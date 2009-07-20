@@ -33,12 +33,6 @@ import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.FilterSet;
 
-/**
- * <a href="CopyTask.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CopyTask {
 
 	public static void copyDirectory(String source, String destination) {

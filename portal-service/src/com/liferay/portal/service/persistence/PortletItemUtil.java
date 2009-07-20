@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="PortletItemUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletItemUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.PortletItem portletItem) {

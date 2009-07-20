@@ -37,12 +37,6 @@ import java.util.List;
 
 import javax.portlet.PortletURL;
 
-/**
- * <a href="JournalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/journal/open_search";

@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.xml.QName;
 
 import java.io.Serializable;
 
-/**
- * <a href="PublicRenderParameter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PublicRenderParameter extends Serializable {
 
 	public String getIdentifier();

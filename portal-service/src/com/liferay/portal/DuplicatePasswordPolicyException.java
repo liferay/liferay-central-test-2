@@ -22,13 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="DuplicatePasswordPolicyException.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Scott Lee
- *
- */
 public class DuplicatePasswordPolicyException extends PortalException {
 
 	public DuplicatePasswordPolicyException() {

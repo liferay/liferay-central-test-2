@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-/**
- * <a href="Sort.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class Sort {
 
 	public static final int AUTO_TYPE = 2;

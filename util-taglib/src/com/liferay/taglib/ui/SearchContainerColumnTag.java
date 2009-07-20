@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
-/**
- * <a href="SearchContainerColumnTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public abstract class SearchContainerColumnTag
 	extends ParamAndPropertyAncestorTagImpl {
 

@@ -29,12 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="MakerStats.java.html"><b><i>View Source</i></b></a>
- *
- * @author Harry Mark
- *
- */
 public class MakerStats {
 
 	public MakerStats(String name) {

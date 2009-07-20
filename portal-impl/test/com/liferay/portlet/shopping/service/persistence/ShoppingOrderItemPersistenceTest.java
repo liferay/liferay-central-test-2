@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.shopping.NoSuchOrderItemException;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 
-/**
- * <a href="ShoppingOrderItemPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

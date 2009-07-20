@@ -24,12 +24,6 @@ package com.liferay.portlet.announcements;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="EntryContentException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EntryContentException extends PortalException {
 
 	public EntryContentException() {

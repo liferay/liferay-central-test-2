@@ -31,13 +31,6 @@ import java.util.Comparator;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
-/**
- * <a href="PropertyComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Patrick Brady
- * @author Raymond Augé
- *
- */
 public class PropertyComparator implements Comparator {
 
 	public PropertyComparator(String propertyName) {

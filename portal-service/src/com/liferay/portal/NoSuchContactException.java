@@ -22,12 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="NoSuchContactException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchContactException extends PortalException {
 
 	public NoSuchContactException() {

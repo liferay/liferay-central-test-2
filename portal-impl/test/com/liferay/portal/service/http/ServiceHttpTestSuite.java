@@ -25,12 +25,6 @@ package com.liferay.portal.service.http;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="ServiceHttpTestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ServiceHttpTestSuite extends TestSuite {
 
 	public static Test suite() {

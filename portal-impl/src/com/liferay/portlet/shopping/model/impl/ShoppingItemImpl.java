@@ -36,12 +36,6 @@ import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 
 import java.util.List;
 
-/**
- * <a href="ShoppingItemImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingItemImpl
 	extends ShoppingItemModelImpl implements ShoppingItem {
 

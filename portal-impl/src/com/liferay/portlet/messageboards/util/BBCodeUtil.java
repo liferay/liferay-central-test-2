@@ -35,12 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="BBCodeUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class BBCodeUtil {
 
 	static Map<Integer, String> fontSizes = new HashMap<Integer, String>();

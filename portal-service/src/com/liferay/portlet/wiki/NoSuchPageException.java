@@ -24,12 +24,6 @@ package com.liferay.portlet.wiki;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchPageException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchPageException extends PortalException {
 
 	public NoSuchPageException() {

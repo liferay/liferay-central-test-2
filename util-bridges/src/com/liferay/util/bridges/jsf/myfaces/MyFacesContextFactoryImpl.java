@@ -37,12 +37,6 @@ import javax.servlet.ServletResponse;
 
 import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
 
-/**
- * <a href="MyFacesContextFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Myunghun Kim
- *
- */
 public class MyFacesContextFactoryImpl extends FacesContextFactory {
 
 	public FacesContext getFacesContext(

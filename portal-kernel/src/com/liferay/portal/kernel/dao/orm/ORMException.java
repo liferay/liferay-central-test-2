@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="ORMException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ORMException extends RuntimeException {
 
 	public ORMException() {

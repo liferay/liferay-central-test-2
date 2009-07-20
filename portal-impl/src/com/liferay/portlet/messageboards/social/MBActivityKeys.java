@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.social;
 
-/**
- * <a href="MBActivityKeys.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBActivityKeys {
 
 	public static final int ADD_MESSAGE = 1;

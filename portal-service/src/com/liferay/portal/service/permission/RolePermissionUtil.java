@@ -25,12 +25,6 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="RolePermissionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RolePermissionUtil {
 
 	public static void check(

@@ -26,12 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="MBPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class MBPermission {
 
 	public static void check(

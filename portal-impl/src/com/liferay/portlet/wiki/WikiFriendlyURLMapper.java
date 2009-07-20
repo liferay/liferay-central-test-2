@@ -36,12 +36,6 @@ import java.util.Map;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
-/**
- * <a href="WikiFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {

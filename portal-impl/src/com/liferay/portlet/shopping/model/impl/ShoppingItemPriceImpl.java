@@ -24,12 +24,6 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 
-/**
- * <a href="ShoppingItemPriceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingItemPriceImpl
 	extends ShoppingItemPriceModelImpl implements ShoppingItemPrice {
 

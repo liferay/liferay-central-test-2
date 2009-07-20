@@ -37,12 +37,6 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="MBMessageServiceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
 	public void setUp() throws Exception {

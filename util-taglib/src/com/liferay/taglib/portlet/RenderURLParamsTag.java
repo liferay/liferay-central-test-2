@@ -33,12 +33,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="RenderURLParamsTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RenderURLParamsTag extends TagSupport {
 
 	public static String doTag(String varImpl, PageContext pageContext)

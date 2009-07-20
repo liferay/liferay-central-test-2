@@ -60,13 +60,6 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.portlet.PortletFileUpload;
 
-/**
- * <a href="PortletRequestUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class PortletRequestUtil {
 
 	public static List<DiskFileItem> testMultipartWithCommonsFileUpload(

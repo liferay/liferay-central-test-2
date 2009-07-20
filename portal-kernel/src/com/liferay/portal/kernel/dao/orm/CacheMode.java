@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="CacheMode.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface CacheMode {
 
 	public static final CacheMode GET = new CacheModeImpl("GET");

@@ -28,12 +28,6 @@ import java.io.Serializable;
 
 import java.security.Principal;
 
-/**
- * <a href="ProtectedPrincipal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProtectedPrincipal implements Principal, Serializable {
 
 	public ProtectedPrincipal() {

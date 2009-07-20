@@ -24,12 +24,6 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
-/**
- * <a href="PortletInfo.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletInfo implements Serializable {
 
 	public PortletInfo() {

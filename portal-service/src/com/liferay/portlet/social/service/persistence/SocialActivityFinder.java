@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.social.service.persistence;
 
-/**
- * <a href="SocialActivityFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SocialActivityFinder {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

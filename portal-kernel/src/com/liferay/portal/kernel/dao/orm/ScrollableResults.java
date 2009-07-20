@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="ScrollableResults.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ScrollableResults {
 
 	public boolean first() throws ORMException;

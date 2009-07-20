@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AnnouncementsFlagSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap
- *
- */
 public class AnnouncementsFlagSoap implements Serializable {
 	public static AnnouncementsFlagSoap toSoapModel(AnnouncementsFlag model) {
 		AnnouncementsFlagSoap soapModel = new AnnouncementsFlagSoap();

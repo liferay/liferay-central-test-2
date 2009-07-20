@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.bi.rules;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="RulesEngineException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class RulesEngineException extends PortalException {
 
 	public RulesEngineException(String msg) {

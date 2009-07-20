@@ -24,12 +24,6 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portlet.wiki.model.WikiPageDisplay;
 
-/**
- * <a href="WikiPageDisplayImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class WikiPageDisplayImpl implements WikiPageDisplay {
 
 	public WikiPageDisplayImpl(

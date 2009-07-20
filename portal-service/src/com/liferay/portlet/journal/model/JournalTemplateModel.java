@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="JournalTemplateModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>JournalTemplate</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.journal.model.JournalTemplate
- * @see com.liferay.portlet.journal.model.impl.JournalTemplateImpl
- * @see com.liferay.portlet.journal.model.impl.JournalTemplateModelImpl
- *
- */
 public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public long getPrimaryKey();
 

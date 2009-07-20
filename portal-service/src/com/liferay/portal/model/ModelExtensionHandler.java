@@ -24,12 +24,6 @@ package com.liferay.portal.model;
 
 import java.util.List;
 
-/**
- * <a href="ModelExtensionHandler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Aug�
- *
- */
 public interface ModelExtensionHandler<T> {
 
 	public List<String> getExtensionMethodNames();

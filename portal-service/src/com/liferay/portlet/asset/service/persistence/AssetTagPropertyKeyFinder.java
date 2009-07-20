@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
-/**
- * <a href="AssetTagPropertyKeyFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AssetTagPropertyKeyFinder {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;

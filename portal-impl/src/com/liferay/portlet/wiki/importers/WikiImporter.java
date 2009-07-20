@@ -29,12 +29,6 @@ import java.io.File;
 
 import java.util.Map;
 
-/**
- * <a href="WikiImporter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public interface WikiImporter {
 
 	public void importPages(

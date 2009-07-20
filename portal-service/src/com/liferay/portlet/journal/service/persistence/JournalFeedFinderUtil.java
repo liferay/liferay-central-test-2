@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-/**
- * <a href="JournalFeedFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalFeedFinderUtil {
 	public static int countByKeywords(long companyId, long groupId,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {

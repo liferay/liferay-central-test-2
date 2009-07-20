@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="PermissionPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PermissionPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Permission permission);
 

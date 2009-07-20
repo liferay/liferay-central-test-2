@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.cache;
 
 import java.io.Serializable;
 
-/**
- * <a href="MultiVMPoolUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Michael Young
- *
- */
 public class MultiVMPoolUtil {
 
 	public static void clear() {

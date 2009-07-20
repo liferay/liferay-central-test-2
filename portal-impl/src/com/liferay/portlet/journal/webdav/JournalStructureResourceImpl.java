@@ -31,13 +31,6 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-/**
- * <a href="JournalStructureResourceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Alexander Chow
- *
- */
 public class JournalStructureResourceImpl extends BaseResourceImpl {
 
 	public JournalStructureResourceImpl(

@@ -34,17 +34,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="PortalDelegatorServlet.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * See http://support.liferay.com/browse/LEP-2297.
- * </p>
- *
- * @author Olaf Fricke
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalDelegatorServlet extends HttpServlet {
 
 	public static void addDelegate(String subContext, HttpServlet delegate) {

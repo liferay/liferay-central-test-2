@@ -22,12 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="NoSuchShardException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchShardException extends PortalException {
 
 	public NoSuchShardException() {

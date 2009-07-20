@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.io.Serializable;
 
-/**
- * <a href="LayoutType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface LayoutType extends Serializable {
 
 	public Layout getLayout();

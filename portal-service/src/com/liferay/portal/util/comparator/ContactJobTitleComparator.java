@@ -22,15 +22,6 @@
 
 package com.liferay.portal.util.comparator;
 
-/**
- * <a href="ContactJobTitleComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- * @deprecated This class has been renamed to <code>UserJobTitleComparator
- * </code>.
- *
- */
 public class ContactJobTitleComparator extends UserJobTitleComparator {
 
 	public ContactJobTitleComparator() {

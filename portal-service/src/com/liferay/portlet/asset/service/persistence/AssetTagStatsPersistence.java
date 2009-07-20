@@ -24,12 +24,6 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="AssetTagStatsPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AssetTagStatsPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats);

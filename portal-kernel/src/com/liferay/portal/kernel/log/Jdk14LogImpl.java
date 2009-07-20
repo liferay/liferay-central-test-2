@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.log;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * <a href="Jdk14LogImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Jdk14LogImpl implements Log {
 
 	public Jdk14LogImpl(Logger log) {

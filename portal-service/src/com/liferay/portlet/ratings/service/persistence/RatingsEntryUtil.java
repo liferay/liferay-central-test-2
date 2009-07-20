@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-/**
- * <a href="RatingsEntryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RatingsEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry) {

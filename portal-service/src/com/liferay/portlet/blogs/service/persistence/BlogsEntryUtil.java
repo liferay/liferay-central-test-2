@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
-/**
- * <a href="BlogsEntryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BlogsEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry) {

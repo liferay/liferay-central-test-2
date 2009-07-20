@@ -32,13 +32,6 @@ import java.util.Map;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-/**
- * <a href="JNDIUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Sandeep Soni
- *
- */
 public class JNDIUtil {
 
 	public static Object lookup(Context ctx, String location)

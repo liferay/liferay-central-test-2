@@ -24,12 +24,6 @@ package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="BlogsEntryPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface BlogsEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry);

@@ -35,13 +35,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * <a href="PropertiesTransformerListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PropertiesTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
@@ -72,13 +65,6 @@ public class PropertiesTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	/**
-	 * Replace the properties in a given string with their values fetched from
-	 * the template GLOBAL-PROPERTIES.
-	 *
-	 * @param		s the given string
-	 * @return		the processed string
-	 */
 	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 

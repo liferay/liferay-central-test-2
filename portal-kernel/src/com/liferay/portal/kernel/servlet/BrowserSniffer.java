@@ -24,14 +24,6 @@ package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="BrowserSniffer.java.html"><b><i>View Source</i></b></a>
- *
- * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface BrowserSniffer {
 
 	public static final String BROWSER_ID_FIREFOX = "firefox";

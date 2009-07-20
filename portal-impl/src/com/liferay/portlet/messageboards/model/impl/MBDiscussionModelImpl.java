@@ -42,26 +42,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="MBDiscussionModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>MBDiscussion</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.messageboards.model.MBDiscussion
- * @see com.liferay.portlet.messageboards.model.MBDiscussionModel
- * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
- *
- */
 public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public static final String TABLE_NAME = "MBDiscussion";
 	public static final Object[][] TABLE_COLUMNS = {

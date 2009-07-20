@@ -31,12 +31,6 @@ import java.lang.reflect.Method;
 
 import java.util.Map;
 
-/**
- * <a href="TaskInstanceRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class TaskInstanceRequest extends BaseRequest {
 
 	public static TaskInstanceRequest createAssignTaskInstanceToRoleRequest(

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.util;
 
-/**
- * <a href="MailingListThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Thiago Moreira
- *
- */
 public class MailingListThreadLocal {
 
 	public static boolean isSourceMailingList() {

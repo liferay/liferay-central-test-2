@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AddressSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.AddressServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.AddressServiceSoap
- *
- */
 public class AddressSoap implements Serializable {
 	public static AddressSoap toSoapModel(Address model) {
 		AddressSoap soapModel = new AddressSoap();

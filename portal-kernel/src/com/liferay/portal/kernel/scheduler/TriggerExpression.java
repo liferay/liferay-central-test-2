@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
 
-/**
- * <a href="TriggerExpression.java.html"><b><i>View Source</i></b></a>
- *
- * @author Thiago Moreira
- *
- */
 public class TriggerExpression {
 
 	public final static int DAILY_FREQUENCY = 3;

@@ -22,13 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-/**
- * <a href="BaseDestinationEventListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Michael C. Han
- *
- */
 public class BaseDestinationEventListener implements DestinationEventListener {
 
 	public void destinationAdded(Destination destination) {

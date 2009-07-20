@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.log;
 
-/**
- * <a href="LogFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface LogFactory {
 
 	public Log getLog(Class<?> c);

@@ -31,12 +31,6 @@ import javax.portlet.PortletResponse;
 import org.apache.myfaces.context.ReleaseableExternalContext;
 import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
 
-/**
- * <a href="MyFacesContextImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Myunghun Kim
- *
- */
 public class MyFacesContextImpl extends ServletFacesContextImpl {
 
 	public MyFacesContextImpl(PortletContext portletContext,

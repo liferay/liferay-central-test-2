@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
-/**
- * <a href="AssetCategoryPropertyFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssetCategoryPropertyFinderUtil {
 	public static int countByG_K(long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException {

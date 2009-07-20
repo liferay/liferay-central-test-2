@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-/**
- * <a href="ShoppingOrderFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingOrderFinderUtil {
 	public static int countByG_C_U_N_PPPS(long groupId, long companyId,
 		long userId, java.lang.String number,

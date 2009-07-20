@@ -30,12 +30,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ExecutionRequestMessage.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class ExecutionRequestMessage implements Serializable {
 
 	public ExecutionRequestMessage(String domainName) {

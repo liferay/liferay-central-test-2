@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.wiki.util;
 
-/**
- * <a href="WikiCacheThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class WikiCacheThreadLocal {
 
 	public static boolean isClearCache() {

@@ -24,12 +24,6 @@ package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchMessageException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchMessageException extends PortalException {
 
 	public NoSuchMessageException() {

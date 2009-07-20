@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.util.UnicodeFormatter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-/**
- * <a href="JS.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JS {
 
 	public static String getSafeName(String name) {
@@ -51,16 +45,10 @@ public class JS {
 		return safeName;
 	}
 
-	/**
-	 * @deprecated Use <code>encodeURIComponent</code>.
-	 */
 	public static String escape(String s) {
 		return encodeURIComponent(s);
 	}
 
-	/**
-	 * @deprecated Use <code>decodeURIComponent</code>.
-	 */
 	public static String unescape(String s) {
 		return decodeURIComponent(s);
 	}

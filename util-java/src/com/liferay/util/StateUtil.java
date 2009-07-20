@@ -24,12 +24,6 @@ package com.liferay.util;
 
 import java.util.Arrays;
 
-/**
- * <a href="StateUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StateUtil {
 
 	public static final String[] STATE_IDS = new String[] {

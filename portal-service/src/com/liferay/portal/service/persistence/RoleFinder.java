@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="RoleFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface RoleFinder {
 	public int countByR_U(long roleId, long userId)
 		throws com.liferay.portal.SystemException;

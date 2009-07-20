@@ -31,13 +31,6 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- *
- */
 public interface Document {
 
 	public void add(Field field);

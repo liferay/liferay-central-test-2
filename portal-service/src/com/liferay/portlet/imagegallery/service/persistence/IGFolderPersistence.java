@@ -24,12 +24,6 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="IGFolderPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface IGFolderPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder);

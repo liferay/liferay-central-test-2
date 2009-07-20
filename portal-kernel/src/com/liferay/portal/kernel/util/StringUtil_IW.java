@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="StringUtil_IW.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StringUtil_IW {
 	public static StringUtil_IW getInstance() {
 		return _instance;
@@ -90,17 +84,11 @@ public class StringUtil_IW {
 		return StringUtil.extractLast(s, delimiter);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords) {
 		return StringUtil.highlight(s, keywords);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords, java.lang.String highlight1,
 		java.lang.String highlight2) {

@@ -24,12 +24,6 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="ArticleTitleException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ArticleTitleException extends PortalException {
 
 	public ArticleTitleException() {

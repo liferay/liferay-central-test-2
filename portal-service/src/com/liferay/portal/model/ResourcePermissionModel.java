@@ -22,27 +22,6 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="ResourcePermissionModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>ResourcePermission</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.ResourcePermission
- * @see com.liferay.portal.model.impl.ResourcePermissionImpl
- * @see com.liferay.portal.model.impl.ResourcePermissionModelImpl
- *
- */
 public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public long getPrimaryKey();
 

@@ -39,31 +39,6 @@ import java.util.EventObject;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-/**
- * <a href="FileUploadManagedBean.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class is a managed bean that is designed specifically to work with the
- * ICEfaces framework, by utilizing the <code><ice:inputFile/></code> component.
- * The basic ideas found in this bean were taken from the ICEfaces tuorial,
- * found here:
- * </p>
- *
- * <p>
- * http://facestutorials.icefaces.org/tutorial/inputFile-tutorial.html
- * </p>
- *
- * <p>
- * The server initiated rendering API documentation is found here:
- * </p>
- *
- * <p>
- * http://www.icesoft.com/developer_guides/icefaces/htmlguide/devguide/advanced_topics2.html
- * </p>
- *
- * @author Neil Griffin
- *
- */
 public class FileUploadManagedBean implements Renderable {
 
 	public FileUploadManagedBean() {

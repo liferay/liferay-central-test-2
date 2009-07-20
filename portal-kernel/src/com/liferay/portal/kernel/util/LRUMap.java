@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * <a href="LRUMap.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LRUMap<K, V> extends LinkedHashMap<K, V> {
 
 	public LRUMap(int capacity) {

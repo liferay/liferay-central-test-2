@@ -30,17 +30,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import javax.faces.context.FacesContext;
 
-/**
- * <a href="ThemeDisplayManagedBean.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class is designed to be a convenient JSF managed bean that can be used
- * to get portal related information (such as the user's time zone).
- * </p>
- *
- * @author Neil Griffin
- *
- */
 public class ThemeDisplayManagedBean {
 
 	public User getUser() {

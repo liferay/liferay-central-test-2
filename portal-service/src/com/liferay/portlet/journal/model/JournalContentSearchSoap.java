@@ -27,24 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="JournalContentSearchSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.journal.service.http.JournalContentSearchServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.journal.service.http.JournalContentSearchServiceSoap
- *
- */
 public class JournalContentSearchSoap implements Serializable {
 	public static JournalContentSearchSoap toSoapModel(
 		JournalContentSearch model) {

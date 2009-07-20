@@ -24,12 +24,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
-/**
- * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBMessageFlagImpl
 	extends MBMessageFlagModelImpl implements MBMessageFlag {
 

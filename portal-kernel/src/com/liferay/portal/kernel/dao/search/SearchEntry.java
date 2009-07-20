@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.dao.search;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="SearchEntry.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SearchEntry implements Cloneable {
 
 	public static final String DEFAULT_ALIGN = "left";

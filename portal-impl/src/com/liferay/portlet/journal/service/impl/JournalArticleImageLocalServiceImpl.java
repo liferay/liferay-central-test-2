@@ -31,13 +31,6 @@ import com.liferay.portlet.journal.service.base.JournalArticleImageLocalServiceB
 
 import java.util.List;
 
-/**
- * <a href="JournalArticleImageLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalArticleImageLocalServiceImpl
 	extends JournalArticleImageLocalServiceBaseImpl {
 

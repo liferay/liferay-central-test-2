@@ -33,13 +33,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="LiferayServletContextProviderWrapper.java.html"><b><i>View Source
- * </i></b></a>
- *
- * @author Michael Young
- *
- */
 public class LiferayServletContextProviderWrapper
 	implements org.apache.portals.bridges.common.ServletContextProvider {
 

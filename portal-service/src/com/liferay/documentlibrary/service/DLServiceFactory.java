@@ -24,12 +24,6 @@ package com.liferay.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
-/**
- * <a href="DLServiceFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLServiceFactory {
 
 	public static DLService getService() {

@@ -22,13 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="RequiredOrganizationException.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RequiredOrganizationException extends PortalException {
 
 	public RequiredOrganizationException() {

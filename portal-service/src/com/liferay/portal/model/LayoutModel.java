@@ -22,27 +22,6 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="LayoutModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>Layout</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Layout
- * @see com.liferay.portal.model.impl.LayoutImpl
- * @see com.liferay.portal.model.impl.LayoutModelImpl
- *
- */
 public interface LayoutModel extends BaseModel<Layout> {
 	public long getPrimaryKey();
 

@@ -31,12 +31,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-/**
- * <a href="JournalTemplateResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalTemplateResourceImpl extends BaseResourceImpl {
 
 	public JournalTemplateResourceImpl(

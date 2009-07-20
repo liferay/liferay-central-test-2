@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="DoubleWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DoubleWrapper
 	extends PrimitiveWrapper implements Comparable<DoubleWrapper> {
 

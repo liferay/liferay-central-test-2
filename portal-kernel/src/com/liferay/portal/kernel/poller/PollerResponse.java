@@ -31,12 +31,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * <a href="PollerResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollerResponse {
 
 	public static final String POLLER_HINT_HIGH_CONNECTIVITY =

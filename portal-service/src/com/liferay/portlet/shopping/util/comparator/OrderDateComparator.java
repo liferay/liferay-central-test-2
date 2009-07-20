@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 
-/**
- * <a href="OrderDateComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrderDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "createDate ASC";

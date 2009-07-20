@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 
-/**
- * <a href="IGImagePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGImagePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

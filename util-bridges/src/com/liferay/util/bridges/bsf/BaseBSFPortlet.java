@@ -50,13 +50,6 @@ import javax.portlet.ResourceResponse;
 import org.apache.bsf.BSFException;
 import org.apache.bsf.BSFManager;
 
-/**
- * <a href="BaseBSFPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseBSFPortlet extends GenericPortlet {
 
 	public void init() {

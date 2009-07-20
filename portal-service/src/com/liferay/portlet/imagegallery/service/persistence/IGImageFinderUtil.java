@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-/**
- * <a href="IGImageFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGImageFinderUtil {
 	public static int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {

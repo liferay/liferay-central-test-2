@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.messaging;
 
 import java.util.Set;
 
-/**
- * <a href="DummyDispatcherDestination.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DummyDispatcherDestination extends BaseDestination {
 
 	public DummyDispatcherDestination(String name) {

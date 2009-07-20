@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Constructor;
 
-/**
- * <a href="ReflectionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReflectionUtil {
 
 	public static Object newInstance(String className, String p1) {

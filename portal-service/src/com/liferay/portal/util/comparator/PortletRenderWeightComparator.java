@@ -28,13 +28,6 @@ import java.io.Serializable;
 
 import java.util.Comparator;
 
-/**
- * <a href="PortletRenderWeightComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletRenderWeightComparator
 	implements Comparator<Portlet>, Serializable {
 

@@ -53,12 +53,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.portals.bridges.common.ScriptPostProcess;
 
-/**
- * <a href="PHPPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class PHPPortlet extends GenericPortlet {
 
 	public void init(PortletConfig portletConfig) throws PortletException {

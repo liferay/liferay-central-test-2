@@ -52,13 +52,6 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-/**
- * <a href="LiferayAddonUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raju Uppalapati
- * @author Brian Wing Shun Chan
- *
- */
 public class LiferayAddonUtil {
 
 	public static void copyFile(String sourceFile, String destFile)

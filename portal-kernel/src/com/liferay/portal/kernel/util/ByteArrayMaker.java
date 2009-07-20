@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * <a href="ByteArrayMaker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Harry Mark
- *
- */
 public class ByteArrayMaker extends ByteArrayOutputStream {
 
 	static boolean collect = false;

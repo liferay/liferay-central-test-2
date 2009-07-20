@@ -24,18 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Reader;
 
-/**
- * <a href="DiffHtmlUtil.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class can compare two different versions of HTML code. It detects
- * changes to an entire HTML page such as removal or addition of characters or
- * images.
- * </p>
- *
- * @author Julio Camarero
- *
- */
 public class DiffHtmlUtil {
 
 	public static String diff(Reader source, Reader target) throws Exception {

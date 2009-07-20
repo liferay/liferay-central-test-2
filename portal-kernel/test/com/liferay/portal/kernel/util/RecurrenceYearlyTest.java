@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 
-/**
- * <a href="RecurrenceYearlyTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Douglas Wong
- *
- */
 public class RecurrenceYearlyTest extends RecurrenceTestCase {
 
 	public void testByDay() throws Exception {

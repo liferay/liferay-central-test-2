@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-/**
- * <a href="DLFileShortcutUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileShortcutUtil {
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut) {

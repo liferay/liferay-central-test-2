@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-/**
- * <a href="ShoppingOrderItemUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingOrderItemUtil {
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem) {

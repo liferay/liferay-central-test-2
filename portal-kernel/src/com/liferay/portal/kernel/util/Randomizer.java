@@ -28,12 +28,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-/**
- * <a href="Randomizer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Randomizer extends Random {
 
 	public static Randomizer getInstance() {

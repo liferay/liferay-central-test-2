@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-/**
- * <a href="ContactConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ContactConstants {
 
 	public static final long DEFAULT_PARENT_CONTACT_ID = 0;

@@ -24,97 +24,17 @@ package com.liferay.portal.kernel.workflow;
 
 import java.util.List;
 
-/**
- * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * The workflow definition manager is used to deploy workflow definitions. A
- * workflow definition is the process model of a workflow to be executed by
- * creating a workflow instance attached to it, reflecting the current state and
- * history as well as any related objects like tasks, jobs and timers.
- * </p>
- *
- * <p>
- * Depending on the underlying workflow engine, even hot deployment is possible.
- * </p>
- *
- * @author Micha Kiener
- *
- */
 public interface WorkflowDefinitionManager {
 
-	/**
-	 * <p>
-	 * Deploys the given workflow definition within the engine.
-	 * </p>
-	 *
-	 * <p>
-	 * If the workflow definition already exists and versioning is not supported
-	 * or it is the same version as already existing, the definition is
-	 * exchanged with the given one, otherwise the definition is added as a
-	 * complete new definition or as a new version of an already existing
-	 * definition.
-	 * </p>
-	 *
-	 * <p>
-	 * If you deploy a workflow definition by overwriting an existing one, make
-	 * sure it is compatible with already existing workflow instances to not
-	 * compromise their execution plan or current state, tasks or timers. It is
-	 * usually a good practice to deploy changed workflow definitions as new
-	 * versions, so that existing workflow instances are being finished with the
-	 * old definition, and newly created workflow instances are created by using
-	 * the new version.
-	 * </p>
-	 *
-	 * @param workflowDefinition the workflow definition to be deployed
-	 * @param callingUserId the id of the user deploying the workflow definition
-	 *			(see {@link WorkflowUtil#createUserCredential(long)} for more
-	 *			information)
-	 * @throws WorkflowException is thrown, if deployment of the definition
-	 *			 failed
-	 */
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId)
 		throws WorkflowException;
 
-	/**
-	 * Returns a list of all workflow definitions available within the
-	 * repository. The returned list will contain information objects about the
-	 * workflow definitions but without the definition model file actually, so
-	 * {@link WorkflowDefinition#getJar()} will always return <code>null</code>.
-	 * The list will only contain the newest (actual) version of a definition,
-	 * if you need all versions for a specific version, use the method
-	 * {@link #getWorkflowDefinitions(String)} instead where all versions for a
-	 * specific workflow definition are being returned.
-	 *
-	 * @return the list of available workflow definitions, never
-	 *         <code>null</code>
-	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions();
 
-	/**
-	 * Returns a list of all versions of the specified workflow definition, if
-	 * found, an empty list otherwise or a list containing just one element, if
-	 * there is only one version available or versioning is not supported at all
-	 * by the underlying workflow engine.
-	 *
-	 * @param workflowDefinitionName the name of the workflow definition to
-	 *            retrieve all versions for
-	 * @return the list of all versions, if any found, an empty list otherwise
-	 *         or a list containing just one element, must never be
-	 *         <code>null</code>
-	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName);
 
-	/**
-	 * Returns <code>true</code>, if the underlying workflow system supports
-	 * versioning of workflow definitions. If versioning is not supported, the
-	 * version number of a workflow definition is most likely ignored by the
-	 * engine.
-	 *
-	 * @return <code>true</code>, if the workflow engine supports versioning
-	 */
 	public boolean isSupportsVersioning();
 
 }

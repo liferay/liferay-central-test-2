@@ -33,12 +33,6 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="LiferayURLConstructor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class LiferayURLConstructor implements URLConstructor {
 
 	public String getForwardPage(HttpServletRequest request) {

@@ -22,12 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="RolePermissionsException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RolePermissionsException extends PortalException {
 
 	public RolePermissionsException() {

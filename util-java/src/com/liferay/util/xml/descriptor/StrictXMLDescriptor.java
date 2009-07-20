@@ -32,12 +32,6 @@ import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-/**
- * <a href="StrictXMLDescriptor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class StrictXMLDescriptor implements XMLDescriptor {
 
 	public boolean areEqual(Element el1, Element el2) {

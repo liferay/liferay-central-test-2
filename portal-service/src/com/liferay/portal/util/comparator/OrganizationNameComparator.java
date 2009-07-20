@@ -25,12 +25,6 @@ package com.liferay.portal.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Organization;
 
-/**
- * <a href="OrganizationNameComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrganizationNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "orgName ASC";

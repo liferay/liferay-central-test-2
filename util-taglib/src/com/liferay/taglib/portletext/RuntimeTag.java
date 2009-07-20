@@ -43,12 +43,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="RuntimeTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RuntimeTag extends TagSupport {
 
 	public static void doTag(

@@ -26,12 +26,6 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="DiffHtmlTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Julio Camarero
- *
- */
 public class DiffHtmlTag extends IncludeTag {
 
 	public int doStartTag() {

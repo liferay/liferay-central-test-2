@@ -29,12 +29,6 @@ import com.liferay.portlet.network.model.DNSLookup;
 
 import java.net.InetAddress;
 
-/**
- * <a href="DNSLookupWebCacheItem.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DNSLookupWebCacheItem implements WebCacheItem {
 
 	public DNSLookupWebCacheItem(String domain) {

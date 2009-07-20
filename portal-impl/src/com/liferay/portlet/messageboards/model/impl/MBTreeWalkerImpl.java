@@ -33,12 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="MBTreeWalkerImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBTreeWalkerImpl implements MBTreeWalker {
 
 	public MBTreeWalkerImpl(MBMessage message) {

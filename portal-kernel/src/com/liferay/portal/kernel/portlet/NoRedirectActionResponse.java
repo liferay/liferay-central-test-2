@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.portlet;
 import javax.portlet.ActionResponse;
 import javax.portlet.filter.ActionResponseWrapper;
 
-/**
- * <a href="NoRedirectActionResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoRedirectActionResponse extends ActionResponseWrapper {
 
 	public NoRedirectActionResponse(ActionResponse actionResponse) {

@@ -30,14 +30,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
-/**
- * <a href="ButtonTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Julio Camarero
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class ButtonTag extends IncludeTag implements DynamicAttributes {
 
 	public int doStartTag() {

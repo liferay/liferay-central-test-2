@@ -29,13 +29,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
-/**
- * <a href="SCProductEntryPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class SCProductEntryPermission {
 
 	public static void check(

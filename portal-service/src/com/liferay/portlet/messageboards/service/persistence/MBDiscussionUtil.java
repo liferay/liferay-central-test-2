@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-/**
- * <a href="MBDiscussionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBDiscussionUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion) {

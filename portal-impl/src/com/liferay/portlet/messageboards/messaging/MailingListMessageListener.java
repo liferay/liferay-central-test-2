@@ -54,12 +54,6 @@ import javax.mail.Store;
 import javax.mail.URLName;
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="MailingListMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Thiago Moreira
- *
- */
 public class MailingListMessageListener implements MessageListener {
 
 	public void receive(com.liferay.portal.kernel.messaging.Message message) {

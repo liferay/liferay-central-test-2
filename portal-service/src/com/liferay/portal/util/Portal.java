@@ -67,12 +67,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="Portal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Portal {
 
 	public static final String FRIENDLY_URL_SEPARATOR = "/-/";
@@ -88,39 +82,13 @@ public interface Portal {
 
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
-	/**
-	 * Adds the description for a page. This appends to the existing page
-	 * description.
-	 *
-	 * @param		description the description for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageDescription(
 		String description, HttpServletRequest request);
 
-	/**
-	 * Adds the keywords for a page. This appends to the existing page keywords.
-	 *
-	 * @param		keywords the keywords for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageKeywords(String keywords, HttpServletRequest request);
 
-	/**
-	 * Adds the subtitle for a page. This appends to the existing page subtitle.
-	 *
-	 * @param		subtitle the subtitle for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageSubtitle(String subtitle, HttpServletRequest request);
 
-	/**
-	 * Adds the whole title for a page. This appends to the existing page whole
-	 * title.
-	 *
-	 * @param		title the whole title for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageTitle(String title, HttpServletRequest request);
 
 	public void addPortletBreadcrumbEntry(
@@ -332,29 +300,14 @@ public interface Portal {
 			Map<String, String[]> params)
 		throws PortalException, SystemException;
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(ActionRequest actionRequest);
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(HttpServletRequest request);
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(Layout layout);
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(long plid);
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(RenderRequest renderRequest);
 
 	public String getPortletId(HttpServletRequest request);
@@ -551,46 +504,15 @@ public interface Portal {
 			HttpServletResponse response)
 		throws IOException, ServletException;
 
-	/**
-	 * Sets the description for a page. This overrides the existing page
-	 * description.
-	 *
-	 * @param		description the description for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageDescription(
 		String description, HttpServletRequest request);
 
-	/**
-	 * Sets the keywords for a page. This overrides the existing page keywords.
-	 *
-	 * @param		keywords the keywords for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageKeywords(String keywords, HttpServletRequest request);
 
-	/**
-	 * Sets the subtitle for a page. This overrides the existing page subtitle.
-	 *
-	 * @param		subtitle the subtitle for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageSubtitle(String subtitle, HttpServletRequest request);
 
-	/**
-	 * Sets the whole title for a page. This overrides the existing page whole
-	 * title.
-	 *
-	 * @param		title the whole title for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageTitle(String title, HttpServletRequest request);
 
-	/**
-	 * Sets the port obtained on the first request to the portal.
-	 *
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPortalPort(HttpServletRequest request);
 
 	public void storePreferences(PortletPreferences preferences)

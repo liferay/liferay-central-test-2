@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
-/**
- * <a href="EntryDisplayDateComparator.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Alexander Chow
- *
- */
 public class EntryDisplayDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "displayDate ASC, entryId ASC";

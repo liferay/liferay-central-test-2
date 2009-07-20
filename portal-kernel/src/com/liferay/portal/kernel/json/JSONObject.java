@@ -27,12 +27,6 @@ import java.io.Writer;
 import java.util.Date;
 import java.util.Iterator;
 
-/**
- * <a href="JSONObject.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface JSONObject {
 
 	public boolean getBoolean(String key);

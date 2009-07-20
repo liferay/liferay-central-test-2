@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="IGFolderModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>IGFolder</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.model.IGFolder
- * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
- * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
- *
- */
 public interface IGFolderModel extends BaseModel<IGFolder> {
 	public long getPrimaryKey();
 

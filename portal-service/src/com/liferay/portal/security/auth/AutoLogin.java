@@ -25,18 +25,8 @@ package com.liferay.portal.security.auth;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="AutoLogin.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AutoLogin {
 
-	/**
-	 * Set a request attribute with this variable to tell the AutoLoginFilter to
-	 * redirect the user to a specified location.
-	 */
 	public static final String AUTO_LOGIN_REDIRECT = "AUTO_LOGIN_REDIRECT";
 
 	public String[] login(

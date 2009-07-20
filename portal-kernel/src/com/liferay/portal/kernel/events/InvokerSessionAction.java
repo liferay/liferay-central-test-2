@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.events;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="InvokerSessionAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InvokerSessionAction extends SessionAction {
 
 	public InvokerSessionAction(SessionAction sessionAction) {

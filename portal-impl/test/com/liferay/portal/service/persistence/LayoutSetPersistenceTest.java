@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="LayoutSetPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

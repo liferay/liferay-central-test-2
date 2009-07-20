@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="RegionPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface RegionPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Region region);
 

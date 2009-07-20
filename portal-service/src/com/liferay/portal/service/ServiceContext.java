@@ -29,14 +29,6 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * <a href="ServiceContext.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class ServiceContext implements Serializable {
 
 	public ServiceContext() {

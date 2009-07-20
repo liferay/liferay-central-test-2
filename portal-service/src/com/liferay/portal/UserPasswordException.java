@@ -22,12 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="UserPasswordException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserPasswordException extends PortalException {
 
 	public static final int PASSWORD_ALREADY_USED = 1;

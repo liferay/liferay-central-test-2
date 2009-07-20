@@ -30,12 +30,6 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.service.base.MBBanServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBPermission;
 
-/**
- * <a href="MBBanServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 
 	public MBBan addBan(long banUserId, ServiceContext serviceContext)

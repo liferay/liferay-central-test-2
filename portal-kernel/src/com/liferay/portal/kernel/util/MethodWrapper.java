@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-/**
- * <a href="MethodWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MethodWrapper implements Serializable {
 
 	public MethodWrapper(String className, String methodName) {

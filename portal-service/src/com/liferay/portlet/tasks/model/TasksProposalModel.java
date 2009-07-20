@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="TasksProposalModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>TasksProposal</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.tasks.model.TasksProposal
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
- *
- */
 public interface TasksProposalModel extends BaseModel<TasksProposal> {
 	public long getPrimaryKey();
 

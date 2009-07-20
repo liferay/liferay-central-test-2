@@ -28,12 +28,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.expando.NoSuchValueException;
 import com.liferay.portlet.expando.model.ExpandoValue;
 
-/**
- * <a href="ExpandoValuePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

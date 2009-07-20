@@ -31,12 +31,6 @@ import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.util.StringUtils;
 
-/**
- * <a href="SystemLogger.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SystemLogger extends DefaultLogger {
 
 	public void messageLogged(BuildEvent event) {

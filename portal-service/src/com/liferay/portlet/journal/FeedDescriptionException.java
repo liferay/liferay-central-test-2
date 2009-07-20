@@ -24,12 +24,6 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="FeedDescriptionException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FeedDescriptionException extends PortalException {
 
 	public FeedDescriptionException() {

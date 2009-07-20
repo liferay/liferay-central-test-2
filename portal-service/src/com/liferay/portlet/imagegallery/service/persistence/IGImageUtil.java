@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-/**
- * <a href="IGImageUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGImageUtil {
 	public static void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGImage igImage) {

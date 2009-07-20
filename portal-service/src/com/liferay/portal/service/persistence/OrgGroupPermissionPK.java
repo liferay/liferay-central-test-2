@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
-/**
- * <a href="OrgGroupPermissionPK.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgGroupPermissionPK implements Comparable<OrgGroupPermissionPK>,
 	Serializable {
 	public long organizationId;

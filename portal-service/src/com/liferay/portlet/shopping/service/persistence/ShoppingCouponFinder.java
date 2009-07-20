@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-/**
- * <a href="ShoppingCouponFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ShoppingCouponFinder {
 	public int countByG_C_C_A_DT(long groupId, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,

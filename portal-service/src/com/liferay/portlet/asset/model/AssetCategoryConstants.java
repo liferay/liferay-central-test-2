@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.asset.model;
 
-/**
- * <a href="AssetCategoryConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class AssetCategoryConstants {
 
 	public static final long DEFAULT_PARENT_CATEGORY_ID = 0;

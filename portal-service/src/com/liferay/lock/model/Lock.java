@@ -28,12 +28,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-/**
- * <a href="Lock.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Lock implements Comparable<Lock>, Serializable {
 
 	public Lock() {

@@ -27,24 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ExpandoTableSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.expando.service.http.ExpandoTableServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.expando.service.http.ExpandoTableServiceSoap
- *
- */
 public class ExpandoTableSoap implements Serializable {
 	public static ExpandoTableSoap toSoapModel(ExpandoTable model) {
 		ExpandoTableSoap soapModel = new ExpandoTableSoap();

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.social.model;
 
-/**
- * <a href="SocialRequestFeedEntry.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialRequestFeedEntry {
 
 	public SocialRequestFeedEntry(String title, String body) {

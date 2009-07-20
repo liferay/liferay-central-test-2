@@ -27,12 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="OrganizationPermissionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrganizationPermissionUtil {
 
 	public static void check(

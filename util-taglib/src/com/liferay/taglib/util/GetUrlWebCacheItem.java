@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 
-/**
- * <a href="GetUrlWebCacheItem.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GetUrlWebCacheItem implements WebCacheItem {
 
 	public GetUrlWebCacheItem(String url, long refreshTime) {

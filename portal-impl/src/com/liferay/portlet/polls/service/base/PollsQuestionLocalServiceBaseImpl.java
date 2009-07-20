@@ -52,12 +52,6 @@ import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 
 import java.util.List;
 
-/**
- * <a href="PollsQuestionLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class PollsQuestionLocalServiceBaseImpl
 	implements PollsQuestionLocalService {
 	public PollsQuestion addPollsQuestion(PollsQuestion pollsQuestion)

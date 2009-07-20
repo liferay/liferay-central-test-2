@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.util.TimeZone;
 
-/**
- * <a href="TimeZoneUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TimeZoneUtil {
 
 	public static TimeZone getDefault() {

@@ -25,14 +25,6 @@ package com.liferay.util.lucene;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
-/**
- * <a href="KeywordsUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Mirco Tamburini
- * @author Josiah Goh
- *
- */
 public class KeywordsUtil {
 
 	public static final String[] SPECIAL = new String[] {

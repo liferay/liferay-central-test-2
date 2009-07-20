@@ -67,13 +67,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 
-/**
- * <a href="WikiUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class WikiUtil {
 
 	public static final String POP_PORTLET_PREFIX = "wiki.";

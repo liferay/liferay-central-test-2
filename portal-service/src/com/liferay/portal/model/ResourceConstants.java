@@ -22,12 +22,6 @@
 
 package com.liferay.portal.model;
 
-/**
- * <a href="ResourceConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ResourceConstants {
 
 	public static final int SCOPE_INDIVIDUAL = 4;

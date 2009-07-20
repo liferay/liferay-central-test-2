@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Reader;
 
-/**
- * <a href="DiffHtml.java.html"><b><i>View Source</i></b></a>
- *
- * @author Julio Camarero
- *
- */
 public interface DiffHtml {
 
 	public String diff(Reader source, Reader target) throws Exception;

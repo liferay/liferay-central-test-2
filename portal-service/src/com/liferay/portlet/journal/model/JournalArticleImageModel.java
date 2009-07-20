@@ -24,26 +24,6 @@ package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.model.BaseModel;
 
-/**
- * <a href="JournalArticleImageModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>JournalArticleImage</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.journal.model.JournalArticleImage
- * @see com.liferay.portlet.journal.model.impl.JournalArticleImageImpl
- * @see com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl
- *
- */
 public interface JournalArticleImageModel extends BaseModel<JournalArticleImage> {
 	public long getPrimaryKey();
 

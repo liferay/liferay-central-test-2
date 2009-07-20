@@ -36,13 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * <a href="BaseResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class BaseResourceImpl implements Resource {
 
 	public BaseResourceImpl(

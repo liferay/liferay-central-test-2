@@ -22,15 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="Html.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Clarence Shen
- * @author Harry Mark
- * @author Samuel Kong
- *
- */
 public interface Html {
 
 	public String escape(String text);

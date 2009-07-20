@@ -31,13 +31,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class MapUtil {
 
 	public static void copy(Map master, Map copy) {

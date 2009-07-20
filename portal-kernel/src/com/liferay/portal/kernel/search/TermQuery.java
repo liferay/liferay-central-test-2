@@ -22,11 +22,5 @@
 
 package com.liferay.portal.kernel.search;
 
-/**
- * <a href="TermQuery.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface TermQuery extends Query {
 }

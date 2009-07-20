@@ -24,12 +24,6 @@ package com.liferay.portlet.ratings;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchStatsException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchStatsException extends PortalException {
 
 	public NoSuchStatsException() {

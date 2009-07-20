@@ -32,12 +32,6 @@ import java.util.TreeSet;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
-/**
- * <a href="TagsCompilerSessionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TagsCompilerSessionUtil {
 
 	public static void addEntries(

@@ -44,26 +44,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="SocialActivityModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>SocialActivity</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.social.model.SocialActivity
- * @see com.liferay.portlet.social.model.SocialActivityModel
- * @see com.liferay.portlet.social.model.impl.SocialActivityImpl
- *
- */
 public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	public static final String TABLE_NAME = "SocialActivity";
 	public static final Object[][] TABLE_COLUMNS = {

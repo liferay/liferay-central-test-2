@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="PollsVotePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollsVotePersistenceImpl extends BasePersistenceImpl
 	implements PollsVotePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PollsVoteImpl.class.getName();

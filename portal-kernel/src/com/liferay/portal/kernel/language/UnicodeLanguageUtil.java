@@ -26,12 +26,6 @@ import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="UnicodeLanguageUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UnicodeLanguageUtil {
 
 	public static String format(

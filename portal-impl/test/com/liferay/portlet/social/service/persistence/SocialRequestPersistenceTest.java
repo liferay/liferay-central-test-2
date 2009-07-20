@@ -28,12 +28,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.social.NoSuchRequestException;
 import com.liferay.portlet.social.model.SocialRequest;
 
-/**
- * <a href="SocialRequestPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

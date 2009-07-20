@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.dao.search;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="ScoreSearchEntry.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ScoreSearchEntry extends SearchEntry {
 
 	public ScoreSearchEntry(float score) {

@@ -22,31 +22,5 @@
 
 package com.liferay.portlet.social.model;
 
-
-/**
- * <a href="SocialRelation.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>SocialRelation</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.social.model.impl.SocialRelationImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.social.model.SocialRelationModel
- * @see com.liferay.portlet.social.model.impl.SocialRelationImpl
- * @see com.liferay.portlet.social.model.impl.SocialRelationModelImpl
- *
- */
 public interface SocialRelation extends SocialRelationModel {
 }

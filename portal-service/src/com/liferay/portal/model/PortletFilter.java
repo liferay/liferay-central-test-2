@@ -27,12 +27,6 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * <a href="PortletFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PortletFilter extends Serializable {
 
 	public String getFilterName();

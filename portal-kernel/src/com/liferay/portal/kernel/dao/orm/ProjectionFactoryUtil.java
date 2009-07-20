@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="ProjectionFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProjectionFactoryUtil {
 
 	public static Projection alias(Projection projection, String alias) {

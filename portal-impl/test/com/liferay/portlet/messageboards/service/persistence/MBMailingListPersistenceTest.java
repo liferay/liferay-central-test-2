@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 
-/**
- * <a href="MBMailingListPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="LockModeImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LockModeImpl implements LockMode {
 
 	public LockModeImpl(String name) {

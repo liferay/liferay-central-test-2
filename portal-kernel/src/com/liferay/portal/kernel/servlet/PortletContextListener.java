@@ -43,13 +43,6 @@ import javax.servlet.ServletContextListener;
 
 import javax.sql.DataSource;
 
-/**
- * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletContextListener
 	implements PortalInitable, ServletContextListener {
 

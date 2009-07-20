@@ -22,32 +22,6 @@
 
 package com.liferay.portlet.asset.model;
 
-
-/**
- * <a href="AssetCategory.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>AssetCategory</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.asset.model.impl.AssetCategoryImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.model.AssetCategoryModel
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryImpl
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
- *
- */
 public interface AssetCategory extends AssetCategoryModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAncestors()
 		throws com.liferay.portal.PortalException,

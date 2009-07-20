@@ -22,27 +22,6 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="UserGroupModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>UserGroup</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserGroup
- * @see com.liferay.portal.model.impl.UserGroupImpl
- * @see com.liferay.portal.model.impl.UserGroupModelImpl
- *
- */
 public interface UserGroupModel extends BaseModel<UserGroup> {
 	public long getPrimaryKey();
 

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="OrgGroupPermissionFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface OrgGroupPermissionFinder {
 	public void removeByO_G_R(long organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.SystemException;

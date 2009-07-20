@@ -41,12 +41,6 @@ import javax.portlet.PortletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="ActionURLTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static String doTag(

@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.jbi;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="WorkflowComponent.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public interface WorkflowComponent {
 
 	public String deploy(String xml) throws WorkflowComponentException;

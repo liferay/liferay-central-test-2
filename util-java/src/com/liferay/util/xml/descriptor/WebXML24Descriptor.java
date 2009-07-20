@@ -30,13 +30,6 @@ import java.util.Map;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-/**
- * <a href="WebXML24Descriptor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class WebXML24Descriptor extends SimpleXMLDescriptor {
 
 	public WebXML24Descriptor() {

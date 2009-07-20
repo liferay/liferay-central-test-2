@@ -29,12 +29,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 
-/**
- * <a href="JournalFeedPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class JournalFeedPermission {
 
 	public static void check(

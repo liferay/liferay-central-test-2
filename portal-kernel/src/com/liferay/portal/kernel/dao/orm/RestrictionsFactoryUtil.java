@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.dao.orm;
 import java.util.Collection;
 import java.util.Map;
 
-/**
- * <a href="RestrictionsFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class RestrictionsFactoryUtil {
 
 	public static Criterion allEq(Map propertyNameValues) {

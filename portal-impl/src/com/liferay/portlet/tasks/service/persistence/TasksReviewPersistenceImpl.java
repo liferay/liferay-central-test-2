@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="TasksReviewPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	implements TasksReviewPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = TasksReviewImpl.class.getName();

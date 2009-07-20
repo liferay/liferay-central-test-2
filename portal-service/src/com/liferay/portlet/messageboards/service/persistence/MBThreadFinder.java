@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-/**
- * <a href="MBThreadFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface MBThreadFinder {
 	public int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;

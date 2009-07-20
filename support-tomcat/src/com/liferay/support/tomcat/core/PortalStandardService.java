@@ -29,16 +29,6 @@ import com.liferay.support.tomcat.connector.PortalConnector;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardService;
 
-/**
- * <a href="PortalStandardService.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * See http://support.liferay.com/browse/LEP-4602.
- * </p>
- *
- * @author Minhchau Dang
- *
- */
 public class PortalStandardService extends StandardService {
 
 	public void addConnector(Connector connector) {

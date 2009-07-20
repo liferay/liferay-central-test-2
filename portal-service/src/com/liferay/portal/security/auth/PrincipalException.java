@@ -24,12 +24,6 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="PrincipalException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PrincipalException extends PortalException {
 
 	public PrincipalException() {

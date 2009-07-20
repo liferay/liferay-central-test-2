@@ -58,13 +58,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="RuntimePortletUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class RuntimePortletUtil {
 
 	public static void processPortlet(

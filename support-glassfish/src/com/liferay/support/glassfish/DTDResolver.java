@@ -50,13 +50,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**
- * <a href="DTDResolver.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raju Uppalapati
- * @author Brian Wing Shun Chan
- *
- */
 public class DTDResolver extends DefaultHandler {
 
 	public DTDResolver(String dtdDir) {

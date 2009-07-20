@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.dao.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * <a href="CountRowMapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CountRowMapper implements RowMapper {
 
 	public Object mapRow(ResultSet rs, int rowNumber) throws SQLException {

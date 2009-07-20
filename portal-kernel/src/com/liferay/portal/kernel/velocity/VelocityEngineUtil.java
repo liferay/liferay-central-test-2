@@ -27,12 +27,6 @@ import com.liferay.portal.SystemException;
 import java.io.IOException;
 import java.io.Writer;
 
-/**
- * <a href="VelocityEngineUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class VelocityEngineUtil {
 
 	public static void flushTemplate(String resource) {

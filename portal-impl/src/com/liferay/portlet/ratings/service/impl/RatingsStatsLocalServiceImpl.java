@@ -31,13 +31,6 @@ import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
 
-/**
- * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RatingsStatsLocalServiceImpl
 	extends RatingsStatsLocalServiceBaseImpl {
 

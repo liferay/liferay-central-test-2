@@ -27,12 +27,6 @@ import java.io.File;
 import org.apache.tools.ant.taskdefs.Delete;
 import org.apache.tools.ant.types.FileSet;
 
-/**
- * <a href="DeleteTask.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteTask {
 
 	public static void deleteDirectory(String dir) {

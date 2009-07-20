@@ -30,12 +30,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-/**
- * <a href="BaseConfigurationAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BaseConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.social.service.persistence;
 
-/**
- * <a href="SocialRequestUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialRequestUtil {
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialRequest socialRequest) {

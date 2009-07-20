@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.language;
 
-/**
- * <a href="LanguageWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LanguageWrapper {
 
 	public LanguageWrapper(String before, String text, String after) {

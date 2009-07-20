@@ -42,13 +42,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="WikiPageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public static final String DEFAULT_FORMAT =

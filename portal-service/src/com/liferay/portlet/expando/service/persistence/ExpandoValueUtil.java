@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
-/**
- * <a href="ExpandoValueUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoValueUtil {
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue) {

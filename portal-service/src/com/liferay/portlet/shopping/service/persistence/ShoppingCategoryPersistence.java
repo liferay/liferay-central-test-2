@@ -24,12 +24,6 @@ package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="ShoppingCategoryPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ShoppingCategoryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory);

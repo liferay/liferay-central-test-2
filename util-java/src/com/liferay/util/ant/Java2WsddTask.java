@@ -38,12 +38,6 @@ import org.apache.tools.ant.Project;
 
 import org.dom4j.DocumentException;
 
-/**
- * <a href="Java2WsddTask.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Java2WsddTask {
 
 	public static String[] generateWsdd(String className, String serviceName)

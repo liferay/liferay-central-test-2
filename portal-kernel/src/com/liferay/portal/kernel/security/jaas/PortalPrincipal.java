@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.security.jaas;
 
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 
-/**
- * <a href="PortalPrincipal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalPrincipal extends ProtectedPrincipal {
 
 	public PortalPrincipal() {

@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-/**
- * <a href="BufferTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BufferTag extends BodyTagSupport {
 
 	public int doStartTag() {

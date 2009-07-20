@@ -40,12 +40,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
-/**
- * <a href="SMSPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SMSPortlet extends MVCPortlet {
 
 	public void processAction(

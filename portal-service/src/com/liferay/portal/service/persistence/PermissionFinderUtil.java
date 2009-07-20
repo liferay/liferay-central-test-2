@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="PermissionFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PermissionFinderUtil {
 	public static boolean containsPermissions_2(
 		java.util.List<com.liferay.portal.model.Permission> permissions,

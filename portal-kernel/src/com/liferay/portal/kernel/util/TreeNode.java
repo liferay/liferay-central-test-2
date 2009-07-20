@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.util;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="TreeNode.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class TreeNode<T extends Comparable<T>> {
 
 	public TreeNode(T value) {

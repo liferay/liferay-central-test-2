@@ -32,12 +32,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-/**
- * <a href="DLLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLLocalServiceUtil {
 
 	public static void addFile(

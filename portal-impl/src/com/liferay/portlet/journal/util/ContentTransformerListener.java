@@ -36,12 +36,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Map;
 
-/**
- * <a href="ContentTransformerListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ContentTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
@@ -70,13 +64,6 @@ public class ContentTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	/**
-	 * Fill one article with content from another approved article. See the
-	 * article DOCUMENTATION-INSTALLATION-BORLAND for a sample use case.
-	 *
-	 * @param		xml the given string
-	 * @return		the processed string
-	 */
 	protected String replace(String xml) {
 		try {
 			Document doc = SAXReaderUtil.read(xml);

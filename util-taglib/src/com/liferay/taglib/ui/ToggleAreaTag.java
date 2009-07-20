@@ -29,12 +29,6 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
-/**
- * <a href="ToggleAreaTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Aug�
- *
- */
 public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() throws JspException {

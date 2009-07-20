@@ -55,12 +55,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBCategoryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 	public MBCategory addCategory(

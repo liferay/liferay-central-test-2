@@ -22,13 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="NoSuchLayoutPrototypeException.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchLayoutPrototypeException extends PortalException {
 
 	public NoSuchLayoutPrototypeException() {

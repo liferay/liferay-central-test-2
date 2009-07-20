@@ -41,12 +41,6 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-/**
- * <a href="MVCPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MVCPortlet extends LiferayPortlet {
 
 	public void init() {

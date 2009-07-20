@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.json;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="JSONException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JSONException extends PortalException {
 
 	public JSONException() {

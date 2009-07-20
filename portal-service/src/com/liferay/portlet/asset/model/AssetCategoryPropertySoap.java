@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryPropertySoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceSoap
- *
- */
 public class AssetCategoryPropertySoap implements Serializable {
 	public static AssetCategoryPropertySoap toSoapModel(
 		AssetCategoryProperty model) {

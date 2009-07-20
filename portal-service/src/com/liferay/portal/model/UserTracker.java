@@ -22,32 +22,6 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="UserTracker.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>UserTracker</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portal.model.impl.UserTrackerImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserTrackerModel
- * @see com.liferay.portal.model.impl.UserTrackerImpl
- * @see com.liferay.portal.model.impl.UserTrackerModelImpl
- *
- */
 public interface UserTracker extends UserTrackerModel {
 	public java.lang.String getFullName();
 

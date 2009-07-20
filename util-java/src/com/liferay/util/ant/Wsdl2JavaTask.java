@@ -27,12 +27,6 @@ import java.io.File;
 import org.apache.axis.tools.ant.wsdl.NamespaceMapping;
 import org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask;
 
-/**
- * <a href="Wsdl2JavaTask.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Wsdl2JavaTask {
 
 	public static void generateJava(String url, String output) {

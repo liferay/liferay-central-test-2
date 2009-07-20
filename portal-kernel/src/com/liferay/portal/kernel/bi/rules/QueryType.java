@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
-/**
- * <a href="QueryType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public enum QueryType {
 
 	CUSTOM, STANDARD

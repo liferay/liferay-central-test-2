@@ -34,12 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * <a href="SetUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SetUtil {
 
 	public static Set<Long> fromArray(long[] array) {

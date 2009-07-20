@@ -38,12 +38,6 @@ import javax.portlet.PortletURL;
 
 import org.apache.commons.lang.time.StopWatch;
 
-/**
- * <a href="WikiCacheUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class WikiCacheUtil {
 
 	public static final String CACHE_NAME = WikiCacheUtil.class.getName();

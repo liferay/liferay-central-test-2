@@ -36,12 +36,6 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.validator.EmailValidator;
 
-/**
- * <a href="EmailAddressValidator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Neil Griffin
- *
- */
 public class EmailAddressValidator
 	implements StateHolder, javax.faces.validator.Validator {
 

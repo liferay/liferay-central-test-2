@@ -27,24 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="UserGroupSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.UserGroupServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.UserGroupServiceSoap
- *
- */
 public class UserGroupSoap implements Serializable {
 	public static UserGroupSoap toSoapModel(UserGroup model) {
 		UserGroupSoap soapModel = new UserGroupSoap();

@@ -33,12 +33,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
-/**
- * <a href="MBMessageFlagServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 
 	public void addAnswerFlag(long messageId)

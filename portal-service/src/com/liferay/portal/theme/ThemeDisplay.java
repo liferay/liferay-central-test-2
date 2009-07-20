@@ -48,12 +48,6 @@ import java.util.TimeZone;
 
 import javax.portlet.PortletURL;
 
-/**
- * <a href="ThemeDisplay.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThemeDisplay implements Serializable {
 
 	public ThemeDisplay() {
@@ -265,9 +259,6 @@ public class ThemeDisplay implements Serializable {
 		return _scopeGroup;
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId() {
 		return getScopeGroupId();
 	}
@@ -712,9 +703,6 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeCss = pathThemeCss;
 	}
 
-	/**
-	 * @deprecated Use <code>getPathThemeImages</code>.
-	 */
 	public String getPathThemeImage() {
 		return getPathThemeImages();
 	}

@@ -22,32 +22,6 @@
 
 package com.liferay.portlet.tasks.model;
 
-
-/**
- * <a href="TasksProposal.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>TasksProposal</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.tasks.model.impl.TasksProposalImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.tasks.model.TasksProposalModel
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
- *
- */
 public interface TasksProposal extends TasksProposalModel {
 	public java.lang.String getStatus(java.util.Locale locale)
 		throws com.liferay.portal.PortalException,

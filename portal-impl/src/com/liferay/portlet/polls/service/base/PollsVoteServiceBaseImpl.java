@@ -40,12 +40,6 @@ import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 
-/**
- * <a href="PollsVoteServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 	implements PollsVoteService {
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

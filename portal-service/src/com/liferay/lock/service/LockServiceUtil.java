@@ -25,12 +25,6 @@ package com.liferay.lock.service;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="LockServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LockServiceUtil {
 
 	public static void clear() {

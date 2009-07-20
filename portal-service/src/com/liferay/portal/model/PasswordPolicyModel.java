@@ -26,26 +26,6 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
-/**
- * <a href="PasswordPolicyModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>PasswordPolicy</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.PasswordPolicy
- * @see com.liferay.portal.model.impl.PasswordPolicyImpl
- * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
- *
- */
 public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public long getPrimaryKey();
 

@@ -25,12 +25,6 @@ package com.liferay.portal.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
 
-/**
- * <a href="GroupNameComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "groupName ASC";

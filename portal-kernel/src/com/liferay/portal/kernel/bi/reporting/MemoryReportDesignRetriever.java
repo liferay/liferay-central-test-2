@@ -27,12 +27,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-/**
- * <a href="MemoryReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class MemoryReportDesignRetriever implements ReportDesignRetriever {
 
 	public MemoryReportDesignRetriever(

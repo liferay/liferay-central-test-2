@@ -33,12 +33,6 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
-/**
- * <a href="MBDiscussionPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class MBDiscussionPermission {
 
 	public static void check(

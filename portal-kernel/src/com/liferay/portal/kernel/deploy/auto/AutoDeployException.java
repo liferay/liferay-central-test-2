@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.deploy.auto;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="AutoDeployException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class AutoDeployException extends PortalException {
 
 	public AutoDeployException() {

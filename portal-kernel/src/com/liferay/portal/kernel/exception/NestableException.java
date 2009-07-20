@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.exception;
 
-/**
- * <a href="NestableException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NestableException extends Exception {
 
 	public NestableException() {

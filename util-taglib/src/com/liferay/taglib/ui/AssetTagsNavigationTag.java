@@ -26,14 +26,6 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="AssetTagsNavigationTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alvaro del Castillo
- * @author Eduardo Lundgren
- * @author Jorge Ferrer
- *
- */
 public class AssetTagsNavigationTag extends IncludeTag {
 
 	public int doStartTag() {

@@ -24,12 +24,6 @@ package com.liferay.portlet.social.model.impl;
 
 import com.liferay.portlet.social.model.SocialRelation;
 
-/**
- * <a href="SocialRelationImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialRelationImpl
 	extends SocialRelationModelImpl implements SocialRelation {
 

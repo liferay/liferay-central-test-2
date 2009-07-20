@@ -26,21 +26,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="DiffResult.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Represents a change between one or several lines. <code>changeType</code>
- * tells if the change happened in source or target. <code>lineNumber</code>
- * holds the line number of the first modified line. This line number refers to
- * a line in source or target, depending on the <code>changeType</code> value.
- * <code>changedLines</code> is a list of strings, each string is a line that
- * is already highlighted, indicating where the changes are.
- * </p>
- *
- * @author Bruno Farache
- *
- */
 public class DiffResult {
 
 	public static final String SOURCE = "SOURCE";

@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 
-/**
- * <a href="RulesEngine.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Vihang Pathak
- *
- */
 public interface RulesEngine {
 
 	public void add(String domainName, ResourceRetriever resourceRetriever)

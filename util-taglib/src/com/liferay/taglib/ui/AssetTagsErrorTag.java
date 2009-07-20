@@ -24,12 +24,6 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-/**
- * <a href="AssetTagsErrorTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssetTagsErrorTag extends IncludeTag {
 
 	protected String getDefaultPage() {

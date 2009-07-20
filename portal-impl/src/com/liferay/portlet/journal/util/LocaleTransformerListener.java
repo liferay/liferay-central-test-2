@@ -33,12 +33,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.List;
 
-/**
- * <a href="LocaleTransformerListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class LocaleTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {

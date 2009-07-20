@@ -39,12 +39,6 @@ import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="JSFPortletUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Neil Griffin
- *
- */
 public class JSFPortletUtil {
 
 	public static long getCompanyId(FacesContext facesContext) {

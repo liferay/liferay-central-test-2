@@ -49,12 +49,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
 
 import java.util.List;
 
-/**
- * <a href="TasksReviewLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class TasksReviewLocalServiceBaseImpl
 	implements TasksReviewLocalService {
 	public TasksReview addTasksReview(TasksReview tasksReview)

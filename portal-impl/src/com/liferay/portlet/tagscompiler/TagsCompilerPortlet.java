@@ -42,12 +42,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="TagsCompilerPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TagsCompilerPortlet extends LiferayPortlet {
 
 	public void render(

@@ -24,12 +24,6 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
-/**
- * <a href="PortletURLListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PortletURLListener extends Serializable {
 
 	public String getListenerClass();

@@ -33,13 +33,6 @@ import com.liferay.portal.kernel.workflow.request.WorkflowInstanceRequest;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="WorkflowInstanceManagerProxy.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Shuyang Zhou
- *
- */
 public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 
 	public WorkflowInstanceManagerProxy(

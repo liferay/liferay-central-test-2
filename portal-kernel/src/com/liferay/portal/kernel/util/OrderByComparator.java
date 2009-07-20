@@ -26,12 +26,6 @@ import java.io.Serializable;
 
 import java.util.Comparator;
 
-/**
- * <a href="OrderByComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class OrderByComparator implements Comparator, Serializable {
 
 	public abstract int compare(Object obj1, Object obj2);

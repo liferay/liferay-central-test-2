@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Field;
 
-/**
- * <a href="StaticFieldGetter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StaticFieldGetter {
 
 	public static StaticFieldGetter getInstance() {

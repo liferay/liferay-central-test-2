@@ -26,12 +26,6 @@ import java.util.Comparator;
 
 import javax.faces.model.SelectItem;
 
-/**
- * <a href="SelectItemComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Neil Griffin
- *
- */
 public class SelectItemComparator implements Comparator<SelectItem> {
 
 	public SelectItemComparator() {

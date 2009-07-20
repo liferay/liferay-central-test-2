@@ -30,13 +30,6 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.service.permission.SCLicensePermission;
 
-/**
- * <a href="SCLicenseServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class SCLicenseServiceImpl extends SCLicenseServiceBaseImpl {
 
 	public SCLicense addLicense(

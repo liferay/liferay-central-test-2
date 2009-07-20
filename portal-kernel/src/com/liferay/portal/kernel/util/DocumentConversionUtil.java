@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.InputStream;
 
-/**
- * <a href="DocumentConversionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class DocumentConversionUtil {
 
 	public static InputStream convert(

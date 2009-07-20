@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.bi.rules;
 
 import java.io.Serializable;
 
-/**
- * <a href="AdminRequestType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public enum AdminRequestType implements Serializable {
 
 	ADD, REMOVE, UPDATE

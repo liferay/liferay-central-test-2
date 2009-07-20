@@ -25,14 +25,6 @@ package com.liferay.portal.kernel.messaging;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-/**
- * <a href="DestinationRegistrationTask.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Shuyang Zhou
- * @author Brian Wing Shun Chan
- *
- */
 public class DestinationRegistrationTask implements Callable<Object> {
 
 	public DestinationRegistrationTask(

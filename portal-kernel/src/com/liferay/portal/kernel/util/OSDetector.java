@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.File;
 
-/**
- * <a href="OSDetector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OSDetector {
 
 	public static boolean isUnix() {

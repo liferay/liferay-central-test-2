@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-/**
- * <a href="CacheRegistryItem.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface CacheRegistryItem {
 
 	public String getRegistryName();

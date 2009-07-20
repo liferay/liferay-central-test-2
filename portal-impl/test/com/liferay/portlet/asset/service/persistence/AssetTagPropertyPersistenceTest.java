@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.asset.NoSuchTagPropertyException;
 import com.liferay.portlet.asset.model.AssetTagProperty;
 
-/**
- * <a href="AssetTagPropertyPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

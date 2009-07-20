@@ -25,12 +25,6 @@ package com.liferay.portlet.tasks.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.tasks.model.TasksReview;
 
-/**
- * <a href="ReviewUserNameComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReviewUserNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "stage, userName ASC";

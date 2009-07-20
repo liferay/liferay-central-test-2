@@ -27,30 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
-/**
- * <a href="SocialRequestInterpreterLocalService.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl</code>.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil
- *
- */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface SocialRequestInterpreterLocalService {

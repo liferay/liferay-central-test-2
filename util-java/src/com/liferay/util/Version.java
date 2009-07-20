@@ -30,12 +30,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="Version.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class Version implements Comparable<Version> {
 
 	public static final String UNKNOWN = "unknown";

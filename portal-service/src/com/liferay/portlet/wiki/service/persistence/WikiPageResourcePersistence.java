@@ -24,12 +24,6 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="WikiPageResourcePersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface WikiPageResourcePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource);

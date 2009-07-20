@@ -33,13 +33,6 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="PageRatingsPortletDataHandlerImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Bruno Farache
- *
- */
 public class PageRatingsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(

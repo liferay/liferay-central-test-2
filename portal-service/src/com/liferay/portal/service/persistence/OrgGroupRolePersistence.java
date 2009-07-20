@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="OrgGroupRolePersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface OrgGroupRolePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.OrgGroupRole orgGroupRole);
 

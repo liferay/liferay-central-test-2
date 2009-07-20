@@ -27,13 +27,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-/**
- * <a href="ContextClassloaderReportDesignRetriever.java.html"><b><i>View Source
- * </i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class ContextClassloaderReportDesignRetriever
 	implements ReportDesignRetriever, Serializable {
 

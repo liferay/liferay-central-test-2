@@ -33,13 +33,6 @@ import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="SocialRelationLocalServiceTest.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialRelationLocalServiceTest extends BaseServiceTestCase {
 
 	public void testAddRelationWithBiType() throws Exception {

@@ -27,13 +27,6 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-/**
- * <a href="ModelContextTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class ModelContextTag extends BodyTagSupport {
 
 	public int doEndTag() throws JspException {

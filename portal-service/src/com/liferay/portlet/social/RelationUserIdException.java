@@ -24,12 +24,6 @@ package com.liferay.portlet.social;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="RelationUserIdException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RelationUserIdException extends PortalException {
 
 	public RelationUserIdException() {

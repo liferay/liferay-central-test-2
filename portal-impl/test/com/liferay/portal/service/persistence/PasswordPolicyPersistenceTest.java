@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="PasswordPolicyPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

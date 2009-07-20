@@ -34,12 +34,6 @@ import com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * <a href="TasksProposalImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TasksProposalImpl
 	extends TasksProposalModelImpl implements TasksProposal {
 

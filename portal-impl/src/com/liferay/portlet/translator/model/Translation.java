@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
-/**
- * <a href="Translation.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Translation implements Serializable {
 
 	public Translation(String translationId, String fromText) {

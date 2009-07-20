@@ -34,14 +34,6 @@ import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
 import java.util.List;
 
-/**
- * <a href="BaseSocialRequestInterpreter.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- * @author Amos Fong
- *
- */
 public abstract class BaseSocialRequestInterpreter
 	implements SocialRequestInterpreter {
 

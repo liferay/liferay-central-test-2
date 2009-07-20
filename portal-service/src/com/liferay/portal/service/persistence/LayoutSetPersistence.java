@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="LayoutSetPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface LayoutSetPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.LayoutSet layoutSet);
 

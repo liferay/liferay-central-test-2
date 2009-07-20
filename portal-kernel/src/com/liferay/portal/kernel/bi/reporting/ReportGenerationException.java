@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.bi.reporting;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="ReportGenerationException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class ReportGenerationException extends PortalException {
 
 	public ReportGenerationException() {

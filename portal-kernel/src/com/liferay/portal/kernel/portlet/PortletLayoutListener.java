@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-/**
- * <a href="PortletLayoutListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PortletLayoutListener {
 
 	public void onAddToLayout(String portletId, long plid)

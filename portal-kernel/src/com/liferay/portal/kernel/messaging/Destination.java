@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-/**
- * <a href="Destination.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public interface Destination {
 
 	public void addDestinationEventListener(

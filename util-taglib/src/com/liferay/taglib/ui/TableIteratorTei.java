@@ -26,12 +26,6 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
-/**
- * <a href="TableIteratorTei.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TableIteratorTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {

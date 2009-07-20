@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.io.Serializable;
 
-/**
- * <a href="AdminRequestMessage.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class AdminRequestMessage implements Serializable {
 
 	public static AdminRequestMessage add(

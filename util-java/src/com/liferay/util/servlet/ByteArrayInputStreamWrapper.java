@@ -27,12 +27,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletInputStream;
 
-/**
- * <a href="ByteArrayInputStreamWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ByteArrayInputStreamWrapper extends ServletInputStream {
 
 	public ByteArrayInputStreamWrapper(ByteArrayInputStream is) {

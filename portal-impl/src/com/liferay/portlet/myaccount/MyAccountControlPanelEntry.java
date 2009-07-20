@@ -26,12 +26,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.BaseControlPanelEntry;
 
-/**
- * <a href="MyAccountControlPanelEntry.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class MyAccountControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(

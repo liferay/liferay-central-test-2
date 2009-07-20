@@ -28,13 +28,6 @@ import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 
-/**
- * <a href="MBMessageDisplayImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Shuyang Zhou
- *
- */
 public class MBMessageDisplayImpl implements MBMessageDisplay {
 
 	public MBMessageDisplayImpl(

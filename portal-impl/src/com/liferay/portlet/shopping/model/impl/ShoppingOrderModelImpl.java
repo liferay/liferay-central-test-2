@@ -45,26 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="ShoppingOrderModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>ShoppingOrder</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.shopping.model.ShoppingOrder
- * @see com.liferay.portlet.shopping.model.ShoppingOrderModel
- * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl
- *
- */
 public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	public static final String TABLE_NAME = "ShoppingOrder";
 	public static final Object[][] TABLE_COLUMNS = {

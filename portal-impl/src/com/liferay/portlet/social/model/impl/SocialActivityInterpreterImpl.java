@@ -30,13 +30,6 @@ import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <a href="SocialActivityInterpreterImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SocialActivityInterpreterImpl
 	implements SocialActivityInterpreter {
 

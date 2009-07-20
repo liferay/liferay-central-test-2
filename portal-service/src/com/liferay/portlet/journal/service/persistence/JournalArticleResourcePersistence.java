@@ -24,12 +24,6 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="JournalArticleResourcePersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface JournalArticleResourcePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource);

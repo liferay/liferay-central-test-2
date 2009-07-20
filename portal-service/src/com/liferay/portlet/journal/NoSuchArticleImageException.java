@@ -24,12 +24,6 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchArticleImageException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchArticleImageException extends PortalException {
 
 	public NoSuchArticleImageException() {

@@ -29,12 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-/**
- * <a href="WebDirDetector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WebDirDetector {
 
 	public static String getLibDir(ClassLoader classLoader) {

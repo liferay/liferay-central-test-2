@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.job;
 
-/**
- * <a href="JobSchedulerUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JobSchedulerUtil {
 
 	public static JobScheduler getJobScheduler() {

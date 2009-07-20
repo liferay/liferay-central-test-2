@@ -29,12 +29,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="InputMoveBoxesTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InputMoveBoxesTag extends IncludeTag {
 
 	public int doStartTag() {

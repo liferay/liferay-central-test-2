@@ -39,12 +39,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-/**
- * <a href="CacheResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class CacheResponse extends HttpServletResponseWrapper {
 
 	public CacheResponse(HttpServletResponse response, String encoding) {

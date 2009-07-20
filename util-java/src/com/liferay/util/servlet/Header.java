@@ -22,12 +22,6 @@
 
 package com.liferay.util.servlet;
 
-/**
- * <a href="Header.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public class Header {
 
 	public static final int INTEGER_TYPE = 1;

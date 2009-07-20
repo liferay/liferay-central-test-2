@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-/**
- * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- *
- */
 public class CustomSQLUtil {
 
 	public static String get(String id) {

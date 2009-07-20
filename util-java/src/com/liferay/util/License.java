@@ -22,12 +22,6 @@
 
 package com.liferay.util;
 
-/**
- * <a href="License.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class License {
 
 	public String getName() {

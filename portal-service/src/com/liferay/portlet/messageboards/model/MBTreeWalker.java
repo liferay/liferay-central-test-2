@@ -26,12 +26,6 @@ import java.io.Serializable;
 
 import java.util.List;
 
-/**
- * <a href="MBTreeWalker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface MBTreeWalker extends Serializable {
 
 	public MBMessage getRoot();

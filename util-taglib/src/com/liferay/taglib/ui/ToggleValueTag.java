@@ -33,12 +33,6 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="ToggleValueTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ToggleValueTag extends TagSupport {
 
 	public static void doTag(

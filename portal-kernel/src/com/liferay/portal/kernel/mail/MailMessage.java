@@ -30,15 +30,6 @@ import java.util.List;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="MailMessage.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Neil Griffin
- * @author Raymond Augé
- * @author Thiago Moreira
- *
- */
 public class MailMessage implements Serializable {
 
 	public MailMessage() {

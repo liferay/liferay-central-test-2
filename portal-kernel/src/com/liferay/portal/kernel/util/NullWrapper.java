@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-/**
- * <a href="NullWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NullWrapper implements Serializable {
 
 	public NullWrapper(String className) {

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-/**
- * <a href="MBCategoryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBCategoryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory) {

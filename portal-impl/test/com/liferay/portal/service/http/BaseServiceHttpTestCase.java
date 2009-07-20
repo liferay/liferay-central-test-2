@@ -26,12 +26,6 @@ import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.TestPropsValues;
 
-/**
- * <a href="BaseServiceHttpTestCase.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BaseServiceHttpTestCase extends BaseTestCase {
 
 	protected HttpPrincipal getHttpPrincipal() {

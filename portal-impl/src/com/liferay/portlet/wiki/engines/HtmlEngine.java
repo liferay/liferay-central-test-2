@@ -29,12 +29,6 @@ import java.util.Map;
 
 import javax.portlet.PortletURL;
 
-/**
- * <a href="HtmlEngine.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class HtmlEngine implements WikiEngine {
 
 	public String convert(WikiPage page, PortletURL portletURL) {

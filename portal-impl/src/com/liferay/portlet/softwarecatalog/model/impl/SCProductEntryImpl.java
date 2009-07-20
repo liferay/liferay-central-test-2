@@ -33,12 +33,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceU
 
 import java.util.List;
 
-/**
- * <a href="SCProductEntryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCProductEntryImpl
 	extends SCProductEntryModelImpl implements SCProductEntry {
 

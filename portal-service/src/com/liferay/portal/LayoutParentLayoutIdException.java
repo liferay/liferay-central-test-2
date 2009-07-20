@@ -22,13 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="LayoutParentLayoutIdException.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutParentLayoutIdException extends PortalException {
 
 	public static final int NOT_PARENTABLE = 1;

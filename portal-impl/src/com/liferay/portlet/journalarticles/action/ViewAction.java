@@ -37,13 +37,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class ViewAction extends WebContentAction {
 
 	public ActionForward render(

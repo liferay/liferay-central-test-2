@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.resource;
 
 import java.io.InputStream;
 
-/**
- * <a href="ContextClassLoaderResourceRetriever.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class ContextClassLoaderResourceRetriever implements ResourceRetriever {
 
 	public ContextClassLoaderResourceRetriever(String fileName) {

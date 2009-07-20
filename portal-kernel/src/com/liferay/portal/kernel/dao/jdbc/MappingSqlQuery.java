@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.dao.jdbc;
 
 import java.util.List;
 
-/**
- * <a href="MappingSqlQuery.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface MappingSqlQuery {
 
 	public List execute(Object[] params);

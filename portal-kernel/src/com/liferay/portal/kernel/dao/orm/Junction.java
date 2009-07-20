@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-/**
- * <a href="Junction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public interface Junction extends Criterion {
 
 	public Junction add(Criterion criterion);

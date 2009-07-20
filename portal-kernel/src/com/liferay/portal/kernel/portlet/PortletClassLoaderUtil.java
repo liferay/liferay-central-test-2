@@ -22,13 +22,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-/**
- * <a href="PortletClassLoaderUtil.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletClassLoaderUtil {
 
 	public static ClassLoader getClassLoader() {

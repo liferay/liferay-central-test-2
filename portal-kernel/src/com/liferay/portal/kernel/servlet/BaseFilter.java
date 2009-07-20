@@ -41,12 +41,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="BaseFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public abstract class BaseFilter implements Filter {
 
 	public void init(FilterConfig filterConfig) {

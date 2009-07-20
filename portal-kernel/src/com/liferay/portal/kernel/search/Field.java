@@ -22,15 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-/**
- * <a href="Field.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- * @author Brian Wing Shun Chan
- * @author Allen Chiang
- * @author Alex Wallace
- *
- */
 public class Field {
 
 	public static final String ASSET_CATEGORY_IDS = "assetCategoryIds";

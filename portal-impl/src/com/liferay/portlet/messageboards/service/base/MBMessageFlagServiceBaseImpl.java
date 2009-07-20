@@ -59,12 +59,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersiste
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 
-/**
- * <a href="MBMessageFlagServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class MBMessageFlagServiceBaseImpl extends PrincipalBean
 	implements MBMessageFlagService {
 	public MBBanLocalService getMBBanLocalService() {

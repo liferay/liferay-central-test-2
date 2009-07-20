@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-/**
- * <a href="SCProductEntryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCProductEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry) {

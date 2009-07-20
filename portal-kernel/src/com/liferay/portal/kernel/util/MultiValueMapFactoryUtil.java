@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="MultiValueMapFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MultiValueMapFactoryUtil {
 
 	public static MultiValueMap getMultiValueMap(int type) {

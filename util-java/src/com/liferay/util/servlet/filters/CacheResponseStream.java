@@ -28,12 +28,6 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
-/**
- * <a href="CacheResponseStream.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class CacheResponseStream extends ServletOutputStream {
 
 	public CacheResponseStream(OutputStream os) {

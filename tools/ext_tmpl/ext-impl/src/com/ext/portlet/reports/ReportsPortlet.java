@@ -31,12 +31,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-/**
- * <a href="ReportsPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReportsPortlet extends StrutsPortlet {
 
 	public void doView(

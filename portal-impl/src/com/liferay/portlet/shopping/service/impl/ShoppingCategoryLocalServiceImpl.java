@@ -39,13 +39,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="ShoppingCategoryLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCategoryLocalServiceImpl
 	extends ShoppingCategoryLocalServiceBaseImpl {
 

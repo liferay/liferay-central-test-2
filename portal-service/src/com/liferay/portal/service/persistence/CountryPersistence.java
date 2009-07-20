@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="CountryPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface CountryPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Country country);
 

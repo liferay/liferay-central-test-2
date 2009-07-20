@@ -41,26 +41,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ShoppingItemFieldModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>ShoppingItemField</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.shopping.model.ShoppingItemField
- * @see com.liferay.portlet.shopping.model.ShoppingItemFieldModel
- * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
- *
- */
 public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField> {
 	public static final String TABLE_NAME = "ShoppingItemField";
 	public static final Object[][] TABLE_COLUMNS = {

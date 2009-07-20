@@ -24,12 +24,6 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="SocialRelationPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SocialRelationPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.social.model.SocialRelation socialRelation);

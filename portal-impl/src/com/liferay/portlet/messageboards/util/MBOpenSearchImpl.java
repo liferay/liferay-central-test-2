@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
-/**
- * <a href="MBOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/message_boards/open_search";

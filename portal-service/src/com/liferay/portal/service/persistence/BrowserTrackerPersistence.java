@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="BrowserTrackerPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface BrowserTrackerPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.BrowserTracker browserTracker);

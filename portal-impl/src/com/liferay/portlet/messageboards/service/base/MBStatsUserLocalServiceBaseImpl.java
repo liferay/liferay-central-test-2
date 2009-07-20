@@ -59,12 +59,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 
 import java.util.List;
 
-/**
- * <a href="MBStatsUserLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class MBStatsUserLocalServiceBaseImpl
 	implements MBStatsUserLocalService {
 	public MBStatsUser addMBStatsUser(MBStatsUser mbStatsUser)

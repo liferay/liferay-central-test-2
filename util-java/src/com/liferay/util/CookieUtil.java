@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="CookieUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CookieUtil {
 
 	public static String get(HttpServletRequest request, String name) {

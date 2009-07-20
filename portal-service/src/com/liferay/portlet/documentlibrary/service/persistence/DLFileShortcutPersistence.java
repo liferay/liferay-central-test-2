@@ -24,12 +24,6 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="DLFileShortcutPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface DLFileShortcutPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut);

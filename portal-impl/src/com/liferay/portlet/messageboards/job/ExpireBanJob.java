@@ -32,12 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
-/**
- * <a href="ExpireBanJob.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public class ExpireBanJob implements IntervalJob {
 
 	public ExpireBanJob() {

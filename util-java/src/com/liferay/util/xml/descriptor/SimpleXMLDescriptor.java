@@ -28,12 +28,6 @@ import com.liferay.util.xml.ElementIdentifier;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-/**
- * <a href="SimpleXMLDescriptor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public abstract class SimpleXMLDescriptor implements XMLDescriptor {
 
 	public boolean areEqual(Element el1, Element el2) {

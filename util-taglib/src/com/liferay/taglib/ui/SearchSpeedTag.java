@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.search.Hits;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="SearchSpeedTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SearchSpeedTag extends SearchFormTag {
 
 	public int doStartTag() {

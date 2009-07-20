@@ -28,13 +28,6 @@ import com.liferay.portal.kernel.util.PortalClassInvoker;
 
 import java.util.Map;
 
-/**
- * <a href="BaseFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	public abstract String getPortletId();

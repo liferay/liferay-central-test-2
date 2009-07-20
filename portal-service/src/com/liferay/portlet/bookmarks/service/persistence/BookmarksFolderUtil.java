@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
-/**
- * <a href="BookmarksFolderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BookmarksFolderUtil {
 	public static void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder) {

@@ -24,12 +24,6 @@ package com.liferay.taglib.faces.validator;
 
 import javax.faces.webapp.ValidatorTag;
 
-/**
- * <a href="EmailAddressValidatorTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Neil Griffin
- *
- */
 public class EmailAddressValidatorTag extends ValidatorTag {
 
 	public EmailAddressValidatorTag() {

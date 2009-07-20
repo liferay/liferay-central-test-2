@@ -36,12 +36,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * <a href="ReverendFunUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReverendFunUtil {
 
 	public static String getCurrentDate() {

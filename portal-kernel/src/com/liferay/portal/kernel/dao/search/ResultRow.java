@@ -33,12 +33,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="ResultRow.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ResultRow {
 
 	public ResultRow(Object obj, long primaryKey, int pos) {

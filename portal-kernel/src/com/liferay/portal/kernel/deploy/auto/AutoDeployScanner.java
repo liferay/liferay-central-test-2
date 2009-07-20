@@ -22,13 +22,6 @@
 
 package com.liferay.portal.kernel.deploy.auto;
 
-/**
- * <a href="AutoDeployScanner.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class AutoDeployScanner extends Thread {
 
 	public AutoDeployScanner(ThreadGroup group, String name,

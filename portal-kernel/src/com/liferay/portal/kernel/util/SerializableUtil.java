@@ -28,12 +28,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-/**
- * <a href="SerializableUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class SerializableUtil {
 
 	public static Object deserialize(byte[] bytes)

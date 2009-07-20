@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="OrgGroupRolePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

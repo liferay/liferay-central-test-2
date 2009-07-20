@@ -24,12 +24,6 @@ package com.liferay.counter.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
-/**
- * <a href="CounterLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CounterLocalServiceFactory {
 
 	public static CounterLocalService getService() {

@@ -24,13 +24,6 @@ package com.liferay.portlet.softwarecatalog;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="ProductVersionChangeLogException.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class ProductVersionChangeLogException extends PortalException {
 
 	public ProductVersionChangeLogException() {

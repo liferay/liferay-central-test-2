@@ -30,12 +30,6 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="MathUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MathUtil {
 
 	public static int base2Log(long x) {

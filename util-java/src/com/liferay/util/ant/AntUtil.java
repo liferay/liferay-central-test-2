@@ -24,12 +24,6 @@ package com.liferay.util.ant;
 
 import org.apache.tools.ant.Project;
 
-/**
- * <a href="AntUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AntUtil {
 
 	public static Project getProject() {

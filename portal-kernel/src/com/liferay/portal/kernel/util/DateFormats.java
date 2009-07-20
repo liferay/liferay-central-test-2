@@ -27,12 +27,6 @@ import java.text.DateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/**
- * <a href="DateFormats.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DateFormats {
 
 	public static DateFormat getDate(Locale locale) {

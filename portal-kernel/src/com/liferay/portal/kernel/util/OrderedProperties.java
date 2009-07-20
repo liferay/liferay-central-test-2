@@ -26,12 +26,6 @@ import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Vector;
 
-/**
- * <a href="OrderedProperties.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrderedProperties extends Properties {
 
 	public OrderedProperties() {

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-/**
- * <a href="SCFrameworkVersionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCFrameworkVersionUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion) {

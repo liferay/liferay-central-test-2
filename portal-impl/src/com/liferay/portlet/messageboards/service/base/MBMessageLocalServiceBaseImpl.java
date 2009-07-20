@@ -102,12 +102,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.util.List;
 
-/**
- * <a href="MBMessageLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class MBMessageLocalServiceBaseImpl
 	implements MBMessageLocalService {
 	public MBMessage addMBMessage(MBMessage mbMessage)

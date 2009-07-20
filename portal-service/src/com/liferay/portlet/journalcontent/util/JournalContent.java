@@ -25,12 +25,6 @@ package com.liferay.portlet.journalcontent.util;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 
-/**
- * <a href="JournalContent.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public interface JournalContent {
 
 	public static final String CACHE_NAME = JournalContent.class.getName();

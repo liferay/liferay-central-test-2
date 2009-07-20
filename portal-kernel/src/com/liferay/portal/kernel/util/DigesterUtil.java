@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="DigesterUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DigesterUtil {
 
 	public static String digest(String text) {

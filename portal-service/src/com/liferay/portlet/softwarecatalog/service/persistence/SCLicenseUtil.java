@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
-/**
- * <a href="SCLicenseUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCLicenseUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense) {

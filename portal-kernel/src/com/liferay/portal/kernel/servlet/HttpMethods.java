@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-/**
- * <a href="HttpMethods.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface HttpMethods {
 
 	public static final String CONNECT = "CONNECT";

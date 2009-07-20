@@ -24,12 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
 
-/**
- * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface BasePersistence {
 
 	public void clearCache();

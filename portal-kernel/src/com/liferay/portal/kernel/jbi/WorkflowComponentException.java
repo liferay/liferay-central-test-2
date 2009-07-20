@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.jbi;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="WorkflowComponentException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WorkflowComponentException extends PortalException {
 
 	public WorkflowComponentException() {

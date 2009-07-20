@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="UserFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserFinderUtil {
 	public static int countByUser(long userId,
 		java.util.LinkedHashMap<String, Object> params)

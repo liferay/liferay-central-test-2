@@ -22,12 +22,6 @@
 
 package com.liferay.portal.lar;
 
-/**
- * <a href="PortletDataHandlerChoice.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class PortletDataHandlerChoice extends PortletDataHandlerControl {
 
 	public PortletDataHandlerChoice(String namespace, String controlName) {

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="MembershipRequestUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MembershipRequestUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.MembershipRequest membershipRequest) {

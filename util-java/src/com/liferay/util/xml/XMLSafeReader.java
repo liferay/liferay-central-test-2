@@ -24,12 +24,6 @@ package com.liferay.util.xml;
 
 import java.io.StringReader;
 
-/**
- * <a href="XMLSafeReader.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class XMLSafeReader extends StringReader {
 
 	public XMLSafeReader(String xml) {

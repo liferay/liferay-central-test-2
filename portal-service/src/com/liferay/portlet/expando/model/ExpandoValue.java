@@ -22,32 +22,6 @@
 
 package com.liferay.portlet.expando.model;
 
-
-/**
- * <a href="ExpandoValue.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>ExpandoValue</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.expando.model.impl.ExpandoValueImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.expando.model.ExpandoValueModel
- * @see com.liferay.portlet.expando.model.impl.ExpandoValueImpl
- * @see com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
- *
- */
 public interface ExpandoValue extends ExpandoValueModel {
 	public boolean getBoolean()
 		throws com.liferay.portal.PortalException,

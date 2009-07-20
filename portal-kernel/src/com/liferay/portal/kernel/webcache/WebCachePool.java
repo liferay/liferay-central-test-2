@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.webcache;
 
-/**
- * <a href="WebCachePool.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface WebCachePool {
 
 	public void clear();

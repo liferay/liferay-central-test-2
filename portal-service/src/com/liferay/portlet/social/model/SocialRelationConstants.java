@@ -22,13 +22,6 @@
 
 package com.liferay.portlet.social.model;
 
-/**
- * <a href="SocialRelationConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class SocialRelationConstants {
 
 	public static final int TYPE_BI_COWORKER = 1;

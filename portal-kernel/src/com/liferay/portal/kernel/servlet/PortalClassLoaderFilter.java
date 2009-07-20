@@ -38,12 +38,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-/**
- * <a href="PortalClassLoaderFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalClassLoaderFilter implements Filter, PortalInitable {
 
 	public void destroy() {

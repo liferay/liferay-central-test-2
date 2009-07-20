@@ -41,13 +41,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="ServiceContextFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class ServiceContextFactory {
 
 	public static ServiceContext getInstance(

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="RegionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RegionUtil {
 	public static void cacheResult(com.liferay.portal.model.Region region) {
 		getPersistence().cacheResult(region);

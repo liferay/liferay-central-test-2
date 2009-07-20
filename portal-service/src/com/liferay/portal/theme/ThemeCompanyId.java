@@ -24,12 +24,6 @@ package com.liferay.portal.theme;
 
 import java.io.Serializable;
 
-/**
- * <a href="ThemeCompanyId.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThemeCompanyId implements Serializable {
 
 	public ThemeCompanyId(String value, boolean pattern) {

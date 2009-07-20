@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
-/**
- * <a href="AnnouncementsEntryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AnnouncementsEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {

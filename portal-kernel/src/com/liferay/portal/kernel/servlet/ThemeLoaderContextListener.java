@@ -29,12 +29,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-/**
- * <a href="ThemeLoaderContextListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThemeLoaderContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {

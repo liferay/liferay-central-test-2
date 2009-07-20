@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.messaging;
 
-/**
- * <a href="MailingListRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Thiago Moreira
- *
- */
 public class MailingListRequest {
 
 	public long getCategoryId() {

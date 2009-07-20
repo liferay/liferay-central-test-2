@@ -37,12 +37,6 @@ import org.apache.xml.utils.WrappedRuntimeException;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-/**
- * <a href="JournalXslErrorListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class JournalXslErrorListener implements ErrorListener {
 
 	public JournalXslErrorListener(long companyId, Locale locale) {

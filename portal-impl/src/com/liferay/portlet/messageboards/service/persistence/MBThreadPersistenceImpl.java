@@ -54,12 +54,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBThreadPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	implements MBThreadPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBThreadImpl.class.getName();

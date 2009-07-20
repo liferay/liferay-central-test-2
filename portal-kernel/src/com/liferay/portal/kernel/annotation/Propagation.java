@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.annotation;
 
-/**
- * <a href="Propagation.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public enum Propagation {
 
 	MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),

@@ -29,12 +29,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * <a href="ImageProcessor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ImageProcessor {
 
 	public static final String TYPE_BMP = "bmp";

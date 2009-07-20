@@ -65,12 +65,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
 
 import java.util.List;
 
-/**
- * <a href="SCProductEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SCProductEntryLocalServiceBaseImpl
 	implements SCProductEntryLocalService {
 	public SCProductEntry addSCProductEntry(SCProductEntry scProductEntry)

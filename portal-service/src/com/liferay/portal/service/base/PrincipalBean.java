@@ -34,12 +34,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-/**
- * <a href="PrincipalBean.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PrincipalBean {
 
 	public static final String JRUN_ANONYMOUS = "anonymous-guest";

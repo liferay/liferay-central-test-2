@@ -24,12 +24,6 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 
-/**
- * <a href="SCProductScreenshotImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCProductScreenshotImpl
 	extends SCProductScreenshotModelImpl implements SCProductScreenshot {
 

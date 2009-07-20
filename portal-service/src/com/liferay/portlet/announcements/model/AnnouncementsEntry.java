@@ -22,31 +22,5 @@
 
 package com.liferay.portlet.announcements.model;
 
-
-/**
- * <a href="AnnouncementsEntry.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>AnnouncementsEntry</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.announcements.model.AnnouncementsEntryModel
- * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
- * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
- *
- */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {
 }

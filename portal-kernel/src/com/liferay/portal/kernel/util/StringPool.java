@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="StringPool.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StringPool {
 
 	public static final String AMPERSAND = "&";

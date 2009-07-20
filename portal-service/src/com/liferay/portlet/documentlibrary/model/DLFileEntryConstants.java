@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-/**
- * <a href="DLFileEntryConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Samuel Kong
- *
- */
 public class DLFileEntryConstants {
 
 	public static final int DEFAULT_READ_COUNT = 0;

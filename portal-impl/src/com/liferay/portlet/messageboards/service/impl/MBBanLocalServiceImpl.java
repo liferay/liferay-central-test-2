@@ -40,12 +40,6 @@ import com.liferay.portlet.messageboards.util.MBUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBBanLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 
 	public MBBan addBan(

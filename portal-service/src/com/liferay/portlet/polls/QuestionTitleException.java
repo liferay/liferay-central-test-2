@@ -24,12 +24,6 @@ package com.liferay.portlet.polls;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="QuestionTitleException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class QuestionTitleException extends PortalException {
 
 	public QuestionTitleException() {

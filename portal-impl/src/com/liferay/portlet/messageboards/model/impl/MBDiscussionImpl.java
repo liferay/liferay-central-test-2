@@ -24,12 +24,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 
-/**
- * <a href="MBDiscussionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBDiscussionImpl
 	extends MBDiscussionModelImpl implements MBDiscussion {
 

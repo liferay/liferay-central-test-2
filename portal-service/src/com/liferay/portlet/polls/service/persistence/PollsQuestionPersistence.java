@@ -24,12 +24,6 @@ package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="PollsQuestionPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PollsQuestionPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion);

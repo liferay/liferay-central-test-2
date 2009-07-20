@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.dao.jdbc;
 
-/**
- * <a href="SqlUpdate.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SqlUpdate {
 
 	public int update(Object[] params);

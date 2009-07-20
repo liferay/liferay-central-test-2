@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.annotation;
 
 import java.sql.Connection;
 
-/**
- * <a href="TransactionDefinition.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public interface TransactionDefinition {
 
 	public static final int ISOLATION_DEFAULT = -1;

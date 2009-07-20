@@ -49,12 +49,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="FindPageAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Samuel Kong
- *
- */
 public class FindPageAction extends Action {
 
 	public ActionForward execute(

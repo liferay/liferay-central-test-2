@@ -28,13 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * <a href="Validator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alysa Carver
- *
- */
 public class Validator {
 
 	public static boolean equals(Object obj1, Object obj2) {
@@ -82,12 +75,6 @@ public class Validator {
 		}
 	}
 
-	/**
-	 * Returns true if c is a letter between a-z and A-Z.
-	 *
-	 * @param		c a character
-	 * @return		true if c is a letter between a-z and A-Z
-	 */
 	public static boolean isChar(char c) {
 		int x = c;
 
@@ -98,13 +85,6 @@ public class Validator {
 		return false;
 	}
 
-	/**
-	 * Returns true if s is a string of letters that are between a-z and A-Z.
-	 *
-	 * @param		s a string
-	 * @return		true if s is a string of letters that are between a-z and
-	 *				A-Z
-	 */
 	public static boolean isChar(String s) {
 		if (isNull(s)) {
 			return false;
@@ -123,12 +103,6 @@ public class Validator {
 		return isGregorianDate(month, day, year);
 	}
 
-	/**
-	 * Returns true if c is a digit between 0 and 9.
-	 *
-	 * @param		c a character
-	 * @return		true if c is a digit between 0 and 9
-	 */
 	public static boolean isDigit(char c) {
 		int x = c;
 
@@ -139,12 +113,6 @@ public class Validator {
 		return false;
 	}
 
-	/**
-	 * Returns true if s is a string of letters that are between 0 and 9.
-	 *
-	 * @param		s a string
-	 * @return		true if s is a string of letters that are between 0 and 9
-	 */
 	public static boolean isDigit(String s) {
 		if (isNull(s)) {
 			return false;

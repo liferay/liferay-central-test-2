@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="JournalStructureSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.journal.service.http.JournalStructureServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.journal.service.http.JournalStructureServiceSoap
- *
- */
 public class JournalStructureSoap implements Serializable {
 	public static JournalStructureSoap toSoapModel(JournalStructure model) {
 		JournalStructureSoap soapModel = new JournalStructureSoap();

@@ -25,12 +25,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
-/**
- * <a href="BaseModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
 	public BaseModelImpl() {

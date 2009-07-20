@@ -83,13 +83,6 @@ import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="ShoppingOrderLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingOrderLocalServiceImpl
 	extends ShoppingOrderLocalServiceBaseImpl {
 

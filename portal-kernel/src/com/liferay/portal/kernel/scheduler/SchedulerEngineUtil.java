@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="SchedulerEngineUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class SchedulerEngineUtil {
 
 	public static List<SchedulerRequest> getScheduledJobs(String groupName)

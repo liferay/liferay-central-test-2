@@ -25,17 +25,6 @@ package com.liferay.portal.kernel.messaging;
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
-/**
- * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Destination that delivers a message to a list of message listeners in
- * parallel.
- * </p>
- *
- * @author Michael C. Han
- *
- */
 public class ParallelDestination extends BaseDestination {
 
 	public ParallelDestination(String name) {

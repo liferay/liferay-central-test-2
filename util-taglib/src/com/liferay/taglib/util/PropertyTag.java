@@ -25,12 +25,6 @@ package com.liferay.taglib.util;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="PropertyTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PropertyTag extends TagSupport {
 
 	public int doStartTag() throws JspException {

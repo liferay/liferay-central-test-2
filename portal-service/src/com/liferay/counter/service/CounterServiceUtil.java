@@ -26,12 +26,6 @@ import com.liferay.portal.SystemException;
 
 import java.util.List;
 
-/**
- * <a href="CounterServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CounterServiceUtil {
 
 	public static List<String> getNames() throws SystemException {

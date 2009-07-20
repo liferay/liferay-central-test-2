@@ -22,11 +22,6 @@
 
 package com.liferay.util;
 
-/**
- * <a href="Screenshot.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- */
 public class Screenshot {
 
 	public String getThumbnailURL() {

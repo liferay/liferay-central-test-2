@@ -25,12 +25,6 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="LayoutPrototypePermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public interface LayoutPrototypePermission {
 
 	public void check(

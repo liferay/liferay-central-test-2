@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.scripting;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="ScriptingException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
- */
 public class ScriptingException extends PortalException {
 
 	public ScriptingException() {

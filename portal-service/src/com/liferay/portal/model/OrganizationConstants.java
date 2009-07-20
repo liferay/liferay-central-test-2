@@ -22,12 +22,6 @@
 
 package com.liferay.portal.model;
 
-/**
- * <a href="OrganizationConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrganizationConstants {
 
 	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;

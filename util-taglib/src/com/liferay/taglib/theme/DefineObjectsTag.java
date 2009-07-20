@@ -28,12 +28,6 @@ import com.liferay.portal.util.WebKeys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="DefineObjectsTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DefineObjectsTag extends TagSupport {
 
 	public int doStartTag() {

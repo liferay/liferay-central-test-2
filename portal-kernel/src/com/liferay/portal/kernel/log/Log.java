@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.log;
 
-/**
- * <a href="Log.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Log {
 
 	public void debug(Object msg);

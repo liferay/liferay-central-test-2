@@ -22,12 +22,6 @@
 
 package com.liferay.util;
 
-/**
- * <a href="FiniteUniqueStack.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FiniteUniqueStack<E> extends FiniteStack<E> {
 
 	public FiniteUniqueStack(int maxSize) {

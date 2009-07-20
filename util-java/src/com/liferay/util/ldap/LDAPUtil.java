@@ -31,13 +31,6 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 
-/**
- * <a href="LDAPUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Toma Bedolla
- * @author Michael Young
- *
- */
 public class LDAPUtil {
 
 	public static String getAttributeValue(Attributes attrs, String id)

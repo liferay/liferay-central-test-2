@@ -33,13 +33,6 @@ import java.net.DatagramPacket;
 
 import java.util.zip.GZIPInputStream;
 
-/**
- * <a href="MulticastDatagramHandler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Raymond Aug�
- *
- */
 public class MulticastDatagramHandler implements DatagramHandler {
 
 	public MulticastDatagramHandler(boolean gzipData, boolean shortData) {

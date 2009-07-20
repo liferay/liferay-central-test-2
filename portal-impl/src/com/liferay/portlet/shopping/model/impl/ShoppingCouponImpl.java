@@ -27,12 +27,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 
 import java.util.Date;
 
-/**
- * <a href="ShoppingCouponImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCouponImpl
 	extends ShoppingCouponModelImpl implements ShoppingCoupon {
 

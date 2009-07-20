@@ -22,12 +22,6 @@
 
 package com.liferay.taglib.util;
 
-/**
- * <a href="PropertyAncestorTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface PropertyAncestorTag {
 
 	public void addProperty(String name, String value);

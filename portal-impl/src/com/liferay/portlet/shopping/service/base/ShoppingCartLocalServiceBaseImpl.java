@@ -62,12 +62,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence
 
 import java.util.List;
 
-/**
- * <a href="ShoppingCartLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class ShoppingCartLocalServiceBaseImpl
 	implements ShoppingCartLocalService {
 	public ShoppingCart addShoppingCart(ShoppingCart shoppingCart)

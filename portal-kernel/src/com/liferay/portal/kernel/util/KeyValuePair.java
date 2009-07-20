@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-/**
- * <a href="KeyValuePair.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 
 	public KeyValuePair() {

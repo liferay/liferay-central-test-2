@@ -26,12 +26,6 @@ import java.io.Serializable;
 
 import java.util.Comparator;
 
-/**
- * <a href="StringComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StringComparator implements Comparator<String>, Serializable {
 
 	public StringComparator() {

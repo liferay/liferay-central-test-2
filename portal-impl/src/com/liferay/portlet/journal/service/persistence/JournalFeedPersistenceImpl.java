@@ -54,12 +54,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="JournalFeedPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 	implements JournalFeedPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalFeedImpl.class.getName();

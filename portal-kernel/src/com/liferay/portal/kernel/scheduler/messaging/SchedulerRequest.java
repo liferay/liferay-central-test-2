@@ -26,21 +26,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-/**
- * <a href="SchedulerRequest.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * A request to schedule a job for the scheduling engine. You may specify the
- * timing of the job via the cron syntax. See
- * http://quartz.sourceforge.net/javadoc/org/quartz/CronTrigger.html for a
- * description of the syntax.
- * </p>
- *
- * @author Michael C. Han
- * @author Bruno Farache
- * @author Brian Wing Shun Chan
- *
- */
 public class SchedulerRequest implements Serializable {
 
 	public static final String COMMAND_REGISTER = "REGISTER";

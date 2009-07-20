@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.poller;
 
 import java.util.Map;
 
-/**
- * <a href="PollerRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollerRequest {
 
 	public PollerRequest(

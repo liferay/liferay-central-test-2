@@ -39,12 +39,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-/**
- * <a href="BasePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";

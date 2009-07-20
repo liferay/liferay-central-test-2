@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-/**
- * <a href="HtmlBottomTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class HtmlBottomTag extends BodyTagSupport {
 
 	public int doStartTag() {

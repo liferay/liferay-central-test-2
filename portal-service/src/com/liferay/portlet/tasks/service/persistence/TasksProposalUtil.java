@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
-/**
- * <a href="TasksProposalUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TasksProposalUtil {
 	public static void cacheResult(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal) {

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.annotation;
 
-/**
- * <a href="Isolation.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public enum Isolation {
 
 	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),

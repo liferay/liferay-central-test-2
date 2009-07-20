@@ -27,13 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.base.WikiPageResourceLocalServiceBaseImpl;
 
-/**
- * <a href="WikiPageResourceLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WikiPageResourceLocalServiceImpl
 	extends WikiPageResourceLocalServiceBaseImpl {
 

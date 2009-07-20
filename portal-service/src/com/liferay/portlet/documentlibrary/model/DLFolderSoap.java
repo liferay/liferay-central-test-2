@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFolderSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.documentlibrary.service.http.DLFolderServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.documentlibrary.service.http.DLFolderServiceSoap
- *
- */
 public class DLFolderSoap implements Serializable {
 	public static DLFolderSoap toSoapModel(DLFolder model) {
 		DLFolderSoap soapModel = new DLFolderSoap();

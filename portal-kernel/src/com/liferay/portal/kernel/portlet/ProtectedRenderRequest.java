@@ -29,12 +29,6 @@ import java.security.Principal;
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
 
-/**
- * <a href="ProtectedRenderRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProtectedRenderRequest extends RenderRequestWrapper {
 
 	public ProtectedRenderRequest(

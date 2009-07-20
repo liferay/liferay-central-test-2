@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="CouponDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CouponDisplayTerms extends DisplayTerms {
 
 	public static final String CODE = "code";

@@ -28,12 +28,6 @@ import javax.servlet.ServletContext;
 
 import javax.sql.DataSource;
 
-/**
- * <a href="ReportEngine.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public interface ReportEngine {
 
 	public void compile(ReportRequest reportRequest)

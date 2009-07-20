@@ -22,28 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
-
-/**
- * <a href="SCLicenseServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class provides static methods for the
- * <code>com.liferay.portlet.softwarecatalog.service.SCLicenseService</code>
- * bean. The static methods of this class calls the same methods of the bean
- * instance. It's convenient to be able to just write one line to call a method
- * on a bean instead of writing a lookup call and a method call.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.softwarecatalog.service.SCLicenseService
- *
- */
 public class SCLicenseServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,

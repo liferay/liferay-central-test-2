@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.events;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="SessionAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SessionAction {
 
 	public abstract void run(HttpSession session) throws ActionException;

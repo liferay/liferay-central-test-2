@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.xml;
 
-/**
- * <a href="Attribute.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Attribute extends Node {
 
 	public Object getData();

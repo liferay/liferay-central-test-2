@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="OrgLaborUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgLaborUtil {
 	public static void cacheResult(com.liferay.portal.model.OrgLabor orgLabor) {
 		getPersistence().cacheResult(orgLabor);

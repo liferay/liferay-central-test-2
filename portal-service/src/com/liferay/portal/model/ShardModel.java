@@ -22,27 +22,6 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="ShardModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>Shard</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Shard
- * @see com.liferay.portal.model.impl.ShardImpl
- * @see com.liferay.portal.model.impl.ShardModelImpl
- *
- */
 public interface ShardModel extends BaseModel<Shard> {
 	public long getPrimaryKey();
 

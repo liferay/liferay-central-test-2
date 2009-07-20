@@ -27,13 +27,6 @@ import com.liferay.portal.kernel.messaging.Destination;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
-/**
- * <a href="DestinationManager.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class DestinationManager implements DestinationManagerMBean {
 
 	public static ObjectName createObjectName(String destinationName) {

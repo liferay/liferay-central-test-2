@@ -29,18 +29,6 @@ import java.util.List;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-/**
- * <a href="PortletSessionListenerManager.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * <p>
- * See http://support.liferay.com/browse/LEP-2299.
- * </p>
- *
- * @author Olaf Fricke
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletSessionListenerManager implements HttpSessionListener {
 
 	public static void addListener(HttpSessionListener listener) {

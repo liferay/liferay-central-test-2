@@ -22,15 +22,5 @@
 
 package com.liferay.util;
 
-/**
- * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.util</code>.
- *
- */
 public class MapUtil extends com.liferay.portal.kernel.util.MapUtil {
 }

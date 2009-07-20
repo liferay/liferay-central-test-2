@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="SubscriptionPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SubscriptionPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Subscription subscription);
 

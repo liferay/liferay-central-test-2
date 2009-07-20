@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="ImagePersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ImagePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Image image);
 

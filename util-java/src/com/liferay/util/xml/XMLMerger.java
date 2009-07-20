@@ -33,14 +33,6 @@ import java.util.Vector;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-/**
- * <a href="XMLMerger.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alan Zimmerman
- * @author Jorge Ferrer
- *
- */
 public class XMLMerger {
 
 	public XMLMerger(XMLDescriptor descriptor) {

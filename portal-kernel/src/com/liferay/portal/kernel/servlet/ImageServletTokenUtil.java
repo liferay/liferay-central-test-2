@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-/**
- * <a href="ImageServletTokenUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImageServletTokenUtil {
 
 	public static ImageServletToken getImageServletToken() {

@@ -49,12 +49,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="ImportPagesAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class ImportPagesAction extends PortletAction {
 
 	public void processAction(

@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="MBBanPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBBanPersistenceImpl extends BasePersistenceImpl
 	implements MBBanPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBBanImpl.class.getName();

@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.UserGroupGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="UserGroupGroupRolePersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

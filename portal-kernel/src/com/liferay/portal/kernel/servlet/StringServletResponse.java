@@ -37,12 +37,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-/**
- * <a href="StringServletResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StringServletResponse extends HttpServletResponseWrapper {
 
 	public StringServletResponse(HttpServletResponse response) {

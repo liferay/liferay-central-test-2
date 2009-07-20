@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.lang.Cloneable;
 import java.lang.reflect.Method;
 
-/**
- * <a href="InitialThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InitialThreadLocal<T> extends ThreadLocal<T> {
 
 	public InitialThreadLocal(T initialValue) {

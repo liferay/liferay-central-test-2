@@ -31,12 +31,6 @@ import com.liferay.portlet.translator.model.Translation;
 
 import java.net.URL;
 
-/**
- * <a href="TranslationWebCacheItem.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TranslationWebCacheItem implements WebCacheItem {
 
 	public TranslationWebCacheItem(String translationId, String fromText) {

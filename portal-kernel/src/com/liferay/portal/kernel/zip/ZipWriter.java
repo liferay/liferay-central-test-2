@@ -36,12 +36,6 @@ import java.io.Serializable;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-/**
- * <a href="ZipWriter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ZipWriter implements Serializable {
 
 	public ZipWriter() throws IOException {

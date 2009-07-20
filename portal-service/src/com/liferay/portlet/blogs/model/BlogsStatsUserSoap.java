@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="BlogsStatsUserSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.blogs.service.http.BlogsStatsUserServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.blogs.service.http.BlogsStatsUserServiceSoap
- *
- */
 public class BlogsStatsUserSoap implements Serializable {
 	public static BlogsStatsUserSoap toSoapModel(BlogsStatsUser model) {
 		BlogsStatsUserSoap soapModel = new BlogsStatsUserSoap();

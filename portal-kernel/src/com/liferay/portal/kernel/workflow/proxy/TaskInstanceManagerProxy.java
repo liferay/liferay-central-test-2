@@ -33,12 +33,6 @@ import com.liferay.portal.kernel.workflow.request.TaskInstanceRequest;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="TaskInstanceManagerProxy.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class TaskInstanceManagerProxy implements TaskInstanceManager {
 
 	public TaskInstanceManagerProxy(

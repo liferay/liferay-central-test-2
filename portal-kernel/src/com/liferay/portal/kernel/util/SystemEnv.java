@@ -29,12 +29,6 @@ import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Properties;
 
-/**
- * <a href="SystemEnv.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SystemEnv {
 
 	public static Properties getProperties() {

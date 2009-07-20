@@ -30,13 +30,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-/**
- * <a href="Scripting.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
- */
 public interface Scripting {
 
 	public void clearCache(String language) throws ScriptingException;

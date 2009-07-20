@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
-/**
- * <a href="CalEventUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalEventUtil {
 	public static void cacheResult(
 		com.liferay.portlet.calendar.model.CalEvent calEvent) {

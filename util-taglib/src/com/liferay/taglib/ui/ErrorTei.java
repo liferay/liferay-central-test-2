@@ -26,12 +26,6 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
-/**
- * <a href="ErrorTei.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ErrorTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {

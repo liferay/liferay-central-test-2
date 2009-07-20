@@ -28,12 +28,6 @@ import javax.servlet.http.Cookie;
 
 import org.apache.catalina.connector.Request;
 
-/**
- * <a href="PortalRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Minhchau Dang
- *
- */
 public class PortalRequest extends Request {
 
 	protected void configureSessionCookie(Cookie cookie) {

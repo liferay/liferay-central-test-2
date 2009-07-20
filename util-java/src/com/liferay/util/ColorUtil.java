@@ -26,14 +26,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.awt.Color;
 
-/**
- * <a href="ColorUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Ming-Gih Lam
- * @author David Truong
- *
- */
 public class ColorUtil {
 
 	public static Color blend(int[] color1, int[] color2, double ratio) {

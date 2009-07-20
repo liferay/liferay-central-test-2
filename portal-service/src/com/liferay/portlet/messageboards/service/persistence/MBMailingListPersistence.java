@@ -24,12 +24,6 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="MBMailingListPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface MBMailingListPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList);

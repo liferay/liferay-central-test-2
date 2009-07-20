@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.xml;
 
 import java.io.IOException;
 
-/**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Document extends Branch {
 
 	public Document addComment(String comment);

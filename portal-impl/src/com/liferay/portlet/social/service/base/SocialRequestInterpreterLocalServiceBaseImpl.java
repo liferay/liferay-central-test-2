@@ -36,12 +36,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 
-/**
- * <a href="SocialRequestInterpreterLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	implements SocialRequestInterpreterLocalService {
 	public SocialActivityLocalService getSocialActivityLocalService() {

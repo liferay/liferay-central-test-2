@@ -30,12 +30,6 @@ import java.util.Map;
 
 import javax.portlet.PortletMode;
 
-/**
- * <a href="RSSFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class RSSFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {

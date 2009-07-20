@@ -24,12 +24,6 @@ package com.liferay.portlet.polls;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchQuestionException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchQuestionException extends PortalException {
 
 	public NoSuchQuestionException() {

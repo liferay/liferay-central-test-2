@@ -51,12 +51,6 @@ import com.liferay.util.RSSUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class JournalFeedLocalServiceImpl
 	extends JournalFeedLocalServiceBaseImpl {
 

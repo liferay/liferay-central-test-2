@@ -26,12 +26,6 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="InputEditorTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InputEditorTag extends IncludeTag {
 
 	public int doStartTag() {

@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 
-/**
- * <a href="ProductEntryModifiedDateComparator.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProductEntryModifiedDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "modifiedDate ASC";

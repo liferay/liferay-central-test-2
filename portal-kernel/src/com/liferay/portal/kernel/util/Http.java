@@ -35,12 +35,6 @@ import javax.portlet.RenderRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="Http.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Http {
 
 	public static final String HTTP = "http";
@@ -159,17 +153,6 @@ public interface Http {
 
 	public String URLtoString(String location, boolean post) throws IOException;
 
-	/**
-	 * This method only uses the default Commons HttpClient implementation when
-	 * the URL object represents a HTTP resource. The URL object could also
-	 * represent a file or some JNDI resource. In that case, the default Java
-	 * implementation is used.
-	 *
-	 * @param		url URL object
-	 * @return		A string representation of the resource referenced by the
-	 *				URL object
-	 * @throws		IOException
-	 */
 	public String URLtoString(URL url) throws IOException;
 
 	public class Auth {

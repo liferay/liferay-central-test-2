@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="LayoutSetPrototypeUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetPrototypeUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype) {

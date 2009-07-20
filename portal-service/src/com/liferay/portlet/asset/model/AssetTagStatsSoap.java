@@ -27,24 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="AssetTagStatsSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetTagStatsServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.service.http.AssetTagStatsServiceSoap
- *
- */
 public class AssetTagStatsSoap implements Serializable {
 	public static AssetTagStatsSoap toSoapModel(AssetTagStats model) {
 		AssetTagStatsSoap soapModel = new AssetTagStatsSoap();

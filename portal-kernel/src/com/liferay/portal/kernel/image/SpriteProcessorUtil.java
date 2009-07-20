@@ -28,12 +28,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * <a href="SpriteProcessorUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SpriteProcessorUtil {
 
 	public static Properties generate(

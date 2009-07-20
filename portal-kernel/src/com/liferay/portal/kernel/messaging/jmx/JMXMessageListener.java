@@ -34,13 +34,6 @@ import javax.management.InstanceAlreadyExistsException;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-/**
- * <a href="JMXMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class JMXMessageListener extends BaseDestinationEventListener {
 
 	public void destinationAdded(Destination destination) {

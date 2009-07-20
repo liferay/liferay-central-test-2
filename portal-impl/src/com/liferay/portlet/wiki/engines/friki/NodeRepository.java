@@ -34,12 +34,6 @@ import java.util.Map;
 
 import org.stringtree.util.tract.Tract;
 
-/**
- * <a href="NodeRepository.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NodeRepository extends BasicDriver {
 
 	public NodeRepository(long nodeId) {

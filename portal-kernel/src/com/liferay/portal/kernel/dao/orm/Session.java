@@ -26,12 +26,6 @@ import java.io.Serializable;
 
 import java.sql.Connection;
 
-/**
- * <a href="Session.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Session {
 
 	public void clear() throws ORMException;

@@ -34,12 +34,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
 
-/**
- * <a href="PollsChoiceFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class PollsChoiceFinderImpl
 	extends BasePersistenceImpl implements PollsChoiceFinder {
 

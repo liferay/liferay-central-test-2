@@ -61,12 +61,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="SCLicensePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	implements SCLicensePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCLicenseImpl.class.getName();

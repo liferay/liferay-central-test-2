@@ -25,12 +25,6 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="PortalPermissionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalPermissionUtil {
 
 	public static void check(

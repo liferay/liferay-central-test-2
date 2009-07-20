@@ -26,12 +26,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
-/**
- * <a href="BaseModel.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
 	public boolean isNew();

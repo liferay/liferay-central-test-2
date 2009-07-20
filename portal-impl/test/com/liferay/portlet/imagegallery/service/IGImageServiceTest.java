@@ -35,12 +35,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 
 import java.io.File;
 
-/**
- * <a href="IGImageServiceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
 	public void setUp() throws Exception {

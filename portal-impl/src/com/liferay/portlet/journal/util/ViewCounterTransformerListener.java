@@ -29,13 +29,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Map;
 
-/**
- * <a href="ViewCounterTransformerListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Raymond Augé
- *
- */
 public class ViewCounterTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
@@ -62,12 +55,6 @@ public class ViewCounterTransformerListener extends TransformerListener {
 		return replace(s);
 	}
 
-	/**
-	 * Replace the counter token with the increment call.
-	 *
-	 * @param		s the given string
-	 * @return		the processed string
-	 */
 	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 

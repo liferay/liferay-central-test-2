@@ -40,14 +40,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="JournalTemplateFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- * @author Prakash Reddy
- *
- */
 public class JournalTemplateFinderImpl
 	extends BasePersistenceImpl implements JournalTemplateFinder {
 

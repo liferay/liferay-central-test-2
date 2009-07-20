@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
-/**
- * <a href="BlogsEntryFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BlogsEntryFinderUtil {
 	public static int countByOrganizationId(long organizationId,
 		java.util.Date displayDate, boolean draft)

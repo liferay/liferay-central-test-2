@@ -75,12 +75,6 @@ import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
-/**
- * <a href="MBThreadServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 	implements MBThreadService {
 	public MBBanLocalService getMBBanLocalService() {

@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.search;
 
 import javax.portlet.PortletURL;
 
-/**
- * <a href="InvokerIndexer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InvokerIndexer implements Indexer {
 
 	public InvokerIndexer(Indexer indexer, ClassLoader classLoader) {

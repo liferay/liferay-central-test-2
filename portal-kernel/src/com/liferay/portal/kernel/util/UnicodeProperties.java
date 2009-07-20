@@ -31,25 +31,6 @@ import java.io.StringReader;
 
 import java.util.HashMap;
 
-/**
- * <a href="UnicodeProperties.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This is a rewrite of java.util.Properties that is not synchronized and
- * natively supports non-ASCII encodings. It can also be configured to be
- * "safe", allowing the values to have new line characters. When stored to a
- * given BufferedWriter, "safe" properties will replace all new line characters
- * with a _SAFE_NEWLINE_CHARACTER_.
- * </p>
- *
- * <p>
- * In its current form, this is not intended to replace java.util.Properties for
- * reading properties flat files. This class is not thread-safe.
- * </p>
- *
- * @author Alexander Chow
- *
- */
 public class UnicodeProperties extends HashMap<String, String> {
 
 	public UnicodeProperties() {

@@ -32,12 +32,6 @@ import com.liferay.util.xml.descriptor.XMLDescriptor;
 
 import org.dom4j.Document;
 
-/**
- * <a href="XMLTypeDetector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class XMLTypeDetector {
 
 	public static final XMLDescriptor[] REGISTERED_DESCRIPTORS = {

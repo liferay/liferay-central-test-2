@@ -32,12 +32,6 @@ import com.liferay.portal.util.TestPropsValues;
 
 import java.util.Calendar;
 
-/**
- * <a href="UserServiceSoapTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 
 	public void testAddUser() throws Exception {

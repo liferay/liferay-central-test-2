@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.job;
 
 import java.util.Date;
 
-/**
- * <a href="JobExecutionContext.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface JobExecutionContext {
 
 	public Object get(Object key);

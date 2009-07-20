@@ -24,12 +24,6 @@ package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="ExpandoColumnPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ExpandoColumnPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn);

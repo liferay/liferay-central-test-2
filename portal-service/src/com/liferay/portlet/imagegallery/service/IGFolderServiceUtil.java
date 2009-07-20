@@ -22,28 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service;
 
-
-/**
- * <a href="IGFolderServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class provides static methods for the
- * <code>com.liferay.portlet.imagegallery.service.IGFolderService</code>
- * bean. The static methods of this class calls the same methods of the bean
- * instance. It's convenient to be able to just write one line to call a method
- * on a bean instead of writing a lookup call and a method call.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.service.IGFolderService
- *
- */
 public class IGFolderServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long parentFolderId, java.lang.String name,

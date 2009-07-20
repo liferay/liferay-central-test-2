@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
-/**
- * <a href="AssetTagPropertyUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssetTagPropertyUtil {
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty) {

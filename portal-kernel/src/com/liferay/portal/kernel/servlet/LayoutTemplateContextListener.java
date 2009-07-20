@@ -29,14 +29,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-/**
- * <a href="LayoutTemplateContextListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutTemplateContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {

@@ -40,12 +40,6 @@ import java.util.jar.JarInputStream;
 
 import javax.servlet.ServletContext;
 
-/**
- * <a href="ServletContextUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ServletContextUtil {
 
 	public static final String LOG_INFO_PREFIX =

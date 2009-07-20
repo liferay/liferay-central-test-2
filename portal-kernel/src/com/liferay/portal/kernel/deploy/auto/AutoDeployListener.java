@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.deploy.auto;
 
 import java.io.File;
 
-/**
- * <a href="AutoDeployListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public interface AutoDeployListener {
 
 	public void deploy(File file) throws AutoDeployException;

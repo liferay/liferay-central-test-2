@@ -26,13 +26,6 @@ import com.liferay.lock.model.Lock;
 
 import java.util.List;
 
-/**
- * <a href="WebDAVStorage.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public interface WebDAVStorage {
 
 	public int copyCollectionResource(

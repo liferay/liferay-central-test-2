@@ -31,12 +31,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * <a href="SortedProperties.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SortedProperties extends Properties {
 
 	public SortedProperties() {

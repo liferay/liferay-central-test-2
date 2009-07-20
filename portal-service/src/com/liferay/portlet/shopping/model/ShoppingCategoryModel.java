@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="ShoppingCategoryModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>ShoppingCategory</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.shopping.model.ShoppingCategory
- * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
- * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
- *
- */
 public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	public long getPrimaryKey();
 

@@ -64,13 +64,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="ShoppingItemLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingItemLocalServiceImpl
 	extends ShoppingItemLocalServiceBaseImpl {
 

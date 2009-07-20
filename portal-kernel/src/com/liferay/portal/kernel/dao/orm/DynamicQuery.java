@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.dao.orm;
 
 import java.util.List;
 
-/**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface DynamicQuery {
 
 	public DynamicQuery add(Criterion criterion);

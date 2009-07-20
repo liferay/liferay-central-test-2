@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="GetterUtil_IW.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GetterUtil_IW {
 	public static GetterUtil_IW getInstance() {
 		return _instance;

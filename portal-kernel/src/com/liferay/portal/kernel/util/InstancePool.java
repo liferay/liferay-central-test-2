@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="InstancePool.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InstancePool {
 
 	public static boolean contains(String className) {

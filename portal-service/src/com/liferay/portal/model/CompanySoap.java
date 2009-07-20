@@ -27,24 +27,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="CompanySoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.CompanyServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.CompanyServiceSoap
- *
- */
 public class CompanySoap implements Serializable {
 	public static CompanySoap toSoapModel(Company model) {
 		CompanySoap soapModel = new CompanySoap();

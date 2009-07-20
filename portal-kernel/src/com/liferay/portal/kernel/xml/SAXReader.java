@@ -32,12 +32,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="SAXReader.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SAXReader {
 
 	public Attribute createAttribute(

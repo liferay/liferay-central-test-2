@@ -55,14 +55,6 @@ import java.util.Map;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.VelocityException;
 
-/**
- * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class JournalVmUtil {
 
 	public static List<TemplateNode> extractDynamicContents(Element parent)

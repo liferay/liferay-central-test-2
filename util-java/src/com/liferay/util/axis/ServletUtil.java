@@ -31,12 +31,6 @@ import org.apache.axis.AxisEngine;
 import org.apache.axis.MessageContext;
 import org.apache.axis.transport.http.HTTPConstants;
 
-/**
- * <a href="ServletUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ServletUtil {
 
 	public static HttpServletRequest getRequest() {

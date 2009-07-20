@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.xml;
 
-/**
- * <a href="QName.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface QName {
 
 	public String getLocalPart();

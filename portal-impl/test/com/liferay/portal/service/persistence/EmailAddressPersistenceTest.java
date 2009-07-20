@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="EmailAddressPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

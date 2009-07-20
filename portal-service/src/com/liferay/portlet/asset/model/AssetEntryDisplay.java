@@ -26,13 +26,6 @@ import java.io.Serializable;
 
 import java.util.Date;
 
-/**
- * <a href="AssetEntryDisplay.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class AssetEntryDisplay implements Serializable {
 
 	public long getEntryId() {

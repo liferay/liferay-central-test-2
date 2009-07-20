@@ -22,12 +22,6 @@
 
 package com.liferay.portal.webdav;
 
-/**
- * <a href="Status.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Status {
 
 	public Status(int code) {

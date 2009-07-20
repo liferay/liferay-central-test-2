@@ -30,12 +30,6 @@ import java.io.File;
 
 import java.util.Date;
 
-/**
- * <a href="DLServiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLServiceUtil {
 
 	public static void addDirectory(

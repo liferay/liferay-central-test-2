@@ -35,12 +35,6 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="NullSession.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NullSession implements HttpSession {
 
 	public NullSession() {
@@ -83,9 +77,6 @@ public class NullSession implements HttpSession {
 		return _servletContext;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
 		return null;
 	}

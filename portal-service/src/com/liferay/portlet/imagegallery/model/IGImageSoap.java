@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="IGImageSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap
- *
- */
 public class IGImageSoap implements Serializable {
 	public static IGImageSoap toSoapModel(IGImage model) {
 		IGImageSoap soapModel = new IGImageSoap();

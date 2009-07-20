@@ -22,31 +22,5 @@
 
 package com.liferay.portal.model;
 
-
-/**
- * <a href="UserGroupGroupRole.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>UserGroupGroupRole</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portal.model.impl.UserGroupGroupRoleImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserGroupGroupRoleModel
- * @see com.liferay.portal.model.impl.UserGroupGroupRoleImpl
- * @see com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
- *
- */
 public interface UserGroupGroupRole extends UserGroupGroupRoleModel {
 }

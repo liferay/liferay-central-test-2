@@ -27,12 +27,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import java.util.Arrays;
 import java.util.Comparator;
 
-/**
- * <a href="VisibleNodesComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class VisibleNodesComparator implements Comparator<WikiNode> {
 
 	public VisibleNodesComparator(String[] visibleNodes) {

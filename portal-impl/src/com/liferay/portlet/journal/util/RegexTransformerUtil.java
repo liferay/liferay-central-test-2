@@ -31,12 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * <a href="RegexTransformerUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RegexTransformerUtil {
 
 	public static List<Pattern> getPatterns() {

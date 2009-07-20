@@ -26,26 +26,6 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
-/**
- * <a href="EmailAddressModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>EmailAddress</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.EmailAddress
- * @see com.liferay.portal.model.impl.EmailAddressImpl
- * @see com.liferay.portal.model.impl.EmailAddressModelImpl
- *
- */
 public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public long getPrimaryKey();
 

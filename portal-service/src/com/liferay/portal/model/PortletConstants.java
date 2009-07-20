@@ -22,61 +22,25 @@
 
 package com.liferay.portal.model;
 
-/**
- * <a href="PortletConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletConstants {
 
-	/**
-	 * War file separator.
-	 */
 	public static final String WAR_SEPARATOR = "_WAR_";
 
-	/**
-	 * Instance separator.
-	 */
 	public static final String INSTANCE_SEPARATOR = "_INSTANCE_";
 
-	/**
-	 * Layout separator.
-	 */
 	public static final String LAYOUT_SEPARATOR = "_LAYOUT_";
 
-	/**
-	 * Default preferences.
-	 */
 	public static final String DEFAULT_PREFERENCES = "<portlet-preferences />";
 
-	/**
-	 * User principal strategy for screen name.
-	 */
 	public static final String USER_PRINCIPAL_STRATEGY_SCREEN_NAME =
 		"screenName";
 
-	/**
-	 * User principal strategy for screen name.
-	 */
 	public static final String USER_PRINCIPAL_STRATEGY_USER_ID = "userId";
 
-	/**
-	 * Facebook integration method for FBML.
-	 */
 	public static final String FACEBOOK_INTEGRATION_FBML = "fbml";
 
-	/**
-	 * Facebook integration method for IFrame.
-	 */
 	public static final String FACEBOOK_INTEGRATION_IFRAME = "iframe";
 
-	/**
-	 * Gets the root portlet id of the portlet.
-	 *
-	 * @param		portletId the portlet id of the portlet
-	 * @return		the root portlet id of the portlet
-	 */
 	public static String getRootPortletId(String portletId) {
 		int pos = portletId.indexOf(INSTANCE_SEPARATOR);
 
@@ -88,12 +52,6 @@ public class PortletConstants {
 		}
 	}
 
-	/**
-	 * Gets the instance id of the portlet.
-	 *
-	 * @param		portletId the portlet id of the portlet
-	 * @return		the instance id of the portlet
-	 */
 	public static String getInstanceId(String portletId) {
 		int pos = portletId.indexOf(INSTANCE_SEPARATOR);
 

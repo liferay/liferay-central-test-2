@@ -25,12 +25,6 @@ package com.liferay.support.tomcat.session;
 import org.apache.catalina.Session;
 import org.apache.catalina.session.StandardManager;
 
-/**
- * <a href="SessionLessManagerBase.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionLessManagerBase extends StandardManager {
 
 	public void add(Session session) {

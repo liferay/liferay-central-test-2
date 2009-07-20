@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.poller;
 
-/**
- * <a href="InvokerPollerProcessor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InvokerPollerProcessor implements PollerProcessor {
 
 	public InvokerPollerProcessor(

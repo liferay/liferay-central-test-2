@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 
-/**
- * <a href="MBStatsUserPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

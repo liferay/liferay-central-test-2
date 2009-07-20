@@ -35,12 +35,6 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 
-/**
- * <a href="RulesEngineProxy.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class RulesEngineProxy implements RulesEngine {
 
 	public RulesEngineProxy(

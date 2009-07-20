@@ -31,13 +31,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 
-/**
- * <a href="BaseBookmarksServiceTestCase.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 
 	protected BookmarksEntry addEntry() throws Exception {

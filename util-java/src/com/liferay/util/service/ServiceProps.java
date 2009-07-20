@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.configuration.Filter;
 
 import java.util.Properties;
 
-/**
- * <a href="ServiceProps.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ServiceProps {
 
 	public static void addProperties(Properties properties) {

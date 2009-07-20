@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 
-/**
- * <a href="BaseMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public abstract class BaseMessageListener implements MessageListener {
 
 	public BaseMessageListener(

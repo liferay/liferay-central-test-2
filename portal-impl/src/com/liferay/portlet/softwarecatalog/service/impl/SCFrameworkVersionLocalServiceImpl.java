@@ -34,14 +34,6 @@ import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalS
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="SCFrameworkVersionLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class SCFrameworkVersionLocalServiceImpl
 	extends SCFrameworkVersionLocalServiceBaseImpl {
 

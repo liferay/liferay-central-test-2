@@ -24,26 +24,6 @@ package com.liferay.portlet.wiki.model;
 
 import com.liferay.portal.model.BaseModel;
 
-/**
- * <a href="WikiPageResourceModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>WikiPageResource</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.wiki.model.WikiPageResource
- * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
- * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
- *
- */
 public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public long getPrimaryKey();
 

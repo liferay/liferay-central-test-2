@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.bean;
 
-/**
- * <a href="BeanPropertiesUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BeanPropertiesUtil {
 
 	public static BeanProperties getBeanProperties() {

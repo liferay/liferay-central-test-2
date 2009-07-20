@@ -24,12 +24,6 @@ package com.liferay.documentlibrary;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="DuplicateFileException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DuplicateFileException extends PortalException {
 
 	public DuplicateFileException() {

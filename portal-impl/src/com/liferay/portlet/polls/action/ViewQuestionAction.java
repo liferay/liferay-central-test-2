@@ -28,12 +28,6 @@ import com.liferay.portlet.polls.util.PollsUtil;
 
 import javax.portlet.ActionRequest;
 
-/**
- * <a href="ViewQuestionAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ViewQuestionAction extends EditQuestionAction {
 
 	protected void updateQuestion(ActionRequest actionRequest)

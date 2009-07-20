@@ -30,12 +30,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="ServletContextProvider.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public interface ServletContextProvider {
 
 	public static final String STRUTS_BRIDGES_CONTEXT_PROVIDER =

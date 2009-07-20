@@ -45,26 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="TasksReviewModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>TasksReview</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.tasks.model.TasksReview
- * @see com.liferay.portlet.tasks.model.TasksReviewModel
- * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
- *
- */
 public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public static final String TABLE_NAME = "TasksReview";
 	public static final Object[][] TABLE_COLUMNS = {

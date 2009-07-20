@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.security.jaas;
 
-/**
- * <a href="PortalRole.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalRole extends PortalPrincipal {
 
 	public PortalRole() {

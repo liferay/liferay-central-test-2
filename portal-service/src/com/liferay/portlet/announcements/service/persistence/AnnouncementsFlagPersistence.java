@@ -24,12 +24,6 @@ package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="AnnouncementsFlagPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AnnouncementsFlagPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag);

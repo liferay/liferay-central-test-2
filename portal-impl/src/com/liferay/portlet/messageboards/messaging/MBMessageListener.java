@@ -51,13 +51,6 @@ import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="MBMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Thiago Moreira
- *
- */
 public class MBMessageListener implements MessageListener {
 
 	public void receive(com.liferay.portal.kernel.messaging.Message message) {

@@ -53,12 +53,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
 
-/**
- * <a href="TasksProposalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 	implements TasksProposalService {
 	public TasksProposalLocalService getTasksProposalLocalService() {

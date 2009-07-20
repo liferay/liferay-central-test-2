@@ -34,12 +34,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-/**
- * <a href="XLSTextStripper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Mirco Tamburini
- *
- */
 public class XLSTextStripper {
 
 	public XLSTextStripper(InputStream is) {

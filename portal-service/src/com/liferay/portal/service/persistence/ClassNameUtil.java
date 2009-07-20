@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="ClassNameUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ClassNameUtil {
 	public static void cacheResult(com.liferay.portal.model.ClassName className) {
 		getPersistence().cacheResult(className);

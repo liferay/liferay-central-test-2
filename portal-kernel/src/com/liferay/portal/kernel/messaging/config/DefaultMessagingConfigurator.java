@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.messaging.config;
 
 import com.liferay.portal.kernel.messaging.MessageBus;
 
-/**
- * <a href="DefaultMessagingConfigurator.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Michael C. Han
- *
- */
 public class DefaultMessagingConfigurator
 	extends AbstractMessagingConfigurator {
 

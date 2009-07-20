@@ -22,13 +22,6 @@
 
 package com.liferay.portal;
 
-/**
- * <a href="NoSuchResourcePermissionException.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchResourcePermissionException extends PortalException {
 
 	public NoSuchResourcePermissionException() {

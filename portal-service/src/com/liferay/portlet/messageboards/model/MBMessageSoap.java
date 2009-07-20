@@ -28,24 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBMessageSoap.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap</code>.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap
- *
- */
 public class MBMessageSoap implements Serializable {
 	public static MBMessageSoap toSoapModel(MBMessage model) {
 		MBMessageSoap soapModel = new MBMessageSoap();

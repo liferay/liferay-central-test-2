@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CacheRegistry {
 
 	public static void clear() {

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="AccountUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AccountUtil {
 	public static void cacheResult(com.liferay.portal.model.Account account) {
 		getPersistence().cacheResult(account);

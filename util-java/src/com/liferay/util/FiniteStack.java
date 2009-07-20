@@ -24,12 +24,6 @@ package com.liferay.util;
 
 import java.util.Stack;
 
-/**
- * <a href="FiniteStack.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FiniteStack<E> extends Stack<E> {
 
 	public FiniteStack(int maxSize) {

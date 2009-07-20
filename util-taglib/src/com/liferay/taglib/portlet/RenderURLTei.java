@@ -22,11 +22,5 @@
 
 package com.liferay.taglib.portlet;
 
-/**
- * <a href="RenderURLTei.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RenderURLTei extends ActionURLTei {
 }

@@ -44,26 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBBanModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>MBBan</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.messageboards.model.MBBan
- * @see com.liferay.portlet.messageboards.model.MBBanModel
- * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
- *
- */
 public class MBBanModelImpl extends BaseModelImpl<MBBan> {
 	public static final String TABLE_NAME = "MBBan";
 	public static final Object[][] TABLE_COLUMNS = {

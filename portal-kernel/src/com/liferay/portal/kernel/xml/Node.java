@@ -27,12 +27,6 @@ import java.io.Writer;
 
 import java.util.List;
 
-/**
- * <a href="Node.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Node {
 
 	public String asXML();

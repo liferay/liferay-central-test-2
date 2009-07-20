@@ -25,12 +25,6 @@ package com.liferay.portlet.bookmarks.service;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
-/**
- * <a href="BookmarksEntryServiceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BookmarksEntryServiceTest extends BaseBookmarksServiceTestCase {
 
 	public void testAddEntry() throws Exception {

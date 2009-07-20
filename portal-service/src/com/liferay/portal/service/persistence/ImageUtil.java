@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImageUtil {
 	public static void cacheResult(com.liferay.portal.model.Image image) {
 		getPersistence().cacheResult(image);

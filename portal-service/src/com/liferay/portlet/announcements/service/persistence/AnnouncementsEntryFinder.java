@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
-/**
- * <a href="AnnouncementsEntryFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AnnouncementsEntryFinder {
 	public int countByScope(long userId, long classNameId, long[] classPKs,
 		int displayDateMonth, int displayDateDay, int displayDateYear,

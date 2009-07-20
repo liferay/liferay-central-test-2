@@ -42,16 +42,6 @@ import java.util.Date;
 
 import javax.portlet.PortletURL;
 
-/**
- * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- * @author Harry Mark
- * @author Bruno Farache
- * @author Raymond Augé
- *
- */
 public class Indexer
 	implements com.liferay.portal.kernel.search.Indexer {
 

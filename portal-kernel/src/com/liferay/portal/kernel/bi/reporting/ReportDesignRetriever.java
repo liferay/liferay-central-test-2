@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.Date;
 
-/**
- * <a href="ReportDesignRetriever.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public interface ReportDesignRetriever extends ResourceRetriever {
 
 	public Date getModifiedDate();

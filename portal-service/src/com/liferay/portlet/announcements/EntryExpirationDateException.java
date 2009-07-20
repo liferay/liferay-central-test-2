@@ -24,13 +24,6 @@ package com.liferay.portlet.announcements;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="EntryExpirationDateException.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EntryExpirationDateException extends PortalException {
 
 	public EntryExpirationDateException() {

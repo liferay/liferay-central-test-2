@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-/**
- * <a href="DLFileVersionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileVersionUtil {
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion) {

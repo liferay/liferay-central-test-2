@@ -33,12 +33,6 @@ import java.lang.reflect.Method;
 
 import java.util.List;
 
-/**
- * <a href="BeanToXMLUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class BeanToXMLUtil {
 
 	public static void addBean(Object obj, Element parentEl) {
@@ -50,9 +44,6 @@ public class BeanToXMLUtil {
 		addFields(obj, el);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public static void addBean(Object obj, org.dom4j.Element parentEl) {
 		String classNameWithoutPackage = getClassNameWithoutPackage(
 			obj.getClass().getName());
@@ -103,9 +94,6 @@ public class BeanToXMLUtil {
 		}
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public static void addFields(Object obj, org.dom4j.Element parentEl) {
 		Method[] methods = obj.getClass().getMethods();
 

@@ -30,12 +30,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 
-/**
- * <a href="ShoppingCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCategoryServiceImpl
 	extends ShoppingCategoryServiceBaseImpl {
 

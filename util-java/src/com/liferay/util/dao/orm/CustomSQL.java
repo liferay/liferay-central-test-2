@@ -49,13 +49,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * <a href="CustomSQL.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- *
- */
 public class CustomSQL {
 
 	public static final String DB2_FUNCTION_IS_NULL =
@@ -200,60 +193,26 @@ public class CustomSQL {
 		return _sqlPool.get(id);
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to a DB2 database.
-	 *
-	 * @return		true if Hibernate is connecting to a DB2 database
-	 */
 	public boolean isVendorDB2() {
 		return _vendorDB2;
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to an Informix database.
-	 *
-	 * @return		true if Hibernate is connecting to an Informix database
-	 */
 	public boolean isVendorInformix() {
 		return _vendorInformix;
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to a MySQL database.
-	 *
-	 * @return		true if Hibernate is connecting to a MySQL database
-	 */
 	public boolean isVendorMySQL() {
 		return _vendorMySQL;
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to an Oracle database.
-	 *
-	 * Oracle has a nasty bug where it treats '' as a NULL value. See
-	 * http://thedailywtf.com/forums/thread/26879.aspx for more information
-	 * on this nasty bug.
-	 *
-	 * @return		true if Hibernate is connecting to an Oracle database
-	 */
 	public boolean isVendorOracle() {
 		return _vendorOracle;
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to a PostgreSQL database.
-	 *
-	 * @return		true if Hibernate is connecting to a PostgreSQL database
-	 */
 	public boolean isVendorPostgreSQL() {
 		return _vendorPostgreSQL;
 	}
 
-	/**
-	 * Returns true if Hibernate is connecting to a Sybase database.
-	 *
-	 * @return		true if Hibernate is connecting to a Sybase database
-	 */
 	public boolean isVendorSybase() {
 		return _vendorSybase;
 	}

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-/**
- * <a href="HttpHeaders.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface HttpHeaders {
 
 	// Names
@@ -89,18 +83,12 @@ public interface HttpHeaders {
 
 	public static final String CACHE_CONTROL_PUBLIC_VALUE = "public";
 
-	/**
-	 * @deprecated Use <code>CONNECTION_CLOSE_VALUE</code>.
-	 */
 	public static final String CLOSE = CONNECTION_CLOSE_VALUE;
 
 	public static final String EXPIRES_DEFAULT_VALUE = "315360000";
 
 	public static final String PRAGMA_PUBLIC_VALUE = "public";
 
-	/**
-	 * @deprecated Use <code>CACHE_CONTROL_PUBLIC_VALUE</code>.
-	 */
 	public static final String PUBLIC = CACHE_CONTROL_PUBLIC_VALUE;
 
 }

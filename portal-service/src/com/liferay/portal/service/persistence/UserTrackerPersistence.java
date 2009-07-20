@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="UserTrackerPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface UserTrackerPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.UserTracker userTracker);
 

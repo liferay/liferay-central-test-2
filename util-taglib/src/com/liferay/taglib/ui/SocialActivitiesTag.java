@@ -30,12 +30,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="SocialActivitiesTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class SocialActivitiesTag extends IncludeTag {
 
 	public int doStartTag() {

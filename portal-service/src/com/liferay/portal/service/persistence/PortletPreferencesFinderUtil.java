@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="PortletPreferencesFinderUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletPreferencesFinderUtil {
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByPortletId(
 		java.lang.String portletId) throws com.liferay.portal.SystemException {

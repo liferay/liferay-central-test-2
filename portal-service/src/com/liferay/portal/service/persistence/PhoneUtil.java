@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="PhoneUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PhoneUtil {
 	public static void cacheResult(com.liferay.portal.model.Phone phone) {
 		getPersistence().cacheResult(phone);

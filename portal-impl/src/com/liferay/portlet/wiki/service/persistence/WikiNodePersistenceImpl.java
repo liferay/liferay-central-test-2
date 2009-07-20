@@ -54,12 +54,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="WikiNodePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	implements WikiNodePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiNodeImpl.class.getName();

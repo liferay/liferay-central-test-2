@@ -24,12 +24,6 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 
-/**
- * <a href="SCFrameworkVersionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SCFrameworkVersionImpl
 	extends SCFrameworkVersionModelImpl implements SCFrameworkVersion {
 

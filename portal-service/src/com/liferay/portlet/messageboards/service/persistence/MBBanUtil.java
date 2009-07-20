@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-/**
- * <a href="MBBanUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBBanUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBBan mbBan) {

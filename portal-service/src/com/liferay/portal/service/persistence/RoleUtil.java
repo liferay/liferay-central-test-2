@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="RoleUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RoleUtil {
 	public static void cacheResult(com.liferay.portal.model.Role role) {
 		getPersistence().cacheResult(role);

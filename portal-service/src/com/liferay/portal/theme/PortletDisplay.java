@@ -32,12 +32,6 @@ import java.io.Serializable;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="PortletDisplay.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletDisplay implements Serializable {
 
 	public PortletDisplay() {

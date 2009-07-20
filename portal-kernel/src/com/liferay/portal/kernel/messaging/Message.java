@@ -29,13 +29,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="Message.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Michael C. Han
- *
- */
 public class Message implements Serializable {
 
 	public Object get(String key) {

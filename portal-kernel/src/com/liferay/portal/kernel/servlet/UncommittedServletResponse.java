@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.servlet;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-/**
- * <a href="UncommittedServletResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UncommittedServletResponse extends HttpServletResponseWrapper {
 
 	public UncommittedServletResponse(HttpServletResponse response) {

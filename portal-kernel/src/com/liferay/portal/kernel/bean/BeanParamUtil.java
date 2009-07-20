@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="BeanParamUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BeanParamUtil {
 
 	public static boolean getBoolean(

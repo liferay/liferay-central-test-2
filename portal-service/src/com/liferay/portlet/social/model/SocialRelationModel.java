@@ -24,26 +24,6 @@ package com.liferay.portlet.social.model;
 
 import com.liferay.portal.model.BaseModel;
 
-/**
- * <a href="SocialRelationModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>SocialRelation</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.social.model.SocialRelation
- * @see com.liferay.portlet.social.model.impl.SocialRelationImpl
- * @see com.liferay.portlet.social.model.impl.SocialRelationModelImpl
- *
- */
 public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public long getPrimaryKey();
 

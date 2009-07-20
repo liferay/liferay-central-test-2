@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
-/**
- * <a href="PollsChoiceUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollsChoiceUtil {
 	public static void cacheResult(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice) {

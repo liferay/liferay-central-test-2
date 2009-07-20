@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.job;
 
-/**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Scheduler {
 
 	public void schedule();

@@ -24,12 +24,6 @@ package com.liferay.portal.theme;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="RequestVars.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RequestVars {
 
 	public RequestVars(

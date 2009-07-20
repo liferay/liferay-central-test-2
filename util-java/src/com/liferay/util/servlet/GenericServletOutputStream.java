@@ -28,12 +28,6 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
-/**
- * <a href="GenericServletOutputStream.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GenericServletOutputStream extends ServletOutputStream {
 
 	public GenericServletOutputStream(OutputStream os) {

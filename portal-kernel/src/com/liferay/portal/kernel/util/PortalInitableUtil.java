@@ -25,12 +25,6 @@ package com.liferay.portal.kernel.util;
 import java.util.List;
 import java.util.Vector;
 
-/**
- * <a href="PortalInitableUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalInitableUtil {
 
 	public synchronized static void flushInitables() {

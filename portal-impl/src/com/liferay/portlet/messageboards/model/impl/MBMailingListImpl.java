@@ -24,12 +24,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBMailingList;
 
-/**
- * <a href="MBMailingListImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBMailingListImpl
 	extends MBMailingListModelImpl implements MBMailingList {
 

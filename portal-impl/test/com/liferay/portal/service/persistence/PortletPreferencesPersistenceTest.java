@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
-/**
- * <a href="PortletPreferencesPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletPreferencesPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

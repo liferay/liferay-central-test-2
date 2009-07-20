@@ -28,12 +28,6 @@ import com.liferay.portlet.words.util.comparator.WordComparator;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * <a href="Scrambler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Scrambler {
 
 	public Scrambler(String word) throws ScramblerException {

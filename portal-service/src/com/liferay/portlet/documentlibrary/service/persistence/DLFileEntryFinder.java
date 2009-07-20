@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
-/**
- * <a href="DLFileEntryFinder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface DLFileEntryFinder {
 	public int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;

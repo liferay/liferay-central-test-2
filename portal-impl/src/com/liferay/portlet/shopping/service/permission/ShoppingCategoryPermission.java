@@ -31,12 +31,6 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 
-/**
- * <a href="ShoppingCategoryPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCategoryPermission {
 
 	public static void check(

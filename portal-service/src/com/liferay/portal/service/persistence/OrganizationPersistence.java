@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="OrganizationPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface OrganizationPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Organization organization);
 

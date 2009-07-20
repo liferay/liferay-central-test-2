@@ -31,12 +31,6 @@ import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Map;
 
-/**
- * <a href="ExpandoBridge.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public interface ExpandoBridge {
 
 	public void addAttribute(String name) throws PortalException;

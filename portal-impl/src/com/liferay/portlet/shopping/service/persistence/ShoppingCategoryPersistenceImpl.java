@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ShoppingCategoryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCategoryImpl.class.getName();

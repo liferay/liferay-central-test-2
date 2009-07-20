@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="BookmarksEntryModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>BookmarksEntry</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.bookmarks.model.BookmarksEntry
- * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
- * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl
- *
- */
 public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public long getPrimaryKey();
 

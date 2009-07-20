@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.workflow.WorkflowUtil;
 
 import java.lang.reflect.Method;
 
-/**
- * <a href="WorkflowDefinitionRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class WorkflowDefinitionRequest extends BaseRequest {
 
 	public static WorkflowDefinitionRequest

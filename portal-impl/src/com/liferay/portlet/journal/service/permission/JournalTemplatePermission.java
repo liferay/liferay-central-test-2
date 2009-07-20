@@ -29,13 +29,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
-/**
- * <a href="JournalTemplatePermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class JournalTemplatePermission {
 
 	public static void check(

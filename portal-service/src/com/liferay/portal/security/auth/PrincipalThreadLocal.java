@@ -25,12 +25,6 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-/**
- * <a href="PrincipalThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PrincipalThreadLocal {
 
 	public static String getName() {

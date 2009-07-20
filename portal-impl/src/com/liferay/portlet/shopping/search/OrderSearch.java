@@ -31,12 +31,6 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-/**
- * <a href="OrderSearch.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrderSearch extends SearchContainer<ShoppingOrder> {
 
 	static List<String> headerNames = new ArrayList<String>();

@@ -50,12 +50,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.WindowState;
 
-/**
- * <a href="LiferayPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LiferayPortlet extends GenericPortlet {
 
 	public void processAction(

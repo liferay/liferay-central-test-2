@@ -27,13 +27,6 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Bruno Farache
- *
- */
 public interface SchedulerEngine {
 
 	public static final String CRON_TEXT = "cronText";

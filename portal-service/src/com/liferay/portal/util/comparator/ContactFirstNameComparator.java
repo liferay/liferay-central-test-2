@@ -22,15 +22,6 @@
 
 package com.liferay.portal.util.comparator;
 
-/**
- * <a href="ContactFirstNameComparator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- * @deprecated This class has been renamed to <code>UserFirstNameComparator
- * </code>.
- *
- */
 public class ContactFirstNameComparator extends UserFirstNameComparator {
 
 	public ContactFirstNameComparator() {

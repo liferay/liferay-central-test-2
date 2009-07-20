@@ -26,13 +26,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-/**
- * <a href="ResourceServingConfigurationAction.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface ResourceServingConfigurationAction {
 
 	public void serveResource(

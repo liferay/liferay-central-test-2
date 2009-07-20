@@ -25,26 +25,6 @@ package com.liferay.portal.model;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * <a href="RoleModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>Role</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Role
- * @see com.liferay.portal.model.impl.RoleImpl
- * @see com.liferay.portal.model.impl.RoleModelImpl
- *
- */
 public interface RoleModel extends BaseModel<Role> {
 	public long getPrimaryKey();
 

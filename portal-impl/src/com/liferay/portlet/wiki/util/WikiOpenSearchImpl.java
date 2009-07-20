@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 
-/**
- * <a href="WikiOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WikiOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/wiki/open_search";

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-/**
- * <a href="TimeZoneUtil_IW.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TimeZoneUtil_IW {
 	public static TimeZoneUtil_IW getInstance() {
 		return _instance;

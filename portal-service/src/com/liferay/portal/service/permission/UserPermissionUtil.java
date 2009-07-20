@@ -25,12 +25,6 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="UserPermissionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserPermissionUtil {
 
 	public static void check(
@@ -40,9 +34,6 @@ public class UserPermissionUtil {
 		getUserPermission().check(permissionChecker, userId, actionId);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public static void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
@@ -69,9 +60,6 @@ public class UserPermissionUtil {
 			permissionChecker, userId, actionId);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public static boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {

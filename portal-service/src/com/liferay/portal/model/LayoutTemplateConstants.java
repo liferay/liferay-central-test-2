@@ -22,12 +22,6 @@
 
 package com.liferay.portal.model;
 
-/**
- * <a href="LayoutTemplateConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutTemplateConstants {
 
 	public static final String CUSTOM_SEPARATOR = "_CUSTOM_";

@@ -22,12 +22,6 @@
 
 package com.liferay.taglib.theme;
 
-/**
- * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 
 	public boolean isTheme() {

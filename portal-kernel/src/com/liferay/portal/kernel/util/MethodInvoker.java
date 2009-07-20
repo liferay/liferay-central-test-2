@@ -32,13 +32,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="MethodInvoker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Harry Mark
- *
- */
 public class MethodInvoker {
 
 	public static Object invoke(MethodWrapper methodWrapper)

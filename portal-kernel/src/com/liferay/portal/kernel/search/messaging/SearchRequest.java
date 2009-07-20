@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.Sort;
 
-/**
- * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class SearchRequest {
 
 	public static SearchRequest add(long companyId, Document document) {

@@ -24,12 +24,6 @@ package com.liferay.portlet.documentlibrary;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchFileEntryException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchFileEntryException extends PortalException {
 
 	public NoSuchFileEntryException() {

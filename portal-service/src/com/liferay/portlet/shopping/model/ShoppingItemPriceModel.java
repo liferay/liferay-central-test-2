@@ -24,26 +24,6 @@ package com.liferay.portlet.shopping.model;
 
 import com.liferay.portal.model.BaseModel;
 
-/**
- * <a href="ShoppingItemPriceModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>ShoppingItemPrice</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.shopping.model.ShoppingItemPrice
- * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl
- * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl
- *
- */
 public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public long getPrimaryKey();
 

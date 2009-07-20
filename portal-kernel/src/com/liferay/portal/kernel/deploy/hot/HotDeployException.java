@@ -24,13 +24,6 @@ package com.liferay.portal.kernel.deploy.hot;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="HotDeployException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class HotDeployException extends PortalException {
 
 	public HotDeployException() {

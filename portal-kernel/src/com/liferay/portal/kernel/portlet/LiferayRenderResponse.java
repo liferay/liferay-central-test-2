@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.portlet;
 
 import javax.portlet.RenderResponse;
 
-/**
- * <a href="LiferayRenderResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public interface LiferayRenderResponse extends RenderResponse {
 
 	public void setResourceName(String resourceName);

@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-/**
- * <a href="JournalFeedUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalFeedUtil {
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed) {

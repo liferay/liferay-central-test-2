@@ -28,12 +28,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="DisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DisplayTerms {
 
 	public static final String KEYWORDS = "keywords";

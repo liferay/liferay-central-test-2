@@ -30,12 +30,6 @@ import java.text.NumberFormat;
 
 import java.util.Locale;
 
-/**
- * <a href="TextFormatter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TextFormatter {
 
 	// Web Search --> WEB_SEARCH

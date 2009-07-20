@@ -93,12 +93,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceT
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="PersistenceTestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PersistenceTestSuite extends TestSuite {
 
 	public static Test suite() {

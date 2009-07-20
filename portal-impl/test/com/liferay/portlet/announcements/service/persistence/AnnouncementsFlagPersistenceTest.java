@@ -29,12 +29,6 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.announcements.NoSuchFlagException;
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 
-/**
- * <a href="AnnouncementsFlagPersistenceTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

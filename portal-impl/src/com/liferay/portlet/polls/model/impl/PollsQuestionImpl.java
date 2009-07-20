@@ -31,12 +31,6 @@ import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="PollsQuestionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollsQuestionImpl
 	extends PollsQuestionModelImpl implements PollsQuestion {
 

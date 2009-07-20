@@ -24,13 +24,6 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="TemplateSmallImageSizeException.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TemplateSmallImageSizeException extends PortalException {
 
 	public TemplateSmallImageSizeException() {

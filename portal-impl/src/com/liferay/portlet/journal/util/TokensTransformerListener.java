@@ -34,12 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * <a href="TokensTransformerListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TokensTransformerListener extends TransformerListener {
 
 	public static final String TEMP_ESCAPED_AT_OPEN =
@@ -72,12 +66,6 @@ public class TokensTransformerListener extends TransformerListener {
 		return replace(s);
 	}
 
-	/**
-	 * Replace the standard tokens in a given string with their values.
-	 *
-	 * @param		s the given string
-	 * @return		the processed string
-	 */
 	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 

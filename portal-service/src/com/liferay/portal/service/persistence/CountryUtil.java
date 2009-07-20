@@ -22,12 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-/**
- * <a href="CountryUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CountryUtil {
 	public static void cacheResult(com.liferay.portal.model.Country country) {
 		getPersistence().cacheResult(country);

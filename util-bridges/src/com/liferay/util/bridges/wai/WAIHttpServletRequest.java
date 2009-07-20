@@ -31,12 +31,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-/**
- * <a href="WAIHttpServletRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 
 	public WAIHttpServletRequest(

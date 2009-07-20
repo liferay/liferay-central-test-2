@@ -24,13 +24,6 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
 
-/**
- * <a href="WikiPageResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class WikiPageResourceImpl
 	extends WikiPageResourceModelImpl implements WikiPageResource {
 

@@ -27,26 +27,6 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * <a href="WikiNodeModel.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>WikiNode</code>
- * table in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.wiki.model.WikiNode
- * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
- * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
- *
- */
 public interface WikiNodeModel extends BaseModel<WikiNode> {
 	public long getPrimaryKey();
 

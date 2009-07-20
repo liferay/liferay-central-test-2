@@ -28,12 +28,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="BaseWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	public int copyCollectionResource(

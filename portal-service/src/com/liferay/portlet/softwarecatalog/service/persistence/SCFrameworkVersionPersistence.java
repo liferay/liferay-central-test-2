@@ -24,12 +24,6 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
-/**
- * <a href="SCFrameworkVersionPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface SCFrameworkVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion);

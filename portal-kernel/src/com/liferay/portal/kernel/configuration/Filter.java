@@ -24,12 +24,6 @@ package com.liferay.portal.kernel.configuration;
 
 import java.util.Map;
 
-/**
- * <a href="Filter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Filter {
 
 	public Filter(String selector1) {

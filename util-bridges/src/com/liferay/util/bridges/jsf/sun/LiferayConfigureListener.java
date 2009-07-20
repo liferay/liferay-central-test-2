@@ -29,12 +29,6 @@ import com.sun.faces.config.ConfigureListener;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
-/**
- * <a href="LiferayConfigureListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Myunghun Kim
- *
- */
 public class LiferayConfigureListener extends ConfigureListener {
 
 	public static final String ASSOCIATE_KEY =

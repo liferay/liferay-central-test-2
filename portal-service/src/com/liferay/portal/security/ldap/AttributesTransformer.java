@@ -24,12 +24,6 @@ package com.liferay.portal.security.ldap;
 
 import javax.naming.directory.Attributes;
 
-/**
- * <a href="AttributesTransformer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AttributesTransformer {
 
 	public Attributes transformGroup(Attributes attributes);

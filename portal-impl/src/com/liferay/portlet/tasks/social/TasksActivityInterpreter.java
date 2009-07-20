@@ -38,12 +38,6 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 
-/**
- * <a href="TasksActivityInterpreter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
