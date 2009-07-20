@@ -46,18 +46,14 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.tools.ant.DirectoryScanner;
 
-/**
- * <a href="JavadocBuilder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JavadocBuilder {
 
 	public static void main(String[] args) {
@@ -569,6 +565,7 @@ public class JavadocBuilder {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
+		ds.setExcludes(new String[] {"**\\Test.java"});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
 		ds.scan();
@@ -578,9 +575,9 @@ public class JavadocBuilder {
 		for (String fileName : fileNames) {
 			fileName = StringUtil.replace(fileName, "\\", "/");
 
-			if (!fileName.endsWith("MailService.java")) {
+			/*if (!fileName.endsWith("Operation.java")) {
 				continue;
-			}
+			}*/
 
 			if (command.equals("delete")) {
 				_removeJavadocFromJava(basedir, fileName, true);
@@ -616,7 +613,7 @@ public class JavadocBuilder {
 		JavaClass javaClass = _getJavaClass(
 			fileName, new StringReader(oldContent));
 
-		List<Integer> lineNumbers = new ArrayList<Integer>();
+		Set<Integer> lineNumbers = new HashSet<Integer>();
 
 		lineNumbers.add(javaClass.getLineNumber());
 
@@ -632,9 +629,7 @@ public class JavadocBuilder {
 			lineNumbers.add(javaField.getLineNumber());
 		}
 
-		for (int i = 0; i < lineNumbers.size(); i++) {
-			int lineNumber = lineNumbers.get(i);
-
+		for (int lineNumber : lineNumbers) {
 			int pos = lineNumber - 2;
 
 			String line = lines[pos].trim();
