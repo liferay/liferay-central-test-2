@@ -270,7 +270,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	}
 %>
 
-	<c:if test="<%= searchContainer.getTotal() > 0 %>">
+	<c:if test="<%= !resultRows.isEmpty() %>">
 
 		<%
 		totalResults = totalResults + searchContainer.getTotal();
