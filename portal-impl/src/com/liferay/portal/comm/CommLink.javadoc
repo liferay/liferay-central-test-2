@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CommLink</name>
+	<type>com.liferay.portal.comm.CommLink</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getState</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setState</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>state</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>org.jgroups.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.io.Serializable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>CommLink</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_channel</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_history</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

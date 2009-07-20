@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CaptchaAction</name>
+	<type>com.liferay.portal.captcha.CaptchaAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been renamed to <code>CaptchaPortletAction</code>.]]></deprecated>
+</javadoc>

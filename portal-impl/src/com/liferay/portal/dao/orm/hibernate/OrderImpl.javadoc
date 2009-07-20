@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrderImpl</name>
+	<type>com.liferay.portal.dao.orm.hibernate.OrderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>OrderImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>criterion</name>
+			<type>org.hibernate.criterion.Order</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWrappedOrder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_criterion</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

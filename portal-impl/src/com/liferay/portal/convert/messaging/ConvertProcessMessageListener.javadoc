@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ConvertProcessMessageListener</name>
+	<type>com.liferay.portal.convert.messaging.ConvertProcessMessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>doReceive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

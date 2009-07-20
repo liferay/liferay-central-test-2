@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShardSqlUpdateFactoryImpl</name>
+	<type>com.liferay.portal.dao.shard.ShardSqlUpdateFactoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getSqlUpdate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSource</name>
+			<type>javax.sql.DataSource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sql</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>types</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

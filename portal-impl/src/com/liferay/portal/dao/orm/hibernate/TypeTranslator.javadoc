@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TypeTranslator</name>
+	<type>com.liferay.portal.dao.orm.hibernate.TypeTranslator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>translate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>com.liferay.portal.kernel.dao.orm.Type</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

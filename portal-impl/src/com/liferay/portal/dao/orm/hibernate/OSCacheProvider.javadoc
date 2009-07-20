@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OSCacheProvider</name>
+	<type>com.liferay.portal.dao.orm.hibernate.OSCacheProvider</type>
+	<comment><![CDATA[]]></comment>
+	<author>Mathias Bogaert</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>buildCache</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>region</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>properties</name>
+			<type>java.util.Properties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>CacheException</name>
+			<type>org.hibernate.cache.CacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isMinimalPutsEnabledByDefault</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>nextTimestamp</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>start</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>properties</name>
+			<type>java.util.Properties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>CacheException</name>
+			<type>org.hibernate.cache.CacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>stop</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>OSCACHE_REFRESH_PERIOD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OSCACHE_CRON</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

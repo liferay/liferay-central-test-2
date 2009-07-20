@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>EmptyProfile</name>
+	<type>com.liferay.portal.ccpp.EmptyProfile</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>getAttribute</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getAttributes</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getComponent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>localtype</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getComponents</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

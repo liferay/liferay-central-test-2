@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ConvertPermissionTuner</name>
+	<type>com.liferay.portal.convert.ConvertPermissionTuner</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPath</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isEnabled</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doConvert</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

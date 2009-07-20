@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayStrutsPortletURLImpl</name>
+	<type>com.liferay.portal.apache.bridges.struts.LiferayStrutsPortletURLImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>LiferayStrutsPortletURLImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletResponseImpl</name>
+			<type>com.liferay.portlet.PortletResponseImpl</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>plid</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>lifecycle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setParameter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

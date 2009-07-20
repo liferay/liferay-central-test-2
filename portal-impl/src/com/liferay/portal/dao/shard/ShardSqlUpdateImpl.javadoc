@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShardSqlUpdateImpl</name>
+	<type>com.liferay.portal.dao.shard.ShardSqlUpdateImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>ShardSqlUpdateImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSource</name>
+			<type>javax.sql.DataSource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sql</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>types</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>update</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>params</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>DataAccessException</name>
+			<type>org.springframework.dao.DataAccessException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

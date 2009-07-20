@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrderFactoryImpl</name>
+	<type>com.liferay.portal.dao.orm.jpa.OrderFactoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Prashant Dighe</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>asc</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>propertyName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>desc</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>propertyName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

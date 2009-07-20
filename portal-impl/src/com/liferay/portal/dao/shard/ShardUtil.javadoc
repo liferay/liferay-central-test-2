@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShardUtil</name>
+	<type>com.liferay.portal.dao.shard.ShardUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getDataSource</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getShardSelector</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>popCompanyService</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>pushCompanyService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>pushCompanyService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>shardName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setShardAdvice</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>shardAdvice</name>
+			<type>com.liferay.portal.dao.shard.ShardAdvice</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>COMPANY_SCOPE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_shardAdvice</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_shardSelector</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

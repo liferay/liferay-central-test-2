@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DisjunctionImpl</name>
+	<type>com.liferay.portal.dao.orm.hibernate.DisjunctionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>DisjunctionImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>disjunction</name>
+			<type>org.hibernate.criterion.Disjunction</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>add</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>criterion</name>
+			<type>com.liferay.portal.kernel.dao.orm.Criterion</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWrappedDisjunction</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_disjunction</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

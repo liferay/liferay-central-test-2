@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ConjunctionImpl</name>
+	<type>com.liferay.portal.dao.orm.hibernate.ConjunctionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>ConjunctionImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>conjunction</name>
+			<type>org.hibernate.criterion.Conjunction</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>add</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>criterion</name>
+			<type>com.liferay.portal.kernel.dao.orm.Criterion</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWrappedConjunction</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_conjunction</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

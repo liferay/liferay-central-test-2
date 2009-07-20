@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CacheModeTranslator</name>
+	<type>com.liferay.portal.dao.orm.hibernate.CacheModeTranslator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>translate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cacheMode</name>
+			<type>com.liferay.portal.kernel.dao.orm.CacheMode</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

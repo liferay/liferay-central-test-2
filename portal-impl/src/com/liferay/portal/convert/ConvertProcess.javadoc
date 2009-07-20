@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ConvertProcess</name>
+	<type>com.liferay.portal.convert.ConvertProcess</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>convert</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>ConvertException</name>
+			<type>com.liferay.portal.convert.ConvertException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPath</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isEnabled</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doConvert</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

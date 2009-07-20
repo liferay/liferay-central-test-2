@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DB2Dialect</name>
+	<type>com.liferay.portal.dao.orm.hibernate.DB2Dialect</type>
+	<comment><![CDATA[]]></comment>
+	<author>Shepherd Ching</author>
+	<author>Jian Cao</author>
+	<method>
+		<name>getLimitString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sql</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>hasOffset</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>
