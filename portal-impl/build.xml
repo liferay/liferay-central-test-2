@@ -351,9 +351,9 @@ ${exception.message}
 		</exec>
 
 		<copy file="${lang.dir}/${lang.file}_${lang.code}.properties.tmp" tofile="${lang.dir}/${lang.file}_${lang.code}.properties" overwrite="true">
-			<filterset begintoken=" [" endtoken="]">
-				<filter token="automatic translation" value=""/>
-				<filter token="automatic copy" value=""/>
+			<filterset begintoken=" (" endtoken=")">
+				<filter token="Automatic Translation" value=""/>
+				<filter token="Automatic Copy" value=""/>
 			</filterset>
 		</copy>
 
