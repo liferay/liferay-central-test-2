@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditSecondEntryTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditSecondEntryTest extends BaseTestCase {
 	public void testEditSecondEntry() throws Exception {
 		for (int second = 0;; second++) {

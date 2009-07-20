@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.cluster.cluster1;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="N1_AddMessageBoardsContentTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class N1_AddMessageBoardsContentTest extends BaseTestCase {
 	public void testN1_AddMessageBoardsContent() throws Exception {
 		selenium.open("/");

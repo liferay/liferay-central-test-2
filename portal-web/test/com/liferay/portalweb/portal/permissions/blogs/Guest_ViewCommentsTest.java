@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Guest_ViewCommentsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Guest_ViewCommentsTest extends BaseTestCase {
 	public void testGuest_ViewComments() throws Exception {
 		for (int second = 0;; second++) {

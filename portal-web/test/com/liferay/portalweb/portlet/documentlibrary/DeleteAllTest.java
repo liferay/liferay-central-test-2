@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeleteAllTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteAllTest extends BaseTestCase {
 	public void testDeleteAll() throws Exception {
 		int label = 1;

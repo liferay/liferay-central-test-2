@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.admin;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="BrowseInstallMorePluginsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BrowseInstallMorePluginsTest extends BaseTestCase {
 	public void testBrowseInstallMorePlugins() throws Exception {
 		for (int second = 0;; second++) {

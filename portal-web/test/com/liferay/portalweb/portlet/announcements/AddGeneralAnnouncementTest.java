@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.announcements;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddGeneralAnnouncementTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddGeneralAnnouncementTest extends BaseTestCase {
 	public void testAddGeneralAnnouncement() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.staging.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CC_SendContentProposalTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CC_SendContentProposalTest extends BaseTestCase {
 	public void testCC_SendContentProposal() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullUserGroupNameTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullUserGroupNameTest extends BaseTestCase {
 	public void testAddNullUserGroupName() throws Exception {
 		for (int second = 0;; second++) {

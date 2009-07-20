@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.loancalculator;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CalculateLoanTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalculateLoanTest extends BaseTestCase {
 	public void testCalculateLoan() throws Exception {
 		selenium.type("_61_loanAmount", RuntimeVariables.replace("1,000"));

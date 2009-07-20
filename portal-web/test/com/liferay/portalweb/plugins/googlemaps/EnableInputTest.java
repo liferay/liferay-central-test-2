@@ -25,12 +25,6 @@ package com.liferay.portalweb.plugins.googlemaps;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EnableInputTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EnableInputTest extends BaseTestCase {
 	public void testEnableInput() throws Exception {
 		int label = 1;

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeleteEntryTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteEntryTest extends BaseTestCase {
 	public void testDeleteEntry() throws Exception {
 		for (int second = 0;; second++) {

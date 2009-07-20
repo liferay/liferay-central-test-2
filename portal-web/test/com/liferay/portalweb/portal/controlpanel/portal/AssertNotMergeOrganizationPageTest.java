@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertNotMergeOrganizationPageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 	public void testAssertNotMergeOrganizationPage() throws Exception {
 		int label = 1;

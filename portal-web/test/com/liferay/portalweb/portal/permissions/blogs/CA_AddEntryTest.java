@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AddEntryTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AddEntryTest extends BaseTestCase {
 	public void testCA_AddEntry() throws Exception {
 		for (int second = 0;; second++) {

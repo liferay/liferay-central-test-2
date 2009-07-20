@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullCreditCardNameTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullCreditCardNameTest extends BaseTestCase {
 	public void testAddNullCreditCardName() throws Exception {
 		for (int second = 0;; second++) {

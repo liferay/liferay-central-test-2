@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddUserInstantMessengerTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddUserInstantMessengerTest extends BaseTestCase {
 	public void testAddUserInstantMessenger() throws Exception {
 		for (int second = 0;; second++) {

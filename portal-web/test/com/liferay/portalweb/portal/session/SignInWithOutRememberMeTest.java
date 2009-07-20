@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.session;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SignInWithOutRememberMeTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SignInWithOutRememberMeTest extends BaseTestCase {
 	public void testSignInWithOutRememberMe() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.plugins.wol;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddPortletSVNTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddPortletSVNTest extends BaseTestCase {
 	public void testAddPortletSVN() throws Exception {
 		for (int second = 0;; second++) {

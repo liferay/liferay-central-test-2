@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="VerifyDynamicConfigurationMessageBoardTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyDynamicConfigurationMessageBoardTest extends BaseTestCase {
 	public void testVerifyDynamicConfigurationMessageBoard()
 		throws Exception {

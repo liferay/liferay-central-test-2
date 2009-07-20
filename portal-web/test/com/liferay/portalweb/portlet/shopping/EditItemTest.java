@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditItemTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditItemTest extends BaseTestCase {
 	public void testEditItem() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AddPageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AddPageTest extends BaseTestCase {
 	public void testCA_AddPage() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Welcome"));

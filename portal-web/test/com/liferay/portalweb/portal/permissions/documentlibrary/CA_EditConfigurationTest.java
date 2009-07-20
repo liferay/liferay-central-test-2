@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_EditConfigurationTest extends BaseTestCase {
 	public void testCA_EditConfiguration() throws Exception {
 		for (int second = 0;; second++) {

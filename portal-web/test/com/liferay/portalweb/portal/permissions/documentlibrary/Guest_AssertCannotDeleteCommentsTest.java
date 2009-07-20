@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Guest_AssertCannotDeleteCommentsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Guest_AssertCannotDeleteCommentsTest extends BaseTestCase {
 	public void testGuest_AssertCannotDeleteComments()
 		throws Exception {

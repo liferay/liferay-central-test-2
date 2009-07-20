@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wiki;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CancelAddChildPageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CancelAddChildPageTest extends BaseTestCase {
 	public void testCancelAddChildPage() throws Exception {
 		for (int second = 0;; second++) {

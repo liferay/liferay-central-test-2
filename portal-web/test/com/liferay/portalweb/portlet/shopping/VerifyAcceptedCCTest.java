@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="VerifyAcceptedCCTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyAcceptedCCTest extends BaseTestCase {
 	public void testVerifyAcceptedCC() throws Exception {
 		for (int second = 0;; second++) {

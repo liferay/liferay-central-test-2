@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wikidisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SetupTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SetupTest extends BaseTestCase {
 	public void testSetup() throws Exception {
 		int label = 1;

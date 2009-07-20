@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeleteCompareVersionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteCompareVersionsTest extends BaseTestCase {
 	public void testDeleteCompareVersions() throws Exception {
 		int label = 1;

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wikidisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="PreviewChildPageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PreviewChildPageTest extends BaseTestCase {
 	public void testPreviewChildPage() throws Exception {
 		for (int second = 0;; second++) {

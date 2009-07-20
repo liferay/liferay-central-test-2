@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_EditFolderTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_EditFolderTest extends BaseTestCase {
 	public void testCA_EditFolder() throws Exception {
 		for (int second = 0;; second++) {

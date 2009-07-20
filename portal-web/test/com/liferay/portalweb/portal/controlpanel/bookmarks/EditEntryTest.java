@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditEntryTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditEntryTest extends BaseTestCase {
 	public void testEditEntry() throws Exception {
 		for (int second = 0;; second++) {

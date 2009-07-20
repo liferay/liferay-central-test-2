@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullImageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullImageTest extends BaseTestCase {
 	public void testAddNullImage() throws Exception {
 		for (int second = 0;; second++) {

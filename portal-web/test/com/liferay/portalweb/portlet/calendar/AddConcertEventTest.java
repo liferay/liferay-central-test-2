@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddConcertEventTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddConcertEventTest extends BaseTestCase {
 	public void testAddConcertEvent() throws Exception {
 		for (int second = 0;; second++) {

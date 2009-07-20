@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.announcements;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SA_TearDownTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SA_TearDownTest extends BaseTestCase {
 	public void testSA_TearDown() throws Exception {
 		int label = 1;

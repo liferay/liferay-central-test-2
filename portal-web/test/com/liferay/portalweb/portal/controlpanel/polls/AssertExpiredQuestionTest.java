@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.polls;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertExpiredQuestionTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertExpiredQuestionTest extends BaseTestCase {
 	public void testAssertExpiredQuestion() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddInvalidEndDateEventTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddInvalidEndDateEventTest extends BaseTestCase {
 	public void testAddInvalidEndDateEvent() throws Exception {
 		for (int second = 0;; second++) {

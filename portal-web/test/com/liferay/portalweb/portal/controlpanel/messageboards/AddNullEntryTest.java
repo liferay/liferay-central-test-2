@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullEntryTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullEntryTest extends BaseTestCase {
 	public void testAddNullEntry() throws Exception {
 		for (int second = 0;; second++) {

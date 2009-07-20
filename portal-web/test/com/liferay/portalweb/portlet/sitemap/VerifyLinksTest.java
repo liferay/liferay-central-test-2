@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.sitemap;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="VerifyLinksTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyLinksTest extends BaseTestCase {
 	public void testVerifyLinks() throws Exception {
 		for (int second = 0;; second++) {

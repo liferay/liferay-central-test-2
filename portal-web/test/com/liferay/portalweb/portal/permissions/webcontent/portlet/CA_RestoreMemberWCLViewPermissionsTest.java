@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.webcontent.portlet;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_RestoreMemberWCLViewPermissionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_RestoreMemberWCLViewPermissionsTest extends BaseTestCase {
 	public void testCA_RestoreMemberWCLViewPermissions()
 		throws Exception {

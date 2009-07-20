@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.directory;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AdvancedSearchOrganizationsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 	public void testAdvancedSearchOrganizations() throws Exception {
 		for (int second = 0;; second++) {

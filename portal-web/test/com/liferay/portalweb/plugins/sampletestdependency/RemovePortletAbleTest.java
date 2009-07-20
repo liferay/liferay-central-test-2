@@ -25,12 +25,6 @@ package com.liferay.portalweb.plugins.sampletestdependency;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="RemovePortletAbleTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RemovePortletAbleTest extends BaseTestCase {
 	public void testRemovePortletAble() throws Exception {
 		for (int second = 0;; second++) {

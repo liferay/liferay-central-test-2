@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullPassword1Test.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullPassword1Test extends BaseTestCase {
 	public void testAddNullPassword1() throws Exception {
 		for (int second = 0;; second++) {

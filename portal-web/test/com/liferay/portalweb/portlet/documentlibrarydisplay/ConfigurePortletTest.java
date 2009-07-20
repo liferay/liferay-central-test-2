@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.documentlibrarydisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ConfigurePortletTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConfigurePortletTest extends BaseTestCase {
 	public void testConfigurePortlet() throws Exception {
 		for (int second = 0;; second++) {

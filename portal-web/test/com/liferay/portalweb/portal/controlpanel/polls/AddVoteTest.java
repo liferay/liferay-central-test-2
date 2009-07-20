@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.polls;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddVoteTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddVoteTest extends BaseTestCase {
 	public void testAddVote() throws Exception {
 		for (int second = 0;; second++) {

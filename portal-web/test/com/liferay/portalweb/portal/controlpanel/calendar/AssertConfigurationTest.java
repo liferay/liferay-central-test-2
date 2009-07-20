@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertConfigurationTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertConfigurationTest extends BaseTestCase {
 	public void testAssertConfiguration() throws Exception {
 		for (int second = 0;; second++) {

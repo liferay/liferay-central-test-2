@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AddSecondImageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AddSecondImageTest extends BaseTestCase {
 	public void testCA_AddSecondImage() throws Exception {
 		for (int second = 0;; second++) {

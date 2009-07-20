@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.announcements;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullTitleAnnouncementTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullTitleAnnouncementTest extends BaseTestCase {
 	public void testAddNullTitleAnnouncement() throws Exception {
 		for (int second = 0;; second++) {

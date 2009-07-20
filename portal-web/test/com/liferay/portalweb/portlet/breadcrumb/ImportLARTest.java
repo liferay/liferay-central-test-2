@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.breadcrumb;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImportLARTest extends BaseTestCase {
 	public void testImportLAR() throws Exception {
 		for (int second = 0;; second++) {

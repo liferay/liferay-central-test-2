@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.virtualhosting;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditPrivatePageURLTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditPrivatePageURLTest extends BaseTestCase {
 	public void testEditPrivatePageURL() throws Exception {
 		for (int second = 0;; second++) {

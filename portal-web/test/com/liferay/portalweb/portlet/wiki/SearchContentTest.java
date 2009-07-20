@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wiki;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SearchContentTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SearchContentTest extends BaseTestCase {
 	public void testSearchContent() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.cluster.cluster1;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertNodeOneTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertNodeOneTest extends BaseTestCase {
 	public void testAssertNodeOne() throws Exception {
 		selenium.click(RuntimeVariables.replace("//li[5]/a/span"));

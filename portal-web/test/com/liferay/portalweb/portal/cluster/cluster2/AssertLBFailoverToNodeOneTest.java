@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.cluster.cluster2;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertLBFailoverToNodeOneTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertLBFailoverToNodeOneTest extends BaseTestCase {
 	public void testAssertLBFailoverToNodeOne() throws Exception {
 		selenium.open("/");

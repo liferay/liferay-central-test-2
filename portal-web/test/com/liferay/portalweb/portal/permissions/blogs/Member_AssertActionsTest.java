@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Member_AssertActionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Member_AssertActionsTest extends BaseTestCase {
 	public void testMember_AssertActions() throws Exception {
 		for (int second = 0;; second++) {

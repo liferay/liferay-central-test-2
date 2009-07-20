@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Member_AddImageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Member_AddImageTest extends BaseTestCase {
 	public void testMember_AddImage() throws Exception {
 		for (int second = 0;; second++) {

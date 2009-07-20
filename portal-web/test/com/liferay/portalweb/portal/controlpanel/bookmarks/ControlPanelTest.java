@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ControlPanelTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ControlPanelTest extends BaseTestCase {
 	public void testControlPanel() throws Exception {
 		selenium.click(RuntimeVariables.replace(

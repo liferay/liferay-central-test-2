@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.communities;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddTemporaryCommunityTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddTemporaryCommunityTest extends BaseTestCase {
 	public void testAddTemporaryCommunity() throws Exception {
 		for (int second = 0;; second++) {

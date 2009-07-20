@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Member_AssertCannotEditPermissionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 	public void testMember_AssertCannotEditPermissions()
 		throws Exception {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddNullShippingStateTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddNullShippingStateTest extends BaseTestCase {
 	public void testAddNullShippingState() throws Exception {
 		for (int second = 0;; second++) {

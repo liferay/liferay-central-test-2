@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="RemoveBookmarkTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RemoveBookmarkTest extends BaseTestCase {
 	public void testRemoveBookmark() throws Exception {
 		for (int second = 0;; second++) {

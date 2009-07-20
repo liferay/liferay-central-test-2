@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.controlpanel.webcontent;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SearchStructuresTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SearchStructuresTest extends BaseTestCase {
 	public void testSearchStructures() throws Exception {
 		for (int second = 0;; second++) {

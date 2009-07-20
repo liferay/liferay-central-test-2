@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.language;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ConfirmEnglishTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConfirmEnglishTest extends BaseTestCase {
 	public void testConfirmEnglish() throws Exception {
 		selenium.click("//img[@alt='English (United States)']");

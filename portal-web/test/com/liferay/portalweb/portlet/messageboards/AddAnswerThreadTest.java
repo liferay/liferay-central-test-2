@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddAnswerThreadTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddAnswerThreadTest extends BaseTestCase {
 	public void testAddAnswerThread() throws Exception {
 		for (int second = 0;; second++) {

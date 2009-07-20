@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.language;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="InternationalizationJapaneseTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InternationalizationJapaneseTest extends BaseTestCase {
 	public void testInternationalizationJapanese() throws Exception {
 		for (int second = 0;; second++) {

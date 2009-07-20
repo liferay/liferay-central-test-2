@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Guest_AssertCannotEditFolderTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Guest_AssertCannotEditFolderTest extends BaseTestCase {
 	public void testGuest_AssertCannotEditFolder() throws Exception {
 		for (int second = 0;; second++) {

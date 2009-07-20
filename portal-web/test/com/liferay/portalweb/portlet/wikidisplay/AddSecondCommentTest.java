@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wikidisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddSecondCommentTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddSecondCommentTest extends BaseTestCase {
 	public void testAddSecondComment() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddWriterTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddWriterTest extends BaseTestCase {
 	public void testAddWriter() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Users"));

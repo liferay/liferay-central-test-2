@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.wikidisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeleteAttachmentsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteAttachmentsTest extends BaseTestCase {
 	public void testDeleteAttachments() throws Exception {
 		for (int second = 0;; second++) {

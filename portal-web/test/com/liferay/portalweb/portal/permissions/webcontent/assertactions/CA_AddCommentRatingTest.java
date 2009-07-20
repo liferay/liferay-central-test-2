@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.webcontent.assertactions;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AddCommentRatingTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AddCommentRatingTest extends BaseTestCase {
 	public void testCA_AddCommentRating() throws Exception {
 		for (int second = 0;; second++) {

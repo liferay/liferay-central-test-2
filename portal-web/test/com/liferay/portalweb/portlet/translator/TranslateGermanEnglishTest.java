@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.translator;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="TranslateGermanEnglishTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TranslateGermanEnglishTest extends BaseTestCase {
 	public void testTranslateGermanEnglish() throws Exception {
 		selenium.select("_26_id",

@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.ldap;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertLDAPConnectionTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertLDAPConnectionTest extends BaseTestCase {
 	public void testAssertLDAPConnection() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));

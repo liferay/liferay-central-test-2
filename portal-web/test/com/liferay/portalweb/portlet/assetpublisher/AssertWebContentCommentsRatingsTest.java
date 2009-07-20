@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertWebContentCommentsRatingsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertWebContentCommentsRatingsTest extends BaseTestCase {
 	public void testAssertWebContentCommentsRatings() throws Exception {
 		for (int second = 0;; second++) {

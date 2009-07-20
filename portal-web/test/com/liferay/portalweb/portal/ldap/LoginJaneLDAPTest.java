@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.ldap;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="LoginJaneLDAPTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LoginJaneLDAPTest extends BaseTestCase {
 	public void testLoginJaneLDAP() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Sign In"));

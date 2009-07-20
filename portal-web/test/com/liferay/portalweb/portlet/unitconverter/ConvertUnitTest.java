@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.unitconverter;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ConvertUnitTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConvertUnitTest extends BaseTestCase {
 	public void testConvertUnit() throws Exception {
 		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));

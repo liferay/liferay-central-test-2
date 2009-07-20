@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.staging.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_PortalRolesTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_PortalRolesTest extends BaseTestCase {
 	public void testCA_PortalRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));

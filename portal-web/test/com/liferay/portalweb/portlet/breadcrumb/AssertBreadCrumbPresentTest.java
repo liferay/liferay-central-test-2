@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.breadcrumb;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AssertBreadCrumbPresentTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssertBreadCrumbPresentTest extends BaseTestCase {
 	public void testAssertBreadCrumbPresent() throws Exception {
 		for (int second = 0;; second++) {

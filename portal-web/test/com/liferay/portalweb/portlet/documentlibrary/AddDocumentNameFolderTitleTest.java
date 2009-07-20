@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddDocumentNameFolderTitleTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddDocumentNameFolderTitleTest extends BaseTestCase {
 	public void testAddDocumentNameFolderTitle() throws Exception {
 		for (int second = 0;; second++) {

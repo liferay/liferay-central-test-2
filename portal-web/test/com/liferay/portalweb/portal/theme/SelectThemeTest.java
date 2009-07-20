@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="SelectThemeTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SelectThemeTest extends BaseTestCase {
 	public void testSelectTheme() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));

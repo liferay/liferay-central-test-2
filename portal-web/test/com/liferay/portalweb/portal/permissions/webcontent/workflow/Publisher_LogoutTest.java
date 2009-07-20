@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Publisher_LogoutTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Publisher_LogoutTest extends BaseTestCase {
 	public void testPublisher_Logout() throws Exception {
 		int label = 1;

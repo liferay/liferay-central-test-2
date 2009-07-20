@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.staging.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CP_PublishPortletToLiveTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CP_PublishPortletToLiveTest extends BaseTestCase {
 	public void testCP_PublishPortletToLive() throws Exception {
 		for (int second = 0;; second++) {

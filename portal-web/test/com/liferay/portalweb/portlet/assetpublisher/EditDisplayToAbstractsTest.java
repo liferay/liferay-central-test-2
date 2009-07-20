@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditDisplayToAbstractsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditDisplayToAbstractsTest extends BaseTestCase {
 	public void testEditDisplayToAbstracts() throws Exception {
 		for (int second = 0;; second++) {

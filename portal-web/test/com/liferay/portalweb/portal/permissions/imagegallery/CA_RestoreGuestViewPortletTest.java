@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_RestoreGuestViewPortletTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_RestoreGuestViewPortletTest extends BaseTestCase {
 	public void testCA_RestoreGuestViewPortlet() throws Exception {
 		int label = 1;

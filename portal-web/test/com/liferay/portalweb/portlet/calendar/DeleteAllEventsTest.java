@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeleteAllEventsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeleteAllEventsTest extends BaseTestCase {
 	public void testDeleteAllEvents() throws Exception {
 		int label = 1;

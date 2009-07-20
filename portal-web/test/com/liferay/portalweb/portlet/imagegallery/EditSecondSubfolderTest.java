@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="EditSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EditSecondSubfolderTest extends BaseTestCase {
 	public void testEditSecondSubfolder() throws Exception {
 		for (int second = 0;; second++) {

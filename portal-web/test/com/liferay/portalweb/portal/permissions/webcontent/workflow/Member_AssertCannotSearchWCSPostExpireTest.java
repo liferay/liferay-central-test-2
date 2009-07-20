@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Member_AssertCannotSearchWCSPostExpireTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Member_AssertCannotSearchWCSPostExpireTest extends BaseTestCase {
 	public void testMember_AssertCannotSearchWCSPostExpire()
 		throws Exception {

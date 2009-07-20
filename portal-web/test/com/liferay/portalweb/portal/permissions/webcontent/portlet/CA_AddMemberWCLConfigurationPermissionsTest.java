@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.webcontent.portlet;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AddMemberWCLConfigurationPermissionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AddMemberWCLConfigurationPermissionsTest extends BaseTestCase {
 	public void testCA_AddMemberWCLConfigurationPermissions()
 		throws Exception {

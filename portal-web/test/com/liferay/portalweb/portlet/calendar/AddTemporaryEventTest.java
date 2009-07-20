@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="AddTemporaryEventTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AddTemporaryEventTest extends BaseTestCase {
 	public void testAddTemporaryEvent() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,12 +25,6 @@ package com.liferay.portalweb.plugins.samplejsf12sunfacelets;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="DeletePageTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DeletePageTest extends BaseTestCase {
 	public void testDeletePage() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Home"));

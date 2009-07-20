@@ -25,12 +25,6 @@ package com.liferay.portalweb.portlet.currencyconverter;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="ConfigurePreferencesTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConfigurePreferencesTest extends BaseTestCase {
 	public void testConfigurePreferences() throws Exception {
 		for (int second = 0;; second++) {

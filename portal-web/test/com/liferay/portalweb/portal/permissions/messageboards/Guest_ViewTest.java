@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="Guest_ViewTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Guest_ViewTest extends BaseTestCase {
 	public void testGuest_View() throws Exception {
 		for (int second = 0;; second++) {

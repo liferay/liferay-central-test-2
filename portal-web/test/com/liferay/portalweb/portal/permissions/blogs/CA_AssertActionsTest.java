@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.permissions.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-/**
- * <a href="CA_AssertActionsTest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CA_AssertActionsTest extends BaseTestCase {
 	public void testCA_AssertActions() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
