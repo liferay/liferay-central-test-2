@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ReverendFunBuilder</name>
+	<type>com.liferay.portlet.reverendfun.tools.ReverendFunBuilder</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ReverendFunBuilder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

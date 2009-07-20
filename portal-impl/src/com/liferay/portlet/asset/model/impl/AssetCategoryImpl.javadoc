@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetCategoryImpl</name>
+	<type>com.liferay.portlet.asset.model.impl.AssetCategoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AssetCategoryImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAncestors</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>PortalException</name>
+			<type>com.liferay.portal.PortalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getParentCategory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getParentCategories</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getUserUuid</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isRootCategory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

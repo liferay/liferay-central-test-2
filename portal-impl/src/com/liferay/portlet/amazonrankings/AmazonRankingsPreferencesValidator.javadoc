@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AmazonRankingsPreferencesValidator</name>
+	<type>com.liferay.portlet.amazonrankings.AmazonRankingsPreferencesValidator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>validate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>preferences</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ValidatorException</name>
+			<type>javax.portlet.ValidatorException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RenderURLLogic</name>
+	<type>com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RenderURLLogic</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>renderResponse</name>
+			<type>javax.portlet.RenderResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getOpenTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getClose1Tag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLifecycle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>OPEN_TAG</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>CLOSE_1_TAG</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>CLOSE_2_TAG</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_lifecycle</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

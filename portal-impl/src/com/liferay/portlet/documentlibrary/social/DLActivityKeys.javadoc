@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DLActivityKeys</name>
+	<type>com.liferay.portlet.documentlibrary.social.DLActivityKeys</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ryan Park</author>
+	<field>
+		<name>ADD_FILE_ENTRY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>UPDATE_FILE_ENTRY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FeedDisplayTerms</name>
+	<type>com.liferay.portlet.journal.search.FeedDisplayTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>FeedDisplayTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getGroupId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getFeedId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>GROUP_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FEED_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DESCRIPTION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>groupId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>feedId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>description</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

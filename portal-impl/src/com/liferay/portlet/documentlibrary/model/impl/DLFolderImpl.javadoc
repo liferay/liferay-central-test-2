@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DLFolderImpl</name>
+	<type>com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DLFolderImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isRoot</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPath</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>PortalException</name>
+			<type>com.liferay.portal.PortalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getPathArray</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>PortalException</name>
+			<type>com.liferay.portal.PortalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

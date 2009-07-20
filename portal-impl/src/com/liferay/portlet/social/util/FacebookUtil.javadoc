@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FacebookUtil</name>
+	<type>com.liferay.portlet.social.util.FacebookUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>getCallbackURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fbmlPortletURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>facebookCanvasPageURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFacebookData</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isFacebook</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>currentURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>FACEBOOK_APPS_URL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FACEBOOK_SERVLET_PATH</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

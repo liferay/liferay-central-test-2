@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CommentImpl</name>
+	<type>com.liferay.portal.xml.CommentImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>CommentImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>comment</name>
+			<type>org.dom4j.Comment</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWrappedComment</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hashCode</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_comment</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

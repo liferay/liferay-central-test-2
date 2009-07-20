@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JournalStructureResourceImpl</name>
+	<type>com.liferay.portlet.journal.webdav.JournalStructureResourceImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>JournalStructureResourceImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>structure</name>
+			<type>com.liferay.portlet.journal.model.JournalStructure</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>parentPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isCollection</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getContentType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getContentAsStream</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>WebDAVException</name>
+			<type>com.liferay.portal.webdav.WebDAVException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_structure</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JournalScheduler</name>
+	<type>com.liferay.portlet.journal.job.JournalScheduler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>schedule</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>unschedule</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_checkArticleJob</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

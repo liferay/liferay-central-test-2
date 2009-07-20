@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Whois</name>
+	<type>com.liferay.portlet.network.model.Whois</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>Whois</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>Whois</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>domain</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>results</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDomain</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setDomain</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>domain</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getResults</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setResults</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>results</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_domain</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_results</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

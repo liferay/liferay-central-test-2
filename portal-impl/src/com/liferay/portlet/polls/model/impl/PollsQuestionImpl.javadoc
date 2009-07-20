@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PollsQuestionImpl</name>
+	<type>com.liferay.portlet.polls.model.impl.PollsQuestionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PollsQuestionImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isExpired</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getChoices</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getVotesCount</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

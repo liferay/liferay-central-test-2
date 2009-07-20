@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShoppingItemPriceLocalServiceImpl</name>
+	<type>com.liferay.portlet.shopping.service.impl.ShoppingItemPriceLocalServiceImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getItemPrices</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>itemId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PortalException</name>
+			<type>com.liferay.portal.PortalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DLFileShortcutImpl</name>
+	<type>com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DLFileShortcutImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getFolder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

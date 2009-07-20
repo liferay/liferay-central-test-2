@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AmazonRankingsUtil</name>
+	<type>com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getAmazonAccessKeyId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAmazonAssociateTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAmazonRankings</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>isbn</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

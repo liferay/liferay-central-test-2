@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalContextImpl</name>
+	<type>com.liferay.portlet.PortalContextImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>isSupportedPortletMode</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletMode</name>
+			<type>javax.portlet.PortletMode</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isSupportedWindowState</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>windowState</name>
+			<type>javax.portlet.WindowState</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortalInfo</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getProperty</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPropertyNames</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSupportedPortletModes</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSupportedWindowStates</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>props</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>portletModes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>windowStates</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

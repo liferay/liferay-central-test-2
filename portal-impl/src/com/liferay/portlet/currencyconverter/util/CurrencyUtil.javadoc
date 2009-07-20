@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CurrencyUtil</name>
+	<type>com.liferay.portlet.currencyconverter.util.CurrencyUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getAllSymbols</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pageContext</name>
+			<type>javax.servlet.jsp.PageContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getCurrency</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>symbol</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isCurrency</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>symbol</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>CurrencyUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_symbolsPool</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_currencyIds</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

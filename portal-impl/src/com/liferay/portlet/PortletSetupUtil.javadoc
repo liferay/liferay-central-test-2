@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletSetupUtil</name>
+	<type>com.liferay.portlet.PortletSetupUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>cssToJSON</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletSetup</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>css</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>cssToString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletSetup</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_toJSONObject</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletSetup</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>css</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

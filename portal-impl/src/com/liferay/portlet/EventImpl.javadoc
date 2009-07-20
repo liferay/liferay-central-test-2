@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>EventImpl</name>
+	<type>com.liferay.portlet.EventImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>EventImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>qName</name>
+			<type>javax.xml.namespace.QName</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.io.Serializable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getQName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getValue</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_qName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

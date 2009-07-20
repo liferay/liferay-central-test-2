@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MBMailingListImpl</name>
+	<type>com.liferay.portlet.messageboards.model.impl.MBMailingListImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>MBMailingListImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

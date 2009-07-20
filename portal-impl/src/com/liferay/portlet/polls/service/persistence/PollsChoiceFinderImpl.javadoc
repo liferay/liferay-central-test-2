@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PollsChoiceFinderImpl</name>
+	<type>com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>findByUuid_G</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>uuid</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>groupId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>NoSuchChoiceException</name>
+			<type>com.liferay.portlet.polls.NoSuchChoiceException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>FIND_BY_UUID_G</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AnnouncementsFlagImpl</name>
+	<type>com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Thiago Moreira</author>
+	<author>Raymond Augé</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AnnouncementsFlagImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>HIDDEN</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NOT_HIDDEN</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>READ</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>UNREAD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SCLicenseImpl</name>
+	<type>com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>SCLicenseImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RoleSearchTerms</name>
+	<type>com.liferay.portlet.enterpriseadmin.search.RoleSearchTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RoleSearchTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTypeObj</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

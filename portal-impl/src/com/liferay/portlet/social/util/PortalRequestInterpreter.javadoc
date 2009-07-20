@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalRequestInterpreter</name>
+	<type>com.liferay.portlet.social.util.PortalRequestInterpreter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getClassNames</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doInterpret</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>com.liferay.portlet.social.model.SocialRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>doProcessConfirmation</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>com.liferay.portlet.social.model.SocialRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_CLASS_NAMES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

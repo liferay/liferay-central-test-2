@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RuntimeLogic</name>
+	<type>com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getOpenTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getClose1Tag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getClose2Tag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>processXML</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sb</name>
+			<type>java.lang.StringBuilder</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>xml</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>CLOSE_2_TAG</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

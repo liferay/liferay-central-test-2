@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RenderRequestImpl</name>
+	<type>com.liferay.portlet.RenderRequestImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getETag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLifecycle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

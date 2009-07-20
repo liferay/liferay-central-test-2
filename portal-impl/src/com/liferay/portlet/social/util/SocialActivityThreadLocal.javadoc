@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SocialActivityThreadLocal</name>
+	<type>com.liferay.portlet.social.util.SocialActivityThreadLocal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Amos Fong</author>
+	<method>
+		<name>isEnabled</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setEnabled</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>enabled</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_threadLocal</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

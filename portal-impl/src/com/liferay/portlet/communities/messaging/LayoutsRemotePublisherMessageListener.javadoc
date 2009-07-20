@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutsRemotePublisherMessageListener</name>
+	<type>com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>LayoutsRemotePublisherMessageListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>statusSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>responseSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.MessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>doReceive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>messageStatus</name>
+			<type>com.liferay.portal.kernel.messaging.MessageStatus</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetCategoryPropertyImpl</name>
+	<type>com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AssetCategoryPropertyImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RatingsStatsImpl</name>
+	<type>com.liferay.portlet.ratings.model.impl.RatingsStatsImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RatingsStatsImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

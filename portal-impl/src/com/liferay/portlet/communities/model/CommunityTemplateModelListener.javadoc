@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CommunityTemplateModelListener</name>
+	<type>com.liferay.portlet.communities.model.CommunityTemplateModelListener</type>
+	<comment><![CDATA[<p>A ModelListener that listens for creation of communities and attempts to prepopulate the community pages from a template community.</p><p>The template community should be a private community to avoid unauthorized access. The templated pages are stored in the community's staging area to avoid users accidentally coming to this community.</p><p>You may create a separate template for private, open, and protected communities. You may also create a default template that will apply if the open, private, and restricted templates are not defined. The template community names must be: DEFAULT_TEMPLATE, OPEN_TEMPLATE, PRIVATE_TEMPLATE, or RESTRICTED_TEMPLATE.</p><p>A newly created community will have its layouts preconfigured based on its type. If community is public, templates pages from OPEN_TEMPLATE will be used. If community is restricted, template pages from RESTRICTED_TEMPLATE will be used. If community is private, template pages from PRIVATE_TEMPLATE will be used. If any of the above templates are not found, the DEFAULT_TEMPLATE will be used. If there are no templates, then nothing is done.</p>]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>CommunityTemplateModelListener</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>onAfterCreate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layoutSet</name>
+			<type>com.liferay.portal.model.LayoutSet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTemplateGroup</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>group</name>
+			<type>com.liferay.portal.model.Group</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PortalException</name>
+			<type>com.liferay.portal.PortalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTemplateParameters</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_DEFAULT_TEMPLATE_COMMUNITY_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_OPEN_TEMPLATE_COMMUNITY_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_PRIVATE_TEMPLATE_COMMUNITY_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_RESTRICTED_TEMPLATE_COMMUNITY_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_TEMPLATE_POSTFIX</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_templateParameters</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

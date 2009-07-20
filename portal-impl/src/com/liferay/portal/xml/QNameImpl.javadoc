@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>QNameImpl</name>
+	<type>com.liferay.portal.xml.QNameImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>QNameImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>qName</name>
+			<type>org.dom4j.QName</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getLocalPart</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNamespace</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNamespacePrefix</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNamespaceURI</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getQualifiedName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getWrappedQName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hashCode</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_qName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

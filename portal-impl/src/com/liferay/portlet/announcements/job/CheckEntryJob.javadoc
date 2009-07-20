@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CheckEntryJob</name>
+	<type>com.liferay.portlet.announcements.job.CheckEntryJob</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>execute</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>context</name>
+			<type>com.liferay.portal.kernel.job.JobExecutionContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInterval</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>INTERVAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

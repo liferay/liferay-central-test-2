@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ExpandoColumnImpl</name>
+	<type>com.liferay.portlet.expando.model.impl.ExpandoColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ExpandoColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDefaultValue</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTypeSettings</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTypeSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setTypeSettings</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>typeSettings</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setTypeSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>typeSettingsProperties</name>
+			<type>com.liferay.portal.kernel.util.UnicodeProperties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_typeSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

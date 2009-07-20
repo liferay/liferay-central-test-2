@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FileEntryForm</name>
+	<type>com.liferay.portlet.documentlibrary.form.FileEntryForm</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>FileEntryForm</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getExtraSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getExtraSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setExtraSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>extraSettingsProperties</name>
+			<type>java.util.Properties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setExtraSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_extraSettingsProperties</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

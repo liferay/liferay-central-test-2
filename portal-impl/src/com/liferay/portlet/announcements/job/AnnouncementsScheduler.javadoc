@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AnnouncementsScheduler</name>
+	<type>com.liferay.portlet.announcements.job.AnnouncementsScheduler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>schedule</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>unschedule</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_checkEntryJob</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

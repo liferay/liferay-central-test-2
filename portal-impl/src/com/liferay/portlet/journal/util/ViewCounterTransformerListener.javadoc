@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ViewCounterTransformerListener</name>
+	<type>com.liferay.portlet.journal.util.ViewCounterTransformerListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>onXml</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>onScript</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>onOutput</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>replace</name>
+		<comment><![CDATA[Replace the counter token with the increment call.]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the processed string]]></return>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

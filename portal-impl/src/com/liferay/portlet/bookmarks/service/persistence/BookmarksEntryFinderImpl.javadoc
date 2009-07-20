@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BookmarksEntryFinderImpl</name>
+	<type>com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>countByFolderIds</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>folderIds</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>findByNoAssets</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getFolderIds</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>folderIds</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>COUNT_BY_FOLDER_IDS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FIND_BY_NO_ASSETS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

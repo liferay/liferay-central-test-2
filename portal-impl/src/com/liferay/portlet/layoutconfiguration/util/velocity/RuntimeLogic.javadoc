@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RuntimeLogic</name>
+	<type>com.liferay.portlet.layoutconfiguration.util.velocity.RuntimeLogic</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>processContent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sb</name>
+			<type>java.lang.StringBuilder</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

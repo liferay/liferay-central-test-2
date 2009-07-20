@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RoleDisplayTerms</name>
+	<type>com.liferay.portlet.enterpriseadmin.search.RoleDisplayTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RoleDisplayTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTypeString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DESCRIPTION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>TYPE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>description</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>type</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

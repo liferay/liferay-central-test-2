@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetEntryImpl</name>
+	<type>com.liferay.portlet.asset.model.impl.AssetEntryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AssetEntryImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCategories</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTags</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

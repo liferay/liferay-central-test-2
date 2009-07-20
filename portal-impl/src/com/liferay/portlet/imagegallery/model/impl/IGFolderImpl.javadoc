@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IGFolderImpl</name>
+	<type>com.liferay.portlet.imagegallery.model.impl.IGFolderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>IGFolderImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isRoot</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>DEFAULT_PARENT_FOLDER_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

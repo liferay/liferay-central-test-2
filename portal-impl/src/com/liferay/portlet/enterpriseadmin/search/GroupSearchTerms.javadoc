@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>GroupSearchTerms</name>
+	<type>com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>GroupSearchTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

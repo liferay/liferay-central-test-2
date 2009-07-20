@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RSSWebCacheItem</name>
+	<type>com.liferay.portlet.rss.util.RSSWebCacheItem</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RSSWebCacheItem</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>url</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>convert</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WebCacheException</name>
+			<type>com.liferay.portal.kernel.webcache.WebCacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getRefreshTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_REFRESH_TIME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_url</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

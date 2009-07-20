@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContentHits</name>
+	<type>com.liferay.portlet.journalcontentsearch.util.ContentHits</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Raymond Augé</author>
+	<method>
+		<name>recordHits</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>hits</name>
+			<type>com.liferay.portal.kernel.search.Hits</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>groupId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>privateLayout</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>start</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>end</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isShowListed</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setShowListed</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>showListed</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_showListed</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

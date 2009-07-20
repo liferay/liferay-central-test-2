@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FilterConfigFactory</name>
+	<type>com.liferay.portlet.FilterConfigFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletFilter</name>
+			<type>com.liferay.portal.model.PortletFilter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ctx</name>
+			<type>javax.portlet.PortletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletFilter</name>
+			<type>com.liferay.portal.model.PortletFilter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>FilterConfigFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletFilter</name>
+			<type>com.liferay.portal.model.PortletFilter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ctx</name>
+			<type>javax.portlet.PortletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_destroy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletFilter</name>
+			<type>com.liferay.portal.model.PortletFilter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_pool</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

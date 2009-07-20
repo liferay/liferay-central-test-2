@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShoppingItemFieldImpl</name>
+	<type>com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ShoppingItemFieldImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setValues</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>values</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getValuesArray</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setValuesArray</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>valuesArray</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_valuesArray</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrganizationSearchTerms</name>
+	<type>com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>OrganizationSearchTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRegionIdObj</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCountryIdObj</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

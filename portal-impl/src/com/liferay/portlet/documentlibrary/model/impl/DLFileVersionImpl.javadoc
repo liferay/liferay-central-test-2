@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DLFileVersionImpl</name>
+	<type>com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DLFileVersionImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>StructureDisplayTerms</name>
+	<type>com.liferay.portlet.journal.search.StructureDisplayTerms</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>StructureDisplayTerms</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getGroupId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getStructureId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>GROUP_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STRUCTURE_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DESCRIPTION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>groupId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>structureId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>description</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

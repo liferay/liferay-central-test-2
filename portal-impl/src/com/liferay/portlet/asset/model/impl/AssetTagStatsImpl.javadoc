@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetTagStatsImpl</name>
+	<type>com.liferay.portlet.asset.model.impl.AssetTagStatsImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>AssetTagStatsImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

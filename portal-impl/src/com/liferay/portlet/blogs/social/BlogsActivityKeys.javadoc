@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BlogsActivityKeys</name>
+	<type>com.liferay.portlet.blogs.social.BlogsActivityKeys</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>ADD_COMMENT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>ADD_ENTRY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

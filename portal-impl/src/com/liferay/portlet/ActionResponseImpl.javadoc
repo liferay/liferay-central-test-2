@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ActionResponseImpl</name>
+	<type>com.liferay.portlet.ActionResponseImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getLifecycle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>sendRedirect</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>location</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>sendRedirect</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>location</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>renderUrlParamName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

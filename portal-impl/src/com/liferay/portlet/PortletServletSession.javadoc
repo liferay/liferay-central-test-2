@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletServletSession</name>
+	<type>com.liferay.portlet.PortletServletSession</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortletServletSession</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>javax.servlet.http.HttpSession</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletRequestImpl</name>
+			<type>com.liferay.portlet.PortletRequestImpl</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>invalidate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_portletRequestImpl</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletContextBag</name>
+	<type>com.liferay.portlet.PortletContextBag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortletContextBag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContextName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getServletContextName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCustomUserAttributes</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPortletFilters</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPortletURLListeners</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_servletContextName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_customUserAttributes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_portletFilters</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_urlListeners</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

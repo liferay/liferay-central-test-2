@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserInfoFactory</name>
+	<type>com.liferay.portlet.UserInfoFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getUserInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUserInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUserInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>user</name>
+			<type>com.liferay.portal.model.User</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userInfo</name>
+			<type>java.util.LinkedHashMap</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

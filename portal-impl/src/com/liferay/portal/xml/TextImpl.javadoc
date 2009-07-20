@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TextImpl</name>
+	<type>com.liferay.portal.xml.TextImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>TextImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>text</name>
+			<type>org.dom4j.Text</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWrappedText</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hashCode</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_text</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

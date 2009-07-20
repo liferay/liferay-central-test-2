@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MailingListThreadLocal</name>
+	<type>com.liferay.portlet.messageboards.util.MailingListThreadLocal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Thiago Moreira</author>
+	<method>
+		<name>isSourceMailingList</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setSourceMailingList</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sourceMailingList</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_threadLocal</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

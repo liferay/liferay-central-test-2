@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ActionResponseFactory</name>
+	<type>com.liferay.portlet.ActionResponseFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>actionRequestImpl</name>
+			<type>com.liferay.portlet.ActionRequestImpl</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>user</name>
+			<type>com.liferay.portal.model.User</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>windowState</name>
+			<type>javax.portlet.WindowState</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletMode</name>
+			<type>javax.portlet.PortletMode</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

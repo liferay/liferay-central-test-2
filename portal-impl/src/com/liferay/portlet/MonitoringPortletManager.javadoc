@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MonitoringPortletManager</name>
+	<type>com.liferay.portlet.MonitoringPortletManager</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>isMonitoringPortletActionRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isMonitoringPortletEventRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isMonitoringPortletRenderRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isMonitoringPortletResourceRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setMonitoringPortletActionRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>monitoringPortletActionRequest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMonitoringPortletEventRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>monitoringPortletEventRequest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMonitoringPortletRenderRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>monitoringPortletRenderRequest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMonitoringPortletResourceRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>monitoringPortletResourceRequest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

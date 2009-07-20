@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserGroupSearch</name>
+	<type>com.liferay.portlet.enterpriseadmin.search.UserGroupSearch</type>
+	<comment><![CDATA[]]></comment>
+	<author>Charles May</author>
+	<method>
+		<name>UserGroupSearch</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>iteratorURL</name>
+			<type>javax.portlet.PortletURL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>headerNames</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>orderableHeaders</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>EMPTY_RESULTS_MESSAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

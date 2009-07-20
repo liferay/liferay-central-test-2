@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ViewQuestionAction</name>
+	<type>com.liferay.portlet.polls.action.ViewQuestionAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>updateQuestion</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>actionRequest</name>
+			<type>javax.portlet.ActionRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

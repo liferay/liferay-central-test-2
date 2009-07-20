@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ShoppingCouponImpl</name>
+	<type>com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ShoppingCouponImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hasValidStartDate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hasValidEndDate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hasValidDateRange</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>DISCOUNT_TYPES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DISCOUNT_TYPE_PERCENTAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DISCOUNT_TYPE_ACTUAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DISCOUNT_TYPE_FREE_SHIPPING</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DISCOUNT_TYPE_TAX_FREE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

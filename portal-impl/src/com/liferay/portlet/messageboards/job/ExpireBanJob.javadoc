@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ExpireBanJob</name>
+	<type>com.liferay.portlet.messageboards.job.ExpireBanJob</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>ExpireBanJob</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>execute</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>context</name>
+			<type>com.liferay.portal.kernel.job.JobExecutionContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInterval</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_interval</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

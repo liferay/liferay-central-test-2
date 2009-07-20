@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IGImageImpl</name>
+	<type>com.liferay.portlet.imagegallery.model.impl.IGImageImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getNameWithExtension</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>IGImageImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getFolder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNameWithExtension</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getImageType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setImageType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>imageType</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getImageSize</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_imageType</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_imageSize</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>
