@@ -137,7 +137,7 @@ if (!defaultScope) {
 	for (int i = 0; i < scopeIds.length; i++) {
 		String[] scopeIdFragments = StringUtil.split(scopeIds[i], StringPool.UNDERLINE);
 
-		if (Validator.equals(scopeIdFragments[0], "layout")) {
+		if (Validator.equals(scopeIdFragments[0], "Layout")) {
 			long layoutId = GetterUtil.getLong(scopeIdFragments[1]);
 
 			Layout curLayout = LayoutLocalServiceUtil.getLayout(scopeGroupId, layout.isPrivateLayout(), layoutId);
