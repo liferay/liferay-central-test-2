@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
@@ -129,7 +130,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
+		Document doc, String snippet, PortletURL portletURL) {
 
 		// Title
 
@@ -137,9 +138,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Content
 
-		String content = doc.get(Field.DESCRIPTION);
+		String content = snippet;
 
-		content = StringUtil.shorten(content, 200);
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(doc.get(Field.DESCRIPTION), 200);
+		}
 
 		// Portlet URL
 

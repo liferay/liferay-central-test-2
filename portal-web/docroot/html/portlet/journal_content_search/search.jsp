@@ -78,7 +78,9 @@
 			for (int i = 0; i < results.getDocs().length; i++) {
 				Document doc = results.doc(i);
 
-				ResultRow row = new ResultRow(new Object[] {queryTerms, doc}, i, i);
+				String snippet = results.snippet(i);
+
+				ResultRow row = new ResultRow(new Object[] {queryTerms, doc, snippet}, i, i);
 
 				// Position
 

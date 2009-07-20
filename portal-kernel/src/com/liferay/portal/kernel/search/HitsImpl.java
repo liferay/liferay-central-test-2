@@ -77,6 +77,14 @@ public class HitsImpl implements Hits {
 		_length = length;
 	}
 
+	public String[] getSnippets() {
+		return _snippets;
+	}
+
+	public void setSnippets(String[] snippets) {
+		_snippets = snippets;
+	}
+
 	public float[] getScores() {
 		return _scores;
 	}
@@ -99,6 +107,10 @@ public class HitsImpl implements Hits {
 		return _docs[n];
 	}
 
+	public String snippet(int n) {
+		return _snippets[n];
+	}
+
 	public float score(int n) {
 		return _scores[n];
 	}
@@ -118,6 +130,7 @@ public class HitsImpl implements Hits {
 	private String[] _queryTerms;
 	private Document[] _docs;
 	private int _length;
+	private String[] _snippets;
 	private float[] _scores = new float[0];
 
 }

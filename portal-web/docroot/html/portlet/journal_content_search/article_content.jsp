@@ -31,10 +31,14 @@ Object[] objArray = (Object[])row.getObject();
 
 String[] queryTerms = (String[])objArray[0];
 Document doc = (Document)objArray[1];
+String snippet = (String)objArray[2];
 
-String content = doc.get(Field.CONTENT);
+String content = snippet;
 
-content = StringUtil.shorten(content, 200);
+if (Validator.isNull(snippet)) {
+	content = StringUtil.shorten(doc.get(Field.CONTENT), 200);
+}
+
 content = StringUtil.highlight(content, queryTerms);
 
 String articleId = doc.get(Field.ENTRY_CLASS_PK);

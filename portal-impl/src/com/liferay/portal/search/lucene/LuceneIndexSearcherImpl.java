@@ -34,7 +34,9 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -187,6 +189,31 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return queryTerms;
 	}
 
+	protected String getSnippet(
+			org.apache.lucene.document.Document doc, Query query, String field)
+		throws IOException {
+
+		String[] values = doc.getValues(field);
+
+		String snippet = null;
+
+		if (Validator.isNull(values)) {
+			return snippet;
+		}
+
+		String s = StringUtil.merge(values);
+
+		try {
+			snippet = LuceneUtil.getSnippet(
+				QueryTranslator.translate(query), field, s);
+		}
+		catch (ParseException pe) {
+			_log.error("Query: " + query, pe);
+		}
+
+		return snippet;
+	}
+
 	protected Hits subset(
 			org.apache.lucene.search.Hits luceneHits, Query query,
 			long startTime, float searchTime, int start, int end)
@@ -211,12 +238,16 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			int subsetTotal = end - start;
 
 			Document[] subsetDocs = new DocumentImpl[subsetTotal];
+			String[] subsetSnippets = new String[subsetTotal];
 			float[] subsetScores = new float[subsetTotal];
 
 			int j = 0;
 
 			for (int i = start; i < end; i++, j++) {
-				subsetDocs[j] = getDocument(luceneHits.doc(i));
+				org.apache.lucene.document.Document doc = luceneHits.doc(i);
+
+				subsetDocs[j] = getDocument(doc);
+				subsetSnippets[j] = getSnippet(doc, query, Field.CONTENT);
 				subsetScores[j] = luceneHits.score(i);
 			}
 
@@ -225,6 +256,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			subset.setQueryTerms(queryTerms);
 			subset.setDocs(subsetDocs);
 			subset.setLength(length);
+			subset.setSnippets(subsetSnippets);
 			subset.setScores(subsetScores);
 		}
 

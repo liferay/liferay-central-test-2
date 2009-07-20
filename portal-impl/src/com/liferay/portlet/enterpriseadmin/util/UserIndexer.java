@@ -167,7 +167,7 @@ public class UserIndexer implements Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
+		Document doc, String snippet, PortletURL portletURL) {
 
 		// Title
 

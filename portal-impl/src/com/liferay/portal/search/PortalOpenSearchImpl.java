@@ -125,8 +125,10 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					Indexer indexer = (Indexer)InstancePool.get(
 						portlet.getIndexerClass());
 
+					String snippet = results.snippet(i);
+
 					DocumentSummary docSummary = indexer.getDocumentSummary(
-						result, portletURL);
+						result, snippet, portletURL);
 
 					title = docSummary.getTitle();
 					url = portletURL.toString();

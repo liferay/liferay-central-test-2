@@ -104,6 +104,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				//String portletTitle = PortalUtil.getPortletTitle(
 				//	portletId, themeDisplay.getUser());
 
+				String snippet = results.snippet(i);
+
 				long resultGroupId = GetterUtil.getLong(
 					result.get(Field.GROUP_ID));
 
@@ -114,7 +116,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					portlet.getIndexerClass());
 
 				DocumentSummary docSummary = indexer.getDocumentSummary(
-					result, portletURL);
+					result, snippet, portletURL);
 
 				String title = docSummary.getTitle();
 				String url = getURL(

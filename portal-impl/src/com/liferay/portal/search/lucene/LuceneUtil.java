@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -54,6 +55,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.sql.DataSource;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -67,7 +69,11 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.search.highlight.Highlighter;
+import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.QueryTermExtractor;
+import org.apache.lucene.search.highlight.SimpleFragmenter;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.search.highlight.WeightedTerm;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -434,6 +440,43 @@ public class LuceneUtil {
 		}
 
 		return queryTerms.toArray(new String[queryTerms.size()]);
+	}
+
+	public static String getSnippet(Query query, String field, String s)
+		throws IOException {
+
+		return getSnippet(
+			query, field, s, 3, 80, "...", StringPool.BLANK, StringPool.BLANK);
+	}
+
+	public static String getSnippet(
+			Query query, String field, String s, int maxNumFragments,
+			int fragmentLength, String fragmentSuffix, String preTag,
+			String postTag)
+		throws IOException {
+
+		SimpleHTMLFormatter formatter = new SimpleHTMLFormatter(
+			preTag, postTag);
+
+		QueryScorer scorer = new QueryScorer(query, field);
+
+		Highlighter highlighter = new Highlighter(formatter, scorer);
+
+		highlighter.setTextFragmenter(new SimpleFragmenter(fragmentLength));
+
+		TokenStream tokenStream = LuceneUtil.getAnalyzer().tokenStream(
+			field, new StringReader(s));
+
+		String snippet = highlighter.getBestFragments(
+			tokenStream, s, maxNumFragments, fragmentSuffix);
+
+		if (Validator.isNotNull(snippet) &&
+			!StringUtil.endsWith(snippet, fragmentSuffix)) {
+
+			snippet = snippet + fragmentSuffix;
+		}
+
+		return snippet;
 	}
 
 	public static IndexWriter getWriter(long companyId) throws IOException {

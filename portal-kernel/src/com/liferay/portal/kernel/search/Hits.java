@@ -54,6 +54,10 @@ public interface Hits extends Serializable {
 
 	public void setLength(int length);
 
+	public String[] getSnippets();
+
+	public void setSnippets(String[] snippets);
+
 	public float[] getScores();
 
 	public void setScores(float[] scores);
@@ -61,6 +65,8 @@ public interface Hits extends Serializable {
 	public void setScores(Float[] scores);
 
 	public Document doc(int n);
+
+	public String snippet(int n);
 
 	public float score(int n);
 

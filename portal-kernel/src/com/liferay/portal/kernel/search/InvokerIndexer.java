@@ -53,7 +53,7 @@ public class InvokerIndexer implements Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		Document doc, PortletURL portletURL) {
+		Document doc, String snippet, PortletURL portletURL) {
 
 		Thread currentThread = Thread.currentThread();
 
@@ -62,7 +62,7 @@ public class InvokerIndexer implements Indexer {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return _indexer.getDocumentSummary(doc, portletURL);
+			return _indexer.getDocumentSummary(doc, snippet, portletURL);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
