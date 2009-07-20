@@ -91,9 +91,6 @@ public class SourceFormatter {
 		Set<String> classes = ClassUtil.getClasses(
 			new StringReader(content), className);
 
-		classes.add("_getMarkup");
-		classes.add("_performBlockingInteraction");
-
 		x = content.indexOf("import ");
 
 		y = content.indexOf("{", x);
@@ -383,10 +380,6 @@ public class SourceFormatter {
 
 			if (newContent.indexOf(copyright) == -1) {
 				System.out.println("(c): " + files[i]);
-			}
-
-			if (newContent.indexOf(className + ".java.html") == -1) {
-				System.out.println("Java2HTML: " + files[i]);
 			}
 
 			newContent = stripImports(newContent, packagePath, className);

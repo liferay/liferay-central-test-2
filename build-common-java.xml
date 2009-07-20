@@ -100,6 +100,8 @@
 	<target name="javadoc">
 		<mkdir dir="${javadoc.dir}" />
 
+		<antcall target="javadoc-get" />
+
 		<javadoc
 			breakiterator="yes"
 			classpathref="project.classpath"
@@ -109,6 +111,8 @@
 			sourcepath="src"
 			stylesheetfile="${project.dir}/tools/javadoc.css"
 		/>
+
+		<antcall target="javadoc-delete" />
 	</target>
 
 	<target name="javadoc-delete">
