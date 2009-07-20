@@ -127,6 +127,7 @@ if (Validator.isNull(selectionStyle)) {
 }
 
 boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope", null), true);
+
 long[] groupIds = new long[] {scopeGroupId};
 
 if (!defaultScope) {
@@ -160,7 +161,8 @@ for (int i = 0; i < assetEntryTypes.length; i++) {
 	availableClassNameIds[i] = assetEntryTypes[i].getClassNameId();
 }
 
-boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", String.valueOf(Boolean.TRUE)));
+boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
+
 long[] classNameIds = availableClassNameIds;
 
 if (Validator.equals(selectionStyle, "dynamic") && (preferences.getValues("class-name-ids", null) != null)) {

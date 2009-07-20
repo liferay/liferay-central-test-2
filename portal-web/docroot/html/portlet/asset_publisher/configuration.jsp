@@ -361,7 +361,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
 						%>
 
-						<div id="<portlet:namespace />scopesBoxes" style="display: <%= defaultScope ? "none" : "block" %> ;">
+						<div id="<portlet:namespace />scopesBoxes" style="display: <%= defaultScope ? "none" : "block" %>;">
 							<liferay-ui:input-move-boxes
 								formName="fm"
 								leftTitle="current"
@@ -415,7 +415,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
 						%>
 
-						<div id="<portlet:namespace />classNamesBoxes" style="display: <%= anyAssetType ? "none" : "block" %> ;">
+						<div id="<portlet:namespace />classNamesBoxes" style="display: <%= anyAssetType ? "none" : "block" %>;">
 							<liferay-ui:input-move-boxes
 								formName="fm"
 								leftTitle="current"
@@ -436,7 +436,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								<legend><liferay-ui:message key="displayed-assets-must-match-these-rules" /></legend>
 
 								<%
-								String queryLogicIndexesParam = ParamUtil.getString(request, "queryLogicIndexes") ;
+								String queryLogicIndexesParam = ParamUtil.getString(request, "queryLogicIndexes");
 
 								int[] queryLogicIndexes = null;
 
