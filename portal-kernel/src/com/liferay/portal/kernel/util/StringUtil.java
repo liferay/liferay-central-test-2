@@ -266,57 +266,55 @@ public class StringUtil {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String highlight(String s, String keywords) {
 		return highlight(s, keywords, "<span class=\"highlight\">", "</span>");
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String highlight(
 		String s, String keywords, String highlight1, String highlight2) {
 
-		if (s == null) {
-			return null;
-		}
-
-		if (Validator.isNull(keywords)) {
+		if (Validator.isNull(s) || Validator.isNull(keywords)) {
 			return s;
 		}
-
-		// The problem with using a regexp is that it searches the text in a
-		// case insenstive manner but doens't replace the text in a case
-		// insenstive manner. So the search results actually get messed up. The
-		// best way is to actually parse the results.
-
-		//return s.replaceAll(
-		//	"(?i)" + keywords, highlight1 + keywords + highlight2);
-
-		StringBuilder sb = new StringBuilder();
-
-		StringTokenizer st = new StringTokenizer(s);
 
 		Pattern pattern = Pattern.compile(
 			Pattern.quote(keywords), Pattern.CASE_INSENSITIVE);
 
-		while (st.hasMoreTokens()) {
-			String token = st.nextToken();
+		return _highlight(s, pattern, highlight1, highlight2);
+	}
 
-			Matcher matcher = pattern.matcher(token);
+	public static String highlight(String s, String[] queryTerms) {
+		return highlight(
+			s, queryTerms, "<span class=\"highlight\">", "</span>");
+	}
 
-			if (matcher.find()) {
-				String highlightedToken = matcher.replaceAll(
-					highlight1 + matcher.group() + highlight2);
+	public static String highlight(
+		String s, String[] queryTerms, String highlight1, String highlight2) {
 
-				sb.append(highlightedToken);
-			}
-			else {
-				sb.append(token);
-			}
+		if (Validator.isNull(s) || Validator.isNull(queryTerms)) {
+			return s;
+		}
 
-			if (st.hasMoreTokens()) {
-				sb.append(StringPool.SPACE);
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < queryTerms.length; i++) {
+			sb.append(Pattern.quote(queryTerms[i].trim()));
+
+			if ((i + 1) < queryTerms.length) {
+				sb.append(StringPool.PIPE);
 			}
 		}
 
-		return sb.toString();
+		Pattern pattern = Pattern.compile(
+			sb.toString(), Pattern.CANON_EQ | Pattern.UNICODE_CASE);
+
+		return _highlight(s, pattern, highlight1, highlight2);
 	}
 
 	public static String insert(String s, String insert, int offset) {
@@ -1407,6 +1405,36 @@ public class StringUtil {
 		}
 		catch (IOException ioe) {
 			_log.error(ioe.getMessage());
+		}
+
+		return sb.toString();
+	}
+
+	private static String _highlight(
+		String s, Pattern pattern, String highlight1, String highlight2) {
+
+		StringTokenizer st = new StringTokenizer(s);
+
+		StringBuilder sb = new StringBuilder();
+
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+
+			Matcher matcher = pattern.matcher(token);
+
+			if (matcher.find()) {
+				String highlightedToken = matcher.replaceAll(
+					highlight1 + matcher.group() + highlight2);
+
+				sb.append(highlightedToken);
+			}
+			else {
+				sb.append(token);
+			}
+
+			if (st.hasMoreTokens()) {
+				sb.append(StringPool.SPACE);
+			}
 		}
 
 		return sb.toString();

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -228,9 +229,22 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			item, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected Object[] addSearchResults(
 		String keywords, int startPage, int itemsPerPage, int total, int start,
 		String title, String searchPath, String format,
+		ThemeDisplay themeDisplay) {
+
+		return addSearchResults(
+			new String[0], keywords, startPage, itemsPerPage, total, start,
+			title, searchPath, format, themeDisplay);
+	}
+
+	protected Object[] addSearchResults(
+		String[] queryTerms, String keywords, int startPage, int itemsPerPage,
+		int total, int start, String title, String searchPath, String format,
 		ThemeDisplay themeDisplay) {
 
 		int totalPages = 0;
@@ -249,22 +263,23 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		if (format.equals("rss")) {
 			return addSearchResultsRSS(
-				doc, keywords, startPage, itemsPerPage, total, start,
-				totalPages, previousPage, nextPage, title, searchPath,
+				doc, queryTerms, keywords, startPage, itemsPerPage, total,
+				start, totalPages, previousPage, nextPage, title, searchPath,
 				themeDisplay);
 		}
 		else {
 			return addSearchResultsAtom(
-				doc, keywords, startPage, itemsPerPage, total, start,
-				totalPages, previousPage, nextPage, title, searchPath,
+				doc, queryTerms, keywords, startPage, itemsPerPage, total,
+				start, totalPages, previousPage, nextPage, title, searchPath,
 				themeDisplay);
 		}
 	}
 
 	protected Object[] addSearchResultsAtom(
-		Document doc, String keywords, int startPage, int itemsPerPage,
-		int total, int start, int totalPages, int previousPage, int nextPage,
-		String title, String searchPath, ThemeDisplay themeDisplay) {
+		Document doc, String[] queryTerms, String keywords, int startPage,
+		int itemsPerPage, int total, int start, int totalPages,
+		int previousPage, int nextPage, String title, String searchPath,
+		ThemeDisplay themeDisplay) {
 
 		// feed
 
@@ -301,6 +316,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		OpenSearchUtil.addElement(
 			root, "id", OpenSearchUtil.DEFAULT_NAMESPACE,
 			"urn:uuid:" + PortalUUIDUtil.generate());
+
+		// queryTerms
+
+		OpenSearchUtil.addElement(
+			root, "queryTerms", OpenSearchUtil.DEFAULT_NAMESPACE,
+			StringUtil.merge(queryTerms, StringPool.COMMA_AND_SPACE));
 
 		// opensearch:totalResults
 
@@ -360,9 +381,10 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected Object[] addSearchResultsRSS(
-		Document doc, String keywords, int startPage, int itemsPerPage,
-		int total, int start, int totalPages, int previousPage, int nextPage,
-		String title, String searchPath, ThemeDisplay themeDisplay) {
+		Document doc, String[] queryTerms, String keywords, int startPage,
+		int itemsPerPage, int total, int start, int totalPages,
+		int previousPage, int nextPage, String title, String searchPath,
+		ThemeDisplay themeDisplay) {
 
 		// rss
 
@@ -395,6 +417,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			channel, "description", OpenSearchUtil.NO_NAMESPACE, title);
+
+		// queryTerms
+
+		OpenSearchUtil.addElement(
+			channel, "queryTerms", OpenSearchUtil.NO_NAMESPACE,
+			StringUtil.merge(queryTerms, StringPool.COMMA_AND_SPACE));
 
 		// opensearch:totalResults
 

@@ -42,6 +42,10 @@ public interface Hits extends Serializable {
 
 	public void setSearchTime(float time);
 
+	public String[] getQueryTerms();
+
+	public void setQueryTerms(String[] queryTerms);
+
 	public Document[] getDocs();
 
 	public void setDocs(Document[] docs);

@@ -53,6 +53,14 @@ public class HitsImpl implements Hits {
 		_searchTime = time;
 	}
 
+	public String[] getQueryTerms() {
+		return _queryTerms;
+	}
+
+	public void setQueryTerms(String[] queryTerms) {
+		_queryTerms = queryTerms;
+	}
+
 	public Document[] getDocs() {
 		return _docs;
 	}
@@ -107,6 +115,7 @@ public class HitsImpl implements Hits {
 
 	private long _start;
 	private float _searchTime;
+	private String[] _queryTerms;
 	private Document[] _docs;
 	private int _length;
 	private float[] _scores = new float[0];

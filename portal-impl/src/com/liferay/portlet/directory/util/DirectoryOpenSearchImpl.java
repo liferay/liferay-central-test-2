@@ -25,6 +25,8 @@ package com.liferay.portlet.directory.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.User;
@@ -80,11 +82,13 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, start,
 			end, new UserLastNameComparator(true));
 
+		String[] queryTerms = StringUtil.split(keywords, StringPool.SPACE);
+
 		int total = UserLocalServiceUtil.searchCount(
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null);
 
 		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, total, start,
+			queryTerms, keywords, startPage, itemsPerPage, total, start,
 			"Liferay Directory Search: " + keywords, SEARCH_PATH, format,
 			themeDisplay);
 

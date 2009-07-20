@@ -25,16 +25,17 @@
 <%@ include file="/html/portlet/journal_content_search/init.jsp" %>
 
 <%
-String keywords = ParamUtil.getString(request, "keywords");
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Document doc = (Document)row.getObject();
+Object[] objArray = (Object[])row.getObject();
+
+String[] queryTerms = (String[])objArray[0];
+Document doc = (Document)objArray[1];
 
 String content = doc.get(Field.CONTENT);
 
 content = StringUtil.shorten(content, 200);
-content = StringUtil.highlight(content, keywords);
+content = StringUtil.highlight(content, queryTerms);
 
 String articleId = doc.get(Field.ENTRY_CLASS_PK);
 long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));

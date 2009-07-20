@@ -154,7 +154,9 @@ for (int i = 0; i < portlets.size(); i++) {
 
 		//portletTitle = root.elementText("title");
 
-		List entries = root.elements("entry");
+		String[] queryTerms = StringUtil.split(root.elementText("queryTerms"), StringPool.COMMA_AND_SPACE);
+
+		List<Element> entries = root.elements("entry");
 
 		int total = GetterUtil.getInteger(root.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
 
@@ -199,12 +201,12 @@ for (int i = 0; i < portlets.size(); i++) {
 				rowSB.append("\">");
 			}
 
-			rowSB.append(StringUtil.highlight(entryTitle, keywords));
+			rowSB.append(StringUtil.highlight(entryTitle, queryTerms));
 			rowSB.append("</a>");
 
 			if (Validator.isNotNull(summary)) {
 				rowSB.append("<br />");
-				rowSB.append(StringUtil.highlight(summary, keywords));
+				rowSB.append(StringUtil.highlight(summary, queryTerms));
 			}
 
 			rowSB.append("<br />");
@@ -213,10 +215,10 @@ for (int i = 0; i < portlets.size(); i++) {
 
 			String[] tags = StringUtil.split(el.elementText("tags"));
 
-			String tagsKeywords = keywords;
+			String[] tagsQueryTerms = queryTerms;
 
-			if (StringUtil.startsWith(tagsKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
-				tagsKeywords = StringUtil.replace(tagsKeywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK);
+			if (StringUtil.startsWith(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
+				tagsQueryTerms = new String[] {StringUtil.replace(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK)};
 			}
 
 			for (int k = 0; k < tags.length; k++) {
@@ -229,13 +231,13 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				if (k == 0) {
 					rowSB.append("<div class=\"entry-tags\">");
-					rowSB.append("<div class=\"taglib-tags-summary\">");
+					rowSB.append("<div class=\"taglib-asset-tags-summary\">");
 				}
 
 				rowSB.append("<a class=\"tag\" href=\"");
 				rowSB.append(tagURL.toString());
 				rowSB.append("\">");
-				rowSB.append(StringUtil.highlight(tag, tagsKeywords));
+				rowSB.append(StringUtil.highlight(tag, tagsQueryTerms));
 				rowSB.append("</a>");
 
 				if ((k + 1) == tags.length) {

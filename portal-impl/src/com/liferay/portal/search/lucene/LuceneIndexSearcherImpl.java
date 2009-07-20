@@ -81,10 +81,16 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				luceneSort = new org.apache.lucene.search.Sort(sortFields);
 			}
 
+			long startTime = System.currentTimeMillis();
+
 			org.apache.lucene.search.Hits luceneHits = searcher.search(
 				QueryTranslator.translate(query), luceneSort);
 
-			hits = subset(luceneHits, start, end);
+			long endTime = System.currentTimeMillis();
+
+			float searchTime = (float)(endTime - startTime) / Time.SECOND;
+
+			hits = subset(luceneHits, query, startTime, searchTime, start, end);
 		}
 		catch (BooleanQuery.TooManyClauses tmc) {
 			int maxClauseCount = BooleanQuery.getMaxClauseCount();
@@ -92,10 +98,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			BooleanQuery.setMaxClauseCount(Integer.MAX_VALUE);
 
 			try {
+				long startTime = System.currentTimeMillis();
+
 				org.apache.lucene.search.Hits luceneHits = searcher.search(
 					QueryTranslator.translate(query), luceneSort);
 
-				hits = subset(luceneHits, start, end);
+				long endTime = System.currentTimeMillis();
+
+				float searchTime = (float)(endTime - startTime) / Time.SECOND;
+
+				hits = subset(
+					luceneHits, query, startTime, searchTime, start, end);
 			}
 			catch (Exception e) {
 				throw new SearchException(e);
@@ -160,8 +173,23 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return newDoc;
 	}
 
+	protected String[] getQueryTerms(Query query) {
+		String[] queryTerms = new String[0];
+
+		try {
+			queryTerms = LuceneUtil.getQueryTerms(
+				QueryTranslator.translate(query));
+		}
+		catch (ParseException pe) {
+			_log.error("Query: " + query, pe);
+		}
+
+		return queryTerms;
+	}
+
 	protected Hits subset(
-			org.apache.lucene.search.Hits luceneHits, int start, int end)
+			org.apache.lucene.search.Hits luceneHits, Query query,
+			long startTime, float searchTime, int start, int end)
 		throws IOException {
 
 		int length = luceneHits.length();
@@ -171,7 +199,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			end = length;
 		}
 
-		long startTime = System.currentTimeMillis();
+		String[] queryTerms = getQueryTerms(query);
 
 		Hits subset = new HitsImpl();
 
@@ -192,15 +220,12 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				subsetScores[j] = luceneHits.score(i);
 			}
 
-			subset.setLength(length);
-			subset.setDocs(subsetDocs);
-			subset.setScores(subsetScores);
 			subset.setStart(startTime);
-
-			float searchTime =
-				(float)(System.currentTimeMillis() - startTime) / Time.SECOND;
-
 			subset.setSearchTime(searchTime);
+			subset.setQueryTerms(queryTerms);
+			subset.setDocs(subsetDocs);
+			subset.setLength(length);
+			subset.setScores(subsetScores);
 		}
 
 		return subset;

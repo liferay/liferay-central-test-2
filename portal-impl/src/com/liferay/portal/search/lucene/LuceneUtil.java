@@ -25,6 +25,7 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
@@ -45,7 +46,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
@@ -64,6 +67,8 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.search.highlight.QueryTermExtractor;
+import org.apache.lucene.search.highlight.WeightedTerm;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.RAMDirectory;
@@ -405,6 +410,32 @@ public class LuceneUtil {
 		return new IndexSearcher(getLuceneDir(companyId));
 	}
 
+	public static String[] getQueryTerms(Query query) {
+		String[] fieldNames = new String[] {
+			Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES, Field.TITLE,
+			Field.USER_NAME
+		};
+
+		WeightedTerm[] weightedTerms = null;
+
+		for (String fieldName : fieldNames) {
+			weightedTerms = QueryTermExtractor.getTerms(
+				query, false, fieldName);
+
+			if (weightedTerms.length > 0) {
+				break;
+			}
+		}
+
+		Set<String> queryTerms = new HashSet<String>();
+
+		for (WeightedTerm weightedTerm : weightedTerms) {
+			queryTerms.add(weightedTerm.getTerm());
+		}
+
+		return queryTerms.toArray(new String[queryTerms.size()]);
+	}
+
 	public static IndexWriter getWriter(long companyId) throws IOException {
 		return getWriter(companyId, false);
 	}
@@ -486,7 +517,7 @@ public class LuceneUtil {
 		}
 	}
 
-	public void _delete(long companyId) {
+	private void _delete(long companyId) {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}

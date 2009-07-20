@@ -61,6 +61,8 @@
 
 			Hits results = CompanyLocalServiceUtil.search(company.getCompanyId(), 0, PortletKeys.JOURNAL, 0, type, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
+			String[] queryTerms = results.getQueryTerms();
+
 			ContentHits contentHits = new ContentHits();
 
 			contentHits.setShowListed(showListed);
@@ -76,7 +78,7 @@
 			for (int i = 0; i < results.getDocs().length; i++) {
 				Document doc = results.doc(i);
 
-				ResultRow row = new ResultRow(doc, i, i);
+				ResultRow row = new ResultRow(new Object[] {queryTerms, doc}, i, i);
 
 				// Position
 
@@ -86,7 +88,7 @@
 
 				String title = doc.get(Field.TITLE);
 
-				title = StringUtil.highlight(title, keywords);
+				title = StringUtil.highlight(title, queryTerms);
 
 				row.addText(title);
 
