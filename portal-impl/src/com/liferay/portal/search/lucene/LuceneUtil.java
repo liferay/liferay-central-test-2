@@ -455,12 +455,13 @@ public class LuceneUtil {
 			String postTag)
 		throws IOException {
 
-		SimpleHTMLFormatter formatter = new SimpleHTMLFormatter(
+		SimpleHTMLFormatter simpleHTMLFormatter = new SimpleHTMLFormatter(
 			preTag, postTag);
 
-		QueryScorer scorer = new QueryScorer(query, field);
+		QueryScorer queryScorer = new QueryScorer(query, field);
 
-		Highlighter highlighter = new Highlighter(formatter, scorer);
+		Highlighter highlighter = new Highlighter(
+			simpleHTMLFormatter, queryScorer);
 
 		highlighter.setTextFragmenter(new SimpleFragmenter(fragmentLength));
 
