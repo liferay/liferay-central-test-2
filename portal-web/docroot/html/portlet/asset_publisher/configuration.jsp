@@ -68,8 +68,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 	}
 
 	function <portlet:namespace />saveSelectBoxes() {
-		if (document.<portlet:namespace />fm.<portlet:namespace />groupIds) {
-			document.<portlet:namespace />fm.<portlet:namespace />groupIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentGroupIds);
+		if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
+			document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds);
 		}
 
 		if (document.<portlet:namespace />fm.<portlet:namespace />classNameIds) {
@@ -322,7 +322,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option <%= !defaultScope ? "selected" : StringPool.BLANK %> value="<%= false %>"><liferay-ui:message key="select" />...</option>
 						</select>
 
-						<input name="<portlet:namespace />groupIds" type="hidden" value="" />
+						<input name="<portlet:namespace />scopeIds" type="hidden" value="" />
 
 						<%
 						Set<Group> groups = new HashSet<Group>();
@@ -338,39 +338,39 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						// Left list
 
-						List<KeyValuePair> groupsLeftList = new ArrayList<KeyValuePair>();
+						List<KeyValuePair> scopesLeftList = new ArrayList<KeyValuePair>();
 
 						for (long groupId : groupIds) {
 							Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-							groupsLeftList.add(new KeyValuePair(String.valueOf(groupId), group.getDescriptiveName()));
+							scopesLeftList.add(new KeyValuePair(_getKey(group), group.getDescriptiveName()));
 						}
 
 						// Right list
 
-						List<KeyValuePair> groupsRightList = new ArrayList<KeyValuePair>();
+						List<KeyValuePair> scopesRightList = new ArrayList<KeyValuePair>();
 
 						Arrays.sort(groupIds);
 
 						for (Group group : groups) {
 							if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
-								groupsRightList.add(new KeyValuePair(String.valueOf(group.getGroupId()), group.getDescriptiveName()));
+								scopesRightList.add(new KeyValuePair(_getKey(group), group.getDescriptiveName()));
 							}
 						}
 
-						groupsRightList = ListUtil.sort(groupsRightList, new KeyValuePairComparator(false, true));
+						scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
 						%>
 
-						<div id="<portlet:namespace />groupsBoxes" style="display: <%= defaultScope ? "none" : "block" %> ;">
+						<div id="<portlet:namespace />scopesBoxes" style="display: <%= defaultScope ? "none" : "block" %> ;">
 							<liferay-ui:input-move-boxes
 								formName="fm"
 								leftTitle="current"
 								rightTitle="available"
-								leftBoxName="currentGroupIds"
-								rightBoxName="availableGroupIds"
+								leftBoxName="currentScopeIds"
+								rightBoxName="availableScopeIds"
 								leftReorder="true"
-								leftList="<%= groupsLeftList %>"
-								rightList="<%= groupsRightList %>"
+								leftList="<%= scopesLeftList %>"
+								rightList="<%= scopesRightList %>"
 							/>
 						</div>
 
@@ -379,7 +379,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<liferay-ui:message key="asset-entry-type" />
 
 						<select name="<portlet:namespace />anyAssetType" id="<portlet:namespace />anyAssetType">
-							<option <%= anyAssetType ? "selected" : StringPool.BLANK %> value="<%= true %>" ><liferay-ui:message key="any" /></option>
+							<option <%= anyAssetType ? "selected" : StringPool.BLANK %> value="<%= true %>"><liferay-ui:message key="any" /></option>
 							<option <%= !anyAssetType ? "selected" : StringPool.BLANK %> value="<%= false %>"><liferay-ui:message key="filter[action]" />...</option>
 						</select>
 
@@ -538,7 +538,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<script type="text/javascript">
 							jQuery(
 								function () {
-									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />groupsBoxes');
+									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 
 									var queryRules = jQuery('#<portlet:namespace />queryRules');
@@ -780,3 +780,20 @@ configurationActionURL.setParameter("portletResource", portletResource);
 </c:choose>
 
 </form>
+
+<%!
+private String _getKey(Group group) throws Exception {
+	String key;
+
+	if (group.isLayout()) {
+		Layout curLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+		key = "Layout" + StringPool.UNDERLINE + curLayout.getLayoutId();
+	}
+	else {
+		key = "Group" + StringPool.UNDERLINE + group.getGroupId();;
+	}
+
+	return key;
+}
+%>

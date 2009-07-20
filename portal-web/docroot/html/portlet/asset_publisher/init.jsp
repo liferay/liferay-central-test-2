@@ -127,10 +127,29 @@ if (Validator.isNull(selectionStyle)) {
 }
 
 boolean defaultScope = GetterUtil.getBoolean(preferences.getValue("default-scope", null), true);
-long[] groupIds = new long[] {scopeGroupId}; 
+long[] groupIds = new long[] {scopeGroupId};
 
 if (!defaultScope) {
-	groupIds = GetterUtil.getLongValues(preferences.getValues("group-ids", new String[] {String.valueOf(scopeGroupId)}));
+	String[] scopeIds = preferences.getValues("scope-ids", new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
+
+	groupIds = new long[scopeIds.length];
+
+	for (int i = 0; i < scopeIds.length; i++) {
+		String[] scopeIdFragments = StringUtil.split(scopeIds[i], StringPool.UNDERLINE);
+
+		if (Validator.equals(scopeIdFragments[0], "layout")) {
+			long layoutId = GetterUtil.getLong(scopeIdFragments[1]);
+
+			Layout curLayout = LayoutLocalServiceUtil.getLayout(scopeGroupId, layout.isPrivateLayout(), layoutId);
+
+			groupIds[i] = curLayout.getScopeGroup().getGroupId();
+		}
+		else {
+			long groupId = GetterUtil.getLong(scopeIdFragments[1]);
+
+			groupIds[i] = groupId;
+		}
+	}
 }
 
 AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLanguageId());

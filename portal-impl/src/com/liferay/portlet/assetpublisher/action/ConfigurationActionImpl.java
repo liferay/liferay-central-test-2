@@ -231,8 +231,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		boolean defaultScope = ParamUtil.getBoolean(
 			actionRequest, "defaultScope");
-		long[] groupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "groupIds"), 0L);
+		String[] scopeIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "scopeIds"));
 		boolean anyAssetType = ParamUtil.getBoolean(
 			actionRequest, "anyAssetType");
 		long[] classNameIds = StringUtil.split(
@@ -280,7 +280,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
 
 		preferences.setValue("default-scope", String.valueOf(defaultScope));
-		preferences.setValues("group-ids", ArrayUtil.toStringArray(groupIds));
+		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
 		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
 		preferences.setValues(
 			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
