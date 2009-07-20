@@ -39,13 +39,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-/**
- * <a href="PortletContextLoaderListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
 	public void contextDestroyed(ServletContextEvent event) {

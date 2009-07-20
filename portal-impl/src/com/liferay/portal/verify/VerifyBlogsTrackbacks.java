@@ -33,18 +33,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="VerifyBlogsTrackbacks.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class looks at every blog comment to see if it is a trackback and
- * verifies that the source URL is a valid URL. Do not run this unless you want
- * to do this.
- * </p>
- *
- * @author Alexander Chow
- *
- */
 public class VerifyBlogsTrackbacks extends VerifyProcess {
 
 	public void verify() throws VerifyException {

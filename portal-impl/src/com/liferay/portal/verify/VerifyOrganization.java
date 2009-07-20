@@ -31,12 +31,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- * <a href="VerifyOrganization.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyOrganization extends VerifyProcess {
 
 	public void verify() throws VerifyException {

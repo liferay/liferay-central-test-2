@@ -33,12 +33,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 
-/**
- * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeRole extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

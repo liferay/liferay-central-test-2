@@ -38,12 +38,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocalizationUtil;
 
-/**
- * <a href="JournalArticleImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalArticleImpl
 	extends JournalArticleModelImpl implements JournalArticle {
 

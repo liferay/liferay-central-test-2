@@ -31,13 +31,6 @@ import com.liferay.portal.service.permission.CommonPermissionUtil;
 
 import java.util.List;
 
-/**
- * <a href="EmailAddressServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 
 	public EmailAddress addEmailAddress(

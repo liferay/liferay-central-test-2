@@ -51,12 +51,6 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeJournal extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

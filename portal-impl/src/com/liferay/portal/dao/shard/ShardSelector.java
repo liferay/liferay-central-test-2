@@ -24,12 +24,6 @@ package com.liferay.portal.dao.shard;
 
 import java.util.Map;
 
-/**
- * <a href="ShardSelector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public interface ShardSelector {
 
 	public String getShardName(

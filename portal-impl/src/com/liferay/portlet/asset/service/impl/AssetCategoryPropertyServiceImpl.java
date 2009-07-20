@@ -29,14 +29,6 @@ import com.liferay.portlet.asset.service.base.AssetCategoryPropertyServiceBaseIm
 
 import java.util.List;
 
-/**
- * <a href="AssetCategoryPropertyServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class AssetCategoryPropertyServiceImpl
 	extends AssetCategoryPropertyServiceBaseImpl {
 

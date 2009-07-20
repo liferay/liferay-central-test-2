@@ -29,13 +29,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 
-/**
- * <a href="BaseUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseUpgradeTableImpl extends Table {
 
 	public BaseUpgradeTableImpl(String tableName) {

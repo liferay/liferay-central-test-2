@@ -31,14 +31,6 @@ import org.walluck.oscar.AIMConnection;
 import org.walluck.oscar.AIMSession;
 import org.walluck.oscar.client.Oscar;
 
-/**
- * <a href="AIMConnector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Brett Randall
- * @author Bruno Farache
- *
- */
 public class AIMConnector {
 
 	public static void disconnect() {

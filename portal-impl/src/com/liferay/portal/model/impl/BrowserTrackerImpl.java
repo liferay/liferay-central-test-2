@@ -24,12 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.BrowserTracker;
 
-/**
- * <a href="BrowserTrackerImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BrowserTrackerImpl
 	extends BrowserTrackerModelImpl implements BrowserTracker {
 

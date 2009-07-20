@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-/**
- * <a href="PortalPreferencesImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalPreferencesImpl implements PortalPreferences {
 
 	public PortalPreferencesImpl(

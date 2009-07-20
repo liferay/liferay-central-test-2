@@ -36,15 +36,6 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
 import java.util.TimeZone;
 
-/**
- * <a href="CalEventRecurrenceUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Samuel Kong
- *
- * @deprecated
- *
- */
 public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public CalEventRecurrenceUpgradeColumnImpl(String name) {

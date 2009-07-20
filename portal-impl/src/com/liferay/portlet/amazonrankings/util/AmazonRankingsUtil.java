@@ -30,12 +30,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 
-/**
- * <a href="AmazonRankingsUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AmazonRankingsUtil {
 
 	public static String getAmazonAccessKeyId() {

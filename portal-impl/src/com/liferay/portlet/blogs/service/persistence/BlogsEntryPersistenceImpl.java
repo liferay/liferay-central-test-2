@@ -56,12 +56,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="BlogsEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 	implements BlogsEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BlogsEntryImpl.class.getName();

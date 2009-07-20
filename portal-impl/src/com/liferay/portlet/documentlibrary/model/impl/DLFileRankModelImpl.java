@@ -45,26 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFileRankModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>DLFileRank</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.documentlibrary.model.DLFileRank
- * @see com.liferay.portlet.documentlibrary.model.DLFileRankModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
- *
- */
 public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public static final String TABLE_NAME = "DLFileRank";
 	public static final Object[][] TABLE_COLUMNS = {

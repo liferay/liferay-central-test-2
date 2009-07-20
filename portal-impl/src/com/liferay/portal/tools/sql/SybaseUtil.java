@@ -30,15 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
-/**
- * <a href="SybaseUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Bruno Farache
- * @author Sandeep Soni
- * @author Ganesh Ram
- *
- */
 public class SybaseUtil extends DBUtil {
 
 	public static DBUtil getInstance() {

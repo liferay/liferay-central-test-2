@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.dao.orm.ProjectionList;
 
 import org.hibernate.criterion.Projections;
 
-/**
- * <a href="ProjectionFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProjectionFactoryImpl implements ProjectionFactory {
 
 	public Projection alias(Projection projection, String alias) {

@@ -59,12 +59,6 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.MapConfiguration;
 
-/**
- * <a href="ConfigurationImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 

@@ -61,15 +61,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * <a href="OrganizationLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- * @author Julio Camarero
- *
- */
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 

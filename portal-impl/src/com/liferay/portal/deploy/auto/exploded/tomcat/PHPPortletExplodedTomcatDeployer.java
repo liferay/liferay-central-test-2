@@ -28,13 +28,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 
 import java.io.File;
 
-/**
- * <a href="PHPPortletExplodedTomcatDeployer.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PHPPortletExplodedTomcatDeployer
 	extends PHPPortletAutoDeployer implements ExplodedTomcatDeployer {
 

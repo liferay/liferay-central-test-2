@@ -25,12 +25,6 @@ package com.liferay.portlet;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="ActionRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ActionRequestImpl
 	extends ClientDataRequestImpl implements ActionRequest {
 

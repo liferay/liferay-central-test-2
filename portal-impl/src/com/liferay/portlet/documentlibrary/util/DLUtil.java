@@ -47,13 +47,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="DLUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Julio Camarero
- *
- */
 public class DLUtil {
 
 	public static String getBreadcrumbs(

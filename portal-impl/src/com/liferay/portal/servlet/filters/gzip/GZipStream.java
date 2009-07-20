@@ -35,13 +35,6 @@ import java.util.zip.GZIPOutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="GZipStream.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jayson Falkner
- * @author Brian Wing Shun Chan
- *
- */
 public class GZipStream extends ServletOutputStream {
 
 	public GZipStream(HttpServletResponse response) throws IOException {

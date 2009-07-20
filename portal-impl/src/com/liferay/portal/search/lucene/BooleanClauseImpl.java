@@ -24,12 +24,6 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.BooleanClause;
 
-/**
- * <a href="BooleanClauseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BooleanClauseImpl implements BooleanClause {
 
 	public BooleanClauseImpl(

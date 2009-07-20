@@ -22,12 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-/**
- * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
 	public BaseUpgradeColumnImpl(String name) {

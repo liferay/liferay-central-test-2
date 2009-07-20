@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="RegionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RegionPersistenceImpl extends BasePersistenceImpl
 	implements RegionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RegionImpl.class.getName();

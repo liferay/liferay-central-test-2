@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
-/**
- * <a href="ImageServletTokenImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImageServletTokenImpl implements ImageServletToken {
 
 	public static final String CACHE_NAME = ImageServletToken.class.getName();

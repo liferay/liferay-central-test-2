@@ -26,13 +26,6 @@ import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 
-/**
- * <a href="PutMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class PutMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {

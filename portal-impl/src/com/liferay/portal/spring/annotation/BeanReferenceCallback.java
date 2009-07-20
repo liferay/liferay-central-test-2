@@ -36,12 +36,6 @@ import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
-/**
- * <a href="BeanReferenceCallback.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public class BeanReferenceCallback
 	implements ReflectionUtils.FieldCallback, ReflectionUtils.MethodCallback {
 

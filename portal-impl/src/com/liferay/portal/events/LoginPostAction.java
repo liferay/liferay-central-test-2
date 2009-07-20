@@ -40,12 +40,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts.Globals;
 
-/**
- * <a href="LoginPostAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LoginPostAction extends Action {
 
 	public void run(HttpServletRequest request, HttpServletResponse response)

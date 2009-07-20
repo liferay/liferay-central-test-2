@@ -37,15 +37,6 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="PortletPreferencesSerializer.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
- * @author Zongliang Li
- *
- */
 public class PortletPreferencesSerializer {
 
 	public static PortletPreferences fromDefaultXML(String xml)

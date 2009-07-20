@@ -42,15 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="CounterPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Harry Mark
- * @author Michael Young
- * @author Shuyang Zhou
- *
- */
 public class CounterPersistence extends BasePersistenceImpl {
 
 	public static int getCounterIncrement() {

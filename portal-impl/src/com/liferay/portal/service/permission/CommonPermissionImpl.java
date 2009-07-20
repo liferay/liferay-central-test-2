@@ -35,12 +35,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
-/**
- * <a href="CommonPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class CommonPermissionImpl implements CommonPermission {
 
 	public void check(

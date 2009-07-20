@@ -42,12 +42,6 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
-/**
- * <a href="DataSourceFactoryBean.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DataSourceFactoryBean extends AbstractFactoryBean {
 
 	public Class<?> getObjectType() {

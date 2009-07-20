@@ -30,12 +30,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 
-/**
- * <a href="CalEventImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 
 	public static final String[] TYPES =

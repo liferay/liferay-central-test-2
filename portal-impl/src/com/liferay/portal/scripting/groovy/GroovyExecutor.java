@@ -35,13 +35,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * <a href="GroovyExecutor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
- */
 public class GroovyExecutor implements ScriptingExecutor {
 
 	public static final String CACHE_NAME = GroovyExecutor.class.getName();

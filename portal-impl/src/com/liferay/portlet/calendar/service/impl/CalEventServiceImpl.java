@@ -34,12 +34,6 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
-/**
- * <a href="CalEventServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 
 	public CalEvent addEvent(

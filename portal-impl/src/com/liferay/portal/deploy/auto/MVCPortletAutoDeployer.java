@@ -29,12 +29,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="MVCPortletAutoDeployer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MVCPortletAutoDeployer extends PortletAutoDeployer {
 
 	protected void copyXmls(

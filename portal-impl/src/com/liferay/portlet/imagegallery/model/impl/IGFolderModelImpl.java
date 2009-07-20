@@ -44,26 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="IGFolderModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>IGFolder</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.model.IGFolder
- * @see com.liferay.portlet.imagegallery.model.IGFolderModel
- * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
- *
- */
 public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public static final String TABLE_NAME = "IGFolder";
 	public static final Object[][] TABLE_COLUMNS = {

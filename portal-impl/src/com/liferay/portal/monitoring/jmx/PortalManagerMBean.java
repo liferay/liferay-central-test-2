@@ -44,14 +44,6 @@ package com.liferay.portal.monitoring.jmx;
 import com.liferay.portal.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.SummaryStatistics;
 
-/**
- * <a href="PortalManagerMBean.java.html"><b><i>View Source</i></b></a>
- *
- * @author Karthik Sudarshan
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public interface PortalManagerMBean extends SummaryStatistics {
 
 	public long[] getCompanyIds() throws MonitoringException;

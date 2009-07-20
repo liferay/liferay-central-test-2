@@ -57,12 +57,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="SoftwareCatalogServlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class SoftwareCatalogServlet extends HttpServlet {
 
 	public void service(

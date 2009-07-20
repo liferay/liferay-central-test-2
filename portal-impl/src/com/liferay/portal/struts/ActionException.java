@@ -22,15 +22,6 @@
 
 package com.liferay.portal.struts;
 
-/**
- * <a href="ActionException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.events</code>.
- *
- */
 public class ActionException
 	extends com.liferay.portal.kernel.events.ActionException {
 

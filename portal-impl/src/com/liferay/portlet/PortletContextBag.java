@@ -28,12 +28,6 @@ import java.util.Map;
 import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.filter.PortletFilter;
 
-/**
- * <a href="PortletContextBag.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletContextBag {
 
 	public PortletContextBag(String servletContextName) {

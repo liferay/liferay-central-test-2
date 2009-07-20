@@ -25,12 +25,6 @@ package com.liferay.portal.dao.orm.hibernate;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactory;
 
-/**
- * <a href="OrderFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrderFactoryImpl implements OrderFactory {
 
 	public Order asc(String propertyName) {

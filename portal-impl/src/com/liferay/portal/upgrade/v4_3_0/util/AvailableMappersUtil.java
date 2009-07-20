@@ -24,12 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.ValueMapper;
 
-/**
- * <a href="AvailableMappersUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AvailableMappersUtil {
 
 	public static ValueMapper getBlogsEntryIdMapper() {

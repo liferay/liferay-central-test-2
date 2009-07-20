@@ -42,12 +42,6 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-/**
- * <a href="GroupSearch.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupSearch extends SearchContainer<Group> {
 
 	static List<String> headerNames = new ArrayList<String>();

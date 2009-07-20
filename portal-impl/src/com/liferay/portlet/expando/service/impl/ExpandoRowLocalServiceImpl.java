@@ -34,12 +34,6 @@ import com.liferay.portlet.expando.service.base.ExpandoRowLocalServiceBaseImpl;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ExpandoRowLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
 	public ExpandoRow addRow(long tableId, long classPK)

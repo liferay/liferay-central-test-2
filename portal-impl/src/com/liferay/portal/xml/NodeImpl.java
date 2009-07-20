@@ -31,12 +31,6 @@ import java.io.Writer;
 
 import java.util.List;
 
-/**
- * <a href="NodeImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NodeImpl implements Node {
 
 	public NodeImpl(org.dom4j.Node node) {

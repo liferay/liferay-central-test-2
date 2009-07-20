@@ -34,12 +34,6 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="GroupPermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupPermissionImpl implements GroupPermission {
 
 	public void check(

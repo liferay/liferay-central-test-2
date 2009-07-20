@@ -42,12 +42,6 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-/**
- * <a href="UserGroupSearch.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class UserGroupSearch extends SearchContainer<UserGroup> {
 
 	static List<String> headerNames = new ArrayList<String>();

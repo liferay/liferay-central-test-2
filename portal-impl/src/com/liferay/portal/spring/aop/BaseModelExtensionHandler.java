@@ -29,12 +29,6 @@ import com.liferay.portal.model.BaseModelExtension;
 
 import java.util.List;
 
-/**
- * <a href="BaseModelExtensionHandler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Aug�
- *
- */
 public class BaseModelExtensionHandler<T>
 	extends AbstractModelExtensionHandler<T> {
 

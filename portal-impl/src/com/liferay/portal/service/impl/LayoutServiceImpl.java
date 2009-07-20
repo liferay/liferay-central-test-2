@@ -51,12 +51,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public Layout addLayout(

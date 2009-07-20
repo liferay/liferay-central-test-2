@@ -24,12 +24,6 @@ package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
-/**
- * <a href="IGFolderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 
 	public static final long DEFAULT_PARENT_FOLDER_ID = 0;

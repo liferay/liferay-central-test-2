@@ -46,13 +46,6 @@ import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeWebsite extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

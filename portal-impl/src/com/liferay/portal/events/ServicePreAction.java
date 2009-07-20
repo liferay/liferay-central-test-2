@@ -121,13 +121,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.struts.Globals;
 
-/**
- * <a href="ServicePreAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Felix Ventero
- *
- */
 public class ServicePreAction extends Action {
 
 	public ServicePreAction() {
@@ -589,9 +582,6 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	/**
-	 * @deprecated Use <code>isViewableGroup</code>.
-	 */
 	protected boolean isViewableCommunity(
 			User user, long groupId, boolean privateLayout,
 			PermissionChecker permissionChecker)

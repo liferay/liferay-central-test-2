@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="PasswordPolicySearchTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- *
- */
 public class PasswordPolicySearchTerms extends PasswordPolicyDisplayTerms {
 
 	public PasswordPolicySearchTerms(PortletRequest portletRequest) {

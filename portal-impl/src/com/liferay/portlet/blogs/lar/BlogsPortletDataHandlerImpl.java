@@ -46,13 +46,6 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- * @author Raymond Augé
- *
- */
 public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(

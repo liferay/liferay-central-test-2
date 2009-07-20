@@ -43,26 +43,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="GroupModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Group</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Group
- * @see com.liferay.portal.model.GroupModel
- * @see com.liferay.portal.model.impl.GroupImpl
- *
- */
 public class GroupModelImpl extends BaseModelImpl<Group> {
 	public static final String TABLE_NAME = "Group_";
 	public static final Object[][] TABLE_COLUMNS = {

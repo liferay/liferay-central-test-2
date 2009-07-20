@@ -36,13 +36,6 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-/**
- * <a href="LiferayFileUpload.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Myunghun Kim
- * @author Brian Wing Shun Chan
- *
- */
 public class LiferayFileUpload extends ServletFileUpload {
 
 	public static final String FILE_NAME =
@@ -67,9 +60,6 @@ public class LiferayFileUpload extends ServletFileUpload {
 		return super.parseRequest(request);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	protected FileItem createItem(Map headers, boolean formField)
 		throws FileUploadException {
 

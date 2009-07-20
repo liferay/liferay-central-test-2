@@ -29,13 +29,6 @@ import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
 import java.sql.Types;
 
-/**
- * <a href="JournalStructurePKUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalStructurePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public JournalStructurePKUpgradeColumnImpl(

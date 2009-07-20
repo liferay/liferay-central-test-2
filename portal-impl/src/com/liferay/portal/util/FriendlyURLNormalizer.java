@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Normalizer;
 
-/**
- * <a href="FriendlyURLNormalizer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FriendlyURLNormalizer {
 
 	public static String normalize(String friendlyURL) {

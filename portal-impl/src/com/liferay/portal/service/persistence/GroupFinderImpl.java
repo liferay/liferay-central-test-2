@@ -44,12 +44,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="GroupFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupFinderImpl
 	extends BasePersistenceImpl implements GroupFinder {
 

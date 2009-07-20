@@ -45,12 +45,6 @@ import java.sql.PreparedStatement;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeJournal extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

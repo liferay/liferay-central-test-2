@@ -87,19 +87,6 @@ import java.util.regex.Matcher;
 
 import org.dom4j.DocumentException;
 
-/**
- * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Charles May
- * @author Alexander Chow
- * @author Harry Mark
- * @author Tariq Dweik
- * @author Glenn Powell
- * @author Raymond Augé
- * @author Prashant Dighe
- *
- */
 public class ServiceBuilder {
 
 	public static void main(String[] args) {

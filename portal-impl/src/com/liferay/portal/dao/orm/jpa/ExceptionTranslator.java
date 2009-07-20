@@ -46,13 +46,6 @@ import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 
 import javax.persistence.EntityNotFoundException;
 
-/**
- * <a href="ExceptionTranslator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Prashant Dighe
- * @author Brian Wing Shun Chan
- *
- */
 public class ExceptionTranslator {
 
 	public static ORMException translate(Exception e) {

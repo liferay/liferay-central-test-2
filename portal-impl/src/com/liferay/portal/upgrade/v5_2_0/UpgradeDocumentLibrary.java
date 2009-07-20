@@ -40,13 +40,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
- *
- * @author Samuel Kong
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

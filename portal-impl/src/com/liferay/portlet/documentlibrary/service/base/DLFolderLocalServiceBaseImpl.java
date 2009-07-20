@@ -72,12 +72,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.util.List;
 
-/**
- * <a href="DLFolderLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class DLFolderLocalServiceBaseImpl
 	implements DLFolderLocalService {
 	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {

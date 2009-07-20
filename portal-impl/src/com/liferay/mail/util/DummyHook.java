@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.List;
 
-/**
- * <a href="DummyHook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DummyHook implements Hook {
 
 	public void addForward(

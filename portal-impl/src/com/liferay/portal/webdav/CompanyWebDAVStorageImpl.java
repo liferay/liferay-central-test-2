@@ -33,12 +33,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * <a href="CompanyWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public Resource getResource(WebDAVRequest webDavRequest)

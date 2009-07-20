@@ -42,13 +42,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryServiceBaseImpl;
 import com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPermission;
 
-/**
- * <a href="AnnouncementsEntryServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AnnouncementsEntryServiceImpl
 	extends AnnouncementsEntryServiceBaseImpl {
 

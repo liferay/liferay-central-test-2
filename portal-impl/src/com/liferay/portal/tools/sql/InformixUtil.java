@@ -31,14 +31,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
-/**
- * <a href="InformixUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Neil Griffin
- * @author Sandeep Soni
- * @author Ganesh Ram
- *
- */
 public class InformixUtil extends DBUtil {
 
 	public static DBUtil getInstance() {

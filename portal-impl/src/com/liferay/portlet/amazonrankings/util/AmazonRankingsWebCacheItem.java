@@ -40,13 +40,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * <a href="AmazonRankingsWebCacheItem.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Samuel Kong
- *
- */
 public class AmazonRankingsWebCacheItem implements WebCacheItem {
 
 	public AmazonRankingsWebCacheItem(String isbn) {

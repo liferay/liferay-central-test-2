@@ -33,13 +33,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
 
-/**
- * <a href="OrgGroupPermissionFinderImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgGroupPermissionFinderImpl
 	extends BasePersistenceImpl implements OrgGroupPermissionFinder {
 

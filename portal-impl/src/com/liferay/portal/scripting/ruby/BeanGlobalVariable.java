@@ -30,12 +30,6 @@ import org.jruby.runtime.Block;
 import org.jruby.runtime.IAccessor;
 import org.jruby.runtime.builtin.IRubyObject;
 
-/**
- * <a href="BeanGlobalVariable.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- *
- */
 class BeanGlobalVariable implements IAccessor {
 
 	public BeanGlobalVariable(Ruby ruby, Object bean, Class<?> type) {

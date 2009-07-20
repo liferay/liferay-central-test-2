@@ -38,13 +38,6 @@ import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcess
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.util.ReflectionUtils;
 
-/**
- * <a href="BeanReferenceAnnotationBeanPostProcessor.java.html"><b><i>View
- * Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public class BeanReferenceAnnotationBeanPostProcessor
 	implements BeanFactoryAware, InstantiationAwareBeanPostProcessor,
 		MergedBeanDefinitionPostProcessor {

@@ -53,13 +53,6 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/search/open_search";

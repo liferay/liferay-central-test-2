@@ -42,12 +42,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeImage.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeImage extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

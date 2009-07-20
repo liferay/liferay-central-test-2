@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 
-/**
- * <a href="VerifyProperties.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyProperties extends VerifyProcess {
 
 	public void verify() throws VerifyException {

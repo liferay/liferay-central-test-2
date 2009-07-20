@@ -27,12 +27,6 @@ import com.liferay.lock.service.LockService;
 import com.liferay.lock.util.LockPool;
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="LockServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LockServiceImpl implements LockService {
 
 	public void clear() {

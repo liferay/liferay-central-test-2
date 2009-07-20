@@ -33,14 +33,6 @@ import com.liferay.portal.upgrade.v4_4_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeTags;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeUUID;
 
-/**
- * <a href="UpgradeProcess_4_4_0.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- * @deprecated
- *
- */
 public class UpgradeProcess_4_4_0 extends UpgradeProcess {
 
 	public int getThreshold() {

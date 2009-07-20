@@ -34,12 +34,6 @@ import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="VerifyMessageBoards.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyMessageBoards extends VerifyProcess {
 
 	public void verify() throws VerifyException {

@@ -41,12 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.DispatcherServlet;
 
-/**
- * <a href="RemotingServlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RemotingServlet extends DispatcherServlet {
 
 	public static final String CONTEXT_CLASS =

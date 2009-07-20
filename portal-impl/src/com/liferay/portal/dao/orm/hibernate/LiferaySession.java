@@ -48,16 +48,6 @@ import org.hibernate.Transaction;
 import org.hibernate.jdbc.Work;
 import org.hibernate.stat.SessionStatistics;
 
-/**
- * <a href="LiferaySession.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * See http://support.liferay.com/browse/LEP-2996.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LiferaySession implements Session {
 
 	public LiferaySession(Session session) {
@@ -84,9 +74,6 @@ public class LiferaySession implements Session {
 		return _session.close();
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public Connection connection() throws HibernateException {
 		Thread currentThread = Thread.currentThread();
 
@@ -321,9 +308,6 @@ public class LiferaySession implements Session {
 		_session.persist(entityName, object);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public void reconnect() throws HibernateException {
 		_session.reconnect();
 	}

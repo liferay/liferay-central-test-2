@@ -31,12 +31,6 @@ import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 
 import java.util.List;
 
-/**
- * <a href="OrgLaborServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 	public OrgLabor addOrgLabor(

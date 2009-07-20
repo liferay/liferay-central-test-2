@@ -65,12 +65,6 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
 import java.util.List;
 
-/**
- * <a href="AssetTagPropertyLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class AssetTagPropertyLocalServiceBaseImpl
 	implements AssetTagPropertyLocalService {
 	public AssetTagProperty addAssetTagProperty(

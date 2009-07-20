@@ -22,13 +22,6 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-/**
- * <a href="DB2Dialect.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shepherd Ching
- * @author Jian Cao
- *
- */
 public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 
 	public String getLimitString(String sql, boolean hasOffset) {

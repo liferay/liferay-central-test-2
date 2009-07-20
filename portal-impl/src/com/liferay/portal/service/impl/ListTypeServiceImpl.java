@@ -31,12 +31,6 @@ import com.liferay.portal.service.base.ListTypeServiceBaseImpl;
 
 import java.util.List;
 
-/**
- * <a href="ListTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 
 	public ListType getListType(int listTypeId)

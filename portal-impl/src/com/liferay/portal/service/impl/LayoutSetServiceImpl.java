@@ -32,12 +32,6 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 import java.io.File;
 
-/**
- * <a href="LayoutSetServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 
 	public void updateLogo(

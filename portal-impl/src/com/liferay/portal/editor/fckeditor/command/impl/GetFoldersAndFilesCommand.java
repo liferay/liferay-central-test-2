@@ -30,12 +30,6 @@ import com.liferay.portal.editor.fckeditor.receiver.CommandReceiverFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="GetFoldersAndFilesCommand.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- *
- */
 public class GetFoldersAndFilesCommand implements Command {
 
 	public void execute(

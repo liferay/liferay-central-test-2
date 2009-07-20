@@ -22,12 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-/**
- * <a href="SwapUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {

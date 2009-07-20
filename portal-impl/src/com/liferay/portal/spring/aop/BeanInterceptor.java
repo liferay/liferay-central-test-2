@@ -25,12 +25,6 @@ package com.liferay.portal.spring.aop;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-/**
- * <a href="BeanInterceptor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BeanInterceptor implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation invocation) throws Throwable {

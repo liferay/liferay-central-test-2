@@ -32,13 +32,6 @@ import java.util.Map;
 
 import org.apache.commons.collections.map.LRUMap;
 
-/**
- * <a href="PermissionCacheUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- * @author Michael Young
- *
- */
 public class PermissionCacheUtil {
 
 	public static final String CACHE_NAME = PermissionCacheUtil.class.getName();

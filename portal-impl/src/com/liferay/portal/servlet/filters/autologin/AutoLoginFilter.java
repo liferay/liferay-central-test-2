@@ -49,13 +49,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class AutoLoginFilter extends BasePortalFilter {
 
 	public static void registerAutoLogin(AutoLogin autoLogin) {

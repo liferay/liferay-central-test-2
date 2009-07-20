@@ -114,15 +114,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.portals.bridges.struts.StrutsPortlet;
 
-/**
- * <a href="PortletHotDeployListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Brian Myunghun Kim
- * @author Ivica Cardic
- * @author Raymond Augé
- *
- */
 public class PortletHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {

@@ -25,12 +25,6 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactory;
 
-/**
- * <a href="TermQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TermQueryFactoryImpl implements TermQueryFactory {
 
 	public TermQuery create(String field, long value) {

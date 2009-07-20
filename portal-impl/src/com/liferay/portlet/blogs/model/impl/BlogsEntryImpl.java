@@ -24,12 +24,6 @@ package com.liferay.portlet.blogs.model.impl;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
-/**
- * <a href="BlogsEntryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BlogsEntryImpl extends BlogsEntryModelImpl implements BlogsEntry {
 
 	public BlogsEntryImpl() {

@@ -33,13 +33,6 @@ import com.liferay.portal.webdav.WebDAVUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="CopyMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class CopyMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {

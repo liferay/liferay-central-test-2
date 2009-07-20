@@ -54,12 +54,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="DLFolderPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	implements DLFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFolderImpl.class.getName();

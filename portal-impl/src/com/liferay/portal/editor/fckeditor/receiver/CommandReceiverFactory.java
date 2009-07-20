@@ -27,13 +27,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="CommandReceiverFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Michael C. Han
- *
- */
 public class CommandReceiverFactory {
 
 	public static CommandReceiver getCommandReceiver(String type) {

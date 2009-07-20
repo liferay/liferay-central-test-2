@@ -40,26 +40,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ResourceModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Resource</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Resource
- * @see com.liferay.portal.model.ResourceModel
- * @see com.liferay.portal.model.impl.ResourceImpl
- *
- */
 public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	public static final String TABLE_NAME = "Resource_";
 	public static final Object[][] TABLE_COLUMNS = {

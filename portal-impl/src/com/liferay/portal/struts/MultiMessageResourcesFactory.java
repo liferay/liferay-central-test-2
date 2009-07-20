@@ -25,13 +25,6 @@ package com.liferay.portal.struts;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.util.MessageResourcesFactory;
 
-/**
- * <a href="MultiMessageResourcesFactory.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MultiMessageResourcesFactory extends MessageResourcesFactory {
 
 	public static MultiMessageResources getInstance() {

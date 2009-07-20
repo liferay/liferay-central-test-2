@@ -43,26 +43,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="UserTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>UserTracker</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserTracker
- * @see com.liferay.portal.model.UserTrackerModel
- * @see com.liferay.portal.model.impl.UserTrackerImpl
- *
- */
 public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	public static final String TABLE_NAME = "UserTracker";
 	public static final Object[][] TABLE_COLUMNS = {

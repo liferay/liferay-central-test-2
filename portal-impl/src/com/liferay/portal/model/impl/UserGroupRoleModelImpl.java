@@ -39,26 +39,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="UserGroupRoleModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>UserGroupRole</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserGroupRole
- * @see com.liferay.portal.model.UserGroupRoleModel
- * @see com.liferay.portal.model.impl.UserGroupRoleImpl
- *
- */
 public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole> {
 	public static final String TABLE_NAME = "UserGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {

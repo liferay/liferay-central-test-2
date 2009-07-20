@@ -29,12 +29,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
-/**
- * <a href="LayoutPlidUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public LayoutPlidUpgradeColumnImpl(

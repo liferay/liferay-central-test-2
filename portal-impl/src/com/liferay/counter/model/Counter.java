@@ -24,12 +24,6 @@ package com.liferay.counter.model;
 
 import java.io.Serializable;
 
-/**
- * <a href="Counter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Counter implements Serializable {
 
 	public Counter() {

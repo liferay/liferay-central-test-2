@@ -26,13 +26,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 
 import java.sql.Types;
 
-/**
- * <a href="PKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PKUpgradeColumnImpl(String name, boolean trackValues) {

@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.springframework.context.ApplicationContext;
 
-/**
- * <a href="BeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BeanLocatorImpl implements BeanLocator {
 
 	public BeanLocatorImpl(

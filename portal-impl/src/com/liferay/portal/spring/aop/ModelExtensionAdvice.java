@@ -33,12 +33,6 @@ import java.util.List;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 
-/**
- * <a href="ModelExtensionAdvice.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class ModelExtensionAdvice<T> {
 
 	public ModelExtensionHandler<T> getModelExtensionHandler() {

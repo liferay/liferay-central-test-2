@@ -27,12 +27,6 @@ import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 import java.security.Principal;
 
-/**
- * <a href="PortalLoginModule.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalLoginModule extends BasicLoginModule {
 
 	protected Principal getPortalPrincipal(String name) {

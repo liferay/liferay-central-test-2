@@ -31,13 +31,6 @@ import javax.sql.DataSource;
 
 import org.springframework.aop.TargetSource;
 
-/**
- * <a href="DynamicDataSourceTargetSource.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Michael Young
- *
- */
 public class DynamicDataSourceTargetSource implements TargetSource {
 
 	public Stack<String> getMethodStack() {

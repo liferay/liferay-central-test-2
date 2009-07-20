@@ -47,13 +47,6 @@ import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
 
-/**
- * <a href="QuartzSchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Bruno Farache
- *
- */
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void afterPropertiesSet() {

@@ -44,26 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryPropertyModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>AssetCategoryProperty</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.model.AssetCategoryProperty
- * @see com.liferay.portlet.asset.model.AssetCategoryPropertyModel
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
- *
- */
 public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryProperty> {
 	public static final String TABLE_NAME = "AssetCategoryProperty";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -84,13 +84,6 @@ import org.apache.lucene.store.jdbc.dialect.Dialect;
 import org.apache.lucene.store.jdbc.lock.JdbcLock;
 import org.apache.lucene.store.jdbc.support.JdbcTemplate;
 
-/**
- * <a href="LuceneUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Harry Mark
- *
- */
 public class LuceneUtil {
 
 	public static void acquireLock(long companyId) {

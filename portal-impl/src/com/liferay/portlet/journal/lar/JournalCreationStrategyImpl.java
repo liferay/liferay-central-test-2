@@ -25,23 +25,6 @@ package com.liferay.portlet.journal.lar;
 import com.liferay.portal.lar.PortletDataContext;
 import com.liferay.portlet.journal.model.JournalArticle;
 
-/**
- * <a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Provides the strategy for creating new content when new Journal content is
- * imported into a layout set from a LAR. The default strategy implemented by
- * this class is to return zero for the author and approval user ids, which
- * causes the default user id import strategy to be used. Content will be added
- * as is with no transformations.
- * </p>
- *
- * @author Joel Kozikowski
- *
- * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
- * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
- *
- */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
 	public long getAuthorUserId(PortletDataContext context, Object journalObj)

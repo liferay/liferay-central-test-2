@@ -48,12 +48,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="BasePropMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public abstract class BasePropMethodImpl implements Method {
 
 	protected void addResponse(

@@ -26,12 +26,6 @@ import com.liferay.portal.model.Permission;
 
 import java.util.List;
 
-/**
- * <a href="PermissionsListFilterImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PermissionsListFilterImpl implements PermissionsListFilter {
 
 	public List<Permission> filterCommunityPermissions(

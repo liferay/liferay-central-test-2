@@ -24,13 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 
-/**
- * <a href="PrefsOwnerTypeUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PrefsOwnerTypeUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PrefsOwnerTypeUpgradeColumnImpl(

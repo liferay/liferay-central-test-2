@@ -56,12 +56,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-/**
- * <a href="DLLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(

@@ -54,12 +54,6 @@ import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class AssetPublisherUtil {
 
 	public static final String TYPE_BLOG = "blog";

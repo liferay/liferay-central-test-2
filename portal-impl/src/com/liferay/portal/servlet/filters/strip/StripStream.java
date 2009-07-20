@@ -28,12 +28,6 @@ import java.io.OutputStream;
 
 import javax.servlet.ServletOutputStream;
 
-/**
- * <a href="StripStream.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StripStream extends ServletOutputStream {
 
 	public StripStream(OutputStream os) {

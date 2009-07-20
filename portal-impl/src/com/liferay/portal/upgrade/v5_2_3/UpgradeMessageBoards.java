@@ -34,12 +34,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- * <a href="UpgradeMessageBoards.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeMessageBoards extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

@@ -31,12 +31,6 @@ import com.liferay.portal.sharepoint.SharepointRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="UrlToWebUrlMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class UrlToWebUrlMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {

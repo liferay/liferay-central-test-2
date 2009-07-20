@@ -36,14 +36,6 @@ import com.liferay.portlet.asset.service.permission.AssetVocabularyPermission;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="AssetVocabularyServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alvaro del Castillo
- * @author Eduardo Lundgren
- * @author Jorge Ferrer
- *
- */
 public class AssetVocabularyServiceImpl
 	extends AssetVocabularyServiceBaseImpl {
 

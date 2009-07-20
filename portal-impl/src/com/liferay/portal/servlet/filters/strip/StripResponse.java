@@ -33,12 +33,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-/**
- * <a href="StripResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StripResponse extends HttpServletResponseWrapper {
 
 	public StripResponse(HttpServletResponse response) {

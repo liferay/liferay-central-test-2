@@ -24,12 +24,6 @@ package com.liferay.portal.search.generic;
 
 import com.liferay.portal.kernel.search.TermQuery;
 
-/**
- * <a href="TermQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class TermQueryImpl implements TermQuery {
 
 	public TermQueryImpl(QueryTerm queryTerm) {

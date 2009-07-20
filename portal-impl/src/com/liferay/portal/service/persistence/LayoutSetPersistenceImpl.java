@@ -51,12 +51,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="LayoutSetPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	implements LayoutSetPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutSetImpl.class.getName();

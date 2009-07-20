@@ -29,12 +29,6 @@ import java.io.UnsupportedEncodingException;
 
 import javax.portlet.ClientDataRequest;
 
-/**
- * <a href="ClientDataRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class ClientDataRequestImpl
 	extends PortletRequestImpl implements ClientDataRequest {
 

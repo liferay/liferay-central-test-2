@@ -86,39 +86,6 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * <p>
- * Provides the Journal portlet export and import functionality, which is to
- * clone all articles, structures, and templates associated with the layout's
- * group. Upon import, new instances of the corresponding articles, structures,
- * and templates are created or updated according to the DATA_MIRROW strategy
- * The author of the newly created objects are determined by the
- * JournalCreationStrategy class defined in <i>portal.properties</i>. That
- * strategy also allows the text of the journal article to be modified prior
- * to import.
- * </p>
- *
- * <p>
- * This <code>PortletDataHandler</code> differs from
- * <code>JournalContentPortletDataHandlerImpl</code> in that it exports all
- * articles owned by the group whether or not they are actually displayed in a
- * portlet in the layout set.
- * </p>
- *
- * @author Raymond Augé
- * @author Joel Kozikowski
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- * @author Karthik Sudarshan
- *
- * @see com.liferay.portal.lar.PortletDataHandler
- * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
- * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
- *
- */
 public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportArticle(

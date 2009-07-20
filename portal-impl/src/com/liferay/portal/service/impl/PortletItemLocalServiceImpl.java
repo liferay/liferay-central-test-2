@@ -36,12 +36,6 @@ import com.liferay.portal.util.PortalUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="PortletItemLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class PortletItemLocalServiceImpl
 	extends PortletItemLocalServiceBaseImpl {
 

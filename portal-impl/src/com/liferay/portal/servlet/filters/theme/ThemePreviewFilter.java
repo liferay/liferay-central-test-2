@@ -56,12 +56,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="ThemePreviewFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ganesh Ram
- *
- */
 public class ThemePreviewFilter extends BasePortalFilter {
 
 	protected String getContent(HttpServletRequest request, String content) {

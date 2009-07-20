@@ -35,13 +35,6 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="CommandArgument.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
- *
- */
 public class CommandArgument {
 
 	public CommandArgument(

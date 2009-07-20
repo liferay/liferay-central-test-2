@@ -28,15 +28,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- * @deprecated
- *
- */
 public class VelocityFilter extends BasePortalFilter {
 
 	protected void processFilter(

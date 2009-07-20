@@ -24,12 +24,6 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.Validator;
 
-/**
- * <a href="LiberalScreenNameValidator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LiberalScreenNameValidator extends ScreenNameValidator {
 
 	public boolean validate(long companyId, String screenName) {

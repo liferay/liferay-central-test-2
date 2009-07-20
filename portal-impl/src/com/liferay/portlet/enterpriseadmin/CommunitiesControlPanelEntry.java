@@ -29,13 +29,6 @@ import com.liferay.portlet.BaseControlPanelEntry;
 
 import java.util.LinkedHashMap;
 
-/**
- * <a href="CommunitiesControlPanelEntry.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Jorge Ferrer
- *
- */
 public class CommunitiesControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(

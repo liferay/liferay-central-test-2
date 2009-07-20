@@ -32,13 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
-/**
- * <a href="CheckArticleJob.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class CheckArticleJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(

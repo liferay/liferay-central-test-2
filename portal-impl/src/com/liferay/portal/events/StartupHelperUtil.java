@@ -25,14 +25,6 @@ package com.liferay.portal.events;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.verify.VerifyException;
 
-/**
- * <a href="StartupHelperUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- * @author Raymond Augé
- *
- */
 public class StartupHelperUtil {
 
 	public static void deleteTempImages() {

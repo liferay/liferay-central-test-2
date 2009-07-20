@@ -26,14 +26,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
 
-/**
- * <a href="JDataStoreUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Sandeep Soni
- * @author Ganesh Ram
- *
- */
 public class JDataStoreUtil extends FirebirdUtil {
 
 	public static DBUtil getInstance() {

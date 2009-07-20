@@ -25,12 +25,6 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.search.PortalSearchEngine;
 import com.liferay.portal.util.PropsValues;
 
-/**
- * <a href="PortalSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class PortalSearchEngineImpl implements PortalSearchEngine {
 
 	public PortalSearchEngineImpl() {

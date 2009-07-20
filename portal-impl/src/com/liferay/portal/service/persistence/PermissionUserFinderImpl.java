@@ -36,12 +36,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="PermissionUserFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class PermissionUserFinderImpl
 	extends BasePersistenceImpl implements PermissionUserFinder {
 

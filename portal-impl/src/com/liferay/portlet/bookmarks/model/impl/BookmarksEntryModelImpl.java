@@ -44,26 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="BookmarksEntryModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>BookmarksEntry</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.bookmarks.model.BookmarksEntry
- * @see com.liferay.portlet.bookmarks.model.BookmarksEntryModel
- * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
- *
- */
 public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	public static final String TABLE_NAME = "BookmarksEntry";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -46,12 +46,6 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 
 import java.util.List;
 
-/**
- * <a href="BlogsStatsUserLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BlogsStatsUserLocalServiceBaseImpl
 	implements BlogsStatsUserLocalService {
 	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser blogsStatsUser)

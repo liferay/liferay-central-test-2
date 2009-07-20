@@ -28,13 +28,6 @@ import com.liferay.portal.upgrade.util.ValueMapper;
 
 import java.sql.Types;
 
-/**
- * <a href="PollsVoteChoiceIdUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollsVoteChoiceIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PollsVoteChoiceIdUpgradeColumnImpl(

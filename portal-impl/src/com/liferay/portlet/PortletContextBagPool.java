@@ -25,12 +25,6 @@ package com.liferay.portlet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="PortletContextBagPool.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletContextBagPool {
 
 	public static PortletContextBag get(String servletContextName) {

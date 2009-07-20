@@ -24,12 +24,6 @@ package com.liferay.portal.security.auth;
 
 import java.util.Map;
 
-/**
- * <a href="AuthFailure.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface AuthFailure {
 
 	public void onFailureByEmailAddress(

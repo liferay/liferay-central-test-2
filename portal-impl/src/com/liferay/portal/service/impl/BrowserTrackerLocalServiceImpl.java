@@ -30,13 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BrowserTracker;
 import com.liferay.portal.service.base.BrowserTrackerLocalServiceBaseImpl;
 
-/**
- * <a href="BrowserTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BrowserTrackerLocalServiceImpl
 	extends BrowserTrackerLocalServiceBaseImpl {
 

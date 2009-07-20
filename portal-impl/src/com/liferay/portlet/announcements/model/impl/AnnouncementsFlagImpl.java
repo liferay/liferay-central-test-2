@@ -24,14 +24,6 @@ package com.liferay.portlet.announcements.model.impl;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 
-/**
- * <a href="AnnouncementsFlagImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Thiago Moreira
- * @author Raymond Augé
- * @author Brian Wing Shun Chan
- *
- */
 public class AnnouncementsFlagImpl
 	extends AnnouncementsFlagModelImpl implements AnnouncementsFlag {
 

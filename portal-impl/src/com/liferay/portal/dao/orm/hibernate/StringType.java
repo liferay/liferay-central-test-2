@@ -24,12 +24,6 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.util.StringPool;
 
-/**
- * <a href="StringType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StringType extends org.hibernate.type.StringType {
 
 	public boolean isEqual(Object x, Object y) {

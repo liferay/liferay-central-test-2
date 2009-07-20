@@ -36,14 +36,6 @@ import net.sf.ehcache.ObjectExistsException;
 import net.sf.ehcache.constructs.blocking.BlockingCache;
 import net.sf.ehcache.management.ManagementService;
 
-/**
- * <a href="EhcachePortalCacheManager.java.html"><b><i>View Source</i></b></a>
- *
- * @author Joseph Shum
- * @author Raymond Augé
- * @author Michael C. Han
- *
- */
 public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {

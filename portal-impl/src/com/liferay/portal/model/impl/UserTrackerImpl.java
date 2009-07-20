@@ -33,12 +33,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="UserTrackerImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserTrackerImpl
 	extends UserTrackerModelImpl implements UserTracker {
 

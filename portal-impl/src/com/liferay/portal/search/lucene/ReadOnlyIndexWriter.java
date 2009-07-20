@@ -34,11 +34,6 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 
-/**
- * <a href="ReadOnlyIndexWriter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- */
 public class ReadOnlyIndexWriter extends IndexWriter {
 
 	public ReadOnlyIndexWriter(

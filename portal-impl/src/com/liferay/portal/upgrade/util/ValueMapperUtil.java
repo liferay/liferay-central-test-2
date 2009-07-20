@@ -29,12 +29,6 @@ import java.io.FileWriter;
 
 import java.util.Iterator;
 
-/**
- * <a href="ValueMapperUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ValueMapperUtil {
 
 	public static void persist(

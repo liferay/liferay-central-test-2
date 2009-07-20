@@ -29,13 +29,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.MembershipRequestServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 
-/**
- * <a href="MembershipRequestServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Jorge Ferrer
- *
- */
 public class MembershipRequestServiceImpl
 	extends MembershipRequestServiceBaseImpl {
 

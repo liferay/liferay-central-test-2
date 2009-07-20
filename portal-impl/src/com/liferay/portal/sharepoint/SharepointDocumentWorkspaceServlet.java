@@ -51,13 +51,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.util.FileUtil;
 
-/**
- * <a href="SharepointDocumentWorkspaceServlet.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Bruno Farache
- *
- */
 public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 
 	protected void doPost(

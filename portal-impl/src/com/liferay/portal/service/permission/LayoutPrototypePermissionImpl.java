@@ -26,13 +26,6 @@ import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="LayoutPrototypePermissionImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Jorge Ferrer
- *
- */
 public class LayoutPrototypePermissionImpl
 	implements LayoutPrototypePermission {
 

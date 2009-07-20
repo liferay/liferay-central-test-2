@@ -25,14 +25,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 
-/**
- * <a href="UserListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class UserListener extends BaseModelListener<User> {
 
 	public void onAfterUpdate(User user) throws ModelListenerException {

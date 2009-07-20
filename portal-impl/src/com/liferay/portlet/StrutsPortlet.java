@@ -48,12 +48,6 @@ import javax.portlet.ResourceResponse;
 
 import javax.servlet.ServletException;
 
-/**
- * <a href="StrutsPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StrutsPortlet extends LiferayPortlet {
 
 	public void doAbout(

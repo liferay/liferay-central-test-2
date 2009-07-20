@@ -24,12 +24,6 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Entity;
 
-/**
- * <a href="EntityImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EntityImpl extends NodeImpl implements Entity {
 
 	public EntityImpl(org.dom4j.Entity entity) {

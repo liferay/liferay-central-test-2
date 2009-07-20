@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
-/**
- * <a href="ConvertPermissionTuner.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class ConvertPermissionTuner extends ConvertProcess {
 
 	public String getDescription() {

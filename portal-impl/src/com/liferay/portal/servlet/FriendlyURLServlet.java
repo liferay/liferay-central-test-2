@@ -52,13 +52,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="FriendlyURLServlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class FriendlyURLServlet extends HttpServlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {

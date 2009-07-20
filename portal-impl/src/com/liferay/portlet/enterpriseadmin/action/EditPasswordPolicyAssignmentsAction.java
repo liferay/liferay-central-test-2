@@ -43,13 +43,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="EditPasswordPolicyAssignmentsAction.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Scott Lee
- *
- */
 public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 	public void processAction(

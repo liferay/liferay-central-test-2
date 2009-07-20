@@ -26,13 +26,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.Map;
 
-/**
- * <a href="LoginMaxFailures.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Scott Lee
- *
- */
 public class LoginMaxFailures implements AuthFailure {
 
 	public void onFailureByEmailAddress(

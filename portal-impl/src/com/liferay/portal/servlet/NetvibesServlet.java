@@ -43,13 +43,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="NetvibesServlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- * @author Julio Camarero
- *
- */
 public class NetvibesServlet extends HttpServlet {
 
 	public void service(

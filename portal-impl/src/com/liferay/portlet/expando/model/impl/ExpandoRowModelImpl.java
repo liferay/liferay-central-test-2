@@ -38,26 +38,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ExpandoRowModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>ExpandoRow</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.expando.model.ExpandoRow
- * @see com.liferay.portlet.expando.model.ExpandoRowModel
- * @see com.liferay.portlet.expando.model.impl.ExpandoRowImpl
- *
- */
 public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow> {
 	public static final String TABLE_NAME = "ExpandoRow";
 	public static final Object[][] TABLE_COLUMNS = {

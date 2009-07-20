@@ -31,12 +31,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 
 import java.util.Set;
 
-/**
- * <a href="DLFileEntryTitleColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DLFileEntryTitleColumnImpl(

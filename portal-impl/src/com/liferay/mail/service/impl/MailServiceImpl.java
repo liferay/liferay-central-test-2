@@ -50,12 +50,6 @@ import java.util.Properties;
 
 import javax.mail.Session;
 
-/**
- * <a href="MailServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MailServiceImpl implements MailService {
 
 	public void addForward(

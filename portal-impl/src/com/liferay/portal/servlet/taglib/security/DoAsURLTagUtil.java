@@ -35,12 +35,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
-/**
- * <a href="DoAsURLTagUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DoAsURLTagUtil extends TagSupport {
 
 	public static String doEndTag(

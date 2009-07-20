@@ -40,26 +40,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="UserGroupModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>UserGroup</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.UserGroup
- * @see com.liferay.portal.model.UserGroupModel
- * @see com.liferay.portal.model.impl.UserGroupImpl
- *
- */
 public class UserGroupModelImpl extends BaseModelImpl<UserGroup> {
 	public static final String TABLE_NAME = "UserGroup";
 	public static final Object[][] TABLE_COLUMNS = {

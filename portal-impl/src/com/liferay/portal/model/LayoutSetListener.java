@@ -24,13 +24,6 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
-/**
- * <a href="LayoutSetListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Raymond Augé
- *
- */
 public class LayoutSetListener extends BaseModelListener<LayoutSet> {
 
 	public void onAfterRemove(LayoutSet layoutSet) {

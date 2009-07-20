@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.calendar.social;
 
-/**
- * <a href="CalendarActivityKeys.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalendarActivityKeys {
 
 	public static final int ADD_EVENT = 1;

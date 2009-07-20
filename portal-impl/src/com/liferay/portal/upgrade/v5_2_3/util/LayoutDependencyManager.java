@@ -22,12 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_3.util;
 
-/**
- * <a href="LayoutDependencyManager.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutDependencyManager extends DependencyManager {
 
 	public void update(

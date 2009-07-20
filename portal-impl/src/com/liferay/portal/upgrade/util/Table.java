@@ -61,14 +61,6 @@ import java.util.Date;
 
 import org.hibernate.usertype.UserType;
 
-/**
- * <a href="Table.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class Table {
 
 	public static final int BATCH_SIZE = GetterUtil.getInteger(

@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.MaintenanceUtil;
 
-/**
- * <a href="ConvertProcess.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public abstract class ConvertProcess {
 
 	public void convert() throws ConvertException {

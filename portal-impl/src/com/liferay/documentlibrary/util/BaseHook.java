@@ -41,13 +41,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-/**
-
- * <a href="BaseHook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseHook implements Hook {
 
 	public abstract void addDirectory(

@@ -37,13 +37,6 @@ import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeBlogs extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

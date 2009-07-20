@@ -24,12 +24,6 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.CacheMode;
 
-/**
- * <a href="CacheModeTranslator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CacheModeTranslator {
 
 	public static org.hibernate.CacheMode translate(CacheMode cacheMode) {

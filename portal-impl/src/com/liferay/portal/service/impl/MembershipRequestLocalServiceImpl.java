@@ -49,13 +49,6 @@ import java.util.List;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="MembershipRequestLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class MembershipRequestLocalServiceImpl
 	extends MembershipRequestLocalServiceBaseImpl {
 

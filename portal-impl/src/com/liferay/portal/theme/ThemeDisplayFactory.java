@@ -22,12 +22,6 @@
 
 package com.liferay.portal.theme;
 
-/**
- * <a href="ThemeDisplayFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThemeDisplayFactory {
 
 	public static ThemeDisplay create() {

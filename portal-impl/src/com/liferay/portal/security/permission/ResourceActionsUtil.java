@@ -70,12 +70,6 @@ import java.util.Set;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ResourceActionsUtil {
 
 	public static final String ACTION_NAME_PREFIX = "action.";

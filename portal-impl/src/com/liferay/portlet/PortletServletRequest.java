@@ -52,13 +52,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="PortletServletRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Brian Myunghun Kim
- *
- */
 public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public PortletServletRequest(
@@ -398,9 +391,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _request.isRequestedSessionIdFromURL();
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public boolean isRequestedSessionIdFromUrl() {
 		return _request.isRequestedSessionIdFromUrl();
 	}

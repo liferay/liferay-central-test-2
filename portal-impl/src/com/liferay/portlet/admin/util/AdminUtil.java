@@ -41,12 +41,6 @@ import javax.portlet.ActionRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="AdminUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AdminUtil {
 
 	public static String getUpdateUserPassword(

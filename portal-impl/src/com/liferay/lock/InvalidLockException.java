@@ -24,12 +24,6 @@ package com.liferay.lock;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="InvalidLockException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class InvalidLockException extends PortalException {
 
 	public InvalidLockException() {

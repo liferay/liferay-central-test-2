@@ -34,12 +34,6 @@ import com.liferay.portal.upgrade.v5_2_0.UpgradePortletPermissions;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
 
-/**
- * <a href="UpgradeProcess_5_2_0.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 
 	public int getThreshold() {

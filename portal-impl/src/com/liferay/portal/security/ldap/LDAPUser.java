@@ -38,13 +38,6 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
 
-/**
- * <a href="LDAPUser.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- *
- */
 public class LDAPUser extends DummyDirContext {
 
 	public LDAPUser() {

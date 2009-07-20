@@ -28,12 +28,6 @@ import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.ListTypeServiceUtil;
 
-/**
- * <a href="WebsiteImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WebsiteImpl extends WebsiteModelImpl implements Website {
 
 	public WebsiteImpl() {

@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="PasswordPolicyDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- *
- */
 public class PasswordPolicyDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";

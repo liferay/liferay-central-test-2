@@ -25,12 +25,6 @@ package com.liferay.portal.configuration;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactory;
 
-/**
- * <a href="ConfigurationFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ConfigurationFactoryImpl implements ConfigurationFactory {
 
 	public Configuration getConfiguration(

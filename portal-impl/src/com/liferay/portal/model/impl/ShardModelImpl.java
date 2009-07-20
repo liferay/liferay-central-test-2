@@ -42,26 +42,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ShardModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Shard</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Shard
- * @see com.liferay.portal.model.ShardModel
- * @see com.liferay.portal.model.impl.ShardImpl
- *
- */
 public class ShardModelImpl extends BaseModelImpl<Shard> {
 	public static final String TABLE_NAME = "Shard";
 	public static final Object[][] TABLE_COLUMNS = {

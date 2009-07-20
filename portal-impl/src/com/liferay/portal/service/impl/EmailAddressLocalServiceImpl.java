@@ -36,14 +36,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="EmailAddressLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class EmailAddressLocalServiceImpl
 	extends EmailAddressLocalServiceBaseImpl {
 

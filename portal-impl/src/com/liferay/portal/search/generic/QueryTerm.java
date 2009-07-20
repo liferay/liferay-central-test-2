@@ -22,12 +22,6 @@
 
 package com.liferay.portal.search.generic;
 
-/**
- * <a href="QueryTerm.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- *
- */
 public class QueryTerm {
 
 	public QueryTerm(String field, String value) {

@@ -24,13 +24,6 @@ package com.liferay.portal.monitoring.statistics;
 
 import com.liferay.portal.monitoring.MonitoringException;
 
-/**
- * <a href="SummaryStatistics.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public interface SummaryStatistics {
 
 	public long getAverageTime() throws MonitoringException;

@@ -26,12 +26,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="RolePermissionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class RolePermissionImpl implements RolePermission {
 
 	public void check(

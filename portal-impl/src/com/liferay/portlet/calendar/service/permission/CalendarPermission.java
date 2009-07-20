@@ -26,12 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="CalendarPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class CalendarPermission {
 
 	public static void check(

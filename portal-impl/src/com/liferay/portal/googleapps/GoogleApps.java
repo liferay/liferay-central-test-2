@@ -45,12 +45,6 @@ import java.io.StringReader;
 
 import java.util.Properties;
 
-/**
- * <a href="GoogleApps.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GoogleApps {
 
 	public GoogleApps(long companyId) {

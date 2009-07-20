@@ -41,12 +41,6 @@ import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradePolls extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

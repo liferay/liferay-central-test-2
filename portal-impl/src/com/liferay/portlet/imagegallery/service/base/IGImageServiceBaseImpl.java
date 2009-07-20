@@ -66,12 +66,6 @@ import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
-/**
- * <a href="IGImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class IGImageServiceBaseImpl extends PrincipalBean
 	implements IGImageService {
 	public IGFolderLocalService getIGFolderLocalService() {

@@ -29,14 +29,6 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
-/**
- * <a href="ResourceCodeIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- */
 public class ResourceCodeIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ResourceCodeIdUpgradeColumnImpl(

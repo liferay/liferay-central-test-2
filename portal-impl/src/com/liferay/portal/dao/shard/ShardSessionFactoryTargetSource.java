@@ -30,13 +30,6 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.aop.TargetSource;
 
-/**
- * <a href="ShardSessionFactoryTargetSource.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Michael Young
- *
- */
 public class ShardSessionFactoryTargetSource implements TargetSource {
 
 	public SessionFactory getSessionFactory() {

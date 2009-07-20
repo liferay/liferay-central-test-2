@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="GroupSearchTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupSearchTerms extends GroupDisplayTerms {
 
 	public GroupSearchTerms(PortletRequest portletRequest) {

@@ -30,12 +30,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-/**
- * <a href="IngresUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author David Maier
- *
- */
 public class IngresUtil extends DBUtil {
 
 	public static DBUtil getInstance() {

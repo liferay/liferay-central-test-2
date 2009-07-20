@@ -174,12 +174,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="PasswordTrackerLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class PasswordTrackerLocalServiceBaseImpl
 	implements PasswordTrackerLocalService {
 	public PasswordTracker addPasswordTracker(PasswordTracker passwordTracker)

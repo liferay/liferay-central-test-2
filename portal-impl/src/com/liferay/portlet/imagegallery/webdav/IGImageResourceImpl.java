@@ -33,12 +33,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-/**
- * <a href="IGImageResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class IGImageResourceImpl extends BaseResourceImpl {
 
 	public IGImageResourceImpl(IGImage image, String parentPath, String name) {

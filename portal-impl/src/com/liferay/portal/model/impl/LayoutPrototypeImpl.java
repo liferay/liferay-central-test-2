@@ -30,12 +30,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="LayoutPrototypeImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class LayoutPrototypeImpl
 	extends LayoutPrototypeModelImpl implements LayoutPrototype {
 

@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogWrapper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-/**
- * <a href="Log4jLogImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Log4jLogImpl implements Log {
 
 	public Log4jLogImpl(Logger logger) {

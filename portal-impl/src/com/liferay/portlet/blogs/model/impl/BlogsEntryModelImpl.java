@@ -45,26 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="BlogsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>BlogsEntry</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.blogs.model.BlogsEntry
- * @see com.liferay.portlet.blogs.model.BlogsEntryModel
- * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
- *
- */
 public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	public static final String TABLE_NAME = "BlogsEntry";
 	public static final Object[][] TABLE_COLUMNS = {

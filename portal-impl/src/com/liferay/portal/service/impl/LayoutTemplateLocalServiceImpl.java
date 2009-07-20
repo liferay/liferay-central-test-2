@@ -59,16 +59,6 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
-/**
- * <a href="LayoutTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Ivica Cardic
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
-*/
 public class LayoutTemplateLocalServiceImpl
 	extends LayoutTemplateLocalServiceBaseImpl {
 

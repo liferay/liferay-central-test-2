@@ -40,12 +40,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-/**
- * <a href="AnnouncementsUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class AnnouncementsUtil {
 
 	public static LinkedHashMap<Long, long[]> getAnnouncementScopes(long userId)

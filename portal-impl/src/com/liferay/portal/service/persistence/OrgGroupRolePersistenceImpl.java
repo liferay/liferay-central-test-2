@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="OrgGroupRolePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements OrgGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupRoleImpl.class.getName();

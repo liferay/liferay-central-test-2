@@ -30,12 +30,6 @@ import com.liferay.portal.upgrade.v5_1_0.UpgradeMessageBoards;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeSitemap;
 
-/**
- * <a href="UpgradeProcess_5_1_0.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeProcess_5_1_0 extends UpgradeProcess {
 
 	public int getThreshold() {

@@ -171,12 +171,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="ImageLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);

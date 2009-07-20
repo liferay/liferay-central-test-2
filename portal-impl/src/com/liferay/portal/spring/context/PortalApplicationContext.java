@@ -33,19 +33,6 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-/**
- * <a href="PortalApplicationContext.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This web application context will first load bean definitions in the
- * contextConfigLocation parameter in web.xml. Then, the context will load bean
- * definitions specified by the property "spring.configs" in portal.properties.
- * </p>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class PortalApplicationContext extends XmlWebApplicationContext {
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {

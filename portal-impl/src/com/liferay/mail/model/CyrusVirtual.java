@@ -26,12 +26,6 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
-/**
- * <a href="CyrusVirtual.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CyrusVirtual implements Serializable {
 
 	public static String TABLE_NAME = "CyrusVirtual";

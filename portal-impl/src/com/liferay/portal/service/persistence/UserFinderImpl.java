@@ -43,14 +43,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="UserFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
- * @author Raymond Augé
- *
- */
 public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 
 	public static String COUNT_BY_USER =

@@ -53,12 +53,6 @@ import java.util.Locale;
 
 import javax.mail.internet.InternetAddress;
 
-/**
- * <a href="FlagsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Julio Camarero
- *
- */
 public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 
 	public void addEntry(

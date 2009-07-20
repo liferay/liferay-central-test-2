@@ -77,12 +77,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="LayoutImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public static int validateFriendlyURL(String friendlyURL) {

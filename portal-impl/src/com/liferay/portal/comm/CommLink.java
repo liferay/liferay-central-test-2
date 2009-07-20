@@ -42,12 +42,6 @@ import org.jgroups.MessageListener;
 import org.jgroups.blocks.PullPushAdapter;
 import org.jgroups.util.Util;
 
-/**
- * <a href="CommLink.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CommLink implements MessageListener {
 
 	public static CommLink getInstance() {

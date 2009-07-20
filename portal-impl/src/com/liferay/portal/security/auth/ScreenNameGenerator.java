@@ -30,13 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-/**
- * <a href="ScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class ScreenNameGenerator {
 
 	public String generate(long companyId, long userId, String emailAddress)

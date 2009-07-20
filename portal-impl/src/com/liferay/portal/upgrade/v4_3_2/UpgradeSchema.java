@@ -24,12 +24,6 @@ package com.liferay.portal.upgrade.v4_3_2;
 
 import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
-/**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeSchema extends SmartUpgradeSchema {
 
 	protected void upgradeOnce() throws Exception {

@@ -34,12 +34,6 @@ import java.sql.Connection;
 
 import org.hibernate.engine.SessionFactoryImplementor;
 
-/**
- * <a href="SessionFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionFactoryImpl implements SessionFactory {
 
 	public void closeSession(Session session) throws ORMException {

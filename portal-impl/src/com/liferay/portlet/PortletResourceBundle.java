@@ -30,12 +30,6 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-/**
- * <a href="PortletResourceBundle.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletResourceBundle extends ResourceBundle {
 
 	public PortletResourceBundle(

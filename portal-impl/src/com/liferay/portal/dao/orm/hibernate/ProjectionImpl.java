@@ -24,12 +24,6 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Projection;
 
-/**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProjectionImpl implements Projection {
 
 	public ProjectionImpl(org.hibernate.criterion.Projection projection) {

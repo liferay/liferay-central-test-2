@@ -40,26 +40,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="PermissionModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Permission</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Permission
- * @see com.liferay.portal.model.PermissionModel
- * @see com.liferay.portal.model.impl.PermissionImpl
- *
- */
 public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	public static final String TABLE_NAME = "Permission_";
 	public static final Object[][] TABLE_COLUMNS = {

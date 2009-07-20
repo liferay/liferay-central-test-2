@@ -24,12 +24,6 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Criterion;
 
-/**
- * <a href="CriterionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CriterionImpl implements Criterion {
 
 	public CriterionImpl(org.hibernate.criterion.Criterion criterion) {

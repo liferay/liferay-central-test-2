@@ -97,12 +97,6 @@ import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
 import java.util.List;
 
-/**
- * <a href="JournalArticleLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class JournalArticleLocalServiceBaseImpl
 	implements JournalArticleLocalService {
 	public JournalArticle addJournalArticle(JournalArticle journalArticle)

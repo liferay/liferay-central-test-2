@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
-/**
- * <a href="CyrusUserPersistence.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CyrusUserPersistence extends BasePersistenceImpl {
 
 	public void remove(long userId)

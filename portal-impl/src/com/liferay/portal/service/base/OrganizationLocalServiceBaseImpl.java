@@ -179,12 +179,6 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
 import java.util.List;
 
-/**
- * <a href="OrganizationLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class OrganizationLocalServiceBaseImpl
 	implements OrganizationLocalService {
 	public Organization addOrganization(Organization organization)

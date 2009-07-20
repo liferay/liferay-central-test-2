@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 
-/**
- * <a href="Method.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public interface Method {
 
 	public static final String COPY = "COPY";
@@ -67,17 +60,6 @@ public interface Method {
 	public static final String SUPPORTED_METHODS =
 		StringUtil.merge(SUPPORTED_METHODS_ARRAY);
 
-	/**
-	 * Returns -1 or a supported HTTP status code. If it is -1, then the status
-	 * code has already been set. Otherwise, the status code needs to be set by
-	 * the caller.
-	 *
-	 * @param		webDavRequest the WebDAV request
-	 * @return		-1 or a supported HTTP status code. If it is -1, then the
-	 *				status code has already been set. Otherwise, the status code
-	 *				needs to be set by the caller.
-	 * @throws		WebDAVException
-	 */
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException;
 
 }

@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 
 import javax.servlet.ServletContext;
 
-/**
- * <a href="MessagingHotDeployListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MessagingHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {

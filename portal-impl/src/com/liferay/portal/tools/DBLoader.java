@@ -39,12 +39,6 @@ import java.sql.Statement;
 
 import org.apache.derby.tools.ij;
 
-/**
- * <a href="DBLoader.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DBLoader {
 
 	public static void main(String[] args) {

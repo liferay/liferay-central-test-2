@@ -33,12 +33,6 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-/**
- * <a href="MinifierUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MinifierUtil {
 
 	public static String minifyCss(String content) {

@@ -63,13 +63,6 @@ import org.jets3t.service.model.S3Bucket;
 import org.jets3t.service.model.S3Object;
 import org.jets3t.service.security.AWSCredentials;
 
-/**
- * <a href="S3Hook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Sten Martinez
- *
- */
 public class S3Hook extends BaseHook {
 
 	public S3Hook() {

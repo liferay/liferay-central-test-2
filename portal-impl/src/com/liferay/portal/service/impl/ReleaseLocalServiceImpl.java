@@ -43,12 +43,6 @@ import java.sql.ResultSet;
 
 import java.util.Date;
 
-/**
- * <a href="ReleaseLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public Release addRelease() throws SystemException {

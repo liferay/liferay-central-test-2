@@ -28,12 +28,6 @@ import com.liferay.portal.SystemException;
 
 import java.util.List;
 
-/**
- * <a href="CounterServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CounterServiceImpl implements CounterService {
 
 	public List<String> getNames() throws SystemException {

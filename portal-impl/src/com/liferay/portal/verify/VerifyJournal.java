@@ -40,12 +40,6 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="VerifyJournal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class VerifyJournal extends VerifyProcess {
 
 	public static final long DEFAULT_GROUP_ID = 14;

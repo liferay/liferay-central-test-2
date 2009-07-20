@@ -44,12 +44,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
-/**
- * <a href="ArticleSearch.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ArticleSearch extends SearchContainer<JournalArticle> {
 
 	static List<String> headerNames = new ArrayList<String>();

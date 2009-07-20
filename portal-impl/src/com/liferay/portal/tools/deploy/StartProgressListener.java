@@ -48,14 +48,6 @@ import javax.enterprise.deploy.spi.status.DeploymentStatus;
 import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
 
-/**
- * <a href="StartProgressListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Sandeep Soni
- * @author Brian Wing Shun Chan
- * @author Deepak Gothe
- *
- */
 public class StartProgressListener implements ProgressListener {
 
 	public StartProgressListener(DeploymentHandler deploymentHandler) {

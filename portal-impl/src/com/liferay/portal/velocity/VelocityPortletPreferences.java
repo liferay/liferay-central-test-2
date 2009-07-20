@@ -30,12 +30,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 
 import javax.portlet.ReadOnlyException;
 
-/**
- * <a href="VelocityPortletPreferences.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VelocityPortletPreferences {
 
 	public VelocityPortletPreferences() {

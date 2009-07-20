@@ -22,12 +22,6 @@
 
 package com.liferay.portal.util;
 
-/**
- * <a href="SessionClicks_IW.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionClicks_IW {
 	public static SessionClicks_IW getInstance() {
 		return _instance;

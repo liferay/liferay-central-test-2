@@ -32,12 +32,6 @@ import java.io.InputStream;
 
 import java.util.Date;
 
-/**
- * <a href="Hook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public interface Hook {
 
 	public static final double DEFAULT_VERSION = 1.0;

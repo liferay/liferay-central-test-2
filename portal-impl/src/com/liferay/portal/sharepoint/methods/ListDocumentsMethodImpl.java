@@ -30,12 +30,6 @@ import com.liferay.portal.sharepoint.SharepointStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ListDocumentsMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class ListDocumentsMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {

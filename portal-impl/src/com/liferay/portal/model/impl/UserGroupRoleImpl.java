@@ -32,12 +32,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-/**
- * <a href="UserGroupRoleImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserGroupRoleImpl
 	extends UserGroupRoleModelImpl implements UserGroupRole {
 

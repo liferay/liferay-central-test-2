@@ -36,15 +36,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="LiferayServletContextProvider.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author James Schopp
- * @author Michael Young
- * @author Deepak Gothe
- *
- */
 public class LiferayServletContextProvider implements ServletContextProvider {
 
 	public ServletContext getServletContext(GenericPortlet portlet) {

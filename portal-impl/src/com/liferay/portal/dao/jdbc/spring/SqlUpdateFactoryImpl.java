@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactory;
 
 import javax.sql.DataSource;
 
-/**
- * <a href="SqlUpdateFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SqlUpdateFactoryImpl implements SqlUpdateFactory {
 
 	public SqlUpdate getSqlUpdate(

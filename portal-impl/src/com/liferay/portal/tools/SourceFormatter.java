@@ -46,12 +46,6 @@ import java.util.regex.Pattern;
 
 import org.apache.tools.ant.DirectoryScanner;
 
-/**
- * <a href="SourceFormatter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SourceFormatter {
 
 	public static void main(String[] args) {

@@ -32,13 +32,6 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-/**
- * <a href="OpenSearchUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- * @author Brian Wing Shun Chan
- *
- */
 public class OpenSearchUtil {
 
 	public static final int DEFAULT_NAMESPACE = 0;

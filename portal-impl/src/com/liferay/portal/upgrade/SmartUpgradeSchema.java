@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 
-/**
- * <a href="SmartUpgradeSchema.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SmartUpgradeSchema extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

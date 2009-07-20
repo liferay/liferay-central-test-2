@@ -31,12 +31,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
-/**
- * <a href="OrganizationRoleChecker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrganizationRoleChecker extends RowChecker {
 
 	public OrganizationRoleChecker(RenderResponse renderResponse, Role role) {

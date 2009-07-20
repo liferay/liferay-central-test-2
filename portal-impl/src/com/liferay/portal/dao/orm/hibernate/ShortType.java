@@ -33,12 +33,6 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
-/**
- * <a href="ShortType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShortType implements UserType {
 
 	public final static short DEFAULT_VALUE = 0;

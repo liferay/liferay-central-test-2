@@ -25,14 +25,6 @@ package com.liferay.portal.model;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 
-/**
- * <a href="ContactListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class ContactListener extends BaseModelListener<Contact> {
 
 	public void onAfterCreate(Contact contact) throws ModelListenerException {

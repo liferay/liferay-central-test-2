@@ -34,13 +34,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-/**
- * <a href="ServletVelocityResourceListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Alexander Chow
- *
- */
 public class ServletVelocityResourceListener extends VelocityResourceListener {
 
 	public InputStream getResourceStream(String source)

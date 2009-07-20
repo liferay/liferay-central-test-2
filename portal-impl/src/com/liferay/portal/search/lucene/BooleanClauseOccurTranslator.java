@@ -24,13 +24,6 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 
-/**
- * <a href="BooleanClauseOccurTranslator.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BooleanClauseOccurTranslator {
 
 	public static org.apache.lucene.search.BooleanClause.Occur translate(

@@ -31,12 +31,6 @@ import com.liferay.portlet.bookmarks.service.base.BookmarksEntryServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 
-/**
- * <a href="BookmarksEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry addEntry(

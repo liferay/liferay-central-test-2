@@ -31,12 +31,6 @@ import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
 
-/**
- * <a href="CacheProviderWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CacheProviderWrapper implements CacheProvider {
 
 	public CacheProviderWrapper(String cacheProvider) {

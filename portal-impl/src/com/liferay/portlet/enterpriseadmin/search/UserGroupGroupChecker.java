@@ -31,12 +31,6 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
-/**
- * <a href="UserGroupGroupChecker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class UserGroupGroupChecker extends RowChecker {
 
 	public UserGroupGroupChecker(RenderResponse renderResponse, Group group) {

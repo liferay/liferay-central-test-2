@@ -37,12 +37,6 @@ import org.quartz.Scheduler;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 
-/**
- * <a href="JobSchedulerImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JobSchedulerImpl implements JobScheduler {
 
 	public void schedule(IntervalJob intervalJob) {

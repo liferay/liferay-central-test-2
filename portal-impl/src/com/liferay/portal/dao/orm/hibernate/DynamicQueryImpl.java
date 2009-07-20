@@ -35,12 +35,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 
-/**
- * <a href="DynamicQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DynamicQueryImpl implements DynamicQuery {
 
 	public DynamicQueryImpl(DetachedCriteria detachedCriteria) {

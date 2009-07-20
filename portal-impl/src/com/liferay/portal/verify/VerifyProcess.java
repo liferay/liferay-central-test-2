@@ -22,18 +22,6 @@
 
 package com.liferay.portal.verify;
 
-/**
- * This abstract class should be extended for startup processes that verify the
- * integrity of the database.  They can be added as part of
- * <code>com.liferay.portal.verify.VerifyProcessSuite</code> or be executed
- * independently by being set in the portal.properties file.  Each of these
- * processes should not cause any problems if run multiple times.
- *
- * <a href="VerifyProcess.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public abstract class VerifyProcess {
 
 	public static final int ALWAYS = -1;

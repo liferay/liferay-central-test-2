@@ -28,14 +28,6 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
-/**
- * <a href="JournalTemplateListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jon Steer
- * @author Raymond Augé
- *
- */
 public class JournalTemplateListener
 	extends BaseModelListener<JournalTemplate> {
 

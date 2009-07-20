@@ -33,19 +33,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-/**
- * <a href="SharedSessionAttributeListener.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * <p>
- * Listener used to help manage shared session attributes into a cache. This
- * cache is more thread safe than the HttpSession and leads to fewer problems
- * with shared session attributes being modified out of sequence.
- * </p>
- *
- * @author Michael C. Han
- *
- */
 public class SharedSessionAttributeListener
 	implements HttpSessionAttributeListener, HttpSessionListener {
 

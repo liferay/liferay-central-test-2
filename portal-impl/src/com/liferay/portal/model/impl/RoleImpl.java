@@ -26,13 +26,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 
-/**
- * <a href="RoleImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class RoleImpl extends RoleModelImpl implements Role {
 
 	public RoleImpl() {

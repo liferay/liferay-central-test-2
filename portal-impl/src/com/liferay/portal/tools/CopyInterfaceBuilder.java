@@ -43,12 +43,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-/**
- * <a href="CopyInterfaceBuilder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CopyInterfaceBuilder {
 
 	public static void main(String[] args) {

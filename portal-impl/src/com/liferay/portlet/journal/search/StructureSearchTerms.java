@@ -29,12 +29,6 @@ import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="StructureSearchTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StructureSearchTerms extends StructureDisplayTerms {
 
 	public StructureSearchTerms(PortletRequest portletRequest) {

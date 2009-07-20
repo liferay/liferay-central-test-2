@@ -37,12 +37,6 @@ import com.liferay.portal.util.PropsValues;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="SiteMinderAutoLogin.java.html"><b><i>View Source</i></b></a>
- *
- * @author Mika Koivisto
- *
- */
 public class SiteMinderAutoLogin extends CASAutoLogin {
 
 	public String[] login(

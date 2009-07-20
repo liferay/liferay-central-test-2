@@ -52,12 +52,6 @@ import java.io.IOException;
 
 import java.util.List;
 
-/**
- * <a href="GroupImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupImpl extends GroupModelImpl implements Group {
 
 	public GroupImpl() {

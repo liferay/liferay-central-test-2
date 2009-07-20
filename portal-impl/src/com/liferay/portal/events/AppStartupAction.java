@@ -24,12 +24,6 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.SimpleAction;
 
-/**
- * <a href="AppStartupAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AppStartupAction extends SimpleAction {
 
 	public void run(String[] ids) {

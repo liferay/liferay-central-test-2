@@ -31,13 +31,6 @@ import freemarker.template.Template;
 import java.io.StringWriter;
 import java.io.Writer;
 
-/**
- * <a href="FreeMarkerUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Tariq Dweik
- * @author Brian Wing Shun Chan
- *
- */
 public class FreeMarkerUtil {
 
 	public static String process(String name, Object context)

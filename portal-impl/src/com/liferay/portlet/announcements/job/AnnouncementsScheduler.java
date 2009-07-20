@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.job.Scheduler;
 
-/**
- * <a href="AnnouncementsScheduler.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class AnnouncementsScheduler implements Scheduler {
 
 	public void schedule() {

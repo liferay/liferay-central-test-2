@@ -174,12 +174,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="SubscriptionLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class SubscriptionLocalServiceBaseImpl
 	implements SubscriptionLocalService {
 	public Subscription addSubscription(Subscription subscription)

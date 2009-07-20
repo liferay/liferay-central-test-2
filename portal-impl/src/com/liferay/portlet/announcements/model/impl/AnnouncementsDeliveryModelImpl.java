@@ -43,26 +43,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="AnnouncementsDeliveryModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>AnnouncementsDelivery</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.announcements.model.AnnouncementsDelivery
- * @see com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
- * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
- *
- */
 public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery> {
 	public static final String TABLE_NAME = "AnnouncementsDelivery";
 	public static final Object[][] TABLE_COLUMNS = {

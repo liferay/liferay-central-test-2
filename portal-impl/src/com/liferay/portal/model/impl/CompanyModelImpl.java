@@ -40,26 +40,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="CompanyModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Company</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Company
- * @see com.liferay.portal.model.CompanyModel
- * @see com.liferay.portal.model.impl.CompanyImpl
- *
- */
 public class CompanyModelImpl extends BaseModelImpl<Company> {
 	public static final String TABLE_NAME = "Company";
 	public static final Object[][] TABLE_COLUMNS = {

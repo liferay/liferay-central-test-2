@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 
-/**
- * <a href="ImageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImageImpl extends ImageModelImpl implements Image {
 
 	public static final String TYPE_BMP = ImageProcessor.TYPE_BMP;

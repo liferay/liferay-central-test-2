@@ -29,13 +29,6 @@ import com.liferay.portal.model.ModelExtensionHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="AbstractModelExtensionHandler.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Raymond Augé
- *
- */
 public abstract class AbstractModelExtensionHandler<T>
 	implements ModelExtensionHandler<T> {
 

@@ -51,12 +51,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ServiceComponentPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	implements ServiceComponentPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponentImpl.class.getName();

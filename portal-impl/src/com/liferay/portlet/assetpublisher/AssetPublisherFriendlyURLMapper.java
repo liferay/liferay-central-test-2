@@ -36,13 +36,6 @@ import java.util.Map;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
-/**
- * <a href="AssetPublisherFriendlyURLMapper.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Julio Camarero
- *
- */
 public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {

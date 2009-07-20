@@ -45,13 +45,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="PropfindMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {

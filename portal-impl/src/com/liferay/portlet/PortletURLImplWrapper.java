@@ -22,12 +22,6 @@
 
 package com.liferay.portlet;
 
-/**
- * <a href="PortletURLImplWrapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletURLImplWrapper extends PortletURLImpl {
 
 	public PortletURLImplWrapper(

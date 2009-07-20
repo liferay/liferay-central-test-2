@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import javax.naming.ldap.Control;
 
-/**
- * <a href="LDAPAuthResult.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- *
- */
 public class LDAPAuthResult {
 
 	public boolean isAuthenticated() {

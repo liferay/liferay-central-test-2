@@ -25,12 +25,6 @@ package com.liferay.portal.upgrade.v5_2_0;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-/**
- * <a href="UpgradePortletId.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradePortletId
 	extends com.liferay.portal.upgrade.v4_3_5.UpgradePortletId {
 

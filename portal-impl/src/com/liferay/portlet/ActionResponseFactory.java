@@ -30,12 +30,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="ActionResponseFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ActionResponseFactory {
 
 	public static ActionResponseImpl create(

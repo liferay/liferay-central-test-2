@@ -33,12 +33,6 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
-/**
- * <a href="FloatType.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FloatType implements UserType {
 
 	public final static float DEFAULT_VALUE = 0.0F;

@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_2.UpgradeWebForm;
 
-/**
- * <a href="UpgradeProcess_5_2_2.java.html"><b><i>View Source</i></b></a>
- *
- * @author Julio Camarero
- *
- */
 public class UpgradeProcess_5_2_2 extends UpgradeProcess {
 
 	public int getThreshold() {

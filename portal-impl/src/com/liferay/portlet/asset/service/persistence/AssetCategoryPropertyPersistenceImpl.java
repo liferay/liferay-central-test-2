@@ -53,12 +53,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryPropertyPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 	implements AssetCategoryPropertyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryPropertyImpl.class.getName();

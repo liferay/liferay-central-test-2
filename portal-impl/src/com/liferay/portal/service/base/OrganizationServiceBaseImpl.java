@@ -174,12 +174,6 @@ import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 
-/**
- * <a href="OrganizationServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	implements OrganizationService {
 	public AccountLocalService getAccountLocalService() {

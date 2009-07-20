@@ -33,12 +33,6 @@ import javax.portlet.PortletSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="DefineObjectsTagUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DefineObjectsTagUtil {
 
 	public static void doStartTag(PageContext pageContext) {

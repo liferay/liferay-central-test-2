@@ -29,12 +29,6 @@ import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="FeedDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class FeedDisplayTerms extends DisplayTerms {
 
 	public static final String GROUP_ID = "groupId";

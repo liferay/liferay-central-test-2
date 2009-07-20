@@ -70,13 +70,6 @@ import java.util.zip.ZipFile;
 
 import org.apache.oro.io.GlobFilenameFilter;
 
-/**
- * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Sandeep Soni
- *
- */
 public class BaseDeployer {
 
 	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";

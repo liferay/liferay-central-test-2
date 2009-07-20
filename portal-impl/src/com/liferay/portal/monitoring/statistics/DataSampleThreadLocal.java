@@ -29,13 +29,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="DataSampleThreadLocal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class DataSampleThreadLocal implements Cloneable {
 
 	public static void addDataSample(DataSample dataSample) {

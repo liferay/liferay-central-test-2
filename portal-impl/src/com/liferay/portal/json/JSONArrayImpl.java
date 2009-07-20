@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.Writer;
 
-/**
- * <a href="JSONArrayImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JSONArrayImpl implements JSONArray {
 
 	public JSONArrayImpl() {

@@ -49,14 +49,6 @@ import com.liferay.portlet.PortletResponseImpl;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-/**
- * <a href="PortletRequestDataSample.java.html"><b><i>View Source</i></b></a>
- *
- * @author Karthik Sudarshan
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletRequestDataSample extends BaseDataSample {
 
 	public PortletRequestDataSample(

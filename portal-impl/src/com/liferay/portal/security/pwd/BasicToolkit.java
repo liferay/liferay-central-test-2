@@ -26,12 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
 
-/**
- * <a href="BasicToolkit.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BasicToolkit {
 
 	public abstract String generate();

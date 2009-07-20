@@ -37,12 +37,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="GetDocumentMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class GetDocumentMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {

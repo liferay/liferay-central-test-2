@@ -42,14 +42,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="ExpandoValueLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Raymond Augé
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoValueLocalServiceImpl
 	extends ExpandoValueLocalServiceBaseImpl {
 

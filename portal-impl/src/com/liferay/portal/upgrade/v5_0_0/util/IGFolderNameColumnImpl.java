@@ -29,12 +29,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <a href="IGFolderNameColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class IGFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 
 	public IGFolderNameColumnImpl(

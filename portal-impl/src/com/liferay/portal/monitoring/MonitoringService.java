@@ -24,13 +24,6 @@ package com.liferay.portal.monitoring;
 
 import java.util.Set;
 
-/**
- * <a href="MonitoringService.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public interface MonitoringService {
 
 	public Level getLevel(String namespace);

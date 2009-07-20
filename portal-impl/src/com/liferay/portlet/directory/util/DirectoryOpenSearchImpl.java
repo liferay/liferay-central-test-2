@@ -44,12 +44,6 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="DirectoryOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/directory/open_search";

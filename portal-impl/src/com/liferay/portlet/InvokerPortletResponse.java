@@ -24,12 +24,6 @@ package com.liferay.portlet;
 
 import java.io.Serializable;
 
-/**
- * <a href="InvokerPortletResponse.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class InvokerPortletResponse implements Serializable {
 
 	public InvokerPortletResponse(String title, String content, long time) {

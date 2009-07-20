@@ -32,13 +32,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/**
- * <a href="ServerStatistics.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class ServerStatistics
 	implements DataSampleProcessor<PortalRequestDataSample> {
 

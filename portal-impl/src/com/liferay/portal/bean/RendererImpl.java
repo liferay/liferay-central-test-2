@@ -56,12 +56,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
-/**
- * <a href="RendererImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class RendererImpl implements Renderer {
 
 	public String renderBean(

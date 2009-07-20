@@ -48,12 +48,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ReleasePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ReleasePersistenceImpl extends BasePersistenceImpl
 	implements ReleasePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ReleaseImpl.class.getName();

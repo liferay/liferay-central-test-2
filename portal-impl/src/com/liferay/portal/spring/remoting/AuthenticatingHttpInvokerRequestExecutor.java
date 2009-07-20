@@ -35,18 +35,6 @@ import org.apache.commons.codec.binary.Base64;
 
 import org.springframework.remoting.httpinvoker.SimpleHttpInvokerRequestExecutor;
 
-/**
- * <a href="AuthenticatingHttpInvokerRequestExecutor.java.html"><b><i>
- * View Source</i></b></a>
- *
- * <p>
- * An HttpInvoker request executor for Spring Remoting that provides HTTP BASIC
- * authentication information for service invocations.
- * </p>
- *
- * @author Joel Kozikowski
- *
- */
 public class AuthenticatingHttpInvokerRequestExecutor
 	extends SimpleHttpInvokerRequestExecutor {
 
@@ -70,11 +58,6 @@ public class AuthenticatingHttpInvokerRequestExecutor
 		_password = PwdEncryptor.encrypt(password);
 	}
 
-	/**
-	 * Called every time a HTTP invocation is made. This implementation allows
-	 * the parent to setup the connection, and then adds an
-	 * <code>Authorization</code> HTTP header property for BASIC authentication.
-	 */
 	protected void prepareConnection(HttpURLConnection con, int contentLength)
 		throws IOException {
 

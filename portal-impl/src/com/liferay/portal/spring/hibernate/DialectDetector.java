@@ -39,12 +39,6 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.DialectFactory;
 import org.hibernate.dialect.SybaseDialect;
 
-/**
- * <a href="DialectDetector.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DialectDetector {
 
 	public static String determineDialect(DataSource dataSource) {

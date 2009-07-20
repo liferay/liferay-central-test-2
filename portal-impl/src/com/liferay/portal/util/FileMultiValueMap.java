@@ -40,12 +40,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <a href="FileMultiValueMap.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class FileMultiValueMap<K extends Serializable, V extends Serializable>
 	extends MultiValueMap<K, V> {
 

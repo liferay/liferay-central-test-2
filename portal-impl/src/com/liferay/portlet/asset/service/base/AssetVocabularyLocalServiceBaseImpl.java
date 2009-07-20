@@ -73,12 +73,6 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
 import java.util.List;
 
-/**
- * <a href="AssetVocabularyLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class AssetVocabularyLocalServiceBaseImpl
 	implements AssetVocabularyLocalService {
 	public AssetVocabulary addAssetVocabulary(AssetVocabulary assetVocabulary)

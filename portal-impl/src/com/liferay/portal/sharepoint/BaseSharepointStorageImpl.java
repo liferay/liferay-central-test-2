@@ -33,12 +33,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * <a href="BaseSharepointStorageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 
 	public void addDocumentElements(

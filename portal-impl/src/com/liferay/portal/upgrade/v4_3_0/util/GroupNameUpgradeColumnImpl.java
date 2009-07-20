@@ -27,12 +27,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 
 import java.sql.Types;
 
-/**
- * <a href="GroupNameUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupNameUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public GroupNameUpgradeColumnImpl(

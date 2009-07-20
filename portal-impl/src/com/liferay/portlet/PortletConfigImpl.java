@@ -55,12 +55,6 @@ import javax.portlet.PortletContext;
 
 import javax.xml.namespace.QName;
 
-/**
- * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletConfigImpl implements PortletConfig {
 
 	public static final String RUNTIME_OPTION_ESCAPE_XML =

@@ -33,13 +33,6 @@ import java.io.InputStream;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-/**
- * <a href="ThemeLoaderVelocityResourceListener.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThemeLoaderVelocityResourceListener
 	extends VelocityResourceListener {
 

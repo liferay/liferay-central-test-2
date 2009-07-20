@@ -43,13 +43,6 @@ import com.liferay.portal.util.PropsValues;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="PasswordPolicyLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Scott Lee
- *
- */
 public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
@@ -171,9 +164,6 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long organizationId, long locationId)
 		throws PortalException, SystemException {

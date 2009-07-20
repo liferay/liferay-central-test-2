@@ -41,12 +41,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 
-/**
- * <a href="UpgradeOrganization.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class UpgradeOrganization extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

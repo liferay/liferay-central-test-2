@@ -36,12 +36,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <a href="ElementImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ElementImpl extends BranchImpl implements Element {
 
 	public ElementImpl(org.dom4j.Element element) {

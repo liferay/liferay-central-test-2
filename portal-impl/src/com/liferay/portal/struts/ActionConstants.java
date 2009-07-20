@@ -22,12 +22,6 @@
 
 package com.liferay.portal.struts;
 
-/**
- * <a href="ActionConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ActionConstants {
 
 	public static final String COMMON_FORWARD = "/common/forward_js.jsp";

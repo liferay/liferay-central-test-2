@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="SessionCreateAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionCreateAction extends SessionAction {
 
 	public void run(HttpSession session) {

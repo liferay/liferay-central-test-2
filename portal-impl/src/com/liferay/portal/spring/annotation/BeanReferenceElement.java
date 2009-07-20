@@ -35,13 +35,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 
-/**
- * <a href="BeanReferenceElement.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- * @author Raymond Augé
- *
- */
 public class BeanReferenceElement extends InjectionMetadata.InjectedElement {
 
 	public BeanReferenceElement(

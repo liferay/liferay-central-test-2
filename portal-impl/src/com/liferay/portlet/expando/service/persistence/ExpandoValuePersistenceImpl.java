@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ExpandoValuePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	implements ExpandoValuePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoValueImpl.class.getName();

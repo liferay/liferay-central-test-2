@@ -52,12 +52,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * <a href="RoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role addRole(
@@ -316,16 +310,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return userPersistence.containsRole(userId, roleId);
 	}
 
-	/**
-	 * Returns true if the user has the role.
-	 *
-	 * @param		userId the user id of the user
-	 * @param		companyId the company id of the company
-	 * @param		name the name of the role
-	 * @param		inherited boolean value for whether to check roles inherited
-	 *				from the community, organization, location, or user group
-	 * @return		true if the user has the role
-	 */
 	public boolean hasUserRole(
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
@@ -345,16 +329,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 	}
 
-	/**
-	 * Returns true if the user has any one of the specified roles.
-	 *
-	 * @param		userId the user id of the user
-	 * @param		companyId the company id of the company
-	 * @param		names an array of role names
-	 * @param		inherited boolean value for whether to check roles inherited
-	 *				from the community, organization, location, or user group
-	 * @return		true if the user has the role
-	 */
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {

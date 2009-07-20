@@ -191,12 +191,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 
 import java.util.List;
 
-/**
- * <a href="LayoutLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	public Layout addLayout(Layout layout) throws SystemException {
 		layout.setNew(true);

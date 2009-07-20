@@ -30,13 +30,6 @@ import java.io.File;
 
 import javax.activation.MimetypesFileTypeMap;
 
-/**
- * <a href="MimeTypesImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- *
- */
 public class MimeTypesImpl implements MimeTypes {
 
 	public MimeTypesImpl() {

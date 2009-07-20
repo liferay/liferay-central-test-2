@@ -35,17 +35,6 @@ import org.hibernate.classic.Session;
 
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
 
-/**
- * <a href="SessionFactoryInvocationHandler.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * <p>
- * See http://support.liferay.com/browse/LEP-2996.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionFactoryInvocationHandler implements InvocationHandler {
 
 	public SessionFactoryInvocationHandler(SessionFactory sessionFactory) {

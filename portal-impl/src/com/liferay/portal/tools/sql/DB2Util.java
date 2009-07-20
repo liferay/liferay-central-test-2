@@ -39,15 +39,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Bruno Farache
- * @author Sandeep Soni
- * @author Ganesh Ram
- *
- */
 public class DB2Util extends DBUtil {
 
 	public static DBUtil getInstance() {

@@ -24,12 +24,6 @@ package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 
-/**
- * <a href="BookmarksFolderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BookmarksFolderImpl
 	extends BookmarksFolderModelImpl implements BookmarksFolder {
 

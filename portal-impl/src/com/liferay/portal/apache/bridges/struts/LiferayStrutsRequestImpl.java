@@ -43,13 +43,6 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-/**
- * <a href="LiferayStrutsRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- * @author Deepak Gothe
- *
- */
 public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 
 	public LiferayStrutsRequestImpl(HttpServletRequest request) {

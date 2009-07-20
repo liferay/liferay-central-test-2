@@ -41,26 +41,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="ReleaseModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>Release</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.Release
- * @see com.liferay.portal.model.ReleaseModel
- * @see com.liferay.portal.model.impl.ReleaseImpl
- *
- */
 public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	public static final String TABLE_NAME = "Release_";
 	public static final Object[][] TABLE_COLUMNS = {

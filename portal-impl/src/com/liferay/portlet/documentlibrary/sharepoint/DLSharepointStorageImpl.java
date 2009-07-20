@@ -45,12 +45,6 @@ import java.io.InputStream;
 
 import java.util.List;
 
-/**
- * <a href="DLSharepointStorageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 	public void addDocumentElements(

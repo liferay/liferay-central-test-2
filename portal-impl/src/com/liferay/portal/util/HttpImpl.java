@@ -82,12 +82,6 @@ import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 
-/**
- * <a href="HttpImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class HttpImpl implements Http {
 
 	public HttpImpl() {
@@ -710,17 +704,6 @@ public class HttpImpl implements Http {
 		return new String(URLtoByteArray(location, post));
 	}
 
-	/**
-	 * This method only uses the default Commons HttpClient implementation when
-	 * the URL object represents a HTTP resource. The URL object could also
-	 * represent a file or some JNDI resource. In that case, the default Java
-	 * implementation is used.
-	 *
-	 * @param		url URL object
-	 * @return		A string representation of the resource referenced by the
-	 *				URL object
-	 * @throws		IOException
-	 */
 	public String URLtoString(URL url) throws IOException {
 		String xml = null;
 

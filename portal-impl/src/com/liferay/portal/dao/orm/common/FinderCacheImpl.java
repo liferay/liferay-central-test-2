@@ -45,12 +45,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections.map.LRUMap;
 
-/**
- * <a href="FinderCacheImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	public static final String CACHE_NAME = FinderCache.class.getName();

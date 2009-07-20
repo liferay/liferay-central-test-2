@@ -24,12 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PasswordPolicyRel;
 
-/**
- * <a href="PasswordPolicyRelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Scott Lee
- *
- */
 public class PasswordPolicyRelImpl
 	extends PasswordPolicyRelModelImpl implements PasswordPolicyRel {
 

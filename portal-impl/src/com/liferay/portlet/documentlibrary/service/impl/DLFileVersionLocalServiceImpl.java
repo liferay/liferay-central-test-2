@@ -29,13 +29,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServic
 
 import java.util.List;
 
-/**
- * <a href="DLFileVersionLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
 

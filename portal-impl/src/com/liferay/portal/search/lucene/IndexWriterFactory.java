@@ -49,26 +49,6 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
-/**
- * <a href="IndexWriterFactory.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Lucene only allows one IndexWriter to be open at a time. However, multiple
- * threads can use this single IndexWriter. This class manages a global
- * IndexWriter and uses reference counting to determine when it can be closed.
- * </p>
- *
- * <p>
- * To delete documents, IndexReaders are used but cannot delete while another
- * IndexWriter or IndexReader has the write lock. A semaphore is used to
- * serialize delete and add operations. If the shared IndexWriter is open,
- * concurrent add operations are permitted.
- * </p>
- *
- * @author Harry Mark
- * @author Brian Wing Shun Chan
- *
- */
 public class IndexWriterFactory {
 
 	public IndexWriterFactory() {

@@ -33,12 +33,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 
-/**
- * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

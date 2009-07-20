@@ -35,12 +35,6 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceURL;
 
-/**
- * <a href="JournalFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL) {

@@ -31,12 +31,6 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
-/**
- * <a href="UpgradePortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradePortlet extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

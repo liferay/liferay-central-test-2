@@ -35,12 +35,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeMappingTables.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeMappingTables extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

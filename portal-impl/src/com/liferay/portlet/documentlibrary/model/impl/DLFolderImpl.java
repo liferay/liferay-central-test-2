@@ -30,12 +30,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
-/**
- * <a href="DLFolderImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public DLFolderImpl() {

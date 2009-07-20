@@ -85,20 +85,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * <a href="PortletDataContextImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Holds context information that is used during exporting and importing portlet
- * data.
- * </p>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- * @author Bruno Farache
- * @author Alex Chow
- *
- */
 public class PortletDataContextImpl implements PortletDataContext {
 
 	public PortletDataContextImpl(

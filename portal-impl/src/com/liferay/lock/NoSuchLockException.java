@@ -24,12 +24,6 @@ package com.liferay.lock;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchLockException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchLockException extends PortalException {
 
 	public NoSuchLockException() {

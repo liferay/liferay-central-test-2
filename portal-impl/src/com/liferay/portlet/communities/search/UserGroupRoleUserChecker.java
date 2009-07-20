@@ -32,12 +32,6 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
-/**
- * <a href="UserGroupRoleUserChecker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class UserGroupRoleUserChecker extends RowChecker {
 
 	public UserGroupRoleUserChecker(

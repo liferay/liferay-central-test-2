@@ -24,13 +24,6 @@ package com.liferay.portal.monitoring.statistics;
 
 import com.liferay.portal.monitoring.RequestStatus;
 
-/**
- * <a href="DataSample.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public interface DataSample {
 
 	public long getCompanyId();

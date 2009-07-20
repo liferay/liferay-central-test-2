@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactory;
 import java.util.Collection;
 import java.util.Map;
 
-/**
- * <a href="RestrictionsFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class RestrictionsFactoryImpl implements RestrictionsFactory {
 
 	public Criterion allEq(Map propertyNameValues) {

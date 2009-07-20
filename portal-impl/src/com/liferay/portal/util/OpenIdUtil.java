@@ -34,11 +34,6 @@ import org.openid4java.consumer.ConsumerManager;
 import org.openid4java.consumer.InMemoryConsumerAssociationStore;
 import org.openid4java.consumer.InMemoryNonceVerifier;
 
-/**
- * <a href="OpenIdUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- */
 public class OpenIdUtil {
 
 	public static ConsumerManager getConsumerManager() {

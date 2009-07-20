@@ -31,12 +31,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="ThreadLocalCacheFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ThreadLocalCacheFilter extends BasePortalFilter {
 
 	protected void processFilter(

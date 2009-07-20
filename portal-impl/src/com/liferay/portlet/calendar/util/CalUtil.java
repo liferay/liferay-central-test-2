@@ -39,12 +39,6 @@ import java.util.TimeZone;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="CalUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CalUtil {
 
 	public static String getEmailFromAddress(PortletPreferences preferences) {

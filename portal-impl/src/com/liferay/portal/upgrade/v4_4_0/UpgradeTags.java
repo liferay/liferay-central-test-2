@@ -33,12 +33,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetGroupIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_4_0.util.TagsAssetTable;
 
-/**
- * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeTags extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

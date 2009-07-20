@@ -32,12 +32,6 @@ import java.util.Map;
 
 import org.hibernate.criterion.DetachedCriteria;
 
-/**
- * <a href="DynamicQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 	public DynamicQuery forClass(Class<?> clazz) {

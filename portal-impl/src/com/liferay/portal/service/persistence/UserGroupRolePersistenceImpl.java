@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="UserGroupRolePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements UserGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupRoleImpl.class.getName();

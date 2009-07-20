@@ -32,12 +32,6 @@ import com.liferay.portal.webdav.WebDAVException;
 
 import java.util.Date;
 
-/**
- * <a href="WebDAVPropsLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class WebDAVPropsLocalServiceImpl
 	extends WebDAVPropsLocalServiceBaseImpl {
 

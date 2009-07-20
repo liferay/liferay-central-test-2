@@ -24,12 +24,6 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
 
-/**
- * <a href="JournalArticleImageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JournalArticleImageImpl
 	extends JournalArticleImageModelImpl implements JournalArticleImage {
 

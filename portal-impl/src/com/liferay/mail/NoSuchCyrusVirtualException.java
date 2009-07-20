@@ -24,12 +24,6 @@ package com.liferay.mail;
 
 import com.liferay.portal.PortalException;
 
-/**
- * <a href="NoSuchCyrusVirtualException.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class NoSuchCyrusVirtualException extends PortalException {
 
 	public NoSuchCyrusVirtualException() {

@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="UserDisplayTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String FIRST_NAME = "firstName";

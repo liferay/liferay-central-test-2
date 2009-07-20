@@ -29,13 +29,6 @@ import com.liferay.portal.webdav.WebDAVStorage;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="HeadMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class HeadMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {

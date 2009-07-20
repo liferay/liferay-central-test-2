@@ -47,29 +47,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.AttributesImpl;
 
-/**
- * <a href="DiffHtmlImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class can compare two different versions of HTML code. It detects
- * changes to an entire HTML page such as removal or addition of characters or
- * images.
- * </p>
- *
- * @author Julio Camarero
- *
- */
 public class DiffHtmlImpl implements DiffHtml {
 
-	/**
-	 * This is a diff method with default values.
-	 *
-	 * @param		source the <code>Reader</code> of the source text, this can
-	 *				be for example, an instance of FileReader or StringReader
-	 * @param		target the <code>Reader</code> of the target text
-	 * @return		a string containing the HTML code of the source text
-	 *				showing the differences with the target text
-	 */
 	public String diff(Reader source, Reader target) throws Exception {
 		InputSource oldSource = new InputSource(source);
 		InputSource newSource = new InputSource(target);

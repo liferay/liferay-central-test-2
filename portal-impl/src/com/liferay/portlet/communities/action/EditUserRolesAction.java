@@ -42,12 +42,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="EditUserRolesAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- *
- */
 public class EditUserRolesAction extends PortletAction {
 
 	public void processAction(

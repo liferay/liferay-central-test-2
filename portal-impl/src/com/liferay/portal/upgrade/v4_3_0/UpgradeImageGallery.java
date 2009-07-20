@@ -42,12 +42,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeImageGallery extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

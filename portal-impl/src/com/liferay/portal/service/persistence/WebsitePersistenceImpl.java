@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="WebsitePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WebsitePersistenceImpl extends BasePersistenceImpl
 	implements WebsitePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WebsiteImpl.class.getName();

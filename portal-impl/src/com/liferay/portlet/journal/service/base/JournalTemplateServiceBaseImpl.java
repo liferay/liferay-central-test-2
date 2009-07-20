@@ -68,12 +68,6 @@ import com.liferay.portlet.journal.service.persistence.JournalStructurePersisten
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 
-/**
- * <a href="JournalTemplateServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 	implements JournalTemplateService {
 	public JournalArticleLocalService getJournalArticleLocalService() {

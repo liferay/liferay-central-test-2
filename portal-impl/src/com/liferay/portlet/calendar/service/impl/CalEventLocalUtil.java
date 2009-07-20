@@ -31,13 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="CalEventLocalUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Michael Young
- *
- */
 public class CalEventLocalUtil {
 
 	public static final String CACHE_NAME = CalEventLocalUtil.class.getName();

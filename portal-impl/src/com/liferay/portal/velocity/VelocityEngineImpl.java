@@ -40,12 +40,6 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
-/**
- * <a href="VelocityEngineImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class VelocityEngineImpl implements VelocityEngine {
 
 	public VelocityEngineImpl() {

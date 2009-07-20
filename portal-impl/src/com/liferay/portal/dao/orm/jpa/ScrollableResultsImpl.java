@@ -46,13 +46,6 @@ import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 
 import java.util.List;
 
-/**
- * <a href="ScrollableResultsImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Prashant Dighe
- * @author Brian Wing Shun Chan
- *
- */
 public class ScrollableResultsImpl implements ScrollableResults {
 
 	public ScrollableResultsImpl(List<?> results) {

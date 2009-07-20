@@ -34,12 +34,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.List;
 
-/**
- * <a href="GoogleHook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GoogleHook implements Hook {
 
 	public void addForward(

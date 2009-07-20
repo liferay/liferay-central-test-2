@@ -27,12 +27,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 
-/**
- * <a href="IGImageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public IGImageIdUpgradeColumnImpl(UpgradeColumn companyIdColumn) {

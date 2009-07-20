@@ -32,12 +32,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="PrefsXMLUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public PrefsXMLUpgradeColumnImpl(

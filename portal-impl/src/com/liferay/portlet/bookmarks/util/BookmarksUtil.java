@@ -44,12 +44,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="BookmarksUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BookmarksUtil {
 
 	public static String getBreadcrumbs(

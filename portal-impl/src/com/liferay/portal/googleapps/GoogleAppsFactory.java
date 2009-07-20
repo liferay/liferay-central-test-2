@@ -25,12 +25,6 @@ package com.liferay.portal.googleapps;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="GoogleAppsFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GoogleAppsFactory {
 
 	public static GoogleApps getGoogleApps(long companyId) throws Exception {

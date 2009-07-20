@@ -24,12 +24,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 
-/**
- * <a href="DLFileRankImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileRankImpl extends DLFileRankModelImpl implements DLFileRank {
 
 	public DLFileRankImpl() {

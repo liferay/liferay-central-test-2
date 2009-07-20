@@ -74,21 +74,6 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * For DLFileEntries, the naming convention for some of the variables is not
- * very informative, due to legacy code. Each DLFileEntry has a corresponding
- * name and title. The "name" is a unique identifier for a given file and
- * usually follows the format "DLFE-1234.xls" whereas the "title" is the actual
- * name specified by the user (e.g., "Budget.xls").
- * </p>
- *
- * @author Brian Wing Shun Chan
- * @author Harry Mark
- *
- */
 public class DLFileEntryLocalServiceImpl
 	extends DLFileEntryLocalServiceBaseImpl {
 

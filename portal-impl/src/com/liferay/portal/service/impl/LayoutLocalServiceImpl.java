@@ -85,17 +85,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Joel Kozikowski
- * @author Charles May
- * @author Raymond Augé
- * @author Jorge Ferrer
- * @author Bruno Farache
- *
- */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout addLayout(

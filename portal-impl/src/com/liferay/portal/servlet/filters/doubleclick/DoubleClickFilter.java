@@ -34,14 +34,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.StopWatch;
 
-/**
- * <a href="DoubleClickFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Olaf Fricke
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class DoubleClickFilter extends BasePortalFilter {
 
 	protected void processFilter(

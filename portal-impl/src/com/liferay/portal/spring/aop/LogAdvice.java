@@ -49,14 +49,6 @@ import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
-/**
- * <a href="LogAdvice.java.html"><b><i>View Source</i></b></a>
- *
- * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
- * @author Michael Young
- *
- */
 public class LogAdvice {
 
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)

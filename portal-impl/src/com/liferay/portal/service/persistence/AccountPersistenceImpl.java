@@ -48,12 +48,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="AccountPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AccountPersistenceImpl extends BasePersistenceImpl
 	implements AccountPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AccountImpl.class.getName();

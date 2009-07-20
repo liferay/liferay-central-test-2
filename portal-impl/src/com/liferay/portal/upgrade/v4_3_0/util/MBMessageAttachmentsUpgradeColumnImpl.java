@@ -30,13 +30,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
-/**
- * <a href="MBMessageAttachmentsUpgradeColumnImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class MBMessageAttachmentsUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 

@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="ImagePersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ImagePersistenceImpl extends BasePersistenceImpl
 	implements ImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();

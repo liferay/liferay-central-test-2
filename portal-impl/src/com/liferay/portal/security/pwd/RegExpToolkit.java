@@ -32,12 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
-/**
- * <a href="RegExpToolkit.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RegExpToolkit extends BasicToolkit {
 
 	public RegExpToolkit() {

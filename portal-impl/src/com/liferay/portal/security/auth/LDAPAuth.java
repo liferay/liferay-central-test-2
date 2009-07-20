@@ -51,13 +51,6 @@ import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
-/**
- * <a href="LDAPAuth.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Scott Lee
- *
- */
 public class LDAPAuth implements Authenticator {
 
 	public static final String AUTH_METHOD_BIND = "bind";

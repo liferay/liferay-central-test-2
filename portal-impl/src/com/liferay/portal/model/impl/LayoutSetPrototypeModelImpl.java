@@ -40,26 +40,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="LayoutSetPrototypeModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>LayoutSetPrototype</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.model.LayoutSetPrototype
- * @see com.liferay.portal.model.LayoutSetPrototypeModel
- * @see com.liferay.portal.model.impl.LayoutSetPrototypeImpl
- *
- */
 public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype> {
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -70,12 +70,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.util.List;
 
-/**
- * <a href="IGImageLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService {
 	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);

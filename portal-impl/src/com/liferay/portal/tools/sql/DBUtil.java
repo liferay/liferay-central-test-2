@@ -69,13 +69,6 @@ import org.hibernate.dialect.SAPDBDialect;
 import org.hibernate.dialect.SQLServerDialect;
 import org.hibernate.dialect.SybaseDialect;
 
-/**
- * <a href="DBUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Ganesh Ram
- *
- */
 public abstract class DBUtil {
 
 	public static final String TYPE_DB2 = "db2";

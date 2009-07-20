@@ -91,14 +91,6 @@ import java.util.Set;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- * @author Julio Camarero
- *
- */
 public class EnterpriseAdminUtil {
 
 	public static final String CUSTOM_QUESTION = "write-my-own-question";

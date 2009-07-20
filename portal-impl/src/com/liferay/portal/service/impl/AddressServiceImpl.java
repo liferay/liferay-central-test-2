@@ -31,13 +31,6 @@ import com.liferay.portal.service.permission.CommonPermissionUtil;
 
 import java.util.List;
 
-/**
- * <a href="AddressServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class AddressServiceImpl extends AddressServiceBaseImpl {
 
 	public Address addAddress(

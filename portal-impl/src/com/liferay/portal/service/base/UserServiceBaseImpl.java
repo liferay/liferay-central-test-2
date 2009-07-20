@@ -202,12 +202,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 
-/**
- * <a href="UserServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class UserServiceBaseImpl extends PrincipalBean
 	implements UserService {
 	public AccountLocalService getAccountLocalService() {

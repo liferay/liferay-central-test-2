@@ -24,12 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.UserTrackerPath;
 
-/**
- * <a href="UserTrackerPathImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserTrackerPathImpl
 	extends UserTrackerPathModelImpl implements UserTrackerPath {
 

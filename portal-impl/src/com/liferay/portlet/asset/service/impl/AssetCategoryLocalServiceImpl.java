@@ -46,16 +46,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryLocalServiceImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alvaro del Castillo
- * @author Jorge Ferrer
- * @author Bruno Farache
- *
- */
 public class AssetCategoryLocalServiceImpl
 	extends AssetCategoryLocalServiceBaseImpl {
 

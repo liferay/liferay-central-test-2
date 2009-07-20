@@ -22,12 +22,6 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-/**
- * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EhCacheProvider extends CacheProviderWrapper {
 
 	public EhCacheProvider() {

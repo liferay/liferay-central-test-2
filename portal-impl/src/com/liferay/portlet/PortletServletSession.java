@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="PortletServletSession.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletServletSession extends HttpSessionWrapper {
 
 	public PortletServletSession(

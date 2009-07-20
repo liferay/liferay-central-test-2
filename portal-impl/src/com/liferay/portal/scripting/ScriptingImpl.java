@@ -59,13 +59,6 @@ import org.python.core.Py;
 import org.python.core.PyFile;
 import org.python.core.PySyntaxError;
 
-/**
- * <a href="ScriptingImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alberto Montero
- * @author Brian Wing Shun Chan
- *
- */
 public class ScriptingImpl implements Scripting {
 
 	public void afterPropertiesSet() {

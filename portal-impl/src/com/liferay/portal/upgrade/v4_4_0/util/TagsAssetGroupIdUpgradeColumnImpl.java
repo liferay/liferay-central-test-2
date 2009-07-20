@@ -48,13 +48,6 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 
-/**
- * <a href="TagsAssetGroupIdUpgradeColumnImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public TagsAssetGroupIdUpgradeColumnImpl(

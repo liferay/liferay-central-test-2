@@ -45,26 +45,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="CalEventModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>CalEvent</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.calendar.model.CalEvent
- * @see com.liferay.portlet.calendar.model.CalEventModel
- * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
- *
- */
 public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	public static final String TABLE_NAME = "CalEvent";
 	public static final Object[][] TABLE_COLUMNS = {

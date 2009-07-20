@@ -38,12 +38,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-/**
- * <a href="SocialBookmarkTagUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class SocialBookmarkTagUtil {
 
 	public static void doEndTag(

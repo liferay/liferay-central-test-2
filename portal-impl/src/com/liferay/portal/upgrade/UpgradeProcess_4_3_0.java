@@ -63,15 +63,6 @@ import com.liferay.portal.upgrade.v4_3_0.UpgradeUserIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWiki;
 
-/**
- * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- * @deprecated
- *
- */
 public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 	public int getThreshold() {

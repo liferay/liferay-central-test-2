@@ -55,12 +55,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinder;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 
-/**
- * <a href="IGFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 	implements IGFolderService {
 	public IGFolderLocalService getIGFolderLocalService() {

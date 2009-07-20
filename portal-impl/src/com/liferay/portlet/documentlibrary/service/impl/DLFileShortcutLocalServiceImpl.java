@@ -36,13 +36,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServi
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFileShortcutLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 

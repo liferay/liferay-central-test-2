@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="SubscriptionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 	implements SubscriptionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SubscriptionImpl.class.getName();

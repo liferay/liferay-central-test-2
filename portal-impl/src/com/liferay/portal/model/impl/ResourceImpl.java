@@ -28,12 +28,6 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 
-/**
- * <a href="ResourceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ResourceImpl extends ResourceModelImpl implements Resource {
 
 	public ResourceImpl() {

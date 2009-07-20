@@ -27,12 +27,6 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
-/**
- * <a href="CountryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CountryImpl extends CountryModelImpl implements Country {
 
 	public static final int DEFAULT_COUNTRY_ID =

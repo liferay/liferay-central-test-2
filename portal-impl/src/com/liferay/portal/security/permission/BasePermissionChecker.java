@@ -33,12 +33,6 @@ import com.liferay.portlet.admin.util.OmniadminUtil;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="BasePermissionChecker.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BasePermissionChecker implements PermissionChecker {
 
 	public long getCompanyId() {

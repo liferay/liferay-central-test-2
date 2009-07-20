@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
-/**
- * <a href="BeanPropertiesImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BeanPropertiesImpl implements BeanProperties {
 
 	public boolean getBoolean(Object bean, String param) {

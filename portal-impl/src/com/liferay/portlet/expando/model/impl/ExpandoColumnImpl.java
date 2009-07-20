@@ -32,13 +32,6 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * <a href="ExpandoColumnImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- * @author Brian Wing Shun Chan
- *
- */
 public class ExpandoColumnImpl
 	extends ExpandoColumnModelImpl implements ExpandoColumn {
 

@@ -29,15 +29,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
-/**
- * <a href="HtmlImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Clarence Shen
- * @author Harry Mark
- * @author Samuel Kong
- *
- */
 public class HtmlImpl implements Html {
 
 	public static final int ESCAPE_MODE_ATTRIBUTE = 1;

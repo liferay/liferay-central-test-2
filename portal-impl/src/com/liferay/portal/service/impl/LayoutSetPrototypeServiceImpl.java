@@ -24,13 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.service.base.LayoutSetPrototypeServiceBaseImpl;
 
-/**
- * <a href="LayoutSetPrototypeServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetPrototypeServiceImpl
 	extends LayoutSetPrototypeServiceBaseImpl {
 }

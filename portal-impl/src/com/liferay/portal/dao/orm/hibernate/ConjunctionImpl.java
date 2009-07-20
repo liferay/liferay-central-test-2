@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.Junction;
 
-/**
- * <a href="ConjunctionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class ConjunctionImpl extends CriterionImpl implements Conjunction {
 
 	public ConjunctionImpl(org.hibernate.criterion.Conjunction conjunction) {

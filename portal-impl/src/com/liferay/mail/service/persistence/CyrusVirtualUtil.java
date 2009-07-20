@@ -28,12 +28,6 @@ import com.liferay.portal.SystemException;
 
 import java.util.List;
 
-/**
- * <a href="CyrusVirtualUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CyrusVirtualUtil {
 
 	public static void remove(String emailAddress)

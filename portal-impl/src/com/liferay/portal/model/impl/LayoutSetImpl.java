@@ -32,13 +32,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 
-/**
- * <a href="LayoutSetImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 
 	public LayoutSetImpl() {

@@ -44,26 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFileShortcutModelImpl.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is a model that represents the <code>DLFileShortcut</code> table
- * in the database.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.documentlibrary.model.DLFileShortcut
- * @see com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
- *
- */
 public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	public static final String TABLE_NAME = "DLFileShortcut";
 	public static final Object[][] TABLE_COLUMNS = {

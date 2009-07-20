@@ -38,13 +38,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="MonitoringFilter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Rajesh Thiagarajan
- * @author Michael C. Han
- *
- */
 public class MonitoringFilter extends BasePortalFilter {
 
 	public static boolean isMonitoringPortalRequest() {

@@ -45,12 +45,6 @@ import javax.jcr.SimpleCredentials;
 import org.apache.jackrabbit.api.JackrabbitRepository;
 import org.apache.jackrabbit.core.TransientRepository;
 
-/**
- * <a href="JCRFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- *
- */
 public class JCRFactoryImpl implements JCRFactory {
 
 	public static final String REPOSITORY_ROOT = PropsUtil.get(

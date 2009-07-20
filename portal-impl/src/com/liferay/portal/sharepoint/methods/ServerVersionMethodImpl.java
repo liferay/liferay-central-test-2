@@ -31,12 +31,6 @@ import com.liferay.portal.sharepoint.Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * <a href="ServerVersionMethodImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class ServerVersionMethodImpl extends BaseMethodImpl {
 
 	public ServerVersionMethodImpl() {

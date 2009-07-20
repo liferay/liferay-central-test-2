@@ -37,12 +37,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="IGImageServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage addImage(

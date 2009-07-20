@@ -33,13 +33,6 @@ import javax.enterprise.deploy.spi.status.ProgressEvent;
 import javax.enterprise.deploy.spi.status.ProgressListener;
 import javax.enterprise.deploy.spi.status.ProgressObject;
 
-/**
- * <a href="DeploymentProgressListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Sandeep Soni
- *
- */
 public class DeploymentProgressListener implements ProgressListener {
 
 	public DeploymentProgressListener(

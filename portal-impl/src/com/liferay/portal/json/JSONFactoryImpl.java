@@ -33,12 +33,6 @@ import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
 import org.jabsorb.serializer.UnmarshallException;
 
-/**
- * <a href="JSONFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class JSONFactoryImpl implements JSONFactory {
 
 	public JSONFactoryImpl() {

@@ -22,12 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-/**
- * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
- *
- * @author Douglas Wong
- *
- */
 public class UpgradeBlogs
 	extends com.liferay.portal.upgrade.v5_1_0.UpgradeBlogs {
 }

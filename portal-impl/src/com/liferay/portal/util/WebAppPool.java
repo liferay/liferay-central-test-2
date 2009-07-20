@@ -25,12 +25,6 @@ package com.liferay.portal.util;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="WebAppPool.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WebAppPool {
 
 	public static Object get(String webAppId, String key) {

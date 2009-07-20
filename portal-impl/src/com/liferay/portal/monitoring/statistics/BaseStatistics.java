@@ -41,13 +41,6 @@
 
 package com.liferay.portal.monitoring.statistics;
 
-/**
- * <a href="BaseStatistics.java.html"><b><i>View Source</i></b></a>
- *
- * @author Rajesh Thiagarajan
- * @author Brian Wing Shun Chan
- *
- */
 public class BaseStatistics implements Statistics {
 
 	public BaseStatistics(String name) {

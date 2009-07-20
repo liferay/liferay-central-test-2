@@ -25,12 +25,6 @@ package com.liferay.portal.velocity;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 
-/**
- * <a href="UtilLocator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class UtilLocator {
 
 	public static UtilLocator getInstance() {

@@ -29,12 +29,6 @@ import com.liferay.portal.security.pwd.PwdEncryptor;
 
 import java.io.Serializable;
 
-/**
- * <a href="HttpPrincipal.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class HttpPrincipal implements Serializable {
 
 	public HttpPrincipal(String url) {

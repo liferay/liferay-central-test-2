@@ -60,12 +60,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="GroupPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class GroupPersistenceImpl extends BasePersistenceImpl
 	implements GroupPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = GroupImpl.class.getName();

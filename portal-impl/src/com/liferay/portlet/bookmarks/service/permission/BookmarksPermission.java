@@ -26,12 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="BookmarksPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class BookmarksPermission {
 
 	public static void check(

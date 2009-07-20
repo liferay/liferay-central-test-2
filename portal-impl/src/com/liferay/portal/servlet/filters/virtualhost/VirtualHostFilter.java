@@ -51,22 +51,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="VirtualHostFilter.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This filter is used to provide virtual host functionality. However, this
- * filter is still required even if you do not use virtual hosting because it
- * sets the company id in the request so that subsequent calls in the thread
- * have the company id properly set. This filter must also always be the first
- * filter in the list of filters.
- * </p>
- *
- * @author Joel Kozikowski
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
- *
- */
 public class VirtualHostFilter extends BasePortalFilter {
 
 	public void init(FilterConfig filterConfig) {

@@ -53,13 +53,6 @@ import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="BaseOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Charles May
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 	public boolean isEnabled() {
@@ -229,9 +222,6 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			item, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	protected Object[] addSearchResults(
 		String keywords, int startPage, int itemsPerPage, int total, int start,
 		String title, String searchPath, String format,

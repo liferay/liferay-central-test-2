@@ -29,14 +29,6 @@ import com.liferay.portal.util.InitUtil;
 
 import java.io.IOException;
 
-/**
- * <a href="DBBuilder.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Charles May
- * @author Alexander Chow
- *
- */
 public class DBBuilder {
 
 	public static void main(String[] args) {

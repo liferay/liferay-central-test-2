@@ -47,18 +47,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServi
 
 import java.util.List;
 
-/**
- * <a href="VerifyImage.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * This class is very powerful because it removes all images that it believes
- * is stale. Do not run this unless you are also not managing images in
- * Liferay's Image service for your custom models.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class VerifyImage extends VerifyProcess {
 
 	public void verify() throws VerifyException {

@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.search.TermQuery;
 
 import org.apache.lucene.index.Term;
 
-/**
- * <a href="TermQueryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TermQueryImpl implements TermQuery {
 
 	public TermQueryImpl(String field, long value) {

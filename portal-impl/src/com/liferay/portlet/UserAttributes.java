@@ -29,12 +29,6 @@ import com.liferay.portal.model.User;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-/**
- * <a href="UserAttributes.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UserAttributes {
 
 	// Mandatory Liferay attributes

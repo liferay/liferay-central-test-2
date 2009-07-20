@@ -190,15 +190,6 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.Globals;
 
-/**
- * <a href="PortalImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Brian Myunghun Kim
- * @author Jorge Ferrer
- * @author Raymond Augé
- *
- */
 public class PortalImpl implements Portal {
 
 	public PortalImpl() {
@@ -396,13 +387,6 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("saveLastPath");
 	}
 
-	/**
-	 * Adds the description for a page. This appends to the existing page
-	 * description.
-	 *
-	 * @param		description the description for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageDescription(
 		String description, HttpServletRequest request) {
 
@@ -416,12 +400,6 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
 	}
 
-	/**
-	 * Adds the keywords for a page. This appends to the existing page keywords.
-	 *
-	 * @param		keywords the keywords for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageKeywords(String keywords, HttpServletRequest request) {
 		List<String> requestKeywords = (List<String>)request.getAttribute(
 			WebKeys.PAGE_KEYWORDS);
@@ -441,12 +419,6 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.PAGE_KEYWORDS, requestKeywords);
 	}
 
-	/**
-	 * Adds the subtitle for a page. This appends to the existing page subtitle.
-	 *
-	 * @param		subtitle the subtitle for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageSubtitle(String subtitle, HttpServletRequest request) {
 		String requestSubtitle = (String)request.getAttribute(
 			WebKeys.PAGE_SUBTITLE);
@@ -458,13 +430,6 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
 	}
 
-	/**
-	 * Adds the whole title for a page. This appends to the existing page whole
-	 * title.
-	 *
-	 * @param		title the whole title for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void addPageTitle(String title, HttpServletRequest request) {
 		String requestTitle = (String)request.getAttribute(WebKeys.PAGE_TITLE);
 
@@ -1928,30 +1893,18 @@ public class PortalImpl implements Portal {
 		return new Object[] {layout, queryString};
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(ActionRequest actionRequest) {
 		return getScopeGroupId(actionRequest);
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(HttpServletRequest request) {
 		return getScopeGroupId(request);
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(Layout layout) {
 		return getScopeGroupId(layout);
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(long plid) {
 		Layout layout = null;
 
@@ -1964,9 +1917,6 @@ public class PortalImpl implements Portal {
 		return getPortletGroupId(layout);
 	}
 
-	/**
-	 * @deprecated Use <code>getScopeGroupId</code>.
-	 */
 	public long getPortletGroupId(RenderRequest renderRequest) {
 		return getScopeGroupId(renderRequest);
 	}
@@ -3107,57 +3057,26 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	/**
-	 * Sets the description for a page. This overrides the existing page
-	 * description.
-	 *
-	 * @param		description the description for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageDescription(
 		String description, HttpServletRequest request) {
 
 		request.setAttribute(WebKeys.PAGE_DESCRIPTION, description);
 	}
 
-	/**
-	 * Sets the keywords for a page. This overrides the existing page keywords.
-	 *
-	 * @param		keywords the keywords for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageKeywords(String keywords, HttpServletRequest request) {
 		request.removeAttribute(WebKeys.PAGE_KEYWORDS);
 
 		addPageKeywords(keywords, request);
 	}
 
-	/**
-	 * Sets the subtitle for a page. This overrides the existing page subtitle.
-	 *
-	 * @param		subtitle the subtitle for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageSubtitle(String subtitle, HttpServletRequest request) {
 		request.setAttribute(WebKeys.PAGE_SUBTITLE, subtitle);
 	}
 
-	/**
-	 * Sets the whole title for a page. This overrides the existing page whole
-	 * title.
-	 *
-	 * @param		title the whole title for a page
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPageTitle(String title, HttpServletRequest request) {
 		request.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
 
-	/**
-	 * Sets the port obtained on the first request to the portal.
-	 *
-	 * @param		request the HTTP servlet request
-	 */
 	public void setPortalPort(HttpServletRequest request) {
 		if (_portalPort.intValue() == -1) {
 			synchronized (_portalPort) {

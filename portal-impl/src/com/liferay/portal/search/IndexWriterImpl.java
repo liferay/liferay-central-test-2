@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
-/**
- * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Bruno Farache
- *
- */
 public class IndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document document) {

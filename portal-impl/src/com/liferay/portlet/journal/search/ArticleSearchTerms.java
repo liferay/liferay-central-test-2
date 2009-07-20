@@ -31,12 +31,6 @@ import java.util.Date;
 
 import javax.portlet.PortletRequest;
 
-/**
- * <a href="ArticleSearchTerms.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ArticleSearchTerms extends ArticleDisplayTerms {
 
 	public ArticleSearchTerms(PortletRequest portletRequest) {

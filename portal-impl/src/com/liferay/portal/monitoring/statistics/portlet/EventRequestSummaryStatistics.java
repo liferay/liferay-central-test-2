@@ -27,14 +27,6 @@ import com.liferay.portal.monitoring.statistics.RequestStatistics;
 
 import java.util.Set;
 
-/**
- * <a href="EventRequestSummaryStatistics.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Michael C. Han
- * @author Brian Wing Shun Chan
- *
- */
 public class EventRequestSummaryStatistics implements PortletSummaryStatistics {
 
 	public EventRequestSummaryStatistics(ServerStatistics serverStatistics) {

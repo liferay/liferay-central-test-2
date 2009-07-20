@@ -22,12 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.social;
 
-/**
- * <a href="DLActivityKeys.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ryan Park
- *
- */
 public class DLActivityKeys {
 
 	public static final int ADD_FILE_ENTRY = 1;

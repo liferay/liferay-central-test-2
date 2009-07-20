@@ -40,12 +40,6 @@ import javax.portlet.UnavailableException;
 
 import javax.servlet.ServletContext;
 
-/**
- * <a href="PortletInstanceFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
 	public PortletInstanceFactoryImpl() {

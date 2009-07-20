@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.log.LogFactory;
 
 import org.apache.log4j.LogManager;
 
-/**
- * <a href="Log4jLogFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Log4jLogFactoryImpl implements LogFactory {
 
 	public Log getLog(Class<?> c) {

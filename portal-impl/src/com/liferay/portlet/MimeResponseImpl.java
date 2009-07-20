@@ -38,12 +38,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="MimeResponseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class MimeResponseImpl
 	extends PortletResponseImpl implements MimeResponse {
 

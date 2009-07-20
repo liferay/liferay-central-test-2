@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePermission;
 import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
 
-/**
- * <a href="UpgradeProcess_4_3_5.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeProcess_4_3_5 extends UpgradeProcess {
 
 	public int getThreshold() {

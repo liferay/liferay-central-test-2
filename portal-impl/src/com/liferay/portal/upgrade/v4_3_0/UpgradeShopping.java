@@ -48,12 +48,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeShopping extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

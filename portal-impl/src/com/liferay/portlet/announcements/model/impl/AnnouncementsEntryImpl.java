@@ -26,12 +26,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 
-/**
- * <a href="AnnouncementsEntryImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class AnnouncementsEntryImpl
 	extends AnnouncementsEntryModelImpl implements AnnouncementsEntry {
 

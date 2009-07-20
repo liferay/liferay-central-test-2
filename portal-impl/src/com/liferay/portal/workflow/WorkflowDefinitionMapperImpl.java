@@ -29,13 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * <a href="WorkflowDefinitionMapperImpl.java.html"><b><i>View Source</i>
- * </b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public class WorkflowDefinitionMapperImpl implements WorkflowDefinitionMapper{
 
 	public void init() {

@@ -31,12 +31,6 @@ import com.liferay.portal.service.permission.CommonPermissionUtil;
 
 import java.util.List;
 
-/**
- * <a href="WebsiteServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
 	public Website addWebsite(

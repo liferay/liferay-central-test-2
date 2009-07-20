@@ -25,12 +25,6 @@ package com.liferay.portal.editor.fckeditor.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="Command.java.html"><b><i>View Source</i></b></a>
- *
- * @author Ivica Cardic
- *
- */
 public interface Command {
 
 	public void execute(

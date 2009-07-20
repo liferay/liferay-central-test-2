@@ -174,12 +174,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="ResourceLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class ResourceLocalServiceBaseImpl
 	implements ResourceLocalService {
 	public Resource addResource(Resource resource) throws SystemException {

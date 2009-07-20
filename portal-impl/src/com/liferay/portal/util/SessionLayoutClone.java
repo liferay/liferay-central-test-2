@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * <a href="SessionLayoutClone.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SessionLayoutClone implements LayoutClone {
 
 	public String get(HttpServletRequest request, long plid) {

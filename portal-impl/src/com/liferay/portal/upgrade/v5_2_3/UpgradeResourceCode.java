@@ -30,12 +30,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
-/**
- * <a href="UpgradeResourceCode.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeResourceCode extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

@@ -49,13 +49,6 @@ import javax.portlet.RenderRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="ActionUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public class ActionUtil {
 
 	public static void getAddress(ActionRequest actionRequest)

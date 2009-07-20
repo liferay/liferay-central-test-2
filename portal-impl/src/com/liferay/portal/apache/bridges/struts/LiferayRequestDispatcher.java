@@ -45,15 +45,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="LiferayRequestDispatcher.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Young
- * @author Brian Myunghun Kim
- * @author Brian Wing Shun Chan
- * @author Deepak Gothe
- *
- */
 public class LiferayRequestDispatcher implements RequestDispatcher {
 
 	public LiferayRequestDispatcher(

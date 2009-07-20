@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.xml.ProcessingInstruction;
 
 import java.util.Map;
 
-/**
- * <a href="ProcessingInstructionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ProcessingInstructionImpl
 	extends NodeImpl implements ProcessingInstruction {
 

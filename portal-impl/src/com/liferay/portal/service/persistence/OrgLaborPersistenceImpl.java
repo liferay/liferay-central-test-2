@@ -50,12 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="OrgLaborPersistenceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	implements OrgLaborPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgLaborImpl.class.getName();

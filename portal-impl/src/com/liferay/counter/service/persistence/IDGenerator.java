@@ -30,12 +30,6 @@ import java.io.Serializable;
 import org.hibernate.engine.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-/**
- * <a href="IDGenerator.java.html"><b><i>View Source</i></b></a>
- *
- * @author Patrick Brady
- *
- */
 public class IDGenerator implements IdentifierGenerator {
 
 	public Serializable generate(SessionImplementor session, Object object) {

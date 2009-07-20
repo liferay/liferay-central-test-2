@@ -67,12 +67,6 @@ import javax.media.jai.operator.TranslateDescriptor;
 
 import org.geotools.image.ImageWorker;
 
-/**
- * <a href="SpriteProcessorImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SpriteProcessorImpl implements SpriteProcessor {
 
 	static {

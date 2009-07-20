@@ -25,12 +25,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
 
-/**
- * <a href="ClassNameImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ClassNameImpl extends ClassNameModelImpl implements ClassName {
 
 	public ClassNameImpl() {

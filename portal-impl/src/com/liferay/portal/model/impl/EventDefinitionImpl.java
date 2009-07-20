@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
 
-/**
- * <a href="EventDefinitionImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class EventDefinitionImpl implements EventDefinition {
 
 	public EventDefinitionImpl(

@@ -70,12 +70,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenc
 
 import java.util.List;
 
-/**
- * <a href="JournalStructureLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class JournalStructureLocalServiceBaseImpl
 	implements JournalStructureLocalService {
 	public JournalStructure addJournalStructure(

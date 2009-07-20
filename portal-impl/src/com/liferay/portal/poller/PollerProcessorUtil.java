@@ -27,12 +27,6 @@ import com.liferay.portal.kernel.poller.PollerProcessor;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * <a href="PollerProcessorUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PollerProcessorUtil {
 
 	public static void addPollerProcessor(

@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
 
-/**
- * <a href="AdvancedFileSystemHook.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
 public class AdvancedFileSystemHook extends FileSystemHook {
 
 	protected void buildPath(StringBuilder sb, String fileNameFragment) {

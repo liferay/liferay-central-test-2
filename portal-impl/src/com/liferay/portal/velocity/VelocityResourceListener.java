@@ -26,12 +26,6 @@ import java.io.InputStream;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-/**
- * <a href="VelocityResourceListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public abstract class VelocityResourceListener {
 
 	public static final String JOURNAL_SEPARATOR = "_JOURNAL_CONTEXT_";

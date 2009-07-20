@@ -28,12 +28,6 @@ import java.util.Properties;
 
 import nl.captcha.text.TextProducer;
 
-/**
- * <a href="DictionaryWordTextProducer.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DictionaryWordTextProducer implements TextProducer {
 
 	public DictionaryWordTextProducer() {

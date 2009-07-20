@@ -37,13 +37,6 @@ import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- *
- */
 public class UpgradeCalendar extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

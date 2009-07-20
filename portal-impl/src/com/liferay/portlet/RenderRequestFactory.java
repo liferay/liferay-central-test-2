@@ -31,12 +31,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * <a href="RenderRequestFactory.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RenderRequestFactory {
 
 	public static RenderRequestImpl create(

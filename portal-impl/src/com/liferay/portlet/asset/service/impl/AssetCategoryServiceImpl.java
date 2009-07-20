@@ -36,16 +36,6 @@ import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- * @author Alvaro del Castillo
- * @author Eduardo Lundgren
- * @author Bruno Farache
- *
- */
 public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(

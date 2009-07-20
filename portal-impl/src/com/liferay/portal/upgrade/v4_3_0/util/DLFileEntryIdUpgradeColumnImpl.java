@@ -33,13 +33,6 @@ import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <a href="DLFileEntryIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public DLFileEntryIdUpgradeColumnImpl(

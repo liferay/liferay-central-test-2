@@ -24,12 +24,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.LayoutSetPrototype;
 
-/**
- * <a href="LayoutSetPrototypeImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LayoutSetPrototypeImpl
 	extends LayoutSetPrototypeModelImpl implements LayoutSetPrototype {
 

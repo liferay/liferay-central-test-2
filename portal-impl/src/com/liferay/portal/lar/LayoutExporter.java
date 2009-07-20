@@ -88,18 +88,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.time.StopWatch;
 
-/**
- * <a href="LayoutExporter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Joel Kozikowski
- * @author Charles May
- * @author Raymond Augé
- * @author Jorge Ferrer
- * @author Bruno Farache
- * @author Karthik Sudarshan
- *
- */
 public class LayoutExporter {
 
 	public static List<Portlet> getAlwaysExportablePortlets(long companyId)

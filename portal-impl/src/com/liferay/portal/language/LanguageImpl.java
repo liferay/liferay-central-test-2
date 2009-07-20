@@ -71,13 +71,6 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.taglib.TagUtils;
 
-/**
- * <a href="LanguageImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Andrius Vitkauskas
- *
- */
 public class LanguageImpl implements Language {
 
 	public String format(Locale locale, String pattern, Object argument) {

@@ -57,16 +57,6 @@ import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * <a href="UserServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Brian Myunghun Kim
- * @author Scott Lee
- * @author Jorge Ferrer
- * @author Julio Camarero
- *
- */
 public class UserServiceImpl extends UserServiceBaseImpl {
 
 	public void addGroupUsers(long groupId, long[] userIds)

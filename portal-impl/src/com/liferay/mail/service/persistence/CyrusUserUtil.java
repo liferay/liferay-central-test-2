@@ -26,12 +26,6 @@ import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.portal.SystemException;
 
-/**
- * <a href="CyrusUserUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CyrusUserUtil {
 
 	public static void remove(long userId)

@@ -28,45 +28,6 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortalServiceUtil;
 
-/**
- * <a href="PortalServiceHttp.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class provides a HTTP utility for the
- * <code>com.liferay.portal.service.PortalServiceUtil</code> service
- * utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it requires an
- * additional <code>com.liferay.portal.security.auth.HttpPrincipal</code>
- * parameter.
- * </p>
- *
- * <p>
- * The benefits of using the HTTP utility is that it is fast and allows for
- * tunneling without the cost of serializing to text. The drawback is that it
- * only works with Java.
- * </p>
- *
- * <p>
- * Set the property <code>tunnel.servlet.hosts.allowed</code> in
- * portal.properties to configure security.
- * </p>
- *
- * <p>
- * The HTTP utility is only generated for remote services.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.security.auth.HttpPrincipal
- * @see com.liferay.portal.service.PortalServiceUtil
- * @see com.liferay.portal.service.http.PortalServiceSoap
- *
- */
 public class PortalServiceHttp {
 	public static java.lang.String getAutoDeployDirectory(
 		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {

@@ -34,12 +34,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="RenderResponseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RenderResponseImpl
 	extends MimeResponseImpl implements LiferayRenderResponse {
 

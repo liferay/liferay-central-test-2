@@ -52,12 +52,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFolderLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(

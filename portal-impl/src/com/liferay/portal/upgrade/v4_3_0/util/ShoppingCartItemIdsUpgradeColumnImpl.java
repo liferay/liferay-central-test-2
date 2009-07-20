@@ -27,13 +27,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
-/**
- * <a href="ShoppingCartItemIdsUpgradeColumnImpl.java.html"><b><i>View Source
- * </i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class ShoppingCartItemIdsUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 

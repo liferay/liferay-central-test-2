@@ -40,13 +40,6 @@ import java.util.Iterator;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
-/**
- * <a href="PortletPreferencesServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Jorge Ferrer
- *
- */
 public class PortletPreferencesServiceImpl
 	extends PortletPreferencesServiceBaseImpl {
 

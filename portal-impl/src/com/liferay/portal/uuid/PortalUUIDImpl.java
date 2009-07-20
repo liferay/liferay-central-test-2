@@ -26,12 +26,6 @@ import com.liferay.portal.kernel.uuid.PortalUUID;
 
 import java.util.UUID;
 
-/**
- * <a href="PortalUUIDImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalUUIDImpl implements PortalUUID {
 
 	public String generate() {

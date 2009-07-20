@@ -38,13 +38,6 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-/**
- * <a href="LayoutTemplateImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class LayoutTemplateImpl
 	 extends PluginBaseImpl implements LayoutTemplate {
 

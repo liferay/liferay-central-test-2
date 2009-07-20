@@ -46,12 +46,6 @@ import javax.portlet.filter.PortletFilter;
 import javax.portlet.filter.RenderFilter;
 import javax.portlet.filter.ResourceFilter;
 
-/**
- * <a href="FilterChainImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class FilterChainImpl implements FilterChain {
 
 	public FilterChainImpl(

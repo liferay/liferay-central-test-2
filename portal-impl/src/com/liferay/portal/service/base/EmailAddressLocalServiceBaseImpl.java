@@ -174,12 +174,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="EmailAddressLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class EmailAddressLocalServiceBaseImpl
 	implements EmailAddressLocalService {
 	public EmailAddress addEmailAddress(EmailAddress emailAddress)

@@ -25,12 +25,6 @@ package com.liferay.portlet;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 
-/**
- * <a href="RenderRequestImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RenderRequestImpl
 	extends PortletRequestImpl implements RenderRequest {
 

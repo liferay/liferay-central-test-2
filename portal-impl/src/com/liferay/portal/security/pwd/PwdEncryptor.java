@@ -41,13 +41,6 @@ import java.util.Random;
 
 import org.vps.crypt.Crypt;
 
-/**
- * <a href="PwdEncryptor.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Scott Lee
- *
- */
 public class PwdEncryptor {
 
 	public static final String PASSWORDS_ENCRYPTION_ALGORITHM =

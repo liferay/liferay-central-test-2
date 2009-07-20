@@ -28,12 +28,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-/**
- * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class ContentTypeUtil {
 
 	public static String getContentType(String fileName) {

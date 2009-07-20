@@ -24,14 +24,6 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
-/**
- * <a href="PortletHibernateConfiguration.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- * @author Ganesh Ram
- *
- */
 public class PortletHibernateConfiguration
 	extends PortalHibernateConfiguration {
 

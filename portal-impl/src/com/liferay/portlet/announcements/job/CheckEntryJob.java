@@ -32,12 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
-/**
- * <a href="CheckEntryJob.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
- *
- */
 public class CheckEntryJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(

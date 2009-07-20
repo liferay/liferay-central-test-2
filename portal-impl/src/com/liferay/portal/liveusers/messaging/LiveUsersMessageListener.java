@@ -29,12 +29,6 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.liveusers.LiveUsers;
 
-/**
- * <a href="LiveUsersMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LiveUsersMessageListener implements MessageListener {
 
 	public void receive(Message message) {

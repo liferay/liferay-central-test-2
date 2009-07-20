@@ -174,12 +174,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
-/**
- * <a href="PortletLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public abstract class PortletLocalServiceBaseImpl implements PortletLocalService {
 	public Portlet addPortlet(Portlet portlet) throws SystemException {
 		portlet.setNew(true);

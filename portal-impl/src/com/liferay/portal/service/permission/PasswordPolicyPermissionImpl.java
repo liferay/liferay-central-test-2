@@ -26,13 +26,6 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
-/**
- * <a href="PasswordPolicyPermissionImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PasswordPolicyPermissionImpl implements PasswordPolicyPermission {
 
 	public void check(

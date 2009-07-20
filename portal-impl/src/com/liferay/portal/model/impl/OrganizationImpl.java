@@ -57,13 +57,6 @@ import java.util.Set;
 
 import javax.portlet.PortletPreferences;
 
-/**
- * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
- *
- */
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 

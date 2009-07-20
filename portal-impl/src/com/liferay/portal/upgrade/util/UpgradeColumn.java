@@ -22,13 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-/**
- * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Alexander Chow
- *
- */
 public interface UpgradeColumn {
 
 	public String getName();

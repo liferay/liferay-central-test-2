@@ -45,14 +45,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.UserPortraitIdUpgradeColumnImpl;
 
 import java.sql.Types;
 
-/**
- * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- *
- */
 public class UpgradeUser extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

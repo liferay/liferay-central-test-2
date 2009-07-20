@@ -52,13 +52,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <a href="TunnelServlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author Michael Weisser
- * @author Brian Wing Shun Chan
- *
- */
 public class TunnelServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -30,12 +30,6 @@ import com.liferay.portal.kernel.dao.orm.Property;
 
 import java.util.Collection;
 
-/**
- * <a href="PropertyImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PropertyImpl extends ProjectionImpl implements Property {
 
 	public PropertyImpl(org.hibernate.criterion.Property property) {

@@ -36,13 +36,6 @@ import com.liferay.portal.service.persistence.UserGroupRolePK;
 
 import java.util.List;
 
-/**
- * <a href="UserGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Jorge Ferrer
- *
- */
 public class UserGroupRoleLocalServiceImpl
 	extends UserGroupRoleLocalServiceBaseImpl {
 

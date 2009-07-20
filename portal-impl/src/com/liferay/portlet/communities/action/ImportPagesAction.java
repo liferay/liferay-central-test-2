@@ -43,13 +43,6 @@ import javax.portlet.PortletConfig;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-/**
- * <a href="ImportPagesAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- * @author Raymond Aug�
- *
- */
 public class ImportPagesAction extends EditPagesAction {
 
 	public void processAction(

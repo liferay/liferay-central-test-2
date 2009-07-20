@@ -24,13 +24,6 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 
-/**
- * <a href="JournalArticleDisplayImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- * @author Raymond Aug�
- *
- */
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(

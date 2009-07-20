@@ -29,12 +29,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
-/**
- * <a href="BlogsEntryPermission.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class BlogsEntryPermission {
 
 	public static void check(

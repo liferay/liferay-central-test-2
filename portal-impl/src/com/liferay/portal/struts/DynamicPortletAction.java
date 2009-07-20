@@ -36,12 +36,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ModuleConfig;
 
-/**
- * <a href="DynamicPortletAction.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class DynamicPortletAction extends PortletAction {
 
 	public void processAction(

@@ -30,13 +30,6 @@ import java.sql.Connection;
 
 import org.quartz.utils.ConnectionProvider;
 
-/**
- * <a href="QuartzConnectionProviderImpl.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Bruno Farache
- *
- */
 public class QuartzConnectionProviderImpl implements ConnectionProvider {
 
 	public Connection getConnection() {

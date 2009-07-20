@@ -32,12 +32,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
-/**
- * <a href="PortalServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
 	public String getAutoDeployDirectory() throws SystemException {

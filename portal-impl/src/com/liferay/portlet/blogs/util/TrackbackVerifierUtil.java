@@ -37,12 +37,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * <a href="TrackbackVerifierUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Alexander Chow
- *
- */
 public class TrackbackVerifierUtil {
 
 	public static void addNewPost(

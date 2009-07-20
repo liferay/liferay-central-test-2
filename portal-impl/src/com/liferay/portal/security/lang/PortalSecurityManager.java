@@ -24,12 +24,6 @@ package com.liferay.portal.security.lang;
 
 import java.security.Permission;
 
-/**
- * <a href="PortalSecurityManager.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalSecurityManager extends SecurityManager {
 
 	public void checkPermission(Permission permission) {

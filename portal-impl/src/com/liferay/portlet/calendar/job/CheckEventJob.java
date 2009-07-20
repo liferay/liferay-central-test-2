@@ -32,12 +32,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
-/**
- * <a href="CheckEventJob.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class CheckEventJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
