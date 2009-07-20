@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WikiPageResourceImpl</name>
+	<type>com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>WikiPageResourceImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

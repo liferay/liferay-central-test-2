@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Text</name>
+	<type>com.liferay.portal.kernel.xml.Text</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+</javadoc>

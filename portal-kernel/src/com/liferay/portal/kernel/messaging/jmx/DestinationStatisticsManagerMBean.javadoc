@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DestinationStatisticsManagerMBean</name>
+	<type>com.liferay.portal.kernel.messaging.jmx.DestinationStatisticsManagerMBean</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getActiveThreadCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCurrentThreadCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLargestThreadCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLastRefresh</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getMaxThreadPoolSize</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getMinThreadPoolSize</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPendingMessageCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSentMessageCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isAutoRefresh</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>refresh</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setAutoRefresh</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>autoRefresh</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

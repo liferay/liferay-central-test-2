@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ProjectionList</name>
+	<type>com.liferay.portal.kernel.dao.orm.ProjectionList</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>add</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>projection</name>
+			<type>com.liferay.portal.kernel.dao.orm.Projection</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>add</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>projection</name>
+			<type>com.liferay.portal.kernel.dao.orm.Projection</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>alias</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

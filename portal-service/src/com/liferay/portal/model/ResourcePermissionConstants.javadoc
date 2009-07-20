@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ResourcePermissionConstants</name>
+	<type>com.liferay.portal.model.ResourcePermissionConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>OPERATOR_ADD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OPERATOR_REMOVE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OPERATOR_SET</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BridgingMessageListener</name>
+	<type>com.liferay.portal.kernel.messaging.BridgingMessageListener</type>
+	<comment><![CDATA[<p/>]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>BridgingMessageListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>messageSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_messageSender</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

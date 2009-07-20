@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MediaWikiToCreoleTranslator</name>
+	<type>com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>MediaWikiToCreoleTranslator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>initNowikiRegexps</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>initRegexps</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>postProcess</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>content</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>TABLE_OF_CONTENTS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_HTML_TAGS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

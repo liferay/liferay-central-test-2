@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CounterLocalServiceFactory</name>
+	<type>com.liferay.counter.service.CounterLocalServiceFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getService</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTxImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>service</name>
+			<type>com.liferay.counter.service.CounterLocalService</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_getFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_FACTORY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_IMPL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_TX_IMPL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_factory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_impl</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_txImpl</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_service</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

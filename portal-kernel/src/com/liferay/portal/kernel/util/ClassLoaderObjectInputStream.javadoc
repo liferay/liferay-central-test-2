@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ClassLoaderObjectInputStream</name>
+	<type>com.liferay.portal.kernel.util.ClassLoaderObjectInputStream</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ClassLoaderObjectInputStream</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>is</name>
+			<type>java.io.InputStream</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>resolveClass</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>osc</name>
+			<type>java.io.ObjectStreamClass</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ClassNotFoundException</name>
+			<type>java.lang.ClassNotFoundException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_classLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayGroupDatabase</name>
+	<type>com.liferay.portlet.wiki.engines.jspwiki.LiferayGroupDatabase</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>commit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>delete</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>group</name>
+			<type>com.ecyrd.jspwiki.auth.authorize.Group</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>groups</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>initialize</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>engine</name>
+			<type>com.ecyrd.jspwiki.WikiEngine</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>props</name>
+			<type>java.util.Properties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>save</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>group</name>
+			<type>com.ecyrd.jspwiki.auth.authorize.Group</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>modifier</name>
+			<type>java.security.Principal</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

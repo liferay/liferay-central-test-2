@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PropertyFactoryUtil</name>
+	<type>com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>forName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>propertyName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPropertyFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPropertyFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>projectionFactory</name>
+			<type>com.liferay.portal.kernel.dao.orm.PropertyFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_projectionFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

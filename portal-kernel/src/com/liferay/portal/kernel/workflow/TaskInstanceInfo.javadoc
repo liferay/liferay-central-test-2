@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TaskInstanceInfo</name>
+	<type>com.liferay.portal.kernel.workflow.TaskInstanceInfo</type>
+	<comment><![CDATA[<p>This interface represents the information of a workflow task which is requested through the {@link TaskInstanceManager} where you will find additional information about tasks and how to handle them.</p><p>A task is always related to a workflow instance (represented through a {@link WorkflowInstanceInfo}) and breaks the execution of the workflow execution plan until the task has been completed. Consequently a task is an element within a workflow definition to break the execution and let the user do some work like making a decision or providing additional information to be used by the continuation of the workflow execution after the task has been completed.</p><p>A task can have several meta information usually being presented to the user in order to be completed. The type of meta information is somewhat dependent on the underlying workflow definition language and designer.</p>]]></comment>
+	<author>Micha Kiener</author>
+	<method>
+		<name>getAssignedRoleId</name>
+		<comment><![CDATA[If this task has been assigned to a role, it is returned by this method.]]></comment>
+		<return><![CDATA[the role id this task has been assigned to or <code>null</code>,
+if not assigned yet]]></return>
+	</method>
+	<method>
+		<name>getAssignedUserId</name>
+		<comment><![CDATA[If this task has been assigned to a specific user already, its user id is being returned by this method, otherwise<code>null</code>is returned.]]></comment>
+		<return><![CDATA[the id of the user being assigned to this task or
+<code>null</code> if not assigned yet]]></return>
+	</method>
+	<method>
+		<name>getAttributes</name>
+		<comment><![CDATA[Returns optional attributes of this task which are dependent on the underlying engine. This map of attributes must not be confused with the one being returned by the workflow instance through {@link WorkflowInstanceInfo#getContext()}.]]></comment>
+		<return><![CDATA[the optional map of attributes related to this task, might be
+empty or even <code>null</code>]]></return>
+	</method>
+	<method>
+		<name>getCompletionDate</name>
+		<comment><![CDATA[If this task has been completed already (thus {@link #isCompleted()} returns<code>true</code>), this method returns the date of completion.]]></comment>
+		<return><![CDATA[the date and time when this task has been completed or
+<code>null</code> if not yet completed]]></return>
+	</method>
+	<method>
+		<name>getCreateDate</name>
+		<comment><![CDATA[Returns the date and time this task was created (usually by a task executor triggered by the engine).]]></comment>
+		<return><![CDATA[the creation time and date]]></return>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[Returns the description of this task which is usually used to be presented to the user completing this task. It is optional and thus this method could return<code>null</code>.]]></comment>
+		<return><![CDATA[the description of this task or <code>null</code> if not provided]]></return>
+	</method>
+	<method>
+		<name>getDueDate</name>
+		<comment><![CDATA[Returns the due date of this task or<code>null</code>, if there is no such date specified.]]></comment>
+		<return><![CDATA[the date where this task has to be completed]]></return>
+	</method>
+	<method>
+		<name>getTaskInstanceId</name>
+		<comment><![CDATA[Returns the unique task instance id which is usually the same as the primary key of the task entity within the database.]]></comment>
+		<return><![CDATA[the id of this task]]></return>
+	</method>
+	<method>
+		<name>getTaskMetaId</name>
+		<comment><![CDATA[Returns the task meta information id which is usually a technical name of the workflow definition and thus must be unique within one workflow definition. Usually there is exactly a one to one mapping between the task name and the task meta id, is just a different naming pattern usually. This meta id is usually used to map it to an additional description or even some other related content as it truly represents a unique meta id.]]></comment>
+		<return><![CDATA[the task meta id]]></return>
+	</method>
+	<method>
+		<name>getTaskName</name>
+		<comment><![CDATA[Returns the human readable name of this task which is usually given by the workflow definition defining this task. There is no need of this name being unique within the workflow definition, but it is good practice to do so.]]></comment>
+		<return><![CDATA[the name of this task]]></return>
+	</method>
+	<method>
+		<name>getWorkflowDefinitionName</name>
+		<comment><![CDATA[Returns the workflow definition name this task is related to. By default, this is the same as the current one of the workflow instance being referenced by this task, but could have been changed on the workflow instance meanwhile (e.g. this is an asynchronous task and meanwhile the workflow has been moved forward on the related workflow instance where it will not reference the same workflow definition again and hence the task has to know the related workflow definition on its own).]]></comment>
+		<return><![CDATA[the workflow definition name this task is defined in]]></return>
+	</method>
+	<method>
+		<name>getWorkflowDefinitionVersion</name>
+		<comment><![CDATA[Returns the version of the workflow definition this task was defined in. See {@link #getWorkflowDefinitionName()} for more information about referencing the workflow definition.]]></comment>
+		<return><![CDATA[the version of the workflow definition]]></return>
+	</method>
+	<method>
+		<name>getWorkflowInstanceId</name>
+		<comment><![CDATA[Returns the workflow instance id to which this task belongs. As soon as this task will be completed, the execution of the workflow continues with exactly that workflow instance.]]></comment>
+		<return><![CDATA[the id of the workflow instance this task belongs to]]></return>
+	</method>
+	<method>
+		<name>isAsynchronous</name>
+		<comment><![CDATA[Returns<code>true</code>, if this task is asynchronous, meaning it didn't break the workflow execution, it was just created and the engine continued with the next activity, so completing this task will not further change the workflow execution and has no impact on it.]]></comment>
+		<return><![CDATA[<code>true</code>, if this is an asynchronous task]]></return>
+	</method>
+	<method>
+		<name>isCompleted</name>
+		<comment><![CDATA[Returns<code>true</code>, if this task has been completed and the process was triggered accordingly.]]></comment>
+		<return><![CDATA[<code>true</code>, if this task has been completed]]></return>
+	</method>
+</javadoc>

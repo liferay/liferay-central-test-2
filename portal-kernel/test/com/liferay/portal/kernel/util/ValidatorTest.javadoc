@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ValidatorTest</name>
+	<type>com.liferay.portal.kernel.util.ValidatorTest</type>
+	<comment><![CDATA[]]></comment>
+	<author>Shuyang Zhou</author>
+	<method>
+		<name>testIsNull</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

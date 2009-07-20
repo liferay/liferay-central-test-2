@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Isolation</name>
+	<type>com.liferay.portal.kernel.annotation.Isolation</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>Isolation</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>value</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>DEFAULT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PORTAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>READ_COMMITTED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>READ_UNCOMMITTED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>REPEATABLE_READ</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SERIALIZABLE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WebDirDetector</name>
+	<type>com.liferay.portal.kernel.servlet.WebDirDetector</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getLibDir</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRootDir</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRootDir</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>libDir</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Junction</name>
+	<type>com.liferay.portal.kernel.dao.orm.Junction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>add</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>criterion</name>
+			<type>com.liferay.portal.kernel.dao.orm.Criterion</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

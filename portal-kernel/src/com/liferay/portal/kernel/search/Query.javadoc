@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Query</name>
+	<type>com.liferay.portal.kernel.search.Query</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+</javadoc>

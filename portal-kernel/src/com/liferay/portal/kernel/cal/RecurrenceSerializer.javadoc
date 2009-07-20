@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RecurrenceSerializer</name>
+	<type>com.liferay.portal.kernel.cal.RecurrenceSerializer</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>toCronText</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>recurrence</name>
+			<type>com.liferay.portal.kernel.cal.Recurrence</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

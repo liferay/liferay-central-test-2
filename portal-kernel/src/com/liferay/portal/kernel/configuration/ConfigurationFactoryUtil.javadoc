@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ConfigurationFactoryUtil</name>
+	<type>com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getConfiguration</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getConfigurationFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setConfigurationFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>configurationFactory</name>
+			<type>com.liferay.portal.kernel.configuration.ConfigurationFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_configurationFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

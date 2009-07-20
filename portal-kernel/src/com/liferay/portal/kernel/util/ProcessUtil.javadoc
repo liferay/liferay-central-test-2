@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ProcessUtil</name>
+	<type>com.liferay.portal.kernel.util.ProcessUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>close</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>p</name>
+			<type>java.lang.Process</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WikiActivityKeys</name>
+	<type>com.liferay.portlet.wiki.social.WikiActivityKeys</type>
+	<comment><![CDATA[]]></comment>
+	<author>Samuel Kong</author>
+	<field>
+		<name>ADD_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>UPDATE_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

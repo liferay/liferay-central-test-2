@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WorkflowMessageListener</name>
+	<type>com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener</type>
+	<comment><![CDATA[<p>The generic message listener for workflow messages. The object (manager) to invoke the method on has to be injected using constructor injection as well as the expected request class to be handled by this listener.</p>]]></comment>
+	<author>Micha Kiener</author>
+	<author>Shuyang Zhou</author>
+	<method>
+		<name>WorkflowMessageListener</name>
+		<comment><![CDATA[Constructor using the manager to invoke methods on and the expected request class this listener will be able to handle.]]></comment>
+		<param>
+			<name>manager</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>requestClazz</name>
+			<type>java.lang.Class</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>messageBus</name>
+			<type>com.liferay.portal.kernel.messaging.MessageBus</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<see>com.liferay.portal.kernel.messaging.MessageListener# receive(com.liferay.portal.kernel.messaging.Message)</see>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>MISSING_REQUEST_ERROR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>WRONG_REQUEST_ERROR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>EXECUTE_ERROR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_manager</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_requestClazz</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_messageBus</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

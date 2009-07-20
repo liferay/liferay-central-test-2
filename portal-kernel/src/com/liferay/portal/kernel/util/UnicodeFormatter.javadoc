@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UnicodeFormatter</name>
+	<type>com.liferay.portal.kernel.util.UnicodeFormatter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>byteToHex</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>b</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>charToHex</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>c</name>
+			<type>char</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>parseString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>hexString</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>array</name>
+			<type>char</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>HEX_DIGIT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ArrayWrapper</name>
+	<type>com.liferay.portal.kernel.util.ArrayWrapper</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ArrayWrapper</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getArray</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setArray</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>array</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_array</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SynchronousMessageSender</name>
+	<type>com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>destinationName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MessageBusException</name>
+			<type>com.liferay.portal.kernel.messaging.MessageBusException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>destinationName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>timeout</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MessageBusException</name>
+			<type>com.liferay.portal.kernel.messaging.MessageBusException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

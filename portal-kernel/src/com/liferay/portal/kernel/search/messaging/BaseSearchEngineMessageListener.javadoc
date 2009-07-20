@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseSearchEngineMessageListener</name>
+	<type>com.liferay.portal.kernel.search.messaging.BaseSearchEngineMessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>getSearchEngineName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setSearchEngine</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>searchEngine</name>
+			<type>com.liferay.portal.kernel.search.SearchEngine</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>searchEngine</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

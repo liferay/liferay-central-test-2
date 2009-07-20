@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalPrincipal</name>
+	<type>com.liferay.portal.kernel.security.jaas.PortalPrincipal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortalPrincipal</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>PortalPrincipal</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

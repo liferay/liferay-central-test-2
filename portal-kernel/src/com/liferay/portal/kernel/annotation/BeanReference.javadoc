@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BeanReference</name>
+	<type>com.liferay.portal.kernel.annotation.BeanReference</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>name</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

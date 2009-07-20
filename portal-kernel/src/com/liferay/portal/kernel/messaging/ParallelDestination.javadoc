@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ParallelDestination</name>
+	<type>com.liferay.portal.kernel.messaging.ParallelDestination</type>
+	<comment><![CDATA[<p>Destination that delivers a message to a list of message listeners in parallel.</p>]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>ParallelDestination</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ParallelDestination</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>workersCoreSize</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>workersMaxSize</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>dispatch</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>messageListeners</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalUUIDUtil</name>
+	<type>com.liferay.portal.kernel.uuid.PortalUUIDUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>generate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPortalUUID</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPortalUUID</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portalJNDI</name>
+			<type>com.liferay.portal.kernel.uuid.PortalUUID</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_portalJNDI</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

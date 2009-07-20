@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DayAndPosition</name>
+	<type>com.liferay.portal.kernel.cal.DayAndPosition</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jonathan Lennox</author>
+	<method>
+		<name>DayAndPosition</name>
+		<comment><![CDATA[Constructor DayAndPosition]]></comment>
+	</method>
+	<method>
+		<name>DayAndPosition</name>
+		<comment><![CDATA[Constructor DayAndPosition]]></comment>
+		<param>
+			<name>d</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>p</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDayOfWeek</name>
+		<comment><![CDATA[Method getDayOfWeek]]></comment>
+		<return><![CDATA[int]]></return>
+	</method>
+	<method>
+		<name>setDayOfWeek</name>
+		<comment><![CDATA[Method setDayOfWeek]]></comment>
+		<param>
+			<name>d</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDayPosition</name>
+		<comment><![CDATA[Method getDayPosition]]></comment>
+		<return><![CDATA[int]]></return>
+	</method>
+	<method>
+		<name>setDayPosition</name>
+		<comment><![CDATA[Method setDayPosition]]></comment>
+		<param>
+			<name>p</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[Method equals]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[boolean]]></return>
+	</method>
+	<method>
+		<name>isValidDayOfWeek</name>
+		<comment><![CDATA[Method isValidDayOfWeek]]></comment>
+		<param>
+			<name>d</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[boolean]]></return>
+	</method>
+	<method>
+		<name>isValidDayPosition</name>
+		<comment><![CDATA[Method isValidDayPosition]]></comment>
+		<param>
+			<name>p</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[boolean]]></return>
+	</method>
+	<method>
+		<name>clone</name>
+		<comment><![CDATA[Method clone]]></comment>
+		<return><![CDATA[Object]]></return>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[Method toString]]></comment>
+		<return><![CDATA[String]]></return>
+	</method>
+	<field>
+		<name>day</name>
+		<comment><![CDATA[Field day]]></comment>
+	</field>
+	<field>
+		<name>position</name>
+		<comment><![CDATA[Field position]]></comment>
+	</field>
+	<field>
+		<name>NO_WEEKDAY</name>
+		<comment><![CDATA[Field NO_WEEKDAY]]></comment>
+	</field>
+</javadoc>

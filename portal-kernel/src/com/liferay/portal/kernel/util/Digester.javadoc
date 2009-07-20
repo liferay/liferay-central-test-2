@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Digester</name>
+	<type>com.liferay.portal.kernel.util.Digester</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>digest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>text</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>digest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>algorithm</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>text</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>ENCODING</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DIGEST_ALGORITHM</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

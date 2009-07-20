@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PermissionCheckerFactoryUtil</name>
+	<type>com.liferay.portal.security.permission.PermissionCheckerFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Charles May</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>user</name>
+			<type>com.liferay.portal.model.User</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>checkGuest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getPermissionCheckerFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPermissionCheckerFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>permissionCheckerFactory</name>
+			<type>com.liferay.portal.security.permission.PermissionCheckerFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_permissionCheckerFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

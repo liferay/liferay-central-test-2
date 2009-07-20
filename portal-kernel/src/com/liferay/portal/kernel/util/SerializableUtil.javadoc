@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SerializableUtil</name>
+	<type>com.liferay.portal.kernel.util.SerializableUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>deserialize</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>bytes</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ClassNotFoundException</name>
+			<type>java.lang.ClassNotFoundException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>serialize</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

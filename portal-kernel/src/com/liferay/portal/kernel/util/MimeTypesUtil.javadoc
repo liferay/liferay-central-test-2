@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MimeTypesUtil</name>
+	<type>com.liferay.portal.kernel.util.MimeTypesUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getContentType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getContentType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fileName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getMimeTypes</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setMimeTypes</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>mimeTypes</name>
+			<type>com.liferay.portal.kernel.util.MimeTypes</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_mimeTypes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

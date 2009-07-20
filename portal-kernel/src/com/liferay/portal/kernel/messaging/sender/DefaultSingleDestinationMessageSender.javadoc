@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DefaultSingleDestinationMessageSender</name>
+	<type>com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>DefaultSingleDestinationMessageSender</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>destinationName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>messageSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.MessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>payload</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_destinationName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_messageSender</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

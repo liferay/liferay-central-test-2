@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Dialect</name>
+	<type>com.liferay.portal.kernel.dao.orm.Dialect</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>supportsLimit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

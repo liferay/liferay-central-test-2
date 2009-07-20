@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ProtectedActionRequest</name>
+	<type>com.liferay.portal.kernel.portlet.ProtectedActionRequest</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ProtectedActionRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>actionRequest</name>
+			<type>javax.portlet.ActionRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>remoteUser</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRemoteUser</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getUserPrincipal</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_remoteUser</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_userPrincipal</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

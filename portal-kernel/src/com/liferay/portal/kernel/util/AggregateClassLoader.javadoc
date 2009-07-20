@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AggregateClassLoader</name>
+	<type>com.liferay.portal.kernel.util.AggregateClassLoader</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AggregateClassLoader</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>defaultClassLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>backupClassLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>loadClass</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ClassNotFoundException</name>
+			<type>java.lang.ClassNotFoundException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_backupClassLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

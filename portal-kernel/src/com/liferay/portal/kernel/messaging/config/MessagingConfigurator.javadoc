@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MessagingConfigurator</name>
+	<type>com.liferay.portal.kernel.messaging.config.MessagingConfigurator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setDestinations</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>destinations</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setGlobalDestinationEventListeners</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>globalDestinationEventListeners</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMessageListeners</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>messageListeners</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setReplacementDestinations</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>replacementDestinations</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setSpecificDestinationEventListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>specificDestinationEventListeners</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

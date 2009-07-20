@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DocumentConversionUtil</name>
+	<type>com.liferay.portal.kernel.util.DocumentConversionUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>convert</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>is</name>
+			<type>java.io.InputStream</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sourceExtension</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>targetExtension</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getConversions</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>extension</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_CLASS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

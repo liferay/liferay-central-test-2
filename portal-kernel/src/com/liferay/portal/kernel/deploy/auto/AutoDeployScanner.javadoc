@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AutoDeployScanner</name>
+	<type>com.liferay.portal.kernel.deploy.auto.AutoDeployScanner</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AutoDeployScanner</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>group</name>
+			<type>java.lang.ThreadGroup</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>dir</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployDir</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>run</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>pause</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_dir</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_started</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

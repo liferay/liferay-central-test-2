@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AutoDeployListener</name>
+	<type>com.liferay.portal.kernel.deploy.auto.AutoDeployListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>deploy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

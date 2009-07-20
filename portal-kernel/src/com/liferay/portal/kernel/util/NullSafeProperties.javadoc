@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>NullSafeProperties</name>
+	<type>com.liferay.portal.kernel.util.NullSafeProperties</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been renamed to <code>SafeProperties</code>.]]></deprecated>
+</javadoc>

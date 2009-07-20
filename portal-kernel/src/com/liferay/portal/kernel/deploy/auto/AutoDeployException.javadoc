@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AutoDeployException</name>
+	<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AutoDeployException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>AutoDeployException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>AutoDeployException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>AutoDeployException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

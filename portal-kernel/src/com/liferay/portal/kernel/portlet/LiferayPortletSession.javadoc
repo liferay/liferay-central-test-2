@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayPortletSession</name>
+	<type>com.liferay.portal.kernel.portlet.LiferayPortletSession</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>setHttpSession</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>javax.servlet.http.HttpSession</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>PORTLET_SCOPE_NAMESPACE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>LAYOUT_SEPARATOR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

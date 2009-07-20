@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IndexSearcher</name>
+	<type>com.liferay.portal.kernel.search.IndexSearcher</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>search</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>query</name>
+			<type>com.liferay.portal.kernel.search.Query</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sort</name>
+			<type>com.liferay.portal.kernel.search.Sort</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>start</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>end</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SearchException</name>
+			<type>com.liferay.portal.kernel.search.SearchException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

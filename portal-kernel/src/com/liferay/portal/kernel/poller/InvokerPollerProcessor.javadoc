@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InvokerPollerProcessor</name>
+	<type>com.liferay.portal.kernel.poller.InvokerPollerProcessor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>InvokerPollerProcessor</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pollerProcessor</name>
+			<type>com.liferay.portal.kernel.poller.PollerProcessor</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pollerRequest</name>
+			<type>com.liferay.portal.kernel.poller.PollerRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pollerResponse</name>
+			<type>com.liferay.portal.kernel.poller.PollerResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PollerException</name>
+			<type>com.liferay.portal.kernel.poller.PollerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pollerRequest</name>
+			<type>com.liferay.portal.kernel.poller.PollerRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PollerException</name>
+			<type>com.liferay.portal.kernel.poller.PollerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_pollerProcessor</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

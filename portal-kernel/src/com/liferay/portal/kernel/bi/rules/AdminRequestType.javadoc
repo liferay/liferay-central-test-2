@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AdminRequestType</name>
+	<type>com.liferay.portal.kernel.bi.rules.AdminRequestType</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<field>
+		<name>ADD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>REMOVE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>UPDATE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

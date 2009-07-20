@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JobExecutionContext</name>
+	<type>com.liferay.portal.kernel.job.JobExecutionContext</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getJobRunTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNextFireTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPreviousFireTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getResult</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>put</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setJobRunTime</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>jobRunTime</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setResult</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>result</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

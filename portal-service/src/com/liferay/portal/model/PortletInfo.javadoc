@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletInfo</name>
+	<type>com.liferay.portal.model.PortletInfo</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortletInfo</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>PortletInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>title</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>shortTitle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>keywords</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTitle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getShortTitle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getKeywords</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_title</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_shortTitle</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_keywords</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

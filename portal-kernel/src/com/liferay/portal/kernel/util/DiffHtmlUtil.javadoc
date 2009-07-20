@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DiffHtmlUtil</name>
+	<type>com.liferay.portal.kernel.util.DiffHtmlUtil</type>
+	<comment><![CDATA[<p>This class can compare two different versions of HTML code. It detects changes to an entire HTML page such as removal or addition of characters or images.</p>]]></comment>
+	<author>Julio Camarero</author>
+	<method>
+		<name>diff</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.io.Reader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>target</name>
+			<type>java.io.Reader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getDiffHtml</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setDiffHtml</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>diffHtml</name>
+			<type>com.liferay.portal.kernel.util.DiffHtml</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_diffHtml</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

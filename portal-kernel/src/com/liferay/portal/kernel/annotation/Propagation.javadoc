@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Propagation</name>
+	<type>com.liferay.portal.kernel.annotation.Propagation</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>Propagation</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>value</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>MANDATORY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NEVER</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NESTED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NOT_SUPPORTED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>REQUIRED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>REQUIRES_NEW</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SUPPORTS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

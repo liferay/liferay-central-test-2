@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TimeZoneUtil</name>
+	<type>com.liferay.portal.kernel.util.TimeZoneUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getDefault</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTimeZone</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>timeZoneId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setDefault</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>TimeZoneUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_getDefault</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_setDefault</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_timeZone</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

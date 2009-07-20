@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FriendlyURLMapperThreadLocal</name>
+	<type>com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getPRPIdentifiers</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPRPIdentifiers</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>prpIdentifiers</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_threadLocal</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PluginMessagingConfigurator</name>
+	<type>com.liferay.portal.kernel.messaging.config.PluginMessagingConfigurator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>getMessageBus</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getOperatingClassloader</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MultiValueMapFactory</name>
+	<type>com.liferay.portal.kernel.util.MultiValueMapFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getMultiValueMap</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>FILE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>MEMORY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

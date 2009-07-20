@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayRenderResponse</name>
+	<type>com.liferay.portal.kernel.portlet.LiferayRenderResponse</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>setResourceName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>resourceName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

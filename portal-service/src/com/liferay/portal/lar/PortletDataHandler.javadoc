@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletDataHandler</name>
+	<type>com.liferay.portal.lar.PortletDataHandler</type>
+	<comment><![CDATA[<p>A<code>PortletDataHandler</code>is a special class capable of exporting and importing portlet specific data to a Liferay Archive file (LAR) when a community's layouts are exported or imported.<code>PortletDataHandler</code>s are defined by placing a<code>portlet-data-handler-class</code>element in the<code>portlet</code>section of the<b>liferay-portlet.xml</b>file.</p>]]></comment>
+	<author>Raymond Augé</author>
+	<author>Joel Kozikowski</author>
+	<author>Bruno Farache</author>
+	<method>
+		<name>deleteData</name>
+		<comment><![CDATA[Deletes the data created by the portlet. Can optionally return a modified version of<code>preferences</code>if it contains reference to data that does not exist anymore.]]></comment>
+		<param>
+			<name>context</name>
+			<type>com.liferay.portal.lar.PortletDataContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferences</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[A modified version of preferences that should be saved. Null
+if the preferences were unmodified by this data handler.]]></return>
+		<throws>
+			<name>PortletDataException</name>
+			<type>com.liferay.portal.lar.PortletDataException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>exportData</name>
+		<comment><![CDATA[Returns a string of data to be placed in the &lt;portlet-data&gt; section of the LAR file. This data will be passed as the<code>data</code>parameter of<code>importData()</code>.]]></comment>
+		<param>
+			<name>context</name>
+			<type>com.liferay.portal.lar.PortletDataContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferences</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[A string of data to be placed in the LAR. It may be XML,
+but not necessarily. Null should be returned if no portlet
+data is to be written out.]]></return>
+		<throws>
+			<name>PortletDataException</name>
+			<type>com.liferay.portal.lar.PortletDataException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getExportControls</name>
+		<comment><![CDATA[Returns an array of the controls defined for this data handler. These controls enable the developer to create fine grained controls over export behavior. The controls are rendered in the export UI.]]></comment>
+		<return><![CDATA[an array of PortletDataHandlerControls]]></return>
+		<throws>
+			<name>PortletDataException</name>
+			<type>com.liferay.portal.lar.PortletDataException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getImportControls</name>
+		<comment><![CDATA[Returns an array of the controls defined for this data handler. These controls enable the developer to create fine grained controls over import behavior. The controls are rendered in the import UI.]]></comment>
+		<return><![CDATA[An array of PortletDataHandlerControls]]></return>
+		<throws>
+			<name>PortletDataException</name>
+			<type>com.liferay.portal.lar.PortletDataException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>importData</name>
+		<comment><![CDATA[Handles any special processing of the data when the portlet is imported into a new layout. Can optionally return a modified version of<code>preferences</code>to be saved in the new portlet.]]></comment>
+		<param>
+			<name>context</name>
+			<type>com.liferay.portal.lar.PortletDataContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferences</name>
+			<type>javax.portlet.PortletPreferences</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>data</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[A modified version of preferences that should be
+saved. Null if the preferences were unmodified by this data
+handler.]]></return>
+		<throws>
+			<name>PortletDataException</name>
+			<type>com.liferay.portal.lar.PortletDataException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isAlwaysExportable</name>
+		<comment><![CDATA[Returns true to allow the user to export data for this portlet even though it may not belong to any pages. See LPS-1624.]]></comment>
+		<return><![CDATA[true to allow the user to export data for this portlet even
+though it may not belong to any pages]]></return>
+	</method>
+	<method>
+		<name>isPublishToLiveByDefault</name>
+		<comment><![CDATA[Returns whether the data exported by this handler should be included by default when publishing to live. This should only be true for data that is meant to be managed in an staging environment such as CMS content, but not for data meant to be input by users such as wiki pages or message board posts.]]></comment>
+		<return><![CDATA[true to publish to live by default]]></return>
+	</method>
+</javadoc>

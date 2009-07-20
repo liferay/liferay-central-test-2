@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MappingSqlQuery</name>
+	<type>com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>execute</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>params</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

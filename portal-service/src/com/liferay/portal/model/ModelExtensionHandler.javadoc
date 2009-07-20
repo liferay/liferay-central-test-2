@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ModelExtensionHandler</name>
+	<type>com.liferay.portal.model.ModelExtensionHandler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Aug�</author>
+	<method>
+		<name>getExtensionMethodNames</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setExtensionMethodNames</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>extensionMethodNames</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>extendList</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>models</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>extendSingle</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>model</name>
+			<type>com.liferay.portal.model.BaseModel</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IndexerRegistry</name>
+	<type>com.liferay.portal.kernel.search.IndexerRegistry</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>getIndexer</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>className</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getIndexers</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>register</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>className</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>indexer</name>
+			<type>com.liferay.portal.kernel.search.Indexer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>unregister</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>className</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

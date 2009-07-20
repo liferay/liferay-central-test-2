@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InvokerSimpleAction</name>
+	<type>com.liferay.portal.kernel.events.InvokerSimpleAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>InvokerSimpleAction</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>simpleAction</name>
+			<type>com.liferay.portal.kernel.events.SimpleAction</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>InvokerSimpleAction</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>simpleAction</name>
+			<type>com.liferay.portal.kernel.events.SimpleAction</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>run</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>ids</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ActionException</name>
+			<type>com.liferay.portal.kernel.events.ActionException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_simpleAction</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

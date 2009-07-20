@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalBeanLocatorUtil</name>
+	<type>com.liferay.portal.kernel.bean.PortalBeanLocatorUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getBeanLocator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>locate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>BeanLocatorException</name>
+			<type>com.liferay.portal.kernel.bean.BeanLocatorException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setBeanLocator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>beanLocator</name>
+			<type>com.liferay.portal.kernel.bean.BeanLocator</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_beanLocator</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

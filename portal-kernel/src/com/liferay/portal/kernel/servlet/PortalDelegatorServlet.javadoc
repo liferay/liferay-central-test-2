@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalDelegatorServlet</name>
+	<type>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</type>
+	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2297.</p>]]></comment>
+	<author>Olaf Fricke</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>addDelegate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>subContext</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>delegate</name>
+			<type>javax.servlet.http.HttpServlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>removeDelegate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>subContext</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>service</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_delegates</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

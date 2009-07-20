@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WikiImporterKeys</name>
+	<type>com.liferay.portlet.wiki.importers.WikiImporterKeys</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<field>
+		<name>OPTIONS_FRONT_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OPTIONS_IMPORT_LATEST_VERSION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

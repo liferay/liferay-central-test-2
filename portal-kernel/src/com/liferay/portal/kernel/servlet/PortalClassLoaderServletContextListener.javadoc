@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalClassLoaderServletContextListener</name>
+	<type>com.liferay.portal.kernel.servlet.PortalClassLoaderServletContextListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Sandeep Soni</author>
+	<method>
+		<name>PortalClassLoaderServletContextListener</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>contextDestroyed</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>javax.servlet.ServletContextEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>contextInitialized</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>javax.servlet.ServletContextEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>portalInit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_event</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_servletContextListener</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_portletClassLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

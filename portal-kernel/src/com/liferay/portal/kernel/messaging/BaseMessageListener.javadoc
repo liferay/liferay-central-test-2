@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseMessageListener</name>
+	<type>com.liferay.portal.kernel.messaging.BaseMessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>BaseMessageListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>statusSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>responseSender</name>
+			<type>com.liferay.portal.kernel.messaging.sender.MessageSender</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>doReceive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>messageStatus</name>
+			<type>com.liferay.portal.kernel.messaging.MessageStatus</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getResponseSender</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_responseSender</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_statusSender</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

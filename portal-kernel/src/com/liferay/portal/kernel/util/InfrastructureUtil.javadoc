@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InfrastructureUtil</name>
+	<type>com.liferay.portal.kernel.util.InfrastructureUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Michael Young</author>
+	<method>
+		<name>getDataSource</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDynamicDataSourceTargetSource</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getMailSession</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setDataSource</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSource</name>
+			<type>javax.sql.DataSource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setDynamicDataSourceTargetSource</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dynamicDataSourceTargetSource</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMailSession</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>mailSession</name>
+			<type>javax.mail.Session</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_dataSource</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_dynamicDataSourceTargetSource</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_mailSession</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

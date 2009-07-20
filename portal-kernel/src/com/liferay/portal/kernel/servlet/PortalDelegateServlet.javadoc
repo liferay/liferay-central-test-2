@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalDelegateServlet</name>
+	<type>com.liferay.portal.kernel.servlet.PortalDelegateServlet</type>
+	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2297.</p>]]></comment>
+	<author>Olaf Fricke</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletConfig</name>
+			<type>javax.servlet.ServletConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_subContext</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

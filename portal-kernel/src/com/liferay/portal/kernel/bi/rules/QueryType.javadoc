@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>QueryType</name>
+	<type>com.liferay.portal.kernel.bi.rules.QueryType</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<field>
+		<name>CUSTOM</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STANDARD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

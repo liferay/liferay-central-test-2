@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WikiEngine</name>
+	<type>com.liferay.portlet.wiki.engines.WikiEngine</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>convert</name>
+		<comment><![CDATA[Convert the content of the given page to HTML using the portletURL to build links.]]></comment>
+		<param>
+			<name>page</name>
+			<type>com.liferay.portlet.wiki.model.WikiPage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletURL</name>
+			<type>javax.portlet.PortletURL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[HTML string]]></return>
+		<throws>
+			<name>PageContentException</name>
+			<type>com.liferay.portlet.wiki.PageContentException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getOutgoingLinks</name>
+		<comment><![CDATA[Get a map with the links included in the given page. The key of each map entry is the title of the linked page. The value is a Boolean object that indicates if the linked page exists or not.]]></comment>
+		<param>
+			<name>page</name>
+			<type>com.liferay.portlet.wiki.model.WikiPage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[a map of links]]></return>
+		<throws>
+			<name>PageContentException</name>
+			<type>com.liferay.portlet.wiki.PageContentException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setInterWikiConfiguration</name>
+		<comment><![CDATA[Set the configuraton to support quick links to other wikis. The format of the configuration is specific to the wiki engine.]]></comment>
+		<param>
+			<name>interWikiConfiguration</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMainConfiguration</name>
+		<comment><![CDATA[Set the main wiki configuraiton as a String. The format of the configuration is specific to the wiki engine.]]></comment>
+		<param>
+			<name>mainConfiguration</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>validate</name>
+		<comment><![CDATA[Validate the content of a wiki page for this engine.]]></comment>
+		<param>
+			<name>nodeId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>content</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the content is valid]]></return>
+	</method>
+</javadoc>

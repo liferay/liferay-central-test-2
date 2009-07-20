@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MultiValueMapTestCase</name>
+	<type>com.liferay.portal.util.MultiValueMapTestCase</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>testDelete</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testMultipleInsert</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>multiValueMap</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

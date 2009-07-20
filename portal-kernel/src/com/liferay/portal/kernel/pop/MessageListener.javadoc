@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MessageListener</name>
+	<type>com.liferay.portal.kernel.pop.MessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>accept</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>from</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>recipient</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>message</name>
+			<type>javax.mail.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>deliver</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>from</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>recipient</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>message</name>
+			<type>javax.mail.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MessageListenerException</name>
+			<type>com.liferay.portal.kernel.pop.MessageListenerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

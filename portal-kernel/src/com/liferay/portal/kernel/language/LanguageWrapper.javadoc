@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LanguageWrapper</name>
+	<type>com.liferay.portal.kernel.language.LanguageWrapper</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>LanguageWrapper</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>before</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>text</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>after</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getBefore</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getText</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAfter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_before</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_text</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_after</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

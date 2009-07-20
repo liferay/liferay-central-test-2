@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DestinationRegistrationTask</name>
+	<type>com.liferay.portal.kernel.messaging.DestinationRegistrationTask</type>
+	<comment><![CDATA[]]></comment>
+	<author>Shuyang Zhou</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DestinationRegistrationTask</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>destination</name>
+			<type>com.liferay.portal.kernel.messaging.Destination</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>listeners</name>
+			<type>com.liferay.portal.kernel.messaging.MessageListener</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>taskIterationCount</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>register</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>call</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_destination</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_listeners</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_register</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_taskIterationCount</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

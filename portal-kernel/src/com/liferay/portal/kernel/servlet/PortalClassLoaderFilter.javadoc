@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalClassLoaderFilter</name>
+	<type>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doFilter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletRequest</name>
+			<type>javax.servlet.ServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>servletResponse</name>
+			<type>javax.servlet.ServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filterChain</name>
+			<type>javax.servlet.FilterChain</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>filterConfig</name>
+			<type>javax.servlet.FilterConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>portalInit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_filter</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_filterConfig</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DiffImplTest</name>
+	<type>com.liferay.portal.util.DiffImplTest</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>testOne</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testTwo</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testThree</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testFour</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testFive</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testSix</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testSeven</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testEight</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testNine</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testTen</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testEleven</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>testTwelve</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

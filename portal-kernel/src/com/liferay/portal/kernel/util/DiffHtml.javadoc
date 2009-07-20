@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DiffHtml</name>
+	<type>com.liferay.portal.kernel.util.DiffHtml</type>
+	<comment><![CDATA[]]></comment>
+	<author>Julio Camarero</author>
+	<method>
+		<name>diff</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.io.Reader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>target</name>
+			<type>java.io.Reader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

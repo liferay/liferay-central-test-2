@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutTypeException</name>
+	<type>com.liferay.portal.LayoutTypeException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>LayoutTypeException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>NOT_PARENTABLE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FIRST_LAYOUT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_type</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DocumentSummary</name>
+	<type>com.liferay.portal.kernel.search.DocumentSummary</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DocumentSummary</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>title</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>content</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>url</name>
+			<type>javax.portlet.PortletURL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTitle</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getContent</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getURL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_title</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_content</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_url</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

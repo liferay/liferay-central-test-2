@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BooleanQueryFactoryUtil</name>
+	<type>com.liferay.portal.kernel.search.BooleanQueryFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getBooleanQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setBooleanQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>booleanQueryFactory</name>
+			<type>com.liferay.portal.kernel.search.BooleanQueryFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_booleanQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

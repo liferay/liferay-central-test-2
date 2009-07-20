@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InvokerAction</name>
+	<type>com.liferay.portal.kernel.events.InvokerAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>InvokerAction</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>action</name>
+			<type>com.liferay.portal.kernel.events.Action</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>run</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ActionException</name>
+			<type>com.liferay.portal.kernel.events.ActionException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_action</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PropertyFactory</name>
+	<type>com.liferay.portal.kernel.dao.orm.PropertyFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>forName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>propertyName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

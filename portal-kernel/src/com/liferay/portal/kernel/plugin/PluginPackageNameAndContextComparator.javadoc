@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PluginPackageNameAndContextComparator</name>
+	<type>com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>package1</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>package2</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

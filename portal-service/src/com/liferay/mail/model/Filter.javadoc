@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Filter</name>
+	<type>com.liferay.mail.model.Filter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>Filter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>Filter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>emailAddress</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>folder</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getEmailAddress</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setEmailAddress</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>emailAddress</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFolder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setFolder</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>folder</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_emailAddress</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_folder</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

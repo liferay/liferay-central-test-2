@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CommonContextInfoNames</name>
+	<type>com.liferay.portal.kernel.workflow.CommonContextInfoNames</type>
+	<comment><![CDATA[]]></comment>
+	<author>Shuyang Zhou</author>
+	<field>
+		<name>GROUP_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>JOURNAL_ARTICLEID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

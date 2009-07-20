@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrganizationConstants</name>
+	<type>com.liferay.portal.model.OrganizationConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>DEFAULT_PARENT_ORGANIZATION_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>ANY_PARENT_ORGANIZATION_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>TYPE_REGULAR_ORGANIZATION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>TYPE_LOCATION</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

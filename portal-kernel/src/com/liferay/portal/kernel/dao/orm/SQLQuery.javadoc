@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SQLQuery</name>
+	<type>com.liferay.portal.kernel.dao.orm.SQLQuery</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>addEntity</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>alias</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>entityClass</name>
+			<type>java.lang.Class</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addScalar</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>columnAlias</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
+			<type>com.liferay.portal.kernel.dao.orm.Type</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

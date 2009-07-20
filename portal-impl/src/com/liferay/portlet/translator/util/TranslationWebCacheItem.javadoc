@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TranslationWebCacheItem</name>
+	<type>com.liferay.portlet.translator.util.TranslationWebCacheItem</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>TranslationWebCacheItem</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>translationId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>fromText</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>convert</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WebCacheException</name>
+			<type>com.liferay.portal.kernel.webcache.WebCacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getRefreshTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_REFRESH_TIME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_translationId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_fromText</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

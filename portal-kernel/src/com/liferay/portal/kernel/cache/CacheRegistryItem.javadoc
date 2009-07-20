@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CacheRegistryItem</name>
+	<type>com.liferay.portal.kernel.cache.CacheRegistryItem</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getRegistryName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>invalidate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

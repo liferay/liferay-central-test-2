@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ServletObjectsFactory</name>
+	<type>com.liferay.portal.kernel.servlet.ServletObjectsFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Deepak Gothe</author>
+	<method>
+		<name>getServletConfig</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletConfig</name>
+			<type>javax.portlet.PortletConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getServletRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getServletResponse</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletResponse</name>
+			<type>javax.portlet.PortletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

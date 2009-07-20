@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PollerProcessor</name>
+	<type>com.liferay.portal.kernel.poller.PollerProcessor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pollerRequest</name>
+			<type>com.liferay.portal.kernel.poller.PollerRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pollerResponse</name>
+			<type>com.liferay.portal.kernel.poller.PollerResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PollerException</name>
+			<type>com.liferay.portal.kernel.poller.PollerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pollerRequest</name>
+			<type>com.liferay.portal.kernel.poller.PollerRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PollerException</name>
+			<type>com.liferay.portal.kernel.poller.PollerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

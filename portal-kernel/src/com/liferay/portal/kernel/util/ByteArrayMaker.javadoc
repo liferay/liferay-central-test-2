@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ByteArrayMaker</name>
+	<type>com.liferay.portal.kernel.util.ByteArrayMaker</type>
+	<comment><![CDATA[]]></comment>
+	<author>Harry Mark</author>
+	<method>
+		<name>getStatistics</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ByteArrayMaker</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ByteArrayMaker</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>size</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toByteArray</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_getInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>t</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>collect</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>stats</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>defaultInitSize</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_initSize</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_caller</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

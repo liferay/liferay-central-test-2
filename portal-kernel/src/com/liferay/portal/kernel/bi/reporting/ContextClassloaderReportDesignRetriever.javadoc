@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContextClassloaderReportDesignRetriever</name>
+	<type>com.liferay.portal.kernel.bi.reporting.ContextClassloaderReportDesignRetriever</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>ContextClassloaderReportDesignRetriever</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>reportName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInputStream</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getModifiedDate</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getReportName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_reportName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

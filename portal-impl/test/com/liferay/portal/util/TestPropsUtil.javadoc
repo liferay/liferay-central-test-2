@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TestPropsUtil</name>
+	<type>com.liferay.portal.util.TestPropsUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getProperties</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>TestPropsUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_props</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

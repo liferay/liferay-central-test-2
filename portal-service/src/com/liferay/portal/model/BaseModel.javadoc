@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseModel</name>
+	<type>com.liferay.portal.model.BaseModel</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>isNew</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setNew</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>n</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isCachedModel</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setCachedModel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cachedModel</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isEscapedModel</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setEscapedModel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>escapedModel</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPrimaryKeyObj</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getExpandoBridge</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>clone</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>toXmlString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ImageServletTokenUtil</name>
+	<type>com.liferay.portal.kernel.servlet.ImageServletTokenUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getImageServletToken</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getToken</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>imageId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>resetToken</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>imageId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setImageServletToken</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>imageServletToken</name>
+			<type>com.liferay.portal.kernel.servlet.ImageServletToken</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_imageServletToken</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

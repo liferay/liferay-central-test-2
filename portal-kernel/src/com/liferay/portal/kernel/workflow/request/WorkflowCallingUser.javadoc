@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WorkflowCallingUser</name>
+	<type>com.liferay.portal.kernel.workflow.request.WorkflowCallingUser</type>
+	<comment><![CDATA[<p>This class represents the {@link UserCredential} attached to a {@link ThreadLocal}, made available through {@link #getCallingUserCredential()}. Most workflow API invocations provides the calling user however, some read only methods do not, so the calling user might not be present for all requests and thus the method {@link #getCallingUserCredential()} could return<code>null</code>.</p>]]></comment>
+	<author>Micha Kiener</author>
+	<see>BaseRequest BaseRequest for more information about the transport mechanism used for the credential</see>
+	<method>
+		<name>getCallingUserCredential</name>
+		<comment><![CDATA[]]></comment>
+		<return><![CDATA[the calling user's credential, if available, <code>null</code>
+otherwise]]></return>
+	</method>
+	<method>
+		<name>setCallingUserCredential</name>
+		<comment><![CDATA[This method should only be used by the {@link BaseRequest} to set the calling user credential before invoking the method on the underlying workflow engine.<b>IMPORTANT</b>It has to make sure, to remove the credential in a finally after the method execution by invoking this method again by passing in<code>null</code>.]]></comment>
+		<param>
+			<name>userCredential</name>
+			<type>com.liferay.portal.kernel.workflow.UserCredential</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_callingUser</name>
+		<comment><![CDATA[The thread local holding the calling user's credential, if any.]]></comment>
+	</field>
+</javadoc>

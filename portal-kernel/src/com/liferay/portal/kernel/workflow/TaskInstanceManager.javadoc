@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TaskInstanceManager</name>
+	<type>com.liferay.portal.kernel.workflow.TaskInstanceManager</type>
+	<comment><![CDATA[<p>The task instance manager handles all tasks related to a workflow system. A task might be part of the workflow definition in order to stop the execution plan as any user needs to complete the task before the execution continues.</p><p>The next step in a workflow definition is a decision to be made by a user, so this could be modeled by adding a task activity to the workflow definition, stopping the workflow execution and creating a task instance. The task would ask the user for a decision and adds it to the context information available trough the workflow instance and hence any node would have access to it. After the task is completed, the workflow execution automatically continues by executing the decision element using the information entered while completing the task and taking that decision to continue with the execution of the workflow.</p><p>This is just one scenario where tasks come into play, but basically, a task is just an element preventing the execution of the workflow by delegating it to a user through a task instance.</p>]]></comment>
+	<author>Micha Kiener</author>
+	<method>
+		<name>assignTaskInstanceToRole</name>
+		<comment><![CDATA[Assign the task instance with the given id to the specified role with an optional comment. The task instance information being returned will reflect those changes made to the task instance.]]></comment>
+		<param>
+			<name>taskInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>roleId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>comment</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>callingUserId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the task information reflecting the changes made to it]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>assignTaskInstanceToUser</name>
+		<comment><![CDATA[Assign the task instance with the given id to the specified user with an optional comment. The task instance information being returned will reflect those changes made to the task instance.]]></comment>
+		<param>
+			<name>taskInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userCredential</name>
+			<type>com.liferay.portal.kernel.workflow.UserCredential</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>comment</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>callingUserId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the task information reflecting the changes made to it]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>completeTaskInstance</name>
+		<comment><![CDATA[<p>Completes the task instance with the specified id by the given user id (which should usually be the same as the current assignee, but it's not a must). Optionally there might be a comment to be left for the completion of the task and a map with attributes to be passed on to the workflow instance this task belongs to. If any attributes are provided, they will be made part of the context information of the workflow instance this task belongs to and hence available by the workflow actions later through the context information map.</p><p>If the workflow engine supports EL expressions and a special process scope and Spring is used as the IoC container, the attributes are not necessary but instead, the information to be provided by task completion could directly be made to beans having process scope as they would be stored within the context information of the process instance anyway. As an alternative, the attribute map might be used for the same effect.</p><p>Make sure that all attribute objects are serializable as they will be persisted along with the process instance.</p><p>After the task has been completed, the workflow engine will continue with the next default activity, if it was not an asynchronous task.</p>]]></comment>
+		<param>
+			<name>taskInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>comment</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the task information reflecting the changes]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByRole</name>
+		<comment><![CDATA[Queries for all tasks currently assigned to the given role. If only open tasks should be returned, use {@link #getTaskInstanceInfosByRole(long, boolean)} instead.]]></comment>
+		<param>
+			<name>roleId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all tasks assigned to the given role]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByRole</name>
+		<comment><![CDATA[Queries for open or completed tasks currently assigned to the given role.]]></comment>
+		<param>
+			<name>roleId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>completed</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all open or completed tasks assigned to the given role]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByUser</name>
+		<comment><![CDATA[Queries for all tasks currently assigned to the given user. If only open tasks should be returned, use {@link #getTaskInstanceInfosByUser(long, boolean)} instead.]]></comment>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all tasks assigned to the given user]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByUser</name>
+		<comment><![CDATA[Queries for open or completed tasks currently assigned to the given user.]]></comment>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>completed</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all open or completed tasks assigned to the given user]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByWorkflowInstance</name>
+		<comment><![CDATA[Queries for all tasks for the specified workflow instance. If only open tasks should be returned, use {@link #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all tasks related to the specified workflow instance]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTaskInstanceInfosByWorkflowInstance</name>
+		<comment><![CDATA[Queries for open or completed tasks for the specified workflow instance.]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>completed</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[all completed or open tasks related to the specified workflow
+instance]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

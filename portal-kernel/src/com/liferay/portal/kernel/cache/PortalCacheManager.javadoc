@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalCacheManager</name>
+	<type>com.liferay.portal.kernel.cache.PortalCacheManager</type>
+	<comment><![CDATA[]]></comment>
+	<author>Joseph Shum</author>
+	<method>
+		<name>clearAll</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>PortalCacheException</name>
+			<type>com.liferay.portal.kernel.cache.PortalCacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getCache</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PortalCacheException</name>
+			<type>com.liferay.portal.kernel.cache.PortalCacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getCache</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>blocking</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PortalCacheException</name>
+			<type>com.liferay.portal.kernel.cache.PortalCacheException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

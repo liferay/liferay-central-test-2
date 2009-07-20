@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WorkflowResultContainer</name>
+	<type>com.liferay.portal.kernel.workflow.proxy.WorkflowResultContainer</type>
+	<comment><![CDATA[<p>The workflow result container is used to return an argument or an exception which was the result of the workflow engine invocation through a {@link BaseRequest} or any of its subclasses.</p>]]></comment>
+	<author>Shuyang Zhou</author>
+	<author>Micha Kiener</author>
+	<method>
+		<name>WorkflowResultContainer</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>WorkflowResultContainer</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>result</name>
+			<type>T</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getException</name>
+		<comment><![CDATA[]]></comment>
+		<return><![CDATA[the exception which was thrown by invoking the method, if
+{@link #hasError()} returns <code>true</code>, otherwise this
+method just returns <code>null</code>]]></return>
+	</method>
+	<method>
+		<name>getResult</name>
+		<comment><![CDATA[]]></comment>
+		<return><![CDATA[the result of the method invocation]]></return>
+	</method>
+	<method>
+		<name>hasError</name>
+		<comment><![CDATA[]]></comment>
+		<return><![CDATA[<code>true</code>, if the method invocation produced an exception
+rather than returning a value]]></return>
+	</method>
+	<method>
+		<name>setException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>exception</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setResult</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>result</name>
+			<type>T</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_exception</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_result</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

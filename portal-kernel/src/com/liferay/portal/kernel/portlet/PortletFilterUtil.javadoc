@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletFilterUtil</name>
+	<type>com.liferay.portal.kernel.portlet.PortletFilterUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>doFilter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletResponse</name>
+			<type>javax.portlet.PortletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>lifecycle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filterChain</name>
+			<type>javax.portlet.filter.FilterChain</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>PortletException</name>
+			<type>javax.portlet.PortletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TermQueryFactoryUtil</name>
+	<type>com.liferay.portal.kernel.search.TermQueryFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTermQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setTermQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>termQueryFactory</name>
+			<type>com.liferay.portal.kernel.search.TermQueryFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_termQueryFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

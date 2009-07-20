@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CodeBlock</name>
+	<type>com.liferay.portlet.wiki.filters.CodeBlock</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>getObject</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>content</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_pattern</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

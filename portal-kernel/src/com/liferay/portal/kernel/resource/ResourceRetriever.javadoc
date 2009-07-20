@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ResourceRetriever</name>
+	<type>com.liferay.portal.kernel.resource.ResourceRetriever</type>
+	<comment><![CDATA[]]></comment>
+	<author>Shuyang Zhou</author>
+	<method>
+		<name>getInputStream</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

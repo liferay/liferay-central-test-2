@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PermissionThreadLocal</name>
+	<type>com.liferay.portal.security.permission.PermissionThreadLocal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getPermissionChecker</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isAddResource</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setAddResource</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>addResource</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setPermissionChecker</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>permissionChecker</name>
+			<type>com.liferay.portal.security.permission.PermissionChecker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_addResource</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_permissionChecker</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ReportFormat</name>
+	<type>com.liferay.portal.kernel.bi.reporting.ReportFormat</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>parse</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ReportFormat</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>CSV</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>EXCEL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>HTML</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PDF</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>RTF</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>TEXT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>XML</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_reportFormats</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MessageBusManager</name>
+	<type>com.liferay.portal.kernel.messaging.jmx.MessageBusManager</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>createObjectName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>MessageBusManager</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>messageBus</name>
+			<type>com.liferay.portal.kernel.messaging.MessageBus</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDestinationCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_OBJECT_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_messageBus</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>
