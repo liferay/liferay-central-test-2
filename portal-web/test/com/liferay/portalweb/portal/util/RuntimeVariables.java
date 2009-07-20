@@ -32,12 +32,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <a href="RuntimeVariables.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class RuntimeVariables {
 
 	public static String getValue(String key) {

@@ -28,12 +28,6 @@ import com.liferay.portalweb.portal.cluster.cluster2.Cluster2bTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="Cluster2TestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Cluster2TestSuite extends BaseTests {
 
 	public static Test suite() {

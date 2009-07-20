@@ -24,12 +24,6 @@ package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 
-/**
- * <a href="TestPropsValues.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class TestPropsValues {
 
 	public static final String BROWSER_TYPE = TestPropsUtil.get("browser.type");

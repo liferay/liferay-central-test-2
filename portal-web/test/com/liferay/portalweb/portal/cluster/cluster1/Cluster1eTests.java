@@ -28,12 +28,6 @@ import com.liferay.portalweb.portal.StopSeleniumTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="Cluster1eTests.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class Cluster1eTests extends BaseTests {
 
 	public static Test suite() {

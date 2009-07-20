@@ -29,12 +29,6 @@ import com.liferay.portalweb.portal.staging.controlpanel.ControlPanelTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="StagingTestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StagingTestSuite extends BaseTests {
 
 	public static Test suite() {

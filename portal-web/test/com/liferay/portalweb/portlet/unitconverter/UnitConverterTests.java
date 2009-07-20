@@ -27,12 +27,6 @@ import com.liferay.portalweb.portal.BaseTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="UnitConverterTests.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class UnitConverterTests extends BaseTests {
 
 	public static Test suite() {

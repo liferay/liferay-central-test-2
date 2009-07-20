@@ -1,4 +1,4 @@
-	/**
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,12 +27,6 @@ import com.liferay.portalweb.portal.BaseTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="StocksTests.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class StocksTests extends BaseTests {
 
 	public static Test suite() {

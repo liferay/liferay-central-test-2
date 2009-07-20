@@ -76,12 +76,6 @@ import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class PortalWebTestSuite extends BaseTests {
 
 	public static Test suite() {

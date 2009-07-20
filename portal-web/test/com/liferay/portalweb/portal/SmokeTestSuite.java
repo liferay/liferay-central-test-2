@@ -28,12 +28,6 @@ import com.liferay.portalweb.portal.logout.LogoutTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
- * <a href="SmokeTestSuite.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SmokeTestSuite extends BaseTests {
 
 	public static Test suite() {

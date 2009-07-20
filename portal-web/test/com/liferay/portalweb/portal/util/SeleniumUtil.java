@@ -25,12 +25,6 @@ package com.liferay.portalweb.portal.util;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portalweb.portal.util.TestPropsValues;
 
-/**
- * <a href="SeleniumUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class SeleniumUtil {
 
 	public static LiferaySelenium getSelenium() {

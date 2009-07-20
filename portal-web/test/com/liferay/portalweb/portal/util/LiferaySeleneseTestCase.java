@@ -24,12 +24,6 @@ package com.liferay.portalweb.portal.util;
 
 import com.thoughtworks.selenium.SeleneseTestCase;
 
-/**
- * <a href="LiferaySeleneseTestCase.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
 public class LiferaySeleneseTestCase extends SeleneseTestCase {
 
 	public LiferaySeleneseTestCase() {
