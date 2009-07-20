@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalRole</name>
+	<type>com.liferay.portal.security.jaas.PortalRole</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been repackaged at
+<code>com.liferay.portal.kernel.security.jaas</code>.]]></deprecated>
+	<method>
+		<name>PortalRole</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>PortalRole</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

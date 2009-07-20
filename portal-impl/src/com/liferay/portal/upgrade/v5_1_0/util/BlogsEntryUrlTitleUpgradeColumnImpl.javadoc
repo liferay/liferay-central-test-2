@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BlogsEntryUrlTitleUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>BlogsEntryUrlTitleUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>entryIdColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>titleColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getUrlTitle</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>entryId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>title</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_entryIdColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_titleColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_urlTitles</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

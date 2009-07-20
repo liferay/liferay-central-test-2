@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrgGroupRoleImpl</name>
+	<type>com.liferay.portal.model.impl.OrgGroupRoleImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>OrgGroupRoleImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>containsOrganization</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>organizations</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>containsGroup</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>groups</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

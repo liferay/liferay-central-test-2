@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TermQueryImpl</name>
+	<type>com.liferay.portal.search.lucene.TermQueryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>TermQueryImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>TermQueryImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTermQuery</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_termQuery</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletBeanFactoryPostProcessor</name>
+	<type>com.liferay.portal.spring.context.PortletBeanFactoryPostProcessor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>postProcessBeanFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>beanFactory</name>
+			<type>org.springframework.beans.factory.config.ConfigurableListableBeanFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

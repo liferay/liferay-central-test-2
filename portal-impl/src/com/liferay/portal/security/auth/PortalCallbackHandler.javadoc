@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalCallbackHandler</name>
+	<type>com.liferay.portal.security.auth.PortalCallbackHandler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortalCallbackHandler</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>password</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>handle</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>callbacks</name>
+			<type>javax.security.auth.callback.Callback</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_password</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

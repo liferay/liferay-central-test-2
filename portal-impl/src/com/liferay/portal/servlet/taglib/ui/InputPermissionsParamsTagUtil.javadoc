@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InputPermissionsParamsTagUtil</name>
+	<type>com.liferay.portal.servlet.taglib.ui.InputPermissionsParamsTagUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>modelName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pageContext</name>
+			<type>javax.servlet.jsp.PageContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

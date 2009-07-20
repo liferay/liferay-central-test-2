@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ThemeDisplayFactory</name>
+	<type>com.liferay.portal.theme.ThemeDisplayFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

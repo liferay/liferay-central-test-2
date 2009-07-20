@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MonitoringFilter</name>
+	<type>com.liferay.portal.servlet.filters.monitoring.MonitoringFilter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Rajesh Thiagarajan</author>
+	<author>Michael C. Han</author>
+	<method>
+		<name>isMonitoringPortalRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setMonitoringPortalRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>monitoringPortalRequest</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isFilterEnabled</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>processFilter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filterChain</name>
+			<type>javax.servlet.FilterChain</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_monitoringPortalRequest</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

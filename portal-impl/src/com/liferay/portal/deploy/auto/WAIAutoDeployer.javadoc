@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WAIAutoDeployer</name>
+	<type>com.liferay.portal.deploy.auto.WAIAutoDeployer</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>WAIAutoDeployer</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>copyXmls</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>srcFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>displayName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pluginPackage</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>_setInitParams</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>filterMap</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pluginPackage</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_INIT_PARAM_NAMES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_INIT_PARAM_DEFAULT_VALUES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

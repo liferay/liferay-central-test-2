@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WebIdUtil</name>
+	<type>com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getWebIds</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_GET_WEB_IDS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_webIds</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

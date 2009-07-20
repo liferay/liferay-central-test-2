@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrganizationTypeUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>OrganizationTypeUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>locationColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_locationColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

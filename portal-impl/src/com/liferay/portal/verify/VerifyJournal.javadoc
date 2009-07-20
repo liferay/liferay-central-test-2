@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>VerifyJournal</name>
+	<type>com.liferay.portal.verify.VerifyJournal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>verify</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>VerifyException</name>
+			<type>com.liferay.portal.verify.VerifyException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>verifyOracleNewLine</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>verifyJournal</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>DEFAULT_GROUP_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>NUM_OF_ARTICLES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutView</name>
+	<type>com.liferay.portal.util.LayoutView</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>LayoutView</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>LayoutView</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>list</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>depth</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getList</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDepth</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_list</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_depth</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

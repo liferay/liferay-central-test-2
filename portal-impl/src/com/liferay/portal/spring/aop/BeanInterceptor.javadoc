@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BeanInterceptor</name>
+	<type>com.liferay.portal.spring.aop.BeanInterceptor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>invoke</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>invocation</name>
+			<type>org.aopalliance.intercept.MethodInvocation</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Throwable</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setClassLoader</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setExceptionSafe</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>exceptionSafe</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_classLoader</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_exceptionSafe</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

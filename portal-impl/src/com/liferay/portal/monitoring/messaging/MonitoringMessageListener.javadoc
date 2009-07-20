@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MonitoringMessageListener</name>
+	<type>com.liferay.portal.monitoring.messaging.MonitoringMessageListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>MonitoringMessageListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSampleProcessor</name>
+			<type>com.liferay.portal.monitoring.statistics.DataSampleProcessor</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>receive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>doReceive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portal.kernel.messaging.Message</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_dataSampleProcessor</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

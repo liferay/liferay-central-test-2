@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OrgGroupPermissionFinderImpl</name>
+	<type>com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>removeByO_G_R</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>organizationId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>groupId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resourceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>FIND_BY_O_G_R</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

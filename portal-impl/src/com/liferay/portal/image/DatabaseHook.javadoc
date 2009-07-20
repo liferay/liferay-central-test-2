@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DatabaseHook</name>
+	<type>com.liferay.portal.image.DatabaseHook</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>deleteImage</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>image</name>
+			<type>com.liferay.portal.model.Image</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getImageAsBytes</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>image</name>
+			<type>com.liferay.portal.model.Image</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getImageAsStream</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>image</name>
+			<type>com.liferay.portal.model.Image</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>updateImage</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>image</name>
+			<type>com.liferay.portal.model.Image</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>bytes</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

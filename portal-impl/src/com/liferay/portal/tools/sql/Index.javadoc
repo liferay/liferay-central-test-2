@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Index</name>
+	<type>com.liferay.portal.tools.sql.Index</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>Index</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>indexName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>tableName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>unique</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getIndexName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTableName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isUnique</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_indexName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_tableName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_unique</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

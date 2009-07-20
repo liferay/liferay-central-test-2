@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalApplicationContext</name>
+	<type>com.liferay.portal.spring.context.PortalApplicationContext</type>
+	<comment><![CDATA[<p>This web application context will first load bean definitions in the contextConfigLocation parameter in web.xml. Then, the context will load bean definitions specified by the property "spring.configs" in portal.properties.</p>]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Alexander Chow</author>
+	<method>
+		<name>loadBeanDefinitions</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>reader</name>
+			<type>org.springframework.beans.factory.xml.XmlBeanDefinitionReader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

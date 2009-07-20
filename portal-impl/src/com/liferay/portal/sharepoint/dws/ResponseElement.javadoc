@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ResponseElement</name>
+	<type>com.liferay.portal.sharepoint.dws.ResponseElement</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>addElement</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>doc</name>
+			<type>com.liferay.portal.kernel.xml.Element</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

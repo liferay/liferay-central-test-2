@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BatchJspCompiler</name>
+	<type>com.liferay.portal.tools.jspc.resin.BatchJspCompiler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>BatchJspCompiler</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>appDir</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classDir</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_compile</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fileNames</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_fileUtil</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_appDir</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classDir</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

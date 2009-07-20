@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RegionImpl</name>
+	<type>com.liferay.portal.model.impl.RegionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RegionImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>DEFAULT_REGION_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

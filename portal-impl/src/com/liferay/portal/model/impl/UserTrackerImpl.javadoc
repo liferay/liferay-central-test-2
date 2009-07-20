@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserTrackerImpl</name>
+	<type>com.liferay.portal.model.impl.UserTrackerImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>UserTrackerImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getFullName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getEmailAddress</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPaths</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>addPath</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>path</name>
+			<type>com.liferay.portal.model.UserTrackerPath</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHits</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>compareTo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>userTracker</name>
+			<type>com.liferay.portal.model.UserTracker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_user</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_fullName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_emailAddress</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_paths</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

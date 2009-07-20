@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>NetvibesServlet</name>
+	<type>com.liferay.portal.servlet.NetvibesServlet</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alberto Montero</author>
+	<author>Julio Camarero</author>
+	<method>
+		<name>service</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getContent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_NETVIBES_CSS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_NETVIBES_JS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

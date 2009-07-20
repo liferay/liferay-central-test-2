@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TagsAssetGroupIdUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v4_4_0.util.TagsAssetGroupIdUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>TagsAssetGroupIdUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classNameIdColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classPKColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getGroupId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>className</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>classPK</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classNameIdColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classPKColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

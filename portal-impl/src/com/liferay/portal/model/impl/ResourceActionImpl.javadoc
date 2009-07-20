@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ResourceActionImpl</name>
+	<type>com.liferay.portal.model.impl.ResourceActionImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ResourceActionImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

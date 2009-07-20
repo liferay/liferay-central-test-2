@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DialectDetector</name>
+	<type>com.liferay.portal.spring.hibernate.DialectDetector</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>determineDialect</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSource</name>
+			<type>javax.sql.DataSource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

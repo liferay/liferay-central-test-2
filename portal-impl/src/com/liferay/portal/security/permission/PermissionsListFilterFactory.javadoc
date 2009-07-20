@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PermissionsListFilterFactory</name>
+	<type>com.liferay.portal.security.permission.PermissionsListFilterFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_permissionsListFilter</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

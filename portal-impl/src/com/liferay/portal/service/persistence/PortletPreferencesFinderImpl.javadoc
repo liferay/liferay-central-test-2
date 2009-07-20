@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletPreferencesFinderImpl</name>
+	<type>com.liferay.portal.service.persistence.PortletPreferencesFinderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>findByPortletId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>FIND_BY_PORTLETID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

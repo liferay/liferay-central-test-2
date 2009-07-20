@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ModelResourceComparator</name>
+	<type>com.liferay.portal.security.permission.comparator.ModelResourceComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ModelResourceComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>locale</name>
+			<type>java.util.Locale</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>resource1</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resource2</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_companyId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_locale</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LogAdvice</name>
+	<type>com.liferay.portal.spring.aop.LogAdvice</type>
+	<comment><![CDATA[]]></comment>
+	<author>Karthik Sudarshan</author>
+	<author>Brian Wing Shun Chan</author>
+	<author>Michael Young</author>
+	<method>
+		<name>invoke</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>proceedingJoinPoint</name>
+			<type>org.aspectj.lang.ProceedingJoinPoint</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Throwable</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getLog</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>typeName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_logs</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

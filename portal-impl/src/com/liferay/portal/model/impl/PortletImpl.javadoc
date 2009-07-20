@@ -1,0 +1,2331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletImpl</name>
+	<type>com.liferay.portal.model.impl.PortletImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortletImpl</name>
+		<comment><![CDATA[Constructs a portlet with no parameters.]]></comment>
+	</method>
+	<method>
+		<name>PortletImpl</name>
+		<comment><![CDATA[Constructs a portlet with the specified parameters.]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>PortletImpl</name>
+		<comment><![CDATA[Constructs a portlet with the specified parameters.]]></comment>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pluginPackage</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pluginSetting</name>
+			<type>com.liferay.portal.model.PluginSetting</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>timestamp</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>icon</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>virtualPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>strutsPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>displayName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>configurationActionClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>indexerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>openSearchClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>schedulerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletURLClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>friendlyURLMapperClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>urlEncoderClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletDataHandlerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletLayoutListenerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pollerProcessorClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>popMessageListenerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>socialActivityInterpreterClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>socialRequestInterpreterClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>webDAVStorageToken</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>webDAVStorageClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>controlPanelEntryCategory</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>controlPanelEntryWeight</name>
+			<type>double</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>controlPanelClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>defaultPreferences</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesValidator</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesCompanyWide</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesUniquePerLayout</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesOwnedByGroup</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>useDefaultTemplate</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>showPortletAccessDenied</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>showPortletInactive</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>actionURLRedirect</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>restoreCurrentView</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>maximizeEdit</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>maximizeHelp</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>popUpPrint</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>layoutCacheable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>instanceable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>scopeable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userPrincipalStrategy</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>privateRequestAttributes</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>privateSessionAttributes</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>renderWeight</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ajaxable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>headerPortalCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>headerPortletCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>headerPortalJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>headerPortletJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>footerPortalCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>footerPortletCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>footerPortalJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>footerPortletJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cssClassWrapper</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>facebookIntegration</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>addDefaultResource</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>roles</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>unlinkedRoles</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>roleMappers</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>system</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>active</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>include</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>initParams</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>expCache</name>
+			<type>java.lang.Integer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletModes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>windowStates</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>supportedLocales</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resourceBundle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletInfo</name>
+			<type>com.liferay.portal.model.PortletInfo</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletFilters</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>processingEvents</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>publishingEvents</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>publicRenderParameters</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletApp</name>
+			<type>com.liferay.portal.model.PortletApp</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRootPortletId</name>
+		<comment><![CDATA[Gets the root portlet id of the portlet.]]></comment>
+		<return><![CDATA[the root portlet id of the portlet]]></return>
+	</method>
+	<method>
+		<name>getInstanceId</name>
+		<comment><![CDATA[Gets the instance id of the portlet.]]></comment>
+		<return><![CDATA[the instance id of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPluginId</name>
+		<comment><![CDATA[Gets the plugin id of the portlet.]]></comment>
+		<return><![CDATA[the plugin id of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPluginType</name>
+		<comment><![CDATA[Gets the plugin type of the portlet.]]></comment>
+		<return><![CDATA[the plugin type of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPluginPackage</name>
+		<comment><![CDATA[Get the package to which the portlet belongs to.]]></comment>
+		<return><![CDATA[the plugin package of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPluginPackage</name>
+		<comment><![CDATA[Sets the plugin package this portlet belongs to.]]></comment>
+		<param>
+			<name>pluginPackage</name>
+			<type>com.liferay.portal.kernel.plugin.PluginPackage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDefaultPluginSetting</name>
+		<comment><![CDATA[Get the default plugin settings of the portlet.]]></comment>
+		<return><![CDATA[the plugin settings]]></return>
+	</method>
+	<method>
+		<name>setDefaultPluginSetting</name>
+		<comment><![CDATA[Sets the default plugin settings of the portlet.]]></comment>
+		<param>
+			<name>pluginSetting</name>
+			<type>com.liferay.portal.model.PluginSetting</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTimestamp</name>
+		<comment><![CDATA[Gets the timestamp of the portlet.]]></comment>
+		<return><![CDATA[the timestamp of the portlet]]></return>
+	</method>
+	<method>
+		<name>setTimestamp</name>
+		<comment><![CDATA[Sets the timestamp of the portlet.]]></comment>
+		<param>
+			<name>timestamp</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getIcon</name>
+		<comment><![CDATA[Gets the icon of the portlet.]]></comment>
+		<return><![CDATA[the icon of the portlet]]></return>
+	</method>
+	<method>
+		<name>setIcon</name>
+		<comment><![CDATA[Sets the icon of the portlet.]]></comment>
+		<param>
+			<name>icon</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getVirtualPath</name>
+		<comment><![CDATA[Gets the virtual path of the portlet.]]></comment>
+		<return><![CDATA[the virtual path of the portlet]]></return>
+	</method>
+	<method>
+		<name>setVirtualPath</name>
+		<comment><![CDATA[Sets the virtual path of the portlet.]]></comment>
+		<param>
+			<name>virtualPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getStrutsPath</name>
+		<comment><![CDATA[Gets the struts path of the portlet.]]></comment>
+		<return><![CDATA[the struts path of the portlet]]></return>
+	</method>
+	<method>
+		<name>setStrutsPath</name>
+		<comment><![CDATA[Sets the struts path of the portlet.]]></comment>
+		<param>
+			<name>strutsPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletName</name>
+		<comment><![CDATA[Gets the name of the portlet.]]></comment>
+		<return><![CDATA[the display name of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletName</name>
+		<comment><![CDATA[Sets the name of the portlet.]]></comment>
+		<param>
+			<name>portletName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDisplayName</name>
+		<comment><![CDATA[Gets the display name of the portlet.]]></comment>
+		<return><![CDATA[the display name of the portlet]]></return>
+	</method>
+	<method>
+		<name>setDisplayName</name>
+		<comment><![CDATA[Sets the display name of the portlet.]]></comment>
+		<param>
+			<name>displayName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletClass</name>
+		<comment><![CDATA[Gets the name of the portlet class of the portlet.]]></comment>
+		<return><![CDATA[the name of the portlet class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletClass</name>
+		<comment><![CDATA[Sets the name of the portlet class of the portlet.]]></comment>
+		<param>
+			<name>portletClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getConfigurationActionClass</name>
+		<comment><![CDATA[Gets the configuration action class of the portlet.]]></comment>
+		<return><![CDATA[the configuration action class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setConfigurationActionClass</name>
+		<comment><![CDATA[Sets the configuration action class of the portlet.]]></comment>
+		<param>
+			<name>configurationActionClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getConfigurationActionInstance</name>
+		<comment><![CDATA[Gets the configuration action instance of the portlet.]]></comment>
+		<return><![CDATA[the configuration action instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getIndexerClass</name>
+		<comment><![CDATA[Gets the name of the indexer class of the portlet.]]></comment>
+		<return><![CDATA[the name of the indexer class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setIndexerClass</name>
+		<comment><![CDATA[Sets the name of the indexer class of the portlet.]]></comment>
+		<param>
+			<name>indexerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getIndexerInstance</name>
+		<comment><![CDATA[Gets the indexer instance of the portlet.]]></comment>
+		<return><![CDATA[the indexer instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getOpenSearchClass</name>
+		<comment><![CDATA[Gets the name of the open search class of the portlet.]]></comment>
+		<return><![CDATA[the name of the open search class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setOpenSearchClass</name>
+		<comment><![CDATA[Sets the name of the open search class of the portlet.]]></comment>
+		<param>
+			<name>openSearchClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getOpenSearchInstance</name>
+		<comment><![CDATA[Gets the indexer instance of the portlet.]]></comment>
+		<return><![CDATA[the indexer instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getSchedulerClass</name>
+		<comment><![CDATA[Gets the name of the scheduler class of the portlet.]]></comment>
+		<return><![CDATA[the name of the scheduler class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setSchedulerClass</name>
+		<comment><![CDATA[Sets the name of the scheduler class of the portlet.]]></comment>
+		<param>
+			<name>schedulerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSchedulerInstance</name>
+		<comment><![CDATA[Gets the scheduler instance of the portlet.]]></comment>
+		<return><![CDATA[the scheduler instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPortletURLClass</name>
+		<comment><![CDATA[Gets the name of the portlet URL class of the portlet.]]></comment>
+		<return><![CDATA[the name of the portlet URL class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletURLClass</name>
+		<comment><![CDATA[Sets the name of the portlet URL class of the portlet.]]></comment>
+		<param>
+			<name>portletURLClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFriendlyURLMapperClass</name>
+		<comment><![CDATA[Gets the name of the friendly URL mapper class of the portlet.]]></comment>
+		<return><![CDATA[the name of the friendly URL mapper class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setFriendlyURLMapperClass</name>
+		<comment><![CDATA[Sets the name of the friendly URL mapper class of the portlet.]]></comment>
+		<param>
+			<name>friendlyURLMapperClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFriendlyURLMapperInstance</name>
+		<comment><![CDATA[Gets the friendly URL mapper instance of the portlet.]]></comment>
+		<return><![CDATA[the friendly URL mapper instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getURLEncoderClass</name>
+		<comment><![CDATA[Gets the name of the URL encoder class of the portlet.]]></comment>
+		<return><![CDATA[the name of the URL encoder class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setURLEncoderClass</name>
+		<comment><![CDATA[Sets the name of the URL encoder class of the portlet.]]></comment>
+		<param>
+			<name>urlEncoderClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getURLEncoderInstance</name>
+		<comment><![CDATA[Gets the URL encoder instance of the portlet.]]></comment>
+		<return><![CDATA[the URL encoder instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPortletDataHandlerClass</name>
+		<comment><![CDATA[Gets the name of the portlet data handler class of the portlet.]]></comment>
+		<return><![CDATA[the name of the portlet data handler class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletDataHandlerClass</name>
+		<comment><![CDATA[Sets the name of the portlet data handler class of the portlet.]]></comment>
+		<param>
+			<name>portletDataHandlerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletDataHandlerInstance</name>
+		<comment><![CDATA[Gets the portlet data handler instance of the portlet.]]></comment>
+		<return><![CDATA[the portlet data handler instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPortletLayoutListener</name>
+		<comment><![CDATA[Gets the portlet layout listener of the portlet.]]></comment>
+		<return><![CDATA[the name of the portlet layout listener class of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPortletLayoutListenerClass</name>
+		<comment><![CDATA[Gets the name of the portlet layout listener class of the portlet.]]></comment>
+		<return><![CDATA[the name of the portlet layout listener class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletLayoutListenerClass</name>
+		<comment><![CDATA[Sets the name of the portlet layout listener class of the portlet.]]></comment>
+		<param>
+			<name>portletLayoutListenerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletLayoutListenerInstance</name>
+		<comment><![CDATA[Gets the portlet layout listener instance of the portlet.]]></comment>
+		<return><![CDATA[the portlet layout listener instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPollerProcessorClass</name>
+		<comment><![CDATA[Gets the name of the poller processor class of the portlet.]]></comment>
+		<return><![CDATA[the name of the poller processor class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPollerProcessorClass</name>
+		<comment><![CDATA[Sets the name of the poller processor class of the portlet.]]></comment>
+		<param>
+			<name>pollerProcessorClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPollerProcessorInstance</name>
+		<comment><![CDATA[Gets the poller processor instance of the portlet.]]></comment>
+		<return><![CDATA[the poller processor instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPopMessageListenerClass</name>
+		<comment><![CDATA[Gets the name of the POP message listener class of the portlet.]]></comment>
+		<return><![CDATA[the name of the POP message listener class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPopMessageListenerClass</name>
+		<comment><![CDATA[Sets the name of the POP message listener class of the portlet.]]></comment>
+		<param>
+			<name>popMessageListenerClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPopMessageListenerInstance</name>
+		<comment><![CDATA[Gets the POP message listener instance of the portlet.]]></comment>
+		<return><![CDATA[the POP message listener instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getSocialActivityInterpreterClass</name>
+		<comment><![CDATA[Gets the name of the social activity interpreter class of the portlet.]]></comment>
+		<return><![CDATA[the name of the social activity interpreter class of the
+portlet]]></return>
+	</method>
+	<method>
+		<name>setSocialActivityInterpreterClass</name>
+		<comment><![CDATA[Sets the name of the social activity interpreter class of the portlet.]]></comment>
+		<param>
+			<name>socialActivityInterpreterClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSocialActivityInterpreterInstance</name>
+		<comment><![CDATA[Gets the name of the social activity interpreter instance of the portlet.]]></comment>
+		<return><![CDATA[the name of the social activity interpreter instance of the
+portlet]]></return>
+	</method>
+	<method>
+		<name>getSocialRequestInterpreterClass</name>
+		<comment><![CDATA[Gets the name of the social request interpreter class of the portlet.]]></comment>
+		<return><![CDATA[the name of the social request interpreter class of the
+portlet]]></return>
+	</method>
+	<method>
+		<name>setSocialRequestInterpreterClass</name>
+		<comment><![CDATA[Sets the name of the social request interpreter class of the portlet.]]></comment>
+		<param>
+			<name>socialRequestInterpreterClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSocialRequestInterpreterInstance</name>
+		<comment><![CDATA[Gets the name of the social request interpreter instance of the portlet.]]></comment>
+		<return><![CDATA[the name of the social request interpreter instance of the
+portlet]]></return>
+	</method>
+	<method>
+		<name>getWebDAVStorageToken</name>
+		<comment><![CDATA[Gets the name of the WebDAV storage token of the portlet.]]></comment>
+		<return><![CDATA[the name of the WebDAV storage token of the portlet]]></return>
+	</method>
+	<method>
+		<name>setWebDAVStorageToken</name>
+		<comment><![CDATA[Sets the name of the WebDAV storage token of the portlet.]]></comment>
+		<param>
+			<name>webDAVStorageToken</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWebDAVStorageClass</name>
+		<comment><![CDATA[Gets the name of the WebDAV storage class of the portlet.]]></comment>
+		<return><![CDATA[the name of the WebDAV storage class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setWebDAVStorageClass</name>
+		<comment><![CDATA[Sets the name of the WebDAV storage class of the portlet.]]></comment>
+		<param>
+			<name>webDAVStorageClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getWebDAVStorageInstance</name>
+		<comment><![CDATA[Gets the name of the WebDAV storage instance of the portlet.]]></comment>
+		<return><![CDATA[the name of the WebDAV storage instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getControlPanelEntryCategory</name>
+		<comment><![CDATA[Gets the name of the category of the Control Panel where the portlet will be shown.]]></comment>
+		<return><![CDATA[the name of of the category of the Control Panel where the
+portlet will be shown]]></return>
+	</method>
+	<method>
+		<name>setControlPanelEntryCategory</name>
+		<comment><![CDATA[Set the name of the category of the Control Panel where the portlet will be shown.]]></comment>
+		<param>
+			<name>controlPanelEntryCategory</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getControlPanelEntryWeight</name>
+		<comment><![CDATA[Gets the relative weight of the portlet with respect to the other portlets in the same category of the Control Panel.]]></comment>
+		<return><![CDATA[the relative weight of the portlet with respect to the
+other portlets in the same category of the Control Panel]]></return>
+	</method>
+	<method>
+		<name>setControlPanelEntryWeight</name>
+		<comment><![CDATA[Sets the relative weight of the portlet with respect to the other portlets in the same category of the Control Panel.]]></comment>
+		<param>
+			<name>controlPanelEntryWeight</name>
+			<type>double</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getControlPanelEntryClass</name>
+		<comment><![CDATA[Gets the name of the class that will control when the portlet will be shown in the Control Panel.]]></comment>
+		<return><![CDATA[the name of the class that will control when the portlet
+will be shown in the Control Panel]]></return>
+	</method>
+	<method>
+		<name>setControlPanelEntryClass</name>
+		<comment><![CDATA[Sets the name of the class that will control when the portlet will be shown in the Control Panel.]]></comment>
+		<param>
+			<name>controlPanelEntryClass</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getControlPanelEntryInstance</name>
+		<comment><![CDATA[Gets an instance of the class that will control when the portlet will be shown in the Control Panel]]></comment>
+		<return><![CDATA[the instance of the class that will control when the portlet
+will be shown in the Control Panel]]></return>
+	</method>
+	<method>
+		<name>getDefaultPreferences</name>
+		<comment><![CDATA[Gets the default preferences of the portlet.]]></comment>
+		<return><![CDATA[the default preferences of the portlet]]></return>
+	</method>
+	<method>
+		<name>setDefaultPreferences</name>
+		<comment><![CDATA[Sets the default preferences of the portlet.]]></comment>
+		<param>
+			<name>defaultPreferences</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPreferencesValidator</name>
+		<comment><![CDATA[Gets the name of the preferences validator class of the portlet.]]></comment>
+		<return><![CDATA[the name of the preferences validator class of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPreferencesValidator</name>
+		<comment><![CDATA[Sets the name of the preferences validator class of the portlet.]]></comment>
+		<param>
+			<name>preferencesValidator</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPreferencesCompanyWide</name>
+		<comment><![CDATA[Returns true if preferences are shared across the entire company.]]></comment>
+		<return><![CDATA[true if preferences are shared across the entire company]]></return>
+	</method>
+	<method>
+		<name>isPreferencesCompanyWide</name>
+		<comment><![CDATA[Returns true if preferences are shared across the entire company.]]></comment>
+		<return><![CDATA[true if preferences are shared across the entire company]]></return>
+	</method>
+	<method>
+		<name>setPreferencesCompanyWide</name>
+		<comment><![CDATA[Set to true if preferences are shared across the entire company.]]></comment>
+		<param>
+			<name>preferencesCompanyWide</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPreferencesUniquePerLayout</name>
+		<comment><![CDATA[Returns true if preferences are unique per layout.]]></comment>
+		<return><![CDATA[true if preferences are unique per layout]]></return>
+	</method>
+	<method>
+		<name>isPreferencesUniquePerLayout</name>
+		<comment><![CDATA[Returns true if preferences are unique per layout.]]></comment>
+		<return><![CDATA[true if preferences are unique per layout]]></return>
+	</method>
+	<method>
+		<name>setPreferencesUniquePerLayout</name>
+		<comment><![CDATA[Set to true if preferences are unique per layout.]]></comment>
+		<param>
+			<name>preferencesUniquePerLayout</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPreferencesOwnedByGroup</name>
+		<comment><![CDATA[Returns true if preferences are owned by the group when the portlet is shown in a group layout. Returns false if preferences are owned by the user at all times.]]></comment>
+		<return><![CDATA[true if preferences are owned by the group when the portlet
+is shown in a group layout; false if preferences are owned
+by the user at all times.]]></return>
+	</method>
+	<method>
+		<name>isPreferencesOwnedByGroup</name>
+		<comment><![CDATA[Returns true if preferences are owned by the group when the portlet is shown in a group layout. Returns false if preferences are owned by the user at all times.]]></comment>
+		<return><![CDATA[true if preferences are owned by the group when the portlet
+is shown in a group layout; false if preferences are owned
+by the user at all times.]]></return>
+	</method>
+	<method>
+		<name>setPreferencesOwnedByGroup</name>
+		<comment><![CDATA[Set to true if preferences are owned by the group when the portlet is shown in a group layout. Set to false if preferences are owned by the user at all times.]]></comment>
+		<param>
+			<name>preferencesOwnedByGroup</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUseDefaultTemplate</name>
+		<comment><![CDATA[Returns true if the portlet uses the default template.]]></comment>
+		<return><![CDATA[true if the portlet uses the default template]]></return>
+	</method>
+	<method>
+		<name>isUseDefaultTemplate</name>
+		<comment><![CDATA[Returns true if the portlet uses the default template.]]></comment>
+		<return><![CDATA[true if the portlet uses the default template]]></return>
+	</method>
+	<method>
+		<name>setUseDefaultTemplate</name>
+		<comment><![CDATA[Set to true if the portlet uses the default template.]]></comment>
+		<param>
+			<name>useDefaultTemplate</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getShowPortletAccessDenied</name>
+		<comment><![CDATA[Returns true if users are shown that they do not have access to the portlet.]]></comment>
+		<return><![CDATA[true if users are shown that they do not have access to the
+portlet]]></return>
+	</method>
+	<method>
+		<name>isShowPortletAccessDenied</name>
+		<comment><![CDATA[Returns true if users are shown that they do not have access to the portlet.]]></comment>
+		<return><![CDATA[true if users are shown that they do not have access to the
+portlet]]></return>
+	</method>
+	<method>
+		<name>setShowPortletAccessDenied</name>
+		<comment><![CDATA[Set to true if users are shown that they do not have access to the portlet.]]></comment>
+		<param>
+			<name>showPortletAccessDenied</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getShowPortletInactive</name>
+		<comment><![CDATA[Returns true if users are shown that the portlet is inactive.]]></comment>
+		<return><![CDATA[true if users are shown that the portlet is inactive]]></return>
+	</method>
+	<method>
+		<name>isShowPortletInactive</name>
+		<comment><![CDATA[Returns true if users are shown that the portlet is inactive.]]></comment>
+		<return><![CDATA[true if users are shown that the portlet is inactive]]></return>
+	</method>
+	<method>
+		<name>setShowPortletInactive</name>
+		<comment><![CDATA[Set to true if users are shown that the portlet is inactive.]]></comment>
+		<param>
+			<name>showPortletInactive</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getActionURLRedirect</name>
+		<comment><![CDATA[Returns true if an action URL for this portlet should cause an auto redirect.]]></comment>
+		<return><![CDATA[true if an action URL for this portlet should cause an auto
+redirect]]></return>
+	</method>
+	<method>
+		<name>isActionURLRedirect</name>
+		<comment><![CDATA[Returns true if an action URL for this portlet should cause an auto redirect.]]></comment>
+		<return><![CDATA[true if an action URL for this portlet should cause an auto
+redirect]]></return>
+	</method>
+	<method>
+		<name>setActionURLRedirect</name>
+		<comment><![CDATA[Set to true if an action URL for this portlet should cause an auto redirect.]]></comment>
+		<param>
+			<name>actionURLRedirect</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRestoreCurrentView</name>
+		<comment><![CDATA[Returns true if the portlet restores to the current view from the maximized state.]]></comment>
+		<return><![CDATA[true if the portlet restores to the current view from the
+maximized state]]></return>
+	</method>
+	<method>
+		<name>isRestoreCurrentView</name>
+		<comment><![CDATA[Returns true if the portlet restores to the current view from the maximized state.]]></comment>
+		<return><![CDATA[true if the portlet restores to the current view from the
+maximized state]]></return>
+	</method>
+	<method>
+		<name>setRestoreCurrentView</name>
+		<comment><![CDATA[Set to true if the portlet restores to the current view from the maximized state.]]></comment>
+		<param>
+			<name>restoreCurrentView</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getMaximizeEdit</name>
+		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the maximized state when the
+user goes into the edit mode]]></return>
+	</method>
+	<method>
+		<name>isMaximizeEdit</name>
+		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the maximized state when the
+user goes into the edit mode]]></return>
+	</method>
+	<method>
+		<name>setMaximizeEdit</name>
+		<comment><![CDATA[Set to true if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
+		<param>
+			<name>maximizeEdit</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getMaximizeHelp</name>
+		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the maximized state when the
+user goes into the help mode]]></return>
+	</method>
+	<method>
+		<name>isMaximizeHelp</name>
+		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the maximized state when the
+user goes into the help mode]]></return>
+	</method>
+	<method>
+		<name>setMaximizeHelp</name>
+		<comment><![CDATA[Set to true if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
+		<param>
+			<name>maximizeHelp</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPopUpPrint</name>
+		<comment><![CDATA[Returns true if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the pop up state when the user
+goes into the print mode]]></return>
+	</method>
+	<method>
+		<name>isPopUpPrint</name>
+		<comment><![CDATA[Returns true if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
+		<return><![CDATA[true if the portlet goes into the pop up state when the user
+goes into the print mode]]></return>
+	</method>
+	<method>
+		<name>setPopUpPrint</name>
+		<comment><![CDATA[Set to true if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
+		<param>
+			<name>popUpPrint</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getLayoutCacheable</name>
+		<comment><![CDATA[Returns true to allow the portlet to be cached within the layout.]]></comment>
+		<return><![CDATA[true if the portlet can be cached within the layout]]></return>
+	</method>
+	<method>
+		<name>isLayoutCacheable</name>
+		<comment><![CDATA[Returns true to allow the portlet to be cached within the layout.]]></comment>
+		<return><![CDATA[true if the portlet can be cached within the layout]]></return>
+	</method>
+	<method>
+		<name>setLayoutCacheable</name>
+		<comment><![CDATA[Set to true to allow the portlet to be cached within the layout.]]></comment>
+		<param>
+			<name>layoutCacheable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInstanceable</name>
+		<comment><![CDATA[Returns true if the portlet can be added multiple times to a layout.]]></comment>
+		<return><![CDATA[true if the portlet can be added multiple times to a layout]]></return>
+	</method>
+	<method>
+		<name>isInstanceable</name>
+		<comment><![CDATA[Returns true if the portlet can be added multiple times to a layout.]]></comment>
+		<return><![CDATA[true if the portlet can be added multiple times to a layout]]></return>
+	</method>
+	<method>
+		<name>setInstanceable</name>
+		<comment><![CDATA[Set to true if the portlet can be added multiple times to a layout.]]></comment>
+		<param>
+			<name>instanceable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getScopeable</name>
+		<comment><![CDATA[Returns true if the portlet supports scoping of data.]]></comment>
+		<return><![CDATA[true if the portlet supports scoping of data]]></return>
+	</method>
+	<method>
+		<name>isScopeable</name>
+		<comment><![CDATA[Returns true if the portlet supports scoping of data.]]></comment>
+		<return><![CDATA[true if the portlet supports scoping of data]]></return>
+	</method>
+	<method>
+		<name>setScopeable</name>
+		<comment><![CDATA[Set to true if the portlet supports scoping of data.]]></comment>
+		<param>
+			<name>scopeable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUserPrincipalStrategy</name>
+		<comment><![CDATA[Gets the user principal strategy of the portlet.]]></comment>
+		<return><![CDATA[the user principal strategy of the portlet]]></return>
+	</method>
+	<method>
+		<name>setUserPrincipalStrategy</name>
+		<comment><![CDATA[Sets the user principal strategy of the portlet.]]></comment>
+		<param>
+			<name>userPrincipalStrategy</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPrivateRequestAttributes</name>
+		<comment><![CDATA[Returns true if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
+		<return><![CDATA[true if the portlet does not share request attributes with
+the portal or portlets from another WAR]]></return>
+	</method>
+	<method>
+		<name>isPrivateRequestAttributes</name>
+		<comment><![CDATA[Returns true if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
+		<return><![CDATA[true if the portlet does not share request attributes with
+the portal or portlets from another WAR]]></return>
+	</method>
+	<method>
+		<name>setPrivateRequestAttributes</name>
+		<comment><![CDATA[Set to true if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
+		<param>
+			<name>privateRequestAttributes</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPrivateSessionAttributes</name>
+		<comment><![CDATA[Returns true if the portlet does not share session attributes with the portal.]]></comment>
+		<return><![CDATA[true if the portlet does not share session attributes with
+the portal]]></return>
+	</method>
+	<method>
+		<name>isPrivateSessionAttributes</name>
+		<comment><![CDATA[Returns true if the portlet does not share session attributes with the portal.]]></comment>
+		<return><![CDATA[true if the portlet does not share session attributes with
+the portal]]></return>
+	</method>
+	<method>
+		<name>setPrivateSessionAttributes</name>
+		<comment><![CDATA[Set to true if the portlet does not share session attributes with the portal.]]></comment>
+		<param>
+			<name>privateSessionAttributes</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRenderWeight</name>
+		<comment><![CDATA[Returns the render weight of the portlet.]]></comment>
+		<return><![CDATA[the render weight of the portlet]]></return>
+	</method>
+	<method>
+		<name>setRenderWeight</name>
+		<comment><![CDATA[Sets the render weight of the portlet.]]></comment>
+		<param>
+			<name>renderWeight</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getAjaxable</name>
+		<comment><![CDATA[Returns true if the portlet can be displayed via Ajax.]]></comment>
+		<return><![CDATA[true if the portlet can be displayed via Ajax]]></return>
+	</method>
+	<method>
+		<name>isAjaxable</name>
+		<comment><![CDATA[Returns true if the portlet can be displayed via Ajax.]]></comment>
+		<return><![CDATA[true if the portlet can be displayed via Ajax]]></return>
+	</method>
+	<method>
+		<name>setAjaxable</name>
+		<comment><![CDATA[Set to true if the portlet can be displayed via Ajax.]]></comment>
+		<param>
+			<name>ajaxable</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHeaderPortalCss</name>
+		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's
+header relative to the portal's context path]]></return>
+	</method>
+	<method>
+		<name>setHeaderPortalCss</name>
+		<comment><![CDATA[Sets a list of CSS files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+		<param>
+			<name>headerPortalCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHeaderPortletCss</name>
+		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's
+header relative to the portlet's context path]]></return>
+	</method>
+	<method>
+		<name>setHeaderPortletCss</name>
+		<comment><![CDATA[Sets a list of CSS files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+		<param>
+			<name>headerPortletCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHeaderPortalJavaScript</name>
+		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the
+page's header relative to the portal's context path]]></return>
+	</method>
+	<method>
+		<name>setHeaderPortalJavaScript</name>
+		<comment><![CDATA[Sets a list of JavaScript files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+		<param>
+			<name>headerPortalJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHeaderPortletJavaScript</name>
+		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the
+page's header relative to the portlet's context path]]></return>
+	</method>
+	<method>
+		<name>setHeaderPortletJavaScript</name>
+		<comment><![CDATA[Sets a list of JavaScript files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+		<param>
+			<name>headerPortletJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFooterPortalCss</name>
+		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's
+footer relative to the portal's context path]]></return>
+	</method>
+	<method>
+		<name>setFooterPortalCss</name>
+		<comment><![CDATA[Sets a list of CSS files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+		<param>
+			<name>footerPortalCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFooterPortletCss</name>
+		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's
+footer relative to the portlet's context path]]></return>
+	</method>
+	<method>
+		<name>setFooterPortletCss</name>
+		<comment><![CDATA[Sets a list of CSS files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+		<param>
+			<name>footerPortletCss</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFooterPortalJavaScript</name>
+		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the
+page's footer relative to the portal's context path]]></return>
+	</method>
+	<method>
+		<name>setFooterPortalJavaScript</name>
+		<comment><![CDATA[Sets a list of JavaScript files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+		<param>
+			<name>footerPortalJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFooterPortletJavaScript</name>
+		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the
+page's footer relative to the portlet's context path]]></return>
+	</method>
+	<method>
+		<name>setFooterPortletJavaScript</name>
+		<comment><![CDATA[Sets a list of JavaScript files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+		<param>
+			<name>footerPortletJavaScript</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getCssClassWrapper</name>
+		<comment><![CDATA[Gets the name of the CSS class that will be injected in the DIV that wraps this portlet.]]></comment>
+		<return><![CDATA[the name of the CSS class that will be injected in the DIV
+that wraps this portlet]]></return>
+	</method>
+	<method>
+		<name>setCssClassWrapper</name>
+		<comment><![CDATA[Sets the name of the CSS class that will be injected in the DIV that wraps this portlet.]]></comment>
+		<param>
+			<name>cssClassWrapper</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getFacebookIntegration</name>
+		<comment><![CDATA[Gets the Facebook integration method of the portlet.]]></comment>
+		<return><![CDATA[the Facebook integration method of the portlet]]></return>
+	</method>
+	<method>
+		<name>setFacebookIntegration</name>
+		<comment><![CDATA[Sets the Facebook integration method of the portlet.]]></comment>
+		<param>
+			<name>facebookIntegration</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getAddDefaultResource</name>
+		<comment><![CDATA[Returns true if default resources for the portlet are added to a page.]]></comment>
+		<return><![CDATA[true if default resources for the portlet are added to a
+page]]></return>
+	</method>
+	<method>
+		<name>isAddDefaultResource</name>
+		<comment><![CDATA[Returns true if default resources for the portlet are added to a page.]]></comment>
+		<return><![CDATA[true if default resources for the portlet are added to a
+page]]></return>
+	</method>
+	<method>
+		<name>setAddDefaultResource</name>
+		<comment><![CDATA[Set to true if default resources for the portlet are added to a page.]]></comment>
+		<param>
+			<name>addDefaultResource</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setRoles</name>
+		<comment><![CDATA[Sets a string of ordered comma delimited portlet ids.]]></comment>
+		<param>
+			<name>roles</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRolesArray</name>
+		<comment><![CDATA[Gets an array of required roles of the portlet.]]></comment>
+		<return><![CDATA[an array of required roles of the portlet]]></return>
+	</method>
+	<method>
+		<name>setRolesArray</name>
+		<comment><![CDATA[Sets an array of required roles of the portlet.]]></comment>
+		<param>
+			<name>rolesArray</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUnlinkedRoles</name>
+		<comment><![CDATA[Gets the unlinked roles of the portlet.]]></comment>
+		<return><![CDATA[unlinked roles of the portlet]]></return>
+	</method>
+	<method>
+		<name>setUnlinkedRoles</name>
+		<comment><![CDATA[Sets the unlinked roles of the portlet.]]></comment>
+		<param>
+			<name>unlinkedRoles</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRoleMappers</name>
+		<comment><![CDATA[Gets the role mappers of the portlet.]]></comment>
+		<return><![CDATA[role mappers of the portlet]]></return>
+	</method>
+	<method>
+		<name>setRoleMappers</name>
+		<comment><![CDATA[Sets the role mappers of the portlet.]]></comment>
+		<param>
+			<name>roleMappers</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>linkRoles</name>
+		<comment><![CDATA[Link the role names set in portlet.xml with the Liferay roles set in liferay-portlet.xml.]]></comment>
+	</method>
+	<method>
+		<name>hasRoleWithName</name>
+		<comment><![CDATA[Returns true if the portlet has a role with the specified name.]]></comment>
+		<param>
+			<name>roleName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the portlet has a role with the specified name]]></return>
+	</method>
+	<method>
+		<name>hasAddPortletPermission</name>
+		<comment><![CDATA[Returns true if the user has the permission to add the portlet to a layout.]]></comment>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the user has the permission to add the portlet to a
+layout]]></return>
+	</method>
+	<method>
+		<name>getSystem</name>
+		<comment><![CDATA[Returns true if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
+		<return><![CDATA[true if the portlet is a system portlet that a user cannot
+manually add to their page]]></return>
+	</method>
+	<method>
+		<name>isSystem</name>
+		<comment><![CDATA[Returns true if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
+		<return><![CDATA[true if the portlet is a system portlet that a user cannot
+manually add to their page]]></return>
+	</method>
+	<method>
+		<name>setSystem</name>
+		<comment><![CDATA[Set to true if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
+		<param>
+			<name>system</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInclude</name>
+		<comment><![CDATA[Returns true to include the portlet and make it available to be made active.]]></comment>
+		<return><![CDATA[true to include the portlet and make it available to be made
+active]]></return>
+	</method>
+	<method>
+		<name>isInclude</name>
+		<comment><![CDATA[Returns true to include the portlet and make it available to be made active.]]></comment>
+		<return><![CDATA[true to include the portlet and make it available to be made
+active]]></return>
+	</method>
+	<method>
+		<name>setInclude</name>
+		<comment><![CDATA[Set to true to include the portlet and make it available to be made active.]]></comment>
+		<param>
+			<name>include</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInitParams</name>
+		<comment><![CDATA[Gets the init parameters of the portlet.]]></comment>
+		<return><![CDATA[init parameters of the portlet]]></return>
+	</method>
+	<method>
+		<name>setInitParams</name>
+		<comment><![CDATA[Sets the init parameters of the portlet.]]></comment>
+		<param>
+			<name>initParams</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getExpCache</name>
+		<comment><![CDATA[Gets expiration cache of the portlet.]]></comment>
+		<return><![CDATA[expiration cache of the portlet]]></return>
+	</method>
+	<method>
+		<name>setExpCache</name>
+		<comment><![CDATA[Sets expiration cache of the portlet.]]></comment>
+		<param>
+			<name>expCache</name>
+			<type>java.lang.Integer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletModes</name>
+		<comment><![CDATA[Gets the portlet modes of the portlet.]]></comment>
+		<return><![CDATA[portlet modes of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletModes</name>
+		<comment><![CDATA[Sets the portlet modes of the portlet.]]></comment>
+		<param>
+			<name>portletModes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>hasPortletMode</name>
+		<comment><![CDATA[Returns true if the portlet supports the specified mime type and portlet mode.]]></comment>
+		<param>
+			<name>mimeType</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletMode</name>
+			<type>javax.portlet.PortletMode</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the portlet supports the specified mime type and
+portlet mode]]></return>
+	</method>
+	<method>
+		<name>getAllPortletModes</name>
+		<comment><![CDATA[Gets a list of all portlet modes supported by the portlet.]]></comment>
+		<return><![CDATA[a list of all portlet modes supported by the portlet]]></return>
+	</method>
+	<method>
+		<name>hasMultipleMimeTypes</name>
+		<comment><![CDATA[Returns true if the portlet supports more than one mime type.]]></comment>
+		<return><![CDATA[true if the portlet supports more than one mime type]]></return>
+	</method>
+	<method>
+		<name>getWindowStates</name>
+		<comment><![CDATA[Gets the window states of the portlet.]]></comment>
+		<return><![CDATA[window states of the portlet]]></return>
+	</method>
+	<method>
+		<name>setWindowStates</name>
+		<comment><![CDATA[Sets the window states of the portlet.]]></comment>
+		<param>
+			<name>windowStates</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>hasWindowState</name>
+		<comment><![CDATA[Returns true if the portlet supports the specified mime type and window state.]]></comment>
+		<param>
+			<name>mimeType</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>windowState</name>
+			<type>javax.portlet.WindowState</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the portlet supports the specified mime type and
+window state]]></return>
+	</method>
+	<method>
+		<name>getAllWindowStates</name>
+		<comment><![CDATA[Gets a list of all window states supported by the portlet.]]></comment>
+		<return><![CDATA[a list of all window states supported by the portlet]]></return>
+	</method>
+	<method>
+		<name>getSupportedLocales</name>
+		<comment><![CDATA[Gets the supported locales of the portlet.]]></comment>
+		<return><![CDATA[supported locales of the portlet]]></return>
+	</method>
+	<method>
+		<name>setSupportedLocales</name>
+		<comment><![CDATA[Sets the supported locales of the portlet.]]></comment>
+		<param>
+			<name>supportedLocales</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getResourceBundle</name>
+		<comment><![CDATA[Gets the resource bundle of the portlet.]]></comment>
+		<return><![CDATA[resource bundle of the portlet]]></return>
+	</method>
+	<method>
+		<name>setResourceBundle</name>
+		<comment><![CDATA[Sets the resource bundle of the portlet.]]></comment>
+		<param>
+			<name>resourceBundle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletInfo</name>
+		<comment><![CDATA[Gets the portlet info of the portlet.]]></comment>
+		<return><![CDATA[portlet info of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletInfo</name>
+		<comment><![CDATA[Sets the portlet info of the portlet.]]></comment>
+		<param>
+			<name>portletInfo</name>
+			<type>com.liferay.portal.model.PortletInfo</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletFilters</name>
+		<comment><![CDATA[Gets the filters of the portlet.]]></comment>
+		<return><![CDATA[filters of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPortletFilters</name>
+		<comment><![CDATA[Sets the filters of the portlet.]]></comment>
+		<param>
+			<name>portletFilters</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addProcessingEvent</name>
+		<comment><![CDATA[Adds a supported processing event.]]></comment>
+		<param>
+			<name>processingEvent</name>
+			<type>com.liferay.portal.kernel.xml.QName</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getProcessingEvent</name>
+		<comment><![CDATA[Gets the supported processing event from a namespace URI and a local part.]]></comment>
+		<param>
+			<name>uri</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>localPart</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the supported processing event from a namespace URI and a
+local part]]></return>
+	</method>
+	<method>
+		<name>getProcessingEvents</name>
+		<comment><![CDATA[Gets the supported processing events of the portlet.]]></comment>
+		<return><![CDATA[supported processing events of the portlet]]></return>
+	</method>
+	<method>
+		<name>setProcessingEvents</name>
+		<comment><![CDATA[Sets the supported processing events of the portlet.]]></comment>
+		<param>
+			<name>processingEvents</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addPublishingEvent</name>
+		<comment><![CDATA[Adds a supported publishing event.]]></comment>
+		<param>
+			<name>publishingEvent</name>
+			<type>com.liferay.portal.kernel.xml.QName</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPublishingEvents</name>
+		<comment><![CDATA[Gets the supported publishing events of the portlet.]]></comment>
+		<return><![CDATA[supported publishing events of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPublishingEvents</name>
+		<comment><![CDATA[Sets the supported publishing events of the portlet.]]></comment>
+		<param>
+			<name>publishingEvents</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addPublicRenderParameter</name>
+		<comment><![CDATA[Adds a supported public render parameter.]]></comment>
+		<param>
+			<name>publicRenderParameter</name>
+			<type>com.liferay.portal.model.PublicRenderParameter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPublicRenderParameter</name>
+		<comment><![CDATA[Gets the supported public render parameter from an identifier.]]></comment>
+		<param>
+			<name>identifier</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the supported public render parameter from an identifier]]></return>
+	</method>
+	<method>
+		<name>getPublicRenderParameter</name>
+		<comment><![CDATA[Gets the supported public render parameter from a namespace URI and a local part.]]></comment>
+		<param>
+			<name>uri</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>localPart</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the supported public render parameter from a namespace URI
+and a local part]]></return>
+	</method>
+	<method>
+		<name>getPublicRenderParameters</name>
+		<comment><![CDATA[Gets the supported public render parameters of the portlet.]]></comment>
+		<return><![CDATA[the supported public render parameters of the portlet]]></return>
+	</method>
+	<method>
+		<name>setPublicRenderParameters</name>
+		<comment><![CDATA[Sets the supported public render parameters of the portlet.]]></comment>
+		<param>
+			<name>publicRenderParameters</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getContextPath</name>
+		<comment><![CDATA[Gets the servlet context path of the portlet.]]></comment>
+		<return><![CDATA[the servlet context path of the portlet]]></return>
+	</method>
+	<method>
+		<name>getPortletApp</name>
+		<comment><![CDATA[Get the application this portlet belongs to.]]></comment>
+		<return><![CDATA[the application this portlet belongs to]]></return>
+	</method>
+	<method>
+		<name>setPortletApp</name>
+		<comment><![CDATA[Sets the application this portlet belongs to.]]></comment>
+		<param>
+			<name>portletApp</name>
+			<type>com.liferay.portal.model.PortletApp</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getClonedInstance</name>
+		<comment><![CDATA[Returns true if the portlet is found in a WAR file.]]></comment>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[a cloned instance of the portlet]]></return>
+	</method>
+	<method>
+		<name>getStatic</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet that is cannot be moved.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet that is cannot be
+moved]]></return>
+	</method>
+	<method>
+		<name>isStatic</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet that is cannot be moved.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet that is cannot be
+moved]]></return>
+	</method>
+	<method>
+		<name>setStatic</name>
+		<comment><![CDATA[Set to true if the portlet is a static portlet that is cannot be moved.]]></comment>
+		<param>
+			<name>staticPortlet</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getStaticStart</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet at the start of a list of portlets.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet at the start of a
+list of portlets]]></return>
+	</method>
+	<method>
+		<name>isStaticStart</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet at the start of a list of portlets.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet at the start of a
+list of portlets]]></return>
+	</method>
+	<method>
+		<name>setStaticStart</name>
+		<comment><![CDATA[Set to true if the portlet is a static portlet at the start of a list of portlets.]]></comment>
+		<param>
+			<name>staticPortletStart</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getStaticEnd</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet at the end of a list of portlets.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet at the end of a
+list of portlets]]></return>
+	</method>
+	<method>
+		<name>isStaticEnd</name>
+		<comment><![CDATA[Returns true if the portlet is a static portlet at the end of a list of portlets.]]></comment>
+		<return><![CDATA[true if the portlet is a static portlet at the end of a
+list of portlets]]></return>
+	</method>
+	<method>
+		<name>getUndeployedPortlet</name>
+		<comment><![CDATA[Returns true if the portlet is an undeployed portlet.]]></comment>
+		<return><![CDATA[true if the portlet is a placeholder of an undeployed
+portlet]]></return>
+	</method>
+	<method>
+		<name>isUndeployedPortlet</name>
+		<comment><![CDATA[Returns true if the portlet is an undeployed portlet.]]></comment>
+		<return><![CDATA[true if the portlet is a placeholder of an undeployed
+portlet]]></return>
+	</method>
+	<method>
+		<name>setUndeployedPortlet</name>
+		<comment><![CDATA[Set to true if the portlet is an undeployed portlet.]]></comment>
+		<param>
+			<name>undeployedPortlet</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>clone</name>
+		<comment><![CDATA[Creates and returns a copy of this object.]]></comment>
+		<return><![CDATA[a copy of this object]]></return>
+	</method>
+	<method>
+		<name>compareTo</name>
+		<comment><![CDATA[Compares this portlet to the specified object.]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the value 0 if the argument portlet is equal to this
+portlet; a value less than -1 if this portlet is less than
+the portlet argument; and 1 if this portlet is greater than
+the portlet argument]]></return>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[Checks whether this portlet is equal to the specified object.]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the portlet is equal to the specified object]]></return>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[Log instance for this class.]]></comment>
+	</field>
+	<field>
+		<name>_pluginPackage</name>
+		<comment><![CDATA[Package this plugin belongs to.]]></comment>
+	</field>
+	<field>
+		<name>_defaultPluginSetting</name>
+		<comment><![CDATA[Plugin settings associated with the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_timestamp</name>
+		<comment><![CDATA[The timestamp of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_icon</name>
+		<comment><![CDATA[The icon of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_virtualPath</name>
+		<comment><![CDATA[The virtual path of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_strutsPath</name>
+		<comment><![CDATA[The struts path of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletName</name>
+		<comment><![CDATA[The name of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_displayName</name>
+		<comment><![CDATA[The display name of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletClass</name>
+		<comment><![CDATA[The name of the portlet class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_configurationActionClass</name>
+		<comment><![CDATA[The configuration action class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_indexerClass</name>
+		<comment><![CDATA[The name of the indexer class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_openSearchClass</name>
+		<comment><![CDATA[The name of the open search class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_schedulerClass</name>
+		<comment><![CDATA[The name of the scheduler class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletURLClass</name>
+		<comment><![CDATA[The name of the portlet URL class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_friendlyURLMapperClass</name>
+		<comment><![CDATA[The name of the friendly URL mapper class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_urlEncoderClass</name>
+		<comment><![CDATA[The name of the URL encoder class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletDataHandlerClass</name>
+		<comment><![CDATA[The name of the portlet data handler class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletLayoutListenerClass</name>
+		<comment><![CDATA[The name of the portlet data layout listener class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_pollerProcessorClass</name>
+		<comment><![CDATA[The name of the poller processor class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_popMessageListenerClass</name>
+		<comment><![CDATA[The name of the POP message listener class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_socialActivityInterpreterClass</name>
+		<comment><![CDATA[The name of the social activity interpreter class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_socialRequestInterpreterClass</name>
+		<comment><![CDATA[The name of the social request interpreter class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_webDAVStorageToken</name>
+		<comment><![CDATA[The name of the WebDAV storage token of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_webDAVStorageClass</name>
+		<comment><![CDATA[The name of the WebDAV storage class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_defaultPreferences</name>
+		<comment><![CDATA[The default preferences of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_preferencesValidator</name>
+		<comment><![CDATA[The name of the preferences validator class of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_preferencesCompanyWide</name>
+		<comment><![CDATA[True if preferences are shared across the entire company.]]></comment>
+	</field>
+	<field>
+		<name>_preferencesUniquePerLayout</name>
+		<comment><![CDATA[True if preferences are unique per layout.]]></comment>
+	</field>
+	<field>
+		<name>_preferencesOwnedByGroup</name>
+		<comment><![CDATA[True if preferences are owned by the group when the portlet is shown in a group layout. False if preferences are owned by the user at all times.]]></comment>
+	</field>
+	<field>
+		<name>_controlPanelEntryCategory</name>
+		<comment><![CDATA[The name of the category of the Control Panel where this portlet will be shown]]></comment>
+	</field>
+	<field>
+		<name>_controlPanelEntryWeight</name>
+		<comment><![CDATA[The relative weight of this portlet with respect to the other portlets in the same category of the Control Panel]]></comment>
+	</field>
+	<field>
+		<name>_controlPanelEntryClass</name>
+		<comment><![CDATA[The name of the class that will control when this portlet will be shown in the Control Panel]]></comment>
+	</field>
+	<field>
+		<name>_useDefaultTemplate</name>
+		<comment><![CDATA[True if the portlet uses the default template.]]></comment>
+	</field>
+	<field>
+		<name>_showPortletAccessDenied</name>
+		<comment><![CDATA[True if users are shown that they do not have access to the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_showPortletInactive</name>
+		<comment><![CDATA[True if users are shown that the portlet is inactive.]]></comment>
+	</field>
+	<field>
+		<name>_actionURLRedirect</name>
+		<comment><![CDATA[True if an action URL for this portlet should cause an auto redirect.]]></comment>
+	</field>
+	<field>
+		<name>_restoreCurrentView</name>
+		<comment><![CDATA[True if the portlet restores to the current view from the maximized state.]]></comment>
+	</field>
+	<field>
+		<name>_maximizeEdit</name>
+		<comment><![CDATA[True if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
+	</field>
+	<field>
+		<name>_maximizeHelp</name>
+		<comment><![CDATA[True if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
+	</field>
+	<field>
+		<name>_popUpPrint</name>
+		<comment><![CDATA[True if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
+	</field>
+	<field>
+		<name>_layoutCacheable</name>
+		<comment><![CDATA[True if the portlet can be cached within the layout.]]></comment>
+	</field>
+	<field>
+		<name>_instanceable</name>
+		<comment><![CDATA[True if the portlet can be added multiple times to a layout.]]></comment>
+	</field>
+	<field>
+		<name>_scopeable</name>
+		<comment><![CDATA[True if the portlet supports scoping of data.]]></comment>
+	</field>
+	<field>
+		<name>_userPrincipalStrategy</name>
+		<comment><![CDATA[The user principal strategy of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_privateRequestAttributes</name>
+		<comment><![CDATA[True if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
+	</field>
+	<field>
+		<name>_privateSessionAttributes</name>
+		<comment><![CDATA[True if the portlet does not share session attributes with the portal.]]></comment>
+	</field>
+	<field>
+		<name>_renderWeight</name>
+		<comment><![CDATA[Render weight of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_ajaxable</name>
+		<comment><![CDATA[True if the portlet can be displayed via Ajax.]]></comment>
+	</field>
+	<field>
+		<name>_headerPortalCss</name>
+		<comment><![CDATA[A list of CSS files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+	</field>
+	<field>
+		<name>_headerPortletCss</name>
+		<comment><![CDATA[A list of CSS files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+	</field>
+	<field>
+		<name>_headerPortalJavaScript</name>
+		<comment><![CDATA[A list of JavaScript files that will be referenced from the page's header relative to the portal's context path.]]></comment>
+	</field>
+	<field>
+		<name>_headerPortletJavaScript</name>
+		<comment><![CDATA[A list of JavaScript files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
+	</field>
+	<field>
+		<name>_footerPortalCss</name>
+		<comment><![CDATA[A list of CSS files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+	</field>
+	<field>
+		<name>_footerPortletCss</name>
+		<comment><![CDATA[A list of CSS files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+	</field>
+	<field>
+		<name>_footerPortalJavaScript</name>
+		<comment><![CDATA[A list of JavaScript files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
+	</field>
+	<field>
+		<name>_footerPortletJavaScript</name>
+		<comment><![CDATA[A list of JavaScript files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
+	</field>
+	<field>
+		<name>_cssClassWrapper</name>
+		<comment><![CDATA[The name of the CSS class that will be injected in the DIV that wraps this portlet.]]></comment>
+	</field>
+	<field>
+		<name>_facebookIntegration</name>
+		<comment><![CDATA[The Facebook integration method of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_addDefaultResource</name>
+		<comment><![CDATA[True if default resources for the portlet are added to a page.]]></comment>
+	</field>
+	<field>
+		<name>_rolesArray</name>
+		<comment><![CDATA[An array of required roles of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_unlinkedRoles</name>
+		<comment><![CDATA[The unlinked roles of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_roleMappers</name>
+		<comment><![CDATA[The role mappers of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_system</name>
+		<comment><![CDATA[True if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
+	</field>
+	<field>
+		<name>_include</name>
+		<comment><![CDATA[True to include the portlet and make it available to be made active.]]></comment>
+	</field>
+	<field>
+		<name>_initParams</name>
+		<comment><![CDATA[The init parameters of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_expCache</name>
+		<comment><![CDATA[The expiration cache of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletModes</name>
+		<comment><![CDATA[The portlet modes of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_windowStates</name>
+		<comment><![CDATA[The window states of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_supportedLocales</name>
+		<comment><![CDATA[The supported locales of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_resourceBundle</name>
+		<comment><![CDATA[The resource bundle of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletInfo</name>
+		<comment><![CDATA[The portlet info of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_portletFilters</name>
+		<comment><![CDATA[The filters of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_processingEvents</name>
+		<comment><![CDATA[The supported processing events of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_processingEventsByQName</name>
+		<comment><![CDATA[Map of the supported processing events of the portlet keyed by the QName.]]></comment>
+	</field>
+	<field>
+		<name>_publishingEvents</name>
+		<comment><![CDATA[The supported publishing events of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_publicRenderParameters</name>
+		<comment><![CDATA[The supported public render parameters of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_publicRenderParametersByIdentifier</name>
+		<comment><![CDATA[Map of the supported public render parameters of the portlet keyed by the identifier.]]></comment>
+	</field>
+	<field>
+		<name>_publicRenderParametersByQName</name>
+		<comment><![CDATA[Map of the supported public render parameters of the portlet keyed by the QName.]]></comment>
+	</field>
+	<field>
+		<name>_portletApp</name>
+		<comment><![CDATA[The application this portlet belongs to.]]></comment>
+	</field>
+	<field>
+		<name>_clonedInstances</name>
+		<comment><![CDATA[The cloned instances of the portlet.]]></comment>
+	</field>
+	<field>
+		<name>_staticPortlet</name>
+		<comment><![CDATA[True if the portlet is a static portlet that is cannot be moved.]]></comment>
+	</field>
+	<field>
+		<name>_staticPortletStart</name>
+		<comment><![CDATA[True if the portlet is a static portlet at the start of a list of portlets.]]></comment>
+	</field>
+	<field>
+		<name>_undeployedPortlet</name>
+		<comment><![CDATA[True if the portlet is an undeployed portlet.]]></comment>
+	</field>
+</javadoc>

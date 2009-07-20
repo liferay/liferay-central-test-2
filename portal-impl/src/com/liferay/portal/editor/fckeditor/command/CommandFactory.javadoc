@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CommandFactory</name>
+	<type>com.liferay.portal.editor.fckeditor.command.CommandFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<method>
+		<name>getCommand</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>commandStr</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

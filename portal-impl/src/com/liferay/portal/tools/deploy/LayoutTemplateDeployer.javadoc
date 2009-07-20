@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutTemplateDeployer</name>
+	<type>com.liferay.portal.tools.deploy.LayoutTemplateDeployer</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>LayoutTemplateDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>LayoutTemplateDeployer</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>wars</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>jars</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getExtraContent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>webXmlVersion</name>
+			<type>double</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>srcFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>displayName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

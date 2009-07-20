@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpgradePause</name>
+	<type>com.liferay.portal.upgrade.UpgradePause</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>upgrade</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

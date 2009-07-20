@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MemberResponseElement</name>
+	<type>com.liferay.portal.sharepoint.dws.MemberResponseElement</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>MemberResponseElement</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>user</name>
+			<type>com.liferay.portal.model.User</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>member</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addElement</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>rootEl</name>
+			<type>com.liferay.portal.kernel.xml.Element</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_id</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_loginName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_email</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_domainGroup</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_member</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_siteAdmin</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

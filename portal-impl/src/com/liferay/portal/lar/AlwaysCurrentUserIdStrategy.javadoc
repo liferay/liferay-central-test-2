@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AlwaysCurrentUserIdStrategy</name>
+	<type>com.liferay.portal.lar.AlwaysCurrentUserIdStrategy</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>AlwaysCurrentUserIdStrategy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>user</name>
+			<type>com.liferay.portal.model.User</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUserId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>userUuid</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_user</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

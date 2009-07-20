@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayResourceLoader</name>
+	<type>com.liferay.portal.velocity.LiferayResourceLoader</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>setListeners</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>listeners</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>props</name>
+			<type>org.apache.commons.collections.ExtendedProperties</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getResourceStream</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ResourceNotFoundException</name>
+			<type>org.apache.velocity.exception.ResourceNotFoundException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getLastModified</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>resource</name>
+			<type>org.apache.velocity.runtime.resource.Resource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isSourceModified</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>resource</name>
+			<type>org.apache.velocity.runtime.resource.Resource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_listeners</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

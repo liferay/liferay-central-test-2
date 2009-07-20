@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContentTypeUtil</name>
+	<type>com.liferay.portal.util.ContentTypeUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getContentType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fileName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ContentTypeUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_getContentType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fileName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_configuration</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

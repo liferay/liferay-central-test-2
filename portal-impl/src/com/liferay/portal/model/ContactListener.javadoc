@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContactListener</name>
+	<type>com.liferay.portal.model.ContactListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Scott Lee</author>
+	<author>Brian Wing Shun Chan</author>
+	<author>Raymond Augé</author>
+	<method>
+		<name>onAfterCreate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>contact</name>
+			<type>com.liferay.portal.model.Contact</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ModelListenerException</name>
+			<type>com.liferay.portal.ModelListenerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>onAfterUpdate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>contact</name>
+			<type>com.liferay.portal.model.Contact</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ModelListenerException</name>
+			<type>com.liferay.portal.ModelListenerException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PollsChoiceIdUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v4_3_0.util.PollsChoiceIdUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PollsChoiceIdUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>questionIdColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getValueMapper</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_questionIdColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_pollsChoiceIdMapper</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

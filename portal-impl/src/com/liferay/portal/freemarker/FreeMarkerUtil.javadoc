@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FreeMarkerUtil</name>
+	<type>com.liferay.portal.freemarker.FreeMarkerUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Tariq Dweik</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>process</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>context</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>process</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>context</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>writer</name>
+			<type>java.io.Writer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>_getConfiguration</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_configuration</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

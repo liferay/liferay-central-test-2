@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ActionConstants</name>
+	<type>com.liferay.portal.struts.ActionConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>COMMON_FORWARD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>COMMON_FORWARD_JSP</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>COMMON_NULL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>COMMON_REFERER</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>COMMON_REFERER_JSP</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

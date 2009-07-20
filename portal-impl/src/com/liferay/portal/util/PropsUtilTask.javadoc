@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PropsUtilTask</name>
+	<type>com.liferay.portal.util.PropsUtilTask</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>execute</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>BuildException</name>
+			<type>org.apache.tools.ant.BuildException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setKey</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setResult</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>result</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_key</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_result</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

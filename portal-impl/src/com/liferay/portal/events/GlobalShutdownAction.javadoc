@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>GlobalShutdownAction</name>
+	<type>com.liferay.portal.events.GlobalShutdownAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>run</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>ids</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

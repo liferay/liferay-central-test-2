@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserGroupGroupRoleImpl</name>
+	<type>com.liferay.portal.model.impl.UserGroupGroupRoleImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>UserGroupGroupRoleImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

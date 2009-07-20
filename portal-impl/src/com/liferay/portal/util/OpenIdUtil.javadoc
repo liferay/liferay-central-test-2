@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>OpenIdUtil</name>
+	<type>com.liferay.portal.util.OpenIdUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>getConsumerManager</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getScreenName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>openId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isEnabled</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>normalize</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>identity</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>OpenIdUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_manager</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

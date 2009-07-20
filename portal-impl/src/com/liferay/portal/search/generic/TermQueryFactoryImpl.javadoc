@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TermQueryFactoryImpl</name>
+	<type>com.liferay.portal.search.generic.TermQueryFactoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

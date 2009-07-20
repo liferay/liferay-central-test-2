@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>GroupWebDAVStorageImpl</name>
+	<type>com.liferay.portal.webdav.GroupWebDAVStorageImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getResource</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>webDavRequest</name>
+			<type>com.liferay.portal.webdav.WebDAVRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WebDAVException</name>
+			<type>com.liferay.portal.webdav.WebDAVException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getResources</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>webDavRequest</name>
+			<type>com.liferay.portal.webdav.WebDAVRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

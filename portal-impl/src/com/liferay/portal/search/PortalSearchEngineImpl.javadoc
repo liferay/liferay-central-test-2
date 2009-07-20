@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalSearchEngineImpl</name>
+	<type>com.liferay.portal.search.PortalSearchEngineImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>PortalSearchEngineImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isIndexReadOnly</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setIndexReadOnly</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>indexReadOnly</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_indexReadOnly</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

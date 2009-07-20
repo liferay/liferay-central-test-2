@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ColumnsComparator</name>
+	<type>com.liferay.portal.tools.comparator.ColumnsComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ColumnsComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>columnName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ColumnsComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>columnNames</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ColumnsComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>columnNames</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj1</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>obj2</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_columnNames</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

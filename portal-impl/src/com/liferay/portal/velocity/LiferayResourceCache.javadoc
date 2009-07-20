@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayResourceCache</name>
+	<type>com.liferay.portal.velocity.LiferayResourceCache</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>initialize</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>rs</name>
+			<type>org.apache.velocity.runtime.RuntimeServices</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>put</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resource</name>
+			<type>org.apache.velocity.runtime.resource.Resource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>remove</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>enumerateKeys</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

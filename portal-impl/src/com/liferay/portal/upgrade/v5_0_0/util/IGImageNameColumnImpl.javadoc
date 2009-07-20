@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IGImageNameColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v5_0_0.util.IGImageNameColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>IGImageNameColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>imageIdColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_imageIdColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

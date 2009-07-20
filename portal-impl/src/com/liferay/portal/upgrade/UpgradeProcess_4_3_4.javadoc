@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpgradeProcess_4_3_4</name>
+	<type>com.liferay.portal.upgrade.UpgradeProcess_4_3_4</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getThreshold</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>upgrade</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>UpgradeException</name>
+			<type>com.liferay.portal.upgrade.UpgradeException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

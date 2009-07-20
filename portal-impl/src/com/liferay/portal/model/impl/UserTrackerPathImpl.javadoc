@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserTrackerPathImpl</name>
+	<type>com.liferay.portal.model.impl.UserTrackerPathImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>UserTrackerPathImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

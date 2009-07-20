@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutListener</name>
+	<type>com.liferay.portal.model.LayoutListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Raymond Augé</author>
+	<method>
+		<name>onAfterCreate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>onAfterRemove</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>onAfterUpdate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>clearCache</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

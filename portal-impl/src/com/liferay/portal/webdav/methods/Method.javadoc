@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Method</name>
+	<type>com.liferay.portal.webdav.methods.Method</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Alexander Chow</author>
+	<method>
+		<name>process</name>
+		<comment><![CDATA[Returns -1 or a supported HTTP status code. If it is -1, then the status code has already been set. Otherwise, the status code needs to be set by the caller.]]></comment>
+		<param>
+			<name>webDavRequest</name>
+			<type>com.liferay.portal.webdav.WebDAVRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[-1 or a supported HTTP status code. If it is -1, then the
+status code has already been set. Otherwise, the status code
+needs to be set by the caller.]]></return>
+		<throws>
+			<name>WebDAVException</name>
+			<type>com.liferay.portal.webdav.WebDAVException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>COPY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>DELETE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>GET</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>HEAD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>LOCK</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>MKCOL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>MOVE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OPTIONS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PROPFIND</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PROPPATCH</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PUT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>UNLOCK</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SUPPORTED_METHODS_ARRAY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SUPPORTED_METHODS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

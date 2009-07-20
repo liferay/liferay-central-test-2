@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DataSample</name>
+	<type>com.liferay.portal.monitoring.statistics.DataSample</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getCompanyId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDescription</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getDuration</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getNamespace</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getRequestStatus</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getUser</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

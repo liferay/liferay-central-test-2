@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SessionFactoryInvocationHandler</name>
+	<type>com.liferay.portal.spring.hibernate.SessionFactoryInvocationHandler</type>
+	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2996.</p>]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>SessionFactoryInvocationHandler</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sessionFactory</name>
+			<type>org.hibernate.SessionFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>invoke</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>proxy</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>method</name>
+			<type>java.lang.reflect.Method</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>args</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Throwable</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>wrapLiferaySession</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>org.hibernate.classic.Session</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_sessionFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

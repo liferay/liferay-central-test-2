@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>QuartzConnectionProviderImpl</name>
+	<type>com.liferay.portal.scheduler.quartz.QuartzConnectionProviderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>getConnection</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>shutdown</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

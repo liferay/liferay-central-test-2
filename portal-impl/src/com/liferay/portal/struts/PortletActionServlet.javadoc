@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletActionServlet</name>
+	<type>com.liferay.portal.struts.PortletActionServlet</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletConfig</name>
+			<type>javax.servlet.ServletConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

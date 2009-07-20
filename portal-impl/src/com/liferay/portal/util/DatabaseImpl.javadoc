@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DatabaseImpl</name>
+	<type>com.liferay.portal.util.DatabaseImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ganesh Ram</author>
+	<method>
+		<name>getType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>runSQLTemplate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>path</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>NamingException</name>
+			<type>javax.naming.NamingException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SQLException</name>
+			<type>java.sql.SQLException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>runSQLTemplate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>path</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>failOnError</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>NamingException</name>
+			<type>javax.naming.NamingException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+		<throws>
+			<name>SQLException</name>
+			<type>java.sql.SQLException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

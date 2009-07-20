@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MoveMethodImpl</name>
+	<type>com.liferay.portal.webdav.methods.MoveMethodImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Alexander Chow</author>
+	<method>
+		<name>process</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>webDavRequest</name>
+			<type>com.liferay.portal.webdav.WebDAVRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WebDAVException</name>
+			<type>com.liferay.portal.webdav.WebDAVException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

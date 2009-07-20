@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContactIdUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ContactIdUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>screenNameColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>valueMapper</name>
+			<type>com.liferay.portal.upgrade.util.ValueMapper</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_screenNameColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_valueMapper</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

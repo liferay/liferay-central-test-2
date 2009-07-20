@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpgradeWebForm</name>
+	<type>com.liferay.portal.upgrade.v5_2_2.UpgradeWebForm</type>
+	<comment><![CDATA[]]></comment>
+	<author>Julio Camarero</author>
+	<method>
+		<name>upgrade</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>UpgradeException</name>
+			<type>com.liferay.portal.upgrade.UpgradeException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>doUpgrade</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_NEW_WEBFORM_CLASS_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_OLD_WEBFORM_CLASS_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletContextLoaderListener</name>
+	<type>com.liferay.portal.spring.context.PortletContextLoaderListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>contextDestroyed</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>javax.servlet.ServletContextEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>contextInitialized</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>javax.servlet.ServletContextEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>createContextLoader</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

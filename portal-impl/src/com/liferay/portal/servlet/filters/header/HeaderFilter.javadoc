@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>HeaderFilter</name>
+	<type>com.liferay.portal.servlet.filters.header.HeaderFilter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Raymond Augé</author>
+	<author>Eduardo Lundgren</author>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>filterConfig</name>
+			<type>javax.servlet.FilterConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getLastModified</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>processFilter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filterChain</name>
+			<type>javax.servlet.FilterChain</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_DATE_FORMAT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_EXPIRES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_TIME_ZONE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_filterConfig</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_timeZone</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

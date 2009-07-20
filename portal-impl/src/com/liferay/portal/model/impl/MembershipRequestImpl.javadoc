@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MembershipRequestImpl</name>
+	<type>com.liferay.portal.model.impl.MembershipRequestImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>MembershipRequestImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>STATUS_PENDING</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATUS_APPROVED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATUS_DENIED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

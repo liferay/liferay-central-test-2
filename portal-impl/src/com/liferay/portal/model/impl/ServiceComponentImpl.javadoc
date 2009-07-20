@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ServiceComponentImpl</name>
+	<type>com.liferay.portal.model.impl.ServiceComponentImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ServiceComponentImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setData</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>data</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getTablesSQL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSequencesSQL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getIndexesSQL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_getData</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_getDataEl</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>DocumentException</name>
+			<type>com.liferay.portal.kernel.xml.DocumentException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_dataEl</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

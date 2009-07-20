@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalManagerMBean</name>
+	<type>com.liferay.portal.monitoring.jmx.PortalManagerMBean</type>
+	<comment><![CDATA[]]></comment>
+	<author>Karthik Sudarshan</author>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getCompanyIds</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>MonitoringException</name>
+			<type>com.liferay.portal.monitoring.MonitoringException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getUptime</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MonitoringException</name>
+			<type>com.liferay.portal.monitoring.MonitoringException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getUptime</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyWebId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MonitoringException</name>
+			<type>com.liferay.portal.monitoring.MonitoringException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getWebIds</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>MonitoringException</name>
+			<type>com.liferay.portal.monitoring.MonitoringException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>reset</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>reset</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>reset</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>webId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

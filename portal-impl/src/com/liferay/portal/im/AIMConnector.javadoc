@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AIMConnector</name>
+	<type>com.liferay.portal.im.AIMConnector</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Brett Randall</author>
+	<author>Bruno Farache</author>
+	<method>
+		<name>disconnect</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>to</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>AIMConnector</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_connect</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_disconnect</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_send</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>to</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_aim</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_oscar</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

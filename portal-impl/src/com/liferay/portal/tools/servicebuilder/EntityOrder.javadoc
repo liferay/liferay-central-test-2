@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>EntityOrder</name>
+	<type>com.liferay.portal.tools.servicebuilder.EntityOrder</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>EntityOrder</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>asc</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>columns</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getColumns</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isAscending</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_asc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_columns</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

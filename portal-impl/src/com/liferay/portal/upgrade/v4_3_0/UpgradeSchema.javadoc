@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpgradeSchema</name>
+	<type>com.liferay.portal.upgrade.v4_3_0.UpgradeSchema</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>upgradeOnce</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_OLD_TABLES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

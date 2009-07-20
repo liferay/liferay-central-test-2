@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SampleAppStartupAction</name>
+	<type>com.liferay.portal.events.SampleAppStartupAction</type>
+	<comment><![CDATA[<p>This class can be used to populate an empty database programmatically. This allows a developer to create sample data without relying on native SQL.</p>]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>run</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>ids</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ActionException</name>
+			<type>com.liferay.portal.kernel.events.ActionException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>doRun</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

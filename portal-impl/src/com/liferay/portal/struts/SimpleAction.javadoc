@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SimpleAction</name>
+	<type>com.liferay.portal.struts.SimpleAction</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been repackaged at
+<code>com.liferay.portal.kernel.events</code>.]]></deprecated>
+</javadoc>

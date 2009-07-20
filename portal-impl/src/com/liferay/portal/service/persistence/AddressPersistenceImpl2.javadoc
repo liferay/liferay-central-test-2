@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AddressPersistenceImpl2</name>
+	<type>com.liferay.portal.service.persistence.AddressPersistenceImpl2</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+</javadoc>

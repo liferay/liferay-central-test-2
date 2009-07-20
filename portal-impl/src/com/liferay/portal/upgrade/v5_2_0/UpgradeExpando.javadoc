@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpgradeExpando</name>
+	<type>com.liferay.portal.upgrade.v5_2_0.UpgradeExpando</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>upgrade</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>UpgradeException</name>
+			<type>com.liferay.portal.upgrade.UpgradeException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>doUpgrade</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_GET_COMPANY_IDS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

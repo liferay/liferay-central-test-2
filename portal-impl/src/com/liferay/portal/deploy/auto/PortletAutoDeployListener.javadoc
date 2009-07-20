@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletAutoDeployListener</name>
+	<type>com.liferay.portal.deploy.auto.PortletAutoDeployListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>PortletAutoDeployListener</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>deploy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getMvcDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPhpDeployer</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getWaiDeployer</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_deployer</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_mvcDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_phpDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_waiDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

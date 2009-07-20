@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JobSchedulerImpl</name>
+	<type>com.liferay.portal.job.JobSchedulerImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>schedule</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>intervalJob</name>
+			<type>com.liferay.portal.kernel.job.IntervalJob</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setScheduler</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>scheduler</name>
+			<type>org.quartz.Scheduler</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>shutdown</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>unschedule</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>intervalJob</name>
+			<type>com.liferay.portal.kernel.job.IntervalJob</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_scheduler</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

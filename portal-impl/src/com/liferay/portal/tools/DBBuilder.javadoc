@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DBBuilder</name>
+	<type>com.liferay.portal.tools.DBBuilder</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Charles May</author>
+	<author>Alexander Chow</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>DBBuilder</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>databaseName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>databaseTypes</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_buildCreateFile</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>_buildSQLFile</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fileName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>_getDBUtil</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_databaseName</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_databaseTypes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

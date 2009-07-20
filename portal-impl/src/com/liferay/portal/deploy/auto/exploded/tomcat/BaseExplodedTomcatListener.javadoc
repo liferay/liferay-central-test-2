@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseExplodedTomcatListener</name>
+	<type>com.liferay.portal.deploy.auto.exploded.tomcat.BaseExplodedTomcatListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Olaf Fricke</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>copyContextFile</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getDocBaseDir</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>checkXmlFile</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isMatchingFileExtension</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

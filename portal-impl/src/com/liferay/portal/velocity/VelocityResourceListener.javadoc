@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>VelocityResourceListener</name>
+	<type>com.liferay.portal.velocity.VelocityResourceListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getResourceStream</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ResourceNotFoundException</name>
+			<type>org.apache.velocity.exception.ResourceNotFoundException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>JOURNAL_SEPARATOR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SERVLET_SEPARATOR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>THEME_LOADER_SEPARATOR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

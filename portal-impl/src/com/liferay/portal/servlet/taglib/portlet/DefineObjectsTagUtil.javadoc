@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DefineObjectsTagUtil</name>
+	<type>com.liferay.portal.servlet.taglib.portlet.DefineObjectsTagUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pageContext</name>
+			<type>javax.servlet.jsp.PageContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

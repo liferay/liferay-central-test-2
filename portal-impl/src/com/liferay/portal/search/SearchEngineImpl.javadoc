@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SearchEngineImpl</name>
+	<type>com.liferay.portal.search.SearchEngineImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSearcher</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getWriter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setSearcher</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>searcher</name>
+			<type>com.liferay.portal.kernel.search.IndexSearcher</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setWriter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>writer</name>
+			<type>com.liferay.portal.kernel.search.IndexWriter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_searcher</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_writer</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

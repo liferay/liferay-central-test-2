@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ThumbnailBuilder</name>
+	<type>com.liferay.portal.tools.ThumbnailBuilder</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ThumbnailBuilder</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>originalFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>thumbnailFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>height</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>width</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>overwrite</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_imageProcessorUtil</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

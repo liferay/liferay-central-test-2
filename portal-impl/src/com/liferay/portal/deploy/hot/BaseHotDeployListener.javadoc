@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseHotDeployListener</name>
+	<type>com.liferay.portal.deploy.hot.BaseHotDeployListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>throwHotDeployException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>com.liferay.portal.kernel.deploy.hot.HotDeployEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>t</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>HotDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.hot.HotDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>registerClpMessageListeners</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContext</name>
+			<type>javax.servlet.ServletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletClassLoader</name>
+			<type>java.lang.ClassLoader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>unregisterClpMessageListeners</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContext</name>
+			<type>javax.servlet.ServletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

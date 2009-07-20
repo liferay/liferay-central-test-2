@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>QueryTerm</name>
+	<type>com.liferay.portal.search.generic.QueryTerm</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>QueryTerm</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>field</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getField</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getValue</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_field</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

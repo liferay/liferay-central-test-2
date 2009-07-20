@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CacheUtil</name>
+	<type>com.liferay.portal.servlet.filters.cache.CacheUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Michael Young</author>
+	<method>
+		<name>clearCache</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>clearCache</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getCacheResponseData</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>putCacheResponseData</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>data</name>
+			<type>com.liferay.util.servlet.filters.CacheResponseData</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_encodeKey</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>CACHE_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_cache</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

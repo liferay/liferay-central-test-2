@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserGroupImpl</name>
+	<type>com.liferay.portal.model.impl.UserGroupImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>UserGroupImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getGroup</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPrivateLayoutsPageCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hasPrivateLayouts</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPublicLayoutsPageCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>hasPublicLayouts</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>DEFAULT_PARENT_USER_GROUP_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>VerifyBlogsTrackbacks</name>
+	<type>com.liferay.portal.verify.VerifyBlogsTrackbacks</type>
+	<comment><![CDATA[<p>This class looks at every blog comment to see if it is a trackback and verifies that the source URL is a valid URL. Do not run this unless you want to do this.</p>]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>verify</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>VerifyException</name>
+			<type>com.liferay.portal.verify.VerifyException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>verifyBlogsTrackbacks</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayResourceCacheUtil</name>
+	<type>com.liferay.portal.velocity.LiferayResourceCacheUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>clear</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>put</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resource</name>
+			<type>org.apache.velocity.runtime.resource.Resource</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>remove</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>CACHE_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_cache</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

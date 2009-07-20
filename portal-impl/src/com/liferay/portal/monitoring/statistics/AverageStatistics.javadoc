@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AverageStatistics</name>
+	<type>com.liferay.portal.monitoring.statistics.AverageStatistics</type>
+	<comment><![CDATA[<a href="RollingAverageStatistics.java.html"><b><i>View Source</i></b></a>]]></comment>
+	<author>Rajesh Thiagarajan</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AverageStatistics</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addDuration</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>duration</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getAverageTime</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>reset</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_averageTime</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_countStatistics</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

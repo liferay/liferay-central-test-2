@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LuceneServlet</name>
+	<type>com.liferay.portal.servlet.LuceneServlet</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletConfig</name>
+			<type>javax.servlet.ServletConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ServletException</name>
+			<type>javax.servlet.ServletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>THREAD_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>THREAD_PRIORITY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>THREAD_TIMEOUT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_indexers</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

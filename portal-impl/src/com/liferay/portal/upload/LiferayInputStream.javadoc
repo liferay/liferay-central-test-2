@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayInputStream</name>
+	<type>com.liferay.portal.upload.LiferayInputStream</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Myunghun Kim</author>
+	<author>Brian Wing Shun Chan</author>
+	<author>Harry Mark</author>
+	<method>
+		<name>LiferayInputStream</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>read</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>b</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>off</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>len</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getCachedInputStream</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>THRESHOLD_SIZE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_session</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_totalRead</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_totalSize</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_cachedBytes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MonitoringService</name>
+	<type>com.liferay.portal.monitoring.MonitoringService</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getLevel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>namespace</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNamespaces</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setLevel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>namespace</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>level</name>
+			<type>com.liferay.portal.monitoring.Level</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

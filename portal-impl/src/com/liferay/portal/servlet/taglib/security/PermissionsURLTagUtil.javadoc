@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PermissionsURLTagUtil</name>
+	<type>com.liferay.portal.servlet.taglib.security.PermissionsURLTagUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>redirect</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>modelResource</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>modelResourceDescription</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>resourcePrimKey</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>var</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>writeOutput</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pageContext</name>
+			<type>javax.servlet.jsp.PageContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

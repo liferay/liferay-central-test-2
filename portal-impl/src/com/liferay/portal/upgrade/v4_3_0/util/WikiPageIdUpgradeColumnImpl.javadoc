@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WikiPageIdUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.v4_3_0.util.WikiPageIdUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>WikiPageIdUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>nodeIdColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>titleColumn</name>
+			<type>com.liferay.portal.upgrade.util.UpgradeColumn</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getValueMapper</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getResourcePrimKey</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_nodeIdColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_titleColumn</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_wikiPageIdMapper</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_resourcePrimKey</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

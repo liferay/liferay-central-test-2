@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SharepointException</name>
+	<type>com.liferay.portal.sharepoint.SharepointException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>SharepointException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>SharepointException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>SharepointException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>SharepointException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

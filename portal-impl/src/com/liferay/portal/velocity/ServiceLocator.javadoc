@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ServiceLocator</name>
+	<type>com.liferay.portal.velocity.ServiceLocator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>findService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>serviceName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>findService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContextName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>serviceName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ServiceLocator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_SERVICE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_VELOCITY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

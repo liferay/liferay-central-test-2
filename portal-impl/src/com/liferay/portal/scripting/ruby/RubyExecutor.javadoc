@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RubyExecutor</name>
+	<type>com.liferay.portal.scripting.ruby.RubyExecutor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alberto Montero</author>
+	<method>
+		<name>RubyExecutor</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>clearCache</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLanguage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>eval</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>allowedClasses</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>inputObjects</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>outputNames</name>
+			<type>java.util.Set</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>script</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ScriptingException</name>
+			<type>com.liferay.portal.kernel.scripting.ScriptingException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>LANGUAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_ruby</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ActionException</name>
+	<type>com.liferay.portal.struts.ActionException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been repackaged at
+<code>com.liferay.portal.kernel.events</code>.]]></deprecated>
+	<method>
+		<name>ActionException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ActionException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ActionException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ActionException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

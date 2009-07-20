@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InterBaseUtil</name>
+	<type>com.liferay.portal.tools.sql.InterBaseUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>InterBaseUtil</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getServerName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TempUpgradeColumnImpl</name>
+	<type>com.liferay.portal.upgrade.util.TempUpgradeColumnImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>TempUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>TempUpgradeColumnImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>oldColumnType</name>
+			<type>java.lang.Integer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewColumnType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>defaultType</name>
+			<type>java.lang.Integer</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getNewValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>oldValue</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

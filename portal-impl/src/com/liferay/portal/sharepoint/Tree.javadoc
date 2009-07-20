@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Tree</name>
+	<type>com.liferay.portal.sharepoint.Tree</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>addChild</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>node</name>
+			<type>com.liferay.portal.sharepoint.ResponseElement</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>parse</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>CLOSE_UL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>OPEN_UL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_children</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

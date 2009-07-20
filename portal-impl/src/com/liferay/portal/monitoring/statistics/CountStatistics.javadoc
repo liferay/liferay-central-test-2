@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CountStatistics</name>
+	<type>com.liferay.portal.monitoring.statistics.CountStatistics</type>
+	<comment><![CDATA[]]></comment>
+	<author>Rajesh Thiagarajan</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>CountStatistics</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>decrementCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>incrementCount</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>reset</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setCount</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>count</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_count</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

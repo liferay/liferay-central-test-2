@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LayoutFinderImpl</name>
+	<type>com.liferay.portal.service.persistence.LayoutFinderImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>findByNullFriendlyURL</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>findByC_P_P</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesKey</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>preferencesValue</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>FIND_BY_NULL_FRIENDLY_URL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FIND_BY_C_P_P</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

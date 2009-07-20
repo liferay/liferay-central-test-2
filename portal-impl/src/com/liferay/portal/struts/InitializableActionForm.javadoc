@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>InitializableActionForm</name>
+	<type>com.liferay.portal.struts.InitializableActionForm</type>
+	<comment><![CDATA[]]></comment>
+	<author>Araceli Checa</author>
+	<method>
+		<name>init</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>mapping</name>
+			<type>org.apache.struts.action.ActionMapping</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

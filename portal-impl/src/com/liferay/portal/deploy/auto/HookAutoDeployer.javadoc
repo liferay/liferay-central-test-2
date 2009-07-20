@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>HookAutoDeployer</name>
+	<type>com.liferay.portal.deploy.auto.HookAutoDeployer</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>HookAutoDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>autoDeploy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

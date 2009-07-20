@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>StartupHelperUtil</name>
+	<type>com.liferay.portal.events.StartupHelperUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Alexander Chow</author>
+	<author>Raymond Augé</author>
+	<method>
+		<name>deleteTempImages</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getStartupHelper</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setDropIndexes</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dropIndexes</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>updateIndexes</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>upgradeProcess</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>buildNumber</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>UpgradeException</name>
+			<type>com.liferay.portal.upgrade.UpgradeException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>verifyProcess</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>verified</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>VerifyException</name>
+			<type>com.liferay.portal.verify.VerifyException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isUpgraded</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isVerified</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setStartupHelper</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>startupHelper</name>
+			<type>com.liferay.portal.events.StartupHelper</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_startupHelper</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

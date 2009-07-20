@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalRequestDataSample</name>
+	<type>com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample</type>
+	<comment><![CDATA[]]></comment>
+	<author>Rajesh Thiagarajan</author>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortalRequestDataSample</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>user</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>requestURI</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>requestURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRequestURL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_requestURL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

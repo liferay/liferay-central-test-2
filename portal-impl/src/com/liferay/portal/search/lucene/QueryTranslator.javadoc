@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>QueryTranslator</name>
+	<type>com.liferay.portal.search.lucene.QueryTranslator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>translate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>query</name>
+			<type>com.liferay.portal.kernel.search.Query</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>ParseException</name>
+			<type>org.apache.lucene.queryParser.ParseException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

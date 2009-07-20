@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WebAutoDeployer</name>
+	<type>com.liferay.portal.deploy.auto.WebAutoDeployer</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>WebAutoDeployer</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>autoDeploy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>file</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>AutoDeployException</name>
+			<type>com.liferay.portal.kernel.deploy.auto.AutoDeployException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

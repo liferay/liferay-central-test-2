@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UtilLocator</name>
+	<type>com.liferay.portal.velocity.UtilLocator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>getInstance</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>findUtil</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>utilName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>findUtil</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContextName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>utilName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>UtilLocator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_UTIL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_VELOCITY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_instance</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

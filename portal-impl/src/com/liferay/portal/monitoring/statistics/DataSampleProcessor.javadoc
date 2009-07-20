@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DataSampleProcessor</name>
+	<type>com.liferay.portal.monitoring.statistics.DataSampleProcessor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>processDataSample</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>dataSample</name>
+			<type>T</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>MonitoringException</name>
+			<type>com.liferay.portal.monitoring.MonitoringException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PluginSettingImpl</name>
+	<type>com.liferay.portal.model.impl.PluginSettingImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PluginSettingImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>PluginSettingImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pluginSetting</name>
+			<type>com.liferay.portal.model.PluginSetting</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>addRole</name>
+		<comment><![CDATA[Adds a role to the list of roles.]]></comment>
+		<param>
+			<name>role</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setRoles</name>
+		<comment><![CDATA[Sets a string of ordered comma delimited plugin ids.]]></comment>
+		<param>
+			<name>roles</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRolesArray</name>
+		<comment><![CDATA[Gets an array of required roles of the plugin.]]></comment>
+		<return><![CDATA[an array of required roles of the plugin]]></return>
+	</method>
+	<method>
+		<name>setRolesArray</name>
+		<comment><![CDATA[Sets an array of required roles of the plugin.]]></comment>
+		<param>
+			<name>rolesArray</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>hasRoleWithName</name>
+		<comment><![CDATA[Returns true if the plugin has a role with the specified name.]]></comment>
+		<param>
+			<name>roleName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the plugin has a role with the specified name]]></return>
+	</method>
+	<method>
+		<name>hasPermission</name>
+		<comment><![CDATA[Returns true if the user has permission to use this plugin]]></comment>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[true if the user has permission to use this plugin]]></return>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[Log instance for this class.]]></comment>
+	</field>
+	<field>
+		<name>_rolesArray</name>
+		<comment><![CDATA[An array of required roles of the plugin.]]></comment>
+	</field>
+</javadoc>

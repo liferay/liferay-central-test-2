@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LuceneQueryImpl</name>
+	<type>com.liferay.portal.search.lucene.LuceneQueryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Bruno Farache</author>
+	<method>
+		<name>LuceneQueryImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>query</name>
+			<type>org.apache.lucene.search.Query</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getQuery</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>toString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_query</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MonitorNames</name>
+	<type>com.liferay.portal.monitoring.MonitorNames</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>PORTAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PORTLET</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

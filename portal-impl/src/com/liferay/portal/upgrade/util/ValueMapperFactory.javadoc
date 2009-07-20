@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ValueMapperFactory</name>
+	<type>com.liferay.portal.upgrade.util.ValueMapperFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getValueMapper</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

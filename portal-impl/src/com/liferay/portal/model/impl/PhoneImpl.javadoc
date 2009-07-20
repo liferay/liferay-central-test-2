@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PhoneImpl</name>
+	<type>com.liferay.portal.model.impl.PhoneImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PhoneImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

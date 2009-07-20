@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>FCKException</name>
+	<type>com.liferay.portal.editor.fckeditor.exception.FCKException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Ivica Cardic</author>
+	<method>
+		<name>FCKException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>FCKException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>FCKException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>FCKException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

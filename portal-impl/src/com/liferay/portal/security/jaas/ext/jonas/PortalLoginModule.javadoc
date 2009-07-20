@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalLoginModule</name>
+	<type>com.liferay.portal.security.jaas.ext.jonas.PortalLoginModule</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>commit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getPortalPrincipal</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_JGROUP</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_JPRINCIPAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_JROLE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>
