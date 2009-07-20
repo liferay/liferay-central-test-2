@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayServletContextProviderWrapper</name>
+	<type>com.liferay.util.bridges.struts.LiferayServletContextProviderWrapper</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael Young</author>
+	<method>
+		<name>getServletContext</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>javax.portlet.GenericPortlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHttpServletRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>javax.portlet.GenericPortlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getHttpServletResponse</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>javax.portlet.GenericPortlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletResponse</name>
+			<type>javax.portlet.PortletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_getProvider</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>javax.portlet.GenericPortlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_provider</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

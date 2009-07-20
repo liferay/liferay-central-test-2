@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IconHelpTag</name>
+	<type>com.liferay.taglib.ui.IconHelpTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Scott Lee</author>
+	<method>
+		<name>getDefaultPage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ThemeCompanyId</name>
+	<type>com.liferay.portal.theme.ThemeCompanyId</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ThemeCompanyId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pattern</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getValue</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isPattern</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_pattern</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

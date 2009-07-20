@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CouponNameException</name>
+	<type>com.liferay.portlet.shopping.CouponNameException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>CouponNameException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>CouponNameException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>CouponNameException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>CouponNameException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

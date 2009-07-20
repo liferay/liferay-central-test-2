@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MBTreeWalker</name>
+	<type>com.liferay.portlet.messageboards.model.MBTreeWalker</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getRoot</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getChildren</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portlet.messageboards.model.MBMessage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getChildrenRange</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portlet.messageboards.model.MBMessage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getMessages</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isOdd</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isLeaf</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portlet.messageboards.model.MBMessage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>NullServletResponse</name>
+	<type>com.liferay.util.servlet.NullServletResponse</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>NullServletResponse</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getOutputStream</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getWriter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_sos</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_pw</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

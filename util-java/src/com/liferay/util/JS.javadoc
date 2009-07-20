@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JS</name>
+	<type>com.liferay.util.JS</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getSafeName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>escape</name>
+		<comment><![CDATA[]]></comment>
+		<deprecated><![CDATA[Use <code>encodeURIComponent</code>.]]></deprecated>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>unescape</name>
+		<comment><![CDATA[]]></comment>
+		<deprecated><![CDATA[Use <code>decodeURIComponent</code>.]]></deprecated>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>encodeURIComponent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>decodeURIComponent</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toScript</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>array</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

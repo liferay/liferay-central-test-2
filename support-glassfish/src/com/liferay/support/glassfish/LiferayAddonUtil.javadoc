@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayAddonUtil</name>
+	<type>com.liferay.support.glassfish.LiferayAddonUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raju Uppalapati</author>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>copyFile</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sourceFile</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>destFile</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>copyFile</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sourceFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>destFile</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getTimestamp</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getTmpDir</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_TIMESTAMP</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

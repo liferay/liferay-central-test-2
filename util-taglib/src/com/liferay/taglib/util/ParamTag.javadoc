@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ParamTag</name>
+	<type>com.liferay.taglib.util.ParamTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

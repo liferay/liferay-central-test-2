@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>GenericServletResponse</name>
+	<type>com.liferay.util.servlet.GenericServletResponse</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>GenericServletResponse</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getData</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getContentLength</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setContentLength</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>length</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getContentType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setContentType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getOutputStream</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getWriter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_bam</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_contentLength</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_contentType</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

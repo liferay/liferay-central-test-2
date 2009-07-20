@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>IncludeTag</name>
+	<type>com.liferay.taglib.theme.IncludeTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>isTheme</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

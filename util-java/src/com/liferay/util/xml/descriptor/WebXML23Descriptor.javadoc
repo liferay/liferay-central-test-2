@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WebXML23Descriptor</name>
+	<type>com.liferay.util.xml.descriptor.WebXML23Descriptor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>canHandleType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>doctype</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>root</name>
+			<type>org.dom4j.Document</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRootChildrenOrder</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getElementsIdentifiedByAttribute</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getElementsIdentifiedByChild</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getUniqueElements</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getJoinableElements</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_ROOT_ORDERED_CHILDREN</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_ELEMENTS_IDENTIFIED_BY_ATTR</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_ELEMENTS_IDENTIFIED_BY_CHILD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_UNIQUE_ELEMENTS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_JOINABLE_ELEMENTS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

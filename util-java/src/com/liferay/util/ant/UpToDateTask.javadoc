@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UpToDateTask</name>
+	<type>com.liferay.util.ant.UpToDateTask</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>isUpToDate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>target</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isUpToDate</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>target</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletCategoryKeys</name>
+	<type>com.liferay.portal.util.PortletCategoryKeys</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>CONTENT</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>MY</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PORTAL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>SERVER</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>ALL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

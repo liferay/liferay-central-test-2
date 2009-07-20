@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MyFacesContextFactoryImpl</name>
+	<type>com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Myunghun Kim</author>
+	<method>
+		<name>getFacesContext</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>context</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>request</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>response</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>lifecycle</name>
+			<type>javax.faces.lifecycle.Lifecycle</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>FacesException</name>
+			<type>javax.faces.FacesException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

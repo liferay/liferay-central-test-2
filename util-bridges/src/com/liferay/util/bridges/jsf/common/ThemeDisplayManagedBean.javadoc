@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ThemeDisplayManagedBean</name>
+	<type>com.liferay.util.bridges.jsf.common.ThemeDisplayManagedBean</type>
+	<comment><![CDATA[<p>This class is designed to be a convenient JSF managed bean that can be used to get portal related information (such as the user's time zone).</p>]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>getUser</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

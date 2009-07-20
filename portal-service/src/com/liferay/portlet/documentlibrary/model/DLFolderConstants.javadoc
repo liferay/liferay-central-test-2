@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DLFolderConstants</name>
+	<type>com.liferay.portlet.documentlibrary.model.DLFolderConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Samuel Kong</author>
+	<field>
+		<name>DEFAULT_PARENT_FOLDER_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

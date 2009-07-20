@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>EmailAddressValidatorTag</name>
+	<type>com.liferay.taglib.faces.validator.EmailAddressValidatorTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>EmailAddressValidatorTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

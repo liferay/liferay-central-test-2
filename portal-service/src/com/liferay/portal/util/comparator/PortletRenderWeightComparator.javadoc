@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletRenderWeightComparator</name>
+	<type>com.liferay.portal.util.comparator.PortletRenderWeightComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet1</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portlet2</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

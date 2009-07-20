@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CacheResponseUtil</name>
+	<type>com.liferay.util.servlet.filters.CacheResponseUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Alexander Chow</author>
+	<method>
+		<name>addHeaders</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>headers</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>write</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>response</name>
+			<type>javax.servlet.http.HttpServletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cacheResponseData</name>
+			<type>com.liferay.util.servlet.filters.CacheResponseData</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+</javadoc>

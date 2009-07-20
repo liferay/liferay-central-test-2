@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ServletUtil</name>
+	<type>com.liferay.util.axis.ServletUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getServlet</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getServletContext</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSession</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

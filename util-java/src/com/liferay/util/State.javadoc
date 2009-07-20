@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>State</name>
+	<type>com.liferay.util.State</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>State</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>compareTo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>equals</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>obj</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_id</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_name</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

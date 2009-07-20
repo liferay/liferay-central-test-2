@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ExpandTask</name>
+	<type>com.liferay.util.ant.ExpandTask</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>expand</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>destination</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>expand</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>source</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>destination</name>
+			<type>java.io.File</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

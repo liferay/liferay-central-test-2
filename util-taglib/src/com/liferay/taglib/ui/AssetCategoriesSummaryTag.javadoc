@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetCategoriesSummaryTag</name>
+	<type>com.liferay.taglib.ui.AssetCategoriesSummaryTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setClassName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>className</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setClassPK</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>classPK</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMessage</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletURL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPortletURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletURL</name>
+			<type>javax.portlet.PortletURL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDefaultPage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_className</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_classPK</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_message</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_portletURL</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

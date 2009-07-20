@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LiferayRenderKitFactoryImpl</name>
+	<type>com.liferay.util.bridges.jsf.sun.LiferayRenderKitFactoryImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Myunghun Kim</author>
+	<method>
+		<name>LiferayRenderKitFactoryImpl</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

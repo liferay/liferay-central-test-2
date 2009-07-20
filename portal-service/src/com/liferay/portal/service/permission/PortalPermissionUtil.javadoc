@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortalPermissionUtil</name>
+	<type>com.liferay.portal.service.permission.PortalPermissionUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>check</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>permissionChecker</name>
+			<type>com.liferay.portal.security.permission.PermissionChecker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>actionId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PrincipalException</name>
+			<type>com.liferay.portal.security.auth.PrincipalException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>contains</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>permissionChecker</name>
+			<type>com.liferay.portal.security.permission.PermissionChecker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>actionId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortalPermission</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPortalPermission</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portalPermission</name>
+			<type>com.liferay.portal.service.permission.PortalPermission</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_portalPermission</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

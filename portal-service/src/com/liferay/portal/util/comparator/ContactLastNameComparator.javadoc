@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ContactLastNameComparator</name>
+	<type>com.liferay.portal.util.comparator.ContactLastNameComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been renamed to <code>UserLastNameComparator
+</code>.]]></deprecated>
+	<method>
+		<name>ContactLastNameComparator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ContactLastNameComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>asc</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

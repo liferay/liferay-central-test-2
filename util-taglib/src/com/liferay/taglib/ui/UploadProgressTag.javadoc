@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UploadProgressTag</name>
+	<type>com.liferay.taglib.ui.UploadProgressTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Keith R. Davis</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setIframeSrc</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>iframeSrc</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setRedirect</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>redirect</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setMessage</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDefaultPage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_id</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_iframeSrc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_redirect</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_message</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

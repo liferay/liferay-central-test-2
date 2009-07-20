@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletInstanceFactoryUtil</name>
+	<type>com.liferay.portlet.PortletInstanceFactoryUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>clear</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>servletContext</name>
+			<type>javax.servlet.ServletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>PortletException</name>
+			<type>javax.portlet.PortletException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>destroy</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPortletInstanceFactory</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPortletInstanceFactory</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletInstanceFactory</name>
+			<type>com.liferay.portlet.PortletInstanceFactory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_portletInstanceFactory</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

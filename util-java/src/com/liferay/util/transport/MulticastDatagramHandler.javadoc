@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MulticastDatagramHandler</name>
+	<type>com.liferay.util.transport.MulticastDatagramHandler</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<author>Raymond Aug�</author>
+	<method>
+		<name>MulticastDatagramHandler</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>gzipData</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>shortData</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>errorReceived</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>t</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>process</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>packet</name>
+			<type>java.net.DatagramPacket</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getUnzippedBytes</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>bytes</name>
+			<type>byte</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_gzipData</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_shortData</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

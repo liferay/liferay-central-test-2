@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>HtmlBottomTag</name>
+	<type>com.liferay.taglib.util.HtmlBottomTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doAfterBody</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_bodyContentString</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

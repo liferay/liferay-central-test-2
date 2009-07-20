@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RatingsScoreTag</name>
+	<type>com.liferay.taglib.ui.RatingsScoreTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setScore</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>score</name>
+			<type>double</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDefaultPage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_score</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

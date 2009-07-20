@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BasicSpellCheckListener</name>
+	<type>com.liferay.util.jazzy.BasicSpellCheckListener</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>BasicSpellCheckListener</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>text</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>spellingError</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>event</name>
+			<type>com.swabunga.spell.event.SpellCheckEvent</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInvalidWords</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>_isInsideHtmlTag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>pos</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_text</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_textCharArray</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_invalidWords</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

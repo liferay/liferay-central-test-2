@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletAppDescriptor</name>
+	<type>com.liferay.util.xml.descriptor.PortletAppDescriptor</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>canHandleType</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>doctype</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>root</name>
+			<type>org.dom4j.Document</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getElementsIdentifiedByChild</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_ELEMENTS_IDENTIFIED_BY_CHILD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

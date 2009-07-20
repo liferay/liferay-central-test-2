@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SearchContainerColumnJSPTag</name>
+	<type>com.liferay.taglib.ui.SearchContainerColumnJSPTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getPath</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setPath</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>path</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_path</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

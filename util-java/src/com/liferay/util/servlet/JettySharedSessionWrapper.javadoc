@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JettySharedSessionWrapper</name>
+	<type>com.liferay.util.servlet.JettySharedSessionWrapper</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>JettySharedSessionWrapper</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>javax.servlet.http.HttpSession</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>JettySharedSessionWrapper</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>javax.servlet.http.HttpSession</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sharedAttributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSession</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_session</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

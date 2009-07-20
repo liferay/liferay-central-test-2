@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PhoneNumberConverterTag</name>
+	<type>com.liferay.taglib.faces.converter.PhoneNumberConverterTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>PhoneNumberConverterTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setUnitedStatesFormat</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>unitedStatesFormat</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>release</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>createConverter</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>_unitedStatesFormat</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

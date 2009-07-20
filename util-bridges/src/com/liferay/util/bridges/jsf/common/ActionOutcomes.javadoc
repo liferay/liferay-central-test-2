@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ActionOutcomes</name>
+	<type>com.liferay.util.bridges.jsf.common.ActionOutcomes</type>
+	<comment><![CDATA[<p>This class provides a set of string constants that describe typical outcomes from JSF actions.</p>]]></comment>
+	<author>Neil Griffin</author>
+	<field>
+		<name>SUCCESS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>FAILURE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

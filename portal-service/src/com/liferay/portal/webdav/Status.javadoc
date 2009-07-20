@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Status</name>
+	<type>com.liferay.portal.webdav.Status</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>Status</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>code</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>Status</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>object</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>code</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getObject</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getCode</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_object</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_code</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

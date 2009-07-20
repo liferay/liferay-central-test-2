@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>JSFTagUtil</name>
+	<type>com.liferay.taglib.faces.util.JSFTagUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>eval</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>expr</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

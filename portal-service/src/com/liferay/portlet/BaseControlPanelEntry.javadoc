@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>BaseControlPanelEntry</name>
+	<type>com.liferay.portlet.BaseControlPanelEntry</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+</javadoc>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SocialActivityInterpreter</name>
+	<type>com.liferay.portlet.social.model.SocialActivityInterpreter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getClassNames</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>interpret</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>activity</name>
+			<type>com.liferay.portlet.social.model.SocialActivity</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

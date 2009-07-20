@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ReportsEntry</name>
+	<type>com.ext.portlet.reports.model.ReportsEntry</type>
+	<comment><![CDATA[<p>ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.</p><p>This interface is a model that represents the<code>ReportsEntry</code>table in the database.</p><p>Customize<code>com.ext.portlet.reports.model.impl.ReportsEntryImpl</code>and rerun the ServiceBuilder to generate the new methods.</p>]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<see>com.ext.portlet.reports.model.ReportsEntryModel</see>
+	<see>com.ext.portlet.reports.model.impl.ReportsEntryImpl</see>
+	<see>com.ext.portlet.reports.model.impl.ReportsEntryModelImpl</see>
+</javadoc>

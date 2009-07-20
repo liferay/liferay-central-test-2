@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SocialBookmarksTag</name>
+	<type>com.liferay.taglib.ui.SocialBookmarksTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setTypes</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>types</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setUrl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>url</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setTitle</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>title</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setTarget</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>target</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getDefaultPage</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_PAGE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_types</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_url</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_title</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_target</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

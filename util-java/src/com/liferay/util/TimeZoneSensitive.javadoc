@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>TimeZoneSensitive</name>
+	<type>com.liferay.util.TimeZoneSensitive</type>
+	<comment><![CDATA[]]></comment>
+	<author>Samuel Kong</author>
+	<method>
+		<name>TimeZoneSensitive</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>TimeZoneSensitive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>TimeZoneSensitive</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>list</name>
+			<type>net.fortuna.ical4j.model.ParameterList</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>PROPERTY_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

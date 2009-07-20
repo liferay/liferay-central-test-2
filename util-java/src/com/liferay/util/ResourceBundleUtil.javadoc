@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ResourceBundleUtil</name>
+	<type>com.liferay.util.ResourceBundleUtil</type>
+	<comment><![CDATA[<p>This class provides a convenience routine named getString() that gets the value of a ResourceBundle key, but also provides the ability to perform search & replace on tokens within the value of the key.</p>]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>getString</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>bundle</name>
+			<type>java.util.ResourceBundle</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>locale</name>
+			<type>java.util.Locale</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>args</name>
+			<type>java.lang.Object</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

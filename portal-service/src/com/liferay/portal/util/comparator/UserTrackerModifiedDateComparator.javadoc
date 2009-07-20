@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>UserTrackerModifiedDateComparator</name>
+	<type>com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>UserTrackerModifiedDateComparator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>UserTrackerModifiedDateComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>asc</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>userTracker1</name>
+			<type>com.liferay.portal.model.UserTracker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userTracker2</name>
+			<type>com.liferay.portal.model.UserTracker</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_asc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ElementComparator</name>
+	<type>com.liferay.util.xml.ElementComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>el1</name>
+			<type>org.dom4j.Element</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>el2</name>
+			<type>org.dom4j.Element</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>list</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>obj</name>
+			<type>org.dom4j.Attribute</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>comparator</name>
+			<type>java.util.Comparator</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>list</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>obj</name>
+			<type>org.dom4j.Element</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>comparator</name>
+			<type>java.util.Comparator</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

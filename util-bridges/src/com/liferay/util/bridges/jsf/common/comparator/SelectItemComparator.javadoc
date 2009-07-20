@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SelectItemComparator</name>
+	<type>com.liferay.util.bridges.jsf.common.comparator.SelectItemComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Neil Griffin</author>
+	<method>
+		<name>SelectItemComparator</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>SelectItemComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>asc</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>selectItem1</name>
+			<type>javax.faces.model.SelectItem</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>selectItem2</name>
+			<type>javax.faces.model.SelectItem</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_asc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

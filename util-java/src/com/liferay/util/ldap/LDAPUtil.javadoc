@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>LDAPUtil</name>
+	<type>com.liferay.util.ldap.LDAPUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Toma Bedolla</author>
+	<author>Michael Young</author>
+	<method>
+		<name>getAttributeValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>attrs</name>
+			<type>javax.naming.directory.Attributes</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>NamingException</name>
+			<type>javax.naming.NamingException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getAttributeValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>attrs</name>
+			<type>javax.naming.directory.Attributes</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>id</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>defaultValue</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>NamingException</name>
+			<type>javax.naming.NamingException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getFullProviderURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>baseURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>baseDN</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>splitFullName</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>fullName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

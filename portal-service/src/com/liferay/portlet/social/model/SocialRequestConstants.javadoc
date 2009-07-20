@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SocialRequestConstants</name>
+	<type>com.liferay.portlet.social.model.SocialRequestConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<field>
+		<name>STATUS_CONFIRM</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATUS_IGNORE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATUS_PENDING</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

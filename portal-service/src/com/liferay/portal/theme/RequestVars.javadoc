@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RequestVars</name>
+	<type>com.liferay.portal.theme.RequestVars</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>RequestVars</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ancestorPlid</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ancestorLayoutId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getRequest</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getThemeDisplay</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAncestorPlid</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getAncestorLayoutId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_request</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_themeDisplay</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_ancestorPlid</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_ancestorLayoutId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

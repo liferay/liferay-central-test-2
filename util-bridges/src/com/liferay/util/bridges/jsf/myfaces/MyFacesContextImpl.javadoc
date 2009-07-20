@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MyFacesContextImpl</name>
+	<type>com.liferay.util.bridges.jsf.myfaces.MyFacesContextImpl</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Myunghun Kim</author>
+	<method>
+		<name>MyFacesContextImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletContext</name>
+			<type>javax.portlet.PortletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletRequest</name>
+			<type>javax.portlet.PortletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletResponse</name>
+			<type>javax.portlet.PortletResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setResponseWriter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>responseWriter</name>
+			<type>javax.faces.context.ResponseWriter</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getResponseWriter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>release</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setExternalContext</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>extContext</name>
+			<type>org.apache.myfaces.context.ReleaseableExternalContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_responseWriter</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

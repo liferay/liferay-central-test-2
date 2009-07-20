@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WAIFriendlyURLMapper</name>
+	<type>com.liferay.util.bridges.wai.WAIFriendlyURLMapper</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<method>
+		<name>buildPath</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portletURL</name>
+			<type>com.liferay.portal.kernel.portlet.LiferayPortletURL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getMapping</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>isCheckMappingWithPrefix</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>populateParams</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>friendlyURLPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>params</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>hasBinaryExtension</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>friendlyURLPath</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_CHECK_MAPPING_WITH_PREFIX</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_MAPPING</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_BINARY_EXTENSIONS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>DynamicServletConfig</name>
+	<type>com.liferay.util.servlet.DynamicServletConfig</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>DynamicServletConfig</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletConfig</name>
+			<type>javax.servlet.ServletConfig</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>params</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInitParameter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getInitParameterNames</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getServletContext</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getServletName</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_servletConfig</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_params</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

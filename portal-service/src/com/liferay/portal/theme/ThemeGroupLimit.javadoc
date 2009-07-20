@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ThemeGroupLimit</name>
+	<type>com.liferay.portal.theme.ThemeGroupLimit</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ThemeGroupLimit</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

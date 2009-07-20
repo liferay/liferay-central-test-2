@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ProtectedPrincipal</name>
+	<type>com.liferay.util.servlet.ProtectedPrincipal</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<deprecated><![CDATA[This class has been repackaged at
+<code>com.liferay.portal.kernel.servlet</code>.]]></deprecated>
+	<method>
+		<name>ProtectedPrincipal</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ProtectedPrincipal</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

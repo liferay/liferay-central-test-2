@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SimpleCounter</name>
+	<type>com.liferay.util.SimpleCounter</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>SimpleCounter</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>SimpleCounter</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>counter</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getString</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_DEFAULT_COUNTER</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_counter</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

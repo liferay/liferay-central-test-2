@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>CookieUtil</name>
+	<type>com.liferay.util.CookieUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>get</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ErrorMarkerTag</name>
+	<type>com.liferay.taglib.ui.ErrorMarkerTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doStartTag</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setKey</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>key</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setValue</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>value</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_key</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_value</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

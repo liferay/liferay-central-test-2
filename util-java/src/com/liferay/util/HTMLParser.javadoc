@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>HTMLParser</name>
+	<type>com.liferay.util.HTMLParser</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>HTMLParser</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>reader</name>
+			<type>java.io.Reader</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getImages</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getLinks</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_images</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_links</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

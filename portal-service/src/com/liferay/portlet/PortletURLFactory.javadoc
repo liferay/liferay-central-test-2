@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletURLFactory</name>
+	<type>com.liferay.portlet.PortletURLFactory</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>create</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portletName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>plid</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>lifecycle</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

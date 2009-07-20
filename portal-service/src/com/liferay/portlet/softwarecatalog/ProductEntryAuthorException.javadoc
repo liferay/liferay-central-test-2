@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ProductEntryAuthorException</name>
+	<type>com.liferay.portlet.softwarecatalog.ProductEntryAuthorException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>ProductEntryAuthorException</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>ProductEntryAuthorException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ProductEntryAuthorException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>msg</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>ProductEntryAuthorException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>cause</name>
+			<type>java.lang.Throwable</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

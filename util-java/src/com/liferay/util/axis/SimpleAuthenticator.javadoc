@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SimpleAuthenticator</name>
+	<type>com.liferay.util.axis.SimpleAuthenticator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>SimpleAuthenticator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>userName</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>password</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getPasswordAuthentication</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>_authentication</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

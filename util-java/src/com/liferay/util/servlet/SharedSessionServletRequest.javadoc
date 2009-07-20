@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SharedSessionServletRequest</name>
+	<type>com.liferay.util.servlet.SharedSessionServletRequest</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<author>Brian Myunghun Kim</author>
+	<method>
+		<name>SharedSessionServletRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>sharedSessionAttributes</name>
+			<type>java.util.Map</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>shared</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSession</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getSession</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>create</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getSharedSessionWrapper</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>session</name>
+			<type>javax.servlet.http.HttpSession</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_session</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_sharedSessionAttributes</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_shared</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

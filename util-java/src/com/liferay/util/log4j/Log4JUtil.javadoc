@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Log4JUtil</name>
+	<type>com.liferay.util.log4j.Log4JUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>configureLog4J</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>url</name>
+			<type>java.net.URL</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setLevel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>name</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>priority</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_getJdkLevel</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>priority</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>MulticastServerTool</name>
+	<type>com.liferay.util.transport.MulticastServerTool</type>
+	<comment><![CDATA[<p>A server that will send out heart beat messages until you kill it. This enables you to try and debug multicast issues.</p>]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>main</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>args</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>

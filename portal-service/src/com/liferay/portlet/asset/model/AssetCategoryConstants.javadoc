@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetCategoryConstants</name>
+	<type>com.liferay.portlet.asset.model.AssetCategoryConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Jorge Ferrer</author>
+	<field>
+		<name>DEFAULT_PARENT_CATEGORY_ID</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

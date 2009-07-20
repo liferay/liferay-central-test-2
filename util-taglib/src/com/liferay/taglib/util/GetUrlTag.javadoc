@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>GetUrlTag</name>
+	<type>com.liferay.taglib.util.GetUrlTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setUrl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>url</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setExpires</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>expires</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>setVar</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>var</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_url</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_expires</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_var</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

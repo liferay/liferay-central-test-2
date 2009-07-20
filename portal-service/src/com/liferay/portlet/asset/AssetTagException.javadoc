@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>AssetTagException</name>
+	<type>com.liferay.portlet.asset.AssetTagException</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>AssetTagException</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>type</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getType</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<field>
+		<name>AT_LEAST_ONE_TAG</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>INVALID_CHARACTER</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_type</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>StateUtil</name>
+	<type>com.liferay.util.StateUtil</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>isStateId</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>stateId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>isState</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>state</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>STATE_IDS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATE_IDS_ORDERED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>STATES</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>RenderURLParamsTag</name>
+	<type>com.liferay.taglib.portlet.RenderURLParamsTag</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>doTag</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>varImpl</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>pageContext</name>
+			<type>javax.servlet.jsp.PageContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>doEndTag</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>JspException</name>
+			<type>javax.servlet.jsp.JspException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>setVarImpl</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>varImpl</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_TAG_CLASS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_TAG_DO_END_METHOD</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_log</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_varImpl</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

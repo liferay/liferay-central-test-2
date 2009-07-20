@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>ExpandoTableConstants</name>
+	<type>com.liferay.portlet.expando.model.ExpandoTableConstants</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<field>
+		<name>DEFAULT_TABLE_NAME</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

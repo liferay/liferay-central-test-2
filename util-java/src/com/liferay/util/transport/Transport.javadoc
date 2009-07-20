@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>Transport</name>
+	<type>com.liferay.util.transport.Transport</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+	<method>
+		<name>connect</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>disconnect</name>
+		<comment><![CDATA[]]></comment>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>sendMessage</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>IOException</name>
+			<type>java.io.IOException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>isConnected</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+</javadoc>

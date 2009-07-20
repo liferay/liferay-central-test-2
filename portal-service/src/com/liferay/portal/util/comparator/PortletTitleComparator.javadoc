@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>PortletTitleComparator</name>
+	<type>com.liferay.portal.util.comparator.PortletTitleComparator</type>
+	<comment><![CDATA[]]></comment>
+	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>PortletTitleComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>locale</name>
+			<type>java.util.Locale</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>PortletTitleComparator</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>servletContext</name>
+			<type>javax.servlet.ServletContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>locale</name>
+			<type>java.util.Locale</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>compare</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>portlet1</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>portlet2</name>
+			<type>com.liferay.portal.model.Portlet</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<field>
+		<name>_companyId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_servletContext</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_locale</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+</javadoc>

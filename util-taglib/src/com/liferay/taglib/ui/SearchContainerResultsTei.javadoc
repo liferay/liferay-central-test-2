@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>SearchContainerResultsTei</name>
+	<type>com.liferay.taglib.ui.SearchContainerResultsTei</type>
+	<comment><![CDATA[]]></comment>
+	<author>Raymond Augé</author>
+	<method>
+		<name>getVariableInfo</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>data</name>
+			<type>javax.servlet.jsp.tagext.TagData</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+</javadoc>
