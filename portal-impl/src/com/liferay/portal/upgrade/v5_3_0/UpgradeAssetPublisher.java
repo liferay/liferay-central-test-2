@@ -151,9 +151,9 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 
 		if (layoutId != 0) {
 			preferences.setValues(
-				"scope-ids", new String[] {"Layout_" + layoutId });
+				"scope-ids", new String[] {"Layout_" + layoutId});
 
-			preferences.setValue("default-scope", String.valueOf(Boolean.FALSE));
+			preferences.setValue("default-scope", Boolean.FALSE.toString());
 		}
 
 		long classNameId = GetterUtil.getLong(
@@ -165,7 +165,7 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 			preferences.setValues(
 				"class-name-ids", new String[] {String.valueOf(classNameId)});
 
-			preferences.setValue("any-asset-type", String.valueOf(Boolean.FALSE));
+			preferences.setValue("any-asset-type", Boolean.FALSE.toString());
 		}
 
 		boolean andOperator = GetterUtil.getBoolean(
