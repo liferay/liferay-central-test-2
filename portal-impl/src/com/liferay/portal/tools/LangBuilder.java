@@ -161,6 +161,7 @@ public class LangBuilder {
 				String key = line.substring(0, pos);
 				String value = line.substring(pos + 1, line.length());
 
+				String nativeValue = nativeProps.getProperty(key);
 				String translatedText = props.getProperty(key);
 
 				if ((translatedText != null) &&
@@ -169,10 +170,18 @@ public class LangBuilder {
 
 					translatedText = "";
 				}
+				else if (nativeValue != null) {
+					if (nativeValue.endsWith(_AUTOMATIC_COPY)) {
+						translatedText += _AUTOMATIC_COPY;
+					}
+					else if (nativeValue.endsWith(_AUTOMATIC_TRANSLATION)) {
+						translatedText += _AUTOMATIC_TRANSLATION;
+					}
+				}
 
 				if ((translatedText == null) || translatedText.equals("")) {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
-						translatedText = value;
+						translatedText = value + _AUTOMATIC_COPY;
 					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
@@ -346,10 +355,18 @@ public class LangBuilder {
 			return _translate(translationId, fromText, ++limit);
 		}
 
+		if (Validator.isNotNull(toText)) {
+			toText += _AUTOMATIC_TRANSLATION;
+		}
+
 		return toText;
 	}
 
 	private String _langDir;
 	private String _langFile;
+
+	private static final String _AUTOMATIC_COPY = " [automatic copy]";
+	private static final String _AUTOMATIC_TRANSLATION =
+		" [automatic translation]";
 
 }

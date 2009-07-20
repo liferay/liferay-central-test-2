@@ -339,16 +339,25 @@ ${exception.message}
 		<delete file="${lang.dir}/${lang.file}_${lang.code}.properties" failonerror="false" />
 
 		<exec dir="${lang.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c '${env.JAVA_HOME}'/bin/native2ascii -encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
+			<arg line="/c '${env.JAVA_HOME}'/bin/native2ascii -encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties.tmp" />
 		</exec>
 
 		<exec dir="${lang.dir}" executable="${env.JAVA_HOME}/bin/native2ascii" os="${os.unix}">
-			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
+			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties.tmp" />
 		</exec>
 
 		<exec dir="${lang.dir}" executable="/usr/bin/native2ascii" os="${os.apple}">
-			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties" />
+			<arg line="-encoding UTF-8 ${lang.file}_${lang.code}.properties.native ${lang.file}_${lang.code}.properties.tmp" />
 		</exec>
+
+		<copy file="${lang.dir}/${lang.file}_${lang.code}.properties.tmp" tofile="${lang.dir}/${lang.file}_${lang.code}.properties" overwrite="true">
+			<filterset begintoken=" [" endtoken="]">
+				<filter token="automatic translation" value=""/>
+				<filter token="automatic copy" value=""/>
+			</filterset>
+		</copy>
+
+		<delete file="${lang.dir}/${lang.file}_${lang.code}.properties.tmp" />
 	</target>
 
 	<target name="build-lang-native2ascii-all">
