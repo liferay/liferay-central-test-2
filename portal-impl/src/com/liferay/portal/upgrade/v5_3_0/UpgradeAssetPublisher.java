@@ -144,6 +144,18 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 			PortletPreferencesSerializer.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
+		long layoutId = GetterUtil.getLong(
+			preferences.getValue("lfr-scope-layout-id", null));
+
+		preferences.reset("lfr-scope-layout-id");
+
+		if (layoutId != 0) {
+			preferences.setValues(
+				"scope-ids", new String[] {"Layout_" + layoutId });
+
+			preferences.setValue("default-scope", String.valueOf(Boolean.FALSE));
+		}
+
 		long classNameId = GetterUtil.getLong(
 			preferences.getValue("class-name-id", null));
 
@@ -152,6 +164,8 @@ public class UpgradeAssetPublisher extends UpgradeProcess {
 		if (classNameId != 0) {
 			preferences.setValues(
 				"class-name-ids", new String[] {String.valueOf(classNameId)});
+
+			preferences.setValue("any-asset-type", String.valueOf(Boolean.FALSE));
 		}
 
 		boolean andOperator = GetterUtil.getBoolean(
