@@ -601,8 +601,6 @@ public class JavadocBuilder {
 				_updateJavadocFromJava(basedir, fileName);
 			}
 		}
-
-		FileUtil.write("test.txt", sb.toString());
 	}
 
 	private String _removeJavadocFromJava(
