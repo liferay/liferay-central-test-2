@@ -83,7 +83,9 @@ if (assetVocabularyId > 0) {
 	}
 }
 else if (!groupByClass) {
-	assetEntryQuery.setClassNameIds(classNameIds);
+	if(!anyAssetType) {
+		assetEntryQuery.setClassNameIds(classNameIds);
+	}
 
 	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 

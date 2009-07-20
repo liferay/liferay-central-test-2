@@ -317,6 +317,11 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					<liferay-ui:panel id='assetPublisherSources' title='<%= LanguageUtil.get(pageContext, "source") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:message key="scope" />
 
+						<select name="<portlet:namespace />defaultScope" id="<portlet:namespace />defaultScope">
+							<option <%= defaultScope ? "selected" : StringPool.BLANK %> value="<%= true %>"><%= themeDisplay.getScopeGroup().getDescriptiveName() %></option>
+							<option <%= !defaultScope ? "selected" : StringPool.BLANK %> value="<%= false %>"><liferay-ui:message key="select" />...</option>
+						</select>
+
 						<input name="<portlet:namespace />groupIds" type="hidden" value="" />
 
 						<%
@@ -356,20 +361,27 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						groupsRightList = ListUtil.sort(groupsRightList, new KeyValuePairComparator(false, true));
 						%>
 
-						<liferay-ui:input-move-boxes
-							formName="fm"
-							leftTitle="current"
-							rightTitle="available"
-							leftBoxName="currentGroupIds"
-							rightBoxName="availableGroupIds"
-							leftReorder="true"
-							leftList="<%= groupsLeftList %>"
-							rightList="<%= groupsRightList %>"
-						/>
+						<div id="<portlet:namespace />groupsBoxes" style="display: <%= defaultScope ? "none" : "block" %> ;">
+							<liferay-ui:input-move-boxes
+								formName="fm"
+								leftTitle="current"
+								rightTitle="available"
+								leftBoxName="currentGroupIds"
+								rightBoxName="availableGroupIds"
+								leftReorder="true"
+								leftList="<%= groupsLeftList %>"
+								rightList="<%= groupsRightList %>"
+							/>
+						</div>
 
 						<br /><br />
 
 						<liferay-ui:message key="asset-entry-type" />
+
+						<select name="<portlet:namespace />anyAssetType" id="<portlet:namespace />anyAssetType">
+							<option <%= anyAssetType ? "selected" : StringPool.BLANK %> value="<%= true %>" ><liferay-ui:message key="any" /></option>
+							<option <%= !anyAssetType ? "selected" : StringPool.BLANK %> value="<%= false %>"><liferay-ui:message key="filter[action]" />...</option>
+						</select>
 
 						<input name="<portlet:namespace />classNameIds" type="hidden" value="" />
 
@@ -403,16 +415,18 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
 						%>
 
-						<liferay-ui:input-move-boxes
-							formName="fm"
-							leftTitle="current"
-							rightTitle="available"
-							leftBoxName="currentClassNameIds"
-							rightBoxName="availableClassNameIds"
-							leftReorder="true"
-							leftList="<%= typesLeftList %>"
-							rightList="<%= typesRightList %>"
-						/>
+						<div id="<portlet:namespace />classNamesBoxes" style="display: <%= anyAssetType ? "none" : "block" %> ;">
+							<liferay-ui:input-move-boxes
+								formName="fm"
+								leftTitle="current"
+								rightTitle="available"
+								leftBoxName="currentClassNameIds"
+								rightBoxName="availableClassNameIds"
+								leftReorder="true"
+								leftList="<%= typesLeftList %>"
+								rightList="<%= typesRightList %>"
+							/>
+						</div>
 					</liferay-ui:panel>
 					<liferay-ui:panel id='assetPublisherQueryLogic' title='<%= LanguageUtil.get(pageContext, "filter") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 						<liferay-ui:asset-tags-error />
@@ -524,6 +538,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<script type="text/javascript">
 							jQuery(
 								function () {
+									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />groupsBoxes');
+									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
+
 									var queryRules = jQuery('#<portlet:namespace />queryRules');
 									var queryRulesContainer = queryRules.find('> fieldset');
 									var queryRulesRows = queryRulesContainer.find('.lfr-form-row');
