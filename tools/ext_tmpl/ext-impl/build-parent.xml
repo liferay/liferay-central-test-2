@@ -147,7 +147,15 @@ ${exception.message}
 	</target>
 
 	<target name="build-lang-cmd">
-		<antcall target="build-lang-native2ascii-all" />
+		<if>
+			<isset property="lang.code" />
+			<then>
+				<antcall target="build-lang-native2ascii" />
+			</then>
+			<else>
+				<antcall target="build-lang-native2ascii-all" />
+			</else>
+		</if>
 
 		<java
 			classname="com.liferay.portal.tools.LangBuilder"
@@ -161,11 +169,20 @@ ${exception.message}
 			<jvmarg value="-Duser.language=en" />
 			<arg value="${lang.dir}" />
 			<arg value="${lang.file}" />
+			<arg value="${lang.code}" />
 		</java>
 
-		<antcall target="build-lang-native2ascii-all" />
+		<if>
+			<isset property="lang.code" />
+			<then>
+				<antcall target="build-lang-native2ascii" />
+			</then>
+			<else>
+				<antcall target="build-lang-native2ascii-all" />
 
-		<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
+				<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
+			</else>
+		</if>
 	</target>
 
 	<target name="build-lang-native2ascii">
@@ -187,6 +204,14 @@ ${exception.message}
 	<target name="build-lang-native2ascii-all">
 		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="ar" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="eu" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="bg" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
@@ -250,11 +275,23 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
-			<param name="lang.code" value="pt" />
+			<param name="lang.code" value="pl" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="pt_BR" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="pt_PT" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="ru" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="sk" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
