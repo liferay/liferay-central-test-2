@@ -362,11 +362,12 @@ public class LangBuilder {
 		return toText;
 	}
 
+	private static final String _AUTOMATIC_COPY = " (Automatic Copy)";
+
+	private static final String _AUTOMATIC_TRANSLATION =
+		" (Automatic Translation)";
+
 	private String _langDir;
 	private String _langFile;
-
-	private static final String _AUTOMATIC_COPY = " [automatic copy]";
-	private static final String _AUTOMATIC_TRANSLATION =
-		" [automatic translation]";
 
 }
