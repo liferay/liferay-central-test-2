@@ -565,7 +565,10 @@ public class JavadocBuilder {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(basedir);
-		ds.setExcludes(new String[] {"**\\Test.java"});
+		ds.setExcludes(
+			new String[] {
+				"**\\classes\\**", "**\\portal-client\\**", "**\\portal-web\\**"
+			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
 		ds.scan();
@@ -598,6 +601,8 @@ public class JavadocBuilder {
 				_updateJavadocFromJava(basedir, fileName);
 			}
 		}
+
+		FileUtil.write("test.txt", sb.toString());
 	}
 
 	private String _removeJavadocFromJava(
