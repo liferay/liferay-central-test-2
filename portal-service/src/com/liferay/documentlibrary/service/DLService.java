@@ -31,13 +31,13 @@ import java.io.File;
 
 import java.util.Date;
 
+@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 /**
  * <a href="DLService.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-@Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLService {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
