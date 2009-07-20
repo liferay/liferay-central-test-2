@@ -783,12 +783,12 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 <%!
 private String _getKey(Group group) throws Exception {
-	String key;
+	String key = null;
 
 	if (group.isLayout()) {
-		Layout curLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+		Layout layout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
 
-		key = "Layout" + StringPool.UNDERLINE + curLayout.getLayoutId();
+		key = "Layout" + StringPool.UNDERLINE + layout.getLayoutId();
 	}
 	else {
 		key = "Group" + StringPool.UNDERLINE + group.getGroupId();;

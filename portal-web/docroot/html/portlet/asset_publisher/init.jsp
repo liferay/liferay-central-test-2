@@ -138,17 +138,17 @@ if (!defaultScope) {
 	for (int i = 0; i < scopeIds.length; i++) {
 		String[] scopeIdFragments = StringUtil.split(scopeIds[i], StringPool.UNDERLINE);
 
-		if (Validator.equals(scopeIdFragments[0], "Layout")) {
-			long layoutId = GetterUtil.getLong(scopeIdFragments[1]);
+		if (scopeIdFragments[0].equals("Layout")) {
+			long scopeIdLayoutId = GetterUtil.getLong(scopeIdFragments[1]);
 
-			Layout curLayout = LayoutLocalServiceUtil.getLayout(scopeGroupId, layout.isPrivateLayout(), layoutId);
+			Layout scopeIdLayout = LayoutLocalServiceUtil.getLayout(scopeGroupId, layout.isPrivateLayout(), scopeIdLayoutId);
 
-			groupIds[i] = curLayout.getScopeGroup().getGroupId();
+			groupIds[i] = scopeIdLayout.getScopeGroup().getGroupId();
 		}
 		else {
-			long groupId = GetterUtil.getLong(scopeIdFragments[1]);
+			long scopeIdGroupId = GetterUtil.getLong(scopeIdFragments[1]);
 
-			groupIds[i] = groupId;
+			groupIds[i] = scopeIdGroupId;
 		}
 	}
 }
