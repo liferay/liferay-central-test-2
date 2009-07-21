@@ -33,14 +33,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 public interface DLFileShortcutService {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long folderId, long toFolderId, java.lang.String toName,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long folderId, long toFolderId, java.lang.String toName,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -56,7 +49,8 @@ public interface DLFileShortcutService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
 		long fileShortcutId, long folderId, long toFolderId,
-		java.lang.String toName)
+		java.lang.String toName,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

@@ -178,6 +178,8 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	<entity name="DLFileVersion" local-service="true" remote-service="false">
 

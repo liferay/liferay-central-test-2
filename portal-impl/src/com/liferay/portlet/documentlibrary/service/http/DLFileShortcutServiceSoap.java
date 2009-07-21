@@ -32,30 +32,12 @@ import java.rmi.RemoteException;
 public class DLFileShortcutServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
 		long folderId, long toFolderId, java.lang.String toName,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
-					toName, addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		long folderId, long toFolderId, java.lang.String toName,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
-				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
-					toName, communityPermissions, guestPermissions);
+					toName, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
@@ -95,11 +77,13 @@ public class DLFileShortcutServiceSoap {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap updateFileShortcut(
 		long fileShortcutId, long folderId, long toFolderId,
-		java.lang.String toName) throws RemoteException {
+		java.lang.String toName,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLFileShortcutServiceUtil.updateFileShortcut(fileShortcutId,
-					folderId, toFolderId, toName);
+					folderId, toFolderId, toName, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
