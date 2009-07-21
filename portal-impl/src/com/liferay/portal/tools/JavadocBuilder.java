@@ -294,15 +294,10 @@ public class JavadocBuilder {
 			return StringPool.BLANK;
 		}
 
-		cdata = StringUtil.replace(cdata, "\n", " ");
-
-		while (cdata.contains("> ")) {
-			cdata = StringUtil.replace(cdata, "> ", ">");
-		}
-
-		while (cdata.contains(" <")) {
-			cdata = StringUtil.replace(cdata, " <", "<");
-		}
+		cdata = StringUtil.replace(
+			cdata,
+			new String[] {"\n", "<p>", "</p>"},
+			new String[] {" ", " <p> ", " </p> "});
 
 		while (cdata.contains("  ")) {
 			cdata = StringUtil.replace(cdata, "  ", " ");
@@ -578,12 +573,9 @@ public class JavadocBuilder {
 		for (String fileName : fileNames) {
 			fileName = StringUtil.replace(fileName, "\\", "/");
 
-			if (!fileName.endsWith("BlogsEntryPersistence.java") &&
-				!fileName.endsWith("BlogsEntryPersistenceImpl.java") &&
-				!fileName.endsWith("BlogsEntryUtil.java")) {
-
+			/*if (!fileName.endsWith("Isolation.java")) {
 				continue;
-			}
+			}*/
 
 			if (command.equals("delete")) {
 				_removeJavadocFromJava(basedir, fileName, true);
@@ -745,6 +737,10 @@ public class JavadocBuilder {
 		JavaMethod[] javaMethods = javaClass.getMethods();
 
 		for (JavaMethod javaMethod : javaMethods) {
+			if (commentsMap.containsKey(javaMethod.getLineNumber())) {
+				continue;
+			}
+
 			commentsMap.put(
 				javaMethod.getLineNumber(),
 				_getJavaMethodComment(lines, methodElementsMap, javaMethod));
@@ -763,6 +759,10 @@ public class JavadocBuilder {
 		JavaField[] javaFields = javaClass.getFields();
 
 		for (JavaField javaField : javaFields) {
+			if (commentsMap.containsKey(javaField.getLineNumber())) {
+				continue;
+			}
+
 			commentsMap.put(
 				javaField.getLineNumber(),
 				_getJavaFieldComment(lines, fieldElementsMap, javaField));
