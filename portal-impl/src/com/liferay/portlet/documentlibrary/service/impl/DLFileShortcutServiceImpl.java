@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutServiceBaseImpl;
@@ -38,7 +37,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
 			long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -53,7 +52,29 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		}
 
 		return dlFileShortcutLocalService.addFileShortcut(
-			getUserId(), folderId, toFolderId, toName, serviceContext);
+			getUserId(), folderId, toFolderId, toName, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public DLFileShortcut addFileShortcut(
+			long folderId, long toFolderId, String toName,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_SHORTCUT);
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), toFolderId, toName, ActionKeys.VIEW);
+		}
+		catch (PrincipalException pe) {
+			throw new FileShortcutPermissionException();
+		}
+
+		return dlFileShortcutLocalService.addFileShortcut(
+			getUserId(), folderId, toFolderId, toName, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
@@ -75,8 +96,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long fileShortcutId, long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			long fileShortcutId, long folderId, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		DLFileShortcutPermission.check(
@@ -91,8 +111,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		}
 
 		return dlFileShortcutLocalService.updateFileShortcut(
-			getUserId(), fileShortcutId, folderId, toFolderId, toName,
-			serviceContext);
+			getUserId(), fileShortcutId, folderId, toFolderId, toName);
 	}
 
 }

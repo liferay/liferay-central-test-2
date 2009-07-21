@@ -51,7 +51,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -505,14 +504,6 @@ public class DLFileEntryLocalServiceImpl
 		assetEntryLocalService.incrementViewCounter(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTF_TN(folderId, name);
-
-		for (DLFileShortcut shortcut : fileShortcuts) {
-			assetEntryLocalService.incrementViewCounter(
-				DLFileShortcut.class.getName(), shortcut.getFileShortcutId());
-		}
-
 		if ((version > 0) && (fileEntry.getVersion() != version)) {
 			return dlLocalService.getFileAsStream(
 				companyId, folderId, name, version);
@@ -702,18 +693,6 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getFileEntryId(), assetCategoryIds, assetTagNames, true,
 			null, null, null, null, mimeType, fileEntry.getTitle(),
 			fileEntry.getDescription(), null, null, 0, 0, null, false);
-
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTF_TN(
-				fileEntry.getFolderId(), fileEntry.getName());
-
-		 for (DLFileShortcut shortcut : fileShortcuts) {
-			 assetEntryLocalService.updateEntry(
-				userId, shortcut.getGroupId(), DLFileShortcut.class.getName(),
-				shortcut.getFileShortcutId(), assetCategoryIds, assetTagNames, true, null,
-				null, null, null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
-		 }
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -891,14 +870,6 @@ public class DLFileEntryLocalServiceImpl
 
 			assetEntryLocalService.deleteEntry(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTF_TN(folderId, name);
-
-			for (DLFileShortcut shortcut : fileShortcuts) {
-				assetEntryLocalService.deleteEntry(
-					DLFileShortcut.class.getName(), shortcut.getFileShortcutId());
-			}
 
 			// Expando
 

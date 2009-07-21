@@ -27,15 +27,10 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -131,29 +126,25 @@ public class EditFileShortcutAction extends PortletAction {
 		String toName = HtmlUtil.unescape(
 			ParamUtil.getString(actionRequest, "toName"));
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				DLFileEntry.class.getName(), actionRequest);
+		String[] communityPermissions = actionRequest.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = actionRequest.getParameterValues(
+			"guestPermissions");
 
 		if (fileShortcutId <= 0) {
 
 			// Add file shortcut
 
-			DLFileShortcut shortcut =  DLFileShortcutServiceUtil.addFileShortcut(
-				folderId, toFolderId, toName, serviceContext);
-
-			AssetPublisherUtil.addAndStoreSelection(
-				actionRequest, DLFileShortcut.class.getName(),
-				shortcut.getFileShortcutId(), -1);
+			DLFileShortcutServiceUtil.addFileShortcut(
+				folderId, toFolderId, toName, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
 			// Update file shortcut
 
 			DLFileShortcutServiceUtil.updateFileShortcut(
-				fileShortcutId, folderId, toFolderId, toName, serviceContext);
-
-			AssetPublisherUtil.addRecentFolderId(
-					actionRequest, DLFileShortcut.class.getName(), folderId);
+				fileShortcutId, folderId, toFolderId, toName);
 		}
 	}
 

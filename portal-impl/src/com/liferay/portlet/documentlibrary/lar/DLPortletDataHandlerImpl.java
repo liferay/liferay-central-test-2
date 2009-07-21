@@ -758,33 +758,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		String toName = MapUtil.getString(
 			fileEntryNames, fileShortcut.getToName(), fileShortcut.getToName());
 
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
 		try {
 			DLFolderUtil.findByPrimaryKey(folderId);
 			DLFolderUtil.findByPrimaryKey(toFolderId);
-
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				toFolderId, toName);
-
-			long[] assetCategoryIds = null;
-			String[] assetTagNames = null;
-
-			if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-				assetCategoryIds = context.getAssetCategoryIds(
-					DLFileEntry.class, fileEntry.getFileEntryId());
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				assetTagNames = context.getAssetTagNames(
-					DLFileEntry.class, fileEntry.getFileEntryId());
-			}
-
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setAddCommunityPermissions(true);
-			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setScopeGroupId(context.getGroupId());
-			serviceContext.setAssetCategoryIds(assetCategoryIds);
-			serviceContext.setAssetTagNames(assetTagNames);
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
@@ -796,18 +775,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					DLFileShortcutLocalServiceUtil.updateFileShortcut(
 						userId, existingFileShortcut.getFileShortcutId(),
-						folderId, toFolderId, toName, serviceContext);
+						folderId, toFolderId, toName);
 				}
 				catch (NoSuchFileShortcutException nsfse) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(
 						fileShortcut.getUuid(), userId, folderId, toFolderId,
-						toName, serviceContext);
+						toName, addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
 					userId, folderId, toFolderId, toName,
-					serviceContext);
+					addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
