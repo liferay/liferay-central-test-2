@@ -68,7 +68,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 
 Iterator itr = portlets.iterator();
 
-StringBuilder sb = new StringBuilder();
+List<String> portletTitles = new ArrayList<String>();
 
 while (itr.hasNext()) {
 	Portlet portlet = (Portlet)itr.next();
@@ -87,7 +87,7 @@ while (itr.hasNext()) {
 		continue;
 	}
 
-	sb.append(PortalUtil.getPortletTitle(portlet, application, locale) + StringPool.COMMA_AND_SPACE);
+	portletTitles.add(PortalUtil.getPortletTitle(portlet, application, locale));
 }
 
 if (Validator.isNotNull(primarySearch)) {
@@ -106,11 +106,16 @@ if (Validator.isNotNull(primarySearch)) {
 }
 %>
 
-<c:if test="<%= sb.length() > 0 %>">
-	<div class="search-msg">
-		<liferay-ui:message key="searched" /> <%= sb.substring(0, sb.length() - 2) %>
-	</div>
-</c:if>
+<div class="search-msg">
+	<c:choose>
+		<c:when test="<%= portletTitles.isEmpty() %>">
+			<liferay-ui:message key="no-portlets-were-searched" />
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:message key="searched" /> <%= StringUtil.merge(portletTitles, StringPool.COMMA_AND_SPACE) %>
+		</c:otherwise>
+	</c:choose>
+</div>
 
 <%
 int totalResults = 0;
@@ -316,8 +321,12 @@ for (int i = 0; i < portlets.size(); i++) {
 
 <%
 String pageSubtitle = LanguageUtil.get(pageContext, "search-results");
-String pageDescription = LanguageUtil.get(pageContext, "searched") + StringPool.SPACE + sb.substring(0, sb.length() - 2);
+String pageDescription = LanguageUtil.get(pageContext, "search-results");
 String pageKeywords = LanguageUtil.get(pageContext, "search");
+
+if (!portletTitles.isEmpty()) {
+	pageDescription = LanguageUtil.get(pageContext, "searched") + StringPool.SPACE + StringUtil.merge(portletTitles, StringPool.COMMA_AND_SPACE);
+}
 
 if (Validator.isNotNull(keywords)) {
 	pageKeywords = keywords;
