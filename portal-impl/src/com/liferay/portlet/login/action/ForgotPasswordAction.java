@@ -23,6 +23,7 @@
 package com.liferay.portlet.login.action;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.RequiredReminderQueryException;
 import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserReminderQueryException;
@@ -91,6 +92,7 @@ public class ForgotPasswordAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
 				e instanceof NoSuchUserException ||
+				e instanceof RequiredReminderQueryException ||
 				e instanceof SendPasswordException ||
 				e instanceof UserEmailAddressException ||
 				e instanceof UserReminderQueryException) {
@@ -159,6 +161,15 @@ public class ForgotPasswordAction extends PortletAction {
 		User user = getUser(actionRequest);
 
 		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
+
+			if (PropsValues.USERS_REMINDER_QUERIES_REQUIRED &&
+				!user.hasReminderQuery()) {
+
+				throw new RequiredReminderQueryException(
+					"No reminder query or answer is defined for user " +
+						user.getUserId());
+			}
+
 			String answer = ParamUtil.getString(actionRequest, "answer");
 
 			if (!user.getReminderQueryAnswer().equals(answer)) {

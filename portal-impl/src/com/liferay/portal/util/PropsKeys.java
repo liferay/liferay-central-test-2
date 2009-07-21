@@ -1294,6 +1294,8 @@ public interface PropsKeys {
 
 	public static final String USERS_REMINDER_QUERIES_ENABLED = "users.reminder.queries.enabled";
 
+	public static final String USERS_REMINDER_QUERIES_REQUIRED = "users.reminder.queries.required";
+
 	public static final String USERS_REMINDER_QUERIES_QUESTIONS = "users.reminder.queries.questions";
 
 	public static final String USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE = "users.screen.name.always.autogenerate";

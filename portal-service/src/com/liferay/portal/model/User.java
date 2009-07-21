@@ -99,6 +99,8 @@ public interface User extends UserModel {
 
 	public boolean hasPublicLayouts();
 
+	public boolean hasReminderQuery();
+
 	public boolean isFemale();
 
 	public boolean isMale();

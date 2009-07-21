@@ -38,6 +38,7 @@ if (Validator.isNull(authType)) {
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 
 <liferay-ui:error exception="<%= NoSuchUserException.class %>" message='<%= "the-" + TextFormatter.format(authType, TextFormatter.K) + "-you-requested-is-not-registered-in-our-database" %>' />
+<liferay-ui:error exception="<%= RequiredReminderQueryException.class %>" message="you-have-not-configured-a-reminder-query-yet" />
 <liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="your-answer-does-not-match-what-is-in-our-database" />
@@ -103,17 +104,26 @@ if (Validator.isNull(authType)) {
 				</div>
 			</c:if>
 
-			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
-				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-					<portlet:param name="struts_action" value="/login/captcha" />
-				</portlet:actionURL>
+			<c:choose>
+				<c:when test="<%= PropsValues.USERS_REMINDER_QUERIES_REQUIRED && !user2.hasReminderQuery() %>">
+					<div class="portlet-msg-info">
+						<liferay-ui:message key="the-password-cannot-be-reset-because-you-have-not-configured-a-reminder-query" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+						<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+							<portlet:param name="struts_action" value="/login/captcha" />
+						</portlet:actionURL>
 
-				<liferay-ui:captcha url="<%= captchaURL %>" />
-			</c:if>
+						<liferay-ui:captcha url="<%= captchaURL %>" />
+					</c:if>
 
-			<div class="aui-button-holder">
-				<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
-			</div>
+					<div class="aui-button-holder">
+						<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-alert">

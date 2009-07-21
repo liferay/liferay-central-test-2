@@ -561,6 +561,16 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
+	public boolean hasReminderQuery() {
+		if (Validator.isNotNull(getReminderQueryQuestion()) &&
+			Validator.isNotNull(getReminderQueryAnswer())) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isFemale() {
 		return getFemale();
 	}
