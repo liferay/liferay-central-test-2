@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
+import java.util.List;
+import java.util.Map;
+
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
@@ -30,9 +33,12 @@ import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.request.TaskInstanceRequest;
 
-import java.util.List;
-import java.util.Map;
-
+/**
+ * <a href="TaskInstanceManagerProxy.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ *
+ */
 public class TaskInstanceManagerProxy implements TaskInstanceManager {
 
 	public TaskInstanceManagerProxy(
@@ -113,7 +119,146 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to complete task instance.", ex);
 		}
 	}
+	
+	public TaskInstanceInfo completeTaskInstance(
+		long taskInstanceId, long userId, String activityName, String comment,
+		Map<String, Object> attributes)
+		throws WorkflowException {
+		try {
+			WorkflowResultContainer<TaskInstanceInfo> response =
+				(WorkflowResultContainer<TaskInstanceInfo>) _synchronousMessageSender.send(TaskInstanceRequest.createCompleteTaskInstanceRequest(
+					taskInstanceId, userId, activityName, comment, attributes));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException("Unable to complete task instance.", ex);
+		}
+	}
+	
+	public List<String> getPossibleNextActivityNames(
+		long taskInstanceId, long userId)
+		throws WorkflowException {
+		try {
+			WorkflowResultContainer<List<String>> response =
+				(WorkflowResultContainer<List<String>>) _synchronousMessageSender.send(TaskInstanceRequest.createGetPossibleNextActivityNamesRequest(
+					taskInstanceId, userId));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get possible next activities.", ex);
+		}
+	}
+	
+	public int getTaskInstanceCountForCredential(UserCredential userCredential)
+		throws WorkflowException {
+		try {
+			WorkflowResultContainer<Integer> response =
+				(WorkflowResultContainer<Integer>)
+					_synchronousMessageSender.send(
+						TaskInstanceRequest.createGetTaskInstanceCountForCredentialRequest(
+					userCredential));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get task count for credential.", ex);
+		}
+	}
+	
+	public int getTaskInstanceCountForRole(long roleId)
+		throws WorkflowException {
+		try {
+			WorkflowResultContainer<Integer> response =
+				(WorkflowResultContainer<Integer>) _synchronousMessageSender.send(TaskInstanceRequest.createGetTaskInstanceCountForRoleRequest(roleId));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get task count for role.", ex);
+		}
+	}
+	
+	public int getTaskInstanceCountForUser(long userId)
+		throws WorkflowException {
 
+		try {
+			WorkflowResultContainer<Integer> response =
+				(WorkflowResultContainer<Integer>) _synchronousMessageSender.send(TaskInstanceRequest.createGetTaskInstanceCountForUserRequest(userId));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get task count for user.", ex);
+		}
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+		UserCredential userCredential)
+		throws WorkflowException {
+
+		try {
+			WorkflowResultContainer<List<TaskInstanceInfo>> response =
+				(WorkflowResultContainer<List<TaskInstanceInfo>>) _synchronousMessageSender.send(TaskInstanceRequest.createGetTaskInstanceInfosByCredentialRequest(userCredential));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get task instances information by credential.", ex);
+		}
+	}
+	
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+		UserCredential userCredential, boolean completed)
+		throws WorkflowException {
+
+		try {
+			WorkflowResultContainer<List<TaskInstanceInfo>> response =
+				(WorkflowResultContainer<List<TaskInstanceInfo>>) _synchronousMessageSender.send(TaskInstanceRequest.createGetTaskInstanceInfosByCredentialRequest(
+					userCredential, completed));
+			if (response.hasError()) {
+				throw response.getException();
+			}
+			else {
+				return response.getResult();
+			}
+		}
+		catch (MessageBusException ex) {
+			throw new WorkflowException(
+				"Unable to get task instances information by credential.", ex);
+		}
+	}
+	
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(long roleId)
 		throws WorkflowException {
 		try {

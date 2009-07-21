@@ -22,14 +22,19 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
 
-import java.lang.reflect.Method;
-
-import java.util.Map;
-
+/**
+ * <a href="WorkflowInstanceRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ *
+ */
 public class WorkflowInstanceRequest extends BaseRequest {
 
 	public static WorkflowInstanceRequest createAddContextInformationRequest(
@@ -37,6 +42,14 @@ public class WorkflowInstanceRequest extends BaseRequest {
 		throws WorkflowException {
 		return new WorkflowInstanceRequest(
 			addContextInformation_long_Map, 0, workflowInstanceId, context);
+	}
+
+	public static WorkflowInstanceRequest createGetPossibleNextActivityNamesRequest(
+		long workflowInstanceId, long userId)
+		throws WorkflowException {
+		return new WorkflowInstanceRequest(
+			getPossibleNextActivityNames_long_long, userId, workflowInstanceId,
+			userId);
 	}
 
 	public static WorkflowInstanceRequest
@@ -173,6 +186,7 @@ public class WorkflowInstanceRequest extends BaseRequest {
 	}
 
 	private static Method addContextInformation_long_Map;
+	private static Method getPossibleNextActivityNames_long_long;
 	private static Method getWorkflowInstanceHistory_long_boolean;
 	private static Method getWorkflowInstanceInfo_long_boolean;
 	private static Method getWorkflowInstanceInfo_String_long_boolean;
@@ -196,6 +210,9 @@ public class WorkflowInstanceRequest extends BaseRequest {
 			addContextInformation_long_Map =
 				clazz.getMethod(
 					"addContextInformation", long.class, Map.class);
+			getPossibleNextActivityNames_long_long =
+				clazz.getMethod(
+					"getPossibleNextActivityNames", long.class, long.class);
 			getWorkflowInstanceHistory_long_boolean =
 				clazz.getMethod(
 					"getWorkflowInstanceHistory", long.class, boolean.class);

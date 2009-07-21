@@ -22,15 +22,20 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
 
-import java.lang.reflect.Method;
-
-import java.util.Map;
-
+/**
+ * <a href="TaskInstanceRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ *
+ */
 public class TaskInstanceRequest extends BaseRequest {
 
 	public static TaskInstanceRequest createAssignTaskInstanceToRoleRequest(
@@ -62,6 +67,60 @@ public class TaskInstanceRequest extends BaseRequest {
 			userId, comment, attributes);
 	}
 
+	public static TaskInstanceRequest createCompleteTaskInstanceRequest(
+		long taskInstanceId, long userId, String activityName, String comment,
+		Map<String, Object> attributes)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			completeTaskInstance_long_long_String_String_Map, userId,
+			taskInstanceId,
+			userId, activityName, comment, attributes);
+	}
+	
+	public static TaskInstanceRequest createGetPossibleNextActivityNamesRequest(
+		long taskInstanceId, long userId)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getPossibleNextActivityNames_long_long, userId, taskInstanceId,
+			userId);
+	}
+
+	public static TaskInstanceRequest createGetTaskInstanceCountForCredentialRequest(
+		UserCredential userCredential)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getTaskInstanceCountForCredential_UserCredential, 0, userCredential);
+	}
+	
+	public static TaskInstanceRequest createGetTaskInstanceCountForRoleRequest(
+		long roleId)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getTaskInstanceCountForRole_long, 0, roleId);
+	}
+
+	public static TaskInstanceRequest createGetTaskInstanceCountForUserRequest(
+		long userId)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getTaskInstanceCountForUser_long, 0, userId);
+	}
+
+	public static TaskInstanceRequest createGetTaskInstanceInfosByCredentialRequest(
+		UserCredential userCredential)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getTaskInstanceInfosByCredential_UserCredential, 0, userCredential);
+	}
+
+	public static TaskInstanceRequest createGetTaskInstanceInfosByCredentialRequest(
+		UserCredential userCredential, boolean completed)
+		throws WorkflowException {
+		return new TaskInstanceRequest(
+			getTaskInstanceInfosByCredential_UserCredential_boolean, 0,
+			userCredential, completed);
+	}
+	
 	public static TaskInstanceRequest createGetTaskInstanceInfosByRoleRequest(
 			long roleId)
 		throws WorkflowException {
@@ -117,6 +176,13 @@ public class TaskInstanceRequest extends BaseRequest {
 	private static
 		Method assignTaskInstanceToUser_long_UserCredential_String_Map_long;
 	private static Method completeTaskInstance_long_long_String_Map;
+	private static Method completeTaskInstance_long_long_String_String_Map;
+	private static Method getPossibleNextActivityNames_long_long;
+	private static Method getTaskInstanceCountForCredential_UserCredential;
+	private static Method getTaskInstanceCountForRole_long;
+	private static Method getTaskInstanceCountForUser_long;
+	private static Method getTaskInstanceInfosByCredential_UserCredential;
+	private static Method getTaskInstanceInfosByCredential_UserCredential_boolean;
 	private static Method getTaskInstanceInfosByRole_long;
 	private static Method getTaskInstanceInfosByRole_long_boolean;
 	private static Method getTaskInstanceInfosByUser_long;
@@ -139,6 +205,27 @@ public class TaskInstanceRequest extends BaseRequest {
 				clazz.getMethod(
 					"completeTaskInstance", long.class, long.class,
 					String.class, Map.class);
+			completeTaskInstance_long_long_String_String_Map =
+				clazz.getMethod(
+					"completeTaskInstance", long.class, long.class,
+					String.class, String.class, Map.class);
+			getPossibleNextActivityNames_long_long =
+				clazz.getMethod(
+					"getPossibleNextActivityNames", long.class, long.class);
+			getTaskInstanceCountForCredential_UserCredential =
+				clazz.getMethod(
+					"getTaskInstanceCountForCredential", UserCredential.class);
+			getTaskInstanceCountForRole_long =
+				clazz.getMethod("getTaskInstanceCountForRole", long.class);
+			getTaskInstanceCountForUser_long =
+				clazz.getMethod("getTaskInstanceCountForUser", long.class);
+			getTaskInstanceInfosByCredential_UserCredential =
+				clazz.getMethod(
+					"getTaskInstanceInfosByCredential", UserCredential.class);
+			getTaskInstanceInfosByCredential_UserCredential_boolean =
+				clazz.getMethod(
+					"getTaskInstanceInfosByCredential", UserCredential.class,
+					boolean.class);
 			getTaskInstanceInfosByRole_long =
 				clazz.getMethod("getTaskInstanceInfosByRole", long.class);
 			getTaskInstanceInfosByRole_long_boolean =

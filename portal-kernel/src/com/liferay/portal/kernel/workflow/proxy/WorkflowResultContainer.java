@@ -24,6 +24,21 @@ package com.liferay.portal.kernel.workflow.proxy;
 
 import com.liferay.portal.kernel.workflow.WorkflowException;
 
+/**
+ * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * The workflow result container is used to return an argument or an exception
+ * which was the result of the workflow engine invocation through a
+ * {@link BaseRequest} or any of its subclasses.
+ * </p>
+ *
+ * @author Shuyang Zhou
+ * @author Micha Kiener
+ *
+ * @param <T> the type of result this container will return
+ *
+ */
 public class WorkflowResultContainer<T> {
 
 	public WorkflowResultContainer() {
@@ -33,14 +48,26 @@ public class WorkflowResultContainer<T> {
 		_result = result;
 	}
 
+	/**
+	 * @return the exception which was thrown by invoking the method, if
+	 *		 {@link #hasError()} returns <code>true</code>, otherwise this
+	 *		 method just returns <code>null</code>
+	 */
 	public WorkflowException getException() {
 		return _exception;
 	}
 
+	/**
+	 * @return the result of the method invocation
+	 */
 	public T getResult() {
 		return _result;
 	}
 
+	/**
+	 * @return <code>true</code>, if the method invocation produced an exception
+	 *		 rather than returning a value
+	 */
 	public boolean hasError() {
 		return _exception != null;
 	}
