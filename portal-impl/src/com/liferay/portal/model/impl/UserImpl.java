@@ -567,8 +567,9 @@ public class UserImpl extends UserModelImpl implements User {
 
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public boolean isFemale() {

@@ -1415,12 +1415,12 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_REMINDER_QUERIES_ENABLED));
 
+	public static final String[] USERS_REMINDER_QUERIES_QUESTIONS =
+		PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS);
+
 	public static final boolean USERS_REMINDER_QUERIES_REQUIRED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.USERS_REMINDER_QUERIES_REQUIRED));
-
-	public static final String[] USERS_REMINDER_QUERIES_QUESTIONS =
-		PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS);
 
 	public static final boolean USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE =
 		GetterUtil.getBoolean(

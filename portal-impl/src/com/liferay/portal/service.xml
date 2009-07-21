@@ -2004,6 +2004,7 @@
 		<exception>RequiredLayout</exception>
 		<exception>RequiredOrganization</exception>
 		<exception>RequiredPasswordPolicy</exception>
+		<exception>RequiredReminderQueryException</exception>
 		<exception>RequiredRole</exception>
 		<exception>RequiredUser</exception>
 		<exception>RequiredUserGroup</exception>
