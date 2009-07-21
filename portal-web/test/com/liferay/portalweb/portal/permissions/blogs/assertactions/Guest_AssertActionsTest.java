@@ -20,24 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
-
+public class Guest_AssertActionsTest extends BaseTestCase {
+	public void testGuest_AssertActions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
 					break;
 				}
 			}
@@ -47,9 +43,23 @@ public class DefineWriterRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
+		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
+		assertTrue(selenium.isElementPresent(
+				"link=Permissions Blogs Test Entry"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		assertFalse(selenium.isElementPresent(
+				"//input[@value='Add Blog Entry']"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Blogs Test Entry"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Add Comment"));
+		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		assertFalse(selenium.isElementPresent("link=Delete"));
+		assertTrue(selenium.isElementPresent("link=Sign in to vote."));
 	}
 }

@@ -64,8 +64,12 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(AddCATest.class);
 		testSuite.addTestSuite(AddMemberTest.class);
 		testSuite.addTestSuite(AddPublisherTest.class);
+		testSuite.addTestSuite(AddScopeTest.class);
 		testSuite.addTestSuite(AddWriterTest.class);
 		testSuite.addTestSuite(AssignMembersTest.class);
+		testSuite.addTestSuite(AddScopeCommunityTest.class);
+		testSuite.addTestSuite(AddScopeCommunityPageTest.class);
+		testSuite.addTestSuite(AssignScopeMemberToScopeCommunityTest.class);
 		testSuite.addTestSuite(LoginUsersTest.class);
 		testSuite.addTestSuite(LogoutTest.class);
 

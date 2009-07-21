@@ -20,36 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.assertactions;
 
-import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
+import com.liferay.portalweb.portal.BaseTests;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+public class AssertActionsTests extends BaseTests {
 
-			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
+	public static Test suite() {
+		TestSuite testSuite = new TestSuite();
 
-			Thread.sleep(1000);
-		}
+		testSuite.addTestSuite(CA_LoginTest.class);
+		testSuite.addTestSuite(CA_AddEntryTest.class);
+		testSuite.addTestSuite(CA_AddCommentTest.class);
+		testSuite.addTestSuite(CA_AssertActionsTest.class);
+		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(Member_LoginTest.class);
+		testSuite.addTestSuite(Member_ViewEntryTest.class);
+		testSuite.addTestSuite(Member_AddCommentTest.class);
+		testSuite.addTestSuite(Member_AssertActionsTest.class);
+		testSuite.addTestSuite(Member_LogoutTest.class);
+		testSuite.addTestSuite(Guest_ViewEntryTest.class);
+		testSuite.addTestSuite(Guest_ViewCommentsTest.class);
+		testSuite.addTestSuite(Guest_AssertActionsTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_CleanUpTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
+		return testSuite;
 	}
+
 }

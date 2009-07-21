@@ -20,16 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.scope;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
+public class SA_RemovePortalScopePermissionsTest extends BaseTestCase {
+	public void testSA_RemovePortalScopePermissions() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Guest")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Guest"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[16]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -49,7 +69,15 @@ public class DefineWriterRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.waitForPageToLoad("30000");
+		selenium.select("add-permissions", "label=Blogs");
+		selenium.waitForPageToLoad("30000");
+		selenium.uncheck("_128_rowIds");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent("The role permissions were updated."));
+		assertTrue(selenium.isTextPresent(
+				"This role does not have any permissions."));
 	}
 }

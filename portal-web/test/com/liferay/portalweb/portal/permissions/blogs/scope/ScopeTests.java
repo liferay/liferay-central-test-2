@@ -20,26 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs;
+package com.liferay.portalweb.portal.permissions.blogs.scope;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.blogs.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.blogs.scope.ScopeTests;
-import com.liferay.portalweb.portal.permissions.blogs.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.blogs.teardown.TearDownTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class BlogsTests extends BaseTests {
+public class ScopeTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(ScopeTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_AddScopeBlogsPageTest.class);
+		testSuite.addTestSuite(SA_AddScopeBlogsPortletTest.class);
+		testSuite.addTestSuite(SA_AddPortalScopePermissionsTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
+		testSuite.addTestSuite(Scope_LoginTest.class);
+		testSuite.addTestSuite(Scope_AddGuestPortalScopeEntryTest.class);
+		testSuite.addTestSuite(Scope_AddScopePortalScopeEntryTest.class);
+		testSuite.addTestSuite(Scope_LogoutTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_RemovePortalScopePermissionsTest.class);
+		testSuite.addTestSuite(SA_AddCommunityScopePermissionsTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
+		testSuite.addTestSuite(Scope_LoginTest.class);
+		testSuite.addTestSuite(Scope_AssertCannotAddPortalScopeEntryTest.class);
+		testSuite.addTestSuite(Scope_AddScopeCommunityScopeEntryTest.class);
+		testSuite.addTestSuite(Scope_LogoutTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_RemoveCommunityScopePermissionsTest.class);
+		testSuite.addTestSuite(SA_CleanUpTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

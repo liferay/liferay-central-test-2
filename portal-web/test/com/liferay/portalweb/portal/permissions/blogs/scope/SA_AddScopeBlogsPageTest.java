@@ -20,24 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.scope;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
-
+public class SA_AddScopeBlogsPageTest extends BaseTestCase {
+	public void testSA_AddScopeBlogsPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent(
+							"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span")) {
 					break;
 				}
 			}
@@ -47,9 +44,42 @@ public class DefineWriterRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Blogs Scope Permissions Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent(
+				"link=Blogs Scope Permissions Page"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Blogs Scope Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 	}
 }

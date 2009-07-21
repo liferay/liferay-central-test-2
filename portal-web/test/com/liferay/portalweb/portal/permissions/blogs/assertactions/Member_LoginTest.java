@@ -20,36 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+public class Member_LoginTest extends BaseTestCase {
+	public void testMember_Login() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.type("_58_login",
+			RuntimeVariables.replace("member@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("_58_rememberMeCheckbox");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
 	}
 }

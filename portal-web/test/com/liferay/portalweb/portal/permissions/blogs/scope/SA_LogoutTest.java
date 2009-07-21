@@ -20,36 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.controlpanel;
+package com.liferay.portalweb.portal.permissions.blogs.scope;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
+public class SA_LogoutTest extends BaseTestCase {
+	public void testSA_Logout() throws Exception {
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
 
-			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
-					break;
+				boolean InControlPanel = selenium.isElementPresent(
+						"link=Back to Guest");
+
+				if (!InControlPanel) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace("link=Sign Out"));
+				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("_58_login")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
 	}
 }

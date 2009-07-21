@@ -25,19 +25,15 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-public class DefineWriterRolesTest extends BaseTestCase {
-	public void testDefineWriterRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Roles"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
-
+public class AddScopeCommunityPageTest extends BaseTestCase {
+	public void testAddScopeCommunityPage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("link=Communities")) {
 					break;
 				}
 			}
@@ -47,9 +43,37 @@ public class DefineWriterRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Writer"));
+		selenium.type("_134_name", RuntimeVariables.replace("Scope Community"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Manage Pages")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_134_name_en_US",
+			RuntimeVariables.replace("Scope Test Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isElementPresent("link=Scope Test Page"));
 	}
 }
