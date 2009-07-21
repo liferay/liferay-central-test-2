@@ -43,7 +43,8 @@
 	<method>
 		<name>getCallingUserCredential</name>
 		<comment><![CDATA[]]></comment>
-		<return><![CDATA[the credential of the calling user, if any provided by the request, <code>null</code> otherwise]]></return>
+		<return><![CDATA[the credential of the calling user, if any provided by the
+request, <code>null</code> otherwise]]></return>
 	</method>
 	<method>
 		<name>hasReturnValue</name>

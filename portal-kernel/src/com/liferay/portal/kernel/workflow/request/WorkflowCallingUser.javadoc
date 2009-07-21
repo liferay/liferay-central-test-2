@@ -9,7 +9,8 @@
 	<method>
 		<name>getCallingUserCredential</name>
 		<comment><![CDATA[]]></comment>
-		<return><![CDATA[the calling user's credential, if available, <code>null</code> otherwise]]></return>
+		<return><![CDATA[the calling user's credential, if available, <code>null</code>
+otherwise]]></return>
 	</method>
 	<method>
 		<name>setCallingUserCredential</name>

@@ -8,7 +8,8 @@
 	<method>
 		<name>getJar</name>
 		<comment><![CDATA[<p> A workflow definition is being deployed as an archive, having the definition file (usually an XML file) within a folder called META-INF and any optional classes the workflow engine would need in order to execute any actions and activities. The jar being returned as the resource will be deployed within the lib folder of the workflow plugin. </p> <p> This method returns <code>null</code>, if this definition has been queried through the {@link WorkflowDefinitionManager}. </p>]]></comment>
-		<return><![CDATA[the resource representing the workflow definition jar to be deployed]]></return>
+		<return><![CDATA[the resource representing the workflow definition jar to be
+deployed]]></return>
 	</method>
 	<method>
 		<name>getWorkflowDefinitionName</name>

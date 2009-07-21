@@ -22,7 +22,9 @@
 	<method>
 		<name>getException</name>
 		<comment><![CDATA[]]></comment>
-		<return><![CDATA[the exception which was thrown by invoking the method, if {@link #hasError()} returns <code>true</code>, otherwise this method just returns <code>null</code>]]></return>
+		<return><![CDATA[the exception which was thrown by invoking the method, if
+{@link #hasError()} returns <code>true</code>, otherwise this
+method just returns <code>null</code>]]></return>
 	</method>
 	<method>
 		<name>getResult</name>
@@ -32,7 +34,8 @@
 	<method>
 		<name>hasError</name>
 		<comment><![CDATA[]]></comment>
-		<return><![CDATA[<code>true</code>, if the method invocation produced an exception rather than returning a value]]></return>
+		<return><![CDATA[<code>true</code>, if the method invocation produced an exception
+rather than returning a value]]></return>
 	</method>
 	<method>
 		<name>setException</name>

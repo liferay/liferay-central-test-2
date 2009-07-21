@@ -8,22 +8,26 @@
 	<method>
 		<name>getAssignedRoleId</name>
 		<comment><![CDATA[If this task has been assigned to a role, it is returned by this method.]]></comment>
-		<return><![CDATA[the role id this task has been assigned to or <code>null</code>, if not assigned yet]]></return>
+		<return><![CDATA[the role id this task has been assigned to or <code>null</code>,
+if not assigned yet]]></return>
 	</method>
 	<method>
 		<name>getAssignedUserId</name>
 		<comment><![CDATA[If this task has been assigned to a specific user already, its user id is being returned by this method, otherwise <code>null</code> is returned.]]></comment>
-		<return><![CDATA[the id of the user being assigned to this task or <code>null</code> if not assigned yet]]></return>
+		<return><![CDATA[the id of the user being assigned to this task or
+<code>null</code> if not assigned yet]]></return>
 	</method>
 	<method>
 		<name>getAttributes</name>
 		<comment><![CDATA[Returns optional attributes of this task which are dependent on the underlying engine. This map of attributes must not be confused with the one being returned by the workflow instance through {@link WorkflowInstanceInfo#getContext()}.]]></comment>
-		<return><![CDATA[the optional map of attributes related to this task, might be empty or even <code>null</code>]]></return>
+		<return><![CDATA[the optional map of attributes related to this task, might be
+empty or even <code>null</code>]]></return>
 	</method>
 	<method>
 		<name>getCompletionDate</name>
 		<comment><![CDATA[If this task has been completed already (thus {@link #isCompleted()} returns <code>true</code>), this method returns the date of completion.]]></comment>
-		<return><![CDATA[the date and time when this task has been completed or <code>null</code> if not yet completed]]></return>
+		<return><![CDATA[the date and time when this task has been completed or
+<code>null</code> if not yet completed]]></return>
 	</method>
 	<method>
 		<name>getCreateDate</name>

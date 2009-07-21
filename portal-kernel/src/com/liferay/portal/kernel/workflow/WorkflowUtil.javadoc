@@ -13,7 +13,8 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the user credential object acting as the container representing the set of roles and additional information for the given user]]></return>
+		<return><![CDATA[the user credential object acting as the container representing
+the set of roles and additional information for the given user]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>

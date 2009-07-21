@@ -18,7 +18,49 @@
 			<type>java.util.Map</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance information object reflecting those changes made]]></return>
+		<return><![CDATA[the workflow instance information object reflecting those changes
+made]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getPossibleNextActivityNames</name>
+		<comment><![CDATA[<p> Returns a list of activity names to be possible next activities to signal the given workflow instance with. </p> <p> The list of possible next activities is checked with the role set of the specified user to only return activity names the user is allowed to execute. </p>]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the list of activity names possible to be signaled]]></return>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>getWorkflowInstanceHistory</name>
+		<comment><![CDATA[<p> Returns the history of the specified workflow instance. The history will contain the workflow log entries being made which are workflow engine specific in terms of what event will be part of the history. </p> <p> If the parameter <code>includeChildren</code> is set to <code>true</code> , a complete history is returned, also including the log entries from the children of the given instance, if any in chronological, descending order, the newest entry at first position.]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>includeChildren</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<return><![CDATA[the list of history entries for the given instance and optionally
+its children]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -63,27 +105,8 @@
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance related to the specified domain object instance, if found, <code>null</code> otherwise]]></return>
-		<throws>
-			<name>WorkflowException</name>
-			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
-			<comment><![CDATA[]]></comment>
-		</throws>
-	</method>
-	<method>
-		<name>getWorkflowInstanceHistory</name>
-		<comment><![CDATA[<p> Returns the history of the specified workflow instance. The history will contain the workflow log entries being made which are workflow engine specific in terms of what event will be part of the history. </p> <p> If the parameter <code>includeChildren</code> is set to <code>true</code> , a complete history is returned, also including the log entries from the children of the given instance, if any in chronological, descending order, the newest entry at first position.]]></comment>
-		<param>
-			<name>workflowInstanceId</name>
-			<type>long</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>includeChildren</name>
-			<type>boolean</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<return><![CDATA[the list of history entries for the given instance and optionally its children]]></return>
+		<return><![CDATA[the workflow instance related to the specified domain object
+instance, if found, <code>null</code> otherwise]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -108,7 +131,9 @@
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[a list of workflow instance information for the given definition, will return an empty list rather than <code>null</code> if no instances found]]></return>
+		<return><![CDATA[a list of workflow instance information for the given definition,
+will return an empty list rather than <code>null</code> if no
+instances found]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -138,7 +163,9 @@
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[a list of workflow instance information for the given definition, will return an empty list rather than <code>null</code> if no instances found]]></return>
+		<return><![CDATA[a list of workflow instance information for the given definition,
+will return an empty list rather than <code>null</code> if no
+instances found]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -163,7 +190,9 @@
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the list of workflow instance information found in relation to the specified domain object instance or an empty list, if nothing found, never <code>null</code>]]></return>
+		<return><![CDATA[the list of workflow instance information found in relation to
+the specified domain object instance or an empty list, if nothing
+found, never <code>null</code>]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -202,7 +231,9 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the updated workflow instance information reflecting the current node (state) of the process after the next default activity has been executed]]></return>
+		<return><![CDATA[the updated workflow instance information reflecting the current
+node (state) of the process after the next default activity has
+been executed]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -232,7 +263,8 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the updated workflow instance information reflecting the current node (state) of the process after the activity has been executed]]></return>
+		<return><![CDATA[the updated workflow instance information reflecting the current
+node (state) of the process after the activity has been executed]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -262,7 +294,8 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance information after being successfully created]]></return>
+		<return><![CDATA[the workflow instance information after being successfully
+created]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -297,7 +330,8 @@
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance information after being successfully created]]></return>
+		<return><![CDATA[the workflow instance information after being successfully
+created]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -337,7 +371,8 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance information after being successfully created]]></return>
+		<return><![CDATA[the workflow instance information after being successfully
+created]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -382,7 +417,8 @@
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the workflow instance information after being successfully created]]></return>
+		<return><![CDATA[the workflow instance information after being successfully
+created]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>

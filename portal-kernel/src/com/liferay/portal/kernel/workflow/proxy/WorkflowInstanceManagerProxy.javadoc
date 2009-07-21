@@ -34,6 +34,25 @@
 		</throws>
 	</method>
 	<method>
+		<name>getPossibleNextActivityNames</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
 		<name>getWorkflowInstanceInfo</name>
 		<comment><![CDATA[]]></comment>
 		<param>

@@ -25,6 +25,25 @@
 		</throws>
 	</method>
 	<method>
+		<name>createGetPossibleNextActivityNamesRequest</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>workflowInstanceId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>WorkflowException</name>
+			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
 		<name>createGetWorkflowInstanceHistoryRequest</name>
 		<comment><![CDATA[]]></comment>
 		<param>
@@ -402,6 +421,10 @@
 	</method>
 	<field>
 		<name>addContextInformation_long_Map</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>getPossibleNextActivityNames_long_long</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
