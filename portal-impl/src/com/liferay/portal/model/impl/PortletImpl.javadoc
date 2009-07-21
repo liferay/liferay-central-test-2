@@ -780,8 +780,7 @@
 	<method>
 		<name>getSocialActivityInterpreterClass</name>
 		<comment><![CDATA[Gets the name of the social activity interpreter class of the portlet.]]></comment>
-		<return><![CDATA[the name of the social activity interpreter class of the
-portlet]]></return>
+		<return><![CDATA[the name of the social activity interpreter class of the portlet]]></return>
 	</method>
 	<method>
 		<name>setSocialActivityInterpreterClass</name>
@@ -795,14 +794,12 @@ portlet]]></return>
 	<method>
 		<name>getSocialActivityInterpreterInstance</name>
 		<comment><![CDATA[Gets the name of the social activity interpreter instance of the portlet.]]></comment>
-		<return><![CDATA[the name of the social activity interpreter instance of the
-portlet]]></return>
+		<return><![CDATA[the name of the social activity interpreter instance of the portlet]]></return>
 	</method>
 	<method>
 		<name>getSocialRequestInterpreterClass</name>
 		<comment><![CDATA[Gets the name of the social request interpreter class of the portlet.]]></comment>
-		<return><![CDATA[the name of the social request interpreter class of the
-portlet]]></return>
+		<return><![CDATA[the name of the social request interpreter class of the portlet]]></return>
 	</method>
 	<method>
 		<name>setSocialRequestInterpreterClass</name>
@@ -816,8 +813,7 @@ portlet]]></return>
 	<method>
 		<name>getSocialRequestInterpreterInstance</name>
 		<comment><![CDATA[Gets the name of the social request interpreter instance of the portlet.]]></comment>
-		<return><![CDATA[the name of the social request interpreter instance of the
-portlet]]></return>
+		<return><![CDATA[the name of the social request interpreter instance of the portlet]]></return>
 	</method>
 	<method>
 		<name>getWebDAVStorageToken</name>
@@ -855,8 +851,7 @@ portlet]]></return>
 	<method>
 		<name>getControlPanelEntryCategory</name>
 		<comment><![CDATA[Gets the name of the category of the Control Panel where the portlet will be shown.]]></comment>
-		<return><![CDATA[the name of of the category of the Control Panel where the
-portlet will be shown]]></return>
+		<return><![CDATA[the name of of the category of the Control Panel where the portlet will be shown]]></return>
 	</method>
 	<method>
 		<name>setControlPanelEntryCategory</name>
@@ -870,8 +865,7 @@ portlet will be shown]]></return>
 	<method>
 		<name>getControlPanelEntryWeight</name>
 		<comment><![CDATA[Gets the relative weight of the portlet with respect to the other portlets in the same category of the Control Panel.]]></comment>
-		<return><![CDATA[the relative weight of the portlet with respect to the
-other portlets in the same category of the Control Panel]]></return>
+		<return><![CDATA[the relative weight of the portlet with respect to the other portlets in the same category of the Control Panel]]></return>
 	</method>
 	<method>
 		<name>setControlPanelEntryWeight</name>
@@ -885,8 +879,7 @@ other portlets in the same category of the Control Panel]]></return>
 	<method>
 		<name>getControlPanelEntryClass</name>
 		<comment><![CDATA[Gets the name of the class that will control when the portlet will be shown in the Control Panel.]]></comment>
-		<return><![CDATA[the name of the class that will control when the portlet
-will be shown in the Control Panel]]></return>
+		<return><![CDATA[the name of the class that will control when the portlet will be shown in the Control Panel]]></return>
 	</method>
 	<method>
 		<name>setControlPanelEntryClass</name>
@@ -900,8 +893,7 @@ will be shown in the Control Panel]]></return>
 	<method>
 		<name>getControlPanelEntryInstance</name>
 		<comment><![CDATA[Gets an instance of the class that will control when the portlet will be shown in the Control Panel]]></comment>
-		<return><![CDATA[the instance of the class that will control when the portlet
-will be shown in the Control Panel]]></return>
+		<return><![CDATA[the instance of the class that will control when the portlet will be shown in the Control Panel]]></return>
 	</method>
 	<method>
 		<name>getDefaultPreferences</name>
@@ -972,16 +964,12 @@ will be shown in the Control Panel]]></return>
 	<method>
 		<name>getPreferencesOwnedByGroup</name>
 		<comment><![CDATA[Returns true if preferences are owned by the group when the portlet is shown in a group layout. Returns false if preferences are owned by the user at all times.]]></comment>
-		<return><![CDATA[true if preferences are owned by the group when the portlet
-is shown in a group layout; false if preferences are owned
-by the user at all times.]]></return>
+		<return><![CDATA[true if preferences are owned by the group when the portlet is shown in a group layout; false if preferences are owned by the user at all times.]]></return>
 	</method>
 	<method>
 		<name>isPreferencesOwnedByGroup</name>
 		<comment><![CDATA[Returns true if preferences are owned by the group when the portlet is shown in a group layout. Returns false if preferences are owned by the user at all times.]]></comment>
-		<return><![CDATA[true if preferences are owned by the group when the portlet
-is shown in a group layout; false if preferences are owned
-by the user at all times.]]></return>
+		<return><![CDATA[true if preferences are owned by the group when the portlet is shown in a group layout; false if preferences are owned by the user at all times.]]></return>
 	</method>
 	<method>
 		<name>setPreferencesOwnedByGroup</name>
@@ -1014,14 +1002,12 @@ by the user at all times.]]></return>
 	<method>
 		<name>getShowPortletAccessDenied</name>
 		<comment><![CDATA[Returns true if users are shown that they do not have access to the portlet.]]></comment>
-		<return><![CDATA[true if users are shown that they do not have access to the
-portlet]]></return>
+		<return><![CDATA[true if users are shown that they do not have access to the portlet]]></return>
 	</method>
 	<method>
 		<name>isShowPortletAccessDenied</name>
 		<comment><![CDATA[Returns true if users are shown that they do not have access to the portlet.]]></comment>
-		<return><![CDATA[true if users are shown that they do not have access to the
-portlet]]></return>
+		<return><![CDATA[true if users are shown that they do not have access to the portlet]]></return>
 	</method>
 	<method>
 		<name>setShowPortletAccessDenied</name>
@@ -1054,14 +1040,12 @@ portlet]]></return>
 	<method>
 		<name>getActionURLRedirect</name>
 		<comment><![CDATA[Returns true if an action URL for this portlet should cause an auto redirect.]]></comment>
-		<return><![CDATA[true if an action URL for this portlet should cause an auto
-redirect]]></return>
+		<return><![CDATA[true if an action URL for this portlet should cause an auto redirect]]></return>
 	</method>
 	<method>
 		<name>isActionURLRedirect</name>
 		<comment><![CDATA[Returns true if an action URL for this portlet should cause an auto redirect.]]></comment>
-		<return><![CDATA[true if an action URL for this portlet should cause an auto
-redirect]]></return>
+		<return><![CDATA[true if an action URL for this portlet should cause an auto redirect]]></return>
 	</method>
 	<method>
 		<name>setActionURLRedirect</name>
@@ -1075,14 +1059,12 @@ redirect]]></return>
 	<method>
 		<name>getRestoreCurrentView</name>
 		<comment><![CDATA[Returns true if the portlet restores to the current view from the maximized state.]]></comment>
-		<return><![CDATA[true if the portlet restores to the current view from the
-maximized state]]></return>
+		<return><![CDATA[true if the portlet restores to the current view from the maximized state]]></return>
 	</method>
 	<method>
 		<name>isRestoreCurrentView</name>
 		<comment><![CDATA[Returns true if the portlet restores to the current view from the maximized state.]]></comment>
-		<return><![CDATA[true if the portlet restores to the current view from the
-maximized state]]></return>
+		<return><![CDATA[true if the portlet restores to the current view from the maximized state]]></return>
 	</method>
 	<method>
 		<name>setRestoreCurrentView</name>
@@ -1096,14 +1078,12 @@ maximized state]]></return>
 	<method>
 		<name>getMaximizeEdit</name>
 		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the maximized state when the
-user goes into the edit mode]]></return>
+		<return><![CDATA[true if the portlet goes into the maximized state when the user goes into the edit mode]]></return>
 	</method>
 	<method>
 		<name>isMaximizeEdit</name>
 		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the edit mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the maximized state when the
-user goes into the edit mode]]></return>
+		<return><![CDATA[true if the portlet goes into the maximized state when the user goes into the edit mode]]></return>
 	</method>
 	<method>
 		<name>setMaximizeEdit</name>
@@ -1117,14 +1097,12 @@ user goes into the edit mode]]></return>
 	<method>
 		<name>getMaximizeHelp</name>
 		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the maximized state when the
-user goes into the help mode]]></return>
+		<return><![CDATA[true if the portlet goes into the maximized state when the user goes into the help mode]]></return>
 	</method>
 	<method>
 		<name>isMaximizeHelp</name>
 		<comment><![CDATA[Returns true if the portlet goes into the maximized state when the user goes into the help mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the maximized state when the
-user goes into the help mode]]></return>
+		<return><![CDATA[true if the portlet goes into the maximized state when the user goes into the help mode]]></return>
 	</method>
 	<method>
 		<name>setMaximizeHelp</name>
@@ -1138,14 +1116,12 @@ user goes into the help mode]]></return>
 	<method>
 		<name>getPopUpPrint</name>
 		<comment><![CDATA[Returns true if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the pop up state when the user
-goes into the print mode]]></return>
+		<return><![CDATA[true if the portlet goes into the pop up state when the user goes into the print mode]]></return>
 	</method>
 	<method>
 		<name>isPopUpPrint</name>
 		<comment><![CDATA[Returns true if the portlet goes into the pop up state when the user goes into the print mode.]]></comment>
-		<return><![CDATA[true if the portlet goes into the pop up state when the user
-goes into the print mode]]></return>
+		<return><![CDATA[true if the portlet goes into the pop up state when the user goes into the print mode]]></return>
 	</method>
 	<method>
 		<name>setPopUpPrint</name>
@@ -1230,14 +1206,12 @@ goes into the print mode]]></return>
 	<method>
 		<name>getPrivateRequestAttributes</name>
 		<comment><![CDATA[Returns true if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
-		<return><![CDATA[true if the portlet does not share request attributes with
-the portal or portlets from another WAR]]></return>
+		<return><![CDATA[true if the portlet does not share request attributes with the portal or portlets from another WAR]]></return>
 	</method>
 	<method>
 		<name>isPrivateRequestAttributes</name>
 		<comment><![CDATA[Returns true if the portlet does not share request attributes with the portal or portlets from another WAR.]]></comment>
-		<return><![CDATA[true if the portlet does not share request attributes with
-the portal or portlets from another WAR]]></return>
+		<return><![CDATA[true if the portlet does not share request attributes with the portal or portlets from another WAR]]></return>
 	</method>
 	<method>
 		<name>setPrivateRequestAttributes</name>
@@ -1251,14 +1225,12 @@ the portal or portlets from another WAR]]></return>
 	<method>
 		<name>getPrivateSessionAttributes</name>
 		<comment><![CDATA[Returns true if the portlet does not share session attributes with the portal.]]></comment>
-		<return><![CDATA[true if the portlet does not share session attributes with
-the portal]]></return>
+		<return><![CDATA[true if the portlet does not share session attributes with the portal]]></return>
 	</method>
 	<method>
 		<name>isPrivateSessionAttributes</name>
 		<comment><![CDATA[Returns true if the portlet does not share session attributes with the portal.]]></comment>
-		<return><![CDATA[true if the portlet does not share session attributes with
-the portal]]></return>
+		<return><![CDATA[true if the portlet does not share session attributes with the portal]]></return>
 	</method>
 	<method>
 		<name>setPrivateSessionAttributes</name>
@@ -1305,8 +1277,7 @@ the portal]]></return>
 	<method>
 		<name>getHeaderPortalCss</name>
 		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's header relative to the portal's context path.]]></comment>
-		<return><![CDATA[a list of CSS files that will be referenced from the page's
-header relative to the portal's context path]]></return>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's header relative to the portal's context path]]></return>
 	</method>
 	<method>
 		<name>setHeaderPortalCss</name>
@@ -1320,8 +1291,7 @@ header relative to the portal's context path]]></return>
 	<method>
 		<name>getHeaderPortletCss</name>
 		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
-		<return><![CDATA[a list of CSS files that will be referenced from the page's
-header relative to the portlet's context path]]></return>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's header relative to the portlet's context path]]></return>
 	</method>
 	<method>
 		<name>setHeaderPortletCss</name>
@@ -1335,8 +1305,7 @@ header relative to the portlet's context path]]></return>
 	<method>
 		<name>getHeaderPortalJavaScript</name>
 		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's header relative to the portal's context path.]]></comment>
-		<return><![CDATA[a list of JavaScript files that will be referenced from the
-page's header relative to the portal's context path]]></return>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the page's header relative to the portal's context path]]></return>
 	</method>
 	<method>
 		<name>setHeaderPortalJavaScript</name>
@@ -1350,8 +1319,7 @@ page's header relative to the portal's context path]]></return>
 	<method>
 		<name>getHeaderPortletJavaScript</name>
 		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's header relative to the portlet's context path.]]></comment>
-		<return><![CDATA[a list of JavaScript files that will be referenced from the
-page's header relative to the portlet's context path]]></return>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the page's header relative to the portlet's context path]]></return>
 	</method>
 	<method>
 		<name>setHeaderPortletJavaScript</name>
@@ -1365,8 +1333,7 @@ page's header relative to the portlet's context path]]></return>
 	<method>
 		<name>getFooterPortalCss</name>
 		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
-		<return><![CDATA[a list of CSS files that will be referenced from the page's
-footer relative to the portal's context path]]></return>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's footer relative to the portal's context path]]></return>
 	</method>
 	<method>
 		<name>setFooterPortalCss</name>
@@ -1380,8 +1347,7 @@ footer relative to the portal's context path]]></return>
 	<method>
 		<name>getFooterPortletCss</name>
 		<comment><![CDATA[Gets a list of CSS files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
-		<return><![CDATA[a list of CSS files that will be referenced from the page's
-footer relative to the portlet's context path]]></return>
+		<return><![CDATA[a list of CSS files that will be referenced from the page's footer relative to the portlet's context path]]></return>
 	</method>
 	<method>
 		<name>setFooterPortletCss</name>
@@ -1395,8 +1361,7 @@ footer relative to the portlet's context path]]></return>
 	<method>
 		<name>getFooterPortalJavaScript</name>
 		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's footer relative to the portal's context path.]]></comment>
-		<return><![CDATA[a list of JavaScript files that will be referenced from the
-page's footer relative to the portal's context path]]></return>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the page's footer relative to the portal's context path]]></return>
 	</method>
 	<method>
 		<name>setFooterPortalJavaScript</name>
@@ -1410,8 +1375,7 @@ page's footer relative to the portal's context path]]></return>
 	<method>
 		<name>getFooterPortletJavaScript</name>
 		<comment><![CDATA[Gets a list of JavaScript files that will be referenced from the page's footer relative to the portlet's context path.]]></comment>
-		<return><![CDATA[a list of JavaScript files that will be referenced from the
-page's footer relative to the portlet's context path]]></return>
+		<return><![CDATA[a list of JavaScript files that will be referenced from the page's footer relative to the portlet's context path]]></return>
 	</method>
 	<method>
 		<name>setFooterPortletJavaScript</name>
@@ -1425,8 +1389,7 @@ page's footer relative to the portlet's context path]]></return>
 	<method>
 		<name>getCssClassWrapper</name>
 		<comment><![CDATA[Gets the name of the CSS class that will be injected in the DIV that wraps this portlet.]]></comment>
-		<return><![CDATA[the name of the CSS class that will be injected in the DIV
-that wraps this portlet]]></return>
+		<return><![CDATA[the name of the CSS class that will be injected in the DIV that wraps this portlet]]></return>
 	</method>
 	<method>
 		<name>setCssClassWrapper</name>
@@ -1454,14 +1417,12 @@ that wraps this portlet]]></return>
 	<method>
 		<name>getAddDefaultResource</name>
 		<comment><![CDATA[Returns true if default resources for the portlet are added to a page.]]></comment>
-		<return><![CDATA[true if default resources for the portlet are added to a
-page]]></return>
+		<return><![CDATA[true if default resources for the portlet are added to a page]]></return>
 	</method>
 	<method>
 		<name>isAddDefaultResource</name>
 		<comment><![CDATA[Returns true if default resources for the portlet are added to a page.]]></comment>
-		<return><![CDATA[true if default resources for the portlet are added to a
-page]]></return>
+		<return><![CDATA[true if default resources for the portlet are added to a page]]></return>
 	</method>
 	<method>
 		<name>setAddDefaultResource</name>
@@ -1545,20 +1506,17 @@ page]]></return>
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if the user has the permission to add the portlet to a
-layout]]></return>
+		<return><![CDATA[true if the user has the permission to add the portlet to a layout]]></return>
 	</method>
 	<method>
 		<name>getSystem</name>
 		<comment><![CDATA[Returns true if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
-		<return><![CDATA[true if the portlet is a system portlet that a user cannot
-manually add to their page]]></return>
+		<return><![CDATA[true if the portlet is a system portlet that a user cannot manually add to their page]]></return>
 	</method>
 	<method>
 		<name>isSystem</name>
 		<comment><![CDATA[Returns true if the portlet is a system portlet that a user cannot manually add to their page.]]></comment>
-		<return><![CDATA[true if the portlet is a system portlet that a user cannot
-manually add to their page]]></return>
+		<return><![CDATA[true if the portlet is a system portlet that a user cannot manually add to their page]]></return>
 	</method>
 	<method>
 		<name>setSystem</name>
@@ -1572,14 +1530,12 @@ manually add to their page]]></return>
 	<method>
 		<name>getInclude</name>
 		<comment><![CDATA[Returns true to include the portlet and make it available to be made active.]]></comment>
-		<return><![CDATA[true to include the portlet and make it available to be made
-active]]></return>
+		<return><![CDATA[true to include the portlet and make it available to be made active]]></return>
 	</method>
 	<method>
 		<name>isInclude</name>
 		<comment><![CDATA[Returns true to include the portlet and make it available to be made active.]]></comment>
-		<return><![CDATA[true to include the portlet and make it available to be made
-active]]></return>
+		<return><![CDATA[true to include the portlet and make it available to be made active]]></return>
 	</method>
 	<method>
 		<name>setInclude</name>
@@ -1645,8 +1601,7 @@ active]]></return>
 			<type>javax.portlet.PortletMode</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if the portlet supports the specified mime type and
-portlet mode]]></return>
+		<return><![CDATA[true if the portlet supports the specified mime type and portlet mode]]></return>
 	</method>
 	<method>
 		<name>getAllPortletModes</name>
@@ -1685,8 +1640,7 @@ portlet mode]]></return>
 			<type>javax.portlet.WindowState</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if the portlet supports the specified mime type and
-window state]]></return>
+		<return><![CDATA[true if the portlet supports the specified mime type and window state]]></return>
 	</method>
 	<method>
 		<name>getAllWindowStates</name>
@@ -1771,8 +1725,7 @@ window state]]></return>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the supported processing event from a namespace URI and a
-local part]]></return>
+		<return><![CDATA[the supported processing event from a namespace URI and a local part]]></return>
 	</method>
 	<method>
 		<name>getProcessingEvents</name>
@@ -1843,8 +1796,7 @@ local part]]></return>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the supported public render parameter from a namespace URI
-and a local part]]></return>
+		<return><![CDATA[the supported public render parameter from a namespace URI and a local part]]></return>
 	</method>
 	<method>
 		<name>getPublicRenderParameters</name>
@@ -1892,14 +1844,12 @@ and a local part]]></return>
 	<method>
 		<name>getStatic</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet that is cannot be moved.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet that is cannot be
-moved]]></return>
+		<return><![CDATA[true if the portlet is a static portlet that is cannot be moved]]></return>
 	</method>
 	<method>
 		<name>isStatic</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet that is cannot be moved.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet that is cannot be
-moved]]></return>
+		<return><![CDATA[true if the portlet is a static portlet that is cannot be moved]]></return>
 	</method>
 	<method>
 		<name>setStatic</name>
@@ -1913,14 +1863,12 @@ moved]]></return>
 	<method>
 		<name>getStaticStart</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet at the start of a list of portlets.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet at the start of a
-list of portlets]]></return>
+		<return><![CDATA[true if the portlet is a static portlet at the start of a list of portlets]]></return>
 	</method>
 	<method>
 		<name>isStaticStart</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet at the start of a list of portlets.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet at the start of a
-list of portlets]]></return>
+		<return><![CDATA[true if the portlet is a static portlet at the start of a list of portlets]]></return>
 	</method>
 	<method>
 		<name>setStaticStart</name>
@@ -1934,26 +1882,22 @@ list of portlets]]></return>
 	<method>
 		<name>getStaticEnd</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet at the end of a list of portlets.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet at the end of a
-list of portlets]]></return>
+		<return><![CDATA[true if the portlet is a static portlet at the end of a list of portlets]]></return>
 	</method>
 	<method>
 		<name>isStaticEnd</name>
 		<comment><![CDATA[Returns true if the portlet is a static portlet at the end of a list of portlets.]]></comment>
-		<return><![CDATA[true if the portlet is a static portlet at the end of a
-list of portlets]]></return>
+		<return><![CDATA[true if the portlet is a static portlet at the end of a list of portlets]]></return>
 	</method>
 	<method>
 		<name>getUndeployedPortlet</name>
 		<comment><![CDATA[Returns true if the portlet is an undeployed portlet.]]></comment>
-		<return><![CDATA[true if the portlet is a placeholder of an undeployed
-portlet]]></return>
+		<return><![CDATA[true if the portlet is a placeholder of an undeployed portlet]]></return>
 	</method>
 	<method>
 		<name>isUndeployedPortlet</name>
 		<comment><![CDATA[Returns true if the portlet is an undeployed portlet.]]></comment>
-		<return><![CDATA[true if the portlet is a placeholder of an undeployed
-portlet]]></return>
+		<return><![CDATA[true if the portlet is a placeholder of an undeployed portlet]]></return>
 	</method>
 	<method>
 		<name>setUndeployedPortlet</name>
@@ -1977,10 +1921,7 @@ portlet]]></return>
 			<type>com.liferay.portal.model.Portlet</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the value 0 if the argument portlet is equal to this
-portlet; a value less than -1 if this portlet is less than
-the portlet argument; and 1 if this portlet is greater than
-the portlet argument]]></return>
+		<return><![CDATA[the value 0 if the argument portlet is equal to this portlet; a value less than -1 if this portlet is less than the portlet argument; and 1 if this portlet is greater than the portlet argument]]></return>
 	</method>
 	<method>
 		<name>equals</name>

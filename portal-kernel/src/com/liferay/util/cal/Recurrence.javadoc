@@ -5,8 +5,7 @@
 	<type>com.liferay.util.cal.Recurrence</type>
 	<comment><![CDATA[]]></comment>
 	<author>Jonathan Lennox</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.cal</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.cal</code>.]]></deprecated>
 	<method>
 		<name>Recurrence</name>
 		<comment><![CDATA[Constructor Recurrence]]></comment>

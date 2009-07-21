@@ -6,6 +6,5 @@
 	<comment><![CDATA[]]></comment>
 	<author>Jorge Ferrer</author>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.portlet</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.portlet</code>.]]></deprecated>
 </javadoc>

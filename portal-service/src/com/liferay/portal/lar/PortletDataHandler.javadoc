@@ -25,8 +25,7 @@
 			<type>javax.portlet.PortletPreferences</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[A modified version of preferences that should be saved. Null
-if the preferences were unmodified by this data handler.]]></return>
+		<return><![CDATA[A modified version of preferences that should be saved. Null if the preferences were unmodified by this data handler.]]></return>
 		<throws>
 			<name>PortletDataException</name>
 			<type>com.liferay.portal.lar.PortletDataException</type>
@@ -51,9 +50,7 @@ if the preferences were unmodified by this data handler.]]></return>
 			<type>javax.portlet.PortletPreferences</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[A string of data to be placed in the LAR. It may be XML,
-but not necessarily. Null should be returned if no portlet
-data is to be written out.]]></return>
+		<return><![CDATA[A string of data to be placed in the LAR. It may be XML, but not necessarily. Null should be returned if no portlet data is to be written out.]]></return>
 		<throws>
 			<name>PortletDataException</name>
 			<type>com.liferay.portal.lar.PortletDataException</type>
@@ -103,9 +100,7 @@ data is to be written out.]]></return>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[A modified version of preferences that should be
-saved. Null if the preferences were unmodified by this data
-handler.]]></return>
+		<return><![CDATA[A modified version of preferences that should be saved. Null if the preferences were unmodified by this data handler.]]></return>
 		<throws>
 			<name>PortletDataException</name>
 			<type>com.liferay.portal.lar.PortletDataException</type>
@@ -115,8 +110,7 @@ handler.]]></return>
 	<method>
 		<name>isAlwaysExportable</name>
 		<comment><![CDATA[Returns true to allow the user to export data for this portlet even though it may not belong to any pages. See LPS-1624.]]></comment>
-		<return><![CDATA[true to allow the user to export data for this portlet even
-though it may not belong to any pages]]></return>
+		<return><![CDATA[true to allow the user to export data for this portlet even though it may not belong to any pages]]></return>
 	</method>
 	<method>
 		<name>isPublishToLiveByDefault</name>

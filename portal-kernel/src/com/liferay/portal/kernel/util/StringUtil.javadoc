@@ -1158,8 +1158,7 @@
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the number of starting letters that s1 and s2 have in common
-before they deviate]]></return>
+		<return><![CDATA[the number of starting letters that s1 and s2 have in common before they deviate]]></return>
 	</method>
 	<method>
 		<name>stripBetween</name>

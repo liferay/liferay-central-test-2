@@ -18,8 +18,7 @@
 			<type>java.lang.Object</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use
-the default user id strategy]]></return>
+		<return><![CDATA[the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use the default user id strategy]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>
@@ -39,8 +38,7 @@ the default user id strategy]]></return>
 			<type>java.lang.Object</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to
-use the default user id strategy]]></return>
+		<return><![CDATA[the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to use the default user id strategy]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>
@@ -60,9 +58,7 @@ use the default user id strategy]]></return>
 			<type>com.liferay.portlet.journal.model.JournalArticle</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the transformed content to save in the database or
-ARTICLE_CONTENT_UNCHANGED if the content should be added
-unchanged]]></return>
+		<return><![CDATA[the transformed content to save in the database or ARTICLE_CONTENT_UNCHANGED if the content should be added unchanged]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>
@@ -82,8 +78,7 @@ unchanged]]></return>
 			<type>java.lang.Object</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if default community permissions should be added to the
-specified journalObj]]></return>
+		<return><![CDATA[true if default community permissions should be added to the specified journalObj]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>
@@ -103,8 +98,7 @@ specified journalObj]]></return>
 			<type>java.lang.Object</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if default guest permissions should be added to the
-specified journalObj]]></return>
+		<return><![CDATA[true if default guest permissions should be added to the specified journalObj]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>

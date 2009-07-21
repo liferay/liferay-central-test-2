@@ -5,8 +5,7 @@
 	<type>com.liferay.util.servlet.ProtectedServletRequest</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.servlet</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.servlet</code>.]]></deprecated>
 	<method>
 		<name>ProtectedServletRequest</name>
 		<comment><![CDATA[]]></comment>

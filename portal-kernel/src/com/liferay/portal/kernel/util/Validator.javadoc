@@ -56,8 +56,7 @@
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[true if s is a string of letters that are between a-z and
-A-Z]]></return>
+		<return><![CDATA[true if s is a string of letters that are between a-z and A-Z]]></return>
 	</method>
 	<method>
 		<name>isDate</name>

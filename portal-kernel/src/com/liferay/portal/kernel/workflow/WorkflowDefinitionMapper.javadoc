@@ -13,8 +13,7 @@
 			<type>java.lang.Class</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the name of the workflow definition mapped to the given domain
-class or <code>null</code> if no such mapping available]]></return>
+		<return><![CDATA[the name of the workflow definition mapped to the given domain class or <code>null</code> if no such mapping available]]></return>
 	</method>
 	<method>
 		<name>hasWorkflowDefinitionMapping</name>
@@ -24,8 +23,7 @@ class or <code>null</code> if no such mapping available]]></return>
 			<type>java.lang.Class</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[<code>true</code>, if there is a mapping between the given domain
-class and a workflow definition]]></return>
+		<return><![CDATA[<code>true</code>, if there is a mapping between the given domain class and a workflow definition]]></return>
 	</method>
 	<method>
 		<name>setWorkflowDefinitionMapping</name>
@@ -40,7 +38,6 @@ class and a workflow definition]]></return>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the old workflow definition name, if any previously set,
-<code>null</code> otherwise]]></return>
+		<return><![CDATA[the old workflow definition name, if any previously set, <code>null</code> otherwise]]></return>
 	</method>
 </javadoc>

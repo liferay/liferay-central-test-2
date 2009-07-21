@@ -695,8 +695,7 @@
 			<type>java.net.URL</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[A string representation of the resource referenced by the
-URL object]]></return>
+		<return><![CDATA[A string representation of the resource referenced by the URL object]]></return>
 		<throws>
 			<name>IOException</name>
 			<type>java.io.IOException</type>

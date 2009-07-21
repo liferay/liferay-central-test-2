@@ -400,8 +400,7 @@
 	<field>
 		<name>ALL_POS</name>
 		<comment><![CDATA[]]></comment>
-		<deprecated><![CDATA[Use
-<code>com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS</code>.]]></deprecated>
+		<deprecated><![CDATA[Use <code>com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS</code>.]]></deprecated>
 	</field>
 	<field>
 		<name>_DEFAULT_SORT</name>

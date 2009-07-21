@@ -18,8 +18,7 @@
 			<type>java.io.Reader</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[a string containing the HTML code of the source text
-showing the differences with the target text]]></return>
+		<return><![CDATA[a string containing the HTML code of the source text showing the differences with the target text]]></return>
 		<throws>
 			<name>Exception</name>
 			<type>java.lang.Exception</type>

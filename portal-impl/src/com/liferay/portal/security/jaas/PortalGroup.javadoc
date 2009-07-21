@@ -5,8 +5,7 @@
 	<type>com.liferay.portal.security.jaas.PortalGroup</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.security.jaas</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.security.jaas</code>.]]></deprecated>
 	<method>
 		<name>PortalGroup</name>
 		<comment><![CDATA[]]></comment>

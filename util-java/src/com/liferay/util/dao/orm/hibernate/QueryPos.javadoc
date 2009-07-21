@@ -5,8 +5,7 @@
 	<type>com.liferay.util.dao.orm.hibernate.QueryPos</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.dao.orm</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.dao.orm</code>.]]></deprecated>
 	<method>
 		<name>getInstance</name>
 		<comment><![CDATA[]]></comment>

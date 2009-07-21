@@ -14,9 +14,7 @@
 			<type>com.liferay.portal.webdav.WebDAVRequest</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[-1 or a supported HTTP status code. If it is -1, then the
-status code has already been set. Otherwise, the status code
-needs to be set by the caller.]]></return>
+		<return><![CDATA[-1 or a supported HTTP status code. If it is -1, then the status code has already been set. Otherwise, the status code needs to be set by the caller.]]></return>
 		<throws>
 			<name>WebDAVException</name>
 			<type>com.liferay.portal.webdav.WebDAVException</type>

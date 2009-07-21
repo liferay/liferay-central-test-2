@@ -5,8 +5,7 @@
 	<type>com.liferay.portal.util.comparator.ContactFirstNameComparator</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been renamed to <code>UserFirstNameComparator
-</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been renamed to <code>UserFirstNameComparator </code>.]]></deprecated>
 	<method>
 		<name>ContactFirstNameComparator</name>
 		<comment><![CDATA[]]></comment>

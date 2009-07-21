@@ -203,8 +203,7 @@
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[all completed or open tasks related to the specified workflow
-instance]]></return>
+		<return><![CDATA[all completed or open tasks related to the specified workflow instance]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>

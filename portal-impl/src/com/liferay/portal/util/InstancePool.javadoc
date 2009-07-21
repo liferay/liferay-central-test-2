@@ -5,8 +5,7 @@
 	<type>com.liferay.portal.util.InstancePool</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been repackaged at
-<code>com.liferay.portal.kernel.util</code>.]]></deprecated>
+	<deprecated><![CDATA[This class has been repackaged at <code>com.liferay.portal.kernel.util</code>.]]></deprecated>
 	<method>
 		<name>get</name>
 		<comment><![CDATA[]]></comment>

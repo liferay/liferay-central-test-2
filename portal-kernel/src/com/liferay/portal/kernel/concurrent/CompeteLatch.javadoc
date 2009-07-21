@@ -17,8 +17,7 @@
 	<method>
 		<name>done</name>
 		<comment><![CDATA[This method should only be called by the winner thread. The winner thread calls this method to indicate that it has finished its job and unlocks the latch to allow all loser threads return from the <code>await</code> method. If a loser thread does call this method when a winner thread has locked the latch, the latch will break and the winner thread may be put into a non thread safe state. You should never have to do this except to get out of a deadlock. If no one threads have locked the latch, then calling this method has no effect. This method will return immediately.]]></comment>
-		<return><![CDATA[true if this call opens the latch, false if the latch is
-already open]]></return>
+		<return><![CDATA[true if this call opens the latch, false if the latch is already open]]></return>
 	</method>
 	<method>
 		<name>isLocked</name>
