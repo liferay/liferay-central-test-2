@@ -3,7 +3,7 @@
 <javadoc>
 	<name>PortalStandardService</name>
 	<type>com.liferay.support.tomcat.core.PortalStandardService</type>
-	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-4602.</p>]]></comment>
+	<comment><![CDATA[<p> See http://support.liferay.com/browse/LEP-4602. </p>]]></comment>
 	<author>Minhchau Dang</author>
 	<method>
 		<name>addConnector</name>

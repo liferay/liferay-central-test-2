@@ -3,7 +3,7 @@
 <javadoc>
 	<name>PortletDataContext</name>
 	<type>com.liferay.portal.lar.PortletDataContext</type>
-	<comment><![CDATA[<p>Holds context information that is used during exporting and importing portlet data.</p>]]></comment>
+	<comment><![CDATA[<p> Holds context information that is used during exporting and importing portlet data. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<author>Raymond Augé</author>
 	<method>

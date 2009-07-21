@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SessionFactoryInvocationHandler</name>
 	<type>com.liferay.portal.spring.hibernate.SessionFactoryInvocationHandler</type>
-	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2996.</p>]]></comment>
+	<comment><![CDATA[<p> See http://support.liferay.com/browse/LEP-2996. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
 		<name>SessionFactoryInvocationHandler</name>

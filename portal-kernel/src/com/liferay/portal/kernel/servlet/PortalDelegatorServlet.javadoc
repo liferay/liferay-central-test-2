@@ -3,7 +3,7 @@
 <javadoc>
 	<name>PortalDelegatorServlet</name>
 	<type>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</type>
-	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2297.</p>]]></comment>
+	<comment><![CDATA[<p> See http://support.liferay.com/browse/LEP-2297. </p>]]></comment>
 	<author>Olaf Fricke</author>
 	<author>Brian Wing Shun Chan</author>
 	<method>

@@ -3,7 +3,7 @@
 <javadoc>
 	<name>VerifyImage</name>
 	<type>com.liferay.portal.verify.VerifyImage</type>
-	<comment><![CDATA[<p>This class is very powerful because it removes all images that it believes is stale. Do not run this unless you are also not managing images in Liferay's Image service for your custom models.</p>]]></comment>
+	<comment><![CDATA[<p> This class is very powerful because it removes all images that it believes is stale. Do not run this unless you are also not managing images in Liferay's Image service for your custom models. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
 		<name>verify</name>

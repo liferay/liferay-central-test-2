@@ -4,5 +4,52 @@
 	<name>ReportsEntryServiceBaseImpl</name>
 	<type>com.ext.portlet.reports.service.base.ReportsEntryServiceBaseImpl</type>
 	<comment><![CDATA[]]></comment>
-	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getReportsEntryService</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setReportsEntryService</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>reportsEntryService</name>
+			<type>com.ext.portlet.reports.service.ReportsEntryService</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getReportsEntryPersistence</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>setReportsEntryPersistence</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>reportsEntryPersistence</name>
+			<type>com.ext.portlet.reports.service.persistence.ReportsEntryPersistence</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>runSQL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>sql</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<field>
+		<name>reportsEntryService</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>reportsEntryPersistence</name>
+		<comment><![CDATA[]]></comment>
+	</field>
 </javadoc>

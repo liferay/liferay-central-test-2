@@ -3,19 +3,43 @@
 <javadoc>
 	<name>ReportsEntryJSONSerializer</name>
 	<type>com.ext.portlet.reports.service.http.ReportsEntryJSONSerializer</type>
-	<comment>
-		<![CDATA[
-			<p>
-				ServiceBuilder generated this class. Modifications in this class will be
-				overwritten the next time is generated.
-			</p>
-
-			<p>
-				This class is used by {@link ReportsEntryServiceJSON} to translate
-				objects.
-			</p>
-		]]>
-	</comment>
+	<comment><![CDATA[<p> ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated. </p> <p> This class is used by <code>com.ext.portlet.reports.service.http.ReportsEntryServiceJSON</code> to translate objects. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<see>ReportsEntryServiceJSON</see>
+	<see>com.ext.portlet.reports.service.http.ReportsEntryServiceJSON</see>
+	<method>
+		<name>toJSONObject</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>model</name>
+			<type>com.ext.portlet.reports.model.ReportsEntry</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toJSONArray</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>models</name>
+			<type>com.ext.portlet.reports.model.ReportsEntry</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toJSONArray</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>models</name>
+			<type>com.ext.portlet.reports.model.ReportsEntry</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>toJSONArray</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>models</name>
+			<type>java.util.List</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
 </javadoc>

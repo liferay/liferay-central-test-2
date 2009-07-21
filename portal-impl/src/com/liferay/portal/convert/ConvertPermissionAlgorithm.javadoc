@@ -3,7 +3,7 @@
 <javadoc>
 	<name>ConvertPermissionAlgorithm</name>
 	<type>com.liferay.portal.convert.ConvertPermissionAlgorithm</type>
-	<comment><![CDATA[<p>This class converts all existing permissions from the legacy permissions algorithm to the latest algorithm.</p>]]></comment>
+	<comment><![CDATA[<p> This class converts all existing permissions from the legacy permissions algorithm to the latest algorithm. </p>]]></comment>
 	<author>Alexander Chow</author>
 	<method>
 		<name>getDescription</name>

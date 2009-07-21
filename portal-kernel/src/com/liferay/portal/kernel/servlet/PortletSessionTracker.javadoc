@@ -3,7 +3,7 @@
 <javadoc>
 	<name>PortletSessionTracker</name>
 	<type>com.liferay.portal.kernel.servlet.PortletSessionTracker</type>
-	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-1466.</p>]]></comment>
+	<comment><![CDATA[<p> See http://support.liferay.com/browse/LEP-1466. </p>]]></comment>
 	<author>Rudy Hilado</author>
 	<method>
 		<name>add</name>

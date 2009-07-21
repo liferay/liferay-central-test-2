@@ -3,7 +3,7 @@
 <javadoc>
 	<name>PortalApplicationContext</name>
 	<type>com.liferay.portal.spring.context.PortalApplicationContext</type>
-	<comment><![CDATA[<p>This web application context will first load bean definitions in the contextConfigLocation parameter in web.xml. Then, the context will load bean definitions specified by the property "spring.configs" in portal.properties.</p>]]></comment>
+	<comment><![CDATA[<p> This web application context will first load bean definitions in the contextConfigLocation parameter in web.xml. Then, the context will load bean definitions specified by the property "spring.configs" in portal.properties. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<author>Alexander Chow</author>
 	<method>

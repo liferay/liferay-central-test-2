@@ -3,7 +3,7 @@
 <javadoc>
 	<name>LiferayClassicSession</name>
 	<type>com.liferay.portal.dao.orm.hibernate.LiferayClassicSession</type>
-	<comment><![CDATA[<p>See http://support.liferay.com/browse/LEP-2996.</p>]]></comment>
+	<comment><![CDATA[<p> See http://support.liferay.com/browse/LEP-2996. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
 		<name>LiferayClassicSession</name>

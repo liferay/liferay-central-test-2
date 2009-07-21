@@ -3,7 +3,7 @@
 <javadoc>
 	<name>MulticastServerTool</name>
 	<type>com.liferay.util.transport.MulticastServerTool</type>
-	<comment><![CDATA[<p>A server that will send out heart beat messages until you kill it. This enables you to try and debug multicast issues.</p>]]></comment>
+	<comment><![CDATA[<p> A server that will send out heart beat messages until you kill it. This enables you to try and debug multicast issues. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<method>
 		<name>main</name>

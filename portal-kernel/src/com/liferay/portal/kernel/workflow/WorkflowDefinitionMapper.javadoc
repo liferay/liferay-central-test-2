@@ -3,11 +3,11 @@
 <javadoc>
 	<name>WorkflowDefinitionMapper</name>
 	<type>com.liferay.portal.kernel.workflow.WorkflowDefinitionMapper</type>
-	<comment><![CDATA[<p>The workflow definition mapper is a manager used to map domain classes to workflow definitions.</p><p>It might be used to map a domain or model class to be used in conjunction with a certain workflow definition.</p><p>The mapper works independently of the underlying engine, it is just a mapping between domain classes as workflow definitions.</p>]]></comment>
+	<comment><![CDATA[<p> The workflow definition mapper is a manager used to map domain classes to workflow definitions. </p> <p> It might be used to map a domain or model class to be used in conjunction with a certain workflow definition. </p> <p> The mapper works independently of the underlying engine, it is just a mapping between domain classes as workflow definitions. </p>]]></comment>
 	<author>Micha Kiener</author>
 	<method>
 		<name>getWorkflowDefinitionName</name>
-		<comment><![CDATA[Returns the workflow definition name mapped to the given domain class, if any,<code>null</code>otherwise.]]></comment>
+		<comment><![CDATA[Returns the workflow definition name mapped to the given domain class, if any, <code>null</code> otherwise.]]></comment>
 		<param>
 			<name>domainClass</name>
 			<type>java.lang.Class</type>
@@ -18,7 +18,7 @@ class or <code>null</code> if no such mapping available]]></return>
 	</method>
 	<method>
 		<name>hasWorkflowDefinitionMapping</name>
-		<comment><![CDATA[Returns<code>true</code>, if there is a mapping for the given domain class,<code>false</code>, if no mapping was made.]]></comment>
+		<comment><![CDATA[Returns <code>true</code>, if there is a mapping for the given domain class, <code>false</code>, if no mapping was made.]]></comment>
 		<param>
 			<name>domainClass</name>
 			<type>java.lang.Class</type>

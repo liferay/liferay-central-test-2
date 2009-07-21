@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SchedulerRequest</name>
 	<type>com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest</type>
-	<comment><![CDATA[<p>A request to schedule a job for the scheduling engine. You may specify the timing of the job via the cron syntax. See http://quartz.sourceforge.net/javadoc/org/quartz/CronTrigger.html for a description of the syntax.</p>]]></comment>
+	<comment><![CDATA[<p> A request to schedule a job for the scheduling engine. You may specify the timing of the job via the cron syntax. See http://quartz.sourceforge.net/javadoc/org/quartz/CronTrigger.html for a description of the syntax. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<author>Bruno Farache</author>
 	<author>Brian Wing Shun Chan</author>

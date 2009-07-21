@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SelectItemList</name>
 	<type>com.liferay.util.bridges.jsf.common.SelectItemList</type>
-	<comment><![CDATA[<p>This class provides a convenient way of building lists of JSF SelectItem objects, and convenience method for operating against them.</p>]]></comment>
+	<comment><![CDATA[<p> This class provides a convenient way of building lists of JSF SelectItem objects, and convenience method for operating against them. </p>]]></comment>
 	<author>Neil Griffin</author>
 	<method>
 		<name>prependEmptySelectItem</name>

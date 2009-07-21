@@ -1547,11 +1547,23 @@
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
+		<name>_tplPersistenceImplJavadoc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_tplPersistenceJavadoc</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
 		<name>_tplPersistenceTest</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
 		<name>_tplPersistenceUtil</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_tplPersistenceUtilJavadoc</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>

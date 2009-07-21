@@ -435,7 +435,7 @@
 	</method>
 	<method>
 		<name>_getRootPortletId</name>
-		<comment><![CDATA[Copied from<code>com.liferay.portal.model.PortletConstants</code>.]]></comment>
+		<comment><![CDATA[Copied from <code>com.liferay.portal.model.PortletConstants</code>.]]></comment>
 		<param>
 			<name>portletId</name>
 			<type>java.lang.String</type>

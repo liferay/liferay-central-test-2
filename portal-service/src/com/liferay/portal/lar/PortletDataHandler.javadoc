@@ -3,13 +3,13 @@
 <javadoc>
 	<name>PortletDataHandler</name>
 	<type>com.liferay.portal.lar.PortletDataHandler</type>
-	<comment><![CDATA[<p>A<code>PortletDataHandler</code>is a special class capable of exporting and importing portlet specific data to a Liferay Archive file (LAR) when a community's layouts are exported or imported.<code>PortletDataHandler</code>s are defined by placing a<code>portlet-data-handler-class</code>element in the<code>portlet</code>section of the<b>liferay-portlet.xml</b>file.</p>]]></comment>
+	<comment><![CDATA[<p> A <code>PortletDataHandler</code> is a special class capable of exporting and importing portlet specific data to a Liferay Archive file (LAR) when a community's layouts are exported or imported. <code>PortletDataHandler</code>s are defined by placing a <code>portlet-data-handler-class</code> element in the <code>portlet</code> section of the <b>liferay-portlet.xml</b> file. </p>]]></comment>
 	<author>Raymond Augé</author>
 	<author>Joel Kozikowski</author>
 	<author>Bruno Farache</author>
 	<method>
 		<name>deleteData</name>
-		<comment><![CDATA[Deletes the data created by the portlet. Can optionally return a modified version of<code>preferences</code>if it contains reference to data that does not exist anymore.]]></comment>
+		<comment><![CDATA[Deletes the data created by the portlet. Can optionally return a modified version of <code>preferences</code> if it contains reference to data that does not exist anymore.]]></comment>
 		<param>
 			<name>context</name>
 			<type>com.liferay.portal.lar.PortletDataContext</type>
@@ -35,7 +35,7 @@ if the preferences were unmodified by this data handler.]]></return>
 	</method>
 	<method>
 		<name>exportData</name>
-		<comment><![CDATA[Returns a string of data to be placed in the &lt;portlet-data&gt; section of the LAR file. This data will be passed as the<code>data</code>parameter of<code>importData()</code>.]]></comment>
+		<comment><![CDATA[Returns a string of data to be placed in the &lt;portlet-data&gt; section of the LAR file. This data will be passed as the <code>data</code> parameter of <code>importData()</code>.]]></comment>
 		<param>
 			<name>context</name>
 			<type>com.liferay.portal.lar.PortletDataContext</type>
@@ -82,7 +82,7 @@ data is to be written out.]]></return>
 	</method>
 	<method>
 		<name>importData</name>
-		<comment><![CDATA[Handles any special processing of the data when the portlet is imported into a new layout. Can optionally return a modified version of<code>preferences</code>to be saved in the new portlet.]]></comment>
+		<comment><![CDATA[Handles any special processing of the data when the portlet is imported into a new layout. Can optionally return a modified version of <code>preferences</code> to be saved in the new portlet.]]></comment>
 		<param>
 			<name>context</name>
 			<type>com.liferay.portal.lar.PortletDataContext</type>

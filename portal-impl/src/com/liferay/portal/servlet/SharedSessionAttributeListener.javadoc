@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SharedSessionAttributeListener</name>
 	<type>com.liferay.portal.servlet.SharedSessionAttributeListener</type>
-	<comment><![CDATA[<p>Listener used to help manage shared session attributes into a cache. This cache is more thread safe than the HttpSession and leads to fewer problems with shared session attributes being modified out of sequence.</p>]]></comment>
+	<comment><![CDATA[<p> Listener used to help manage shared session attributes into a cache. This cache is more thread safe than the HttpSession and leads to fewer problems with shared session attributes being modified out of sequence. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<method>
 		<name>attributeAdded</name>

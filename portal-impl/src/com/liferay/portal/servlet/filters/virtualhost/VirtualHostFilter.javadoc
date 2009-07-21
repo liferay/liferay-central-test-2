@@ -3,7 +3,7 @@
 <javadoc>
 	<name>VirtualHostFilter</name>
 	<type>com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter</type>
-	<comment><![CDATA[<p>This filter is used to provide virtual host functionality. However, this filter is still required even if you do not use virtual hosting because it sets the company id in the request so that subsequent calls in the thread have the company id properly set. This filter must also always be the first filter in the list of filters.</p>]]></comment>
+	<comment><![CDATA[<p> This filter is used to provide virtual host functionality. However, this filter is still required even if you do not use virtual hosting because it sets the company id in the request so that subsequent calls in the thread have the company id properly set. This filter must also always be the first filter in the list of filters. </p>]]></comment>
 	<author>Joel Kozikowski</author>
 	<author>Brian Wing Shun Chan</author>
 	<author>Raymond Augé</author>

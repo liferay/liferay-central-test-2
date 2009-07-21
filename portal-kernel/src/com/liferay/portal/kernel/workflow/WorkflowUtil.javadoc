@@ -3,11 +3,11 @@
 <javadoc>
 	<name>WorkflowUtil</name>
 	<type>com.liferay.portal.kernel.workflow.WorkflowUtil</type>
-	<comment><![CDATA[<p>This utility class defines the main entry point to the workflow system in Liferay as it provides static access to different manager of the workflow system. A more detailed description can be found on the manager interfaces being returned by the static accessory methods in this utility class.</p>]]></comment>
+	<comment><![CDATA[<p> This utility class defines the main entry point to the workflow system in Liferay as it provides static access to different manager of the workflow system. A more detailed description can be found on the manager interfaces being returned by the static accessory methods in this utility class. </p>]]></comment>
 	<author>Micha Kiener</author>
 	<method>
 		<name>createUserCredential</name>
-		<comment><![CDATA[<p>Creates a user credential representing the user with the specified id, its set of assigned roles and additional information requested through the {@link UserCredentialFactory#createCredential(long)}.</p><p>The user credential is most likely be used to represent the<code>callingUserId</code>on a workflow API invocation to be passed on to the underlying workflow engine. Some engines want to track users invoking methods and thus executing activities, creating history entries or starting new workflows. Thats why most methods of the workflow API are taking the caller's user id to pass it on to the engine through a {@link UserCredential}.</p>]]></comment>
+		<comment><![CDATA[<p> Creates a user credential representing the user with the specified id, its set of assigned roles and additional information requested through the {@link UserCredentialFactory#createCredential(long)}. </p> <p> The user credential is most likely be used to represent the <code>callingUserId</code> on a workflow API invocation to be passed on to the underlying workflow engine. Some engines want to track users invoking methods and thus executing activities, creating history entries or starting new workflows. Thats why most methods of the workflow API are taking the caller's user id to pass it on to the engine through a {@link UserCredential}. </p>]]></comment>
 		<param>
 			<name>userId</name>
 			<type>long</type>

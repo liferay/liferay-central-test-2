@@ -3,7 +3,7 @@
 <javadoc>
 	<name>DLFileEntryLocalServiceImpl</name>
 	<type>com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl</type>
-	<comment><![CDATA[<p>For DLFileEntries, the naming convention for some of the variables is not very informative, due to legacy code. Each DLFileEntry has a corresponding name and title. The "name" is a unique identifier for a given file and usually follows the format "DLFE-1234.xls" whereas the "title" is the actual name specified by the user (e.g., "Budget.xls").</p>]]></comment>
+	<comment><![CDATA[<p> For DLFileEntries, the naming convention for some of the variables is not very informative, due to legacy code. Each DLFileEntry has a corresponding name and title. The "name" is a unique identifier for a given file and usually follows the format "DLFE-1234.xls" whereas the "title" is the actual name specified by the user (e.g., "Budget.xls"). </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<author>Harry Mark</author>
 	<method>

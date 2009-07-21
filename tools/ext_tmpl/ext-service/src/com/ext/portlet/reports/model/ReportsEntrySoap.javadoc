@@ -3,7 +3,7 @@
 <javadoc>
 	<name>ReportsEntrySoap</name>
 	<type>com.ext.portlet.reports.model.ReportsEntrySoap</type>
-	<comment><![CDATA[<p>ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.</p><p>This class is used by<code>com.ext.portlet.reports.service.http.ReportsEntryServiceSoap</code>.</p>]]></comment>
+	<comment><![CDATA[<p> ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated. </p> <p> This class is used by <code>com.ext.portlet.reports.service.http.ReportsEntryServiceSoap</code>. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<see>com.ext.portlet.reports.service.http.ReportsEntryServiceSoap</see>
 	<method>

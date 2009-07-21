@@ -3,7 +3,7 @@
 <javadoc>
 	<name>WorkflowException</name>
 	<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
-	<comment><![CDATA[<p>The workflow exception is the main exception to be thrown by any of the workflow system API methods.</p><p>A workflow exception might contain a native exception being thrown by the underlying workflow engine, if the transport layer allows it otherwise it will just contain its message.</p>]]></comment>
+	<comment><![CDATA[<p> The workflow exception is the main exception to be thrown by any of the workflow system API methods. </p> <p> A workflow exception might contain a native exception being thrown by the underlying workflow engine, if the transport layer allows it otherwise it will just contain its message. </p>]]></comment>
 	<author>Micha Kiener</author>
 	<method>
 		<name>WorkflowException</name>

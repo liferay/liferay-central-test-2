@@ -3,7 +3,7 @@
 <javadoc>
 	<name>ReportsEntryModel</name>
 	<type>com.ext.portlet.reports.model.ReportsEntryModel</type>
-	<comment><![CDATA[<p>ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated.</p><p>This interface is a model that represents the<code>ReportsEntry</code>table in the database.</p>]]></comment>
+	<comment><![CDATA[<p> ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated. </p> <p> This interface is a model that represents the <code>ReportsEntry</code> table in the database. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<see>com.ext.portlet.reports.model.ReportsEntry</see>
 	<see>com.ext.portlet.reports.model.impl.ReportsEntryImpl</see>

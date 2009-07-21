@@ -3,7 +3,7 @@
 <javadoc>
 	<name>DiffHtmlUtil</name>
 	<type>com.liferay.portal.kernel.util.DiffHtmlUtil</type>
-	<comment><![CDATA[<p>This class can compare two different versions of HTML code. It detects changes to an entire HTML page such as removal or addition of characters or images.</p>]]></comment>
+	<comment><![CDATA[<p> This class can compare two different versions of HTML code. It detects changes to an entire HTML page such as removal or addition of characters or images. </p>]]></comment>
 	<author>Julio Camarero</author>
 	<method>
 		<name>diff</name>

@@ -3,7 +3,7 @@
 <javadoc>
 	<name>AuthenticatingHttpInvokerRequestExecutor</name>
 	<type>com.liferay.portal.spring.remoting.AuthenticatingHttpInvokerRequestExecutor</type>
-	<comment><![CDATA[<p>An HttpInvoker request executor for Spring Remoting that provides HTTP BASIC authentication information for service invocations.</p>]]></comment>
+	<comment><![CDATA[<p> An HttpInvoker request executor for Spring Remoting that provides HTTP BASIC authentication information for service invocations. </p>]]></comment>
 	<author>Joel Kozikowski</author>
 	<method>
 		<name>AuthenticatingHttpInvokerRequestExecutor</name>
@@ -42,7 +42,7 @@
 	</method>
 	<method>
 		<name>prepareConnection</name>
-		<comment><![CDATA[Called every time a HTTP invocation is made. This implementation allows the parent to setup the connection, and then adds an<code>Authorization</code>HTTP header property for BASIC authentication.]]></comment>
+		<comment><![CDATA[Called every time a HTTP invocation is made. This implementation allows the parent to setup the connection, and then adds an <code>Authorization</code> HTTP header property for BASIC authentication.]]></comment>
 		<param>
 			<name>con</name>
 			<type>java.net.HttpURLConnection</type>

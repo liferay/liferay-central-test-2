@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SessionIdFilter</name>
 	<type>com.liferay.portal.servlet.filters.sessionid.SessionIdFilter</type>
-	<comment><![CDATA[<p>http://forum.java.sun.com/thread.jspa?threadID=197150.</p>]]></comment>
+	<comment><![CDATA[<p> http://forum.java.sun.com/thread.jspa?threadID=197150. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<author>Raymond Augé</author>
 	<method>

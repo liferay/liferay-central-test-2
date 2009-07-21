@@ -4,7 +4,6 @@
 	<name>Transactional</name>
 	<type>com.liferay.portal.kernel.annotation.Transactional</type>
 	<comment><![CDATA[]]></comment>
-	<author>Michael Young</author>
 	<method>
 		<name>isolation</name>
 		<comment><![CDATA[]]></comment>

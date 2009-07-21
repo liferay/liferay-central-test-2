@@ -3,7 +3,7 @@
 <javadoc>
 	<name>WorkflowMessageListener</name>
 	<type>com.liferay.portal.kernel.workflow.messaging.WorkflowMessageListener</type>
-	<comment><![CDATA[<p>The generic message listener for workflow messages. The object (manager) to invoke the method on has to be injected using constructor injection as well as the expected request class to be handled by this listener.</p>]]></comment>
+	<comment><![CDATA[<p> The generic message listener for workflow messages. The object (manager) to invoke the method on has to be injected using constructor injection as well as the expected request class to be handled by this listener. </p>]]></comment>
 	<author>Micha Kiener</author>
 	<author>Shuyang Zhou</author>
 	<method>

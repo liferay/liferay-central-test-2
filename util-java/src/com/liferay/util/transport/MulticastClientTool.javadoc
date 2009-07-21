@@ -3,7 +3,7 @@
 <javadoc>
 	<name>MulticastClientTool</name>
 	<type>com.liferay.util.transport.MulticastClientTool</type>
-	<comment><![CDATA[<p>A client that listens for multicast messages at a designated port. You may use this to for potential multicast issues when tuning distributed caches.</p>]]></comment>
+	<comment><![CDATA[<p> A client that listens for multicast messages at a designated port. You may use this to for potential multicast issues when tuning distributed caches. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<author>Raymond Augé</author>
 	<method>

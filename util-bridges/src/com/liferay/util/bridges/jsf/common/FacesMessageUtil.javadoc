@@ -3,7 +3,7 @@
 <javadoc>
 	<name>FacesMessageUtil</name>
 	<type>com.liferay.util.bridges.jsf.common.FacesMessageUtil</type>
-	<comment><![CDATA[<p>This class provides static convenience methods for creating FacesMessage objects from locale-specific values in the Liferay portal.properties file, and adding them to the FacesContext either globally, or to individual components.</p>]]></comment>
+	<comment><![CDATA[<p> This class provides static convenience methods for creating FacesMessage objects from locale-specific values in the Liferay portal.properties file, and adding them to the FacesContext either globally, or to individual components. </p>]]></comment>
 	<author>Neil Griffin</author>
 	<method>
 		<name>error</name>

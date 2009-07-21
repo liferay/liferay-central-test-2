@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SampleAppStartupAction</name>
 	<type>com.liferay.portal.events.SampleAppStartupAction</type>
-	<comment><![CDATA[<p>This class can be used to populate an empty database programmatically. This allows a developer to create sample data without relying on native SQL.</p>]]></comment>
+	<comment><![CDATA[<p> This class can be used to populate an empty database programmatically. This allows a developer to create sample data without relying on native SQL. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
 		<name>run</name>

@@ -3,7 +3,7 @@
 <javadoc>
 	<name>MulticastTransport</name>
 	<type>com.liferay.util.transport.MulticastTransport</type>
-	<comment><![CDATA[<p>The MulticastTransport will send strings across a specified multicast address. It will also listen for messages and hand them to the appropriate DatagramHandler.</p>]]></comment>
+	<comment><![CDATA[<p> The MulticastTransport will send strings across a specified multicast address. It will also listen for messages and hand them to the appropriate DatagramHandler. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<method>
 		<name>MulticastTransport</name>

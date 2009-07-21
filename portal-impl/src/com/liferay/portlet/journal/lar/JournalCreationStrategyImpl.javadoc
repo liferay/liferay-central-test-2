@@ -3,7 +3,7 @@
 <javadoc>
 	<name>JournalCreationStrategyImpl</name>
 	<type>com.liferay.portlet.journal.lar.JournalCreationStrategyImpl</type>
-	<comment><![CDATA[<p>Provides the strategy for creating new content when new Journal content is imported into a layout set from a LAR. The default strategy implemented by this class is to return zero for the author and approval user ids, which causes the default user id import strategy to be used. Content will be added as is with no transformations.</p>]]></comment>
+	<comment><![CDATA[<p> Provides the strategy for creating new content when new Journal content is imported into a layout set from a LAR. The default strategy implemented by this class is to return zero for the author and approval user ids, which causes the default user id import strategy to be used. Content will be added as is with no transformations. </p>]]></comment>
 	<author>Joel Kozikowski</author>
 	<see>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</see>
 	<see>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</see>

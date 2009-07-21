@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SecureRequestAction</name>
 	<type>com.liferay.portal.events.SecureRequestAction</type>
-	<comment><![CDATA[<p>This action ensures that all requests are secure. Extend this and override the<code>isRequiresSecure</code>method to programmatically decide when a request requires HTTPS.</p>]]></comment>
+	<comment><![CDATA[<p> This action ensures that all requests are secure. Extend this and override the <code>isRequiresSecure</code> method to programmatically decide when a request requires HTTPS. </p>]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
 		<name>run</name>

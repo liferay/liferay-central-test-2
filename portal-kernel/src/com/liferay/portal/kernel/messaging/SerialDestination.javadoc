@@ -3,7 +3,7 @@
 <javadoc>
 	<name>SerialDestination</name>
 	<type>com.liferay.portal.kernel.messaging.SerialDestination</type>
-	<comment><![CDATA[<p>Destination that delivers a message to a list of message listeners one at a time.</p>]]></comment>
+	<comment><![CDATA[<p> Destination that delivers a message to a list of message listeners one at a time. </p>]]></comment>
 	<author>Michael C. Han</author>
 	<method>
 		<name>SerialDestination</name>

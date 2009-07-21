@@ -3,7 +3,7 @@
 <javadoc>
 	<name>WorkflowResultContainer</name>
 	<type>com.liferay.portal.kernel.workflow.proxy.WorkflowResultContainer</type>
-	<comment><![CDATA[<p>The workflow result container is used to return an argument or an exception which was the result of the workflow engine invocation through a {@link BaseRequest} or any of its subclasses.</p>]]></comment>
+	<comment><![CDATA[<p> The workflow result container is used to return an argument or an exception which was the result of the workflow engine invocation through a {@link BaseRequest} or any of its subclasses. </p>]]></comment>
 	<author>Shuyang Zhou</author>
 	<author>Micha Kiener</author>
 	<method>

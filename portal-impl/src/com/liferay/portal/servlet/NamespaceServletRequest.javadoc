@@ -3,7 +3,7 @@
 <javadoc>
 	<name>NamespaceServletRequest</name>
 	<type>com.liferay.portal.servlet.NamespaceServletRequest</type>
-	<comment><![CDATA[<p>This class ensures that portlet attributes and parameters are private to the portlet.</p>]]></comment>
+	<comment><![CDATA[<p> This class ensures that portlet attributes and parameters are private to the portlet. </p>]]></comment>
 	<author>Brian Myunghun Kim</author>
 	<method>
 		<name>NamespaceServletRequest</name>

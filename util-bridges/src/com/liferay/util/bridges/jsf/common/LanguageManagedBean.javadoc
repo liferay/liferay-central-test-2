@@ -3,7 +3,7 @@
 <javadoc>
 	<name>LanguageManagedBean</name>
 	<type>com.liferay.util.bridges.jsf.common.LanguageManagedBean</type>
-	<comment><![CDATA[<p>This class serves as a bridge between the JSF Expression Language (EL) and Liferay's Language.properties resource bundle.</p>]]></comment>
+	<comment><![CDATA[<p> This class serves as a bridge between the JSF Expression Language (EL) and Liferay's Language.properties resource bundle. </p>]]></comment>
 	<author>Neil Griffin</author>
 	<method>
 		<name>LanguageManagedBean</name>

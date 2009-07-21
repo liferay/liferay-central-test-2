@@ -3,7 +3,7 @@
 <javadoc>
 	<name>JournalCreationStrategy</name>
 	<type>com.liferay.portlet.journal.lar.JournalCreationStrategy</type>
-	<comment><![CDATA[<p>An interface defining how newly created content should be added to the Journal when imported from a LAR file. A class implementing this interface should be specified in<i>portal.properties</i>under the<b>journal.lar.creation.strategy</b>property.</p>]]></comment>
+	<comment><![CDATA[<p> An interface defining how newly created content should be added to the Journal when imported from a LAR file. A class implementing this interface should be specified in <i>portal.properties</i> under the <b>journal.lar.creation.strategy</b> property. </p>]]></comment>
 	<author>Joel Kozikowski</author>
 	<method>
 		<name>getAuthorUserId</name>
