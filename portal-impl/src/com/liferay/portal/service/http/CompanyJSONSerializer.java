@@ -29,25 +29,6 @@ import com.liferay.portal.model.Company;
 
 import java.util.List;
 
-/**
- * <a href="CompanyJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.CompanyServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.CompanyServiceJSON
- *
- */
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

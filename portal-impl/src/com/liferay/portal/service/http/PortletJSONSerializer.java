@@ -29,25 +29,6 @@ import com.liferay.portal.model.Portlet;
 
 import java.util.List;
 
-/**
- * <a href="PortletJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.PortletServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.PortletServiceJSON
- *
- */
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -55,28 +55,12 @@ public class WikiPageResourceUtil {
 		return getPersistence().remove(wikiPageResource);
 	}
 
-	/**
-	 * @deprecated Use <code>update(WikiPageResource wikiPageResource, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(wikiPageResource);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        wikiPageResource the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when wikiPageResource is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource,
 		boolean merge) throws com.liferay.portal.SystemException {

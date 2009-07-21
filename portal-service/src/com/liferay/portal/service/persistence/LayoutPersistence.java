@@ -40,26 +40,10 @@ public interface LayoutPersistence extends BasePersistence {
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * @deprecated Use <code>update(Layout layout, boolean merge)</code>.
-	 */
 	public com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        layout the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when layout is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.SystemException;

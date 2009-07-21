@@ -254,9 +254,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return portletItem;
 	}
 
-	/**
-	 * @deprecated Use <code>update(PortletItem portletItem, boolean merge)</code>.
-	 */
 	public PortletItem update(PortletItem portletItem)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -267,19 +264,6 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return update(portletItem, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        portletItem the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when portletItem is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public PortletItem update(PortletItem portletItem, boolean merge)
 		throws SystemException {
 		boolean isNew = portletItem.isNew();

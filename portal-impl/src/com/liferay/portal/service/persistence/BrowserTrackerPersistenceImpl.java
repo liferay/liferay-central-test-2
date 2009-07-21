@@ -196,9 +196,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return browserTracker;
 	}
 
-	/**
-	 * @deprecated Use <code>update(BrowserTracker browserTracker, boolean merge)</code>.
-	 */
 	public BrowserTracker update(BrowserTracker browserTracker)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -209,19 +206,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return update(browserTracker, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        browserTracker the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when browserTracker is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public BrowserTracker update(BrowserTracker browserTracker, boolean merge)
 		throws SystemException {
 		boolean isNew = browserTracker.isNew();

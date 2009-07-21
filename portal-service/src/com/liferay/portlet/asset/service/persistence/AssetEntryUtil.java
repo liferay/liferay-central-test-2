@@ -55,28 +55,12 @@ public class AssetEntryUtil {
 		return getPersistence().remove(assetEntry);
 	}
 
-	/**
-	 * @deprecated Use <code>update(AssetEntry assetEntry, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.asset.model.AssetEntry update(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(assetEntry);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        assetEntry the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when assetEntry is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.asset.model.AssetEntry update(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
 		throws com.liferay.portal.SystemException {

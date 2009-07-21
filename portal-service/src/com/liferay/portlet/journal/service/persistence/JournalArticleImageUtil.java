@@ -55,28 +55,12 @@ public class JournalArticleImageUtil {
 		return getPersistence().remove(journalArticleImage);
 	}
 
-	/**
-	 * @deprecated Use <code>update(JournalArticleImage journalArticleImage, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(journalArticleImage);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        journalArticleImage the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when journalArticleImage is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.journal.model.JournalArticleImage update(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage,
 		boolean merge) throws com.liferay.portal.SystemException {

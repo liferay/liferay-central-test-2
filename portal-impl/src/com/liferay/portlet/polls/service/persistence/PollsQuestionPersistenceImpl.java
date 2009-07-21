@@ -242,9 +242,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		return pollsQuestion;
 	}
 
-	/**
-	 * @deprecated Use <code>update(PollsQuestion pollsQuestion, boolean merge)</code>.
-	 */
 	public PollsQuestion update(PollsQuestion pollsQuestion)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -255,19 +252,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl
 		return update(pollsQuestion, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        pollsQuestion the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when pollsQuestion is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public PollsQuestion update(PollsQuestion pollsQuestion, boolean merge)
 		throws SystemException {
 		boolean isNew = pollsQuestion.isNew();

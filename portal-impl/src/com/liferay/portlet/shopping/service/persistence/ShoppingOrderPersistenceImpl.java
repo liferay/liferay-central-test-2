@@ -252,9 +252,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		return shoppingOrder;
 	}
 
-	/**
-	 * @deprecated Use <code>update(ShoppingOrder shoppingOrder, boolean merge)</code>.
-	 */
 	public ShoppingOrder update(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -265,19 +262,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl
 		return update(shoppingOrder, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        shoppingOrder the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when shoppingOrder is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public ShoppingOrder update(ShoppingOrder shoppingOrder, boolean merge)
 		throws SystemException {
 		boolean isNew = shoppingOrder.isNew();

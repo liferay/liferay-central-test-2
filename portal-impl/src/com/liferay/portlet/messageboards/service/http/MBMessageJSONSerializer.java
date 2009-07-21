@@ -32,25 +32,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBMessageJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.messageboards.service.http.MBMessageServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.messageboards.service.http.MBMessageServiceJSON
- *
- */
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

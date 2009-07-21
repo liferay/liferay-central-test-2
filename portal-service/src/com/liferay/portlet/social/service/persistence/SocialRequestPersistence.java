@@ -43,26 +43,10 @@ public interface SocialRequestPersistence extends BasePersistence {
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * @deprecated Use <code>update(SocialRequest socialRequest, boolean merge)</code>.
-	 */
 	public com.liferay.portlet.social.model.SocialRequest update(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        socialRequest the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when socialRequest is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public com.liferay.portlet.social.model.SocialRequest update(
 		com.liferay.portlet.social.model.SocialRequest socialRequest,
 		boolean merge) throws com.liferay.portal.SystemException;

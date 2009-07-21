@@ -29,25 +29,6 @@ import com.liferay.portal.model.Region;
 
 import java.util.List;
 
-/**
- * <a href="RegionJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.RegionServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.RegionServiceJSON
- *
- */
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

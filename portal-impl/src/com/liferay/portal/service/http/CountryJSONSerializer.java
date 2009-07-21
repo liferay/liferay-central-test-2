@@ -29,25 +29,6 @@ import com.liferay.portal.model.Country;
 
 import java.util.List;
 
-/**
- * <a href="CountryJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.CountryServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.CountryServiceJSON
- *
- */
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

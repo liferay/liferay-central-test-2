@@ -32,25 +32,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AnnouncementsFlagJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceJSON
- *
- */
 public class AnnouncementsFlagJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsFlag model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

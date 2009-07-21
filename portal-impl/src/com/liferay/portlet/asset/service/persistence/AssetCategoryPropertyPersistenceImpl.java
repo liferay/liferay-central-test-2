@@ -260,9 +260,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return assetCategoryProperty;
 	}
 
-	/**
-	 * @deprecated Use <code>update(AssetCategoryProperty assetCategoryProperty, boolean merge)</code>.
-	 */
 	public AssetCategoryProperty update(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -273,19 +270,6 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl
 		return update(assetCategoryProperty, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        assetCategoryProperty the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when assetCategoryProperty is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public AssetCategoryProperty update(
 		AssetCategoryProperty assetCategoryProperty, boolean merge)
 		throws SystemException {

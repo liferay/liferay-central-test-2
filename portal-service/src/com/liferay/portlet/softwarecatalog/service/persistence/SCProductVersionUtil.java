@@ -55,28 +55,12 @@ public class SCProductVersionUtil {
 		return getPersistence().remove(scProductVersion);
 	}
 
-	/**
-	 * @deprecated Use <code>update(SCProductVersion scProductVersion, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(scProductVersion);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        scProductVersion the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when scProductVersion is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws com.liferay.portal.SystemException {

@@ -264,9 +264,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		return phone;
 	}
 
-	/**
-	 * @deprecated Use <code>update(Phone phone, boolean merge)</code>.
-	 */
 	public Phone update(Phone phone) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -276,19 +273,6 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		return update(phone, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        phone the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when phone is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public Phone update(Phone phone, boolean merge) throws SystemException {
 		boolean isNew = phone.isNew();
 

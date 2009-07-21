@@ -32,25 +32,6 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AssetCategoryPropertyJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceJSON
- *
- */
 public class AssetCategoryPropertyJSONSerializer {
 	public static JSONObject toJSONObject(AssetCategoryProperty model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

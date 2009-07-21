@@ -32,25 +32,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="ShoppingCouponJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.shopping.service.http.ShoppingCouponServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.shopping.service.http.ShoppingCouponServiceJSON
- *
- */
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

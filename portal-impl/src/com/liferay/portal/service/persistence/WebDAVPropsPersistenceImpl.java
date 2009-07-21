@@ -199,9 +199,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		return webDAVProps;
 	}
 
-	/**
-	 * @deprecated Use <code>update(WebDAVProps webDAVProps, boolean merge)</code>.
-	 */
 	public WebDAVProps update(WebDAVProps webDAVProps)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -212,19 +209,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		return update(webDAVProps, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        webDAVProps the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when webDAVProps is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public WebDAVProps update(WebDAVProps webDAVProps, boolean merge)
 		throws SystemException {
 		boolean isNew = webDAVProps.isNew();

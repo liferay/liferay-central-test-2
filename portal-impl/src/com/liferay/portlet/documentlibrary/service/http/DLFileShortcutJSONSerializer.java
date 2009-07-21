@@ -32,25 +32,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFileShortcutJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceJSON
- *
- */
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

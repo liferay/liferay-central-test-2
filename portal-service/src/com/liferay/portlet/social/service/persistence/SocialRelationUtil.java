@@ -55,28 +55,12 @@ public class SocialRelationUtil {
 		return getPersistence().remove(socialRelation);
 	}
 
-	/**
-	 * @deprecated Use <code>update(SocialRelation socialRelation, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.social.model.SocialRelation update(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(socialRelation);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        socialRelation the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when socialRelation is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.social.model.SocialRelation update(
 		com.liferay.portlet.social.model.SocialRelation socialRelation,
 		boolean merge) throws com.liferay.portal.SystemException {

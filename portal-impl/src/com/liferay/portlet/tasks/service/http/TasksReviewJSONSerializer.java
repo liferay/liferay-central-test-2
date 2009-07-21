@@ -32,25 +32,6 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="TasksReviewJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.tasks.service.http.TasksReviewServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.tasks.service.http.TasksReviewServiceJSON
- *
- */
 public class TasksReviewJSONSerializer {
 	public static JSONObject toJSONObject(TasksReview model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -55,28 +55,12 @@ public class ExpandoTableUtil {
 		return getPersistence().remove(expandoTable);
 	}
 
-	/**
-	 * @deprecated Use <code>update(ExpandoTable expandoTable, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.expando.model.ExpandoTable update(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(expandoTable);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        expandoTable the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when expandoTable is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.expando.model.ExpandoTable update(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
 		boolean merge) throws com.liferay.portal.SystemException {

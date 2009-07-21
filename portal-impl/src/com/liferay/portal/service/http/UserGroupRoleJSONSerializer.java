@@ -29,25 +29,6 @@ import com.liferay.portal.model.UserGroupRole;
 
 import java.util.List;
 
-/**
- * <a href="UserGroupRoleJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.UserGroupRoleServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.UserGroupRoleServiceJSON
- *
- */
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -283,9 +283,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		return assetVocabulary;
 	}
 
-	/**
-	 * @deprecated Use <code>update(AssetVocabulary assetVocabulary, boolean merge)</code>.
-	 */
 	public AssetVocabulary update(AssetVocabulary assetVocabulary)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -296,19 +293,6 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		return update(assetVocabulary, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        assetVocabulary the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when assetVocabulary is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public AssetVocabulary update(AssetVocabulary assetVocabulary, boolean merge)
 		throws SystemException {
 		boolean isNew = assetVocabulary.isNew();

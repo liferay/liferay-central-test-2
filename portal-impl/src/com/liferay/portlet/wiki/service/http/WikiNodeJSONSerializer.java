@@ -32,25 +32,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="WikiNodeJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.wiki.service.http.WikiNodeServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.wiki.service.http.WikiNodeServiceJSON
- *
- */
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

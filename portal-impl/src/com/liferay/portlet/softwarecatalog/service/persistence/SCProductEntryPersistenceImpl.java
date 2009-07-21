@@ -276,9 +276,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return scProductEntry;
 	}
 
-	/**
-	 * @deprecated Use <code>update(SCProductEntry scProductEntry, boolean merge)</code>.
-	 */
 	public SCProductEntry update(SCProductEntry scProductEntry)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -289,19 +286,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return update(scProductEntry, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        scProductEntry the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when scProductEntry is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public SCProductEntry update(SCProductEntry scProductEntry, boolean merge)
 		throws SystemException {
 		boolean isNew = scProductEntry.isNew();

@@ -40,26 +40,10 @@ public interface ResourceCodePersistence extends BasePersistence {
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * @deprecated Use <code>update(ResourceCode resourceCode, boolean merge)</code>.
-	 */
 	public com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        resourceCode the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when resourceCode is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws com.liferay.portal.SystemException;

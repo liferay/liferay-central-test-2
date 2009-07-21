@@ -187,9 +187,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		return image;
 	}
 
-	/**
-	 * @deprecated Use <code>update(Image image, boolean merge)</code>.
-	 */
 	public Image update(Image image) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -199,19 +196,6 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		return update(image, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        image the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when image is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public Image update(Image image, boolean merge) throws SystemException {
 		boolean isNew = image.isNew();
 

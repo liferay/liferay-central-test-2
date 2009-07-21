@@ -222,9 +222,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		return expandoColumn;
 	}
 
-	/**
-	 * @deprecated Use <code>update(ExpandoColumn expandoColumn, boolean merge)</code>.
-	 */
 	public ExpandoColumn update(ExpandoColumn expandoColumn)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -235,19 +232,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		return update(expandoColumn, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        expandoColumn the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when expandoColumn is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public ExpandoColumn update(ExpandoColumn expandoColumn, boolean merge)
 		throws SystemException {
 		boolean isNew = expandoColumn.isNew();

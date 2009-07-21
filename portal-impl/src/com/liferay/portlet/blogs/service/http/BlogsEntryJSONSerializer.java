@@ -32,25 +32,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="BlogsEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.blogs.service.http.BlogsEntryServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.blogs.service.http.BlogsEntryServiceJSON
- *
- */
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

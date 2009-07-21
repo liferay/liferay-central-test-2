@@ -214,9 +214,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		return expandoRow;
 	}
 
-	/**
-	 * @deprecated Use <code>update(ExpandoRow expandoRow, boolean merge)</code>.
-	 */
 	public ExpandoRow update(ExpandoRow expandoRow) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -226,19 +223,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl
 		return update(expandoRow, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        expandoRow the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when expandoRow is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public ExpandoRow update(ExpandoRow expandoRow, boolean merge)
 		throws SystemException {
 		boolean isNew = expandoRow.isNew();

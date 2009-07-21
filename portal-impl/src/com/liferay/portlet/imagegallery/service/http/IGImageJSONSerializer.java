@@ -32,25 +32,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="IGImageJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.imagegallery.service.http.IGImageServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.service.http.IGImageServiceJSON
- *
- */
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

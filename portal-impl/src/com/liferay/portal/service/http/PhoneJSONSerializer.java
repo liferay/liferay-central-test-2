@@ -31,25 +31,6 @@ import com.liferay.portal.model.Phone;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="PhoneJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portal.service.http.PhoneServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portal.service.http.PhoneServiceJSON
- *
- */
 public class PhoneJSONSerializer {
 	public static JSONObject toJSONObject(Phone model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

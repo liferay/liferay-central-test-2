@@ -52,28 +52,12 @@ public class GroupUtil {
 		return getPersistence().remove(group);
 	}
 
-	/**
-	 * @deprecated Use <code>update(Group group, boolean merge)</code>.
-	 */
 	public static com.liferay.portal.model.Group update(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(group);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        group the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when group is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portal.model.Group update(
 		com.liferay.portal.model.Group group, boolean merge)
 		throws com.liferay.portal.SystemException {

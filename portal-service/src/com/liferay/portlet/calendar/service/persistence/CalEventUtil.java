@@ -55,28 +55,12 @@ public class CalEventUtil {
 		return getPersistence().remove(calEvent);
 	}
 
-	/**
-	 * @deprecated Use <code>update(CalEvent calEvent, boolean merge)</code>.
-	 */
 	public static com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(calEvent);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        calEvent the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when calEvent is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.SystemException {

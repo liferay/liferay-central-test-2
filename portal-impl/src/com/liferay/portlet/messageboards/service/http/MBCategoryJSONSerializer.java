@@ -32,25 +32,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="MBCategoryJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.messageboards.service.http.MBCategoryServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.messageboards.service.http.MBCategoryServiceJSON
- *
- */
 public class MBCategoryJSONSerializer {
 	public static JSONObject toJSONObject(MBCategory model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

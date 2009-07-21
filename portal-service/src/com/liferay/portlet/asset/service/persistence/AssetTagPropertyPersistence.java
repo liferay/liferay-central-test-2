@@ -45,26 +45,10 @@ public interface AssetTagPropertyPersistence extends BasePersistence {
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * @deprecated Use <code>update(AssetTagProperty assetTagProperty, boolean merge)</code>.
-	 */
 	public com.liferay.portlet.asset.model.AssetTagProperty update(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
 		throws com.liferay.portal.SystemException;
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        assetTagProperty the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when assetTagProperty is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public com.liferay.portlet.asset.model.AssetTagProperty update(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
 		boolean merge) throws com.liferay.portal.SystemException;

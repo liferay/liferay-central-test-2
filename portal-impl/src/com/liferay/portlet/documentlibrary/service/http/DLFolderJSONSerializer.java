@@ -32,25 +32,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="DLFolderJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON
- *
- */
 public class DLFolderJSONSerializer {
 	public static JSONObject toJSONObject(DLFolder model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

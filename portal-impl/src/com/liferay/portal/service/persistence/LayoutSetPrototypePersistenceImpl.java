@@ -215,9 +215,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 		return layoutSetPrototype;
 	}
 
-	/**
-	 * @deprecated Use <code>update(LayoutSetPrototype layoutSetPrototype, boolean merge)</code>.
-	 */
 	public LayoutSetPrototype update(LayoutSetPrototype layoutSetPrototype)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
@@ -228,19 +225,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 		return update(layoutSetPrototype, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        layoutSetPrototype the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when layoutSetPrototype is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public LayoutSetPrototype update(LayoutSetPrototype layoutSetPrototype,
 		boolean merge) throws SystemException {
 		boolean isNew = layoutSetPrototype.isNew();

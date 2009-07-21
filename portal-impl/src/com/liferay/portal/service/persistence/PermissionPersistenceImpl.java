@@ -252,9 +252,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return permission;
 	}
 
-	/**
-	 * @deprecated Use <code>update(Permission permission, boolean merge)</code>.
-	 */
 	public Permission update(Permission permission) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -264,19 +261,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		return update(permission, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        permission the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when permission is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public Permission update(Permission permission, boolean merge)
 		throws SystemException {
 		boolean isNew = permission.isNew();

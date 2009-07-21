@@ -32,25 +32,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="IGFolderJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.imagegallery.service.http.IGFolderServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.imagegallery.service.http.IGFolderServiceJSON
- *
- */
 public class IGFolderJSONSerializer {
 	public static JSONObject toJSONObject(IGFolder model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

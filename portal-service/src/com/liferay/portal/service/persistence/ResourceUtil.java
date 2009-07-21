@@ -52,28 +52,12 @@ public class ResourceUtil {
 		return getPersistence().remove(resource);
 	}
 
-	/**
-	 * @deprecated Use <code>update(Resource resource, boolean merge)</code>.
-	 */
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(resource);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        resource the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when resource is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource, boolean merge)
 		throws com.liferay.portal.SystemException {

@@ -55,28 +55,12 @@ public class ServiceComponentUtil {
 		return getPersistence().remove(serviceComponent);
 	}
 
-	/**
-	 * @deprecated Use <code>update(ServiceComponent serviceComponent, boolean merge)</code>.
-	 */
 	public static com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().update(serviceComponent);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param        serviceComponent the entity to add, update, or merge
-	 * @param        merge boolean value for whether to merge the entity. The
-	 *                default value is false. Setting merge to true is more
-	 *                expensive and should only be true when serviceComponent is
-	 *                transient. See LEP-5473 for a detailed discussion of this
-	 *                method.
-	 * @return        true if the portlet can be displayed via Ajax
-	 */
 	public static com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge) throws com.liferay.portal.SystemException {

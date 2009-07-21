@@ -32,25 +32,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="AssetTagJSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>com.liferay.portlet.asset.service.http.AssetTagServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see com.liferay.portlet.asset.service.http.AssetTagServiceJSON
- *
- */
 public class AssetTagJSONSerializer {
 	public static JSONObject toJSONObject(AssetTag model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
