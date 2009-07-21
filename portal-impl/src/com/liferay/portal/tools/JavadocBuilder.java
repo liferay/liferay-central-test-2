@@ -133,10 +133,10 @@ public class JavadocBuilder {
 			if (commentElement != null) {
 				sb.append(element.elementText("name"));
 				sb.append(" ");
-				sb.append(element.elementText("comment"));
+				sb.append(_getCDATA(element.elementText("comment")));
 			}
 			else {
-				sb.append(element.getText());
+				sb.append(_getCDATA(element.getText()));
 			}
 
 			sb.append("\n");
@@ -578,9 +578,12 @@ public class JavadocBuilder {
 		for (String fileName : fileNames) {
 			fileName = StringUtil.replace(fileName, "\\", "/");
 
-			/*if (!fileName.endsWith("Operation.java")) {
+			if (!fileName.endsWith("BlogsEntryPersistence.java") &&
+				!fileName.endsWith("BlogsEntryPersistenceImpl.java") &&
+				!fileName.endsWith("BlogsEntryUtil.java")) {
+
 				continue;
-			}*/
+			}
 
 			if (command.equals("delete")) {
 				_removeJavadocFromJava(basedir, fileName, true);

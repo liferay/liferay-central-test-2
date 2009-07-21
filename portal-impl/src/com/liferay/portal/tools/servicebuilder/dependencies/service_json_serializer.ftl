@@ -11,25 +11,6 @@ import com.liferay.util.JSONUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <a href="${entity.name}JSONSerializer.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This class is used by
- * <code>${packagePath}.service.http.${entity.name}ServiceJSON</code>
- * to translate objects.
- * </p>
- *
- * @author Brian Wing Shun Chan
- *
- * @see ${packagePath}.service.http.${entity.name}ServiceJSON
- *
- */
 public class ${entity.name}JSONSerializer {
 
 	public static JSONObject toJSONObject(${entity.name} model) {

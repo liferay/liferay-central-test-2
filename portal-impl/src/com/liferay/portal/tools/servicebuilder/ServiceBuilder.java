@@ -385,8 +385,14 @@ public class ServiceBuilder {
 		_tplPersistence = _getTplProperty("persistence", _tplPersistence);
 		_tplPersistenceImpl = _getTplProperty(
 			"persistence_impl", _tplPersistenceImpl);
+		_tplPersistenceImplJavadoc = _getTplProperty(
+			"persistence_impl_javadoc", _tplPersistenceImplJavadoc);
+		_tplPersistenceJavadoc = _getTplProperty(
+			"persistence_javadoc", _tplPersistenceJavadoc);
 		_tplPersistenceUtil = _getTplProperty(
 			"persistence_util", _tplPersistenceUtil);
+		_tplPersistenceUtilJavadoc = _getTplProperty(
+			"persistence_util_javadoc", _tplPersistenceUtilJavadoc);
 		_tplProps = _getTplProperty("props", _tplProps);
 		_tplRemotingXml = _getTplProperty("remoting_xml", _tplRemotingXml);
 		_tplService = _getTplProperty("service", _tplService);
@@ -2287,7 +2293,9 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content, _author);
 
-		_writeJavadoc(ejbFile);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplPersistenceJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2321,7 +2329,9 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content, _author);
 
-		_writeJavadoc(ejbFile);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplPersistenceImplJavadoc, context));
 	}
 
 	private void _createPersistenceTest(Entity entity) throws Exception {
@@ -2366,7 +2376,9 @@ public class ServiceBuilder {
 
 		writeFile(ejbFile, content, _author);
 
-		_writeJavadoc(ejbFile);
+		FileUtil.write(
+			ejbFile.toString() + "doc",
+			_processTemplate(_tplPersistenceUtilJavadoc, context));
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -4081,8 +4093,14 @@ public class ServiceBuilder {
 	private String _tplOrmXml = _TPL_ROOT + "orm_xml.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
+	private String _tplPersistenceImplJavadoc =
+		_TPL_ROOT + "persistence_impl_javadoc.ftl";
+	private String _tplPersistenceJavadoc =
+		_TPL_ROOT + "persistence_javadoc.ftl";
 	private String _tplPersistenceTest = _TPL_ROOT + "persistence_test.ftl";
 	private String _tplPersistenceUtil = _TPL_ROOT + "persistence_util.ftl";
+	private String _tplPersistenceUtilJavadoc =
+		_TPL_ROOT + "persistence_util_javadoc.ftl";
 	private String _tplProps = _TPL_ROOT + "props.ftl";
 	private String _tplRemotingXml = _TPL_ROOT + "remoting_xml.ftl";
 	private String _tplService = _TPL_ROOT + "service.ftl";

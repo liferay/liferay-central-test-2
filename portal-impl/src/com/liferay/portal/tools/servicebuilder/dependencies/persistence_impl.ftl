@@ -346,9 +346,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		return ${entity.varName};
 	}
 
-	/**
-	 * @deprecated Use <code>update(${entity.name} ${entity.varName}, boolean merge)</code>.
-	 */
 	public ${entity.name} update(${entity.name} ${entity.varName}) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn("Using the deprecated update(${entity.name} ${entity.varName}) method. Use update(${entity.name} ${entity.varName}, boolean merge) instead.");
@@ -357,19 +354,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		return update(${entity.varName}, false);
 	}
 
-	/**
-	 * Add, update, or merge, the entity. This method also calls the model
-	 * listeners to trigger the proper events associated with adding, deleting,
-	 * or updating an entity.
-	 *
-	 * @param		${entity.varName} the entity to add, update, or merge
-	 * @param		merge boolean value for whether to merge the entity. The
-	 *				default value is false. Setting merge to true is more
-	 *				expensive and should only be true when ${entity.varName} is
-	 *				transient. See LEP-5473 for a detailed discussion of this
-	 *				method.
-	 * @return		true if the portlet can be displayed via Ajax
-	 */
 	public ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		boolean isNew = ${entity.varName}.isNew();
 
