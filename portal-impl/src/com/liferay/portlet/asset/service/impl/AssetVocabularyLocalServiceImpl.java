@@ -149,18 +149,6 @@ public class AssetVocabularyLocalServiceImpl
 		return assetVocabularyPersistence.findByCompanyId(companyId);
 	}
 
-	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
-		throws PortalException, SystemException {
-
-		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
-
-		for (long groupId : groupIds) {
-			vocabularies.addAll(getGroupVocabularies(groupId));
-		}
-
-		return vocabularies;
-	}
-
 	public List<AssetVocabulary> getGroupVocabularies(long groupId)
 		throws PortalException, SystemException {
 
@@ -194,6 +182,18 @@ public class AssetVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return assetVocabularyPersistence.findByG_N(groupId, name);
+	}
+
+	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
+		throws PortalException, SystemException {
+
+		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
+
+		for (long groupId : groupIds) {
+			vocabularies.addAll(getGroupVocabularies(groupId));
+		}
+
+		return vocabularies;
 	}
 
 	public AssetVocabulary getVocabulary(long vocabularyId)
