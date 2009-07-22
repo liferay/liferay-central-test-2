@@ -55,7 +55,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_editBody1")) {
+				if (selenium.isElementPresent("_33_editReplyBody1")) {
 					break;
 				}
 			}
@@ -65,11 +65,11 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_editBody1",
+		selenium.typeKeys("_33_editReplyBody1",
 			RuntimeVariables.replace("This is an edited second entr comment"));
-		selenium.type("_33_editBody1",
+		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is an edited second entry comment!"));
-		selenium.click(RuntimeVariables.replace("_33_updateReplyButton1"));
+		selenium.click(RuntimeVariables.replace("_33_editReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This is an edited second entry comment!"));

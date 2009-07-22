@@ -53,7 +53,7 @@ public class EditReplyCommentSpaceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_editBody3")) {
+				if (selenium.isElementPresent("_107_editReplyBody3")) {
 					break;
 				}
 			}
@@ -63,11 +63,11 @@ public class EditReplyCommentSpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_editBody3",
+		selenium.typeKeys("_107_editReplyBody3",
 			RuntimeVariables.replace(
 				"This is a edtied test Space reply comment!"));
-		selenium.type("_107_editBody3", RuntimeVariables.replace("     "));
-		selenium.click(RuntimeVariables.replace("_107_updateReplyButton3"));
+		selenium.type("_107_editReplyBody3", RuntimeVariables.replace("     "));
+		selenium.click(RuntimeVariables.replace("_107_editReplyButton3"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

@@ -83,7 +83,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_editBody1")) {
+				if (selenium.isElementPresent("_20_editReplyBody1")) {
 					break;
 				}
 			}
@@ -93,13 +93,13 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_editBody1",
+		selenium.typeKeys("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Community Admin and I can write comments!"));
-		selenium.type("_20_editBody1",
+		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Community Admin and I can write comments!\nThis is an edited comment."));
-		selenium.click(RuntimeVariables.replace("_20_updateReplyButton1"));
+		selenium.click(RuntimeVariables.replace("_20_editReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

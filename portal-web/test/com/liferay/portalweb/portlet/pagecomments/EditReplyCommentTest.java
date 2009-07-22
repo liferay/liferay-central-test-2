@@ -53,7 +53,7 @@ public class EditReplyCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_editBody3")) {
+				if (selenium.isElementPresent("_107_editReplyBody3")) {
 					break;
 				}
 			}
@@ -63,9 +63,9 @@ public class EditReplyCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_107_editBody3",
+		selenium.type("_107_editReplyBody3",
 			RuntimeVariables.replace("This is a edtied test reply comment!"));
-		selenium.click(RuntimeVariables.replace("_107_updateReplyButton3"));
+		selenium.click(RuntimeVariables.replace("_107_editReplyButton3"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

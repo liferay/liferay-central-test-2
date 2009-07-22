@@ -80,7 +80,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_editBody1")) {
+				if (selenium.isElementPresent("_20_editReplyBody1")) {
 					break;
 				}
 			}
@@ -90,10 +90,10 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_20_editBody1",
+		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad.\nI'm now editing this comment."));
-		selenium.click(RuntimeVariables.replace("_20_updateReplyButton1"));
+		selenium.click(RuntimeVariables.replace("_20_editReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
