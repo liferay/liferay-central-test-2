@@ -178,17 +178,19 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUseSSL(outUseSSL);
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
+
+		boolean previouslyActive = mailingList.getActive();
 		mailingList.setActive(active);
 
 		mbMailingListPersistence.update(mailingList, false);
 
 		// Scheduler
+		if (previouslyActive) {
+			unscheduleMailingList(mailingList);
+		}
 
 		if (active) {
 			scheduleMailingList(mailingList);
-		}
-		else {
-			unscheduleMailingList(mailingList);
 		}
 
 		return mailingList;
