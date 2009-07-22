@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,9 @@
 package com.liferay.portal.kernel.search;
 
 public interface QueryTerm {
+
 	public String getField();
 
 	public String getValue();
+
 }

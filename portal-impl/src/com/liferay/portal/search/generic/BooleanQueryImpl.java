@@ -36,6 +36,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 	public void add(Query query, BooleanClauseOccur occur)
 		throws ParseException {
+
 		_clauses.add(new BooleanClauseImpl(query, occur));
 	}
 

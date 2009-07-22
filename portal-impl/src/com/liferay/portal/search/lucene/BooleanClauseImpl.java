@@ -39,13 +39,11 @@ public class BooleanClauseImpl implements BooleanClause {
 	}
 
 	public BooleanClauseOccur getBooleanClauseOccur() {
-		throw new UnsupportedOperationException(
-			"No supported in Lucene queries");
+		throw new UnsupportedOperationException();
 	}
 
 	public Query getQuery() {
-		throw new UnsupportedOperationException(
-			"No supported in Lucene queries");
+		throw new UnsupportedOperationException();
 	}
 
 	private org.apache.lucene.search.BooleanClause _booleanClause;

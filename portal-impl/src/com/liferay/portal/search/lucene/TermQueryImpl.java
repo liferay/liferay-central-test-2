@@ -39,8 +39,7 @@ public class TermQueryImpl implements TermQuery {
 	}
 
 	public QueryTerm getQueryTerm() {
-		throw new UnsupportedOperationException(
-			"No supported for Lucene queries");
+		throw new UnsupportedOperationException();
 	}
 
 	public org.apache.lucene.search.TermQuery getTermQuery() {

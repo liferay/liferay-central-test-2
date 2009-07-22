@@ -29,21 +29,21 @@ import com.liferay.portal.kernel.search.Query;
 public class BooleanClauseImpl implements BooleanClause {
 
 	public BooleanClauseImpl(
-		Query query, BooleanClauseOccur occur) {
+		Query query, BooleanClauseOccur booleanClauseOccur) {
 
 		_query = query;
-		_occur = occur;
+		_booleanClauseOccur = booleanClauseOccur;
 	 }
 
 	public BooleanClauseOccur getBooleanClauseOccur() {
-		return _occur;
+		return _booleanClauseOccur;
 	}
 
 	public Query getQuery() {
 		return _query;
 	}
 
-	private BooleanClauseOccur _occur;
+	private BooleanClauseOccur _booleanClauseOccur;
 	private Query _query;
 
 }

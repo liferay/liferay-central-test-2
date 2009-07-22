@@ -23,7 +23,9 @@
 package com.liferay.portal.kernel.search;
 
 public interface BooleanClause {
+
 	public BooleanClauseOccur getBooleanClauseOccur();
 
 	public Query getQuery();
+
 }
