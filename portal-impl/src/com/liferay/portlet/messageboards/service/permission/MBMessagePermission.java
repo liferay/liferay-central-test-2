@@ -25,13 +25,9 @@ package com.liferay.portlet.messageboards.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 public class MBMessagePermission {
@@ -69,7 +65,7 @@ public class MBMessagePermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, MBMessage message,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long groupId = message.getGroupId();
 
@@ -77,21 +73,6 @@ public class MBMessagePermission {
 				groupId, permissionChecker.getUserId())) {
 
 			return false;
-		}
-
-		long categoryId = message.getCategoryId();
-
-		while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-				categoryId);
-
-			if (!MBCategoryPermission.contains(
-					permissionChecker, category, ActionKeys.VIEW)) {
-
-				return false;
-			}
-
-			categoryId = category.getParentCategoryId();
 		}
 
 		if (permissionChecker.hasOwnerPermission(
