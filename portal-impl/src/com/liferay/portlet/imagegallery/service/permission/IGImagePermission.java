@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -66,10 +67,12 @@ public class IGImagePermission {
 
 		IGFolder folder = image.getFolder();
 
-		if (!IGFolderPermission.contains(
-				permissionChecker, folder, ActionKeys.VIEW)) {
+		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+			if (!IGFolderPermission.contains(
+					permissionChecker, folder, ActionKeys.VIEW)) {
 
-			return false;
+				return false;
+			}
 		}
 
 		if (permissionChecker.hasOwnerPermission(

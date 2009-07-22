@@ -1095,6 +1095,10 @@ public class PropsValues {
 	public static int PERMISSIONS_USER_CHECK_ALGORITHM = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
 
+	public static boolean PERMISSIONS_VIEW_DYNAMIC_INHERITANCE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE));
+
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED));

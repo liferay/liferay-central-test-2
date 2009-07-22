@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -117,6 +118,10 @@ public class ShoppingCategoryPermission {
 						category.getCategoryId(), actionId)) {
 
 					return false;
+				}
+
+				if (!PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+					break;
 				}
 			}
 
