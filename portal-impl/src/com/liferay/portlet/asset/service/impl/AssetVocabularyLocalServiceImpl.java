@@ -34,6 +34,7 @@ import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.base.AssetVocabularyLocalServiceBaseImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -146,6 +147,18 @@ public class AssetVocabularyLocalServiceImpl
 		throws SystemException {
 
 		return assetVocabularyPersistence.findByCompanyId(companyId);
+	}
+
+	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
+		throws PortalException, SystemException {
+
+		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
+
+		for (long groupId : groupIds) {
+			vocabularies.addAll(getGroupVocabularies(groupId));
+		}
+
+		return vocabularies;
 	}
 
 	public List<AssetVocabulary> getGroupVocabularies(long groupId)
