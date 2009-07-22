@@ -39,6 +39,7 @@
 			<portlet-name>28</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>ACCESS</action-key>
 			<action-key>ADD_ENTRY</action-key>
 			<action-key>ADD_SUBFOLDER</action-key>
 			<action-key>DELETE</action-key>
