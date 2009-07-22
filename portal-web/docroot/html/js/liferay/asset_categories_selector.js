@@ -269,15 +269,16 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			var options = instance.options;
 			var mainContainer = instance._mainContainer;
 			var container = instance._container;
+			var globalMessage = Liferay.Language.get('global');
 			var searchMessage = Liferay.Language.get('no-categories-found');
 
 			mainContainer.empty();
 
 			container.empty().html('<div class="loading-animation" />');
 
-			Liferay.Service.Asset.AssetVocabulary.getGroupVocabularies(
+			Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 				{
-					groupId: themeDisplay.getScopeGroupId()
+					groupIds: [themeDisplay.getScopeGroupId(), themeDisplay.getCompanyGroupId()]
 				},
 				function(vocabularies) {
 					var buffer = [];
@@ -297,6 +298,11 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 									buffer.push('<fieldset>');
 									buffer.push('<legend class="lfr-asset-category-set-title">');
 									buffer.push(vocabularyName);
+
+									if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
+										buffer.push(' (' + globalMessage + ')');
+									}
+
 									buffer.push('</legend><div class="treeview">');
 
 									instance._categoryIterator(categories, buffer, 0);
