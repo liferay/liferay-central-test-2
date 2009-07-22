@@ -24,10 +24,10 @@ package com.liferay.portlet.shopping.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
@@ -68,7 +68,6 @@ public class ShoppingItemPermission {
 		throws PortalException, SystemException {
 
 		ShoppingCategory category = item.getCategory();
-
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 			if (!ShoppingCategoryPermission.contains(
