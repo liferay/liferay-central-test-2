@@ -55,6 +55,10 @@ import org.dom4j.DocumentHelper;
 
 public class SAXReaderImpl implements SAXReader {
 
+	public static SAXReaderImpl getInstance() {
+		return _instance;
+	}
+
 	public static List<Attribute> toNewAttributes(
 		List<org.dom4j.Attribute> oldAttributes) {
 
@@ -460,5 +464,7 @@ public class SAXReaderImpl implements SAXReader {
 		"http://apache.org/xml/features/validation/dynamic";
 
 	private static Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
+
+	private static SAXReaderImpl _instance = new SAXReaderImpl();
 
 }

@@ -270,8 +270,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Djavadoc.command=delete" />
+			<arg line="--command delete --limit ${limit}" />
 		</java>
 	</target>
 
@@ -282,8 +281,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Djavadoc.command=get" />
+			<arg line="--command get --limit ${limit}" />
 		</java>
 	</target>
 
@@ -294,8 +292,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Djavadoc.command=save" />
+			<arg line="--command save --limit ${limit}" />
 		</java>
 	</target>
 

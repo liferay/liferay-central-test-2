@@ -324,8 +324,7 @@
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Djavadoc.command=delete" />
+			<arg line="--command delete --limit ${limit}" />
 		</java>
 	</target>
 
