@@ -23,4 +23,7 @@
 package com.liferay.portal.kernel.search;
 
 public interface TermQuery extends Query {
+
+	public QueryTerm getQueryTerm();
+
 }

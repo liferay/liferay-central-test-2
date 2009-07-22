@@ -22,6 +22,7 @@
 
 package com.liferay.portal.search.generic;
 
+import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.TermQuery;
 
 public class TermQueryImpl implements TermQuery {

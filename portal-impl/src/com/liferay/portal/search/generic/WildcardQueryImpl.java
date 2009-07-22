@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,9 +22,10 @@
 
 package com.liferay.portal.search.generic;
 
-import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.QueryTerm;
+import com.liferay.portal.kernel.search.WildcardQuery;
 
-public class WildcardQueryImpl implements Query {
+public class WildcardQueryImpl implements WildcardQuery {
 
 	public WildcardQueryImpl(QueryTerm queryTerm) {
 		_queryTerm = queryTerm;

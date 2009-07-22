@@ -29,16 +29,13 @@ import com.liferay.portal.kernel.search.Query;
 public class BooleanClauseImpl implements BooleanClause {
 
 	public BooleanClauseImpl(
-		Query query, BooleanClauseOccur occur, boolean prohibited,
-		boolean required) {
+		Query query, BooleanClauseOccur occur) {
 
 		_query = query;
 		_occur = occur;
-		_prohibited = prohibited;
-		_required = required;
 	 }
 
-	public BooleanClauseOccur getOccur() {
+	public BooleanClauseOccur getBooleanClauseOccur() {
 		return _occur;
 	}
 
@@ -46,17 +43,7 @@ public class BooleanClauseImpl implements BooleanClause {
 		return _query;
 	}
 
-	public boolean isProhibited() {
-		return _prohibited;
-	}
-
-	public boolean isRequired() {
-		return _required;
-	}
-
 	private BooleanClauseOccur _occur;
-	private boolean _prohibited;
 	private Query _query;
-	private boolean _required;
 
 }

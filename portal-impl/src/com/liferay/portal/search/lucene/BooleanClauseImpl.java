@@ -23,6 +23,8 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.BooleanClause;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.Query;
 
 public class BooleanClauseImpl implements BooleanClause {
 
@@ -34,6 +36,16 @@ public class BooleanClauseImpl implements BooleanClause {
 
 	public org.apache.lucene.search.BooleanClause getBooleanClause() {
 		return _booleanClause;
+	}
+
+	public BooleanClauseOccur getBooleanClauseOccur() {
+		throw new UnsupportedOperationException(
+			"No supported in Lucene queries");
+	}
+
+	public Query getQuery() {
+		throw new UnsupportedOperationException(
+			"No supported in Lucene queries");
 	}
 
 	private org.apache.lucene.search.BooleanClause _booleanClause;

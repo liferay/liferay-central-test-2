@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<javadoc>
+	<name>WildcardQuery</name>
+	<type>com.liferay.portal.kernel.search.WildcardQuery</type>
+	<comment><![CDATA[]]></comment>
+	<author>Michael C. Han</author>
+</javadoc>

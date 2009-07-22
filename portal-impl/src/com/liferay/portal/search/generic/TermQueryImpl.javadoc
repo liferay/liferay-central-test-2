@@ -10,7 +10,7 @@
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>queryTerm</name>
-			<type>com.liferay.portal.search.generic.QueryTerm</type>
+			<type>com.liferay.portal.kernel.search.QueryTerm</type>
 			<comment><![CDATA[]]></comment>
 		</param>
 	</method>

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,9 +22,11 @@
 
 package com.liferay.portal.search.generic;
 
-public class QueryTerm {
+import com.liferay.portal.kernel.search.QueryTerm;
 
-	public QueryTerm(String field, String value) {
+public class QueryTermImpl implements QueryTerm {
+
+	public QueryTermImpl(String field, String value) {
 		_field = field;
 		_value = value;
 	}

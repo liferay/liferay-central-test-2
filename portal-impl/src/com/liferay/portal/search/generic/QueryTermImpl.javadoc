@@ -2,7 +2,7 @@
 
 <javadoc>
 	<name>QueryTerm</name>
-	<type>com.liferay.portal.search.generic.QueryTerm</type>
+	<type>com.liferay.portal.search.generic.QueryTermImpl</type>
 	<comment><![CDATA[]]></comment>
 	<author>Michael C. Han</author>
 	<method>

@@ -36,18 +36,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 	public void add(Query query, BooleanClauseOccur occur)
 		throws ParseException {
-
-		if (occur.equals(BooleanClauseOccur.MUST)) {
-			_clauses.add(new BooleanClauseImpl(query, occur, false, true));
-		}
-		else if (occur.equals(BooleanClauseOccur.SHOULD)) {
-			_clauses.add(new BooleanClauseImpl(query, occur, false, false));
-		}
-		else if (occur.equals(BooleanClauseOccur.MUST_NOT)) {
-			_clauses.add(new BooleanClauseImpl(query, occur, true, true));
-		}
-
-		throw new ParseException("Invalid occur clause " + occur);
+		_clauses.add(new BooleanClauseImpl(query, occur));
 	}
 
 	public void addExactTerm(String field, boolean value) {
@@ -92,7 +81,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 	public void addExactTerm(String field, String value) {
 		TermQueryImpl termQuery = new TermQueryImpl(
-			new QueryTerm(field, String.valueOf(value)));
+			new QueryTermImpl(field, String.valueOf(value)));
 
 		try {
 			add(termQuery, BooleanClauseOccur.SHOULD);
@@ -151,11 +140,11 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 		if (like) {
 			query = new WildcardQueryImpl(
-				new QueryTerm(field, String.valueOf(value)));
+				new QueryTermImpl(field, String.valueOf(value)));
 		}
 		else {
 			query = new TermQueryImpl(
-				new QueryTerm(field, String.valueOf(value)));
+				new QueryTermImpl(field, String.valueOf(value)));
 		}
 
 		try {
@@ -181,11 +170,11 @@ public class BooleanQueryImpl implements BooleanQuery {
 
 		if (like) {
 			query = new WildcardQueryImpl(
-				new QueryTerm(field, String.valueOf(value)));
+				new QueryTermImpl(field, String.valueOf(value)));
 		}
 		else {
 			query = new TermQueryImpl(
-				new QueryTerm(field, String.valueOf(value)));
+				new QueryTermImpl(field, String.valueOf(value)));
 		}
 
 		add(query , BooleanClauseOccur.SHOULD);

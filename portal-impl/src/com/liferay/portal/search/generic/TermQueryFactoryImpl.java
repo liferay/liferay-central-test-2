@@ -32,7 +32,7 @@ public class TermQueryFactoryImpl implements TermQueryFactory {
 	}
 
 	public TermQuery create(String field, String value) {
-		return new TermQueryImpl(new QueryTerm(field, value));
+		return new TermQueryImpl(new QueryTermImpl(field, value));
 	}
 
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.TermQuery;
 
 import org.apache.lucene.index.Term;
@@ -35,6 +36,11 @@ public class TermQueryImpl implements TermQuery {
 	public TermQueryImpl(String field, String value) {
 		_termQuery = new org.apache.lucene.search.TermQuery(
 			new Term(field, value));
+	}
+
+	public QueryTerm getQueryTerm() {
+		throw new UnsupportedOperationException(
+			"No supported for Lucene queries");
 	}
 
 	public org.apache.lucene.search.TermQuery getTermQuery() {
