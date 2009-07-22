@@ -585,9 +585,10 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
 		else if (key.equals("usersOrgs")) {
-			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
-
-			if (value instanceof Long[]) {
+			if (value instanceof Long) {
+				join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
+			}
+			else if (value instanceof Long[]) {
 				Long[] organizationIds = (Long[])value;
 
 				if (organizationIds.length > 0) {
