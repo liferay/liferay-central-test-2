@@ -480,6 +480,7 @@ Liferay.Service.registerClass(
 		addVocabulary: true,
 		deleteVocabulary: true,
 		getCompanyVocabularies: true,
+		getGroupsVocabularies: true,
 		getGroupVocabularies: true,
 		getVocabulary: true,
 		updateVocabulary: true

@@ -134,6 +134,13 @@ public class AssetVocabularyLocalServiceUtil {
 		return getService().getCompanyVocabularies(companyId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
+		long[] groupIds)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getGroupsVocabularies(groupIds);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId)
 		throws com.liferay.portal.PortalException,
