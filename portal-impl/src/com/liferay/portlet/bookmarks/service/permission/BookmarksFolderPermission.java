@@ -126,15 +126,15 @@ public class BookmarksFolderPermission {
 		else {
 			while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 				if (permissionChecker.hasOwnerPermission(
-					folder.getCompanyId(), BookmarksFolder.class.getName(),
-					folder.getFolderId(), folder.getUserId(), actionId)) {
+						folder.getCompanyId(), BookmarksFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId)) {
 
 					return true;
 				}
 
 				if (permissionChecker.hasPermission(
-					folder.getGroupId(), BookmarksFolder.class.getName(),
-					folder.getFolderId(), actionId)) {
+						folder.getGroupId(), BookmarksFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
 
 					return true;
 				}

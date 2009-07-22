@@ -102,7 +102,8 @@ public class ShoppingCategoryPermission {
 
 		if (actionId.equals(ActionKeys.VIEW)) {
 			while (categoryId !=
-					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+						ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+
 				category = ShoppingCategoryLocalServiceUtil.getCategory(
 					categoryId);
 
@@ -129,17 +130,20 @@ public class ShoppingCategoryPermission {
 		}
 		else {
 			while (categoryId !=
-					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+						ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+
 				if (permissionChecker.hasOwnerPermission(
-					category.getCompanyId(), ShoppingCategory.class.getName(),
-					category.getCategoryId(), category.getUserId(), actionId)) {
+						category.getCompanyId(),
+						ShoppingCategory.class.getName(),
+						category.getCategoryId(), category.getUserId(),
+						actionId)) {
 
 					return true;
 				}
 
 				if (permissionChecker.hasPermission(
-					category.getGroupId(), ShoppingCategory.class.getName(),
-					category.getCategoryId(), actionId)) {
+						category.getGroupId(), ShoppingCategory.class.getName(),
+						category.getCategoryId(), actionId)) {
 
 					return true;
 				}
