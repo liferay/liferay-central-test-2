@@ -73,6 +73,10 @@ public class ThemeDisplay implements Serializable {
 		return _company.getCompanyId();
 	}
 
+	public long getCompanyGroupId() {
+		return _companyGroupId;
+	}
+
 	public String getCompanyLogo() {
 		return _companyLogo;
 	}
@@ -266,10 +270,6 @@ public class ThemeDisplay implements Serializable {
 
 	public long getScopeGroupId() {
 		return _scopeGroupId;
-	}
-
-	public long getCompanyGroupId() {
-		return _companyGroupId;
 	}
 
 	public void setScopeGroupId(long scopeGroupId) {
@@ -1013,6 +1013,7 @@ public class ThemeDisplay implements Serializable {
 		}
 
 		_company = null;
+		_companyGroupId = 0;
 		_companyLogo = StringPool.BLANK;
 		_companyLogoHeight = 0;
 		_companyLogoWidth = 0;
@@ -1116,6 +1117,7 @@ public class ThemeDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(ThemeDisplay.class);
 
 	private Company _company;
+	private long _companyGroupId;
 	private String _companyLogo = StringPool.BLANK;
 	private int _companyLogoHeight;
 	private int _companyLogoWidth;
@@ -1138,7 +1140,6 @@ public class ThemeDisplay implements Serializable {
 	private LayoutTypePortlet _layoutTypePortlet;
 	private Group _scopeGroup;
 	private long _scopeGroupId;
-	private long _companyGroupId;
 	private boolean _signedIn;
 	private transient PermissionChecker _permissionChecker;
 	private Locale _locale;
