@@ -688,6 +688,26 @@ public class JSONServiceAction extends JSONAction {
 		if (pos != -1) {
 			name = name.substring("class ".length());
 		}
+		else {
+			if (name.equals("boolean[]")) {
+				name = "[Z";
+			}
+			else if (name.equals("double[]")) {
+				name = "[D";
+			}
+			else if (name.equals("float[]")) {
+				name = "[F";
+			}
+			else if (name.equals("int[]")) {
+				name = "[I";
+			}
+			else if (name.equals("long[]")) {
+				name = "[J";
+			}
+			else if (name.equals("short[]")) {
+				name = "[S";
+			}
+		}
 
 		return name;
 	}
