@@ -24,10 +24,10 @@ package com.liferay.portlet.imagegallery.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -69,9 +69,7 @@ public class IGImagePermission {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 			if (!IGFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW) &&
-				!IGFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.ACCESS)) {
+					permissionChecker, folder, ActionKeys.VIEW)) {
 
 				return false;
 			}
