@@ -101,6 +101,9 @@
 				getCompanyId: function() {
 					return "<%= themeDisplay.getCompanyId() %>";
 				},
+				getCompanyGroupId: function() {
+					return "<%= themeDisplay.getCompanyGroupId() %>";
+				},
 				getUserId: function() {
 					return "<%= themeDisplay.getUserId() %>";
 				},

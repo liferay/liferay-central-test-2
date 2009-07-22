@@ -64,6 +64,7 @@ public class ThemeDisplay implements Serializable {
 
 	public void setCompany(Company company) {
 		_company = company;
+		_companyGroupId = company.getGroup().getGroupId();
 
 		setAccount(company.getAccount());
 	}
@@ -265,6 +266,10 @@ public class ThemeDisplay implements Serializable {
 
 	public long getScopeGroupId() {
 		return _scopeGroupId;
+	}
+
+	public long getCompanyGroupId() {
+		return _companyGroupId;
 	}
 
 	public void setScopeGroupId(long scopeGroupId) {
@@ -1133,6 +1138,7 @@ public class ThemeDisplay implements Serializable {
 	private LayoutTypePortlet _layoutTypePortlet;
 	private Group _scopeGroup;
 	private long _scopeGroupId;
+	private long _companyGroupId;
 	private boolean _signedIn;
 	private transient PermissionChecker _permissionChecker;
 	private Locale _locale;
