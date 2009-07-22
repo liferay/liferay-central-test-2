@@ -162,6 +162,8 @@ public class MBMailingListLocalServiceImpl
 		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
 			mailingListId);
 
+		boolean oldActive = mailingList.isActive();
+
 		mailingList.setModifiedDate(new Date());
 		mailingList.setEmailAddress(emailAddress);
 		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
@@ -178,14 +180,13 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUseSSL(outUseSSL);
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
-
-		boolean previouslyActive = mailingList.getActive();
 		mailingList.setActive(active);
 
 		mbMailingListPersistence.update(mailingList, false);
 
 		// Scheduler
-		if (previouslyActive) {
+
+		if (oldActive) {
 			unscheduleMailingList(mailingList);
 		}
 
