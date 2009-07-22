@@ -25,9 +25,12 @@ package com.liferay.portlet.documentlibrary.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 public class DLFileEntryPermission {
 
@@ -44,7 +47,7 @@ public class DLFileEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, DLFileEntry fileEntry,
 			String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, fileEntry, actionId)) {
 			throw new PrincipalException();
@@ -63,8 +66,18 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, DLFileEntry fileEntry,
-		String actionId) {
+			PermissionChecker permissionChecker, DLFileEntry fileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+			fileEntry.getFolderId());
+
+		if (!DLFolderPermission.contains(
+				permissionChecker, folder, ActionKeys.VIEW)) {
+
+			return false;
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				fileEntry.getCompanyId(), DLFileEntry.class.getName(),

@@ -99,31 +99,58 @@ public class ShoppingCategoryPermission {
 
 		long categoryId = category.getCategoryId();
 
-		while (categoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			if (permissionChecker.hasOwnerPermission(
+		if (actionId.equals(ActionKeys.VIEW)) {
+			while (categoryId !=
+					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				category = ShoppingCategoryLocalServiceUtil.getCategory(
+					categoryId);
+
+				categoryId = category.getParentCategoryId();
+
+				if (!permissionChecker.hasOwnerPermission(
+						category.getCompanyId(),
+						ShoppingCategory.class.getName(),
+						category.getCategoryId(), category.getUserId(),
+						actionId) &&
+					!permissionChecker.hasPermission(
+						category.getGroupId(), ShoppingCategory.class.getName(),
+						category.getCategoryId(), actionId)) {
+
+					return false;
+				}
+			}
+
+			return true;
+		}
+		else {
+			while (categoryId !=
+					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				if (permissionChecker.hasOwnerPermission(
 					category.getCompanyId(), ShoppingCategory.class.getName(),
 					category.getCategoryId(), category.getUserId(), actionId)) {
 
-				return true;
-			}
+					return true;
+				}
 
-			if (permissionChecker.hasPermission(
+				if (permissionChecker.hasPermission(
 					category.getGroupId(), ShoppingCategory.class.getName(),
 					category.getCategoryId(), actionId)) {
 
-				return true;
+					return true;
+				}
+
+				if (actionId.equals(ActionKeys.VIEW)) {
+					break;
+				}
+
+				category = ShoppingCategoryLocalServiceUtil.getCategory(
+					categoryId);
+
+				categoryId = category.getParentCategoryId();
 			}
 
-			if (actionId.equals(ActionKeys.VIEW)) {
-				break;
-			}
-
-			category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
-
-			categoryId = category.getParentCategoryId();
+			return false;
 		}
-
-		return false;
 	}
 
 }

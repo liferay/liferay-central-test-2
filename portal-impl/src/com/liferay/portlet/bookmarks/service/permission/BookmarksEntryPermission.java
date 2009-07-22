@@ -25,8 +25,10 @@ package com.liferay.portlet.bookmarks.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 
 public class BookmarksEntryPermission {
@@ -44,7 +46,7 @@ public class BookmarksEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, BookmarksEntry entry,
 			String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, entry, actionId)) {
 			throw new PrincipalException();
@@ -62,8 +64,17 @@ public class BookmarksEntryPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, BookmarksEntry entry,
-		String actionId) {
+			PermissionChecker permissionChecker, BookmarksEntry entry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		BookmarksFolder folder = entry.getFolder();
+
+		if (!BookmarksFolderPermission.contains(
+				permissionChecker, folder, ActionKeys.VIEW)) {
+
+			return false;
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				entry.getCompanyId(), BookmarksEntry.class.getName(),

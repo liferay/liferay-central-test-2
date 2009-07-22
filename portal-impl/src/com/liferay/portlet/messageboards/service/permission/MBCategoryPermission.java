@@ -105,31 +105,54 @@ public class MBCategoryPermission {
 
 		long categoryId = category.getCategoryId();
 
-		while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
-			if (permissionChecker.hasOwnerPermission(
-					category.getCompanyId(), MBCategory.class.getName(),
-					category.getCategoryId(), category.getUserId(), actionId)) {
+		if (actionId.equals(ActionKeys.VIEW)) {
+			while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
-				return true;
+				categoryId = category.getParentCategoryId();
+
+				if (!permissionChecker.hasOwnerPermission(
+						category.getCompanyId(), MBCategory.class.getName(),
+						category.getCategoryId(), category.getUserId(),
+						actionId) &&
+					!permissionChecker.hasPermission(
+						category.getGroupId(), MBCategory.class.getName(),
+						category.getCategoryId(), actionId)) {
+
+					return false;
+				}
 			}
 
-			if (permissionChecker.hasPermission(
-					category.getGroupId(), MBCategory.class.getName(),
-					category.getCategoryId(), actionId)) {
-
-				return true;
-			}
-
-			if (actionId.equals(ActionKeys.VIEW)) {
-				break;
-			}
-
-			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-
-			categoryId = category.getParentCategoryId();
+			return true;
 		}
+		else {
+			while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				if (permissionChecker.hasOwnerPermission(
+						category.getCompanyId(), MBCategory.class.getName(),
+						category.getCategoryId(), category.getUserId(),
+						actionId)) {
 
-		return false;
+					return true;
+				}
+
+				if (permissionChecker.hasPermission(
+						category.getGroupId(), MBCategory.class.getName(),
+						category.getCategoryId(), actionId)) {
+
+					return true;
+				}
+
+				if (actionId.equals(ActionKeys.VIEW)) {
+					break;
+				}
+
+				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+
+				categoryId = category.getParentCategoryId();
+			}
+
+			return false;
+		}
 	}
 
 }

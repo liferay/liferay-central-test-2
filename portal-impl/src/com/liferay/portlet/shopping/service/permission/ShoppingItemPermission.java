@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -44,7 +45,7 @@ public class ShoppingItemPermission {
 	public static void check(
 			PermissionChecker permissionChecker, ShoppingItem item,
 			String actionId)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, item, actionId)) {
 			throw new PrincipalException();
@@ -61,8 +62,17 @@ public class ShoppingItemPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, ShoppingItem item,
-		String actionId) {
+			PermissionChecker permissionChecker, ShoppingItem item,
+			String actionId)
+		throws PortalException, SystemException {
+
+		ShoppingCategory category = item.getCategory();
+
+		if (!ShoppingCategoryPermission.contains(
+				permissionChecker, category, ActionKeys.VIEW)) {
+
+			return false;
+		}
 
 		if (permissionChecker.hasOwnerPermission(
 				item.getCompanyId(), ShoppingItem.class.getName(),
@@ -70,8 +80,6 @@ public class ShoppingItemPermission {
 
 			return true;
 		}
-
-		ShoppingCategory category = item.getCategory();
 
 		return permissionChecker.hasPermission(
 			category.getGroupId(), ShoppingItem.class.getName(),

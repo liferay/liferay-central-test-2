@@ -95,31 +95,48 @@ public class DLFolderPermission {
 
 		long folderId = folder.getFolderId();
 
-		while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			if (permissionChecker.hasOwnerPermission(
-					folder.getCompanyId(), DLFolder.class.getName(),
-					folder.getFolderId(), folder.getUserId(), actionId)) {
+		if (actionId.equals(ActionKeys.VIEW)) {
+			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-				return true;
+				folderId = folder.getParentFolderId();
+
+				if (!permissionChecker.hasOwnerPermission(
+						folder.getCompanyId(), DLFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId) &&
+					!permissionChecker.hasPermission(
+						folder.getGroupId(), DLFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
+
+					return false;
+				}
 			}
 
-			if (permissionChecker.hasPermission(
-					folder.getGroupId(), DLFolder.class.getName(),
-					folder.getFolderId(), actionId)) {
-
-				return true;
-			}
-
-			if (actionId.equals(ActionKeys.VIEW)) {
-				break;
-			}
-
-			folder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-			folderId = folder.getParentFolderId();
+			return true;
 		}
+		else {
+			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-		return false;
+				folderId = folder.getParentFolderId();
+
+				if (permissionChecker.hasOwnerPermission(
+						folder.getCompanyId(), DLFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId)) {
+
+					return true;
+				}
+
+				if (permissionChecker.hasPermission(
+						folder.getGroupId(), DLFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
+
+					return true;
+				}
+			}
+
+			return false;
+		}
 	}
 
 }

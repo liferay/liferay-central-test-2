@@ -25,9 +25,12 @@ package com.liferay.portlet.messageboards.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 public class MBMessagePermission {
@@ -65,12 +68,21 @@ public class MBMessagePermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, MBMessage message,
 			String actionId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long groupId = message.getGroupId();
 
 		if (MBBanLocalServiceUtil.hasBan(
 				groupId, permissionChecker.getUserId())) {
+
+			return false;
+		}
+
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			message.getCategoryId());
+
+		if (!MBCategoryPermission.contains(
+				permissionChecker, category, ActionKeys.VIEW)) {
 
 			return false;
 		}

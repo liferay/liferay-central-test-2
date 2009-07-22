@@ -95,31 +95,52 @@ public class IGFolderPermission {
 
 		long folderId = folder.getFolderId();
 
-		while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			if (permissionChecker.hasOwnerPermission(
-					folder.getCompanyId(), IGFolder.class.getName(),
-					folder.getFolderId(), folder.getUserId(), actionId)) {
+		if (actionId.equals(ActionKeys.VIEW)) {
+			while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				folder = IGFolderLocalServiceUtil.getFolder(folderId);
 
-				return true;
+				folderId = folder.getParentFolderId();
+
+				if (!permissionChecker.hasOwnerPermission(
+						folder.getCompanyId(), IGFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId) &&
+					!permissionChecker.hasPermission(
+						folder.getGroupId(), IGFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
+
+					return false;
+				}
 			}
 
-			if (permissionChecker.hasPermission(
-					folder.getGroupId(), IGFolder.class.getName(),
-					folder.getFolderId(), actionId)) {
-
-				return true;
-			}
-
-			if (actionId.equals(ActionKeys.VIEW)) {
-				break;
-			}
-
-			folder = IGFolderLocalServiceUtil.getFolder(folderId);
-
-			folderId = folder.getParentFolderId();
+			return true;
 		}
+		else {
+			while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				if (permissionChecker.hasOwnerPermission(
+						folder.getCompanyId(), IGFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId)) {
 
-		return false;
+					return true;
+				}
+
+				if (permissionChecker.hasPermission(
+						folder.getGroupId(), IGFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
+
+					return true;
+				}
+
+				if (actionId.equals(ActionKeys.VIEW)) {
+					break;
+				}
+
+				folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+				folderId = folder.getParentFolderId();
+			}
+
+			return false;
+		}
 	}
 
 }

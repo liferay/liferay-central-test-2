@@ -99,31 +99,52 @@ public class BookmarksFolderPermission {
 
 		long folderId = folder.getFolderId();
 
-		while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			if (permissionChecker.hasOwnerPermission(
+		if (actionId.equals(ActionKeys.VIEW)) {
+			while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+
+				folderId = folder.getParentFolderId();
+
+				if (!permissionChecker.hasOwnerPermission(
+						folder.getCompanyId(), BookmarksFolder.class.getName(),
+						folder.getFolderId(), folder.getUserId(), actionId) &&
+					!permissionChecker.hasPermission(
+						folder.getGroupId(), BookmarksFolder.class.getName(),
+						folder.getFolderId(), actionId)) {
+
+					return false;
+				}
+			}
+
+			return true;
+		}
+		else {
+			while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				if (permissionChecker.hasOwnerPermission(
 					folder.getCompanyId(), BookmarksFolder.class.getName(),
 					folder.getFolderId(), folder.getUserId(), actionId)) {
 
-				return true;
-			}
+					return true;
+				}
 
-			if (permissionChecker.hasPermission(
+				if (permissionChecker.hasPermission(
 					folder.getGroupId(), BookmarksFolder.class.getName(),
 					folder.getFolderId(), actionId)) {
 
-				return true;
+					return true;
+				}
+
+				if (actionId.equals(ActionKeys.VIEW)) {
+					break;
+				}
+
+				folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+
+				folderId = folder.getParentFolderId();
 			}
 
-			if (actionId.equals(ActionKeys.VIEW)) {
-				break;
-			}
-
-			folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
-
-			folderId = folder.getParentFolderId();
+			return false;
 		}
-
-		return false;
 	}
 
 }
