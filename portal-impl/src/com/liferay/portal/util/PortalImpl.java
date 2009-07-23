@@ -3323,14 +3323,9 @@ public class PortalImpl implements Portal {
 			Portlet portlet = itr.next();
 
 			try {
-				long plid = scopeGroup.getDefaultPublicPlid();
-
-				if (plid == LayoutConstants.DEFAULT_PLID) {
-					plid = scopeGroup.getDefaultPrivatePlid();
-				}
-
 				if (PortletPermissionUtil.contains(
-						permissionChecker, plid, portlet.getPortletId(),
+						permissionChecker, LayoutConstants.DEFAULT_PLID,
+						portlet.getPortletId(),
 						ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
 
 					continue;
