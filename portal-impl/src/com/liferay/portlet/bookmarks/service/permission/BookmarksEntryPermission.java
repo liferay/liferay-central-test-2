@@ -24,7 +24,6 @@ package com.liferay.portlet.bookmarks.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -74,9 +73,9 @@ public class BookmarksEntryPermission {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 			if (!BookmarksFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW) &&
+					permissionChecker, folder, ActionKeys.ACCESS) &&
 				!BookmarksFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.ACCESS)) {
+					permissionChecker, folder, ActionKeys.VIEW)) {
 
 				return false;
 			}
