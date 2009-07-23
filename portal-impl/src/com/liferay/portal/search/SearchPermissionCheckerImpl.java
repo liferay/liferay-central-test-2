@@ -44,6 +44,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -51,6 +52,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -196,9 +198,20 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		roles = ListUtil.copy(roles);
 
-		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-		roles.addAll(
-			RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+		if (groupId == 0) {
+			List<UserGroupRole> userGroupRoles =
+				UserGroupRoleLocalServiceUtil.getUserGroupRoles(userId);
+
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				roles.add(userGroupRole.getRole());
+			}
+		}
+		else {
+			roles.addAll(
+				RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
+			roles.addAll(
+				RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+		}
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
@@ -266,9 +279,20 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		roles = ListUtil.copy(roles);
 
-		roles.addAll(RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-		roles.addAll(
-			RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+		if (groupId == 0) {
+			List<UserGroupRole> userGroupRoles =
+				UserGroupRoleLocalServiceUtil.getUserGroupRoles(userId);
+
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				roles.add(userGroupRole.getRole());
+			}
+		}
+		else {
+			roles.addAll(
+				RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
+			roles.addAll(
+				RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+		}
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
