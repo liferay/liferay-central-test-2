@@ -682,12 +682,19 @@ else if (portletDisplay.isStateMax()) {
 	//	urlBack = urlMax.toString();
 	//}
 
-	urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
-	urlBack = HtmlUtil.stripHtml(urlBack);
-
+	if (portletDisplay.getId().startsWith("WSRP_")) {
+		urlBack = PortalUtil.getLayoutURL(themeDisplay);	
+	}
+	else {
+		urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
+		urlBack = HtmlUtil.stripHtml(urlBack);
+	}
+	
 	if (Validator.isNull(urlBack)) {
 		urlBack = urlMax.toString();
 	}
+	
+	
 }
 
 if (urlBack != null) {
