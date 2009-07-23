@@ -69,7 +69,9 @@ public class IGImagePermission {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 			if (!IGFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW)) {
+					permissionChecker, folder, ActionKeys.VIEW) &&
+				!IGFolderPermission.contains(
+					permissionChecker, folder, ActionKeys.ACCESS)) {
 
 				return false;
 			}
