@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/search/init.jsp" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
+long groupId = ParamUtil.getLong(request, namespace + "groupId");
 
 Group group = layout.getGroup();
 
