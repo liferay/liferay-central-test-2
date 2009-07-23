@@ -422,7 +422,7 @@ public class JavadocBuilder {
 			_addFieldElement(rootElement, javaField);
 		}
 
-		return document.formattedString();
+		return StringUtil.replace(document.formattedString(), "Ã©", "é");
 	}
 
 	private String _getJavaFieldComment(
