@@ -92,6 +92,7 @@ if (articleDisplay != null) {
 								<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 							</div>
 						</c:if>
+
 						<c:if test="<%= enableConversions %>">
 
 							<%
@@ -127,6 +128,7 @@ if (articleDisplay != null) {
 								</liferay-ui:icon-list>
 							</div>
 						</c:if>
+
 						<c:if test="<%= showAvailableLocales %>">
 
 							<%
