@@ -37,7 +37,7 @@ Liferay.Service = {
 
 		var type = "POST";
 
-		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe) {
+		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
 			type = "GET";
 		}
 
