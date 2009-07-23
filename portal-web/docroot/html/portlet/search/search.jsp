@@ -36,6 +36,8 @@ else {
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
+Group group = layout.getGroup();
+
 String keywords = ParamUtil.getString(request, "keywords");
 
 String format = ParamUtil.getString(request, "format");
@@ -57,9 +59,16 @@ String format = ParamUtil.getString(request, "format");
 <input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 <input name="<portlet:namespace />format" type="hidden" value="<%= HtmlUtil.escapeAttribute(format) %>" />
 
-<input type="submit" value="<liferay-ui:message key="search" />" />
+<select name="<portlet:namespace />groupId">
+	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
+	<option value="<%= group.getGroupId() %>" <%= (groupId != 0) ? "selected" : "" %>><liferay-ui:message key='<%= "this-" + (group.isOrganization() ? "organization" : "community") %>' /></option>
+</select>
 
-<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
+
+<div class="add-search-provider">
+	<input type="button" value="<liferay-ui:message key="add-liferay-as-a-search-provider" />" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");' />
+</div>
 
 <%
 List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
