@@ -216,6 +216,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=工作流任务
 ## Action names
 ##
 
+action.ACCESS=通入 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=访问在控制板
 action.ADD_ARTICLE=添加内容
 action.ADD_ATTACHMENT=添加附件

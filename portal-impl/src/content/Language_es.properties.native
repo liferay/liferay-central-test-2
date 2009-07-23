@@ -216,6 +216,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Tarea del Workflo
 ## Action names
 ##
 
+action.ACCESS=Acceso (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Tenga acceso en el panel de control
 action.ADD_ARTICLE=Añadir contenido
 action.ADD_ATTACHMENT=Adjuntar archivo

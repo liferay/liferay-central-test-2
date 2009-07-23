@@ -216,6 +216,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=Στόχος ρο
 ## Action names
 ##
 
+action.ACCESS=Πρόσβαση (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=Πρόσβαση στην επιτροπή ελέγχου
 action.ADD_ARTICLE=Προσθέστε το περιεχόμενο
 action.ADD_ATTACHMENT=Προσθέστε τη σύνδεση

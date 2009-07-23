@@ -216,6 +216,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=작업 흐름 업
 ## Action names
 ##
 
+action.ACCESS=접근 (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=제어반에 있는 접근
 action.ADD_ARTICLE=내용을 추가하십시오
 action.ADD_ATTACHMENT=부착을 추가하십시오

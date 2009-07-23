@@ -216,6 +216,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフロ�
 ## Action names
 ##
 
+action.ACCESS=アクセス (Automatic Translation)
 action.ACCESS_IN_CONTROL_PANEL=コントロールパネルのアクセス
 action.ADD_ARTICLE=コンテンツの追加
 action.ADD_ATTACHMENT=添付を追加します
