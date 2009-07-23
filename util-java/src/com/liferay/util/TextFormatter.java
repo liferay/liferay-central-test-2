@@ -90,7 +90,7 @@ public class TextFormatter {
 
 	// format_id --> format-id
 
-	public static final int O = 13;
+	public static final int O = 14;
 
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
