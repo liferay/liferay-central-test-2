@@ -4,7 +4,7 @@
 	<name>IndexerRegistryUtil</name>
 	<type>com.liferay.portal.kernel.search.IndexerRegistryUtil</type>
 	<comment><![CDATA[]]></comment>
-	<author>Raymond Augé</author>
+	<author>Raymond AugÃ©</author>
 	<method>
 		<name>getIndexer</name>
 		<comment><![CDATA[]]></comment>

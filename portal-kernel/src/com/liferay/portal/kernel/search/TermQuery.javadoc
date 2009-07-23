@@ -5,4 +5,8 @@
 	<type>com.liferay.portal.kernel.search.TermQuery</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
+	<method>
+		<name>getQueryTerm</name>
+		<comment><![CDATA[]]></comment>
+	</method>
 </javadoc>

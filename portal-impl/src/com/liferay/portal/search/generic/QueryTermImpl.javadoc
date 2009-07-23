@@ -6,7 +6,7 @@
 	<comment><![CDATA[]]></comment>
 	<author>Michael C. Han</author>
 	<method>
-		<name>QueryTerm</name>
+		<name>QueryTermImpl</name>
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>field</name>

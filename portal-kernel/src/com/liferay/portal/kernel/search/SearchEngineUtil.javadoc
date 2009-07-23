@@ -5,7 +5,7 @@
 	<type>com.liferay.portal.kernel.search.SearchEngineUtil</type>
 	<comment><![CDATA[]]></comment>
 	<author>Bruno Farache</author>
-	<author>Raymond Augé</author>
+	<author>Raymond AugÃ©</author>
 	<method>
 		<name>addDocument</name>
 		<comment><![CDATA[]]></comment>

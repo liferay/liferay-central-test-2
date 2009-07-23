@@ -5,7 +5,7 @@
 	<type>com.liferay.portal.kernel.search.Indexer</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<author>Raymond Augé</author>
+	<author>Raymond AugÃ©</author>
 	<method>
 		<name>getClassNames</name>
 		<comment><![CDATA[]]></comment>

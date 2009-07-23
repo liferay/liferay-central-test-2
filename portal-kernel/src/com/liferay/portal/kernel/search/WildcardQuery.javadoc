@@ -5,4 +5,8 @@
 	<type>com.liferay.portal.kernel.search.WildcardQuery</type>
 	<comment><![CDATA[]]></comment>
 	<author>Michael C. Han</author>
+	<method>
+		<name>getQueryTerm</name>
+		<comment><![CDATA[]]></comment>
+	</method>
 </javadoc>

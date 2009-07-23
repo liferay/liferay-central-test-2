@@ -14,51 +14,25 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
-			<name>occur</name>
+			<name>booleanClauseOccur</name>
 			<type>com.liferay.portal.kernel.search.BooleanClauseOccur</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>prohibited</name>
-			<type>boolean</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>required</name>
-			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
 	</method>
 	<method>
-		<name>getOccur</name>
+		<name>getBooleanClauseOccur</name>
 		<comment><![CDATA[]]></comment>
 	</method>
 	<method>
 		<name>getQuery</name>
 		<comment><![CDATA[]]></comment>
 	</method>
-	<method>
-		<name>isProhibited</name>
-		<comment><![CDATA[]]></comment>
-	</method>
-	<method>
-		<name>isRequired</name>
-		<comment><![CDATA[]]></comment>
-	</method>
 	<field>
-		<name>_occur</name>
-		<comment><![CDATA[]]></comment>
-	</field>
-	<field>
-		<name>_prohibited</name>
+		<name>_booleanClauseOccur</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
 		<name>_query</name>
-		<comment><![CDATA[]]></comment>
-	</field>
-	<field>
-		<name>_required</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 </javadoc>

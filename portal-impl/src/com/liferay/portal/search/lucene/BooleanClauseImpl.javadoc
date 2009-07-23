@@ -18,6 +18,14 @@
 		<name>getBooleanClause</name>
 		<comment><![CDATA[]]></comment>
 	</method>
+	<method>
+		<name>getBooleanClauseOccur</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
+		<name>getQuery</name>
+		<comment><![CDATA[]]></comment>
+	</method>
 	<field>
 		<name>_booleanClause</name>
 		<comment><![CDATA[]]></comment>
