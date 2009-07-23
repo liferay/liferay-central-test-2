@@ -575,19 +575,23 @@ public class JavadocBuilder {
 				"**\\classes\\**", "**\\portal-client\\**", "**\\portal-web\\**"
 			});
 
-		String[] includes = null;
+		List<String> includes = new ArrayList<String>();
 
 		if (Validator.isNotNull(limit) && !limit.startsWith("$")) {
-			includes = new String[] {
-				"**\\" + StringUtil.replace(limit, ".", "\\") + "\\**\\*.java",
-				"**\\" + limit + ".java"
-			};
+			String[] limitArray = StringUtil.split(limit, "/");
+
+			for (String curLimit : limitArray) {
+				includes.add(
+					"**\\" + StringUtil.replace(curLimit, ".", "\\") +
+						"\\**\\*.java");
+				includes.add("**\\" + curLimit + ".java");
+			}
 		}
 		else {
-			includes = new String[] {"**\\*.java"};
+			includes.add("**\\*.java");
 		}
 
-		ds.setIncludes(includes);
+		ds.setIncludes(includes.toArray(new String[includes.size()]));
 
 		ds.scan();
 
