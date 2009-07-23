@@ -763,6 +763,12 @@ public class PropsValues {
 	public static final long LDAP_IMPORT_INTERVAL = GetterUtil.getLong(
 		PropsUtil.get(PropsKeys.LDAP_IMPORT_INTERVAL));
 
+	public static final int LDAP_PAGE_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LDAP_PAGE_SIZE));
+
+	public static final int LDAP_RANGE_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LDAP_RANGE_SIZE));
+
 	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));

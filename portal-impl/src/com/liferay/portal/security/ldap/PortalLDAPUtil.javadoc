@@ -9,6 +9,7 @@
 	<author>Jerry Niu</author>
 	<author>Scott Lee</author>
 	<author>Hervé Ménage</author>
+	<author>Samuel Kong</author>
 	<method>
 		<name>exportToLDAP</name>
 		<comment><![CDATA[]]></comment>

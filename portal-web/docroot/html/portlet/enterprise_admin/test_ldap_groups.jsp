@@ -53,7 +53,7 @@ if (Validator.isNull(ParamUtil.getString(request, "groupMappingGroupName")) ||
 
 String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
-NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, groupFilter);
+List<SearchResult> results = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, groupFilter);
 
 String groupMappingsParam =
 	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
@@ -78,9 +78,7 @@ boolean showMissingAttributeMessage = false;
 
 int counter = 0;
 
-while (enu.hasMoreElements()) {
-	SearchResult result = (SearchResult)enu.nextElement();
-
+for (SearchResult result : results) {
 	Attributes attrs = result.getAttributes();
 
 	String name = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("groupName")).toLowerCase();
@@ -89,6 +87,22 @@ while (enu.hasMoreElements()) {
 
 	if (Validator.isNull(name)) {
 		showMissingAttributeMessage = true;
+	}
+
+	if (attribute != null) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("(&");
+		sb.append(groupFilter);
+		sb.append("(");
+		sb.append(groupMappings.getProperty("groupName"));
+		sb.append("=");
+		sb.append(name);
+		sb.append("))");
+
+		String filter = sb.toString();
+
+		attribute = PortalLDAPUtil.getMultiValuedAttribute(themeDisplay.getCompanyId(), ldapContext, baseDN, filter, attribute);
 	}
 
 	if (counter == 0) {

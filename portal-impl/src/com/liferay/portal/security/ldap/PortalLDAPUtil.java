@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -66,13 +67,17 @@ import javax.naming.Binding;
 import javax.naming.Context;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingEnumeration;
+import javax.naming.OperationNotSupportedException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.ModificationItem;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
+import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
+import javax.naming.ldap.PagedResultsControl;
+import javax.naming.ldap.PagedResultsResponseControl;
 
 public class PortalLDAPUtil {
 
@@ -367,7 +372,7 @@ public class PortalLDAPUtil {
 		return groupMappings;
 	}
 
-	public static NamingEnumeration<SearchResult> getGroups(
+	public static List<SearchResult> getGroups(
 			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
@@ -379,15 +384,66 @@ public class PortalLDAPUtil {
 		return getGroups(companyId, ctx, maxResults, baseDN, groupFilter);
 	}
 
-	public static NamingEnumeration<SearchResult> getGroups(
+	public static List<SearchResult> getGroups(
 			long companyId, LdapContext ctx, int maxResults, String baseDN,
 			String groupFilter)
 		throws Exception {
 
-		SearchControls cons = new SearchControls(
-			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
+		return _searchLDAP(
+			companyId, ctx, maxResults, baseDN, groupFilter, null);
+	}
 
-		return ctx.search(baseDN, groupFilter, cons);
+	public static Attribute getMultiValuedAttribute(
+			long companyId, LdapContext ctx, String baseDN, String filter,
+			Attribute attribute)
+		throws Exception {
+
+		if (attribute.size() > 0) {
+			return attribute;
+		}
+
+		String[] attributeIds = {
+			_getNextRange(attribute.getID())
+		};
+
+		while (true) {
+			List<SearchResult> results = _searchLDAP(
+				companyId, ctx, 0, baseDN, filter, attributeIds);
+
+			if (results.size() != 1) {
+				break;
+			}
+
+			SearchResult result = results.get(0);
+
+			Attributes attributes = result.getAttributes();
+
+			if (attributes.size() != 1) {
+				break;
+			}
+
+			NamingEnumeration<? extends Attribute> enu = attributes.getAll();
+
+			if (!enu.hasMoreElements()) {
+				break;
+			}
+
+			Attribute attr = enu.nextElement();
+
+			for (int i = 0; i < attr.size(); i++) {
+				attribute.add(attr.get(i));
+			}
+
+			if (StringUtil.endsWith(attr.getID(), StringPool.STAR) ||
+				(attr.size() < PropsValues.LDAP_RANGE_SIZE)) {
+
+				break;
+			}
+
+			attributeIds[0] = _getNextRange(attributeIds[0]);
+		}
+
+		return attribute;
 	}
 
 	public static String getNameInNamespace(long companyId, Binding binding)
@@ -492,7 +548,7 @@ public class PortalLDAPUtil {
 		return userMappings;
 	}
 
-	public static NamingEnumeration<SearchResult> getUsers(
+	public static List<SearchResult> getUsers(
 			long companyId, LdapContext ctx, int maxResults)
 		throws Exception {
 
@@ -504,15 +560,13 @@ public class PortalLDAPUtil {
 		return getUsers(companyId, ctx, maxResults, baseDN, userFilter);
 	}
 
-	public static NamingEnumeration<SearchResult> getUsers(
+	public static List<SearchResult> getUsers(
 			long companyId, LdapContext ctx, int maxResults, String baseDN,
 			String userFilter)
 		throws Exception {
 
-		SearchControls cons = new SearchControls(
-			SearchControls.SUBTREE_SCOPE, maxResults, 0, null, false, false);
-
-		return ctx.search(baseDN, userFilter, cons);
+		return _searchLDAP(
+			companyId, ctx, maxResults, baseDN, userFilter, null);
 	}
 
 	public static String getUsersDN(long companyId) throws Exception {
@@ -554,40 +608,30 @@ public class PortalLDAPUtil {
 				companyId, PropsKeys.LDAP_IMPORT_METHOD);
 
 			if (importMethod.equals(IMPORT_BY_USER)) {
-				NamingEnumeration<SearchResult> enu = getUsers(
-					companyId, ctx, 0);
+				List<SearchResult> results = getUsers(companyId, ctx, 0);
 
 				// Loop through all LDAP users
 
-				while (enu.hasMoreElements()) {
-					SearchResult result = enu.nextElement();
-
+				for (SearchResult result : results) {
 					Attributes attributes = getUserAttributes(
 						companyId, ctx, getNameInNamespace(companyId, result));
 
 					importLDAPUser(
 						companyId, ctx, attributes, StringPool.BLANK, true);
 				}
-
-				enu.close();
 			}
 			else if (importMethod.equals(IMPORT_BY_GROUP)) {
-				NamingEnumeration<SearchResult> enu = getGroups(
-					companyId, ctx, 0);
+				List<SearchResult> results = getGroups(companyId, ctx, 0);
 
 				// Loop through all LDAP groups
 
-				while (enu.hasMoreElements()) {
-					SearchResult result = enu.nextElement();
-
+				for (SearchResult result : results) {
 					Attributes attributes = getGroupAttributes(
 						companyId, ctx, getNameInNamespace(companyId, result),
 						true);
 
 					importLDAPGroup(companyId, ctx, attributes, true);
 				}
-
-				enu.close();
 			}
 		}
 		catch (Exception e) {
@@ -660,6 +704,25 @@ public class PortalLDAPUtil {
 				groupMappings.getProperty("user"));
 
 			if (attribute != null) {
+				String baseDN = PrefsPropsUtil.getString(
+					companyId, PropsKeys.LDAP_BASE_DN);
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("(&");
+				sb.append(
+					PrefsPropsUtil.getString(
+						companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER));
+				sb.append("(");
+				sb.append(groupMappings.getProperty("groupName"));
+				sb.append("=");
+				sb.append(LDAPUtil.getAttributeValue(
+					attributes, groupMappings.getProperty("groupName")));
+				sb.append("))");
+
+				attribute = getMultiValuedAttribute(
+					companyId, ctx, baseDN, sb.toString(), attribute);
+
 				_importUsersAndMembershipFromLDAPGroup(
 					companyId, ctx, userGroup.getUserGroupId(), attribute);
 			}
@@ -1081,6 +1144,58 @@ public class PortalLDAPUtil {
 		return attributes;
 	}
 
+	private static byte[] _getCookie(Control[] controls) {
+		if (controls == null) {
+			return null;
+		}
+
+		for (Control control : controls) {
+			if (control instanceof PagedResultsResponseControl) {
+				PagedResultsResponseControl pagedResultsResponseControl =
+					(PagedResultsResponseControl)control;
+
+				return pagedResultsResponseControl.getCookie();
+			}
+		}
+
+		return null;
+	}
+
+	private static String _getNextRange(String attributeId) {
+		String originalAttributeId = null;
+		int start = 0;
+		int end = 0;
+
+		int x = attributeId.indexOf(StringPool.SEMICOLON);
+
+		if (x < 0) {
+			originalAttributeId = attributeId;
+			end = PropsValues.LDAP_RANGE_SIZE - 1;
+		}
+		else {
+			int y = attributeId.indexOf(StringPool.EQUAL, x);
+			int z = attributeId.indexOf(StringPool.DASH, y);
+
+			originalAttributeId = attributeId.substring(0, x);
+			start = GetterUtil.getInteger(attributeId.substring(y + 1, z));
+			end = GetterUtil.getInteger(attributeId.substring(z + 1));
+
+			start += PropsValues.LDAP_RANGE_SIZE;
+			end += PropsValues.LDAP_RANGE_SIZE;
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(originalAttributeId);
+		sb.append(StringPool.SEMICOLON);
+		sb.append("range=");
+		sb.append(start);
+		sb.append(StringPool.DASH);
+		sb.append(end);
+
+		return sb.toString();
+	}
+
 	private static void _importGroupsAndMembershipFromLDAPUser(
 			long companyId, LdapContext ctx, long userId, Attribute attr)
 		throws Exception {
@@ -1171,6 +1286,65 @@ public class PortalLDAPUtil {
 					userGroupId, new long[] {user.getUserId()});
 			}
 		}
+	}
+
+	private static List<SearchResult> _searchLDAP(
+			long companyId, LdapContext ctx, int maxResults, String baseDN,
+			String filter, String[] attributeIds)
+		throws Exception {
+
+		List<SearchResult> results = new ArrayList<SearchResult>();
+
+		SearchControls cons = new SearchControls(
+			SearchControls.SUBTREE_SCOPE, maxResults, 0, attributeIds, false,
+			false);
+
+		try {
+			byte[] cookie = new byte[0];
+
+			while (cookie != null) {
+				if (cookie.length == 0) {
+					ctx.setRequestControls(
+						new Control[] {
+							new PagedResultsControl(
+								PropsValues.LDAP_PAGE_SIZE, Control.CRITICAL)
+						});
+				}
+				else {
+					ctx.setRequestControls(
+						new Control[] {
+							new PagedResultsControl(
+								PropsValues.LDAP_PAGE_SIZE, cookie,
+								Control.CRITICAL)
+						});
+				}
+
+				NamingEnumeration<SearchResult> enu = ctx.search(
+					baseDN, filter, cons);
+
+				while (enu.hasMoreElements()) {
+					results.add(enu.nextElement());
+				}
+
+				enu.close();
+
+				cookie = _getCookie(ctx.getResponseControls());
+			}
+		}
+		catch (OperationNotSupportedException onse) {
+			ctx.setRequestControls(new Control[] {});
+
+			NamingEnumeration<SearchResult> enu = ctx.search(
+				baseDN, filter, cons);
+
+			while (enu.hasMoreElements()) {
+				results.add(enu.nextElement());
+			}
+
+			enu.close();
+		}
+
+		return results;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortalLDAPUtil.class);

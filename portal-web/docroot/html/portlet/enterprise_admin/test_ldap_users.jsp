@@ -56,7 +56,7 @@ if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
 
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
-NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, userFilter);
+List<SearchResult> results = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, userFilter);
 
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
@@ -86,9 +86,7 @@ boolean showMissingAttributeMessage = false;
 
 int counter = 0;
 
-while (enu.hasMoreElements()) {
-	SearchResult result = (SearchResult)enu.nextElement();
-
+for (SearchResult result : results) {
 	Attributes attrs = result.getAttributes();
 
 	String screenName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("screenName")).toLowerCase();
