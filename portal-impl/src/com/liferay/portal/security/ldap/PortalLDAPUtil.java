@@ -393,7 +393,7 @@ public class PortalLDAPUtil {
 			companyId, ctx, maxResults, baseDN, groupFilter, null);
 	}
 
-	public static Attribute getMultiValuedAttribute(
+	public static Attribute getMultivaluedAttribute(
 			long companyId, LdapContext ctx, String baseDN, String filter,
 			Attribute attribute)
 		throws Exception {
@@ -402,9 +402,7 @@ public class PortalLDAPUtil {
 			return attribute;
 		}
 
-		String[] attributeIds = {
-			_getNextRange(attribute.getID())
-		};
+		String[] attributeIds = {_getNextRange(attribute.getID())};
 
 		while (true) {
 			List<SearchResult> results = _searchLDAP(
@@ -428,14 +426,14 @@ public class PortalLDAPUtil {
 				break;
 			}
 
-			Attribute attr = enu.nextElement();
+			Attribute curAttribute = enu.nextElement();
 
-			for (int i = 0; i < attr.size(); i++) {
-				attribute.add(attr.get(i));
+			for (int i = 0; i < curAttribute.size(); i++) {
+				attribute.add(curAttribute.get(i));
 			}
 
-			if (StringUtil.endsWith(attr.getID(), StringPool.STAR) ||
-				(attr.size() < PropsValues.LDAP_RANGE_SIZE)) {
+			if (StringUtil.endsWith(curAttribute.getID(), StringPool.STAR) ||
+				(curAttribute.size() < PropsValues.LDAP_RANGE_SIZE)) {
 
 				break;
 			}
@@ -716,11 +714,12 @@ public class PortalLDAPUtil {
 				sb.append("(");
 				sb.append(groupMappings.getProperty("groupName"));
 				sb.append("=");
-				sb.append(LDAPUtil.getAttributeValue(
-					attributes, groupMappings.getProperty("groupName")));
+				sb.append(
+					LDAPUtil.getAttributeValue(
+						attributes, groupMappings.getProperty("groupName")));
 				sb.append("))");
 
-				attribute = getMultiValuedAttribute(
+				attribute = getMultivaluedAttribute(
 					companyId, ctx, baseDN, sb.toString(), attribute);
 
 				_importUsersAndMembershipFromLDAPGroup(
@@ -1332,7 +1331,7 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (OperationNotSupportedException onse) {
-			ctx.setRequestControls(new Control[] {});
+			ctx.setRequestControls(new Control[0]);
 
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
