@@ -724,9 +724,9 @@ public interface PropsKeys {
 
 	public static final String LDAP_PAGE_SIZE = "ldap.page.size";
 
-	public static final String LDAP_RANGE_SIZE = "ldap.range.size";
-
 	public static final String LDAP_PASSWORD_POLICY_ENABLED = "ldap.password.policy.enabled";
+
+	public static final String LDAP_RANGE_SIZE = "ldap.range.size";
 
 	public static final String LDAP_REFERRAL = "ldap.referral";
 

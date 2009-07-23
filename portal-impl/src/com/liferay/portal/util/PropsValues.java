@@ -766,12 +766,12 @@ public class PropsValues {
 	public static final int LDAP_PAGE_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.LDAP_PAGE_SIZE));
 
-	public static final int LDAP_RANGE_SIZE = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.LDAP_RANGE_SIZE));
-
 	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
+
+	public static final int LDAP_RANGE_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.LDAP_RANGE_SIZE));
 
 	public static final String LDAP_USER_IMPL =
 		PropsUtil.get(PropsKeys.LDAP_USER_IMPL);
