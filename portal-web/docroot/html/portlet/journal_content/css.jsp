@@ -41,6 +41,10 @@
 	height: 1%;
 }
 
+.portlet-journal-content .journal-content-article {
+	clear: right;
+}
+
 .portlet-journal-content .taglib-discussion {
 	margin-top: 18px;
 }
@@ -51,4 +55,23 @@
 
 .portlet-journal-content .ui-tabs {
 	margin: 18px 0;
+}
+
+.portlet-journal-content .user-actions {
+	padding-bottom: 2.5em;
+}
+
+.portlet-journal-content .user-actions .export-actions, .portlet-journal-content .user-actions .print-action, .portlet-journal-content .user-actions .locale-actions {
+	float: right;
+}
+
+.portlet-journal-content .user-actions .print-action {
+	margin-left: 1em;
+}
+
+.portlet-journal-content .user-actions .locale-separator {
+	border-right: 1px solid #CCC;
+	float: right;
+	margin-right: 1em;
+	padding: 0.8em 0.5em;
 }
