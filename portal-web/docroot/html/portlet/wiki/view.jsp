@@ -49,7 +49,7 @@ if (wikiPage != null) {
 }
 
 boolean preview = false;
-boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
+boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
@@ -79,7 +79,7 @@ PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
-printPageURL.setParameter("print", "true");
+printPageURL.setParameter("viewMode", Constants.PRINT);
 
 PortletURL categorizedPagesURL = renderResponse.createRenderURL();
 

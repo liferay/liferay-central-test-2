@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
-boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
+boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
 %>
 
 <c:if test="<%= !print && portletName.equals(PortletKeys.WIKI) %>">
