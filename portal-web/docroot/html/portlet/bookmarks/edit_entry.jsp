@@ -34,6 +34,12 @@ BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_EN
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 long folderId = BeanParamUtil.getLong(entry, request, "folderId");
+
+long classPK = 0;
+
+if (entry != null) {
+	classPK = entry.getEntryId();
+}
 %>
 
 <script type="text/javascript">
@@ -151,18 +157,20 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 </tr>
 <tr>
 	<td>
+		<liferay-ui:message key="categories" />
+	</td>
+	<td>
+		<liferay-ui:asset-categories-selector
+			className="<%= BookmarksEntry.class.getName() %>"
+			classPK="<%= classPK %>"
+		/>
+	</td>
+</tr>
+<tr>
+	<td>
 		<liferay-ui:message key="tags" />
 	</td>
 	<td>
-
-		<%
-		long classPK = 0;
-
-		if (entry != null) {
-			classPK = entry.getEntryId();
-		}
-		%>
-
 		<liferay-ui:asset-tags-selector
 			className="<%= BookmarksEntry.class.getName() %>"
 			classPK="<%= classPK %>"
