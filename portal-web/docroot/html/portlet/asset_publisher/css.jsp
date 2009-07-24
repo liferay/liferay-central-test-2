@@ -120,9 +120,6 @@
 	padding-left: 25px;
 }
 
-.portlet-asset-publisher .asset-user-actions {
-}
-
 .portlet-asset-publisher .asset-user-actions .export-actions, .portlet-asset-publisher .asset-user-actions .print-action, .portlet-asset-publisher .asset-user-actions .locale-actions {
 	float: right;
 }
