@@ -42,7 +42,52 @@ boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue()
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
-<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "" %>">
+<div class="asset-full-content <%= showAssetTitle ? "show-asset-title" : "no-title" %>">
+	<c:if test="<%= !print %>">
+		<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+	</c:if>
+
+	<c:if test="<%= (enableConversions && _isConvertible(className)) || (enablePrint && _isPrintable(className)) || (showAvailableLocales && _isLocalizable(className)) %>">
+		<div class="asset-user-actions">
+			<c:if test="<%= enablePrint %>">
+				<div class="print-action">
+					<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
+				</div>
+			</c:if>
+
+			<c:if test="<%= (enableConversions && _isConvertible(className)) && !print %>">
+
+				<%
+				String languageId = LanguageUtil.getLanguageId(request);
+
+				PortletURL exportAssetURL = _createExportURL(className, classPK, languageId, renderResponse, themeDisplay);
+				%>
+
+				<div class="export-actions">
+					<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
+				</div>
+			</c:if>
+			<c:if test="<%= (showAvailableLocales && _isLocalizable(className)) && !print %>">
+
+				<%
+				String languageId = LanguageUtil.getLanguageId(request);
+
+				String[] availableLocales = _getAvailableLocales(className, classPK, languageId, renderResponse, themeDisplay);
+				%>
+
+				<c:if test="<%= availableLocales.length > 0 %>">
+					<c:if test="<%= enableConversions || enablePrint %>">
+						<div class="locale-separator"> </div>
+					</c:if>
+
+					<div class="locale-actions">
+						<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+					</div>
+				</c:if>
+			</c:if>
+		</div>
+	</c:if>
+
 	<c:choose>
 		<c:when test="<%= className.equals(BlogsEntry.class.getName()) %>">
 
@@ -71,28 +116,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			viewFullContent = HttpUtil.setParameter(viewFullContent, "redirect", currentURL);
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BLOG %>">
-						<c:if test="<%= !print %>">
-							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-						</c:if>
-						<%= title %>
-					</h3>
-				</c:when>
-				<c:when test="<%= !print %>">
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:when>
-			</c:choose>
-
-			<c:if test="<%= enablePrint %>">
-				<div class="asset-user-actions">
-					<div class="print-action">
-						<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
-					</div>
-				</div>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BLOG %>"><%= title %></h3>
 			</c:if>
 
 			<div class="asset-content">
@@ -139,20 +164,9 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			String entryURL = themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId();
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BOOKMARK %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-
-						<%= title %>
-					</h3>
-				</c:when>
-				<c:otherwise>
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BOOKMARK %>"><%= title %></h3>
+			</c:if>
 
 			<div class="asset-content">
 				<a href="<%= entryURL %>" target="_blank">
@@ -182,20 +196,9 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_DOCUMENT %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-
-						<%= title %>
-					</h3>
-				</c:when>
-				<c:otherwise>
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_DOCUMENT %>"><%= title %></h3>
+			</c:if>
 
 			<div class="asset-content">
 				<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&folderId=<%= fileEntry.getFolderId() %>&name=<%= HttpUtil.encodeURL(fileEntry.getName()) %>">
@@ -253,29 +256,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			viewImageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_IMAGE %>">
-						<c:if test="<%= !print %>">
-							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-						</c:if>
-
-						<%= title %>
-					</h3>
-				</c:when>
-				<c:when test="<%= !print %>">
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:when>
-			</c:choose>
-
-			<c:if test="<%= enablePrint %>">
-				<div class="asset-user-actions">
-					<div class="print-action">
-						<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
-					</div>
-				</div>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_IMAGE %>"><%= title %></h3>
 			</c:if>
 
 			<div class="asset-content">
@@ -314,62 +296,9 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			%>
 
 			<c:if test="<%= articleDisplay != null %>">
-				<c:choose>
-					<c:when test="<%= showAssetTitle %>">
-						<h3 class="asset-title <%= AssetPublisherUtil.TYPE_CONTENT %>">
-							<c:if test="<%= !print %>">
-								<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-							</c:if>
 
-							<%= title %>
-						</h3>
-					</c:when>
-					<c:when test="<%= !print %>">
-						<div class="asset-edit">
-							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-						</div>
-					</c:when>
-				</c:choose>
-
-				<c:if test="<%= (enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 0)) %>">
-					<div class="asset-user-actions">
-						<c:if test="<%= enablePrint %>">
-							<div class="print-action">
-								<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
-							</div>
-						</c:if>
-
-						<c:if test="<%= enableConversions && !print %>">
-
-							<%
-							PortletURL exportAssetURL = renderResponse.createActionURL();
-
-							exportAssetURL.setParameter("struts_action", "/asset_publisher/export_journal_article");
-							exportAssetURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-							exportAssetURL.setParameter("articleId", articleDisplay.getArticleId());
-							%>
-
-							<div class="export-actions">
-								<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
-							</div>
-						</c:if>
-						<c:if test="<%= showAvailableLocales && !print %>">
-
-							<%
-							String[] availableLocales = articleDisplay.getAvailableLocales();
-							%>
-
-							<c:if test="<%= availableLocales.length > 0 %>">
-								<c:if test="<%= enableConversions || enablePrint %>">
-									<div class="locale-separator"> </div>
-								</c:if>
-
-								<div class="locale-actions">
-									<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
-								</div>
-							</c:if>
-						</c:if>
-					</div>
+				<c:if test="<%= showAssetTitle %>">
+					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_CONTENT %>"><%= title %></h3>
 				</c:if>
 
 				<div class="asset-content">
@@ -454,20 +383,9 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			}
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_THREAD %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-
-						<%= message.getSubject() %>
-					</h3>
-				</c:when>
-				<c:otherwise>
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_THREAD %>"><%= title %></h3>
+			</c:if>
 
 			<div class="asset-content">
 				<%= message.getBody() %>
@@ -489,53 +407,14 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			AssetEntryLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 			%>
 
-			<c:choose>
-				<c:when test="<%= showAssetTitle %>">
-					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_WIKI %>">
-						<c:if test="<%= !print %>">
-							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-						</c:if>
-
-						<%= title %>
-					</h3>
-				</c:when>
-				<c:when test="<%= !print %>">
-					<div class="asset-edit">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-					</div>
-				</c:when>
-			</c:choose>
-
-			<c:if test="<%= (enableConversions || enablePrint) %>">
-				<div class="asset-user-actions">
-					<c:if test="<%= enablePrint %>">
-						<div class="print-action">
-							<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
-						</div>
-					</c:if>
-					<c:if test="<%= enableConversions && !print %>">
-
-						<%
-						PortletURL exportAssetURL = renderResponse.createActionURL();
-
-						exportAssetURL.setParameter("struts_action", "/asset_publisher/export_wiki_page");
-						exportAssetURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
-						exportAssetURL.setParameter("title", wikiPage.getTitle());
-						%>
-
-						<div class="export-actions">
-							<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
-						</div>
-					</c:if>
-				</div>
+			<c:if test="<%= showAssetTitle %>">
+				<h3 class="asset-title <%= AssetPublisherUtil.TYPE_WIKI %>"><%= title %></h3>
 			</c:if>
 
 			<div class="asset-content">
 				<div class="content-body">
 
 					<%
-
-
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
 
@@ -625,5 +504,67 @@ request.setAttribute("view.jsp-showIconLabel", true);
 </c:choose>
 
 <%!
+private PortletURL _createExportURL(String className, long classPK, String languageId, RenderResponse renderResponse, ThemeDisplay themeDisplay) throws Exception {
+	PortletURL portletURL = renderResponse.createActionURL();
+
+	if (Validator.equals(className, JournalArticle.class.getName())) {
+		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
+
+		portletURL.setParameter("struts_action", "/asset_publisher/export_journal_article");
+		portletURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+		portletURL.setParameter("articleId", articleDisplay.getArticleId());
+	}
+
+	else if (className.equals(WikiPage.class.getName())) {
+		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+		portletURL.setParameter("struts_action", "/asset_publisher/export_wiki_page");
+		portletURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
+		portletURL.setParameter("title", wikiPage.getTitle());
+	}
+
+	return portletURL;
+}
+
+private String[] _getAvailableLocales(String className, long classPK, String languageId, RenderResponse renderResponse, ThemeDisplay themeDisplay) throws Exception {
+	if (Validator.equals(className, JournalArticle.class.getName())) {
+		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
+
+		return articleDisplay.getAvailableLocales();
+	}
+
+	return null;
+}
+
+private boolean _isConvertible(String className) {
+	if (Validator.equals(className, JournalArticle.class.getName()) || Validator.equals(className, WikiPage.class.getName())) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+private boolean _isLocalizable(String className) {
+	if (Validator.equals(className, JournalArticle.class.getName())) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+private boolean _isPrintable(String className) {
+	if (!Validator.equals(className, MBMessage.class.getName()) && !Validator.equals(className, DLFileEntry.class.getName())) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.asset_publisher.display_full_content.jsp");
 %>

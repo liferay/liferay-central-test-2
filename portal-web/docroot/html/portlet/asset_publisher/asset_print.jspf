@@ -46,6 +46,6 @@ printAssetURL.setParameter("viewMode", Constants.PRINT);
 			}
 		</script>
 
-		<liferay-ui:icon image="print" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage_" + assetEntryIndex + "();" %>' />
+		<liferay-ui:icon image="print" label="<%= true %>" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage_" + assetEntryIndex + "();" %>' />
 	</c:otherwise>
 </c:choose>
