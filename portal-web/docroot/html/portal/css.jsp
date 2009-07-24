@@ -1018,11 +1018,16 @@ li.toggle-expand a {
 	padding: 0;
 }
 
-.lfr-asset-category-container.no-matches legend {
+.lfr-asset-vocabulary-container.no-matches legend {
 	padding-left: 0;
 }
 
-.lfr-asset-category-container.no-matches .lfr-asset-category-message {
+
+.lfr-asset-vocabulary-container .lfr-asset-category-message, .lfr-asset-vocabulary-container.no-matches .treeview {
+	display: none;
+}
+
+.lfr-asset-vocabulary-container.no-matches .lfr-asset-category-message {
 	display: block;
 }
 

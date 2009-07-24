@@ -290,38 +290,36 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 							var vocabularyName = vocabulary.name;
 							var vocabularyId = vocabulary.vocabularyId;
 
-							Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
+							var categories = Liferay.Service.Asset.AssetCategory.getVocabularyRootCategories(
 								{
 									assetVocabularyId: vocabularyId
-								},
-								function(categories) {
-									buffer.push('<fieldset>');
-									buffer.push('<legend class="lfr-asset-category-set-title">');
-									buffer.push(vocabularyName);
-
-									if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
-										buffer.push(' (' + globalMessage + ')');
-									}
-
-									buffer.push('</legend><div class="treeview">');
-
-									instance._categoryIterator(categories, buffer, 0);
-
-									buffer.push('</div><div class="lfr-asset-category-message">' + searchMessage + '</div>');
-									buffer.push('</fieldset>');
-
-									container.html(buffer.join(''));
-
-									instance._initializeSearch(container);
-
-									if (categories.length == 0) {
-										container.addClass('no-matches');
-									}
-									else {
-										container.removeClass('no-matches');
-									}
 								}
 							);
+
+							var noMatchesClass = '';
+
+							if (categories.length == 0) {
+								noMatchesClass = 'no-matches';
+							}
+
+							buffer.push('<fieldset class="lfr-asset-vocabulary-container ' + noMatchesClass + '">');
+							buffer.push('<legend class="lfr-asset-category-set-title">');
+							buffer.push(vocabularyName);
+
+							if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
+								buffer.push(' (' + globalMessage + ')');
+							}
+
+							buffer.push('</legend><div class="treeview">');
+
+							instance._categoryIterator(categories, buffer, 0);
+
+							buffer.push('</div><div class="lfr-asset-category-message">' + searchMessage + '</div>');
+							buffer.push('</fieldset>');
+
+							container.html(buffer.join(''));
+
+							instance._initializeSearch(container);
 						}
 					);
 				}
