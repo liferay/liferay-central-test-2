@@ -102,7 +102,7 @@ for (SearchResult result : results) {
 
 		String filter = sb.toString();
 
-		attribute = PortalLDAPUtil.getMultiValuedAttribute(themeDisplay.getCompanyId(), ldapContext, baseDN, filter, attribute);
+		attribute = PortalLDAPUtil.getMultivaluedAttribute(themeDisplay.getCompanyId(), ldapContext, baseDN, filter, attribute);
 	}
 
 	if (counter == 0) {
