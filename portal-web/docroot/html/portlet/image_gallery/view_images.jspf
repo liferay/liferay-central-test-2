@@ -158,12 +158,11 @@
 					</div>
 
 					<%
-					List tags = AssetTagServiceUtil.getTags(IGImage.class.getName(), image.getImageId());
-					boolean hasTags = tags != null && !tags.isEmpty();
+					List assetTags = AssetTagServiceUtil.getTags(IGImage.class.getName(), image.getImageId());
 					%>
 
 					<div id="<portlet:namespace />categorizacionContainer_<%= largeImage.getImageId() %>" style="display: none;">
-						<span <%= hasTags ? "class=\"has-tags\"" : "" %> >
+						<span <%= !assetTags.isEmpty() ? "class=\"has-tags\"" : "" %>>
 							<liferay-ui:asset-categories-summary
 								className="<%= IGImage.class.getName() %>"
 								classPK="<%= image.getImageId() %>"
