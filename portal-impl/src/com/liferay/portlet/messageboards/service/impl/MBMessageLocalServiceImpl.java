@@ -1415,9 +1415,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		categoryIds.add(category.getCategoryId());
 		categoryIds.addAll(category.getAncestorCategoryIds());
 
-		String messageURL = StringPool.BLANK;
-
-		messageURL =
+		String messageURL =
 			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
 				"message_boards/message/" + message.getMessageId();
 
