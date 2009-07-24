@@ -173,24 +173,6 @@ if ((message != null) && message.isAttachments()) {
 
 <liferay-ui:asset-tags-error />
 
-<%
-long breadcrumbsMessageId = parentMessageId;
-
-if (threadId <= 0) {
-	breadcrumbsMessageId = messageId;
-}
-
-if (message != null) {
-	breadcrumbsMessageId = message.getMessageId();
-}
-%>
-
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((message == null) ? Constants.ADD : Constants.UPDATE) + "-message" %>' /></span>
-</div>
-
 <table class="lfr-table">
 <tr>
 	<td class="lfr-label">
@@ -492,3 +474,26 @@ if (message != null) {
 		}
 	);
 </script>
+
+<%
+if (curParentMessage != null) {
+	MBUtil.addPortletBreadcrumbEntries(curParentMessage, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "reply"), currentURL);
+}
+else if (message != null) {
+	MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-message"), currentURL);
+}
+else if (curParentMessage != null) {
+	MBUtil.addPortletBreadcrumbEntries(curParentMessage, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-reply"), currentURL);
+}
+else {
+	MBUtil.addPortletBreadcrumbEntries(categoryId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-message"), currentURL);
+}
+%>

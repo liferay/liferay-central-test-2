@@ -79,12 +79,6 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 		<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 
-		<c:if test="<%= category != null %>">
-			<div class="breadcrumbs">
-				<%= MBUtil.getBreadcrumbs(category, null, pageContext, renderRequest, renderResponse) %>
-			</div>
-		</c:if>
-
 		<%
 		List<String> headerNames = new ArrayList<String>();
 
@@ -469,6 +463,8 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			<%
 			PortalUtil.setPageSubtitle(category.getName(), request);
 			PortalUtil.setPageDescription(category.getDescription(), request);
+
+			MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 			%>
 
 		</c:if>
@@ -770,6 +766,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		<%
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>
@@ -822,6 +819,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		<%
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>
@@ -889,6 +887,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 		<%
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
 		%>
 
 	</c:when>

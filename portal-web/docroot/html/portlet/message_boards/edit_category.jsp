@@ -93,12 +93,6 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 <liferay-ui:error exception="<%= MailingListOutServerNameException.class %>" message="please-enter-a-valid-outgoing-server-name" />
 <liferay-ui:error exception="<%= MailingListOutUserNameException.class %>" message="please-enter-a-valid-outgoing-user-name" />
 
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(MBUtil.getBreadcrumbs(parentCategoryId, 0, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((category == null) ? Constants.ADD : Constants.UPDATE) + "-category" %>' /></span>
-</div>
-
 <table class="lfr-table">
 
 <c:if test="<%= category != null %>">
@@ -385,3 +379,18 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	Liferay.Util.toggleBoxes('<portlet:namespace />mailingListActiveCheckbox', '<portlet:namespace />mailingListSettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />outCustomCheckbox', '<portlet:namespace />outCustomSettings');
 </script>
+
+<%
+if (category != null) {
+	MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-category"), currentURL);
+}
+else {
+	if (parentCategoryId > 0) {
+		MBUtil.addPortletBreadcrumbEntries(parentCategoryId, request, renderResponse);
+	}
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-category"), currentURL);
+}
+%>

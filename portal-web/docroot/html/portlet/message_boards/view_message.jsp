@@ -129,9 +129,6 @@ String threadView = messageDisplay.getThreadView();
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td class="stretch">
-		<div class="breadcrumbs">
-			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
-		</div>
 	</td>
 
 	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_VIEWS.length > 1 %>">
@@ -358,4 +355,6 @@ PortalUtil.setPageDescription(message.getSubject(), request);
 List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(MBMessage.class.getName(), message.getMessageId());
 
 PortalUtil.setPageKeywords(ListUtil.toString(assetTags, "name"), request);
+
+MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
 %>

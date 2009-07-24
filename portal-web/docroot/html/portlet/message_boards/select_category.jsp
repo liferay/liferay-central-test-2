@@ -38,7 +38,7 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 
 <c:if test="<%= category != null %>">
 	<div class="breadcrumbs">
-		<%= MBUtil.getBreadcrumbs(category, null, pageContext, renderRequest, renderResponse) %>
+		<%= MBUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
 	</div>
 </c:if>
 

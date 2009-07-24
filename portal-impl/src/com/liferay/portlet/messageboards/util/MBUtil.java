@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,14 +44,13 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.mail.JavaMailUtil;
 
@@ -60,6 +58,7 @@ import java.io.InputStream;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
@@ -72,6 +71,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 public class MBUtil {
@@ -80,6 +80,64 @@ public class MBUtil {
 
 	public static final int POP_SERVER_SUBDOMAIN_LENGTH =
 		PropsValues.POP_SERVER_SUBDOMAIN.length();
+
+	public static void addPortletBreadcrumbEntries(
+			MBMessage message, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+		MBCategory category = message.getCategory();
+
+		addPortletBreadcrumbEntries(category, request, renderResponse);
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("tabs1", "categories");
+		portletURL.setParameter(
+			"messageId", String.valueOf(message.getMessageId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, message.getSubject(), portletURL.toString());
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			long categoryId, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			categoryId);
+
+		addPortletBreadcrumbEntries(category, request, renderResponse);
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			MBCategory category, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter("struts_action", "/message_boards/view");
+		portletURL.setParameter("tabs1", "categories");
+
+		List<MBCategory> ancestorCategories = category.getAncestors();
+
+	   for (MBCategory curCategory : ancestorCategories) {
+
+		   portletURL.setParameter(
+			   "mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+
+		   PortalUtil.addPortletBreadcrumbEntry(
+			   request, curCategory.getName(), portletURL.toString());
+	   }
+
+	   portletURL.setParameter(
+		   "mbCategoryId", String.valueOf(category.getCategoryId()));
+
+	   PortalUtil.addPortletBreadcrumbEntry(
+		   request, category.getName(), portletURL.toString());
+	}
 
 	public static void collectMultipartContent(
 			MimeMultipart multipart, MBMailMessage collector)
@@ -133,67 +191,16 @@ public class MBUtil {
 	}
 
 	public static String getBreadcrumbs(
-			long categoryId, long messageId, PageContext pageContext,
+			MBCategory category, PageContext pageContext,
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
-
-		if (messageId > 0) {
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
-
-			return getBreadcrumbs(
-				null, message, pageContext, renderRequest, renderResponse);
-		}
-		else {
-			MBCategory category = null;
-
-			try {
-				if ((categoryId > 0) &&
-					(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
-
-					category = MBCategoryLocalServiceUtil.getCategory(
-						categoryId);
-				}
-			}
-			catch (Exception e) {
-				_log.error("Unable to retrieve category " + categoryId, e);
-			}
-
-			return getBreadcrumbs(
-				category, null, pageContext, renderRequest, renderResponse);
-		}
-	}
-
-	public static String getBreadcrumbs(
-			MBCategory category, MBMessage message, PageContext pageContext,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
-
-		String strutsAction = ParamUtil.getString(
-			renderRequest, "struts_action");
-
-		boolean selectCategory = strutsAction.equals(
-			"/message_boards/select_category");
-
-		if ((message != null) && (category == null)) {
-			category = message.getCategory();
-		}
 
 		PortletURL categoriesURL = renderResponse.createRenderURL();
 
-		if (selectCategory) {
-			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
+		categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
-			categoriesURL.setParameter(
-				"struts_action", "/message_boards/select_category");
-		}
-		else {
-			//categoriesURL.setWindowState(WindowState.MAXIMIZED);
-
-			categoriesURL.setParameter("struts_action", "/message_boards/view");
-			categoriesURL.setParameter(
-				"mbCategoryId",
-				String.valueOf(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID));
-		}
+		categoriesURL.setParameter(
+			"struts_action", "/message_boards/select_category");
 
 		String categoriesLink =
 			"<a href=\"" + categoriesURL.toString() + "\">" +
@@ -210,35 +217,20 @@ public class MBUtil {
 
 			PortletURL portletURL = renderResponse.createRenderURL();
 
-			if (selectCategory) {
-				portletURL.setWindowState(LiferayWindowState.POP_UP);
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-				portletURL.setParameter(
-					"struts_action", "/message_boards/select_category");
-				portletURL.setParameter(
-					"mbCategoryId", String.valueOf(category.getCategoryId()));
-			}
-			else {
-				//portletURL.setWindowState(WindowState.MAXIMIZED);
-
-				portletURL.setParameter(
-					"struts_action", "/message_boards/view");
-				portletURL.setParameter(
-					"mbCategoryId", String.valueOf(category.getCategoryId()));
-			}
+			portletURL.setParameter(
+				"struts_action", "/message_boards/select_category");
+			portletURL.setParameter(
+				"mbCategoryId", String.valueOf(category.getCategoryId()));
 
 			String categoryLink =
 				"<a href=\"" + portletURL.toString() + "\">" +
 					category.getName() + "</a>";
 
 			if (i == 0) {
-				if (message != null) {
-					breadcrumbs += categoryLink;
-				}
-				else {
-					breadcrumbs =
-						"<span class=\"last\">" + categoryLink + "</span>";
-				}
+				breadcrumbs =
+					"<span class=\"last\">" + categoryLink + "</span>";
 			}
 			else {
 				breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
@@ -255,25 +247,6 @@ public class MBUtil {
 		breadcrumbs =
 			"<span class=\"first\">" + categoriesLink + " &raquo; </span>" +
 				breadcrumbs;
-
-		if (message != null) {
-			message = message.toEscapedModel();
-
-			PortletURL messageURL = renderResponse.createRenderURL();
-
-			//messageURL.setWindowState(WindowState.MAXIMIZED);
-
-			messageURL.setParameter(
-				"struts_action", "/message_boards/view_message");
-			messageURL.setParameter(
-				"messageId", String.valueOf(message.getMessageId()));
-
-			String messageLink =
-				"<span class=\"last\"><a href=\"" + messageURL.toString() +
-					"\">" + message.getSubject() + "</a></span>";
-
-			breadcrumbs = breadcrumbs + " &raquo; " + messageLink;
-		}
 
 		return breadcrumbs;
 	}

@@ -218,6 +218,14 @@ catch (Exception e) {
 	</script>
 </c:if>
 
+<%
+if (breadcrumbsCategoryId > 0) {
+	MBUtil.addPortletBreadcrumbEntries(breadcrumbsCategoryId, request, renderResponse);
+}
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
+%>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.search.jsp");
 %>

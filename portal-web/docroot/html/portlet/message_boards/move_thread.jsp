@@ -83,10 +83,6 @@ boolean quote = false;
 long breadcrumbsMessageId = message.getMessageId();
 %>
 
-<div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
-</div>
-
 <table class="lfr-table">
 <tr>
 	<td class="lfr-label">
@@ -159,3 +155,9 @@ long breadcrumbsMessageId = message.getMessageId();
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
+
+<%
+MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "move-thread"), currentURL);
+%>

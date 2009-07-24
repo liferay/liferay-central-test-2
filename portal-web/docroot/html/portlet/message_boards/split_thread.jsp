@@ -87,10 +87,6 @@ boolean quote = false;
 long breadcrumbsMessageId = message.getMessageId();
 %>
 
-<div class="breadcrumbs">
-	<%= MBUtil.getBreadcrumbs(categoryId, breadcrumbsMessageId, pageContext, renderRequest, renderResponse) %>
-</div>
-
 <div class="portlet-msg-info">
 	<liferay-ui:message key="click-ok-to-create-a-new-thread-with-the-following-messages" />
 </div>
@@ -188,3 +184,9 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
+
+<%
+MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "split-thread"), currentURL);
+%>
