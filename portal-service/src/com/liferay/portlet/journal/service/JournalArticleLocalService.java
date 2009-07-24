@@ -479,20 +479,26 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, int start, int end)
+		long groupId, long userId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords, 
+		java.lang.String type, int start, int end) 
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords,
-		com.liferay.portal.kernel.search.Sort sort, int start, int end)
-		throws com.liferay.portal.SystemException;
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type, com.liferay.portal.kernel.search.Sort sort,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords,
-		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
-		throws com.liferay.portal.SystemException;
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type, com.liferay.portal.kernel.search.Sort[] sorts,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

@@ -1543,26 +1543,39 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, int start, int end)
+			long companyId, long groupId, long userId, String keywords,
+			int start, int end)
+		throws SystemException {
+
+		return search(
+			companyId, groupId, userId, keywords, null, start, end);
+	}
+
+	public Hits search(
+			long companyId, long groupId, long userId, String keywords,
+			String type, int start, int end)
 		throws SystemException {
 
 		Sort sort = new Sort("displayDate", Sort.LONG_TYPE, true);
 
-		return search(companyId, groupId, keywords, sort, start, end);
+		return search(
+			companyId, groupId, userId, keywords, type, new Sort[] {sort},
+			start, end);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, Sort sort, int start,
-			int end)
+			long companyId, long groupId, long userId, String keywords,
+			String type, Sort sort, int start, int end)
 		throws SystemException {
 
 		return search(
-			companyId, groupId, keywords, new Sort[] {sort}, start, end);
+			companyId, groupId, userId, keywords, type, new Sort[] {sort},
+			start, end);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, Sort[] sorts,
-			int start, int end)
+			long companyId, long groupId, long userId, String keywords,
+			String type, Sort[] sorts, int start, int end)
 		throws SystemException {
 
 		try {
@@ -1576,12 +1589,18 @@ public class JournalArticleLocalServiceImpl
 
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
+			if (Validator.isNotNull(type)) {
+				contextQuery.addRequiredTerm(Field.TYPE, type);
+			}
+			else {
+				searchQuery.addTerm(Field.TYPE, keywords);
+			}
+
 			if (Validator.isNotNull(keywords)) {
 				searchQuery.addTerm(Field.TITLE, keywords);
 				searchQuery.addTerm(Field.CONTENT, keywords);
 				searchQuery.addTerm(Field.DESCRIPTION, keywords);
 				searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, true);
-				searchQuery.addTerm(Field.TYPE, keywords);
 			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
@@ -1593,7 +1612,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			return SearchEngineUtil.search(
-				companyId, fullQuery, sorts, start, end);
+				companyId, groupId, userId, JournalArticle.class.getName(),
+				fullQuery, sorts, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

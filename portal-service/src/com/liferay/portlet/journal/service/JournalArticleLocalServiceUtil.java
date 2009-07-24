@@ -642,25 +642,37 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, groupId, keywords, start, end);
+		long groupId, long userId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, groupId, userId, keywords, start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords,
-		com.liferay.portal.kernel.search.Sort sort, int start, int end)
+		long groupId, long userId, java.lang.String keywords, 
+		java.lang.String type, int start, int end) 
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, keywords, sort, start, end);
+				   .search(companyId, groupId, userId, keywords, type,
+			start, end);
+	}	
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type, com.liferay.portal.kernel.search.Sort sort,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getService()
+				   .search(companyId, groupId, userId, keywords, type, sort,
+			start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords,
-		com.liferay.portal.kernel.search.Sort[] sorts, int start, int end)
-		throws com.liferay.portal.SystemException {
+		long groupId, long userId, java.lang.String keywords,
+		java.lang.String type, com.liferay.portal.kernel.search.Sort[] sorts,
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getService()
-				   .search(companyId, groupId, keywords, sorts, start, end);
+				   .search(companyId, groupId, userId, keywords, type, sorts,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

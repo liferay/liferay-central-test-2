@@ -59,7 +59,7 @@
 			// need to filter the results with ContentHits first and then make a
 			// subset of the filtered results.
 
-			Hits results = CompanyLocalServiceUtil.search(company.getCompanyId(), 0, PortletKeys.JOURNAL, 0, type, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			Hits results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), 0, themeDisplay.getUserId(), keywords, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			String[] queryTerms = results.getQueryTerms();
 

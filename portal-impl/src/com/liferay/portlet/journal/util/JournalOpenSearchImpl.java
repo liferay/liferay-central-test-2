@@ -49,7 +49,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return JournalArticleLocalServiceUtil.search(
-			companyId, groupId, keywords, start, end);
+			companyId, groupId, userId, keywords, start, end);
 	}
 
 	public String getSearchPath() {
