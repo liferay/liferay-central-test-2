@@ -48,7 +48,8 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if ((strutsAction.equals("/asset_publisher/view_content"))  &&
 			((windowState == null) ||
-			 (!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
+			 (!windowState.equals(LiferayWindowState.EXCLUSIVE) &&
+			  !windowState.equals(LiferayWindowState.POP_UP)))) {
 
 			String portletId = portletURL.getPortletId();
 			String assetEntryId = portletURL.getParameter("assetEntryId");
