@@ -36,6 +36,10 @@
 			<param name="test.class" value="StagingTestSuite" />
 		</antcall>
 
+		<antcall target="run-tomcat-6.0">
+			<param name="test.class" value="TagsTestSuite" />
+		</antcall>
+
 		<antcall target="stop-selenium" />
 	</target>
 
