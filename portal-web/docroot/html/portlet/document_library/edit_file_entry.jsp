@@ -37,6 +37,8 @@ String uploadProgressId = "dlFileEntryUploadProgress";
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
+long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
+
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
 
@@ -58,14 +60,11 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 
 DLFolder folder = null;
 
-long classPK = 0;
-
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
-	classPK = fileEntry.getFileEntryId();
 	folder = fileEntry.getFolder();
 
 	try {
@@ -270,7 +269,7 @@ portletURL.setParameter("name", name);
 		<td>
 			<liferay-ui:asset-categories-summary
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntry.getFileEntryId() %>"
+				classPK="<%= fileEntryId %>"
 			/>
 		</td>
 	</tr>
@@ -281,7 +280,7 @@ portletURL.setParameter("name", name);
 		<td>
 			<liferay-ui:asset-tags-summary
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntry.getFileEntryId() %>"
+				classPK="<%= fileEntryId %>"
 			/>
 		</td>
 	</tr>
@@ -441,7 +440,7 @@ portletURL.setParameter("name", name);
 
 	<table class="lfr-table">
 
-	<c:if test="<%= ((fileEntry != null) || (folderId <= 0)) %>">
+	<c:if test="<%= (fileEntry != null) || (folderId <= 0) %>">
 		<tr>
 			<td class="lfr-label">
 				<liferay-ui:message key="folder" />
@@ -511,7 +510,7 @@ portletURL.setParameter("name", name);
 		<td>
 			<liferay-ui:asset-categories-selector
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= classPK %>"
+				classPK="<%= fileEntryId %>"
 			/>
 		</td>
 	</tr>
@@ -522,7 +521,7 @@ portletURL.setParameter("name", name);
 		<td>
 			<liferay-ui:asset-tags-selector
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= classPK %>"
+				classPK="<%= fileEntryId %>"
 			/>
 		</td>
 	</tr>
@@ -630,7 +629,7 @@ portletURL.setParameter("name", name);
 
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
-		classPK="<%= fileEntry.getFileEntryId() %>"
+		classPK="<%= fileEntryId %>"
 	/>
 
 	<br />
@@ -745,7 +744,7 @@ portletURL.setParameter("name", name);
 
 				<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />compare(); return false;">
 				<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-				<input name="<portlet:namespace />fileEntryId" type="hidden" value="<%= fileEntry.getFileEntryId() %>" />
+				<input name="<portlet:namespace />fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 				<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 				<input name="<portlet:namespace />name" type="hidden" value="<%= HtmlUtil.escapeAttribute(name) %>" />
 				<input name="<portlet:namespace />titleWithExtension" type="hidden" value="<%= HtmlUtil.escapeAttribute(titleWithExtension) %>" />
@@ -774,7 +773,7 @@ portletURL.setParameter("name", name);
 					formName="fm2"
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= fileEntry.getFileEntryId() %>"
+					classPK="<%= fileEntryId %>"
 					userId="<%= fileEntry.getUserId() %>"
 					subject="<%= fileEntry.getTitle() %>"
 					redirect="<%= currentURL %>"
