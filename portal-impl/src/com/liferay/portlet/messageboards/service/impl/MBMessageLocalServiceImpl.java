@@ -1417,10 +1417,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String messageURL = StringPool.BLANK;
 
-		if (StringUtil.startsWith(layoutURL, portalURL)) {
-			layoutURL = layoutURL.substring(portalURL.length());
-		}
-
 		messageURL =
 			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
 				"message_boards/message/" + message.getMessageId();
