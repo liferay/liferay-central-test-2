@@ -200,6 +200,17 @@ for (int i = 0; i < portlets.size(); i++) {
 				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
 
 				entryTitle = fileEntry.getTitle();
+
+				if (dlLinkToFolder) {
+					long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
+
+					PortletURL viewFolderURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
+
+					viewFolderURL.setParameter("struts_action", "/document_library/view");
+					viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+
+					entryHref = viewFolderURL.toString();
+				}
 			}
 
 			StringBuilder rowSB = new StringBuilder();
