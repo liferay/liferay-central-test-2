@@ -74,7 +74,7 @@ if (articleDisplay != null) {
 							<%
 							PortletURL printPageURL = renderResponse.createRenderURL();
 
-							printPageURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+							printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
 							printPageURL.setParameter("struts_action", "/journal_content/view");
 							printPageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
