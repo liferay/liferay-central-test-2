@@ -70,28 +70,41 @@ if (articleDisplay != null) {
 
 				<c:if test="<%= enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 0) %>">
 					<div class="user-actions">
-						<c:if test="<%= enablePrint && !print %>">
+						<c:if test="<%= enablePrint %>">
+							<c:choose>
+								<c:when test="<%= print %>">
+									<script type="text/javascript">
+										print();
+									</script>
 
-							<%
-							PortletURL printPageURL = renderResponse.createRenderURL();
+									<div class="print-action">
+										<liferay-ui:icon image="print" message="print" url="javascript:print();" />
+									</div>
+								</c:when>
+								<c:otherwise>
 
-							printPageURL.setWindowState(LiferayWindowState.POP_UP);
+									<%
+									PortletURL printPageURL = renderResponse.createRenderURL();
 
-							printPageURL.setParameter("struts_action", "/journal_content/view");
-							printPageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-							printPageURL.setParameter("articleId", articleDisplay.getArticleId());
-							printPageURL.setParameter("viewMode", Constants.PRINT);
-							%>
+									printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
-							<script type="text/javascript">
-								function <portlet:namespace />printPage() {
-									window.open('<%= printPageURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
-								}
-							</script>
+									printPageURL.setParameter("struts_action", "/journal_content/view");
+									printPageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+									printPageURL.setParameter("articleId", articleDisplay.getArticleId());
+									printPageURL.setParameter("viewMode", Constants.PRINT);
+									%>
 
-							<div class="print-action">
-								<liferay-ui:icon image="print" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
-							</div>
+									<script type="text/javascript">
+										function <portlet:namespace />printPage() {
+											window.open('<%= printPageURL %>', '', "directories=0,height=480,left=80,location=1,menubar=1,resizable=1,scrollbars=yes,status=0,toolbar=0,top=180,width=640");
+										}
+									</script>
+
+									<div class="print-action">
+										<liferay-ui:icon image="print" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</c:if>
 
 						<c:if test="<%= enableConversions && !print%>">
