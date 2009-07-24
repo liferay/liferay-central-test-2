@@ -71,6 +71,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" %>
@@ -277,6 +278,12 @@ boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratin
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
 boolean enableTagBasedNavigation = GetterUtil.getBoolean(preferences.getValue("enable-tag-based-navigation", null));
+
+String[] conversions = DocumentConversionUtil.getConversions("html");
+String[] extensions = preferences.getValues("extensions", new String[0]);
+boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
+boolean enableConversions = openOfficeServerEnabled && (extensions != null) && (extensions.length > 0);
+boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print", null));
 
 String defaultMetadataFields = StringPool.BLANK;
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags";

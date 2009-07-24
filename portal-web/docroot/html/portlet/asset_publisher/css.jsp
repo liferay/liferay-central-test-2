@@ -33,6 +33,7 @@
 }
 
 .portlet-asset-publisher .asset-content {
+	clear: right;
 	margin-bottom: 10px;
 	margin-left: 25px;
 	margin-right: 10px;
@@ -113,6 +114,26 @@
 	margin-top: 2em;
 	padding-bottom: 1px;
 	padding-left: 25px;
+}
+
+.portlet-asset-publisher .asset-user-actions {
+	margin-right: 10px;
+	padding-bottom: 2.5em;
+}
+
+.portlet-asset-publisher .asset-user-actions .export-actions, .portlet-asset-publisher .asset-user-actions .print-action, .portlet-asset-publisher .asset-user-actions .locale-actions {
+	float: right;
+}
+
+.portlet-asset-publisher .asset-user-actions .locale-separator {
+	border-right: 1px solid #CCC;
+	float: right;
+	margin-right: 1em;
+	padding: 0.8em 0.5em;
+}
+
+.portlet-asset-publisher .asset-user-actions .print-action {
+	margin-left: 1em;
 }
 
 .portlet-asset-publisher .blog {

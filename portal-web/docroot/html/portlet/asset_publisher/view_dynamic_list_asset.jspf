@@ -12,6 +12,7 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 	String editURL = StringPool.BLANK;
 
 	boolean show = true;
+	boolean print = false;
 
 	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
@@ -26,6 +27,7 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
+	request.setAttribute("view.jsp-print", new Boolean(print));
 
 	try {
 %>

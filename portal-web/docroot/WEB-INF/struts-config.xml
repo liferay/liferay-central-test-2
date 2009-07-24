@@ -234,6 +234,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
 		</action>
 
+		<action path="/asset_publisher/export_journal_article" type="com.liferay.portlet.journalcontent.action.ExportArticleAction" />
+
+		<action path="/asset_publisher/export_wiki_page" type="com.liferay.portlet.wiki.action.ExportPageAction" />
+
 		<action path="/asset_publisher/view" type="com.liferay.portlet.assetpublisher.action.ViewAction">
 			<forward name="portlet.asset_publisher.view" path="portlet.asset_publisher.view" />
 		</action>

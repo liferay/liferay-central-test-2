@@ -260,6 +260,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "paginationType");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			actionRequest, "showAvailableLocales");
+		String[] extensions = actionRequest.getParameterValues("extensions");
+		boolean enablePrint = ParamUtil.getBoolean(
+			actionRequest, "enablePrint");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
@@ -299,6 +302,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("pagination-type", paginationType);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
+		preferences.setValues("extensions", extensions);
+		preferences.setValue("enable-print", String.valueOf(enablePrint));
 		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
@@ -322,6 +327,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "assetLinkBehaviour");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			actionRequest, "showAvailableLocales");
+		String[] extensions = actionRequest.getParameterValues("extensions");
+		boolean enablePrint = ParamUtil.getBoolean(
+			actionRequest, "enablePrint");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
@@ -343,6 +351,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("asset-link-behaviour", assetLinkBehaviour);
 		preferences.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
+		preferences.setValues("extensions", extensions);
+		preferences.setValue("enable-print", String.valueOf(enablePrint));
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
 		preferences.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));

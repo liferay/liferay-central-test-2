@@ -31,6 +31,8 @@ long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
 String urlTitle = ParamUtil.getString(request, "urlTitle");
 
+boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
+
 List results = new ArrayList();
 
 int assetEntryIndex = 0;
@@ -87,11 +89,14 @@ try {
 	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
+	request.setAttribute("view.jsp-print", new Boolean(print));
 %>
 
-	<div align="right">
-		&laquo; <a href="<%= HtmlUtil.escape(redirect) %>"><liferay-ui:message key="back" /></a>
-	</div>
+	<c:if test="<%= !print %>">
+		<div align="right">
+			&laquo; <a href="<%= HtmlUtil.escape(redirect) %>"><liferay-ui:message key="back" /></a>
+		</div>
+	</c:if>
 
 	<div>
 		<liferay-util:include page="/html/portlet/asset_publisher/display/full_content.jsp" />

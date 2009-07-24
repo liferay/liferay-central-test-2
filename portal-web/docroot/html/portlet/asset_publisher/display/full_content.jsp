@@ -37,6 +37,7 @@ String className = (String)request.getAttribute("view.jsp-className");
 long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue();
 
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
@@ -73,22 +74,31 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<c:choose>
 				<c:when test="<%= showAssetTitle %>">
 					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_BLOG %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
-
+						<c:if test="<%= !print %>">
+							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+						</c:if>
 						<%= title %>
 					</h3>
 				</c:when>
-				<c:otherwise>
+				<c:when test="<%= !print %>">
 					<div class="asset-edit">
 						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 					</div>
-				</c:otherwise>
+				</c:when>
 			</c:choose>
+
+			<c:if test="<%= enablePrint %>">
+				<div class="asset-user-actions">
+					<div class="print-action">
+						<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
+					</div>
+				</div>
+			</c:if>
 
 			<div class="asset-content">
 				<%= entry.getContent() %>
 
-				<c:if test="<%= showContextLink %>">
+				<c:if test="<%= showContextLink && !print %>">
 					<div class="asset-more">
 						<a href="<%= themeDisplay.getPathMain() %>/blogs/find_entry?noSuchEntryRedirect=<%= HttpUtil.encodeURL(viewFullContent) %>&entryId=<%= entry.getEntryId() %>"><liferay-ui:message key="view-blog" /> &raquo;</a>
 					</div>
@@ -246,24 +256,34 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<c:choose>
 				<c:when test="<%= showAssetTitle %>">
 					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_IMAGE %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+						<c:if test="<%= !print %>">
+							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+						</c:if>
 
 						<%= title %>
 					</h3>
 				</c:when>
-				<c:otherwise>
+				<c:when test="<%= !print %>">
 					<div class="asset-edit">
 						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 					</div>
-				</c:otherwise>
+				</c:when>
 			</c:choose>
+
+			<c:if test="<%= enablePrint %>">
+				<div class="asset-user-actions">
+					<div class="print-action">
+						<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
+					</div>
+				</div>
+			</c:if>
 
 			<div class="asset-content">
 				<img border="1" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
 
 				<p class="asset-description"><%= image.getDescription() %></p>
 
-				<c:if test="<%= showContextLink %>">
+				<c:if test="<%= showContextLink && !print %>">
 					<div class="asset-more">
 						<a href="<%= viewImageURL.toString() %>"><liferay-ui:message key="view-album" /> &raquo;</a>
 					</div>
@@ -297,34 +317,62 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				<c:choose>
 					<c:when test="<%= showAssetTitle %>">
 						<h3 class="asset-title <%= AssetPublisherUtil.TYPE_CONTENT %>">
-							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+							<c:if test="<%= !print %>">
+								<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+							</c:if>
 
 							<%= title %>
 						</h3>
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !print %>">
 						<div class="asset-edit">
 							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 						</div>
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
-				<div class="asset-content">
-					<c:if test="<%= showAvailableLocales %>">
-
-						<%
-						String[] availableLocales = articleDisplay.getAvailableLocales();
-						%>
-
-						<c:if test="<%= availableLocales.length > 0 %>">
-							<div>
-								<br />
-
-								<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+				<c:if test="<%= (enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 0)) %>">
+					<div class="asset-user-actions">
+						<c:if test="<%= enablePrint %>">
+							<div class="print-action">
+								<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
 							</div>
 						</c:if>
-					</c:if>
 
+						<c:if test="<%= enableConversions && !print %>">
+
+							<%
+							PortletURL exportAssetURL = renderResponse.createActionURL();
+
+							exportAssetURL.setParameter("struts_action", "/asset_publisher/export_journal_article");
+							exportAssetURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
+							exportAssetURL.setParameter("articleId", articleDisplay.getArticleId());
+							%>
+
+							<div class="export-actions">
+								<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
+							</div>
+						</c:if>
+						<c:if test="<%= showAvailableLocales && !print %>">
+
+							<%
+							String[] availableLocales = articleDisplay.getAvailableLocales();
+							%>
+
+							<c:if test="<%= availableLocales.length > 0 %>">
+								<c:if test="<%= enableConversions || enablePrint %>">
+									<div class="locale-separator"> </div>
+								</c:if>
+
+								<div class="locale-actions">
+									<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+								</div>
+							</c:if>
+						</c:if>
+					</div>
+				</c:if>
+
+				<div class="asset-content">
 					<div class="journal-content-article">
 						<%= articleDisplay.getContent() %>
 					</div>
@@ -432,30 +480,61 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			</div>
 		</c:when>
 		<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
+
+			<%
+			WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+
+			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+			AssetEntryLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
+			%>
+
 			<c:choose>
 				<c:when test="<%= showAssetTitle %>">
 					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_WIKI %>">
-						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+						<c:if test="<%= !print %>">
+							<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
+						</c:if>
 
 						<%= title %>
 					</h3>
 				</c:when>
-				<c:otherwise>
+				<c:when test="<%= !print %>">
 					<div class="asset-edit">
 						<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 					</div>
-				</c:otherwise>
+				</c:when>
 			</c:choose>
+
+			<c:if test="<%= (enableConversions || enablePrint) %>">
+				<div class="asset-user-actions">
+					<c:if test="<%= enablePrint %>">
+						<div class="print-action">
+							<%@ include file="/html/portlet/asset_publisher/asset_print.jspf" %>
+						</div>
+					</c:if>
+					<c:if test="<%= enableConversions && !print %>">
+
+						<%
+						PortletURL exportAssetURL = renderResponse.createActionURL();
+
+						exportAssetURL.setParameter("struts_action", "/asset_publisher/export_wiki_page");
+						exportAssetURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
+						exportAssetURL.setParameter("title", wikiPage.getTitle());
+						%>
+
+						<div class="export-actions">
+							<%@ include file="/html/portlet/asset_publisher/asset_export.jspf" %>
+						</div>
+					</c:if>
+				</div>
+			</c:if>
 
 			<div class="asset-content">
 				<div class="content-body">
 
 					<%
-					WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
-					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-
-					AssetEntryLocalServiceUtil.incrementViewCounter(className, wikiPage.getResourcePrimKey());
 
 					if (showContextLink) {
 						WikiNode node = WikiNodeLocalServiceUtil.getNode(pageResource.getNodeId());
@@ -497,7 +576,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					}
 					%>
 
-					<c:if test="<%= showContextLink %>">
+					<c:if test="<%= showContextLink && !print %>">
 						<div class="asset-more">
 							<a href="<%= themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() %>"><liferay-ui:message key="view-wiki" /> &raquo;</a>
 						</div>
