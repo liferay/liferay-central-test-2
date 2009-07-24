@@ -47,12 +47,10 @@ if (image != null) {
 
 String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
-long classPK = 0;
 IGFolder folder = null;
 Image largeImage = null;
 
 if (image != null) {
-	classPK = image.getImageId();
 	folder = image.getFolder();
 	largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 }
@@ -301,7 +299,7 @@ String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_M
 	<td>
 		<liferay-ui:asset-categories-selector
 			className="<%= IGImage.class.getName() %>"
-			classPK="<%= classPK %>"
+			classPK="<%= imageId %>"
 		/>
 	</td>
 </tr>
@@ -312,7 +310,7 @@ String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_M
 	<td>
 		<liferay-ui:asset-tags-selector
 			className="<%= IGImage.class.getName() %>"
-			classPK="<%= classPK %>"
+			classPK="<%= imageId %>"
 		/>
 	</td>
 </tr>
