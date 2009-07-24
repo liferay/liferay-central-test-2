@@ -47,7 +47,8 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 		if ((strutsAction.equals("/journal_content/view")) &&
 			((windowState == null) ||
-			 (!windowState.equals(LiferayWindowState.EXCLUSIVE)))) {
+			 (!windowState.equals(LiferayWindowState.EXCLUSIVE) &&
+			  !windowState.equals(LiferayWindowState.POP_UP)))) {
 
 			String portletId = portletURL.getPortletId();
 			String groupId = portletURL.getParameter("groupId");
