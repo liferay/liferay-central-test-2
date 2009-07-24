@@ -26,6 +26,7 @@
 
 <%
 JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
+boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
 
 if (articleDisplay != null) {
 	AssetEntryLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
@@ -69,7 +70,7 @@ if (articleDisplay != null) {
 
 				<c:if test="<%= enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 0) %>">
 					<div class="user-actions">
-						<c:if test="<%= enablePrint %>">
+						<c:if test="<%= enablePrint && !print %>">
 
 							<%
 							PortletURL printPageURL = renderResponse.createRenderURL();
@@ -89,11 +90,11 @@ if (articleDisplay != null) {
 							</script>
 
 							<div class="print-action">
-								<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
+								<liferay-ui:icon image="print" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 							</div>
 						</c:if>
 
-						<c:if test="<%= enableConversions %>">
+						<c:if test="<%= enableConversions && !print%>">
 
 							<%
 							PortletURL exportArticleURL = renderResponse.createActionURL();
@@ -129,7 +130,7 @@ if (articleDisplay != null) {
 							</div>
 						</c:if>
 
-						<c:if test="<%= showAvailableLocales %>">
+						<c:if test="<%= showAvailableLocales && !print %>">
 
 							<%
 							String[] availableLocales = articleDisplay.getAvailableLocales();
@@ -202,7 +203,7 @@ if (articleDisplay != null) {
 		boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !staged);
 		%>
 
-		<c:if test="<%= showIconsActions %>">
+		<c:if test="<%= showIconsActions && !print %>">
 			<div class="lfr-meta-actions icons-container">
 				<div class="icon-actions">
 					<c:if test="<%= showEditArticleIcon %>">
