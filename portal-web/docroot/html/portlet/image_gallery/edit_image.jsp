@@ -36,7 +36,6 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
-
 String name = BeanParamUtil.getString(image, request, "name");
 
 String extension = StringPool.BLANK;
