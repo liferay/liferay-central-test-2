@@ -155,7 +155,12 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 			height = iframe.contentWindow.document.body.scrollHeight;
 		}
 		catch (e) {
-			<portlet:namespace />maximizeIframe(iframe);
+			if (themeDisplay.isStateMaximized()) {
+				<portlet:namespace />maximizeIframe(iframe);
+			}
+			else {
+				iframe.height = <%= heightNormal %>;
+			}
 
 			return true;
 		}
