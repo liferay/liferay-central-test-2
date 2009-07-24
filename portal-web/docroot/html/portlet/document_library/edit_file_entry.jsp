@@ -58,11 +58,14 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 
 DLFolder folder = null;
 
+long classPK = 0;
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
+	classPK = fileEntry.getFileEntryId();
 	folder = fileEntry.getFolder();
 
 	try {
@@ -258,6 +261,17 @@ portletURL.setParameter("name", name);
 	<tr>
 		<td colspan="2">
 			<br />
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-label">
+			<liferay-ui:message key="categories" />
+		</td>
+		<td>
+			<liferay-ui:asset-categories-summary
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= fileEntry.getFileEntryId() %>"
+			/>
 		</td>
 	</tr>
 	<tr>
@@ -492,18 +506,20 @@ portletURL.setParameter("name", name);
 	</tr>
 	<tr>
 		<td class="lfr-label">
+			<liferay-ui:message key="categories" />
+		</td>
+		<td>
+			<liferay-ui:asset-categories-selector
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= classPK %>"
+			/>
+		</td>
+	</tr>
+	<tr>
+		<td class="lfr-label">
 			<liferay-ui:message key="tags" />
 		</td>
 		<td>
-
-			<%
-			long classPK = 0;
-
-			if (fileEntry != null) {
-				classPK = fileEntry.getFileEntryId();
-			}
-			%>
-
 			<liferay-ui:asset-tags-selector
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= classPK %>"
