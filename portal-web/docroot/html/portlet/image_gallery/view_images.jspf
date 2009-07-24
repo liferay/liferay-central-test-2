@@ -56,14 +56,18 @@
 			winWidth = maxDimension;
 		}
 
+		var messageId = "<portlet:namespace />popup_" + id;
+		var buttonsId = "<portlet:namespace />buttons_" + id;
+		var categorizationId = "<portlet:namespace />categorizacionContainer_" + id;
+
+		var categorization = jQuery("#" + categorizationId);
+
 		var html = "<div class='image-content'>";
 		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
 		html += "<div class='image-name'>" + name + "</div>";
 		html += "<div class='image-description'>" + description + "</div>";
-		html += "</div>";
-
-		var messageId = "<portlet:namespace />popup_" + id;
-		var buttonsId = "<portlet:namespace />buttons_" + id;
+		html += "<div class='image-categorization'>" + categorization.html() + "</div>";
+		html += "</div>"
 
 		var popup = new Alloy.Popup(
 			{
@@ -151,6 +155,25 @@
 						<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
 							<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
 						</div>
+					</div>
+
+					<%
+					List tags = AssetTagServiceUtil.getTags(IGImage.class.getName(), image.getImageId());
+					boolean hasTags = tags != null && !tags.isEmpty();
+					%>
+
+					<div id="<portlet:namespace />categorizacionContainer_<%= largeImage.getImageId() %>" style="display: none;">
+						<span <%= hasTags ? "class=\"has-tags\"" : "" %> >
+							<liferay-ui:asset-categories-summary
+								className="<%= IGImage.class.getName() %>"
+								classPK="<%= image.getImageId() %>"
+							/>
+						</span>
+
+						<liferay-ui:asset-tags-summary
+							className="<%= IGImage.class.getName() %>"
+							classPK="<%= image.getImageId() %>"
+						/>
 					</div>
 				</div>
 			</c:when>

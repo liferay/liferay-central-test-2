@@ -29,6 +29,16 @@
 	text-align: center;
 }
 
+.image-popup .image-content .image-categorization {
+	margin-bottom: 20px;
+}
+
+.image-popup .image-content .image-categorization .has-tags .taglib-asset-categories-summary {
+	border-right: 1px solid #ccc;
+	margin-right: 20px;
+	padding-right: 10px;
+}
+
 .image-popup .image-content .image-name {
 	font-weight: bold;
 }
