@@ -49,7 +49,7 @@ if (wikiPage != null) {
 }
 
 boolean preview = false;
-boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
+boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
