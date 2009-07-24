@@ -223,7 +223,7 @@ if (breadcrumbsCategoryId > 0) {
 	MBUtil.addPortletBreadcrumbEntries(breadcrumbsCategoryId, request, renderResponse);
 }
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
 %>
 
 <%!

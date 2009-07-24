@@ -82,29 +82,10 @@ public class MBUtil {
 		PropsValues.POP_SERVER_SUBDOMAIN.length();
 
 	public static void addPortletBreadcrumbEntries(
-			MBMessage message, HttpServletRequest request,
-			RenderResponse renderResponse)
-		throws Exception {
-		MBCategory category = message.getCategory();
-
-		addPortletBreadcrumbEntries(category, request, renderResponse);
-
-		PortletURL portletURL = renderResponse.createRenderURL();
-
-		portletURL.setParameter(
-			"struts_action", "/message_boards/view_message");
-		portletURL.setParameter("tabs1", "categories");
-		portletURL.setParameter(
-			"messageId", String.valueOf(message.getMessageId()));
-
-		PortalUtil.addPortletBreadcrumbEntry(
-			request, message.getSubject(), portletURL.toString());
-	}
-
-	public static void addPortletBreadcrumbEntries(
 			long categoryId, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
+
 		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 			categoryId);
 
@@ -124,7 +105,6 @@ public class MBUtil {
 		List<MBCategory> ancestorCategories = category.getAncestors();
 
 	   for (MBCategory curCategory : ancestorCategories) {
-
 		   portletURL.setParameter(
 			   "mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
@@ -137,6 +117,27 @@ public class MBUtil {
 
 	   PortalUtil.addPortletBreadcrumbEntry(
 		   request, category.getName(), portletURL.toString());
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			MBMessage message, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		MBCategory category = message.getCategory();
+
+		addPortletBreadcrumbEntries(category, request, renderResponse);
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("tabs1", "categories");
+		portletURL.setParameter(
+			"messageId", String.valueOf(message.getMessageId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, message.getSubject(), portletURL.toString());
 	}
 
 	public static void collectMultipartContent(
@@ -275,20 +276,6 @@ public class MBUtil {
 		}
 	}
 
-	public static boolean getEmailMessageAddedEnabled(
-		PortletPreferences preferences) {
-
-		String emailMessageAddedEnabled = preferences.getValue(
-			"email-message-added-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailMessageAddedEnabled)) {
-			return GetterUtil.getBoolean(emailMessageAddedEnabled);
-		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED;
-		}
-	}
-
 	public static String getEmailMessageAddedBody(
 		PortletPreferences preferences) {
 
@@ -301,6 +288,20 @@ public class MBUtil {
 		else {
 			return ContentUtil.get(
 				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
+		}
+	}
+
+	public static boolean getEmailMessageAddedEnabled(
+		PortletPreferences preferences) {
+
+		String emailMessageAddedEnabled = preferences.getValue(
+			"email-message-added-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageAddedEnabled)) {
+			return GetterUtil.getBoolean(emailMessageAddedEnabled);
+		}
+		else {
+			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED;
 		}
 	}
 
@@ -334,20 +335,6 @@ public class MBUtil {
 		}
 	}
 
-	public static boolean getEmailMessageUpdatedEnabled(
-		PortletPreferences preferences) {
-
-		String emailMessageUpdatedEnabled = preferences.getValue(
-			"email-message-updated-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
-			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
-		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED;
-		}
-	}
-
 	public static String getEmailMessageUpdatedBody(
 		PortletPreferences preferences) {
 
@@ -360,6 +347,20 @@ public class MBUtil {
 		else {
 			return ContentUtil.get(
 				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
+		}
+	}
+
+	public static boolean getEmailMessageUpdatedEnabled(
+		PortletPreferences preferences) {
+
+		String emailMessageUpdatedEnabled = preferences.getValue(
+			"email-message-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
+		}
+		else {
+			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED;
 		}
 	}
 

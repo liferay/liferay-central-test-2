@@ -128,8 +128,7 @@ String threadView = messageDisplay.getThreadView();
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
-	<td class="stretch">
-	</td>
+	<td class="stretch"></td>
 
 	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_VIEWS.length > 1 %>">
 		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
