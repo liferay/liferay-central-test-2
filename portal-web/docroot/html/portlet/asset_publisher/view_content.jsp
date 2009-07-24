@@ -31,7 +31,8 @@ long assetEntryId = ParamUtil.getLong(request, "assetEntryId");
 String type = ParamUtil.getString(request, "type");
 String urlTitle = ParamUtil.getString(request, "urlTitle");
 
-boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
+boolean show = true;
+boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 List results = new ArrayList();
 
@@ -71,8 +72,6 @@ try {
 	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;
 	String editURL = StringPool.BLANK;
-
-	boolean show = true;
 
 	request.setAttribute("view.jsp-results", results);
 

@@ -296,7 +296,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			%>
 
 			<c:if test="<%= articleDisplay != null %>">
-
 				<c:if test="<%= showAssetTitle %>">
 					<h3 class="asset-title <%= AssetPublisherUtil.TYPE_CONTENT %>"><%= title %></h3>
 				</c:if>
@@ -529,7 +528,7 @@ private PortletURL _createExportURL(String className, long classPK, String langu
 }
 
 private String[] _getAvailableLocales(String className, long classPK, String languageId, RenderResponse renderResponse, ThemeDisplay themeDisplay) throws Exception {
-	if (Validator.equals(className, JournalArticle.class.getName())) {
+	if (className.equals(JournalArticle.class.getName())) {
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
 
@@ -540,7 +539,7 @@ private String[] _getAvailableLocales(String className, long classPK, String lan
 }
 
 private boolean _isConvertible(String className) {
-	if (Validator.equals(className, JournalArticle.class.getName()) || Validator.equals(className, WikiPage.class.getName())) {
+	if (className.equals(JournalArticle.class.getName()) || className.equals(WikiPage.class.getName())) {
 		return true;
 	}
 	else {
@@ -549,7 +548,7 @@ private boolean _isConvertible(String className) {
 }
 
 private boolean _isLocalizable(String className) {
-	if (Validator.equals(className, JournalArticle.class.getName())) {
+	if (className.equals(JournalArticle.class.getName())) {
 		return true;
 	}
 	else {
@@ -558,7 +557,7 @@ private boolean _isLocalizable(String className) {
 }
 
 private boolean _isPrintable(String className) {
-	if (!Validator.equals(className, MBMessage.class.getName()) && !Validator.equals(className, DLFileEntry.class.getName())) {
+	if (!className.equals(DLFileEntry.class.getName()) && !className.equals(MBMessage.class.getName())) {
 		return true;
 	}
 	else {
