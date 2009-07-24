@@ -107,7 +107,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 		</script>
 
 		<div class="popup-print">
-			<liferay-ui:icon image="print" message="print" url="javascript:print();" />
+			<liferay-ui:icon image="print" url="javascript:print();" />
 		</div>
 	</c:when>
 	<c:otherwise>

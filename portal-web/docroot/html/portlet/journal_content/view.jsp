@@ -26,7 +26,8 @@
 
 <%
 JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
-boolean print = Validator.equals(Constants.PRINT, ParamUtil.getString(request, "viewMode"));
+
+boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 if (articleDisplay != null) {
 	AssetEntryLocalServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
@@ -78,7 +79,7 @@ if (articleDisplay != null) {
 									</script>
 
 									<div class="print-action">
-										<liferay-ui:icon image="print" message="print" url="javascript:print();" />
+										<liferay-ui:icon image="print" url="javascript:print();" />
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -101,13 +102,13 @@ if (articleDisplay != null) {
 									</script>
 
 									<div class="print-action">
-										<liferay-ui:icon image="print" message="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
+										<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 									</div>
 								</c:otherwise>
 							</c:choose>
 						</c:if>
 
-						<c:if test="<%= enableConversions && !print%>">
+						<c:if test="<%= enableConversions && !print %>">
 
 							<%
 							PortletURL exportArticleURL = renderResponse.createActionURL();
