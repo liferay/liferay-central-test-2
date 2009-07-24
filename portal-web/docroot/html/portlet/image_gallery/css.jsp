@@ -24,6 +24,18 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.image-popup .image-content {
+	margin-top: 16px;
+	text-align: center;
+}
+
+.image-popup .image-content .image-name {
+	font-weight: bold;
+}
+.image-popup .image-content .image-description {
+	font-style: italic;
+}
+
 .image-popup .taglib-icon-list {
 	float: right;
 }

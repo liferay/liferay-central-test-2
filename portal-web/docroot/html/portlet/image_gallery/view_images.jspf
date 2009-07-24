@@ -25,7 +25,7 @@
 <script type="text/javascript">
 	var maxDimension = <%= PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
 
-	function <portlet:namespace />viewImage(id, token, name, width, height) {
+	function <portlet:namespace />viewImage(id, token, name, description, width, height) {
 		var page = Liferay.Util.viewport.page();
 
 		var maxWidth = Math.max(page.x - 150, maxDimension);
@@ -56,9 +56,11 @@
 			winWidth = maxDimension;
 		}
 
-		var html =
-			"<div style='margin-top: 16px; text-align: center;'><img alt='" + name + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' /></div>" +
-			"<div style='text-align: center;'>" + name + "</div>";
+		var html = "<div class='image-content'>";
+		html += "<img alt='" + name + ". " + description + "' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "&t=" + token + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' />"
+		html += "<div class='image-name'>" + name + "</div>";
+		html += "<div class='image-description'>" + description + "</div>";
+		html += "</div>";
 
 		var messageId = "<portlet:namespace />popup_" + id;
 		var buttonsId = "<portlet:namespace />buttons_" + id;
@@ -125,7 +127,7 @@
 				%>
 
 				<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
-					<a href="javascript:;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<b><%= UnicodeFormatter.toString(image.getName()) %></b><br /><%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+					<a href="javascript:;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>', '<%= UnicodeFormatter.toString(image.getName()) %>', '<%= UnicodeFormatter.toString(image.getDescription()) %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
 						<img alt="<%= image.getName() + ". " + image.getDescription() %>" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImageId %>&t=<%= ImageServletTokenUtil.getToken(smallImageId) %>" style="height: <%= smallImageHeight %>; width: <%= smallImageWidth %>;" />
 					</a>
 
