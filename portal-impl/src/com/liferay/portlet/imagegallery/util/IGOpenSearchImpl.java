@@ -38,7 +38,7 @@ public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 		throws Exception {
 
 		return IGFolderLocalServiceUtil.search(
-			companyId, groupId, null, keywords, start, end);
+			companyId, groupId, userId, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

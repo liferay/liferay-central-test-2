@@ -280,8 +280,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] folderIds, String keywords,
-			int start, int end)
+			long companyId, long groupId, long userId, long[] folderIds,
+			String keywords, int start, int end)
 		throws SystemException {
 
 		try {
@@ -297,6 +297,15 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long folderId : folderIds) {
+					if (userId > 0) {
+						try {
+							igFolderService.getFolder(folderId);
+						}
+						catch (Exception e) {
+							continue;
+						}
+					}
+
 					TermQuery termQuery = TermQueryFactoryUtil.create(
 						"folderId", folderId);
 
@@ -322,7 +331,9 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, fullQuery, start, end);
+			return SearchEngineUtil.search(
+				companyId, groupId, userId, IGImage.class.getName(), fullQuery,
+				start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
