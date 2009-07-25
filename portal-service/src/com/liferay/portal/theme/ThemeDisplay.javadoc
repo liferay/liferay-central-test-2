@@ -27,6 +27,10 @@
 		<comment><![CDATA[]]></comment>
 	</method>
 	<method>
+		<name>getCompanyGroupId</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
 		<name>getCompanyLogo</name>
 		<comment><![CDATA[]]></comment>
 	</method>
@@ -1381,6 +1385,10 @@
 	</field>
 	<field>
 		<name>_company</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_companyGroupId</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>

@@ -35,30 +35,8 @@ import com.liferay.portal.kernel.workflow.request.BaseRequest;
 
 import java.util.Formatter;
 
-/**
- * <a href="WorkflowMessageListener.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * The generic message listener for workflow messages. The object (manager) to
- * invoke the method on has to be injected using constructor injection as well
- * as the expected request class to be handled by this listener.
- * </p>
- *
- * @author Micha Kiener
- * @author Shuyang Zhou
- *
- */
 public class WorkflowMessageListener implements MessageListener {
 
-	/**
-	 * Constructor using the manager to invoke methods on and the expected
-	 * request class this listener will be able to handle.
-	 *
-	 * @param manager the manager instance to invoke methods on given by the
-	 *			payload of the message
-	 * @param requestClazz the expected request class as the payload of the
-	 *			message being handled by this listener
-	 */
 	public WorkflowMessageListener(
 		Object manager, Class<? extends BaseRequest> requestClazz,
 		MessageBus messageBus) {
@@ -67,10 +45,6 @@ public class WorkflowMessageListener implements MessageListener {
 		_messageBus=messageBus;
 	}
 
-	/**
-	 * @see com.liferay.portal.kernel.messaging.MessageListener#
-	 * receive(com.liferay.portal.kernel.messaging.Message)
-	 */
 	public void receive(Message message) {
 
 		Object payload = message.getPayload();

@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowException;
@@ -33,13 +30,9 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.request.WorkflowInstanceRequest;
 
-/**
- * <a href="WorkflowInstanceManagerProxy.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * @author Shuyang Zhou
- *
- */
+import java.util.List;
+import java.util.Map;
+
 public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 
 	public WorkflowInstanceManagerProxy(
@@ -70,7 +63,7 @@ public class WorkflowInstanceManagerProxy implements WorkflowInstanceManager {
 				"Unable to add context information.", ex);
 		}
 	}
-	
+
 	public List<String> getPossibleNextActivityNames(
 		long workflowInstanceId, long userId)
 		throws WorkflowException {

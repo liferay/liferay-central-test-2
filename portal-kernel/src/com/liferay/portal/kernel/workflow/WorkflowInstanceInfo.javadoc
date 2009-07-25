@@ -8,8 +8,7 @@
 	<method>
 		<name>getChildren</name>
 		<comment><![CDATA[If this is a parent workflow instance, its children are being returned using this method. A child workflow instance is usually being created automatically by the engine to split the process flow into parallel processing (like a fork), so every child instance has its own track of activities and information related to it.]]></comment>
-		<return><![CDATA[the list of children, if any, an empty list otherwise (never
-<code>null</code>)]]></return>
+		<return><![CDATA[the list of children, if any, an empty list otherwise (never <code>null</code>)]]></return>
 	</method>
 	<method>
 		<name>getContext</name>
@@ -29,21 +28,18 @@
 	<method>
 		<name>getParent</name>
 		<comment><![CDATA[If this is a child workflow instance, its parent instance is being returned by this method. See {@link #getChildren()} for more details about parent - child relationship.]]></comment>
-		<return><![CDATA[the parent instance of this child instance or <code>null</code>
-if this is the root instance]]></return>
+		<return><![CDATA[the parent instance of this child instance or <code>null</code> if this is the root instance]]></return>
 	</method>
 	<method>
 		<name>getRelationId</name>
 		<comment><![CDATA[<p> If this workflow instance was created in relation of a domain object instance, its identifier is returned by this method. </p> <p> <b><i>Note</i></b> The support of a related domain object however is optional and might not be supported by the underlying engine. </p>]]></comment>
-		<return><![CDATA[the domain object identifier, if related to one,
-<code>null</code> otherwise]]></return>
+		<return><![CDATA[the domain object identifier, if related to one, <code>null</code> otherwise]]></return>
 		<see>WorkflowInstanceManager#getWorkflowInstanceInfo(String, long, boolean) for more details about related domain objects</see>
 	</method>
 	<method>
 		<name>getRelationType</name>
 		<comment><![CDATA[<p> If this workflow instance was created in relation of a domain object instance, its type identifier is returned by this method. </p> <p> <b><i>Note</i></b> The support of a related domain object however is optional and might not be supported by the underlying engine. </p>]]></comment>
-		<return><![CDATA[the domain object type identifier, if related to one,
-<code>null</code> otherwise]]></return>
+		<return><![CDATA[the domain object type identifier, if related to one, <code>null</code> otherwise]]></return>
 		<see>WorkflowInstanceManager#getWorkflowInstanceInfo(String, long, boolean) for more details about related domain objects</see>
 	</method>
 	<method>

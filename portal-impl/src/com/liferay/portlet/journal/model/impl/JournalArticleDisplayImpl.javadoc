@@ -5,7 +5,7 @@
 	<type>com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>JournalArticleDisplayImpl</name>
 		<comment><![CDATA[]]></comment>

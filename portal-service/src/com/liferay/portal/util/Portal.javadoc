@@ -720,6 +720,48 @@
 		</param>
 	</method>
 	<method>
+		<name>getLayoutFullURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getLayoutFullURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layout</name>
+			<type>com.liferay.portal.model.Layout</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>doAsUser</name>
+			<type>boolean</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>getLayoutFullURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>themeDisplay</name>
+			<type>com.liferay.portal.theme.ThemeDisplay</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
 		<name>getLayoutSetFriendlyURL</name>
 		<comment><![CDATA[]]></comment>
 		<param>

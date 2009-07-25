@@ -5,7 +5,7 @@
 	<type>com.liferay.portal.util.ContentUtil</type>
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>get</name>
 		<comment><![CDATA[]]></comment>

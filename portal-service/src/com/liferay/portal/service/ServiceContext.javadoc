@@ -61,6 +61,10 @@
 		<comment><![CDATA[]]></comment>
 	</method>
 	<method>
+		<name>getLayoutFullURL</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
 		<name>getLayoutURL</name>
 		<comment><![CDATA[]]></comment>
 	</method>
@@ -197,6 +201,15 @@
 		</param>
 	</method>
 	<method>
+		<name>setLayoutFullURL</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>layoutFullURL</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
 		<name>setLayoutURL</name>
 		<comment><![CDATA[]]></comment>
 		<param>
@@ -306,6 +319,10 @@
 	</field>
 	<field>
 		<name>_languageId</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>_layoutFullURL</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>

@@ -4,7 +4,7 @@
 	<name>PortletDataException</name>
 	<type>com.liferay.portal.lar.PortletDataException</type>
 	<comment><![CDATA[]]></comment>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>PortletDataException</name>
 		<comment><![CDATA[]]></comment>

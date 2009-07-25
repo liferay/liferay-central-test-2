@@ -7,6 +7,10 @@
 	<author>Charles May</author>
 	<author>Brian Wing Shun Chan</author>
 	<field>
+		<name>ACCESS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
 		<name>ACCESS_IN_CONTROL_PANEL</name>
 		<comment><![CDATA[]]></comment>
 	</field>

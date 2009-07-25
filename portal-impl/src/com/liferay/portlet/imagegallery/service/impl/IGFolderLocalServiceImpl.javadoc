@@ -442,6 +442,11 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
 			<name>folderIds</name>
 			<type>long</type>
 			<comment><![CDATA[]]></comment>

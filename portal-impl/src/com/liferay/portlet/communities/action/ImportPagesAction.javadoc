@@ -5,7 +5,7 @@
 	<type>com.liferay.portlet.communities.action.ImportPagesAction</type>
 	<comment><![CDATA[]]></comment>
 	<author>Alexander Chow</author>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>processAction</name>
 		<comment><![CDATA[]]></comment>

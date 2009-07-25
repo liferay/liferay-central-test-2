@@ -2300,6 +2300,11 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
 			<name>keywords</name>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
@@ -2334,7 +2339,61 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
 			<name>keywords</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>start</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>end</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>SystemException</name>
+			<type>com.liferay.portal.SystemException</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>search</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>groupId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>keywords</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
@@ -2373,7 +2432,17 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
+			<name>userId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
 			<name>keywords</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>type</name>
 			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>

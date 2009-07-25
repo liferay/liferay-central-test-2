@@ -22,12 +22,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-/**
- * <a href="CommonContextInfoNames.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
 public interface CommonContextInfoNames {
 
 	public String GROUP_ID = "GROUP_ID";

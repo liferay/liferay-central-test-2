@@ -202,6 +202,10 @@
 		<comment><![CDATA[]]></comment>
 	</method>
 	<method>
+		<name>hasReminderQuery</name>
+		<comment><![CDATA[]]></comment>
+	</method>
+	<method>
 		<name>isFemale</name>
 		<comment><![CDATA[]]></comment>
 	</method>

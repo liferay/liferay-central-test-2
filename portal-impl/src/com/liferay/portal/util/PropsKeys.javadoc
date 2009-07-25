@@ -1402,7 +1402,15 @@
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
+		<name>LDAP_PAGE_SIZE</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
 		<name>LDAP_PASSWORD_POLICY_ENABLED</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>LDAP_RANGE_SIZE</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
@@ -1967,6 +1975,10 @@
 	</field>
 	<field>
 		<name>PERMISSIONS_USER_CHECK_ALGORITHM</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>PERMISSIONS_VIEW_DYNAMIC_INHERITANCE</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>
@@ -2547,6 +2559,10 @@
 	</field>
 	<field>
 		<name>USERS_REMINDER_QUERIES_QUESTIONS</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>USERS_REMINDER_QUERIES_REQUIRED</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 	<field>

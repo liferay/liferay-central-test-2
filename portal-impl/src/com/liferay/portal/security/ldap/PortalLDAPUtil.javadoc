@@ -236,6 +236,40 @@
 		</throws>
 	</method>
 	<method>
+		<name>getMultivaluedAttribute</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ctx</name>
+			<type>javax.naming.ldap.LdapContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>baseDN</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filter</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attribute</name>
+			<type>javax.naming.directory.Attribute</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
 		<name>getNameInNamespace</name>
 		<comment><![CDATA[]]></comment>
 		<param>
@@ -611,6 +645,24 @@
 		</throws>
 	</method>
 	<method>
+		<name>_getCookie</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>controls</name>
+			<type>javax.naming.ldap.Control</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
+		<name>_getNextRange</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>attributeId</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
+	<method>
 		<name>_importGroupsAndMembershipFromLDAPUser</name>
 		<comment><![CDATA[]]></comment>
 		<param>
@@ -660,6 +712,45 @@
 		<param>
 			<name>attr</name>
 			<type>javax.naming.directory.Attribute</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>_searchLDAP</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>companyId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>ctx</name>
+			<type>javax.naming.ldap.LdapContext</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>maxResults</name>
+			<type>int</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>baseDN</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>filter</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>attributeIds</name>
+			<type>java.lang.String</type>
 			<comment><![CDATA[]]></comment>
 		</param>
 		<throws>

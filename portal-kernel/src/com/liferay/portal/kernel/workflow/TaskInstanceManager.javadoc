@@ -153,8 +153,7 @@
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the list of activity names possible to follow on by completing
-the given task]]></return>
+		<return><![CDATA[the list of activity names possible to follow on by completing the given task]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -169,8 +168,7 @@ the given task]]></return>
 			<type>com.liferay.portal.kernel.workflow.UserCredential</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the total count of open tasks of the user represented by the
-credential]]></return>
+		<return><![CDATA[the total count of open tasks of the user represented by the credential]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -200,8 +198,7 @@ credential]]></return>
 			<type>long</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[the total count of open, directly assigned tasks of the specified
-user]]></return>
+		<return><![CDATA[the total count of open, directly assigned tasks of the specified user]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -216,8 +213,7 @@ user]]></return>
 			<type>com.liferay.portal.kernel.workflow.UserCredential</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[all tasks either be assigned to the user directly or indirectly
-assigned to one of its roles]]></return>
+		<return><![CDATA[all tasks either be assigned to the user directly or indirectly assigned to one of its roles]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -237,8 +233,7 @@ assigned to one of its roles]]></return>
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[all tasks either be assigned to the user directly or indirectly
-assigned to one of its roles]]></return>
+		<return><![CDATA[all tasks either be assigned to the user directly or indirectly assigned to one of its roles]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>
@@ -343,8 +338,7 @@ assigned to one of its roles]]></return>
 			<type>boolean</type>
 			<comment><![CDATA[]]></comment>
 		</param>
-		<return><![CDATA[all completed or open tasks related to the specified workflow
-instance]]></return>
+		<return><![CDATA[all completed or open tasks related to the specified workflow instance]]></return>
 		<throws>
 			<name>WorkflowException</name>
 			<type>com.liferay.portal.kernel.workflow.WorkflowException</type>

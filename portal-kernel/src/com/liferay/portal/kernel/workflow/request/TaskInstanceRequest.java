@@ -22,20 +22,15 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
 
-/**
- * <a href="TaskInstanceRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
+import java.lang.reflect.Method;
+
+import java.util.Map;
+
 public class TaskInstanceRequest extends BaseRequest {
 
 	public static TaskInstanceRequest createAssignTaskInstanceToRoleRequest(
@@ -76,7 +71,7 @@ public class TaskInstanceRequest extends BaseRequest {
 			taskInstanceId,
 			userId, activityName, comment, attributes);
 	}
-	
+
 	public static TaskInstanceRequest createGetPossibleNextActivityNamesRequest(
 		long taskInstanceId, long userId)
 		throws WorkflowException {
@@ -91,7 +86,7 @@ public class TaskInstanceRequest extends BaseRequest {
 		return new TaskInstanceRequest(
 			getTaskInstanceCountForCredential_UserCredential, 0, userCredential);
 	}
-	
+
 	public static TaskInstanceRequest createGetTaskInstanceCountForRoleRequest(
 		long roleId)
 		throws WorkflowException {
@@ -120,7 +115,7 @@ public class TaskInstanceRequest extends BaseRequest {
 			getTaskInstanceInfosByCredential_UserCredential_boolean, 0,
 			userCredential, completed);
 	}
-	
+
 	public static TaskInstanceRequest createGetTaskInstanceInfosByRoleRequest(
 			long roleId)
 		throws WorkflowException {

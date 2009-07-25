@@ -191,6 +191,15 @@
 			<comment><![CDATA[]]></comment>
 		</param>
 	</method>
+	<method>
+		<name>_formatO</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>s</name>
+			<type>java.lang.String</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+	</method>
 	<field>
 		<name>A</name>
 		<comment><![CDATA[]]></comment>
@@ -245,6 +254,10 @@
 	</field>
 	<field>
 		<name>N</name>
+		<comment><![CDATA[]]></comment>
+	</field>
+	<field>
+		<name>O</name>
 		<comment><![CDATA[]]></comment>
 	</field>
 </javadoc>

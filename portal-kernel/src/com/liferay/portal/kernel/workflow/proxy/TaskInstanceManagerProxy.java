@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow.proxy;
 
-import java.util.List;
-import java.util.Map;
-
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
@@ -33,12 +30,9 @@ import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.request.TaskInstanceRequest;
 
-/**
- * <a href="TaskInstanceManagerProxy.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
+import java.util.List;
+import java.util.Map;
+
 public class TaskInstanceManagerProxy implements TaskInstanceManager {
 
 	public TaskInstanceManagerProxy(
@@ -119,7 +113,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to complete task instance.", ex);
 		}
 	}
-	
+
 	public TaskInstanceInfo completeTaskInstance(
 		long taskInstanceId, long userId, String activityName, String comment,
 		Map<String, Object> attributes)
@@ -139,7 +133,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 			throw new WorkflowException("Unable to complete task instance.", ex);
 		}
 	}
-	
+
 	public List<String> getPossibleNextActivityNames(
 		long taskInstanceId, long userId)
 		throws WorkflowException {
@@ -159,7 +153,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to get possible next activities.", ex);
 		}
 	}
-	
+
 	public int getTaskInstanceCountForCredential(UserCredential userCredential)
 		throws WorkflowException {
 		try {
@@ -180,7 +174,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to get task count for credential.", ex);
 		}
 	}
-	
+
 	public int getTaskInstanceCountForRole(long roleId)
 		throws WorkflowException {
 		try {
@@ -198,7 +192,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to get task count for role.", ex);
 		}
 	}
-	
+
 	public int getTaskInstanceCountForUser(long userId)
 		throws WorkflowException {
 
@@ -237,7 +231,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to get task instances information by credential.", ex);
 		}
 	}
-	
+
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 		UserCredential userCredential, boolean completed)
 		throws WorkflowException {
@@ -258,7 +252,7 @@ public class TaskInstanceManagerProxy implements TaskInstanceManager {
 				"Unable to get task instances information by credential.", ex);
 		}
 	}
-	
+
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(long roleId)
 		throws WorkflowException {
 		try {

@@ -22,19 +22,14 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowUtil;
 
-/**
- * <a href="WorkflowInstanceRequest.java.html"><b><i>View Source</i></b></a>
- *
- * @author Shuyang Zhou
- *
- */
+import java.lang.reflect.Method;
+
+import java.util.Map;
+
 public class WorkflowInstanceRequest extends BaseRequest {
 
 	public static WorkflowInstanceRequest createAddContextInformationRequest(

@@ -4,7 +4,7 @@
 	<name>TasksProposalPermission</name>
 	<type>com.liferay.portlet.tasks.service.permission.TasksProposalPermission</type>
 	<comment><![CDATA[]]></comment>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>check</name>
 		<comment><![CDATA[]]></comment>

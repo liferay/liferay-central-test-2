@@ -4,7 +4,7 @@
 	<name>ModelExtensionHandler</name>
 	<type>com.liferay.portal.model.ModelExtensionHandler</type>
 	<comment><![CDATA[]]></comment>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>getExtensionMethodNames</name>
 		<comment><![CDATA[]]></comment>

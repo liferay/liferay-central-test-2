@@ -5,7 +5,7 @@
 	<type>com.liferay.util.transport.MulticastDatagramHandler</type>
 	<comment><![CDATA[]]></comment>
 	<author>Michael C. Han</author>
-	<author>Raymond Aug�</author>
+	<author>Raymond Augé</author>
 	<method>
 		<name>MulticastDatagramHandler</name>
 		<comment><![CDATA[]]></comment>

@@ -6,6 +6,78 @@
 	<comment><![CDATA[]]></comment>
 	<author>Brian Wing Shun Chan</author>
 	<method>
+		<name>addPortletBreadcrumbEntries</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>categoryId</name>
+			<type>long</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>renderResponse</name>
+			<type>javax.portlet.RenderResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>addPortletBreadcrumbEntries</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>category</name>
+			<type>com.liferay.portlet.messageboards.model.MBCategory</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>renderResponse</name>
+			<type>javax.portlet.RenderResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
+		<name>addPortletBreadcrumbEntries</name>
+		<comment><![CDATA[]]></comment>
+		<param>
+			<name>message</name>
+			<type>com.liferay.portlet.messageboards.model.MBMessage</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>request</name>
+			<type>javax.servlet.http.HttpServletRequest</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<param>
+			<name>renderResponse</name>
+			<type>javax.portlet.RenderResponse</type>
+			<comment><![CDATA[]]></comment>
+		</param>
+		<throws>
+			<name>Exception</name>
+			<type>java.lang.Exception</type>
+			<comment><![CDATA[]]></comment>
+		</throws>
+	</method>
+	<method>
 		<name>collectMultipartContent</name>
 		<comment><![CDATA[]]></comment>
 		<param>
@@ -47,47 +119,8 @@
 		<name>getBreadcrumbs</name>
 		<comment><![CDATA[]]></comment>
 		<param>
-			<name>categoryId</name>
-			<type>long</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>messageId</name>
-			<type>long</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>pageContext</name>
-			<type>javax.servlet.jsp.PageContext</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>renderRequest</name>
-			<type>javax.portlet.RenderRequest</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>renderResponse</name>
-			<type>javax.portlet.RenderResponse</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<throws>
-			<name>Exception</name>
-			<type>java.lang.Exception</type>
-			<comment><![CDATA[]]></comment>
-		</throws>
-	</method>
-	<method>
-		<name>getBreadcrumbs</name>
-		<comment><![CDATA[]]></comment>
-		<param>
 			<name>category</name>
 			<type>com.liferay.portlet.messageboards.model.MBCategory</type>
-			<comment><![CDATA[]]></comment>
-		</param>
-		<param>
-			<name>message</name>
-			<type>com.liferay.portlet.messageboards.model.MBMessage</type>
 			<comment><![CDATA[]]></comment>
 		</param>
 		<param>
@@ -139,7 +172,7 @@
 		</param>
 	</method>
 	<method>
-		<name>getEmailMessageAddedEnabled</name>
+		<name>getEmailMessageAddedBody</name>
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>preferences</name>
@@ -148,7 +181,7 @@
 		</param>
 	</method>
 	<method>
-		<name>getEmailMessageAddedBody</name>
+		<name>getEmailMessageAddedEnabled</name>
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>preferences</name>
@@ -175,7 +208,7 @@
 		</param>
 	</method>
 	<method>
-		<name>getEmailMessageUpdatedEnabled</name>
+		<name>getEmailMessageUpdatedBody</name>
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>preferences</name>
@@ -184,7 +217,7 @@
 		</param>
 	</method>
 	<method>
-		<name>getEmailMessageUpdatedBody</name>
+		<name>getEmailMessageUpdatedEnabled</name>
 		<comment><![CDATA[]]></comment>
 		<param>
 			<name>preferences</name>
