@@ -80,6 +80,10 @@ public class ServiceContext implements Serializable {
 		return _languageId;
 	}
 
+	public String getLayoutFullURL() {
+		return _layoutFullURL;
+	}
+
 	public String getLayoutURL() {
 		return _layoutURL;
 	}
@@ -158,6 +162,10 @@ public class ServiceContext implements Serializable {
 		_languageId = languageId;
 	}
 
+	public void setLayoutFullURL(String layoutFullURL) {
+		_layoutFullURL = layoutFullURL;
+	}
+
 	public void setLayoutURL(String layoutURL) {
 		_layoutURL = layoutURL;
 	}
@@ -202,6 +210,7 @@ public class ServiceContext implements Serializable {
 	private Map<String, Serializable> _expandoBridgeAttributes;
 	private String[] _guestPermissions;
 	private String _languageId;
+	private String _layoutFullURL;
 	private String _layoutURL;
 	private String _pathMain;
 	private String _portalURL;

@@ -747,13 +747,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
+		String layoutFullURL = serviceContext.getLayoutFullURL();
 
-		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
-			(portalURL.indexOf("://localhost") != -1) ||
-			(portalURL.indexOf("://127.0.0.1") != -1)) {
-
+		if (Validator.isNull(layoutFullURL)) {
 			return;
 		}
 
@@ -762,10 +758,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		StringBuilder sb = new StringBuilder();
 
 		String name = group.getDescriptiveName();
-		String url =
-			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs";
+		String url = layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs";
 		String changesURL =
-			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 		sb.append("http://blogsearch.google.com/ping?name=");
 		sb.append(HttpUtil.encodeURL(name));
@@ -865,10 +860,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
+		String layoutFullURL = serviceContext.getLayoutFullURL();
 
-		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL)) {
+		if (Validator.isNull(layoutFullURL)) {
 			return;
 		}
 
@@ -878,7 +872,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			HtmlUtil.extractText(entry.getContent()),
 			PropsValues.BLOGS_TRACKBACK_EXCERPT_LENGTH);
 		String url =
-			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
 				entry.getUrlTitle();
 
 		parts.put("title", entry.getTitle());

@@ -334,6 +334,22 @@ public class PortalUtil {
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay);
 	}
 
+	public static String getLayoutFullURL(
+		Layout layout, ThemeDisplay themeDisplay) {
+
+		return getPortal().getLayoutFullURL(layout, themeDisplay);
+	}
+
+	public static String getLayoutFullURL(
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+
+		return getPortal().getLayoutFullURL(layout, themeDisplay, doAsUser);
+	}
+
+	public static String getLayoutFullURL(ThemeDisplay themeDisplay) {
+		return getPortal().getLayoutFullURL(themeDisplay);
+	}
+
 	public static String getLayoutSetFriendlyURL(
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {

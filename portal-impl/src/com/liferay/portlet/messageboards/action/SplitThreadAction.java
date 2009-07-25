@@ -141,11 +141,10 @@ public class SplitThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(actionRequest, "subject");
 			String body = ParamUtil.getString(actionRequest, "body");
 
-			String portalURL = PortalUtil.getPortalURL(themeDisplay);
-			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+			String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);
 
 			String newThreadURL =
-				portalURL + layoutURL + "/message_boards/message/" +
+				layoutFullURL + "/message_boards/message/" +
 					message.getMessageId();
 
 			body = StringUtil.replace(

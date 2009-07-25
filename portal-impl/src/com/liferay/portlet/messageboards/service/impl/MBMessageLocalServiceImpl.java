@@ -1362,12 +1362,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext, boolean update)
 		throws PortalException, SystemException {
 
-		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
+		String layoutFullURL = serviceContext.getLayoutFullURL();
 
-		if (Validator.isNull(portalURL) || Validator.isNull(layoutURL) ||
-			category.isDiscussion()) {
-
+		if (Validator.isNull(layoutFullURL) || category.isDiscussion()) {
 			return;
 		}
 
@@ -1416,7 +1413,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		categoryIds.addAll(category.getAncestorCategoryIds());
 
 		String messageURL =
-			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
 				"message_boards/message/" + message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
@@ -1632,11 +1629,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
+		String layoutFullURL = serviceContext.getLayoutFullURL();
 
 		String blogsEntryURL =
-			portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
+			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
 				entry.getUrlTitle();
 
 		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());

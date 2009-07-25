@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -80,14 +79,10 @@ public class SitemapUtil {
 
 				Element url = element.addElement("url");
 
-				String layoutURL = PortalUtil.getLayoutURL(
+				String layoutFullURL = PortalUtil.getLayoutFullURL(
 					layout, themeDisplay);
 
-				if (!HttpUtil.hasDomain(layoutURL)) {
-					layoutURL = themeDisplay.getPortalURL() + layoutURL;
-				}
-
-				url.addElement("loc").addText(encodeXML(layoutURL));
+				url.addElement("loc").addText(encodeXML(layoutFullURL));
 
 				String changefreq = props.getProperty("sitemap-changefreq");
 

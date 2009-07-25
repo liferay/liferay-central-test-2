@@ -110,7 +110,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(BlogsEntry.cla
 		<liferay-ui:message key="trackback-url" />:
 
 		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
+			url='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>'
 		/>
 
 		<br /><br />

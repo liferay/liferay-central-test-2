@@ -40,6 +40,7 @@ public class ServiceContextUtil {
 		// Theme display
 
 		serviceContext.setCompanyId(jsonObject.getLong("companyId"));
+		serviceContext.setLayoutFullURL(jsonObject.getString("layoutFullURL"));
 		serviceContext.setLayoutURL(jsonObject.getString("layoutURL"));
 		serviceContext.setPathMain(jsonObject.getString("pathMain"));
 		serviceContext.setPlid(jsonObject.getLong("plid"));

@@ -70,10 +70,10 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 				continue;
 			}
 
-			String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			String hitLayoutURL = PortalUtil.getLayoutFullURL(hitLayout, themeDisplay);
 		%>
 
-			<br /><a href="<%= hitLayoutURL %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+			<br /><a href="<%= hitLayoutURL %>"><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
 
 		<%
 		}

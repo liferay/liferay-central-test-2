@@ -215,6 +215,13 @@ public interface Portal {
 	public String getLayoutFriendlyURL(
 		Layout layout, ThemeDisplay themeDisplay);
 
+	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay);
+
+	public String getLayoutFullURL(
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
+
+	public String getLayoutFullURL(ThemeDisplay themeDisplay);
+
 	public String getLayoutSetFriendlyURL(
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;

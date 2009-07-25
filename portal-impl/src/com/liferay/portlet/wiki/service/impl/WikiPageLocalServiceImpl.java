@@ -1140,7 +1140,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(page.getUserId());
 
 		String portalURL = serviceContext.getPortalURL();
-		String layoutURL = serviceContext.getLayoutURL();
+		String layoutFullURL = serviceContext.getLayoutFullURL();
 
 		WikiPage previousVersionPage = getPreviousVersionPage(page);
 
@@ -1173,17 +1173,16 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String pageURL = StringPool.BLANK;
 		String diffsURL = StringPool.BLANK;
 
-		if (Validator.isNotNull(layoutURL) && Validator.isNotNull(portalURL)) {
+		if (Validator.isNotNull(layoutFullURL)) {
 			pageURL =
-				portalURL + layoutURL + Portal.FRIENDLY_URL_SEPARATOR +
-					"wiki/" + node.getNodeId() + StringPool.SLASH +
+				layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "wiki/" +
+					node.getNodeId() + StringPool.SLASH +
 						HttpUtil.encodeURL(page.getTitle());
 
 			if (previousVersionPage != null) {
 				StringBuilder sb = new StringBuilder();
 
-				sb.append(portalURL);
-				sb.append(layoutURL);
+				sb.append(layoutFullURL);
 				sb.append("?p_p_id=");
 				sb.append(PortletKeys.WIKI);
 				sb.append("&p_p_state=");

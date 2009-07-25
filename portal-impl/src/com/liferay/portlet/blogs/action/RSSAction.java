@@ -148,9 +148,8 @@ public class RSSAction extends PortletAction {
 			}
 
 			feedURL =
-				themeDisplay.getURLPortal() +
-					PortalUtil.getLayoutURL(themeDisplay) +
-						Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
+				PortalUtil.getLayoutFullURL(themeDisplay) +
+					Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 			entryURL = feedURL;
 

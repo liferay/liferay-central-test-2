@@ -109,8 +109,8 @@ public class ViewAction extends PortletAction {
 
 		String portalURL = PortalUtil.getPortalURL(actionRequest);
 
-		String pageURL =
-			portalURL + PortalUtil.getLayoutURL(layout, themeDisplay);
+		String layoutFullURL =
+			PortalUtil.getLayoutFullURL(layout, themeDisplay);
 
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
@@ -130,7 +130,7 @@ public class ViewAction extends PortletAction {
 			new String[] {
 				fromAddress,
 				fromName,
-				pageURL,
+				layoutFullURL,
 				portalURL
 			});
 
@@ -145,7 +145,7 @@ public class ViewAction extends PortletAction {
 			new String[] {
 				fromAddress,
 				fromName,
-				pageURL,
+				layoutFullURL,
 				portalURL
 			});
 
