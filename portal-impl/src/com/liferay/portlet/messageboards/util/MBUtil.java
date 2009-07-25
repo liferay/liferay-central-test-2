@@ -500,7 +500,7 @@ public class MBUtil {
 
 		if (Validator.isNull(parentHeader) ||
 			!parentHeader.startsWith(POP_PORTLET_PREFIX, 1)) {
-			
+
 			parentHeader = _getParentMessageIdFromSubject(message);
 		}
 
