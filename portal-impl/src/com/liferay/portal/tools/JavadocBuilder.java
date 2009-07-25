@@ -764,7 +764,7 @@ public class JavadocBuilder {
 		String newContent = _getJavadocXml(javaClass);
 
 		if ((oldContent == null) || !oldContent.equals(newContent)) {
-			_fileUtil.write(file, newContent);
+			_fileUtil.write(file, newContent.getBytes());
 
 			System.out.println("Writing " + file);
 		}

@@ -29,7 +29,7 @@
 		<mkdir dir="classes" />
 
 		<copy todir="classes">
-			<fileset dir="src" excludes="**/*.java" />
+			<fileset dir="src" excludes="**/*.java,**/*.javadoc" />
 		</copy>
 
 		<if>
