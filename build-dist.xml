@@ -591,7 +591,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<copy todir="tools/ext_tmpl/ext-service" overwrite="yes">
 			<fileset
 				dir="${lp.ext.dir}/ext-service"
-				includes="**/*.java"
+				includes="**/*.java,**/*.javadoc"
 			/>
 		</copy>
 
