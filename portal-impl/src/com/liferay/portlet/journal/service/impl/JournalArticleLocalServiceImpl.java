@@ -1491,9 +1491,9 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			Indexer.updateArticle(
-				companyId, groupId, articleId, version, title, description,
-				content, type, displayDate, assetCategoryIds, assetTagNames,
-				expandoBridge);
+				companyId, groupId, resourcePrimKey, articleId, version, title,
+				description, content, type, displayDate, assetCategoryIds,
+				assetTagNames, expandoBridge);
 		}
 		catch (SearchException se) {
 			_log.error("Reindexing " + article.getId(), se);

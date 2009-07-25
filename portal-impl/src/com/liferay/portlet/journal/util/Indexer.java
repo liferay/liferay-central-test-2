@@ -49,15 +49,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.JOURNAL;
 
 	public static void addArticle(
-			long companyId, long groupId, String articleId, double version,
-			String title, String description, String content, String type,
-			Date displayDate, long[] assetCategoryIds , String[] assetTagNames,
+			long companyId, long groupId, long resourcePrimKey,
+			String articleId, double version, String title, String description,
+			String content, String type, Date displayDate,
+			long[] assetCategoryIds, String[] assetTagNames,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
-			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, assetCategoryIds, assetTagNames, expandoBridge);
+			companyId, groupId, resourcePrimKey, articleId, version, title,
+			description, content, type, displayDate, assetCategoryIds,
+			assetTagNames, expandoBridge);
 
 		SearchEngineUtil.addDocument(companyId, doc);
 	}
@@ -71,10 +73,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static Document getArticleDocument(
-		long companyId, long groupId, String articleId, double version,
-		String title, String description, String content, String type,
-		Date displayDate, long[] assetCategoryIds, String[] assetTagNames,
-		ExpandoBridge expandoBridge) {
+		long companyId, long groupId, long resourcePrimKey, String articleId,
+		double version, String title, String description, String content,
+		String type, Date displayDate, long[] assetCategoryIds,
+		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content") != -1) ||
@@ -111,6 +113,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
+		doc.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		doc.addKeyword(Field.VERSION, version);
 		doc.addKeyword(Field.TYPE, type);
 
@@ -128,15 +131,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateArticle(
-			long companyId, long groupId, String articleId, double version,
-			String title, String description, String content, String type,
-			Date displayDate, long[] assetCategoryIds , String[] assetTagNames,
+			long companyId, long groupId, long resourcePrimKey,
+			String articleId, double version, String title, String description,
+			String content, String type, Date displayDate,
+			long[] assetCategoryIds, String[] assetTagNames,
 			ExpandoBridge expandoBridge)
 		throws SearchException {
 
 		Document doc = getArticleDocument(
-			companyId, groupId, articleId, version, title, description, content,
-			type, displayDate, assetCategoryIds, assetTagNames, expandoBridge);
+			companyId, groupId, resourcePrimKey, articleId, version, title,
+			description, content, type, displayDate, assetCategoryIds,
+			assetTagNames, expandoBridge);
 
 		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
