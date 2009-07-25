@@ -498,7 +498,9 @@ public class MBUtil {
 			}
 		}
 
-		if (parentHeader == null) {
+		if (Validator.isNull(parentHeader) ||
+			!parentHeader.startsWith(POP_PORTLET_PREFIX, 1)) {
+			
 			parentHeader = _getParentMessageIdFromSubject(message);
 		}
 
