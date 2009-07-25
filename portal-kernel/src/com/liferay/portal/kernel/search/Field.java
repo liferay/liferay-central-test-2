@@ -52,6 +52,8 @@ public class Field {
 
 	public static final String ROLE_ID = "roleId";
 
+	public static final String ROOT_ENTRY_CLASS_PK = "rootEntryClassPK";
+
 	public static final String TITLE = "title";
 
 	public static final String TYPE = "type";

@@ -1030,7 +1030,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		reIndex(message);
+		if (message.isRoot()) {
+			List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+				message.getThreadId());
+
+			for (MBMessage curMessage : messages) {
+				reIndex(curMessage);
+			}
+		}
+		else {
+			reIndex(message);
+		}
 	}
 
 	public void reIndex(MBMessage message) throws SystemException {

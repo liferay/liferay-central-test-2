@@ -42,8 +42,10 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import java.util.Date;
 
@@ -134,6 +136,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword("threadId", threadId);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
+
+		try {
+			MBThread thread = MBThreadLocalServiceUtil.getMBThread(threadId);
+
+			doc.addKeyword(
+				Field.ROOT_ENTRY_CLASS_PK, thread.getRootMessageId());
+		}
+		catch (Exception e) {
+		}
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
 
