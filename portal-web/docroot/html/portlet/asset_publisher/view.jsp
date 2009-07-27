@@ -97,7 +97,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 </c:if>
 
-<c:if test="<%= Validator.isNotNull(assetTagName) && selectionStyle.equals("dynamic") %>">
+<c:if test='<%= Validator.isNotNull(assetTagName) && selectionStyle.equals("dynamic") %>'>
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName) %>
 	</h1>
