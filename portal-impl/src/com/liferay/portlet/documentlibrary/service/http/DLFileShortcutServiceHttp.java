@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -36,8 +35,8 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 public class DLFileShortcutServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		HttpPrincipal httpPrincipal, long folderId, long toFolderId,
-		java.lang.String toName, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String toName,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -51,76 +50,16 @@ public class DLFileShortcutServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj3 = serviceContext;
 
-			Object paramObj4 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(DLFileShortcutServiceUtil.class.getName(),
-					"addFileShortcut",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.documentlibrary.model.DLFileShortcut)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		HttpPrincipal httpPrincipal, long folderId, long toFolderId,
-		java.lang.String toName, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(folderId);
-
-			Object paramObj1 = new LongWrapper(toFolderId);
-
-			Object paramObj2 = toName;
-
-			if (toName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj3 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj4 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileShortcutServiceUtil.class.getName(),
 					"addFileShortcut",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -218,7 +157,8 @@ public class DLFileShortcutServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
 		HttpPrincipal httpPrincipal, long fileShortcutId, long folderId,
-		long toFolderId, java.lang.String toName)
+		long toFolderId, java.lang.String toName,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -234,9 +174,18 @@ public class DLFileShortcutServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileShortcutServiceUtil.class.getName(),
 					"updateFileShortcut",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
