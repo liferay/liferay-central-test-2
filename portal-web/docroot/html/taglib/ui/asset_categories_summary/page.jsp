@@ -90,8 +90,12 @@ for (AssetVocabulary vocabulary : vocabularies) {
 private String _buildCategoryPath(AssetCategory category) throws PortalException, SystemException {
 	StringBuilder sb = new StringBuilder();
 
-	for (AssetCategory curCategory : category.getAncestors()) {
-		sb.append(curCategory.getName());
+	List<AssetCategory> ancestors = category.getAncestors();
+
+	Collections.reverse(ancestors);
+
+	for (AssetCategory ancestor : ancestors) {
+		sb.append(ancestor.getName());
 		sb.append(" &raquo; ");
 	}
 
