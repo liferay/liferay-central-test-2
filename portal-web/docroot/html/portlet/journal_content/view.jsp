@@ -79,7 +79,7 @@ if (articleDisplay != null) {
 									</script>
 
 									<div class="print-action">
-										<liferay-ui:icon image="print" url="javascript:print();" />
+										<liferay-ui:icon image="print" label="<%= true %>" url="javascript:print();" />
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -102,7 +102,7 @@ if (articleDisplay != null) {
 									</script>
 
 									<div class="print-action">
-										<liferay-ui:icon image="print" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
+										<liferay-ui:icon image="print" label="<%= true %>" url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>' />
 									</div>
 								</c:otherwise>
 							</c:choose>

@@ -37,7 +37,7 @@ printAssetURL.setParameter("viewMode", Constants.PRINT);
 			print();
 		</script>
 
-		<liferay-ui:icon image="print" message="print" url="javascript:print();" />
+		<liferay-ui:icon image="print" label="<%= true %>" url="javascript:print();" />
 	</c:when>
 	<c:otherwise>
 		<script type="text/javascript">
