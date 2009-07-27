@@ -28,6 +28,7 @@
 
 .dockbar .user-avatar .sign-out {
 	font-size: 0.8em;
+	padding-left: 0;
 }
 
 .dockbar ul {
@@ -73,6 +74,21 @@ html > .lfr-dockbar-pinned {
 .dockbar .user-avatar img {
 	vertical-align: middle;
 	width: 25px;
+}
+
+.dockbar .impersonating-user {
+	background: url(../images/messages/alert.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.dockbar .impersonating-user .user-links a {
+	color: #999;
+}
+
+.dockbar .menu-container .notice-message {
+	background-image: none;
+	margin: 3px;
+	padding: 6px;
 }
 
 .dockbar .menu-container {
@@ -275,13 +291,13 @@ html > .lfr-dockbar-pinned {
 	padding-left: 20px;
 }
 
-.dockbar .has-submenu .menu-button {
+.dockbar .menu-button {
 	background: url(../images/arrows/05_down.png) no-repeat 100% 90%;
 	padding-right: 13px;
 	text-decoration: none;
 }
 
-.dockbar .has-submenu .menu-button span {
+.dockbar .menu-button span {
 	background: url() no-repeat 0 50%;
 	padding-left: 20px;
 }

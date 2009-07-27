@@ -89,6 +89,14 @@
 					}
 				);
 
+				instance.addMenu(
+					{
+						el: instance._namespace + 'userOptionsContainer',
+						trigger: instance._namespace + 'userAvatar',
+						name: 'userOptions'
+					}
+				);
+
 				var addApplication = jQuery('#' + instance._namespace + 'addApplication');
 
 				addApplication.click(

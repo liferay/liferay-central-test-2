@@ -178,11 +178,57 @@ if (layout != null) {
 			<span></span>
 		</li>
 
-		<li class="user-avatar">
-			<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
+		<li class="user-avatar <%= themeDisplay.isImpersonated() ? "impersonating-user has-submenu" : "" %>" id="<portlet:namespace />userAvatar">
+			<span class="user-links <%= themeDisplay.isImpersonated() ? "menu-button": "" %>">
+				<a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><img alt="<%= user.getFullName() %>" src="<%= themeDisplay.getPathImage() %>/user_<%= user.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user.getPortraitId()) %>" /></a> <a href="<%= HtmlUtil.escape(themeDisplay.getURLMyAccount().toString()) %>"><%= user.getFullName() %></a>
 
-			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
-				<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
+				<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
+					<span class="sign-out">(<a href="<%= themeDisplay.getURLSignOut() %>"><liferay-ui:message key="sign-out" /></a>)</span>
+				</c:if>
+			</span>
+
+			<c:if test="<%= themeDisplay.isImpersonated() %>">
+				<div class="menu-container" id="<portlet:namespace />userOptionsContainer">
+					<div class="notice-message portlet-msg-info">
+						<c:choose>
+							<c:when test="<%= themeDisplay.isSignedIn() %>">
+								<%= LanguageUtil.format(pageContext, "you-are-impersonating-x", new Object[] {user.getFullName()}) %>
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:message key="you-are-impersonating-the-guest-user" />
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<ul>
+						<li><a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a></li>
+
+						<%
+						Locale realUserLocale = realUser.getLocale();
+						Locale userLocale = user.getLocale();
+						%>
+
+						<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+							<%
+							String doAsUserLanguageId = null;
+							String changeLanguageMessage = null;
+
+							if (locale.getLanguage().equals(realUserLocale.getLanguage()) && locale.getCountry().equals(realUserLocale.getCountry())) {
+								doAsUserLanguageId = userLocale.getLanguage() + "_" + userLocale.getCountry();
+								changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-x's-preferred-language-(x)", new String[] {user.getFullName(), userLocale.getDisplayLanguage(realUserLocale)});
+							}
+							else {
+								doAsUserLanguageId = realUserLocale.getLanguage() + "_" + realUserLocale.getCountry();
+								changeLanguageMessage = LanguageUtil.format(realUserLocale, "use-your-preferred-language-(x)", realUserLocale.getDisplayLanguage(realUserLocale));
+							}
+							%>
+
+							<li class="current-user-language">
+								<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>"><%= changeLanguageMessage %></a>
+							</li>
+						</c:if>
+					</ul>
+				</div>
 			</c:if>
 		</li>
 	</ul>
