@@ -508,9 +508,10 @@ public class DLFileEntryLocalServiceImpl
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByTF_TN(folderId, name);
 
-		for (DLFileShortcut shortcut : fileShortcuts) {
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			assetEntryLocalService.incrementViewCounter(
-				DLFileShortcut.class.getName(), shortcut.getFileShortcutId());
+				DLFileShortcut.class.getName(),
+				fileShortcut.getFileShortcutId());
 		}
 
 		if ((version > 0) && (fileEntry.getVersion() != version)) {
@@ -707,12 +708,14 @@ public class DLFileEntryLocalServiceImpl
 			dlFileShortcutPersistence.findByTF_TN(
 				fileEntry.getFolderId(), fileEntry.getName());
 
-		 for (DLFileShortcut shortcut : fileShortcuts) {
-			 assetEntryLocalService.updateEntry(
-				userId, shortcut.getGroupId(), DLFileShortcut.class.getName(),
-				shortcut.getFileShortcutId(), assetCategoryIds, assetTagNames, true, null,
-				null, null, null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
+			assetEntryLocalService.updateEntry(
+				userId, fileShortcut.getGroupId(),
+				DLFileShortcut.class.getName(),
+				fileShortcut.getFileShortcutId(), assetCategoryIds,
+				assetTagNames, true, null, null, null, null, mimeType,
+				fileEntry.getTitle(), fileEntry.getDescription(), null, null, 0,
+				0, null, false);
 		 }
 	}
 
@@ -895,9 +898,10 @@ public class DLFileEntryLocalServiceImpl
 			List<DLFileShortcut> fileShortcuts =
 				dlFileShortcutPersistence.findByTF_TN(folderId, name);
 
-			for (DLFileShortcut shortcut : fileShortcuts) {
+			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.deleteEntry(
-					DLFileShortcut.class.getName(), shortcut.getFileShortcutId());
+					DLFileShortcut.class.getName(),
+					fileShortcut.getFileShortcutId());
 			}
 
 			// Expando

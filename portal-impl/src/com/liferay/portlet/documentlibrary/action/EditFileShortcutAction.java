@@ -131,18 +131,19 @@ public class EditFileShortcutAction extends PortletAction {
 			ParamUtil.getString(actionRequest, "toName"));
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				DLFileShortcut.class.getName(), actionRequest);
+			DLFileShortcut.class.getName(), actionRequest);
 
 		if (fileShortcutId <= 0) {
 
 			// Add file shortcut
 
-			DLFileShortcut shortcut =  DLFileShortcutServiceUtil.addFileShortcut(
-				folderId, toFolderId, toName, serviceContext);
+			DLFileShortcut fileShortcut =
+				DLFileShortcutServiceUtil.addFileShortcut(
+					folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),
-				shortcut.getFileShortcutId(), -1);
+				fileShortcut.getFileShortcutId(), -1);
 		}
 		else {
 
@@ -152,7 +153,7 @@ public class EditFileShortcutAction extends PortletAction {
 				fileShortcutId, folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addRecentFolderId(
-					actionRequest, DLFileShortcut.class.getName(), folderId);
+				actionRequest, DLFileShortcut.class.getName(), folderId);
 		}
 	}
 

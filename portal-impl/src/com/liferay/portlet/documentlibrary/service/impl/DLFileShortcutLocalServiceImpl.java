@@ -85,24 +85,24 @@ public class DLFileShortcutLocalServiceImpl
 		// Resources
 
 		if (serviceContext.getAddCommunityPermissions() ||
-				serviceContext.getAddGuestPermissions()) {
+			serviceContext.getAddGuestPermissions()) {
 
 			addFileShortcutResources(
-					fileShortcut, serviceContext.getAddCommunityPermissions(),
-					serviceContext.getAddGuestPermissions());
+				fileShortcut, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileShortcutResources(
-					fileShortcut, serviceContext.getCommunityPermissions(),
-					serviceContext.getGuestPermissions());
+				fileShortcut, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
 		}
 
-		// Tags
+		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
 			toFolderId, toName);
 
-		copyTagEntries(fileEntry, serviceContext);
+		copyAssetTags(fileEntry, serviceContext);
 
 		updateAsset(
 			userId, fileShortcut, serviceContext.getAssetCategoryIds(),
@@ -168,8 +168,8 @@ public class DLFileShortcutLocalServiceImpl
 	public void deleteFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 
-		DLFileShortcut fileShortcut = dlFileShortcutLocalService
-			.getDLFileShortcut(fileShortcutId);
+		DLFileShortcut fileShortcut =
+			dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
 
 		deleteFileShortcut(fileShortcut);
 	}
@@ -177,7 +177,7 @@ public class DLFileShortcutLocalServiceImpl
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)
 		throws PortalException, SystemException {
 
-		// Tags
+		// Asset
 
 		assetEntryLocalService.deleteEntry(
 			DLFileShortcut.class.getName(), fileShortcut.getFileShortcutId());
@@ -212,19 +212,19 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void updateAsset(
-			long userId, DLFileShortcut shortcut, long[] assetCategoryIds,
+			long userId, DLFileShortcut fileShortcut, long[] assetCategoryIds,
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
-			shortcut.getToFolderId(), shortcut.getToName());
+			fileShortcut.getToFolderId(), fileShortcut.getToName());
 
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getName());
 
 		assetEntryLocalService.updateEntry(
-			userId, shortcut.getGroupId(), DLFileShortcut.class.getName(),
-			shortcut.getFileShortcutId(), assetCategoryIds, assetTagNames, true, null,
-			null, null, null, mimeType, fileEntry.getTitle(),
+			userId, fileShortcut.getGroupId(), DLFileShortcut.class.getName(),
+			fileShortcut.getFileShortcutId(), assetCategoryIds, assetTagNames,
+			true, null, null, null, null, mimeType, fileEntry.getTitle(),
 			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
@@ -250,14 +250,15 @@ public class DLFileShortcutLocalServiceImpl
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
-		// Tags
+		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
 			toFolderId, toName);
 
-		copyTagEntries(fileEntry, serviceContext);
+		copyAssetTags(fileEntry, serviceContext);
 
-		updateAsset(userId, fileShortcut, serviceContext.getAssetCategoryIds(),
+		updateAsset(
+			userId, fileShortcut, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
 		// Folder
@@ -285,6 +286,20 @@ public class DLFileShortcutLocalServiceImpl
 		}
 	}
 
+	protected void copyAssetTags(
+			DLFileEntry fileEntry, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String[] assetTagNames = assetTagLocalService.getTagNames(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		assetTagLocalService.checkTags(
+			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+			assetTagNames);
+
+		serviceContext.setAssetTagNames(assetTagNames);
+	}
+
 	protected long getFolderId(long companyId, long folderId)
 		throws SystemException {
 
@@ -300,20 +315,6 @@ public class DLFileShortcutLocalServiceImpl
 		}
 
 		return folderId;
-	}
-
-	protected void copyTagEntries(
-			DLFileEntry fromFileEntry, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		String[] assetTagNames = assetTagLocalService.getTagNames(
-			DLFileEntry.class.getName(), fromFileEntry.getFileEntryId());
-
-		assetTagLocalService.checkTags(
-			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-			assetTagNames);
-
-		serviceContext.setAssetTagNames(assetTagNames);
 	}
 
 	protected void validate(User user, long toFolderId, String toName)

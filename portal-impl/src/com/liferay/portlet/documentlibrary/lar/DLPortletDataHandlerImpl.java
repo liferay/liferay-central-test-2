@@ -782,9 +782,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setScopeGroupId(context.getGroupId());
 			serviceContext.setAssetCategoryIds(assetCategoryIds);
 			serviceContext.setAssetTagNames(assetTagNames);
+			serviceContext.setScopeGroupId(context.getGroupId());
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
