@@ -104,6 +104,7 @@ try {
 	<liferay-util:include page="/html/portlet/asset_publisher/asset_html_metadata.jsp" />
 
 <%
+	PortalUtil.addPortletBreadcrumbEntry(request, title, currentURL);
 }
 catch (Exception e) {
 	_log.error(e.getMessage());

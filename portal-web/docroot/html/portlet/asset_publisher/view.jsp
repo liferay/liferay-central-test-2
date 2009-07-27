@@ -90,12 +90,22 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-x-x", new String[] {assetVocabularyName, assetCategoryName}) %>
 	</h1>
+
+	<%
+	PortalUtil.addPortletBreadcrumbEntry(request, assetCategoryName, currentURL);
+	%>
+
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(assetTagName) %>">
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName) %>
 	</h1>
+
+	<%
+	PortalUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
+	%>
+
 </c:if>
 
 <c:choose>
