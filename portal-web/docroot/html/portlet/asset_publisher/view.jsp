@@ -71,7 +71,7 @@ for (String curAssetTagName : allAssetTagNames) {
 	}
 }
 
-if (enableTagBasedNavigation && selectionStyle.equals("manual") && (allAssetTagNames.length > 0)) {
+if (enableTagBasedNavigation && selectionStyle.equals("manual") && (allAssetCategoryIds.length > 0 || allAssetTagNames.length > 0)) {
 	selectionStyle = "dynamic";
 }
 
@@ -86,7 +86,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 %>
 
-<c:if test="<%= assetCategoryId > 0 %>">
+<c:if test="<%= (assetCategoryId > 0) && selectionStyle.equals("dynamic") %>">
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-x-x", new String[] {assetVocabularyName, assetCategoryName}) %>
 	</h1>
@@ -97,7 +97,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 </c:if>
 
-<c:if test="<%= Validator.isNotNull(assetTagName) %>">
+<c:if test="<%= Validator.isNotNull(assetTagName) && selectionStyle.equals("dynamic") %>">
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName) %>
 	</h1>
