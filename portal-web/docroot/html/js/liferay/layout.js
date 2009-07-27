@@ -209,7 +209,8 @@
 			var instance = this;
 
 			instance._columns = jQuery(options.columnSelector);
-			var portlets = jQuery(options.boxSelector);
+
+			var portlets = instance._columns.find(options.boxSelector);
 
 			for (var i = portlets.length - 1; i >= 0; i--) {
 				instance.add(portlets[i]);
