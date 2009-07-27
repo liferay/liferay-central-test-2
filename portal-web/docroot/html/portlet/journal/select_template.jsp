@@ -40,7 +40,7 @@ searchContainer.setDelta(10);
 
 String tabs1Names = "shared-templates";
 
-if (scopeGroupId != company.getGroup().getGroupId()) {
+if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
 	tabs1Names = "templates," + tabs1Names;
 }
 %>
@@ -59,7 +59,7 @@ if (scopeGroupId != company.getGroup().getGroupId()) {
 TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
 if (tabs1.equals("shared-templates")) {
-	long companyGroupId = company.getGroup().getGroupId();
+	long companyGroupId = themeDisplay.getCompanyGroupId();
 
 	searchTerms.setGroupId(companyGroupId);
 }

@@ -25,7 +25,7 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
-long groupId = tabs1.equals("entries") ? scopeGroupId : company.getGroup().getGroupId();
+long groupId = tabs1.equals("entries") ? scopeGroupId : themeDisplay.getCompanyGroupId();
 long userId = 0;
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);

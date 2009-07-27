@@ -40,7 +40,7 @@ searchContainer.setDelta(10);
 
 String tabs1Names = "shared-structures";
 
-if (scopeGroupId != company.getGroup().getGroupId()) {
+if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
 	tabs1Names = "structures," + tabs1Names;
 }
 %>
@@ -59,7 +59,7 @@ if (scopeGroupId != company.getGroup().getGroupId()) {
 StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 
 if (tabs1.equals("shared-structures")) {
-	long companyGroupId = company.getGroup().getGroupId();
+	long companyGroupId = themeDisplay.getCompanyGroupId();
 
 	searchTerms.setGroupId(companyGroupId);
 }

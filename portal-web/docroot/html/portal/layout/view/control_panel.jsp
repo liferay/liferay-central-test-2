@@ -158,7 +158,7 @@ if (Validator.isNotNull(ppid)) {
 										<liferay-ui:panel id="globalPanel" title='<%= LanguageUtil.get(pageContext, "shared") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 											<ul>
 												<li>
-													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", company.getGroup().getGroupId()) %>"><liferay-ui:message key="global" /></a>
+													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
 												</li>
 											</ul>
 										</liferay-ui:panel>

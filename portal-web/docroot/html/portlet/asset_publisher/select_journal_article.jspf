@@ -57,7 +57,7 @@ ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 if (tabs1.equals("shared-web-content")) {
-	long companyGroupId = company.getGroup().getGroupId();
+	long companyGroupId = themeDisplay.getCompanyGroupId();
 
 	searchTerms.setGroupId(companyGroupId);
 }

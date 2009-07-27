@@ -25,7 +25,7 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
-long groupId = tabs1.equals("folders") ? scopeGroupId : company.getGroup().getGroupId();
+long groupId = tabs1.equals("folders") ? scopeGroupId : themeDisplay.getCompanyGroupId();
 
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 long folderId = ParamUtil.getLong(request, "assetParentId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
