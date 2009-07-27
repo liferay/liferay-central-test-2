@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -61,39 +60,6 @@ public class AssetCategoryImpl
 		}
 
 		return categories;
-	}
-
-	public AssetCategory getParentCategory() {
-		if (getParentCategoryId() ==
-				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
-			return null;
-		}
-
-		AssetCategory category = null;
-
-		try {
-			category = AssetCategoryLocalServiceUtil.getCategory(
-				getParentCategoryId());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return category;
-	}
-
-	public List<AssetCategory> getParentCategories() {
-		List<AssetCategory> parentCategories = new ArrayList<AssetCategory>();
-
-		AssetCategory parentCategory = getParentCategory();
-
-		if (parentCategory != null) {
-			parentCategories.addAll(parentCategory.getParentCategories());
-			parentCategories.add(parentCategory);
-		}
-
-		return parentCategories;
 	}
 
 	public String getUserUuid() throws SystemException {

@@ -59,7 +59,7 @@ showSearch = showSearch && (results.size() > 0);
 	</h1>
 
 	<%
-	PortalUtil.addPortletBreadcrumbEntry(request, categoryName, currentURL);
+	AssetUtil.addPortletBreadcrumbEntries(categoryId, request, portletURL);
 	%>
 
 </c:if>

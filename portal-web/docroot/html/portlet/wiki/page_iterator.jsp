@@ -29,7 +29,7 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
-String categoryId = ParamUtil.getString(request, "categoryId");
+long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -47,21 +47,9 @@ if (type.equals("all_pages")) {
 }
 else if (type.equals("categorized_pages")) {
 	portletURL.setParameter("struts_action", "/wiki/view_categorized_pages");
-	portletURL.setParameter("categoryId", categoryId);
+	portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
-	AssetCategory assetCategory = AssetCategoryServiceUtil.getCategory(GetterUtil.getLong(categoryId));
-
-	List<AssetCategory> parentCategories = assetCategory.getParentCategories();
-
-	for (AssetCategory curParentCategory : parentCategories) {
-		PortletURL curPortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-
-		curPortletURL.setParameter("categoryId", String.valueOf(curParentCategory.getCategoryId()));
-
-		PortalUtil.addPortletBreadcrumbEntry(request, curParentCategory.getName(), curPortletURL.toString());
-	}
-
-	PortalUtil.addPortletBreadcrumbEntry(request, assetCategory.getName(), portletURL.toString());
+	AssetUtil.addPortletBreadcrumbEntries(categoryId, request, PortletURLUtil.clone(portletURL, renderResponse));
 }
 else if (type.equals("history")) {
 	if (wikiPage != null) {

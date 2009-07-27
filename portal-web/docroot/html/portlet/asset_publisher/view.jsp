@@ -92,7 +92,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 	</h1>
 
 	<%
-	PortalUtil.addPortletBreadcrumbEntry(request, assetCategoryName, currentURL);
+	AssetUtil.addPortletBreadcrumbEntries(assetCategoryId, request, portletURL);
 	%>
 
 </c:if>

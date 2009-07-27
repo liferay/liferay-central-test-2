@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.NoSuchCategoryException;
@@ -51,9 +52,12 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.wiki.model.WikiPage;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,6 +97,32 @@ public class AssetUtil {
 		}
 
 		return layoutTags;
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			long assetCategoryId, HttpServletRequest request,
+			PortletURL portletURL)
+		throws Exception {
+
+		AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(
+			assetCategoryId);
+
+		List<AssetCategory> ancestorCategories = assetCategory.getAncestors();
+
+		Collections.reverse(ancestorCategories);
+
+		 for (AssetCategory ancestorCategory : ancestorCategories) {
+			   portletURL.setParameter("categoryId", String.valueOf(
+				   ancestorCategory.getCategoryId()));
+
+			   PortalUtil.addPortletBreadcrumbEntry(
+				   request, ancestorCategory.getName(), portletURL.toString());
+		   }
+
+		portletURL.setParameter("categoryId", String.valueOf(assetCategoryId));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, assetCategory.getName(), portletURL.toString());
 	}
 
 	public static String getAssetKeywords(String className, long classPK)
