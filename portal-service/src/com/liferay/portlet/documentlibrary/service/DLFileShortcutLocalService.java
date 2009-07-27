@@ -133,7 +133,7 @@ public interface DLFileShortcutLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut shortcut,
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

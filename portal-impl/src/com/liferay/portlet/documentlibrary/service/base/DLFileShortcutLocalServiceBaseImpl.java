@@ -339,39 +339,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public AssetTagLocalService getAssetTagLocalService() {
-		return assetTagLocalService;
-	}
-
-	public void setAssetTagLocalService(
-		AssetTagLocalService assetTagLocalService) {
-		this.assetTagLocalService = assetTagLocalService;
-	}
-
-	public AssetTagService getAssetTagService() {
-		return assetTagService;
-	}
-
-	public void setAssetTagService(AssetTagService assetTagService) {
-		this.assetTagService = assetTagService;
-	}
-
-	public AssetTagPersistence getAssetTagPersistence() {
-		return assetTagPersistence;
-	}
-
-	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
-		this.assetTagPersistence = assetTagPersistence;
-	}
-
-	public AssetTagFinder getAssetTagFinder() {
-		return assetTagFinder;
-	}
-
-	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
-		this.assetTagFinder = assetTagFinder;
-	}
-
 	public AssetEntryLocalService getAssetEntryLocalService() {
 		return assetEntryLocalService;
 	}
@@ -404,6 +371,39 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 
 	public void setAssetEntryFinder(AssetEntryFinder assetEntryFinder) {
 		this.assetEntryFinder = assetEntryFinder;
+	}
+
+	public AssetTagLocalService getAssetTagLocalService() {
+		return assetTagLocalService;
+	}
+
+	public void setAssetTagLocalService(
+		AssetTagLocalService assetTagLocalService) {
+		this.assetTagLocalService = assetTagLocalService;
+	}
+
+	public AssetTagService getAssetTagService() {
+		return assetTagService;
+	}
+
+	public void setAssetTagService(AssetTagService assetTagService) {
+		this.assetTagService = assetTagService;
+	}
+
+	public AssetTagPersistence getAssetTagPersistence() {
+		return assetTagPersistence;
+	}
+
+	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
+		this.assetTagPersistence = assetTagPersistence;
+	}
+
+	public AssetTagFinder getAssetTagFinder() {
+		return assetTagFinder;
+	}
+
+	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
+		this.assetTagFinder = assetTagFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -465,14 +465,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagLocalService.impl")
-	protected AssetTagLocalService assetTagLocalService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagService.impl")
-	protected AssetTagService assetTagService;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
-	protected AssetTagPersistence assetTagPersistence;
-	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
-	protected AssetTagFinder assetTagFinder;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService.impl")
 	protected AssetEntryLocalService assetEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService.impl")
@@ -481,4 +473,12 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
 	protected AssetEntryFinder assetEntryFinder;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagLocalService.impl")
+	protected AssetTagLocalService assetTagLocalService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.AssetTagService.impl")
+	protected AssetTagService assetTagService;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
+	protected AssetTagFinder assetTagFinder;
 }

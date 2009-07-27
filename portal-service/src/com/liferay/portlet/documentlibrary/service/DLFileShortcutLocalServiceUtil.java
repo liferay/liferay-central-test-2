@@ -176,12 +176,12 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut shortcut,
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.updateAsset(userId, shortcut, assetCategoryIds, assetTagNames);
+			.updateAsset(userId, fileShortcut, assetCategoryIds, assetTagNames);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
