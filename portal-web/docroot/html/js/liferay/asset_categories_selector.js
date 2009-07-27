@@ -299,6 +299,9 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 							var noMatchesClass = '';
 
 							if (categories.length == 0) {
+								if (vocabulary.groupId == themeDisplay.getCompanyGroupId()) {
+									return;
+								}
 								noMatchesClass = 'no-matches';
 							}
 

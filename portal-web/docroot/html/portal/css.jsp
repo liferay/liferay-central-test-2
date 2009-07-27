@@ -1013,7 +1013,7 @@ li.toggle-expand a {
 	border-right: none;
 	color: #999;
 	margin-bottom: 0;
-	margin-left: 0;
+	margin-left: 5px;
 	margin-top: 0;
 	padding: 0;
 }
