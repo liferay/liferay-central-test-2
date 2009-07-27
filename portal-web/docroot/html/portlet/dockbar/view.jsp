@@ -201,7 +201,9 @@ if (layout != null) {
 					</div>
 
 					<ul>
-						<li><a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a></li>
+						<li>
+							<a href="<%= PortalUtil.getLayoutURL(layout, themeDisplay, false) %>"><liferay-ui:message key="be-yourself-again" /> (<%= realUser.getFullName() %>)</a>
+						</li>
 
 						<%
 						Locale realUserLocale = realUser.getLocale();
@@ -209,6 +211,7 @@ if (layout != null) {
 						%>
 
 						<c:if test="<%= !realUserLocale.equals(userLocale) %>">
+
 							<%
 							String doAsUserLanguageId = null;
 							String changeLanguageMessage = null;
