@@ -133,7 +133,7 @@ else {
 }
 
 if (total == 0) {
-	if (!showPortletWithNoResults) {
+	if (!showPortletWithNoResults && !(assetCategoryId > 0 || Validator.isNotNull(assetTagName))) {
 		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
 	}
 %>
