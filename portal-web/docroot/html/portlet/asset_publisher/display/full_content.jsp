@@ -75,7 +75,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				String[] availableLocales = _getAvailableLocales(className, classPK, languageId, renderResponse, themeDisplay);
 				%>
 
-				<c:if test="<%= availableLocales.length > 0 %>">
+				<c:if test="<%= availableLocales.length > 1 %>">
 					<c:if test="<%= enableConversions || enablePrint %>">
 						<div class="locale-separator"> </div>
 					</c:if>

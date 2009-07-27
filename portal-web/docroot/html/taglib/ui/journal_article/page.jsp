@@ -67,7 +67,7 @@ JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, ar
 		String[] availableLocales = articleDisplay.getAvailableLocales();
 		%>
 
-		<c:if test="<%= availableLocales.length > 0 %>">
+		<c:if test="<%= availableLocales.length > 1 %>">
 			<div>
 				<br />
 

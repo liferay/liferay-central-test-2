@@ -69,7 +69,7 @@ if (articleDisplay != null) {
 				PortletURL portletURL = renderResponse.createRenderURL();
 				%>
 
-				<c:if test="<%= enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 0) %>">
+				<c:if test="<%= enableConversions || enablePrint || (showAvailableLocales && articleDisplay.getAvailableLocales().length > 1) %>">
 					<div class="user-actions">
 						<c:if test="<%= enablePrint %>">
 							<c:choose>
@@ -150,7 +150,7 @@ if (articleDisplay != null) {
 							String[] availableLocales = articleDisplay.getAvailableLocales();
 							%>
 
-							<c:if test="<%= availableLocales.length > 0 %>">
+							<c:if test="<%= availableLocales.length > 1 %>">
 								<c:if test="<%= enableConversions || enablePrint %>">
 									<div class="locale-separator"> </div>
 								</c:if>
