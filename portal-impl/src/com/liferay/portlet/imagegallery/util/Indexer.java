@@ -141,7 +141,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String imageId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
-		portletURL.setParameter(Field.ENTRY_CLASS_PK, imageId);
+		portletURL.setParameter("imageId", imageId);
 
 		return new DocumentSummary(title, content, portletURL);
 	}
