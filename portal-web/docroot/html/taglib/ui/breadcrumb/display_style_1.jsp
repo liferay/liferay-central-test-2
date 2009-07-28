@@ -41,16 +41,19 @@ if (showPortletBreadcrumb) {
 }
 
 String breadCrumbString = sb.toString();
-String listToken = "<li";
-int tokenLength = listToken.length();
 
-int pos = breadCrumbString.indexOf(listToken);
+if (Validator.isNotNull(breadCrumbString)) {
+	String listToken = "<li";
+	int tokenLength = listToken.length();
 
-breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
+	int pos = breadCrumbString.indexOf(listToken);
 
-pos = breadCrumbString.lastIndexOf(listToken);
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
 
-breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
+	pos = breadCrumbString.lastIndexOf(listToken);
+
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
+}
 %>
 
 <ul class="breadcrumbs lfr-component">
