@@ -23,4 +23,7 @@
 package com.liferay.portal.model;
 
 public interface LayoutSetPrototype extends LayoutSetPrototypeModel {
+	public com.liferay.portal.model.Group getGroup();
+
+	public com.liferay.portal.model.LayoutSet getLayoutSet();
 }

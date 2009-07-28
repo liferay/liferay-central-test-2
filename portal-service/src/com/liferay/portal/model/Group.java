@@ -31,6 +31,8 @@ public interface Group extends GroupModel {
 
 	public boolean isLayoutPrototype();
 
+	public boolean isLayoutSetPrototype();
+
 	public boolean isOrganization();
 
 	public boolean isUser();
@@ -65,11 +67,15 @@ public interface Group extends GroupModel {
 
 	public long getDefaultPrivatePlid();
 
+	public com.liferay.portal.model.LayoutSet getPrivateLayoutSet();
+
 	public int getPrivateLayoutsPageCount();
 
 	public boolean hasPrivateLayouts();
 
 	public long getDefaultPublicPlid();
+
+	public com.liferay.portal.model.LayoutSet getPublicLayoutSet();
 
 	public int getPublicLayoutsPageCount();
 

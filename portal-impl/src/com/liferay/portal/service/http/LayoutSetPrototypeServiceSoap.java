@@ -22,5 +22,55 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
+
+import java.rmi.RemoteException;
+
 public class LayoutSetPrototypeServiceSoap {
+	public static void deleteLayoutSetPrototype(long layoutSetPrototypeId)
+		throws RemoteException {
+		try {
+			LayoutSetPrototypeServiceUtil.deleteLayoutSetPrototype(layoutSetPrototypeId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSetPrototypeSoap getLayoutSetPrototype(
+		long layoutSetPrototypeId) throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutSetPrototype returnValue = LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(layoutSetPrototypeId);
+
+			return com.liferay.portal.model.LayoutSetPrototypeSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSetPrototypeSoap[] search(
+		long companyId, java.lang.Boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.LayoutSetPrototype> returnValue =
+				LayoutSetPrototypeServiceUtil.search(companyId, active, obc);
+
+			return com.liferay.portal.model.LayoutSetPrototypeSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypeServiceSoap.class);
 }

@@ -23,6 +23,46 @@
 package com.liferay.portal.service;
 
 public class LayoutSetPrototypeServiceUtil {
+	public static com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.lang.String description, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().addLayoutSetPrototype(nameMap, description, active);
+	}
+
+	public static void deleteLayoutSetPrototype(long layoutSetPrototypeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteLayoutSetPrototype(layoutSetPrototypeId);
+	}
+
+	public static com.liferay.portal.model.LayoutSetPrototype getLayoutSetPrototype(
+		long layoutSetPrototypeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLayoutSetPrototype(layoutSetPrototypeId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.LayoutSetPrototype> search(
+		long companyId, java.lang.Boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().search(companyId, active, obc);
+	}
+
+	public static com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
+		long layoutSetPrototypeId,
+		java.util.Map<java.util.Locale, String> nameMap,
+		java.lang.String description, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateLayoutSetPrototype(layoutSetPrototypeId, nameMap,
+			description, active);
+	}
+
 	public static LayoutSetPrototypeService getService() {
 		if (_service == null) {
 			throw new RuntimeException("LayoutSetPrototypeService is not set");
