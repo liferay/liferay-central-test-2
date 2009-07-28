@@ -47,6 +47,12 @@ for (int i = 0; i < categoryNames.length; i++) {
 				for (String section : sections) {
 					String sectionId = _getSectionId(section);
 
+					Boolean show = (Boolean)request.getAttribute(WebKeys.FORM_NAVIGATOR_SECTION_SHOW + sectionId);
+
+					if ((show != null) && (!show.booleanValue())) {
+						continue;
+					}
+
 					boolean error = false;
 
 					if (sectionId.equals(errorSection)) {
