@@ -129,6 +129,93 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		/>
 	</td>
 </tr>
+
+<%
+List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+%>
+
+<c:if test="<%= (group != null) || !layoutSetPrototypes.isEmpty()%>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="public-pages" />
+		</td>
+		<td colspan="2">
+			<c:choose>
+				<c:when test="<%= ((group == null) || (group.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
+					<select id="<portlet:namespace />publicLayoutPrototypeId" name="<portlet:namespace />publicLayoutSetPrototypeId">
+						<option selected value="">(<liferay-ui:message key="none" />)</option>
+
+						<%
+						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+						%>
+
+							<option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+				</c:when>
+				<c:when test="<%= (group != null) && (group.getPublicLayoutsPageCount() > 0) %>">
+					<liferay-portlet:actionURL var="publicPagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+						<portlet:param name="struts_action" value="/my_places/view" />
+						<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+						<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
+					</liferay-portlet:actionURL>
+
+					<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="this-community-doesn't-have-any-public-pages" />
+				</c:otherwise>
+			</c:choose>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="private-pages" />
+		</td>
+		<td colspan="2">
+			<c:choose>
+				<c:when test="<%= ((group == null) || (group.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
+					<select id="<portlet:namespace />privateLayoutPrototypeId" name="<portlet:namespace />privateLayoutSetPrototypeId">
+						<option selected value="">(<liferay-ui:message key="none" />)</option>
+
+						<%
+						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+						%>
+
+							<option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+				</c:when>
+				<c:when test="<%= (group != null) && (group.getPrivateLayoutsPageCount() > 0) %>">
+					<liferay-portlet:actionURL var="privatePagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+						<portlet:param name="struts_action" value="/my_places/view" />
+						<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+						<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
+					</liferay-portlet:actionURL>
+
+					<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="this-community-doesn't-have-any-private-pages" />
+				</c:otherwise>
+			</c:choose>
+		</td>
+	</tr>
+</c:if>
+
 </table>
 
 <br />

@@ -64,6 +64,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
+import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -354,6 +355,10 @@ public class EditPagesAction extends PortletAction {
 		}
 		else if (group.isLayoutPrototype()) {
 			LayoutPrototypePermissionUtil.check(
+				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);
+		}
+		else if (group.isLayoutSetPrototype()) {
+			LayoutSetPrototypePermissionUtil.check(
 				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);
 		}
 		else if (group.isOrganization()) {

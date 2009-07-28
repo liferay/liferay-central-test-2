@@ -20,44 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.service.permission;
 
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
-public class LayoutSetPrototypeImpl
-	extends LayoutSetPrototypeModelImpl implements LayoutSetPrototype {
+public interface LayoutSetPrototypePermission {
 
-	public LayoutSetPrototypeImpl() {
-	}
+	public void check(
+			PermissionChecker permissionChecker, long layoutPrototypeId,
+			String actionId)
+		throws PrincipalException;
 
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-				getCompanyId(), getLayoutSetPrototypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
-	}
-
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroup().getGroupId(), true);
-		}
-		catch (Exception e) {
-		}
-
-		return layoutSet;
-	}
+	public boolean contains(
+		PermissionChecker permissionChecker, long layoutPrototypeId,
+		String actionId);
 
 }

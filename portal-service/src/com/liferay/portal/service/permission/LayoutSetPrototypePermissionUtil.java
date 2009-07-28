@@ -20,44 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.service.permission;
 
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
-public class LayoutSetPrototypeImpl
-	extends LayoutSetPrototypeModelImpl implements LayoutSetPrototype {
+public class LayoutSetPrototypePermissionUtil {
 
-	public LayoutSetPrototypeImpl() {
+	public static void check(
+			PermissionChecker permissionChecker, long layoutPrototypeId,
+			String actionId)
+		throws PrincipalException {
+
+		getLayoutSetPrototypePermission().check(
+			permissionChecker, layoutPrototypeId, actionId);
 	}
 
-	public Group getGroup() {
-		Group group = null;
+	public static boolean contains(
+		PermissionChecker permissionChecker, long layoutPrototypeId,
+		String actionId) {
 
-		try {
-			group = GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-				getCompanyId(), getLayoutSetPrototypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
+		return getLayoutSetPrototypePermission().contains(
+			permissionChecker, layoutPrototypeId, actionId);
 	}
 
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroup().getGroupId(), true);
-		}
-		catch (Exception e) {
-		}
-
-		return layoutSet;
+	public static LayoutPrototypePermission getLayoutSetPrototypePermission() {
+		return _layoutSetPrototypePermission;
 	}
+
+	public void setLayoutSetPrototypePermission (
+			LayoutPrototypePermission layoutPrototypePermission) {
+		_layoutSetPrototypePermission = layoutPrototypePermission;
+	}
+
+	private static LayoutPrototypePermission _layoutSetPrototypePermission;
 
 }

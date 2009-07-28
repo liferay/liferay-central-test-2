@@ -1119,6 +1119,20 @@
 			<forward name="portlet.communities.error" path="portlet.layout_prototypes.error" />
 		</action>
 
+		<!-- Layout Set Prototypes -->
+
+		<action path="/layout_set_prototypes/view" forward="portlet.layout_set_prototypes.view" />
+
+		<action path="/layout_set_prototypes/edit_layout_set_prototype" type="com.liferay.portlet.layoutsetprototypes.action.EditLayoutSetPrototypeAction">
+			<forward name="portlet.layout_set_prototypes.edit_layout_set_prototype" path="portlet.layout_set_prototypes.edit_layout_set_prototype" />
+			<forward name="portlet.layout_set_prototypes.error" path="portlet.layout_set_prototypes.error" />
+		</action>
+
+		<action path="/layout_set_prototypes/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
+			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
+			<forward name="portlet.communities.error" path="portlet.layout_set_prototypes.error" />
+		</action>
+
 		<!-- Login -->
 
 		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />

@@ -70,6 +70,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortletImpl;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
@@ -395,6 +396,11 @@ public class EditUserAction extends PortletAction {
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest);
 
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
@@ -498,6 +504,12 @@ public class EditUserAction extends PortletAction {
 				}
 			}
 		}
+
+		// LayoutSet prototypes
+
+		CommunitiesUtil.applyLayoutSetPrototypes(
+			user.getGroup(), publicLayoutSetPrototypeId,
+			privateLayoutSetPrototypeId);
 
 		return new Object[] {user, oldScreenName};
 	}

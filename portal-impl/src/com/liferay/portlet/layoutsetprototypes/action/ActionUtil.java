@@ -20,44 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portlet.layoutsetprototypes.action;
 
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.NoSuchLayoutSetPrototypeException;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 
-public class LayoutSetPrototypeImpl
-	extends LayoutSetPrototypeModelImpl implements LayoutSetPrototype {
+import javax.portlet.PortletRequest;
 
-	public LayoutSetPrototypeImpl() {
+import javax.servlet.http.HttpServletRequest;
+
+public class ActionUtil {
+
+	public static void getLayoutSetPrototype(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getLayoutSetPrototype(request);
 	}
 
-	public Group getGroup() {
-		Group group = null;
+	public static void getLayoutSetPrototype(HttpServletRequest request)
+		throws Exception {
+
+		long layoutSetPrototypeId = ParamUtil.getLong(
+			request, "layoutSetPrototypeId");
+
+		LayoutSetPrototype layoutSetPrototype = null;
 
 		try {
-			group = GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-				getCompanyId(), getLayoutSetPrototypeId());
+			layoutSetPrototype =
+				LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(
+					layoutSetPrototypeId);
 		}
-		catch (Exception e) {
-		}
-
-		return group;
-	}
-
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroup().getGroupId(), true);
-		}
-		catch (Exception e) {
+		catch (NoSuchLayoutSetPrototypeException nslpte) {
 		}
 
-		return layoutSet;
+		request.setAttribute(WebKeys.LAYOUT_PROTOTYPE, layoutSetPrototype);
 	}
 
 }

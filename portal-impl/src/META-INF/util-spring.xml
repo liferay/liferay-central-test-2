@@ -151,6 +151,11 @@
 			<bean class="com.liferay.portal.service.permission.LayoutPrototypePermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil" class="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil">
+		<property name="layoutSetPrototypePermission">
+			<bean class="com.liferay.portal.service.permission.LayoutSetPrototypePermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.OrganizationPermissionUtil" class="com.liferay.portal.service.permission.OrganizationPermissionUtil">
 		<property name="organizationPermission">
 			<bean class="com.liferay.portal.service.permission.OrganizationPermissionImpl" />

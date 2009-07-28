@@ -94,6 +94,13 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
+			else if (group.isLayoutSetPrototype()) {
+				long layoutSetPrototypeId = group.getClassPK();
+
+				if (LayoutSetPrototypePermissionUtil.contains(permissionChecker, layoutSetPrototypeId, ActionKeys.UPDATE)) {
+					addDefaultResource = true;
+				}
+			}
 			else if (group.isOrganization()) {
 				long organizationId = group.getClassPK();
 

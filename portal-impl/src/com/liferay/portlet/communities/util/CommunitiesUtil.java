@@ -24,15 +24,21 @@ package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.lar.PortletDataHandlerKeys;
+import com.liferay.portal.lar.UserIdStrategy;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -40,6 +46,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -50,6 +59,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CommunitiesUtil {
+
+	public static void applyLayoutSetPrototypes(
+			Group group, long publicLayoutSetPrototypeId,
+			long privateLayoutSetPrototypeId)
+		throws Exception {
+
+		if (publicLayoutSetPrototypeId > 0) {
+			LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+					publicLayoutSetPrototypeId);
+			LayoutSet publicLayoutSet = group.getPublicLayoutSet();
+
+			copyLayoutSet(
+				layoutSetPrototype.getLayoutSet(), publicLayoutSet);
+		}
+
+		if (privateLayoutSetPrototypeId > 0) {
+			LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+					privateLayoutSetPrototypeId);
+			LayoutSet privateLayoutSet = group.getPrivateLayoutSet();
+
+			copyLayoutSet(
+				layoutSetPrototype.getLayoutSet(), privateLayoutSet);
+		}
+	}
+
+	public static void copyLayoutSet(
+			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet)
+		throws Exception {
+
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters();
+
+		FileCacheOutputStream fileCacheOutputStream =
+			LayoutLocalServiceUtil.exportLayoutsAsStream(
+				sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
+				null, parameterMap, null, null);
+
+		try {
+			LayoutServiceUtil.importLayouts(
+				targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
+				parameterMap, fileCacheOutputStream.getFileInputStream());
+		}
+		finally {
+			fileCacheOutputStream.close();
+		}
+	}
 
 	public static void deleteLayout(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -131,6 +187,50 @@ public class CommunitiesUtil {
 		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
+	}
+
+	public static Map<String, String[]> getLayoutSetPrototypeParameters() {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.CATEGORIES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.THEME,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+
+		return parameterMap;
 	}
 
 }

@@ -82,6 +82,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPrototypePermissionUtil;
+import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -706,6 +707,16 @@ public class ServicePreAction extends Action {
 		}
 		else if (group.isLayoutPrototype()) {
 			if (LayoutPrototypePermissionUtil.contains(
+					permissionChecker, group.getClassPK(), ActionKeys.VIEW)) {
+
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else if (group.isLayoutSetPrototype()) {
+			if (LayoutSetPrototypePermissionUtil.contains(
 					permissionChecker, group.getClassPK(), ActionKeys.VIEW)) {
 
 				return true;

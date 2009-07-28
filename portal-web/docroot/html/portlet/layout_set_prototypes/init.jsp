@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -19,45 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.model.impl;
+<%@ include file="/html/portlet/init.jsp" %>
 
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-
-public class LayoutSetPrototypeImpl
-	extends LayoutSetPrototypeModelImpl implements LayoutSetPrototype {
-
-	public LayoutSetPrototypeImpl() {
-	}
-
-	public Group getGroup() {
-		Group group = null;
-
-		try {
-			group = GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-				getCompanyId(), getLayoutSetPrototypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return group;
-	}
-
-	public LayoutSet getLayoutSet() {
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroup().getGroupId(), true);
-		}
-		catch (Exception e) {
-		}
-
-		return layoutSet;
-	}
-
-}
+<%@ page import="com.liferay.portal.NoSuchLayoutSetPrototypeException" %>
+<%@ page import="com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil" %>
+<%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>

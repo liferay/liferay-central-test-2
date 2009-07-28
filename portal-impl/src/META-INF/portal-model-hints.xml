@@ -260,7 +260,7 @@
 	<model name="com.liferay.portal.model.LayoutSetPrototype">
 		<field name="layoutSetPrototypeId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="name" type="String">
+		<field name="name" type="String" localized="true">
 			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String">

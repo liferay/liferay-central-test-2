@@ -848,7 +848,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		Role role = null;
 
-		if (group.isCommunity() || group.isLayoutPrototype()) {
+		if (group.isCommunity() || group.isLayoutPrototype() ||
+			group.isLayoutSetPrototype()) {
+
 			role = roleLocalService.getRole(
 				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
 		}

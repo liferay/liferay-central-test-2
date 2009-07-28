@@ -53,6 +53,7 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.util.LocalizationUtil;
 
@@ -204,6 +205,11 @@ public class EditOrganizationAction extends PortletAction {
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Organization.class.getName(), actionRequest);
 
@@ -235,6 +241,14 @@ public class EditOrganizationAction extends PortletAction {
 					organization.getOrganizationId());
 			}
 		}
+
+		// LayoutSet prototypes
+
+		CommunitiesUtil.applyLayoutSetPrototypes(
+			organization.getGroup(), publicLayoutSetPrototypeId,
+			privateLayoutSetPrototypeId);
+
+		// Reminder queries
 
 		String reminderQueries = actionRequest.getParameter("reminderQueries");
 

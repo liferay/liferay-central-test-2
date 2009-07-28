@@ -22,8 +22,93 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.model.LayoutSetPrototype;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.LayoutSetPrototypeServiceBaseImpl;
+import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class LayoutSetPrototypeServiceImpl
 	extends LayoutSetPrototypeServiceBaseImpl {
+	public LayoutSetPrototype addLayoutSetPrototype(
+			Map<Locale, String> nameMap, String description,
+			boolean active)
+		throws PortalException, SystemException {
+
+		User user = getUser();
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(), ActionKeys.ADD_LAYOUT_PROTOTYPE);
+
+		return layoutSetPrototypeLocalService.addLayoutSetPrototype(
+			user.getUserId(), user.getCompanyId(), nameMap, description,
+			active);
+	}
+
+	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
+		throws PortalException, SystemException {
+
+		LayoutSetPrototypePermissionUtil.check(
+			getPermissionChecker(), layoutSetPrototypeId, ActionKeys.DELETE);
+
+		layoutSetPrototypeLocalService.deleteLayoutSetPrototype(
+			layoutSetPrototypeId);
+	}
+
+	public LayoutSetPrototype getLayoutSetPrototype(long layoutSetPrototypeId)
+		throws PortalException, SystemException {
+
+		LayoutSetPrototypePermissionUtil.check(
+			getPermissionChecker(), layoutSetPrototypeId, ActionKeys.VIEW);
+
+		return layoutSetPrototypeLocalService.getLayoutSetPrototype(
+			layoutSetPrototypeId);
+	}
+
+	public List<LayoutSetPrototype> search(
+			long companyId, Boolean active, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		List<LayoutSetPrototype> filteredLayoutSetPrototypes =
+			new ArrayList<LayoutSetPrototype>();
+
+		List<LayoutSetPrototype> layoutSetPrototypes =
+			layoutSetPrototypeLocalService.search(
+				companyId, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, obc);
+
+		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+			if (LayoutSetPrototypePermissionUtil.contains(
+					getPermissionChecker(),
+					layoutSetPrototype.getLayoutSetPrototypeId(),
+					ActionKeys.VIEW)) {
+
+				filteredLayoutSetPrototypes.add(layoutSetPrototype);
+			}
+		}
+
+		return filteredLayoutSetPrototypes;
+	}
+
+	public LayoutSetPrototype updateLayoutSetPrototype(
+			long layoutSetPrototypeId, Map<Locale, String> nameMap,
+			String description, boolean active)
+		throws PortalException, SystemException {
+
+		LayoutSetPrototypePermissionUtil.check(
+			getPermissionChecker(), layoutSetPrototypeId, ActionKeys.UPDATE);
+
+		return layoutSetPrototypeLocalService.updateLayoutSetPrototype(
+			layoutSetPrototypeId, nameMap, description, active);
+	}
+
 }

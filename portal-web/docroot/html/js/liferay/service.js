@@ -119,6 +119,17 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "LayoutSetPrototype",
+	{
+		addLayoutSetPrototype: true,
+		deleteLayoutSetPrototype: true,
+		getLayoutSetPrototype: true,
+		search: true,
+		updateLayoutSetPrototype: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "ListType",
 	{
 		getListType: true,

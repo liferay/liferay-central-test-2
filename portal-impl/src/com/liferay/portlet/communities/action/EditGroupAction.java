@@ -40,6 +40,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -152,14 +153,21 @@ public class EditGroupAction extends PortletAction {
 		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Group.class.getName(), actionRequest);
+
+		Group group = null;
 
 		if (groupId <= 0) {
 
 			// Add group
 
-			Group group = GroupServiceUtil.addGroup(
+			group = GroupServiceUtil.addGroup(
 				name, description, type, friendlyURL, active, serviceContext);
 
 			LiveUsers.joinGroup(
@@ -169,10 +177,16 @@ public class EditGroupAction extends PortletAction {
 
 			// Update group
 
-			GroupServiceUtil.updateGroup(
+			group = GroupServiceUtil.updateGroup(
 				groupId, name, description, type, friendlyURL, active,
 				serviceContext);
 		}
+
+		// LayoutSet prototypes
+
+		CommunitiesUtil.applyLayoutSetPrototypes(
+			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId);
+
 	}
 
 }

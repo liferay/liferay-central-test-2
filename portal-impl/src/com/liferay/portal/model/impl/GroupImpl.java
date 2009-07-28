@@ -34,6 +34,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -41,6 +42,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -71,6 +73,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public boolean isLayoutPrototype() {
 		return hasClassName(LayoutPrototype.class);
+	}
+
+	public boolean isLayoutSetPrototype() {
+		return hasClassName(LayoutSetPrototype.class);
 	}
 
 	public boolean isOrganization() {
@@ -170,6 +176,13 @@ public class GroupImpl extends GroupModelImpl implements Group {
 						getClassPK());
 
 				name = layoutPrototype.getName(LocaleUtil.getDefault());
+			}
+			else if (isLayoutSetPrototype()) {
+				LayoutSetPrototype layoutSetPrototype =
+					LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+						getClassPK());
+
+				name = layoutSetPrototype.getName(LocaleUtil.getDefault());
 			}
 			else if (isOrganization()) {
 				long organizationId = getClassPK();
@@ -271,10 +284,23 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return getDefaultPlid(true);
 	}
 
+	public LayoutSet getPrivateLayoutSet() {
+		LayoutSet layoutSet = null;
+
+		try {
+			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				getGroupId(), true);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return layoutSet;
+	}
+
 	public int getPrivateLayoutsPageCount() {
 		try {
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroupId(), true);
+			LayoutSet layoutSet = getPrivateLayoutSet();
 
 			return layoutSet.getPageCount();
 		}
@@ -298,10 +324,23 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return getDefaultPlid(false);
 	}
 
+	public LayoutSet getPublicLayoutSet() {
+		LayoutSet layoutSet = null;
+
+		try {
+			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				getGroupId(), false);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return layoutSet;
+	}
+
 	public int getPublicLayoutsPageCount() {
 		try {
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				getGroupId(), false);
+			LayoutSet layoutSet = getPublicLayoutSet();
 
 			return layoutSet.getPageCount();
 		}
