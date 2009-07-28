@@ -69,12 +69,6 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 <liferay-ui:asset-tags-error />
 
-<c:if test="<%= folderId > 0 %>">
-	<div class="breadcrumbs">
-		<%= BookmarksUtil.getBreadcrumbs(folderId, -1, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
-
 <table class="lfr-table">
 
 <c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
@@ -205,3 +199,14 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
+if(entry != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-entry"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
+}
+%>

@@ -55,11 +55,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<c:if test="<%= folder != null %>">
-			<div class="breadcrumbs">
-				<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-			</div>
-		</c:if>
 
 		<liferay-ui:search-container
 			curParam="cur1"
@@ -403,6 +398,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</script>
 
 			<%
+			BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
 			PortalUtil.setPageSubtitle(folder.getName(), request);
 			PortalUtil.setPageDescription(folder.getDescription(), request);
 			%>
@@ -481,6 +478,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</form>
 
 		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
 		%>
 

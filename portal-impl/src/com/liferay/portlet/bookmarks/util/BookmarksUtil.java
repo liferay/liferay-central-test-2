@@ -22,14 +22,12 @@
 
 package com.liferay.portlet.bookmarks.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.util.comparator.EntryCreateDateComparator;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
@@ -38,151 +36,86 @@ import com.liferay.portlet.bookmarks.util.comparator.EntryPriorityComparator;
 import com.liferay.portlet.bookmarks.util.comparator.EntryURLComparator;
 import com.liferay.portlet.bookmarks.util.comparator.EntryVisitsComparator;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.jsp.PageContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class BookmarksUtil {
 
-	public static String getBreadcrumbs(
-			long folderId, long entryId, PageContext pageContext,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+	public static void addPortletBreadcrumbEntries(
+			BookmarksEntry entry, HttpServletRequest request,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		if (entryId > 0) {
-			BookmarksEntry entry =
-				BookmarksEntryLocalServiceUtil.getEntry(entryId);
+		BookmarksFolder folder = entry.getFolder();
 
-			return getBreadcrumbs(
-				entry.getFolder(), entry, pageContext, renderRequest,
-				renderResponse);
-		}
-		else {
-			BookmarksFolder folder = null;
+		addPortletBreadcrumbEntries(folder, request, renderResponse);
 
-			try {
-				folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
-			}
-			catch (Exception e) {
-			}
+		PortletURL portletURL = renderResponse.createRenderURL();
 
-			return getBreadcrumbs(
-				folder, null, pageContext, renderRequest, renderResponse);
-		}
+		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
+			portletURL.setParameter(
+				"entryId", String.valueOf(entry.getEntryId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, entry.getName(), portletURL.toString());
 	}
 
-	public static String getBreadcrumbs(
-			BookmarksFolder folder, BookmarksEntry entry,
-			PageContext pageContext, RenderRequest renderRequest,
+	public static void addPortletBreadcrumbEntries(
+			long folderId, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
+			folderId);
+
+		addPortletBreadcrumbEntries(folder, request, renderResponse);
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			BookmarksFolder folder, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
 		String strutsAction = ParamUtil.getString(
-			renderRequest, "struts_action");
+			request, "struts_action");
 
 		boolean selectFolder = strutsAction.equals("/bookmarks/select_folder");
 
-		if ((entry != null) && (folder == null)) {
-			folder = entry.getFolder();
-		}
-
-		PortletURL foldersURL = renderResponse.createRenderURL();
+		PortletURL portletURL = renderResponse.createRenderURL();
 
 		if (selectFolder) {
-			foldersURL.setWindowState(LiferayWindowState.POP_UP);
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-			foldersURL.setParameter(
+			portletURL.setParameter(
 				"struts_action", "/bookmarks/select_folder");
 		}
 		else {
-			//foldersURL.setWindowState(WindowState.MAXIMIZED);
-
-			foldersURL.setParameter("struts_action", "/bookmarks/view");
+			portletURL.setParameter("struts_action", "/bookmarks/view");
 		}
 
-		String foldersLink =
-			"<a href=\"" + foldersURL.toString() + "\">" +
-				LanguageUtil.get(pageContext, "folders") + "</a>";
+		List<BookmarksFolder> ancestorFolders = folder.getAncestors();
 
-		if (folder == null) {
-			return "<span class=\"first last\">" + foldersLink + "</span>";
+		Collections.reverse(ancestorFolders);
+
+		for (BookmarksFolder ancestorFolder : ancestorFolders) {
+
+			portletURL.setParameter(
+				"folderId", String.valueOf(ancestorFolder.getFolderId()));
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, ancestorFolder.getName(), portletURL.toString());
 		}
 
-		String breadcrumbs = StringPool.BLANK;
+		portletURL.setParameter(
+			"folderId", String.valueOf(folder.getFolderId()));
 
-		if (folder != null) {
-			for (int i = 0;; i++) {
-				folder = folder.toEscapedModel();
-
-				PortletURL portletURL = renderResponse.createRenderURL();
-
-				if (selectFolder) {
-					portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-					portletURL.setParameter(
-						"struts_action", "/bookmarks/select_folder");
-					portletURL.setParameter(
-						"folderId", String.valueOf(folder.getFolderId()));
-				}
-				else {
-					//portletURL.setWindowState(WindowState.MAXIMIZED);
-
-					portletURL.setParameter("struts_action", "/bookmarks/view");
-					portletURL.setParameter(
-						"folderId", String.valueOf(folder.getFolderId()));
-				}
-
-				String folderLink =
-					"<a href=\"" + portletURL.toString() + "\">" +
-						folder.getName() + "</a>";
-
-				if (i == 0) {
-					if (entry != null) {
-						breadcrumbs += folderLink;
-					}
-					else {
-						breadcrumbs =
-							"<span class=\"last\">" + folderLink + "</span>";
-					}
-				}
-				else {
-					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
-				}
-
-				if (folder.isRoot()) {
-					break;
-				}
-
-				folder = BookmarksFolderLocalServiceUtil.getFolder(
-					folder.getParentFolderId());
-			}
-		}
-
-		breadcrumbs =
-			"<span class=\"first\">" + foldersLink + " &raquo; </span>" +
-				breadcrumbs;
-
-		if (entry != null) {
-			entry = entry.toEscapedModel();
-
-			PortletURL entryURL = renderResponse.createRenderURL();
-
-			//entryURL.setWindowState(WindowState.MAXIMIZED);
-
-			entryURL.setParameter("struts_action", "/bookmarks/edit_entry");
-			entryURL.setParameter(
-				"entryId", String.valueOf(entry.getEntryId()));
-
-			String entryLink =
-				"<span class=\"last\"><a href=\"" + entryURL.toString() +
-					"\">" + entry.getEntryId() + "</a></span>";
-
-			breadcrumbs = breadcrumbs + " &raquo; " + entryLink;
-		}
-
-		return breadcrumbs;
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, folder.getName(), portletURL.toString());
 	}
 
 	public static OrderByComparator getEntriesOrderByComparator(

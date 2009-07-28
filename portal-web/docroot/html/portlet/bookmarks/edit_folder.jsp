@@ -79,12 +79,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
-	<div class="breadcrumbs">
-		<%= BookmarksUtil.getBreadcrumbs(parentFolderId, -1, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
-
 <table class="lfr-table">
 
 <c:if test="<%= folder != null %>">
@@ -189,3 +183,16 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+if(folder != null) {
+	BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-folder"), currentURL);
+}
+else {
+	BookmarksUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-folder"), currentURL);
+}
+%>

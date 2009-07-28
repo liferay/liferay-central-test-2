@@ -28,17 +28,24 @@
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+if (folder != null) {
+	PortletURL foldersURL = renderResponse.createRenderURL();
+
+	foldersURL.setWindowState(LiferayWindowState.POP_UP);
+	foldersURL.setParameter("struts_action", "/bookmarks/select_folder");
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "folders"), foldersURL.toString());
+
+	BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+}
 %>
 
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="folders" />
 
-<c:if test="<%= folder != null %>">
-	<div class="breadcrumbs">
-		<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
