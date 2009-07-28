@@ -44,7 +44,7 @@ import java.rmi.RemoteException;
  * <p>
  * You can see a list of services at
  * http://localhost:8080/tunnel-web/secure/axis. Set the property
- * <code>tunnel.servlet.hosts.allowed</code> in portal.properties to configure
+ * <b>tunnel.servlet.hosts.allowed</b> in portal.properties to configure
  * security.
  * </p>
  *
