@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -116,8 +115,7 @@ public class MBUtil {
 				"struts_action", "/message_boards/select_category");
 
 			PortalUtil.addPortletBreadcrumbEntry(
-				request,
-				LanguageUtil.get(themeDisplay.getLocale(), "categories"),
+				request, themeDisplay.translate("categories"),
 				portletURL.toString());
 		}
 		else {

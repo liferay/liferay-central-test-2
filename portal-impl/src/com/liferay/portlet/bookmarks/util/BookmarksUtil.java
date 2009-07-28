@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.bookmarks.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -101,7 +100,7 @@ public class BookmarksUtil {
 				"struts_action", "/bookmarks/select_folder");
 
 			PortalUtil.addPortletBreadcrumbEntry(
-				request, LanguageUtil.get(themeDisplay.getLocale(), "folders"),
+				request, themeDisplay.translate("folders"),
 				portletURL.toString());
 		}
 		else {
@@ -113,7 +112,6 @@ public class BookmarksUtil {
 		Collections.reverse(ancestorFolders);
 
 		for (BookmarksFolder ancestorFolder : ancestorFolders) {
-
 			portletURL.setParameter(
 				"folderId", String.valueOf(ancestorFolder.getFolderId()));
 

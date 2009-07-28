@@ -203,7 +203,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 <%
 BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
 
-if(entry != null) {
+if (entry != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-entry"), currentURL);
 }
 else {

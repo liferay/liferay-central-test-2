@@ -55,7 +55,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-
 		<liferay-ui:search-container
 			curParam="cur1"
 			headerNames="folder,num-of-folders,num-of-entries"
