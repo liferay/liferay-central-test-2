@@ -57,6 +57,7 @@ import com.liferay.util.mail.JavaMailUtil;
 import java.io.InputStream;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -104,19 +105,21 @@ public class MBUtil {
 
 		List<MBCategory> ancestorCategories = category.getAncestors();
 
-	   for (MBCategory curCategory : ancestorCategories) {
-		   portletURL.setParameter(
-			   "mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+		Collections.reverse(ancestorCategories);
 
-		   PortalUtil.addPortletBreadcrumbEntry(
-			   request, curCategory.getName(), portletURL.toString());
-	   }
+		for (MBCategory curCategory : ancestorCategories) {
+			portletURL.setParameter(
+				"mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
-	   portletURL.setParameter(
-		   "mbCategoryId", String.valueOf(category.getCategoryId()));
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, curCategory.getName(), portletURL.toString());
+		}
 
-	   PortalUtil.addPortletBreadcrumbEntry(
-		   request, category.getName(), portletURL.toString());
+		portletURL.setParameter(
+			"mbCategoryId", String.valueOf(category.getCategoryId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, category.getName(), portletURL.toString());
 	}
 
 	public static void addPortletBreadcrumbEntries(
