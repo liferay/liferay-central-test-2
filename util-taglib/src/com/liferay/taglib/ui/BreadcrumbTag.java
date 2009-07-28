@@ -66,16 +66,16 @@ public class BreadcrumbTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:breadcrumb:displayStyle", String.valueOf(displayStyle));
 		request.setAttribute(
-			"liferay-ui:breadcrumb:showGuestGroup", String.valueOf(
-				showGuestGroup));
+			"liferay-ui:breadcrumb:showGuestGroup",
+			String.valueOf(showGuestGroup));
 		request.setAttribute(
-			"liferay-ui:breadcrumb:showParentGroups", String.valueOf(
-				showParentGroups));
+			"liferay-ui:breadcrumb:showParentGroups",
+			String.valueOf(showParentGroups));
 		request.setAttribute(
 			"liferay-ui:breadcrumb:showLayout", String.valueOf(showLayout));
 		request.setAttribute(
-			"liferay-ui:breadcrumb:showPortletBreadcrumb", String.valueOf(
-				showPortletBreadcrumb));
+			"liferay-ui:breadcrumb:showPortletBreadcrumb",
+			String.valueOf(showPortletBreadcrumb));
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
@@ -143,19 +143,20 @@ public class BreadcrumbTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
 
 	private static final int _DISPLAY_STYLE = 0;
+
 	private static final boolean _SHOW_GUEST_GROUP =
 		PropsValues.BREADCRUMB_SHOW_GUEST_GROUP;
+
 	private static final boolean _SHOW_PARENT_GROUPS =
 		PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
 
 	private Layout _selLayout;
 	private String _selLayoutParam;
 	private PortletURL _portletURL;
+	private int _displayStyle = _DISPLAY_STYLE;
 	private boolean _showGuestGroup = _SHOW_GUEST_GROUP;
 	private boolean _showParentGroups = _SHOW_PARENT_GROUPS;
 	private boolean _showLayout = true;
 	private boolean _showPortletBreadcrumb = true;
-
-	private int _displayStyle = _DISPLAY_STYLE;
 
 }
