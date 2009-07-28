@@ -59,7 +59,7 @@ public class AnnouncementsUtil {
 
 		List<Group> groupsList = new ArrayList<Group>();
 
-		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId);
+		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId, true);
 
 		if (groups.size() > 0) {
 			scopes.put(_GROUP_CLASS_NAME_ID, _getGroupIds(groups));
@@ -70,7 +70,7 @@ public class AnnouncementsUtil {
 		// Organization announcements
 
 		List<Organization> organizations =
-			OrganizationLocalServiceUtil.getUserOrganizations(userId);
+			OrganizationLocalServiceUtil.getUserOrganizations(userId, true);
 
 		if (organizations.size() > 0) {
 			scopes.put(

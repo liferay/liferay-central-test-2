@@ -33,6 +33,7 @@ import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -590,8 +591,43 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, userGroupId);
 	}
 
-	public List<Group> getUserGroups(long userId) throws SystemException {
-		return userPersistence.getGroups(userId);
+	public List<Group> getUserGroups(long userId)
+		throws PortalException, SystemException {
+
+		return getUserGroups(userId, false);
+	}
+
+	public List<Group> getUserGroups(long userId, boolean inherit)
+		throws PortalException, SystemException {
+
+		return getUserGroups(
+			userId, inherit, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<Group> getUserGroups(long userId, int start, int end)
+		throws PortalException, SystemException {
+
+		return getUserGroups(userId, false, start, end);
+	}
+
+	public List<Group> getUserGroups(
+			long userId, boolean inherit, int start, int end)
+		throws PortalException, SystemException {
+
+		if (inherit) {
+			User user = userPersistence.findByPrimaryKey(userId);
+
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
+
+			groupParams.put("usersGroups", new Long(userId));
+
+			return search(
+				user.getCompanyId(), null, null, groupParams, start, end);
+		}
+		else {
+			return userPersistence.getGroups(userId);
+		}
 	}
 
 	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups) {
@@ -616,7 +652,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		List<Organization> userOrgs =
 			organizationLocalService.getUserOrganizations(
-				userId, start, end);
+				userId, true, start, end);
 
 		for (Organization organization : userOrgs) {
 			userOrgsGroups.add(0, organization.getGroup());

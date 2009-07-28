@@ -230,8 +230,31 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
-		long userId) throws com.liferay.portal.SystemException {
+		long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().getUserGroups(userId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId, boolean inherit)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserGroups(userId, inherit);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserGroups(userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId, boolean inherit, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getUserGroups(userId, inherit, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
