@@ -255,12 +255,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>showParentGroups</name>
+			<name>showLayout</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>showLayout</name>
+			<name>showParentGroups</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

@@ -173,6 +173,17 @@ public class VelocityTaglib {
 
 	public String breadcrumb(
 			String page, Layout selLayout, String selLayoutParam,
+			PortletURL portletURL, int displayStyle)
+		throws Exception {
+
+		return breadcrumb (
+			page, selLayout, selLayoutParam, portletURL, displayStyle,
+			PropsValues.BREADCRUMB_SHOW_GUEST_GROUP,
+			PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS, true, true);
+	}
+
+	public String breadcrumb(
+			String page, Layout selLayout, String selLayoutParam,
 			PortletURL portletURL, int displayStyle, boolean showGuestGroup,
 			boolean showParentGroups, boolean showLayout,
 			boolean showPortletBreadcrumb)
@@ -186,17 +197,6 @@ public class VelocityTaglib {
 			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
-	}
-
-	public String breadcrumb(
-			String page, Layout selLayout, String selLayoutParam,
-			PortletURL portletURL, int displayStyle)
-		throws Exception {
-
-		return breadcrumb (
-			page, selLayout, selLayoutParam, portletURL, displayStyle,
-			PropsValues.BREADCRUMB_SHOW_GUEST_GROUP,
-			PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS, true, true);
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {

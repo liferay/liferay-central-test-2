@@ -30,12 +30,15 @@ StringBuilder sb = new StringBuilder();
 if (showGuestGroup) {
 	_buildGuestGroupBreadcrumb(themeDisplay, sb);
 }
+
 if (showParentGroups) {
 	_buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
 }
+
 if (showLayout) {
 	_buildLayoutBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
 }
+
 if (showPortletBreadcrumb) {
 	_buildPortletBreadcrumb(request, sb);
 }
