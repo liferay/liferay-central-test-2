@@ -49,7 +49,7 @@ for (int i = 0; i < categoryNames.length; i++) {
 
 					Boolean show = (Boolean)request.getAttribute(WebKeys.FORM_NAVIGATOR_SECTION_SHOW + sectionId);
 
-					if ((show != null) && (!show.booleanValue())) {
+					if ((show != null) && !show.booleanValue()) {
 						continue;
 					}
 
