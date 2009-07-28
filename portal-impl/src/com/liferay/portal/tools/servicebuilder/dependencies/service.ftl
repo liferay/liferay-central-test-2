@@ -7,6 +7,30 @@ import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 @Transactional(isolation = Isolation.PORTAL, rollbackFor = {PortalException.class, SystemException.class})
+
+/**
+ * <a href="${entity.name}${sessionTypeName}Service.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is
+ * {@link
+ * ${packagePath}.service.impl.${entity.name}${sessionTypeName}ServiceImpl}}.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * ${serviceComments}
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ${entity.name}${sessionTypeName}ServiceUtil
+ */
 public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>

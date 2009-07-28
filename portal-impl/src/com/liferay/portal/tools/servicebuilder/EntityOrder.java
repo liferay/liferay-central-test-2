@@ -24,6 +24,11 @@ package com.liferay.portal.tools.servicebuilder;
 
 import java.util.List;
 
+/**
+ * <a href="EntityOrder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntityOrder {
 
 	public EntityOrder(boolean asc, List<EntityColumn> columns) {

@@ -376,6 +376,10 @@ public class SourceFormatter {
 				System.out.println("(c): " + files[i]);
 			}
 
+			if (newContent.indexOf(className + ".java.html") == -1) {
+				System.out.println("Java2HTML: " + files[i]);
+			}
+
 			newContent = stripImports(newContent, packagePath, className);
 
 			newContent = StringUtil.replace(

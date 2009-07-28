@@ -1,6 +1,29 @@
 package ${packagePath}.model;
 
-public interface ${entity.name} extends ${entity.name}Model {
+/**
+ * <a href="${entity.name}.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ${entity.table} table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ${entity.name}Model
+ * @see ${packagePath}.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.impl.${entity.name}ModelImpl
+ */
+ public interface ${entity.name} extends ${entity.name}Model {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>

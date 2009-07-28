@@ -25,6 +25,12 @@ package com.liferay.portal.tools.servicebuilder;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.TextFormatter;
 
+/**
+ * <a href="EntityColumn.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Charles May
+ */
 public class EntityColumn implements Cloneable {
 
 	public EntityColumn(String name) {

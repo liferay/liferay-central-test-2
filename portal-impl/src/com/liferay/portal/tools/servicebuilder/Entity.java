@@ -30,6 +30,12 @@ import com.liferay.util.TextFormatter;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="Entity.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
 public class Entity {
 
 	public static final String DEFAULT_DATA_SOURCE = "liferayDataSource";

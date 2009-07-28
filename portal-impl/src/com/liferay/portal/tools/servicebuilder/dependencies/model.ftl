@@ -14,6 +14,24 @@ import java.util.Date;
 	import java.util.Map;
 </#if>
 
+/**
+ * <a href="${entity.name}Model.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ${entity.table} table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ${entity.name}
+ * @see    ${packagePath}.model.impl.${entity.name}Impl
+ * @see    ${packagePath}.model.impl.${entity.name}ModelImpl
+ */
 public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 	public ${entity.PKClassName} getPrimaryKey();

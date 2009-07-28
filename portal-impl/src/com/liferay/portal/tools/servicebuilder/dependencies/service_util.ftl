@@ -3,6 +3,25 @@ package ${packagePath}.service;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
 
+/**
+ * <a href="${entity.name}${sessionTypeName}ServiceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class provides static methods for the
+ * {@link ${entity.name}${sessionTypeName}Service} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ${entity.name}${sessionTypeName}Service
+ */
 public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#list methods as method>
