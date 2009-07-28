@@ -258,6 +258,8 @@ if (Validator.isNull(redirect)) {
 	</c:if>
 
 	<c:if test="<%= editable %>">
+		<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
+
 		<aui:fieldset>
 			<c:if test="<%= editTitle %>">
 				<aui:input name="title" size="30" value="<%= title %>" />
@@ -319,8 +321,6 @@ if (Validator.isNull(redirect)) {
 
 				</aui:field-wrapper>
 			</c:if>
-
-			<aui:model-context bean="<%= !newPage ? wikiPage : templatePage %>" model="<%= WikiPage.class %>" />
 
 			<%
 			long resourcePrimKey = 0;

@@ -1825,6 +1825,8 @@
 	<model name="com.liferay.portlet.wiki.model.WikiPageResource">
 		<field name="resourcePrimKey" type="long" />
 		<field name="nodeId" type="long" />
-		<field name="title" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 	</model>
 </model-hints>

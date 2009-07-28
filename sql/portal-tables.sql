@@ -1681,5 +1681,5 @@ create table WikiPage (
 create table WikiPageResource (
 	resourcePrimKey LONG not null primary key,
 	nodeId LONG,
-	title VARCHAR(75) null
+	title VARCHAR(255) null
 );

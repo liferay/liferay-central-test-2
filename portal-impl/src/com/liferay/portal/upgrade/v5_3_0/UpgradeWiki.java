@@ -20,39 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeAsset;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeAssetPublisher;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
-import com.liferay.portal.upgrade.v5_3_0.UpgradePolls;
-import com.liferay.portal.upgrade.v5_3_0.UpgradePortletId;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeWiki;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
 
-public class UpgradeProcess_5_3_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_3_0_BUILD_NUMBER;
-	}
+public class UpgradeWiki extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeAsset.class);
-		upgrade(UpgradeAssetPublisher.class);
-		upgrade(UpgradeBlogs.class);
-		upgrade(UpgradePolls.class);
-		upgrade(UpgradePortletId.class);
-		upgrade(UpgradeSocial.class);
-		upgrade(UpgradeWiki.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_3_0.class);
+	protected void doUpgrade() throws Exception {
+		if (isSupportsAlterColumnType()) {
+			runSQL(
+				"alter_column_type WikiPageResource title varchar(255) null");
+		}
+		else {
+
+			// WikiPageResource
+
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+				WikiPageResourceImpl.TABLE_NAME,
+				WikiPageResourceImpl.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(WikiPageResourceImpl.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeWiki.class);
 
 }
