@@ -69,20 +69,20 @@ public class CommunitiesUtil {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
 					publicLayoutSetPrototypeId);
+
 			LayoutSet publicLayoutSet = group.getPublicLayoutSet();
 
-			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), publicLayoutSet);
+			copyLayoutSet(layoutSetPrototype.getLayoutSet(), publicLayoutSet);
 		}
 
 		if (privateLayoutSetPrototypeId > 0) {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
 					privateLayoutSetPrototypeId);
+
 			LayoutSet privateLayoutSet = group.getPrivateLayoutSet();
 
-			copyLayoutSet(
-				layoutSetPrototype.getLayoutSet(), privateLayoutSet);
+			copyLayoutSet(layoutSetPrototype.getLayoutSet(), privateLayoutSet);
 		}
 	}
 

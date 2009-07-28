@@ -134,7 +134,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 %>
 
-<c:if test="<%= (group != null) || !layoutSetPrototypes.isEmpty()%>">
+<c:if test="<%= (group != null) || !layoutSetPrototypes.isEmpty() %>">
 	<tr>
 		<td colspan="2">
 			<br />
@@ -172,7 +172,7 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 					<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="this-community-doesn't-have-any-public-pages" />
+					<liferay-ui:message key="this-community-does-not-have-any-public-pages" />
 				</c:otherwise>
 			</c:choose>
 		</td>
@@ -209,7 +209,7 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 					<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="this-community-doesn't-have-any-private-pages" />
+					<liferay-ui:message key="this-community-does-not-have-any-private-pages" />
 				</c:otherwise>
 			</c:choose>
 		</td>

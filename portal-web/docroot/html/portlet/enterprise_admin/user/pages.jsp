@@ -57,7 +57,6 @@ User selUser = (User)request.getAttribute("user.selUser");
 				</select>
 			</c:when>
 			<c:when test="<%= (selUser != null) && (selUser.getPublicLayoutsPageCount() > 0) %>">
-
 				<liferay-portlet:actionURL var="publicPagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
 					<portlet:param name="struts_action" value="/my_places/view" />
 					<portlet:param name="groupId" value="<%= String.valueOf(selUser.getGroup().getGroupId()) %>" />
@@ -67,7 +66,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 				<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="this-user-doesn't-have-any-public-pages" />
+				<liferay-ui:message key="this-user-does-not-have-any-public-pages" />
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -109,7 +108,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 				<a href="<%= privatePagesURL %>"><liferay-ui:message key="private-pages" /></a>
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="this-user-doesn't-have-any-private-pages" />
+				<liferay-ui:message key="this-user-does-not-have-any-private-pages" />
 			</c:otherwise>
 		</c:choose>
 	</div>

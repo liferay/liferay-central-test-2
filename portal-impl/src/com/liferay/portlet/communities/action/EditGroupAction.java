@@ -153,11 +153,6 @@ public class EditGroupAction extends PortletAction {
 		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
-		long publicLayoutSetPrototypeId = ParamUtil.getLong(
-			actionRequest, "publicLayoutSetPrototypeId");
-		long privateLayoutSetPrototypeId = ParamUtil.getLong(
-			actionRequest, "privateLayoutSetPrototypeId");
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Group.class.getName(), actionRequest);
 
@@ -182,11 +177,15 @@ public class EditGroupAction extends PortletAction {
 				serviceContext);
 		}
 
-		// LayoutSet prototypes
+		// Layout set prototypes
+
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId);
-
 	}
 
 }

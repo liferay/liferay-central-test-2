@@ -205,11 +205,6 @@ public class EditOrganizationAction extends PortletAction {
 		List<Phone> phones = EnterpriseAdminUtil.getPhones(actionRequest);
 		List<Website> websites = EnterpriseAdminUtil.getWebsites(actionRequest);
 
-		long publicLayoutSetPrototypeId = ParamUtil.getLong(
-			actionRequest, "publicLayoutSetPrototypeId");
-		long privateLayoutSetPrototypeId = ParamUtil.getLong(
-			actionRequest, "privateLayoutSetPrototypeId");
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Organization.class.getName(), actionRequest);
 
@@ -242,7 +237,12 @@ public class EditOrganizationAction extends PortletAction {
 			}
 		}
 
-		// LayoutSet prototypes
+		// Layout set prototypes
+
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			organization.getGroup(), publicLayoutSetPrototypeId,

@@ -28,20 +28,20 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public class LayoutSetPrototypePermissionUtil {
 
 	public static void check(
-			PermissionChecker permissionChecker, long layoutPrototypeId,
+			PermissionChecker permissionChecker, long layoutSetPrototypeId,
 			String actionId)
 		throws PrincipalException {
 
 		getLayoutSetPrototypePermission().check(
-			permissionChecker, layoutPrototypeId, actionId);
+			permissionChecker, layoutSetPrototypeId, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, long layoutPrototypeId,
+		PermissionChecker permissionChecker, long layoutSetPrototypeId,
 		String actionId) {
 
 		return getLayoutSetPrototypePermission().contains(
-			permissionChecker, layoutPrototypeId, actionId);
+			permissionChecker, layoutSetPrototypeId, actionId);
 	}
 
 	public static LayoutPrototypePermission getLayoutSetPrototypePermission() {

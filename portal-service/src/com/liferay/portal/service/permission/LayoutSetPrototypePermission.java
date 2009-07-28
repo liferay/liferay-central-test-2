@@ -28,12 +28,12 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface LayoutSetPrototypePermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long layoutPrototypeId,
+			PermissionChecker permissionChecker, long layoutSetPrototypeId,
 			String actionId)
 		throws PrincipalException;
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long layoutPrototypeId,
+		PermissionChecker permissionChecker, long layoutSetPrototypeId,
 		String actionId);
 
 }

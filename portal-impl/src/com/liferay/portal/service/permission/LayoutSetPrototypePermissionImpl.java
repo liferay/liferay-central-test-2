@@ -30,21 +30,21 @@ public class LayoutSetPrototypePermissionImpl
 	implements LayoutPrototypePermission {
 
 	public void check(
-			PermissionChecker permissionChecker, long layoutPrototypeId,
+			PermissionChecker permissionChecker, long layoutSetPrototypeId,
 			String actionId)
 		throws PrincipalException {
 
-		if (!contains(permissionChecker, layoutPrototypeId, actionId)) {
+		if (!contains(permissionChecker, layoutSetPrototypeId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long layoutPrototypeId,
+		PermissionChecker permissionChecker, long layoutSetPrototypeId,
 		String actionId) {
 
 		if (permissionChecker.hasPermission(
-				0, LayoutSetPrototype.class.getName(), layoutPrototypeId,
+				0, LayoutSetPrototype.class.getName(), layoutSetPrototypeId,
 				actionId)) {
 
 			return true;

@@ -40,6 +40,7 @@ import java.util.Map;
 
 public class LayoutSetPrototypeServiceImpl
 	extends LayoutSetPrototypeServiceBaseImpl {
+
 	public LayoutSetPrototype addLayoutSetPrototype(
 			Map<Locale, String> nameMap, String description,
 			boolean active)

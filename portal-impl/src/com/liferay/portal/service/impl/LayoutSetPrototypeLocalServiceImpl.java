@@ -45,7 +45,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			String description, boolean active)
 		throws PortalException, SystemException {
 
-		// LayoutSet prototype
+		// Layout set prototype
 
 		long layoutSetPrototypeId = counterLocalService.increment();
 
@@ -108,7 +108,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			layoutSetPrototype.getLayoutSetPrototypeId());
 
-		// LayoutSet prototype
+		// Layout set prototype
 
 		layoutSetPrototypePersistence.remove(layoutSetPrototype);
 
@@ -148,7 +148,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			String description, boolean active)
 		throws PortalException, SystemException {
 
-		// LayoutSet prototype
+		// Layout set prototype
 
 		LayoutSetPrototype layoutSetPrototype =
 			layoutSetPrototypePersistence.findByPrimaryKey(

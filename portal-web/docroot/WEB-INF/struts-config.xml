@@ -1107,8 +1107,6 @@
 
 		<!-- Layout Prototypes -->
 
-		<action path="/layout_prototypes/view" forward="portlet.layout_prototypes.view" />
-
 		<action path="/layout_prototypes/edit_layout_prototype" type="com.liferay.portlet.layoutprototypes.action.EditLayoutPrototypeAction">
 			<forward name="portlet.layout_prototypes.edit_layout_prototype" path="portlet.layout_prototypes.edit_layout_prototype" />
 			<forward name="portlet.layout_prototypes.error" path="portlet.layout_prototypes.error" />
@@ -1119,9 +1117,9 @@
 			<forward name="portlet.communities.error" path="portlet.layout_prototypes.error" />
 		</action>
 
-		<!-- Layout Set Prototypes -->
+		<action path="/layout_prototypes/view" forward="portlet.layout_prototypes.view" />
 
-		<action path="/layout_set_prototypes/view" forward="portlet.layout_set_prototypes.view" />
+		<!-- Layout Set Prototypes -->
 
 		<action path="/layout_set_prototypes/edit_layout_set_prototype" type="com.liferay.portlet.layoutsetprototypes.action.EditLayoutSetPrototypeAction">
 			<forward name="portlet.layout_set_prototypes.edit_layout_set_prototype" path="portlet.layout_set_prototypes.edit_layout_set_prototype" />
@@ -1132,6 +1130,8 @@
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.layout_set_prototypes.error" />
 		</action>
+
+		<action path="/layout_set_prototypes/view" forward="portlet.layout_set_prototypes.view" />
 
 		<!-- Login -->
 
