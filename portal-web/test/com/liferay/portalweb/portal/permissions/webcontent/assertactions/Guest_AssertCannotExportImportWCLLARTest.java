@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.assertactions;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Guest_AssertCannotExportImportWCLLARTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Guest_AssertCannotExportImportWCLLARTest extends BaseTestCase {
 	public void testGuest_AssertCannotExportImportWCLLAR()
 		throws Exception {

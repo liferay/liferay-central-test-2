@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.staging.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Guest_AssertNoContentPreApprovalTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Guest_AssertNoContentPreApprovalTest extends BaseTestCase {
 	public void testGuest_AssertNoContentPreApproval()
 		throws Exception {

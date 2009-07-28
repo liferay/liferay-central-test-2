@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddYearlyDateRepeatingEventTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 	public void testAddYearlyDateRepeatingEvent() throws Exception {
 		for (int second = 0;; second++) {

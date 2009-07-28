@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddTemporaryOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddTemporaryOrganizationTest extends BaseTestCase {
 	public void testAddTemporaryOrganization() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddUserSMSTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddUserSMSTest extends BaseTestCase {
 	public void testAddUserSMS() throws Exception {
 		for (int second = 0;; second++) {

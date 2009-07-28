@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.tagsadmin;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddDuplicateTagTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddDuplicateTagTest extends BaseTestCase {
 	public void testAddDuplicateTag() throws Exception {
 		for (int second = 0;; second++) {

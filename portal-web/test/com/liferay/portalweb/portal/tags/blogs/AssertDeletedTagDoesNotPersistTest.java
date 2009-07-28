@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertDeletedTagDoesNotPersistTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 	public void testAssertDeletedTagDoesNotPersist() throws Exception {
 		for (int second = 0;; second++) {

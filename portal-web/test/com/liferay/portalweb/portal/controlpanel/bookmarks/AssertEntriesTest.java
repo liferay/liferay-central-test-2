@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertEntriesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertEntriesTest extends BaseTestCase {
 	public void testAssertEntries() throws Exception {
 		for (int second = 0;; second++) {

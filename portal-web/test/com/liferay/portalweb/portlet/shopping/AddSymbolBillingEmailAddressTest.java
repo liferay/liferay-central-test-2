@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddSymbolBillingEmailAddressTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddSymbolBillingEmailAddressTest extends BaseTestCase {
 	public void testAddSymbolBillingEmailAddress() throws Exception {
 		for (int second = 0;; second++) {

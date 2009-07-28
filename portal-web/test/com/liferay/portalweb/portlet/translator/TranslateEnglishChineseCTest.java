@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.translator;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="TranslateEnglishChineseCTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TranslateEnglishChineseCTest extends BaseTestCase {
 	public void testTranslateEnglishChineseC() throws Exception {
 		selenium.select("_26_id",

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ViewDocumentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ViewDocumentTest extends BaseTestCase {
 	public void testViewDocument() throws Exception {
 		for (int second = 0;; second++) {

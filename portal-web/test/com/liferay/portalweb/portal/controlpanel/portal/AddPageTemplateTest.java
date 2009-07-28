@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddPageTemplateTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddPageTemplateTest extends BaseTestCase {
 	public void testAddPageTemplate() throws Exception {
 		for (int second = 0;; second++) {

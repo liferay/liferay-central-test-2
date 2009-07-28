@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.sampleorbeonforms;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
 		for (int second = 0;; second++) {

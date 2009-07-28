@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.webcontent;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddArticle2Test.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddArticle2Test extends BaseTestCase {
 	public void testAddArticle2() throws Exception {
 		for (int second = 0;; second++) {

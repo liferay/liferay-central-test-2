@@ -24,6 +24,11 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
+/**
+ * <a href="CA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CA_AddPortletTest extends BaseTestCase {
 	public void testCA_AddPortlet() throws Exception {
 		for (int second = 0;; second++) {

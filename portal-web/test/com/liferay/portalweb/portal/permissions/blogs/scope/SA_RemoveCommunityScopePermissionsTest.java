@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.blogs.scope;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SA_RemoveCommunityScopePermissionsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SA_RemoveCommunityScopePermissionsTest extends BaseTestCase {
 	public void testSA_RemoveCommunityScopePermissions()
 		throws Exception {

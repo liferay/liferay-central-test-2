@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.wol;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddPortletJIRATest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddPortletJIRATest extends BaseTestCase {
 	public void testAddPortletJIRA() throws Exception {
 		for (int second = 0;; second++) {

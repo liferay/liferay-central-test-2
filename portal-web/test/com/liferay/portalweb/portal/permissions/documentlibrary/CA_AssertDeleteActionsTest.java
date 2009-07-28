@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CA_AssertDeleteActionsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CA_AssertDeleteActionsTest extends BaseTestCase {
 	public void testCA_AssertDeleteActions() throws Exception {
 		selenium.click(RuntimeVariables.replace(

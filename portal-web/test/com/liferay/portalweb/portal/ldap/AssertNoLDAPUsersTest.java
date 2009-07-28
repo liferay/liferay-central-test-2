@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.ldap;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertNoLDAPUsersTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertNoLDAPUsersTest extends BaseTestCase {
 	public void testAssertNoLDAPUsers() throws Exception {
 		System.out.println("Now testing LDAP integration...");

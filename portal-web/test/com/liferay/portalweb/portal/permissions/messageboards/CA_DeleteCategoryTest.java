@@ -24,6 +24,11 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
+/**
+ * <a href="CA_DeleteCategoryTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CA_DeleteCategoryTest extends BaseTestCase {
 	public void testCA_DeleteCategory() throws Exception {
 		for (int second = 0;; second++) {

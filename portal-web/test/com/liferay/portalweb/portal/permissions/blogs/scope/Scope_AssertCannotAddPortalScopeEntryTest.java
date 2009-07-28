@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.blogs.scope;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Scope_AssertCannotAddPortalScopeEntryTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Scope_AssertCannotAddPortalScopeEntryTest extends BaseTestCase {
 	public void testScope_AssertCannotAddPortalScopeEntry()
 		throws Exception {

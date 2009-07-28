@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddThirdReplyMessageTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddThirdReplyMessageTest extends BaseTestCase {
 	public void testAddThirdReplyMessage() throws Exception {
 		for (int second = 0;; second++) {

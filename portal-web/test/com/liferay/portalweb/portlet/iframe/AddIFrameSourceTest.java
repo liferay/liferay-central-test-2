@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.iframe;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddIFrameSourceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddIFrameSourceTest extends BaseTestCase {
 	public void testAddIFrameSource() throws Exception {
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));

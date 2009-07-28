@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Writer_AssertViewWCDContentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Writer_AssertViewWCDContentTest extends BaseTestCase {
 	public void testWriter_AssertViewWCDContent() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Member_AddDocumentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_AddDocumentTest extends BaseTestCase {
 	public void testMember_AddDocument() throws Exception {
 		for (int second = 0;; second++) {

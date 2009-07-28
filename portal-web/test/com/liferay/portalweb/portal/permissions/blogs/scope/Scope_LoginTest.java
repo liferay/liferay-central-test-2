@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.blogs.scope;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Scope_LoginTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Scope_LoginTest extends BaseTestCase {
 	public void testScope_Login() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Welcome"));

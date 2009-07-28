@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Member_AssertDeleteDocumentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_AssertDeleteDocumentTest extends BaseTestCase {
 	public void testMember_AssertDeleteDocument() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.announcements;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DeleteAnnouncementTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DeleteAnnouncementTest extends BaseTestCase {
 	public void testDeleteAnnouncement() throws Exception {
 		for (int second = 0;; second++) {

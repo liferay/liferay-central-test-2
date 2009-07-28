@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.blogs.teardown;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SA_LogoutTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SA_LogoutTest extends BaseTestCase {
 	public void testSA_Logout() throws Exception {
 		for (int second = 0;; second++) {

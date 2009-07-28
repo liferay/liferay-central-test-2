@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.managepages;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DisplayOrderTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DisplayOrderTest extends BaseTestCase {
 	public void testDisplayOrder() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));

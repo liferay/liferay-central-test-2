@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddMoveFoldersTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddMoveFoldersTest extends BaseTestCase {
 	public void testAddMoveFolders() throws Exception {
 		for (int second = 0;; second++) {

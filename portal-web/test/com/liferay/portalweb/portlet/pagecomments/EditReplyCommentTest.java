@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.pagecomments;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="EditReplyCommentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EditReplyCommentTest extends BaseTestCase {
 	public void testEditReplyComment() throws Exception {
 		for (int second = 0;; second++) {

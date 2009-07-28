@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Writer_EditOwnArticleTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Writer_EditOwnArticleTest extends BaseTestCase {
 	public void testWriter_EditOwnArticle() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.login;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
 		selenium.open("/web/guest/home");

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssignMembersTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssignMembersTest extends BaseTestCase {
 	public void testAssignMembers() throws Exception {
 		for (int second = 0;; second++) {

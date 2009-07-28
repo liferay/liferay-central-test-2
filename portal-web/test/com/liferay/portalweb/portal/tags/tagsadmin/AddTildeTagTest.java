@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.tagsadmin;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddTildeTagTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddTildeTagTest extends BaseTestCase {
 	public void testAddTildeTag() throws Exception {
 		for (int second = 0;; second++) {

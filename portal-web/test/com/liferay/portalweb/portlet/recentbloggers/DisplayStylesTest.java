@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.recentbloggers;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DisplayStylesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DisplayStylesTest extends BaseTestCase {
 	public void testDisplayStyles() throws Exception {
 		for (int second = 0;; second++) {

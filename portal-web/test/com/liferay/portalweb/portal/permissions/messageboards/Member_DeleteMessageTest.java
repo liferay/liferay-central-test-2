@@ -24,6 +24,11 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
+/**
+ * <a href="Member_DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_DeleteMessageTest extends BaseTestCase {
 	public void testMember_DeleteMessage() throws Exception {
 		for (int second = 0;; second++) {

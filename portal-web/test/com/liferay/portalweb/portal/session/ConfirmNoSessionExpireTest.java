@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.session;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ConfirmNoSessionExpireTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ConfirmNoSessionExpireTest extends BaseTestCase {
 	public void testConfirmNoSessionExpire() throws Exception {
 		Thread.sleep(30000);

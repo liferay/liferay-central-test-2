@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DeleteTemporaryItemTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DeleteTemporaryItemTest extends BaseTestCase {
 	public void testDeleteTemporaryItem() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.webform;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ArchiveTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ArchiveTest extends BaseTestCase {
 	public void testArchive() throws Exception {
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));

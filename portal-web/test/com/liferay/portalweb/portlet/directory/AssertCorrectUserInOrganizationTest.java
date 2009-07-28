@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.directory;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertCorrectUserInOrganizationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
 	public void testAssertCorrectUserInOrganization() throws Exception {
 		for (int second = 0;; second++) {

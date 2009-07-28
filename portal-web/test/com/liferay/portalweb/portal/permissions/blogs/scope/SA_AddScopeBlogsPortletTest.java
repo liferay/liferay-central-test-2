@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.blogs.scope;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SA_AddScopeBlogsPortletTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 	public void testSA_AddScopeBlogsPortlet() throws Exception {
 		for (int second = 0;; second++) {

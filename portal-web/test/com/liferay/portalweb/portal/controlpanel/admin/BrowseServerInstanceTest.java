@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.admin;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="BrowseServerInstanceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BrowseServerInstanceTest extends BaseTestCase {
 	public void testBrowseServerInstance() throws Exception {
 		for (int second = 0;; second++) {

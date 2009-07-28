@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="GetAppointmentEventsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class GetAppointmentEventsTest extends BaseTestCase {
 	public void testGetAppointmentEvents() throws Exception {
 		for (int second = 0;; second++) {

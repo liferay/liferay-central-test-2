@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SelectBookmarkTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SelectBookmarkTest extends BaseTestCase {
 	public void testSelectBookmark() throws Exception {
 		for (int second = 0;; second++) {

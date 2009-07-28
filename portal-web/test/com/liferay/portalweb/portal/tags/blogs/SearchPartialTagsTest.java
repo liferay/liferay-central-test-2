@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SearchPartialTagsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SearchPartialTagsTest extends BaseTestCase {
 	public void testSearchPartialTags() throws Exception {
 		for (int second = 0;; second++) {

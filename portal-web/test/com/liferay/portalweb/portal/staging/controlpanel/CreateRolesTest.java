@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.staging.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CreateRolesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CreateRolesTest extends BaseTestCase {
 	public void testCreateRoles() throws Exception {
 		for (int second = 0;; second++) {

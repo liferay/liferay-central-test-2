@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.samplelar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ConfigurationTest extends BaseTestCase {
 	public void testConfiguration() throws Exception {
 		for (int second = 0;; second++) {

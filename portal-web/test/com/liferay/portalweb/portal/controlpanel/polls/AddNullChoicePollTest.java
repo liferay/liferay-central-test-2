@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.polls;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddNullChoicePollTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddNullChoicePollTest extends BaseTestCase {
 	public void testAddNullChoicePoll() throws Exception {
 		for (int second = 0;; second++) {

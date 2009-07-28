@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.portlet;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Member_AssertEditWCLConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_AssertEditWCLConfigurationTest extends BaseTestCase {
 	public void testMember_AssertEditWCLConfiguration()
 		throws Exception {

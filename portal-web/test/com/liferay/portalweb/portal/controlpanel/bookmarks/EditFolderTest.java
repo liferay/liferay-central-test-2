@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="EditFolderTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EditFolderTest extends BaseTestCase {
 	public void testEditFolder() throws Exception {
 		for (int second = 0;; second++) {

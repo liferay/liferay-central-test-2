@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.imagegallery;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CA_AddSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CA_AddSubfolderTest extends BaseTestCase {
 	public void testCA_AddSubfolder() throws Exception {
 		for (int second = 0;; second++) {

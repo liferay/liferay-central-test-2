@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Member_ReplyMessageTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_ReplyMessageTest extends BaseTestCase {
 	public void testMember_ReplyMessage() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.tagsadmin;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddCompareCharacterTagTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddCompareCharacterTagTest extends BaseTestCase {
 	public void testAddCompareCharacterTag() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.virtualhosting;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertPublicPageHostURLTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertPublicPageHostURLTest extends BaseTestCase {
 	public void testAssertPublicPageHostURL() throws Exception {
 		selenium.open("http://www.able.com:8080/");

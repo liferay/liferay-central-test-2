@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.shopping;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddTemporaryItemTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddTemporaryItemTest extends BaseTestCase {
 	public void testAddTemporaryItem() throws Exception {
 		for (int second = 0;; second++) {

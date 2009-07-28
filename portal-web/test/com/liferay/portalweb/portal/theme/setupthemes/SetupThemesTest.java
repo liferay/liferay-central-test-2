@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.theme.setupthemes;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="SetupThemesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SetupThemesTest extends BaseTestCase {
 	public void testSetupThemes() throws Exception {
 		for (int second = 0;; second++) {

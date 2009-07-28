@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Publisher_AssertSearchWCSPortletTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Publisher_AssertSearchWCSPortletTest extends BaseTestCase {
 	public void testPublisher_AssertSearchWCSPortlet()
 		throws Exception {

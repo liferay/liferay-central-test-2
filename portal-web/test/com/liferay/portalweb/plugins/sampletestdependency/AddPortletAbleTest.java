@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.sampletestdependency;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddPortletAbleTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddPortletAbleTest extends BaseTestCase {
 	public void testAddPortletAble() throws Exception {
 		for (int second = 0;; second++) {

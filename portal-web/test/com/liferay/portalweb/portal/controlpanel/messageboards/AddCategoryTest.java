@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddCategoryTest extends BaseTestCase {
 	public void testAddCategory() throws Exception {
 		for (int second = 0;; second++) {

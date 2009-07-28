@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.softwarecatalog;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
 		for (int second = 0;; second++) {

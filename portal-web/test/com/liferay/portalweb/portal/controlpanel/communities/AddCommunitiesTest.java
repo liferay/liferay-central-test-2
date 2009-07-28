@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.communities;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddCommunitiesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddCommunitiesTest extends BaseTestCase {
 	public void testAddCommunities() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DefineMemberRolesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DefineMemberRolesTest extends BaseTestCase {
 	public void testDefineMemberRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Roles"));

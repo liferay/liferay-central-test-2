@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.language;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="LanguageTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LanguageTest extends BaseTestCase {
 	public void testLanguage() throws Exception {
 		selenium.click(RuntimeVariables.replace(

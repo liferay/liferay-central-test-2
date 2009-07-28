@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.virtualhosting;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertPrivatePageFriendlyURLTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertPrivatePageFriendlyURLTest extends BaseTestCase {
 	public void testAssertPrivatePageFriendlyURL() throws Exception {
 		selenium.open("/group/alpha/");

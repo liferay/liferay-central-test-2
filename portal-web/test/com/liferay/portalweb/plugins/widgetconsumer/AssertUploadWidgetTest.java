@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.widgetconsumer;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertUploadWidgetTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertUploadWidgetTest extends BaseTestCase {
 	public void testAssertUploadWidget() throws Exception {
 		for (int second = 0;; second++) {

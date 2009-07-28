@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.webcontent.workflow;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Member_AssertCannotViewWCDPostExpireTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Member_AssertCannotViewWCDPostExpireTest extends BaseTestCase {
 	public void testMember_AssertCannotViewWCDPostExpire()
 		throws Exception {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddSubfolderTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddSubfolderTest extends BaseTestCase {
 	public void testAddSubfolder() throws Exception {
 		for (int second = 0;; second++) {

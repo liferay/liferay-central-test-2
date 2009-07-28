@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="VerifyDynamicConfigurationDocumentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class VerifyDynamicConfigurationDocumentTest extends BaseTestCase {
 	public void testVerifyDynamicConfigurationDocument()
 		throws Exception {

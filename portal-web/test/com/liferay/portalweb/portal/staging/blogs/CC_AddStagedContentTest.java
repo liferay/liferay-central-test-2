@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.staging.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CC_AddStagedContentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CC_AddStagedContentTest extends BaseTestCase {
 	public void testCC_AddStagedContent() throws Exception {
 		for (int second = 0;; second++) {

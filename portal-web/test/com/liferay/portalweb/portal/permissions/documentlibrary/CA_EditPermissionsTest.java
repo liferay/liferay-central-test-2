@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CA_EditPermissionsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CA_EditPermissionsTest extends BaseTestCase {
 	public void testCA_EditPermissions() throws Exception {
 		for (int second = 0;; second++) {

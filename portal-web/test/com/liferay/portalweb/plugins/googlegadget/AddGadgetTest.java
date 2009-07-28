@@ -25,6 +25,11 @@ package com.liferay.portalweb.plugins.googlegadget;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddGadgetTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddGadgetTest extends BaseTestCase {
 	public void testAddGadget() throws Exception {
 		for (int second = 0;; second++) {

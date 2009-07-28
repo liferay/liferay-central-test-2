@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.staging.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="CP_LogoutTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CP_LogoutTest extends BaseTestCase {
 	public void testCP_Logout() throws Exception {
 		for (int second = 0;; second++) {

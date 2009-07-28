@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.plugininstaller;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="PluginUpdateTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PluginUpdateTest extends BaseTestCase {
 	public void testPluginUpdate() throws Exception {
 		selenium.click(RuntimeVariables.replace(

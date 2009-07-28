@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddNumberUserGroupNameTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddNumberUserGroupNameTest extends BaseTestCase {
 	public void testAddNumberUserGroupName() throws Exception {
 		for (int second = 0;; second++) {

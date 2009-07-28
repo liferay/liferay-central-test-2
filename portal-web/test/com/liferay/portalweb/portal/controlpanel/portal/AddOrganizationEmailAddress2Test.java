@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddOrganizationEmailAddress2Test.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddOrganizationEmailAddress2Test extends BaseTestCase {
 	public void testAddOrganizationEmailAddress2() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Organizations"));

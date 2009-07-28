@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.cluster.cluster1;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="N2_UpdateMessageBoardsContentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 	public void testN2_UpdateMessageBoardsContent() throws Exception {
 		for (int second = 0;; second++) {

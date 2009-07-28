@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.controlpanel;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddScopeTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddScopeTest extends BaseTestCase {
 	public void testAddScope() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Users"));

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.communities;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ImportCommunityLARTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ImportCommunityLARTest extends BaseTestCase {
 	public void testImportCommunityLAR() throws Exception {
 		for (int second = 0;; second++) {

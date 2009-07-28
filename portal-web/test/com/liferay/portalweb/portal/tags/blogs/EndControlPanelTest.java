@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="EndControlPanelTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EndControlPanelTest extends BaseTestCase {
 	public void testEndControlPanel() throws Exception {
 		int label = 1;

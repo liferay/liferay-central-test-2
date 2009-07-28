@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.assetpublisher;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="DeleteArchivedConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DeleteArchivedConfigurationTest extends BaseTestCase {
 	public void testDeleteArchivedConfiguration() throws Exception {
 		for (int second = 0;; second++) {

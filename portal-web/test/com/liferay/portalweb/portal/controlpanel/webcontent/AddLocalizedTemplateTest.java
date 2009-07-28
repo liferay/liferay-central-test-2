@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.controlpanel.webcontent;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddLocalizedTemplateTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddLocalizedTemplateTest extends BaseTestCase {
 	public void testAddLocalizedTemplate() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Web Content"));

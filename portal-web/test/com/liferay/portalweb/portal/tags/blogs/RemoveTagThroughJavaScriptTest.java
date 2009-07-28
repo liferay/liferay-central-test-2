@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.tags.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="RemoveTagThroughJavaScriptTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RemoveTagThroughJavaScriptTest extends BaseTestCase {
 	public void testRemoveTagThroughJavaScript() throws Exception {
 		for (int second = 0;; second++) {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddWeeklyRepeatingEventTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddWeeklyRepeatingEventTest extends BaseTestCase {
 	public void testAddWeeklyRepeatingEvent() throws Exception {
 		for (int second = 0;; second++) {

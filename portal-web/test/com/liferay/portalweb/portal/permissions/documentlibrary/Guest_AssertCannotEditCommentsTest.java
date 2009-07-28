@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="Guest_AssertCannotEditCommentsTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Guest_AssertCannotEditCommentsTest extends BaseTestCase {
 	public void testGuest_AssertCannotEditComments() throws Exception {
 		for (int second = 0;; second++) {

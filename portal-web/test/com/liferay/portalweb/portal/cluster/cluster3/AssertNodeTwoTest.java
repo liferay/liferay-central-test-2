@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.cluster.cluster3;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AssertNodeTwoTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssertNodeTwoTest extends BaseTestCase {
 	public void testAssertNodeTwo() throws Exception {
 		selenium.open("/");

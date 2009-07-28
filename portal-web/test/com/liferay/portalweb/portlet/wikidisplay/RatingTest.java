@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.wikidisplay;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="RatingTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RatingTest extends BaseTestCase {
 	public void testRating() throws Exception {
 		for (int second = 0;; second++) {

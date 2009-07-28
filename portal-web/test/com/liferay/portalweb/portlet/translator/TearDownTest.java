@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.translator;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="TearDownTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TearDownTest extends BaseTestCase {
 	public void testTearDown() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Home"));

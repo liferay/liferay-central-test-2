@@ -25,6 +25,11 @@ package com.liferay.portalweb.portlet.documentlibrary;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="AddNullDocumentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddNullDocumentTest extends BaseTestCase {
 	public void testAddNullDocument() throws Exception {
 		for (int second = 0;; second++) {

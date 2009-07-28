@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
+/**
+ * <a href="ScreengrabPageCommentTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ScreengrabPageCommentTest extends BaseTestCase {
 	public void testScreengrabPageComment() throws Exception {
 		for (int second = 0;; second++) {
