@@ -36,11 +36,7 @@ MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, cate
 
 <liferay-ui:tabs names="categories" />
 
-<c:if test="<%= category != null %>">
-	<div class="breadcrumbs">
-		<%= MBUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

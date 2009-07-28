@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -46,6 +47,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -69,11 +71,9 @@ import javax.mail.internet.MimeMultipart;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.PageContext;
 
 public class MBUtil {
 
@@ -98,10 +98,32 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
+		String strutsAction = ParamUtil.getString(
+			request, "struts_action");
+
+		boolean selectCategory = strutsAction.equals(
+			"/message_boards/select_category");
+
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter("struts_action", "/message_boards/view");
-		portletURL.setParameter("tabs1", "categories");
+		if (selectCategory) {
+			ThemeDisplay themeDisplay =	(ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
+
+			portletURL.setParameter(
+				"struts_action", "/message_boards/select_category");
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request,
+				LanguageUtil.get(themeDisplay.getLocale(), "categories"),
+				portletURL.toString());
+		}
+		else {
+			portletURL.setParameter("struts_action", "/message_boards/view");
+			portletURL.setParameter("tabs1", "categories");
+		}
 
 		List<MBCategory> ancestorCategories = category.getAncestors();
 
@@ -192,67 +214,6 @@ public class MBUtil {
 				}
 			}
 		}
-	}
-
-	public static String getBreadcrumbs(
-			MBCategory category, PageContext pageContext,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
-
-		PortletURL categoriesURL = renderResponse.createRenderURL();
-
-		categoriesURL.setWindowState(LiferayWindowState.POP_UP);
-
-		categoriesURL.setParameter(
-			"struts_action", "/message_boards/select_category");
-
-		String categoriesLink =
-			"<a href=\"" + categoriesURL.toString() + "\">" +
-				LanguageUtil.get(pageContext, "categories") + "</a>";
-
-		if (category == null) {
-			return "<span class=\"first last\">" + categoriesLink + "</span>";
-		}
-
-		String breadcrumbs = StringPool.BLANK;
-
-		for (int i = 0;; i++) {
-			category = category.toEscapedModel();
-
-			PortletURL portletURL = renderResponse.createRenderURL();
-
-			portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-			portletURL.setParameter(
-				"struts_action", "/message_boards/select_category");
-			portletURL.setParameter(
-				"mbCategoryId", String.valueOf(category.getCategoryId()));
-
-			String categoryLink =
-				"<a href=\"" + portletURL.toString() + "\">" +
-					category.getName() + "</a>";
-
-			if (i == 0) {
-				breadcrumbs =
-					"<span class=\"last\">" + categoryLink + "</span>";
-			}
-			else {
-				breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
-			}
-
-			if (category.isRoot()) {
-				break;
-			}
-
-			category = MBCategoryLocalServiceUtil.getCategory(
-				category.getParentCategoryId());
-		}
-
-		breadcrumbs =
-			"<span class=\"first\">" + categoriesLink + " &raquo; </span>" +
-				breadcrumbs;
-
-		return breadcrumbs;
 	}
 
 	public static String getEmailFromAddress(PortletPreferences preferences) {
