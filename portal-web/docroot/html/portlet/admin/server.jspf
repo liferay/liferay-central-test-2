@@ -591,7 +591,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="user-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3User" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />pop3User" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_USER) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -599,7 +599,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="password" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />pop3Password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />pop3Password" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD) %>" />
 					</td>
 				</tr>
 				<tr>
