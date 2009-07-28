@@ -4282,6 +4282,7 @@ x-disables-the-minimum-order-requirement={0} deaktiviert die minimale Reihenfolg
 x-does-not-have-any-commits-to-the-svn-repository={0} hat noch keine Beiträge zum SVN-Repository eingereicht.
 x-files-ready-to-be-uploaded={0} Dateien können hochgeladen werden.
 x-forum-posts={0} Forum Posts
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} hat ihren JIRA Login nicht eingrichtet.
 x-has-not-configured-his-jira-login={0} hat seinen JIRA Login nicht eingerichtet.
 x-has-x-friends={0} hat {1} Freunde.

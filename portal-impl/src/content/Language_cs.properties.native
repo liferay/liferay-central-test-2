@@ -1641,6 +1641,7 @@ x-disables-the-minimum-order-requirement={0} vypni požadavek minimální objedn
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
 x-files-ready-to-be-uploaded={0} souborů je připraveno k uploadu.
 x-forum-posts={0} příspěvků v diskusních fórech
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login=Uživatelka {0} nemá nakonfigurován svůj login do systému JIRA.
 x-has-not-configured-his-jira-login=Uživatel {0} nemá nakonfigurován svůj login do systému JIRA.
 x-has-x-friends=Uživatel {0} má registrováno {1} pčátel.

@@ -3927,6 +3927,7 @@ x-disables-the-minimum-order-requirement={0} отменя минималното
 x-does-not-have-any-commits-to-the-svn-repository={0} няма никакви качвания в SVN хранилището.
 x-files-ready-to-be-uploaded={0} файла са готови да бъдат качени.
 x-forum-posts={0} поста във форума
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} не е конфигурирала нейния JIRA логин.
 x-has-not-configured-his-jira-login={0} не е конфигурирал неговия JIRA логин.
 x-has-x-friends={0} има {1} приятели.

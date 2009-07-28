@@ -3647,6 +3647,7 @@ x-disables-the-minimum-order-requirement={0} disables the minimum order requirem
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
 x-files-ready-to-be-uploaded={0} súborov pripravených na nahratie.
 x-forum-posts={0} príspevkov na fóre
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} si nenakonfigurovala svoje JIRA prihlasovacie meno.
 x-has-not-configured-his-jira-login={0} si nenakonfiguroval svoje JIRA prihlasovacie meno.
 x-has-x-friends={0} has {1} friends.

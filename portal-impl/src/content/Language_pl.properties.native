@@ -4022,6 +4022,7 @@ x-disables-the-minimum-order-requirement={0} wyłącza wymóg minimalnego zamów
 x-does-not-have-any-commits-to-the-svn-repository={0} Nie ma żadnych zatwierdzeń w repozytorium SVN.
 x-files-ready-to-be-uploaded={0} plików gotowych do załadowania.
 x-forum-posts={0} postów na forum
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} nie skonfigurowała swojego loginu do JIRA.
 x-has-not-configured-his-jira-login={0} nie skonfigurował swojego loginu do JIRA.
 x-has-x-friends={0} ma {1} znajomych.

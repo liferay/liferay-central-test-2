@@ -3976,6 +3976,7 @@ x-disables-the-minimum-order-requirement={0} отменяет требовани
 x-does-not-have-any-commits-to-the-svn-repository=У {0} нет фиксация в репозитарий SVN.
 x-files-ready-to-be-uploaded={0} файлов готовы к загрузке.
 x-forum-posts=Записи на форум {0}
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} не настроила свою учетную запись JIRA.
 x-has-not-configured-his-jira-login={0} не настроил свою учетную запись JIRA.
 x-has-x-friends=У {0} {1} друзей.

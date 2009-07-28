@@ -4198,6 +4198,7 @@ x-disables-the-minimum-order-requirement={0} eskaera minimoa egiteko derrigortas
 x-does-not-have-any-commits-to-the-svn-repository={0} ez du commit-ik SVN errepositorioan.
 x-files-ready-to-be-uploaded={0} fitxategi prest igotzeko.
 x-forum-posts={0} sarrerak foroan
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0}(e)k ez du konfiguratu bere erabiltzaile identifikatzailea JIRAn.
 x-has-not-configured-his-jira-login={0}(e)k ez du konfiguratu bere erabiltzaile identifikatzailea JIRAn.
 x-has-x-friends={0}-(e)k {1} lagun dauzka

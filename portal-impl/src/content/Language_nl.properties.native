@@ -4282,6 +4282,7 @@ x-disables-the-minimum-order-requirement={0} stelt de verplichting van een minim
 x-does-not-have-any-commits-to-the-svn-repository={0} heeft geen enkele commits in SVN.
 x-files-ready-to-be-uploaded={0} bestanden klaar om te uploaden.
 x-forum-posts={0} forum berichten
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} heeft niet haar JIRA login geconfigureerd.
 x-has-not-configured-his-jira-login={0} heeft niet zijn JIRA login geconfigureerd.
 x-has-x-friends={0} heeft {1} vrienden.

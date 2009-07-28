@@ -3072,6 +3072,7 @@ x-disables-the-minimum-order-requirement={0} tar bort det minimale bestillingskr
 x-does-not-have-any-commits-to-the-svn-repository={0} does not have any commits to the SVN repository.
 x-files-ready-to-be-uploaded={0} filer er klare til å lastes opp
 x-forum-posts={0} Foruminnlegg
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} har ikke satt opp JIRA login.
 x-has-not-configured-his-jira-login={0} har ikkesatt opp JIRA login.
 x-has-x-friends={0} har {1} venner.

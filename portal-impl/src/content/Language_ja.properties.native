@@ -4282,6 +4282,7 @@ x-disables-the-minimum-order-requirement={0}は最少注文要求が無効です
 x-does-not-have-any-commits-to-the-svn-repository={0} さんは、 SVN リポジトリへコミットをしていません。
 x-files-ready-to-be-uploaded={0}ファイルのアップロード準備が完了しました。
 x-forum-posts={0} フォーラム投稿
+x-has-invited-you-to-join-x={0} has invited you to join {1}. (Automatic Copy)
 x-has-not-configured-her-jira-login={0} は彼女の JIRA ログインを設定していません。
 x-has-not-configured-his-jira-login={0}  は彼の JIRA ログインを設定していません。
 x-has-x-friends={0} さんには {1} 人の友達がいます。
