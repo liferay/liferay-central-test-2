@@ -240,10 +240,18 @@ public class PortletAction extends Action {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 
-			if (BrowserSnifferUtil.isIe(request) &&
-				(BrowserSnifferUtil.getMajorVersion(request) == 6.0)) {
+			if ((BrowserSnifferUtil.isIe(request)) &&
+				(BrowserSnifferUtil.getMajorVersion(request) == 6.0) &&
+				(redirect.contains(StringPool.POUND))) {
 
-				redirect = StringUtil.replace(redirect, StringPool.POUND, "&#");
+				String redirectToken = "&#";
+
+				if (!redirect.contains(StringPool.QUESTION)) {
+					redirectToken = StringPool.QUESTION + redirectToken;
+				}
+
+				redirect = StringUtil.replace(
+					redirect, StringPool.POUND, redirectToken);
 			}
 
 			actionResponse.sendRedirect(redirect);
