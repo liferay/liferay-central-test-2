@@ -22,10 +22,13 @@
 
 package com.liferay.portlet.bookmarks.util;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
@@ -89,10 +92,17 @@ public class BookmarksUtil {
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		if (selectFolder) {
+			ThemeDisplay themeDisplay =	(ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 			portletURL.setParameter(
 				"struts_action", "/bookmarks/select_folder");
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, LanguageUtil.get(themeDisplay.getLocale(), "folders"),
+				portletURL.toString());
 		}
 		else {
 			portletURL.setParameter("struts_action", "/bookmarks/view");

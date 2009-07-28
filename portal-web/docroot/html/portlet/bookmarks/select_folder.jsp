@@ -30,13 +30,6 @@ BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 if (folder != null) {
-	PortletURL foldersURL = renderResponse.createRenderURL();
-
-	foldersURL.setWindowState(LiferayWindowState.POP_UP);
-	foldersURL.setParameter("struts_action", "/bookmarks/select_folder");
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "folders"), foldersURL.toString());
-
 	BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
 %>
