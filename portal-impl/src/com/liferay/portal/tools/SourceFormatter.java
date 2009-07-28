@@ -881,9 +881,9 @@ public class SourceFormatter {
 		sb.deleteCharAt(sb.length() - 1);
 		sb.append("):([^>]|%>)*");
 		sb.append(quoteType);
-		sb.append("<%=[^>]*");
+		sb.append("<%=.*");
 		sb.append(quoteType);
-		sb.append("[^>]*%>");
+		sb.append(".*%>");
 		sb.append(quoteType);
 		sb.append("([^>]|%>)*>");
 

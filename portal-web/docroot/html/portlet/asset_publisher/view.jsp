@@ -86,7 +86,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
 %>
 
-<c:if test="<%= (assetCategoryId > 0) && selectionStyle.equals("dynamic") %>">
+<c:if test='<%= (assetCategoryId > 0) && selectionStyle.equals("dynamic") %>'>
 	<h1 class="asset-categorization-title">
 		<%= LanguageUtil.format(pageContext, "content-with-x-x", new String[] {assetVocabularyName, assetCategoryName}) %>
 	</h1>
