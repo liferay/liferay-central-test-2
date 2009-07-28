@@ -260,8 +260,8 @@ String threadView = messageDisplay.getThreadView();
 					<portlet:renderURL var="editThreadURL">
 						<portlet:param name="struts_action" value="/message_boards/move_thread" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 						<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
+						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
 					</portlet:renderURL>
 
 					<liferay-ui:icon image="forward" message="move-thread" url="<%= editThreadURL %>" label="<%= true %>" />
