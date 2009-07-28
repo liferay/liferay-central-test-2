@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SearchRemovedTagTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SearchRemovedTagTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blogs Tags Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blogs Tags Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_33_keywords</td>
+	<td>selenium3 liferay3</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Tags3 Blogs3 Test3 Entry3</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

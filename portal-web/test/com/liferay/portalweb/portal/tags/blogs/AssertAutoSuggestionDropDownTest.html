@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AssertAutoSuggestionDropDownTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AssertAutoSuggestionDropDownTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blogs Tags Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blogs Tags Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Tags3 Blogs3 Test3 Entry3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tags3 Blogs3 Test3 Entry3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//div[6]/input[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//div[6]/input[2]</td>
+	<td>selenium</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[1]</td>
+	<td>selenium1 liferay1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[2]</td>
+	<td>selenium2 liferay2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[3]</td>
+	<td>selenium3 liferay3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[4]</td>
+	<td>selenium4 liferay4</td>
+</tr>
+<tr>
+	<td>typeKeys</td>
+	<td>//div[6]/input[2]</td>
+	<td>2 </td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[1]</td>
+	<td>selenium2 liferay2</td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotVisible</td>
+	<td>//div[6]/div[1]/div[2]/ul/li[4]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -20,27 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.tags.blogs;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.tags.blogs.BlogsTests;
-import com.liferay.portalweb.portal.tags.tagsadmin.TagsAdminTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+public class AssertNoTagsInTagsAdminTest extends BaseTestCase {
+	public void testAssertNoTagsInTagsAdmin() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-public class TagsTestSuite extends BaseTests {
+			try {
+				if (selenium.isElementPresent("link=Tags")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			Thread.sleep(1000);
+		}
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
+		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.waitForPageToLoad("30000");
 
-		testSuite.addTestSuite(StopSeleniumTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		return testSuite;
+			try {
+				if (selenium.isTextPresent("no-tags-were-found")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent("no-tags-were-found"));
 	}
-
 }

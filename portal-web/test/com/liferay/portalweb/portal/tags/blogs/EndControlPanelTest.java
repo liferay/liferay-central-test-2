@@ -20,27 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.tags.blogs;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.tags.blogs.BlogsTests;
-import com.liferay.portalweb.portal.tags.tagsadmin.TagsAdminTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+public class EndControlPanelTest extends BaseTestCase {
+	public void testEndControlPanel() throws Exception {
+		int label = 1;
 
-public class TagsTestSuite extends BaseTests {
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				Thread.sleep(500);
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+				boolean InControlPanel = selenium.isElementPresent(
+						"link=Back to My Community");
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
+				if (!InControlPanel) {
+					label = 2;
 
-		testSuite.addTestSuite(StopSeleniumTest.class);
+					continue;
+				}
 
-		return testSuite;
+				selenium.click(RuntimeVariables.replace(
+						"link=Back to My Community"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
+		}
 	}
-
 }

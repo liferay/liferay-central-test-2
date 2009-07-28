@@ -20,27 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal;
+package com.liferay.portalweb.portal.tags.blogs;
 
-import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.tags.blogs.BlogsTests;
-import com.liferay.portalweb.portal.tags.tagsadmin.TagsAdminTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+public class SearchRemovedTagTest extends BaseTestCase {
+	public void testSearchRemovedTag() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-public class TagsTestSuite extends BaseTests {
+			try {
+				if (selenium.isElementPresent("link=Blogs Tags Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			Thread.sleep(1000);
+		}
 
-		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(BlogsTests.suite());
-		testSuite.addTest(TagsAdminTests.suite());
-
-		testSuite.addTestSuite(StopSeleniumTest.class);
-
-		return testSuite;
+		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_33_keywords",
+			RuntimeVariables.replace("selenium3 liferay3"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Tags3 Blogs3 Test3 Entry3"));
 	}
-
 }
