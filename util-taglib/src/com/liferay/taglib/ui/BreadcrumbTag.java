@@ -24,6 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.io.IOException;
@@ -45,15 +46,17 @@ public class BreadcrumbTag extends IncludeTag {
 		throws IOException, ServletException {
 
 		doTag(
-			_PAGE, null, null, null, _DISPLAY_STYLE, servletContext, request,
+			_PAGE, null, null, null, _DISPLAY_STYLE, _SHOW_GUEST_GROUP,
+			_SHOW_PARENT_GROUPS, true, true, servletContext, request,
 			response);
 	}
 
 	public static void doTag(
 			String page, Layout selLayout, String selLayoutParam,
-			PortletURL portletURL, int displayStyle,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
+			PortletURL portletURL, int displayStyle, boolean showGuestGroup,
+			boolean showParentGroups, boolean showLayout,
+			boolean showPortletBreadcrumb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		request.setAttribute("liferay-ui:breadcrumb:selLayout", selLayout);
@@ -62,6 +65,17 @@ public class BreadcrumbTag extends IncludeTag {
 		request.setAttribute("liferay-ui:breadcrumb:portletURL", portletURL);
 		request.setAttribute(
 			"liferay-ui:breadcrumb:displayStyle", String.valueOf(displayStyle));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showGuestGroup", String.valueOf(
+				showGuestGroup));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showParentGroups", String.valueOf(
+				showParentGroups));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showLayout", String.valueOf(showLayout));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showPortletBreadcrumb", String.valueOf(
+				showPortletBreadcrumb));
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
@@ -77,7 +91,9 @@ public class BreadcrumbTag extends IncludeTag {
 
 			doTag(
 				getPage(), _selLayout, _selLayoutParam, _portletURL,
-				_displayStyle, servletContext, request, stringResponse);
+				_displayStyle, _showGuestGroup, _showParentGroups, _showLayout,
+				_showPortletBreadcrumb, servletContext, request,
+				stringResponse);
 
 			pageContext.getOut().print(stringResponse.getString());
 
@@ -104,6 +120,22 @@ public class BreadcrumbTag extends IncludeTag {
 		_displayStyle = displayStyle;
 	}
 
+	public void setShowGuestGroup(boolean showGuestGroup) {
+		_showGuestGroup = showGuestGroup;
+	}
+
+	public void setShowParentGroups(boolean showParentGroups) {
+		_showParentGroups = showParentGroups;
+	}
+
+	public void setShowLayout(boolean showLayout) {
+		_showLayout = showLayout;
+	}
+
+	public void setShowPortletBreadcrumb(boolean showPortletBreadcrumb) {
+		_showPortletBreadcrumb = showPortletBreadcrumb;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -111,10 +143,19 @@ public class BreadcrumbTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
 
 	private static final int _DISPLAY_STYLE = 0;
+	private static final boolean _SHOW_GUEST_GROUP =
+		PropsValues.BREADCRUMB_SHOW_GUEST_GROUP;
+	private static final boolean _SHOW_PARENT_GROUPS =
+		PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
 
 	private Layout _selLayout;
 	private String _selLayoutParam;
 	private PortletURL _portletURL;
+	private boolean _showGuestGroup = _SHOW_GUEST_GROUP;
+	private boolean _showParentGroups = _SHOW_PARENT_GROUPS;
+	private boolean _showLayout = true;
+	private boolean _showPortletBreadcrumb = true;
+
 	private int _displayStyle = _DISPLAY_STYLE;
 
 }

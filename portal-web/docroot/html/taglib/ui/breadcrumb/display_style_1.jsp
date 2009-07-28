@@ -27,10 +27,18 @@
 <%
 StringBuilder sb = new StringBuilder();
 
-_buildGuestGroupBreadcrumb(themeDisplay, sb);
-_buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
-_buildPortletBreadcrumb(request, sb);
+if (showGuestGroup) {
+	_buildGuestGroupBreadcrumb(themeDisplay, sb);
+}
+if (showParentGroups) {
+	_buildParentGroupsBreadcrumb(selLayout.getLayoutSet(), portletURL, themeDisplay, sb);
+}
+if (showLayout) {
+	_buildLayoutBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+}
+if (showPortletBreadcrumb) {
+	_buildPortletBreadcrumb(request, sb);
+}
 
 String breadCrumbString = sb.toString();
 String listToken = "<li";
@@ -50,7 +58,7 @@ breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + 
 </ul>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuilder sb) throws Exception {
+private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBuilder sb) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
 
@@ -74,7 +82,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
-		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
+		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
 
 		sb.append(breadCrumbSB.toString());
 	}

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
@@ -172,16 +173,30 @@ public class VelocityTaglib {
 
 	public String breadcrumb(
 			String page, Layout selLayout, String selLayoutParam,
-			PortletURL portletURL, int displayStyle)
+			PortletURL portletURL, int displayStyle, boolean showGuestGroup,
+			boolean showParentGroups, boolean showLayout,
+			boolean showPortletBreadcrumb)
 		throws Exception {
 
 		_stringResponse.recycle();
 
 		BreadcrumbTag.doTag(
 			page, selLayout, selLayoutParam, portletURL, displayStyle,
+			showGuestGroup, showParentGroups, showLayout, showPortletBreadcrumb,
 			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
+	}
+
+	public String breadcrumb(
+			String page, Layout selLayout, String selLayoutParam,
+			PortletURL portletURL, int displayStyle)
+		throws Exception {
+
+		return breadcrumb (
+			page, selLayout, selLayoutParam, portletURL, displayStyle,
+			PropsValues.BREADCRUMB_SHOW_GUEST_GROUP,
+			PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS, true, true);
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {

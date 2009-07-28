@@ -39,14 +39,15 @@ int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-u
 if (displayStyle == 0) {
 	displayStyle = 1;
 }
+
+boolean showGuestGroup = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showGuestGroup"));
+boolean showParentGroups = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showParentGroups"));
+boolean showLayout = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showLayout"));
+boolean showPortletBreadcrumb = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showPortletBreadcrumb"));
 %>
 
 <%!
 private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	if (!PropsValues.BREADCRUMB_SHOW_GUEST_GROUP) {
-		return;
-	}
-
 	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.GUEST);
 
 	if (group.getPublicLayoutsPageCount() > 0) {
@@ -65,10 +66,6 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder
 }
 
 private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
-	if (!PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS) {
-		return;
-	}
-
 	Group group = layoutSet.getGroup();
 
 	if (group.isOrganization()) {
