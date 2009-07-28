@@ -191,7 +191,9 @@ if(folder != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-folder"), currentURL);
 }
 else {
-	BookmarksUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
+	if (parentFolderId > 0) {
+		BookmarksUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
+	}
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-folder"), currentURL);
 }
