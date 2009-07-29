@@ -1145,7 +1145,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage previousVersionPage = getPreviousVersionPage(page);
 
 		String attachmentURLPrefix =
-			portalURL + Portal.PATH_MAIN +
+			portalURL + serviceContext.getPathMain() +
 				"/wiki/get_page_attachment?p_l_id=" + serviceContext.getPlid() +
 					"&nodeId=" + page.getNodeId() + "&title=" +
 						HttpUtil.encodeURL(page.getTitle()) + "&fileName=";

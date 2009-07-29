@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchCartException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
@@ -882,7 +881,7 @@ public class ShoppingUtil {
 	}
 
 	public static String getPayPalNotifyURL(ThemeDisplay themeDisplay) {
-		return themeDisplay.getURLPortal() + Portal.PATH_MAIN +
+		return themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 			"/shopping/notify";
 	}
 

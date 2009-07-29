@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Portal;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
@@ -71,7 +70,7 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Link
 
 		String link =
-			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 				"/image_gallery/find_image?imageId=" + image.getImageId();
 
 		// Title
@@ -100,7 +99,7 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Body
 
 		String folderLink =
-			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
 				"/image_gallery/find_folder?folderId=" + image.getFolderId();
 
 		String body = wrapLink(folderLink, "go-to-folder", themeDisplay);

@@ -342,7 +342,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + Portal.PATH_MAIN + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
 			/>
 		</td>
 	</tr>

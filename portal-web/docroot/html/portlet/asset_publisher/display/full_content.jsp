@@ -456,7 +456,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 					<c:if test="<%= showContextLink && !print %>">
 						<div class="asset-more">
-							<a href="<%= themeDisplay.getURLPortal() + Portal.PATH_MAIN + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() %>"><liferay-ui:message key="view-wiki" /> &raquo;</a>
+							<a href="<%= themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() %>"><liferay-ui:message key="view-wiki" /> &raquo;</a>
 						</div>
 					</c:if>
 

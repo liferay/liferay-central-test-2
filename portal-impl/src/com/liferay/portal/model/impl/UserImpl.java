@@ -52,7 +52,6 @@ import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -108,7 +107,9 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public String getDisplayURL(ThemeDisplay themeDisplay) {
-		return getDisplayURL(themeDisplay.getPortalURL(), Portal.PATH_MAIN);
+		return getDisplayURL(
+			themeDisplay.getPortalURL(), themeDisplay.getPathMain());
+
 	}
 
 	public String getDisplayURL(String portalURL, String mainPath) {

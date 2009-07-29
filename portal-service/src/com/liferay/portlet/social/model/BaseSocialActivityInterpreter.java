@@ -32,7 +32,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.Portal;
 
 public abstract class BaseSocialActivityInterpreter
 	implements SocialActivityInterpreter {
@@ -75,7 +74,7 @@ public abstract class BaseSocialActivityInterpreter
 			}
 
 			String groupDisplayURL =
-				themeDisplay.getPortalURL() + Portal.PATH_MAIN +
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 					"/my_places/view?groupId=" +  group.getGroupId() +
 						"&privateLayout=0";
 

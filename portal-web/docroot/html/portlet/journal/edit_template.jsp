@@ -258,7 +258,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + Portal.PATH_MAIN + "/journal/get_template?groupId=" + groupId + "&templateId=" + templateId %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_template?groupId=" + groupId + "&templateId=" + templateId %>'
 			/>
 		</td>
 	</tr>

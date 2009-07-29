@@ -54,7 +54,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	viewFullContentURL.setParameter("urlTitle", entry.getUrlTitle());
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
 
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + Portal.PATH_MAIN + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
 }
 else if (className.equals(BookmarksEntry.class.getName())) {
 	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
@@ -132,7 +132,7 @@ else if (className.equals(MBMessage.class.getName())) {
 
 	viewFullContentURL.setParameter("type", "thread");
 
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + Portal.PATH_MAIN + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 }
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
