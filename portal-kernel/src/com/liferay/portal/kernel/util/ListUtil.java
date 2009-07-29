@@ -129,10 +129,6 @@ public class ListUtil {
 		return list;
 	}
 
-	public static List<String> fromFile(String fileName) throws IOException {
-		return fromFile(new File(fileName));
-	}
-
 	public static List<String> fromFile(File file) throws IOException {
 		List<String> list = new ArrayList<String>();
 
@@ -149,6 +145,10 @@ public class ListUtil {
 		return list;
 	}
 
+	public static List<String> fromFile(String fileName) throws IOException {
+		return fromFile(new File(fileName));
+	}
+
 	public static List<String> fromString(String s) {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
@@ -158,7 +158,8 @@ public class ListUtil {
 	}
 
 	public static<E> List<E> sort(
-			List<E> list, Comparator<? super E> comparator) {
+		List<E> list, Comparator<? super E> comparator) {
+
 		if (UnmodifiableList.class.isAssignableFrom(list.getClass())) {
 			list = copy(list);
 		}
@@ -212,6 +213,14 @@ public class ListUtil {
 		}
 
 		return list;
+	}
+
+	public static<E> List<E> toList(E[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.emptyList();
+		}
+
+		return Arrays.asList(array);
 	}
 
 	public static List<Float> toList(float[] array) {
@@ -270,20 +279,13 @@ public class ListUtil {
 		return list;
 	}
 
-	public static<E> List<E> toList(E[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return Collections.emptyList();
-		}
-
-		return Arrays.asList(array);
-	}
-
 	public static String toString(List<?> list, String param) {
 		return toString(list, param, StringPool.COMMA);
 	}
 
 	public static String toString(
-			List<?> list, String param, String delimiter) {
+		List<?> list, String param, String delimiter) {
+
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < list.size(); i++) {
