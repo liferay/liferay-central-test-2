@@ -83,6 +83,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.DuplicateCategoryException;
+import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -837,31 +838,38 @@ public class LayoutImporter {
 
 				AssetVocabulary assetVocabulary = null;
 
-				if (context.getDataStrategy().equals(
+				try {
+					if (context.getDataStrategy().equals(
 						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
-					AssetVocabulary existingAssetVocabulary =
-						AssetVocabularyUtil.fetchByUUID_G(
-							vocabularyUuid, context.getGroupId());
+						AssetVocabulary existingAssetVocabulary =
+							AssetVocabularyUtil.fetchByUUID_G(
+								vocabularyUuid, context.getGroupId());
 
-					if (existingAssetVocabulary == null) {
-						assetVocabulary =
-							AssetVocabularyLocalServiceUtil.addVocabulary(
-								vocabularyUuid, context.getUserId(userUuid),
-								vocabularyName, serviceContext);
+						if (existingAssetVocabulary == null) {
+							assetVocabulary =
+								AssetVocabularyLocalServiceUtil.addVocabulary(
+									vocabularyUuid, context.getUserId(userUuid),
+									vocabularyName, serviceContext);
+						}
+						else {
+							assetVocabulary =
+								AssetVocabularyLocalServiceUtil.updateVocabulary(
+									existingAssetVocabulary.getVocabularyId(),
+									vocabularyName, serviceContext);
+						}
 					}
 					else {
 						assetVocabulary =
-							AssetVocabularyLocalServiceUtil.updateVocabulary(
-								existingAssetVocabulary.getVocabularyId(),
+							AssetVocabularyLocalServiceUtil.addVocabulary(
+								null, context.getUserId(userUuid),
 								vocabularyName, serviceContext);
 					}
 				}
-				else {
+				catch (DuplicateVocabularyException dve) {
 					assetVocabulary =
-						AssetVocabularyLocalServiceUtil.addVocabulary(
-							null, context.getUserId(userUuid), vocabularyName,
-							serviceContext);
+						AssetVocabularyLocalServiceUtil.getGroupVocabulary(
+							context.getGroupId(), vocabularyName);
 				}
 
 				List<Element> categories = vocabularyEl.elements("category");
