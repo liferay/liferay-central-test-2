@@ -25,73 +25,36 @@
 <%@ include file="/html/portlet/expando/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-
-String modelResource = ParamUtil.getString(request, "modelResource");
-String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/expando/view");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("modelResource", modelResource);
-%>
+List<String> headerNames = new ArrayList<String>();
 
-<script type="text/javascript">
-	function <portlet:namespace />addExpando() {
-		submitForm(document.hrefFm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="modelResource" value="<%= modelResource %>" /></portlet:renderURL>');
-	}
-</script>
+headerNames.add("resource");
+headerNames.add("custom-attributes");
 
-<div>
-	<liferay-ui:message key="edit-custom-attributes-for" />: <a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></a>
-</div>
-
-<br />
-
-<liferay-ui:tabs
-	names="custom-attributes"
-	backURL="<%= redirect %>"
-/>
-
-<%
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
-
-List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
+List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage='<%= LanguageUtil.format(pageContext, "no-custom-attributes-are-defined-for-x", modelResourceName) %>'
+	emptyResultsMessage='<%= LanguageUtil.get(pageContext, "custom-attributes-are-not-enabled-for-any-resource") %>'
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
-		total="<%= attributeNames.size() %>"
-		results="<%= attributeNames %>"
+		total="<%= modelResources.size() %>"
+		results="<%= ListUtil.subList(modelResources, searchContainer.getStart(), searchContainer.getEnd()) %>"
 	/>
 
 	<liferay-ui:search-container-row
 		className="java.lang.String"
-		modelVar="name"
+		modelVar="modelResource"
 		stringKey="<%= true %>"
 	>
 
-		<%
-		int type = expandoBridge.getAttributeType(name);
-
-		ExpandoColumn expandoColumn = ExpandoColumnLocalServiceUtil.getDefaultTableColumn(modelResource, name);
-		%>
-
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="rowURL">
-			<portlet:param name="struts_action" value="/expando/edit_expando" />
+			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="columnId" value="<%= String.valueOf(expandoColumn.getColumnId()) %>" />
 			<portlet:param name="modelResource" value="<%= modelResource %>" />
 		</portlet:renderURL>
-
-		<liferay-ui:search-container-row-parameter
-			name="expandoColumn"
-			value="<%= expandoColumn %>"
-		/>
 
 		<liferay-ui:search-container-row-parameter
 			name="modelResource"
@@ -99,115 +62,60 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 		/>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
 			buffer="buffer"
-			name="name"
+			href="<%= rowURL %>"
+			name="resource"
 		>
 
 			<%
-			String localizedName = LanguageUtil.get(pageContext, name);
-
-			if (name.equals(localizedName)) {
-				localizedName = TextFormatter.format(name, TextFormatter.J);
-			}
-
-			buffer.append(HtmlUtil.escape(localizedName));
+				buffer.append("<img align=\"left\" border=\"0\" src=\"");
+				buffer.append(themeDisplay.getPathThemeImages());
+				buffer.append(_getIconPath(modelResource));
+				buffer.append("\">&nbsp;");
+				buffer.append("<b>");
+				buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
+				buffer.append("</b>");
 			%>
 
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="key"
-			value="<%= HtmlUtil.escape(name) %>"
-		/>
-
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="type"
-			value="<%= LanguageUtil.get(pageContext, ExpandoColumnConstants.getTypeLabel(type)) %>"
-		/>
-
-		<liferay-ui:search-container-column-text
 			buffer="buffer"
 			href="<%= rowURL %>"
-			name="default-value"
+			name="custom-attributes"
 		>
 
 			<%
-			if (type == ExpandoColumnConstants.BOOLEAN) {
-				buffer.append((Boolean)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-				buffer.append(StringUtil.merge((boolean[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.DATE) {
-				buffer.append(dateFormatDateTime.format((Date)expandoBridge.getAttributeDefault(name)));
-			}
-			else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-				Date[] dates = (Date[])expandoBridge.getAttributeDefault(name);
+			ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
 
-				for (int i = 0; i < dates.length; i++) {
-					if (i != 0) {
-						buffer.append(StringPool.COMMA_AND_SPACE);
-					}
+			List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 
-					buffer.append(dateFormatDateTime.format(dates[i]));
-				}
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE) {
-				buffer.append((Double)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-				buffer.append(StringUtil.merge((double[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.FLOAT) {
-				buffer.append((Float)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-				buffer.append(StringUtil.merge((float[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.INTEGER) {
-				buffer.append((Integer)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-				buffer.append(StringUtil.merge((int[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.LONG) {
-				buffer.append((Long)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-				buffer.append(StringUtil.merge((long[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.SHORT) {
-				buffer.append((Short)expandoBridge.getAttributeDefault(name));
-			}
-			else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-				buffer.append(StringUtil.merge((short[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE));
-			}
-			else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-				buffer.append(HtmlUtil.escape(StringUtil.merge((String[])expandoBridge.getAttributeDefault(name), StringPool.COMMA_AND_SPACE)));
-			}
-			else {
-				buffer.append(HtmlUtil.escape((String)expandoBridge.getAttributeDefault(name)));
-			}
+			buffer.append(StringUtil.merge(attributeNames, ", "));
 			%>
 
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
 			align="right"
-			path="/html/portlet/expando/expando_action.jsp"
+			path="/html/portlet/expando/resource_action.jsp"
 		/>
 	</liferay-ui:search-container-row>
 
-	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">
-		<div>
-			<input type="button" value="<liferay-ui:message key="add-custom-attribute" />" onClick="<portlet:namespace />addExpando();" />
-		</div>
-
-		<br />
-	</c:if>
-
 	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
+
+<%!
+private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = new String[]{User.class.getName(), Organization.class.getName()};
+
+private String _getIconPath(String modelResource) {
+	if (modelResource.equals(User.class.getName())) {
+		return "/common/user_icon.png";
+	}
+	else if (modelResource.equals(Organization.class.getName())) {
+		return "/common/organization_icon.png";
+	}
+	else {
+		return "/common/page.png";
+	}
+}
+%>

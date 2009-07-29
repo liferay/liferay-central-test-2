@@ -49,7 +49,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.ADMINISTRATOR, true) %>">
 		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="expandoURL" portletName="<%= PortletKeys.EXPANDO %>">
-			<portlet:param name="struts_action" value="/expando/view" />
+			<portlet:param name="struts_action" value="/expando/view_attributes" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= Organization.class.getName() %>" />
 		</liferay-portlet:renderURL>

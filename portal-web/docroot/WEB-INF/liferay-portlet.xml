@@ -1143,7 +1143,7 @@
 		<struts-path>enterprise_admin_monitoring</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
-		<control-panel-entry-weight>8.0</control-panel-entry-weight>
+		<control-panel-entry-weight>9.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1158,7 +1158,7 @@
 		<struts-path>enterprise_admin_plugins</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
-		<control-panel-entry-weight>9.0</control-panel-entry-weight>
+		<control-panel-entry-weight>10.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1243,6 +1243,8 @@
 		<portlet-name>139</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>expando</struts-path>
+		<control-panel-entry-category>portal</control-panel-entry-category>
+		<control-panel-entry-weight>8.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -1342,7 +1344,7 @@
 		<struts-path>layout_prototypes</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
-		<control-panel-entry-weight>10.0</control-panel-entry-weight>
+		<control-panel-entry-weight>11.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
@@ -1391,7 +1393,7 @@
 		<struts-path>layout_set_prototypes</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
-		<control-panel-entry-weight>11.0</control-panel-entry-weight>
+		<control-panel-entry-weight>12.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>

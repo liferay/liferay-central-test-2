@@ -889,6 +889,8 @@
 			<forward name="portlet.expando.error" path="portlet.expando.error" />
 		</action>
 
+		<action path="/expando/view_attributes" forward="portlet.expando.view_attributes" />
+
 		<action path="/expando/view" forward="portlet.expando.view" />
 
 		<!-- Flags -->
