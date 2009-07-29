@@ -71,7 +71,7 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 			buffer.append("<img align=\"left\" border=\"0\" src=\"");
 			buffer.append(themeDisplay.getPathThemeImages());
 			buffer.append(_getIconPath(modelResource));
-			buffer.append("\">&nbsp;");
+			buffer.append("\" style=\"margin-right: 5px\">");
 			buffer.append("<b>");
 			buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
 			buffer.append("</b>");
@@ -105,10 +105,21 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 </liferay-ui:search-container>
 
 <%!
-private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {User.class.getName(), Organization.class.getName()};
+private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
+		DLFileEntry.class.getName(),
+		DLFolder.class.getName(),
+		Organization.class.getName(),
+		User.class.getName()
+};
 
 private String _getIconPath(String modelResource) {
-	if (modelResource.equals(Organization.class.getName())) {
+	if (modelResource.equals(DLFileEntry.class.getName()) || modelResource.equals(DLFileShortcut.class.getName())) {
+		return "/document_library/page.png";
+	}
+	else if (modelResource.equals(DLFolder.class.getName())) {
+		return "/common/folder.png";
+	}
+	else if (modelResource.equals(Organization.class.getName())) {
 		return "/common/organization_icon.png";
 	}
 	else if (modelResource.equals(User.class.getName())) {

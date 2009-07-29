@@ -279,6 +279,24 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 
+	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</td>
+		</tr>
+	</liferay-ui:custom-attributes-available>
+
 	<c:if test="<%= conversions.length > 0 %>">
 		<tr>
 			<td class="lfr-label">
@@ -519,6 +537,24 @@ portletURL.setParameter("name", name);
 			/>
 		</td>
 	</tr>
+
+	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</td>
+		</tr>
+	</liferay-ui:custom-attributes-available>
 
 	<%
 	if (fileEntry == null) {

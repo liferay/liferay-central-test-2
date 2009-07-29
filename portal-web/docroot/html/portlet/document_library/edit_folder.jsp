@@ -122,6 +122,24 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	</td>
 </tr>
 
+<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= DLFolder.class.getName() %>"
+				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= folder != null %>">
 	<tr>
 		<td colspan="2">
