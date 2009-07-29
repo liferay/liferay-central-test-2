@@ -113,7 +113,7 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 };
 
 private String _getIconPath(String modelResource) {
-	if (modelResource.equals(DLFileEntry.class.getName()) || modelResource.equals(DLFileShortcut.class.getName())) {
+	if (modelResource.equals(DLFileEntry.class.getName())) {
 		return "/document_library/page.png";
 	}
 	else if (modelResource.equals(DLFolder.class.getName())) {
