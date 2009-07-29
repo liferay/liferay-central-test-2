@@ -909,7 +909,8 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_STRING_ARRAY = new String[] {
-		"layout.static.portlets.all"
+		"layout.static.portlets.all",
+		"session.phishing.protected.attributes"
 	};
 
 	private static Log _log =

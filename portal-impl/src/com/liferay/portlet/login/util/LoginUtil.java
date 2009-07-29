@@ -37,7 +37,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -173,11 +172,23 @@ public class LoginUtil {
 
 				// Invalidate the previous session to prevent phishing
 
-				Boolean httpsInitial = (Boolean)session.getAttribute(
-					WebKeys.HTTPS_INITIAL);
+				String[] protectedAttributeNames =
+					PropsValues.SESSION_PHISHING_PROTECTED_ATTRIBUTES;
 
-				LastPath lastPath = (LastPath)session.getAttribute(
-					WebKeys.LAST_PATH);
+				Map<String, Object> protectedAttributes =
+					new HashMap<String, Object>();
+
+				for (String protectedAttributeName : protectedAttributeNames) {
+					Object protectedAttributeValue = session.getAttribute(
+						protectedAttributeName);
+
+					if (protectedAttributeValue == null) {
+						continue;
+					}
+
+					protectedAttributes.put(
+						protectedAttributeName, protectedAttributeValue);
+				}
 
 				try {
 					session.invalidate();
@@ -193,12 +204,16 @@ public class LoginUtil {
 
 				session = request.getSession(true);
 
-				if (httpsInitial != null) {
-					session.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
-				}
+				for (String protectedAttributeName : protectedAttributeNames) {
+					Object protectedAttributeValue = protectedAttributes.get(
+						protectedAttributeName);
 
-				if (lastPath != null) {
-					session.setAttribute(WebKeys.LAST_PATH, lastPath);
+					if (protectedAttributeValue == null) {
+						continue;
+					}
+
+					session.setAttribute(
+						protectedAttributeName, protectedAttributeValue);
 				}
 			}
 
