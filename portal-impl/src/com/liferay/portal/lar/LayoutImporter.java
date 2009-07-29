@@ -805,6 +805,50 @@ public class LayoutImporter {
 		return actions;
 	}
 
+	protected AssetVocabulary getAssetVocabulary(
+			PortletDataContext context, String vocabularyUuid,
+			String vocabularyName, String userUuid,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		AssetVocabulary assetVocabulary = null;
+
+		try {
+			if (context.getDataStrategy().equals(
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
+				AssetVocabulary existingAssetVocabulary =
+					AssetVocabularyUtil.fetchByUUID_G(
+						vocabularyUuid, context.getGroupId());
+
+				if (existingAssetVocabulary == null) {
+					assetVocabulary =
+						AssetVocabularyLocalServiceUtil.addVocabulary(
+							vocabularyUuid, context.getUserId(userUuid),
+							vocabularyName, serviceContext);
+				}
+				else {
+					assetVocabulary =
+						AssetVocabularyLocalServiceUtil.updateVocabulary(
+							existingAssetVocabulary.getVocabularyId(),
+							vocabularyName, serviceContext);
+				}
+			}
+			else {
+				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
+					null, context.getUserId(userUuid), vocabularyName,
+					serviceContext);
+			}
+		}
+		catch (DuplicateVocabularyException dve) {
+			assetVocabulary =
+				AssetVocabularyLocalServiceUtil.getGroupVocabulary(
+					context.getGroupId(), vocabularyName);
+		}
+
+		return assetVocabulary;
+	}
+
 	protected void importCategories(PortletDataContext context)
 		throws SystemException {
 
@@ -836,41 +880,9 @@ public class LayoutImporter {
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(context.getGroupId());
 
-				AssetVocabulary assetVocabulary = null;
-
-				try {
-					if (context.getDataStrategy().equals(
-						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
-
-						AssetVocabulary existingAssetVocabulary =
-							AssetVocabularyUtil.fetchByUUID_G(
-								vocabularyUuid, context.getGroupId());
-
-						if (existingAssetVocabulary == null) {
-							assetVocabulary =
-								AssetVocabularyLocalServiceUtil.addVocabulary(
-									vocabularyUuid, context.getUserId(userUuid),
-									vocabularyName, serviceContext);
-						}
-						else {
-							assetVocabulary =
-								AssetVocabularyLocalServiceUtil.updateVocabulary(
-									existingAssetVocabulary.getVocabularyId(),
-									vocabularyName, serviceContext);
-						}
-					}
-					else {
-						assetVocabulary =
-							AssetVocabularyLocalServiceUtil.addVocabulary(
-								null, context.getUserId(userUuid),
-								vocabularyName, serviceContext);
-					}
-				}
-				catch (DuplicateVocabularyException dve) {
-					assetVocabulary =
-						AssetVocabularyLocalServiceUtil.getGroupVocabulary(
-							context.getGroupId(), vocabularyName);
-				}
+				AssetVocabulary assetVocabulary = getAssetVocabulary(
+					context, vocabularyUuid, vocabularyName, userUuid,
+					serviceContext);
 
 				List<Element> categories = vocabularyEl.elements("category");
 
@@ -901,7 +913,7 @@ public class LayoutImporter {
 		}
 	}
 
-	private void importCategory(
+	protected void importCategory(
 			PortletDataContext context, String categoryUuid, String userUuid,
 			String parentCategoryUuid, String categoryName, long vocabularyId,
 			String[] properties, ServiceContext serviceContext)
