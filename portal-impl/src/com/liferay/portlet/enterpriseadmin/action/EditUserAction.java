@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -409,7 +410,7 @@ public class EditUserAction extends PortletAction {
 			user = UserServiceUtil.addUser(
 				themeDisplay.getCompanyId(), autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, openId,
-				themeDisplay.getLocale(), firstName, middleName, lastName,
+				LocaleUtil.getDefault(), firstName, middleName, lastName,
 				prefixId, suffixId, male, birthdayMonth, birthdayDay,
 				birthdayYear, jobTitle, groupIds, organizationIds,
 				roleIds, userGroupIds, sendEmail, addresses, emailAddresses,
