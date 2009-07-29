@@ -408,6 +408,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		mbThreadPersistence.update(oldThread, false);
 
+		// Update thread count
+
+		category.setThreadCount(category.getThreadCount() + 1);
+
+		mbCategoryPersistence.update(category, false);
+
 		return thread;
 	}
 
