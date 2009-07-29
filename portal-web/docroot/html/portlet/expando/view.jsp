@@ -40,8 +40,8 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results
-		total="<%= modelResources.size() %>"
 		results="<%= ListUtil.subList(modelResources, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= modelResources.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -68,13 +68,13 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 		>
 
 			<%
-				buffer.append("<img align=\"left\" border=\"0\" src=\"");
-				buffer.append(themeDisplay.getPathThemeImages());
-				buffer.append(_getIconPath(modelResource));
-				buffer.append("\">&nbsp;");
-				buffer.append("<b>");
-				buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
-				buffer.append("</b>");
+			buffer.append("<img align=\"left\" border=\"0\" src=\"");
+			buffer.append(themeDisplay.getPathThemeImages());
+			buffer.append(_getIconPath(modelResource));
+			buffer.append("\">&nbsp;");
+			buffer.append("<b>");
+			buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
+			buffer.append("</b>");
 			%>
 
 		</liferay-ui:search-container-column-text>
@@ -105,14 +105,14 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 </liferay-ui:search-container>
 
 <%!
-private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = new String[]{User.class.getName(), Organization.class.getName()};
+private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {User.class.getName(), Organization.class.getName()};
 
 private String _getIconPath(String modelResource) {
-	if (modelResource.equals(User.class.getName())) {
-		return "/common/user_icon.png";
-	}
-	else if (modelResource.equals(Organization.class.getName())) {
+	if (modelResource.equals(Organization.class.getName())) {
 		return "/common/organization_icon.png";
+	}
+	else if (modelResource.equals(User.class.getName())) {
+		return "/common/user_icon.png";
 	}
 	else {
 		return "/common/page.png";
