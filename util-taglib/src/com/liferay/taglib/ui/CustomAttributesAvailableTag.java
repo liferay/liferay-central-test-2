@@ -29,12 +29,14 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomAttributesAvailableTag extends ParamAndPropertyAncestorTagImpl {
+public class CustomAttributesAvailableTag
+	extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() {
 		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(_className, 0);
 
-		List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
+		List<String> attributeNames = Collections.list(
+			expandoBridge.getAttributeNames());
 
 		if (attributeNames.isEmpty()) {
 			return EVAL_PAGE;
