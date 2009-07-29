@@ -24,4 +24,6 @@ package com.liferay.portlet.documentlibrary.model;
 
 public interface DLFileShortcut extends DLFileShortcutModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
+
+	public java.lang.String getToTitle();
 }
