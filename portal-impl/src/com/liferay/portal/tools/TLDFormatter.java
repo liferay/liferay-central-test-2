@@ -60,7 +60,7 @@ public class TLDFormatter {
 			return;
 		}
 
-		List<File> list = new ArrayList<File>();
+		List<String> list = new ArrayList<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 

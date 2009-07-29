@@ -562,7 +562,7 @@ public class SourceFormatter {
 	private static void _formatJSP() throws IOException {
 		String basedir = "./";
 
-		List<File> list = new ArrayList<File>();
+		List<String> list = new ArrayList<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -765,7 +765,7 @@ public class SourceFormatter {
 	private static String[] _getPluginJavaFiles() {
 		String basedir = "./";
 
-		List<File> list = new ArrayList<File>();
+		List<String> list = new ArrayList<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -801,7 +801,7 @@ public class SourceFormatter {
 	private static String[] _getPortalJavaFiles() {
 		String basedir = "./";
 
-		List<File> list = new ArrayList<File>();
+		List<String> list = new ArrayList<String>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
