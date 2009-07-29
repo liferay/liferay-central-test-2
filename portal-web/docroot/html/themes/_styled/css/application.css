@@ -151,6 +151,7 @@
 }
 
 .site-breadcrumbs ul {
+ 	background-color: #ffffff;
  	border: 1px solid #dedede;
  	height: 2.3em;
 	margin: 0;
