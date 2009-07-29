@@ -22,8 +22,38 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+
+/**
+ * <a href="DLFolder.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFolder table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see DLFolderModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
+ */
 public interface DLFolder extends DLFolderModel {
-	public boolean isRoot();
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getAncestors()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder getParentFolder()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.lang.String getPath()
 		throws com.liferay.portal.PortalException,
@@ -32,4 +62,6 @@ public interface DLFolder extends DLFolderModel {
 	public java.lang.String[] getPathArray()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public boolean isRoot();
 }

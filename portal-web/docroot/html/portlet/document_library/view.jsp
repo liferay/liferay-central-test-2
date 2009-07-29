@@ -63,12 +63,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<c:if test="<%= showBreadcrumbs && (folder != null) %>">
-			<div class="breadcrumbs">
-				<%= DLUtil.getBreadcrumbs(folder, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
-			</div>
-		</c:if>
-
 		<c:if test="<%= showSubfolders %>">
 			<liferay-ui:search-container
 				curParam="cur1"
@@ -324,6 +318,13 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
+
+		<%
+		if (folder!= null && (folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID || windowState.equals(WindowState.MAXIMIZED))) {
+			DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+		}
+		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 
@@ -364,6 +365,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</form>
 
 		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, tabs1), request);
 		%>
 

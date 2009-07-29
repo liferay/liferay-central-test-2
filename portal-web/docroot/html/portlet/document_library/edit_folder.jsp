@@ -69,12 +69,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 <liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(DLUtil.getBreadcrumbs(parentFolderId, null, rootFolderId, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((folder == null) ? Constants.ADD : Constants.UPDATE) + "-folder" %>' /></span>
-</div>
-
 <table class="lfr-table">
 
 <c:if test="<%= folder != null %>">
@@ -202,3 +196,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+DLUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (folder == null ? Constants.ADD : Constants.UPDATE) + "-folder"), currentURL);
+%>

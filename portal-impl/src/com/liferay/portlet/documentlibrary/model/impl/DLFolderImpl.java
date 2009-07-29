@@ -30,18 +30,43 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public DLFolderImpl() {
 	}
 
-	public boolean isRoot() {
+	public List<DLFolder> getAncestors()
+		throws PortalException, SystemException {
+
+		List<DLFolder> ancestors = new ArrayList<DLFolder>();
+
+		DLFolder folder = this;
+
+		while (true) {
+			if (!folder.isRoot()) {
+				folder = folder.getParentFolder();
+
+				ancestors.add(folder);
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestors;
+	}
+
+	public DLFolder getParentFolder()
+		throws PortalException, SystemException {
+
 		if (getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return true;
+			return null;
 		}
-		else {
-			return false;
-		}
+
+		return DLFolderLocalServiceUtil.getFolder(getParentFolderId());
 	}
 
 	public String getPath() throws PortalException, SystemException {
@@ -75,6 +100,15 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		path = path.substring(1, path.length());
 
 		return StringUtil.split(path, StringPool.SLASH);
+	}
+
+	public boolean isRoot() {
+		if (getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

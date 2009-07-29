@@ -185,6 +185,14 @@ catch (Exception e) {
 	</script>
 </c:if>
 
+<%
+if (searchFolderId > 0) {
+	DLUtil.addPortletBreadcrumbEntries(searchFolderId, request, renderResponse);
+}
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
+%>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.search.jsp");
 %>

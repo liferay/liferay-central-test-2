@@ -23,176 +23,134 @@
 package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
-import javax.servlet.jsp.PageContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class DLUtil {
 
-	public static String getBreadcrumbs(
-			long folderId, String name, long rootFolderId,
-			PageContext pageContext, RenderRequest renderRequest,
+	public static void addPortletBreadcrumbEntries(
+			DLFileEntry fileEntry, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if ((folderId > 0) && Validator.isNotNull(name)) {
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				folderId, name);
+		DLFolder folder = fileEntry.getFolder();
 
-			return getBreadcrumbs(
-				fileEntry.getFolder(), fileEntry, rootFolderId, pageContext,
-				renderRequest, renderResponse);
-		}
-		else {
-			DLFolder folder = null;
+		addPortletBreadcrumbEntries(folder, request, renderResponse);
 
-			try {
-				folder = DLFolderLocalServiceUtil.getFolder(folderId);
-			}
-			catch (Exception e) {
-			}
+		PortletURL portletURL = renderResponse.createRenderURL();
 
-			return getBreadcrumbs(
-				folder, null, rootFolderId, pageContext, renderRequest,
-				renderResponse);
-		}
+		portletURL.setParameter(
+			"struts_action", "/document_library/view_file_entry");
+		portletURL.setParameter(
+			"folderId", String.valueOf(fileEntry.getFolderId()));
+		portletURL.setParameter("name", fileEntry.getName());
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, fileEntry.getTitle(), portletURL.toString());
 	}
 
-	public static String getBreadcrumbs(
-			DLFolder folder, DLFileEntry fileEntry, long rootFolderId,
-			PageContext pageContext, RenderRequest renderRequest,
+	public static void addPortletBreadcrumbEntries(
+			DLFileShortcut fileShortcut, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		DLFolder folder = fileShortcut.getFolder();
+
+		addPortletBreadcrumbEntries(folder, request, renderResponse);
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/document_library/view_file_shortcut");
+		portletURL.setParameter(
+			"fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, fileShortcut.getToTitle(), portletURL.toString());
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			long folderId, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+		addPortletBreadcrumbEntries(folder, request, renderResponse);
+	}
+
+	public static void addPortletBreadcrumbEntries(
+			DLFolder folder, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
 		String strutsAction = ParamUtil.getString(
-			renderRequest, "struts_action");
+			request, "struts_action");
 
-		long groupId = ParamUtil.getLong(renderRequest, "groupId");
+		long groupId = ParamUtil.getLong(request, "groupId");
 
-		if ((fileEntry != null) && (folder == null)) {
-			folder = fileEntry.getFolder();
-		}
+		PortletURL portletURL = renderResponse.createRenderURL();
 
-		PortletURL foldersURL = renderResponse.createRenderURL();
+		if (strutsAction.equals("/journal/select_document_library") ||
+			strutsAction.equals("/document_library/select_file_entry") ||
+			strutsAction.equals("/document_library/select_folder")) {
 
-		WindowState windowState = renderRequest.getWindowState();
+			ThemeDisplay themeDisplay =	(ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-		if (windowState.equals(LiferayWindowState.POP_UP)) {
-			foldersURL.setWindowState(LiferayWindowState.POP_UP);
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-			foldersURL.setParameter("struts_action", strutsAction);
-			foldersURL.setParameter("groupId", String.valueOf(groupId));
+			portletURL.setParameter("struts_action", strutsAction);
+			portletURL.setParameter("groupId", String.valueOf(groupId));
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, themeDisplay.translate("folders"),
+				portletURL.toString());
 		}
 		else {
-			//foldersURL.setWindowState(WindowState.MAXIMIZED);
-
-			foldersURL.setParameter("struts_action", "/document_library/view");
+			portletURL.setParameter("struts_action", "/document_library/view");
 		}
 
-		String foldersLink =
-			"<a href=\"" + foldersURL.toString() + "\">" +
-				LanguageUtil.get(pageContext, "folders") + "</a>";
+		List<DLFolder> ancestorFolders = folder.getAncestors();
 
-		if (folder == null) {
-			return "<span class=\"first last\">" + foldersLink + "</span>";
+		Collections.reverse(ancestorFolders);
+
+		for (DLFolder ancestorFolder : ancestorFolders) {
+
+			portletURL.setParameter(
+				"folderId", String.valueOf(ancestorFolder.getFolderId()));
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, ancestorFolder.getName(), portletURL.toString());
 		}
 
-		String breadcrumbs = StringPool.BLANK;
+		portletURL.setParameter(
+			"folderId", String.valueOf(folder.getFolderId()));
 
-		if (folder != null) {
-			for (int i = 0;; i++) {
-				folder = folder.toEscapedModel();
-
-				PortletURL portletURL = renderResponse.createRenderURL();
-
-				if (windowState.equals(LiferayWindowState.POP_UP)) {
-					portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-					portletURL.setParameter("struts_action", strutsAction);
-					portletURL.setParameter("groupId", String.valueOf(groupId));
-					portletURL.setParameter(
-						"folderId", String.valueOf(folder.getFolderId()));
-				}
-				else {
-					//portletURL.setWindowState(WindowState.MAXIMIZED);
-
-					portletURL.setParameter(
-						"struts_action", "/document_library/view");
-					portletURL.setParameter(
-						"folderId", String.valueOf(folder.getFolderId()));
-				}
-
-				String folderLink =
-					"<a href=\"" + portletURL.toString() + "\">" +
-						folder.getName() + "</a>";
-
-				if (i == 0) {
-					if (fileEntry != null) {
-						breadcrumbs += folderLink;
-					}
-					else {
-						breadcrumbs =
-							"<span class=\"last\">" + folderLink + "</span>";
-					}
-				}
-				else {
-					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
-				}
-
-				if (folder.isRoot() || (folder.getFolderId() == rootFolderId)) {
-					break;
-				}
-
-				folder = DLFolderLocalServiceUtil.getFolder(
-					folder.getParentFolderId());
-			}
-		}
-
-		breadcrumbs =
-			"<span class=\"first\">" + foldersLink + " &raquo; </span>" +
-				breadcrumbs;
-
-		if (fileEntry != null) {
-			fileEntry = fileEntry.toEscapedModel();
-
-			PortletURL fileEntryURL = renderResponse.createRenderURL();
-
-			//fileEntryURL.setWindowState(WindowState.MAXIMIZED);
-
-			fileEntryURL.setParameter(
-				"struts_action", "/document_library/edit_file_entry");
-			fileEntryURL.setParameter(
-				"folderId", String.valueOf(fileEntry.getFolderId()));
-			fileEntryURL.setParameter("name", fileEntry.getName());
-
-			String fileEntryLink =
-				"<span class=\"last\"><a href=\"" + fileEntryURL.toString() +
-					"\">" + fileEntry.getName() + "</a></span>";
-
-			breadcrumbs = breadcrumbs + " &raquo; " + fileEntryLink;
-		}
-
-		return breadcrumbs;
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, folder.getName(), portletURL.toString());
 	}
 
 	public static String getFileExtension(String name) {

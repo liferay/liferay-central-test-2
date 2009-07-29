@@ -28,17 +28,17 @@
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+if (folder != null) {
+	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+}
 %>
 
 <form method="post" name="<portlet:namespace />fm">
 
 <liferay-ui:tabs names="folders" />
 
-<c:if test="<%= folder != null %>">
-	<div class="breadcrumbs">
-		<%= DLUtil.getBreadcrumbs(folder, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
 <%
 PortletURL portletURL = renderResponse.createRenderURL();

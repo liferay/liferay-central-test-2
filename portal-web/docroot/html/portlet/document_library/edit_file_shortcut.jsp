@@ -141,12 +141,6 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((fileShortcut == null) ? Constants.ADD : Constants.UPDATE) + "-short-cut" %>' /></span>
-</div>
-
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
 	<table class="lfr-table">
 	<tr>
@@ -376,3 +370,18 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</c:when>
 	</c:choose>
 </c:if>
+
+<%
+if (fileShortcut != null) {
+	DLUtil.addPortletBreadcrumbEntries(fileShortcut, request, renderResponse);
+
+	if (strutsAction.equals("/document_library/edit_file_shortcut")) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-file-shortcut"), currentURL);
+	}
+}
+else {
+	DLUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-file-shortcut"), currentURL);
+}
+%>

@@ -197,12 +197,6 @@ portletURL.setParameter("name", name);
 	</c:choose>
 </c:if>
 
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((fileEntry == null) ? Constants.ADD : Constants.UPDATE) + "-file-entry" %>' /></span>
-</div>
-
 <c:if test="<%= fileEntry != null %>">
 	<table class="lfr-table">
 	<tr>
@@ -783,3 +777,18 @@ portletURL.setParameter("name", name);
 		</c:when>
 	</c:choose>
 </c:if>
+
+<%
+if (fileEntry != null) {
+	DLUtil.addPortletBreadcrumbEntries(fileEntry, request, renderResponse);
+
+	if (strutsAction.equals("/document_library/edit_file_entry")) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-file-entry"), currentURL);
+	}
+}
+else {
+	DLUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-file-entry"), currentURL);
+}
+%>
