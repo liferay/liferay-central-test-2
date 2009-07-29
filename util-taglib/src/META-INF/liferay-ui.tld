@@ -396,6 +396,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>custom-attributes-available</name>
+		<tag-class>com.liferay.taglib.ui.CustomAttributesAvailableTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>diff</name>
 		<tag-class>com.liferay.taglib.ui.DiffTag</tag-class>
 		<body-content>JSP</body-content>
