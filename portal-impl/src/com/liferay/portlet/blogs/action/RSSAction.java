@@ -109,7 +109,7 @@ public class RSSAction extends PortletAction {
 			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/blogs/find_entry?";
 
 		String entryURL = feedURL;

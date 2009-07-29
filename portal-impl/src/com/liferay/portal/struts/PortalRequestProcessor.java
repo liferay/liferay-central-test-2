@@ -55,6 +55,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -381,7 +382,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(portalURL);
-		sb.append(themeDisplay.getPathMain());
+		sb.append(Portal.PATH_MAIN);
 		sb.append(_PATH_PORTAL_LAYOUT);
 
 		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {

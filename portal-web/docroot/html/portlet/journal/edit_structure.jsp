@@ -394,7 +394,7 @@ int tabIndex = 1;
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/journal/get_structure?groupId=" + groupId + "&structureId=" + structureId %>'
+				url='<%= themeDisplay.getPortalURL() + Portal.PATH_MAIN + "/journal/get_structure?groupId=" + groupId + "&structureId=" + structureId %>'
 			/>
 		</td>
 	</tr>

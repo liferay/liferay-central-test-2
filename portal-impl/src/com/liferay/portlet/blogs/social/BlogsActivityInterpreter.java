@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
@@ -72,7 +73,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			activity.getClassPK());
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/blogs/find_entry?entryId=" + activity.getClassPK();
 
 		// Title

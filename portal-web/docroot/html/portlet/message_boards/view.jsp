@@ -737,7 +737,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
 			<%
-			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + scopeGroupId;
+			String rssURL = themeDisplay.getPortalURL() + Portal.PATH_MAIN + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + scopeGroupId;
 
 			if (groupThreadsUserId > 0) {
 				rssURL += "&userId=" + groupThreadsUserId;

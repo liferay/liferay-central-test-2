@@ -50,6 +50,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -646,7 +647,7 @@ public class PortletURLImpl
 
 		if (Validator.isNull(_layoutFriendlyURL)) {
 			sb.append(portalURL);
-			sb.append(themeDisplay.getPathMain());
+			sb.append(Portal.PATH_MAIN);
 			sb.append("/portal/layout?");
 
 			sb.append("p_l_id");

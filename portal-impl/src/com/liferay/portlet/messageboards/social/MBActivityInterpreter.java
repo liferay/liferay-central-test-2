@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
@@ -72,7 +73,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			activity.getClassPK());
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/message_boards/find_message?messageId=" +
 					message.getMessageId();
 
@@ -103,7 +104,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Body
 
 		String categoryLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/message_boards/find_category?categoryId=" +
 					message.getCategoryId();
 

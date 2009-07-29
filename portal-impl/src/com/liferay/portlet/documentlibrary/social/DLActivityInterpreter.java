@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
@@ -70,7 +71,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Link
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/document_library/get_file?folderId=" +
 					fileEntry.getFolderId() + "&name=" + fileEntry.getName();
 
@@ -102,7 +103,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		StringBuilder sb = new StringBuilder();
 
 		String fileEntryLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/document_library/find_file_entry?fileEntryId=" +
 					fileEntry.getFileEntryId();
 
@@ -110,7 +111,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append(StringPool.SPACE);
 
 		String folderLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/document_library/find_folder?folderId=" +
 					fileEntry.getFolderId();
 

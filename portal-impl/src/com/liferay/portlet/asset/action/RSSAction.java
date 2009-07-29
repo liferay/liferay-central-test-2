@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
@@ -84,7 +85,7 @@ public class RSSAction extends Action {
 		String feedURL = StringPool.BLANK;
 
 		String entryURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getURLPortal() + Portal.PATH_MAIN +
 				"/asset/find_asset?";
 
 		String rss = StringPool.BLANK;
