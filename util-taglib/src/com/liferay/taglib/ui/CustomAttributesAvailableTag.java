@@ -22,9 +22,9 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.Collections;
 import java.util.List;
