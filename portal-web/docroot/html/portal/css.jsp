@@ -164,16 +164,16 @@
 	display: none;
 }
 
-.js .lfr-flyout.has-children {
+.js .lfr-flyout-has-children {
 	background: url(<%= themeImagesPath %>/arrows/04_left.png) no-repeat 5px 50%;
 	padding-left: 12px;
 }
 
-.js .lfr-flyout.has-children.send-right {
+.js .lfr-flyout-has-children.send-right {
 	background-image: url(<%= themeImagesPath %>/arrows/04_right.png);
 }
 
-.js .lfr-flyout.has-children ul {
+.js .lfr-flyout-has-children ul {
 	display: none;
 	min-width: 150px;
 	position: absolute;
@@ -181,7 +181,7 @@
 	top: -1px;
 }
 
-.js .lfr-flyout.has-children.send-right ul {
+.js .lfr-flyout-has-children.send-right ul {
 	left: 100%;
 	right: auto;
 }

@@ -78,7 +78,7 @@ boolean nodeOpen = false;
 		%>
 
 			<li branchid="<%= treeLayout.getPlid() %>" class="<%= cssClass %>" layoutid="<%= treeLayout.getLayoutId() %>" nodeid="<%= nodeId %>" privateLayout="<%= treeLayout.getPrivateLayout() %>">
-				<img alt="" class="expand-image" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
+				<img alt="" class="expand-image no-png-fix" src="<%= themeDisplay.getPathThemeImages() + "/trees/" + image %>" />
 
 				<%
 				if (selectableTree && Validator.isNotNull(selectedNodes)) {
@@ -89,7 +89,7 @@ boolean nodeOpen = false;
 					}
 				%>
 
-					<img alt="" class="select-state" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
+					<img alt="" class="select-state no-png-fix" src="<%= themeDisplay.getPathThemeImages() + selectableImagePath %>" />
 
 				<%
 				}

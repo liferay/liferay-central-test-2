@@ -236,7 +236,7 @@ Liferay.Util = {
 		}
 
 		containers.addClass('lfr-flyout');
-		containers.addClass('has-children');
+		containers.addClass('has-children lfr-flyout-has-children');
 
 		if (!options.container) {
 			containers = containers.add(flyout);
