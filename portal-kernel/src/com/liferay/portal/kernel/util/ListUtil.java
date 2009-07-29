@@ -42,7 +42,7 @@ import java.util.TreeSet;
 
 public class ListUtil {
 
-	public static<E> List<E> copy(List<E> master) {
+	public static <E> List<E> copy(List<E> master) {
 		if (master == null) {
 			return null;
 		}
@@ -50,7 +50,7 @@ public class ListUtil {
 		return new ArrayList<E>(master);
 	}
 
-	public static<E> void copy(List<E> master, List<? super E> copy) {
+	public static <E> void copy(List<E> master, List<? super E> copy) {
 		if ((master == null) || (copy == null)) {
 			return;
 		}
@@ -64,7 +64,7 @@ public class ListUtil {
 		distinct(list, null);
 	}
 
-	public static<E> void distinct(List<E> list, Comparator<E> comparator) {
+	public static <E> void distinct(List<E> list, Comparator<E> comparator) {
 		if ((list == null) || (list.size() == 0)) {
 			return;
 		}
@@ -92,16 +92,16 @@ public class ListUtil {
 		}
 	}
 
-	public static<E> List<E> fromArray(E[] array) {
+	public static <E> List<E> fromArray(E[] array) {
 		if ((array == null) || (array.length == 0)) {
 			return new ArrayList<E>();
 		}
 
-		return Arrays.asList(array);
+		return new ArrayList<E>(Arrays.asList(array));
 	}
 
 	@SuppressWarnings("unchecked")
-	public static<E> List<E> fromCollection(Collection<E> c) {
+	public static <E> List<E> fromCollection(Collection<E> c) {
 		if ((c != null) && (List.class.isAssignableFrom(c.getClass()))) {
 			return (List)c;
 		}
@@ -117,7 +117,7 @@ public class ListUtil {
 		return list;
 	}
 
-	public static<E> List<E> fromEnumeration(Enumeration<E> enu) {
+	public static <E> List<E> fromEnumeration(Enumeration<E> enu) {
 		List<E> list = new ArrayList<E>();
 
 		while (enu.hasMoreElements()) {
@@ -153,11 +153,11 @@ public class ListUtil {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
-	public static<E> List<E> sort(List<E> list) {
+	public static <E> List<E> sort(List<E> list) {
 		return sort(list, null);
 	}
 
-	public static<E> List<E> sort(
+	public static <E> List<E> sort(
 		List<E> list, Comparator<? super E> comparator) {
 
 		if (UnmodifiableList.class.isAssignableFrom(list.getClass())) {
@@ -169,7 +169,7 @@ public class ListUtil {
 		return list;
 	}
 
-	public static<E> List<E> subList(List<E> list, int start, int end) {
+	public static <E> List<E> subList(List<E> list, int start, int end) {
 		List<E> newList = new ArrayList<E>();
 
 		int normalizedSize = list.size() - 1;
@@ -215,12 +215,12 @@ public class ListUtil {
 		return list;
 	}
 
-	public static<E> List<E> toList(E[] array) {
+	public static <E> List<E> toList(E[] array) {
 		if ((array == null) || (array.length == 0)) {
 			return Collections.emptyList();
 		}
 
-		return Arrays.asList(array);
+		return new ArrayList<E>(Arrays.asList(array));
 	}
 
 	public static List<Float> toList(float[] array) {
