@@ -52,18 +52,19 @@ public class DLFileShortcutImpl
 	}
 
 	public String getToTitle() {
-		DLFileEntry fileEntry = null;
+		String toTitle = null;
 
 		try {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(getToFolderId(), getToName());
+			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				getToFolderId(), getToName());
+
+			toTitle = fileEntry.getTitle();
 		}
 		catch (Exception e) {
 			_log.error(e);
-
-			return null;
 		}
 
-		return fileEntry.getTitle();
+		return toTitle;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutImpl.class);
