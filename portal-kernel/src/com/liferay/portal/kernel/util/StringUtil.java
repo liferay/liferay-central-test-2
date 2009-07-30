@@ -1318,56 +1318,14 @@ public class StringUtil {
 	}
 
 	public static String wrap(String text, int width, String lineSeparator) {
-		if (text == null) {
-			return null;
-		}
-
-		StringBuilder sb = new StringBuilder();
-
 		try {
-			BufferedReader br = new BufferedReader(new StringReader(text));
-
-			String s = StringPool.BLANK;
-
-			while ((s = br.readLine()) != null) {
-				if (s.length() == 0) {
-					sb.append(lineSeparator);
-				}
-				else {
-					String[] tokens = s.split(StringPool.SPACE);
-					boolean firstWord = true;
-					int curLineLength = 0;
-
-					for (int i = 0; i < tokens.length; i++) {
-						if (!firstWord) {
-							sb.append(StringPool.SPACE);
-							curLineLength++;
-						}
-
-						if (firstWord) {
-							sb.append(lineSeparator);
-						}
-
-						sb.append(tokens[i]);
-
-						curLineLength += tokens[i].length();
-
-						if (curLineLength >= width) {
-							firstWord = true;
-							curLineLength = 0;
-						}
-						else {
-							firstWord = false;
-						}
-					}
-				}
-			}
+			return _wrap(text, width, lineSeparator);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe.getMessage());
-		}
 
-		return sb.toString();
+			return text;
+		}
 	}
 
 	private static String _highlight(
@@ -1410,6 +1368,59 @@ public class StringUtil {
 		}
 
 		return Character.isWhitespace(c);
+	}
+
+	private static String _wrap(String text, int width, String lineSeparator)
+		throws IOException {
+
+		if (text == null) {
+			return null;
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		BufferedReader br = new BufferedReader(new StringReader(text));
+
+		String s = StringPool.BLANK;
+
+		while ((s = br.readLine()) != null) {
+			if (s.length() == 0) {
+				sb.append(lineSeparator);
+
+				continue;
+			}
+
+			int lineLength = 0;
+
+			String[] tokens = s.split(StringPool.SPACE);
+
+			for (String token : tokens) {
+				if ((lineLength + token.length() + 1) > width) {
+					if (lineLength > 0) {
+						sb.append(lineSeparator);
+					}
+
+					sb.append(token);
+
+					lineLength = token.length();
+				}
+				else {
+					if (lineLength > 0) {
+						sb.append(StringPool.SPACE);
+
+						lineLength++;
+					}
+
+					sb.append(token);
+
+					lineLength += token.length();
+				}
+			}
+
+			sb.append(lineSeparator);
+		}
+
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
