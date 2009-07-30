@@ -26,7 +26,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AssertEmailNotificationPasswordChangedTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertEmailNotificationPasswordChangedTest.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */

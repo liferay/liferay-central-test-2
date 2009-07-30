@@ -26,7 +26,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddOrganizationEmailAddress2Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddOrganizationEmailAddress2Test.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
