@@ -27,6 +27,10 @@ $theme.include($top_messages_include)
 		#end
 	</div>
 
+	<div class="site-breadcrumbs">
+		#breadcrumbs("control_panel")
+	</div>
+
 	#if ($selectable)
 		$theme.include($content_include)
 	#else

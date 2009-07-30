@@ -199,6 +199,20 @@ public class VelocityTaglib {
 		return _stringResponse.getString();
 	}
 
+	public String breadcrumb(
+			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
+			boolean showLayout, boolean showPortletBreadcrumb)
+		throws Exception {
+
+		_stringResponse.recycle();
+
+		BreadcrumbTag.doTag(
+			displayStyle, showGuestGroup, showParentGroups, showLayout,
+			showPortletBreadcrumb, _servletContext, _request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
 	public String doAsURL(long doAsUserId) throws Exception {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}

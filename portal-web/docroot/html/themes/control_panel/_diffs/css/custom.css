@@ -40,6 +40,18 @@ body {
 	width: auto;
 }
 
+/* ---------- Site breadcrumbs ---------- */
+
+.site-breadcrumbs {
+	border-color:#fff;
+	border-style: solid;
+	border-width: 5px 5px 0;
+	margin:0 auto;
+	position:relative;
+	top:20px;
+	width:976px;
+}
+
 /* ---------- Control panel ---------- */
 
 .lfr-ctrl-panel {

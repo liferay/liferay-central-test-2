@@ -320,7 +320,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
 
 		<%
-		if ((folder!= null) && ((folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) || windowState.equals(WindowState.MAXIMIZED))) {
+		if ((folder!= null) && ((folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID))) {
 			DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 		}
 		%>
