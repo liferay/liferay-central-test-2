@@ -22,6 +22,13 @@
 
 package com.liferay.util;
 
+/**
+ * <a href="BeanParamUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Brian Wing Shun Chan
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.bean</code>.
+ */
 public class BeanParamUtil
 	extends com.liferay.portal.kernel.bean.BeanParamUtil {
 }

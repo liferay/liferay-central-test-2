@@ -26,6 +26,11 @@ import java.util.Comparator;
 
 import org.dom4j.Attribute;
 
+/**
+ * <a href="AttributeComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AttributeComparator implements Comparator<Attribute> {
 
 	public int compare(Attribute attr1, Attribute attr2) {

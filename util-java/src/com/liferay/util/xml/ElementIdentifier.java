@@ -22,6 +22,11 @@
 
 package com.liferay.util.xml;
 
+/**
+ * <a href="ElementIdentifier.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ElementIdentifier {
 
 	public ElementIdentifier(String elementName, String identifierName) {

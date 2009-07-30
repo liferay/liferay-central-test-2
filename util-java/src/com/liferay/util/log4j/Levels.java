@@ -24,6 +24,11 @@ package com.liferay.util.log4j;
 
 import org.apache.log4j.Level;
 
+/**
+ * <a href="Levels.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Levels {
 
 	public static final Level[] ALL_LEVELS = new Level[] {

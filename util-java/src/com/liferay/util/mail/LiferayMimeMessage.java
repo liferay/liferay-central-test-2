@@ -26,6 +26,11 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * <a href="LiferayMimeMessage.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class LiferayMimeMessage extends MimeMessage {
 
 	public LiferayMimeMessage(Session session) {

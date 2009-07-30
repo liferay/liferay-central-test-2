@@ -22,6 +22,11 @@
 
 package com.liferay.util;
 
+/**
+ * <a href="State.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class State {
 
 	public State(String id, String name) {

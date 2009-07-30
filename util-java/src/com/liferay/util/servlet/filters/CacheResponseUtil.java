@@ -32,6 +32,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="CacheResponseUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class CacheResponseUtil {
 
 	public static void addHeaders(

@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="PKParser.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PKParser {
 
 	public PKParser(String pk) {

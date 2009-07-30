@@ -28,6 +28,11 @@ import java.util.List;
 import org.dom4j.Attribute;
 import org.dom4j.Element;
 
+/**
+ * <a href="ElementComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ElementComparator implements Comparator<Element> {
 
 	public int compare(Element el1, Element el2) {

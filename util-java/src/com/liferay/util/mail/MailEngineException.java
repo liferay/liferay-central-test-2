@@ -24,6 +24,11 @@ package com.liferay.util.mail;
 
 import org.apache.commons.lang.exception.NestableException;
 
+/**
+ * <a href="MailEngineException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MailEngineException extends NestableException {
 
 	public MailEngineException() {

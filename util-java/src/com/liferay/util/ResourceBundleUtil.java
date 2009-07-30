@@ -30,6 +30,17 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * <a href="ResourceBundleUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class provides a convenience routine named getString() that gets the
+ * value of a ResourceBundle key, but also provides the ability to perform
+ * search & replace on tokens within the value of the key.
+ * </p>
+ *
+ * @author Neil Griffin
+ */
 public class ResourceBundleUtil {
 
 	public static String getString(

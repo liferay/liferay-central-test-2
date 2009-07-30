@@ -30,6 +30,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="CacheResponseData.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class CacheResponseData implements Serializable {
 
 	public CacheResponseData(

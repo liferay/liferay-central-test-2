@@ -33,6 +33,11 @@ import java.lang.reflect.Method;
 
 import java.util.List;
 
+/**
+ * <a href="BeanToXMLUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class BeanToXMLUtil {
 
 	public static void addBean(Object obj, Element parentEl) {

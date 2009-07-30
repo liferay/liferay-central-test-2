@@ -35,6 +35,11 @@ import java.util.List;
 
 import org.jdom.IllegalDataException;
 
+/**
+ * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RSSUtil {
 
 	public static final String RSS = "rss";

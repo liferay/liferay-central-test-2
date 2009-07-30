@@ -22,6 +22,11 @@
 
 package com.liferay.util;
 
+/**
+ * <a href="EncryptorException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EncryptorException extends Exception {
 
 	public EncryptorException() {

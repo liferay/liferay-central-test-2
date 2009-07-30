@@ -26,6 +26,11 @@ import java.io.File;
 
 import org.apache.tools.ant.taskdefs.Mkdir;
 
+/**
+ * <a href="MkdirTask.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MkdirTask {
 
 	public static void mkdir(String dir) {

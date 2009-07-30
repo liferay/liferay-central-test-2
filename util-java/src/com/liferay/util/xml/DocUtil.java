@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
+/**
+ * <a href="DocUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DocUtil {
 
 	public static void add(Element element, String name, boolean text) {

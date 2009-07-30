@@ -22,6 +22,11 @@
 
 package com.liferay.util;
 
+/**
+ * <a href="Distance.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Distance {
 
 	public static double calculate(double lat1, double lon1,

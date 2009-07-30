@@ -26,6 +26,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * <a href="UniqueList.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UniqueList<E> extends ArrayList<E> {
 
 	public UniqueList() {

@@ -47,6 +47,11 @@ import org.apache.axis.MessageContext;
 import org.apache.axis.transport.http.HTTPConstants;
 import org.apache.axis.transport.http.HTTPSender;
 
+/**
+ * <a href="SimpleHTTPSender.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SimpleHTTPSender extends HTTPSender {
 
 	public static String getCurrentCookie() {

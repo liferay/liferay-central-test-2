@@ -24,6 +24,11 @@ package com.liferay.util;
 
 import java.text.NumberFormat;
 
+/**
+ * <a href="NumberFormatUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public final class NumberFormatUtil {
 
 	public static String format(

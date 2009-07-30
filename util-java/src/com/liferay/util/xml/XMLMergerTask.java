@@ -27,6 +27,11 @@ import java.io.File;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
+/**
+ * <a href="XMLMergerTask.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class XMLMergerTask extends Task {
 
 	public void setMasterFile(File masterFile) {

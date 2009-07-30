@@ -25,6 +25,11 @@ package com.liferay.util.axis;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
+/**
+ * <a href="SimpleAuthenticator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SimpleAuthenticator extends Authenticator {
 
 	public SimpleAuthenticator(String userName, String password) {

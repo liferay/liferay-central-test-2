@@ -24,6 +24,11 @@ package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+/**
+ * <a href="CDATAUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class CDATAUtil {
 
 	public static String wrap(String s) {

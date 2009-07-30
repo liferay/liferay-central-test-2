@@ -26,6 +26,11 @@ import com.liferay.util.xml.descriptor.XMLDescriptor;
 
 import org.dom4j.Element;
 
+/**
+ * <a href="XMLElementComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class XMLElementComparator extends ElementComparator {
 
 	public XMLElementComparator(XMLDescriptor descriptor) {

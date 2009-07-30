@@ -35,6 +35,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="SharedSessionWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SharedSessionWrapper implements HttpSession {
 
 	public SharedSessionWrapper(HttpSession session) {

@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.util.SystemProperties;
 
+/**
+ * <a href="PhoneNumberUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PhoneNumberUtil {
 
 	public static String format(String phoneNumber) {

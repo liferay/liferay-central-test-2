@@ -26,6 +26,11 @@ import java.io.File;
 
 import org.apache.tools.ant.taskdefs.Expand;
 
+/**
+ * <a href="ExpandTask.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandTask {
 
 	public static void expand(String source, String destination) {

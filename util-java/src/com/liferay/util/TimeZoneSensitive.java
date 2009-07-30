@@ -25,6 +25,11 @@ package com.liferay.util;
 import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.property.XProperty;
 
+/**
+ * <a href="TimeZoneSensitive.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ */
 public class TimeZoneSensitive extends XProperty {
 
 	public static final String PROPERTY_NAME = "X-LIFERAY-TIMEZONE-SENSITIVE";

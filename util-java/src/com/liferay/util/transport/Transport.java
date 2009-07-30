@@ -24,6 +24,11 @@ package com.liferay.util.transport;
 
 import java.io.IOException;
 
+/**
+ * <a href="Transport.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface Transport {
 
 	public void connect() throws IOException;

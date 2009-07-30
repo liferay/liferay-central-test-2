@@ -45,6 +45,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
 
+/**
+ * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ServletResponseUtil {
 
 	public static void cleanUp(InputStream is) {

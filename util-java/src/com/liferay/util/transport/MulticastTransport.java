@@ -31,6 +31,17 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
+/**
+ * <a href="MulticastTransport.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * The MulticastTransport will send strings across a specified multicast
+ * address. It will also listen for messages and hand them to the appropriate
+ * DatagramHandler.
+ * </p>
+ *
+ * @author Michael C. Han
+ */
 public class MulticastTransport extends Thread implements Transport {
 
 	public MulticastTransport(DatagramHandler handler, String host, int port) {

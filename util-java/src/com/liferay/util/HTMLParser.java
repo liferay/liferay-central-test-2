@@ -32,6 +32,11 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLEditorKit;
 
+/**
+ * <a href="HTMLParser.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class HTMLParser {
 
 	public HTMLParser(Reader reader) throws IOException {

@@ -24,6 +24,11 @@ package com.liferay.util.servlet;
 
 import javax.servlet.ServletOutputStream;
 
+/**
+ * <a href="NullServletOutputStream.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NullServletOutputStream extends ServletOutputStream {
 
 	public NullServletOutputStream() {

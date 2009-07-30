@@ -31,6 +31,12 @@ import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
+/**
+ * <a href="Modifications.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Amos Fong
+ * @author Brian Wing Shun Chan
+ */
 public class Modifications {
 
 	public static Modifications getInstance() {

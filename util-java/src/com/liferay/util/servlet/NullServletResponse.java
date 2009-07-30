@@ -28,6 +28,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+/**
+ * <a href="NullServletResponse.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NullServletResponse extends HttpServletResponseWrapper {
 
 	public NullServletResponse(HttpServletResponse response) {

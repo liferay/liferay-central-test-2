@@ -27,6 +27,11 @@ import java.io.File;
 import org.apache.tools.ant.taskdefs.Manifest;
 import org.apache.tools.ant.taskdefs.ManifestException;
 
+/**
+ * <a href="ManifestTask.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ManifestTask {
 
 	public static void manifest(String file, Manifest.Attribute[] attributes)

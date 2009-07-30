@@ -24,6 +24,11 @@ package com.liferay.util;
 
 import com.liferay.ibm.icu.text.Transliterator;
 
+/**
+ * <a href="Normalizer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Normalizer {
 
 	public static String normalizeToAscii(String s) {

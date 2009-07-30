@@ -22,6 +22,11 @@
 
 package com.liferay.util.xml;
 
+/**
+ * <a href="XMLConverter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class XMLConverter {
 
 	public static org.w3c.dom.Document toW3CDocument(
