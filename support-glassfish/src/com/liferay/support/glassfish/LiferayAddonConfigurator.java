@@ -55,6 +55,12 @@ import java.io.FileOutputStream;
 
 import java.util.Properties;
 
+/**
+ * <a href="LiferayAddonConfigurator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raju Uppalapati
+ * @author Brian Wing Shun Chan
+ */
 public class LiferayAddonConfigurator implements Configurator {
 
 	public void configure(ConfigurationContext cc) throws AddonException {
