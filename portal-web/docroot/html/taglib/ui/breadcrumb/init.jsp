@@ -56,11 +56,13 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBuilder
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
 		sb.append("<li>");
+		sb.append("<span>");
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
 		sb.append(HtmlUtil.escape(themeDisplay.getAccount().getName()));
 		sb.append("</a>");
+		sb.append("</span>");
 		sb.append("</li>");
 	}
 }
@@ -110,11 +112,13 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
 		sb.append("<li>");
+		sb.append("<span>");
 		sb.append("<a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
 		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
 		sb.append("</a>");
+		sb.append("</span>");
 		sb.append("</li>");
 	}
 }
@@ -131,11 +135,21 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBuilder s
 		String breadcrumbURL = entry.getValue();
 
 		sb.append("<li>");
-		sb.append("<a href=\"");
-		sb.append(breadcrumbURL);
-		sb.append("\">");
+		sb.append("<span>");
+
+		if (Validator.isNotNull(breadcrumbURL)) {
+			sb.append("<a href=\"");
+			sb.append(breadcrumbURL);
+			sb.append("\">");
+		}
+
 		sb.append(HtmlUtil.escape(breadcrumbText));
-		sb.append("</a>");
+
+		if (Validator.isNotNull(breadcrumbURL)) {
+			sb.append("</a>");
+		}
+
+		sb.append("</span>");
 		sb.append("</li>");
 	}
 }

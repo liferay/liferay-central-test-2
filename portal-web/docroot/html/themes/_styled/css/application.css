@@ -166,11 +166,14 @@
 	padding-right: 0;
 }
 
-.site-breadcrumbs li a {
+.site-breadcrumbs li span {
 	background: url(../images/common/breadcrumbs.png) no-repeat right center;
 	display: block;
 	padding: 0 15px 0 0;
-	text-decoration:none;
+}
+
+.site-breadcrumbs li span a {
+	text-decoration: none;
 }
 
 .site-breadcrumbs .last {
@@ -180,7 +183,7 @@
 	padding-right: 0;
 }
 
-.site-breadcrumbs .last a {
+.site-breadcrumbs .last span {
 	background-image: none;
 	padding: 0;
 }
