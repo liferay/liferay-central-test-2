@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    AssetVocabulary
  * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @generated
  */
 public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 	public long getPrimaryKey();

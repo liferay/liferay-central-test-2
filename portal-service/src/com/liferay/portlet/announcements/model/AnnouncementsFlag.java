@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+
 /**
  * <a href="AnnouncementsFlag.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AnnouncementsFlagModel
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
+ * @see AnnouncementsFlagModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
+ * @generated
  */
 public interface AnnouncementsFlag extends AnnouncementsFlagModel {
 }

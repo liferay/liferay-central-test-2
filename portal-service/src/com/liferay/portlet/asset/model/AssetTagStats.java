@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetTagStats.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetTagStatsImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetTagStatsImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetTagStatsModel
- * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
+ * @see AssetTagStatsModel
+ * @see com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
+ * @generated
  */
 public interface AssetTagStats extends AssetTagStatsModel {
 }

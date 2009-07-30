@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap
+ * @generated
  */
 public class MBThreadSoap implements Serializable {
 	public static MBThreadSoap toSoapModel(MBThread model) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetCategory.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetCategoryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetCategoryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetCategoryModel
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
+ * @see AssetCategoryModel
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
+ * @generated
  */
 public interface AssetCategory extends AssetCategoryModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAncestors()

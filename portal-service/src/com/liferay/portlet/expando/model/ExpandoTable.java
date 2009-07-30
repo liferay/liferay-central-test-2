@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model;
 
+
 /**
  * <a href="ExpandoTable.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoTableImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoTableImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ExpandoTableModel
- * @see    com.liferay.portlet.expando.model.impl.ExpandoTableImpl
- * @see    com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl
+ * @see ExpandoTableModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoTableImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl
+ * @generated
  */
 public interface ExpandoTable extends ExpandoTableModel {
 	public boolean isDefaultTable();

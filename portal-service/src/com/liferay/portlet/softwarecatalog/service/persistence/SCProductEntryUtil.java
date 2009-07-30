@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+
 /**
  * <a href="SCProductEntryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    SCProductEntryPersistence
  * @see    SCProductEntryPersistenceImpl
+ * @generated
  */
 public class SCProductEntryUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class SCProductEntryUtil {
 		return getPersistence().update(scProductEntry);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  scProductEntry the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when scProductEntry is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws com.liferay.portal.SystemException {

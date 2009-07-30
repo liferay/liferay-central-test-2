@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.shopping.service.http.ShoppingCartServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.shopping.service.http.ShoppingCartServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.shopping.service.http.ShoppingCartServiceSoap
+ * @generated
  */
 public class ShoppingCartSoap implements Serializable {
 	public static ShoppingCartSoap toSoapModel(ShoppingCart model) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBMessage.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMessageImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMessageImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBMessageModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
+ * @see MBMessageModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
+ * @generated
  */
 public interface MBMessage extends MBMessageModel {
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();

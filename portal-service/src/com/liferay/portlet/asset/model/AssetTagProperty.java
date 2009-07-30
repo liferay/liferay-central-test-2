@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetTagProperty.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetTagPropertyModel
- * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl
+ * @see AssetTagPropertyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl
+ * @generated
  */
 public interface AssetTagProperty extends AssetTagPropertyModel {
 }

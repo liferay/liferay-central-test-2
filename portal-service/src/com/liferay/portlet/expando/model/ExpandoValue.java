@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model;
 
+
 /**
  * <a href="ExpandoValue.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoValueImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoValueImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ExpandoValueModel
- * @see    com.liferay.portlet.expando.model.impl.ExpandoValueImpl
- * @see    com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
+ * @see ExpandoValueModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoValueImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
+ * @generated
  */
 public interface ExpandoValue extends ExpandoValueModel {
 	public boolean getBoolean()

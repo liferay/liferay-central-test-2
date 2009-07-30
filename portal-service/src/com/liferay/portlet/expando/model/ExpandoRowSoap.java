@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.expando.service.http.ExpandoRowServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.expando.service.http.ExpandoRowServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.expando.service.http.ExpandoRowServiceSoap
+ * @generated
  */
 public class ExpandoRowSoap implements Serializable {
 	public static ExpandoRowSoap toSoapModel(ExpandoRow model) {

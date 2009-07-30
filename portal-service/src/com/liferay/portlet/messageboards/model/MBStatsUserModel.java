@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    MBStatsUser
  * @see    com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
  * @see    com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
+ * @generated
  */
 public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	public long getPrimaryKey();

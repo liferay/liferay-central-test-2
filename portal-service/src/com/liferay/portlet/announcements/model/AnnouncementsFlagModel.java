@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    AnnouncementsFlag
  * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
  * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
+ * @generated
  */
 public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public long getPrimaryKey();

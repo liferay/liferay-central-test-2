@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model;
 
+
 /**
  * <a href="ExpandoRow.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoRowImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoRowImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ExpandoRowModel
- * @see    com.liferay.portlet.expando.model.impl.ExpandoRowImpl
- * @see    com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl
+ * @see ExpandoRowModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoRowImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl
+ * @generated
  */
 public interface ExpandoRow extends ExpandoRowModel {
 }

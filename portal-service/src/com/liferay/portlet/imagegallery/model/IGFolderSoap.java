@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.imagegallery.service.http.IGFolderServiceSoap
+ * @generated
  */
 public class IGFolderSoap implements Serializable {
 	public static IGFolderSoap toSoapModel(IGFolder model) {

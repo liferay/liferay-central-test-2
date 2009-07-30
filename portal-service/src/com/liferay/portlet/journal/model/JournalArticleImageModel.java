@@ -33,14 +33,15 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the JournalArticleImage table in
- * the database.
+ * This interface is a model that represents the JournalArticleImage table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    JournalArticleImage
  * @see    com.liferay.portlet.journal.model.impl.JournalArticleImageImpl
  * @see    com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl
+ * @generated
  */
 public interface JournalArticleImageModel extends BaseModel<JournalArticleImage> {
 	public long getPrimaryKey();

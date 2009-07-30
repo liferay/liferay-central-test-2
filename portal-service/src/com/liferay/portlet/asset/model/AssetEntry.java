@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetEntryModel
- * @see    com.liferay.portlet.asset.model.impl.AssetEntryImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ * @see AssetEntryModel
+ * @see com.liferay.portlet.asset.model.impl.AssetEntryImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ * @generated
  */
 public interface AssetEntry extends AssetEntryModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()

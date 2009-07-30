@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBStatsUser.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl} and rerun the
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBStatsUserModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
+ * @see MBStatsUserModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
+ * @generated
  */
 public interface MBStatsUser extends MBStatsUserModel {
 }

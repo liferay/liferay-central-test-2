@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.model;
 
+
 /**
  * <a href="PollsChoice.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.polls.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.polls.model.impl.PollsChoiceImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.polls.model.impl.PollsChoiceImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PollsChoiceModel
- * @see    com.liferay.portlet.polls.model.impl.PollsChoiceImpl
- * @see    com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
+ * @see PollsChoiceModel
+ * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
+ * @generated
  */
 public interface PollsChoice extends PollsChoiceModel {
 	public int getVotesCount() throws com.liferay.portal.SystemException;

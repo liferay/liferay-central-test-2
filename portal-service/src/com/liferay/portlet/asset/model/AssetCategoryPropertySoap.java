@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceSoap
+ * @generated
  */
 public class AssetCategoryPropertySoap implements Serializable {
 	public static AssetCategoryPropertySoap toSoapModel(

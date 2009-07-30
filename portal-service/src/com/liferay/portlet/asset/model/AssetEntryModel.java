@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    AssetEntry
  * @see    com.liferay.portlet.asset.model.impl.AssetEntryImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ * @generated
  */
 public interface AssetEntryModel extends BaseModel<AssetEntry> {
 	public long getPrimaryKey();

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+
 /**
  * <a href="SCProductScreenshot.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +32,20 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the SCProductScreenshot table in
- * the database.
+ * This interface is a model that represents the SCProductScreenshot table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCProductScreenshotModel
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @see SCProductScreenshotModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @generated
  */
 public interface SCProductScreenshot extends SCProductScreenshotModel {
 }

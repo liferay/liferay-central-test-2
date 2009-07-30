@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.model;
 
+
 /**
  * <a href="PollsQuestion.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.polls.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PollsQuestionModel
- * @see    com.liferay.portlet.polls.model.impl.PollsQuestionImpl
- * @see    com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
+ * @see PollsQuestionModel
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
+ * @generated
  */
 public interface PollsQuestion extends PollsQuestionModel {
 	public boolean isExpired();

@@ -33,14 +33,15 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the JournalContentSearch table in
- * the database.
+ * This interface is a model that represents the JournalContentSearch table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    JournalContentSearch
  * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
  * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
+ * @generated
  */
 public interface JournalContentSearchModel extends BaseModel<JournalContentSearch> {
 	public long getPrimaryKey();

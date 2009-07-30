@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  * @see    IGFolderPersistenceImpl
  * @see    IGFolderUtil
+ * @generated
  */
 public interface IGFolderPersistence extends BasePersistence {
 	public void cacheResult(
@@ -62,6 +63,18 @@ public interface IGFolderPersistence extends BasePersistence {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  igFolder the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when igFolder is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws com.liferay.portal.SystemException;

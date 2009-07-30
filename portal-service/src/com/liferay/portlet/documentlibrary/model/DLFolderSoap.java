@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.documentlibrary.service.http.DLFolderServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.documentlibrary.service.http.DLFolderServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.documentlibrary.service.http.DLFolderServiceSoap
+ * @generated
  */
 public class DLFolderSoap implements Serializable {
 	public static DLFolderSoap toSoapModel(DLFolder model) {

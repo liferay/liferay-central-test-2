@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+
 /**
  * <a href="ExpandoRowUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.expando.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    ExpandoRowPersistence
  * @see    ExpandoRowPersistenceImpl
+ * @generated
  */
 public class ExpandoRowUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class ExpandoRowUtil {
 		return getPersistence().update(expandoRow);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  expandoRow the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when expandoRow is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.expando.model.ExpandoRow update(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
 		throws com.liferay.portal.SystemException {

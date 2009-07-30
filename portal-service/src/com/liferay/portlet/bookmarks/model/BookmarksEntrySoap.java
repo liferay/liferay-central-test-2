@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceSoap
+ * @generated
  */
 public class BookmarksEntrySoap implements Serializable {
 	public static BookmarksEntrySoap toSoapModel(BookmarksEntry model) {

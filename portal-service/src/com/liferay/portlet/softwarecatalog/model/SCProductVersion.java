@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+
 /**
  * <a href="SCProductVersion.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCProductVersionModel
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
+ * @see SCProductVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
+ * @generated
  */
 public interface SCProductVersion extends SCProductVersionModel {
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry();

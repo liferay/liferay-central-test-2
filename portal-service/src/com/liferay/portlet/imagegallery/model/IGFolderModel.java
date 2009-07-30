@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the IGFolder table in the database.
+ * This interface is a model that represents the IGFolder table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    IGFolder
  * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
  * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
+ * @generated
  */
 public interface IGFolderModel extends BaseModel<IGFolder> {
 	public long getPrimaryKey();

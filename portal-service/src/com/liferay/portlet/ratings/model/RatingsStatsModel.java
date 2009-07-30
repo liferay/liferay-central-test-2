@@ -41,6 +41,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    RatingsStats
  * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
  * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
+ * @generated
  */
 public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	public long getPrimaryKey();

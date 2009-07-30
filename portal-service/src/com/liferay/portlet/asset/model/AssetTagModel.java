@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AssetTag table in the database.
+ * This interface is a model that represents the AssetTag table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AssetTag
  * @see    com.liferay.portlet.asset.model.impl.AssetTagImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetTagModelImpl
+ * @generated
  */
 public interface AssetTagModel extends BaseModel<AssetTag> {
 	public long getPrimaryKey();

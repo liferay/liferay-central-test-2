@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+
 /**
  * <a href="ShoppingCategory.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.shopping.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl} and rerun the
+ * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingCategoryModel
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
+ * @see ShoppingCategoryModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
+ * @generated
  */
 public interface ShoppingCategory extends ShoppingCategoryModel {
 	public boolean isRoot();

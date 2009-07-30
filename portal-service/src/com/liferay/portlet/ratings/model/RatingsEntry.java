@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.model;
 
+
 /**
  * <a href="RatingsEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.ratings.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.ratings.model.impl.RatingsEntryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.ratings.model.impl.RatingsEntryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    RatingsEntryModel
- * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
- * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ * @see RatingsEntryModel
+ * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
+ * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ * @generated
  */
 public interface RatingsEntry extends RatingsEntryModel {
 }

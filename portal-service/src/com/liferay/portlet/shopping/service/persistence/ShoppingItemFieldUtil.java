@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+
 /**
  * <a href="ShoppingItemFieldUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.shopping.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    ShoppingItemFieldPersistence
  * @see    ShoppingItemFieldPersistenceImpl
+ * @generated
  */
 public class ShoppingItemFieldUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class ShoppingItemFieldUtil {
 		return getPersistence().update(shoppingItemField);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  shoppingItemField the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when shoppingItemField is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
 		boolean merge) throws com.liferay.portal.SystemException {

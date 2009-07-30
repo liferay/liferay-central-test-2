@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.model;
 
+
 /**
  * <a href="BookmarksFolder.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.bookmarks.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl} and rerun the
+ * Customize {@link com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BookmarksFolderModel
- * @see    com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
- * @see    com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
+ * @see BookmarksFolderModel
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
+ * @generated
  */
 public interface BookmarksFolder extends BookmarksFolderModel {
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getAncestors()

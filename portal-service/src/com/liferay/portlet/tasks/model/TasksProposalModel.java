@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    TasksProposal
  * @see    com.liferay.portlet.tasks.model.impl.TasksProposalImpl
  * @see    com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
+ * @generated
  */
 public interface TasksProposalModel extends BaseModel<TasksProposal> {
 	public long getPrimaryKey();

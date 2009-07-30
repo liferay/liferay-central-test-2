@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap
+ * @generated
  */
 public class WikiNodeSoap implements Serializable {
 	public static WikiNodeSoap toSoapModel(WikiNode model) {

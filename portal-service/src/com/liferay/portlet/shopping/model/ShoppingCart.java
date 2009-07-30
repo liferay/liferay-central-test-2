@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+
 /**
  * <a href="ShoppingCart.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.shopping.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCartImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCartImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingCartModel
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
+ * @see ShoppingCartModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
+ * @generated
  */
 public interface ShoppingCart extends ShoppingCartModel {
 	public void addItemId(long itemId, java.lang.String fields);

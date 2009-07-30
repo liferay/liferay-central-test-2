@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+
 /**
  * <a href="JournalStructureUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.journal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    JournalStructurePersistence
  * @see    JournalStructurePersistenceImpl
+ * @generated
  */
 public class JournalStructureUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class JournalStructureUtil {
 		return getPersistence().update(journalStructure);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  journalStructure the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when journalStructure is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge) throws com.liferay.portal.SystemException {

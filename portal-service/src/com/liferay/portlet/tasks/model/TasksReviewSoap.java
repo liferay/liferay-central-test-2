@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.tasks.service.http.TasksReviewServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.tasks.service.http.TasksReviewServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.tasks.service.http.TasksReviewServiceSoap
+ * @generated
  */
 public class TasksReviewSoap implements Serializable {
 	public static TasksReviewSoap toSoapModel(TasksReview model) {

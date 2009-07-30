@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WikiNode table in the database.
+ * This interface is a model that represents the WikiNode table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    WikiNode
  * @see    com.liferay.portlet.wiki.model.impl.WikiNodeImpl
  * @see    com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
+ * @generated
  */
 public interface WikiNodeModel extends BaseModel<WikiNode> {
 	public long getPrimaryKey();

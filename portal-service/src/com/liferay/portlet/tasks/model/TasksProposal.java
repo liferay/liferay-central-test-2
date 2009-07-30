@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.model;
 
+
 /**
  * <a href="TasksProposal.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.tasks.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.tasks.model.impl.TasksProposalImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.tasks.model.impl.TasksProposalImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    TasksProposalModel
- * @see    com.liferay.portlet.tasks.model.impl.TasksProposalImpl
- * @see    com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
+ * @see TasksProposalModel
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
+ * @generated
  */
 public interface TasksProposal extends TasksProposalModel {
 	public java.lang.String getStatus(java.util.Locale locale)

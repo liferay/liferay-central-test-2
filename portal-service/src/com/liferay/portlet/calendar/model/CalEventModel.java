@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the CalEvent table in the database.
+ * This interface is a model that represents the CalEvent table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    CalEvent
  * @see    com.liferay.portlet.calendar.model.impl.CalEventImpl
  * @see    com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ * @generated
  */
 public interface CalEventModel extends BaseModel<CalEvent> {
 	public long getPrimaryKey();

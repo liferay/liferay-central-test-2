@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+
 /**
  * <a href="WikiPage.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,18 +32,20 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WikiPage table in the database.
+ * This interface is a model that represents the WikiPage table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WikiPageModel
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageImpl
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @see WikiPageModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @generated
  */
 public interface WikiPage extends WikiPageModel {
 	public java.lang.String getAttachmentsDir();

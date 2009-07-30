@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+
 /**
  * <a href="DLFileEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun the
+ * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileEntryModel
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @see DLFileEntryModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @generated
  */
 public interface DLFileEntry extends DLFileEntryModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();

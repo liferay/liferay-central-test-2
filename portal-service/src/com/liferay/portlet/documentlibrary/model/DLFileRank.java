@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+
 /**
  * <a href="DLFileRank.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl} and rerun the
+ * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileRankModel
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @see DLFileRankModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @generated
  */
 public interface DLFileRank extends DLFileRankModel {
 }

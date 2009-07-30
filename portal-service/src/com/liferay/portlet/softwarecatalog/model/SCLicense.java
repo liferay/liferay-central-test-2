@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+
 /**
  * <a href="SCLicense.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl} and rerun the
+ * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCLicenseModel
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
+ * @see SCLicenseModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
+ * @generated
  */
 public interface SCLicense extends SCLicenseModel {
 }

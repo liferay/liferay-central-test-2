@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    MBMailingList
  * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
  * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
+ * @generated
  */
 public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public long getPrimaryKey();

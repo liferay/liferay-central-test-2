@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.model;
 
+
 /**
  * <a href="SocialRelation.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.social.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialRelationImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.social.model.impl.SocialRelationImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SocialRelationModel
- * @see    com.liferay.portlet.social.model.impl.SocialRelationImpl
- * @see    com.liferay.portlet.social.model.impl.SocialRelationModelImpl
+ * @see SocialRelationModel
+ * @see com.liferay.portlet.social.model.impl.SocialRelationImpl
+ * @see com.liferay.portlet.social.model.impl.SocialRelationModelImpl
+ * @generated
  */
 public interface SocialRelation extends SocialRelationModel {
 }

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.journal.service;
 
+
 /**
- * <a href="JournalArticleImageLocalServiceUtil.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalArticleImageLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -32,15 +32,16 @@ package com.liferay.portlet.journal.service;
  * </p>
  *
  * <p>
- * This class provides static methods for the {@link
- * JournalArticleImageLocalService} bean. The static methods of this class calls
- * the same methods of the bean instance. It's convenient to be able to just
- * write one line to call a method on a bean instead of writing a lookup call
- * and a method call.
+ * This class provides static methods for the
+ * {@link JournalArticleImageLocalService} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    JournalArticleImageLocalService
+ * @generated
  */
 public class JournalArticleImageLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticleImage addJournalArticleImage(

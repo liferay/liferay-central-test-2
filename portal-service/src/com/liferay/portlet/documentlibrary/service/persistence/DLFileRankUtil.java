@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+
 /**
  * <a href="DLFileRankUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    DLFileRankPersistence
  * @see    DLFileRankPersistenceImpl
+ * @generated
  */
 public class DLFileRankUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class DLFileRankUtil {
 		return getPersistence().update(dlFileRank);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  dlFileRank the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when dlFileRank is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean merge) throws com.liferay.portal.SystemException {

@@ -42,6 +42,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    SocialRequest
  * @see    com.liferay.portlet.social.model.impl.SocialRequestImpl
  * @see    com.liferay.portlet.social.model.impl.SocialRequestModelImpl
+ * @generated
  */
 public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public long getPrimaryKey();

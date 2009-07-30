@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+
 /**
  * <a href="AssetTagPropertyUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.asset.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    AssetTagPropertyPersistence
  * @see    AssetTagPropertyPersistenceImpl
+ * @generated
  */
 public class AssetTagPropertyUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class AssetTagPropertyUtil {
 		return getPersistence().update(assetTagProperty);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  assetTagProperty the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when assetTagProperty is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.asset.model.AssetTagProperty update(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty,
 		boolean merge) throws com.liferay.portal.SystemException {

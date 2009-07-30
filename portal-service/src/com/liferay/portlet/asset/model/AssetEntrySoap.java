@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.asset.service.http.AssetEntryServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.asset.service.http.AssetEntryServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.asset.service.http.AssetEntryServiceSoap
+ * @generated
  */
 public class AssetEntrySoap implements Serializable {
 	public static AssetEntrySoap toSoapModel(AssetEntry model) {

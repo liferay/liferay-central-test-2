@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+
 /**
  * <a href="WikiPageResource.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WikiPageResourceModel
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
+ * @see WikiPageResourceModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
+ * @generated
  */
 public interface WikiPageResource extends WikiPageResourceModel {
 }

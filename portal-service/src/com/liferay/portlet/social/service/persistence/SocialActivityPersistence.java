@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  * @see    SocialActivityPersistenceImpl
  * @see    SocialActivityUtil
+ * @generated
  */
 public interface SocialActivityPersistence extends BasePersistence {
 	public void cacheResult(
@@ -64,6 +65,18 @@ public interface SocialActivityPersistence extends BasePersistence {
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  socialActivity the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when socialActivity is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portlet.social.model.SocialActivity update(
 		com.liferay.portlet.social.model.SocialActivity socialActivity,
 		boolean merge) throws com.liferay.portal.SystemException;

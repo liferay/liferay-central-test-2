@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model;
 
+
 /**
  * <a href="ExpandoColumn.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ExpandoColumnModel
- * @see    com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
- * @see    com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @see ExpandoColumnModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @generated
  */
 public interface ExpandoColumn extends ExpandoColumnModel {
 	public java.io.Serializable getDefaultValue();

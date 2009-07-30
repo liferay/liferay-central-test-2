@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+
 /**
  * <a href="WikiNodeUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.wiki.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    WikiNodePersistence
  * @see    WikiNodePersistenceImpl
+ * @generated
  */
 public class WikiNodeUtil {
 	public static void cacheResult(
@@ -74,6 +76,18 @@ public class WikiNodeUtil {
 		return getPersistence().update(wikiNode);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  wikiNode the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when wikiNode is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.SystemException {

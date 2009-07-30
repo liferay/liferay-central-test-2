@@ -41,6 +41,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    ShoppingItemPrice
  * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl
  * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl
+ * @generated
  */
 public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public long getPrimaryKey();

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBMailingList.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.messageboards.model.impl.MBMailingListImpl} and rerun the
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMailingListImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBMailingListModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
+ * @see MBMailingListModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
+ * @generated
  */
 public interface MBMailingList extends MBMailingListModel {
 }

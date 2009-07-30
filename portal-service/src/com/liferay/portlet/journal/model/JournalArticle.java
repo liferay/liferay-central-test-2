@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+
 /**
  * <a href="JournalArticle.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalArticleModel
- * @see    com.liferay.portlet.journal.model.impl.JournalArticleImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
+ * @see JournalArticleModel
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
+ * @generated
  */
 public interface JournalArticle extends JournalArticleModel {
 	public java.lang.String getApprovedByUserUuid()

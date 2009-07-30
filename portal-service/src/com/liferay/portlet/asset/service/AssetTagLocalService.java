@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
 /**
  * <a href="AssetTagLocalService.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,21 +37,23 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * </p>
  *
  * <p>
- * This interface defines the service. The default implementation is {@link
- * com.liferay.portlet.asset.service.impl.AssetTagLocalServiceImpl}}. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * This interface defines the service. The default implementation is
+ * {@link
+ * com.liferay.portlet.asset.service.impl.AssetTagLocalServiceImpl}}.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a local service. Methods of this service will not have security
- * checks based on the propagated JAAS credentials because this service can only
- * be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.asset.service.AssetTagLocalServiceUtil
+ * @see    AssetTagLocalServiceUtil
+ * @generated
  */
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface AssetTagLocalService {
 	public com.liferay.portlet.asset.model.AssetTag addAssetTag(
 		com.liferay.portlet.asset.model.AssetTag assetTag)

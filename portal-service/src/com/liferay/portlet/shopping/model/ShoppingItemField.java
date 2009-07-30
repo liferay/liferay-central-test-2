@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+
 /**
  * <a href="ShoppingItemField.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.shopping.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl} and rerun the
+ * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingItemFieldModel
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ * @see ShoppingItemFieldModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ * @generated
  */
 public interface ShoppingItemField extends ShoppingItemFieldModel {
 	public void setValues(java.lang.String values);

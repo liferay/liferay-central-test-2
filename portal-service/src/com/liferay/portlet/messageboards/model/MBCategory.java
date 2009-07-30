@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBCategory.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBCategoryModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ * @see MBCategoryModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ * @generated
  */
 public interface MBCategory extends MBCategoryModel {
 	public java.util.List<Long> getAncestorCategoryIds()

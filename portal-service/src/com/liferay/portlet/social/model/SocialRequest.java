@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.model;
 
+
 /**
  * <a href="SocialRequest.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.social.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialRequestImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.social.model.impl.SocialRequestImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SocialRequestModel
- * @see    com.liferay.portlet.social.model.impl.SocialRequestImpl
- * @see    com.liferay.portlet.social.model.impl.SocialRequestModelImpl
+ * @see SocialRequestModel
+ * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
+ * @see com.liferay.portlet.social.model.impl.SocialRequestModelImpl
+ * @generated
  */
 public interface SocialRequest extends SocialRequestModel {
 }

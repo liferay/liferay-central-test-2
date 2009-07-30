@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.asset.service.http.AssetTagStatsServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.asset.service.http.AssetTagStatsServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.asset.service.http.AssetTagStatsServiceSoap
+ * @generated
  */
 public class AssetTagStatsSoap implements Serializable {
 	public static AssetTagStatsSoap toSoapModel(AssetTagStats model) {

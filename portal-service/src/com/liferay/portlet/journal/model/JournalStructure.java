@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+
 /**
  * <a href="JournalStructure.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.journal.model.impl.JournalStructureImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalStructureImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalStructureModel
- * @see    com.liferay.portlet.journal.model.impl.JournalStructureImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
+ * @see JournalStructureModel
+ * @see com.liferay.portlet.journal.model.impl.JournalStructureImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
+ * @generated
  */
 public interface JournalStructure extends JournalStructureModel {
 	public java.lang.String getMergedXsd();

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+
 /**
  * <a href="AnnouncementsDelivery.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +32,20 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AnnouncementsDelivery table in
- * the database.
+ * This interface is a model that represents the AnnouncementsDelivery table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AnnouncementsDeliveryModel
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ * @see AnnouncementsDeliveryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ * @generated
  */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel {
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetVocabulary.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl}
- * and rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetVocabularyModel
- * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @see AssetVocabularyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @generated
  */
 public interface AssetVocabulary extends AssetVocabularyModel {
 	public java.lang.String getUserUuid()

@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.journal.service.http.JournalArticleImageServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.journal.service.http.JournalArticleImageServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.journal.service.http.JournalArticleImageServiceSoap
+ * @generated
  */
 public class JournalArticleImageSoap implements Serializable {
 	public static JournalArticleImageSoap toSoapModel(JournalArticleImage model) {

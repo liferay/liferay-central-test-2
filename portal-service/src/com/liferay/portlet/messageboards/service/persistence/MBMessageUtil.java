@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+
 /**
  * <a href="MBMessageUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    MBMessagePersistence
  * @see    MBMessagePersistenceImpl
+ * @generated
  */
 public class MBMessageUtil {
 	public static void cacheResult(
@@ -76,6 +78,18 @@ public class MBMessageUtil {
 		return getPersistence().update(mbMessage);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  mbMessage the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when mbMessage is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge) throws com.liferay.portal.SystemException {

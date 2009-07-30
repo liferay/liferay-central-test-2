@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
 /**
  * <a href="ShoppingOrderService.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,21 +37,23 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * </p>
  *
  * <p>
- * This interface defines the service. The default implementation is {@link
- * com.liferay.portlet.shopping.service.impl.ShoppingOrderServiceImpl}}. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * This interface defines the service. The default implementation is
+ * {@link
+ * com.liferay.portlet.shopping.service.impl.ShoppingOrderServiceImpl}}.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil
+ * @see    ShoppingOrderServiceUtil
+ * @generated
  */
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface ShoppingOrderService {
 	public void completeOrder(long groupId, java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,

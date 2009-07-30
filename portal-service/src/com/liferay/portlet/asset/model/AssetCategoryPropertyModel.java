@@ -36,14 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AssetCategoryProperty table in
- * the database.
+ * This interface is a model that represents the AssetCategoryProperty table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AssetCategoryProperty
  * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @generated
  */
 public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryProperty> {
 	public long getPrimaryKey();

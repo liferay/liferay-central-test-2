@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+
 /**
  * <a href="ShoppingOrderItem.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.shopping.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl} and rerun the
+ * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingOrderItemModel
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl
+ * @see ShoppingOrderItemModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl
+ * @generated
  */
 public interface ShoppingOrderItem extends ShoppingOrderItemModel {
 }

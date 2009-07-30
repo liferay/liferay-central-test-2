@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    DLFileRank
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @generated
  */
 public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public long getPrimaryKey();

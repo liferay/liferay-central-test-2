@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the MBThread table in the database.
+ * This interface is a model that represents the MBThread table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    MBThread
  * @see    com.liferay.portlet.messageboards.model.impl.MBThreadImpl
  * @see    com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
+ * @generated
  */
 public interface MBThreadModel extends BaseModel<MBThread> {
 	public long getPrimaryKey();

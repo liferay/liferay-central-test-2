@@ -27,8 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Isolation;
 import com.liferay.portal.kernel.annotation.Transactional;
 
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
 /**
  * <a href="MBThreadService.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,21 +36,23 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * </p>
  *
  * <p>
- * This interface defines the service. The default implementation is {@link
- * com.liferay.portlet.messageboards.service.impl.MBThreadServiceImpl}}. Modify
- * methods in that class and rerun ServiceBuilder to populate this class and all
- * other generated classes.
+ * This interface defines the service. The default implementation is
+ * {@link
+ * com.liferay.portlet.messageboards.service.impl.MBThreadServiceImpl}}.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
  * </p>
  *
  * <p>
- * This is a remote service. Methods of this service are expected to have
- * security checks based on the propagated JAAS credentials because this service
- * can be accessed remotely.
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.MBThreadServiceUtil
+ * @see    MBThreadServiceUtil
+ * @generated
  */
+@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
+	PortalException.class, SystemException.class})
 public interface MBThreadService {
 	public void deleteThread(long threadId)
 		throws com.liferay.portal.PortalException,

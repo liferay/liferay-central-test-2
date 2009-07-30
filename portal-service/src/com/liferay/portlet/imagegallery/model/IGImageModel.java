@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the IGImage table in the database.
+ * This interface is a model that represents the IGImage table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    IGImage
  * @see    com.liferay.portlet.imagegallery.model.impl.IGImageImpl
  * @see    com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
+ * @generated
  */
 public interface IGImageModel extends BaseModel<IGImage> {
 	public long getPrimaryKey();

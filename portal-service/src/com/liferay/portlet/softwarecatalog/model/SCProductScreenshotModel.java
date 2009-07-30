@@ -33,14 +33,15 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the SCProductScreenshot table in
- * the database.
+ * This interface is a model that represents the SCProductScreenshot table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    SCProductScreenshot
  * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
  * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @generated
  */
 public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot> {
 	public long getPrimaryKey();

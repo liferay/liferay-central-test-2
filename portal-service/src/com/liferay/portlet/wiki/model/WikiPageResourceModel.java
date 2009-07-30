@@ -41,6 +41,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    WikiPageResource
  * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
  * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
+ * @generated
  */
 public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public long getPrimaryKey();

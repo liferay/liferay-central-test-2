@@ -41,6 +41,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    AssetTagStats
  * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
+ * @generated
  */
 public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public long getPrimaryKey();

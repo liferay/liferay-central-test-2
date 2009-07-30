@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+
 /**
  * <a href="AnnouncementsEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AnnouncementsEntryModel
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
+ * @see AnnouncementsEntryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
+ * @generated
  */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {
 }

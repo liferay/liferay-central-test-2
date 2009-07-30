@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+
 /**
  * <a href="JournalArticleResource.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +32,20 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the JournalArticleResource table in
- * the database.
+ * This interface is a model that represents the JournalArticleResource table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalArticleResourceModel
- * @see    com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
+ * @see JournalArticleResourceModel
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
+ * @generated
  */
 public interface JournalArticleResource extends JournalArticleResourceModel {
 }

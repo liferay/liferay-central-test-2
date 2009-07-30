@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBDiscussion.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl} and rerun the
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBDiscussionModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
+ * @see MBDiscussionModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
+ * @generated
  */
 public interface MBDiscussion extends MBDiscussionModel {
 }

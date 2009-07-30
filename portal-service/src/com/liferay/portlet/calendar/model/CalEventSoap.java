@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.calendar.service.http.CalEventServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.calendar.service.http.CalEventServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.calendar.service.http.CalEventServiceSoap
+ * @generated
  */
 public class CalEventSoap implements Serializable {
 	public static CalEventSoap toSoapModel(CalEvent model) {

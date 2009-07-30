@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+
 /**
  * <a href="SCFrameworkVersion.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCFrameworkVersionModel
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ * @see SCFrameworkVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ * @generated
  */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {
 }

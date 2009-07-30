@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.service;
 
+
 /**
  * <a href="AssetTagLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,14 +32,16 @@ package com.liferay.portlet.asset.service;
  * </p>
  *
  * <p>
- * This class provides static methods for the {@link AssetTagLocalService} bean.
- * The static methods of this class calls the same methods of the bean instance.
- * It's convenient to be able to just write one line to call a method on a bean
- * instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * {@link AssetTagLocalService} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AssetTagLocalService
+ * @generated
  */
 public class AssetTagLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetTag addAssetTag(

@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    MBMessageFlag
  * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
  * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @generated
  */
 public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public long getPrimaryKey();

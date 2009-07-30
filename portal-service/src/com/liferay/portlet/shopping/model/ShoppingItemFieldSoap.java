@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.shopping.service.http.ShoppingItemFieldServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.shopping.service.http.ShoppingItemFieldServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.shopping.service.http.ShoppingItemFieldServiceSoap
+ * @generated
  */
 public class ShoppingItemFieldSoap implements Serializable {
 	public static ShoppingItemFieldSoap toSoapModel(ShoppingItemField model) {

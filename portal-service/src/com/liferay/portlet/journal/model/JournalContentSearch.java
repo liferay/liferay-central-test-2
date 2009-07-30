@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+
 /**
  * <a href="JournalContentSearch.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +32,20 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the JournalContentSearch table in
- * the database.
+ * This interface is a model that represents the JournalContentSearch table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.journal.model.impl.JournalContentSearchImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalContentSearchImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalContentSearchModel
- * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
+ * @see JournalContentSearchModel
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
+ * @generated
  */
 public interface JournalContentSearch extends JournalContentSearchModel {
 }

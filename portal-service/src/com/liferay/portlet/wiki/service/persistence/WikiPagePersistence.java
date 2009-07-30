@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @author Brian Wing Shun Chan
  * @see    WikiPagePersistenceImpl
  * @see    WikiPageUtil
+ * @generated
  */
 public interface WikiPagePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portlet.wiki.model.WikiPage wikiPage);
@@ -61,6 +62,18 @@ public interface WikiPagePersistence extends BasePersistence {
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  wikiPage the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when wikiPage is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portlet.wiki.model.WikiPage update(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean merge)
 		throws com.liferay.portal.SystemException;

@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    AssetCategory
  * @see    com.liferay.portlet.asset.model.impl.AssetCategoryImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
+ * @generated
  */
 public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	public long getPrimaryKey();

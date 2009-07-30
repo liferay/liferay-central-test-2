@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    ShoppingCategory
  * @see    com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
  * @see    com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
+ * @generated
  */
 public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	public long getPrimaryKey();

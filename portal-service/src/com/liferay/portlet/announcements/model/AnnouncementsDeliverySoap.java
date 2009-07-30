@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap
+ * @generated
  */
 public class AnnouncementsDeliverySoap implements Serializable {
 	public static AnnouncementsDeliverySoap toSoapModel(

@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WikiPage table in the database.
+ * This interface is a model that represents the WikiPage table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    WikiPage
  * @see    com.liferay.portlet.wiki.model.impl.WikiPageImpl
  * @see    com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @generated
  */
 public interface WikiPageModel extends BaseModel<WikiPage> {
 	public long getPrimaryKey();

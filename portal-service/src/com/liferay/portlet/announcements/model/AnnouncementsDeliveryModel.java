@@ -34,14 +34,15 @@ import com.liferay.portal.model.BaseModel;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AnnouncementsDelivery table in
- * the database.
+ * This interface is a model that represents the AnnouncementsDelivery table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AnnouncementsDelivery
  * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
  * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ * @generated
  */
 public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDelivery> {
 	public long getPrimaryKey();

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+
 /**
  * <a href="DLFileVersion.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileVersionModel
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ * @see DLFileVersionModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {
 }

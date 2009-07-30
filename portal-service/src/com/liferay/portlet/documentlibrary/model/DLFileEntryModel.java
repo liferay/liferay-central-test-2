@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    DLFileEntry
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @generated
  */
 public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public long getPrimaryKey();

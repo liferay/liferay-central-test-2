@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap
+ * @generated
  */
 public class DLFileVersionSoap implements Serializable {
 	public static DLFileVersionSoap toSoapModel(DLFileVersion model) {

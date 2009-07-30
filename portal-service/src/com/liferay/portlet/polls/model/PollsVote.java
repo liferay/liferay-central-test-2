@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.model;
 
+
 /**
  * <a href="PollsVote.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.polls.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.polls.model.impl.PollsVoteImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.polls.model.impl.PollsVoteImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PollsVoteModel
- * @see    com.liferay.portlet.polls.model.impl.PollsVoteImpl
- * @see    com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
+ * @see PollsVoteModel
+ * @see com.liferay.portlet.polls.model.impl.PollsVoteImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
+ * @generated
  */
 public interface PollsVote extends PollsVoteModel {
 	public com.liferay.portlet.polls.model.PollsChoice getChoice()

@@ -41,6 +41,7 @@ import com.liferay.portal.model.BaseModel;
  * @see    SCLicense
  * @see    com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
  * @see    com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
+ * @generated
  */
 public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public long getPrimaryKey();

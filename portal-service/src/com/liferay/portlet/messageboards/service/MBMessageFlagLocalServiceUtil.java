@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.messageboards.service;
 
+
 /**
- * <a href="MBMessageFlagLocalServiceUtil.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MBMessageFlagLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -32,14 +32,16 @@ package com.liferay.portlet.messageboards.service;
  * </p>
  *
  * <p>
- * This class provides static methods for the {@link MBMessageFlagLocalService}
- * bean. The static methods of this class calls the same methods of the bean
- * instance. It's convenient to be able to just write one line to call a method
- * on a bean instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * {@link MBMessageFlagLocalService} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    MBMessageFlagLocalService
+ * @generated
  */
 public class MBMessageFlagLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(

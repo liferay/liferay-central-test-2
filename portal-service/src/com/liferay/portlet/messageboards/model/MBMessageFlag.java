@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBMessageFlag.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl} and rerun the
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBMessageFlagModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @see MBMessageFlagModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @generated
  */
 public interface MBMessageFlag extends MBMessageFlagModel {
 }

@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    JournalFeed
  * @see    com.liferay.portlet.journal.model.impl.JournalFeedImpl
  * @see    com.liferay.portlet.journal.model.impl.JournalFeedModelImpl
+ * @generated
  */
 public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public long getPrimaryKey();

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.ratings.service;
 
+
 /**
- * <a href="RatingsStatsLocalServiceUtil.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="RatingsStatsLocalServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -32,14 +32,16 @@ package com.liferay.portlet.ratings.service;
  * </p>
  *
  * <p>
- * This class provides static methods for the {@link RatingsStatsLocalService}
- * bean. The static methods of this class calls the same methods of the bean
- * instance. It's convenient to be able to just write one line to call a method
- * on a bean instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * {@link RatingsStatsLocalService} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    RatingsStatsLocalService
+ * @generated
  */
 public class RatingsStatsLocalServiceUtil {
 	public static com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(

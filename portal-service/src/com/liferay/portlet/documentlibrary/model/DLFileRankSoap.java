@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap
+ * @generated
  */
 public class DLFileRankSoap implements Serializable {
 	public static DLFileRankSoap toSoapModel(DLFileRank model) {

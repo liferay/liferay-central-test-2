@@ -44,6 +44,7 @@ import java.util.Map;
  * @see    PollsChoice
  * @see    com.liferay.portlet.polls.model.impl.PollsChoiceImpl
  * @see    com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
+ * @generated
  */
 public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public long getPrimaryKey();

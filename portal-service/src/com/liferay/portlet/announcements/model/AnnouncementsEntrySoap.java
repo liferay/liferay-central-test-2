@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceSoap
+ * @generated
  */
 public class AnnouncementsEntrySoap implements Serializable {
 	public static AnnouncementsEntrySoap toSoapModel(AnnouncementsEntry model) {

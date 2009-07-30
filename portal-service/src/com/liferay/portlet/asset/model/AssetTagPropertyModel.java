@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    AssetTagProperty
  * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl
  * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl
+ * @generated
  */
 public interface AssetTagPropertyModel extends BaseModel<AssetTagProperty> {
 	public long getPrimaryKey();

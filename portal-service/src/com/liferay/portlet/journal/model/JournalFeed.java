@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.model;
 
+
 /**
  * <a href="JournalFeed.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.journal.model.impl.JournalFeedImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalFeedImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalFeedModel
- * @see    com.liferay.portlet.journal.model.impl.JournalFeedImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalFeedModelImpl
+ * @see JournalFeedModel
+ * @see com.liferay.portlet.journal.model.impl.JournalFeedImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalFeedModelImpl
+ * @generated
  */
 public interface JournalFeed extends JournalFeedModel {
 }

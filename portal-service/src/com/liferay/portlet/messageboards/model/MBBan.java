@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+
 /**
  * <a href="MBBan.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,18 +32,20 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the MBBan table in the database.
+ * This interface is a model that represents the MBBan table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBBanImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBBanImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBBanModel
- * @see    com.liferay.portlet.messageboards.model.impl.MBBanImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
+ * @see MBBanModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
+ * @generated
  */
 public interface MBBan extends MBBanModel {
 }

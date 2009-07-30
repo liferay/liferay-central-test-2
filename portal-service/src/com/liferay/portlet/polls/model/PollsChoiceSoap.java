@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.polls.service.http.PollsChoiceServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.polls.service.http.PollsChoiceServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.polls.service.http.PollsChoiceServiceSoap
+ * @generated
  */
 public class PollsChoiceSoap implements Serializable {
 	public static PollsChoiceSoap toSoapModel(PollsChoice model) {

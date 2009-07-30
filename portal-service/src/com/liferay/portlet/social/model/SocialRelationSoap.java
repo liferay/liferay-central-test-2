@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.social.service.http.SocialRelationServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.social.service.http.SocialRelationServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.social.service.http.SocialRelationServiceSoap
+ * @generated
  */
 public class SocialRelationSoap implements Serializable {
 	public static SocialRelationSoap toSoapModel(SocialRelation model) {

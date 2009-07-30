@@ -36,13 +36,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the DLFolder table in the database.
+ * This interface is a model that represents the DLFolder table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    DLFolder
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
  * @see    com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
+ * @generated
  */
 public interface DLFolderModel extends BaseModel<DLFolder> {
 	public long getPrimaryKey();

@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    RatingsEntry
  * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
  * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ * @generated
  */
 public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public long getPrimaryKey();

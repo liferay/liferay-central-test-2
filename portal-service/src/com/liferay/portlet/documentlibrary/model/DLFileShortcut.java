@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+
 /**
  * <a href="DLFileShortcut.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileShortcutModel
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
+ * @see DLFileShortcutModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
+ * @generated
  */
 public interface DLFileShortcut extends DLFileShortcutModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();

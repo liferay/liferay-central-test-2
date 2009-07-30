@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap
+ * @generated
  */
 public class AnnouncementsFlagSoap implements Serializable {
 	public static AnnouncementsFlagSoap toSoapModel(AnnouncementsFlag model) {

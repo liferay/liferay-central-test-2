@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceSoap
+ * @generated
  */
 public class SCProductVersionSoap implements Serializable {
 	public static SCProductVersionSoap toSoapModel(SCProductVersion model) {

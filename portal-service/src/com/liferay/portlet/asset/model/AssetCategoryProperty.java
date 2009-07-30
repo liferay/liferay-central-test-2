@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.asset.model;
 
+
 /**
  * <a href="AssetCategoryProperty.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +32,20 @@ package com.liferay.portlet.asset.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AssetCategoryProperty table in
- * the database.
+ * This interface is a model that represents the AssetCategoryProperty table in the
+ * database.
  * </p>
  *
  * <p>
- * Customize {@link
- * com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl} and rerun the
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl} and rerun the
  * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetCategoryPropertyModel
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @see AssetCategoryPropertyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @generated
  */
 public interface AssetCategoryProperty extends AssetCategoryPropertyModel {
 }

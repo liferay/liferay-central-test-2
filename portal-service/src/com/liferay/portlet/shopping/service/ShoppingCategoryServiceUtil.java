@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service;
 
+
 /**
  * <a href="ShoppingCategoryServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,14 +32,16 @@ package com.liferay.portlet.shopping.service;
  * </p>
  *
  * <p>
- * This class provides static methods for the {@link ShoppingCategoryService}
- * bean. The static methods of this class calls the same methods of the bean
- * instance. It's convenient to be able to just write one line to call a method
- * on a bean instead of writing a lookup call and a method call.
+ * This class provides static methods for the
+ * {@link ShoppingCategoryService} bean. The static methods of
+ * this class calls the same methods of the bean instance. It's convenient to be
+ * able to just write one line to call a method on a bean instead of writing a
+ * lookup call and a method call.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    ShoppingCategoryService
+ * @generated
  */
 public class ShoppingCategoryServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(

@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portlet.messageboards.service.http.MBMailingListServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portlet.messageboards.service.http.MBMailingListServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portlet.messageboards.service.http.MBMailingListServiceSoap
+ * @generated
  */
 public class MBMailingListSoap implements Serializable {
 	public static MBMailingListSoap toSoapModel(MBMailingList model) {
