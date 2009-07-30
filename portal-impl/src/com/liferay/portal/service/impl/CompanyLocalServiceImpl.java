@@ -379,6 +379,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
+	public void deleteLogo(long companyId)
+		throws PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		long logoId = company.getLogoId();
+
+		if (logoId > 0) {
+			company.setLogoId(0);
+
+			companyPersistence.update(company, false);
+
+			imageLocalService.deleteImage(logoId);
+		}
+	}
+
 	public List<Company> getCompanies() throws SystemException {
 		return companyPersistence.findAll();
 	}

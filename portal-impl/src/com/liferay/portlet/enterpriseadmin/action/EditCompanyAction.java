@@ -160,6 +160,12 @@ public class EditCompanyAction extends PortletAction {
 			actionRequest,
 			"settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")");
 
+		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
+
+		if (deleteLogo) {
+			CompanyServiceUtil.deleteLogo(company.getCompanyId());
+		}
+
 		CompanyServiceUtil.updateDisplay(
 			company.getCompanyId(), languageId, timeZoneId);
 

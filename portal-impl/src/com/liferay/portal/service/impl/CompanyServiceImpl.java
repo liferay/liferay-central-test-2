@@ -55,6 +55,18 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			webId, virtualHost, mx, shardName, system);
 	}
 
+	public void deleteLogo(long companyId)
+		throws PortalException, SystemException {
+
+		if (!roleLocalService.hasUserRole(
+				getUserId(), companyId, RoleConstants.ADMINISTRATOR, true)) {
+
+			throw new PrincipalException();
+		}
+
+		companyLocalService.deleteLogo(companyId);
+	}
+
 	public Company getCompanyById(long companyId)
 		throws PortalException, SystemException {
 
