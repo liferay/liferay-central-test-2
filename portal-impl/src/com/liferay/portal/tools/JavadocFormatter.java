@@ -90,8 +90,7 @@ public class JavadocFormatter {
 		ds.setBasedir(_basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\classes\\**", "**\\portal-client\\**",
-				"**\\portal-web\\**\\*Test.java"
+				"**\\classes\\**", "**\\portal-client\\**"
 			});
 
 		List<String> includes = new ArrayList<String>();
@@ -221,7 +220,8 @@ public class JavadocFormatter {
 			maxNameIndent += " ";
 		}
 
-		maxNameIndent = StringUtil.replace(maxNameIndent, "    ", "\t");
+		maxNameIndent = StringUtil.replace(
+			maxNameIndent, StringPool.FOUR_SPACES, "\t");
 
 		for (String name : names) {
 			List<Element> elements = parentElement.elements(name);

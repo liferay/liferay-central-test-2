@@ -319,9 +319,32 @@ public class ServiceBuilder {
 
 		Convention convention = Convention.getInstance();
 
-		String classMask =
-			"/**\n" +
-			" * <a href=\"$fileName$.html\"><b><i>View Source</i></b></a>\n" +
+		String classMask = "/**\n";
+
+		String viewSourceHREF =
+			" * <a href=\"" + file.getName() +
+				".java.html\"><b><i>View Source</i></b></a>\n";
+
+		if (viewSourceHREF.length() > 80) {
+			int x = viewSourceHREF.lastIndexOf("<", 80);
+			int y = viewSourceHREF.lastIndexOf(" ", 80);
+
+			int start = x;
+			int end = x;
+
+			if (x < y) {
+				start = y;
+				end = y + 1;
+			}
+
+			viewSourceHREF =
+				viewSourceHREF.substring(0, start) + "\n * " +
+					viewSourceHREF.substring(end);
+		}
+
+		classMask += viewSourceHREF;
+
+		classMask +=
 			" *\n" +
 			" * @author $author$\n" +
 			"*/";
