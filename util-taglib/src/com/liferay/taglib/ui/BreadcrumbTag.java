@@ -52,10 +52,10 @@ public class BreadcrumbTag extends IncludeTag {
 	}
 
 	public static void doTag(
-			int displayStyle, boolean showGuestGroup,
-			boolean showParentGroups, boolean showLayout,
-			boolean showPortletBreadcrumb, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
+			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
+			boolean showLayout, boolean showPortletBreadcrumb,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
 		doTag(

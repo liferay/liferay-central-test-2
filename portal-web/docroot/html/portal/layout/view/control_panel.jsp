@@ -82,7 +82,6 @@ if (Validator.isNotNull(ppid)) {
 	}
 	else if (category.equals(PortletCategoryKeys.MY)) {
 		panelCategory = "panel-manage-my";
-
 		categoryTitle = HtmlUtil.escape(user.getFullName());
 	}
 	else if (category.equals(PortletCategoryKeys.PORTAL)) {
@@ -360,6 +359,7 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 	}
 	else {
 		String portletTitle = PortalUtil.getPortletTitle(ppid, company.getCompanyId(), locale);
+
 		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.ACTION_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
