@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="WebsiteUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebsitePersistence
+ * @see    WebsitePersistenceImpl
+ */
 public class WebsiteUtil {
 	public static void cacheResult(com.liferay.portal.model.Website website) {
 		getPersistence().cacheResult(website);
@@ -52,6 +64,9 @@ public class WebsiteUtil {
 		return getPersistence().remove(website);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Website, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {

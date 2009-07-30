@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetEntrySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.asset.service.http.AssetEntryServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.asset.service.http.AssetEntryServiceSoap
+ */
 public class AssetEntrySoap implements Serializable {
 	public static AssetEntrySoap toSoapModel(AssetEntry model) {
 		AssetEntrySoap soapModel = new AssetEntrySoap();

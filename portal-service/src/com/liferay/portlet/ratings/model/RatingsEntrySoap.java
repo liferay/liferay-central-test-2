@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="RatingsEntrySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.ratings.service.http.RatingsEntryServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.ratings.service.http.RatingsEntryServiceSoap
+ */
 public class RatingsEntrySoap implements Serializable {
 	public static RatingsEntrySoap toSoapModel(RatingsEntry model) {
 		RatingsEntrySoap soapModel = new RatingsEntrySoap();

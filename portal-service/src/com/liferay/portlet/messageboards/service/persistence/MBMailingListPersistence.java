@@ -24,6 +24,18 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="MBMailingListPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMailingListPersistenceImpl
+ * @see    MBMailingListUtil
+ */
 public interface MBMailingListPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList);
@@ -45,6 +57,9 @@ public interface MBMailingListPersistence extends BasePersistence {
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MBMailingList, boolean merge)}.
+	 */
 	public com.liferay.portlet.messageboards.model.MBMailingList update(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
 		throws com.liferay.portal.SystemException;

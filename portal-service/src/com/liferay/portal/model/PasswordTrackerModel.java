@@ -26,6 +26,24 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="PasswordTrackerModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PasswordTracker table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordTracker
+ * @see    com.liferay.portal.model.impl.PasswordTrackerImpl
+ * @see    com.liferay.portal.model.impl.PasswordTrackerModelImpl
+ */
 public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public long getPrimaryKey();
 

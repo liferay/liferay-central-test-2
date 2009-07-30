@@ -22,5 +22,28 @@
 
 package com.liferay.portlet.blogs.model;
 
+/**
+ * <a href="BlogsStatsUser.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the BlogsStatsUser table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BlogsStatsUserModel
+ * @see    com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
+ * @see    com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
+ */
 public interface BlogsStatsUser extends BlogsStatsUserModel {
 }

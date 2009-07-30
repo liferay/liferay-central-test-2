@@ -22,6 +22,23 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="CountryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Country table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Country
+ * @see    com.liferay.portal.model.impl.CountryImpl
+ * @see    com.liferay.portal.model.impl.CountryModelImpl
+ */
 public interface CountryModel extends BaseModel<Country> {
 	public long getPrimaryKey();
 

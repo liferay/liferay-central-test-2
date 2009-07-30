@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="UserUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserPersistence
+ * @see    UserPersistenceImpl
+ */
 public class UserUtil {
 	public static void cacheResult(com.liferay.portal.model.User user) {
 		getPersistence().cacheResult(user);
@@ -52,6 +64,9 @@ public class UserUtil {
 		return getPersistence().remove(user);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(User, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {

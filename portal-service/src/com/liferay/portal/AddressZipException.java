@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="AddressZipException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddressZipException extends PortalException {
 
 	public AddressZipException() {

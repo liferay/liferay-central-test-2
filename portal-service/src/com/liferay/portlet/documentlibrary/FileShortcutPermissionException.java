@@ -24,6 +24,12 @@ package com.liferay.portlet.documentlibrary;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="FileShortcutPermissionException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class FileShortcutPermissionException extends PortalException {
 
 	public FileShortcutPermissionException() {

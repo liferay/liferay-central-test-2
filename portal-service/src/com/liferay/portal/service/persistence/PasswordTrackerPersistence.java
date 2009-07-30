@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PasswordTrackerPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordTrackerPersistenceImpl
+ * @see    PasswordTrackerUtil
+ */
 public interface PasswordTrackerPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.PasswordTracker passwordTracker);
@@ -43,6 +55,9 @@ public interface PasswordTrackerPersistence extends BasePersistence {
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(PasswordTracker, boolean merge)}.
+	 */
 	public com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;

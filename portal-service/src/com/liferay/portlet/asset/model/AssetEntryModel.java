@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="AssetEntryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetEntry table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetEntry
+ * @see    com.liferay.portlet.asset.model.impl.AssetEntryImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ */
 public interface AssetEntryModel extends BaseModel<AssetEntry> {
 	public long getPrimaryKey();
 

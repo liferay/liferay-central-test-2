@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
+/**
+ * <a href="OrgGroupRolePK.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable {
 	public long organizationId;
 	public long groupId;

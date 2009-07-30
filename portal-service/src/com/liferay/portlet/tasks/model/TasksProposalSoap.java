@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="TasksProposalSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.tasks.service.http.TasksProposalServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.tasks.service.http.TasksProposalServiceSoap
+ */
 public class TasksProposalSoap implements Serializable {
 	public static TasksProposalSoap toSoapModel(TasksProposal model) {
 		TasksProposalSoap soapModel = new TasksProposalSoap();

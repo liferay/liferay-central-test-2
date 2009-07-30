@@ -24,6 +24,11 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
+/**
+ * <a href="PortletPreferencesIds.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletPreferencesIds implements Serializable {
 
 	public PortletPreferencesIds() {

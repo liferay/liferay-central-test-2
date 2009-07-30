@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="RemoteExportException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class RemoteExportException extends PortalException {
 
 	public static final int BAD_CONNECTION = 1;

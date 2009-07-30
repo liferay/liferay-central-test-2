@@ -29,6 +29,24 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * <a href="PollsQuestionModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PollsQuestion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsQuestion
+ * @see    com.liferay.portlet.polls.model.impl.PollsQuestionImpl
+ * @see    com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
+ */
 public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	public long getPrimaryKey();
 

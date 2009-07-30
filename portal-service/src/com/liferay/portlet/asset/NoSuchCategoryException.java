@@ -24,6 +24,11 @@ package com.liferay.portlet.asset;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="NoSuchCategoryException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchCategoryException extends PortalException {
 
 	public NoSuchCategoryException() {

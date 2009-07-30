@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+/**
+ * <a href="ExpandoValueUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoValuePersistence
+ * @see    ExpandoValuePersistenceImpl
+ */
 public class ExpandoValueUtil {
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue) {
@@ -55,6 +67,9 @@ public class ExpandoValueUtil {
 		return getPersistence().remove(expandoValue);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoValue, boolean merge)}.
+	 */
 	public static com.liferay.portlet.expando.model.ExpandoValue update(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {

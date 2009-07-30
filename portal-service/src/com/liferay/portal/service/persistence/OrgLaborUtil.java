@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="OrgLaborUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgLaborPersistence
+ * @see    OrgLaborPersistenceImpl
+ */
 public class OrgLaborUtil {
 	public static void cacheResult(com.liferay.portal.model.OrgLabor orgLabor) {
 		getPersistence().cacheResult(orgLabor);
@@ -52,6 +64,9 @@ public class OrgLaborUtil {
 		return getPersistence().remove(orgLabor);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgLabor, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {

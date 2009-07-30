@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ResourceCodePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceCodePersistenceImpl
+ * @see    ResourceCodeUtil
+ */
 public interface ResourceCodePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.ResourceCode resourceCode);
 
@@ -40,6 +52,9 @@ public interface ResourceCodePersistence extends BasePersistence {
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(ResourceCode, boolean merge)}.
+	 */
 	public com.liferay.portal.model.ResourceCode update(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;

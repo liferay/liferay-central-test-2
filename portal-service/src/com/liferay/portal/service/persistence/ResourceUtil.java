@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ResourceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourcePersistence
+ * @see    ResourcePersistenceImpl
+ */
 public class ResourceUtil {
 	public static void cacheResult(com.liferay.portal.model.Resource resource) {
 		getPersistence().cacheResult(resource);
@@ -52,6 +64,9 @@ public class ResourceUtil {
 		return getPersistence().remove(resource);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Resource, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {

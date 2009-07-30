@@ -24,6 +24,11 @@ package com.liferay.portlet.shopping.model;
 
 import java.io.Serializable;
 
+/**
+ * <a href="ShoppingCartItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ShoppingCartItem
 	extends Comparable<ShoppingCartItem>, Serializable {
 

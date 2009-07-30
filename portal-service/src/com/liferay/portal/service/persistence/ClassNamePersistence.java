@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ClassNamePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ClassNamePersistenceImpl
+ * @see    ClassNameUtil
+ */
 public interface ClassNamePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.ClassName className);
 
@@ -40,6 +52,9 @@ public interface ClassNamePersistence extends BasePersistence {
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(ClassName, boolean merge)}.
+	 */
 	public com.liferay.portal.model.ClassName update(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;

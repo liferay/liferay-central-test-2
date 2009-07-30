@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+/**
+ * <a href="TasksProposalFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface TasksProposalFinder {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;

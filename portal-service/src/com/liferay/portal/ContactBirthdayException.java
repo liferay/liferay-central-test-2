@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="ContactBirthdayException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ContactBirthdayException extends PortalException {
 
 	public ContactBirthdayException() {

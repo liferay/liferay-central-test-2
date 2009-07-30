@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+/**
+ * <a href="ShoppingCouponUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCouponPersistence
+ * @see    ShoppingCouponPersistenceImpl
+ */
 public class ShoppingCouponUtil {
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon) {
@@ -55,6 +67,9 @@ public class ShoppingCouponUtil {
 		return getPersistence().remove(shoppingCoupon);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingCoupon, boolean merge)}.
+	 */
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {

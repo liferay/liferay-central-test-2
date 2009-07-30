@@ -33,6 +33,11 @@ import java.util.List;
 import javax.mail.Session;
 
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
+/**
+ * <a href="MailService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface MailService {
 
 	public void addForward(

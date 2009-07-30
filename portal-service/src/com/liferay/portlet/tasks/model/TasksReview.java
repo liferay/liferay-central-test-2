@@ -22,5 +22,28 @@
 
 package com.liferay.portlet.tasks.model;
 
+/**
+ * <a href="TasksReview.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the TasksReview table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.tasks.model.impl.TasksReviewImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksReviewModel
+ * @see    com.liferay.portlet.tasks.model.impl.TasksReviewImpl
+ * @see    com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
+ */
 public interface TasksReview extends TasksReviewModel {
 }

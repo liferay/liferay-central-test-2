@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+/**
+ * <a href="JournalStructureUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalStructurePersistence
+ * @see    JournalStructurePersistenceImpl
+ */
 public class JournalStructureUtil {
 	public static void cacheResult(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure) {
@@ -55,6 +67,9 @@ public class JournalStructureUtil {
 		return getPersistence().remove(journalStructure);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(JournalStructure, boolean merge)}.
+	 */
 	public static com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="CountryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CountryPersistence
+ * @see    CountryPersistenceImpl
+ */
 public class CountryUtil {
 	public static void cacheResult(com.liferay.portal.model.Country country) {
 		getPersistence().cacheResult(country);
@@ -52,6 +64,9 @@ public class CountryUtil {
 		return getPersistence().remove(country);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Country, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country)
 		throws com.liferay.portal.SystemException {

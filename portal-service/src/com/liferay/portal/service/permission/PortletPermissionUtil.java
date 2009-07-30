@@ -27,6 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="PortletPermissionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletPermissionUtil {
 
 	public static void check(

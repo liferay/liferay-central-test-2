@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+/**
+ * <a href="ShoppingItemFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ShoppingItemFinder {
 	public int countByCategoryIds(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;

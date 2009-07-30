@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+/**
+ * <a href="PollsChoiceFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PollsChoiceFinderUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice findByUuid_G(
 		java.lang.String uuid, long groupId)

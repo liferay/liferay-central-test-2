@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+/**
+ * <a href="AssetCategoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetCategoryPersistence
+ * @see    AssetCategoryPersistenceImpl
+ */
 public class AssetCategoryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory) {
@@ -55,6 +67,9 @@ public class AssetCategoryUtil {
 		return getPersistence().remove(assetCategory);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AssetCategory, boolean merge)}.
+	 */
 	public static com.liferay.portlet.asset.model.AssetCategory update(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+/**
+ * <a href="WikiNodeUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiNodePersistence
+ * @see    WikiNodePersistenceImpl
+ */
 public class WikiNodeUtil {
 	public static void cacheResult(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode) {
@@ -53,6 +65,9 @@ public class WikiNodeUtil {
 		return getPersistence().remove(wikiNode);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(WikiNode, boolean merge)}.
+	 */
 	public static com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {

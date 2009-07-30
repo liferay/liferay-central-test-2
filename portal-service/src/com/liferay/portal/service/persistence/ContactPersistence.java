@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ContactPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ContactPersistenceImpl
+ * @see    ContactUtil
+ */
 public interface ContactPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Contact contact);
 
@@ -40,6 +52,9 @@ public interface ContactPersistence extends BasePersistence {
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Contact, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ListTypeUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ListTypePersistence
+ * @see    ListTypePersistenceImpl
+ */
 public class ListTypeUtil {
 	public static void cacheResult(com.liferay.portal.model.ListType listType) {
 		getPersistence().cacheResult(listType);
@@ -52,6 +64,9 @@ public class ListTypeUtil {
 		return getPersistence().remove(listType);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ListType, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.ListType update(
 		com.liferay.portal.model.ListType listType)
 		throws com.liferay.portal.SystemException {

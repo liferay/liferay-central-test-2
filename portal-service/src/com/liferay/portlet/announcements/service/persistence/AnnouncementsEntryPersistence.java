@@ -24,6 +24,19 @@ package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="AnnouncementsEntryPersistence.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsEntryPersistenceImpl
+ * @see    AnnouncementsEntryUtil
+ */
 public interface AnnouncementsEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry);
@@ -45,6 +58,9 @@ public interface AnnouncementsEntryPersistence extends BasePersistence {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(AnnouncementsEntry, boolean merge)}.
+	 */
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry update(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException;

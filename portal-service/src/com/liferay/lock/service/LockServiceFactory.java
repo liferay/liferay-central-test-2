@@ -24,6 +24,11 @@ package com.liferay.lock.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
+/**
+ * <a href="LockServiceFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LockServiceFactory {
 
 	public static LockService getService() {

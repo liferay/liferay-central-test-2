@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+/**
+ * <a href="AnnouncementsEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsEntryPersistence
+ * @see    AnnouncementsEntryPersistenceImpl
+ */
 public class AnnouncementsEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
@@ -55,6 +67,9 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().remove(announcementsEntry);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AnnouncementsEntry, boolean merge)}.
+	 */
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry update(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException {

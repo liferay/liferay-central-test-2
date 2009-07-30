@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+/**
+ * <a href="SocialActivityUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SocialActivityPersistence
+ * @see    SocialActivityPersistenceImpl
+ */
 public class SocialActivityUtil {
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialActivity socialActivity) {
@@ -55,6 +67,9 @@ public class SocialActivityUtil {
 		return getPersistence().remove(socialActivity);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SocialActivity, boolean merge)}.
+	 */
 	public static com.liferay.portlet.social.model.SocialActivity update(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="LayoutUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutPersistence
+ * @see    LayoutPersistenceImpl
+ */
 public class LayoutUtil {
 	public static void cacheResult(com.liferay.portal.model.Layout layout) {
 		getPersistence().cacheResult(layout);
@@ -52,6 +64,9 @@ public class LayoutUtil {
 		return getPersistence().remove(layout);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Layout, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Layout update(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {

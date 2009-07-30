@@ -22,5 +22,29 @@
 
 package com.liferay.portlet.journal.model;
 
+/**
+ * <a href="JournalArticleResource.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalArticleResource table in
+ * the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl} and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalArticleResourceModel
+ * @see    com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
+ * @see    com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
+ */
 public interface JournalArticleResource extends JournalArticleResourceModel {
 }

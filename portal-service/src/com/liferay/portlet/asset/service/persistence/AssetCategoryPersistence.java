@@ -24,6 +24,18 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="AssetCategoryPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetCategoryPersistenceImpl
+ * @see    AssetCategoryUtil
+ */
 public interface AssetCategoryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory);
@@ -43,6 +55,9 @@ public interface AssetCategoryPersistence extends BasePersistence {
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(AssetCategory, boolean merge)}.
+	 */
 	public com.liferay.portlet.asset.model.AssetCategory update(
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
 		throws com.liferay.portal.SystemException;

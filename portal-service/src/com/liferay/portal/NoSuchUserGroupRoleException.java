@@ -22,6 +22,12 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="NoSuchUserGroupRoleException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchUserGroupRoleException extends PortalException {
 
 	public NoSuchUserGroupRoleException() {

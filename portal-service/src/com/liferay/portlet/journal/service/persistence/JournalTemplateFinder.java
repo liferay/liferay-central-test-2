@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+/**
+ * <a href="JournalTemplateFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface JournalTemplateFinder {
 	public int countByKeywords(long companyId, long groupId,
 		java.lang.String keywords, java.lang.String structureId,

@@ -26,6 +26,23 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="ContactModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Contact_ table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Contact
+ * @see    com.liferay.portal.model.impl.ContactImpl
+ * @see    com.liferay.portal.model.impl.ContactModelImpl
+ */
 public interface ContactModel extends BaseModel<Contact> {
 	public long getPrimaryKey();
 

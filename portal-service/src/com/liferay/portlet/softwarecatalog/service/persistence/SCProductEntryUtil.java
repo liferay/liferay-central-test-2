@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+/**
+ * <a href="SCProductEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductEntryPersistence
+ * @see    SCProductEntryPersistenceImpl
+ */
 public class SCProductEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry) {
@@ -55,6 +67,9 @@ public class SCProductEntryUtil {
 		return getPersistence().remove(scProductEntry);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCProductEntry, boolean merge)}.
+	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ReleasePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ReleasePersistenceImpl
+ * @see    ReleaseUtil
+ */
 public interface ReleasePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Release release);
 
@@ -40,6 +52,9 @@ public interface ReleasePersistence extends BasePersistence {
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Release, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Release update(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;

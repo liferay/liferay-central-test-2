@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+/**
+ * <a href="PollsVoteUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsVotePersistence
+ * @see    PollsVotePersistenceImpl
+ */
 public class PollsVoteUtil {
 	public static void cacheResult(
 		com.liferay.portlet.polls.model.PollsVote pollsVote) {
@@ -53,6 +65,9 @@ public class PollsVoteUtil {
 		return getPersistence().remove(pollsVote);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PollsVote, boolean merge)}.
+	 */
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {

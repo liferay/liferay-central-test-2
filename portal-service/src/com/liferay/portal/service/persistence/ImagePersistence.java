@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ImagePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ImagePersistenceImpl
+ * @see    ImageUtil
+ */
 public interface ImagePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Image image);
 
@@ -40,6 +52,9 @@ public interface ImagePersistence extends BasePersistence {
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Image, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;

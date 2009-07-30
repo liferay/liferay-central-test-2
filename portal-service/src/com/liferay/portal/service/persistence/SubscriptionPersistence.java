@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="SubscriptionPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SubscriptionPersistenceImpl
+ * @see    SubscriptionUtil
+ */
 public interface SubscriptionPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Subscription subscription);
 
@@ -40,6 +52,9 @@ public interface SubscriptionPersistence extends BasePersistence {
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Subscription, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Subscription update(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;

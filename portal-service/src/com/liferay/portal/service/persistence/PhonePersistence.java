@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PhonePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PhonePersistenceImpl
+ * @see    PhoneUtil
+ */
 public interface PhonePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Phone phone);
 
@@ -40,6 +52,9 @@ public interface PhonePersistence extends BasePersistence {
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Phone, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;

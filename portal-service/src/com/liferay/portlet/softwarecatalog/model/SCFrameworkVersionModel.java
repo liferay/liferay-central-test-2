@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="SCFrameworkVersionModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCFrameworkVersion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCFrameworkVersion
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ */
 public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	public long getPrimaryKey();
 

@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBBanSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.messageboards.service.http.MBBanServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.messageboards.service.http.MBBanServiceSoap
+ */
 public class MBBanSoap implements Serializable {
 	public static MBBanSoap toSoapModel(MBBan model) {
 		MBBanSoap soapModel = new MBBanSoap();

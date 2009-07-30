@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="BaseModelExtension.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public interface BaseModelExtension<T> extends BaseModel<T> {
 
 	public BaseModelExtension<T> extend(BaseModel<T> baseModel);

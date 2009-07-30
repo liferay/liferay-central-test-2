@@ -25,6 +25,11 @@ package com.liferay.portlet.softwarecatalog.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 
+/**
+ * <a href="ProductEntryNameComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ProductEntryNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "name ASC";

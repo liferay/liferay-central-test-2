@@ -24,6 +24,18 @@ package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="TasksProposalPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksProposalPersistenceImpl
+ * @see    TasksProposalUtil
+ */
 public interface TasksProposalPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal);
@@ -43,6 +55,9 @@ public interface TasksProposalPersistence extends BasePersistence {
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(TasksProposal, boolean merge)}.
+	 */
 	public com.liferay.portlet.tasks.model.TasksProposal update(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;

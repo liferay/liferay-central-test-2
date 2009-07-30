@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="RatingsEntryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the RatingsEntry table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsEntry
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ */
 public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public long getPrimaryKey();
 

@@ -24,6 +24,12 @@ package com.liferay.portal.lar;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="InvokerPortletDataHandler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Raymond Augé
+ */
 public class InvokerPortletDataHandler implements PortletDataHandler {
 
 	public InvokerPortletDataHandler(

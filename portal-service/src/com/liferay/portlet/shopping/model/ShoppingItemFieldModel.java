@@ -24,6 +24,24 @@ package com.liferay.portlet.shopping.model;
 
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="ShoppingItemFieldModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ShoppingItemField table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingItemField
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ */
 public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public long getPrimaryKey();
 

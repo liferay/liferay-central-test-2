@@ -25,6 +25,24 @@ package com.liferay.portlet.announcements.model;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="AnnouncementsDeliveryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AnnouncementsDelivery table in
+ * the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsDelivery
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ */
 public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDelivery> {
 	public long getPrimaryKey();
 

@@ -27,6 +27,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="BrowserTrackerSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.BrowserTrackerServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.BrowserTrackerServiceSoap
+ */
 public class BrowserTrackerSoap implements Serializable {
 	public static BrowserTrackerSoap toSoapModel(BrowserTracker model) {
 		BrowserTrackerSoap soapModel = new BrowserTrackerSoap();

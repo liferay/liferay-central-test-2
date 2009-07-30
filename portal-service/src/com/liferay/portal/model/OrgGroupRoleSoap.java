@@ -29,6 +29,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="OrgGroupRoleSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.OrgGroupRoleServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.OrgGroupRoleServiceSoap
+ */
 public class OrgGroupRoleSoap implements Serializable {
 	public static OrgGroupRoleSoap toSoapModel(OrgGroupRole model) {
 		OrgGroupRoleSoap soapModel = new OrgGroupRoleSoap();

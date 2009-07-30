@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+/**
+ * <a href="RatingsStatsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsStatsPersistence
+ * @see    RatingsStatsPersistenceImpl
+ */
 public class RatingsStatsUtil {
 	public static void cacheResult(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats) {
@@ -55,6 +67,9 @@ public class RatingsStatsUtil {
 		return getPersistence().remove(ratingsStats);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(RatingsStats, boolean merge)}.
+	 */
 	public static com.liferay.portlet.ratings.model.RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException {

@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="ShoppingCategorySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.shopping.service.http.ShoppingCategoryServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.shopping.service.http.ShoppingCategoryServiceSoap
+ */
 public class ShoppingCategorySoap implements Serializable {
 	public static ShoppingCategorySoap toSoapModel(ShoppingCategory model) {
 		ShoppingCategorySoap soapModel = new ShoppingCategorySoap();

@@ -27,6 +27,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ExpandoColumnSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.expando.service.http.ExpandoColumnServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.expando.service.http.ExpandoColumnServiceSoap
+ */
 public class ExpandoColumnSoap implements Serializable {
 	public static ExpandoColumnSoap toSoapModel(ExpandoColumn model) {
 		ExpandoColumnSoap soapModel = new ExpandoColumnSoap();

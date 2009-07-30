@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ResourceActionPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceActionPersistenceImpl
+ * @see    ResourceActionUtil
+ */
 public interface ResourceActionPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.ResourceAction resourceAction);
@@ -41,6 +53,9 @@ public interface ResourceActionPersistence extends BasePersistence {
 		com.liferay.portal.model.ResourceAction resourceAction)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(ResourceAction, boolean merge)}.
+	 */
 	public com.liferay.portal.model.ResourceAction update(
 		com.liferay.portal.model.ResourceAction resourceAction)
 		throws com.liferay.portal.SystemException;

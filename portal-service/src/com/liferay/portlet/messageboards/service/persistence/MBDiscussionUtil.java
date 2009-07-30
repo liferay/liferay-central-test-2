@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+/**
+ * <a href="MBDiscussionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBDiscussionPersistence
+ * @see    MBDiscussionPersistenceImpl
+ */
 public class MBDiscussionUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion) {
@@ -55,6 +67,9 @@ public class MBDiscussionUtil {
 		return getPersistence().remove(mbDiscussion);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBDiscussion, boolean merge)}.
+	 */
 	public static com.liferay.portlet.messageboards.model.MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.SystemException {

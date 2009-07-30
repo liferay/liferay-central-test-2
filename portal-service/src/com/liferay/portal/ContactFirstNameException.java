@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="ContactFirstNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ContactFirstNameException extends PortalException {
 
 	public ContactFirstNameException() {

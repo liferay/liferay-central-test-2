@@ -22,6 +22,30 @@
 
 package com.liferay.portlet.shopping.model;
 
+/**
+ * <a href="ShoppingItemField.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ShoppingItemField table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingItemFieldModel
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ */
 public interface ShoppingItemField extends ShoppingItemFieldModel {
 	public void setValues(java.lang.String values);
 

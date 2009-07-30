@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="PwdEncryptorException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ */
 public class PwdEncryptorException extends PortalException {
 
 	public PwdEncryptorException() {

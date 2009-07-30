@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="AddressPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AddressPersistenceImpl
+ * @see    AddressUtil
+ */
 public interface AddressPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Address address);
 
@@ -40,6 +52,9 @@ public interface AddressPersistence extends BasePersistence {
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Address, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;

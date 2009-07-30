@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="GroupConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class GroupConstants {
 
 	public static final long DEFAULT_PARENT_GROUP_ID = 0;

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="WebDAVPropsPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebDAVPropsPersistenceImpl
+ * @see    WebDAVPropsUtil
+ */
 public interface WebDAVPropsPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.WebDAVProps webDAVProps);
 
@@ -40,6 +52,9 @@ public interface WebDAVPropsPersistence extends BasePersistence {
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(WebDAVProps, boolean merge)}.
+	 */
 	public com.liferay.portal.model.WebDAVProps update(
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;

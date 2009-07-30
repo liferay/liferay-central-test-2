@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="JournalStructureModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalStructure table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalStructure
+ * @see    com.liferay.portlet.journal.model.impl.JournalStructureImpl
+ * @see    com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
+ */
 public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public long getPrimaryKey();
 

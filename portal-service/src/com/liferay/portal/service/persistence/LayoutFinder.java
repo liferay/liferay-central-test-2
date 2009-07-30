@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="LayoutFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface LayoutFinder {
 	public java.util.List<com.liferay.portal.model.Layout> findByNullFriendlyURL()
 		throws com.liferay.portal.SystemException;

@@ -24,6 +24,18 @@ package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="PollsChoicePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsChoicePersistenceImpl
+ * @see    PollsChoiceUtil
+ */
 public interface PollsChoicePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice);
@@ -43,6 +55,9 @@ public interface PollsChoicePersistence extends BasePersistence {
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(PollsChoice, boolean merge)}.
+	 */
 	public com.liferay.portlet.polls.model.PollsChoice update(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException;

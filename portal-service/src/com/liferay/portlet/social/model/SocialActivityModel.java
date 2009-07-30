@@ -25,6 +25,24 @@ package com.liferay.portlet.social.model;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="SocialActivityModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SocialActivity table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SocialActivity
+ * @see    com.liferay.portlet.social.model.impl.SocialActivityImpl
+ * @see    com.liferay.portlet.social.model.impl.SocialActivityModelImpl
+ */
 public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public long getPrimaryKey();
 

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PluginSettingPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PluginSettingPersistenceImpl
+ * @see    PluginSettingUtil
+ */
 public interface PluginSettingPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.PluginSetting pluginSetting);
@@ -41,6 +53,9 @@ public interface PluginSettingPersistence extends BasePersistence {
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(PluginSetting, boolean merge)}.
+	 */
 	public com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;

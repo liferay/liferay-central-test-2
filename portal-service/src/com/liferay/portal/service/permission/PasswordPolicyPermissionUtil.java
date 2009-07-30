@@ -25,6 +25,12 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="PasswordPolicyPermissionUtil.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PasswordPolicyPermissionUtil {
 
 	public static void check(

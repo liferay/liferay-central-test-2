@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+/**
+ * <a href="AssetEntryFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface AssetEntryFinder {
 	public int countEntries(
 		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery)

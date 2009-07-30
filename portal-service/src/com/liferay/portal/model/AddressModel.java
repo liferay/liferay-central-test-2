@@ -26,6 +26,23 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="AddressModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Address table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Address
+ * @see    com.liferay.portal.model.impl.AddressImpl
+ * @see    com.liferay.portal.model.impl.AddressModelImpl
+ */
 public interface AddressModel extends BaseModel<Address> {
 	public long getPrimaryKey();
 

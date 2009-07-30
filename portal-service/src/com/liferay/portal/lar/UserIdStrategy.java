@@ -24,6 +24,11 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.SystemException;
 
+/**
+ * <a href="UserIdStrategy.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface UserIdStrategy {
 
 	public static final String ALWAYS_CURRENT_USER_ID =

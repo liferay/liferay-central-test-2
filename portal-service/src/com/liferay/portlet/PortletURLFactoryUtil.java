@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="PortletURLFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletURLFactoryUtil {
 
 	public static LiferayPortletURL create(

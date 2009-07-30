@@ -24,6 +24,11 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="AutoLoginException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AutoLoginException extends PortalException {
 
 	public AutoLoginException() {

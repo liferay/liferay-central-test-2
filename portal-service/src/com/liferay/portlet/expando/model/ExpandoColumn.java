@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.expando.model;
 
+/**
+ * <a href="ExpandoColumn.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ExpandoColumn table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoColumnModel
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ */
 public interface ExpandoColumn extends ExpandoColumnModel {
 	public java.io.Serializable getDefaultValue();
 

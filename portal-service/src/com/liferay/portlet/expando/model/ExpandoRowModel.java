@@ -24,6 +24,24 @@ package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="ExpandoRowModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ExpandoRow table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoRow
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoRowImpl
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl
+ */
 public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	public long getPrimaryKey();
 

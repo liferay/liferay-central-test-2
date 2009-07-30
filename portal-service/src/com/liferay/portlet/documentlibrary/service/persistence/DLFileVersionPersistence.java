@@ -24,6 +24,18 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="DLFileVersionPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileVersionPersistenceImpl
+ * @see    DLFileVersionUtil
+ */
 public interface DLFileVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion);
@@ -45,6 +57,9 @@ public interface DLFileVersionPersistence extends BasePersistence {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(DLFileVersion, boolean merge)}.
+	 */
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion update(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;

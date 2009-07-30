@@ -51,6 +51,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="ExpandoBridgeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	public ExpandoBridgeImpl(String className) {

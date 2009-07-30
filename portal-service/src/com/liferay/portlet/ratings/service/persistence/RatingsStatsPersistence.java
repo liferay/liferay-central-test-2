@@ -24,6 +24,18 @@ package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="RatingsStatsPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsStatsPersistenceImpl
+ * @see    RatingsStatsUtil
+ */
 public interface RatingsStatsPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats);
@@ -43,6 +55,9 @@ public interface RatingsStatsPersistence extends BasePersistence {
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(RatingsStats, boolean merge)}.
+	 */
 	public com.liferay.portlet.ratings.model.RatingsStats update(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;

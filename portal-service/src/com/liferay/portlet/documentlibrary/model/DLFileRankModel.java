@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="DLFileRankModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileRank table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileRank
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ */
 public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public long getPrimaryKey();
 

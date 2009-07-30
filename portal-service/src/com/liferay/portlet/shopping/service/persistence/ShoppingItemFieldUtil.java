@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+/**
+ * <a href="ShoppingItemFieldUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingItemFieldPersistence
+ * @see    ShoppingItemFieldPersistenceImpl
+ */
 public class ShoppingItemFieldUtil {
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField) {
@@ -55,6 +67,9 @@ public class ShoppingItemFieldUtil {
 		return getPersistence().remove(shoppingItemField);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingItemField, boolean merge)}.
+	 */
 	public static com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {

@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SubscriptionSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.SubscriptionServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.SubscriptionServiceSoap
+ */
 public class SubscriptionSoap implements Serializable {
 	public static SubscriptionSoap toSoapModel(Subscription model) {
 		SubscriptionSoap soapModel = new SubscriptionSoap();

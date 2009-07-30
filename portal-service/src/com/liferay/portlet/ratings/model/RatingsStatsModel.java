@@ -24,6 +24,24 @@ package com.liferay.portlet.ratings.model;
 
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="RatingsStatsModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the RatingsStats table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsStats
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
+ */
 public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	public long getPrimaryKey();
 

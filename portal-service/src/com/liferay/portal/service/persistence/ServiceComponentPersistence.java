@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ServiceComponentPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ServiceComponentPersistenceImpl
+ * @see    ServiceComponentUtil
+ */
 public interface ServiceComponentPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.ServiceComponent serviceComponent);
@@ -43,6 +55,9 @@ public interface ServiceComponentPersistence extends BasePersistence {
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(ServiceComponent, boolean merge)}.
+	 */
 	public com.liferay.portal.model.ServiceComponent update(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;

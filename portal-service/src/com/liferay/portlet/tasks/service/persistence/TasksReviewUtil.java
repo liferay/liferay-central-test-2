@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+/**
+ * <a href="TasksReviewUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksReviewPersistence
+ * @see    TasksReviewPersistenceImpl
+ */
 public class TasksReviewUtil {
 	public static void cacheResult(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview) {
@@ -55,6 +67,9 @@ public class TasksReviewUtil {
 		return getPersistence().remove(tasksReview);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(TasksReview, boolean merge)}.
+	 */
 	public static com.liferay.portlet.tasks.model.TasksReview update(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {

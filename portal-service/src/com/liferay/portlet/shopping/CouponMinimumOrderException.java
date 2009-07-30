@@ -24,6 +24,11 @@ package com.liferay.portlet.shopping;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="CouponMinimumOrderException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Huang Jie
+ */
 public class CouponMinimumOrderException extends PortalException {
 
 	public CouponMinimumOrderException(){

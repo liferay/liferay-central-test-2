@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.bookmarks.model;
 
+/**
+ * <a href="BookmarksEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the BookmarksEntry table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BookmarksEntryModel
+ * @see    com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
+ * @see    com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl
+ */
 public interface BookmarksEntry extends BookmarksEntryModel {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder();
 }

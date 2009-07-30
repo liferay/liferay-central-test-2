@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="LayoutFriendlyURLException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LayoutFriendlyURLException extends PortalException {
 
 	public static final int DOES_NOT_START_WITH_SLASH = 1;

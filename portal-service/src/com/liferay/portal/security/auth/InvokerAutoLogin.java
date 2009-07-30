@@ -25,6 +25,11 @@ package com.liferay.portal.security.auth;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="InvokerAutoLogin.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InvokerAutoLogin implements AutoLogin {
 
 	public InvokerAutoLogin(AutoLogin autoLogin, ClassLoader classLoader) {

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="UserGroupRolePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserGroupRolePersistenceImpl
+ * @see    UserGroupRoleUtil
+ */
 public interface UserGroupRolePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.UserGroupRole userGroupRole);
@@ -43,6 +55,9 @@ public interface UserGroupRolePersistence extends BasePersistence {
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(UserGroupRole, boolean merge)}.
+	 */
 	public com.liferay.portal.model.UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;

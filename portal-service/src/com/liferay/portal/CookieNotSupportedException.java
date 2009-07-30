@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="CookieNotSupportedException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class CookieNotSupportedException extends PortalException {
 
 	public CookieNotSupportedException() {

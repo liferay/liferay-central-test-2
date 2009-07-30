@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+/**
+ * <a href="SCFrameworkVersionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCFrameworkVersionPersistence
+ * @see    SCFrameworkVersionPersistenceImpl
+ */
 public class SCFrameworkVersionUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion) {
@@ -55,6 +67,9 @@ public class SCFrameworkVersionUtil {
 		return getPersistence().remove(scFrameworkVersion);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCFrameworkVersion, boolean merge)}.
+	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {

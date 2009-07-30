@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="OrgGroupRoleUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupRolePersistence
+ * @see    OrgGroupRolePersistenceImpl
+ */
 public class OrgGroupRoleUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole) {
@@ -55,6 +67,9 @@ public class OrgGroupRoleUtil {
 		return getPersistence().remove(orgGroupRole);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgGroupRole, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws com.liferay.portal.SystemException {

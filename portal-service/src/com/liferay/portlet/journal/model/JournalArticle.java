@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.journal.model;
 
+/**
+ * <a href="JournalArticle.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalArticle table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalArticleModel
+ * @see    com.liferay.portlet.journal.model.impl.JournalArticleImpl
+ * @see    com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
+ */
 public interface JournalArticle extends JournalArticleModel {
 	public java.lang.String getApprovedByUserUuid()
 		throws com.liferay.portal.SystemException;

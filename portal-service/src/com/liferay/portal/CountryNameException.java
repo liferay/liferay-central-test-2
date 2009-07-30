@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="CountryNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CountryNameException extends PortalException {
 
 	public CountryNameException() {

@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="AnnouncementsFlagModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AnnouncementsFlag table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsFlag
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
+ */
 public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public long getPrimaryKey();
 

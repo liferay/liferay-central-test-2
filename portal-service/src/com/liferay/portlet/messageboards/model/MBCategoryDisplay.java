@@ -24,6 +24,11 @@ package com.liferay.portlet.messageboards.model;
 
 import java.util.List;
 
+/**
+ * <a href="MBCategoryDisplay.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ */
 public interface MBCategoryDisplay {
 
 	public List<MBCategory> getAllCategories();

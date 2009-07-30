@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="LayoutSetPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSetPersistenceImpl
+ * @see    LayoutSetUtil
+ */
 public interface LayoutSetPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.LayoutSet layoutSet);
 
@@ -40,6 +52,9 @@ public interface LayoutSetPersistence extends BasePersistence {
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(LayoutSet, boolean merge)}.
+	 */
 	public com.liferay.portal.model.LayoutSet update(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;

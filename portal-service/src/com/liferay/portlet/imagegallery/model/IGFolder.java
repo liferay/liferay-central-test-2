@@ -22,6 +22,28 @@
 
 package com.liferay.portlet.imagegallery.model;
 
+/**
+ * <a href="IGFolder.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the IGFolder table in the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.imagegallery.model.impl.IGFolderImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGFolderModel
+ * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
+ * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
+ */
 public interface IGFolder extends IGFolderModel {
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getAncestors()
 		throws com.liferay.portal.PortalException,

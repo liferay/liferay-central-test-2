@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="WebsiteSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.WebsiteServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.WebsiteServiceSoap
+ */
 public class WebsiteSoap implements Serializable {
 	public static WebsiteSoap toSoapModel(Website model) {
 		WebsiteSoap soapModel = new WebsiteSoap();

@@ -24,6 +24,11 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 
+/**
+ * <a href="PermissionThreadLocal.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionThreadLocal {
 
 	public static PermissionChecker getPermissionChecker() {

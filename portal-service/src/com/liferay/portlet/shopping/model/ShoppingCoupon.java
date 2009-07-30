@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.shopping.model;
 
+/**
+ * <a href="ShoppingCoupon.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ShoppingCoupon table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCouponModel
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl
+ */
 public interface ShoppingCoupon extends ShoppingCouponModel {
 	public boolean hasValidStartDate();
 

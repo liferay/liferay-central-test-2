@@ -22,6 +22,30 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+/**
+ * <a href="DLFileEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileEntry table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileEntryModel
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ */
 public interface DLFileEntry extends DLFileEntryModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 

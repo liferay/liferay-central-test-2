@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+/**
+ * <a href="BlogsEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BlogsEntryPersistence
+ * @see    BlogsEntryPersistenceImpl
+ */
 public class BlogsEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry) {
@@ -55,6 +67,9 @@ public class BlogsEntryUtil {
 		return getPersistence().remove(blogsEntry);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BlogsEntry, boolean merge)}.
+	 */
 	public static com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {

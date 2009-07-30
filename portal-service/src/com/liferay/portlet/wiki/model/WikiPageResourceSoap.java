@@ -27,6 +27,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="WikiPageResourceSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap
+ */
 public class WikiPageResourceSoap implements Serializable {
 	public static WikiPageResourceSoap toSoapModel(WikiPageResource model) {
 		WikiPageResourceSoap soapModel = new WikiPageResourceSoap();

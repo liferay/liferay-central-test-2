@@ -26,6 +26,12 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="BatchSession.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ * @author Brian Wing Shun Chan
+ */
 public interface BatchSession {
 
 	public boolean isEnabled();

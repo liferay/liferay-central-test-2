@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+/**
+ * <a href="BookmarksFolderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BookmarksFolderPersistence
+ * @see    BookmarksFolderPersistenceImpl
+ */
 public class BookmarksFolderUtil {
 	public static void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder) {
@@ -55,6 +67,9 @@ public class BookmarksFolderUtil {
 		return getPersistence().remove(bookmarksFolder);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BookmarksFolder, boolean merge)}.
+	 */
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {

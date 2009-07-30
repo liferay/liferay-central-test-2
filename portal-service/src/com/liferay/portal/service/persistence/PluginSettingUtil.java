@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PluginSettingUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PluginSettingPersistence
+ * @see    PluginSettingPersistenceImpl
+ */
 public class PluginSettingUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.PluginSetting pluginSetting) {
@@ -55,6 +67,9 @@ public class PluginSettingUtil {
 		return getPersistence().remove(pluginSetting);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PluginSetting, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.PluginSetting update(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {

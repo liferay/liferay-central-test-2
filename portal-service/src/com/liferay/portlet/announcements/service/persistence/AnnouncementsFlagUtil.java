@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+/**
+ * <a href="AnnouncementsFlagUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsFlagPersistence
+ * @see    AnnouncementsFlagPersistenceImpl
+ */
 public class AnnouncementsFlagUtil {
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag) {
@@ -55,6 +67,9 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().remove(announcementsFlag);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AnnouncementsFlag, boolean merge)}.
+	 */
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag update(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {

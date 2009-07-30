@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="DLFileVersionModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileVersion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileVersion
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ */
 public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public long getPrimaryKey();
 

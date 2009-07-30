@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+/**
+ * <a href="DLFolderConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ */
 public class DLFolderConstants {
 
 	public static final long DEFAULT_PARENT_FOLDER_ID = 0;

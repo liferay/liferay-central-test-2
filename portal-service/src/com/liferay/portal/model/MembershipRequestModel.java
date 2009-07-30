@@ -26,6 +26,24 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="MembershipRequestModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MembershipRequest table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MembershipRequest
+ * @see    com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see    com.liferay.portal.model.impl.MembershipRequestModelImpl
+ */
 public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public long getPrimaryKey();
 

@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.social.model;
 
+/**
+ * <a href="SocialRequestConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SocialRequestConstants {
 
 	public static final int STATUS_CONFIRM = 1;

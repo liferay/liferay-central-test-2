@@ -24,6 +24,18 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="MBThreadPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBThreadPersistenceImpl
+ * @see    MBThreadUtil
+ */
 public interface MBThreadPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBThread mbThread);
@@ -45,6 +57,9 @@ public interface MBThreadPersistence extends BasePersistence {
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MBThread, boolean merge)}.
+	 */
 	public com.liferay.portlet.messageboards.model.MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;

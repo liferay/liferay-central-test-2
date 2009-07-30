@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="AddressUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AddressPersistence
+ * @see    AddressPersistenceImpl
+ */
 public class AddressUtil {
 	public static void cacheResult(com.liferay.portal.model.Address address) {
 		getPersistence().cacheResult(address);
@@ -52,6 +64,9 @@ public class AddressUtil {
 		return getPersistence().remove(address);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Address, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {

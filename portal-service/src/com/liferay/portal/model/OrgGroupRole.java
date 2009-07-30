@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="OrgGroupRole.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the OrgGroupRole table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.OrgGroupRoleImpl} and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupRoleModel
+ * @see    com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see    com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ */
 public interface OrgGroupRole extends OrgGroupRoleModel {
 	public boolean containsOrganization(
 		java.util.List<com.liferay.portal.model.Organization> organizations);

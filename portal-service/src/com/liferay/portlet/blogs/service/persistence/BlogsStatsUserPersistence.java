@@ -24,6 +24,18 @@ package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="BlogsStatsUserPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BlogsStatsUserPersistenceImpl
+ * @see    BlogsStatsUserUtil
+ */
 public interface BlogsStatsUserPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser);
@@ -45,6 +57,9 @@ public interface BlogsStatsUserPersistence extends BasePersistence {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(BlogsStatsUser, boolean merge)}.
+	 */
 	public com.liferay.portlet.blogs.model.BlogsStatsUser update(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;

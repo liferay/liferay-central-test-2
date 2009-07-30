@@ -27,6 +27,23 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="CalEventModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the CalEvent table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CalEvent
+ * @see    com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see    com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ */
 public interface CalEventModel extends BaseModel<CalEvent> {
 	public long getPrimaryKey();
 

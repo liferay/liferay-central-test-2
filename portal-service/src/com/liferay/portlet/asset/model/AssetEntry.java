@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.asset.model;
 
+/**
+ * <a href="AssetEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetEntry table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetEntryModel
+ * @see    com.liferay.portlet.asset.model.impl.AssetEntryImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ */
 public interface AssetEntry extends AssetEntryModel {
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
 		throws com.liferay.portal.SystemException;

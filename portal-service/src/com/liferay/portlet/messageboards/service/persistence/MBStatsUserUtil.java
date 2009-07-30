@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+/**
+ * <a href="MBStatsUserUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBStatsUserPersistence
+ * @see    MBStatsUserPersistenceImpl
+ */
 public class MBStatsUserUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser) {
@@ -55,6 +67,9 @@ public class MBStatsUserUtil {
 		return getPersistence().remove(mbStatsUser);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBStatsUser, boolean merge)}.
+	 */
 	public static com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {

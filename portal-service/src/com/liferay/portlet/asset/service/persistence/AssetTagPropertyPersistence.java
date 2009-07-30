@@ -24,6 +24,18 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="AssetTagPropertyPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagPropertyPersistenceImpl
+ * @see    AssetTagPropertyUtil
+ */
 public interface AssetTagPropertyPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty);
@@ -45,6 +57,9 @@ public interface AssetTagPropertyPersistence extends BasePersistence {
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(AssetTagProperty, boolean merge)}.
+	 */
 	public com.liferay.portlet.asset.model.AssetTagProperty update(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
 		throws com.liferay.portal.SystemException;

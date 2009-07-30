@@ -26,6 +26,12 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalArticle;
 
+/**
+ * <a href="ArticleModifiedDateComparator.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ArticleModifiedDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "modifiedDate ASC";

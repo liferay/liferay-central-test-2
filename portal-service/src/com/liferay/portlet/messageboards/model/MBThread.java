@@ -22,6 +22,28 @@
 
 package com.liferay.portlet.messageboards.model;
 
+/**
+ * <a href="MBThread.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBThread table in the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBThreadImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBThreadModel
+ * @see    com.liferay.portlet.messageboards.model.impl.MBThreadImpl
+ * @see    com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
+ */
 public interface MBThread extends MBThreadModel {
 	public java.lang.String getAttachmentsDir();
 }

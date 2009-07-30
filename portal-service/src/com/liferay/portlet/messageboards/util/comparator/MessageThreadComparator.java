@@ -29,6 +29,11 @@ import java.io.Serializable;
 
 import java.util.Comparator;
 
+/**
+ * <a href="MessageThreadComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MessageThreadComparator
 	implements Comparator<MBMessage>, Serializable {
 

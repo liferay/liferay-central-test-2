@@ -24,6 +24,24 @@ package com.liferay.portlet.softwarecatalog.model;
 
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="SCProductScreenshotModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCProductScreenshot table in
+ * the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductScreenshot
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ */
 public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot> {
 	public long getPrimaryKey();
 

@@ -22,6 +22,28 @@
 
 package com.liferay.portlet.calendar.model;
 
+/**
+ * <a href="CalEvent.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the CalEvent table in the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.calendar.model.impl.CalEventImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CalEventModel
+ * @see    com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see    com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ */
 public interface CalEvent extends CalEventModel {
 	public void setRecurrence(java.lang.String recurrence);
 

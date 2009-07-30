@@ -26,6 +26,12 @@ import com.liferay.portal.PortalException;
 
 import java.util.List;
 
+/**
+ * <a href="CouponLimitCategoriesException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CouponLimitCategoriesException extends PortalException {
 
 	public CouponLimitCategoriesException() {

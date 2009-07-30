@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="LARFileException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class LARFileException extends PortalException {
 
 	public LARFileException() {

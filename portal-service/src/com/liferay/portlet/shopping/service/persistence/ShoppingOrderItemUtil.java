@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+/**
+ * <a href="ShoppingOrderItemUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingOrderItemPersistence
+ * @see    ShoppingOrderItemPersistenceImpl
+ */
 public class ShoppingOrderItemUtil {
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem) {
@@ -55,6 +67,9 @@ public class ShoppingOrderItemUtil {
 		return getPersistence().remove(shoppingOrderItem);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingOrderItem, boolean merge)}.
+	 */
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {

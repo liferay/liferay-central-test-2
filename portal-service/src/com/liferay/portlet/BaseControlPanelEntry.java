@@ -22,5 +22,10 @@
 
 package com.liferay.portlet;
 
+/**
+ * <a href="BaseControlPanelEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 }

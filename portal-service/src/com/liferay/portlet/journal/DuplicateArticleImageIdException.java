@@ -24,6 +24,12 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="DuplicateArticleImageIdException.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DuplicateArticleImageIdException extends PortalException {
 
 	public DuplicateArticleImageIdException() {

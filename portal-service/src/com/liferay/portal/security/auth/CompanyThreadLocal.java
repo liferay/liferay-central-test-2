@@ -25,6 +25,11 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+/**
+ * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CompanyThreadLocal {
 
 	public static long getCompanyId() {

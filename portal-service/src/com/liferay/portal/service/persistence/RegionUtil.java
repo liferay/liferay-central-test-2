@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="RegionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RegionPersistence
+ * @see    RegionPersistenceImpl
+ */
 public class RegionUtil {
 	public static void cacheResult(com.liferay.portal.model.Region region) {
 		getPersistence().cacheResult(region);
@@ -52,6 +64,9 @@ public class RegionUtil {
 		return getPersistence().remove(region);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Region, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Region update(
 		com.liferay.portal.model.Region region)
 		throws com.liferay.portal.SystemException {

@@ -33,6 +33,13 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
+/**
+ * <a href="BaseSocialActivityInterpreter.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Ryan Park
+ */
 public abstract class BaseSocialActivityInterpreter
 	implements SocialActivityInterpreter {
 

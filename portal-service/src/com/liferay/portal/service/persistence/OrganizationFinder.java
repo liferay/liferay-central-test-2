@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="OrganizationFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface OrganizationFinder {
 	public int countByKeywords(long companyId, long parentOrganizationId,
 		java.lang.String parentOrganizationIdComparator,

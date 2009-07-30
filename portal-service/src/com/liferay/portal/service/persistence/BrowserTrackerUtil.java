@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="BrowserTrackerUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BrowserTrackerPersistence
+ * @see    BrowserTrackerPersistenceImpl
+ */
 public class BrowserTrackerUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.BrowserTracker browserTracker) {
@@ -55,6 +67,9 @@ public class BrowserTrackerUtil {
 		return getPersistence().remove(browserTracker);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BrowserTracker, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.BrowserTracker update(
 		com.liferay.portal.model.BrowserTracker browserTracker)
 		throws com.liferay.portal.SystemException {

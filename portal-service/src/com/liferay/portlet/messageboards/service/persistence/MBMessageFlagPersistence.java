@@ -24,6 +24,18 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="MBMessageFlagPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessageFlagPersistenceImpl
+ * @see    MBMessageFlagUtil
+ */
 public interface MBMessageFlagPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag);
@@ -45,6 +57,9 @@ public interface MBMessageFlagPersistence extends BasePersistence {
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MBMessageFlag, boolean merge)}.
+	 */
 	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;

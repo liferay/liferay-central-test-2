@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+/**
+ * <a href="DLFileRankUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileRankPersistence
+ * @see    DLFileRankPersistenceImpl
+ */
 public class DLFileRankUtil {
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank) {
@@ -55,6 +67,9 @@ public class DLFileRankUtil {
 		return getPersistence().remove(dlFileRank);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
+	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {

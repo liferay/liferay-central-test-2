@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+/**
+ * <a href="BookmarksEntryFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BookmarksEntryFinderUtil {
 	public static int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {

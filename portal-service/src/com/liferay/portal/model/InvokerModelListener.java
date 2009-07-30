@@ -24,6 +24,11 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
 
+/**
+ * <a href="InvokerModelListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InvokerModelListener<T> implements ModelListener<T> {
 
 	public InvokerModelListener(

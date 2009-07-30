@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+/**
+ * <a href="SCProductScreenshotUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductScreenshotPersistence
+ * @see    SCProductScreenshotPersistenceImpl
+ */
 public class SCProductScreenshotUtil {
 	public static void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot) {
@@ -55,6 +67,9 @@ public class SCProductScreenshotUtil {
 		return getPersistence().remove(scProductScreenshot);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCProductScreenshot, boolean merge)}.
+	 */
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot update(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {

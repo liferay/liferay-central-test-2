@@ -24,6 +24,18 @@ package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="AssetEntryPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetEntryPersistenceImpl
+ * @see    AssetEntryUtil
+ */
 public interface AssetEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry);
@@ -43,6 +55,9 @@ public interface AssetEntryPersistence extends BasePersistence {
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(AssetEntry, boolean merge)}.
+	 */
 	public com.liferay.portlet.asset.model.AssetEntry update(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ShardUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShardPersistence
+ * @see    ShardPersistenceImpl
+ */
 public class ShardUtil {
 	public static void cacheResult(com.liferay.portal.model.Shard shard) {
 		getPersistence().cacheResult(shard);
@@ -52,6 +64,9 @@ public class ShardUtil {
 		return getPersistence().remove(shard);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Shard, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Shard update(
 		com.liferay.portal.model.Shard shard)
 		throws com.liferay.portal.SystemException {

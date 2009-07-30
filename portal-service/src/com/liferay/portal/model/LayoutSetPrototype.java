@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="LayoutSetPrototype.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the LayoutSetPrototype table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.LayoutSetPrototypeImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSetPrototypeModel
+ * @see    com.liferay.portal.model.impl.LayoutSetPrototypeImpl
+ * @see    com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
+ */
 public interface LayoutSetPrototype extends LayoutSetPrototypeModel {
 	public com.liferay.portal.model.Group getGroup();
 

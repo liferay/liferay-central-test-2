@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.asset.model;
 
+/**
+ * <a href="AssetVocabulary.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetVocabulary table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetVocabularyModel
+ * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ */
 public interface AssetVocabulary extends AssetVocabularyModel {
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;

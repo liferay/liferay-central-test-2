@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="AccountNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AccountNameException extends PortalException {
 
 	public AccountNameException() {

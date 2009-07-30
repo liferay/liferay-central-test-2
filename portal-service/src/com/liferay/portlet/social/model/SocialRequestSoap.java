@@ -27,6 +27,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="SocialRequestSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.social.service.http.SocialRequestServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.social.service.http.SocialRequestServiceSoap
+ */
 public class SocialRequestSoap implements Serializable {
 	public static SocialRequestSoap toSoapModel(SocialRequest model) {
 		SocialRequestSoap soapModel = new SocialRequestSoap();

@@ -24,6 +24,12 @@ package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="MailingListOutEmailAddressException.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MailingListOutEmailAddressException extends PortalException {
 
 	public MailingListOutEmailAddressException() {

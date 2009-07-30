@@ -22,5 +22,27 @@
 
 package com.liferay.portlet.asset.model;
 
+/**
+ * <a href="AssetTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetTag table in the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.asset.model.impl.AssetTagImpl} and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagModel
+ * @see    com.liferay.portlet.asset.model.impl.AssetTagImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetTagModelImpl
+ */
 public interface AssetTag extends AssetTagModel {
 }

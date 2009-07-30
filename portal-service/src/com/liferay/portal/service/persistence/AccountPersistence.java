@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="AccountPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AccountPersistenceImpl
+ * @see    AccountUtil
+ */
 public interface AccountPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Account account);
 
@@ -40,6 +52,9 @@ public interface AccountPersistence extends BasePersistence {
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Account, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;

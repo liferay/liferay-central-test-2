@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ImagePersistence
+ * @see    ImagePersistenceImpl
+ */
 public class ImageUtil {
 	public static void cacheResult(com.liferay.portal.model.Image image) {
 		getPersistence().cacheResult(image);
@@ -52,6 +64,9 @@ public class ImageUtil {
 		return getPersistence().remove(image);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Image, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="UserTrackerPathPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserTrackerPathPersistenceImpl
+ * @see    UserTrackerPathUtil
+ */
 public interface UserTrackerPathPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath);
@@ -43,6 +55,9 @@ public interface UserTrackerPathPersistence extends BasePersistence {
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(UserTrackerPath, boolean merge)}.
+	 */
 	public com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;

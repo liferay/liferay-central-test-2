@@ -24,6 +24,12 @@ package com.liferay.portal.webdav;
 
 import java.io.InputStream;
 
+/**
+ * <a href="Resource.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ */
 public interface Resource {
 
  	public String getHREF();

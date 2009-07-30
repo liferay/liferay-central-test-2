@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ServiceComponent.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ServiceComponent table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.ServiceComponentImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ServiceComponentModel
+ * @see    com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see    com.liferay.portal.model.impl.ServiceComponentModelImpl
+ */
 public interface ServiceComponent extends ServiceComponentModel {
 	public void setData(java.lang.String data);
 

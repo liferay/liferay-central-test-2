@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+/**
+ * <a href="WikiPageResourceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiPageResourcePersistence
+ * @see    WikiPageResourcePersistenceImpl
+ */
 public class WikiPageResourceUtil {
 	public static void cacheResult(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource) {
@@ -55,6 +67,9 @@ public class WikiPageResourceUtil {
 		return getPersistence().remove(wikiPageResource);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(WikiPageResource, boolean merge)}.
+	 */
 	public static com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {

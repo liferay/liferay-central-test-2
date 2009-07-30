@@ -24,6 +24,12 @@ package com.liferay.portlet.softwarecatalog;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="ProductEntryShortDescriptionException.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ProductEntryShortDescriptionException extends PortalException {
 
 	public ProductEntryShortDescriptionException() {

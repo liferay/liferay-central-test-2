@@ -24,6 +24,11 @@ package com.liferay.portlet.social.model;
 
 import com.liferay.portal.theme.ThemeDisplay;
 
+/**
+ * <a href="SocialActivityInterpreter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface SocialActivityInterpreter {
 
 	public String[] getClassNames();

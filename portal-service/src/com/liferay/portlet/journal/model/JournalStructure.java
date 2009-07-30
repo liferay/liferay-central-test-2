@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.journal.model;
 
+/**
+ * <a href="JournalStructure.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalStructure table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.journal.model.impl.JournalStructureImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalStructureModel
+ * @see    com.liferay.portlet.journal.model.impl.JournalStructureImpl
+ * @see    com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
+ */
 public interface JournalStructure extends JournalStructureModel {
 	public java.lang.String getMergedXsd();
 }

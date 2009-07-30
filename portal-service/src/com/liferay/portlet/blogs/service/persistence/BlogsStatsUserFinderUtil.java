@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+/**
+ * <a href="BlogsStatsUserFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BlogsStatsUserFinderUtil {
 	public static int countByOrganizationId(long organizationId)
 		throws com.liferay.portal.SystemException {

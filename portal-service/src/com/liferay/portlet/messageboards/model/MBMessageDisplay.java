@@ -24,6 +24,12 @@ package com.liferay.portlet.messageboards.model;
 
 import java.io.Serializable;
 
+/**
+ * <a href="MBMessageDisplay.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
+ */
 public interface MBMessageDisplay extends Serializable {
 
 	public MBMessage getMessage();

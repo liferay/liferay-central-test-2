@@ -24,6 +24,18 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="SocialRelationPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SocialRelationPersistenceImpl
+ * @see    SocialRelationUtil
+ */
 public interface SocialRelationPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.social.model.SocialRelation socialRelation);
@@ -45,6 +57,9 @@ public interface SocialRelationPersistence extends BasePersistence {
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(SocialRelation, boolean merge)}.
+	 */
 	public com.liferay.portlet.social.model.SocialRelation update(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException;

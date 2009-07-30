@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="MBCategoryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBCategory table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBCategory
+ * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ */
 public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public long getPrimaryKey();
 

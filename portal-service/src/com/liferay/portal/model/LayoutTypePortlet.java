@@ -26,6 +26,11 @@ import com.liferay.portal.SystemException;
 
 import java.util.List;
 
+/**
+ * <a href="LayoutTypePortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface LayoutTypePortlet extends LayoutType {
 
 	public LayoutTemplate getLayoutTemplate();

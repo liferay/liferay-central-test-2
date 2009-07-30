@@ -24,6 +24,18 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="MBMessagePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessagePersistenceImpl
+ * @see    MBMessageUtil
+ */
 public interface MBMessagePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage);
@@ -45,6 +57,9 @@ public interface MBMessagePersistence extends BasePersistence {
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MBMessage, boolean merge)}.
+	 */
 	public com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException;

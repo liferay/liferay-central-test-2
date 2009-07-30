@@ -24,6 +24,18 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="SCProductVersionPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductVersionPersistenceImpl
+ * @see    SCProductVersionUtil
+ */
 public interface SCProductVersionPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion);
@@ -45,6 +57,9 @@ public interface SCProductVersionPersistence extends BasePersistence {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(SCProductVersion, boolean merge)}.
+	 */
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion update(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;

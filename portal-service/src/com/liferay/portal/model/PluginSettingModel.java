@@ -22,6 +22,24 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="PluginSettingModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PluginSetting table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PluginSetting
+ * @see    com.liferay.portal.model.impl.PluginSettingImpl
+ * @see    com.liferay.portal.model.impl.PluginSettingModelImpl
+ */
 public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public long getPrimaryKey();
 

@@ -27,6 +27,23 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="WikiPageModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the WikiPage table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiPage
+ * @see    com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see    com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ */
 public interface WikiPageModel extends BaseModel<WikiPage> {
 	public long getPrimaryKey();
 

@@ -27,6 +27,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Brian Wing Shun Chan
+ */
 public interface LayoutPermission {
 
 	public void check(

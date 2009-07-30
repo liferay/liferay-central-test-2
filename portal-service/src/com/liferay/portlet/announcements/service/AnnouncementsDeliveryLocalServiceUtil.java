@@ -22,6 +22,26 @@
 
 package com.liferay.portlet.announcements.service;
 
+/**
+ * <a href="AnnouncementsDeliveryLocalServiceUtil.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class provides static methods for the {@link
+ * AnnouncementsDeliveryLocalService} bean. The static methods of this class
+ * calls the same methods of the bean instance. It's convenient to be able to
+ * just write one line to call a method on a bean instead of writing a lookup
+ * call and a method call.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsDeliveryLocalService
+ */
 public class AnnouncementsDeliveryLocalServiceUtil {
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery addAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)

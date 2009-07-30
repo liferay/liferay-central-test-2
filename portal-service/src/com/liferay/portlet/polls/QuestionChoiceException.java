@@ -24,6 +24,11 @@ package com.liferay.portlet.polls;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="QuestionChoiceException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QuestionChoiceException extends PortalException {
 
 	public QuestionChoiceException() {

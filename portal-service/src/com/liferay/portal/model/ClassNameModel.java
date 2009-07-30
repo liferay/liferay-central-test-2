@@ -22,6 +22,24 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ClassNameModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ClassName_ table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ClassName
+ * @see    com.liferay.portal.model.impl.ClassNameImpl
+ * @see    com.liferay.portal.model.impl.ClassNameModelImpl
+ */
 public interface ClassNameModel extends BaseModel<ClassName> {
 	public long getPrimaryKey();
 

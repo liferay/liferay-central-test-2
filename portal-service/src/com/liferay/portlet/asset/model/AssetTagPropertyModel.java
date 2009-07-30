@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="AssetTagPropertyModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetTagProperty table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagProperty
+ * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl
+ */
 public interface AssetTagPropertyModel extends BaseModel<AssetTagProperty> {
 	public long getPrimaryKey();
 

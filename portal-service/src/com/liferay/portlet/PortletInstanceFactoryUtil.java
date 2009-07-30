@@ -28,6 +28,11 @@ import javax.portlet.PortletException;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="PortletInstanceFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletInstanceFactoryUtil {
 
 	public static void clear(Portlet portlet) {

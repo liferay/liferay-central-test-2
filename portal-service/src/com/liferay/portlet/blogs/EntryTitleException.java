@@ -24,6 +24,11 @@ package com.liferay.portlet.blogs;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="EntryTitleException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntryTitleException extends PortalException {
 
 	public EntryTitleException() {

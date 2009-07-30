@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.polls.model;
 
+/**
+ * <a href="PollsVote.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PollsVote table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.polls.model.impl.PollsVoteImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsVoteModel
+ * @see    com.liferay.portlet.polls.model.impl.PollsVoteImpl
+ * @see    com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
+ */
 public interface PollsVote extends PollsVoteModel {
 	public com.liferay.portlet.polls.model.PollsChoice getChoice()
 		throws com.liferay.portal.PortalException,

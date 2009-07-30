@@ -24,6 +24,12 @@ package com.liferay.portlet.messageboards;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="MailingListInServerNameException.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MailingListInServerNameException extends PortalException {
 
 	public MailingListInServerNameException() {

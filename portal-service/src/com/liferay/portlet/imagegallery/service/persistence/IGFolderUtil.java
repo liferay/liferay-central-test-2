@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+/**
+ * <a href="IGFolderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGFolderPersistence
+ * @see    IGFolderPersistenceImpl
+ */
 public class IGFolderUtil {
 	public static void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder) {
@@ -55,6 +67,9 @@ public class IGFolderUtil {
 		return getPersistence().remove(igFolder);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(IGFolder, boolean merge)}.
+	 */
 	public static com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {

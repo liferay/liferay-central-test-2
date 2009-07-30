@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
+/**
+ * <a href="EntryModifiedDateComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntryModifiedDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "modifiedDate ASC";

@@ -24,6 +24,18 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="WikiNodePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiNodePersistenceImpl
+ * @see    WikiNodeUtil
+ */
 public interface WikiNodePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portlet.wiki.model.WikiNode wikiNode);
 
@@ -42,6 +54,9 @@ public interface WikiNodePersistence extends BasePersistence {
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(WikiNode, boolean merge)}.
+	 */
 	public com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;

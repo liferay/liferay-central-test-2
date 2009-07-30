@@ -22,6 +22,28 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="Portlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Portlet table in the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.PortletImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletModel
+ * @see    com.liferay.portal.model.impl.PortletImpl
+ * @see    com.liferay.portal.model.impl.PortletModelImpl
+ */
 public interface Portlet extends PortletModel {
 	public java.lang.String getRootPortletId();
 

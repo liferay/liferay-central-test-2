@@ -22,5 +22,28 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="UserTrackerPath.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the UserTrackerPath table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.UserTrackerPathImpl} and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserTrackerPathModel
+ * @see    com.liferay.portal.model.impl.UserTrackerPathImpl
+ * @see    com.liferay.portal.model.impl.UserTrackerPathModelImpl
+ */
 public interface UserTrackerPath extends UserTrackerPathModel {
 }

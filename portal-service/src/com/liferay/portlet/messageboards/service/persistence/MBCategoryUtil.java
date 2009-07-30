@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+/**
+ * <a href="MBCategoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBCategoryPersistence
+ * @see    MBCategoryPersistenceImpl
+ */
 public class MBCategoryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory) {
@@ -55,6 +67,9 @@ public class MBCategoryUtil {
 		return getPersistence().remove(mbCategory);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBCategory, boolean merge)}.
+	 */
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {

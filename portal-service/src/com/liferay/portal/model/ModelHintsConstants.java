@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ModelHintsConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ModelHintsConstants {
 
 	public static final String TEXT_DISPLAY_HEIGHT = "15";

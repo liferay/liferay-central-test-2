@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="MBMessageModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBMessage table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessage
+ * @see    com.liferay.portlet.messageboards.model.impl.MBMessageImpl
+ * @see    com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
+ */
 public interface MBMessageModel extends BaseModel<MBMessage> {
 	public long getPrimaryKey();
 

@@ -26,6 +26,14 @@ import com.liferay.portal.model.Portlet;
 
 import java.util.Comparator;
 
+/**
+ * <a href="PortletControlPanelWeightComparator.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Minhchau Dang
+ * @author Brian Wing Shun Chan
+ */
 public class PortletControlPanelWeightComparator
 	implements Comparator<Portlet> {
 

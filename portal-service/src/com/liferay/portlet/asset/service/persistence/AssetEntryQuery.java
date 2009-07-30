@@ -37,6 +37,12 @@ import java.util.Date;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="AssetEntryQuery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class AssetEntryQuery {
 
 	public static String[] ORDER_BY_COLUMNS = new String[] {

@@ -24,6 +24,24 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.SystemException;
 
+/**
+ * <a href="UserIdMapperModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the UserIdMapper table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserIdMapper
+ * @see    com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see    com.liferay.portal.model.impl.UserIdMapperModelImpl
+ */
 public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public long getPrimaryKey();
 

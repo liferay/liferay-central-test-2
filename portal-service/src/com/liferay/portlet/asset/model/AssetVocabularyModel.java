@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="AssetVocabularyModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetVocabulary table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetVocabulary
+ * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ */
 public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 	public long getPrimaryKey();
 

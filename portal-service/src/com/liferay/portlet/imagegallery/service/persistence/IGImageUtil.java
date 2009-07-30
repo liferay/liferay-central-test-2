@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+/**
+ * <a href="IGImageUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGImagePersistence
+ * @see    IGImagePersistenceImpl
+ */
 public class IGImageUtil {
 	public static void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGImage igImage) {
@@ -55,6 +67,9 @@ public class IGImageUtil {
 		return getPersistence().remove(igImage);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(IGImage, boolean merge)}.
+	 */
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {

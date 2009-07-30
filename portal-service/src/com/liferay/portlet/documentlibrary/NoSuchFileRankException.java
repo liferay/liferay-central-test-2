@@ -24,6 +24,11 @@ package com.liferay.portlet.documentlibrary;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="NoSuchFileRankException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchFileRankException extends PortalException {
 
 	public NoSuchFileRankException() {

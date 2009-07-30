@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+/**
+ * <a href="DLFileEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileEntryPersistence
+ * @see    DLFileEntryPersistenceImpl
+ */
 public class DLFileEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry) {
@@ -55,6 +67,9 @@ public class DLFileEntryUtil {
 		return getPersistence().remove(dlFileEntry);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileEntry, boolean merge)}.
+	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {

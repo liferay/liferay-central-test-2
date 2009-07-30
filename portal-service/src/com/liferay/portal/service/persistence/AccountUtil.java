@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="AccountUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AccountPersistence
+ * @see    AccountPersistenceImpl
+ */
 public class AccountUtil {
 	public static void cacheResult(com.liferay.portal.model.Account account) {
 		getPersistence().cacheResult(account);
@@ -52,6 +64,9 @@ public class AccountUtil {
 		return getPersistence().remove(account);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Account, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {

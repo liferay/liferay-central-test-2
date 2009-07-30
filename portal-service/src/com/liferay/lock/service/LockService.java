@@ -28,6 +28,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.Transactional;
 
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
+/**
+ * <a href="LockService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface LockService {
 
 	public void clear();

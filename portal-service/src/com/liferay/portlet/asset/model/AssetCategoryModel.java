@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="AssetCategoryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetCategory table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetCategory
+ * @see    com.liferay.portlet.asset.model.impl.AssetCategoryImpl
+ * @see    com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl
+ */
 public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	public long getPrimaryKey();
 

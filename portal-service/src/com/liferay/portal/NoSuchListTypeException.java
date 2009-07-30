@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="NoSuchListTypeException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchListTypeException extends PortalException {
 
 	public NoSuchListTypeException() {

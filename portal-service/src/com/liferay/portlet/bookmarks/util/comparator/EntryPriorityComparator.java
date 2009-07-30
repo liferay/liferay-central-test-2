@@ -25,6 +25,11 @@ package com.liferay.portlet.bookmarks.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 
+/**
+ * <a href="EntryPriorityComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntryPriorityComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "priority ASC";

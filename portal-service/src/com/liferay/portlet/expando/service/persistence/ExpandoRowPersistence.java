@@ -24,6 +24,18 @@ package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="ExpandoRowPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoRowPersistenceImpl
+ * @see    ExpandoRowUtil
+ */
 public interface ExpandoRowPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow);
@@ -43,6 +55,9 @@ public interface ExpandoRowPersistence extends BasePersistence {
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoRow, boolean merge)}.
+	 */
 	public com.liferay.portlet.expando.model.ExpandoRow update(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException;

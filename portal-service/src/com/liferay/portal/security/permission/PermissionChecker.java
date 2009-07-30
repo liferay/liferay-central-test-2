@@ -26,6 +26,11 @@ import com.liferay.portal.model.User;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="PermissionChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface PermissionChecker {
 
 	public long getCompanyId();

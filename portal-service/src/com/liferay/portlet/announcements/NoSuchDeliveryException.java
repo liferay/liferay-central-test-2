@@ -24,6 +24,11 @@ package com.liferay.portlet.announcements;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="NoSuchDeliveryException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchDeliveryException extends PortalException {
 
 	public NoSuchDeliveryException() {

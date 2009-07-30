@@ -24,6 +24,23 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.SystemException;
 
+/**
+ * <a href="GroupModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Group_ table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Group
+ * @see    com.liferay.portal.model.impl.GroupImpl
+ * @see    com.liferay.portal.model.impl.GroupModelImpl
+ */
 public interface GroupModel extends BaseModel<Group> {
 	public long getPrimaryKey();
 

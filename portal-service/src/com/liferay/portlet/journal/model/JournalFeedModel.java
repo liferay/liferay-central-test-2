@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="JournalFeedModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalFeed table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalFeed
+ * @see    com.liferay.portlet.journal.model.impl.JournalFeedImpl
+ * @see    com.liferay.portlet.journal.model.impl.JournalFeedModelImpl
+ */
 public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public long getPrimaryKey();
 

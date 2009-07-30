@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="EmailAddressPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    EmailAddressPersistenceImpl
+ * @see    EmailAddressUtil
+ */
 public interface EmailAddressPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.EmailAddress emailAddress);
 
@@ -40,6 +52,9 @@ public interface EmailAddressPersistence extends BasePersistence {
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(EmailAddress, boolean merge)}.
+	 */
 	public com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="LayoutConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LayoutConstants {
 
 	public static final long DEFAULT_PLID = 0;

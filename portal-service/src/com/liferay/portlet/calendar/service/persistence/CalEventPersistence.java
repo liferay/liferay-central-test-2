@@ -24,6 +24,18 @@ package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="CalEventPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CalEventPersistenceImpl
+ * @see    CalEventUtil
+ */
 public interface CalEventPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.calendar.model.CalEvent calEvent);
@@ -43,6 +55,9 @@ public interface CalEventPersistence extends BasePersistence {
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(CalEvent, boolean merge)}.
+	 */
 	public com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;

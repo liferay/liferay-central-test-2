@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="WebDAVProps.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the WebDAVProps table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.WebDAVPropsImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebDAVPropsModel
+ * @see    com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see    com.liferay.portal.model.impl.WebDAVPropsModelImpl
+ */
 public interface WebDAVProps extends WebDAVPropsModel {
 	public java.lang.String getProps();
 

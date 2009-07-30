@@ -24,6 +24,24 @@ package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.model.BaseModel;
 
+/**
+ * <a href="ExpandoValueModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ExpandoValue table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoValue
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoValueImpl
+ * @see    com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
+ */
 public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	public long getPrimaryKey();
 

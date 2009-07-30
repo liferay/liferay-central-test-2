@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+/**
+ * <a href="MBMessageFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBMessageFinderUtil {
 	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {

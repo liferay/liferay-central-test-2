@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="NoSuchAccountException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchAccountException extends PortalException {
 
 	public NoSuchAccountException() {

@@ -30,6 +30,30 @@ import com.liferay.portal.kernel.annotation.Transactional;
 
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
+/**
+ * <a href="PollsVoteLocalService.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is {@link
+ * com.liferay.portlet.polls.service.impl.PollsVoteLocalServiceImpl}}. Modify
+ * methods in that class and rerun ServiceBuilder to populate this class and all
+ * other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil
+ */
 public interface PollsVoteLocalService {
 	public com.liferay.portlet.polls.model.PollsVote addPollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)

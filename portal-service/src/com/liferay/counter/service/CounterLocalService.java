@@ -26,6 +26,11 @@ import com.liferay.portal.SystemException;
 
 import java.util.List;
 
+/**
+ * <a href="CounterLocalService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface CounterLocalService {
 
 	public List<String> getNames() throws SystemException;

@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="RoleUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RolePersistence
+ * @see    RolePersistenceImpl
+ */
 public class RoleUtil {
 	public static void cacheResult(com.liferay.portal.model.Role role) {
 		getPersistence().cacheResult(role);
@@ -52,6 +64,9 @@ public class RoleUtil {
 		return getPersistence().remove(role);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Role, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.polls.model;
 
+/**
+ * <a href="PollsQuestion.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PollsQuestion table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsQuestionModel
+ * @see    com.liferay.portlet.polls.model.impl.PollsQuestionImpl
+ * @see    com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
+ */
 public interface PollsQuestion extends PollsQuestionModel {
 	public boolean isExpired();
 

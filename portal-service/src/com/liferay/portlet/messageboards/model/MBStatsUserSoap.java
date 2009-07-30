@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBStatsUserSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.messageboards.service.http.MBStatsUserServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.messageboards.service.http.MBStatsUserServiceSoap
+ */
 public class MBStatsUserSoap implements Serializable {
 	public static MBStatsUserSoap toSoapModel(MBStatsUser model) {
 		MBStatsUserSoap soapModel = new MBStatsUserSoap();

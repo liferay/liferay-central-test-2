@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+/**
+ * <a href="WikiPageFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface WikiPageFinder {
 	public int countByCreateDate(long nodeId, java.util.Date createDate,
 		boolean before) throws com.liferay.portal.SystemException;

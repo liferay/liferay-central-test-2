@@ -22,6 +22,24 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="LayoutSetModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the LayoutSet table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSet
+ * @see    com.liferay.portal.model.impl.LayoutSetImpl
+ * @see    com.liferay.portal.model.impl.LayoutSetModelImpl
+ */
 public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public long getPrimaryKey();
 

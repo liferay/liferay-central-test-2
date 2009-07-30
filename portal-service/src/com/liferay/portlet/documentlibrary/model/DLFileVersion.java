@@ -22,5 +22,29 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+/**
+ * <a href="DLFileVersion.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileVersion table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun
+ * the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileVersionModel
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ */
 public interface DLFileVersion extends DLFileVersionModel {
 }

@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="UserTrackerPathSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.UserTrackerPathServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.UserTrackerPathServiceSoap
+ */
 public class UserTrackerPathSoap implements Serializable {
 	public static UserTrackerPathSoap toSoapModel(UserTrackerPath model) {
 		UserTrackerPathSoap soapModel = new UserTrackerPathSoap();

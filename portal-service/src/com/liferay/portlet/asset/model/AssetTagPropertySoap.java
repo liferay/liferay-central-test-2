@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetTagPropertySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.asset.service.http.AssetTagPropertyServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.asset.service.http.AssetTagPropertyServiceSoap
+ */
 public class AssetTagPropertySoap implements Serializable {
 	public static AssetTagPropertySoap toSoapModel(AssetTagProperty model) {
 		AssetTagPropertySoap soapModel = new AssetTagPropertySoap();

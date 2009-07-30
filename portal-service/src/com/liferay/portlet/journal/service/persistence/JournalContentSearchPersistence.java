@@ -24,6 +24,19 @@ package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="JournalContentSearchPersistence.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalContentSearchPersistenceImpl
+ * @see    JournalContentSearchUtil
+ */
 public interface JournalContentSearchPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch);
@@ -45,6 +58,9 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(JournalContentSearch, boolean merge)}.
+	 */
 	public com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException;

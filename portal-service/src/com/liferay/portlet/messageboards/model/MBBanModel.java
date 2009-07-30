@@ -27,6 +27,23 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="MBBanModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBBan table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBBan
+ * @see    com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see    com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
+ */
 public interface MBBanModel extends BaseModel<MBBan> {
 	public long getPrimaryKey();
 

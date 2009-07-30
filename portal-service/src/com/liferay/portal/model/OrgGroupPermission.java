@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="OrgGroupPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the OrgGroupPermission table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.OrgGroupPermissionImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupPermissionModel
+ * @see    com.liferay.portal.model.impl.OrgGroupPermissionImpl
+ * @see    com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
+ */
 public interface OrgGroupPermission extends OrgGroupPermissionModel {
 	public boolean containsOrganization(
 		java.util.List<com.liferay.portal.model.Organization> organizations);

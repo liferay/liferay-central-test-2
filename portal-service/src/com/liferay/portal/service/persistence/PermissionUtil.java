@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PermissionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PermissionPersistence
+ * @see    PermissionPersistenceImpl
+ */
 public class PermissionUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.Permission permission) {
@@ -53,6 +65,9 @@ public class PermissionUtil {
 		return getPersistence().remove(permission);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Permission, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {

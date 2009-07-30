@@ -22,6 +22,12 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="MembershipRequestCommentsException.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MembershipRequestCommentsException extends PortalException {
 
 	public MembershipRequestCommentsException() {

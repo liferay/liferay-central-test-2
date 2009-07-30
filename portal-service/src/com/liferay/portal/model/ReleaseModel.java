@@ -24,6 +24,23 @@ package com.liferay.portal.model;
 
 import java.util.Date;
 
+/**
+ * <a href="ReleaseModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Release_ table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Release
+ * @see    com.liferay.portal.model.impl.ReleaseImpl
+ * @see    com.liferay.portal.model.impl.ReleaseModelImpl
+ */
 public interface ReleaseModel extends BaseModel<Release> {
 	public long getPrimaryKey();
 

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="CompanyConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CompanyConstants {
 
 	public static final String AUTH_TYPE_EA = "emailAddress";

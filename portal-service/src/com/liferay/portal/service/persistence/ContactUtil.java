@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="ContactUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ContactPersistence
+ * @see    ContactPersistenceImpl
+ */
 public class ContactUtil {
 	public static void cacheResult(com.liferay.portal.model.Contact contact) {
 		getPersistence().cacheResult(contact);
@@ -52,6 +64,9 @@ public class ContactUtil {
 		return getPersistence().remove(contact);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Contact, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {

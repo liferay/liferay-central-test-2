@@ -22,6 +22,29 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="Resource.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Resource_ table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.ResourceImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceModel
+ * @see    com.liferay.portal.model.impl.ResourceImpl
+ * @see    com.liferay.portal.model.impl.ResourceModelImpl
+ */
 public interface Resource extends ResourceModel {
 	public long getCompanyId()
 		throws com.liferay.portal.PortalException,

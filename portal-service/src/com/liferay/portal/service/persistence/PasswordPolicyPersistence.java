@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PasswordPolicyPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordPolicyPersistenceImpl
+ * @see    PasswordPolicyUtil
+ */
 public interface PasswordPolicyPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy);
@@ -41,6 +53,9 @@ public interface PasswordPolicyPersistence extends BasePersistence {
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(PasswordPolicy, boolean merge)}.
+	 */
 	public com.liferay.portal.model.PasswordPolicy update(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;

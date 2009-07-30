@@ -22,6 +22,23 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ListTypeModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ListType table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ListType
+ * @see    com.liferay.portal.model.impl.ListTypeImpl
+ * @see    com.liferay.portal.model.impl.ListTypeModelImpl
+ */
 public interface ListTypeModel extends BaseModel<ListType> {
 	public int getPrimaryKey();
 

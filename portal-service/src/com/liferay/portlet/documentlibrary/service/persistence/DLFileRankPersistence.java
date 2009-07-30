@@ -24,6 +24,18 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="DLFileRankPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileRankPersistenceImpl
+ * @see    DLFileRankUtil
+ */
 public interface DLFileRankPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank);
@@ -45,6 +57,9 @@ public interface DLFileRankPersistence extends BasePersistence {
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
+	 */
 	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException;

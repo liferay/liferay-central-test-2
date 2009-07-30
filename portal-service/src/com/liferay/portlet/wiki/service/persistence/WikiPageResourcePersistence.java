@@ -24,6 +24,18 @@ package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="WikiPageResourcePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiPageResourcePersistenceImpl
+ * @see    WikiPageResourceUtil
+ */
 public interface WikiPageResourcePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource);
@@ -45,6 +57,9 @@ public interface WikiPageResourcePersistence extends BasePersistence {
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(WikiPageResource, boolean merge)}.
+	 */
 	public com.liferay.portlet.wiki.model.WikiPageResource update(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;

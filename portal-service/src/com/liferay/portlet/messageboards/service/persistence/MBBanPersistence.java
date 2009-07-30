@@ -24,6 +24,18 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="MBBanPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBBanPersistenceImpl
+ * @see    MBBanUtil
+ */
 public interface MBBanPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portlet.messageboards.model.MBBan mbBan);
 
@@ -42,6 +54,9 @@ public interface MBBanPersistence extends BasePersistence {
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MBBan, boolean merge)}.
+	 */
 	public com.liferay.portlet.messageboards.model.MBBan update(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;

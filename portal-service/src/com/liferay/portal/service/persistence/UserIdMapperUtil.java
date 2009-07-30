@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="UserIdMapperUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserIdMapperPersistence
+ * @see    UserIdMapperPersistenceImpl
+ */
 public class UserIdMapperUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.UserIdMapper userIdMapper) {
@@ -55,6 +67,9 @@ public class UserIdMapperUtil {
 		return getPersistence().remove(userIdMapper);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(UserIdMapper, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {

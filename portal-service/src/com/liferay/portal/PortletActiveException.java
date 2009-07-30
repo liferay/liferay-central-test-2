@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="PortletActiveException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletActiveException extends PortalException {
 
 	public PortletActiveException() {

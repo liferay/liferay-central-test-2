@@ -24,6 +24,11 @@ package com.liferay.portal.security.auth;
 
 import java.util.Map;
 
+/**
+ * <a href="Authenticator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Authenticator {
 
 	public static final int SUCCESS = 1;

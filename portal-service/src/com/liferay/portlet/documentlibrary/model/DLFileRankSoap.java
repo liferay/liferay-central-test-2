@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="DLFileRankSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.documentlibrary.service.http.DLFileRankServiceSoap
+ */
 public class DLFileRankSoap implements Serializable {
 	public static DLFileRankSoap toSoapModel(DLFileRank model) {
 		DLFileRankSoap soapModel = new DLFileRankSoap();

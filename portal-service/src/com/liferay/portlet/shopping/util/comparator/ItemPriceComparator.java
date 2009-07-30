@@ -25,6 +25,11 @@ package com.liferay.portlet.shopping.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 
+/**
+ * <a href="ItemPriceComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ItemPriceComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "categoryId ASC, price ASC, name ASC";

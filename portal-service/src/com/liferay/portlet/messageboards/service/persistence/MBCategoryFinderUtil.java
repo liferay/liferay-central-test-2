@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+/**
+ * <a href="MBCategoryFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBCategoryFinderUtil {
 	public static int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {

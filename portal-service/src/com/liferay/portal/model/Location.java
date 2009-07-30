@@ -24,5 +24,10 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
+/**
+ * <a href="Location.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Location extends Serializable {
 }

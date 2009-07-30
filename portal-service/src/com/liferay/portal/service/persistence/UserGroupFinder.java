@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="UserGroupFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface UserGroupFinder {
 	public int countByC_N_D(long companyId, java.lang.String name,
 		java.lang.String description,

@@ -26,6 +26,23 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="WebsiteModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Website table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Website
+ * @see    com.liferay.portal.model.impl.WebsiteImpl
+ * @see    com.liferay.portal.model.impl.WebsiteModelImpl
+ */
 public interface WebsiteModel extends BaseModel<Website> {
 	public long getPrimaryKey();
 

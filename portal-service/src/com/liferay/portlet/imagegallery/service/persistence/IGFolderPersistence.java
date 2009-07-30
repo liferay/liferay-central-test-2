@@ -24,6 +24,18 @@ package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="IGFolderPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGFolderPersistenceImpl
+ * @see    IGFolderUtil
+ */
 public interface IGFolderPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder);
@@ -43,6 +55,9 @@ public interface IGFolderPersistence extends BasePersistence {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(IGFolder, boolean merge)}.
+	 */
 	public com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;

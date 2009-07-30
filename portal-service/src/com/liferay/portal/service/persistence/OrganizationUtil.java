@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="OrganizationUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrganizationPersistence
+ * @see    OrganizationPersistenceImpl
+ */
 public class OrganizationUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.Organization organization) {
@@ -55,6 +67,9 @@ public class OrganizationUtil {
 		return getPersistence().remove(organization);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Organization, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Organization update(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {

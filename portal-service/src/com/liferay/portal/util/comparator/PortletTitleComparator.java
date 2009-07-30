@@ -33,6 +33,11 @@ import java.util.Locale;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="PortletTitleComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletTitleComparator
 	implements Comparator<Portlet>, Serializable {
 

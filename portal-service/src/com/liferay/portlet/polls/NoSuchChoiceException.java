@@ -24,6 +24,11 @@ package com.liferay.portlet.polls;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="NoSuchChoiceException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchChoiceException extends PortalException {
 
 	public NoSuchChoiceException() {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="PasswordPolicyNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ */
 public class PasswordPolicyNameException extends PortalException {
 
 	public PasswordPolicyNameException() {

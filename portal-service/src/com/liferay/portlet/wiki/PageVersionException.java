@@ -24,6 +24,11 @@ package com.liferay.portlet.wiki;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="PageVersionException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PageVersionException extends PortalException {
 
 	public PageVersionException() {

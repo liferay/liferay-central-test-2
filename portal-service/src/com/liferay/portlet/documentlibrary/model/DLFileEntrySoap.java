@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="DLFileEntrySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap
+ */
 public class DLFileEntrySoap implements Serializable {
 	public static DLFileEntrySoap toSoapModel(DLFileEntry model) {
 		DLFileEntrySoap soapModel = new DLFileEntrySoap();

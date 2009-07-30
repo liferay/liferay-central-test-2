@@ -27,6 +27,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ResourceCodeSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.ResourceCodeServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.ResourceCodeServiceSoap
+ */
 public class ResourceCodeSoap implements Serializable {
 	public static ResourceCodeSoap toSoapModel(ResourceCode model) {
 		ResourceCodeSoap soapModel = new ResourceCodeSoap();

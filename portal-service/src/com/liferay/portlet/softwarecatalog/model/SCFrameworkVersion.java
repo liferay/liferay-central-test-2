@@ -22,5 +22,29 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+/**
+ * <a href="SCFrameworkVersion.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCFrameworkVersion table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCFrameworkVersionModel
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {
 }

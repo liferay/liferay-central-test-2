@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="ShoppingCartModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ShoppingCart table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCart
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
+ * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
+ */
 public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public long getPrimaryKey();
 

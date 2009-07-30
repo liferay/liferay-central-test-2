@@ -24,6 +24,11 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
 
+/**
+ * <a href="BaseModelListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BaseModelListener<T extends BaseModel<T>>
 	implements ModelListener<T> {
 

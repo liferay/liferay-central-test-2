@@ -25,6 +25,11 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.QName;
 
+/**
+ * <a href="PortletQName.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface PortletQName {
 
 	public static final String PUBLIC_RENDER_PARAMETER_NAMESPACE = "p_r_p_";

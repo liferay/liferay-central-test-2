@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.xml.QName;
 
 import java.io.Serializable;
 
+/**
+ * <a href="EventDefinition.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface EventDefinition extends Serializable {
 
 	public QName getQName();

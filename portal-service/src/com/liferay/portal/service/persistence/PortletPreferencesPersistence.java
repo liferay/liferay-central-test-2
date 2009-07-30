@@ -22,6 +22,19 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PortletPreferencesPersistence.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletPreferencesPersistenceImpl
+ * @see    PortletPreferencesUtil
+ */
 public interface PortletPreferencesPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.PortletPreferences portletPreferences);
@@ -43,6 +56,9 @@ public interface PortletPreferencesPersistence extends BasePersistence {
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(PortletPreferences, boolean merge)}.
+	 */
 	public com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;

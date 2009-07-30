@@ -22,6 +22,11 @@
 
 package com.liferay.portal.lar;
 
+/**
+ * <a href="PortletDataHandlerKeys.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class PortletDataHandlerKeys {
 
 	public static final String CATEGORIES = "CATEGORIES";

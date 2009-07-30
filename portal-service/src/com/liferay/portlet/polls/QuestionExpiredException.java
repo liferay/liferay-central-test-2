@@ -24,6 +24,11 @@ package com.liferay.portlet.polls;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="QuestionExpiredException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QuestionExpiredException extends PortalException {
 
 	public QuestionExpiredException() {

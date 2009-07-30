@@ -22,5 +22,29 @@
 
 package com.liferay.portlet.announcements.model;
 
+/**
+ * <a href="AnnouncementsDelivery.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AnnouncementsDelivery table in
+ * the database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link
+ * com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsDeliveryModel
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel {
 }

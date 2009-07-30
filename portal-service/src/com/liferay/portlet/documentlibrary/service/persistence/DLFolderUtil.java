@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+/**
+ * <a href="DLFolderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFolderPersistence
+ * @see    DLFolderPersistenceImpl
+ */
 public class DLFolderUtil {
 	public static void cacheResult(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder) {
@@ -55,6 +67,9 @@ public class DLFolderUtil {
 		return getPersistence().remove(dlFolder);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFolder, boolean merge)}.
+	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {

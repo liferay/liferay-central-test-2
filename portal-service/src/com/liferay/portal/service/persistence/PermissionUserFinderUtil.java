@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PermissionUserFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionUserFinderUtil {
 	public static int countByOrgGroupPermissions(long companyId,
 		java.lang.String name, java.lang.String primKey,

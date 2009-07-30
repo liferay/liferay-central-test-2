@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="NoSuchRoleException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchRoleException extends PortalException {
 
 	public NoSuchRoleException() {

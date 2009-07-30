@@ -24,6 +24,24 @@ package com.liferay.portal.model;
 
 import java.util.Date;
 
+/**
+ * <a href="UserTrackerPathModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the UserTrackerPath table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserTrackerPath
+ * @see    com.liferay.portal.model.impl.UserTrackerPathImpl
+ * @see    com.liferay.portal.model.impl.UserTrackerPathModelImpl
+ */
 public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	public long getPrimaryKey();
 

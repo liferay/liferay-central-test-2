@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
+/**
+ * <a href="CalEventFinder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface CalEventFinder {
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,

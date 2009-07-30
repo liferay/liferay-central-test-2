@@ -24,6 +24,18 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="SCLicensePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCLicensePersistenceImpl
+ * @see    SCLicenseUtil
+ */
 public interface SCLicensePersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense);
@@ -45,6 +57,9 @@ public interface SCLicensePersistence extends BasePersistence {
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(SCLicense, boolean merge)}.
+	 */
 	public com.liferay.portlet.softwarecatalog.model.SCLicense update(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException;

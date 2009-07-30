@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SCFrameworkVersionSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap
+ */
 public class SCFrameworkVersionSoap implements Serializable {
 	public static SCFrameworkVersionSoap toSoapModel(SCFrameworkVersion model) {
 		SCFrameworkVersionSoap soapModel = new SCFrameworkVersionSoap();

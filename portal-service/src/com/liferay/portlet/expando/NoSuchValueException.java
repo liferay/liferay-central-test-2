@@ -24,6 +24,11 @@ package com.liferay.portlet.expando;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="NoSuchValueException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchValueException extends PortalException {
 
 	public NoSuchValueException() {

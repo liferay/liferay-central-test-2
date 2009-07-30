@@ -24,6 +24,11 @@ package com.liferay.portlet.imagegallery;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="ImageSizeException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ImageSizeException extends PortalException {
 
 	public ImageSizeException() {

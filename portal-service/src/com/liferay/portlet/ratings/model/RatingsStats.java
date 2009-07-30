@@ -22,5 +22,28 @@
 
 package com.liferay.portlet.ratings.model;
 
+/**
+ * <a href="RatingsStats.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the RatingsStats table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.ratings.model.impl.RatingsStatsImpl} and
+ * rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsStatsModel
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
+ * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
+ */
 public interface RatingsStats extends RatingsStatsModel {
 }

@@ -34,6 +34,11 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * <a href="JBIRequestURL.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class JBIRequestURL {
 
 	public JBIRequestURL() {

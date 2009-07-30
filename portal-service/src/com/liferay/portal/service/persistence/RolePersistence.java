@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="RolePersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RolePersistenceImpl
+ * @see    RoleUtil
+ */
 public interface RolePersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.Role role);
 
@@ -39,6 +51,9 @@ public interface RolePersistence extends BasePersistence {
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(Role, boolean merge)}.
+	 */
 	public com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;

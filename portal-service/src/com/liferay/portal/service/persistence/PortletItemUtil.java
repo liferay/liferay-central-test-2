@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PortletItemUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletItemPersistence
+ * @see    PortletItemPersistenceImpl
+ */
 public class PortletItemUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.PortletItem portletItem) {
@@ -55,6 +67,9 @@ public class PortletItemUtil {
 		return getPersistence().remove(portletItem);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PortletItem, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.PortletItem update(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {

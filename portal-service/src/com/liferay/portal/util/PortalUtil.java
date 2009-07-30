@@ -67,26 +67,45 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="PortalUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalUtil {
 
+	/**
+	 * Adds the description for a page. This appends to the existing page
+	 * description.
+	 */
 	public static void addPageDescription(
 		String description, HttpServletRequest request) {
 
 		getPortal().addPageDescription(description, request);
 	}
 
+	/**
+	 * Adds the keywords for a page. This appends to the existing page keywords.
+	 */
 	public static void addPageKeywords(
 		String keywords, HttpServletRequest request) {
 
 		getPortal().addPageKeywords(keywords, request);
 	}
 
+	/**
+	 * Adds the subtitle for a page. This appends to the existing page subtitle.
+	 */
 	public static void addPageSubtitle(
 		String subtitle, HttpServletRequest request) {
 
 		getPortal().addPageSubtitle(subtitle, request);
 	}
 
+	/**
+	 * Adds the whole title for a page. This appends to the existing page whole
+	 * title.
+	 */
 	public static void addPageTitle(String title, HttpServletRequest request) {
 		getPortal().addPageTitle(title, request);
 	}
@@ -533,22 +552,37 @@ public class PortalUtil {
 			groupId, privateLayout, url, params);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(ActionRequest actionRequest) {
 		return getPortal().getPortletGroupId(actionRequest);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(HttpServletRequest request) {
 		return getPortal().getPortletGroupId(request);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(Layout layout) {
 		return getPortal().getPortletGroupId(layout);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(long plid) {
 		return getPortal().getPortletGroupId(plid);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(RenderRequest renderRequest) {
 		return getPortal().getPortletGroupId(renderRequest);
 	}
@@ -929,30 +963,47 @@ public class PortalUtil {
 		getPortal().sendError(status, e, request, response);
 	}
 
+	/**
+	 * Sets the description for a page. This overrides the existing page
+	 * description.
+	 */
 	public static void setPageDescription(
 		String description, HttpServletRequest request) {
 
 		getPortal().setPageDescription(description, request);
 	}
 
+	/**
+	 * Sets the keywords for a page. This overrides the existing page keywords.
+	 */
 	public static void setPageKeywords(
 		String keywords, HttpServletRequest request) {
 
 		getPortal().setPageKeywords(keywords, request);
 	}
 
+	/**
+	 * Sets the subtitle for a page. This overrides the existing page subtitle.
+	 */
 	public static void setPageSubtitle(
 		String subtitle, HttpServletRequest request) {
 
 		getPortal().setPageSubtitle(subtitle, request);
 	}
 
+	/**
+	 * Sets the whole title for a page. This overrides the existing page whole
+	 * title.
+	 */
 	public static void setPageTitle(
 		String title, HttpServletRequest request) {
 
 		getPortal().setPageTitle(title, request);
 	}
 
+	/**
+	 * Sets the port obtained on the first request to the portal.
+	 */
 	public static void setPortalPort(HttpServletRequest request) {
 		getPortal().setPortalPort(request);
 	}

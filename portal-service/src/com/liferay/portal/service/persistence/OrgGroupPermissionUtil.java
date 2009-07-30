@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="OrgGroupPermissionUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupPermissionPersistence
+ * @see    OrgGroupPermissionPersistenceImpl
+ */
 public class OrgGroupPermissionUtil {
 	public static void cacheResult(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission) {
@@ -55,6 +67,9 @@ public class OrgGroupPermissionUtil {
 		return getPersistence().remove(orgGroupPermission);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgGroupPermission, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
 		throws com.liferay.portal.SystemException {

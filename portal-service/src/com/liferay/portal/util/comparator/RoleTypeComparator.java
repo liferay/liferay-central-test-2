@@ -25,6 +25,11 @@ package com.liferay.portal.util.comparator;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Role;
 
+/**
+ * <a href="RoleTypeComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RoleTypeComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "Role_.type_ ASC, Role_.name ASC";

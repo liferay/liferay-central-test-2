@@ -28,6 +28,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="EmailAddressSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link
+ * com.liferay.portal.service.http.EmailAddressServiceSoap}.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.service.http.EmailAddressServiceSoap
+ */
 public class EmailAddressSoap implements Serializable {
 	public static EmailAddressSoap toSoapModel(EmailAddress model) {
 		EmailAddressSoap soapModel = new EmailAddressSoap();

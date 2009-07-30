@@ -22,6 +22,11 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="GroupFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class GroupFinderUtil {
 	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException {

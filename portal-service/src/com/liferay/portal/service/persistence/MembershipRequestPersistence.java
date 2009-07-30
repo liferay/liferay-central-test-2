@@ -22,6 +22,19 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="MembershipRequestPersistence.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MembershipRequestPersistenceImpl
+ * @see    MembershipRequestUtil
+ */
 public interface MembershipRequestPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portal.model.MembershipRequest membershipRequest);
@@ -43,6 +56,9 @@ public interface MembershipRequestPersistence extends BasePersistence {
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(MembershipRequest, boolean merge)}.
+	 */
 	public com.liferay.portal.model.MembershipRequest update(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;

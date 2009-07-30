@@ -34,6 +34,11 @@ import java.io.InputStream;
 import java.util.Date;
 
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
+/**
+ * <a href="DLLocalService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface DLLocalService {
 
 	public void addFile(

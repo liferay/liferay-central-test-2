@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+/**
+ * <a href="ExpandoRowUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoRowPersistence
+ * @see    ExpandoRowPersistenceImpl
+ */
 public class ExpandoRowUtil {
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow) {
@@ -55,6 +67,9 @@ public class ExpandoRowUtil {
 		return getPersistence().remove(expandoRow);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoRow, boolean merge)}.
+	 */
 	public static com.liferay.portlet.expando.model.ExpandoRow update(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException {

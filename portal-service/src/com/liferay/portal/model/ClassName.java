@@ -22,5 +22,28 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ClassName.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ClassName_ table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portal.model.impl.ClassNameImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ClassNameModel
+ * @see    com.liferay.portal.model.impl.ClassNameImpl
+ * @see    com.liferay.portal.model.impl.ClassNameModelImpl
+ */
 public interface ClassName extends ClassNameModel {
 }

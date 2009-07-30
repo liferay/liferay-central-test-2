@@ -22,6 +22,29 @@
 
 package com.liferay.portlet.messageboards.model;
 
+/**
+ * <a href="MBMessage.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBMessage table in the
+ * database.
+ * </p>
+ *
+ * <p>
+ * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMessageImpl}
+ * and rerun the ServiceBuilder to generate the new methods.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessageModel
+ * @see    com.liferay.portlet.messageboards.model.impl.MBMessageImpl
+ * @see    com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
+ */
 public interface MBMessage extends MBMessageModel {
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 

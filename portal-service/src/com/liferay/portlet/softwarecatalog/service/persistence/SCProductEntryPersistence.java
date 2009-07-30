@@ -24,6 +24,18 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.service.persistence.BasePersistence;
 
+/**
+ * <a href="SCProductEntryPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductEntryPersistenceImpl
+ * @see    SCProductEntryUtil
+ */
 public interface SCProductEntryPersistence extends BasePersistence {
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry);
@@ -45,6 +57,9 @@ public interface SCProductEntryPersistence extends BasePersistence {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use {@link #update(SCProductEntry, boolean merge)}.
+	 */
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry update(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;

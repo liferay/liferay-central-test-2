@@ -24,6 +24,11 @@ package com.liferay.portlet.shopping;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="ShippingZipException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShippingZipException extends PortalException {
 
 	public ShippingZipException() {

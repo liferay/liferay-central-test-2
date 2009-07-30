@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+/**
+ * <a href="BookmarksEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BookmarksEntryPersistence
+ * @see    BookmarksEntryPersistenceImpl
+ */
 public class BookmarksEntryUtil {
 	public static void cacheResult(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry) {
@@ -55,6 +67,9 @@ public class BookmarksEntryUtil {
 		return getPersistence().remove(bookmarksEntry);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BookmarksEntry, boolean merge)}.
+	 */
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {

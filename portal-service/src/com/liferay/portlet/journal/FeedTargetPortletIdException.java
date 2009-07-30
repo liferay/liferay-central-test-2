@@ -24,6 +24,12 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="FeedTargetPortletIdException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class FeedTargetPortletIdException extends PortalException {
 
 	public FeedTargetPortletIdException() {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal;
 
+/**
+ * <a href="NoSuchRegionException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NoSuchRegionException extends PortalException {
 
 	public NoSuchRegionException() {

@@ -31,6 +31,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * <a href="Theme.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public String getThemeId();

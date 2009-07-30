@@ -22,6 +22,18 @@
 
 package com.liferay.portal.service.persistence;
 
+/**
+ * <a href="PhoneUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PhonePersistence
+ * @see    PhonePersistenceImpl
+ */
 public class PhoneUtil {
 	public static void cacheResult(com.liferay.portal.model.Phone phone) {
 		getPersistence().cacheResult(phone);
@@ -52,6 +64,9 @@ public class PhoneUtil {
 		return getPersistence().remove(phone);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Phone, boolean merge)}.
+	 */
 	public static com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {

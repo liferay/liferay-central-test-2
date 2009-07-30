@@ -24,6 +24,11 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+/**
+ * <a href="PortletDataHandlerControl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class PortletDataHandlerControl {
 
 	public static String getNamespacedControlName(

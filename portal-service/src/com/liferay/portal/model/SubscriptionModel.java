@@ -26,6 +26,24 @@ import com.liferay.portal.SystemException;
 
 import java.util.Date;
 
+/**
+ * <a href="SubscriptionModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Subscription table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    Subscription
+ * @see    com.liferay.portal.model.impl.SubscriptionImpl
+ * @see    com.liferay.portal.model.impl.SubscriptionModelImpl
+ */
 public interface SubscriptionModel extends BaseModel<Subscription> {
 	public long getPrimaryKey();
 

@@ -27,6 +27,24 @@ import com.liferay.portal.model.BaseModel;
 
 import java.util.Date;
 
+/**
+ * <a href="SCProductVersionModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCProductVersion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductVersion
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
+ */
 public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	public long getPrimaryKey();
 

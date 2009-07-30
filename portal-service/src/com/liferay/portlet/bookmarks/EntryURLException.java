@@ -24,6 +24,11 @@ package com.liferay.portlet.bookmarks;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="EntryURLException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntryURLException extends PortalException {
 
 	public EntryURLException() {

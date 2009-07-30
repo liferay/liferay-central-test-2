@@ -22,6 +22,11 @@
 
 package com.liferay.portal.model;
 
+/**
+ * <a href="ResourcePermissionConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourcePermissionConstants {
 
 	public static final int OPERATOR_ADD = 1;

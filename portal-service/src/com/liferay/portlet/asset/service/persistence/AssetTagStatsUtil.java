@@ -22,6 +22,18 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+/**
+ * <a href="AssetTagStatsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagStatsPersistence
+ * @see    AssetTagStatsPersistenceImpl
+ */
 public class AssetTagStatsUtil {
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats) {
@@ -55,6 +67,9 @@ public class AssetTagStatsUtil {
 		return getPersistence().remove(assetTagStats);
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AssetTagStats, boolean merge)}.
+	 */
 	public static com.liferay.portlet.asset.model.AssetTagStats update(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
 		throws com.liferay.portal.SystemException {

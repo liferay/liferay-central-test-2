@@ -27,6 +27,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="WebDAVRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface WebDAVRequest {
 
 	public WebDAVStorage getWebDAVStorage();

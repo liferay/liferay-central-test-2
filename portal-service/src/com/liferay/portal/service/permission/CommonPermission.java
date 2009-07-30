@@ -26,6 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public interface CommonPermission {
 
 	public void check(
