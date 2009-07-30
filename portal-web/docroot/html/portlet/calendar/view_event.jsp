@@ -280,6 +280,25 @@ if ((event.getRepeating()) && (recurrence != null)) {
 			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
 		</td>
 	</tr>
+
+	<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<liferay-ui:custom-attribute-list
+					className="<%= CalEvent.class.getName() %>"
+					classPK="<%= (event != null) ? event.getEventId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</td>
+		</tr>
+	</liferay-ui:custom-attributes-available>
+
 	<tr>
 		<td colspan="2">
 			<br />

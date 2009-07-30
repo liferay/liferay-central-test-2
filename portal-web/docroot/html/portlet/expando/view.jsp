@@ -109,6 +109,7 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 		BlogsEntry.class.getName(),
 		BookmarksEntry.class.getName(),
 		BookmarksFolder.class.getName(),
+		CalEvent.class.getName(),
 		DLFileEntry.class.getName(),
 		DLFolder.class.getName(),
 		IGFolder.class.getName(),
@@ -126,6 +127,9 @@ private String _getIconPath(String modelResource) {
 	}
 	else if (modelResource.equals(BookmarksFolder.class.getName())) {
 		return "/common/folder.png";
+	}
+	else if (modelResource.equals(CalEvent.class.getName())) {
+		return "/common/date.png";
 	}
 	else if (modelResource.equals(DLFileEntry.class.getName())) {
 		return "/document_library/page.png";

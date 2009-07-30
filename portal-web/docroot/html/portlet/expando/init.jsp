@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
+<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
 <%@ page import="com.liferay.portlet.expando.ColumnNameException" %>
