@@ -23,6 +23,7 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Company",
 	{
 		addCompany: true,
+		deleteLogo: true,
 		getCompanyById: true,
 		getCompanyByLogoId: true,
 		getCompanyByMx: true,

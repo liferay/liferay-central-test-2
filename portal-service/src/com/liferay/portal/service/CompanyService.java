@@ -37,6 +37,10 @@ public interface CompanyService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteLogo(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company getCompanyById(long companyId)
 		throws com.liferay.portal.PortalException,

@@ -112,6 +112,12 @@ public class CompanyLocalServiceUtil {
 		getService().checkCompanyKey(companyId);
 	}
 
+	public static void deleteLogo(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteLogo(companyId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies()
 		throws com.liferay.portal.SystemException {
 		return getService().getCompanies();

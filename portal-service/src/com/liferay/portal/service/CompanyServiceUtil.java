@@ -31,6 +31,12 @@ public class CompanyServiceUtil {
 		return getService().addCompany(webId, virtualHost, mx, shardName, system);
 	}
 
+	public static void deleteLogo(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteLogo(companyId);
+	}
+
 	public static com.liferay.portal.model.Company getCompanyById(
 		long companyId)
 		throws com.liferay.portal.PortalException,

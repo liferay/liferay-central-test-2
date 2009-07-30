@@ -97,6 +97,37 @@ public class CompanyServiceHttp {
 		}
 	}
 
+	public static void deleteLogo(HttpPrincipal httpPrincipal, long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
+					"deleteLogo", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Company getCompanyById(
 		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.PortalException,

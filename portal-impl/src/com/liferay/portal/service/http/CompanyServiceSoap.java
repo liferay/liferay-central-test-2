@@ -46,6 +46,17 @@ public class CompanyServiceSoap {
 		}
 	}
 
+	public static void deleteLogo(long companyId) throws RemoteException {
+		try {
+			CompanyServiceUtil.deleteLogo(companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.CompanySoap getCompanyById(
 		long companyId) throws RemoteException {
 		try {
