@@ -46,6 +46,11 @@ import java.util.regex.Pattern;
 
 import org.apache.tools.ant.DirectoryScanner;
 
+/**
+ * <a href="SourceFormatter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SourceFormatter {
 
 	public static void main(String[] args) {
@@ -381,9 +386,6 @@ public class SourceFormatter {
 			}
 
 			newContent = stripImports(newContent, packagePath, className);
-
-			newContent = StringUtil.replace(
-				newContent, "@author Raymond Aug?", "@author Raymond Augé");
 
 			if (newContent.indexOf(";\n/**") != -1) {
 				newContent = StringUtil.replace(
