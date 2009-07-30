@@ -62,6 +62,7 @@ import java.util.List;
  * @see    ShoppingOrderImpl
  * @see    com.liferay.portlet.shopping.model.ShoppingOrder
  * @see    com.liferay.portlet.shopping.model.ShoppingOrderModel
+ * @generated
  */
 public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder> {
 	public static final String TABLE_NAME = "ShoppingOrder";

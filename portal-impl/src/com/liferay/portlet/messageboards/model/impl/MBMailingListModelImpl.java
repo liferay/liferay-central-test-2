@@ -61,6 +61,7 @@ import java.util.List;
  * @see    MBMailingListImpl
  * @see    com.liferay.portlet.messageboards.model.MBMailingList
  * @see    com.liferay.portlet.messageboards.model.MBMailingListModel
+ * @generated
  */
 public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	public static final String TABLE_NAME = "MBMailingList";

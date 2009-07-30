@@ -62,6 +62,7 @@ import java.util.List;
  * @see    DLFileRankImpl
  * @see    com.liferay.portlet.documentlibrary.model.DLFileRank
  * @see    com.liferay.portlet.documentlibrary.model.DLFileRankModel
+ * @generated
  */
 public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {
 	public static final String TABLE_NAME = "DLFileRank";

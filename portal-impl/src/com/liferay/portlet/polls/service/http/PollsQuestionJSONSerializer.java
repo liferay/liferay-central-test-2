@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PollsQuestionServiceJSON
+ * @see    com.liferay.portlet.polls.service.http.PollsQuestionServiceJSON
+ * @generated
  */
 public class PollsQuestionJSONSerializer {
 	public static JSONObject toJSONObject(PollsQuestion model) {

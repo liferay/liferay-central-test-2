@@ -63,8 +63,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="SCProductEntryPersistenceImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="SCProductEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -74,6 +73,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    SCProductEntryPersistence
  * @see    SCProductEntryUtil
+ * @generated
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	implements SCProductEntryPersistence {
@@ -302,6 +302,18 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return update(scProductEntry, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  scProductEntry the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when scProductEntry is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public SCProductEntry update(SCProductEntry scProductEntry, boolean merge)
 		throws SystemException {
 		boolean isNew = scProductEntry.isNew();

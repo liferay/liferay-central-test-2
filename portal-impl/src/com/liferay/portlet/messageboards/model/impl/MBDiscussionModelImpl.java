@@ -59,6 +59,7 @@ import java.util.List;
  * @see    MBDiscussionImpl
  * @see    com.liferay.portlet.messageboards.model.MBDiscussion
  * @see    com.liferay.portlet.messageboards.model.MBDiscussionModel
+ * @generated
  */
 public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {
 	public static final String TABLE_NAME = "MBDiscussion";

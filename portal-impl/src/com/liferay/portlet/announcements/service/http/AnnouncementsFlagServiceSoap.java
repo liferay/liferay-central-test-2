@@ -30,8 +30,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="AnnouncementsFlagServiceSoap.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AnnouncementsFlagServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,23 +38,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil}
- * service utility. The static methods of this class calls the same methods of
- * the service utility. However, the signatures are different because it is
- * difficult for SOAP to support certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portlet.announcements.model.AnnouncementsFlagSoap}. If the method
- * in the service utility returns a {@link
- * com.liferay.portlet.announcements.model.AnnouncementsFlag}, that is
- * translated to a {@link
- * com.liferay.portlet.announcements.model.AnnouncementsFlagSoap}. Methods that
- * SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portlet.announcements.model.AnnouncementsFlagSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portlet.announcements.model.AnnouncementsFlag}, that is translated to a
+ * {@link com.liferay.portlet.announcements.model.AnnouncementsFlagSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -80,6 +77,7 @@ import java.rmi.RemoteException;
  * @see    AnnouncementsFlagServiceHttp
  * @see    com.liferay.portlet.announcements.model.AnnouncementsFlagSoap
  * @see    com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil
+ * @generated
  */
 public class AnnouncementsFlagServiceSoap {
 	public static void addFlag(long entryId, int value)

@@ -71,6 +71,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    ShoppingItemPersistence
  * @see    ShoppingItemUtil
+ * @generated
  */
 public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingItemPersistence {
@@ -299,6 +300,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		return update(shoppingItem, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  shoppingItem the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when shoppingItem is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public ShoppingItem update(ShoppingItem shoppingItem, boolean merge)
 		throws SystemException {
 		boolean isNew = shoppingItem.isNew();

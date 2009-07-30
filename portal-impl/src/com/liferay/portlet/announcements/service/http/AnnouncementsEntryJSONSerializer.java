@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsEntryJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AnnouncementsEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link AnnouncementsEntryServiceJSON} to translate
- * objects.
+ * This class is used by {@link AnnouncementsEntryServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AnnouncementsEntryServiceJSON
+ * @see    com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceJSON
+ * @generated
  */
 public class AnnouncementsEntryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsEntry model) {

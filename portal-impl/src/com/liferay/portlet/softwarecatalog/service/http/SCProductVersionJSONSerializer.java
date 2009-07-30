@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="SCProductVersionJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="SCProductVersionJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link SCProductVersionServiceJSON} to translate
- * objects.
+ * This class is used by {@link SCProductVersionServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCProductVersionServiceJSON
+ * @see    com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceJSON
+ * @generated
  */
 public class SCProductVersionJSONSerializer {
 	public static JSONObject toJSONObject(SCProductVersion model) {

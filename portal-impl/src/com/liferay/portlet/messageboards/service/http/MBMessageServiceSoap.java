@@ -38,22 +38,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portlet.messageboards.service.MBMessageServiceUtil} service
- * utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it is
- * difficult for SOAP to support certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portlet.messageboards.service.MBMessageServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portlet.messageboards.model.MBMessageSoap}. If the method in the
- * service utility returns a {@link
- * com.liferay.portlet.messageboards.model.MBMessage}, that is translated to a
- * {@link com.liferay.portlet.messageboards.model.MBMessageSoap}. Methods that
- * SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portlet.messageboards.model.MBMessageSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portlet.messageboards.model.MBMessage}, that is translated to a
+ * {@link com.liferay.portlet.messageboards.model.MBMessageSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -78,6 +77,7 @@ import java.rmi.RemoteException;
  * @see    MBMessageServiceHttp
  * @see    com.liferay.portlet.messageboards.model.MBMessageSoap
  * @see    com.liferay.portlet.messageboards.service.MBMessageServiceUtil
+ * @generated
  */
 public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(

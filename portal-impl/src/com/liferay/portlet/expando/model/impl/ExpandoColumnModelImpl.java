@@ -56,6 +56,7 @@ import java.util.List;
  * @see    ExpandoColumnImpl
  * @see    com.liferay.portlet.expando.model.ExpandoColumn
  * @see    com.liferay.portlet.expando.model.ExpandoColumnModel
+ * @generated
  */
 public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {
 	public static final String TABLE_NAME = "ExpandoColumn";

@@ -40,11 +40,11 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil} service
- * utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -66,6 +66,7 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil;
  * @see    MBMessageFlagServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
+ * @generated
  */
 public class MBMessageFlagServiceHttp {
 	public static void addAnswerFlag(HttpPrincipal httpPrincipal, long messageId)

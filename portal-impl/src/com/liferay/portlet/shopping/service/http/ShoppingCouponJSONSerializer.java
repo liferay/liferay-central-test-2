@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="ShoppingCouponJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ShoppingCouponJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -46,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingCouponServiceJSON
+ * @see    com.liferay.portlet.shopping.service.http.ShoppingCouponServiceJSON
+ * @generated
  */
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {

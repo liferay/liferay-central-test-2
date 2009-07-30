@@ -61,6 +61,7 @@ import java.util.List;
  * @see    MBCategoryImpl
  * @see    com.liferay.portlet.messageboards.model.MBCategory
  * @see    com.liferay.portlet.messageboards.model.MBCategoryModel
+ * @generated
  */
 public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	public static final String TABLE_NAME = "MBCategory";

@@ -43,11 +43,11 @@ import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.polls.service.PollsQuestionServiceUtil} service utility.
- * The static methods of this class calls the same methods of the service
- * utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.polls.service.PollsQuestionServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -69,6 +69,7 @@ import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
  * @see    PollsQuestionServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.polls.service.PollsQuestionServiceUtil
+ * @generated
  */
 public class PollsQuestionServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(

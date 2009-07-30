@@ -53,13 +53,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AssetTag table in the database.
+ * This interface is a model that represents the AssetTag table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AssetTagImpl
  * @see    com.liferay.portlet.asset.model.AssetTag
  * @see    com.liferay.portlet.asset.model.AssetTagModel
+ * @generated
  */
 public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 	public static final String TABLE_NAME = "AssetTag";

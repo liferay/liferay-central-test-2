@@ -61,6 +61,7 @@ import java.util.List;
  * @see    DLFileShortcutImpl
  * @see    com.liferay.portlet.documentlibrary.model.DLFileShortcut
  * @see    com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
+ * @generated
  */
 public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	public static final String TABLE_NAME = "DLFileShortcut";

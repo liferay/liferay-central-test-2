@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFolderServiceJSON
+ * @see    com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON
+ * @generated
  */
 public class DLFolderJSONSerializer {
 	public static JSONObject toJSONObject(DLFolder model) {

@@ -60,6 +60,7 @@ import java.util.List;
  * @see    MBStatsUserImpl
  * @see    com.liferay.portlet.messageboards.model.MBStatsUser
  * @see    com.liferay.portlet.messageboards.model.MBStatsUserModel
+ * @generated
  */
 public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser> {
 	public static final String TABLE_NAME = "MBStatsUser";

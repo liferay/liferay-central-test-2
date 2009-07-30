@@ -54,13 +54,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the CalEvent table in the database.
+ * This interface is a model that represents the CalEvent table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    CalEventImpl
  * @see    com.liferay.portlet.calendar.model.CalEvent
  * @see    com.liferay.portlet.calendar.model.CalEventModel
+ * @generated
  */
 public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	public static final String TABLE_NAME = "CalEvent";

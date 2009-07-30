@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WikiPageServiceJSON
+ * @see    com.liferay.portlet.wiki.service.http.WikiPageServiceJSON
+ * @generated
  */
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {

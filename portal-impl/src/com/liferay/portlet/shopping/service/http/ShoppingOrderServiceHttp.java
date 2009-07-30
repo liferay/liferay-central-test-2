@@ -44,11 +44,11 @@ import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil} service
- * utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -70,6 +70,7 @@ import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
  * @see    ShoppingOrderServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil
+ * @generated
  */
 public class ShoppingOrderServiceHttp {
 	public static void completeOrder(HttpPrincipal httpPrincipal, long groupId,

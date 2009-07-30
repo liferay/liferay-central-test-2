@@ -63,6 +63,7 @@ import java.util.List;
  * @see    MBMessageImpl
  * @see    com.liferay.portlet.messageboards.model.MBMessage
  * @see    com.liferay.portlet.messageboards.model.MBMessageModel
+ * @generated
  */
 public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	public static final String TABLE_NAME = "MBMessage";

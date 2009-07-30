@@ -58,6 +58,7 @@ import java.util.List;
  * @see    WikiPageResourceImpl
  * @see    com.liferay.portlet.wiki.model.WikiPageResource
  * @see    com.liferay.portlet.wiki.model.WikiPageResourceModel
+ * @generated
  */
 public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {
 	public static final String TABLE_NAME = "WikiPageResource";

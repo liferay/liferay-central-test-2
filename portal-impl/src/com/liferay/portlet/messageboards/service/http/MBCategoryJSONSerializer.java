@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBCategoryServiceJSON
+ * @see    com.liferay.portlet.messageboards.service.http.MBCategoryServiceJSON
+ * @generated
  */
 public class MBCategoryJSONSerializer {
 	public static JSONObject toJSONObject(MBCategory model) {

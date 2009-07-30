@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="JournalArticleJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="JournalArticleJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -46,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalArticleServiceJSON
+ * @see    com.liferay.portlet.journal.service.http.JournalArticleServiceJSON
+ * @generated
  */
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {

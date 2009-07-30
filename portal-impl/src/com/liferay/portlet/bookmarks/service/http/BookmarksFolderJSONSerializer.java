@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="BookmarksFolderJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BookmarksFolderJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link BookmarksFolderServiceJSON} to translate
- * objects.
+ * This class is used by {@link BookmarksFolderServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BookmarksFolderServiceJSON
+ * @see    com.liferay.portlet.bookmarks.service.http.BookmarksFolderServiceJSON
+ * @generated
  */
 public class BookmarksFolderJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksFolder model) {

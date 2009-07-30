@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBBanServiceJSON
+ * @see    com.liferay.portlet.messageboards.service.http.MBBanServiceJSON
+ * @generated
  */
 public class MBBanJSONSerializer {
 	public static JSONObject toJSONObject(MBBan model) {

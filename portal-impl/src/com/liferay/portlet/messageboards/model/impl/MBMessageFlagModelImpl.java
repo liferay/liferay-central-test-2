@@ -60,6 +60,7 @@ import java.util.List;
  * @see    MBMessageFlagImpl
  * @see    com.liferay.portlet.messageboards.model.MBMessageFlag
  * @see    com.liferay.portlet.messageboards.model.MBMessageFlagModel
+ * @generated
  */
 public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public static final String TABLE_NAME = "MBMessageFlag";

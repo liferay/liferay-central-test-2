@@ -35,8 +35,7 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
 
 /**
- * <a href="AnnouncementsEntryServiceHttp.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AnnouncementsEntryServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -44,12 +43,11 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil}
- * service utility. The static methods of this class calls the same methods of
- * the service utility. However, the signatures are different because it
- * requires an additional {@link com.liferay.portal.security.auth.HttpPrincipal}
- * parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -71,6 +69,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
  * @see    AnnouncementsEntryServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil
+ * @generated
  */
 public class AnnouncementsEntryServiceHttp {
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(

@@ -72,6 +72,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    AssetEntryPersistence
  * @see    AssetEntryUtil
+ * @generated
  */
 public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 	implements AssetEntryPersistence {
@@ -267,6 +268,18 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		return update(assetEntry, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  assetEntry the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when assetEntry is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public AssetEntry update(AssetEntry assetEntry, boolean merge)
 		throws SystemException {
 		boolean isNew = assetEntry.isNew();

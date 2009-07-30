@@ -38,22 +38,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil}
- * service utility. The static methods of this class calls the same methods of
- * the service utility. However, the signatures are different because it is
- * difficult for SOAP to support certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap}. If the method
- * in the service utility returns a {@link
- * com.liferay.portlet.documentlibrary.model.DLFileShortcut}, that is translated
- * to a {@link com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap}.
- * Methods that SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portlet.documentlibrary.model.DLFileShortcut}, that is translated to a
+ * {@link com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -78,6 +77,7 @@ import java.rmi.RemoteException;
  * @see    DLFileShortcutServiceHttp
  * @see    com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap
  * @see    com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil
+ * @generated
  */
 public class DLFileShortcutServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(

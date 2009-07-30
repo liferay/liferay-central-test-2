@@ -63,6 +63,7 @@ import java.util.List;
  * @see    TasksProposalImpl
  * @see    com.liferay.portlet.tasks.model.TasksProposal
  * @see    com.liferay.portlet.tasks.model.TasksProposalModel
+ * @generated
  */
 public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {
 	public static final String TABLE_NAME = "TasksProposal";

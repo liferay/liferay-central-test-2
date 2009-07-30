@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="BookmarksEntryJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BookmarksEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -46,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BookmarksEntryServiceJSON
+ * @see    com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceJSON
+ * @generated
  */
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {

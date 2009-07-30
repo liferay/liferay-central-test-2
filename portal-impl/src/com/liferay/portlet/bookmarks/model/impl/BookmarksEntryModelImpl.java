@@ -61,6 +61,7 @@ import java.util.List;
  * @see    BookmarksEntryImpl
  * @see    com.liferay.portlet.bookmarks.model.BookmarksEntry
  * @see    com.liferay.portlet.bookmarks.model.BookmarksEntryModel
+ * @generated
  */
 public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {
 	public static final String TABLE_NAME = "BookmarksEntry";

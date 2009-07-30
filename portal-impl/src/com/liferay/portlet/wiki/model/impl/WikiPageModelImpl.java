@@ -53,13 +53,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the WikiPage table in the database.
+ * This interface is a model that represents the WikiPage table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    WikiPageImpl
  * @see    com.liferay.portlet.wiki.model.WikiPage
  * @see    com.liferay.portlet.wiki.model.WikiPageModel
+ * @generated
  */
 public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public static final String TABLE_NAME = "WikiPage";

@@ -59,6 +59,7 @@ import java.util.List;
  * @see    AssetTagStatsImpl
  * @see    com.liferay.portlet.asset.model.AssetTagStats
  * @see    com.liferay.portlet.asset.model.AssetTagStatsModel
+ * @generated
  */
 public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
 	public static final String TABLE_NAME = "AssetTagStats";

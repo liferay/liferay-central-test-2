@@ -44,8 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsDeliveryModelImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AnnouncementsDeliveryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -53,14 +52,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the AnnouncementsDelivery table in
- * the database.
+ * This interface is a model that represents the AnnouncementsDelivery table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    AnnouncementsDeliveryImpl
  * @see    com.liferay.portlet.announcements.model.AnnouncementsDelivery
  * @see    com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
+ * @generated
  */
 public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery> {
 	public static final String TABLE_NAME = "AnnouncementsDelivery";

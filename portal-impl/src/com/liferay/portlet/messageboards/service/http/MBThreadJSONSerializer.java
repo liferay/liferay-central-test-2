@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBThreadServiceJSON
+ * @see    com.liferay.portlet.messageboards.service.http.MBThreadServiceJSON
+ * @generated
  */
 public class MBThreadJSONSerializer {
 	public static JSONObject toJSONObject(MBThread model) {

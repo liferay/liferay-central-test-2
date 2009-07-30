@@ -63,6 +63,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    MBBanPersistence
  * @see    MBBanUtil
+ * @generated
  */
 public class MBBanPersistenceImpl extends BasePersistenceImpl
 	implements MBBanPersistence {
@@ -262,6 +263,18 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		return update(mbBan, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  mbBan the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when mbBan is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public MBBan update(MBBan mbBan, boolean merge) throws SystemException {
 		boolean isNew = mbBan.isNew();
 

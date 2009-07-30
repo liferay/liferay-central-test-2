@@ -31,8 +31,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsDeliveryJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AnnouncementsDeliveryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -40,12 +39,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link AnnouncementsDeliveryServiceJSON} to translate
- * objects.
+ * This class is used by {@link AnnouncementsDeliveryServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AnnouncementsDeliveryServiceJSON
+ * @see    com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceJSON
+ * @generated
  */
 public class AnnouncementsDeliveryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsDelivery model) {

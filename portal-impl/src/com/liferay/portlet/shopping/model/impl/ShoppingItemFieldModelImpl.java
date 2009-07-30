@@ -58,6 +58,7 @@ import java.util.List;
  * @see    ShoppingItemFieldImpl
  * @see    com.liferay.portlet.shopping.model.ShoppingItemField
  * @see    com.liferay.portlet.shopping.model.ShoppingItemFieldModel
+ * @generated
  */
 public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField> {
 	public static final String TABLE_NAME = "ShoppingItemField";

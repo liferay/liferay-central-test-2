@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MBMessageFlagServiceJSON
+ * @see    com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceJSON
+ * @generated
  */
 public class MBMessageFlagJSONSerializer {
 	public static JSONObject toJSONObject(MBMessageFlag model) {

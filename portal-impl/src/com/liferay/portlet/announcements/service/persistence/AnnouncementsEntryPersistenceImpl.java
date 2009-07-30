@@ -55,8 +55,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="AnnouncementsEntryPersistenceImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AnnouncementsEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -66,6 +65,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    AnnouncementsEntryPersistence
  * @see    AnnouncementsEntryUtil
+ * @generated
  */
 public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsEntryPersistence {
@@ -290,6 +290,18 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
 		return update(announcementsEntry, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  announcementsEntry the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when announcementsEntry is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public AnnouncementsEntry update(AnnouncementsEntry announcementsEntry,
 		boolean merge) throws SystemException {
 		boolean isNew = announcementsEntry.isNew();

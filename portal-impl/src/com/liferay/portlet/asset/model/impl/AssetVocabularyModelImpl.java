@@ -61,6 +61,7 @@ import java.util.List;
  * @see    AssetVocabularyImpl
  * @see    com.liferay.portlet.asset.model.AssetVocabulary
  * @see    com.liferay.portlet.asset.model.AssetVocabularyModel
+ * @generated
  */
 public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public static final String TABLE_NAME = "AssetVocabulary";

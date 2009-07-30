@@ -62,6 +62,7 @@ import java.util.List;
  * @see    SCProductEntryImpl
  * @see    com.liferay.portlet.softwarecatalog.model.SCProductEntry
  * @see    com.liferay.portlet.softwarecatalog.model.SCProductEntryModel
+ * @generated
  */
 public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry> {
 	public static final String TABLE_NAME = "SCProductEntry";

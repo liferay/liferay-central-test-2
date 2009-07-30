@@ -61,6 +61,7 @@ import java.util.List;
  * @see    SocialRequestImpl
  * @see    com.liferay.portlet.social.model.SocialRequest
  * @see    com.liferay.portlet.social.model.SocialRequestModel
+ * @generated
  */
 public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {
 	public static final String TABLE_NAME = "SocialRequest";

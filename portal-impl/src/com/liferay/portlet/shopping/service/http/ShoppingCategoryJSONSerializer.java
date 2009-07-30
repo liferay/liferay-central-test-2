@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="ShoppingCategoryJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ShoppingCategoryJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link ShoppingCategoryServiceJSON} to translate
- * objects.
+ * This class is used by {@link ShoppingCategoryServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingCategoryServiceJSON
+ * @see    com.liferay.portlet.shopping.service.http.ShoppingCategoryServiceJSON
+ * @generated
  */
 public class ShoppingCategoryJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCategory model) {

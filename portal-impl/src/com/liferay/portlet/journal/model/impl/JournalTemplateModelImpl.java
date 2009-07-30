@@ -61,6 +61,7 @@ import java.util.List;
  * @see    JournalTemplateImpl
  * @see    com.liferay.portlet.journal.model.JournalTemplate
  * @see    com.liferay.portlet.journal.model.JournalTemplateModel
+ * @generated
  */
 public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate> {
 	public static final String TABLE_NAME = "JournalTemplate";

@@ -58,6 +58,7 @@ import java.util.List;
  * @see    ExpandoValueImpl
  * @see    com.liferay.portlet.expando.model.ExpandoValue
  * @see    com.liferay.portlet.expando.model.ExpandoValueModel
+ * @generated
  */
 public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public static final String TABLE_NAME = "ExpandoValue";

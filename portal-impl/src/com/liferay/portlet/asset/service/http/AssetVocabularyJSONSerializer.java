@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetVocabularyJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AssetVocabularyJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link AssetVocabularyServiceJSON} to translate
- * objects.
+ * This class is used by {@link AssetVocabularyServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetVocabularyServiceJSON
+ * @see    com.liferay.portlet.asset.service.http.AssetVocabularyServiceJSON
+ * @generated
  */
 public class AssetVocabularyJSONSerializer {
 	public static JSONObject toJSONObject(AssetVocabulary model) {

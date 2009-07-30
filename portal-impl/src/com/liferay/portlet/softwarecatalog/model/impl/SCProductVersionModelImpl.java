@@ -62,6 +62,7 @@ import java.util.List;
  * @see    SCProductVersionImpl
  * @see    com.liferay.portlet.softwarecatalog.model.SCProductVersion
  * @see    com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
+ * @generated
  */
 public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {
 	public static final String TABLE_NAME = "SCProductVersion";

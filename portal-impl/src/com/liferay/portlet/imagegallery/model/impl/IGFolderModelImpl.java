@@ -53,13 +53,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the IGFolder table in the database.
+ * This interface is a model that represents the IGFolder table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    IGFolderImpl
  * @see    com.liferay.portlet.imagegallery.model.IGFolder
  * @see    com.liferay.portlet.imagegallery.model.IGFolderModel
+ * @generated
  */
 public class IGFolderModelImpl extends BaseModelImpl<IGFolder> {
 	public static final String TABLE_NAME = "IGFolder";

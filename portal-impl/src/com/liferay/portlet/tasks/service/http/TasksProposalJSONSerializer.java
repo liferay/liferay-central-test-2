@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    TasksProposalServiceJSON
+ * @see    com.liferay.portlet.tasks.service.http.TasksProposalServiceJSON
+ * @generated
  */
 public class TasksProposalJSONSerializer {
 	public static JSONObject toJSONObject(TasksProposal model) {

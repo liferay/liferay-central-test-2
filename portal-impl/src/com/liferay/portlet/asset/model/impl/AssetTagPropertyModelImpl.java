@@ -61,6 +61,7 @@ import java.util.List;
  * @see    AssetTagPropertyImpl
  * @see    com.liferay.portlet.asset.model.AssetTagProperty
  * @see    com.liferay.portlet.asset.model.AssetTagPropertyModel
+ * @generated
  */
 public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty> {
 	public static final String TABLE_NAME = "AssetTagProperty";

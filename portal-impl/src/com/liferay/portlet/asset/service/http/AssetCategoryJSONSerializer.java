@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetCategoryServiceJSON
+ * @see    com.liferay.portlet.asset.service.http.AssetCategoryServiceJSON
+ * @generated
  */
 public class AssetCategoryJSONSerializer {
 	public static JSONObject toJSONObject(AssetCategory model) {

@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    IGFolderServiceJSON
+ * @see    com.liferay.portlet.imagegallery.service.http.IGFolderServiceJSON
+ * @generated
  */
 public class IGFolderJSONSerializer {
 	public static JSONObject toJSONObject(IGFolder model) {

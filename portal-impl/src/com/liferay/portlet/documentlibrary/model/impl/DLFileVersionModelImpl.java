@@ -61,6 +61,7 @@ import java.util.List;
  * @see    DLFileVersionImpl
  * @see    com.liferay.portlet.documentlibrary.model.DLFileVersion
  * @see    com.liferay.portlet.documentlibrary.model.DLFileVersionModel
+ * @generated
  */
 public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public static final String TABLE_NAME = "DLFileVersion";

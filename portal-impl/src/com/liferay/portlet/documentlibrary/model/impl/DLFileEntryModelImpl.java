@@ -61,6 +61,7 @@ import java.util.List;
  * @see    DLFileEntryImpl
  * @see    com.liferay.portlet.documentlibrary.model.DLFileEntry
  * @see    com.liferay.portlet.documentlibrary.model.DLFileEntryModel
+ * @generated
  */
 public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	public static final String TABLE_NAME = "DLFileEntry";

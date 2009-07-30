@@ -41,11 +41,11 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.expando.service.ExpandoValueServiceUtil} service utility.
- * The static methods of this class calls the same methods of the service
- * utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.expando.service.ExpandoValueServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -67,6 +67,7 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
  * @see    ExpandoValueServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.expando.service.ExpandoValueServiceUtil
+ * @generated
  */
 public class ExpandoValueServiceHttp {
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(

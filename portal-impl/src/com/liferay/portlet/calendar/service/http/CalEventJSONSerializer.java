@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    CalEventServiceJSON
+ * @see    com.liferay.portlet.calendar.service.http.CalEventServiceJSON
+ * @generated
  */
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {

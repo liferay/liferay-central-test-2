@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileEntryServiceJSON
+ * @see    com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceJSON
+ * @generated
  */
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {

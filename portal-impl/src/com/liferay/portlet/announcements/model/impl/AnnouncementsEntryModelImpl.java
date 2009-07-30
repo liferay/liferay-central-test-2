@@ -63,6 +63,7 @@ import java.util.List;
  * @see    AnnouncementsEntryImpl
  * @see    com.liferay.portlet.announcements.model.AnnouncementsEntry
  * @see    com.liferay.portlet.announcements.model.AnnouncementsEntryModel
+ * @generated
  */
 public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntry> {
 	public static final String TABLE_NAME = "AnnouncementsEntry";

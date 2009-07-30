@@ -62,6 +62,7 @@ import java.util.List;
  * @see    TasksReviewImpl
  * @see    com.liferay.portlet.tasks.model.TasksReview
  * @see    com.liferay.portlet.tasks.model.TasksReviewModel
+ * @generated
  */
 public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public static final String TABLE_NAME = "TasksReview";

@@ -40,8 +40,8 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.polls.service.PollsVoteServiceUtil} service utility. The
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.polls.service.PollsVoteServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
@@ -66,6 +66,7 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
  * @see    PollsVoteServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.polls.service.PollsVoteServiceUtil
+ * @generated
  */
 public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(

@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="AssetCategoryPropertyJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="AssetCategoryPropertyJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link AssetCategoryPropertyServiceJSON} to translate
- * objects.
+ * This class is used by {@link AssetCategoryPropertyServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetCategoryPropertyServiceJSON
+ * @see    com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceJSON
+ * @generated
  */
 public class AssetCategoryPropertyJSONSerializer {
 	public static JSONObject toJSONObject(AssetCategoryProperty model) {

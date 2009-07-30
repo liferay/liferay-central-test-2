@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    IGImageServiceJSON
+ * @see    com.liferay.portlet.imagegallery.service.http.IGImageServiceJSON
+ * @generated
  */
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {

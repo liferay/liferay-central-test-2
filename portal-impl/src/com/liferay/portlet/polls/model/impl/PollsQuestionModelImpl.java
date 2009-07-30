@@ -70,6 +70,7 @@ import java.util.Map;
  * @see    PollsQuestionImpl
  * @see    com.liferay.portlet.polls.model.PollsQuestion
  * @see    com.liferay.portlet.polls.model.PollsQuestionModel
+ * @generated
  */
 public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {
 	public static final String TABLE_NAME = "PollsQuestion";

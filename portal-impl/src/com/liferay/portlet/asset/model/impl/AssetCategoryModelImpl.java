@@ -61,6 +61,7 @@ import java.util.List;
  * @see    AssetCategoryImpl
  * @see    com.liferay.portlet.asset.model.AssetCategory
  * @see    com.liferay.portlet.asset.model.AssetCategoryModel
+ * @generated
  */
 public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 	public static final String TABLE_NAME = "AssetCategory";

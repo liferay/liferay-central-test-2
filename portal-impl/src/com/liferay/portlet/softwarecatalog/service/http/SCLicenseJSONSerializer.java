@@ -43,7 +43,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    SCLicenseServiceJSON
+ * @see    com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceJSON
+ * @generated
  */
 public class SCLicenseJSONSerializer {
 	public static JSONObject toJSONObject(SCLicense model) {

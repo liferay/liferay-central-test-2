@@ -61,6 +61,7 @@ import java.util.List;
  * @see    SocialActivityImpl
  * @see    com.liferay.portlet.social.model.SocialActivity
  * @see    com.liferay.portlet.social.model.SocialActivityModel
+ * @generated
  */
 public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity> {
 	public static final String TABLE_NAME = "SocialActivity";

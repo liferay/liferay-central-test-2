@@ -42,11 +42,11 @@ import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.expando.service.ExpandoColumnServiceUtil} service
- * utility. The static methods of this class calls the same methods of the
- * service utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.expando.service.ExpandoColumnServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -68,6 +68,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
  * @see    ExpandoColumnServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.expando.service.ExpandoColumnServiceUtil
+ * @generated
  */
 public class ExpandoColumnServiceHttp {
 	public static com.liferay.portlet.expando.model.ExpandoColumn addColumn(

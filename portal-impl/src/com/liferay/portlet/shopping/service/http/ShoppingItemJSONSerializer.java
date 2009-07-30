@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ShoppingItemServiceJSON
+ * @see    com.liferay.portlet.shopping.service.http.ShoppingItemServiceJSON
+ * @generated
  */
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {

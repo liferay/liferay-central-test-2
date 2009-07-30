@@ -62,6 +62,7 @@ import java.util.List;
  * @see    AssetEntryImpl
  * @see    com.liferay.portlet.asset.model.AssetEntry
  * @see    com.liferay.portlet.asset.model.AssetEntryModel
+ * @generated
  */
 public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	public static final String TABLE_NAME = "AssetEntry";

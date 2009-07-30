@@ -65,6 +65,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    DLFolderPersistence
  * @see    DLFolderUtil
+ * @generated
  */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	implements DLFolderPersistence {
@@ -335,6 +336,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		return update(dlFolder, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  dlFolder the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when dlFolder is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public DLFolder update(DLFolder dlFolder, boolean merge)
 		throws SystemException {
 		boolean isNew = dlFolder.isNew();

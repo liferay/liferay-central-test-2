@@ -62,6 +62,7 @@ import java.util.List;
  * @see    RatingsEntryImpl
  * @see    com.liferay.portlet.ratings.model.RatingsEntry
  * @see    com.liferay.portlet.ratings.model.RatingsEntryModel
+ * @generated
  */
 public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	public static final String TABLE_NAME = "RatingsEntry";

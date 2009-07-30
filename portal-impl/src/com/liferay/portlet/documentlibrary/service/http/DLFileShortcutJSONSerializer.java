@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="DLFileShortcutJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="DLFileShortcutJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -46,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    DLFileShortcutServiceJSON
+ * @see    com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceJSON
+ * @generated
  */
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {

@@ -61,6 +61,7 @@ import java.util.List;
  * @see    AnnouncementsFlagImpl
  * @see    com.liferay.portlet.announcements.model.AnnouncementsFlag
  * @see    com.liferay.portlet.announcements.model.AnnouncementsFlagModel
+ * @generated
  */
 public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag> {
 	public static final String TABLE_NAME = "AnnouncementsFlag";

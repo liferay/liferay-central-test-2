@@ -38,21 +38,20 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portlet.calendar.service.CalEventServiceUtil} service utility.
- * The static methods of this class calls the same methods of the service
- * utility. However, the signatures are different because it is difficult for
- * SOAP to support certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portlet.calendar.service.CalEventServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portlet.calendar.model.CalEventSoap}. If the method in the
- * service utility returns a {@link
- * com.liferay.portlet.calendar.model.CalEvent}, that is translated to a {@link
- * com.liferay.portlet.calendar.model.CalEventSoap}. Methods that SOAP cannot
+ * is translated to an array of {@link com.liferay.portlet.calendar.model.CalEventSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portlet.calendar.model.CalEvent}, that is translated to a
+ * {@link com.liferay.portlet.calendar.model.CalEventSoap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
  *
@@ -78,6 +77,7 @@ import java.rmi.RemoteException;
  * @see    CalEventServiceHttp
  * @see    com.liferay.portlet.calendar.model.CalEventSoap
  * @see    com.liferay.portlet.calendar.service.CalEventServiceUtil
+ * @generated
  */
 public class CalEventServiceSoap {
 	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(

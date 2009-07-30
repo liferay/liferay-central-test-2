@@ -43,7 +43,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ExpandoValueServiceJSON
+ * @see    com.liferay.portlet.expando.service.http.ExpandoValueServiceJSON
+ * @generated
  */
 public class ExpandoValueJSONSerializer {
 	public static JSONObject toJSONObject(ExpandoValue model) {

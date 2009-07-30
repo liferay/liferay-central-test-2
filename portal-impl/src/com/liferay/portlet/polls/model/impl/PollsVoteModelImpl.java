@@ -60,6 +60,7 @@ import java.util.List;
  * @see    PollsVoteImpl
  * @see    com.liferay.portlet.polls.model.PollsVote
  * @see    com.liferay.portlet.polls.model.PollsVoteModel
+ * @generated
  */
 public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	public static final String TABLE_NAME = "PollsVote";

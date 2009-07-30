@@ -33,8 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="JournalTemplateJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="JournalTemplateJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -42,12 +41,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link JournalTemplateServiceJSON} to translate
- * objects.
+ * This class is used by {@link JournalTemplateServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalTemplateServiceJSON
+ * @see    com.liferay.portlet.journal.service.http.JournalTemplateServiceJSON
+ * @generated
  */
 public class JournalTemplateJSONSerializer {
 	public static JSONObject toJSONObject(JournalTemplate model) {

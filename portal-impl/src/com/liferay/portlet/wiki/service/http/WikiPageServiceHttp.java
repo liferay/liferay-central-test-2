@@ -44,8 +44,8 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portlet.wiki.service.WikiPageServiceUtil} service utility. The
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portlet.wiki.service.WikiPageServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
@@ -70,6 +70,7 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
  * @see    WikiPageServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portlet.wiki.service.WikiPageServiceUtil
+ * @generated
  */
 public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(

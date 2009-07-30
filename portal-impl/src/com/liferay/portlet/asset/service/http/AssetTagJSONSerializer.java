@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AssetTagServiceJSON
+ * @see    com.liferay.portlet.asset.service.http.AssetTagServiceJSON
+ * @generated
  */
 public class AssetTagJSONSerializer {
 	public static JSONObject toJSONObject(AssetTag model) {

@@ -58,6 +58,7 @@ import java.util.List;
  * @see    SCLicenseImpl
  * @see    com.liferay.portlet.softwarecatalog.model.SCLicense
  * @see    com.liferay.portlet.softwarecatalog.model.SCLicenseModel
+ * @generated
  */
 public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	public static final String TABLE_NAME = "SCLicense";

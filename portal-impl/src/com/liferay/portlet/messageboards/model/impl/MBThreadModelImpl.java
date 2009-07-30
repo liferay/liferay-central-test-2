@@ -53,13 +53,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the MBThread table in the database.
+ * This interface is a model that represents the MBThread table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    MBThreadImpl
  * @see    com.liferay.portlet.messageboards.model.MBThread
  * @see    com.liferay.portlet.messageboards.model.MBThreadModel
+ * @generated
  */
 public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	public static final String TABLE_NAME = "MBThread";

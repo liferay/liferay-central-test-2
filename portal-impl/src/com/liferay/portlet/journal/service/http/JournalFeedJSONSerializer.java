@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    JournalFeedServiceJSON
+ * @see    com.liferay.portlet.journal.service.http.JournalFeedServiceJSON
+ * @generated
  */
 public class JournalFeedJSONSerializer {
 	public static JSONObject toJSONObject(JournalFeed model) {

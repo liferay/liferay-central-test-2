@@ -54,8 +54,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="ShoppingCouponPersistenceImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ShoppingCouponPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -65,6 +64,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    ShoppingCouponPersistence
  * @see    ShoppingCouponUtil
+ * @generated
  */
 public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCouponPersistence {
@@ -241,6 +241,18 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		return update(shoppingCoupon, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  shoppingCoupon the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when shoppingCoupon is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon, boolean merge)
 		throws SystemException {
 		boolean isNew = shoppingCoupon.isNew();

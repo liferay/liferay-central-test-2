@@ -65,6 +65,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    CalEventPersistence
  * @see    CalEventUtil
+ * @generated
  */
 public class CalEventPersistenceImpl extends BasePersistenceImpl
 	implements CalEventPersistence {
@@ -320,6 +321,18 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		return update(calEvent, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  calEvent the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when calEvent is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public CalEvent update(CalEvent calEvent, boolean merge)
 		throws SystemException {
 		boolean isNew = calEvent.isNew();

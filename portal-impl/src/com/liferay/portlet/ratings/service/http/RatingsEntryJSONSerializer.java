@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    RatingsEntryServiceJSON
+ * @see    com.liferay.portlet.ratings.service.http.RatingsEntryServiceJSON
+ * @generated
  */
 public class RatingsEntryJSONSerializer {
 	public static JSONObject toJSONObject(RatingsEntry model) {

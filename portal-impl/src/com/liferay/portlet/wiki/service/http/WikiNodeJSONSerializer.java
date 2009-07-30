@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WikiNodeServiceJSON
+ * @see    com.liferay.portlet.wiki.service.http.WikiNodeServiceJSON
+ * @generated
  */
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
