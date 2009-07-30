@@ -60,6 +60,7 @@ import java.util.List;
  * @see    BlogsStatsUserImpl
  * @see    com.liferay.portlet.blogs.model.BlogsStatsUser
  * @see    com.liferay.portlet.blogs.model.BlogsStatsUserModel
+ * @generated
  */
 public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	public static final String TABLE_NAME = "BlogsStatsUser";

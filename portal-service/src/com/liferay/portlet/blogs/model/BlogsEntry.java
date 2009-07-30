@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.model;
 
+
 /**
  * <a href="BlogsEntry.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.blogs.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.blogs.model.impl.BlogsEntryImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.blogs.model.impl.BlogsEntryImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BlogsEntryModel
- * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
- * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
+ * @see BlogsEntryModel
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
+ * @generated
  */
 public interface BlogsEntry extends BlogsEntryModel {
 }

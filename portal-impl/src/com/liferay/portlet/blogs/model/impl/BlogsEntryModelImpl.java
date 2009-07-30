@@ -62,6 +62,7 @@ import java.util.List;
  * @see    BlogsEntryImpl
  * @see    com.liferay.portlet.blogs.model.BlogsEntry
  * @see    com.liferay.portlet.blogs.model.BlogsEntryModel
+ * @generated
  */
 public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	public static final String TABLE_NAME = "BlogsEntry";

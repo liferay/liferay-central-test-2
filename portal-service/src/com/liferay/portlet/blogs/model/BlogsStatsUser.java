@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.model;
 
+
 /**
  * <a href="BlogsStatsUser.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portlet.blogs.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BlogsStatsUserModel
- * @see    com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
- * @see    com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
+ * @see BlogsStatsUserModel
+ * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
+ * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
+ * @generated
  */
 public interface BlogsStatsUser extends BlogsStatsUserModel {
 }

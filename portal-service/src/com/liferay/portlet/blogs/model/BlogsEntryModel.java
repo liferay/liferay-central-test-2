@@ -44,6 +44,7 @@ import java.util.Date;
  * @see    BlogsEntry
  * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
  * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
+ * @generated
  */
 public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public long getPrimaryKey();

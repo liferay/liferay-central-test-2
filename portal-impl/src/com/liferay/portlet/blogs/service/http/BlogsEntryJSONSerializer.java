@@ -45,7 +45,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    BlogsEntryServiceJSON
+ * @see    com.liferay.portlet.blogs.service.http.BlogsEntryServiceJSON
+ * @generated
  */
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
