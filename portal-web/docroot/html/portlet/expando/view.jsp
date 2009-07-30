@@ -114,6 +114,7 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 		DLFolder.class.getName(),
 		IGFolder.class.getName(),
 		IGImage.class.getName(),
+		JournalArticle.class.getName(),
 		Organization.class.getName(),
 		User.class.getName()
 };
@@ -142,6 +143,9 @@ private String _getIconPath(String modelResource) {
 	}
 	else if (modelResource.equals(IGImage.class.getName())) {
 		return "/document_library/bmp.png";
+	}
+	else if (modelResource.equals(JournalArticle.class.getName())) {
+		return "/common/history.png";
 	}
 	else if (modelResource.equals(Organization.class.getName())) {
 		return "/common/organization_icon.png";

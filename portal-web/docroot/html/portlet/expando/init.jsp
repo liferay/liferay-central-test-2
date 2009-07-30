@@ -48,6 +48,7 @@
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);

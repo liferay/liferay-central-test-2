@@ -1026,6 +1026,25 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<liferay-ui:input-field model="<%= JournalArticle.class %>" bean="<%= article %>" field="smallImage" />
 				</td>
 			</tr>
+
+			<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<liferay-ui:custom-attribute-list
+							className="<%= JournalArticle.class.getName() %>"
+							classPK="<%= (article != null) ? article.getResourcePrimKey() : 0 %>"
+							editable="<%= true %>"
+							label="<%= true %>"
+						/>
+					</td>
+				</tr>
+			</liferay-ui:custom-attributes-available>
+
 			</table>
 		</liferay-ui:panel>
 
