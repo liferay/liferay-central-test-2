@@ -24,6 +24,11 @@ package com.liferay.portal.velocity;
 
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 
+/**
+ * <a href="LiferayResourceManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LiferayResourceManager extends ResourceManagerImpl {
 
 	public String getLoaderNameForResource(String source) {

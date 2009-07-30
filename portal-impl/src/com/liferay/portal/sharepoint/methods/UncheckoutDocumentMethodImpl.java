@@ -29,6 +29,12 @@ import com.liferay.portal.sharepoint.SharepointStorage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="UncheckoutDocumentMethodImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Bruno Farache
+ */
 public class UncheckoutDocumentMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {

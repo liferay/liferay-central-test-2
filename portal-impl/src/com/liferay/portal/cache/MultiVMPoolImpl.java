@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 
 import java.io.Serializable;
 
+/**
+ * <a href="MultiVMPoolImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
+ */
 public class MultiVMPoolImpl implements MultiVMPool {
 
 	public void clear() {

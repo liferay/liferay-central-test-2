@@ -29,6 +29,21 @@ import com.liferay.portal.model.Resource;
 
 import java.util.List;
 
+/**
+ * <a href="ResourceJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link ResourceServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceServiceJSON
+ */
 public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

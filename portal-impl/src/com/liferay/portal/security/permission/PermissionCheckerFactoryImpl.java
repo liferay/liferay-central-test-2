@@ -25,6 +25,13 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="PermissionCheckerFactoryImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Charles May
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionCheckerFactoryImpl implements PermissionCheckerFactory {
 
 	public PermissionChecker create(User user, boolean checkGuest)

@@ -35,6 +35,11 @@ import com.liferay.portal.upgrade.v5_0_0.util.IGImageNameColumnImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
 
+/**
+ * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class UpgradeImageGallery extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

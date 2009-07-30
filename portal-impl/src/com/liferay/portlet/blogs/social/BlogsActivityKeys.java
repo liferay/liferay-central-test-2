@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.blogs.social;
 
+/**
+ * <a href="BlogsActivityKeys.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BlogsActivityKeys {
 
 	public static final int ADD_COMMENT = 1;

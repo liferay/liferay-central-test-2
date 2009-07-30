@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.job.Scheduler;
 
+/**
+ * <a href="AdminScheduler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class AdminScheduler implements Scheduler {
 
 	public void schedule() {

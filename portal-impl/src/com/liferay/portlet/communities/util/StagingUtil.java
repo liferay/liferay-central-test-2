@@ -83,6 +83,12 @@ import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
 
+/**
+ * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ * @author Bruno Farache
+ */
 public class StagingUtil {
 
 	public static void copyFromLive(ActionRequest actionRequest)

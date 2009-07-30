@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ShoppingCouponPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCouponPersistence
+ * @see    ShoppingCouponUtil
+ */
 public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCouponPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCouponImpl.class.getName();
@@ -215,6 +228,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl
 		return shoppingCoupon;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingCoupon, boolean merge)}.
+	 */
 	public ShoppingCoupon update(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

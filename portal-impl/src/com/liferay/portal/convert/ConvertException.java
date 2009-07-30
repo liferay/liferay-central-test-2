@@ -24,6 +24,11 @@ package com.liferay.portal.convert;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="ConvertException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class ConvertException extends PortalException {
 
 	public ConvertException() {

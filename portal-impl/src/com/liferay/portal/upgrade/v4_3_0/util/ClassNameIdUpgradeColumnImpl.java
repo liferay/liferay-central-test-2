@@ -27,6 +27,12 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Types;
 
+/**
+ * <a href="ClassNameIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ClassNameIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ClassNameIdUpgradeColumnImpl() {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.tools.sql;
 
+/**
+ * <a href="InterBaseUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class InterBaseUtil extends FirebirdUtil {
 
 	public static DBUtil getInstance() {

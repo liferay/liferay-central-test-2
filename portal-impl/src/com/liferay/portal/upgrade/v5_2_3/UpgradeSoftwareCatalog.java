@@ -30,6 +30,11 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 
+/**
+ * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

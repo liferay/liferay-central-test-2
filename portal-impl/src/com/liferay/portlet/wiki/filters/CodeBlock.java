@@ -29,6 +29,11 @@ import java.util.regex.Pattern;
 
 import org.stringtree.factory.AbstractStringFetcher;
 
+/**
+ * <a href="CodeBlock.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class CodeBlock extends AbstractStringFetcher {
 
 	public Object getObject(String content) {

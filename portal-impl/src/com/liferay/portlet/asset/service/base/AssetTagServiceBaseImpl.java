@@ -65,6 +65,11 @@ import com.liferay.portlet.asset.service.persistence.AssetTagPropertyPersistence
 import com.liferay.portlet.asset.service.persistence.AssetTagStatsPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
+/**
+ * <a href="AssetTagServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class AssetTagServiceBaseImpl extends PrincipalBean
 	implements AssetTagService {
 	public AssetCategoryLocalService getAssetCategoryLocalService() {

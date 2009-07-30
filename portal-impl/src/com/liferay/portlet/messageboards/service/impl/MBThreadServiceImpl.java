@@ -34,6 +34,12 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import java.util.List;
 
+/**
+ * <a href="MBThreadServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Deepak Gothe
+ */
 public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 
 	public void deleteThread(long threadId)

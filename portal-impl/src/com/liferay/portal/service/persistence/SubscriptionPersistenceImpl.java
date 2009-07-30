@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SubscriptionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SubscriptionPersistence
+ * @see    SubscriptionUtil
+ */
 public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 	implements SubscriptionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SubscriptionImpl.class.getName();
@@ -263,6 +275,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		return subscription;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Subscription, boolean merge)}.
+	 */
 	public Subscription update(Subscription subscription)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

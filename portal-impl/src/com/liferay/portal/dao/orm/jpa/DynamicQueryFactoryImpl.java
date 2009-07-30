@@ -44,6 +44,12 @@ package com.liferay.portal.dao.orm.jpa;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactory;
 
+/**
+ * <a href="DynamicQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 	public DynamicQuery forClass(Class<?> clazz) {

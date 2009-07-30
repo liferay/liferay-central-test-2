@@ -26,6 +26,12 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
+/**
+ * <a href="UserPortraitIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserPortraitIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public UserPortraitIdUpgradeColumnImpl(

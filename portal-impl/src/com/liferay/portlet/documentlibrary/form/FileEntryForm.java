@@ -28,6 +28,11 @@ import java.util.Properties;
 
 import org.apache.struts.action.ActionForm;
 
+/**
+ * <a href="FileEntryForm.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class FileEntryForm extends ActionForm {
 
 	public FileEntryForm() {

@@ -30,6 +30,11 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.DeleteTask;
 
+/**
+ * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CleanUpJob implements IntervalJob {
 
 	public CleanUpJob() {

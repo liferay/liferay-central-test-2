@@ -33,6 +33,11 @@ import java.io.Serializable;
 
 import java.sql.Connection;
 
+/**
+ * <a href="SessionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SessionImpl implements Session {
 
 	public SessionImpl(org.hibernate.Session session) {

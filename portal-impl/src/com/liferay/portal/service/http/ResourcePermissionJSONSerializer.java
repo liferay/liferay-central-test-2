@@ -29,6 +29,23 @@ import com.liferay.portal.model.ResourcePermission;
 
 import java.util.List;
 
+/**
+ * <a href="ResourcePermissionJSONSerializer.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link ResourcePermissionServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourcePermissionServiceJSON
+ */
 public class ResourcePermissionJSONSerializer {
 	public static JSONObject toJSONObject(ResourcePermission model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -35,6 +35,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="RESTProxyAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author David Truong
+ * @author Gavin Wan
+ */
 public class RESTProxyAction extends Action {
 
 	public ActionForward execute(

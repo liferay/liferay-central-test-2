@@ -35,6 +35,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="PortletLogic.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class PortletLogic extends RuntimeLogic {
 
 	public PortletLogic(

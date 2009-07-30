@@ -29,6 +29,11 @@ import com.liferay.portal.model.PluginSetting;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="PluginBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public abstract class PluginBaseImpl implements Plugin {
 
 	public PluginPackage getPluginPackage() {

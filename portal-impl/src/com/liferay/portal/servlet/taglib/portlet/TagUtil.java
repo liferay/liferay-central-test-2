@@ -50,6 +50,11 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="TagUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Deepak Gothe
+ */
 public class TagUtil {
 
 	public static LiferayPortletURL getLiferayPortletURL(

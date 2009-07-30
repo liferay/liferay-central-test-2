@@ -32,6 +32,12 @@ import com.liferay.portal.velocity.VelocityContextPool;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="ThemeLoaderHotDeployListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {

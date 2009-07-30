@@ -36,6 +36,11 @@ import com.liferay.portal.util.PropsValues;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="WebAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WebAutoDeployer extends WebDeployer implements AutoDeployer {
 
 	public WebAutoDeployer() {

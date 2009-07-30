@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="ShoppingCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ShoppingCategory table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCategoryImpl
+ * @see    com.liferay.portlet.shopping.model.ShoppingCategory
+ * @see    com.liferay.portlet.shopping.model.ShoppingCategoryModel
+ */
 public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 	public static final String TABLE_NAME = "ShoppingCategory";
 	public static final Object[][] TABLE_COLUMNS = {

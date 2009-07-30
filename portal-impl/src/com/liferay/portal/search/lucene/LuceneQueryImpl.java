@@ -24,6 +24,11 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.Query;
 
+/**
+ * <a href="LuceneQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class LuceneQueryImpl implements Query {
 
 	public LuceneQueryImpl(org.apache.lucene.search.Query query) {

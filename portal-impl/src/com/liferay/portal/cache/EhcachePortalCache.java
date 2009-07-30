@@ -29,6 +29,11 @@ import java.io.Serializable;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 
+/**
+ * <a href="EhcachePortalCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EhcachePortalCache implements PortalCache {
 
 	public EhcachePortalCache(Ehcache cache) {

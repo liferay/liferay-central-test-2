@@ -37,6 +37,11 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="CalEventFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CalEventFinderImpl
 	extends BasePersistenceImpl implements CalEventFinder {
 

@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="JournalFeedPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalFeedPersistence
+ * @see    JournalFeedUtil
+ */
 public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 	implements JournalFeedPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalFeedImpl.class.getName();
@@ -257,6 +269,9 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl
 		return journalFeed;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(JournalFeed, boolean merge)}.
+	 */
 	public JournalFeed update(JournalFeed journalFeed)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

@@ -79,6 +79,13 @@ import javax.portlet.WindowState;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="PortletRequestImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Brian Myunghun Kim
+ * @author Sergey Ponomarev
+ */
 public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 	public void cleanUp() {

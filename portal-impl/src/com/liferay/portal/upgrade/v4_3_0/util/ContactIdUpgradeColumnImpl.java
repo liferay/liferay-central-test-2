@@ -26,6 +26,12 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
+/**
+ * <a href="ContactIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class ContactIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ContactIdUpgradeColumnImpl(

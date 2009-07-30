@@ -41,6 +41,14 @@
 
 package com.liferay.portal.monitoring.statistics;
 
+/**
+ * <a href="AverageStatistics.java.html"><b><i>View Source</i></b></a>
+ *
+ * <a href="RollingAverageStatistics.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Rajesh Thiagarajan
+ * @author Brian Wing Shun Chan
+ */
 public class AverageStatistics extends BaseStatistics {
 
 	public AverageStatistics(String name) {

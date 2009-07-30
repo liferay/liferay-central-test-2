@@ -31,6 +31,11 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.service.base.ExpandoColumnServiceBaseImpl;
 import com.liferay.portlet.expando.service.permission.ExpandoColumnPermission;
 
+/**
+ * <a href="ExpandoColumnServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 
 	public ExpandoColumn addColumn(long tableId, String name, int type)

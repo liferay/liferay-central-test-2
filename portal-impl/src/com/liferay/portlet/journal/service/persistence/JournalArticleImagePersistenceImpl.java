@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="JournalArticleImagePersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalArticleImagePersistence
+ * @see    JournalArticleImageUtil
+ */
 public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 	implements JournalArticleImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleImageImpl.class.getName();
@@ -288,6 +301,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl
 		return journalArticleImage;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(JournalArticleImage, boolean merge)}.
+	 */
 	public JournalArticleImage update(JournalArticleImage journalArticleImage)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

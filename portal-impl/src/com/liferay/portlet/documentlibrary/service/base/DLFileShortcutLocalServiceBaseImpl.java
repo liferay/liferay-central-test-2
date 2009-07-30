@@ -66,6 +66,12 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
 
 import java.util.List;
 
+/**
+ * <a href="DLFileShortcutLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class DLFileShortcutLocalServiceBaseImpl
 	implements DLFileShortcutLocalService {
 	public DLFileShortcut addDLFileShortcut(DLFileShortcut dlFileShortcut)

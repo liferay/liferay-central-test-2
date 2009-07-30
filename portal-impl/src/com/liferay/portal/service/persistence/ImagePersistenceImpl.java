@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ImagePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ImagePersistence
+ * @see    ImageUtil
+ */
 public class ImagePersistenceImpl extends BasePersistenceImpl
 	implements ImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ImageImpl.class.getName();
@@ -187,6 +199,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl
 		return image;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Image, boolean merge)}.
+	 */
 	public Image update(Image image) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

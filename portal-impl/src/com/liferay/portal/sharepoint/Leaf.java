@@ -24,6 +24,11 @@ package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+/**
+ * <a href="Leaf.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class Leaf implements ResponseElement {
 
 	public static final String OPEN_LI = "<li>";

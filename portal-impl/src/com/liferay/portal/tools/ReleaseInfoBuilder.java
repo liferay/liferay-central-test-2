@@ -32,6 +32,11 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+/**
+ * <a href="ReleaseInfoBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReleaseInfoBuilder {
 
 	public static void main(String[] args) {

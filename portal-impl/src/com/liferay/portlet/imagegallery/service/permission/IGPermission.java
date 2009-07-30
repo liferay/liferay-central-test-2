@@ -26,6 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="IGPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class IGPermission {
 
 	public static void check(

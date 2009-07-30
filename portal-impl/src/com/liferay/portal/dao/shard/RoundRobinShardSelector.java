@@ -27,6 +27,11 @@ import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
 
+/**
+ * <a href="RoundRobinShardSelector.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class RoundRobinShardSelector implements ShardSelector {
 
 	public String getShardName(

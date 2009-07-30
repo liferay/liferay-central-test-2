@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Shard;
 
+/**
+ * <a href="ShardImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShardImpl extends ShardModelImpl implements Shard {
 
 	public ShardImpl() {

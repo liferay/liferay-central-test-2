@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Account;
 
+/**
+ * <a href="AccountImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AccountImpl extends AccountModelImpl implements Account {
 
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;

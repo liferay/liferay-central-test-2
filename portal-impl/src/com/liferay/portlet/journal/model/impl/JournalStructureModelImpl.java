@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="JournalStructureModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalStructure table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalStructureImpl
+ * @see    com.liferay.portlet.journal.model.JournalStructure
+ * @see    com.liferay.portlet.journal.model.JournalStructureModel
+ */
 public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 	public static final String TABLE_NAME = "JournalStructure";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -33,6 +33,11 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+/**
+ * <a href="TunnelApplicationContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TunnelApplicationContext extends XmlWebApplicationContext {
 
 	public void setParent(ApplicationContext parent) {

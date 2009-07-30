@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
+/**
+ * <a href="VerifyLucene.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class VerifyLucene extends VerifyProcess {
 
 	public void verify() throws VerifyException {

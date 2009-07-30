@@ -34,6 +34,12 @@ import com.liferay.portlet.asset.util.AssetUtil;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetTagPropertyLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssetTagPropertyLocalServiceImpl
 	extends AssetTagPropertyLocalServiceBaseImpl {
 

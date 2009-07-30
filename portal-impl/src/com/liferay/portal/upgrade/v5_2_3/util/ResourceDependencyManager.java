@@ -28,6 +28,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="ResourceDependencyManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourceDependencyManager extends DependencyManager {
 
 	public void update(

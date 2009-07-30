@@ -101,7 +101,6 @@ import org.dom4j.DocumentException;
  * @author Glenn Powell
  * @author Raymond Augé
  * @author Prashant Dighe
- *
  */
 public class ServiceBuilder {
 

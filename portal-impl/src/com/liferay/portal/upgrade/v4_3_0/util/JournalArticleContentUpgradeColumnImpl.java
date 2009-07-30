@@ -43,6 +43,12 @@ import com.liferay.util.PKParser;
 
 import java.util.Iterator;
 
+/**
+ * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalArticleContentUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 

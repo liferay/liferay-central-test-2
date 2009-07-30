@@ -45,6 +45,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="TasksReviewModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the TasksReview table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksReviewImpl
+ * @see    com.liferay.portlet.tasks.model.TasksReview
+ * @see    com.liferay.portlet.tasks.model.TasksReviewModel
+ */
 public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {
 	public static final String TABLE_NAME = "TasksReview";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -32,6 +32,11 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="LDAPImportJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class LDAPImportJob implements IntervalJob {
 
 	public LDAPImportJob() {

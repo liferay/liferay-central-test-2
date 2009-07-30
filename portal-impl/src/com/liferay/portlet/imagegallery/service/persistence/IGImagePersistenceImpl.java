@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="IGImagePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGImagePersistence
+ * @see    IGImageUtil
+ */
 public class IGImagePersistenceImpl extends BasePersistenceImpl
 	implements IGImagePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = IGImageImpl.class.getName();
@@ -329,6 +341,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl
 		return igImage;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(IGImage, boolean merge)}.
+	 */
 	public IGImage update(IGImage igImage) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

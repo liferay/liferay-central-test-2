@@ -44,6 +44,12 @@ import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 
 import java.util.List;
 
+/**
+ * <a href="PollsChoiceLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class PollsChoiceLocalServiceBaseImpl
 	implements PollsChoiceLocalService {
 	public PollsChoice addPollsChoice(PollsChoice pollsChoice)

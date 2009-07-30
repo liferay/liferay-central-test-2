@@ -29,6 +29,11 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 
 import java.util.List;
 
+/**
+ * <a href="VerifyBookmarks.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class VerifyBookmarks extends VerifyProcess {
 
 	public void verify() throws VerifyException {

@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="BatchSessionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ * @author Brian Wing Shun Chan
+ */
 public class BatchSessionImpl implements BatchSession {
 
 	public boolean isEnabled() {

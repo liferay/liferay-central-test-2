@@ -32,6 +32,21 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBThreadJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link MBThreadServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBThreadServiceJSON
+ */
 public class MBThreadJSONSerializer {
 	public static JSONObject toJSONObject(MBThread model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

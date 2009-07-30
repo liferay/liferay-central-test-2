@@ -28,6 +28,12 @@ import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 import com.liferay.portlet.announcements.NoSuchDeliveryException;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 
+/**
+ * <a href="AnnouncementsDeliveryPersistenceTest.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AnnouncementsDeliveryPersistenceTest
 	extends BasePersistenceTestCase {
 	public void setUp() throws Exception {

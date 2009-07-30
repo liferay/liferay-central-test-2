@@ -30,6 +30,11 @@ import java.util.Map;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="TextEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class TextEngine implements WikiEngine {
 
 	public String convert(WikiPage page, PortletURL portletURL) {

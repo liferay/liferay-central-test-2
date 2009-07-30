@@ -60,6 +60,12 @@ import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
+/**
+ * <a href="SessionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class SessionImpl implements Session {
 
 	public void clear() throws ORMException {

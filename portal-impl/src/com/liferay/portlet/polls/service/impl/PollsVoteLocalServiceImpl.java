@@ -35,6 +35,11 @@ import com.liferay.portlet.polls.service.base.PollsVoteLocalServiceBaseImpl;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="PollsVoteLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 	public PollsVote addVote(long userId, long questionId, long choiceId)

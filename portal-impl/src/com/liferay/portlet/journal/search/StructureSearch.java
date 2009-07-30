@@ -31,6 +31,11 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="StructureSearch.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StructureSearch extends SearchContainer<JournalStructure> {
 
 	static List<String> headerNames = new ArrayList<String>();

@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="CompanyPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CompanyPersistence
+ * @see    CompanyUtil
+ */
 public class CompanyPersistenceImpl extends BasePersistenceImpl
 	implements CompanyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = CompanyImpl.class.getName();
@@ -240,6 +252,9 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl
 		return company;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Company, boolean merge)}.
+	 */
 	public Company update(Company company) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

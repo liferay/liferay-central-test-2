@@ -31,6 +31,12 @@ import com.liferay.portal.spring.util.JBossClassLoader;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
+/**
+ * <a href="PortletBeanFactoryPostProcessor.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletBeanFactoryPostProcessor
 	implements BeanFactoryPostProcessor {
 

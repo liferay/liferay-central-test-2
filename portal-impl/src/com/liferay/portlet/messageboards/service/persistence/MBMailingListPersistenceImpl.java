@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBMailingListPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMailingListPersistence
+ * @see    MBMailingListUtil
+ */
 public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 	implements MBMailingListPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMailingListImpl.class.getName();
@@ -259,6 +272,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		return mbMailingList;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBMailingList, boolean merge)}.
+	 */
 	public MBMailingList update(MBMailingList mbMailingList)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

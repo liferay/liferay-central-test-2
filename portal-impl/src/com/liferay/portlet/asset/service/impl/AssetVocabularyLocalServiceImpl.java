@@ -38,6 +38,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetVocabularyLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
+ * @author Jorge Ferrer
+ */
 public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 

@@ -62,6 +62,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SCProductVersionPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductVersionPersistence
+ * @see    SCProductVersionUtil
+ */
 public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	implements SCProductVersionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductVersionImpl.class.getName();
@@ -239,6 +252,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		return scProductVersion;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCProductVersion, boolean merge)}.
+	 */
 	public SCProductVersion update(SCProductVersion scProductVersion)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

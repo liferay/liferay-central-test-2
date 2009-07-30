@@ -31,6 +31,11 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ServiceComponent;
 
+/**
+ * <a href="ServiceComponentImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ServiceComponentImpl
 	extends ServiceComponentModelImpl implements ServiceComponent {
 

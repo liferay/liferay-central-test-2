@@ -59,6 +59,13 @@ import java.util.Map;
 
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="AdvancedPermissionChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 	public boolean hasOwnerPermission(

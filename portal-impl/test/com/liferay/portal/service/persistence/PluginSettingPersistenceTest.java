@@ -27,6 +27,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
+/**
+ * <a href="PluginSettingPersistenceTest.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

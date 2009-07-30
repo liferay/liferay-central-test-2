@@ -37,6 +37,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="UserInfoFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserInfoFactory {
 
 	public static LinkedHashMap<String, String> getUserInfo(

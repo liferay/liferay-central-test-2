@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="CalEventPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CalEventPersistence
+ * @see    CalEventUtil
+ */
 public class CalEventPersistenceImpl extends BasePersistenceImpl
 	implements CalEventPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = CalEventImpl.class.getName();
@@ -296,6 +308,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		return calEvent;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(CalEvent, boolean merge)}.
+	 */
 	public CalEvent update(CalEvent calEvent) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

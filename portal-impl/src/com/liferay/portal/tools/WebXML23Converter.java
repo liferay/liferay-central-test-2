@@ -33,6 +33,11 @@ import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Iterator;
 
+/**
+ * <a href="WebXML23Converter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WebXML23Converter {
 
 	public static void main(String[] args) {

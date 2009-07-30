@@ -30,6 +30,11 @@ import com.liferay.portal.upgrade.v4_3_3.UpgradeSoftwareCatalog;
 import com.liferay.portal.upgrade.v4_3_3.UpgradeTags;
 import com.liferay.portal.upgrade.v4_3_3.UpgradeWebsite;
 
+/**
+ * <a href="UpgradeProcess_4_3_3.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeProcess_4_3_3 extends UpgradeProcess {
 
 	public int getThreshold() {

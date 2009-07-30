@@ -46,6 +46,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AnnouncementsEntry table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsEntryImpl
+ * @see    com.liferay.portlet.announcements.model.AnnouncementsEntry
+ * @see    com.liferay.portlet.announcements.model.AnnouncementsEntryModel
+ */
 public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntry> {
 	public static final String TABLE_NAME = "AnnouncementsEntry";
 	public static final Object[][] TABLE_COLUMNS = {

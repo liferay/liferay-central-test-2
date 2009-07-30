@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ResourcePermissionPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourcePermissionPersistence
+ * @see    ResourcePermissionUtil
+ */
 public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 	implements ResourcePermissionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourcePermissionImpl.class.getName();
@@ -287,6 +300,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl
 		return resourcePermission;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ResourcePermission, boolean merge)}.
+	 */
 	public ResourcePermission update(ResourcePermission resourcePermission)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

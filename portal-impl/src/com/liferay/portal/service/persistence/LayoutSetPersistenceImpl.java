@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="LayoutSetPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSetPersistence
+ * @see    LayoutSetUtil
+ */
 public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 	implements LayoutSetPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutSetImpl.class.getName();
@@ -225,6 +237,9 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl
 		return layoutSet;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(LayoutSet, boolean merge)}.
+	 */
 	public LayoutSet update(LayoutSet layoutSet) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

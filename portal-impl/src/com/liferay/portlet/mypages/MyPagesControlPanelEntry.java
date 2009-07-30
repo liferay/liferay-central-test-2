@@ -29,6 +29,12 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.BaseControlPanelEntry;
 
+/**
+ * <a href="MyPagesControlPanelEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Amos Fong
+ */
 public class MyPagesControlPanelEntry extends BaseControlPanelEntry {
 
 	public boolean isVisible(

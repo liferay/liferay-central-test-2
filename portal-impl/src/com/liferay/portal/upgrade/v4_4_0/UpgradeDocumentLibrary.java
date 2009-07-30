@@ -38,6 +38,11 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
 import java.util.Set;
 
+/**
+ * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

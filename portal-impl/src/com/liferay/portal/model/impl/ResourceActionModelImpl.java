@@ -40,6 +40,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ResourceActionModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ResourceAction table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceActionImpl
+ * @see    com.liferay.portal.model.ResourceAction
+ * @see    com.liferay.portal.model.ResourceActionModel
+ */
 public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	public static final String TABLE_NAME = "ResourceAction";
 	public static final Object[][] TABLE_COLUMNS = {

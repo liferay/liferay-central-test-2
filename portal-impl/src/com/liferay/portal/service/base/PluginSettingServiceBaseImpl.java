@@ -169,6 +169,12 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="PluginSettingServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class PluginSettingServiceBaseImpl extends PrincipalBean
 	implements PluginSettingService {
 	public AccountLocalService getAccountLocalService() {

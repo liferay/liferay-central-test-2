@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="UserGroupSearchTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class UserGroupSearchTerms extends UserGroupDisplayTerms {
 
 	public UserGroupSearchTerms(PortletRequest portletRequest) {

@@ -24,6 +24,11 @@ package com.liferay.portal.upgrade.util;
 
 import java.util.Iterator;
 
+/**
+ * <a href="ValueMapperWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ValueMapperWrapper implements ValueMapper {
 
 	public ValueMapperWrapper(ValueMapper valueMapper) {

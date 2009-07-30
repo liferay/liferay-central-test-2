@@ -30,6 +30,12 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.ShutdownUtil;
 
+/**
+ * <a href="ConvertProcessMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Alexander Chow
+ */
 public class ConvertProcessMessageListener implements MessageListener {
 
 	public void receive(Message message) {

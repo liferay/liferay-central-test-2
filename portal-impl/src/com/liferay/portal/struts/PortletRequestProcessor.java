@@ -74,6 +74,11 @@ import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
 
+/**
+ * <a href="PortletRequestProcessor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletRequestProcessor extends TilesRequestProcessor {
 
 	public static PortletRequestProcessor getInstance(

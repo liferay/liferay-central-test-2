@@ -35,6 +35,11 @@ import javax.portlet.PortletRequest;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
+/**
+ * <a href="PortletPreferencesWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletPreferencesWrapper
 	implements PortletPreferences, Serializable {
 

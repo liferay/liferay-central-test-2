@@ -29,6 +29,11 @@ import org.stringtree.juicer.Initialisable;
 import org.stringtree.regex.Matcher;
 import org.stringtree.regex.Pattern;
 
+/**
+ * <a href="MediaWikiLocalLink.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class MediaWikiLocalLink
 	extends AbstractStringFetcher implements Initialisable {
 

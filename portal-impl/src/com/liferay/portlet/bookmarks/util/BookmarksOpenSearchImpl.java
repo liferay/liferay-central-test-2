@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 
+/**
+ * <a href="BookmarksOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/bookmarks/open_search";

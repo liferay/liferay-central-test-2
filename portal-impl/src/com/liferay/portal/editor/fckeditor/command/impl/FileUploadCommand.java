@@ -30,6 +30,11 @@ import com.liferay.portal.editor.fckeditor.receiver.CommandReceiverFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="FileUploadCommand.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ */
 public class FileUploadCommand implements Command {
 
 	public void execute(

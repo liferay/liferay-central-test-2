@@ -33,6 +33,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="VerifySocial.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class VerifySocial extends VerifyProcess {
 
 	public void verify() throws VerifyException {

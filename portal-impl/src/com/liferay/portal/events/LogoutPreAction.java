@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="LogoutPreAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LogoutPreAction extends Action {
 
 	public void run(HttpServletRequest request, HttpServletResponse response) {

@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="JournalFeedModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the JournalFeed table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalFeedImpl
+ * @see    com.liferay.portlet.journal.model.JournalFeed
+ * @see    com.liferay.portlet.journal.model.JournalFeedModel
+ */
 public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {
 	public static final String TABLE_NAME = "JournalFeed";
 	public static final Object[][] TABLE_COLUMNS = {

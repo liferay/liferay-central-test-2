@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.wiki.translators;
 
+/**
+ * <a href="ClassicToCreoleTranslator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ClassicToCreoleTranslator extends BaseTranslator {
 
 	public ClassicToCreoleTranslator() {

@@ -44,6 +44,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetTagModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetTag table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagImpl
+ * @see    com.liferay.portlet.asset.model.AssetTag
+ * @see    com.liferay.portlet.asset.model.AssetTagModel
+ */
 public class AssetTagModelImpl extends BaseModelImpl<AssetTag> {
 	public static final String TABLE_NAME = "AssetTag";
 	public static final Object[][] TABLE_COLUMNS = {

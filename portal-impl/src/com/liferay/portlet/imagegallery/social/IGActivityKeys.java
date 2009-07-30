@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.imagegallery.social;
 
+/**
+ * <a href="IGActivityKeys.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ryan Park
+ */
 public class IGActivityKeys {
 
 	public static final int ADD_IMAGE = 1;

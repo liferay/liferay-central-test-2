@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ContactPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ContactPersistence
+ * @see    ContactUtil
+ */
 public class ContactPersistenceImpl extends BasePersistenceImpl
 	implements ContactPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ContactImpl.class.getName();
@@ -189,6 +201,9 @@ public class ContactPersistenceImpl extends BasePersistenceImpl
 		return contact;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Contact, boolean merge)}.
+	 */
 	public Contact update(Contact contact) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

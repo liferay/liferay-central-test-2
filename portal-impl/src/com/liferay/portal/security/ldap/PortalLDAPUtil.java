@@ -79,6 +79,16 @@ import javax.naming.ldap.LdapContext;
 import javax.naming.ldap.PagedResultsControl;
 import javax.naming.ldap.PagedResultsResponseControl;
 
+/**
+ * <a href="PortalLDAPUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ * @author Brian Wing Shun Chan
+ * @author Jerry Niu
+ * @author Scott Lee
+ * @author Herv� M�nage
+ * @author Samuel Kong
+ */
 public class PortalLDAPUtil {
 
 	public static final String IMPORT_BY_USER = "user";

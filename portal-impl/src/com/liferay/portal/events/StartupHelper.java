@@ -57,6 +57,13 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ * <a href="StartupHelper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ * @author Raymond Augé
+ */
 public class StartupHelper {
 
 	public void deleteTempImages() {

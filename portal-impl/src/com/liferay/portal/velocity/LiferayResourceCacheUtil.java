@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 import org.apache.velocity.runtime.resource.Resource;
 
+/**
+ * <a href="LiferayResourceCacheUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LiferayResourceCacheUtil {
 
 	public static final String CACHE_NAME =

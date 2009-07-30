@@ -24,6 +24,11 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.model.User;
 
+/**
+ * <a href="AlwaysCurrentUserIdStrategy.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class AlwaysCurrentUserIdStrategy implements UserIdStrategy {
 
 	public AlwaysCurrentUserIdStrategy(User user) {

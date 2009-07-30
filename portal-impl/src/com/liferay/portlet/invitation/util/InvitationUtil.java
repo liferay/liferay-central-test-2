@@ -31,6 +31,11 @@ import com.liferay.portal.util.PropsUtil;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="InvitationUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InvitationUtil {
 
 	public static int getEmailMessageMaxRecipients() {

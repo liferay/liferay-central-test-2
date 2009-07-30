@@ -48,6 +48,12 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="DLUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Julio Camarero
+ */
 public class DLUtil {
 
 	public static void addPortletBreadcrumbEntries(

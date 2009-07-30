@@ -36,6 +36,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="LocalPluginPackageRepository.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Jorge Ferrer
+ */
 public class LocalPluginPackageRepository {
 
 	public LocalPluginPackageRepository() {

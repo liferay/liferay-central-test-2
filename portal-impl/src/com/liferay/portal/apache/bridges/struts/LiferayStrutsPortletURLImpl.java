@@ -30,6 +30,11 @@ import com.liferay.portlet.PortletURLImplWrapper;
 
 import org.apache.portals.bridges.struts.StrutsPortletURL;
 
+/**
+ * <a href="LiferayStrutsPortletURLImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
 
 	public LiferayStrutsPortletURLImpl(

@@ -31,6 +31,12 @@ import com.liferay.portlet.softwarecatalog.service.base.SCLicenseLocalServiceBas
 
 import java.util.List;
 
+/**
+ * <a href="SCLicenseLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 
 	public SCLicense addLicense(

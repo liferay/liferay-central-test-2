@@ -67,6 +67,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="ThemeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 	public ColorScheme getColorScheme(

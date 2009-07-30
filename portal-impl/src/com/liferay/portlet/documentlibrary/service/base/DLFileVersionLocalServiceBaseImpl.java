@@ -47,6 +47,12 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
 
 import java.util.List;
 
+/**
+ * <a href="DLFileVersionLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class DLFileVersionLocalServiceBaseImpl
 	implements DLFileVersionLocalService {
 	public DLFileVersion addDLFileVersion(DLFileVersion dlFileVersion)

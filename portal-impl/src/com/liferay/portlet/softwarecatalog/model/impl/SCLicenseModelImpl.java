@@ -41,6 +41,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="SCLicenseModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCLicense table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCLicenseImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.SCLicense
+ * @see    com.liferay.portlet.softwarecatalog.model.SCLicenseModel
+ */
 public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	public static final String TABLE_NAME = "SCLicense";
 	public static final Object[][] TABLE_COLUMNS = {

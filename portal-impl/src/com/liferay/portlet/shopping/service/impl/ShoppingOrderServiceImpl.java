@@ -30,6 +30,11 @@ import com.liferay.portlet.shopping.service.base.ShoppingOrderServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission;
 import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
+/**
+ * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 
 	public void completeOrder(

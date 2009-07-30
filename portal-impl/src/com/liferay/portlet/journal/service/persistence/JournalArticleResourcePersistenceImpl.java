@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="JournalArticleResourcePersistenceImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalArticleResourcePersistence
+ * @see    JournalArticleResourceUtil
+ */
 public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 	implements JournalArticleResourcePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalArticleResourceImpl.class.getName();
@@ -229,6 +242,9 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl
 		return journalArticleResource;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(JournalArticleResource, boolean merge)}.
+	 */
 	public JournalArticleResource update(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {

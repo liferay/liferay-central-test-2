@@ -45,6 +45,12 @@ import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
+/**
+ * <a href="ExpandoColumnServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class ExpandoColumnServiceBaseImpl extends PrincipalBean
 	implements ExpandoColumnService {
 	public ExpandoColumnLocalService getExpandoColumnLocalService() {

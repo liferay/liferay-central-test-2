@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
+/**
+ * <a href="PortletItemPersistenceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

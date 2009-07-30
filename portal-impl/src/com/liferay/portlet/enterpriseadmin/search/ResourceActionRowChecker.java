@@ -30,6 +30,11 @@ import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="ResourceActionRowChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ResourceActionRowChecker extends RowChecker {
 
 	public ResourceActionRowChecker(RenderResponse renderResponse) {

@@ -44,6 +44,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="EditPluginAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class EditPluginAction extends PortletAction {
 
 	public void processAction(

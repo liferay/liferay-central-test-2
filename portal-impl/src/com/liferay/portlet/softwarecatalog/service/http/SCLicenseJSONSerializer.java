@@ -30,6 +30,21 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
 
 import java.util.List;
 
+/**
+ * <a href="SCLicenseJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link SCLicenseServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCLicenseServiceJSON
+ */
 public class SCLicenseJSONSerializer {
 	public static JSONObject toJSONObject(SCLicense model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

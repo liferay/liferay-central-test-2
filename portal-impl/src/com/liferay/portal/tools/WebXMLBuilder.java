@@ -38,6 +38,13 @@ import com.liferay.util.xml.descriptor.WebXML24Descriptor;
 
 import java.io.IOException;
 
+/**
+ * <a href="WebXMLBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Tang Ying Jian
+ * @author Brian Myunghun Kim
+ */
 public class WebXMLBuilder {
 
 	public static void main(String[] args) {

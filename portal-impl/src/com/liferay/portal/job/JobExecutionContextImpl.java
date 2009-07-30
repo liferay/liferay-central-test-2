@@ -26,6 +26,11 @@ import java.util.Date;
 
 import org.quartz.JobExecutionContext;
 
+/**
+ * <a href="JobExecutionContextImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JobExecutionContextImpl
 	implements com.liferay.portal.kernel.job.JobExecutionContext {
 

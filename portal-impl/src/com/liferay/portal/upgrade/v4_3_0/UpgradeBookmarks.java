@@ -39,6 +39,12 @@ import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 
 import java.sql.Types;
 
+/**
+ * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeBookmarks extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

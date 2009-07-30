@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="WebDAVPropsPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebDAVPropsPersistence
+ * @see    WebDAVPropsUtil
+ */
 public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 	implements WebDAVPropsPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WebDAVPropsImpl.class.getName();
@@ -199,6 +211,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
 		return webDAVProps;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(WebDAVProps, boolean merge)}.
+	 */
 	public WebDAVProps update(WebDAVProps webDAVProps)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

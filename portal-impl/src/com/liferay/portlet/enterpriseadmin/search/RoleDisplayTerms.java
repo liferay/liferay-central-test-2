@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="RoleDisplayTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RoleDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";

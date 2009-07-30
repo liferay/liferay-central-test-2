@@ -174,6 +174,11 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
+/**
+ * <a href="PhoneLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 	public Phone addPhone(Phone phone) throws SystemException {
 		phone.setNew(true);

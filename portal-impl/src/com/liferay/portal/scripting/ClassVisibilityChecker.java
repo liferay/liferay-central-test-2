@@ -30,6 +30,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <a href="ClassVisibilityChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
+ */
 public class ClassVisibilityChecker {
 
 	public static final String ALL_CLASSES = "all_classes";

@@ -42,6 +42,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ClassNameModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ClassName_ table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ClassNameImpl
+ * @see    com.liferay.portal.model.ClassName
+ * @see    com.liferay.portal.model.ClassNameModel
+ */
 public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	public static final String TABLE_NAME = "ClassName_";
 	public static final Object[][] TABLE_COLUMNS = {

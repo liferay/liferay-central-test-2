@@ -49,6 +49,14 @@ import com.liferay.portal.util.comparator.ResourceComparator;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="ResourceLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Wilson S. Man
+ * @author Raymond Augé
+ * @author Julio Camarero
+ */
 public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void addModelResources(

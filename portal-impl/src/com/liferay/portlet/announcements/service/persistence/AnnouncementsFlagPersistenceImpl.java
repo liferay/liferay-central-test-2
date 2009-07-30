@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsFlagPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsFlagPersistence
+ * @see    AnnouncementsFlagUtil
+ */
 public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsFlagPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsFlagImpl.class.getName();
@@ -230,6 +243,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
 		return announcementsFlag;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AnnouncementsFlag, boolean merge)}.
+	 */
 	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

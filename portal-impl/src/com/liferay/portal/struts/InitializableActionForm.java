@@ -27,6 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="InitializableActionForm.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Araceli Checa
+ */
 public interface InitializableActionForm {
 
 	public void init(

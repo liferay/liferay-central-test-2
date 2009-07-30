@@ -26,6 +26,12 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 
+/**
+ * <a href="IGLargeImageIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IGLargeImageIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public IGLargeImageIdUpgradeColumnImpl(

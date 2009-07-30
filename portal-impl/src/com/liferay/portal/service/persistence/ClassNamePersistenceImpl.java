@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ClassNamePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ClassNamePersistence
+ * @see    ClassNameUtil
+ */
 public class ClassNamePersistenceImpl extends BasePersistenceImpl
 	implements ClassNamePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ClassNameImpl.class.getName();
@@ -190,6 +202,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl
 		return className;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ClassName, boolean merge)}.
+	 */
 	public ClassName update(ClassName className) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

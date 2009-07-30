@@ -39,6 +39,11 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="BaseHotDeployListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BaseHotDeployListener implements HotDeployListener {
 
 	public void throwHotDeployException(

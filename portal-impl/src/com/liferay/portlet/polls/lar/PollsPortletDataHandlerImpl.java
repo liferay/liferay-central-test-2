@@ -60,6 +60,11 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PollsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(

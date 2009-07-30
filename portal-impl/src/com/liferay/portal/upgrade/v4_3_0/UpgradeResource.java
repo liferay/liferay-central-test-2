@@ -70,6 +70,12 @@ import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeResource extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SocialRelationPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SocialRelationPersistence
+ * @see    SocialRelationUtil
+ */
 public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 	implements SocialRelationPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialRelationImpl.class.getName();
@@ -353,6 +366,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		return socialRelation;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SocialRelation, boolean merge)}.
+	 */
 	public SocialRelation update(SocialRelation socialRelation)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

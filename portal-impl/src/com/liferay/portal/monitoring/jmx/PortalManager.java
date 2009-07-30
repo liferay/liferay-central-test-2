@@ -29,6 +29,12 @@ import com.liferay.portal.monitoring.statistics.portal.ServerStatistics;
 
 import java.util.Set;
 
+/**
+ * <a href="PortalManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class PortalManager implements PortalManagerMBean {
 
 	public PortalManager(

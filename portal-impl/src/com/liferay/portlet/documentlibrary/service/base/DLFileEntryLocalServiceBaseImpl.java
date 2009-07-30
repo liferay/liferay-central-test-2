@@ -94,6 +94,12 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.util.List;
 
+/**
+ * <a href="DLFileEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class DLFileEntryLocalServiceBaseImpl
 	implements DLFileEntryLocalService {
 	public DLFileEntry addDLFileEntry(DLFileEntry dlFileEntry)

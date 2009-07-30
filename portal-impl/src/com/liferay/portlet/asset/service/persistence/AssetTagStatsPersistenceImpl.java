@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AssetTagStatsPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetTagStatsPersistence
+ * @see    AssetTagStatsUtil
+ */
 public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 	implements AssetTagStatsPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetTagStatsImpl.class.getName();
@@ -237,6 +250,9 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl
 		return assetTagStats;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AssetTagStats, boolean merge)}.
+	 */
 	public AssetTagStats update(AssetTagStats assetTagStats)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

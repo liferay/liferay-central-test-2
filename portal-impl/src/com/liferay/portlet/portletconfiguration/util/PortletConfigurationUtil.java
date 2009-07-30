@@ -31,6 +31,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PortletConfigurationUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletConfigurationUtil {
 
 	public static String getPortletTitle(

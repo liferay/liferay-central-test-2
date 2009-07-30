@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ExpandoColumnPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoColumnPersistence
+ * @see    ExpandoColumnUtil
+ */
 public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 	implements ExpandoColumnPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoColumnImpl.class.getName();
@@ -222,6 +235,9 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl
 		return expandoColumn;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoColumn, boolean merge)}.
+	 */
 	public ExpandoColumn update(ExpandoColumn expandoColumn)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

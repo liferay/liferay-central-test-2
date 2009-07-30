@@ -42,6 +42,12 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="JournalContentSearchLocalServiceImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalContentSearchLocalServiceImpl
 	extends JournalContentSearchLocalServiceBaseImpl {
 

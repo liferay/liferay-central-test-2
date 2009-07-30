@@ -44,6 +44,11 @@ import javax.portlet.RenderResponse;
 
 import org.portletbridge.portlet.PortletBridgePortlet;
 
+/**
+ * <a href="WebProxyPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WebProxyPortlet extends PortletBridgePortlet {
 
 	public void init() {

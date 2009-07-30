@@ -29,6 +29,11 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 
+/**
+ * <a href="PortalCallbackHandler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalCallbackHandler implements CallbackHandler, Serializable {
 
 	public PortalCallbackHandler(String name, String password) {

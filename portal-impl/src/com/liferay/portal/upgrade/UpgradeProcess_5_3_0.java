@@ -34,6 +34,11 @@ import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeWiki;
 
+/**
+ * <a href="UpgradeProcess_5_3_0.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 
 	public int getThreshold() {

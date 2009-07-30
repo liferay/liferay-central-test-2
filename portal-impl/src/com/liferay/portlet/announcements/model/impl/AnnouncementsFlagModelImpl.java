@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsFlagModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AnnouncementsFlag table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsFlagImpl
+ * @see    com.liferay.portlet.announcements.model.AnnouncementsFlag
+ * @see    com.liferay.portlet.announcements.model.AnnouncementsFlagModel
+ */
 public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag> {
 	public static final String TABLE_NAME = "AnnouncementsFlag";
 	public static final Object[][] TABLE_COLUMNS = {

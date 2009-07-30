@@ -43,6 +43,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBMessageFlagModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBMessageFlag table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessageFlagImpl
+ * @see    com.liferay.portlet.messageboards.model.MBMessageFlag
+ * @see    com.liferay.portlet.messageboards.model.MBMessageFlagModel
+ */
 public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public static final String TABLE_NAME = "MBMessageFlag";
 	public static final Object[][] TABLE_COLUMNS = {

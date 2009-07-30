@@ -30,6 +30,11 @@ import javax.sql.DataSource;
 
 import org.springframework.aop.TargetSource;
 
+/**
+ * <a href="ShardDataSourceTargetSource.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class ShardDataSourceTargetSource implements TargetSource {
 
 	public DataSource getDataSource() {

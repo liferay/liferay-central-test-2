@@ -114,6 +114,14 @@ import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ * @author Bruno Farache
+ */
 public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 

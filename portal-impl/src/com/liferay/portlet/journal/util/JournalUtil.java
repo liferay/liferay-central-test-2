@@ -84,6 +84,12 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
+/**
+ * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class JournalUtil {
 
 	public static final int MAX_STACK_SIZE = 20;

@@ -39,6 +39,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * <a href="DLFileEntryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ */
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 

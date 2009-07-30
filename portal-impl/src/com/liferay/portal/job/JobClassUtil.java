@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="JobClassUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JobClassUtil {
 
 	public static Class<IntervalJob> get(String jobName) {

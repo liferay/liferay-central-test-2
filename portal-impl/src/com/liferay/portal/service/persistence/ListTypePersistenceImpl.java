@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ListTypePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ListTypePersistence
+ * @see    ListTypeUtil
+ */
 public class ListTypePersistenceImpl extends BasePersistenceImpl
 	implements ListTypePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ListTypeImpl.class.getName();
@@ -189,6 +201,9 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl
 		return listType;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ListType, boolean merge)}.
+	 */
 	public ListType update(ListType listType) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

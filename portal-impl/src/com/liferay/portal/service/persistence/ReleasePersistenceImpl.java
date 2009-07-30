@@ -48,6 +48,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ReleasePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ReleasePersistence
+ * @see    ReleaseUtil
+ */
 public class ReleasePersistenceImpl extends BasePersistenceImpl
 	implements ReleasePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ReleaseImpl.class.getName();
@@ -172,6 +184,9 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl
 		return release;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Release, boolean merge)}.
+	 */
 	public Release update(Release release) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -36,6 +36,11 @@ import com.liferay.portal.service.base.CountryServiceBaseImpl;
 
 import java.util.List;
 
+/**
+ * <a href="CountryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CountryServiceImpl extends CountryServiceBaseImpl {
 
 	public Country addCountry(

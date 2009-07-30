@@ -26,6 +26,11 @@ import javax.servlet.ServletContext;
 
 import org.springframework.web.context.ContextLoader;
 
+/**
+ * <a href="PortletContextLoader.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletContextLoader extends ContextLoader {
 
 	protected Class<?> determineContextClass(ServletContext servletContext) {

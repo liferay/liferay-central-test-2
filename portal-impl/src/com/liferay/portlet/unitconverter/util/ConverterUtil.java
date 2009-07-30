@@ -24,6 +24,11 @@ package com.liferay.portlet.unitconverter.util;
 
 import com.liferay.portlet.unitconverter.model.Conversion;
 
+/**
+ * <a href="ConverterUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author James Lefeu
+ */
 public class ConverterUtil {
 
 	public static int TEMPERATURE_CELSIUS = 1;
@@ -88,7 +93,7 @@ public class ConverterUtil {
 			return 1.8 * fromValue;				// Rankine
 		}
 		else if (toId == 4) {
-			return .8 * (fromValue - 273.15);	// R�aumure
+			return .8 * (fromValue - 273.15);	// R?aumure
 		}
 		else {
 			return 0;
@@ -109,7 +114,7 @@ public class ConverterUtil {
 			return .5555555555 * fromValue;
 		}
 		else if (fromId == 4) {
-			return (1.25 * fromValue) + 273.15;	// R�aumure
+			return (1.25 * fromValue) + 273.15;	// R?aumure
 		}
 		else {
 			return 0;

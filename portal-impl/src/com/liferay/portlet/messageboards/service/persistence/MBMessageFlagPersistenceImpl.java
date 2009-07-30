@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBMessageFlagPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessageFlagPersistence
+ * @see    MBMessageFlagUtil
+ */
 public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 	implements MBMessageFlagPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMessageFlagImpl.class.getName();
@@ -320,6 +333,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return mbMessageFlag;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBMessageFlag, boolean merge)}.
+	 */
 	public MBMessageFlag update(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

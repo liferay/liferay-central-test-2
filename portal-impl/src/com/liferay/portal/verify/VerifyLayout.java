@@ -30,6 +30,11 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.List;
 
+/**
+ * <a href="VerifyLayout.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class VerifyLayout extends VerifyProcess {
 
 	public void verify() throws VerifyException {

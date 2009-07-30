@@ -37,6 +37,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PropsUtil {
 
 	public static void addProperties(Properties properties) {

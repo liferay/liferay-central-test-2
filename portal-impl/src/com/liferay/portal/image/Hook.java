@@ -28,6 +28,11 @@ import com.liferay.portal.model.Image;
 
 import java.io.InputStream;
 
+/**
+ * <a href="Hook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public interface Hook {
 
 	public void deleteImage(Image imageId)

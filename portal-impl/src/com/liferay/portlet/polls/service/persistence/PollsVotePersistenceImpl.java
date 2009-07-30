@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PollsVotePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsVotePersistence
+ * @see    PollsVoteUtil
+ */
 public class PollsVotePersistenceImpl extends BasePersistenceImpl
 	implements PollsVotePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PollsVoteImpl.class.getName();
@@ -229,6 +241,9 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl
 		return pollsVote;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PollsVote, boolean merge)}.
+	 */
 	public PollsVote update(PollsVote pollsVote) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

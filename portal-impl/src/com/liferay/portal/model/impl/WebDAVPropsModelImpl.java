@@ -43,6 +43,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="WebDAVPropsModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the WebDAVProps table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebDAVPropsImpl
+ * @see    com.liferay.portal.model.WebDAVProps
+ * @see    com.liferay.portal.model.WebDAVPropsModel
+ */
 public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -34,6 +34,11 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <a href="ReverendFunBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReverendFunBuilder {
 
 	public static void main(String[] args) {

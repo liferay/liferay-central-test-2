@@ -29,6 +29,11 @@ import com.liferay.portal.model.CompanyConstants;
 
 import java.util.Map;
 
+/**
+ * <a href="AuthPipeline.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AuthPipeline {
 
 	public static int authenticateByEmailAddress(

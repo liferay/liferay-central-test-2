@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="OrgLaborPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgLaborPersistence
+ * @see    OrgLaborUtil
+ */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 	implements OrgLaborPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgLaborImpl.class.getName();
@@ -189,6 +201,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl
 		return orgLabor;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgLabor, boolean merge)}.
+	 */
 	public OrgLabor update(OrgLabor orgLabor) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

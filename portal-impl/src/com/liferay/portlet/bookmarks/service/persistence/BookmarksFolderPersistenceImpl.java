@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="BookmarksFolderPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BookmarksFolderPersistence
+ * @see    BookmarksFolderUtil
+ */
 public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 	implements BookmarksFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BookmarksFolderImpl.class.getName();
@@ -278,6 +291,9 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 		return bookmarksFolder;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BookmarksFolder, boolean merge)}.
+	 */
 	public BookmarksFolder update(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

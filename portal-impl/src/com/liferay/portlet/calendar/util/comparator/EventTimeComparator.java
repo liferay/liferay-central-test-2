@@ -32,6 +32,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * <a href="EventTimeComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ */
 public class EventTimeComparator implements Comparator<CalEvent> {
 
 	public EventTimeComparator(TimeZone timeZone, Locale locale) {

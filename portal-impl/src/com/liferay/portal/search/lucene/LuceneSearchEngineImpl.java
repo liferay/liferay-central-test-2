@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
 
+/**
+ * <a href="LuceneSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class LuceneSearchEngineImpl implements SearchEngine {
 
 	public static final String NAME = "LUCENE";

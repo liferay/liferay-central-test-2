@@ -33,6 +33,11 @@ import com.liferay.portal.service.base.RegionServiceBaseImpl;
 
 import java.util.List;
 
+/**
+ * <a href="RegionServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RegionServiceImpl extends RegionServiceBaseImpl {
 
 	public Region addRegion(

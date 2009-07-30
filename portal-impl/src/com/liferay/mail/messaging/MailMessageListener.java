@@ -36,6 +36,11 @@ import com.liferay.util.mail.MailEngine;
 
 import javax.mail.internet.InternetAddress;
 
+/**
+ * <a href="MailMessageListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MailMessageListener implements MessageListener {
 
 	public void receive(Message message) {

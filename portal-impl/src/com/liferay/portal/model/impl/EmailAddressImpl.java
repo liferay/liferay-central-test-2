@@ -28,6 +28,11 @@ import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.ListTypeServiceUtil;
 
+/**
+ * <a href="EmailAddressImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EmailAddressImpl
 	extends EmailAddressModelImpl implements EmailAddress {
 

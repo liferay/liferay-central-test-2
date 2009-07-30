@@ -33,6 +33,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_4.util.JournalArticleContentUpgradeColumnImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 
+/**
+ * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class UpgradeJournal extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

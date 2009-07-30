@@ -29,6 +29,13 @@ import com.liferay.portal.util.Portal;
 
 import java.io.File;
 
+/**
+ * <a href="PortletAutoDeployListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 	public PortletAutoDeployListener() {

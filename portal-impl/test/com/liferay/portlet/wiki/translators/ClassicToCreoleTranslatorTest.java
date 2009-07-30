@@ -24,6 +24,12 @@ package com.liferay.portlet.wiki.translators;
 
 import com.liferay.portal.util.BaseTestCase;
 
+/**
+ * <a href="ClassicToCreoleTranslatorTest.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ClassicToCreoleTranslatorTest extends BaseTestCase {
 
 	public ClassicToCreoleTranslatorTest() {

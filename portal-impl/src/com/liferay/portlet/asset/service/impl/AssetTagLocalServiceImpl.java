@@ -50,6 +50,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetTagLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alvaro del Castillo
+ * @author Jorge Ferrer
+ * @author Bruno Farache
+ */
 public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 	public AssetTag addTag(

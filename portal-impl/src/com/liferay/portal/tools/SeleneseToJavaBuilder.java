@@ -37,6 +37,11 @@ import java.util.Map;
 
 import org.apache.tools.ant.DirectoryScanner;
 
+/**
+ * <a href="SeleneseToJavaBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SeleneseToJavaBuilder {
 
 	public static void main(String[] args) throws Exception {

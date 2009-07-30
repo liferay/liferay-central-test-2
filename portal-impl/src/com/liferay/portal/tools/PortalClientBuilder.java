@@ -32,6 +32,11 @@ import java.io.File;
 
 import java.util.Iterator;
 
+/**
+ * <a href="PortalClientBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalClientBuilder {
 
 	public static void main(String[] args) {

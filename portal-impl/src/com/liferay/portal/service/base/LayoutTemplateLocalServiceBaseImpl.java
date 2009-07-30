@@ -166,6 +166,12 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="LayoutTemplateLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class LayoutTemplateLocalServiceBaseImpl
 	implements LayoutTemplateLocalService {
 	public AccountLocalService getAccountLocalService() {

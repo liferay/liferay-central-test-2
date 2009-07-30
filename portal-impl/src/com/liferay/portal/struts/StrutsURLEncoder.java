@@ -44,6 +44,11 @@ import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="StrutsURLEncoder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StrutsURLEncoder implements URLEncoder {
 
 	public static void setParameters(

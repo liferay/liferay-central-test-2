@@ -41,6 +41,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="ImageModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Image table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ImageImpl
+ * @see    com.liferay.portal.model.Image
+ * @see    com.liferay.portal.model.ImageModel
+ */
 public class ImageModelImpl extends BaseModelImpl<Image> {
 	public static final String TABLE_NAME = "Image";
 	public static final Object[][] TABLE_COLUMNS = {

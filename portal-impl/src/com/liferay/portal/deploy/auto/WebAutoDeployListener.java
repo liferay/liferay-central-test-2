@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
 
+/**
+ * <a href="WebAutoDeployListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WebAutoDeployListener extends BaseAutoDeployListener {
 
 	public WebAutoDeployListener() {

@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
+/**
+ * <a href="DLOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DLOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/document_library/open_search";

@@ -29,6 +29,12 @@ import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.util.LocalizationUtil;
 
+/**
+ * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class JournalArticleContentUpgradeColumnImpl
 	extends BaseUpgradeColumnImpl {
 

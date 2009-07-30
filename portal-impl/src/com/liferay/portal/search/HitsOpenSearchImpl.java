@@ -47,6 +47,12 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="HitsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Brian Wing Shun Chan
+ */
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 	public abstract Hits getHits(

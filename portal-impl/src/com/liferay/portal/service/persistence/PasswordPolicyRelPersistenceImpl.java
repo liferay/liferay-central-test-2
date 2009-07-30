@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PasswordPolicyRelPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordPolicyRelPersistence
+ * @see    PasswordPolicyRelUtil
+ */
 public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 	implements PasswordPolicyRelPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyRelImpl.class.getName();
@@ -229,6 +242,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl
 		return passwordPolicyRel;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PasswordPolicyRel, boolean merge)}.
+	 */
 	public PasswordPolicyRel update(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

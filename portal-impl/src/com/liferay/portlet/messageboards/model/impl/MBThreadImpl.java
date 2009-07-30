@@ -24,6 +24,11 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBThread;
 
+/**
+ * <a href="MBThreadImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBThreadImpl extends MBThreadModelImpl implements MBThread {
 
 	public static final double PRIORITY_NOT_GIVEN = -1.0;

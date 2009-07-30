@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="RegionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RegionPersistence
+ * @see    RegionUtil
+ */
 public class RegionPersistenceImpl extends BasePersistenceImpl
 	implements RegionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RegionImpl.class.getName();
@@ -221,6 +233,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl
 		return region;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Region, boolean merge)}.
+	 */
 	public Region update(Region region) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

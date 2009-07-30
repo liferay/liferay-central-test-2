@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ExpandoValuePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoValuePersistence
+ * @see    ExpandoValueUtil
+ */
 public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 	implements ExpandoValuePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoValueImpl.class.getName();
@@ -364,6 +376,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		return expandoValue;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoValue, boolean merge)}.
+	 */
 	public ExpandoValue update(ExpandoValue expandoValue)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

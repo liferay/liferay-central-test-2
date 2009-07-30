@@ -31,6 +31,23 @@ import com.liferay.portal.model.MembershipRequest;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MembershipRequestJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link MembershipRequestServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MembershipRequestServiceJSON
+ */
 public class MembershipRequestJSONSerializer {
 	public static JSONObject toJSONObject(MembershipRequest model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

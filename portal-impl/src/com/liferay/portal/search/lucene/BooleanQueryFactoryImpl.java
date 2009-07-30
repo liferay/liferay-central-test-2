@@ -25,6 +25,11 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactory;
 
+/**
+ * <a href="BooleanQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BooleanQueryFactoryImpl implements BooleanQueryFactory {
 
 	public BooleanQuery create() {

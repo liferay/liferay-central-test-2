@@ -54,6 +54,11 @@ import javax.portlet.PortletConfig;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="DeleteThreadAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Deepak Gothe
+ */
 public class DeleteThreadAction extends PortletAction {
 
 	public void processAction(

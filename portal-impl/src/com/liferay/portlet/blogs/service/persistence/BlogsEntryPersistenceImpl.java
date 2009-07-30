@@ -56,6 +56,18 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="BlogsEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BlogsEntryPersistence
+ * @see    BlogsEntryUtil
+ */
 public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 	implements BlogsEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BlogsEntryImpl.class.getName();
@@ -361,6 +373,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return blogsEntry;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BlogsEntry, boolean merge)}.
+	 */
 	public BlogsEntry update(BlogsEntry blogsEntry) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

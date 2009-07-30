@@ -37,6 +37,17 @@ import java.io.FileNotFoundException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+/**
+ * <a href="PortletApplicationContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This web application context will first load bean definitions in the
+ * contextConfigLocation parameter in web.xml. Then, the context will load bean
+ * definitions specified by the property "spring.configs" in service.properties.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {

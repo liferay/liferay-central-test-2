@@ -28,6 +28,11 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
+/**
+ * <a href="JournalTemplateImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalTemplateImpl
 	extends JournalTemplateModelImpl implements JournalTemplate {
 

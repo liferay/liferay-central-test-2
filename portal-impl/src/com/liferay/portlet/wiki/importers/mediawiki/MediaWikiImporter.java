@@ -74,6 +74,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <a href="MediaWikiImporter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alvaro del Castillo
+ * @author Jorge Ferrer
+ */
 public class MediaWikiImporter implements WikiImporter {
 
 	public static final String SHARED_IMAGES_CONTENT = "See attachments";

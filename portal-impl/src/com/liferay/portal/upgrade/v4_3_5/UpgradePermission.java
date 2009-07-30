@@ -59,6 +59,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradePermission extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

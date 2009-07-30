@@ -41,6 +41,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ExpandoValueModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ExpandoValue table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoValueImpl
+ * @see    com.liferay.portlet.expando.model.ExpandoValue
+ * @see    com.liferay.portlet.expando.model.ExpandoValueModel
+ */
 public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {
 	public static final String TABLE_NAME = "ExpandoValue";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -50,6 +50,11 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+/**
+ * <a href="DatabaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ganesh Ram
+ */
 public class DatabaseImpl implements Database {
 
 	public String getType() {

@@ -37,6 +37,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * <a href="LayoutPrototypeLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class LayoutPrototypeLocalServiceImpl
 	extends LayoutPrototypeLocalServiceBaseImpl {
 

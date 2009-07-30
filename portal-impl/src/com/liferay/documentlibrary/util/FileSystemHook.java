@@ -49,6 +49,12 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Sten Martinez
+ */
 public class FileSystemHook extends BaseHook {
 
 	public FileSystemHook() {

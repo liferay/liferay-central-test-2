@@ -53,6 +53,12 @@ import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="BaseOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 	public boolean isEnabled() {

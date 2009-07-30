@@ -26,6 +26,12 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
+/**
+ * <a href="PermissionsListFilterFactory.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionsListFilterFactory {
 
 	public static PermissionsListFilter getInstance() {

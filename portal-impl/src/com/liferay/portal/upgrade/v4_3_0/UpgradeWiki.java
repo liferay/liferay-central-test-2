@@ -41,6 +41,11 @@ import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
 import java.sql.Types;
 
+/**
+ * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeWiki extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

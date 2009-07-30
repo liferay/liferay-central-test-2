@@ -84,6 +84,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ * @author Bruno Farache
+ */
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public GroupLocalServiceImpl() {

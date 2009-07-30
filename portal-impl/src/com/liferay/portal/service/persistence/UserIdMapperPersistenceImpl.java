@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="UserIdMapperPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserIdMapperPersistence
+ * @see    UserIdMapperUtil
+ */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 	implements UserIdMapperPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapperImpl.class.getName();
@@ -240,6 +252,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
 		return userIdMapper;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(UserIdMapper, boolean merge)}.
+	 */
 	public UserIdMapper update(UserIdMapper userIdMapper)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

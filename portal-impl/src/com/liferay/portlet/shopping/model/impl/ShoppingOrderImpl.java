@@ -24,6 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 
+/**
+ * <a href="ShoppingOrderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingOrderImpl
 	extends ShoppingOrderModelImpl implements ShoppingOrder {
 

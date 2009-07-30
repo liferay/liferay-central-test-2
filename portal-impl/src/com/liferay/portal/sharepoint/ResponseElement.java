@@ -22,6 +22,11 @@
 
 package com.liferay.portal.sharepoint;
 
+/**
+ * <a href="ResponseElement.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface ResponseElement {
 
 	public String parse();

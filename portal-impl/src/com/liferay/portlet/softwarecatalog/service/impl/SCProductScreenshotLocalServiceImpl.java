@@ -29,6 +29,12 @@ import com.liferay.portlet.softwarecatalog.service.base.SCProductScreenshotLocal
 
 import java.util.List;
 
+/**
+ * <a href="SCProductScreenshotLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SCProductScreenshotLocalServiceImpl
 	extends SCProductScreenshotLocalServiceBaseImpl {
 

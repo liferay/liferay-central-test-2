@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="LayoutPrototypePersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutPrototypePersistence
+ * @see    LayoutPrototypeUtil
+ */
 public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 	implements LayoutPrototypePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutPrototypeImpl.class.getName();
@@ -214,6 +227,9 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl
 		return layoutPrototype;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(LayoutPrototype, boolean merge)}.
+	 */
 	public LayoutPrototype update(LayoutPrototype layoutPrototype)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

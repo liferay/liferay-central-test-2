@@ -138,6 +138,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.internet.InternetAddress;
 
+/**
+ * <a href="UserLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Scott Lee
+ * @author Raymond Augé
+ * @author Jorge Ferrer
+ * @author Julio Camarero
+ */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void addGroupUsers(long groupId, long[] userIds)
@@ -1424,6 +1433,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return rolePersistence.containsUser(roleId, userId);
 	}
 
+	/**
+	 * Returns true if the user has the role.
+	 *
+	 * @return true if the user has the role
+	 */
 	public boolean hasRoleUser(
 			long companyId, String name, long userId, boolean inherited)
 		throws PortalException, SystemException {

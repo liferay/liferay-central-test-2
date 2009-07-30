@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.cache.SingleVMPool;
 
 import java.io.Serializable;
 
+/**
+ * <a href="SingleVMPoolImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
+ */
 public class SingleVMPoolImpl implements SingleVMPool {
 
 	public void clear() {

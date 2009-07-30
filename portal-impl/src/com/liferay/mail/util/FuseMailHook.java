@@ -39,6 +39,11 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 
+/**
+ * <a href="FuseMailHook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class FuseMailHook implements Hook {
 
 	public FuseMailHook() {

@@ -59,6 +59,11 @@ import org.quartz.spi.ClassLoadHelper;
 import org.quartz.utils.Key;
 import org.quartz.utils.TriggerStatus;
 
+/**
+ * <a href="DynamicDriverDelegate.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DynamicDriverDelegate extends StdJDBCDelegate {
 
 	public DynamicDriverDelegate(

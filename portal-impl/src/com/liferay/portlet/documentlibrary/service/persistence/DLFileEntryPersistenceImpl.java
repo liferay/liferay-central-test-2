@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="DLFileEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileEntryPersistence
+ * @see    DLFileEntryUtil
+ */
 public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 	implements DLFileEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileEntryImpl.class.getName();
@@ -322,6 +334,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
 		return dlFileEntry;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileEntry, boolean merge)}.
+	 */
 	public DLFileEntry update(DLFileEntry dlFileEntry)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

@@ -42,6 +42,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+/**
+ * <a href="UpgradeAsset.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeAsset extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

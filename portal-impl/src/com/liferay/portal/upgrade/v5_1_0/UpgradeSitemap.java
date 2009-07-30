@@ -39,6 +39,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="UpgradeSitemap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeSitemap extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

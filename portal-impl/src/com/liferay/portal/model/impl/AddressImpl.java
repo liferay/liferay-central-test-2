@@ -32,6 +32,11 @@ import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
 
+/**
+ * <a href="AddressImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AddressImpl extends AddressModelImpl implements Address {
 
 	public AddressImpl() {

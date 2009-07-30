@@ -70,6 +70,12 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.util.List;
 
+/**
+ * <a href="CalEventLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class CalEventLocalServiceBaseImpl
 	implements CalEventLocalService {
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {

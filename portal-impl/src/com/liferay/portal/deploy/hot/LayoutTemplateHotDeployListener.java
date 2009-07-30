@@ -37,6 +37,14 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="LayoutTemplateHotDeployListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Brian Myunghun Kim
+ * @author Ivica Cardic
+ */
 public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {

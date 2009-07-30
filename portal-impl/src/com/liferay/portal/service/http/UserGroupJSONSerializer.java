@@ -29,6 +29,21 @@ import com.liferay.portal.model.UserGroup;
 
 import java.util.List;
 
+/**
+ * <a href="UserGroupJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link UserGroupServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserGroupServiceJSON
+ */
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

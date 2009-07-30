@@ -30,6 +30,12 @@ import com.liferay.portlet.PortletPreferencesImpl;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * <a href="PortletPreferencesLocalUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
+ */
 public class PortletPreferencesLocalUtil {
 
 	public static final String CACHE_NAME =

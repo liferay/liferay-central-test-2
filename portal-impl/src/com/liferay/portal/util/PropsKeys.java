@@ -22,6 +22,11 @@
 
 package com.liferay.portal.util;
 
+/**
+ * <a href="PropsKeys.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface PropsKeys {
 
 	public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";

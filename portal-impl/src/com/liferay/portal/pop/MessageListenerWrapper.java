@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.pop.MessageListenerException;
 
 import javax.mail.Message;
 
+/**
+ * <a href="MessageListenerWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MessageListenerWrapper implements MessageListener {
 
 	public MessageListenerWrapper(MessageListener listener) {

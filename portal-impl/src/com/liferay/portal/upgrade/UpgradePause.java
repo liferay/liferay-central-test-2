@@ -22,6 +22,11 @@
 
 package com.liferay.portal.upgrade;
 
+/**
+ * <a href="UpgradePause.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradePause extends UpgradeProcess {
 
 	public void upgrade() {

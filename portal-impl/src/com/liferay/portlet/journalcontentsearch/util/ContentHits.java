@@ -32,6 +32,12 @@ import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ContentHits.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Raymond Augé
+ */
 public class ContentHits {
 
 	public void recordHits(

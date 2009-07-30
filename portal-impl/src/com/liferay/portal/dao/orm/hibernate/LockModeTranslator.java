@@ -24,6 +24,11 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.LockMode;
 
+/**
+ * <a href="LockModeTranslator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LockModeTranslator {
 
 	public static org.hibernate.LockMode translate(LockMode lockMode) {

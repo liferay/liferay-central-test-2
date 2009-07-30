@@ -28,6 +28,12 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 
+/**
+ * <a href="UserGroupImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 
 	public static final long DEFAULT_PARENT_USER_GROUP_ID = 0;

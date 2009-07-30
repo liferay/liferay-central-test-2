@@ -38,6 +38,12 @@ import java.io.File;
 
 import java.util.Date;
 
+/**
+ * <a href="DLServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
+ */
 public class DLServiceImpl implements DLService {
 
 	public static final String GROUP_NAME = DLServiceImpl.class.getName();

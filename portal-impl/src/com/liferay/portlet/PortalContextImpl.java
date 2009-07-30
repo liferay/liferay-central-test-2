@@ -36,6 +36,11 @@ import javax.portlet.PortalContext;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
+/**
+ * <a href="PortalContextImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalContextImpl implements PortalContext {
 
 	static Properties props = new Properties();

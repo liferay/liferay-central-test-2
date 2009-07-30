@@ -61,6 +61,11 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.flags.service.FlagsEntryService;
 
+/**
+ * <a href="FlagsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	implements FlagsEntryService {
 	public FlagsEntryService getFlagsEntryService() {

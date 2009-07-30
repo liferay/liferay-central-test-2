@@ -32,6 +32,23 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="JournalStructureJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link JournalStructureServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    JournalStructureServiceJSON
+ */
 public class JournalStructureJSONSerializer {
 	public static JSONObject toJSONObject(JournalStructure model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

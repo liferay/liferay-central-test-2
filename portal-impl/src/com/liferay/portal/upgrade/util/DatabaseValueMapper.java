@@ -25,6 +25,12 @@ package com.liferay.portal.upgrade.util;
 import java.util.Collections;
 import java.util.Iterator;
 
+/**
+ * <a href="DatabaseValueMapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class DatabaseValueMapper implements ValueMapper {
 
 	public DatabaseValueMapper() {

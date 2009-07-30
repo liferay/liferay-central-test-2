@@ -47,6 +47,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * <a href="WordsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WordsUtil {
 
 	public static List<InvalidWord> checkSpelling(String text) {

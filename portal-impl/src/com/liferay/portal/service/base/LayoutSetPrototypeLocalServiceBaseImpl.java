@@ -174,6 +174,12 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
+/**
+ * <a href="LayoutSetPrototypeLocalServiceBaseImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	implements LayoutSetPrototypeLocalService {
 	public LayoutSetPrototype addLayoutSetPrototype(

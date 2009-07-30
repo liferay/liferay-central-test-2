@@ -24,6 +24,11 @@ package com.liferay.portlet;
 
 import java.io.Serializable;
 
+/**
+ * <a href="Preference.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Preference implements Cloneable, Serializable {
 
 	public Preference(String name, String value) {

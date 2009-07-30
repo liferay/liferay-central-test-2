@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <a href="DefaultUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Bruno Farache
+ */
 public class DefaultUpgradeTableImpl
 	extends BaseUpgradeTableImpl implements UpgradeTable {
 

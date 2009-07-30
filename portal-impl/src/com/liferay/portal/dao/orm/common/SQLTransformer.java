@@ -31,6 +31,11 @@ import com.liferay.portal.util.PropsValues;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="SQLTransformer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SQLTransformer {
 
 	public static String transform(String sql) {

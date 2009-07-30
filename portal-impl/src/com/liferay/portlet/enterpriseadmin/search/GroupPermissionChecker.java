@@ -32,6 +32,11 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="GroupPermissionChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class GroupPermissionChecker extends RowChecker {
 
 	public GroupPermissionChecker(

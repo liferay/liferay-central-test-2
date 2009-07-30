@@ -43,6 +43,12 @@ import javax.servlet.http.HttpSession;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+/**
+ * <a href="PollsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Shepherd Ching
+ */
 public class PollsUtil {
 
 	public static CategoryDataset getVotesDataset(long questionId)

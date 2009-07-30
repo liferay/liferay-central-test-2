@@ -28,6 +28,12 @@ import com.liferay.portal.monitoring.statistics.SummaryStatistics;
 
 import java.util.Set;
 
+/**
+ * <a href="ServerSummaryStatistics.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class ServerSummaryStatistics implements SummaryStatistics {
 
 	public ServerSummaryStatistics(ServerStatistics serverStatistics) {

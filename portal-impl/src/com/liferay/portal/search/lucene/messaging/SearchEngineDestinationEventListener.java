@@ -36,6 +36,12 @@ import com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener;
 import com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener;
 import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
 
+/**
+ * <a href="SearchEngineDestinationEventListener.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class SearchEngineDestinationEventListener
 	extends BaseDestinationEventListener {
 

@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="BrowserTrackerPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BrowserTrackerPersistence
+ * @see    BrowserTrackerUtil
+ */
 public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 	implements BrowserTrackerPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BrowserTrackerImpl.class.getName();
@@ -196,6 +209,9 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return browserTracker;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BrowserTracker, boolean merge)}.
+	 */
 	public BrowserTracker update(BrowserTracker browserTracker)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

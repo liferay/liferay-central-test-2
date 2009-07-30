@@ -67,6 +67,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 
+/**
+ * <a href="PortletResponseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 	public static PortletResponseImpl getPortletResponseImpl(

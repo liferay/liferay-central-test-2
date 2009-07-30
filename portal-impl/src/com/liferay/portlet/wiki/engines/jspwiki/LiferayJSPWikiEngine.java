@@ -29,6 +29,11 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="LiferayJSPWikiEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class LiferayJSPWikiEngine extends com.ecyrd.jspwiki.WikiEngine {
 
 	public LiferayJSPWikiEngine(Properties properties) throws WikiException {

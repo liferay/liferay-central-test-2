@@ -32,6 +32,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * <a href="LayoutLister.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LayoutLister {
 
 	public LayoutView getLayoutView(

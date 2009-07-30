@@ -35,6 +35,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="MBCategoryDisplayImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ */
 public class MBCategoryDisplayImpl implements MBCategoryDisplay {
 
 	public MBCategoryDisplayImpl(long scopeGroupId, long categoryId) {

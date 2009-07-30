@@ -32,6 +32,23 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsEntryJSONSerializer.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link AnnouncementsEntryServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsEntryServiceJSON
+ */
 public class AnnouncementsEntryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsEntry model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

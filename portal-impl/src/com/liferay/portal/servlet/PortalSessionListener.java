@@ -43,6 +43,11 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.struts.Globals;
 
+/**
+ * <a href="PortalSessionListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalSessionListener implements HttpSessionListener {
 
 	public void sessionCreated(HttpSessionEvent event) {

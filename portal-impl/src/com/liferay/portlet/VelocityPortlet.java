@@ -48,6 +48,13 @@ import javax.portlet.ResourceResponse;
 import org.apache.velocity.io.VelocityWriter;
 import org.apache.velocity.util.SimplePool;
 
+/**
+ * <a href="VelocityPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Steven P. Goldsmith
+ * @author Raymond Augé
+ */
 public class VelocityPortlet extends GenericPortlet {
 
 	public void init(PortletConfig portletConfig) throws PortletException {

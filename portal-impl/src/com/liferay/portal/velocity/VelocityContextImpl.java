@@ -24,6 +24,11 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.velocity.VelocityContext;
 
+/**
+ * <a href="VelocityContextImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class VelocityContextImpl implements VelocityContext {
 
 	public VelocityContextImpl() {

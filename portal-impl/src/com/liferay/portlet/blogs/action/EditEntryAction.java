@@ -68,6 +68,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Wilson S. Man
+ */
 public class EditEntryAction extends PortletAction {
 
 	public void processAction(

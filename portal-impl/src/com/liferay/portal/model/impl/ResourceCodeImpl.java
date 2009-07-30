@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.ResourceCode;
 
+/**
+ * <a href="ResourceCodeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourceCodeImpl
 	extends ResourceCodeModelImpl implements ResourceCode {
 

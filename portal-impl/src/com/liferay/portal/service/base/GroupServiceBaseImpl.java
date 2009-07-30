@@ -245,6 +245,11 @@ import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 
+/**
+ * <a href="GroupServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class GroupServiceBaseImpl extends PrincipalBean
 	implements GroupService {
 	public AccountLocalService getAccountLocalService() {

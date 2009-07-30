@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="DLFileVersionModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileVersion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileVersionImpl
+ * @see    com.liferay.portlet.documentlibrary.model.DLFileVersion
+ * @see    com.liferay.portlet.documentlibrary.model.DLFileVersionModel
+ */
 public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	public static final String TABLE_NAME = "DLFileVersion";
 	public static final Object[][] TABLE_COLUMNS = {

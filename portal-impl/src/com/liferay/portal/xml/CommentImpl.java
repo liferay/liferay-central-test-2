@@ -24,6 +24,11 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Comment;
 
+/**
+ * <a href="CommentImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CommentImpl extends NodeImpl implements Comment {
 
 	public CommentImpl(org.dom4j.Comment comment) {

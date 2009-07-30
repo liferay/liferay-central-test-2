@@ -35,6 +35,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="SiteMinderLogoutAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Mika Koivisto
+ */
 public class SiteMinderLogoutAction extends Action {
 
 	public void run(HttpServletRequest request, HttpServletResponse response) {

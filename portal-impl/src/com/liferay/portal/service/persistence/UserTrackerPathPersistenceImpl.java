@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="UserTrackerPathPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserTrackerPathPersistence
+ * @see    UserTrackerPathUtil
+ */
 public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 	implements UserTrackerPathPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserTrackerPathImpl.class.getName();
@@ -197,6 +210,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl
 		return userTrackerPath;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(UserTrackerPath, boolean merge)}.
+	 */
 	public UserTrackerPath update(UserTrackerPath userTrackerPath)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

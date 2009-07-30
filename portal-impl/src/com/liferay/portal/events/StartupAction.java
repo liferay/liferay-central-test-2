@@ -51,6 +51,13 @@ import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ * @author Raymond Augé
+ */
 public class StartupAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {

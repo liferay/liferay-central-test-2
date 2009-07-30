@@ -29,6 +29,12 @@ import com.liferay.portal.service.base.UserIdMapperLocalServiceBaseImpl;
 
 import java.util.List;
 
+/**
+ * <a href="UserIdMapperLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserIdMapperLocalServiceImpl
 	extends UserIdMapperLocalServiceBaseImpl {
 

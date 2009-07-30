@@ -48,6 +48,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AccountPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AccountPersistence
+ * @see    AccountUtil
+ */
 public class AccountPersistenceImpl extends BasePersistenceImpl
 	implements AccountPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AccountImpl.class.getName();
@@ -172,6 +184,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 		return account;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Account, boolean merge)}.
+	 */
 	public Account update(Account account) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

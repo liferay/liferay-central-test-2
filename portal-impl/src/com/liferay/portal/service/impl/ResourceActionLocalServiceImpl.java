@@ -39,6 +39,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="ResourceActionLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourceActionLocalServiceImpl
 	extends ResourceActionLocalServiceBaseImpl {
 

@@ -69,6 +69,12 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence;
 
 import java.util.List;
 
+/**
+ * <a href="AssetCategoryLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class AssetCategoryLocalServiceBaseImpl
 	implements AssetCategoryLocalService {
 	public AssetCategory addAssetCategory(AssetCategory assetCategory)

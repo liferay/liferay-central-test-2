@@ -31,6 +31,12 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="UserPermissionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Jorge Ferrer
+ */
 public class UserPermissionImpl implements UserPermission {
 
 	public void check(

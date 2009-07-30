@@ -32,6 +32,12 @@ import java.io.IOException;
 
 import java.util.zip.ZipFile;
 
+/**
+ * <a href="BaseAutoDeployListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
 	public boolean isHookPlugin(File file) throws AutoDeployException {

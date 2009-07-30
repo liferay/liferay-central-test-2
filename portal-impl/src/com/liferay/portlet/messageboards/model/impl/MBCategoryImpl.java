@@ -31,6 +31,11 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="MBCategoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 
 	public static long DEFAULT_PARENT_CATEGORY_ID = 0;

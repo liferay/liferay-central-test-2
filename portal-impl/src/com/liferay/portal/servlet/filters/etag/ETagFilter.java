@@ -32,6 +32,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="ETagFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Eduardo Lundgren
+ */
 public class ETagFilter extends BasePortalFilter {
 
 	protected void processFilter(

@@ -30,6 +30,11 @@ import java.sql.Types;
 
 import java.util.Map;
 
+/**
+ * <a href="ClassPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public ClassPKUpgradeColumnImpl(

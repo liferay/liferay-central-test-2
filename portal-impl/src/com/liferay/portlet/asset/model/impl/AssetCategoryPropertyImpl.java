@@ -24,6 +24,11 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 
+/**
+ * <a href="AssetCategoryPropertyImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssetCategoryPropertyImpl
 	extends AssetCategoryPropertyModelImpl implements AssetCategoryProperty {
 

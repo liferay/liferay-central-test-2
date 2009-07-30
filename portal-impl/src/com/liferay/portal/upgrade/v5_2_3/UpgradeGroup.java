@@ -30,6 +30,11 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
+/**
+ * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeGroup extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

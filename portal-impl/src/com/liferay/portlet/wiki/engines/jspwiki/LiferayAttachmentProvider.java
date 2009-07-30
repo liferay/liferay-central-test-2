@@ -43,6 +43,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * <a href="LiferayAttachmentProvider.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 
 	public void deleteAttachment(Attachment attachment) {

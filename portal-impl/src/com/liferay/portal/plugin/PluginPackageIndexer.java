@@ -40,6 +40,14 @@ import java.util.List;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="PluginPackageIndexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ * @author Bruno Farache
+ * @author Raymond Augé
+ */
 public class PluginPackageIndexer implements Indexer {
 
 	public static final String PORTLET_ID = "PluginPackageIndexer";

@@ -52,6 +52,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="ImageServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Brett Randall
+ */
 public class ImageServlet extends HttpServlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {

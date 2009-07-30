@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="TasksReviewPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksReviewPersistence
+ * @see    TasksReviewUtil
+ */
 public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 	implements TasksReviewPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = TasksReviewImpl.class.getName();
@@ -295,6 +307,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl
 		return tasksReview;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(TasksReview, boolean merge)}.
+	 */
 	public TasksReview update(TasksReview tasksReview)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

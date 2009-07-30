@@ -22,6 +22,11 @@
 
 package com.liferay.portlet;
 
+/**
+ * <a href="MonitoringPortletManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class MonitoringPortletManager implements MonitoringPortletManagerMBean {
 
 	public boolean isMonitoringPortletActionRequest() {

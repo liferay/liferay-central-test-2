@@ -46,6 +46,11 @@ import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import java.sql.Connection;
 import java.sql.Statement;
 
+/**
+ * <a href="GlobalShutdownAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class GlobalShutdownAction extends SimpleAction {
 
 	public void run(String[] ids) {

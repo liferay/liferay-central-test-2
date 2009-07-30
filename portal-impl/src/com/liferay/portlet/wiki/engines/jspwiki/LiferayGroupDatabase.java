@@ -30,6 +30,11 @@ import java.security.Principal;
 
 import java.util.Properties;
 
+/**
+ * <a href="LiferayGroupDatabase.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class LiferayGroupDatabase  implements GroupDatabase {
 
 	public void commit() {

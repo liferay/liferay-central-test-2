@@ -32,6 +32,21 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="RatingsEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link RatingsEntryServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsEntryServiceJSON
+ */
 public class RatingsEntryJSONSerializer {
 	public static JSONObject toJSONObject(RatingsEntry model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

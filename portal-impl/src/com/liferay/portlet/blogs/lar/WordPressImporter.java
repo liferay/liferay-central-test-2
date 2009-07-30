@@ -58,6 +58,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+/**
+ * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class WordPressImporter {
 
 	public static void importData(PortletDataContext context)

@@ -32,6 +32,11 @@ import com.liferay.portlet.currencyconverter.model.Currency;
 
 import java.util.StringTokenizer;
 
+/**
+ * <a href="CurrencyWebCacheItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CurrencyWebCacheItem implements WebCacheItem {
 
 	public CurrencyWebCacheItem(String symbol) {

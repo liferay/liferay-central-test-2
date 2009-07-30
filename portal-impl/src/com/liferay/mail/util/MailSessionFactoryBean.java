@@ -37,6 +37,11 @@ import javax.naming.InitialContext;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
+/**
+ * <a href="MailSessionFactoryBean.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MailSessionFactoryBean extends AbstractFactoryBean {
 
 	public Class<?> getObjectType() {

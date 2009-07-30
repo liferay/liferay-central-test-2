@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PasswordTracker;
 
+/**
+ * <a href="PasswordTrackerImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PasswordTrackerImpl
 	extends PasswordTrackerModelImpl implements PasswordTracker {
 

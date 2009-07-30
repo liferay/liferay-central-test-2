@@ -24,6 +24,11 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portlet.messageboards.model.MBBan;
 
+/**
+ * <a href="MBBanImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBBanImpl extends MBBanModelImpl implements MBBan {
 
 	public MBBanImpl() {

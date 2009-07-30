@@ -32,6 +32,11 @@ import org.apache.struts.Globals;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ModuleConfig;
 
+/**
+ * <a href="PortletActionServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletActionServlet extends ActionServlet {
 
 	public void init(ServletConfig servletConfig) throws ServletException {

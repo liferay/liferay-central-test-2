@@ -24,6 +24,11 @@ package com.liferay.portlet.announcements.model.impl;
 
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 
+/**
+ * <a href="AnnouncementsDeliveryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AnnouncementsDeliveryImpl
 	extends AnnouncementsDeliveryModelImpl implements AnnouncementsDelivery {
 

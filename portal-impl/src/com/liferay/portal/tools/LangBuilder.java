@@ -42,6 +42,11 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * <a href="LangBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LangBuilder {
 
 	public static void main(String[] args) {
@@ -86,7 +91,7 @@ public class LangBuilder {
 				_createProps(content, "it"); // Italian
 				_createProps(content, "ja"); // Japanese
 				_createProps(content, "ko"); // Korean
-				_createProps(content, "nb"); // Norwegian Bokmål
+				_createProps(content, "nb"); // Norwegian Bokm�l
 				_createProps(content, "fa"); // Persian
 				_createProps(content, "pl"); // Polish
 				_createProps(content, "pt_BR"); // Brazilian Portuguese
@@ -309,7 +314,7 @@ public class LangBuilder {
 			translationId.equals("en_vi")) {
 
 			// Automatic translator does not support Arabic, Basque, Bulgarian,
-			// Catalan, Czech, Finnish, Hungarian, Norwegian Bokmål, Persian,
+			// Catalan, Czech, Finnish, Hungarian, Norwegian Bokm�l, Persian,
 			// Polish, Russian, Slovak, Swedish, Turkish, or Vietnamese
 
 			return null;

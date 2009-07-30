@@ -37,6 +37,12 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 
+/**
+ * <a href="BaseExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Olaf Fricke
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 
 	public void copyContextFile(File file) throws AutoDeployException {

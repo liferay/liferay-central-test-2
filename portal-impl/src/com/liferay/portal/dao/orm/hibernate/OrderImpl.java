@@ -24,6 +24,11 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Order;
 
+/**
+ * <a href="OrderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class OrderImpl implements Order {
 
 	public OrderImpl(org.hibernate.criterion.Order criterion) {

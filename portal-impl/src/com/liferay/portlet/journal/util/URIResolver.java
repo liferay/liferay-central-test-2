@@ -34,6 +34,11 @@ import java.util.Map;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
+/**
+ * <a href="URIResolver.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class URIResolver implements javax.xml.transform.URIResolver {
 
 	public URIResolver(Map<String, String> tokens, String languageId) {

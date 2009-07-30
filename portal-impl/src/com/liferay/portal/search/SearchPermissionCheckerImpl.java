@@ -59,6 +59,13 @@ import com.liferay.portal.util.PropsValues;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="SearchPermissionCheckerImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Allen Chiang
+ * @author Bruno Farache
+ * @author Raymond Augé
+ */
 public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 	public void addPermissionFields(long companyId, Document doc) {

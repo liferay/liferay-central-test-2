@@ -36,6 +36,11 @@ import java.util.Calendar;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * <a href="ReverendFunWebCacheItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReverendFunWebCacheItem implements WebCacheItem {
 
 	public ReverendFunWebCacheItem(String date) {

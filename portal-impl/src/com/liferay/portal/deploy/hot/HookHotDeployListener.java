@@ -86,6 +86,12 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="HookHotDeployListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Bruno Farache
+ */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
 

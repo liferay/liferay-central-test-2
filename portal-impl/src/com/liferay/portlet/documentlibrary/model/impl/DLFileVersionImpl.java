@@ -24,6 +24,11 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
+/**
+ * <a href="DLFileVersionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DLFileVersionImpl
 	extends DLFileVersionModelImpl implements DLFileVersion {
 

@@ -42,6 +42,11 @@ import java.util.Set;
 
 import javax.xml.XMLConstants;
 
+/**
+ * <a href="PortletAppImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletAppImpl implements PortletApp {
 
 	public PortletAppImpl(String servletContextName) {

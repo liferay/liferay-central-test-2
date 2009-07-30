@@ -53,6 +53,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ExpandoTablePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoTablePersistence
+ * @see    ExpandoTableUtil
+ */
 public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 	implements ExpandoTablePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoTableImpl.class.getName();
@@ -229,6 +241,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
 		return expandoTable;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ExpandoTable, boolean merge)}.
+	 */
 	public ExpandoTable update(ExpandoTable expandoTable)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

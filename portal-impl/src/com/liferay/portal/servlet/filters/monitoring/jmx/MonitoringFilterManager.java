@@ -24,6 +24,11 @@ package com.liferay.portal.servlet.filters.monitoring.jmx;
 
 import com.liferay.portal.servlet.filters.monitoring.MonitoringFilter;
 
+/**
+ * <a href="MonitoringFilterManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class MonitoringFilterManager implements MonitoringFilterManagerMBean {
 
 	public boolean isMonitoringPortalRequest() {

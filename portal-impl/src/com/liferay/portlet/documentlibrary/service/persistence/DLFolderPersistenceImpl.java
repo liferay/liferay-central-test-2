@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="DLFolderPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFolderPersistence
+ * @see    DLFolderUtil
+ */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	implements DLFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFolderImpl.class.getName();
@@ -311,6 +323,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 		return dlFolder;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFolder, boolean merge)}.
+	 */
 	public DLFolder update(DLFolder dlFolder) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -37,6 +37,11 @@ import org.python.core.PyCode;
 import org.python.core.PySystemState;
 import org.python.util.InteractiveInterpreter;
 
+/**
+ * <a href="PythonExecutor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alberto Montero
+ */
 public class PythonExecutor implements ScriptingExecutor {
 
 	public static final String CACHE_NAME = PythonExecutor.class.getName();

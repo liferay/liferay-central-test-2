@@ -27,6 +27,12 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="OrganizationDisplayTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class OrganizationDisplayTerms extends DisplayTerms {
 
 	public static final String TYPE = "type";

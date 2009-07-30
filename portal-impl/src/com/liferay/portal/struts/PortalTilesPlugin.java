@@ -25,6 +25,11 @@ package com.liferay.portal.struts;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesPlugin;
 
+/**
+ * <a href="PortalTilesPlugin.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalTilesPlugin extends TilesPlugin {
 
 	protected void initRequestProcessorClass(ModuleConfig moduleConfig) {

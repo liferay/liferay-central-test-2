@@ -27,6 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.base.ResourceServiceBaseImpl;
 
+/**
+ * <a href="ResourceServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourceServiceImpl extends ResourceServiceBaseImpl {
 
 	public Resource getResource(

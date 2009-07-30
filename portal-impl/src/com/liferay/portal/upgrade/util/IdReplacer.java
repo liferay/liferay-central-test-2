@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.StagnantRowException;
 
+/**
+ * <a href="IdReplacer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IdReplacer {
 
 	public static String replaceLongIds(

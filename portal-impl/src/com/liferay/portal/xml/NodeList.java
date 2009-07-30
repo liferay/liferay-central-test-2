@@ -39,6 +39,11 @@ import com.liferay.portal.kernel.xml.XPath;
 
 import java.util.List;
 
+/**
+ * <a href="NodeList.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NodeList<E, F> extends TranslatedList<E, F> {
 
 	public NodeList(List<E> newList, List<F> oldList) {

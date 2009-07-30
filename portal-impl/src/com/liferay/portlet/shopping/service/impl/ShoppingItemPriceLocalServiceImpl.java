@@ -32,6 +32,12 @@ import com.liferay.portlet.shopping.service.base.ShoppingItemPriceLocalServiceBa
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ShoppingItemPriceLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingItemPriceLocalServiceImpl
 	extends ShoppingItemPriceLocalServiceBaseImpl {
 

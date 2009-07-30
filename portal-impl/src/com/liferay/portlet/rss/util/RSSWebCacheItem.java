@@ -32,6 +32,11 @@ import com.sun.syndication.io.XmlReader;
 
 import java.net.URL;
 
+/**
+ * <a href="RSSWebCacheItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RSSWebCacheItem implements WebCacheItem {
 
 	public RSSWebCacheItem(String url) {

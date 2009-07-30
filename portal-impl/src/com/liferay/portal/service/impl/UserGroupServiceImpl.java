@@ -34,6 +34,11 @@ import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 
 import java.util.List;
 
+/**
+ * <a href="UserGroupServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)

@@ -30,6 +30,11 @@ import com.liferay.portal.service.persistence.UserUtil;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="CurrentUserIdStrategy.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class CurrentUserIdStrategy implements UserIdStrategy {
 
 	public CurrentUserIdStrategy(User user) {

@@ -31,6 +31,11 @@ import com.liferay.portlet.journal.service.base.JournalFeedServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
 
+/**
+ * <a href="JournalFeedServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {
 
 	public JournalFeed addFeed(

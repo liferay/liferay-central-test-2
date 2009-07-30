@@ -63,6 +63,11 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 
 import java.util.List;
 
+/**
+ * <a href="MBBanLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 	public MBBan addMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(true);

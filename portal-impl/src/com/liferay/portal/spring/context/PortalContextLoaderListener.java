@@ -35,6 +35,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+/**
+ * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextInitialized(ServletContextEvent event) {

@@ -57,6 +57,12 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
 
 import java.util.List;
 
+/**
+ * <a href="SCFrameworkVersionLocalServiceBaseImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	implements SCFrameworkVersionLocalService {
 	public SCFrameworkVersion addSCFrameworkVersion(

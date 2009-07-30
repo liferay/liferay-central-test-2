@@ -40,6 +40,12 @@ import java.io.File;
 
 import java.util.List;
 
+/**
+ * <a href="CompanyServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Julio Camarero
+ */
 public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
 	public Company addCompany(

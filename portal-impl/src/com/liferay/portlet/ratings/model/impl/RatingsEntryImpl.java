@@ -24,6 +24,11 @@ package com.liferay.portlet.ratings.model.impl;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
+/**
+ * <a href="RatingsEntryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RatingsEntryImpl
 	extends RatingsEntryModelImpl implements RatingsEntry {
 

@@ -61,6 +61,12 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="AssetUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class AssetUtil {
 
 	public static final String[] ASSET_ENTRY_TYPE_CLASS_NAMES = {

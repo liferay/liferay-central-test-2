@@ -30,6 +30,11 @@ import java.io.InputStream;
 
 import org.xml.sax.InputSource;
 
+/**
+ * <a href="EntityResolver.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntityResolver implements org.xml.sax.EntityResolver {
 
 	public InputSource resolveEntity(String publicId, String systemId) {

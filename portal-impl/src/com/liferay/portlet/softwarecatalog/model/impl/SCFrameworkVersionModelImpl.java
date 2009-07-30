@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SCFrameworkVersionModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCFrameworkVersion table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCFrameworkVersionImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion
+ * @see    com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionModel
+ */
 public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersion> {
 	public static final String TABLE_NAME = "SCFrameworkVersion";
 	public static final Object[][] TABLE_COLUMNS = {

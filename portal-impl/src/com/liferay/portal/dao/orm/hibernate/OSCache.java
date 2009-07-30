@@ -36,6 +36,12 @@ import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.Timestamper;
 
+/**
+ * <a href="OSCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Mathias Bogaert
+ * @author Brian Wing Shun Chan
+ */
 public class OSCache implements Cache {
 
 	public OSCache(int refreshPeriod, String cron, String region) {

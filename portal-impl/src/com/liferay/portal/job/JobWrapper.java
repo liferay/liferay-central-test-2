@@ -32,6 +32,11 @@ import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.StatefulJob;
 
+/**
+ * <a href="JobWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JobWrapper implements StatefulJob {
 
 	public void execute(JobExecutionContext context) {

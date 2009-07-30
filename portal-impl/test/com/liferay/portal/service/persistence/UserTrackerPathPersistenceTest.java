@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
+/**
+ * <a href="UserTrackerPathPersistenceTest.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();

@@ -49,6 +49,12 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPe
 
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsDeliveryLocalServiceBaseImpl.java.html"><b><i>View
+ * Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	implements AnnouncementsDeliveryLocalService {
 	public AnnouncementsDelivery addAnnouncementsDelivery(

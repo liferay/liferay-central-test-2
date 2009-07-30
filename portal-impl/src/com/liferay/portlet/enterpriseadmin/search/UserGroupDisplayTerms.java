@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="UserGroupDisplayTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class UserGroupDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";

@@ -30,6 +30,11 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
+/**
+ * <a href="AssetCategoryPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Eduardo Lundgren
+ */
 public class AssetCategoryPermission {
 
 	public static void check(

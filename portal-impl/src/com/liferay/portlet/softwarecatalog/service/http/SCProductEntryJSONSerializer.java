@@ -32,6 +32,22 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SCProductEntryJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link SCProductEntryServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductEntryServiceJSON
+ */
 public class SCProductEntryJSONSerializer {
 	public static JSONObject toJSONObject(SCProductEntry model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

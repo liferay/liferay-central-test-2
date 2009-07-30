@@ -35,6 +35,12 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
+/**
+ * <a href="WikiActivityInterpreter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ * @author Ryan Park
+ */
 public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {

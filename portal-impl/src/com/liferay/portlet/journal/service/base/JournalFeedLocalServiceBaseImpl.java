@@ -68,6 +68,12 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenc
 
 import java.util.List;
 
+/**
+ * <a href="JournalFeedLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class JournalFeedLocalServiceBaseImpl
 	implements JournalFeedLocalService {
 	public JournalFeed addJournalFeed(JournalFeed journalFeed)

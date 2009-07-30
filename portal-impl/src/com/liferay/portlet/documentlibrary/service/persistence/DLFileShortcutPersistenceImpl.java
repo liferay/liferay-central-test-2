@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="DLFileShortcutPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileShortcutPersistence
+ * @see    DLFileShortcutUtil
+ */
 public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 	implements DLFileShortcutPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileShortcutImpl.class.getName();
@@ -259,6 +272,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl
 		return dlFileShortcut;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileShortcut, boolean merge)}.
+	 */
 	public DLFileShortcut update(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

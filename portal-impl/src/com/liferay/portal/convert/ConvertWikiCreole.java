@@ -31,6 +31,11 @@ import com.liferay.portlet.wiki.translators.ClassicToCreoleTranslator;
 
 import java.util.List;
 
+/**
+ * <a href="ConvertWikiCreole.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ConvertWikiCreole extends ConvertProcess {
 
 	public String getDescription() {

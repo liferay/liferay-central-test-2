@@ -24,6 +24,11 @@ package com.liferay.portal.search.lucene;
 
 import org.apache.lucene.index.IndexWriter;
 
+/**
+ * <a href="IndexWriterData.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Harry Mark
+ */
 public class IndexWriterData {
 
 	public IndexWriterData(long companyId, IndexWriter writer, int count) {

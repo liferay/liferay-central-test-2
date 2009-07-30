@@ -34,6 +34,11 @@ import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="MBCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory addCategory(

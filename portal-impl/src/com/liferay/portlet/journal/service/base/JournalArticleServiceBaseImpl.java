@@ -93,6 +93,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenc
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
+/**
+ * <a href="JournalArticleServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	implements JournalArticleService {
 	public JournalArticleLocalService getJournalArticleLocalService() {

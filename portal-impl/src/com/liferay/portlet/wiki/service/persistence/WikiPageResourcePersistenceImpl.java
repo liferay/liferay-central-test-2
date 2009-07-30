@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="WikiPageResourcePersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiPageResourcePersistence
+ * @see    WikiPageResourceUtil
+ */
 public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 	implements WikiPageResourcePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageResourceImpl.class.getName();
@@ -208,6 +221,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl
 		return wikiPageResource;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(WikiPageResource, boolean merge)}.
+	 */
 	public WikiPageResource update(WikiPageResource wikiPageResource)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

@@ -22,6 +22,12 @@
 
 package com.liferay.portal.upgrade.util;
 
+/**
+ * <a href="TempUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class TempUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public TempUpgradeColumnImpl(String name) {

@@ -31,6 +31,18 @@ import com.liferay.util.PwdGenerator;
 
 import java.util.Map;
 
+/**
+ * <a href="TableOfContents.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This is a modification of JSPWiki's core TableOfContents plugin for use
+ * within Liferay. This plugin modifies the original behavior by producing
+ * ordered lists and making contents collapsable.
+ * </p>
+ *
+ * @author Alexander Chow
+ * @author Jorge Ferrer
+ */
 public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 
 	public String execute(WikiContext context, Map params)

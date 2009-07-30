@@ -42,6 +42,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="UpgradePortletPermissions.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class UpgradePortletPermissions extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

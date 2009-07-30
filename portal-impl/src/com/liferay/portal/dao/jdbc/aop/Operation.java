@@ -22,6 +22,11 @@
 
 package com.liferay.portal.dao.jdbc.aop;
 
+/**
+ * <a href="Operation.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public enum Operation {
 
 	READ, WRITE;

@@ -61,6 +61,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="UserPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserPersistence
+ * @see    UserUtil
+ */
 public class UserPersistenceImpl extends BasePersistenceImpl
 	implements UserPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserImpl.class.getName();
@@ -395,6 +407,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		return user;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(User, boolean merge)}.
+	 */
 	public User update(User user) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

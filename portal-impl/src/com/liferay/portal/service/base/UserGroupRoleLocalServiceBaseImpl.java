@@ -172,6 +172,12 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
+/**
+ * <a href="UserGroupRoleLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class UserGroupRoleLocalServiceBaseImpl
 	implements UserGroupRoleLocalService {
 	public UserGroupRole addUserGroupRole(UserGroupRole userGroupRole)

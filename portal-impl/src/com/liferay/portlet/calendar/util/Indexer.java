@@ -42,6 +42,11 @@ import java.util.Date;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brett Swaim
+ */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.CALENDAR;

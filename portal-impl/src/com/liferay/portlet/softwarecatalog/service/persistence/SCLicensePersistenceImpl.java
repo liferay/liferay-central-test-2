@@ -61,6 +61,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SCLicensePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCLicensePersistence
+ * @see    SCLicenseUtil
+ */
 public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	implements SCLicensePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCLicenseImpl.class.getName();
@@ -228,6 +240,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		return scLicense;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCLicense, boolean merge)}.
+	 */
 	public SCLicense update(SCLicense scLicense) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

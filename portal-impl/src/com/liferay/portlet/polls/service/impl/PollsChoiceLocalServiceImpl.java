@@ -31,6 +31,11 @@ import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
 
 import java.util.List;
 
+/**
+ * <a href="PollsChoiceLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 

@@ -31,6 +31,11 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="OrganizationGroupChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class OrganizationGroupChecker extends RowChecker {
 
 	public OrganizationGroupChecker(

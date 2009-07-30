@@ -63,6 +63,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 
 import java.util.List;
 
+/**
+ * <a href="MBMessageFlagLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class MBMessageFlagLocalServiceBaseImpl
 	implements MBMessageFlagLocalService {
 	public MBMessageFlag addMBMessageFlag(MBMessageFlag mbMessageFlag)

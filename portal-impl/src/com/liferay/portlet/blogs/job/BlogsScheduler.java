@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="BlogsScheduler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class BlogsScheduler implements Scheduler {
 
 	public void schedule() {

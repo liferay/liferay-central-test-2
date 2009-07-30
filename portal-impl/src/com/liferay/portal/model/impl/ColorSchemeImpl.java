@@ -36,6 +36,11 @@ import java.io.IOException;
 
 import java.util.Properties;
 
+/**
+ * <a href="ColorSchemeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ColorSchemeImpl implements ColorScheme {
 
 	public static String getDefaultRegularColorSchemeId() {

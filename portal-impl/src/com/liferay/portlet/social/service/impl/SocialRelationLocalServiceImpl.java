@@ -32,6 +32,12 @@ import com.liferay.portlet.social.service.base.SocialRelationLocalServiceBaseImp
 
 import java.util.List;
 
+/**
+ * <a href="SocialRelationLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SocialRelationLocalServiceImpl
 	extends SocialRelationLocalServiceBaseImpl {
 

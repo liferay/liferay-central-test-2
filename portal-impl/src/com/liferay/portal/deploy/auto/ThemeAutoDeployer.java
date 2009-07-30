@@ -36,6 +36,12 @@ import com.liferay.portal.util.PropsValues;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ThemeAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class ThemeAutoDeployer extends ThemeDeployer implements AutoDeployer {
 
 	public ThemeAutoDeployer() {

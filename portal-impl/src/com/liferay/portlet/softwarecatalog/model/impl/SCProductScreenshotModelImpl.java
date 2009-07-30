@@ -40,6 +40,25 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="SCProductScreenshotModelImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the SCProductScreenshot table in
+ * the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductScreenshotImpl
+ * @see    com.liferay.portlet.softwarecatalog.model.SCProductScreenshot
+ * @see    com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel
+ */
 public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreenshot> {
 	public static final String TABLE_NAME = "SCProductScreenshot";
 	public static final Object[][] TABLE_COLUMNS = {

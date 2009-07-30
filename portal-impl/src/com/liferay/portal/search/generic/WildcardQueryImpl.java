@@ -25,6 +25,11 @@ package com.liferay.portal.search.generic;
 import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.WildcardQuery;
 
+/**
+ * <a href="WildcardQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class WildcardQueryImpl implements WildcardQuery {
 
 	public WildcardQueryImpl(QueryTerm queryTerm) {

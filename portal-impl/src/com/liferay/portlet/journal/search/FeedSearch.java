@@ -31,6 +31,11 @@ import java.util.List;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="FeedSearch.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class FeedSearch extends SearchContainer<JournalFeed> {
 
 	static List<String> headerNames = new ArrayList<String>();

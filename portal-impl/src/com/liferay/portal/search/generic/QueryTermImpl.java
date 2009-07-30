@@ -24,6 +24,11 @@ package com.liferay.portal.search.generic;
 
 import com.liferay.portal.kernel.search.QueryTerm;
 
+/**
+ * <a href="QueryTermImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class QueryTermImpl implements QueryTerm {
 
 	public QueryTermImpl(String field, String value) {

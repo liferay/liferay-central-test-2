@@ -26,6 +26,13 @@ import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
+/**
+ * <a href="JournalArticleListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jon Steer
+ * @author Raymond Augé
+ */
 public class JournalArticleListener extends BaseModelListener<JournalArticle> {
 
 	public void onAfterRemove(JournalArticle article) {

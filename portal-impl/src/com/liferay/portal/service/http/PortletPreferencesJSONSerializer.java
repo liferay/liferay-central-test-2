@@ -29,6 +29,23 @@ import com.liferay.portal.model.PortletPreferences;
 
 import java.util.List;
 
+/**
+ * <a href="PortletPreferencesJSONSerializer.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link PortletPreferencesServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletPreferencesServiceJSON
+ */
 public class PortletPreferencesJSONSerializer {
 	public static JSONObject toJSONObject(PortletPreferences model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

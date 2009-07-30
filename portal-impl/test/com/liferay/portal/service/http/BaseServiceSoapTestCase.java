@@ -28,6 +28,11 @@ import com.liferay.portal.util.TestPropsValues;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * <a href="BaseServiceSoapTestCase.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BaseServiceSoapTestCase extends BaseTestCase {
 
 	protected URL getURL(String serviceName) throws MalformedURLException {

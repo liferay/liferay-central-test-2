@@ -28,6 +28,11 @@ import java.io.InputStream;
 
 import java.util.List;
 
+/**
+ * <a href="SharepointStorage.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface SharepointStorage {
 
 	public void addDocumentElements(

@@ -34,6 +34,11 @@ import java.util.Date;
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Field;
 
+/**
+ * <a href="LuceneFields.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LuceneFields {
 
 	public static String getUID(String portletId, long field1) {

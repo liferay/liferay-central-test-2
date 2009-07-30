@@ -36,6 +36,11 @@ import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="QueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QueryImpl implements Query {
 
 	public QueryImpl(org.hibernate.Query query) {

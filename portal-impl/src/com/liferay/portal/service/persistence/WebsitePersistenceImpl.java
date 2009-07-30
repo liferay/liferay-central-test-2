@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="WebsitePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WebsitePersistence
+ * @see    WebsiteUtil
+ */
 public class WebsitePersistenceImpl extends BasePersistenceImpl
 	implements WebsitePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WebsiteImpl.class.getName();
@@ -266,6 +278,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		return website;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Website, boolean merge)}.
+	 */
 	public Website update(Website website) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 
+/**
+ * <a href="AssetVocabularyImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssetVocabularyImpl
 	extends AssetVocabularyModelImpl implements AssetVocabulary {
 

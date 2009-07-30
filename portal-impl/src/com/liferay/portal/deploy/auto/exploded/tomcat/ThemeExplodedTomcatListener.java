@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
 
+/**
+ * <a href="ThemeExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Olaf Fricke
+ * @author Brian Wing Shun Chan
+ */
 public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 
 	public ThemeExplodedTomcatListener() {

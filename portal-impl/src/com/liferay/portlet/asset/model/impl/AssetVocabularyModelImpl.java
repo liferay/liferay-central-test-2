@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetVocabularyModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetVocabulary table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetVocabularyImpl
+ * @see    com.liferay.portlet.asset.model.AssetVocabulary
+ * @see    com.liferay.portlet.asset.model.AssetVocabularyModel
+ */
 public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {
 	public static final String TABLE_NAME = "AssetVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {

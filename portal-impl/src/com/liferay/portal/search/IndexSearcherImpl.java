@@ -31,6 +31,11 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
+/**
+ * <a href="IndexSearcherImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class IndexSearcherImpl implements IndexSearcher {
 
 	public Hits search(

@@ -38,6 +38,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * <a href="ResourceCodeLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ResourceCodeLocalServiceImpl
 	extends ResourceCodeLocalServiceBaseImpl {
 

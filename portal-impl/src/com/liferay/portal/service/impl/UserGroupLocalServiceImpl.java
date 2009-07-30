@@ -42,6 +42,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * <a href="UserGroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)

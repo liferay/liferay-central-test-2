@@ -32,6 +32,11 @@ import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
 import java.util.List;
 
+/**
+ * <a href="ShoppingCouponServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(

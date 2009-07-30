@@ -26,6 +26,11 @@ import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EventResponseImpl
 	extends StateAwareResponseImpl implements EventResponse {
 

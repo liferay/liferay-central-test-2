@@ -28,6 +28,11 @@ import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 
+/**
+ * <a href="ShardSqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class ShardSqlUpdateImpl extends SqlUpdateImpl {
 
 	public ShardSqlUpdateImpl(DataSource dataSource, String sql, int[] types) {

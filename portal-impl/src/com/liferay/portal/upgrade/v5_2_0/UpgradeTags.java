@@ -40,6 +40,12 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="UpgradeTags.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeTags extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

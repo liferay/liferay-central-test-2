@@ -24,6 +24,11 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.events.StartupHelperUtil;
 
+/**
+ * <a href="DropIndexes.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DropIndexes extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

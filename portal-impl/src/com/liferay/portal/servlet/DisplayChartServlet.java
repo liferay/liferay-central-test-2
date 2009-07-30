@@ -32,6 +32,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jfree.chart.servlet.DisplayChart;
 
+/**
+ * <a href="DisplayChartServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ */
 public class DisplayChartServlet extends DisplayChart {
 
 	public void service(

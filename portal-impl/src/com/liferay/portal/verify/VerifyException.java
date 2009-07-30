@@ -24,6 +24,11 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="VerifyException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class VerifyException extends PortalException {
 
 	public VerifyException() {

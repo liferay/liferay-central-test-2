@@ -27,6 +27,11 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="CommandReceiver.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ */
 public interface CommandReceiver {
 
 	public void createFolder(

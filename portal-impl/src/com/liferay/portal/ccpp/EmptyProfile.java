@@ -29,6 +29,11 @@ import javax.ccpp.Component;
 import javax.ccpp.Profile;
 import javax.ccpp.ProfileDescription;
 
+/**
+ * <a href="EmptyProfile.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class EmptyProfile implements Profile {
 
 	public Attribute getAttribute(String name) {

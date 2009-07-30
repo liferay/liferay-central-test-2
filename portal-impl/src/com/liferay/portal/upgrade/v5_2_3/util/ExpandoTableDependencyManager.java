@@ -22,6 +22,12 @@
 
 package com.liferay.portal.upgrade.v5_2_3.util;
 
+/**
+ * <a href="ExpandoTableDependencyManager.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandoTableDependencyManager extends DependencyManager {
 
 	public void update(

@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PortletPreferencesPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletPreferencesPersistence
+ * @see    PortletPreferencesUtil
+ */
 public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 	implements PortletPreferencesPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PortletPreferencesImpl.class.getName();
@@ -274,6 +287,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl
 		return portletPreferences;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PortletPreferences, boolean merge)}.
+	 */
 	public PortletPreferences update(PortletPreferences portletPreferences)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

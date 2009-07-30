@@ -22,6 +22,11 @@
 
 package com.liferay.portal.security.permission;
 
+/**
+ * <a href="SimplePermissionChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SimplePermissionChecker extends BasePermissionChecker {
 
 	public boolean hasOwnerPermission(

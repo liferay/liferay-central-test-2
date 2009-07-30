@@ -31,6 +31,11 @@ import javax.portlet.PortletURL;
 import org.stringtree.factory.Fetcher;
 import org.stringtree.factory.TractFetcher;
 
+/**
+ * <a href="NodeFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NodeFilter extends ClassicToHTMLFilter {
 
 	public NodeFilter(

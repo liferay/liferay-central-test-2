@@ -58,6 +58,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
+/**
+ * <a href="SQLQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 	public SQLQueryImpl(SessionImpl sessionImpl, String queryString) {

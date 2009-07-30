@@ -74,6 +74,11 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="MBUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBUtil {
 
 	public static final String POP_PORTLET_PREFIX = "mb.";

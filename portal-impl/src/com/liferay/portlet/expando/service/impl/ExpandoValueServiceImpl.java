@@ -32,6 +32,11 @@ import com.liferay.portlet.expando.service.permission.ExpandoColumnPermission;
 
 import java.io.Serializable;
 
+/**
+ * <a href="ExpandoValueServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
 	public ExpandoValue addValue(

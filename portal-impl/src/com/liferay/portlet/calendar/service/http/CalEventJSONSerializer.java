@@ -32,6 +32,21 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="CalEventJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link CalEventServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    CalEventServiceJSON
+ */
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -27,6 +27,12 @@ import com.liferay.portal.kernel.scripting.ScriptingException;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * <a href="ScriptingExecutor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
+ */
 public interface ScriptingExecutor {
 
 	public void clearCache();

@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PasswordTrackerPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordTrackerPersistence
+ * @see    PasswordTrackerUtil
+ */
 public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 	implements PasswordTrackerPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordTrackerImpl.class.getName();
@@ -197,6 +210,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl
 		return passwordTracker;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PasswordTracker, boolean merge)}.
+	 */
 	public PasswordTracker update(PasswordTracker passwordTracker)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

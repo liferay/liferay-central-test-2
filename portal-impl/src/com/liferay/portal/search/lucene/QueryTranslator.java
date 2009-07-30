@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 
+/**
+ * <a href="QueryTranslator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QueryTranslator {
 
 	public static org.apache.lucene.search.Query translate(Query query)

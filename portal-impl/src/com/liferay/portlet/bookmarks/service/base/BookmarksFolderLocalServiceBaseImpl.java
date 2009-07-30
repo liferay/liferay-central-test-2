@@ -53,6 +53,12 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.util.List;
 
+/**
+ * <a href="BookmarksFolderLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BookmarksFolderLocalServiceBaseImpl
 	implements BookmarksFolderLocalService {
 	public BookmarksFolder addBookmarksFolder(BookmarksFolder bookmarksFolder)

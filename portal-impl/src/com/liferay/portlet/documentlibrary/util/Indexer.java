@@ -38,6 +38,12 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowStateException;
 
+/**
+ * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public String[] getClassNames() {

@@ -35,6 +35,13 @@ import com.liferay.portlet.expando.service.base.ExpandoTableLocalServiceBaseImpl
 
 import java.util.List;
 
+/**
+ * <a href="ExpandoTableLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Raymond Augé
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandoTableLocalServiceImpl
 	extends ExpandoTableLocalServiceBaseImpl {
 

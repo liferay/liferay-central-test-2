@@ -39,6 +39,12 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="PortletPreferencesLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletPreferencesLocalServiceImpl
 	extends PortletPreferencesLocalServiceBaseImpl {
 

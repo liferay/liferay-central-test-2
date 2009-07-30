@@ -48,6 +48,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * <a href="LayoutSetPrototypeModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the LayoutSetPrototype table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSetPrototypeImpl
+ * @see    com.liferay.portal.model.LayoutSetPrototype
+ * @see    com.liferay.portal.model.LayoutSetPrototypeModel
+ */
 public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype> {
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {

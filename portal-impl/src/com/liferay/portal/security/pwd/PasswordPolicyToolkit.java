@@ -35,6 +35,11 @@ import com.liferay.util.PwdGenerator;
 
 import java.util.Date;
 
+/**
+ * <a href="PasswordPolicyToolkit.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ */
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public String generate() {

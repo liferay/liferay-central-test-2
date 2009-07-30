@@ -43,6 +43,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="UserGroupFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class UserGroupFinderImpl
 	extends BasePersistenceImpl implements UserGroupFinder {
 

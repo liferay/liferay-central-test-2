@@ -59,6 +59,12 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 
 import java.util.List;
 
+/**
+ * <a href="IGFolderLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class IGFolderLocalServiceBaseImpl
 	implements IGFolderLocalService {
 	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {

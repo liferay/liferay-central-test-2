@@ -29,6 +29,11 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * <a href="ModuleId.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class ModuleId {
 
 	public static ModuleId getInstance(String moduleId) {

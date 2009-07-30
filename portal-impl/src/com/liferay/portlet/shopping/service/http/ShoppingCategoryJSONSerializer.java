@@ -32,6 +32,23 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="ShoppingCategoryJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link ShoppingCategoryServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCategoryServiceJSON
+ */
 public class ShoppingCategoryJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCategory model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

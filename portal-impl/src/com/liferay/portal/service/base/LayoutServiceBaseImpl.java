@@ -186,6 +186,11 @@ import com.liferay.portlet.tasks.service.TasksProposalService;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 
+/**
+ * <a href="LayoutServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	implements LayoutService {
 	public AccountLocalService getAccountLocalService() {

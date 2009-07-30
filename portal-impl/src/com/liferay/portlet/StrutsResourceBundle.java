@@ -30,6 +30,11 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * <a href="StrutsResourceBundle.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StrutsResourceBundle extends ResourceBundle {
 
 	public static ResourceBundle getBundle(

@@ -46,6 +46,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBMessageModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the MBMessage table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBMessageImpl
+ * @see    com.liferay.portlet.messageboards.model.MBMessage
+ * @see    com.liferay.portlet.messageboards.model.MBMessageModel
+ */
 public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	public static final String TABLE_NAME = "MBMessage";
 	public static final Object[][] TABLE_COLUMNS = {

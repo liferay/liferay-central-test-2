@@ -27,6 +27,12 @@ import com.liferay.portal.monitoring.MonitoringService;
 
 import java.util.Set;
 
+/**
+ * <a href="MonitoringServiceManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 
 	public MonitoringServiceManager(MonitoringService monitorService) {

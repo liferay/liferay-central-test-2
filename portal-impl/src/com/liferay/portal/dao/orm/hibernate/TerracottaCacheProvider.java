@@ -22,6 +22,11 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+/**
+ * <a href="TerracottaCacheProvider.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Santi Kumar
+ */
 public class TerracottaCacheProvider extends CacheProviderWrapper {
 
 	public TerracottaCacheProvider() {

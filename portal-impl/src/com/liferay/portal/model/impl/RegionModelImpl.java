@@ -40,6 +40,23 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="RegionModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Region table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RegionImpl
+ * @see    com.liferay.portal.model.Region
+ * @see    com.liferay.portal.model.RegionModel
+ */
 public class RegionModelImpl extends BaseModelImpl<Region> {
 	public static final String TABLE_NAME = "Region";
 	public static final Object[][] TABLE_COLUMNS = {

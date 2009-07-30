@@ -29,6 +29,21 @@ import com.liferay.portal.model.Layout;
 
 import java.util.List;
 
+/**
+ * <a href="LayoutJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link LayoutServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutServiceJSON
+ */
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

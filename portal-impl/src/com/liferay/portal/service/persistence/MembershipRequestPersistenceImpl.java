@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MembershipRequestPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MembershipRequestPersistence
+ * @see    MembershipRequestUtil
+ */
 public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	implements MembershipRequestPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MembershipRequestImpl.class.getName();
@@ -232,6 +245,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		return membershipRequest;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MembershipRequest, boolean merge)}.
+	 */
 	public MembershipRequest update(MembershipRequest membershipRequest)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

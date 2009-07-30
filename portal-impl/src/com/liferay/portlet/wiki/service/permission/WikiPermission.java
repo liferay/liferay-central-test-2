@@ -26,6 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+/**
+ * <a href="WikiPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WikiPermission {
 
 	public static void check(

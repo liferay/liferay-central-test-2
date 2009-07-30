@@ -22,6 +22,12 @@
 
 package com.liferay.portal.monitoring;
 
+/**
+ * <a href="MonitorNames.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public interface MonitorNames {
 
 	public static final String PORTAL = "com.liferay.monitoring.Portal";

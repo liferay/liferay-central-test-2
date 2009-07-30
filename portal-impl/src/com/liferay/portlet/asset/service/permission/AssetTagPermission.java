@@ -29,6 +29,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 
+/**
+ * <a href="AssetTagPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Eduardo Lundgren
+ */
 public class AssetTagPermission {
 
 	public static void check(

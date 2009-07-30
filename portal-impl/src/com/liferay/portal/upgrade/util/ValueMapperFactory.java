@@ -22,6 +22,11 @@
 
 package com.liferay.portal.upgrade.util;
 
+/**
+ * <a href="ValueMapperFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ValueMapperFactory {
 
 	public static ValueMapper getValueMapper() {

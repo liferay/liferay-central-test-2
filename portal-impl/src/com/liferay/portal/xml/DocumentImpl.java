@@ -28,6 +28,11 @@ import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
+/**
+ * <a href="DocumentImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DocumentImpl extends BranchImpl implements Document {
 
 	public DocumentImpl(org.dom4j.Document document) {

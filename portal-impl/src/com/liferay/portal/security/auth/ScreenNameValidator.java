@@ -25,6 +25,11 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+/**
+ * <a href="ScreenNameValidator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ScreenNameValidator {
 
 	public static final String CYRUS = "cyrus";

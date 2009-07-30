@@ -28,6 +28,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="PermissionCheckerUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionCheckerUtil {
 
 	public static void setThreadValues(User user) {

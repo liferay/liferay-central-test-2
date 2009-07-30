@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBBanPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBBanPersistence
+ * @see    MBBanUtil
+ */
 public class MBBanPersistenceImpl extends BasePersistenceImpl
 	implements MBBanPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBBanImpl.class.getName();
@@ -238,6 +250,9 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl
 		return mbBan;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBBan, boolean merge)}.
+	 */
 	public MBBan update(MBBan mbBan) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

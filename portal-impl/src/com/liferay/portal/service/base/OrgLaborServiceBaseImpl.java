@@ -169,6 +169,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="OrgLaborServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class OrgLaborServiceBaseImpl extends PrincipalBean
 	implements OrgLaborService {
 	public AccountLocalService getAccountLocalService() {

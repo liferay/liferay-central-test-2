@@ -33,6 +33,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * <a href="WAIAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WAIAutoDeployer extends PortletAutoDeployer {
 
 	protected WAIAutoDeployer() throws AutoDeployException {

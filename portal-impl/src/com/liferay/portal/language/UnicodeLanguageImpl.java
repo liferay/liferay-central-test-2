@@ -31,6 +31,11 @@ import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="UnicodeLanguageImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UnicodeLanguageImpl implements UnicodeLanguage {
 
 	public String format(Locale locale, String pattern, Object argument) {

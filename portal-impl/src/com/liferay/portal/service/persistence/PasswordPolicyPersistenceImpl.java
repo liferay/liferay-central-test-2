@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PasswordPolicyPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordPolicyPersistence
+ * @see    PasswordPolicyUtil
+ */
 public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 	implements PasswordPolicyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyImpl.class.getName();
@@ -225,6 +238,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl
 		return passwordPolicy;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PasswordPolicy, boolean merge)}.
+	 */
 	public PasswordPolicy update(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

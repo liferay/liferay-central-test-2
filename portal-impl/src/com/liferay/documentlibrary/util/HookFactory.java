@@ -25,6 +25,11 @@ package com.liferay.documentlibrary.util;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 
+/**
+ * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class HookFactory {
 
 	public static Hook getInstance() {

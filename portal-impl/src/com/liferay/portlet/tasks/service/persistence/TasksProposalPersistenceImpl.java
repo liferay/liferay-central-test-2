@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="TasksProposalPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    TasksProposalPersistence
+ * @see    TasksProposalUtil
+ */
 public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 	implements TasksProposalPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = TasksProposalImpl.class.getName();
@@ -240,6 +253,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl
 		return tasksProposal;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(TasksProposal, boolean merge)}.
+	 */
 	public TasksProposal update(TasksProposal tasksProposal)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

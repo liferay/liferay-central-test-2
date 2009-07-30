@@ -34,6 +34,11 @@ import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 
+/**
+ * <a href="IGActivityInterpreter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ryan Park
+ */
 public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {

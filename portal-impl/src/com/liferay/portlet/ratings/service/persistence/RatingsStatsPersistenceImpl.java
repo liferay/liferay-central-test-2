@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="RatingsStatsPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RatingsStatsPersistence
+ * @see    RatingsStatsUtil
+ */
 public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 	implements RatingsStatsPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RatingsStatsImpl.class.getName();
@@ -201,6 +213,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl
 		return ratingsStats;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(RatingsStats, boolean merge)}.
+	 */
 	public RatingsStats update(RatingsStats ratingsStats)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

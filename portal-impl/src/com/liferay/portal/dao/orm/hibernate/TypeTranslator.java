@@ -24,6 +24,11 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Type;
 
+/**
+ * <a href="TypeTranslator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TypeTranslator {
 
 	public static org.hibernate.type.Type translate(Type type) {

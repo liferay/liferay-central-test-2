@@ -22,6 +22,12 @@
 
 package com.liferay.portal.util;
 
+/**
+ * <a href="FileMultiValueMapTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class FileMultiValueMapTest extends MultiValueMapTestCase {
 
 	public void setUp() throws Exception {

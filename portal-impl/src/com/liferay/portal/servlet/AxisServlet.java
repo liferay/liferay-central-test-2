@@ -42,6 +42,11 @@ import com.liferay.util.xml.XMLFormatter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="AxisServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 	public void service(

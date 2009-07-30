@@ -24,6 +24,11 @@ package com.liferay.portal.upgrade.v4_3_3.util;
 
 import java.sql.Types;
 
+/**
+ * <a href="TagsAssetTable.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TagsAssetTable {
 
 	public static String TABLE_NAME = "TagsAsset";

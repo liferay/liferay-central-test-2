@@ -38,6 +38,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+/**
+ * <a href="PortletServletResponse.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletServletResponse extends HttpServletResponseWrapper {
 
 	public PortletServletResponse(

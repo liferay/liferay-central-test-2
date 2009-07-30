@@ -33,6 +33,13 @@ import com.liferay.portlet.softwarecatalog.service.permission.SCPermission;
 
 import java.util.List;
 
+/**
+ * <a href="SCFrameworkVersionServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class SCFrameworkVersionServiceImpl
 	extends SCFrameworkVersionServiceBaseImpl {
 

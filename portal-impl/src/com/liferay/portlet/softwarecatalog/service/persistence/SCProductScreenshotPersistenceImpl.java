@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SCProductScreenshotPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductScreenshotPersistence
+ * @see    SCProductScreenshotUtil
+ */
 public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 	implements SCProductScreenshotPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductScreenshotImpl.class.getName();
@@ -256,6 +269,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
 		return scProductScreenshot;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCProductScreenshot, boolean merge)}.
+	 */
 	public SCProductScreenshot update(SCProductScreenshot scProductScreenshot)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

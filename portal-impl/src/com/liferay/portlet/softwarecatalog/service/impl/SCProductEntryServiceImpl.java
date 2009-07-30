@@ -33,6 +33,12 @@ import com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPerm
 
 import java.util.List;
 
+/**
+ * <a href="SCProductEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 
 	public SCProductEntry addProductEntry(

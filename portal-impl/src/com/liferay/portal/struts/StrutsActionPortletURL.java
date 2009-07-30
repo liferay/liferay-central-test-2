@@ -29,6 +29,11 @@ import com.liferay.portlet.PortletURLImplWrapper;
 
 import java.util.Map;
 
+/**
+ * <a href="StrutsActionPortletURL.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StrutsActionPortletURL extends PortletURLImplWrapper {
 
 	public StrutsActionPortletURL(

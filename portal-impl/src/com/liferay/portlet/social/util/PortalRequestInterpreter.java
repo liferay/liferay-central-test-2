@@ -27,6 +27,11 @@ import com.liferay.portlet.social.model.BaseSocialRequestInterpreter;
 import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestFeedEntry;
 
+/**
+ * <a href="PortalRequestInterpreter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalRequestInterpreter extends BaseSocialRequestInterpreter {
 
 	public String[] getClassNames() {

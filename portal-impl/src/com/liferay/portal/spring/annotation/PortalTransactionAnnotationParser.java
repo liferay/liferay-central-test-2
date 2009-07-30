@@ -39,6 +39,12 @@ import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 
+/**
+ * <a href="PortalTransactionAnnotationParser.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Michael Young
+ */
 public class PortalTransactionAnnotationParser
 	implements TransactionAnnotationParser, Serializable {
 

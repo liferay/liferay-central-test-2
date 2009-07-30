@@ -29,6 +29,21 @@ import com.liferay.portal.model.Organization;
 
 import java.util.List;
 
+/**
+ * <a href="OrganizationJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link OrganizationServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrganizationServiceJSON
+ */
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

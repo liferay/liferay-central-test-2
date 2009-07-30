@@ -22,6 +22,13 @@
 
 package com.liferay.portal.security.jaas;
 
+/**
+ * <a href="PortalPrincipal.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Brian Wing Shun Chan
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.security.jaas</code>.
+ */
 public class PortalPrincipal
 	extends com.liferay.portal.kernel.security.jaas.PortalPrincipal {
 

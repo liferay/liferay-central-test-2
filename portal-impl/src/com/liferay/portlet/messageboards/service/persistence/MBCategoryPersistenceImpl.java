@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBCategoryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBCategoryPersistence
+ * @see    MBCategoryUtil
+ */
 public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 	implements MBCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBCategoryImpl.class.getName();
@@ -265,6 +277,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 		return mbCategory;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBCategory, boolean merge)}.
+	 */
 	public MBCategory update(MBCategory mbCategory) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

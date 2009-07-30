@@ -27,6 +27,11 @@ import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="OrderSearchTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class OrderSearchTerms extends OrderDisplayTerms {
 
 	public OrderSearchTerms(PortletRequest portletRequest) {

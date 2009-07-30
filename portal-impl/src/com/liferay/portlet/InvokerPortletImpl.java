@@ -76,6 +76,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="InvokerPortletImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Brian Myunghun Kim
+ */
 public class InvokerPortletImpl implements InvokerPortlet {
 
 	public static void clearResponse(

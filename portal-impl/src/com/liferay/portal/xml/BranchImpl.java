@@ -32,6 +32,11 @@ import com.liferay.portal.kernel.xml.QName;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="BranchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BranchImpl extends NodeImpl implements Branch {
 
 	public BranchImpl(org.dom4j.Branch branch) {

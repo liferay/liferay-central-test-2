@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PortletItemPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletItemPersistence
+ * @see    PortletItemUtil
+ */
 public class PortletItemPersistenceImpl extends BasePersistenceImpl
 	implements PortletItemPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PortletItemImpl.class.getName();
@@ -254,6 +266,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl
 		return portletItem;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PortletItem, boolean merge)}.
+	 */
 	public PortletItem update(PortletItem portletItem)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

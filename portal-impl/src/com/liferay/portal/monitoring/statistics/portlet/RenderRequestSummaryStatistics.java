@@ -27,6 +27,13 @@ import com.liferay.portal.monitoring.statistics.RequestStatistics;
 
 import java.util.Set;
 
+/**
+ * <a href="RenderRequestSummaryStatistics.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class RenderRequestSummaryStatistics
 	implements PortletSummaryStatistics {
 

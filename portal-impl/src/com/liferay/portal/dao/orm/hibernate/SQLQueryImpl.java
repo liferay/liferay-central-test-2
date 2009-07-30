@@ -38,6 +38,11 @@ import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="SQLQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SQLQueryImpl implements SQLQuery {
 
 	public SQLQueryImpl(org.hibernate.SQLQuery sqlQuery) {

@@ -35,6 +35,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="UpgradeBookmarks.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeBookmarks extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

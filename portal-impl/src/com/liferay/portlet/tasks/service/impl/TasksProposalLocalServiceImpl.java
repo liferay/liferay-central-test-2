@@ -37,6 +37,13 @@ import com.liferay.portlet.tasks.social.TasksActivityKeys;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="TasksProposalLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Raymond Augé
+ * @author Brian Wing Shun Chan
+ */
 public class TasksProposalLocalServiceImpl
 	extends TasksProposalLocalServiceBaseImpl {
 

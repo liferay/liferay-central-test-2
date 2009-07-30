@@ -39,6 +39,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="ConnectorAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ */
 public class ConnectorAction extends Action {
 
 	public ActionForward execute(

@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="DLFileVersionPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileVersionPersistence
+ * @see    DLFileVersionUtil
+ */
 public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	implements DLFileVersionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
@@ -230,6 +243,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersion;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileVersion, boolean merge)}.
+	 */
 	public DLFileVersion update(DLFileVersion dlFileVersion)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

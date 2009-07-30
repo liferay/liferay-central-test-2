@@ -31,6 +31,11 @@ import rath.msnm.entity.MsnFriend;
 import rath.msnm.event.MsnAdapter;
 import rath.msnm.msg.MimeMessage;
 
+/**
+ * <a href="MSNMessageAdapter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MSNMessageAdapter extends MsnAdapter {
 
 	public MSNMessageAdapter(MSNMessenger msn, String to, String msg) {

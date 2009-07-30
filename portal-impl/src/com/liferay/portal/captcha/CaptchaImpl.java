@@ -49,6 +49,11 @@ import javax.servlet.http.HttpSession;
 import nl.captcha.servlet.CaptchaProducer;
 import nl.captcha.util.Helper;
 
+/**
+ * <a href="CaptchaImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CaptchaImpl implements Captcha {
 
 	private CaptchaImpl() {

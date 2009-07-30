@@ -29,6 +29,11 @@ import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
 import java.util.List;
 
+/**
+ * <a href="VerifyImageGallery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class VerifyImageGallery extends VerifyProcess {
 
 	public void verify() throws VerifyException {

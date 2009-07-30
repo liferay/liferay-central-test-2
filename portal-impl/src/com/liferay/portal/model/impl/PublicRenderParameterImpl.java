@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
 
+/**
+ * <a href="PublicRenderParameterImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PublicRenderParameterImpl implements PublicRenderParameter {
 
 	public PublicRenderParameterImpl(

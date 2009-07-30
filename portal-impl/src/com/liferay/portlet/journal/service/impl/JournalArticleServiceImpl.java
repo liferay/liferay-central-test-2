@@ -36,6 +36,12 @@ import java.io.File;
 
 import java.util.Map;
 
+/**
+ * <a href="JournalArticleServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle addArticle(

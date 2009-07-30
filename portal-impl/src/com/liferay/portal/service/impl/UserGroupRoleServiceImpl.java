@@ -28,6 +28,11 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
 
+/**
+ * <a href="UserGroupRoleServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)

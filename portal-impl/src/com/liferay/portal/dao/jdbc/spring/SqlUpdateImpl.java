@@ -28,6 +28,11 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.SqlParameter;
 
+/**
+ * <a href="SqlUpdateImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SqlUpdateImpl
 	extends org.springframework.jdbc.object.SqlUpdate implements SqlUpdate {
 

@@ -30,6 +30,12 @@ import java.util.Map;
 
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="BaseDataSample.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class BaseDataSample implements DataSample, Serializable {
 
 	public void capture(RequestStatus requestStatus) {

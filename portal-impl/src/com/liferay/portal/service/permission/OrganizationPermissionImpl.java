@@ -32,6 +32,12 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
+/**
+ * <a href="OrganizationPermissionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ * @author Jorge Ferrer
+ */
 public class OrganizationPermissionImpl implements OrganizationPermission {
 
 	public void check(

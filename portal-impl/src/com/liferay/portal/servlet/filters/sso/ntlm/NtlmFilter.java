@@ -56,6 +56,13 @@ import jcifs.smb.SmbSession;
 
 import jcifs.util.Base64;
 
+/**
+ * <a href="NtlmFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Marcus Schmidke
+ * @author Brian Wing Shun Chan
+ */
 public class NtlmFilter extends BasePortalFilter {
 
 	public void init(FilterConfig filterConfig) {

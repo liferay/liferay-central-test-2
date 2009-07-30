@@ -32,6 +32,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+/**
+ * <a href="PluginSettingImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PluginSettingImpl
 	extends PluginSettingModelImpl implements PluginSetting {
 
@@ -46,26 +51,45 @@ public class PluginSettingImpl
 		setActive(pluginSetting.getActive());
 	}
 
+	/**
+	 * Adds a role to the list of roles.
+	 */
 	public void addRole(String role) {
 		setRolesArray(ArrayUtil.append(_rolesArray, role));
 	}
 
+	/**
+	 * Sets a string of ordered comma delimited plugin ids.
+	 */
 	public void setRoles(String roles) {
 		_rolesArray = StringUtil.split(roles);
 
 		super.setRoles(roles);
 	}
 
+	/**
+	 * Gets an array of required roles of the plugin.
+	 *
+	 * @return an array of required roles of the plugin
+	 */
 	public String[] getRolesArray() {
 		return _rolesArray;
 	}
 
+	/**
+	 * Sets an array of required roles of the plugin.
+	 */
 	public void setRolesArray(String[] rolesArray) {
 		_rolesArray = rolesArray;
 
 		super.setRoles(StringUtil.merge(rolesArray));
 	}
 
+	/**
+	 * Returns true if the plugin has a role with the specified name.
+	 *
+	 * @return true if the plugin has a role with the specified name
+	 */
 	public boolean hasRoleWithName(String roleName) {
 		for (int i = 0; i < _rolesArray.length; i++) {
 			if (_rolesArray[i].equalsIgnoreCase(roleName)) {
@@ -76,6 +100,11 @@ public class PluginSettingImpl
 		return false;
 	}
 
+	/**
+	 * Returns true if the user has permission to use this plugin
+	 *
+	 * @return true if the user has permission to use this plugin
+	 */
 	public boolean hasPermission(long userId) {
 		try {
 			if (_rolesArray.length == 0) {
@@ -109,8 +138,14 @@ public class PluginSettingImpl
 		return false;
 	}
 
+	/**
+	 * Log instance for this class.
+	 */
 	private static Log _log = LogFactoryUtil.getLog(PluginSettingImpl.class);
 
+	/**
+	 * An array of required roles of the plugin.
+	 */
 	private String[] _rolesArray;
 
 }

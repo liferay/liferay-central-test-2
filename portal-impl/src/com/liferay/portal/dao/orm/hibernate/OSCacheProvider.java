@@ -35,6 +35,12 @@ import org.hibernate.cache.CacheProvider;
 import org.hibernate.cache.Timestamper;
 import org.hibernate.util.StringHelper;
 
+/**
+ * <a href="OSCacheProvider.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Mathias Bogaert
+ * @author Brian Wing Shun Chan
+ */
 public class OSCacheProvider implements CacheProvider {
 
 	public static final String OSCACHE_REFRESH_PERIOD = "refresh.period";

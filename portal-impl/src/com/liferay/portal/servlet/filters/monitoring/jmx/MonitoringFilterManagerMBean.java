@@ -22,6 +22,12 @@
 
 package com.liferay.portal.servlet.filters.monitoring.jmx;
 
+/**
+ * <a href="MonitoringFilterManagerMBean.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Michael C. Han
+ */
 public interface MonitoringFilterManagerMBean {
 
 	public boolean isMonitoringPortalRequest();

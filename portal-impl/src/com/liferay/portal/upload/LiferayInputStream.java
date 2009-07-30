@@ -37,6 +37,13 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="LiferayInputStream.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Myunghun Kim
+ * @author Brian Wing Shun Chan
+ * @author Harry Mark
+ */
 public class LiferayInputStream extends ServletInputStreamWrapper {
 
 	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(

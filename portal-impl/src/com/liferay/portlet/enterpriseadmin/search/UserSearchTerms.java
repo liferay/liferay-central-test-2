@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="UserSearchTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserSearchTerms extends UserDisplayTerms {
 
 	public UserSearchTerms(PortletRequest portletRequest) {

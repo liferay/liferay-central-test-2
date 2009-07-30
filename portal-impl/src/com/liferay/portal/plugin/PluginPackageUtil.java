@@ -87,6 +87,13 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="PluginPackageUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
+ */
 public class PluginPackageUtil {
 
 	public static final String REPOSITORY_XML_FILENAME_PREFIX =

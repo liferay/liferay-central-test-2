@@ -29,6 +29,11 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * <a href="MemoryPortalCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MemoryPortalCache implements PortalCache {
 
 	public MemoryPortalCache(int initialCapacity) {

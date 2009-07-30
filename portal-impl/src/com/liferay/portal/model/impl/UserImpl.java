@@ -66,6 +66,12 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 
+/**
+ * <a href="UserImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public class UserImpl extends UserModelImpl implements User {
 
 	public UserImpl() {

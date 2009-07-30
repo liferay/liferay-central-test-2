@@ -33,6 +33,13 @@ import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
 import java.util.Date;
 import java.util.Iterator;
 
+/**
+ * <a href="PasswordTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Scott Lee
+ */
 public class PasswordTrackerLocalServiceImpl
 	extends PasswordTrackerLocalServiceBaseImpl {
 

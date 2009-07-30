@@ -33,6 +33,11 @@ import javax.portlet.UnavailableException;
 import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.PortletFilter;
 
+/**
+ * <a href="PortletFilterFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletFilterFactory {
 
 	public static PortletFilter create(

@@ -43,6 +43,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 
+/**
+ * <a href="UpgradeDuplicates.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeDuplicates extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

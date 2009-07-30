@@ -51,6 +51,12 @@ import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
 import java.util.List;
 
+/**
+ * <a href="RatingsEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class RatingsEntryLocalServiceBaseImpl
 	implements RatingsEntryLocalService {
 	public RatingsEntry addRatingsEntry(RatingsEntry ratingsEntry)

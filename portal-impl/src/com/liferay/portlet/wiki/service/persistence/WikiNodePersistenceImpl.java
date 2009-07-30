@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="WikiNodePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    WikiNodePersistence
+ * @see    WikiNodeUtil
+ */
 public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	implements WikiNodePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiNodeImpl.class.getName();
@@ -266,6 +278,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 		return wikiNode;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(WikiNode, boolean merge)}.
+	 */
 	public WikiNode update(WikiNode wikiNode) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

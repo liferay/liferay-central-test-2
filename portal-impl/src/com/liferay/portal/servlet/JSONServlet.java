@@ -40,6 +40,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
 
+/**
+ * <a href="JSONServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JSONServlet extends HttpServlet {
 
 	public void service(

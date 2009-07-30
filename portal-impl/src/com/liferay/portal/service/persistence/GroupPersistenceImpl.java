@@ -60,6 +60,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="GroupPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    GroupPersistence
+ * @see    GroupUtil
+ */
 public class GroupPersistenceImpl extends BasePersistenceImpl
 	implements GroupPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = GroupImpl.class.getName();
@@ -386,6 +398,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		return group;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Group, boolean merge)}.
+	 */
 	public Group update(Group group) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

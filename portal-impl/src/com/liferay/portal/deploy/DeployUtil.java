@@ -41,6 +41,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * <a href="DeployUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DeployUtil {
 
 	public static String getAutoDeployDestDir() throws Exception {

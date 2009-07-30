@@ -34,6 +34,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * <a href="JSONObjectImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JSONObjectImpl implements JSONObject {
 
 	public JSONObjectImpl() {

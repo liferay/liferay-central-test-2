@@ -29,6 +29,12 @@ import com.liferay.portal.util.PortletKeys;
 
 import java.sql.Types;
 
+/**
+ * <a href="PrefsOwnerIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public PrefsOwnerIdUpgradeColumnImpl(

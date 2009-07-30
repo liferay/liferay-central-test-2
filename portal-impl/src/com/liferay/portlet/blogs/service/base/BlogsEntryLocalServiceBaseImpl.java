@@ -81,6 +81,12 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.util.List;
 
+/**
+ * <a href="BlogsEntryLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BlogsEntryLocalServiceBaseImpl
 	implements BlogsEntryLocalService {
 	public BlogsEntry addBlogsEntry(BlogsEntry blogsEntry)

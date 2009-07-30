@@ -32,6 +32,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
+/**
+ * <a href="DerbyUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Sandeep Soni
+ * @author Ganesh Ram
+ */
 public class DerbyUtil extends DBUtil {
 
 	public static DBUtil getInstance() {

@@ -24,6 +24,11 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Namespace;
 
+/**
+ * <a href="NamespaceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NamespaceImpl extends NodeImpl implements Namespace {
 
 	public NamespaceImpl(org.dom4j.Namespace namespace) {

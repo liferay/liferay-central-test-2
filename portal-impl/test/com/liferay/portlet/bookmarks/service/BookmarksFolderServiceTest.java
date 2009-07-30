@@ -33,6 +33,11 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 import java.util.List;
 
+/**
+ * <a href="BookmarksFolderServiceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 	public void testAddFolder() throws Exception {

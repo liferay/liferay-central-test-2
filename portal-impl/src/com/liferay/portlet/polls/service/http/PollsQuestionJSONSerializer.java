@@ -32,6 +32,21 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="PollsQuestionJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link PollsQuestionServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsQuestionServiceJSON
+ */
 public class PollsQuestionJSONSerializer {
 	public static JSONObject toJSONObject(PollsQuestion model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -32,6 +32,11 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
+/**
+ * <a href="DLFileEntryServiceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 	public void setUp() throws Exception {

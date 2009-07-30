@@ -29,6 +29,21 @@ import com.liferay.portal.model.Group;
 
 import java.util.List;
 
+/**
+ * <a href="GroupJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link GroupServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    GroupServiceJSON
+ */
 public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

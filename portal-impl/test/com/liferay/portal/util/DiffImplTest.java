@@ -31,6 +31,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="DiffImplTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class DiffImplTest extends BaseTestCase {
 
 	public void testOne() {

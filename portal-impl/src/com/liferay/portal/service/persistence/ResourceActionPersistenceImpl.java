@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ResourceActionPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceActionPersistence
+ * @see    ResourceActionUtil
+ */
 public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 	implements ResourceActionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceActionImpl.class.getName();
@@ -218,6 +231,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl
 		return resourceAction;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ResourceAction, boolean merge)}.
+	 */
 	public ResourceAction update(ResourceAction resourceAction)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

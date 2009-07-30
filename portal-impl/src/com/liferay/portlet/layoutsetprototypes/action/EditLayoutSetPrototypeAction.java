@@ -45,6 +45,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="EditLayoutSetPrototypeAction.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EditLayoutSetPrototypeAction extends PortletAction {
 
 	public void processAction(

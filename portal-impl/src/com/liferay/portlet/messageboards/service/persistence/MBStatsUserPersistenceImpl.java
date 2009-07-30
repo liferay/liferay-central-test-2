@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBStatsUserPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBStatsUserPersistence
+ * @see    MBStatsUserUtil
+ */
 public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 	implements MBStatsUserPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBStatsUserImpl.class.getName();
@@ -248,6 +260,9 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl
 		return mbStatsUser;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBStatsUser, boolean merge)}.
+	 */
 	public MBStatsUser update(MBStatsUser mbStatsUser)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

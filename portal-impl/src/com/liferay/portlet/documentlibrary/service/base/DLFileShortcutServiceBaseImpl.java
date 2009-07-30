@@ -62,6 +62,12 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPers
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 
+/**
+ * <a href="DLFileShortcutServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	implements DLFileShortcutService {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

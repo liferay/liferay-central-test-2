@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="OrderDisplayTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class OrderDisplayTerms extends DisplayTerms {
 
 	public static final String NUMBER = "number";

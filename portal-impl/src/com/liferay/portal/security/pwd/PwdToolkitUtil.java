@@ -31,6 +31,11 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
+/**
+ * <a href="PwdToolkitUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PwdToolkitUtil {
 
 	public static String generate() {

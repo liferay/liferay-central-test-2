@@ -34,6 +34,11 @@ import com.liferay.portal.util.PropsUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="MethodFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class MethodFactory {
 
 	public static Method create(SharepointRequest sharepointRequest)

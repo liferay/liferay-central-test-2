@@ -33,6 +33,12 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
 
+/**
+ * <a href="ResourceFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ */
 public class ResourceFinderImpl
 	extends BasePersistenceImpl implements ResourceFinder {
 

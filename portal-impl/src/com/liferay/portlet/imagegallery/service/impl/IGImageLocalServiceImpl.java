@@ -71,6 +71,12 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+/**
+ * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(

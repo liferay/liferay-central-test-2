@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.social.util;
 
+/**
+ * <a href="SocialActivityThreadLocal.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Amos Fong
+ */
 public class SocialActivityThreadLocal {
 
 	public static boolean isEnabled() {

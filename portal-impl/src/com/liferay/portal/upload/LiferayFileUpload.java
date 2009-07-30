@@ -36,6 +36,12 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+/**
+ * <a href="LiferayFileUpload.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Myunghun Kim
+ * @author Brian Wing Shun Chan
+ */
 public class LiferayFileUpload extends ServletFileUpload {
 
 	public static final String FILE_NAME =

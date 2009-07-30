@@ -36,6 +36,12 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 
+/**
+ * <a href="MessageSenderJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Bruno Farache
+ */
 public class MessageSenderJob implements Job {
 
 	public void execute(JobExecutionContext jobExecutionContext) {

@@ -32,6 +32,23 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetVocabularyJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link AssetVocabularyServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetVocabularyServiceJSON
+ */
 public class AssetVocabularyJSONSerializer {
 	public static JSONObject toJSONObject(AssetVocabulary model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

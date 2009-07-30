@@ -24,6 +24,12 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 
+/**
+ * <a href="MBCategoryIdUpgradeColumnImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MBCategoryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 
 	public MBCategoryIdUpgradeColumnImpl() {

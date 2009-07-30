@@ -35,8 +35,29 @@ import java.util.List;
 import org.incava.util.diff.Diff;
 import org.incava.util.diff.Difference;
 
+/**
+ * <a href="DiffImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class can compare two different versions of a text. Source refers to the
+ * earliest version of the text and target refers to a modified version of
+ * source. Changes are considered either as a removal from the source or as an
+ * addition to the target. This class detects changes to an entire line and also
+ * detects changes within lines, such as, removal or addition of characters.
+ * Take a look at <code>DiffTest</code> to see the expected inputs and outputs.
+ * </p>
+ *
+ * @author Bruno Farache
+ */
 public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 
+	/**
+	 * This is a diff method with default values.
+	 *
+	 * @return an array containing two lists of <code>DiffResults</code>, the
+	 *		   first element contains DiffResults related to changes in source
+	 *		   and the second element to changes in target
+	 */
 	public List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
 
@@ -44,6 +65,15 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 			source, target, OPEN_INS, CLOSE_INS, OPEN_DEL, CLOSE_DEL, margin);
 	}
 
+	/**
+	 * The main entrance of this class. This method will compare the two texts,
+	 * highlight the changes by enclosing them with markers and return a list of
+	 * <code>DiffResults</code>.
+	 *
+	 * @return an array containing two lists of <code>DiffResults</code>, the
+	 *		   first element contains DiffResults related to changes in source
+	 *		   and the second element to changes in target
+	 */
 	public List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,

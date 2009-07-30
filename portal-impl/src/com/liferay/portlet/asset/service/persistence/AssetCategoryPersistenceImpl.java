@@ -63,6 +63,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AssetCategoryPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetCategoryPersistence
+ * @see    AssetCategoryUtil
+ */
 public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 	implements AssetCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetCategoryImpl.class.getName();
@@ -329,6 +342,9 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl
 		return assetCategory;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AssetCategory, boolean merge)}.
+	 */
 	public AssetCategory update(AssetCategory assetCategory)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

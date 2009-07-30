@@ -29,6 +29,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
+/**
+ * <a href="TasksProposalPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class TasksProposalPermission {
 
 	public static void check(

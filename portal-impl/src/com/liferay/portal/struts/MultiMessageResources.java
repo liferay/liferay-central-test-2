@@ -43,6 +43,12 @@ import javax.servlet.ServletContext;
 import org.apache.struts.util.MessageResourcesFactory;
 import org.apache.struts.util.PropertyMessageResources;
 
+/**
+ * <a href="MultiMessageResources.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Bruno Farache
+ */
 public class MultiMessageResources extends PropertyMessageResources {
 
 	public MultiMessageResources(

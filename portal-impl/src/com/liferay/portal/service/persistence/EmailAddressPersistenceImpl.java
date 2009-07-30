@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="EmailAddressPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    EmailAddressPersistence
+ * @see    EmailAddressUtil
+ */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 	implements EmailAddressPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = EmailAddressImpl.class.getName();
@@ -270,6 +282,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl
 		return emailAddress;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(EmailAddress, boolean merge)}.
+	 */
 	public EmailAddress update(EmailAddress emailAddress)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

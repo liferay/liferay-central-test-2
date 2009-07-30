@@ -24,6 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portlet.journal.model.JournalFeed;
 
+/**
+ * <a href="JournalFeedImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalFeedImpl
 	extends JournalFeedModelImpl implements JournalFeed {
 

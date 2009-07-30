@@ -24,6 +24,11 @@ package com.liferay.portlet.tasks.model.impl;
 
 import com.liferay.portlet.tasks.model.TasksReview;
 
+/**
+ * <a href="TasksReviewImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TasksReviewImpl
 	extends TasksReviewModelImpl implements TasksReview {
 

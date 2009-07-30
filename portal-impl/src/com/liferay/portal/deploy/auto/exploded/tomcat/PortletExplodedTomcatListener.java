@@ -30,6 +30,13 @@ import com.liferay.portal.util.Portal;
 
 import java.io.File;
 
+/**
+ * <a href="PortletExplodedTomcatListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Olaf Fricke
+ * @author Brian Wing Shun Chan
+ */
 public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 
 	public PortletExplodedTomcatListener() {

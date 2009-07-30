@@ -60,6 +60,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="UserGroupPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserGroupPersistence
+ * @see    UserGroupUtil
+ */
 public class UserGroupPersistenceImpl extends BasePersistenceImpl
 	implements UserGroupPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupImpl.class.getName();
@@ -248,6 +260,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		return userGroup;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(UserGroup, boolean merge)}.
+	 */
 	public UserGroup update(UserGroup userGroup) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

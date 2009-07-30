@@ -44,6 +44,12 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+/**
+ * <a href="MonitoringPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Karthik Sudarshan
+ */
 public class MonitoringPortlet implements InvokerPortlet {
 
 	public static boolean isMonitoringPortletActionRequest() {

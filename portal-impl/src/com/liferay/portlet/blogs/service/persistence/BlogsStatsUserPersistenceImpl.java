@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="BlogsStatsUserPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BlogsStatsUserPersistence
+ * @see    BlogsStatsUserUtil
+ */
 public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 	implements BlogsStatsUserPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = BlogsStatsUserImpl.class.getName();
@@ -271,6 +284,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl
 		return blogsStatsUser;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(BlogsStatsUser, boolean merge)}.
+	 */
 	public BlogsStatsUser update(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

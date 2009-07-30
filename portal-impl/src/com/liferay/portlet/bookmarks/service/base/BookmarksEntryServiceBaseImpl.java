@@ -57,6 +57,12 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
+/**
+ * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 	implements BookmarksEntryService {
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {

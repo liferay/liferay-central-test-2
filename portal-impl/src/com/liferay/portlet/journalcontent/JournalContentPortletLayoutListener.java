@@ -36,6 +36,12 @@ import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="JournalContentPortletLayoutListener.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalContentPortletLayoutListener
 	implements PortletLayoutListener {
 

@@ -30,6 +30,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="PortalSessionContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalSessionContext {
 
 	public static int count() {

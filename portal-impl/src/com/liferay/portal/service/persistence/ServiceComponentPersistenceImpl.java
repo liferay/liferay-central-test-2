@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ServiceComponentPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ServiceComponentPersistence
+ * @see    ServiceComponentUtil
+ */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 	implements ServiceComponentPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ServiceComponentImpl.class.getName();
@@ -221,6 +234,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl
 		return serviceComponent;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ServiceComponent, boolean merge)}.
+	 */
 	public ServiceComponent update(ServiceComponent serviceComponent)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

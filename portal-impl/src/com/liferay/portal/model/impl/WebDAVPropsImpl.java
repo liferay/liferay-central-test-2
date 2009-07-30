@@ -38,6 +38,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * <a href="WebDAVPropsImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class WebDAVPropsImpl
 	extends WebDAVPropsModelImpl implements WebDAVProps {
 

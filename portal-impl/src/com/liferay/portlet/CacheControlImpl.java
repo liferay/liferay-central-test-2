@@ -24,6 +24,11 @@ package com.liferay.portlet;
 
 import javax.portlet.CacheControl;
 
+/**
+ * <a href="CacheControlImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CacheControlImpl implements CacheControl {
 
 	public CacheControlImpl(

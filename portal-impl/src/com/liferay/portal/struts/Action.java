@@ -22,5 +22,12 @@
 
 package com.liferay.portal.struts;
 
+/**
+ * <a href="Action.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Brian Wing Shun Chan
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.events</code>.
+ */
 public abstract class Action extends com.liferay.portal.kernel.events.Action {
 }

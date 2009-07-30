@@ -22,6 +22,11 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+/**
+ * <a href="RuntimeLogic.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class RuntimeLogic {
 
 	public static final String CLOSE_2_TAG = "/>";

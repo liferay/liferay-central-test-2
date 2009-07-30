@@ -33,6 +33,11 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="CyrusVirtualPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CyrusVirtualPersistence extends BasePersistenceImpl {
 
 	public static String FIND_BY_USER_ID =

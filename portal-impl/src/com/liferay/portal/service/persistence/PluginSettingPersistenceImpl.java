@@ -51,6 +51,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PluginSettingPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PluginSettingPersistence
+ * @see    PluginSettingUtil
+ */
 public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 	implements PluginSettingPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PluginSettingImpl.class.getName();
@@ -231,6 +244,9 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl
 		return pluginSetting;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(PluginSetting, boolean merge)}.
+	 */
 	public PluginSetting update(PluginSetting pluginSetting)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

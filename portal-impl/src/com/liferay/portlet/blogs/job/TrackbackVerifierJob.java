@@ -30,6 +30,11 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
 
+/**
+ * <a href="TrackbackVerifierJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class TrackbackVerifierJob implements IntervalJob {
 
 	public TrackbackVerifierJob() {

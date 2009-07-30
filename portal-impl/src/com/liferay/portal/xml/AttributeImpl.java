@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.QName;
 
+/**
+ * <a href="AttributeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AttributeImpl extends NodeImpl implements Attribute {
 
 	public AttributeImpl(org.dom4j.Attribute attribute) {

@@ -26,6 +26,12 @@ import com.liferay.portal.kernel.util.MultiValueMap;
 
 import java.util.Set;
 
+/**
+ * <a href="MultiValueMapTestCase.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public abstract class MultiValueMapTestCase extends BaseTestCase {
 
 	public void testDelete() {

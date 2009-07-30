@@ -46,6 +46,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="OpenSSOUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-5943.
+ * </p>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class OpenSSOUtil {
 
 	public static Map<String, String> getAttributes(

@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ShoppingItemFieldPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingItemFieldPersistence
+ * @see    ShoppingItemFieldUtil
+ */
 public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingItemFieldPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemFieldImpl.class.getName();
@@ -200,6 +213,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl
 		return shoppingItemField;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingItemField, boolean merge)}.
+	 */
 	public ShoppingItemField update(ShoppingItemField shoppingItemField)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

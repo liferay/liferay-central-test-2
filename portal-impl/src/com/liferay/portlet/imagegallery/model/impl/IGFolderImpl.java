@@ -30,6 +30,11 @@ import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="IGFolderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 
 	public static final long DEFAULT_PARENT_FOLDER_ID = 0;

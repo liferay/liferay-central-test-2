@@ -63,6 +63,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 
 import java.util.List;
 
+/**
+ * <a href="MBMailingListLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class MBMailingListLocalServiceBaseImpl
 	implements MBMailingListLocalService {
 	public MBMailingList addMBMailingList(MBMailingList mbMailingList)

@@ -27,6 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.base.RatingsEntryServiceBaseImpl;
 
+/**
+ * <a href="RatingsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RatingsEntryServiceImpl extends RatingsEntryServiceBaseImpl {
 
 	public void deleteEntry(String className, long classPK)

@@ -33,6 +33,12 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PageCommentsPortletDataHandlerImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Bruno Farache
+ */
 public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(

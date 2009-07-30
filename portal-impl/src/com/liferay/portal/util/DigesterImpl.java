@@ -34,6 +34,11 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
 
+/**
+ * <a href="DigesterImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DigesterImpl implements Digester {
 
 	public String digest(String text) {

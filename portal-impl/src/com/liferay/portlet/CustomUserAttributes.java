@@ -28,6 +28,18 @@ import com.liferay.portal.kernel.util.Randomizer;
 
 import java.util.Map;
 
+/**
+ * <a href="CustomUserAttributes.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * A separate instance of this class is created every time
+ * <code>renderRequest.getAttribute(PortletRequest.USER_INFO)</code> is called.
+ * It is safe to cache attributes in this instance because you can assume that
+ * all calls to this instance belong to the same user.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CustomUserAttributes implements Cloneable {
 
 	public String getValue(String name, Map<String, String> userInfo) {

@@ -84,6 +84,16 @@ import java.util.Map;
 
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="PortletExporter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Joel Kozikowski
+ * @author Charles May
+ * @author Raymond Augé
+ * @author Jorge Ferrer
+ * @author Bruno Farache
+ */
 public class PortletExporter {
 
 	public byte[] exportPortletInfo(

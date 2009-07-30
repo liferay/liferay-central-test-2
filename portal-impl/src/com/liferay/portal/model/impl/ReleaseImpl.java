@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.Release;
 
+/**
+ * <a href="ReleaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReleaseImpl extends ReleaseModelImpl implements Release {
 
 	public static final long DEFAULT_ID = 1;

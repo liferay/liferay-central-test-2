@@ -61,6 +61,12 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="WikiPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Jorge Ferrer
+ */
 public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletPreferences deleteData(

@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ShoppingCategoryPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingCategoryPersistence
+ * @see    ShoppingCategoryUtil
+ */
 public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingCategoryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingCategoryImpl.class.getName();
@@ -217,6 +230,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl
 		return shoppingCategory;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingCategory, boolean merge)}.
+	 */
 	public ShoppingCategory update(ShoppingCategory shoppingCategory)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

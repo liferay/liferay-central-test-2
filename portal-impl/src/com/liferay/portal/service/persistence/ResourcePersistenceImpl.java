@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ResourcePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourcePersistence
+ * @see    ResourceUtil
+ */
 public class ResourcePersistenceImpl extends BasePersistenceImpl
 	implements ResourcePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceImpl.class.getName();
@@ -211,6 +223,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl
 		return resource;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Resource, boolean merge)}.
+	 */
 	public Resource update(Resource resource) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

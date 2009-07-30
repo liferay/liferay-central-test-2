@@ -31,6 +31,11 @@ import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePool;
 
+/**
+ * <a href="WebCachePoolImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WebCachePoolImpl implements WebCachePool {
 
 	public static final String CACHE_NAME = WebCachePool.class.getName();

@@ -85,6 +85,16 @@ import java.util.Set;
 
 import org.apache.commons.collections.map.MultiValueMap;
 
+/**
+ * <a href="ConvertPermissionAlgorithm.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class converts all existing permissions from the legacy permissions
+ * algorithm to the latest algorithm.
+ * </p>
+ *
+ * @author Alexander Chow
+ */
 public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 	public String getDescription() {

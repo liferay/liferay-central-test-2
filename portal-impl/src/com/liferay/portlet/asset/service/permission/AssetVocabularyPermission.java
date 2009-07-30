@@ -29,6 +29,12 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
+/**
+ * <a href="AssetVocabularyPermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Eduardo Lundgren
+ * @author JorgeFerrer
+ */
 public class AssetVocabularyPermission {
 
 	public static void check(

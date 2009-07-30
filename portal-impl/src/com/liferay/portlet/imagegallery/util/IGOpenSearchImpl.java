@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
+/**
+ * <a href="IGOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/image_gallery/open_search";

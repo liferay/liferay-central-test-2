@@ -54,6 +54,11 @@ import javax.media.jai.RenderedImageAdapter;
 
 import net.jmge.gif.Gif89Encoder;
 
+/**
+ * <a href="ImageProcessorImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ImageProcessorImpl implements ImageProcessor {
 
 	public static ImageProcessorImpl getInstance() {

@@ -45,6 +45,12 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryF
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
 
+/**
+ * <a href="AnnouncementsDeliveryServiceBaseImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
 	implements AnnouncementsDeliveryService {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {

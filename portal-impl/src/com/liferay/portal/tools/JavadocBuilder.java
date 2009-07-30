@@ -56,6 +56,11 @@ import java.util.TreeMap;
 
 import org.apache.tools.ant.DirectoryScanner;
 
+/**
+ * <a href="JavadocBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JavadocBuilder {
 
 	public static void main(String[] args) {
@@ -122,7 +127,7 @@ public class JavadocBuilder {
 				name.equals("since") || name.equals("version")) {
 
 				if (value.startsWith("Raymond Aug")) {
-					value = "Raymond Augé";
+					value = "Raymond Aug�";
 				}
 
 				DocUtil.add(parentElement, name, value);

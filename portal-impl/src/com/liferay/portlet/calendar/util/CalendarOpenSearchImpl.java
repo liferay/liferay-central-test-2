@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
+/**
+ * <a href="CalendarOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brett Swaim
+ */
 public class CalendarOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/calendar/open_search";

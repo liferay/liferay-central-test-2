@@ -37,6 +37,11 @@ import java.io.FileReader;
 
 import java.util.List;
 
+/**
+ * <a href="SendmailHook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SendmailHook implements Hook {
 
 	public void addForward(

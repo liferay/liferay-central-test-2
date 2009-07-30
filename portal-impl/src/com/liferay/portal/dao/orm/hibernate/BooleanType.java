@@ -33,6 +33,11 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
+/**
+ * <a href="BooleanType.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BooleanType implements UserType {
 
 	public final static boolean DEFAULT_VALUE = false;

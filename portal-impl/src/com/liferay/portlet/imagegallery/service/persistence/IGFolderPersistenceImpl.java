@@ -54,6 +54,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="IGFolderPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    IGFolderPersistence
+ * @see    IGFolderUtil
+ */
 public class IGFolderPersistenceImpl extends BasePersistenceImpl
 	implements IGFolderPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = IGFolderImpl.class.getName();
@@ -294,6 +306,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		return igFolder;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(IGFolder, boolean merge)}.
+	 */
 	public IGFolder update(IGFolder igFolder) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

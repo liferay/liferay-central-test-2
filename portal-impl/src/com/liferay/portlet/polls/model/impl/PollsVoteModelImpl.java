@@ -43,6 +43,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="PollsVoteModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the PollsVote table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsVoteImpl
+ * @see    com.liferay.portlet.polls.model.PollsVote
+ * @see    com.liferay.portlet.polls.model.PollsVoteModel
+ */
 public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 	public static final String TABLE_NAME = "PollsVote";
 	public static final Object[][] TABLE_COLUMNS = {

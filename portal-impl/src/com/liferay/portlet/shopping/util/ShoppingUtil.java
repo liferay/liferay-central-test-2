@@ -79,6 +79,11 @@ import javax.portlet.WindowState;
 
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="ShoppingUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingUtil {
 
 	public static double calculateActualPrice(ShoppingItem item) {

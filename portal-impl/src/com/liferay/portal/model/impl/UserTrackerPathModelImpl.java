@@ -41,6 +41,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="UserTrackerPathModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the UserTrackerPath table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserTrackerPathImpl
+ * @see    com.liferay.portal.model.UserTrackerPath
+ * @see    com.liferay.portal.model.UserTrackerPathModel
+ */
 public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	public static final String TABLE_NAME = "UserTrackerPath";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -60,6 +60,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="OrganizationPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrganizationPersistence
+ * @see    OrganizationUtil
+ */
 public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	implements OrganizationPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrganizationImpl.class.getName();
@@ -281,6 +293,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 		return organization;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Organization, boolean merge)}.
+	 */
 	public Organization update(Organization organization)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

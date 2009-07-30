@@ -31,6 +31,22 @@ import com.liferay.portal.model.PasswordPolicy;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="PasswordPolicyJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link PasswordPolicyServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PasswordPolicyServiceJSON
+ */
 public class PasswordPolicyJSONSerializer {
 	public static JSONObject toJSONObject(PasswordPolicy model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

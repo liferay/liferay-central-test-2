@@ -62,6 +62,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SCProductEntryPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCProductEntryPersistence
+ * @see    SCProductEntryUtil
+ */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	implements SCProductEntryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntryImpl.class.getName();
@@ -276,6 +289,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		return scProductEntry;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SCProductEntry, boolean merge)}.
+	 */
 	public SCProductEntry update(SCProductEntry scProductEntry)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

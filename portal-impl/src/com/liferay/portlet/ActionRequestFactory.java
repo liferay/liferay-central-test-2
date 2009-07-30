@@ -31,6 +31,11 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="ActionRequestFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ActionRequestFactory {
 
 	public static ActionRequestImpl create(

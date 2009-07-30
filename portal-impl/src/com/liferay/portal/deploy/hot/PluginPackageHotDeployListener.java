@@ -48,6 +48,12 @@ import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="PluginPackageHotDeployListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Jorge Ferrer
+ */
 public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 	public static PluginPackage readPluginPackage(ServletContext servletContext)

@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AddressPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AddressPersistence
+ * @see    AddressUtil
+ */
 public class AddressPersistenceImpl extends BasePersistenceImpl
 	implements AddressPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AddressImpl.class.getName();
@@ -290,6 +302,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl
 		return address;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Address, boolean merge)}.
+	 */
 	public Address update(Address address) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="GroupWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public Resource getResource(WebDAVRequest webDavRequest)

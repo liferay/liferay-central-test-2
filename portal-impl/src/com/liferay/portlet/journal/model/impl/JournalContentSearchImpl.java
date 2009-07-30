@@ -24,6 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portlet.journal.model.JournalContentSearch;
 
+/**
+ * <a href="JournalContentSearchImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalContentSearchImpl
 	extends JournalContentSearchModelImpl implements JournalContentSearch {
 

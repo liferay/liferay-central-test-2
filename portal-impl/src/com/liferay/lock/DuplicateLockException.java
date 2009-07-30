@@ -25,6 +25,11 @@ package com.liferay.lock;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="DuplicateLockException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DuplicateLockException extends PortalException {
 
 	public DuplicateLockException(Lock lock) {

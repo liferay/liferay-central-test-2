@@ -31,6 +31,11 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.List;
 
+/**
+ * <a href="BaseMethodImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public abstract class BaseMethodImpl implements Method {
 
 	public String getRootPath(SharepointRequest sharepointRequest) {

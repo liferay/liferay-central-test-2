@@ -49,6 +49,12 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.util.List;
 
+/**
+ * <a href="ExpandoColumnLocalServiceBaseImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class ExpandoColumnLocalServiceBaseImpl
 	implements ExpandoColumnLocalService {
 	public ExpandoColumn addExpandoColumn(ExpandoColumn expandoColumn)

@@ -30,6 +30,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.struts.util.MessageResources;
 
+/**
+ * <a href="LanguageResources.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LanguageResources {
 
 	public LanguageResources(MessageResources resources) {

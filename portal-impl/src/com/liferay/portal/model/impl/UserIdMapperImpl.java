@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.UserIdMapper;
 
+/**
+ * <a href="UserIdMapperImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserIdMapperImpl
 	extends UserIdMapperModelImpl implements UserIdMapper {
 

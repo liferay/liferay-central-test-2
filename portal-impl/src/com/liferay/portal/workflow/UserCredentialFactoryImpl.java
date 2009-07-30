@@ -31,8 +31,22 @@ import com.liferay.portal.service.UserServiceUtil;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <a href="UserCredentialFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * The implementation of the factory creating {@link UserCredential} used by the
+ * workflow proxy.
+ * </p>
+ *
+ * @author Micha Kiener
+ */
 public class UserCredentialFactoryImpl implements UserCredentialFactory {
 
+	/**
+	 * @see com.liferay.portal.kernel.workflow.UserCredentialFactory#
+	 *		createCredential(long)
+	 */
 	public UserCredential createCredential(long userId)
 		throws WorkflowException {
 		// check for a valid user id

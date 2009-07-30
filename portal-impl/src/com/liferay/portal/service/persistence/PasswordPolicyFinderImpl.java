@@ -38,6 +38,11 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="PasswordPolicyFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PasswordPolicyFinderImpl
 	extends BasePersistenceImpl implements PasswordPolicyFinder {
 

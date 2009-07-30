@@ -32,6 +32,11 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+/**
+ * <a href="ThumbnailBuilder.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ThumbnailBuilder {
 
 	public static void main(String[] args) {

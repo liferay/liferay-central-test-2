@@ -26,6 +26,11 @@ import javax.portlet.Event;
 import javax.portlet.EventRequest;
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="EventRequestImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EventRequestImpl
 	extends PortletRequestImpl implements EventRequest {
 

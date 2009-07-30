@@ -54,6 +54,18 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="MBThreadPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBThreadPersistence
+ * @see    MBThreadUtil
+ */
 public class MBThreadPersistenceImpl extends BasePersistenceImpl
 	implements MBThreadPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBThreadImpl.class.getName();
@@ -225,6 +237,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl
 		return mbThread;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBThread, boolean merge)}.
+	 */
 	public MBThread update(MBThread mbThread) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

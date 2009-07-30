@@ -54,6 +54,12 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
 
 import java.util.List;
 
+/**
+ * <a href="DLFileRankLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class DLFileRankLocalServiceBaseImpl
 	implements DLFileRankLocalService {
 	public DLFileRank addDLFileRank(DLFileRank dlFileRank)

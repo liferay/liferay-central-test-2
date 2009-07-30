@@ -169,6 +169,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="ResourceServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class ResourceServiceBaseImpl extends PrincipalBean
 	implements ResourceService {
 	public AccountLocalService getAccountLocalService() {

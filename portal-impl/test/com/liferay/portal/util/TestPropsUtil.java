@@ -31,6 +31,11 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * <a href="TestPropsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TestPropsUtil {
 
 	public static String get(String key) {

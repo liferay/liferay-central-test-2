@@ -45,6 +45,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetEntryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the AssetEntry table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetEntryImpl
+ * @see    com.liferay.portlet.asset.model.AssetEntry
+ * @see    com.liferay.portlet.asset.model.AssetEntryModel
+ */
 public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	public static final String TABLE_NAME = "AssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {

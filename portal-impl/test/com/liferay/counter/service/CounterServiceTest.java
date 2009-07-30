@@ -26,6 +26,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.PortalServiceUtil;
 
+/**
+ * <a href="CounterServiceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public class CounterServiceTest extends BaseServiceTestCase {
 
 	public void testCounterRollback() throws Exception {

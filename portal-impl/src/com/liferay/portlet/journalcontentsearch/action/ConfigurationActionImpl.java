@@ -35,6 +35,12 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Richard Beatty
+ * @author Raymond Augé
+ */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 	public void processAction(

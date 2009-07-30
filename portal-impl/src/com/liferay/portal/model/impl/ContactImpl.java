@@ -25,6 +25,11 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 
+/**
+ * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ContactImpl extends ContactModelImpl implements Contact {
 
 	public ContactImpl() {

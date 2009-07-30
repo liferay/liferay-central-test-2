@@ -47,6 +47,11 @@ import java.util.Properties;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="JSPWikiEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class JSPWikiEngine implements WikiEngine {
 
 	public String convert(

@@ -34,6 +34,11 @@ import java.io.PrintStream;
 
 import java.net.Socket;
 
+/**
+ * <a href="WhoisWebCacheItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WhoisWebCacheItem implements WebCacheItem {
 
 	public static String WHOIS_SERVER = "whois.geektools.com";

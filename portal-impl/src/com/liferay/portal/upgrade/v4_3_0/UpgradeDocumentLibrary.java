@@ -44,6 +44,11 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 
 import java.sql.Types;
 
+/**
+ * <a href="UpgradeDocumentLibrary.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

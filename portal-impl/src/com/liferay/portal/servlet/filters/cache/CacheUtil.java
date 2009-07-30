@@ -28,6 +28,12 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
+/**
+ * <a href="CacheUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Michael Young
+ */
 public class CacheUtil {
 
 	public static String CACHE_NAME = CacheUtil.class.getName();

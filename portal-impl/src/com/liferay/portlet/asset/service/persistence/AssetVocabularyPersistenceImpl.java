@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AssetVocabularyPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AssetVocabularyPersistence
+ * @see    AssetVocabularyUtil
+ */
 public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 	implements AssetVocabularyPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetVocabularyImpl.class.getName();
@@ -283,6 +296,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl
 		return assetVocabulary;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AssetVocabulary, boolean merge)}.
+	 */
 	public AssetVocabulary update(AssetVocabulary assetVocabulary)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

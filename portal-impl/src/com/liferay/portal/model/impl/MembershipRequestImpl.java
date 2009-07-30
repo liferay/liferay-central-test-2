@@ -24,6 +24,11 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.MembershipRequest;
 
+/**
+ * <a href="MembershipRequestImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class MembershipRequestImpl
 	extends MembershipRequestModelImpl implements MembershipRequest {
 

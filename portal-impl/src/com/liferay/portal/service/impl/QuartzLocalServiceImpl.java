@@ -33,6 +33,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="QuartzLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
 	public void checkQuartzTables() throws SystemException {

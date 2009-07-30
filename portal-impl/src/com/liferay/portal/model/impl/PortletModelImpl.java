@@ -40,6 +40,23 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="PortletModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the Portlet table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PortletImpl
+ * @see    com.liferay.portal.model.Portlet
+ * @see    com.liferay.portal.model.PortletModel
+ */
 public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	public static final String TABLE_NAME = "Portlet";
 	public static final Object[][] TABLE_COLUMNS = {

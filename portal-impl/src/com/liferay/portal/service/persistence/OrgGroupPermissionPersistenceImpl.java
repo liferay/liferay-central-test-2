@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="OrgGroupPermissionPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupPermissionPersistence
+ * @see    OrgGroupPermissionUtil
+ */
 public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 	implements OrgGroupPermissionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupPermissionImpl.class.getName();
@@ -215,6 +228,9 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		return orgGroupPermission;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgGroupPermission, boolean merge)}.
+	 */
 	public OrgGroupPermission update(OrgGroupPermission orgGroupPermission)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

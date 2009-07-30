@@ -39,6 +39,23 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="OrgLaborModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the OrgLabor table in the database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgLaborImpl
+ * @see    com.liferay.portal.model.OrgLabor
+ * @see    com.liferay.portal.model.OrgLaborModel
+ */
 public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	public static final String TABLE_NAME = "OrgLabor";
 	public static final Object[][] TABLE_COLUMNS = {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.jcr;
 
+/**
+ * <a href="JCRConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ */
 public interface JCRConstants {
 
 	public static final String JCR_CONTENT = "jcr:content";

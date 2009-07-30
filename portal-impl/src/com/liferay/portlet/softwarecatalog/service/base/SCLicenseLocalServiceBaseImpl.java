@@ -49,6 +49,12 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
 
 import java.util.List;
 
+/**
+ * <a href="SCLicenseLocalServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class SCLicenseLocalServiceBaseImpl
 	implements SCLicenseLocalService {
 	public SCLicense addSCLicense(SCLicense scLicense)

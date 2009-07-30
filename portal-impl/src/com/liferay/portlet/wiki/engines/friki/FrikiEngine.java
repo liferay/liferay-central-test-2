@@ -41,6 +41,11 @@ import javax.portlet.PortletURL;
 
 import org.stringtree.factory.memory.MapStringRepository;
 
+/**
+ * <a href="FrikiEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class FrikiEngine implements WikiEngine {
 
 	public FrikiEngine() {

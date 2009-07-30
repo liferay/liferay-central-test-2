@@ -31,6 +31,11 @@ import com.liferay.portal.util.TestPropsValues;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * <a href="UserServiceHttpTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 
 	public void testAddUser() throws Exception {

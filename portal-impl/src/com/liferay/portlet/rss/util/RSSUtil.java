@@ -29,6 +29,11 @@ import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
 import com.sun.syndication.feed.synd.SyndFeed;
 
+/**
+ * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RSSUtil {
 
 	public static ObjectValuePair<String, SyndFeed> getFeed(String url) {

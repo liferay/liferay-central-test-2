@@ -25,6 +25,12 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="InitColumnProcessor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class InitColumnProcessor {
 
 	public InitColumnProcessor() {

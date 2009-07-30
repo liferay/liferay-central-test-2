@@ -27,6 +27,11 @@ import com.liferay.portal.util.PropsValues;
 
 import org.hibernate.jmx.StatisticsService;
 
+/**
+ * <a href="HibernateStatisticsService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ */
 public class HibernateStatisticsService extends StatisticsService {
 
 	public HibernateStatisticsService() {

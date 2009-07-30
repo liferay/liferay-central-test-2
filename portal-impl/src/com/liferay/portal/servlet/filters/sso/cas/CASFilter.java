@@ -42,6 +42,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="CASFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Young
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class CASFilter extends BasePortalFilter {
 
 	public static void reload(long companyId) {

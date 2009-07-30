@@ -30,6 +30,11 @@ import com.liferay.portal.service.base.PasswordPolicyServiceBaseImpl;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 
+/**
+ * <a href="PasswordPolicyServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ */
 public class PasswordPolicyServiceImpl extends PasswordPolicyServiceBaseImpl {
 
 	public PasswordPolicy addPasswordPolicy(

@@ -30,6 +30,11 @@ import javax.ccpp.ValidationMode;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="PortalProfileFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalProfileFactory {
 
 	public static Profile getCCPPProfile(HttpServletRequest request) {

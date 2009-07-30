@@ -24,6 +24,11 @@ package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
 
+/**
+ * <a href="ExpandoRowImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ExpandoRowImpl extends ExpandoRowModelImpl implements ExpandoRow {
 
 	public ExpandoRowImpl() {

@@ -34,6 +34,12 @@ import java.io.InputStream;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
+/**
+ * <a href="PortalHibernateConfiguration.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalHibernateConfiguration
 	extends TransactionAwareConfiguration {
 

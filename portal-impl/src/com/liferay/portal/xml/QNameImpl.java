@@ -25,6 +25,11 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.QName;
 
+/**
+ * <a href="QNameImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class QNameImpl implements QName {
 
 	public QNameImpl(org.dom4j.QName qName) {

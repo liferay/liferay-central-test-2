@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.plugin.PluginPackageUtil;
 
+/**
+ * <a href="CheckRemoteRepositoriesJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class CheckRemoteRepositoriesJob implements IntervalJob {
 
 	public void execute(JobExecutionContext jobExecutionContext)

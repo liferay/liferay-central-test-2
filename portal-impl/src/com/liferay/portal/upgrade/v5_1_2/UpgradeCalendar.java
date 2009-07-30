@@ -32,6 +32,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
+/**
+ * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Samuel Kong
+ */
 public class UpgradeCalendar extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

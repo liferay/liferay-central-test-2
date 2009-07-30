@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.Query;
 
+/**
+ * <a href="BooleanClauseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BooleanClauseImpl implements BooleanClause {
 
 	public BooleanClauseImpl(

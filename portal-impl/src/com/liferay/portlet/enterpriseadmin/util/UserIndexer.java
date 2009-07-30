@@ -47,6 +47,11 @@ import java.util.List;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="UserIndexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class UserIndexer implements Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.ENTERPRISE_ADMIN_USERS;

@@ -32,6 +32,23 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SCFrameworkVersionJSONSerializer.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link SCFrameworkVersionServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SCFrameworkVersionServiceJSON
+ */
 public class SCFrameworkVersionJSONSerializer {
 	public static JSONObject toJSONObject(SCFrameworkVersion model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

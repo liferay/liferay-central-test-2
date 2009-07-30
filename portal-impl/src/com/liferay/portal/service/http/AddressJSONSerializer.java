@@ -31,6 +31,21 @@ import com.liferay.portal.model.Address;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AddressJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link AddressServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AddressServiceJSON
+ */
 public class AddressJSONSerializer {
 	public static JSONObject toJSONObject(Address model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

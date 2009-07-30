@@ -40,6 +40,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="LayoutSetModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the LayoutSet table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    LayoutSetImpl
+ * @see    com.liferay.portal.model.LayoutSet
+ * @see    com.liferay.portal.model.LayoutSetModel
+ */
 public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public static final String TABLE_NAME = "LayoutSet";
 	public static final Object[][] TABLE_COLUMNS = {

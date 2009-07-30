@@ -50,6 +50,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="UserGroupGroupRolePersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    UserGroupGroupRolePersistence
+ * @see    UserGroupGroupRoleUtil
+ */
 public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements UserGroupGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = UserGroupGroupRoleImpl.class.getName();
@@ -266,6 +279,9 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl
 		return userGroupGroupRole;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(UserGroupGroupRole, boolean merge)}.
+	 */
 	public UserGroupGroupRole update(UserGroupGroupRole userGroupGroupRole)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

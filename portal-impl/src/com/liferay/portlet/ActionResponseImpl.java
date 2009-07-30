@@ -25,6 +25,11 @@ package com.liferay.portlet;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletRequest;
 
+/**
+ * <a href="ActionResponseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ActionResponseImpl
 	extends StateAwareResponseImpl implements ActionResponse {
 

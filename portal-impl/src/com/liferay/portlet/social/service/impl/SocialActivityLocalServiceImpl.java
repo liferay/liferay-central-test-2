@@ -37,6 +37,12 @@ import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="SocialActivityLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SocialActivityLocalServiceImpl
 	extends SocialActivityLocalServiceBaseImpl {
 

@@ -25,6 +25,11 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+/**
+ * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class VerifyProcessSuite extends VerifyProcess {
 
 	public void verify() throws VerifyException {

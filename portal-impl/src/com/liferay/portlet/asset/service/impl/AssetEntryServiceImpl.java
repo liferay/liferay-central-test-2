@@ -52,6 +52,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="AssetEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ * @author Bruno Farache
+ */
 public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 	public void deleteEntry(long entryId)

@@ -34,6 +34,12 @@ import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="LayoutTypeArticleConfigurationUpdateAction.java.html"><b><i>View
+ * Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 
 	public void run(HttpServletRequest request, HttpServletResponse response)

@@ -30,6 +30,21 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 
 import java.util.List;
 
+/**
+ * <a href="ExpandoColumnJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link ExpandoColumnServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ExpandoColumnServiceJSON
+ */
 public class ExpandoColumnJSONSerializer {
 	public static JSONObject toJSONObject(ExpandoColumn model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

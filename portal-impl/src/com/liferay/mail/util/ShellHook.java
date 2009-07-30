@@ -33,6 +33,11 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
 
+/**
+ * <a href="ShellHook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael Lawrence
+ */
 public class ShellHook implements Hook {
 
 	public static String SHELL_SCRIPT =

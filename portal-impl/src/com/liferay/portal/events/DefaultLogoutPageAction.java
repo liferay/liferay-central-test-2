@@ -40,6 +40,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="DefaultLogoutPageAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jerry Niu
+ */
 public class DefaultLogoutPageAction extends Action {
 
 	public void run(HttpServletRequest request, HttpServletResponse response)

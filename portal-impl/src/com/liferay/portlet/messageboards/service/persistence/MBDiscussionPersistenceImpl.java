@@ -52,6 +52,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="MBDiscussionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    MBDiscussionPersistence
+ * @see    MBDiscussionUtil
+ */
 public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	implements MBDiscussionPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = MBDiscussionImpl.class.getName();
@@ -230,6 +242,9 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 		return mbDiscussion;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(MBDiscussion, boolean merge)}.
+	 */
 	public MBDiscussion update(MBDiscussion mbDiscussion)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

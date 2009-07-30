@@ -42,6 +42,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="BlogsEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BlogsEntryFinderImpl
 	extends BasePersistenceImpl implements BlogsEntryFinder {
 

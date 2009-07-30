@@ -29,6 +29,11 @@ import com.liferay.portlet.asset.service.base.AssetTagPropertyServiceBaseImpl;
 
 import java.util.List;
 
+/**
+ * <a href="AssetTagPropertyServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssetTagPropertyServiceImpl
 	extends AssetTagPropertyServiceBaseImpl {
 

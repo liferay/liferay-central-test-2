@@ -24,6 +24,11 @@ package com.liferay.portal.dao.shard;
 
 import java.util.Map;
 
+/**
+ * <a href="ManualShardSelector.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class ManualShardSelector implements ShardSelector {
 
 	public String getShardName(

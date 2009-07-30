@@ -36,6 +36,11 @@ import java.io.InputStream;
 
 import org.apache.lucene.document.Field;
 
+/**
+ * <a href="LuceneFileExtractor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LuceneFileExtractor {
 
 	public Field getFile(String field, InputStream is, String fileExt) {

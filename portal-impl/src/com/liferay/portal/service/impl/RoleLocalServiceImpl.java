@@ -52,6 +52,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * <a href="RoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role addRole(
@@ -310,6 +315,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return userPersistence.containsRole(userId, roleId);
 	}
 
+	/**
+	 * Returns true if the user has the role.
+	 *
+	 * @return true if the user has the role
+	 */
 	public boolean hasUserRole(
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
@@ -329,6 +339,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 	}
 
+	/**
+	 * Returns true if the user has any one of the specified roles.
+	 *
+	 * @return true if the user has the role
+	 */
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {

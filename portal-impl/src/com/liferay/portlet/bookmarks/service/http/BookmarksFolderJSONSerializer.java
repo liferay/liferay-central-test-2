@@ -32,6 +32,23 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="BookmarksFolderJSONSerializer.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link BookmarksFolderServiceJSON} to translate
+ * objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    BookmarksFolderServiceJSON
+ */
 public class BookmarksFolderJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksFolder model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

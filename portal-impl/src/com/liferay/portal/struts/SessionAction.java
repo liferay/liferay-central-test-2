@@ -22,6 +22,13 @@
 
 package com.liferay.portal.struts;
 
+/**
+ * <a href="SessionAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Brian Wing Shun Chan
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.events</code>.
+ */
 public abstract class SessionAction
 	extends com.liferay.portal.kernel.events.SessionAction {
 }

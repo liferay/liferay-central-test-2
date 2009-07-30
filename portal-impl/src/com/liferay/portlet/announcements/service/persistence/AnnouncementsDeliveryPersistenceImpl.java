@@ -53,6 +53,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="AnnouncementsDeliveryPersistenceImpl.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    AnnouncementsDeliveryPersistence
+ * @see    AnnouncementsDeliveryUtil
+ */
 public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 	implements AnnouncementsDeliveryPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = AnnouncementsDeliveryImpl.class.getName();
@@ -226,6 +239,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl
 		return announcementsDelivery;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(AnnouncementsDelivery, boolean merge)}.
+	 */
 	public AnnouncementsDelivery update(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		if (_log.isWarnEnabled()) {

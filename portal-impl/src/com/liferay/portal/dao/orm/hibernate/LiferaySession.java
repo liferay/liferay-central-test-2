@@ -48,6 +48,15 @@ import org.hibernate.Transaction;
 import org.hibernate.jdbc.Work;
 import org.hibernate.stat.SessionStatistics;
 
+/**
+ * <a href="LiferaySession.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-2996.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LiferaySession implements Session {
 
 	public LiferaySession(Session session) {

@@ -31,6 +31,11 @@ import com.liferay.portal.service.permission.CommonPermissionUtil;
 
 import java.util.List;
 
+/**
+ * <a href="PhoneServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PhoneServiceImpl extends PhoneServiceBaseImpl {
 
 	public Phone addPhone(

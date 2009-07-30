@@ -40,6 +40,11 @@ import java.util.TreeMap;
 
 import org.apache.tools.ant.DirectoryScanner;
 
+/**
+ * <a href="TLDFormatter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TLDFormatter {
 
 	public static void main(String[] args) {

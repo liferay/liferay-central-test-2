@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+/**
+ * <a href="PropsValues.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PropsValues {
 
 	public static final String[] ADMIN_DEFAULT_GROUP_NAMES =

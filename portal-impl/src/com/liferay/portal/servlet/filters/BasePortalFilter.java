@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 
+/**
+ * <a href="BasePortalFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BasePortalFilter extends BaseFilter {
 
 	protected Log getLog() {

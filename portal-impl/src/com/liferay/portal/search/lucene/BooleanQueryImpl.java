@@ -31,6 +31,11 @@ import com.liferay.portal.kernel.search.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="BooleanQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BooleanQueryImpl implements BooleanQuery {
 
 	public BooleanQueryImpl() {

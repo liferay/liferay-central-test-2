@@ -28,6 +28,11 @@ import com.liferay.portal.util.PropsValues;
 
 import javax.sql.DataSource;
 
+/**
+ * <a href="ShardUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class ShardUtil {
 
 	public static String COMPANY_SCOPE = "COMPANY_SCOPE";

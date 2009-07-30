@@ -26,6 +26,11 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
 
+/**
+ * <a href="PortalPermissionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Charles May
+ */
 public class PortalPermissionImpl implements PortalPermission {
 
 	public void check(

@@ -47,6 +47,12 @@ import java.sql.Connection;
 
 import javax.persistence.EntityManager;
 
+/**
+ * <a href="NewSessionImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class NewSessionImpl extends SessionImpl {
 
 	public NewSessionImpl(EntityManager entityManager) {

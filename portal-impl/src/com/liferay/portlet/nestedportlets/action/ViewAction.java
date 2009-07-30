@@ -49,6 +49,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Berentey Zsolt
+ * @author Jorge Ferrer
+ * @author Raymond Augé
+ * @author Jesper Weissglas
+ */
 public class ViewAction extends PortletAction {
 
 	public ActionForward render(

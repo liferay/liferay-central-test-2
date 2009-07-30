@@ -31,6 +31,11 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
 import java.util.Iterator;
 
+/**
+ * <a href="JournalStructureImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JournalStructureImpl
 	extends JournalStructureModelImpl implements JournalStructure {
 

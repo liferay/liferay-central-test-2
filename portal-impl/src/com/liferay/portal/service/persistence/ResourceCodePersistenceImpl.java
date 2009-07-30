@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ResourceCodePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceCodePersistence
+ * @see    ResourceCodeUtil
+ */
 public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 	implements ResourceCodePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceCodeImpl.class.getName();
@@ -239,6 +251,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl
 		return resourceCode;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ResourceCode, boolean merge)}.
+	 */
 	public ResourceCode update(ResourceCode resourceCode)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

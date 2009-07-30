@@ -40,6 +40,11 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="ShoppingOrderFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingOrderFinderImpl
 	extends BasePersistenceImpl implements ShoppingOrderFinder {
 

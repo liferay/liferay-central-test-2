@@ -44,6 +44,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="DLFileEntryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the DLFileEntry table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileEntryImpl
+ * @see    com.liferay.portlet.documentlibrary.model.DLFileEntry
+ * @see    com.liferay.portlet.documentlibrary.model.DLFileEntryModel
+ */
 public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	public static final String TABLE_NAME = "DLFileEntry";
 	public static final Object[][] TABLE_COLUMNS = {

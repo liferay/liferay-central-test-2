@@ -24,6 +24,11 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portlet.asset.model.AssetTagProperty;
 
+/**
+ * <a href="AssetTagPropertyImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class AssetTagPropertyImpl
 	extends AssetTagPropertyModelImpl implements AssetTagProperty {
 

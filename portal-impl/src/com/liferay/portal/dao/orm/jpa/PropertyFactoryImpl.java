@@ -44,6 +44,12 @@ package com.liferay.portal.dao.orm.jpa;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactory;
 
+/**
+ * <a href="PropertyFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class PropertyFactoryImpl implements PropertyFactory {
 
 	public Property forName(String propertyName) {

@@ -32,6 +32,21 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="DLFileEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link DLFileEntryServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileEntryServiceJSON
+ */
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

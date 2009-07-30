@@ -30,6 +30,11 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
+/**
+ * <a href="ListTypeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 
 	// Common

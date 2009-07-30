@@ -33,6 +33,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="InputPermissionsTagUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Chan
+ */
 public class InputPermissionsTagUtil {
 
 	public static void doEndTag(

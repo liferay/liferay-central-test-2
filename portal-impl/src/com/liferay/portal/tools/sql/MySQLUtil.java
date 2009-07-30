@@ -31,6 +31,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
+/**
+ * <a href="MySQLUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Sandeep Soni
+ * @author Ganesh Ram
+ */
 public class MySQLUtil extends DBUtil {
 
 	public static DBUtil getInstance() {

@@ -53,6 +53,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="DLFileRankPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    DLFileRankPersistence
+ * @see    DLFileRankUtil
+ */
 public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 	implements DLFileRankPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileRankImpl.class.getName();
@@ -261,6 +273,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		return dlFileRank;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(DLFileRank, boolean merge)}.
+	 */
 	public DLFileRank update(DLFileRank dlFileRank) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

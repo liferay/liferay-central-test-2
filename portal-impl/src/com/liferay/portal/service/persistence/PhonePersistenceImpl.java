@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="PhonePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PhonePersistence
+ * @see    PhoneUtil
+ */
 public class PhonePersistenceImpl extends BasePersistenceImpl
 	implements PhonePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = PhoneImpl.class.getName();
@@ -264,6 +276,9 @@ public class PhonePersistenceImpl extends BasePersistenceImpl
 		return phone;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Phone, boolean merge)}.
+	 */
 	public Phone update(Phone phone) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -52,6 +52,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="JournalRSSUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class JournalRSSUtil {
 
 	public static List<JournalArticle> getArticles(JournalFeed feed)

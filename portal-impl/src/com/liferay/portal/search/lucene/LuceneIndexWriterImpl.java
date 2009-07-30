@@ -36,6 +36,14 @@ import java.util.Collection;
 
 import org.apache.lucene.index.Term;
 
+/**
+ * <a href="LuceneIndexWriterImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Brian Wing Shun Chan
+ * @author Allen Chiang
+ * @author Alex Wallace
+ */
 public class LuceneIndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document doc)

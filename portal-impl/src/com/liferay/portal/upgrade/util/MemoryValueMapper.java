@@ -30,6 +30,12 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class MemoryValueMapper implements ValueMapper {
 
 	public MemoryValueMapper() {

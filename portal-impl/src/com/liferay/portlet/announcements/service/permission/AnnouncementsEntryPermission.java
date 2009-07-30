@@ -29,6 +29,12 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
+/**
+ * <a href="AnnouncementsEntryPermission.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Raymond Augé
+ */
 public class AnnouncementsEntryPermission {
 
 	public static void check(

@@ -24,6 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 
+/**
+ * <a href="ShoppingCategoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ShoppingCategoryImpl
 	extends ShoppingCategoryModelImpl implements ShoppingCategory {
 

@@ -166,6 +166,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="QuartzLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class QuartzLocalServiceBaseImpl implements QuartzLocalService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;

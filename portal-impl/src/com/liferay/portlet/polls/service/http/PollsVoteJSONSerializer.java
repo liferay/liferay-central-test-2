@@ -32,6 +32,21 @@ import com.liferay.portlet.polls.model.PollsVote;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <a href="PollsVoteJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class is used by {@link PollsVoteServiceJSON} to translate objects.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    PollsVoteServiceJSON
+ */
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

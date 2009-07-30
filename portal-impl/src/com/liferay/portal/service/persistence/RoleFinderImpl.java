@@ -46,6 +46,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="RoleFinderImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 	public static String COUNT_BY_COMMUNITY =

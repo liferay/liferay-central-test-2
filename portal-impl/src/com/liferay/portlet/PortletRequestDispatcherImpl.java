@@ -58,6 +58,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.Globals;
 
+/**
+ * <a href="PortletRequestDispatcherImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Brian Myunghun Kim
+ */
 public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 	public PortletRequestDispatcherImpl(

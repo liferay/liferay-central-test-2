@@ -40,6 +40,24 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="ResourceCodeModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface is a model that represents the ResourceCode table in the
+ * database.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ResourceCodeImpl
+ * @see    com.liferay.portal.model.ResourceCode
+ * @see    com.liferay.portal.model.ResourceCodeModel
+ */
 public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public static final String TABLE_NAME = "ResourceCode";
 	public static final Object[][] TABLE_COLUMNS = {

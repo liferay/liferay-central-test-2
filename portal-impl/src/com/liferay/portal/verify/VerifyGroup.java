@@ -33,6 +33,11 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.List;
 
+/**
+ * <a href="VerifyGroup.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class VerifyGroup extends VerifyProcess {
 
 	public void verify() throws VerifyException {

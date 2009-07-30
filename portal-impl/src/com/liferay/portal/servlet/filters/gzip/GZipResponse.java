@@ -32,6 +32,12 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+/**
+ * <a href="GZipResponse.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jayson Falkner
+ * @author Brian Wing Shun Chan
+ */
 public class GZipResponse extends HttpServletResponseWrapper {
 
 	public GZipResponse(HttpServletResponse response) {

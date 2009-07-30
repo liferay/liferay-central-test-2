@@ -25,6 +25,12 @@ package com.liferay.portal.upgrade.util;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public interface UpgradeTable {
 
 	public void appendColumn(StringBuilder sb, Object value, boolean last)

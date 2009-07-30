@@ -31,6 +31,11 @@ import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="PluginUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PluginUtil {
 
 	public static List restrictPlugins(List plugins, User user)

@@ -35,6 +35,11 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.ResourceLoader;
 
+/**
+ * <a href="LiferayResourceLoader.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LiferayResourceLoader extends ResourceLoader {
 
 	private static VelocityResourceListener[] _listeners =

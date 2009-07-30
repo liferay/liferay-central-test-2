@@ -24,6 +24,11 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Text;
 
+/**
+ * <a href="TextImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TextImpl extends NodeImpl implements Text {
 
 	public TextImpl(org.dom4j.Text text) {

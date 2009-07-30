@@ -41,6 +41,11 @@ import jcifs.ntlmssp.Type2Message;
 
 import jcifs.util.Base64;
 
+/**
+ * <a href="NtlmPostFilter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class NtlmPostFilter extends BasePortalFilter {
 
 	protected Log getLog() {

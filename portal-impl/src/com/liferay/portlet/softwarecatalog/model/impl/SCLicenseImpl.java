@@ -24,6 +24,11 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 
+/**
+ * <a href="SCLicenseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SCLicenseImpl extends SCLicenseModelImpl implements SCLicense {
 
 	public SCLicenseImpl() {

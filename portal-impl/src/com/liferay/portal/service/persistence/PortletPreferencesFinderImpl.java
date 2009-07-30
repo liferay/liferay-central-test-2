@@ -33,6 +33,12 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
 
+/**
+ * <a href="PortletPreferencesFinderImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletPreferencesFinderImpl
 	extends BasePersistenceImpl implements PortletPreferencesFinder {
 

@@ -24,6 +24,11 @@ package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="SharepointException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class SharepointException extends PortalException {
 
 	public SharepointException() {

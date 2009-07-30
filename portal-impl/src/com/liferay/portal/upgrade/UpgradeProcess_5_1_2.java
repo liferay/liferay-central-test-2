@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_1_2.UpgradeCalendar;
 import com.liferay.portal.upgrade.v5_1_2.UpgradeSchema;
 
+/**
+ * <a href="UpgradeProcess_5_1_2.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class UpgradeProcess_5_1_2 extends UpgradeProcess {
 
 	public int getThreshold() {

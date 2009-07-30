@@ -47,6 +47,11 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 
+/**
+ * <a href="RatingsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
 	implements RatingsEntryService {
 	public RatingsEntryLocalService getRatingsEntryLocalService() {

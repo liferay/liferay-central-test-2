@@ -169,6 +169,11 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.util.PortalUtil;
 
+/**
+ * <a href="LayoutSetServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class LayoutSetServiceBaseImpl extends PrincipalBean
 	implements LayoutSetService {
 	public AccountLocalService getAccountLocalService() {

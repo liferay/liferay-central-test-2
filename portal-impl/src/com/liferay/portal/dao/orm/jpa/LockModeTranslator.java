@@ -45,6 +45,12 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
 
 import javax.persistence.LockModeType;
 
+/**
+ * <a href="LockModeTranslator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Prashant Dighe
+ * @author Brian Wing Shun Chan
+ */
 public class LockModeTranslator {
 
 	public static LockModeType translate(LockMode lockMode) {

@@ -69,6 +69,11 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersiste
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 
+/**
+ * <a href="MBCategoryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class MBCategoryServiceBaseImpl extends PrincipalBean
 	implements MBCategoryService {
 	public MBBanLocalService getMBBanLocalService() {

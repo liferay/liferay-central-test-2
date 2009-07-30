@@ -66,6 +66,12 @@ import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="DLPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Raymond Augé
+ */
 public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportFileEntry(

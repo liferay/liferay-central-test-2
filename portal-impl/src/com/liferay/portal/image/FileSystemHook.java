@@ -35,6 +35,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * <a href="FileSystemHook.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class FileSystemHook extends BaseHook {
 
 	public FileSystemHook() {

@@ -26,6 +26,11 @@ import java.sql.Types;
 
 import java.util.Date;
 
+/**
+ * <a href="DateUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DateUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public DateUpgradeColumnImpl(String name) {

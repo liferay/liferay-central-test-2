@@ -25,6 +25,11 @@ package com.liferay.portlet.layoutconfiguration.util.xml;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="RenderURLLogic.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RenderURLLogic extends ActionURLLogic {
 
 	public static final String OPEN_TAG = "<runtime-render-url";

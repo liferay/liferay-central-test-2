@@ -33,6 +33,11 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
+/**
+ * <a href="DoubleType.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DoubleType implements UserType {
 
 	public final static double DEFAULT_VALUE = 0.0;

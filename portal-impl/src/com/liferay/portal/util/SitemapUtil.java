@@ -38,6 +38,11 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.List;
 
+/**
+ * <a href="SitemapUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class SitemapUtil {
 
 	public static String getSitemap(

@@ -31,6 +31,11 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PrefsPropsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PrefsPropsUtil {
 
 	public static boolean getBoolean(long companyId, String name)

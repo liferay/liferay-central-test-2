@@ -50,6 +50,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="OrgGroupRolePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    OrgGroupRolePersistence
+ * @see    OrgGroupRoleUtil
+ */
 public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 	implements OrgGroupRolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgGroupRoleImpl.class.getName();
@@ -208,6 +220,9 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
 		return orgGroupRole;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(OrgGroupRole, boolean merge)}.
+	 */
 	public OrgGroupRole update(OrgGroupRole orgGroupRole)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

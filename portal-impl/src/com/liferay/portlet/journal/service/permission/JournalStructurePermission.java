@@ -29,6 +29,12 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
+/**
+ * <a href="JournalStructurePermission.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public class JournalStructurePermission {
 
 	public static void check(

@@ -29,6 +29,12 @@ import org.hibernate.engine.SessionFactoryImplementor;
 
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
+/**
+ * <a href="TransactionAwareConfiguration.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
 
 	protected SessionFactory wrapSessionFactoryIfNecessary(

@@ -41,6 +41,11 @@ import java.util.List;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.lucene.index.IndexWriter;
 
+/**
+ * <a href="LuceneIndexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LuceneIndexer implements Runnable {
 
 	public LuceneIndexer(long companyId) {

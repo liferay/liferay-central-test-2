@@ -52,6 +52,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ShoppingOrderItemPersistenceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShoppingOrderItemPersistence
+ * @see    ShoppingOrderItemUtil
+ */
 public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 	implements ShoppingOrderItemPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingOrderItemImpl.class.getName();
@@ -200,6 +213,9 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl
 		return shoppingOrderItem;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(ShoppingOrderItem, boolean merge)}.
+	 */
 	public ShoppingOrderItem update(ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

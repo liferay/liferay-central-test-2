@@ -51,6 +51,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="ShardPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    ShardPersistence
+ * @see    ShardUtil
+ */
 public class ShardPersistenceImpl extends BasePersistenceImpl
 	implements ShardPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = ShardImpl.class.getName();
@@ -206,6 +218,9 @@ public class ShardPersistenceImpl extends BasePersistenceImpl
 		return shard;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Shard, boolean merge)}.
+	 */
 	public Shard update(Shard shard) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

@@ -62,6 +62,12 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
 
+/**
+ * <a href="ShoppingCategoryServiceBaseImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class ShoppingCategoryServiceBaseImpl extends PrincipalBean
 	implements ShoppingCategoryService {
 	public ShoppingCartLocalService getShoppingCartLocalService() {

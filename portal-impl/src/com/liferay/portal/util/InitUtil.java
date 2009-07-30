@@ -37,6 +37,11 @@ import com.liferay.util.log4j.Log4JUtil;
 
 import org.apache.commons.lang.time.StopWatch;
 
+/**
+ * <a href="InitUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InitUtil {
 
 	public synchronized static void init() {

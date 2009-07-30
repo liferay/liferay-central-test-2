@@ -36,6 +36,11 @@ import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PortletSetupUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletSetupUtil {
 
 	public static final JSONObject cssToJSON(

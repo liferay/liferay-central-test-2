@@ -33,6 +33,12 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.List;
 
+/**
+ * <a href="SchedulerMessageListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Bruno Farache
+ */
 public class SchedulerMessageListener implements MessageListener {
 
 	public SchedulerMessageListener(

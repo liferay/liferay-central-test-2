@@ -60,6 +60,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="RolePersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    RolePersistence
+ * @see    RoleUtil
+ */
 public class RolePersistenceImpl extends BasePersistenceImpl
 	implements RolePersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = RoleImpl.class.getName();
@@ -302,6 +314,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		return role;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(Role, boolean merge)}.
+	 */
 	public Role update(Role role) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(

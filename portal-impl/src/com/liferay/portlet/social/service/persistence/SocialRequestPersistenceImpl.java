@@ -54,6 +54,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <a href="SocialRequestPersistenceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see    SocialRequestPersistence
+ * @see    SocialRequestUtil
+ */
 public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 	implements SocialRequestPersistence {
 	public static final String FINDER_CLASS_NAME_ENTITY = SocialRequestImpl.class.getName();
@@ -393,6 +406,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl
 		return socialRequest;
 	}
 
+	/**
+	 * @deprecated Use {@link #update(SocialRequest, boolean merge)}.
+	 */
 	public SocialRequest update(SocialRequest socialRequest)
 		throws SystemException {
 		if (_log.isWarnEnabled()) {

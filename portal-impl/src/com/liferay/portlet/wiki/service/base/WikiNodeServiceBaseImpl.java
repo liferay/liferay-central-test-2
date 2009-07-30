@@ -50,6 +50,11 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 
+/**
+ * <a href="WikiNodeServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 	implements WikiNodeService {
 	public WikiNodeLocalService getWikiNodeLocalService() {

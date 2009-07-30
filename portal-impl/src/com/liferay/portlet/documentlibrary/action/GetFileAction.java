@@ -56,6 +56,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * <a href="GetFileAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ * @author Charles May
+ * @author Bruno Farache
+ */
 public class GetFileAction extends PortletAction {
 
 	public ActionForward strutsExecute(

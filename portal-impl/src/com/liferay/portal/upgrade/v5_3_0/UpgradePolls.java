@@ -31,6 +31,11 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 
+/**
+ * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Julio Camarero Puras
+ */
 public class UpgradePolls extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {

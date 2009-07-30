@@ -37,6 +37,11 @@ import javax.portlet.PortletURL;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="RenderURLParamsTagUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RenderURLParamsTagUtil {
 
 	public static String doEndTag(String varImpl, PageContext pageContext)
