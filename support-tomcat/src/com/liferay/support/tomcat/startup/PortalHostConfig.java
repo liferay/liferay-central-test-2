@@ -32,6 +32,33 @@ import java.util.Arrays;
 
 import org.apache.catalina.startup.HostConfig;
 
+/**
+ * <a href="PortalHostConfig.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * Tomcat will always process XML descriptors first, then packaged WARs, and
+ * then exploded WARs. However, Tomcat does not have a predictable load order
+ * for the XML descriptors or the WARs. It relies on Java's
+ * <code>java.io.File.list()</code> implementation which is not predictable.
+ * This class overrides several of the deploy methods to ensure that the files
+ * are always processed alphabetically (case sensitive).
+ * </p>
+ *
+ * <p>
+ * To use this class, modify Tomcat's conf/server.xml. Find the
+ * <code>Host</code> element and add the attribute <code>hostConfigClass</code>.
+ * </p>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-2346.
+ * </p>
+ *
+ * <p>
+ * See <code>org.apache.catalina.startup.HostConfig</code>.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortalHostConfig extends HostConfig {
 
 	public PortalHostConfig() {
