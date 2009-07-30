@@ -127,6 +127,24 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	</td>
 </tr>
 
+<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= entry != null %>">
 	<tr>
 		<td>

@@ -106,6 +106,8 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 
 <%!
 private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
+		BookmarksEntry.class.getName(),
+		BookmarksFolder.class.getName(),
 		DLFileEntry.class.getName(),
 		DLFolder.class.getName(),
 		IGImage.class.getName(),
@@ -115,7 +117,13 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 };
 
 private String _getIconPath(String modelResource) {
-	if (modelResource.equals(DLFileEntry.class.getName())) {
+	if (modelResource.equals(BookmarksEntry.class.getName())) {
+		return "/ratings/star_hover.png";
+	}
+	else if (modelResource.equals(BookmarksFolder.class.getName())) {
+		return "/common/folder.png";
+	}
+	else if (modelResource.equals(DLFileEntry.class.getName())) {
 		return "/document_library/page.png";
 	}
 	else if (modelResource.equals(DLFolder.class.getName())) {

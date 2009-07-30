@@ -150,6 +150,24 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 	</td>
 </tr>
 
+<liferay-ui:custom-attributes-available className="<%= BookmarksFolder.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= BookmarksFolder.class.getName() %>"
+				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= folder == null %>">
 	<tr>
 		<td colspan="2">
