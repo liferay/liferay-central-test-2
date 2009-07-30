@@ -105,6 +105,8 @@ import org.dom4j.DocumentException;
  */
 public class ServiceBuilder {
 
+	public static final String AUTHOR = "Brian Wing Shun Chan";
+
 	public static void main(String[] args) {
 		InitUtil.initWithSpring();
 
@@ -252,7 +254,7 @@ public class ServiceBuilder {
 	public static void writeFile(File file, String content)
 		throws IOException {
 
-		writeFile(file, content, _AUTHOR);
+		writeFile(file, content, AUTHOR);
 	}
 
 	public static void writeFile(File file, String content, String author)
@@ -323,7 +325,7 @@ public class ServiceBuilder {
 
 		String viewSourceHREF =
 			" * <a href=\"" + file.getName() +
-				".html\"><b><i>View Source</i></b></a>\n";
+				".html\"><b><i>View Source</i></b></a>";
 
 		if (viewSourceHREF.length() > 80) {
 			int x = viewSourceHREF.lastIndexOf("<", 80);
@@ -342,7 +344,7 @@ public class ServiceBuilder {
 					viewSourceHREF.substring(end);
 		}
 
-		classMask += viewSourceHREF;
+		classMask += viewSourceHREF + "\n";
 
 		classMask +=
 			" *\n" +
@@ -547,7 +549,7 @@ public class ServiceBuilder {
 				_author = author.getText();
 			}
 			else {
-				_author = _AUTHOR;
+				_author = AUTHOR;
 			}
 
 			Element portlet = root.element("portlet");
@@ -4035,8 +4037,6 @@ public class ServiceBuilder {
 
 		return FreeMarkerUtil.process(name, context);
 	}
-
-	private static final String _AUTHOR = "Brian Wing Shun Chan";
 
 	private static final int _SESSION_TYPE_REMOTE = 0;
 

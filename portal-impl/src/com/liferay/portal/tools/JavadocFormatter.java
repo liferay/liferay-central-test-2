@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
 import com.liferay.util.xml.DocUtil;
@@ -169,10 +170,8 @@ public class JavadocFormatter {
 			}
 		}
 
-		if ((_initializeMissingJavadocs) &&
-			(docletTags.length == 0) && (name.equals("author"))) {
-
-			DocUtil.add(parentElement, name, "");
+		if ((docletTags.length == 0) && name.equals("author")) {
+			DocUtil.add(parentElement, name, ServiceBuilder.AUTHOR);
 		}
 	}
 
@@ -514,7 +513,7 @@ public class JavadocFormatter {
 
 		String viewSourceHREF =
 			" * <a href=\"" + javaClass.getName() +
-				".java.html\"><b><i>View Source</i></b></a>\n";
+				".java.html\"><b><i>View Source</i></b></a>";
 
 		if (viewSourceHREF.length() > 80) {
 			int x = viewSourceHREF.lastIndexOf("<", 80);
@@ -534,6 +533,7 @@ public class JavadocFormatter {
 		}
 
 		sb.append(viewSourceHREF);
+		sb.append("\n");
 
 		String comment = rootElement.elementText("comment");
 
