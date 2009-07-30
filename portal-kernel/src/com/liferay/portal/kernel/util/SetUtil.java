@@ -38,7 +38,7 @@ public class SetUtil {
 
 	public static Set<Long> fromArray(long[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return new HashSet();
+			return new HashSet<Long>();
 		}
 
 		Set<Long> set = new HashSet<Long>(array.length);
@@ -50,12 +50,12 @@ public class SetUtil {
 		return set;
 	}
 
-	public static Set fromArray(Object[] array) {
+	public static<E> Set<E> fromArray(E[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return new HashSet();
+			return new HashSet<E>();
 		}
 
-		Set set = new HashSet(array.length);
+		Set<E> set = new HashSet<E>(array.length);
 
 		for (int i = 0; i < array.length; i++) {
 			set.add(array[i]);
@@ -64,28 +64,21 @@ public class SetUtil {
 		return set;
 	}
 
-	public static Set fromCollection(Collection c) {
-		if ((c != null) && (c instanceof Set)) {
+	@SuppressWarnings("unchecked")
+	public static<E> Set<E> fromCollection(Collection<E> c) {
+		if ((c != null) && (Set.class.isAssignableFrom(c.getClass()))) {
 			return (Set)c;
 		}
 
 		if ((c == null) || (c.size() == 0)) {
-			return new HashSet();
+			return new HashSet<E>();
 		}
 
-		Set set = new HashSet(c.size());
-
-		Iterator itr = c.iterator();
-
-		while (itr.hasNext()) {
-			set.add(itr.next());
-		}
-
-		return set;
+		return new HashSet<E>(c);
 	}
 
-	public static Set fromEnumeration(Enumeration enu) {
-		Set set = new HashSet();
+	public static<E> Set<E> fromEnumeration(Enumeration<E> enu) {
+		Set<E> set = new HashSet<E>();
 
 		while (enu.hasMoreElements()) {
 			set.add(enu.nextElement());
@@ -94,8 +87,8 @@ public class SetUtil {
 		return set;
 	}
 
-	public static Set fromIterator(Iterator itr) {
-		Set set = new HashSet();
+	public static<E> Set<E> fromIterator(Iterator<E> itr) {
+		Set<E> set = new HashSet<E>();
 
 		while (itr.hasNext()) {
 			set.add(itr.next());
@@ -104,12 +97,12 @@ public class SetUtil {
 		return set;
 	}
 
-	public static Set fromFile(String fileName) throws IOException {
+	public static Set<String> fromFile(String fileName) throws IOException {
 		return fromFile(new File(fileName));
 	}
 
-	public static Set fromFile(File file) throws IOException {
-		Set set = new HashSet();
+	public static Set<String> fromFile(File file) throws IOException {
+		Set<String> set = new HashSet<String>();
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -124,21 +117,15 @@ public class SetUtil {
 		return set;
 	}
 
-	public static Set fromList(List array) {
+	public static<E> Set<E> fromList(List<E> array) {
 		if ((array == null) || (array.size() == 0)) {
-			return new HashSet();
+			return new HashSet<E>();
 		}
 
-		Set set = new HashSet(array.size());
-
-		for (int i = 0; i < array.size(); i++) {
-			set.add(array.get(i));
-		}
-
-		return set;
+		return new HashSet<E>(array);
 	}
 
-	public static Set fromString(String s) {
+	public static Set<String> fromString(String s) {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
