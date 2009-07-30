@@ -323,7 +323,7 @@ public class ServiceBuilder {
 
 		String viewSourceHREF =
 			" * <a href=\"" + file.getName() +
-				".java.html\"><b><i>View Source</i></b></a>\n";
+				".html\"><b><i>View Source</i></b></a>\n";
 
 		if (viewSourceHREF.length() > 80) {
 			int x = viewSourceHREF.lastIndexOf("<", 80);
