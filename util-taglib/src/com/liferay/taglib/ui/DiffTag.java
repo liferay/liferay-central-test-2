@@ -29,6 +29,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class DiffTag extends IncludeTag {
 
 	public int doStartTag() {

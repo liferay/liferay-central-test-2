@@ -22,6 +22,11 @@
 
 package com.liferay.taglib.ui;
 
+/**
+ * <a href="IconDeleteTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IconDeleteTag extends IconTag {
 
 	protected String getDefaultPage() {

@@ -22,6 +22,11 @@
 
 package com.liferay.taglib.ui;
 
+/**
+ * <a href="IconDeactivateTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IconDeactivateTag extends IconTag {
 
 	protected String getDefaultPage() {

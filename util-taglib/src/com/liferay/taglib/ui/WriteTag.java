@@ -33,6 +33,11 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="WriteTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class WriteTag extends IncludeTag {
 
 	public static String doTag(

@@ -29,6 +29,11 @@ import javax.faces.webapp.ConverterTag;
 
 import javax.servlet.jsp.JspException;
 
+/**
+ * <a href="PhoneNumberConverterTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Neil Griffin
+ */
 public class PhoneNumberConverterTag extends ConverterTag {
 
 	public PhoneNumberConverterTag() {

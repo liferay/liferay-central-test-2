@@ -32,6 +32,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+/**
+ * <a href="PanelFloatingContainerTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PanelFloatingContainerTag extends BodyTagSupport {
 
 	public int doStartTag() {

@@ -38,6 +38,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 
+/**
+ * <a href="LanguageTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LanguageTag extends IncludeTag {
 
 	public static final int LIST_ICON = 0;

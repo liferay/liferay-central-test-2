@@ -28,6 +28,11 @@ import java.text.Format;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="InputFieldTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InputFieldTag extends IncludeTag {
 
 	public int doStartTag() {

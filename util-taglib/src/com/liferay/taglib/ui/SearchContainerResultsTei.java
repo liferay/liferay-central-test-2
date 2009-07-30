@@ -30,6 +30,11 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 import javax.servlet.jsp.tagext.VariableInfo;
 
+/**
+ * <a href="SearchContainerResultsTei.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class SearchContainerResultsTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {

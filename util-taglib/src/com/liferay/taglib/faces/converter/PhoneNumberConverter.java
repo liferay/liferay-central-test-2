@@ -34,6 +34,19 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
+/**
+ * <a href="PhoneNumberConverter.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class is a JSF converter that can be used to convert phone numbers.
+ * Since phone numbers in the United States of America always have 10 digits,
+ * this converter provides automatic conversion of 10 digit phone numbers to a
+ * desired format. The format is specified by the unitedStatesFormat component
+ * attribute.
+ * </p>
+ *
+ * @author Neil Griffin
+ */
 public class PhoneNumberConverter implements Converter, StateHolder {
 
 	public boolean isTransient() {

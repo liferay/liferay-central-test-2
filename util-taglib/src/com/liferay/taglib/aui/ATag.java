@@ -34,6 +34,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
+/**
+ * <a href="ATag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class ATag extends IncludeTag implements DynamicAttributes {
 
 	public int doEndTag() throws JspException {

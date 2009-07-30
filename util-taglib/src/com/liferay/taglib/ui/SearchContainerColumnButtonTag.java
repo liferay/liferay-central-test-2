@@ -35,6 +35,12 @@ import javax.portlet.PortletURL;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
+/**
+ * <a href="SearchContainerColumnButtonTag.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Raymond Augé
+ */
 public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 
 	public int doEndTag() {

@@ -22,6 +22,11 @@
 
 package com.liferay.taglib.theme;
 
+/**
+ * <a href="BoxTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BoxTag extends com.liferay.taglib.ui.BoxTag {
 
 	public boolean isTheme() {

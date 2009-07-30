@@ -35,6 +35,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+/**
+ * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {

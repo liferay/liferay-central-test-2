@@ -34,6 +34,12 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="SocialBookmarkTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author David Truong
+ * @author Jorge Ferrer
+ */
 public class SocialBookmarkTag extends IncludeTag {
 
 	public static String doTag(

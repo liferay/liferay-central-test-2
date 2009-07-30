@@ -30,6 +30,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+/**
+ * <a href="SearchToggleTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SearchToggleTag extends TagSupport {
 
 	public int doStartTag() throws JspException {

@@ -42,6 +42,11 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
+/**
+ * <a href="SearchContainerTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static final String DEFAULT_VAR = "searchContainer";

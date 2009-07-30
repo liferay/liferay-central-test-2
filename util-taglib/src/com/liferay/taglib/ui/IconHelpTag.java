@@ -22,6 +22,11 @@
 
 package com.liferay.taglib.ui;
 
+/**
+ * <a href="IconHelpTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Scott Lee
+ */
 public class IconHelpTag extends IconTag {
 
 	protected String getDefaultPage() {

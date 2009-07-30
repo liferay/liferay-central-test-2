@@ -24,6 +24,11 @@ package com.liferay.taglib.ui;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="SearchPaginatorTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SearchPaginatorTag extends SearchFormTag {
 
 	public int doStartTag() {

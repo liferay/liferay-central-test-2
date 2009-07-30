@@ -30,6 +30,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="CalendarTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CalendarTag extends IncludeTag {
 
 	public int doStartTag() {

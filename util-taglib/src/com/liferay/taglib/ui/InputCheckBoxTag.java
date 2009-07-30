@@ -26,6 +26,11 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="InputCheckBoxTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InputCheckBoxTag extends IncludeTag {
 
 	public int doStartTag() {

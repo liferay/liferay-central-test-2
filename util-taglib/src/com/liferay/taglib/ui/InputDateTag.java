@@ -29,6 +29,11 @@ import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="InputDateTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InputDateTag extends IncludeTag {
 
 	public int doStartTag() {

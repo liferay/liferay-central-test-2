@@ -33,6 +33,11 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="WebDAVTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WebDAVTag extends IncludeTag {
 
 	public static String doTag(String path, PageContext pageContext)

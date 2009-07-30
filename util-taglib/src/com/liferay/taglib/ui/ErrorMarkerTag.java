@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.Validator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
+/**
+ * <a href="ErrorMarkerTag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ErrorMarkerTag extends BodyTagSupport {
 
 	public int doStartTag() {
