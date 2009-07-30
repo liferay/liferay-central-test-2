@@ -511,9 +511,29 @@ public class JavadocFormatter {
 		String indent = StringPool.BLANK;
 
 		sb.append("/**\n");
-		sb.append(" * <a href=\"");
-		sb.append(javaClass.getName());
-		sb.append(".java.html\"><b><i>View Source</i></b></a>\n");
+
+		String viewSourceHREF =
+			" * <a href=\"" + javaClass.getName() +
+				".java.html\"><b><i>View Source</i></b></a>\n";
+
+		if (viewSourceHREF.length() > 80) {
+			int x = viewSourceHREF.lastIndexOf("<", 80);
+			int y = viewSourceHREF.lastIndexOf(" ", 80);
+
+			int start = x;
+			int end = x;
+
+			if (x < y) {
+				start = y;
+				end = y + 1;
+			}
+
+			viewSourceHREF =
+				viewSourceHREF.substring(0, start) + "\n * " +
+					viewSourceHREF.substring(end);
+		}
+
+		sb.append(viewSourceHREF);
 
 		String comment = rootElement.elementText("comment");
 
