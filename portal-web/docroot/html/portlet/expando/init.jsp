@@ -31,8 +31,6 @@
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
 <%@ page import="com.liferay.portlet.expando.ColumnNameException" %>
 <%@ page import="com.liferay.portlet.expando.ColumnTypeException" %>
 <%@ page import="com.liferay.portlet.expando.DuplicateColumnNameException" %>
@@ -46,6 +44,8 @@
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
