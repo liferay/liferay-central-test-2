@@ -27,6 +27,15 @@
 .portlet-blogs .comments {
 }
 
+.portlet-blogs .custom-attributes {
+	margin-bottom: 1em;
+}
+
+.portlet-blogs .custom-attributes label {
+	display: block;
+	font-weight: bold;
+}
+
 .portlet-blogs .edit-actions {
 	margin: 1.5em 0;
 }

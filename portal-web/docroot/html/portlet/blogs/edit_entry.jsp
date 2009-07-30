@@ -213,6 +213,15 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			<aui:input name="content" type="hidden" />
 		</aui:field-wrapper>
 
+		<liferay-ui:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= BlogsEntry.class.getName() %>"
+				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</liferay-ui:custom-attributes-available>
+
 		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 			<aui:input defaultValue="<%= allowTrackbacks %>" inlineLabel="<%= true %>" label="allow-incoming-trackbacks" name="allowTrackbacks" />
 
