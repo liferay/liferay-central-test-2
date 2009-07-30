@@ -217,6 +217,25 @@ portletURL.setParameter("name", name);
 			<%= fileEntry.getVersion() %>
 		</td>
 	</tr>
+
+	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</td>
+		</tr>
+	</liferay-ui:custom-attributes-available>
+
 	<tr>
 		<td class="lfr-label">
 			<liferay-ui:message key="size" />
@@ -278,24 +297,6 @@ portletURL.setParameter("name", name);
 			/>
 		</td>
 	</tr>
-
-	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</td>
-		</tr>
-	</liferay-ui:custom-attributes-available>
 
 	<c:if test="<%= conversions.length > 0 %>">
 		<tr>
@@ -510,6 +511,25 @@ portletURL.setParameter("name", name);
 			<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
 		</td>
 	</tr>
+
+	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</td>
+		</tr>
+	</liferay-ui:custom-attributes-available>
+
 	<tr>
 		<td colspan="2">
 			<br />
@@ -537,24 +557,6 @@ portletURL.setParameter("name", name);
 			/>
 		</td>
 	</tr>
-
-	<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
-					editable="<%= true %>"
-					label="<%= true %>"
-				/>
-			</td>
-		</tr>
-	</liferay-ui:custom-attributes-available>
 
 	<%
 	if (fileEntry == null) {
