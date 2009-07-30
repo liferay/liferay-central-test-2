@@ -156,24 +156,25 @@ public class EditCompanyAction extends PortletAction {
 
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
-		boolean communityLogo = ParamUtil.getBoolean(
-			actionRequest,
-			"settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")");
-
-		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
-
-		if (deleteLogo) {
-			CompanyServiceUtil.deleteLogo(company.getCompanyId());
-		}
 
 		CompanyServiceUtil.updateDisplay(
 			company.getCompanyId(), languageId, timeZoneId);
+
+		boolean communityLogo = ParamUtil.getBoolean(
+			actionRequest,
+			"settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")");
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), company.getAuthType(),
 			company.isAutoLogin(), company.isSendPassword(),
 			company.isStrangers(), company.isStrangersWithMx(),
 			company.isStrangersVerify(), communityLogo);
+
+		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
+
+		if (deleteLogo) {
+			CompanyServiceUtil.deleteLogo(company.getCompanyId());
+		}
 	}
 
 }
