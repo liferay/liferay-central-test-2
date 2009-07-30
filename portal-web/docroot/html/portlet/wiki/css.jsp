@@ -103,6 +103,15 @@
 	padding: 3px;
 }
 
+.portlet-wiki .custom-attributes {
+	margin-bottom: 1em;
+}
+
+.portlet-wiki .custom-attributes label {
+	display: block;
+	font-weight: bold;
+}
+
 .portlet-wiki .child-pages h3 {
 	font-size: 1.2em;
 	margin-bottom: 0.3em;

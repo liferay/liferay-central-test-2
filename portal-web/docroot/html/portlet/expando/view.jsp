@@ -116,7 +116,8 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 		IGImage.class.getName(),
 		JournalArticle.class.getName(),
 		Organization.class.getName(),
-		User.class.getName()
+		User.class.getName(),
+		WikiPage.class.getName()
 };
 
 private String _getIconPath(String modelResource) {
@@ -152,6 +153,9 @@ private String _getIconPath(String modelResource) {
 	}
 	else if (modelResource.equals(User.class.getName())) {
 		return "/common/user_icon.png";
+	}
+	else if (modelResource.equals(WikiPage.class.getName())) {
+		return "/common/pages.png";
 	}
 	else {
 		return "/common/page.png";

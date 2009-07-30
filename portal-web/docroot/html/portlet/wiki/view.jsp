@@ -188,6 +188,17 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
+<liferay-ui:custom-attributes-available className="<%= WikiPage.class.getName() %>">
+	<div class="custom-attributes">
+		<liferay-ui:custom-attribute-list
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= (wikiPage != null) ? wikiPage.getResourcePrimKey() : 0 %>"
+			editable="<%= false %>"
+			label="<%= true %>"
+		/>
+	</div>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
 	<c:if test="<%= childPages.size() > 0 %>">
 		<div class="child-pages">

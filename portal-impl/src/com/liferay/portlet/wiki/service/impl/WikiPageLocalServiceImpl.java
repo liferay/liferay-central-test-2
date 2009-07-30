@@ -164,6 +164,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		addPageResources(page, true, true);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = page.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Node
 
 		node.setLastPostDate(now);
@@ -985,6 +991,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		wikiPagePersistence.update(page, false);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = page.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Node
 
