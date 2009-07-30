@@ -134,6 +134,12 @@ catch (Exception e) {
 	</script>
 </c:if>
 
+<%
+if (Validator.isNotNull(keywords)) {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
+}
+%>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.blogs.search.jsp");
 %>

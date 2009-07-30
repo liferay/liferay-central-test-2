@@ -265,6 +265,21 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	</script>
 </c:if>
 
+<%
+if (entry != null) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/blogs/view_entry");
+	portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+
+	PortalUtil.addPortletBreadcrumbEntry(request, entry.getTitle(), portletURL.toString());
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-entry"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
+}
+%>
+
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.blogs.edit_entry.jsp";
 %>
