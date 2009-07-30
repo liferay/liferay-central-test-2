@@ -23,5 +23,13 @@
 package com.liferay.portlet.imagegallery.model;
 
 public interface IGFolder extends IGFolderModel {
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getAncestors()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGFolder getParentFolder()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean isRoot();
 }

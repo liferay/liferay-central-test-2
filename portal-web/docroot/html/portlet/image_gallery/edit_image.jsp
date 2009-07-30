@@ -55,12 +55,6 @@ if (image != null) {
 }
 %>
 
-<div class="breadcrumbs">
-	<%= BreadcrumbsUtil.removeLastClass(IGUtil.getBreadcrumbs(folderId, 0, pageContext, renderRequest, renderResponse)) %> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((image == null) ? Constants.ADD : Constants.UPDATE) + "-image" %>' /></span>
-</div>
-
 <c:if test="<%= image != null %>">
 	<table class="lfr-table">
 	<tr>
@@ -379,3 +373,16 @@ String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_M
 <c:if test="<%= image == null %>">
 	</div>
 </c:if>
+
+<%
+if (image != null) {
+	IGUtil.addPortletBreadcrumbEntries(image, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-image"), currentURL);
+}
+else {
+	IGUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-image"), currentURL);
+}
+%>

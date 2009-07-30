@@ -130,6 +130,14 @@ catch (Exception e) {
 	</script>
 </c:if>
 
+<%
+if (searchFolderId > 0) {
+	IGUtil.addPortletBreadcrumbEntries(searchFolderId, request, renderResponse);
+}
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "search") + ": " + keywords, currentURL);
+%>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.image_gallery.search.jsp");
 %>

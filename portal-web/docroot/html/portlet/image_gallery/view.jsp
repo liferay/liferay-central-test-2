@@ -67,11 +67,6 @@ tabs1Names += ",recent-images";
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
-		<c:if test="<%= folder != null %>">
-			<div class="breadcrumbs">
-				<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
-			</div>
-		</c:if>
 
 		<%
 		List<String> headerNames = new ArrayList<String>();
@@ -348,6 +343,8 @@ tabs1Names += ",recent-images";
 				}
 			}
 
+			IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
 			PortalUtil.setPageSubtitle(folder.getName(), request);
 			PortalUtil.setPageDescription(folder.getDescription(), request);
 		}
@@ -380,6 +377,8 @@ tabs1Names += ",recent-images";
 		</form>
 
 		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, tabs1), request);
 		%>
 

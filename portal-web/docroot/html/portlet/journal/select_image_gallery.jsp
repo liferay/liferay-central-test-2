@@ -36,24 +36,17 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/journal/select_image_gallery");
 portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("groupId", String.valueOf(groupId));
+
+if (folder != null) {
+	IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+}
 %>
 
 <form method="post" name="<portlet:namespace />">
 
 <liferay-ui:tabs names="folders" />
 
-<c:if test="<%= folder != null %>">
-
-	<%
-	String breadcrumbs = IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse);
-
-	breadcrumbs = StringUtil.replace(breadcrumbs, "image_gallery%2Fselect_folder", "journal%2Fselect_image_gallery&" + renderResponse.getNamespace() + "groupId=" + groupId);
-	%>
-
-	<div class="breadcrumbs">
-		<%= breadcrumbs %>
-	</div>
-</c:if>
+<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
 <%
 List<String> headerNames = new ArrayList<String>();
