@@ -3580,6 +3580,7 @@ public class ServiceBuilder {
 		context.put("serviceOutputPath", _serviceOutputPath);
 		context.put("packagePath", _packagePath);
 		context.put("pluginName", _pluginName);
+		context.put("author", _author);
 		context.put("serviceBuilder", this);
 
 		context.put("arrayUtil", ArrayUtil_IW.getInstance());

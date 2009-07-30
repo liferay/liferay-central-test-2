@@ -19,8 +19,9 @@ import com.liferay.portal.kernel.util.ClassLoaderProxy;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  * @see    ${entity.name}${sessionTypeName}Service
+ * @generated
  */
 public class ${entity.name}${sessionTypeName}ServiceUtil {
 

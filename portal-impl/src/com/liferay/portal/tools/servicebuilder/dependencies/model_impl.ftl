@@ -63,10 +63,11 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  * @see    ${entity.name}Impl
  * @see    ${packagePath}.model.${entity.name}
  * @see    ${packagePath}.model.${entity.name}Model
+ * @generated
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 

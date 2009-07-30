@@ -58,6 +58,19 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * <a href="${entity.name}PersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author ${author}
+ * @see    ${entity.name}Persistence
+ * @see    ${entity.name}Util
+ * @generated
+ */
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
 	public static final String FINDER_CLASS_NAME_ENTITY = ${entity.name}Impl.class.getName();

@@ -27,10 +27,11 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  * @see    ${entity.name}
  * @see    ${packagePath}.model.impl.${entity.name}Impl
  * @see    ${packagePath}.model.impl.${entity.name}ModelImpl
+ * @generated
  */
 public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 

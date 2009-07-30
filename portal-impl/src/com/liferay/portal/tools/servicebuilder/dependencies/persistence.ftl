@@ -8,6 +8,19 @@ import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.util.Date;
 
+/**
+ * <a href="${entity.name}Persistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * @author ${author}
+ * @see    ${entity.name}PersistenceImpl
+ * @see    ${entity.name}Util
+ * @generated
+ */
 public interface ${entity.name}Persistence extends BasePersistence {
 
 	<#list methods as method>

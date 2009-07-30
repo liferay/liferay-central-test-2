@@ -52,10 +52,11 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  * @see    ${entity.name}ServiceHttp
  * @see    ${packagePath}.model.${entity.name}Soap
  * @see    ${packagePath}.service.${entity.name}ServiceUtil
+ * @generated
  */
 public class ${entity.name}ServiceSoap {
 

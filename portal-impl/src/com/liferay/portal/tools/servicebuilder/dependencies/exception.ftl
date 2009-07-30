@@ -8,7 +8,7 @@ import com.liferay.portal.PortalException;
 /**
  * <a href="${exception}Exception.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  */
 public class ${exception}Exception extends PortalException {
 

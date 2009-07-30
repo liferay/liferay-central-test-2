@@ -48,10 +48,11 @@ import com.liferay.portal.service.http.TunnelUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author ${author}
  * @see    ${entity.name}ServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    ${packagePath}.service.${entity.name}ServiceUtil
+ * @generated
  */
 public class ${entity.name}ServiceHttp {
 
