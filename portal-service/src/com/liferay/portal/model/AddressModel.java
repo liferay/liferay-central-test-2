@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Address table in the database.
+ * This interface is a model that represents the Address table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Address
  * @see    com.liferay.portal.model.impl.AddressImpl
  * @see    com.liferay.portal.model.impl.AddressModelImpl
+ * @generated
  */
 public interface AddressModel extends BaseModel<Address> {
 	public long getPrimaryKey();

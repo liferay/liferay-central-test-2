@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+
 /**
  * <a href="LayoutPrototypePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    LayoutPrototypePersistenceImpl
  * @see    LayoutPrototypeUtil
+ * @generated
  */
 public interface LayoutPrototypePersistence extends BasePersistence {
 	public void cacheResult(
@@ -62,6 +64,18 @@ public interface LayoutPrototypePersistence extends BasePersistence {
 		com.liferay.portal.model.LayoutPrototype layoutPrototype)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  layoutPrototype the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when layoutPrototype is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portal.model.LayoutPrototype update(
 		com.liferay.portal.model.LayoutPrototype layoutPrototype, boolean merge)
 		throws com.liferay.portal.SystemException;

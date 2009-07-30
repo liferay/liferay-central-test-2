@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="OrgLabor.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the OrgLabor table in the database.
+ * This interface is a model that represents the OrgLabor table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrgLaborModel
- * @see    com.liferay.portal.model.impl.OrgLaborImpl
- * @see    com.liferay.portal.model.impl.OrgLaborModelImpl
+ * @see OrgLaborModel
+ * @see com.liferay.portal.model.impl.OrgLaborImpl
+ * @see com.liferay.portal.model.impl.OrgLaborModelImpl
+ * @generated
  */
 public interface OrgLabor extends OrgLaborModel {
 	public com.liferay.portal.model.ListType getType();

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="EmailAddress.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.EmailAddressImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.EmailAddressImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    EmailAddressModel
- * @see    com.liferay.portal.model.impl.EmailAddressImpl
- * @see    com.liferay.portal.model.impl.EmailAddressModelImpl
+ * @see EmailAddressModel
+ * @see com.liferay.portal.model.impl.EmailAddressImpl
+ * @see com.liferay.portal.model.impl.EmailAddressModelImpl
+ * @generated
  */
 public interface EmailAddress extends EmailAddressModel {
 	public com.liferay.portal.model.ListType getType();

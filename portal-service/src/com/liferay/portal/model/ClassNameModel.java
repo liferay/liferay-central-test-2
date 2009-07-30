@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ClassNameModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    ClassName
  * @see    com.liferay.portal.model.impl.ClassNameImpl
  * @see    com.liferay.portal.model.impl.ClassNameModelImpl
+ * @generated
  */
 public interface ClassNameModel extends BaseModel<ClassName> {
 	public long getPrimaryKey();

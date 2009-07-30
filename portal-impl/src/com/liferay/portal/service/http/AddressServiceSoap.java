@@ -37,21 +37,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.AddressServiceUtil} service utility. The static
- * methods of this class calls the same methods of the service utility. However,
- * the signatures are different because it is difficult for SOAP to support
- * certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.AddressServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.portal.model.AddressSoap}. If
- * the method in the service utility returns a {@link
- * com.liferay.portal.model.Address}, that is translated to a {@link
- * com.liferay.portal.model.AddressSoap}. Methods that SOAP cannot safely wire
- * are skipped.
+ * is translated to an array of {@link com.liferay.portal.model.AddressSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.Address}, that is translated to a
+ * {@link com.liferay.portal.model.AddressSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -76,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    AddressServiceHttp
  * @see    com.liferay.portal.model.AddressSoap
  * @see    com.liferay.portal.service.AddressServiceUtil
+ * @generated
  */
 public class AddressServiceSoap {
 	public static com.liferay.portal.model.AddressSoap addAddress(

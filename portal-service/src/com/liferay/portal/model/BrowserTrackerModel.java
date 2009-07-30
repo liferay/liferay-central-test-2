@@ -41,6 +41,7 @@ import com.liferay.portal.SystemException;
  * @see    BrowserTracker
  * @see    com.liferay.portal.model.impl.BrowserTrackerImpl
  * @see    com.liferay.portal.model.impl.BrowserTrackerModelImpl
+ * @generated
  */
 public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public long getPrimaryKey();

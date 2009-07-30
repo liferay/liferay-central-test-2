@@ -30,8 +30,7 @@ import com.liferay.portal.model.LayoutSetPrototype;
 import java.util.List;
 
 /**
- * <a href="LayoutSetPrototypeJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="LayoutSetPrototypeJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,12 +38,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link LayoutSetPrototypeServiceJSON} to translate
- * objects.
+ * This class is used by {@link LayoutSetPrototypeServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    LayoutSetPrototypeServiceJSON
+ * @see    com.liferay.portal.service.http.LayoutSetPrototypeServiceJSON
+ * @generated
  */
 public class LayoutSetPrototypeJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSetPrototype model) {

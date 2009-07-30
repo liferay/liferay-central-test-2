@@ -54,6 +54,7 @@ import java.util.List;
  * @see    OrgGroupPermissionImpl
  * @see    com.liferay.portal.model.OrgGroupPermission
  * @see    com.liferay.portal.model.OrgGroupPermissionModel
+ * @generated
  */
 public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermission> {
 	public static final String TABLE_NAME = "OrgGroupPermission";

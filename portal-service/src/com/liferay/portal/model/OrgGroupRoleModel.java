@@ -41,6 +41,7 @@ import com.liferay.portal.service.persistence.OrgGroupRolePK;
  * @see    OrgGroupRole
  * @see    com.liferay.portal.model.impl.OrgGroupRoleImpl
  * @see    com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ * @generated
  */
 public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	public OrgGroupRolePK getPrimaryKey();

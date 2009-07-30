@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="OrgGroupRole.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.OrgGroupRoleImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.OrgGroupRoleImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrgGroupRoleModel
- * @see    com.liferay.portal.model.impl.OrgGroupRoleImpl
- * @see    com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ * @see OrgGroupRoleModel
+ * @see com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ * @generated
  */
 public interface OrgGroupRole extends OrgGroupRoleModel {
 	public boolean containsOrganization(

@@ -57,6 +57,7 @@ import java.util.List;
  * @see    OrganizationImpl
  * @see    com.liferay.portal.model.Organization
  * @see    com.liferay.portal.model.OrganizationModel
+ * @generated
  */
 public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	public static final String TABLE_NAME = "Organization_";

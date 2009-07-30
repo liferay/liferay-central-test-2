@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="LayoutSet.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    LayoutSetModel
- * @see    com.liferay.portal.model.impl.LayoutSetImpl
- * @see    com.liferay.portal.model.impl.LayoutSetModelImpl
+ * @see LayoutSetModel
+ * @see com.liferay.portal.model.impl.LayoutSetImpl
+ * @see com.liferay.portal.model.impl.LayoutSetModelImpl
+ * @generated
  */
 public interface LayoutSet extends LayoutSetModel {
 	public com.liferay.portal.model.Theme getTheme()

@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.OrgLaborServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.OrgLaborServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.OrgLaborServiceSoap
+ * @generated
  */
 public class OrgLaborSoap implements Serializable {
 	public static OrgLaborSoap toSoapModel(OrgLabor model) {

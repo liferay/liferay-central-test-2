@@ -44,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ContactServiceJSON
+ * @see    com.liferay.portal.service.http.ContactServiceJSON
+ * @generated
  */
 public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Layout.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Layout table in the database.
+ * This interface is a model that represents the Layout table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    LayoutModel
- * @see    com.liferay.portal.model.impl.LayoutImpl
- * @see    com.liferay.portal.model.impl.LayoutModelImpl
+ * @see LayoutModel
+ * @see com.liferay.portal.model.impl.LayoutImpl
+ * @see com.liferay.portal.model.impl.LayoutModelImpl
+ * @generated
  */
 public interface Layout extends LayoutModel {
 	public com.liferay.portal.model.Group getGroup();

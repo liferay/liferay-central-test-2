@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.BrowserTrackerServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.BrowserTrackerServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.BrowserTrackerServiceSoap
+ * @generated
  */
 public class BrowserTrackerSoap implements Serializable {
 	public static BrowserTrackerSoap toSoapModel(BrowserTracker model) {

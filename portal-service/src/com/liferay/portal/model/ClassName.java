@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ClassName.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ClassNameModel
- * @see    com.liferay.portal.model.impl.ClassNameImpl
- * @see    com.liferay.portal.model.impl.ClassNameModelImpl
+ * @see ClassNameModel
+ * @see com.liferay.portal.model.impl.ClassNameImpl
+ * @see com.liferay.portal.model.impl.ClassNameModelImpl
+ * @generated
  */
 public interface ClassName extends ClassNameModel {
 }

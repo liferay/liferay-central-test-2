@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Organization.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.OrganizationImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.OrganizationImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrganizationModel
- * @see    com.liferay.portal.model.impl.OrganizationImpl
- * @see    com.liferay.portal.model.impl.OrganizationModelImpl
+ * @see OrganizationModel
+ * @see com.liferay.portal.model.impl.OrganizationImpl
+ * @see com.liferay.portal.model.impl.OrganizationModelImpl
+ * @generated
  */
 public interface Organization extends OrganizationModel {
 	public java.util.List<com.liferay.portal.model.Organization> getAncestors()

@@ -52,13 +52,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Group_ table in the database.
+ * This interface is a model that represents the Group_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    GroupImpl
  * @see    com.liferay.portal.model.Group
  * @see    com.liferay.portal.model.GroupModel
+ * @generated
  */
 public class GroupModelImpl extends BaseModelImpl<Group> {
 	public static final String TABLE_NAME = "Group_";

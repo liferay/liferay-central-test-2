@@ -37,21 +37,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.ClassNameServiceUtil} service utility. The static
- * methods of this class calls the same methods of the service utility. However,
- * the signatures are different because it is difficult for SOAP to support
- * certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.ClassNameServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
  * is translated to an array of {@link com.liferay.portal.model.ClassNameSoap}.
- * If the method in the service utility returns a {@link
- * com.liferay.portal.model.ClassName}, that is translated to a {@link
- * com.liferay.portal.model.ClassNameSoap}. Methods that SOAP cannot safely wire
- * are skipped.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.ClassName}, that is translated to a
+ * {@link com.liferay.portal.model.ClassNameSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -76,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    ClassNameServiceHttp
  * @see    com.liferay.portal.model.ClassNameSoap
  * @see    com.liferay.portal.service.ClassNameServiceUtil
+ * @generated
  */
 public class ClassNameServiceSoap {
 	public static com.liferay.portal.model.ClassNameSoap getClassName(

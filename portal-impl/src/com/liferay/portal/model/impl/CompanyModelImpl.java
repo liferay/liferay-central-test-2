@@ -49,13 +49,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Company table in the database.
+ * This interface is a model that represents the Company table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    CompanyImpl
  * @see    com.liferay.portal.model.Company
  * @see    com.liferay.portal.model.CompanyModel
+ * @generated
  */
 public class CompanyModelImpl extends BaseModelImpl<Company> {
 	public static final String TABLE_NAME = "Company";

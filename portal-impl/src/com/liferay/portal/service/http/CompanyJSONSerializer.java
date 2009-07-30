@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    CompanyServiceJSON
+ * @see    com.liferay.portal.service.http.CompanyServiceJSON
+ * @generated
  */
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {

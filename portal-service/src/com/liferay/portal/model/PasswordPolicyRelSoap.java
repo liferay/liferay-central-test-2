@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PasswordPolicyRelServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PasswordPolicyRelServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PasswordPolicyRelServiceSoap
+ * @generated
  */
 public class PasswordPolicyRelSoap implements Serializable {
 	public static PasswordPolicyRelSoap toSoapModel(PasswordPolicyRel model) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Contact.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Contact_ table in the database.
+ * This interface is a model that represents the Contact_ table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ContactModel
- * @see    com.liferay.portal.model.impl.ContactImpl
- * @see    com.liferay.portal.model.impl.ContactModelImpl
+ * @see ContactModel
+ * @see com.liferay.portal.model.impl.ContactImpl
+ * @see com.liferay.portal.model.impl.ContactModelImpl
+ * @generated
  */
 public interface Contact extends ContactModel {
 	public java.lang.String getFullName();

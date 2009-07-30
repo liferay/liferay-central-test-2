@@ -41,8 +41,8 @@ import com.liferay.portal.service.EmailAddressServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portal.service.EmailAddressServiceUtil} service utility. The
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portal.service.EmailAddressServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
@@ -67,6 +67,7 @@ import com.liferay.portal.service.EmailAddressServiceUtil;
  * @see    EmailAddressServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portal.service.EmailAddressServiceUtil
+ * @generated
  */
 public class EmailAddressServiceHttp {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(

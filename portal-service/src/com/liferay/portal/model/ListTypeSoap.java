@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.ListTypeServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.ListTypeServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.ListTypeServiceSoap
+ * @generated
  */
 public class ListTypeSoap implements Serializable {
 	public static ListTypeSoap toSoapModel(ListType model) {

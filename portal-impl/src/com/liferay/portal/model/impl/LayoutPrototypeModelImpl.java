@@ -65,6 +65,7 @@ import java.util.Map;
  * @see    LayoutPrototypeImpl
  * @see    com.liferay.portal.model.LayoutPrototype
  * @see    com.liferay.portal.model.LayoutPrototypeModel
+ * @generated
  */
 public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 	public static final String TABLE_NAME = "LayoutPrototype";

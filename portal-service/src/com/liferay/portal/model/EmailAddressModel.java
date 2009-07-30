@@ -43,6 +43,7 @@ import java.util.Date;
  * @see    EmailAddress
  * @see    com.liferay.portal.model.impl.EmailAddressImpl
  * @see    com.liferay.portal.model.impl.EmailAddressModelImpl
+ * @generated
  */
 public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public long getPrimaryKey();

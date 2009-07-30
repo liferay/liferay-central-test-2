@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="OrgGroupPermission.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.OrgGroupPermissionImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.OrgGroupPermissionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrgGroupPermissionModel
- * @see    com.liferay.portal.model.impl.OrgGroupPermissionImpl
- * @see    com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
+ * @see OrgGroupPermissionModel
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
+ * @generated
  */
 public interface OrgGroupPermission extends OrgGroupPermissionModel {
 	public boolean containsOrganization(

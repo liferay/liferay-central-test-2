@@ -42,6 +42,7 @@ import java.util.Map;
  * @see    LayoutPrototype
  * @see    com.liferay.portal.model.impl.LayoutPrototypeImpl
  * @see    com.liferay.portal.model.impl.LayoutPrototypeModelImpl
+ * @generated
  */
 public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	public long getPrimaryKey();

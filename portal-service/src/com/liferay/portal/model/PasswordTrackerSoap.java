@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PasswordTrackerServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PasswordTrackerServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PasswordTrackerServiceSoap
+ * @generated
  */
 public class PasswordTrackerSoap implements Serializable {
 	public static PasswordTrackerSoap toSoapModel(PasswordTracker model) {

@@ -41,6 +41,7 @@ import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
  * @see    OrgGroupPermission
  * @see    com.liferay.portal.model.impl.OrgGroupPermissionImpl
  * @see    com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
+ * @generated
  */
 public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public OrgGroupPermissionPK getPrimaryKey();

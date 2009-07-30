@@ -38,12 +38,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.OrgGroupPermissionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.OrgGroupPermissionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.OrgGroupPermissionServiceSoap
+ * @generated
  */
 public class OrgGroupPermissionSoap implements Serializable {
 	public static OrgGroupPermissionSoap toSoapModel(OrgGroupPermission model) {

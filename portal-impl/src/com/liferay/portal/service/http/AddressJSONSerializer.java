@@ -44,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AddressServiceJSON
+ * @see    com.liferay.portal.service.http.AddressServiceJSON
+ * @generated
  */
 public class AddressJSONSerializer {
 	public static JSONObject toJSONObject(Address model) {

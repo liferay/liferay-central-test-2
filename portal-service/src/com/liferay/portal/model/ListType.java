@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ListType.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the ListType table in the database.
+ * This interface is a model that represents the ListType table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ListTypeModel
- * @see    com.liferay.portal.model.impl.ListTypeImpl
- * @see    com.liferay.portal.model.impl.ListTypeModelImpl
+ * @see ListTypeModel
+ * @see com.liferay.portal.model.impl.ListTypeImpl
+ * @see com.liferay.portal.model.impl.ListTypeModelImpl
+ * @generated
  */
 public interface ListType extends ListTypeModel {
 }

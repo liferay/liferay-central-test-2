@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    CountryServiceJSON
+ * @see    com.liferay.portal.service.http.CountryServiceJSON
+ * @generated
  */
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {

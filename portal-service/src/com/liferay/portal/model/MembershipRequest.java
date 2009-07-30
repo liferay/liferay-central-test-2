@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="MembershipRequest.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.MembershipRequestImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.MembershipRequestImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MembershipRequestModel
- * @see    com.liferay.portal.model.impl.MembershipRequestImpl
- * @see    com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @see MembershipRequestModel
+ * @see com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @generated
  */
 public interface MembershipRequest extends MembershipRequestModel {
 }

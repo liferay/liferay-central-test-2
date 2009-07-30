@@ -43,6 +43,7 @@ import java.util.Date;
  * @see    MembershipRequest
  * @see    com.liferay.portal.model.impl.MembershipRequestImpl
  * @see    com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @generated
  */
 public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public long getPrimaryKey();

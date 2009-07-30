@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.http;
 
+
 /**
  * <a href="AccountServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,21 +32,21 @@ package com.liferay.portal.service.http;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.AccountServiceUtil} service utility. The static
- * methods of this class calls the same methods of the service utility. However,
- * the signatures are different because it is difficult for SOAP to support
- * certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.AccountServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.portal.model.AccountSoap}. If
- * the method in the service utility returns a {@link
- * com.liferay.portal.model.Account}, that is translated to a {@link
- * com.liferay.portal.model.AccountSoap}. Methods that SOAP cannot safely wire
- * are skipped.
+ * is translated to an array of {@link com.liferay.portal.model.AccountSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.Account}, that is translated to a
+ * {@link com.liferay.portal.model.AccountSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -70,6 +71,7 @@ package com.liferay.portal.service.http;
  * @see    AccountServiceHttp
  * @see    com.liferay.portal.model.AccountSoap
  * @see    com.liferay.portal.service.AccountServiceUtil
+ * @generated
  */
 public class AccountServiceSoap {
 }

@@ -51,8 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="BrowserTrackerPersistenceImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="BrowserTrackerPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -62,6 +61,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    BrowserTrackerPersistence
  * @see    BrowserTrackerUtil
+ * @generated
  */
 public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 	implements BrowserTrackerPersistence {
@@ -222,6 +222,18 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl
 		return update(browserTracker, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  browserTracker the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when browserTracker is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public BrowserTracker update(BrowserTracker browserTracker, boolean merge)
 		throws SystemException {
 		boolean isNew = browserTracker.isNew();

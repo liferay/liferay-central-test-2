@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.LayoutSetServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.LayoutSetServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.LayoutSetServiceSoap
+ * @generated
  */
 public class LayoutSetSoap implements Serializable {
 	public static LayoutSetSoap toSoapModel(LayoutSet model) {

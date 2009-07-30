@@ -60,6 +60,7 @@ import java.util.List;
  * @see    PasswordPolicyImpl
  * @see    com.liferay.portal.model.PasswordPolicy
  * @see    com.liferay.portal.model.PasswordPolicyModel
+ * @generated
  */
 public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 	public static final String TABLE_NAME = "PasswordPolicy";

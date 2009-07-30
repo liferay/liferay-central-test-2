@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    LayoutServiceJSON
+ * @see    com.liferay.portal.service.http.LayoutServiceJSON
+ * @generated
  */
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {

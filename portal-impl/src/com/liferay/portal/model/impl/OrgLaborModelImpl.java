@@ -48,13 +48,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the OrgLabor table in the database.
+ * This interface is a model that represents the OrgLabor table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    OrgLaborImpl
  * @see    com.liferay.portal.model.OrgLabor
  * @see    com.liferay.portal.model.OrgLaborModel
+ * @generated
  */
 public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {
 	public static final String TABLE_NAME = "OrgLabor";

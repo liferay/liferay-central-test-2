@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="LayoutSetModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    LayoutSet
  * @see    com.liferay.portal.model.impl.LayoutSetImpl
  * @see    com.liferay.portal.model.impl.LayoutSetModelImpl
+ * @generated
  */
 public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public long getPrimaryKey();

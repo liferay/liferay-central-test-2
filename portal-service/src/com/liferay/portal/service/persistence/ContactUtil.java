@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+
 /**
  * <a href="ContactUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    ContactPersistence
  * @see    ContactPersistenceImpl
+ * @generated
  */
 public class ContactUtil {
 	public static void cacheResult(com.liferay.portal.model.Contact contact) {
@@ -73,6 +75,18 @@ public class ContactUtil {
 		return getPersistence().update(contact);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  contact the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when contact is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact, boolean merge)
 		throws com.liferay.portal.SystemException {

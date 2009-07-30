@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PasswordPolicyRelModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    PasswordPolicyRel
  * @see    com.liferay.portal.model.impl.PasswordPolicyRelImpl
  * @see    com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
+ * @generated
  */
 public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public long getPrimaryKey();

@@ -62,6 +62,7 @@ import java.util.List;
  * @see    EmailAddressImpl
  * @see    com.liferay.portal.model.EmailAddress
  * @see    com.liferay.portal.model.EmailAddressModel
+ * @generated
  */
 public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {
 	public static final String TABLE_NAME = "EmailAddress";

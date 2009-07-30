@@ -54,6 +54,7 @@ import java.util.List;
  * @see    OrgGroupRoleImpl
  * @see    com.liferay.portal.model.OrgGroupRole
  * @see    com.liferay.portal.model.OrgGroupRoleModel
+ * @generated
  */
 public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole> {
 	public static final String TABLE_NAME = "OrgGroupRole";

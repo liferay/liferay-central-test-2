@@ -29,8 +29,7 @@ import com.liferay.portal.service.MembershipRequestServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <a href="MembershipRequestServiceSoap.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MembershipRequestServiceSoap.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -38,8 +37,8 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.MembershipRequestServiceUtil} service utility. The
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.MembershipRequestServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -48,11 +47,11 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portal.model.MembershipRequestSoap}. If the method in the service
- * utility returns a {@link com.liferay.portal.model.MembershipRequest}, that is
- * translated to a {@link com.liferay.portal.model.MembershipRequestSoap}.
- * Methods that SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portal.model.MembershipRequestSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.MembershipRequest}, that is translated to a
+ * {@link com.liferay.portal.model.MembershipRequestSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -77,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    MembershipRequestServiceHttp
  * @see    com.liferay.portal.model.MembershipRequestSoap
  * @see    com.liferay.portal.service.MembershipRequestServiceUtil
+ * @generated
  */
 public class MembershipRequestServiceSoap {
 	public static com.liferay.portal.model.MembershipRequestSoap addMembershipRequest(

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Account.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Account_ table in the database.
+ * This interface is a model that represents the Account_ table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AccountModel
- * @see    com.liferay.portal.model.impl.AccountImpl
- * @see    com.liferay.portal.model.impl.AccountModelImpl
+ * @see AccountModel
+ * @see com.liferay.portal.model.impl.AccountImpl
+ * @see com.liferay.portal.model.impl.AccountModelImpl
+ * @generated
  */
 public interface Account extends AccountModel {
 }

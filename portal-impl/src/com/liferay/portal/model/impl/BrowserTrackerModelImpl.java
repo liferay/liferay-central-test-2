@@ -58,6 +58,7 @@ import java.util.List;
  * @see    BrowserTrackerImpl
  * @see    com.liferay.portal.model.BrowserTracker
  * @see    com.liferay.portal.model.BrowserTrackerModel
+ * @generated
  */
 public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 	public static final String TABLE_NAME = "BrowserTracker";

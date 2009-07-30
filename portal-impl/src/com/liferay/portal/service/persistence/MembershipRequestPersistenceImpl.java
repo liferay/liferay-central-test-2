@@ -51,8 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="MembershipRequestPersistenceImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="MembershipRequestPersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -62,6 +61,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    MembershipRequestPersistence
  * @see    MembershipRequestUtil
+ * @generated
  */
 public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 	implements MembershipRequestPersistence {
@@ -258,6 +258,18 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl
 		return update(membershipRequest, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  membershipRequest the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when membershipRequest is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public MembershipRequest update(MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
 		boolean isNew = membershipRequest.isNew();

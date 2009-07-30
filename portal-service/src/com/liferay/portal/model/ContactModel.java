@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Contact_ table in the database.
+ * This interface is a model that represents the Contact_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Contact
  * @see    com.liferay.portal.model.impl.ContactImpl
  * @see    com.liferay.portal.model.impl.ContactModelImpl
+ * @generated
  */
 public interface ContactModel extends BaseModel<Contact> {
 	public long getPrimaryKey();

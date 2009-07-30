@@ -32,8 +32,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="MembershipRequestJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MembershipRequestJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -41,12 +40,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link MembershipRequestServiceJSON} to translate
- * objects.
+ * This class is used by {@link MembershipRequestServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    MembershipRequestServiceJSON
+ * @see    com.liferay.portal.service.http.MembershipRequestServiceJSON
+ * @generated
  */
 public class MembershipRequestJSONSerializer {
 	public static JSONObject toJSONObject(MembershipRequest model) {

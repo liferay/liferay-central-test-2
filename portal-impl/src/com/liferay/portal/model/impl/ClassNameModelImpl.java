@@ -59,6 +59,7 @@ import java.util.List;
  * @see    ClassNameImpl
  * @see    com.liferay.portal.model.ClassName
  * @see    com.liferay.portal.model.ClassNameModel
+ * @generated
  */
 public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	public static final String TABLE_NAME = "ClassName_";

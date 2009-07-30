@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ListTypeServiceJSON
+ * @see    com.liferay.portal.service.http.ListTypeServiceJSON
+ * @generated
  */
 public class ListTypeJSONSerializer {
 	public static JSONObject toJSONObject(ListType model) {

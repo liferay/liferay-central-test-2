@@ -61,6 +61,7 @@ import java.util.List;
  * @see    MembershipRequestImpl
  * @see    com.liferay.portal.model.MembershipRequest
  * @see    com.liferay.portal.model.MembershipRequestModel
+ * @generated
  */
 public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest> {
 	public static final String TABLE_NAME = "MembershipRequest";

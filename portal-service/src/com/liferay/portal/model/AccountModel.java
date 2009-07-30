@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Account_ table in the database.
+ * This interface is a model that represents the Account_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Account
  * @see    com.liferay.portal.model.impl.AccountImpl
  * @see    com.liferay.portal.model.impl.AccountModelImpl
+ * @generated
  */
 public interface AccountModel extends BaseModel<Account> {
 	public long getPrimaryKey();

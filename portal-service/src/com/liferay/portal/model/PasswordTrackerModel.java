@@ -43,6 +43,7 @@ import java.util.Date;
  * @see    PasswordTracker
  * @see    com.liferay.portal.model.impl.PasswordTrackerImpl
  * @see    com.liferay.portal.model.impl.PasswordTrackerModelImpl
+ * @generated
  */
 public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public long getPrimaryKey();

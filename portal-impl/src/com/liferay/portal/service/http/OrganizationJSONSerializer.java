@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrganizationServiceJSON
+ * @see    com.liferay.portal.service.http.OrganizationServiceJSON
+ * @generated
  */
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {

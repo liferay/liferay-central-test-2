@@ -51,8 +51,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * <a href="LayoutSetPrototypePersistenceImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="LayoutSetPrototypePersistenceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -62,6 +61,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    LayoutSetPrototypePersistence
  * @see    LayoutSetPrototypeUtil
+ * @generated
  */
 public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 	implements LayoutSetPrototypePersistence {
@@ -241,6 +241,18 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl
 		return update(layoutSetPrototype, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  layoutSetPrototype the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when layoutSetPrototype is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public LayoutSetPrototype update(LayoutSetPrototype layoutSetPrototype,
 		boolean merge) throws SystemException {
 		boolean isNew = layoutSetPrototype.isNew();

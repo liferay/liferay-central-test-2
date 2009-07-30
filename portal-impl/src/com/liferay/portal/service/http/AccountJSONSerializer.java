@@ -44,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AccountServiceJSON
+ * @see    com.liferay.portal.service.http.AccountServiceJSON
+ * @generated
  */
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {

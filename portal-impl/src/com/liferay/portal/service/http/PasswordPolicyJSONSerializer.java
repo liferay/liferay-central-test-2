@@ -32,8 +32,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="PasswordPolicyJSONSerializer.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="PasswordPolicyJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -45,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PasswordPolicyServiceJSON
+ * @see    com.liferay.portal.service.http.PasswordPolicyServiceJSON
+ * @generated
  */
 public class PasswordPolicyJSONSerializer {
 	public static JSONObject toJSONObject(PasswordPolicy model) {

@@ -33,13 +33,15 @@ import com.liferay.portal.SystemException;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Group_ table in the database.
+ * This interface is a model that represents the Group_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Group
  * @see    com.liferay.portal.model.impl.GroupImpl
  * @see    com.liferay.portal.model.impl.GroupModelImpl
+ * @generated
  */
 public interface GroupModel extends BaseModel<Group> {
 	public long getPrimaryKey();

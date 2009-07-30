@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ClassNameServiceJSON
+ * @see    com.liferay.portal.service.http.ClassNameServiceJSON
+ * @generated
  */
 public class ClassNameJSONSerializer {
 	public static JSONObject toJSONObject(ClassName model) {

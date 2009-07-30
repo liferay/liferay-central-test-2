@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    OrgLaborServiceJSON
+ * @see    com.liferay.portal.service.http.OrgLaborServiceJSON
+ * @generated
  */
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {

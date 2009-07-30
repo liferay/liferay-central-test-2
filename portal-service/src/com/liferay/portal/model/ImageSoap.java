@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.ImageServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.ImageServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.ImageServiceSoap
+ * @generated
  */
 public class ImageSoap implements Serializable {
 	public static ImageSoap toSoapModel(Image model) {

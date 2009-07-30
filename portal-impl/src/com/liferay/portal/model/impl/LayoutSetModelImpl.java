@@ -57,6 +57,7 @@ import java.util.List;
  * @see    LayoutSetImpl
  * @see    com.liferay.portal.model.LayoutSet
  * @see    com.liferay.portal.model.LayoutSetModel
+ * @generated
  */
 public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 	public static final String TABLE_NAME = "LayoutSet";

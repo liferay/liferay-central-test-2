@@ -46,13 +46,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the ListType table in the database.
+ * This interface is a model that represents the ListType table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    ListTypeImpl
  * @see    com.liferay.portal.model.ListType
  * @see    com.liferay.portal.model.ListTypeModel
+ * @generated
  */
 public class ListTypeModelImpl extends BaseModelImpl<ListType> {
 	public static final String TABLE_NAME = "ListType";

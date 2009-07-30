@@ -37,8 +37,8 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.EmailAddressServiceUtil} service utility. The
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.EmailAddressServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -47,11 +47,11 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portal.model.EmailAddressSoap}. If the method in the service
- * utility returns a {@link com.liferay.portal.model.EmailAddress}, that is
- * translated to a {@link com.liferay.portal.model.EmailAddressSoap}. Methods
- * that SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portal.model.EmailAddressSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.EmailAddress}, that is translated to a
+ * {@link com.liferay.portal.model.EmailAddressSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -76,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    EmailAddressServiceHttp
  * @see    com.liferay.portal.model.EmailAddressSoap
  * @see    com.liferay.portal.service.EmailAddressServiceUtil
+ * @generated
  */
 public class EmailAddressServiceSoap {
 	public static com.liferay.portal.model.EmailAddressSoap addEmailAddress(

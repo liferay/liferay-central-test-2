@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="OrgLaborModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,13 +32,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the OrgLabor table in the database.
+ * This interface is a model that represents the OrgLabor table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    OrgLabor
  * @see    com.liferay.portal.model.impl.OrgLaborImpl
  * @see    com.liferay.portal.model.impl.OrgLaborModelImpl
+ * @generated
  */
 public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public long getPrimaryKey();

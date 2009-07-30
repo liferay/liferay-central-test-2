@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="OrganizationModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    Organization
  * @see    com.liferay.portal.model.impl.OrganizationImpl
  * @see    com.liferay.portal.model.impl.OrganizationModelImpl
+ * @generated
  */
 public interface OrganizationModel extends BaseModel<Organization> {
 	public long getPrimaryKey();

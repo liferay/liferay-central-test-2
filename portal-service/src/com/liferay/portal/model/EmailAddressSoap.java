@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.EmailAddressServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.EmailAddressServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.EmailAddressServiceSoap
+ * @generated
  */
 public class EmailAddressSoap implements Serializable {
 	public static EmailAddressSoap toSoapModel(EmailAddress model) {

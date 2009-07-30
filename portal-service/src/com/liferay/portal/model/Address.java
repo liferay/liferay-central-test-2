@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Address.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Address table in the database.
+ * This interface is a model that represents the Address table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    AddressModel
- * @see    com.liferay.portal.model.impl.AddressImpl
- * @see    com.liferay.portal.model.impl.AddressModelImpl
+ * @see AddressModel
+ * @see com.liferay.portal.model.impl.AddressImpl
+ * @see com.liferay.portal.model.impl.AddressModelImpl
+ * @generated
  */
 public interface Address extends AddressModel {
 	public com.liferay.portal.model.Region getRegion();

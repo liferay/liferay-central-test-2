@@ -62,6 +62,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    LayoutPersistence
  * @see    LayoutUtil
+ * @generated
  */
 public class LayoutPersistenceImpl extends BasePersistenceImpl
 	implements LayoutPersistence {
@@ -376,6 +377,18 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		return update(layout, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  layout the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when layout is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public Layout update(Layout layout, boolean merge)
 		throws SystemException {
 		boolean isNew = layout.isNew();

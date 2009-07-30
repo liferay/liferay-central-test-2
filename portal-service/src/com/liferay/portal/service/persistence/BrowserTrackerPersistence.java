@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+
 /**
  * <a href="BrowserTrackerPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    BrowserTrackerPersistenceImpl
  * @see    BrowserTrackerUtil
+ * @generated
  */
 public interface BrowserTrackerPersistence extends BasePersistence {
 	public void cacheResult(
@@ -60,6 +62,18 @@ public interface BrowserTrackerPersistence extends BasePersistence {
 		com.liferay.portal.model.BrowserTracker browserTracker)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  browserTracker the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when browserTracker is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portal.model.BrowserTracker update(
 		com.liferay.portal.model.BrowserTracker browserTracker, boolean merge)
 		throws com.liferay.portal.SystemException;

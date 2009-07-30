@@ -49,13 +49,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Layout table in the database.
+ * This interface is a model that represents the Layout table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    LayoutImpl
  * @see    com.liferay.portal.model.Layout
  * @see    com.liferay.portal.model.LayoutModel
+ * @generated
  */
 public class LayoutModelImpl extends BaseModelImpl<Layout> {
 	public static final String TABLE_NAME = "Layout";

@@ -33,13 +33,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Image table in the database.
+ * This interface is a model that represents the Image table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Image
  * @see    com.liferay.portal.model.impl.ImageImpl
  * @see    com.liferay.portal.model.impl.ImageModelImpl
+ * @generated
  */
 public interface ImageModel extends BaseModel<Image> {
 	public long getPrimaryKey();

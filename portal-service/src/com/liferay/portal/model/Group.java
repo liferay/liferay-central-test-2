@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Group.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Group_ table in the database.
+ * This interface is a model that represents the Group_ table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    GroupModel
- * @see    com.liferay.portal.model.impl.GroupImpl
- * @see    com.liferay.portal.model.impl.GroupModelImpl
+ * @see GroupModel
+ * @see com.liferay.portal.model.impl.GroupImpl
+ * @see com.liferay.portal.model.impl.GroupModelImpl
+ * @generated
  */
 public interface Group extends GroupModel {
 	public boolean isCommunity();

@@ -50,13 +50,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Image table in the database.
+ * This interface is a model that represents the Image table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    ImageImpl
  * @see    com.liferay.portal.model.Image
  * @see    com.liferay.portal.model.ImageModel
+ * @generated
  */
 public class ImageModelImpl extends BaseModelImpl<Image> {
 	public static final String TABLE_NAME = "Image";

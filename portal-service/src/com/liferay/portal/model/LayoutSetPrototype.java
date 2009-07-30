@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="LayoutSetPrototype.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.LayoutSetPrototypeImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.LayoutSetPrototypeImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    LayoutSetPrototypeModel
- * @see    com.liferay.portal.model.impl.LayoutSetPrototypeImpl
- * @see    com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
+ * @see LayoutSetPrototypeModel
+ * @see com.liferay.portal.model.impl.LayoutSetPrototypeImpl
+ * @see com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
+ * @generated
  */
 public interface LayoutSetPrototype extends LayoutSetPrototypeModel {
 	public com.liferay.portal.model.Group getGroup();

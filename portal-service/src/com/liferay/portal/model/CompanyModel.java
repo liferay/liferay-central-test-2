@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="CompanyModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,13 +32,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Company table in the database.
+ * This interface is a model that represents the Company table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Company
  * @see    com.liferay.portal.model.impl.CompanyImpl
  * @see    com.liferay.portal.model.impl.CompanyModelImpl
+ * @generated
  */
 public interface CompanyModel extends BaseModel<Company> {
 	public long getPrimaryKey();

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Country.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Country table in the database.
+ * This interface is a model that represents the Country table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    CountryModel
- * @see    com.liferay.portal.model.impl.CountryImpl
- * @see    com.liferay.portal.model.impl.CountryModelImpl
+ * @see CountryModel
+ * @see com.liferay.portal.model.impl.CountryImpl
+ * @see com.liferay.portal.model.impl.CountryModelImpl
+ * @generated
  */
 public interface Country extends CountryModel {
 }

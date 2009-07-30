@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PasswordPolicyRel.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.PasswordPolicyRelImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.PasswordPolicyRelImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PasswordPolicyRelModel
- * @see    com.liferay.portal.model.impl.PasswordPolicyRelImpl
- * @see    com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
+ * @see PasswordPolicyRelModel
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
+ * @generated
  */
 public interface PasswordPolicyRel extends PasswordPolicyRelModel {
 }
