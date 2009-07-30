@@ -70,7 +70,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Link
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/get_file?folderId=" +
 					fileEntry.getFolderId() + "&name=" + fileEntry.getName();
 
@@ -102,7 +102,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		StringBuilder sb = new StringBuilder();
 
 		String fileEntryLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/find_file_entry?fileEntryId=" +
 					fileEntry.getFileEntryId();
 
@@ -110,7 +110,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		sb.append(StringPool.SPACE);
 
 		String folderLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/find_folder?folderId=" +
 					fileEntry.getFolderId();
 

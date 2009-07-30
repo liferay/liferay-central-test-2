@@ -72,7 +72,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			activity.getClassPK());
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/blogs/find_entry?entryId=" + activity.getClassPK();
 
 		// Title

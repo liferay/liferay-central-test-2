@@ -65,7 +65,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 	}
 
 	summary = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
 	cssClassName = AssetPublisherUtil.TYPE_BLOG;
 }
@@ -216,7 +216,7 @@ else if (className.equals(MBMessage.class.getName())) {
 	viewFullContentURL.setParameter("type", "thread");
 
 	summary = StringUtil.shorten(message.getBody(), abstractLength);
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
 	cssClassName = "thread";
 }
@@ -234,7 +234,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_WIKI);
 
 	summary = StringUtil.shorten(summary, abstractLength);
-	viewURL = viewInContext ? themeDisplay.getURLPortal() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
+	viewURL = viewInContext ? themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/wiki/find_page?pageResourcePrimKey=" + wikiPage.getResourcePrimKey() : viewFullContentURL.toString();
 	viewURLMessage = viewInContext ? "view-in-context" : "read-more";
 	cssClassName = AssetPublisherUtil.TYPE_WIKI;
 }

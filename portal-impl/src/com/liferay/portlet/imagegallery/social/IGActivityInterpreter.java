@@ -70,7 +70,7 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Link
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/image_gallery/find_image?imageId=" + image.getImageId();
 
 		// Title
@@ -99,7 +99,7 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Body
 
 		String folderLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/image_gallery/find_folder?folderId=" + image.getFolderId();
 
 		String body = wrapLink(folderLink, "go-to-folder", themeDisplay);

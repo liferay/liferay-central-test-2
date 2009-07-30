@@ -81,7 +81,7 @@ public class RSSAction extends Action {
 			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String entryURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/message_boards/find_message?p_l_id=" + plid;
 
 		String rss = StringPool.BLANK;
@@ -95,7 +95,7 @@ public class RSSAction extends Action {
 		}
 		else if (groupId > 0) {
 			String feedURL =
-				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 					"/message_boards/find_recent_posts?p_l_id=" + plid;
 
 			if (userId > 0) {
@@ -111,7 +111,7 @@ public class RSSAction extends Action {
 		}
 		else if (categoryId > 0) {
 			String feedURL =
-				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 					"/message_boards/find_category?p_l_id=" + plid +
 						"&mbCategoryId=" + categoryId;
 
@@ -121,7 +121,7 @@ public class RSSAction extends Action {
 		}
 		else if (threadId > 0) {
 			String feedURL =
-				themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 					"/message_boards/find_thread?p_l_id=" + plid +
 						"&threadId=" + threadId;
 

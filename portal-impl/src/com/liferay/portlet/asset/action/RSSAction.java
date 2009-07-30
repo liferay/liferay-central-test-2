@@ -84,7 +84,7 @@ public class RSSAction extends Action {
 		String feedURL = StringPool.BLANK;
 
 		String entryURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/asset/find_asset?";
 
 		String rss = StringPool.BLANK;

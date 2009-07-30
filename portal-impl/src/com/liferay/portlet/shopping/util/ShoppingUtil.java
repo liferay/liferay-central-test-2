@@ -881,7 +881,7 @@ public class ShoppingUtil {
 	}
 
 	public static String getPayPalNotifyURL(ThemeDisplay themeDisplay) {
-		return themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+		return themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 			"/shopping/notify";
 	}
 

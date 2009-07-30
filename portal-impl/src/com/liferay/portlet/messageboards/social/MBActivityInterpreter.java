@@ -72,7 +72,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 			activity.getClassPK());
 
 		String link =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/message_boards/find_message?messageId=" +
 					message.getMessageId();
 
@@ -103,7 +103,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		// Body
 
 		String categoryLink =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/message_boards/find_category?categoryId=" +
 					message.getCategoryId();
 
