@@ -360,7 +360,7 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 	}
 	else {
 		String portletTitle = PortalUtil.getPortletTitle(ppid, company.getCompanyId(), locale);
-		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.ACTION_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 		portletURL.setPortletMode(PortletMode.VIEW);
