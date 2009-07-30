@@ -27,6 +27,11 @@ import com.liferay.portalweb.portal.BaseTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <a href="SampleTestDependencyTests.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SampleTestDependencyTests extends BaseTests {
 
 	public static Test suite() {

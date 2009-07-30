@@ -27,6 +27,11 @@ import com.liferay.portalweb.portal.BaseTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <a href="SunPhotoShowAjaxTests.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SunPhotoShowAjaxTests extends BaseTests {
 
 	public static Test suite() {

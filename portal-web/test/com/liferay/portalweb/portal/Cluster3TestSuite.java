@@ -28,6 +28,11 @@ import com.liferay.portalweb.portal.cluster.cluster3.Cluster3bTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <a href="Cluster3TestSuite.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Cluster3TestSuite extends BaseTests {
 
 	public static Test suite() {

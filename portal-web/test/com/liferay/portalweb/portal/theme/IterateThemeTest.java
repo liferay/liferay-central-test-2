@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal.theme;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.ThemeIds;
 
+/**
+ * <a href="IterateThemeTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class IterateThemeTest extends BaseTestCase {
 
 	public void tearDown() throws Exception {

@@ -26,6 +26,11 @@ import com.liferay.portal.util.InitUtil;
 
 import junit.framework.TestSuite;
 
+/**
+ * <a href="BaseTests.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BaseTests extends TestSuite {
 
 	public BaseTests() {

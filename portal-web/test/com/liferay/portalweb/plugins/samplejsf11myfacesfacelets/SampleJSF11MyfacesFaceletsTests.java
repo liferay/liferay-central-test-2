@@ -27,6 +27,12 @@ import com.liferay.portalweb.portal.BaseTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <a href="SampleJSF11MyfacesFaceletsTests.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SampleJSF11MyfacesFaceletsTests extends BaseTests {
 
 	public static Test suite() {

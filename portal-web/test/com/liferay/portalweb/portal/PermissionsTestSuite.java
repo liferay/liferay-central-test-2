@@ -34,6 +34,11 @@ import com.liferay.portalweb.portal.permissions.webcontent.WebContentTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <a href="PermissionsTestSuite.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PermissionsTestSuite extends BaseTests {
 
 	public static Test suite() {

@@ -25,6 +25,11 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.SeleniumUtil;
 
+/**
+ * <a href="StopSeleniumTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StopSeleniumTest extends BaseTestCase {
 
 	public void tearDown() throws Exception {
