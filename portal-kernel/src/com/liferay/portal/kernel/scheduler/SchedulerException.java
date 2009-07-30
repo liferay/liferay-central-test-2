@@ -24,6 +24,12 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="SchedulerException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Bruno Farache
+ */
 public class SchedulerException extends PortalException {
 
 	public SchedulerException() {

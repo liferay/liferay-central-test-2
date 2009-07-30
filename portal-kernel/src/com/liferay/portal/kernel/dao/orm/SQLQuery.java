@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+/**
+ * <a href="SQLQuery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface SQLQuery extends Query {
 
 	public SQLQuery addEntity(String alias, Class<?> entityClass);

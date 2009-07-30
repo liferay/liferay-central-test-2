@@ -27,6 +27,12 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
+/**
+ * <a href="MessageBusManager.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public class MessageBusManager implements MessageBusManagerMBean {
 
 	public static ObjectName createObjectName() {

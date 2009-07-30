@@ -47,6 +47,11 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+/**
+ * <a href="Database.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ganesh Ram
+ */
 public interface Database {
 
 	public String getType();

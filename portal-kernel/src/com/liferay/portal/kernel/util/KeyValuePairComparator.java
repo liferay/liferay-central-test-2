@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Comparator;
 
+/**
+ * <a href="KeyValuePairComparator.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class KeyValuePairComparator implements Comparator<KeyValuePair> {
 
 	public KeyValuePairComparator() {

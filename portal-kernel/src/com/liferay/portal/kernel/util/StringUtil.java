@@ -42,6 +42,13 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
+ * @author Ganesh Ram
+ */
 public class StringUtil {
 
 	public static String add(String s, String add) {
@@ -795,6 +802,18 @@ public class StringUtil {
 		return s;
 	}
 
+	/**
+	 * Returns a string with replaced values. This method will replace all text
+	 * in the given string, between the beginning and ending delimiter, with new
+	 * values found in the given map. For example, if the string contained the
+	 * text <code>[$HELLO$]</code>, and the beginning delimiter was
+	 * <code>[$]</code>, and the ending delimiter was <code>$]</code>, and the
+	 * values map had a key of <code>HELLO</code> that mapped to
+	 * <code>WORLD</code>, then the replaced string will contain the text
+	 * <code>[$WORLD$]</code>.
+	 *
+	 * @return a string with replaced values
+	 */
 	public static String replaceValues(
 		String s, String begin, String end, Map<String, String> values) {
 
@@ -1115,6 +1134,13 @@ public class StringUtil {
 		}
 	}
 
+	/**
+	 * Return the number of starting letters that s1 and s2 have in common
+	 * before they deviate.
+	 *
+	 * @return the number of starting letters that s1 and s2 have in common
+	 *		   before they deviate
+	 */
 	public static int startsWithWeight(String s1, String s2) {
 		if ((s1 == null) || (s2 == null)) {
 			return 0;

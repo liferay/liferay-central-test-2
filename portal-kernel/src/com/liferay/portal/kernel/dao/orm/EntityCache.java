@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.dao.orm;
 
 import java.io.Serializable;
 
+/**
+ * <a href="EntityCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface EntityCache {
 
 	public void clearCache();

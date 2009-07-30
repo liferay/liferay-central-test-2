@@ -34,6 +34,15 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+/**
+ * <a href="PortletSessionTracker.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-1466.
+ * </p>
+ *
+ * @author Rudy Hilado
+ */
 public class PortletSessionTracker
 	implements HttpSessionBindingListener, Serializable {
 

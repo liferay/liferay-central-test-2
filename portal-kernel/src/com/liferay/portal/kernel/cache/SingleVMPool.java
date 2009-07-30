@@ -24,6 +24,12 @@ package com.liferay.portal.kernel.cache;
 
 import java.io.Serializable;
 
+/**
+ * <a href="SingleVMPool.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Michael Young
+ */
 public interface SingleVMPool {
 
 	public void clear();

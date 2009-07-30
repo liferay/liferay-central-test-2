@@ -56,19 +56,39 @@ import java.io.Serializable;
 
 import java.util.Calendar;
 
+/**
+ * <a href="DayAndPosition.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jonathan Lennox
+ */
 public class DayAndPosition implements Cloneable, Serializable {
 
+	/**
+	 * Field day
+	 */
 	private int day;
 
+	/**
+	 * Field position
+	 */
 	private int position;
 
+	/**
+	 * Field NO_WEEKDAY
+	 */
 	public final static int NO_WEEKDAY = 0;
 
+	/**
+	 * Constructor DayAndPosition
+	 */
 	public DayAndPosition() {
 		day = NO_WEEKDAY;
 		position = 0;
 	}
 
+	/**
+	 * Constructor DayAndPosition
+	 */
 	public DayAndPosition(int d, int p) {
 		if (!isValidDayOfWeek(d)) {
 			throw new IllegalArgumentException("Invalid day of week");
@@ -82,10 +102,18 @@ public class DayAndPosition implements Cloneable, Serializable {
 		position = p;
 	}
 
+	/**
+	 * Method getDayOfWeek
+	 *
+	 * @return int
+	 */
 	public int getDayOfWeek() {
 		return day;
 	}
 
+	/**
+	 * Method setDayOfWeek
+	 */
 	public void setDayOfWeek(int d) {
 		if (!isValidDayOfWeek(d)) {
 			throw new IllegalArgumentException("Invalid day of week");
@@ -94,10 +122,18 @@ public class DayAndPosition implements Cloneable, Serializable {
 		day = d;
 	}
 
+	/**
+	 * Method getDayPosition
+	 *
+	 * @return int
+	 */
 	public int getDayPosition() {
 		return position;
 	}
 
+	/**
+	 * Method setDayPosition
+	 */
 	public void setDayPosition(int p) {
 		if (!isValidDayPosition(p)) {
 			throw new IllegalArgumentException();
@@ -106,6 +142,11 @@ public class DayAndPosition implements Cloneable, Serializable {
 		position = p;
 	}
 
+	/**
+	 * Method equals
+	 *
+	 * @return boolean
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -125,6 +166,11 @@ public class DayAndPosition implements Cloneable, Serializable {
 			   && (getDayPosition() == that.getDayPosition());
 	}
 
+	/**
+	 * Method isValidDayOfWeek
+	 *
+	 * @return boolean
+	 */
 	public static boolean isValidDayOfWeek(int d) {
 		switch (d) {
 
@@ -143,10 +189,20 @@ public class DayAndPosition implements Cloneable, Serializable {
 		}
 	}
 
+	/**
+	 * Method isValidDayPosition
+	 *
+	 * @return boolean
+	 */
 	public static boolean isValidDayPosition(int p) {
 		return ((p >= -53) && (p <= 53));
 	}
 
+	/**
+	 * Method clone
+	 *
+	 * @return Object
+	 */
 	public Object clone() {
 		try {
 			DayAndPosition other = (DayAndPosition)super.clone();
@@ -161,6 +217,11 @@ public class DayAndPosition implements Cloneable, Serializable {
 		}
 	}
 
+	/**
+	 * Method toString
+	 *
+	 * @return String
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 

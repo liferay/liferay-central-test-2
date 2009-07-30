@@ -28,6 +28,11 @@ import java.lang.reflect.Method;
 
 import java.util.Map;
 
+/**
+ * <a href="MethodKey.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MethodKey implements Serializable {
 
 	public MethodKey(String className, String methodName, Class<?>[] types) {

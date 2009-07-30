@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="LongWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LongWrapper
 	extends PrimitiveWrapper implements Comparable<LongWrapper> {
 

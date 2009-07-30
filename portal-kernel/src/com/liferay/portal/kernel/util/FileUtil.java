@@ -31,6 +31,12 @@ import java.io.Reader;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * <a href="FileUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ */
 public class FileUtil {
 
 	public static void copyDirectory(

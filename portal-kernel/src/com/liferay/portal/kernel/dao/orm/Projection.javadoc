@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<javadoc>
-	<name>Projection</name>
-	<type>com.liferay.portal.kernel.dao.orm.Projection</type>
-	<comment><![CDATA[]]></comment>
-	<author>Brian Wing Shun Chan</author>
-</javadoc>

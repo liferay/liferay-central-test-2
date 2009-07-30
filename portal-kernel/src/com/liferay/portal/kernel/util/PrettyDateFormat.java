@@ -33,6 +33,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * <a href="PrettyDateFormat.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class PrettyDateFormat extends DateFormat {
 
 	public PrettyDateFormat(long companyId, Locale locale, TimeZone timeZone) {

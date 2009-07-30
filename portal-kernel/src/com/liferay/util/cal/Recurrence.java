@@ -61,48 +61,112 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * <a href="Recurrence.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Jonathan Lennox
+ * @deprecated This class has been repackaged at
+ *			   <code>com.liferay.portal.kernel.cal</code>.
+ */
 public class Recurrence implements Serializable {
 
+	/**
+	 * Field DAILY
+	 */
 	public final static int DAILY = 3;
 
+	/**
+	 * Field WEEKLY
+	 */
 	public final static int WEEKLY = 4;
 
+	/**
+	 * Field MONTHLY
+	 */
 	public final static int MONTHLY = 5;
 
+	/**
+	 * Field YEARLY
+	 */
 	public final static int YEARLY = 6;
 
+	/**
+	 * Field NO_RECURRENCE
+	 */
 	public final static int NO_RECURRENCE = 7;
 
+	/**
+	 * Field dtStart
+	 */
 	protected Calendar dtStart;
 
+	/**
+	 * Field duration
+	 */
 	protected Duration duration;
 
+	/**
+	 * Field frequency
+	 */
 	protected int frequency;
 
+	/**
+	 * Field interval
+	 */
 	protected int interval;
 
+	/**
+	 * Field interval
+	 */
 	protected int occurrence = 0;
 
+	/**
+	 * Field until
+	 */
 	protected Calendar until;
 
+	/**
+	 * Field byDay
+	 */
 	protected DayAndPosition[] byDay;
 
+	/**
+	 * Field byMonthDay
+	 */
 	protected int[] byMonthDay;
 
+	/**
+	 * Field byYearDay
+	 */
 	protected int[] byYearDay;
 
+	/**
+	 * Field byWeekNo
+	 */
 	protected int[] byWeekNo;
 
+	/**
+	 * Field byMonth
+	 */
 	protected int[] byMonth;
 
+	/**
+	 * Constructor Recurrence
+	 */
 	public Recurrence() {
 		this(null, new Duration(), NO_RECURRENCE);
 	}
 
+	/**
+	 * Constructor Recurrence
+	 */
 	public Recurrence(Calendar start, Duration dur) {
 		this(start, dur, NO_RECURRENCE);
 	}
 
+	/**
+	 * Constructor Recurrence
+	 */
 	public Recurrence(Calendar start, Duration dur, int freq) {
 		setDtStart(start);
 
@@ -113,10 +177,18 @@ public class Recurrence implements Serializable {
 
 	/* Accessors */
 
+	/**
+	 * Method getDtStart
+	 *
+	 * @return Calendar
+	 */
 	public Calendar getDtStart() {
 		return (Calendar)dtStart.clone();
 	}
 
+	/**
+	 * Method setDtStart
+	 */
 	public void setDtStart(Calendar start) {
 		int oldStart;
 
@@ -145,14 +217,27 @@ public class Recurrence implements Serializable {
 		dtStart.setFirstDayOfWeek(oldStart);
 	}
 
+	/**
+	 * Method getDuration
+	 *
+	 * @return Duration
+	 */
 	public Duration getDuration() {
 		return (Duration)duration.clone();
 	}
 
+	/**
+	 * Method setDuration
+	 */
 	public void setDuration(Duration d) {
 		duration = (Duration)d.clone();
 	}
 
+	/**
+	 * Method getDtEnd
+	 *
+	 * @return Calendar
+	 */
 	public Calendar getDtEnd() {
 
 		/*
@@ -167,6 +252,9 @@ public class Recurrence implements Serializable {
 		return tempEnd;
 	}
 
+	/**
+	 * Method setDtEnd
+	 */
 	public void setDtEnd(Calendar end) {
 		Calendar tempEnd = (Calendar)end.clone();
 
@@ -177,10 +265,18 @@ public class Recurrence implements Serializable {
 							 - dtStart.getTime().getTime());
 	}
 
+	/**
+	 * Method getFrequency
+	 *
+	 * @return int
+	 */
 	public int getFrequency() {
 		return frequency;
 	}
 
+	/**
+	 * Method setFrequency
+	 */
 	public void setFrequency(int freq) {
 		if ((frequency != DAILY) && (frequency != WEEKLY)
 			&& (frequency != MONTHLY) && (frequency != YEARLY)
@@ -191,26 +287,50 @@ public class Recurrence implements Serializable {
 		frequency = freq;
 	}
 
+	/**
+	 * Method getInterval
+	 *
+	 * @return int
+	 */
 	public int getInterval() {
 		return interval;
 	}
 
+	/**
+	 * Method setInterval
+	 */
 	public void setInterval(int intr) {
 		interval = (intr > 0) ? intr : 1;
 	}
 
+	/**
+	 * Method getOccurrence
+	 *
+	 * @return int
+	 */
 	public int getOccurrence() {
 		return occurrence;
 	}
 
+	/**
+	 * Method setOccurrence
+	 */
 	public void setOccurrence(int occur) {
 		occurrence = occur;
 	}
 
+	/**
+	 * Method getUntil
+	 *
+	 * @return Calendar
+	 */
 	public Calendar getUntil() {
 		return ((until != null) ? (Calendar)until.clone() : null);
 	}
 
+	/**
+	 * Method setUntil
+	 */
 	public void setUntil(Calendar u) {
 		if (u == null) {
 			until = null;
@@ -225,14 +345,27 @@ public class Recurrence implements Serializable {
 		until.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 	}
 
+	/**
+	 * Method getWeekStart
+	 *
+	 * @return int
+	 */
 	public int getWeekStart() {
 		return dtStart.getFirstDayOfWeek();
 	}
 
+	/**
+	 * Method setWeekStart
+	 */
 	public void setWeekStart(int weekstart) {
 		dtStart.setFirstDayOfWeek(weekstart);
 	}
 
+	/**
+	 * Method getByDay
+	 *
+	 * @return DayAndPosition[]
+	 */
 	public DayAndPosition[] getByDay() {
 		if (byDay == null) {
 			return null;
@@ -251,6 +384,9 @@ public class Recurrence implements Serializable {
 		return b;
 	}
 
+	/**
+	 * Method setByDay
+	 */
 	public void setByDay(DayAndPosition[] b) {
 		if (b == null) {
 			byDay = null;
@@ -269,6 +405,11 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method getByMonthDay
+	 *
+	 * @return int[]
+	 */
 	public int[] getByMonthDay() {
 		if (byMonthDay == null) {
 			return null;
@@ -281,6 +422,9 @@ public class Recurrence implements Serializable {
 		return b;
 	}
 
+	/**
+	 * Method setByMonthDay
+	 */
 	public void setByMonthDay(int[] b) {
 		if (b == null) {
 			byMonthDay = null;
@@ -293,6 +437,11 @@ public class Recurrence implements Serializable {
 		System.arraycopy(b, 0, byMonthDay, 0, b.length);
 	}
 
+	/**
+	 * Method getByYearDay
+	 *
+	 * @return int[]
+	 */
 	public int[] getByYearDay() {
 		if (byYearDay == null) {
 			return null;
@@ -305,6 +454,9 @@ public class Recurrence implements Serializable {
 		return b;
 	}
 
+	/**
+	 * Method setByYearDay
+	 */
 	public void setByYearDay(int[] b) {
 		if (b == null) {
 			byYearDay = null;
@@ -317,6 +469,11 @@ public class Recurrence implements Serializable {
 		System.arraycopy(b, 0, byYearDay, 0, b.length);
 	}
 
+	/**
+	 * Method getByWeekNo
+	 *
+	 * @return int[]
+	 */
 	public int[] getByWeekNo() {
 		if (byWeekNo == null) {
 			return null;
@@ -329,6 +486,9 @@ public class Recurrence implements Serializable {
 		return b;
 	}
 
+	/**
+	 * Method setByWeekNo
+	 */
 	public void setByWeekNo(int[] b) {
 		if (b == null) {
 			byWeekNo = null;
@@ -341,6 +501,11 @@ public class Recurrence implements Serializable {
 		System.arraycopy(b, 0, byWeekNo, 0, b.length);
 	}
 
+	/**
+	 * Method getByMonth
+	 *
+	 * @return int[]
+	 */
 	public int[] getByMonth() {
 		if (byMonth == null) {
 			return null;
@@ -353,6 +518,9 @@ public class Recurrence implements Serializable {
 		return b;
 	}
 
+	/**
+	 * Method setByMonth
+	 */
 	public void setByMonth(int[] b) {
 		if (b == null) {
 			byMonth = null;
@@ -365,10 +533,20 @@ public class Recurrence implements Serializable {
 		System.arraycopy(b, 0, byMonth, 0, b.length);
 	}
 
+	/**
+	 * Method isInRecurrence
+	 *
+	 * @return boolean
+	 */
 	public boolean isInRecurrence(Calendar current) {
 		return isInRecurrence(current, false);
 	}
 
+	/**
+	 * Method isInRecurrence
+	 *
+	 * @return boolean
+	 */
 	public boolean isInRecurrence(Calendar current, boolean debug) {
 		Calendar myCurrent = (Calendar)current.clone();
 
@@ -437,6 +615,11 @@ public class Recurrence implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Method candidateIsInRecurrence
+	 *
+	 * @return boolean
+	 */
 	protected boolean candidateIsInRecurrence(Calendar candidate,
 											  boolean debug) {
 		if ((until != null)
@@ -487,6 +670,11 @@ public class Recurrence implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Method getMinimumInterval
+	 *
+	 * @return int
+	 */
 	protected int getMinimumInterval() {
 		if ((frequency == DAILY) || (byDay != null) || (byMonthDay != null)
 			|| (byYearDay != null)) {
@@ -513,6 +701,11 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method getCandidateStartTime
+	 *
+	 * @return Calendar
+	 */
 	public Calendar getCandidateStartTime(Calendar current) {
 		if (dtStart.getTime().getTime() > current.getTime().getTime()) {
 			throw new IllegalArgumentException("Current time before DtStart");
@@ -567,6 +760,9 @@ public class Recurrence implements Serializable {
 		return candidate;
 	}
 
+	/**
+	 * Method reduce_constant_length_field
+	 */
 	protected static void reduce_constant_length_field(int field,
 													   Calendar start,
 													   Calendar candidate) {
@@ -586,6 +782,9 @@ public class Recurrence implements Serializable {
 		candidate.add(field, delta);
 	}
 
+	/**
+	 * Method reduce_day_of_month
+	 */
 	protected static void reduce_day_of_month(Calendar start,
 											  Calendar candidate) {
 		Calendar tempCal = (Calendar)candidate.clone();
@@ -607,6 +806,9 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method reduce_day_of_year
+	 */
 	protected static void reduce_day_of_year(Calendar start,
 											 Calendar candidate) {
 		if ((start.get(Calendar.MONTH) > candidate.get(Calendar.MONTH))
@@ -628,6 +830,11 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method getRecurrenceCount
+	 *
+	 * @return int
+	 */
 	protected int getRecurrenceCount(Calendar candidate) {
 		switch (frequency) {
 
@@ -657,6 +864,11 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method getDayNumber
+	 *
+	 * @return long
+	 */
 	protected static long getDayNumber(Calendar cal) {
 		Calendar tempCal = (Calendar)cal.clone();
 
@@ -670,6 +882,11 @@ public class Recurrence implements Serializable {
 		return tempCal.getTime().getTime() / (24 * 60 * 60 * 1000);
 	}
 
+	/**
+	 * Method getWeekNumber
+	 *
+	 * @return long
+	 */
 	protected static long getWeekNumber(Calendar cal) {
 		Calendar tempCal = (Calendar)cal.clone();
 
@@ -701,11 +918,21 @@ public class Recurrence implements Serializable {
 			   / (7 * 24 * 60 * 60 * 1000);
 	}
 
+	/**
+	 * Method getMonthNumber
+	 *
+	 * @return long
+	 */
 	protected static long getMonthNumber(Calendar cal) {
 		return (cal.get(Calendar.YEAR) - 1970) * 12
 			   + (cal.get(Calendar.MONTH) - Calendar.JANUARY);
 	}
 
+	/**
+	 * Method matchesByDay
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesByDay(Calendar candidate) {
 		if ((byDay == null) || (byDay.length == 0)) {
 
@@ -725,6 +952,11 @@ public class Recurrence implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Method matchesIndividualByDay
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesIndividualByDay(Calendar candidate,
 											 DayAndPosition pos) {
 		if (pos.getDayOfWeek() != candidate.get(Calendar.DAY_OF_WEEK)) {
@@ -772,6 +1004,11 @@ public class Recurrence implements Serializable {
 		}
 	}
 
+	/**
+	 * Method matchesByField
+	 *
+	 * @return boolean
+	 */
 	protected static boolean matchesByField(int[] array, int field,
 											Calendar candidate,
 											boolean allowNegative) {
@@ -807,22 +1044,47 @@ public class Recurrence implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Method matchesByMonthDay
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesByMonthDay(Calendar candidate) {
 		return matchesByField(byMonthDay, Calendar.DATE, candidate, true);
 	}
 
+	/**
+	 * Method matchesByYearDay
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesByYearDay(Calendar candidate) {
 		return matchesByField(byYearDay, Calendar.DAY_OF_YEAR, candidate, true);
 	}
 
+	/**
+	 * Method matchesByWeekNo
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesByWeekNo(Calendar candidate) {
 		return matchesByField(byWeekNo, Calendar.WEEK_OF_YEAR, candidate, true);
 	}
 
+	/**
+	 * Method matchesByMonth
+	 *
+	 * @return boolean
+	 */
 	protected boolean matchesByMonth(Calendar candidate) {
 		return matchesByField(byMonth, Calendar.MONTH, candidate, false);
 	}
 
+	/**
+	 * Method toString
+	 *
+	 * @return String
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
@@ -874,6 +1136,11 @@ public class Recurrence implements Serializable {
 		return sb.toString();
 	}
 
+	/**
+	 * Method stringizeIntArray
+	 *
+	 * @return String
+	 */
 	private String stringizeIntArray(int[] a) {
 		if (a == null) {
 			return "null";

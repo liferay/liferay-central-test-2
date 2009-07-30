@@ -26,6 +26,17 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionListener;
 
+/**
+ * <a href="PortletSessionListenerLoader.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-2299.
+ * </p>
+ *
+ * @author Olaf Fricke
+ * @author Brian Wing Shun Chan
+ */
 public class PortletSessionListenerLoader implements ServletContextListener {
 
 	public PortletSessionListenerLoader(HttpSessionListener listener) {

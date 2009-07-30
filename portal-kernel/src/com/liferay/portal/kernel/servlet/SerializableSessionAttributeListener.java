@@ -30,6 +30,12 @@ import java.io.Serializable;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+/**
+ * <a href="SerializableSessionAttributeListener.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class SerializableSessionAttributeListener
 	implements HttpSessionAttributeListener {
 

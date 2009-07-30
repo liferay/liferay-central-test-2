@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.bi.reporting;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * <a href="ReportResultContainer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface ReportResultContainer {
 
 	public ReportResultContainer clone(String reportName);

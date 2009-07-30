@@ -22,6 +22,12 @@
 
 package com.liferay.portal.kernel.messaging.jmx;
 
+/**
+ * <a href="DestinationManagerMBean.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ * @author Brian Wing Shun Chan
+ */
 public interface DestinationManagerMBean {
 
 	public int getListenerCount();

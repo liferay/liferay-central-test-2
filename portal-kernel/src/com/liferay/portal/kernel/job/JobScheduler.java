@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.job;
 
+/**
+ * <a href="JobScheduler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface JobScheduler {
 
 	public void schedule(IntervalJob intervalJob);

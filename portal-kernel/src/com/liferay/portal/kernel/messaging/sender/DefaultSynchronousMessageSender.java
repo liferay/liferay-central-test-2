@@ -31,6 +31,12 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUID;
 
+/**
+ * <a href="DefaultSynchronousMessageSender.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Michael C. Han
+ */
 public class DefaultSynchronousMessageSender
 	implements SynchronousMessageSender {
 

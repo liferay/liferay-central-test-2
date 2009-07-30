@@ -28,6 +28,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 
+/**
+ * <a href="PortalDelegateServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * See http://support.liferay.com/browse/LEP-2297.
+ * </p>
+ *
+ * @author Olaf Fricke
+ * @author Brian Wing Shun Chan
+ */
 public class PortalDelegateServlet extends HttpServlet {
 
 	public void init(ServletConfig servletConfig) {

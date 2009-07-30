@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+/**
+ * <a href="StringUtilTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class StringUtilTest extends TestCase {
 
 	public void testReplaceChar() throws Exception {

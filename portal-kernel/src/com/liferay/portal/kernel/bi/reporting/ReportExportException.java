@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
+/**
+ * <a href="ReportExportException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class ReportExportException extends ReportGenerationException {
 
 	public ReportExportException() {

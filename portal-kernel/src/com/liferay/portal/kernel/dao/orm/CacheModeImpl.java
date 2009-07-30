@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+/**
+ * <a href="CacheModeImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CacheModeImpl implements CacheMode {
 
 	public CacheModeImpl(String name) {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.bean;
 
+/**
+ * <a href="BeanLocatorException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BeanLocatorException extends RuntimeException {
 
 	public BeanLocatorException() {

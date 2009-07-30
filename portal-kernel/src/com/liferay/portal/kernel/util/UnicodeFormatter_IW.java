@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="UnicodeFormatter_IW.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class UnicodeFormatter_IW {
 	public static UnicodeFormatter_IW getInstance() {
 		return _instance;

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<javadoc>
-	<name>Order</name>
-	<type>com.liferay.portal.kernel.dao.orm.Order</type>
-	<comment><![CDATA[]]></comment>
-	<author>Brian Wing Shun Chan</author>
-</javadoc>

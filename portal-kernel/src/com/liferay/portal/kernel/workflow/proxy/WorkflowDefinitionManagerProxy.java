@@ -34,6 +34,12 @@ import com.liferay.portal.kernel.workflow.request.WorkflowDefinitionRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <a href="WorkflowDefinitionManagerProxy.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Shuyang Zhou
+ */
 public class WorkflowDefinitionManagerProxy
 	implements WorkflowDefinitionManager {
 

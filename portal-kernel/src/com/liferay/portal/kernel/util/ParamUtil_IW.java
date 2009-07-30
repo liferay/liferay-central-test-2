@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="ParamUtil_IW.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ParamUtil_IW {
 	public static ParamUtil_IW getInstance() {
 		return _instance;

@@ -31,8 +31,38 @@ import java.lang.reflect.Method;
 
 import java.util.Arrays;
 
+/**
+ * <a href="BaseRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * The base request acts as the basic implementation of a workflow API request
+ * transported through the message bus. It contains the {@link Method} to be
+ * invoked on its target as well as the arguments needed for the invocation.
+ * </p>
+ *
+ * <p>
+ * Additionally, most methods provide a {@link UserCredential} representing the
+ * calling user, some of its attributes as well as its role set to avoid the
+ * underlying adapter or workflow engine to call back the portal to get those
+ * information. Every method most likely being transitional (not read only)
+ * should provide its calling user.
+ * </p>
+ *
+ * <p>
+ * The calling user (if it was passed on) will be made available through {@link
+ * WorkflowCallingUser#getCallingUserCredential()} before the method is invoked
+ * and is immediately removed, if the method was finished.
+ * </p>
+ *
+ * @author Shuyang Zhou
+ * @author Micha Kiener
+ */
 public class BaseRequest implements Serializable {
 
+	/**
+	 * Creates a new base request object by providing a method and its arguments
+	 * needed as well as an optional credential of the calling user.
+	 */
 	protected BaseRequest(
 		Method method, UserCredential callingUserCredential, Object... args) {
 		_method = method;
@@ -40,6 +70,14 @@ public class BaseRequest implements Serializable {
 		_args = args;
 	}
 
+	/**
+	 * Invokes the method being submitted by the request through reflection and
+	 * returns its value. Before the method is being invoked, the calling user
+	 * credential is attached, if available, and after the invocation removed
+	 * again through a thread local.
+	 *
+	 * @return the return value as being provided by the method invocation
+	 */
 	public Object execute(Object implObject)
 		throws WorkflowException {
 		try {
@@ -58,6 +96,10 @@ public class BaseRequest implements Serializable {
 		}
 	}
 
+	/**
+	 * @return the credential of the calling user, if any provided by the
+	 *		   request, <code>null</code> otherwise
+	 */
 	public UserCredential getCallingUserCredential() {
 		return _callingUserCredential;
 	}

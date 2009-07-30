@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.events;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="InvokerAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class InvokerAction extends Action {
 
 	public InvokerAction(Action action, ClassLoader classLoader) {

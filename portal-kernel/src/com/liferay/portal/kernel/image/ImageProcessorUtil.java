@@ -29,6 +29,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * <a href="ImageProcessorUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ImageProcessorUtil {
 
 	public static BufferedImage convertImageType(

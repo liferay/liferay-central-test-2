@@ -30,6 +30,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * <a href="ArrayUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ArrayUtil {
 
 	public static boolean[] append(boolean[] array, boolean value) {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.bean;
 
+/**
+ * <a href="RendererException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class RendererException extends RuntimeException {
 
 	public RendererException() {

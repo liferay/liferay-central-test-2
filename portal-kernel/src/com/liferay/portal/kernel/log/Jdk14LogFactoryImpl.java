@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.log;
 
 import java.util.logging.Logger;
 
+/**
+ * <a href="Jdk14LogFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class Jdk14LogFactoryImpl implements LogFactory {
 
 	public Log getLog(Class<?> c) {

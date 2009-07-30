@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.json;
 
+/**
+ * <a href="JSONFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JSONFactoryUtil {
 
 	public static JSONArray createJSONArray() {

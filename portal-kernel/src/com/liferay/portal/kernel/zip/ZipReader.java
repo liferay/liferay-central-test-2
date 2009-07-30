@@ -42,6 +42,12 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * <a href="ZipReader.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ * @author Brian Wing Shun Chan
+ */
 public class ZipReader implements Serializable {
 
 	public ZipReader(File file) throws Exception {

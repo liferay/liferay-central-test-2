@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="IndexWriter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface IndexWriter {
 
 	public void addDocument(long companyId, Document document)

@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+/**
+ * <a href="UnicodePropertiesTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class UnicodePropertiesTest extends TestCase {
 
 	public void testLength() throws Exception {

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.test;
 
+/**
+ * <a href="TestCase.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TestCase extends junit.framework.TestCase {
 
 	protected void assertEquals(double expected, double actual)

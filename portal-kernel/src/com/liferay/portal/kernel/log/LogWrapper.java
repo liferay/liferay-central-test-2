@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.log;
 
+/**
+ * <a href="LogWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LogWrapper implements Log {
 
 	public LogWrapper(Log log) {

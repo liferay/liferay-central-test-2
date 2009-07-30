@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.captcha;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="CaptchaTextException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CaptchaTextException extends PortalException {
 
 	public CaptchaTextException() {

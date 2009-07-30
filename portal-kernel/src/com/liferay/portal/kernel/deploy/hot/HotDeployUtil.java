@@ -30,6 +30,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * <a href="HotDeployUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class HotDeployUtil {
 
 	public static void fireDeployEvent(HotDeployEvent event) {

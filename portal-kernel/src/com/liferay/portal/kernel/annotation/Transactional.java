@@ -33,6 +33,11 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
+/**
+ * <a href="Transactional.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public @interface Transactional {
 
 	public Isolation isolation() default Isolation.DEFAULT;

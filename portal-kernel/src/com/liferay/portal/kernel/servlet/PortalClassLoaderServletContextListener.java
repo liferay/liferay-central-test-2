@@ -32,6 +32,13 @@ import com.liferay.portal.kernel.util.PortalInitableUtil;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * <a href="PortalClassLoaderServletContextListener.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
+ */
 public abstract class PortalClassLoaderServletContextListener
 	implements PortalInitable, ServletContextListener {
 

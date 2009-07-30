@@ -28,6 +28,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * <a href="LogFactoryWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LogFactoryWrapper implements LogFactory {
 
 	public LogFactoryWrapper(LogFactory logFactory) {

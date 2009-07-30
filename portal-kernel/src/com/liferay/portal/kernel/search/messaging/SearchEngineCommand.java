@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
+/**
+ * <a href="SearchEngineCommand.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public enum SearchEngineCommand {
 
 	ADD, DELETE, DELETE_PORTLET_DOCUMENTS, SEARCH, UPDATE

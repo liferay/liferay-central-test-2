@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="ArrayUtil_IW.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ArrayUtil_IW {
 	public static ArrayUtil_IW getInstance() {
 		return _instance;

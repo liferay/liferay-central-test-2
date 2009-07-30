@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Hits;
 
+/**
+ * <a href="SearchReaderMessageListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class SearchReaderMessageListener
 	extends BaseSearchEngineMessageListener {
 

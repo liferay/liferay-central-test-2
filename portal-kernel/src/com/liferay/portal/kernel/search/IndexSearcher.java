@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="IndexSearcher.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface IndexSearcher {
 
 	public Hits search(

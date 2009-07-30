@@ -30,6 +30,11 @@ import java.lang.reflect.Method;
 
 import java.util.Map;
 
+/**
+ * <a href="WorkflowInstanceRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ */
 public class WorkflowInstanceRequest extends BaseRequest {
 
 	public static WorkflowInstanceRequest createAddContextInformationRequest(

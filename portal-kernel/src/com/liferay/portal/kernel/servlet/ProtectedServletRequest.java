@@ -27,6 +27,11 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * <a href="ProtectedServletRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ProtectedServletRequest extends HttpServletRequestWrapper {
 
 	public ProtectedServletRequest(

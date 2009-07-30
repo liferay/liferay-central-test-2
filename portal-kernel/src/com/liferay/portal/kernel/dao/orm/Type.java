@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+/**
+ * <a href="Type.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public enum Type {
 
 	BIG_DECIMAL, BIG_INTEGER, BINARY, BLOB, BOOLEAN, BYTE, CALENDAR,

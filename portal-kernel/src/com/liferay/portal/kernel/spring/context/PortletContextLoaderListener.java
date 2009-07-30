@@ -27,6 +27,12 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import javax.servlet.ServletContextListener;
 
+/**
+ * <a href="PortletContextLoaderListener.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletContextLoaderListener
 	extends PortalClassLoaderServletContextListener {
 

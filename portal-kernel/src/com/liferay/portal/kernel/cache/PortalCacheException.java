@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.cache;
 
+/**
+ * <a href="PortalCacheException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Joseph Shum
+ */
 public class PortalCacheException extends RuntimeException {
 
 	public PortalCacheException() {

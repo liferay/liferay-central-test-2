@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.messaging.sender;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 
+/**
+ * <a href="SynchronousMessageSender.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface SynchronousMessageSender {
 
 	public Object send(String destinationName, Message message)

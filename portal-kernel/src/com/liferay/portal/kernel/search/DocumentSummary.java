@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.search;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="DocumentSummary.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DocumentSummary {
 
 	public DocumentSummary(String title, String content, PortletURL url) {

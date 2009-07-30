@@ -24,6 +24,14 @@ package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="BrowserSnifferUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
+ *
+ * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
+ */
 public class BrowserSnifferUtil {
 
 	public static boolean acceptsGzip(HttpServletRequest request) {

@@ -38,6 +38,12 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="HotDeployEvent.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class HotDeployEvent {
 
 	public HotDeployEvent(

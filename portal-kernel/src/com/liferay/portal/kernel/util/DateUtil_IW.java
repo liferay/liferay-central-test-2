@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="DateUtil_IW.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DateUtil_IW {
 	public static DateUtil_IW getInstance() {
 		return _instance;

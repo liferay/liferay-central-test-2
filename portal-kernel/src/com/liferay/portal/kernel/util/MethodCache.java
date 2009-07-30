@@ -27,6 +27,11 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="MethodCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class MethodCache {
 
 	public static Method get(String className, String methodName)

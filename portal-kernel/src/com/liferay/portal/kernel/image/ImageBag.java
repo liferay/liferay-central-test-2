@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.image;
 
 import java.awt.image.RenderedImage;
 
+/**
+ * <a href="ImageBag.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ImageBag {
 
 	public ImageBag(RenderedImage renderedImage, String type) {

@@ -22,6 +22,12 @@
 
 package com.liferay.portal.kernel.scripting;
 
+/**
+ * <a href="ExecutionException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
+ */
 public class ExecutionException extends ScriptingException {
 
 	public ExecutionException() {

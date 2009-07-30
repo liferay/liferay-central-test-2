@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.job;
 
+/**
+ * <a href="IntervalJob.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface IntervalJob {
 
 	public void execute(JobExecutionContext context)

@@ -54,44 +54,97 @@ package com.liferay.portal.kernel.cal;
 
 import java.io.Serializable;
 
+/**
+ * <a href="Duration.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jonathan Lennox
+ */
 public class Duration implements Cloneable, Serializable {
 
+	/**
+	 * Field weeks
+	 */
 	private int weeks;
 
+	/**
+	 * Field days
+	 */
 	private int days;
 
+	/**
+	 * Field hours
+	 */
 	private int hours;
 
+	/**
+	 * Field minutes
+	 */
 	private int minutes;
 
+	/**
+	 * Field seconds
+	 */
 	private int seconds;
 
+	/**
+	 * Field SECONDS_PER_MINUTE
+	 */
 	private final static int SECONDS_PER_MINUTE = 60;
 
+	/**
+	 * Field MINUTES_PER_HOUR
+	 */
 	private final static int MINUTES_PER_HOUR = 60;
 
+	/**
+	 * Field HOURS_PER_DAY
+	 */
 	private final static int HOURS_PER_DAY = 24;
 
+	/**
+	 * Field DAYS_PER_WEEK
+	 */
 	private final static int DAYS_PER_WEEK = 7;
 
+	/**
+	 * Field MILLIS_PER_SECOND
+	 */
 	private final static int MILLIS_PER_SECOND = 1000;
 
+	/**
+	 * Field MILLIS_PER_MINUTE
+	 */
 	private final static int MILLIS_PER_MINUTE = SECONDS_PER_MINUTE
 												 * MILLIS_PER_SECOND;
 
+	/**
+	 * Field MILLIS_PER_HOUR
+	 */
 	private final static int MILLIS_PER_HOUR = MINUTES_PER_HOUR
 											   * MILLIS_PER_MINUTE;
 
+	/**
+	 * Field MILLIS_PER_DAY
+	 */
 	private final static int MILLIS_PER_DAY = HOURS_PER_DAY * MILLIS_PER_HOUR;
 
+	/**
+	 * Field MILLIS_PER_WEEK
+	 */
 	private final static int MILLIS_PER_WEEK = DAYS_PER_WEEK * MILLIS_PER_DAY;
 
+	/**
+	 * Constructor Duration
+	 */
 	public Duration() {
 
 		/* Zero-initialization of all fields happens by default */
 
 	}
 
+	/**
+	 * Constructor Duration
+	 */
 	public Duration(int d, int h, int m, int s) {
 		days = d;
 		hours = h;
@@ -99,14 +152,23 @@ public class Duration implements Cloneable, Serializable {
 		seconds = s;
 	}
 
+	/**
+	 * Constructor Duration
+	 */
 	public Duration(int h, int m, int s) {
 		this(0, h, m, s);
 	}
 
+	/**
+	 * Constructor Duration
+	 */
 	public Duration(int w) {
 		weeks = w;
 	}
 
+	/**
+	 * Method clear
+	 */
 	public void clear() {
 		weeks = 0;
 		days = 0;
@@ -116,10 +178,18 @@ public class Duration implements Cloneable, Serializable {
 	}
 	;
 
+	/**
+	 * Method getWeeks
+	 *
+	 * @return int
+	 */
 	public int getWeeks() {
 		return weeks;
 	}
 
+	/**
+	 * Method setWeeks
+	 */
 	public void setWeeks(int w) {
 		if (w < 0) {
 			throw new IllegalArgumentException("Week value out of range");
@@ -130,10 +200,18 @@ public class Duration implements Cloneable, Serializable {
 		weeks = w;
 	}
 
+	/**
+	 * Method getDays
+	 *
+	 * @return int
+	 */
 	public int getDays() {
 		return days;
 	}
 
+	/**
+	 * Method setDays
+	 */
 	public void setDays(int d) {
 		if (d < 0) {
 			throw new IllegalArgumentException("Day value out of range");
@@ -146,10 +224,18 @@ public class Duration implements Cloneable, Serializable {
 		normalize();
 	}
 
+	/**
+	 * Method getHours
+	 *
+	 * @return int
+	 */
 	public int getHours() {
 		return hours;
 	}
 
+	/**
+	 * Method setHours
+	 */
 	public void setHours(int h) {
 		if (h < 0) {
 			throw new IllegalArgumentException("Hour value out of range");
@@ -162,10 +248,18 @@ public class Duration implements Cloneable, Serializable {
 		normalize();
 	}
 
+	/**
+	 * Method getMinutes
+	 *
+	 * @return int
+	 */
 	public int getMinutes() {
 		return minutes;
 	}
 
+	/**
+	 * Method setMinutes
+	 */
 	public void setMinutes(int m) {
 		if (m < 0) {
 			throw new IllegalArgumentException("Minute value out of range");
@@ -178,10 +272,18 @@ public class Duration implements Cloneable, Serializable {
 		normalize();
 	}
 
+	/**
+	 * Method getSeconds
+	 *
+	 * @return int
+	 */
 	public int getSeconds() {
 		return seconds;
 	}
 
+	/**
+	 * Method setSeconds
+	 */
 	public void setSeconds(int s) {
 		if (s < 0) {
 			throw new IllegalArgumentException("Second value out of range");
@@ -194,12 +296,20 @@ public class Duration implements Cloneable, Serializable {
 		normalize();
 	}
 
+	/**
+	 * Method getInterval
+	 *
+	 * @return long
+	 */
 	public long getInterval() {
 		return seconds * MILLIS_PER_SECOND + minutes * MILLIS_PER_MINUTE
 			   + hours * MILLIS_PER_HOUR + days * MILLIS_PER_DAY
 			   + weeks * MILLIS_PER_WEEK;
 	}
 
+	/**
+	 * Method setInterval
+	 */
 	public void setInterval(long millis) {
 		if (millis < 0) {
 			throw new IllegalArgumentException("Negative-length interval");
@@ -213,6 +323,9 @@ public class Duration implements Cloneable, Serializable {
 		normalize();
 	}
 
+	/**
+	 * Method normalize
+	 */
 	protected void normalize() {
 		minutes += seconds / SECONDS_PER_MINUTE;
 		seconds %= SECONDS_PER_MINUTE;
@@ -222,6 +335,9 @@ public class Duration implements Cloneable, Serializable {
 		hours %= HOURS_PER_DAY;
 	}
 
+	/**
+	 * Method checkWeeksOkay
+	 */
 	protected void checkWeeksOkay(int f) {
 		if ((f != 0)
 			&& ((days != 0) || (hours != 0) || (minutes != 0)
@@ -231,6 +347,9 @@ public class Duration implements Cloneable, Serializable {
 		}
 	}
 
+	/**
+	 * Method checkNonWeeksOkay
+	 */
 	protected void checkNonWeeksOkay(int f) {
 		if ((f != 0) && (weeks != 0)) {
 			throw new IllegalStateException(
@@ -238,6 +357,11 @@ public class Duration implements Cloneable, Serializable {
 		}
 	}
 
+	/**
+	 * Method clone
+	 *
+	 * @return Object
+	 */
 	public Object clone() {
 		try {
 			Duration other = (Duration)super.clone();
@@ -255,6 +379,11 @@ public class Duration implements Cloneable, Serializable {
 		}
 	}
 
+	/**
+	 * Method toString
+	 *
+	 * @return String
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 

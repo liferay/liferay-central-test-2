@@ -26,6 +26,11 @@ import java.text.DateFormat;
 
 import java.util.Date;
 
+/**
+ * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReleaseInfo {
 
 	static String name = "Liferay Portal Standard Edition";

@@ -24,6 +24,13 @@ package com.liferay.portal.kernel.portlet;
 
 import java.util.Map;
 
+/**
+ * <a href="FriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Myunghun Kim
+ * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
+ */
 public interface FriendlyURLMapper {
 
 	public String buildPath(LiferayPortletURL portletURL);

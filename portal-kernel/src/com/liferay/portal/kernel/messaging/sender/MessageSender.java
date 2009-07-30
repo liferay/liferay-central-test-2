@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.messaging.sender;
 
 import com.liferay.portal.kernel.messaging.Message;
 
+/**
+ * <a href="MessageSender.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface MessageSender {
 
 	public void send(String destinationName, Message message);

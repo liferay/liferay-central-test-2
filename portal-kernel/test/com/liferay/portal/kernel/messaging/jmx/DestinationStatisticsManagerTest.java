@@ -31,6 +31,12 @@ import javax.management.MBeanServer;
 
 import org.jmock.integration.junit4.JUnit4Mockery;
 
+/**
+ * <a href="DestinationStatisticsManagerTest.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Michael C. Han
+ */
 public class DestinationStatisticsManagerTest extends TestCase {
 
 	public void setUp() throws Exception {

@@ -31,6 +31,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * <a href="DispatcherDestinationTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
+ */
 public class DispatcherDestinationTest extends TestCase {
 
 	public static int LISTENER_COUNT = 10000;

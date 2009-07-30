@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="WildcardQuery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface WildcardQuery extends Query {
 
 	public QueryTerm getQueryTerm();

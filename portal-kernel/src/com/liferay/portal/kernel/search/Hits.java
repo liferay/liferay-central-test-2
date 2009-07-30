@@ -26,6 +26,11 @@ import java.io.Serializable;
 
 import java.util.List;
 
+/**
+ * <a href="Hits.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Hits extends Serializable {
 
 	public long getStart();

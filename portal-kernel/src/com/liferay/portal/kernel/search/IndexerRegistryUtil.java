@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.search;
 
 import java.util.List;
 
+/**
+ * <a href="IndexerRegistryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class IndexerRegistryUtil {
 
 	public static Indexer getIndexer(String className) {

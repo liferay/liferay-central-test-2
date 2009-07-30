@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.xml;
 
 import java.util.Map;
 
+/**
+ * <a href="ProcessingInstruction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ProcessingInstruction extends Node {
 
 	public String getTarget();

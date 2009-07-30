@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.webcache;
 
 import java.io.Serializable;
 
+/**
+ * <a href="WebCacheItem.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface WebCacheItem extends Serializable {
 
 	public Object convert(String key) throws WebCacheException;

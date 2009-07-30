@@ -33,6 +33,12 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * <a href="RemotePluginPackageRepository.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Jorge Ferrer
+ */
 public class RemotePluginPackageRepository {
 
 	public static final String LOCAL_URL = "LOCAL_URL";

@@ -34,6 +34,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * <a href="AutoDeployDir.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Ivica Cardic
+ * @author Brian Wing Shun Chan
+ */
 public class AutoDeployDir {
 
 	public AutoDeployDir(

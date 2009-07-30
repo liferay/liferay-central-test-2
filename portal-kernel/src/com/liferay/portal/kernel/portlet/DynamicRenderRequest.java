@@ -34,6 +34,11 @@ import java.util.Map;
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
 
+/**
+ * <a href="DynamicRenderRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DynamicRenderRequest extends RenderRequestWrapper {
 
 	public DynamicRenderRequest(RenderRequest renderRequest) {

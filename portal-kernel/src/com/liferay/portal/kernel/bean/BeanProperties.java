@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.bean;
 
+/**
+ * <a href="BeanProperties.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface BeanProperties {
 
 	public boolean getBoolean(Object bean, String param);

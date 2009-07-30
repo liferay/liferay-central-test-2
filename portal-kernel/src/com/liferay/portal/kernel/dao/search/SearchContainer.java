@@ -32,12 +32,20 @@ import java.util.Map;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="SearchContainer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SearchContainer<R> {
 
 	public static final int DEFAULT_CUR = 1;
 
 	public static final String DEFAULT_CUR_PARAM = "cur";
 
+	/**
+	 * @deprecated Use <code>DEFAULT_CUR</code>.
+	 */
 	public static final int DEFAULT_CUR_VALUE = DEFAULT_CUR;
 
 	public static final int DEFAULT_DELTA = 20;
@@ -119,6 +127,9 @@ public class SearchContainer<R> {
 		return _curParam;
 	}
 
+	/**
+	 * @deprecated Use <code>getCur</code>.
+	 */
 	public int getCurValue() {
 		return getCur();
 	}

@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.poller;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 
+/**
+ * <a href="BasePollerProcessor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public abstract class BasePollerProcessor implements PollerProcessor {
 
 	public void receive(

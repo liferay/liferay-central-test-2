@@ -34,6 +34,11 @@ import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 
+/**
+ * <a href="LogUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LogUtil {
 
 	public static final int STACK_TRACE_LENGTH = 20;

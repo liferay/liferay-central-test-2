@@ -24,6 +24,12 @@ package com.liferay.portal.kernel.util;
 
 import java.io.File;
 
+/**
+ * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public class MimeTypesUtil {
 
 	public static String getContentType(File file) {

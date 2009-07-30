@@ -29,6 +29,12 @@ import java.io.Reader;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * <a href="File.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ */
 public interface File {
 
 	public void copyDirectory(String sourceDirName, String destinationDirName);

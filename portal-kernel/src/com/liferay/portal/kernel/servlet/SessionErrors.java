@@ -34,6 +34,11 @@ import javax.portlet.PortletSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="SessionErrors.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SessionErrors {
 
 	public static final String KEY = SessionErrors.class.getName();

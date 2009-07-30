@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.pop;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="MessageListenerException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class MessageListenerException extends PortalException {
 
 	public MessageListenerException() {

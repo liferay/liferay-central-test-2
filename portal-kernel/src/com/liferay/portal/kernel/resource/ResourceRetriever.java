@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.resource;
 
 import java.io.InputStream;
 
+/**
+ * <a href="ResourceRetriever.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Shuyang Zhou
+ */
 public interface ResourceRetriever {
 
 	public InputStream getInputStream();

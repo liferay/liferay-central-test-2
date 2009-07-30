@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.dao.search;
 
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="ButtonSearchEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ButtonSearchEntry extends TextSearchEntry {
 
 	public ButtonSearchEntry(

@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="ContentTypes.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ContentTypes {
 
 	public static final String APPLICATION_ATOM_XML = "application/atom+xml";

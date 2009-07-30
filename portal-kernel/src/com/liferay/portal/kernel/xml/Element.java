@@ -26,6 +26,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <a href="Element.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Element extends Branch {
 
 	public void add(Attribute attribute);

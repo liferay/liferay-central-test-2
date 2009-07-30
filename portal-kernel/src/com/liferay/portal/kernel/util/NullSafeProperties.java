@@ -24,5 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 
+/**
+ * <a href="NullSafeProperties.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author     Brian Wing Shun Chan
+ * @deprecated This class has been renamed to <code>SafeProperties</code>.
+ */
 public class NullSafeProperties extends Properties {
 }

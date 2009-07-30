@@ -34,6 +34,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * <a href="PropertiesUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PropertiesUtil {
 
 	public static void copyProperties(Properties from, Properties to) {

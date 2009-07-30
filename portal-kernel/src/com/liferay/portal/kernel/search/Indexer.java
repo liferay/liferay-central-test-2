@@ -24,6 +24,12 @@ package com.liferay.portal.kernel.search;
 
 import javax.portlet.PortletURL;
 
+/**
+ * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
+ */
 public interface Indexer {
 
 	public static final int DEFAULT_INTERVAL = 1000;

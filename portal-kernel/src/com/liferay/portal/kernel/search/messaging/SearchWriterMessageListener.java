@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.search.Document;
 
+/**
+ * <a href="SearchWriterMessageListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class SearchWriterMessageListener
 	extends BaseSearchEngineMessageListener {
 

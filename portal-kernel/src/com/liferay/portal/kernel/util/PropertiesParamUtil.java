@@ -28,6 +28,11 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="PropertiesParamUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PropertiesParamUtil {
 
 	public static boolean getBoolean(

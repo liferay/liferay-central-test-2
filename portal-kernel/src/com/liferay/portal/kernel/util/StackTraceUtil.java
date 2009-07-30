@@ -26,6 +26,11 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * <a href="StackTraceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StackTraceUtil {
 
 	public static String getStackTrace(Throwable t) {

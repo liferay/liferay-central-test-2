@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+/**
+ * <a href="PropertyFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface PropertyFactory {
 
 	public Property forName(String propertyName);

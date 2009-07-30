@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.dao.orm;
 
 import java.util.Collection;
 
+/**
+ * <a href="Property.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Property extends Projection {
 
 	public Order asc();

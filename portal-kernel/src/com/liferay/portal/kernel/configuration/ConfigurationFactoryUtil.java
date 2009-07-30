@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.configuration;
 
+/**
+ * <a href="ConfigurationFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ConfigurationFactoryUtil {
 
 	public static Configuration getConfiguration(

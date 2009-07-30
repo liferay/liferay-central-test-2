@@ -30,6 +30,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="JSPSearchEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(String align, String valign, String path) {

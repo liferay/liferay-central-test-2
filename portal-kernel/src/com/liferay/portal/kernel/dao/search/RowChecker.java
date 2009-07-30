@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.RenderResponse;
 
+/**
+ * <a href="RowChecker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RowChecker {
 
 	public static final String ALIGN = "left";

@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+/**
+ * <a href="Account.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Thiago Moreira
+ */
 public abstract class Account implements Serializable {
 
 	public static final String PROTOCOL_IMAP = "imap";

@@ -26,6 +26,11 @@ import java.io.ByteArrayOutputStream;
 
 import javax.servlet.ServletOutputStream;
 
+/**
+ * <a href="StringServletOutputStream.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class StringServletOutputStream extends ServletOutputStream {
 
 	public StringServletOutputStream(ByteArrayOutputStream baos) {

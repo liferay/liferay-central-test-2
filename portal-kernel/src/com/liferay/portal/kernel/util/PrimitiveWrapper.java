@@ -24,5 +24,10 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+/**
+ * <a href="PrimitiveWrapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PrimitiveWrapper implements Serializable {
 }

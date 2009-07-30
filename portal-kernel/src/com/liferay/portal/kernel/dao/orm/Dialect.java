@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+/**
+ * <a href="Dialect.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface Dialect {
 
 	public boolean supportsLimit();

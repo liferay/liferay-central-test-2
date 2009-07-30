@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="StringQueryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class StringQueryImpl implements Query {
 
 	public StringQueryImpl(String query) {

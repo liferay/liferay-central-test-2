@@ -26,6 +26,11 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * <a href="CalendarFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class CalendarFactoryUtil {
 
 	public static Calendar getCalendar() {

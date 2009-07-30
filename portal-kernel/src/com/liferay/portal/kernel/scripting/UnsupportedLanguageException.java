@@ -22,6 +22,13 @@
 
 package com.liferay.portal.kernel.scripting;
 
+/**
+ * <a href="UnsupportedLanguageException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
+ */
 public class UnsupportedLanguageException extends ScriptingException {
 
 	public UnsupportedLanguageException() {

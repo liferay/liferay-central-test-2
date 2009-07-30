@@ -22,8 +22,18 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ * @author Raymond Augé
+ */
 public class SearchEngineUtil {
 
+	/**
+	 * @deprecated Use
+	 *			   <code>com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS</code>.
+	 */
 	public static final int ALL_POS = -1;
 
 	public static void addDocument(long companyId, Document doc)

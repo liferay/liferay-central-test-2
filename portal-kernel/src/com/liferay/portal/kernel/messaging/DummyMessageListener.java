@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+/**
+ * <a href="DummyMessageListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DummyMessageListener implements MessageListener {
 
 	public void receive(Message message) {

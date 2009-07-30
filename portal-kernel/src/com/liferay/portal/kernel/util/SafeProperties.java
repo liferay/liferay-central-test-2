@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 
+/**
+ * <a href="SafeProperties.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class SafeProperties extends Properties {
 
 	public SafeProperties() {

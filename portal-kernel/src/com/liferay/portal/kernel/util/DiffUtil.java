@@ -26,6 +26,21 @@ import java.io.Reader;
 
 import java.util.List;
 
+/**
+ * <a href="DiffUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class can compare two different versions of a text. Source refers to the
+ * earliest version of the text and target refers to a modified version of
+ * source. Changes are considered either as a removal from the source or as an
+ * addition to the target. This class detects changes to an entire line and also
+ * detects changes within lines, such as, removal or addition of characters.
+ * Take a look at <code>DiffTest</code> to see the expected inputs and outputs.
+ * </p>
+ *
+ * @author Bruno Farache
+ * @see    com.liferay.portal.kernel.util.DiffUtil
+ */
 public class DiffUtil {
 
 	public static List<DiffResult>[] diff(Reader source, Reader target) {

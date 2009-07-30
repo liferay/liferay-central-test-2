@@ -42,6 +42,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * <a href="PortletServlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class PortletServlet extends HttpServlet {
 
 	public static final String PORTLET_CLASS_LOADER = "PORTLET_CLASS_LOADER";

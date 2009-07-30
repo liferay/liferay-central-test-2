@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="BreadcrumbsUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class BreadcrumbsUtil {
 
 	public static String removeLastClass(String breadcrumbs) {

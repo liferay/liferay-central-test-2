@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.dao.orm;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+/**
+ * <a href="FinderCacheUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class FinderCacheUtil {
 
 	public static void clearCache() {

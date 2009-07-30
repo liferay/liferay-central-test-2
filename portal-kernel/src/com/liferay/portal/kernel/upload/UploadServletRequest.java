@@ -26,6 +26,13 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <a href="UploadServletRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Zongliang Li
+ * @author Harry Mark
+ */
 public interface UploadServletRequest extends HttpServletRequest {
 
 	public void cleanUp();

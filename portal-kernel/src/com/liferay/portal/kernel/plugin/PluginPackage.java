@@ -26,6 +26,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * <a href="PluginPackage.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ */
 public interface PluginPackage {
 
 	public String getModuleId();

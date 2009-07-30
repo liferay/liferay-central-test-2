@@ -29,6 +29,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * <a href="LocaleUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class LocaleUtil {
 
 	public static Locale fromLanguageId(String languageId) {

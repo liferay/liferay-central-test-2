@@ -26,6 +26,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <a href="Query.java.html"><b><i>View Source</i></b></a>
+ *
+ * <a href="RuleEngineQuery.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class Query {
 
 	public static Query createCustomQuery() {

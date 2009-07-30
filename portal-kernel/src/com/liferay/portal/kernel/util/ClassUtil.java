@@ -37,6 +37,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <a href="ClassUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
+ */
 public class ClassUtil {
 
 	public static Set<String> getClasses(File file) throws IOException {

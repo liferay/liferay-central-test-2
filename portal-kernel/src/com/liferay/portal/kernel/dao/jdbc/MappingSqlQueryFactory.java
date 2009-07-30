@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.dao.jdbc;
 
 import javax.sql.DataSource;
 
+/**
+ * <a href="MappingSqlQueryFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface MappingSqlQueryFactory {
 
 	public MappingSqlQuery getMappingSqlQuery(

@@ -24,6 +24,12 @@ package com.liferay.portal.kernel.messaging.sender;
 
 import com.liferay.portal.kernel.messaging.Message;
 
+/**
+ * <a href="DefaultSingleDestinationMessageSender.java.html"><b><i>View Source
+ * </i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class DefaultSingleDestinationMessageSender
 	implements SingleDestinationMessageSender {
 

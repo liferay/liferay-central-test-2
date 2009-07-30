@@ -33,6 +33,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * <a href="FileCacheOutputStream.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ */
 public class FileCacheOutputStream extends OutputStream {
 
 	public FileCacheOutputStream() throws IOException {

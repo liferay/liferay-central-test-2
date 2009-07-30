@@ -27,6 +27,12 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * <a href="ContextClassLoaderBeanHandler.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ContextClassLoaderBeanHandler implements InvocationHandler {
 
 	public ContextClassLoaderBeanHandler(Object bean, ClassLoader classLoader) {

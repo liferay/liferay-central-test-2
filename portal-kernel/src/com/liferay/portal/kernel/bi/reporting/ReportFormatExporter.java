@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
+/**
+ * <a href="ReportFormatExporter.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public interface ReportFormatExporter {
 
 	public void format(

@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+/**
+ * <a href="ObjectValuePair.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ObjectValuePair<K, V> implements Serializable {
 
 	public ObjectValuePair() {

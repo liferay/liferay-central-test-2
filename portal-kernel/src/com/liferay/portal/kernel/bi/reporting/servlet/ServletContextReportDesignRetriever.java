@@ -30,6 +30,12 @@ import java.util.Date;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="ServletContextReportDesignRetriever.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Michael C. Han
+ */
 public class ServletContextReportDesignRetriever
 	implements ReportDesignRetriever {
 

@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
 
+/**
+ * <a href="RecurrenceSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class RecurrenceSerializer {
 
 	public static String toCronText(Recurrence recurrence) {

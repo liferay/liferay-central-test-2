@@ -27,6 +27,11 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <a href="ReportRequest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Michael C. Han
+ */
 public class ReportRequest implements Serializable {
 
 	public ReportRequest(

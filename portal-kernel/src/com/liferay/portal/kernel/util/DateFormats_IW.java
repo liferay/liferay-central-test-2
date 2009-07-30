@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.util;
 
+/**
+ * <a href="DateFormats_IW.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class DateFormats_IW {
 	public static DateFormats_IW getInstance() {
 		return _instance;

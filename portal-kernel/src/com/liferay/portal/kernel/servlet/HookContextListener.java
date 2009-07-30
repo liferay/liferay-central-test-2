@@ -29,6 +29,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * <a href="HookContextListener.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class HookContextListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {

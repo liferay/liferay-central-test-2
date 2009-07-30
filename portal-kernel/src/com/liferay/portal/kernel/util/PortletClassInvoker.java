@@ -28,6 +28,11 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="PortletClassInvoker.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public class PortletClassInvoker {
 
 	public static Object invoke(
@@ -163,6 +168,9 @@ public class PortletClassInvoker {
 		}
 	}
 
+	/**
+	 * Copied from <code>com.liferay.portal.model.PortletConstants</code>.
+	 */
 	private static String _getRootPortletId(String portletId) {
 		int pos = portletId.indexOf(_INSTANCE_SEPARATOR);
 

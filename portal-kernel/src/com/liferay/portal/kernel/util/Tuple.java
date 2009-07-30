@@ -24,6 +24,11 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+/**
+ * <a href="Tuple.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
 public class Tuple implements Serializable {
 
 	public Tuple(Object obj0, Object obj1) {

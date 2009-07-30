@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+/**
+ * <a href="PortalSearchEngine.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Bruno Farache
+ */
 public interface PortalSearchEngine {
 
 	public boolean isIndexReadOnly();

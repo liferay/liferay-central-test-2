@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.jsp.PageContext;
 
+/**
+ * <a href="TextSearchEntry.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class TextSearchEntry extends SearchEntry {
 
 	public TextSearchEntry(String align, String valign, String name) {

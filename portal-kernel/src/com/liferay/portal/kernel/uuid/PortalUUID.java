@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.uuid;
 
+/**
+ * <a href="PortalUUID.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface PortalUUID {
 
 	public String generate();
