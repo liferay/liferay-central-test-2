@@ -280,6 +280,25 @@ String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_M
 		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
 	</td>
 </tr>
+
+<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= IGImage.class.getName() %>"
+				classPK="<%= imageId %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <tr>
 	<td colspan="2">
 		<br />

@@ -108,6 +108,8 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 		DLFileEntry.class.getName(),
 		DLFolder.class.getName(),
+		IGImage.class.getName(),
+		IGFolder.class.getName(),
 		Organization.class.getName(),
 		User.class.getName()
 };
@@ -117,6 +119,12 @@ private String _getIconPath(String modelResource) {
 		return "/document_library/page.png";
 	}
 	else if (modelResource.equals(DLFolder.class.getName())) {
+		return "/common/folder.png";
+	}
+	else if (modelResource.equals(IGImage.class.getName())) {
+		return "/document_library/bmp.png";
+	}
+	else if (modelResource.equals(IGFolder.class.getName())) {
 		return "/common/folder.png";
 	}
 	else if (modelResource.equals(Organization.class.getName())) {
