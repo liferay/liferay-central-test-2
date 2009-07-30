@@ -27,70 +27,70 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Constructor;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MapUtil {
 
-	public static void copy(Map master, Map copy) {
+	public static<K, V> void copy(
+			Map<K, V> master, Map<? super K, ? super V> copy) {
 		copy.clear();
 
 		merge(master, copy);
 	}
 
-	public static boolean getBoolean(Map map, String key) {
+	public static boolean getBoolean(Map<String, ?> map, String key) {
 		return getBoolean(map, key, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		Map map, String key, boolean defaultValue) {
+		Map<String, ?> map, String key, boolean defaultValue) {
 
 		return GetterUtil.getBoolean(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
-	public static int getInteger(Map map, String key) {
+	public static int getInteger(Map<String, ?> map, String key) {
 		return getInteger(map, key, GetterUtil.DEFAULT_INTEGER);
 	}
 
-	public static int getInteger(Map map, String key, int defaultValue) {
+	public static int getInteger(
+		Map<String, ?> map, String key, int defaultValue) {
 		return GetterUtil.getInteger(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
-	public static long getLong(Map map, long key) {
+	public static long getLong(Map<Long, Long> map, long key) {
 		return getLong(map, key, GetterUtil.DEFAULT_LONG);
 	}
 
-	public static long getLong(Map map, long key, long defaultValue) {
+	public static long getLong(
+		Map<Long, Long> map, long key, long defaultValue) {
 		Long keyObj = new Long(key);
 
 		if (map.containsKey(keyObj)) {
-			Object value = map.get(keyObj);
-
-			if (value instanceof Long) {
-				return ((Long)value).longValue();
-			}
+			return map.get(keyObj);
 		}
 
 		return defaultValue;
 	}
 
-	public static short getShort(Map map, String key) {
+	public static short getShort(Map<String, ?> map, String key) {
 		return getShort(map, key, GetterUtil.DEFAULT_SHORT);
 	}
 
-	public static short getShort(Map map, String key, short defaultValue) {
+	public static short getShort(
+		Map<String, ?> map, String key, short defaultValue) {
 		return GetterUtil.getShort(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
-	public static String getString(Map map, String key) {
+	public static String getString(Map<String, ?> map, String key) {
 		return getString(map, key, GetterUtil.DEFAULT_STRING);
 	}
 
-	public static String getString(Map map, String key, String defaultValue) {
+	public static String getString(
+		Map<String, ?> map, String key, String defaultValue) {
 		if (map.containsKey(key)) {
 			Object value = map.get(key);
 
@@ -104,35 +104,26 @@ public class MapUtil {
 			else if (value instanceof String) {
 				return GetterUtil.getString((String)value, defaultValue);
 			}
-			else {
-				return defaultValue;
-			}
 		}
 
 		return defaultValue;
 	}
 
-	public static void merge(Map master, Map copy) {
-		Iterator itr = master.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			Object key = entry.getKey();
-			Object value = entry.getValue();
-
-			copy.put(key, value);
-		}
+	public static<K, V> void merge(
+			Map<K, V> master, Map<? super K, ? super V> copy) {
+		copy.putAll(master);
 	}
 
-	public static LinkedHashMap toLinkedHashMap(String[] params) {
+	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
+		String[] params) {
 		return toLinkedHashMap(params, StringPool.COLON);
 	}
 
-	public static LinkedHashMap toLinkedHashMap(
+	@SuppressWarnings("unchecked")
+	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
 		String[] params, String delimiter) {
 
-		LinkedHashMap map = new LinkedHashMap();
+		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 
 		for (int i = 0; i < params.length; i++) {
 			String[] kvp = StringUtil.split(params[i], delimiter);
@@ -173,10 +164,10 @@ public class MapUtil {
 				}
 				else {
 					try {
-						Class classObj = Class.forName(type);
+						Class<?> classObj = Class.forName(type);
 
-						Constructor constructor = classObj.getConstructor(
-							new Class[] {String.class});
+						Constructor<?> constructor = classObj.getConstructor(
+							new Class<?>[] {String.class});
 
 						map.put(kvp[0], constructor.newInstance(kvp[1]));
 					}
@@ -187,7 +178,7 @@ public class MapUtil {
 			}
 		}
 
-		return map;
+		return (LinkedHashMap<String, T>) map;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MapUtil.class);
