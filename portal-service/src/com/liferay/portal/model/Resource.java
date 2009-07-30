@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Resource.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ResourceModel
- * @see    com.liferay.portal.model.impl.ResourceImpl
- * @see    com.liferay.portal.model.impl.ResourceModelImpl
+ * @see ResourceModel
+ * @see com.liferay.portal.model.impl.ResourceImpl
+ * @see com.liferay.portal.model.impl.ResourceModelImpl
+ * @generated
  */
 public interface Resource extends ResourceModel {
 	public long getCompanyId()

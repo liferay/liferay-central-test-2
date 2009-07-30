@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PluginSettingServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PluginSettingServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PluginSettingServiceSoap
+ * @generated
  */
 public class PluginSettingSoap implements Serializable {
 	public static PluginSettingSoap toSoapModel(PluginSetting model) {

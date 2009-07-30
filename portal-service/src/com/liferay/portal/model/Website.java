@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Website.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Website table in the database.
+ * This interface is a model that represents the Website table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WebsiteModel
- * @see    com.liferay.portal.model.impl.WebsiteImpl
- * @see    com.liferay.portal.model.impl.WebsiteModelImpl
+ * @see WebsiteModel
+ * @see com.liferay.portal.model.impl.WebsiteImpl
+ * @see com.liferay.portal.model.impl.WebsiteModelImpl
+ * @generated
  */
 public interface Website extends WebsiteModel {
 	public com.liferay.portal.model.ListType getType();

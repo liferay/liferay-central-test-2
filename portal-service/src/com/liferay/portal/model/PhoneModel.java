@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Phone table in the database.
+ * This interface is a model that represents the Phone table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Phone
  * @see    com.liferay.portal.model.impl.PhoneImpl
  * @see    com.liferay.portal.model.impl.PhoneModelImpl
+ * @generated
  */
 public interface PhoneModel extends BaseModel<Phone> {
 	public long getPrimaryKey();

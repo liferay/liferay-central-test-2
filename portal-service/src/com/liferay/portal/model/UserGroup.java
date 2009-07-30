@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserGroup.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserGroupModel
- * @see    com.liferay.portal.model.impl.UserGroupImpl
- * @see    com.liferay.portal.model.impl.UserGroupModelImpl
+ * @see UserGroupModel
+ * @see com.liferay.portal.model.impl.UserGroupImpl
+ * @see com.liferay.portal.model.impl.UserGroupModelImpl
+ * @generated
  */
 public interface UserGroup extends UserGroupModel {
 	public com.liferay.portal.model.Group getGroup();

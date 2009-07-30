@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserGroupRoleServiceJSON
+ * @see    com.liferay.portal.service.http.UserGroupRoleServiceJSON
+ * @generated
  */
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {

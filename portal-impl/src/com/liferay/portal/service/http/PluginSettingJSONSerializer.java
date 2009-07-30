@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PluginSettingServiceJSON
+ * @see    com.liferay.portal.service.http.PluginSettingServiceJSON
+ * @generated
  */
 public class PluginSettingJSONSerializer {
 	public static JSONObject toJSONObject(PluginSetting model) {

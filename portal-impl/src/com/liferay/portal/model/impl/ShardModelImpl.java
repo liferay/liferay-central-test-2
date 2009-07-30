@@ -51,13 +51,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Shard table in the database.
+ * This interface is a model that represents the Shard table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    ShardImpl
  * @see    com.liferay.portal.model.Shard
  * @see    com.liferay.portal.model.ShardModel
+ * @generated
  */
 public class ShardModelImpl extends BaseModelImpl<Shard> {
 	public static final String TABLE_NAME = "Shard";

@@ -57,6 +57,7 @@ import java.util.List;
  * @see    PluginSettingImpl
  * @see    com.liferay.portal.model.PluginSetting
  * @see    com.liferay.portal.model.PluginSettingModel
+ * @generated
  */
 public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 	public static final String TABLE_NAME = "PluginSetting";

@@ -59,13 +59,15 @@ import java.util.Map;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Role_ table in the database.
+ * This interface is a model that represents the Role_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    RoleImpl
  * @see    com.liferay.portal.model.Role
  * @see    com.liferay.portal.model.RoleModel
+ * @generated
  */
 public class RoleModelImpl extends BaseModelImpl<Role> {
 	public static final String TABLE_NAME = "Role_";

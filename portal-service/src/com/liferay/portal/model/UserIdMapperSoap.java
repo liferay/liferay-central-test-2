@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.UserIdMapperServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.UserIdMapperServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.UserIdMapperServiceSoap
+ * @generated
  */
 public class UserIdMapperSoap implements Serializable {
 	public static UserIdMapperSoap toSoapModel(UserIdMapper model) {

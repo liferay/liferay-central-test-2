@@ -42,6 +42,7 @@ import com.liferay.portal.service.persistence.UserGroupRolePK;
  * @see    UserGroupRole
  * @see    com.liferay.portal.model.impl.UserGroupRoleImpl
  * @see    com.liferay.portal.model.impl.UserGroupRoleModelImpl
+ * @generated
  */
 public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public UserGroupRolePK getPrimaryKey();

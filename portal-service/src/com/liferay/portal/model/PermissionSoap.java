@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PermissionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PermissionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PermissionServiceSoap
+ * @generated
  */
 public class PermissionSoap implements Serializable {
 	public static PermissionSoap toSoapModel(Permission model) {

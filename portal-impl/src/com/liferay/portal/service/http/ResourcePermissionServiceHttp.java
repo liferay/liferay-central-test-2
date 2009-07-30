@@ -32,8 +32,7 @@ import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
 
 /**
- * <a href="ResourcePermissionServiceHttp.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ResourcePermissionServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -41,11 +40,11 @@ import com.liferay.portal.service.ResourcePermissionServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portal.service.ResourcePermissionServiceUtil} service utility.
- * The static methods of this class calls the same methods of the service
- * utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portal.service.ResourcePermissionServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -67,6 +66,7 @@ import com.liferay.portal.service.ResourcePermissionServiceUtil;
  * @see    ResourcePermissionServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portal.service.ResourcePermissionServiceUtil
+ * @generated
  */
 public class ResourcePermissionServiceHttp {
 	public static void addResourcePermission(HttpPrincipal httpPrincipal,

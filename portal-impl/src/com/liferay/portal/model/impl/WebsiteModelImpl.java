@@ -54,13 +54,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Website table in the database.
+ * This interface is a model that represents the Website table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    WebsiteImpl
  * @see    com.liferay.portal.model.Website
  * @see    com.liferay.portal.model.WebsiteModel
+ * @generated
  */
 public class WebsiteModelImpl extends BaseModelImpl<Website> {
 	public static final String TABLE_NAME = "Website";

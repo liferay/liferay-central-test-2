@@ -57,6 +57,7 @@ import java.util.List;
  * @see    PermissionImpl
  * @see    com.liferay.portal.model.Permission
  * @see    com.liferay.portal.model.PermissionModel
+ * @generated
  */
 public class PermissionModelImpl extends BaseModelImpl<Permission> {
 	public static final String TABLE_NAME = "Permission_";

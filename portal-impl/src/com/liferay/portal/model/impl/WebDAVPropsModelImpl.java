@@ -60,6 +60,7 @@ import java.util.List;
  * @see    WebDAVPropsImpl
  * @see    com.liferay.portal.model.WebDAVProps
  * @see    com.liferay.portal.model.WebDAVPropsModel
+ * @generated
  */
 public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 	public static final String TABLE_NAME = "WebDAVProps";

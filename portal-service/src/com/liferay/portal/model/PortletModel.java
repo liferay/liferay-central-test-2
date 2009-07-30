@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PortletModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,13 +32,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Portlet table in the database.
+ * This interface is a model that represents the Portlet table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Portlet
  * @see    com.liferay.portal.model.impl.PortletImpl
  * @see    com.liferay.portal.model.impl.PortletModelImpl
+ * @generated
  */
 public interface PortletModel extends BaseModel<Portlet> {
 	public long getPrimaryKey();

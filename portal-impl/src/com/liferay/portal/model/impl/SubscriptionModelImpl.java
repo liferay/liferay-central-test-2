@@ -61,6 +61,7 @@ import java.util.List;
  * @see    SubscriptionImpl
  * @see    com.liferay.portal.model.Subscription
  * @see    com.liferay.portal.model.SubscriptionModel
+ * @generated
  */
 public class SubscriptionModelImpl extends BaseModelImpl<Subscription> {
 	public static final String TABLE_NAME = "Subscription";

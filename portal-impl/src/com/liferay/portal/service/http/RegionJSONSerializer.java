@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    RegionServiceJSON
+ * @see    com.liferay.portal.service.http.RegionServiceJSON
+ * @generated
  */
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {

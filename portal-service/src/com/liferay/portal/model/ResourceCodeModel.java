@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ResourceCodeModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    ResourceCode
  * @see    com.liferay.portal.model.impl.ResourceCodeImpl
  * @see    com.liferay.portal.model.impl.ResourceCodeModelImpl
+ * @generated
  */
 public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	public long getPrimaryKey();

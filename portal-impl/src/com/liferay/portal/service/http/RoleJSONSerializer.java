@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    RoleServiceJSON
+ * @see    com.liferay.portal.service.http.RoleServiceJSON
+ * @generated
  */
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {

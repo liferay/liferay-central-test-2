@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Website table in the database.
+ * This interface is a model that represents the Website table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Website
  * @see    com.liferay.portal.model.impl.WebsiteImpl
  * @see    com.liferay.portal.model.impl.WebsiteModelImpl
+ * @generated
  */
 public interface WebsiteModel extends BaseModel<Website> {
 	public long getPrimaryKey();

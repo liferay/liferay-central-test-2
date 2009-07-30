@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserGroupGroupRole.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.UserGroupGroupRoleImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.UserGroupGroupRoleImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserGroupGroupRoleModel
- * @see    com.liferay.portal.model.impl.UserGroupGroupRoleImpl
- * @see    com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
+ * @see UserGroupGroupRoleModel
+ * @see com.liferay.portal.model.impl.UserGroupGroupRoleImpl
+ * @see com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
+ * @generated
  */
 public interface UserGroupGroupRole extends UserGroupGroupRoleModel {
 }

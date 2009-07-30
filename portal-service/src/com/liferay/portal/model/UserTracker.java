@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserTracker.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserTrackerModel
- * @see    com.liferay.portal.model.impl.UserTrackerImpl
- * @see    com.liferay.portal.model.impl.UserTrackerModelImpl
+ * @see UserTrackerModel
+ * @see com.liferay.portal.model.impl.UserTrackerImpl
+ * @see com.liferay.portal.model.impl.UserTrackerModelImpl
+ * @generated
  */
 public interface UserTracker extends UserTrackerModel {
 	public java.lang.String getFullName();

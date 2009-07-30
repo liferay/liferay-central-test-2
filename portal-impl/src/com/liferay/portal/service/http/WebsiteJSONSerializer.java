@@ -44,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WebsiteServiceJSON
+ * @see    com.liferay.portal.service.http.WebsiteServiceJSON
+ * @generated
  */
 public class WebsiteJSONSerializer {
 	public static JSONObject toJSONObject(Website model) {

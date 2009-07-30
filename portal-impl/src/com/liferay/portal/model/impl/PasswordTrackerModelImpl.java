@@ -61,6 +61,7 @@ import java.util.List;
  * @see    PasswordTrackerImpl
  * @see    com.liferay.portal.model.PasswordTracker
  * @see    com.liferay.portal.model.PasswordTrackerModel
+ * @generated
  */
 public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	public static final String TABLE_NAME = "PasswordTracker";

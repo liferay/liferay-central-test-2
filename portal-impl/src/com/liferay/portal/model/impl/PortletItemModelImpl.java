@@ -61,6 +61,7 @@ import java.util.List;
  * @see    PortletItemImpl
  * @see    com.liferay.portal.model.PortletItem
  * @see    com.liferay.portal.model.PortletItemModel
+ * @generated
  */
 public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {
 	public static final String TABLE_NAME = "PortletItem";

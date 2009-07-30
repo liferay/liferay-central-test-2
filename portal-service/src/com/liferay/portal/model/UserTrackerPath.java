@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserTrackerPath.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.UserTrackerPathImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.UserTrackerPathImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserTrackerPathModel
- * @see    com.liferay.portal.model.impl.UserTrackerPathImpl
- * @see    com.liferay.portal.model.impl.UserTrackerPathModelImpl
+ * @see UserTrackerPathModel
+ * @see com.liferay.portal.model.impl.UserTrackerPathImpl
+ * @see com.liferay.portal.model.impl.UserTrackerPathModelImpl
+ * @generated
  */
 public interface UserTrackerPath extends UserTrackerPathModel {
 }

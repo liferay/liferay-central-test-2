@@ -35,13 +35,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the User_ table in the database.
+ * This interface is a model that represents the User_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    User
  * @see    com.liferay.portal.model.impl.UserImpl
  * @see    com.liferay.portal.model.impl.UserModelImpl
+ * @generated
  */
 public interface UserModel extends BaseModel<User> {
 	public long getPrimaryKey();

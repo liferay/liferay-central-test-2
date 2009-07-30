@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="WebDAVProps.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    WebDAVPropsModel
- * @see    com.liferay.portal.model.impl.WebDAVPropsImpl
- * @see    com.liferay.portal.model.impl.WebDAVPropsModelImpl
+ * @see WebDAVPropsModel
+ * @see com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
+ * @generated
  */
 public interface WebDAVProps extends WebDAVPropsModel {
 	public java.lang.String getProps();

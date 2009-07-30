@@ -57,6 +57,7 @@ import java.util.List;
  * @see    ResourceActionImpl
  * @see    com.liferay.portal.model.ResourceAction
  * @see    com.liferay.portal.model.ResourceActionModel
+ * @generated
  */
 public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	public static final String TABLE_NAME = "ResourceAction";

@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.ShardServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.ShardServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.ShardServiceSoap
+ * @generated
  */
 public class ShardSoap implements Serializable {
 	public static ShardSoap toSoapModel(Shard model) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserIdMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.UserIdMapperImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.UserIdMapperImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserIdMapperModel
- * @see    com.liferay.portal.model.impl.UserIdMapperImpl
- * @see    com.liferay.portal.model.impl.UserIdMapperModelImpl
+ * @see UserIdMapperModel
+ * @see com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
+ * @generated
  */
 public interface UserIdMapper extends UserIdMapperModel {
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ShardModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,13 +32,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Shard table in the database.
+ * This interface is a model that represents the Shard table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Shard
  * @see    com.liferay.portal.model.impl.ShardImpl
  * @see    com.liferay.portal.model.impl.ShardModelImpl
+ * @generated
  */
 public interface ShardModel extends BaseModel<Shard> {
 	public long getPrimaryKey();

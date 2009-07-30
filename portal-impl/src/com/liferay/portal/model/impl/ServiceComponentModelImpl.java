@@ -57,6 +57,7 @@ import java.util.List;
  * @see    ServiceComponentImpl
  * @see    com.liferay.portal.model.ServiceComponent
  * @see    com.liferay.portal.model.ServiceComponentModel
+ * @generated
  */
 public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 	public static final String TABLE_NAME = "ServiceComponent";

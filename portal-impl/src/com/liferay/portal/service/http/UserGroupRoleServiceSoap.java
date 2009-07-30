@@ -37,8 +37,8 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.UserGroupRoleServiceUtil} service utility. The
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.UserGroupRoleServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -47,11 +47,11 @@ import java.rmi.RemoteException;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link
- * com.liferay.portal.model.UserGroupRoleSoap}. If the method in the service
- * utility returns a {@link com.liferay.portal.model.UserGroupRole}, that is
- * translated to a {@link com.liferay.portal.model.UserGroupRoleSoap}. Methods
- * that SOAP cannot safely wire are skipped.
+ * is translated to an array of {@link com.liferay.portal.model.UserGroupRoleSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.UserGroupRole}, that is translated to a
+ * {@link com.liferay.portal.model.UserGroupRoleSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -76,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    UserGroupRoleServiceHttp
  * @see    com.liferay.portal.model.UserGroupRoleSoap
  * @see    com.liferay.portal.service.UserGroupRoleServiceUtil
+ * @generated
  */
 public class UserGroupRoleServiceSoap {
 	public static void addUserGroupRoles(long userId, long groupId,

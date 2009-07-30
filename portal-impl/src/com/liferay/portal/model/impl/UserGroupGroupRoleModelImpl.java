@@ -54,6 +54,7 @@ import java.util.List;
  * @see    UserGroupGroupRoleImpl
  * @see    com.liferay.portal.model.UserGroupGroupRole
  * @see    com.liferay.portal.model.UserGroupGroupRoleModel
+ * @generated
  */
 public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRole> {
 	public static final String TABLE_NAME = "UserGroupGroupRole";

@@ -43,6 +43,7 @@ import java.util.Date;
  * @see    UserTracker
  * @see    com.liferay.portal.model.impl.UserTrackerImpl
  * @see    com.liferay.portal.model.impl.UserTrackerModelImpl
+ * @generated
  */
 public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public long getPrimaryKey();

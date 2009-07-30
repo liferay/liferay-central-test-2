@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PortletItemServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PortletItemServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PortletItemServiceSoap
+ * @generated
  */
 public class PortletItemSoap implements Serializable {
 	public static PortletItemSoap toSoapModel(PortletItem model) {

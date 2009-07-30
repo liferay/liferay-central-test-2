@@ -49,13 +49,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Portlet table in the database.
+ * This interface is a model that represents the Portlet table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    PortletImpl
  * @see    com.liferay.portal.model.Portlet
  * @see    com.liferay.portal.model.PortletModel
+ * @generated
  */
 public class PortletModelImpl extends BaseModelImpl<Portlet> {
 	public static final String TABLE_NAME = "Portlet";

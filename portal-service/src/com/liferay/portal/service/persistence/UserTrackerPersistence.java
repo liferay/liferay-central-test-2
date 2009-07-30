@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+
 /**
  * <a href="UserTrackerPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    UserTrackerPersistenceImpl
  * @see    UserTrackerUtil
+ * @generated
  */
 public interface UserTrackerPersistence extends BasePersistence {
 	public void cacheResult(com.liferay.portal.model.UserTracker userTracker);
@@ -59,6 +61,18 @@ public interface UserTrackerPersistence extends BasePersistence {
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  userTracker the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when userTracker is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portal.model.UserTracker update(
 		com.liferay.portal.model.UserTracker userTracker, boolean merge)
 		throws com.liferay.portal.SystemException;

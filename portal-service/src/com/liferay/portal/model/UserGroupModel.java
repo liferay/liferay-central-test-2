@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="UserGroupModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    UserGroup
  * @see    com.liferay.portal.model.impl.UserGroupImpl
  * @see    com.liferay.portal.model.impl.UserGroupModelImpl
+ * @generated
  */
 public interface UserGroupModel extends BaseModel<UserGroup> {
 	public long getPrimaryKey();

@@ -60,6 +60,7 @@ import java.util.List;
  * @see    UserTrackerImpl
  * @see    com.liferay.portal.model.UserTracker
  * @see    com.liferay.portal.model.UserTrackerModel
+ * @generated
  */
 public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 	public static final String TABLE_NAME = "UserTracker";

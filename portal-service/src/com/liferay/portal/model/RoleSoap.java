@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.RoleServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.RoleServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.RoleServiceSoap
+ * @generated
  */
 public class RoleSoap implements Serializable {
 	public static RoleSoap toSoapModel(Role model) {

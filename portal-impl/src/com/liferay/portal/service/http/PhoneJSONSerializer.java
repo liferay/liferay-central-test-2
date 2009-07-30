@@ -44,7 +44,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PhoneServiceJSON
+ * @see    com.liferay.portal.service.http.PhoneServiceJSON
+ * @generated
  */
 public class PhoneJSONSerializer {
 	public static JSONObject toJSONObject(Phone model) {

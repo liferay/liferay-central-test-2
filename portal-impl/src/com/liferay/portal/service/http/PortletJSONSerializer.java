@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PortletServiceJSON
+ * @see    com.liferay.portal.service.http.PortletServiceJSON
+ * @generated
  */
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {

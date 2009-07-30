@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Phone.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Phone table in the database.
+ * This interface is a model that represents the Phone table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PhoneModel
- * @see    com.liferay.portal.model.impl.PhoneImpl
- * @see    com.liferay.portal.model.impl.PhoneModelImpl
+ * @see PhoneModel
+ * @see com.liferay.portal.model.impl.PhoneImpl
+ * @see com.liferay.portal.model.impl.PhoneModelImpl
+ * @generated
  */
 public interface Phone extends PhoneModel {
 	public com.liferay.portal.model.ListType getType();

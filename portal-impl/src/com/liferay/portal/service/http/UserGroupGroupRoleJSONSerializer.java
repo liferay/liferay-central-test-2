@@ -30,8 +30,7 @@ import com.liferay.portal.model.UserGroupGroupRole;
 import java.util.List;
 
 /**
- * <a href="UserGroupGroupRoleJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="UserGroupGroupRoleJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,12 +38,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link UserGroupGroupRoleServiceJSON} to translate
- * objects.
+ * This class is used by {@link UserGroupGroupRoleServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserGroupGroupRoleServiceJSON
+ * @see    com.liferay.portal.service.http.UserGroupGroupRoleServiceJSON
+ * @generated
  */
 public class UserGroupGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupGroupRole model) {

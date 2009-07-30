@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ResourceAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ResourceActionImpl} and rerun
- * the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.ResourceActionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ResourceActionModel
- * @see    com.liferay.portal.model.impl.ResourceActionImpl
- * @see    com.liferay.portal.model.impl.ResourceActionModelImpl
+ * @see ResourceActionModel
+ * @see com.liferay.portal.model.impl.ResourceActionImpl
+ * @see com.liferay.portal.model.impl.ResourceActionModelImpl
+ * @generated
  */
 public interface ResourceAction extends ResourceActionModel {
 }

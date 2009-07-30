@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PortletItem.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PortletItemModel
- * @see    com.liferay.portal.model.impl.PortletItemImpl
- * @see    com.liferay.portal.model.impl.PortletItemModelImpl
+ * @see PortletItemModel
+ * @see com.liferay.portal.model.impl.PortletItemImpl
+ * @see com.liferay.portal.model.impl.PortletItemModelImpl
+ * @generated
  */
 public interface PortletItem extends PortletItemModel {
 }

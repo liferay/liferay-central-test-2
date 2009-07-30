@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ResourcePermissionModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    ResourcePermission
  * @see    com.liferay.portal.model.impl.ResourcePermissionImpl
  * @see    com.liferay.portal.model.impl.ResourcePermissionModelImpl
+ * @generated
  */
 public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public long getPrimaryKey();

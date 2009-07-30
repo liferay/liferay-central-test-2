@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ResourcePermission.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ResourcePermissionImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.ResourcePermissionImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ResourcePermissionModel
- * @see    com.liferay.portal.model.impl.ResourcePermissionImpl
- * @see    com.liferay.portal.model.impl.ResourcePermissionModelImpl
+ * @see ResourcePermissionModel
+ * @see com.liferay.portal.model.impl.ResourcePermissionImpl
+ * @see com.liferay.portal.model.impl.ResourcePermissionModelImpl
+ * @generated
  */
 public interface ResourcePermission extends ResourcePermissionModel {
 }

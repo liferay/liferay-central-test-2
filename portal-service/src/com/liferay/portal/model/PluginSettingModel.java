@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PluginSettingModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    PluginSetting
  * @see    com.liferay.portal.model.impl.PluginSettingImpl
  * @see    com.liferay.portal.model.impl.PluginSettingModelImpl
+ * @generated
  */
 public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public long getPrimaryKey();

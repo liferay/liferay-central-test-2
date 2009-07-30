@@ -57,6 +57,7 @@ import java.util.List;
  * @see    ResourcePermissionImpl
  * @see    com.liferay.portal.model.ResourcePermission
  * @see    com.liferay.portal.model.ResourcePermissionModel
+ * @generated
  */
 public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermission> {
 	public static final String TABLE_NAME = "ResourcePermission";

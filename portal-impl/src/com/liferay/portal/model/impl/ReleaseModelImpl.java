@@ -50,13 +50,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Release_ table in the database.
+ * This interface is a model that represents the Release_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    ReleaseImpl
  * @see    com.liferay.portal.model.Release
  * @see    com.liferay.portal.model.ReleaseModel
+ * @generated
  */
 public class ReleaseModelImpl extends BaseModelImpl<Release> {
 	public static final String TABLE_NAME = "Release_";

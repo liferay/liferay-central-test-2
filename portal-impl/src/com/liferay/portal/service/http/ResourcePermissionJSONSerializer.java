@@ -30,8 +30,7 @@ import com.liferay.portal.model.ResourcePermission;
 import java.util.List;
 
 /**
- * <a href="ResourcePermissionJSONSerializer.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ResourcePermissionJSONSerializer.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -39,12 +38,12 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link ResourcePermissionServiceJSON} to translate
- * objects.
+ * This class is used by {@link ResourcePermissionServiceJSON} to translate objects.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ResourcePermissionServiceJSON
+ * @see    com.liferay.portal.service.http.ResourcePermissionServiceJSON
+ * @generated
  */
 public class ResourcePermissionJSONSerializer {
 	public static JSONObject toJSONObject(ResourcePermission model) {

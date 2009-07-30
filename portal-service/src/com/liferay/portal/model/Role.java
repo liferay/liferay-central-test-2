@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Role.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Role_ table in the database.
+ * This interface is a model that represents the Role_ table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    RoleModel
- * @see    com.liferay.portal.model.impl.RoleImpl
- * @see    com.liferay.portal.model.impl.RoleModelImpl
+ * @see RoleModel
+ * @see com.liferay.portal.model.impl.RoleImpl
+ * @see com.liferay.portal.model.impl.RoleModelImpl
+ * @generated
  */
 public interface Role extends RoleModel {
 	public java.lang.String getTitle(java.lang.String languageId);

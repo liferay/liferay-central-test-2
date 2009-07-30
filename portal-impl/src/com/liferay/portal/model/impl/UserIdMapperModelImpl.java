@@ -59,6 +59,7 @@ import java.util.List;
  * @see    UserIdMapperImpl
  * @see    com.liferay.portal.model.UserIdMapper
  * @see    com.liferay.portal.model.UserIdMapperModel
+ * @generated
  */
 public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {
 	public static final String TABLE_NAME = "UserIdMapper";

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="RegionModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,13 +32,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Region table in the database.
+ * This interface is a model that represents the Region table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Region
  * @see    com.liferay.portal.model.impl.RegionImpl
  * @see    com.liferay.portal.model.impl.RegionModelImpl
+ * @generated
  */
 public interface RegionModel extends BaseModel<Region> {
 	public long getPrimaryKey();

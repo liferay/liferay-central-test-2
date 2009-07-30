@@ -33,13 +33,15 @@ import java.util.Date;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Release_ table in the database.
+ * This interface is a model that represents the Release_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Release
  * @see    com.liferay.portal.model.impl.ReleaseImpl
  * @see    com.liferay.portal.model.impl.ReleaseModelImpl
+ * @generated
  */
 public interface ReleaseModel extends BaseModel<Release> {
 	public long getPrimaryKey();

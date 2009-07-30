@@ -31,8 +31,7 @@ import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortletPreferencesServiceUtil;
 
 /**
- * <a href="PortletPreferencesServiceHttp.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="PortletPreferencesServiceHttp.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -40,11 +39,11 @@ import com.liferay.portal.service.PortletPreferencesServiceUtil;
  * </p>
  *
  * <p>
- * This class provides a HTTP utility for the {@link
- * com.liferay.portal.service.PortletPreferencesServiceUtil} service utility.
- * The static methods of this class calls the same methods of the service
- * utility. However, the signatures are different because it requires an
- * additional {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
+ * This class provides a HTTP utility for the
+ * {@link com.liferay.portal.service.PortletPreferencesServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it requires an additional
+ * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
  * </p>
  *
  * <p>
@@ -66,6 +65,7 @@ import com.liferay.portal.service.PortletPreferencesServiceUtil;
  * @see    PortletPreferencesServiceSoap
  * @see    com.liferay.portal.security.auth.HttpPrincipal
  * @see    com.liferay.portal.service.PortletPreferencesServiceUtil
+ * @generated
  */
 public class PortletPreferencesServiceHttp {
 	public static void deleteArchivedPreferences(HttpPrincipal httpPrincipal,

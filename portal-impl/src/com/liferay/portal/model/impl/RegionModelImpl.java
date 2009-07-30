@@ -49,13 +49,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Region table in the database.
+ * This interface is a model that represents the Region table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    RegionImpl
  * @see    com.liferay.portal.model.Region
  * @see    com.liferay.portal.model.RegionModel
+ * @generated
  */
 public class RegionModelImpl extends BaseModelImpl<Region> {
 	public static final String TABLE_NAME = "Region";

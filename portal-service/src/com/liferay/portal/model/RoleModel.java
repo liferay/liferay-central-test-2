@@ -34,13 +34,15 @@ import java.util.Map;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Role_ table in the database.
+ * This interface is a model that represents the Role_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    Role
  * @see    com.liferay.portal.model.impl.RoleImpl
  * @see    com.liferay.portal.model.impl.RoleModelImpl
+ * @generated
  */
 public interface RoleModel extends BaseModel<Role> {
 	public long getPrimaryKey();

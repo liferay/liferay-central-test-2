@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PortletPreferences.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.PortletPreferencesImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.PortletPreferencesImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PortletPreferencesModel
- * @see    com.liferay.portal.model.impl.PortletPreferencesImpl
- * @see    com.liferay.portal.model.impl.PortletPreferencesModelImpl
+ * @see PortletPreferencesModel
+ * @see com.liferay.portal.model.impl.PortletPreferencesImpl
+ * @see com.liferay.portal.model.impl.PortletPreferencesModelImpl
+ * @generated
  */
 public interface PortletPreferences extends PortletPreferencesModel {
 }

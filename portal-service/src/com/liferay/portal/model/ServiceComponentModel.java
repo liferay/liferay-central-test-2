@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ServiceComponentModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    ServiceComponent
  * @see    com.liferay.portal.model.impl.ServiceComponentImpl
  * @see    com.liferay.portal.model.impl.ServiceComponentModelImpl
+ * @generated
  */
 public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public long getPrimaryKey();

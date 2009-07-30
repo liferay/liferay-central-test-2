@@ -54,13 +54,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the Phone table in the database.
+ * This interface is a model that represents the Phone table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    PhoneImpl
  * @see    com.liferay.portal.model.Phone
  * @see    com.liferay.portal.model.PhoneModel
+ * @generated
  */
 public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	public static final String TABLE_NAME = "Phone";

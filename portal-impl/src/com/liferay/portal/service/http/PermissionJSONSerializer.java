@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PermissionServiceJSON
+ * @see    com.liferay.portal.service.http.PermissionServiceJSON
+ * @generated
  */
 public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {

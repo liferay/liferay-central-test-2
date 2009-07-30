@@ -61,6 +61,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    WebsitePersistence
  * @see    WebsiteUtil
+ * @generated
  */
 public class WebsitePersistenceImpl extends BasePersistenceImpl
 	implements WebsitePersistence {
@@ -290,6 +291,18 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl
 		return update(website, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  website the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when website is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public Website update(Website website, boolean merge)
 		throws SystemException {
 		boolean isNew = website.isNew();

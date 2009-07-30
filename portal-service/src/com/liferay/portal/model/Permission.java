@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="Permission.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PermissionModel
- * @see    com.liferay.portal.model.impl.PermissionImpl
- * @see    com.liferay.portal.model.impl.PermissionModelImpl
+ * @see PermissionModel
+ * @see com.liferay.portal.model.impl.PermissionImpl
+ * @see com.liferay.portal.model.impl.PermissionModelImpl
+ * @generated
  */
 public interface Permission extends PermissionModel {
 	public java.lang.String getName();

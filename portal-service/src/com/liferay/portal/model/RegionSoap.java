@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.RegionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.RegionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.RegionServiceSoap
+ * @generated
  */
 public class RegionSoap implements Serializable {
 	public static RegionSoap toSoapModel(Region model) {

@@ -58,6 +58,7 @@ import java.util.List;
  * @see    UserTrackerPathImpl
  * @see    com.liferay.portal.model.UserTrackerPath
  * @see    com.liferay.portal.model.UserTrackerPathModel
+ * @generated
  */
 public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {
 	public static final String TABLE_NAME = "UserTrackerPath";

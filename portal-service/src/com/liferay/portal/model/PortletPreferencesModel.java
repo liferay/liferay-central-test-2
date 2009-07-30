@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="PortletPreferencesModel.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +40,7 @@ package com.liferay.portal.model;
  * @see    PortletPreferences
  * @see    com.liferay.portal.model.impl.PortletPreferencesImpl
  * @see    com.liferay.portal.model.impl.PortletPreferencesModelImpl
+ * @generated
  */
 public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public long getPrimaryKey();

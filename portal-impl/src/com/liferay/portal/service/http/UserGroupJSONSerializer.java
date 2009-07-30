@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserGroupServiceJSON
+ * @see    com.liferay.portal.service.http.UserGroupServiceJSON
+ * @generated
  */
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {

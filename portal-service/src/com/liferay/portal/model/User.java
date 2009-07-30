@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="User.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +32,8 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * This interface is a model that represents the User_ table in the database.
+ * This interface is a model that represents the User_ table in the
+ * database.
  * </p>
  *
  * <p>
@@ -40,9 +42,10 @@ package com.liferay.portal.model;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    UserModel
- * @see    com.liferay.portal.model.impl.UserImpl
- * @see    com.liferay.portal.model.impl.UserModelImpl
+ * @see UserModel
+ * @see com.liferay.portal.model.impl.UserImpl
+ * @see com.liferay.portal.model.impl.UserModelImpl
+ * @generated
  */
 public interface User extends UserModel {
 	public java.util.Date getBirthday();

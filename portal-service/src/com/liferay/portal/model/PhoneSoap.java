@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.PhoneServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.PhoneServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.PhoneServiceSoap
+ * @generated
  */
 public class PhoneSoap implements Serializable {
 	public static PhoneSoap toSoapModel(Phone model) {

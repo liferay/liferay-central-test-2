@@ -42,7 +42,8 @@ import java.util.List;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ResourceServiceJSON
+ * @see    com.liferay.portal.service.http.ResourceServiceJSON
+ * @generated
  */
 public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {

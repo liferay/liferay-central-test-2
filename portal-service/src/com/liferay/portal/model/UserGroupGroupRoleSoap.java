@@ -38,12 +38,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.UserGroupGroupRoleServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.UserGroupGroupRoleServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.UserGroupGroupRoleServiceSoap
+ * @generated
  */
 public class UserGroupGroupRoleSoap implements Serializable {
 	public static UserGroupGroupRoleSoap toSoapModel(UserGroupGroupRole model) {

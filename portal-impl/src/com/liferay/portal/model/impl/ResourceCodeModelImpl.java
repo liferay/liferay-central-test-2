@@ -57,6 +57,7 @@ import java.util.List;
  * @see    ResourceCodeImpl
  * @see    com.liferay.portal.model.ResourceCode
  * @see    com.liferay.portal.model.ResourceCodeModel
+ * @generated
  */
 public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 	public static final String TABLE_NAME = "ResourceCode";

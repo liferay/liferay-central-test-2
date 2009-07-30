@@ -41,6 +41,7 @@ import com.liferay.portal.SystemException;
  * @see    UserIdMapper
  * @see    com.liferay.portal.model.impl.UserIdMapperImpl
  * @see    com.liferay.portal.model.impl.UserIdMapperModelImpl
+ * @generated
  */
 public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public long getPrimaryKey();

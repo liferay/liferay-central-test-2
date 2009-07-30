@@ -37,12 +37,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.WebDAVPropsServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.WebDAVPropsServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.WebDAVPropsServiceSoap
+ * @generated
  */
 public class WebDAVPropsSoap implements Serializable {
 	public static WebDAVPropsSoap toSoapModel(WebDAVProps model) {

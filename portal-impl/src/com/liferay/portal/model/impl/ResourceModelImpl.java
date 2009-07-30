@@ -57,6 +57,7 @@ import java.util.List;
  * @see    ResourceImpl
  * @see    com.liferay.portal.model.Resource
  * @see    com.liferay.portal.model.ResourceModel
+ * @generated
  */
 public class ResourceModelImpl extends BaseModelImpl<Resource> {
 	public static final String TABLE_NAME = "Resource_";

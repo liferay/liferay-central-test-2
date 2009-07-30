@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+
 /**
  * <a href="UserGroupRolePersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,6 +34,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  * @see    UserGroupRolePersistenceImpl
  * @see    UserGroupRoleUtil
+ * @generated
  */
 public interface UserGroupRolePersistence extends BasePersistence {
 	public void cacheResult(
@@ -62,6 +64,18 @@ public interface UserGroupRolePersistence extends BasePersistence {
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  userGroupRole the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when userGroupRole is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public com.liferay.portal.model.UserGroupRole update(
 		com.liferay.portal.model.UserGroupRole userGroupRole, boolean merge)
 		throws com.liferay.portal.SystemException;

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+
 /**
  * <a href="ServiceComponent.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,14 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ServiceComponentImpl} and
- * rerun the ServiceBuilder to generate the new methods.
+ * Customize {@link com.liferay.portal.model.impl.ServiceComponentImpl} and rerun the
+ * ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    ServiceComponentModel
- * @see    com.liferay.portal.model.impl.ServiceComponentImpl
- * @see    com.liferay.portal.model.impl.ServiceComponentModelImpl
+ * @see ServiceComponentModel
+ * @see com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
+ * @generated
  */
 public interface ServiceComponent extends ServiceComponentModel {
 	public void setData(java.lang.String data);

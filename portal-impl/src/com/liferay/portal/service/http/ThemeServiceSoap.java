@@ -37,21 +37,21 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * This class provides a SOAP utility for the {@link
- * com.liferay.portal.service.ThemeServiceUtil} service utility. The static
- * methods of this class calls the same methods of the service utility. However,
- * the signatures are different because it is difficult for SOAP to support
- * certain types.
+ * This class provides a SOAP utility for the
+ * {@link com.liferay.portal.service.ThemeServiceUtil} service utility. The
+ * static methods of this class calls the same methods of the service utility.
+ * However, the signatures are different because it is difficult for SOAP to
+ * support certain types.
  * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.portal.model.ThemeSoap}. If
- * the method in the service utility returns a {@link
- * com.liferay.portal.model.Theme}, that is translated to a {@link
- * com.liferay.portal.model.ThemeSoap}. Methods that SOAP cannot safely wire are
- * skipped.
+ * is translated to an array of {@link com.liferay.portal.model.ThemeSoap}.
+ * If the method in the service utility returns a
+ * {@link com.liferay.portal.model.Theme}, that is translated to a
+ * {@link com.liferay.portal.model.ThemeSoap}. Methods that SOAP cannot
+ * safely wire are skipped.
  * </p>
  *
  * <p>
@@ -76,6 +76,7 @@ import java.rmi.RemoteException;
  * @see    ThemeServiceHttp
  * @see    com.liferay.portal.model.ThemeSoap
  * @see    com.liferay.portal.service.ThemeServiceUtil
+ * @generated
  */
 public class ThemeServiceSoap {
 	public static java.util.List getThemes(long companyId)

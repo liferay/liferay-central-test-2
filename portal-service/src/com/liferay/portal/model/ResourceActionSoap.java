@@ -36,12 +36,13 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This class is used by {@link
- * com.liferay.portal.service.http.ResourceActionServiceSoap}.
+ * This class is used by
+ * {@link com.liferay.portal.service.http.ResourceActionServiceSoap}.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.service.http.ResourceActionServiceSoap
+ * @generated
  */
 public class ResourceActionSoap implements Serializable {
 	public static ResourceActionSoap toSoapModel(ResourceAction model) {

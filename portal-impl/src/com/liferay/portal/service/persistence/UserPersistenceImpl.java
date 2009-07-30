@@ -72,6 +72,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @see    UserPersistence
  * @see    UserUtil
+ * @generated
  */
 public class UserPersistenceImpl extends BasePersistenceImpl
 	implements UserPersistence {
@@ -419,6 +420,18 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		return update(user, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param  user the entity to add, update, or merge
+	 * @param  merge boolean value for whether to merge the entity. The default
+	 *         value is false. Setting merge to true is more expensive and
+	 *         should only be true when user is transient. See
+	 *         LEP-5473 for a detailed discussion of this method.
+	 * @return the entity that was added, updated, or merged
+	 */
 	public User update(User user, boolean merge) throws SystemException {
 		boolean isNew = user.isNew();
 

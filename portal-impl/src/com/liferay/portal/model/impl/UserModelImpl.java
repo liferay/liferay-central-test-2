@@ -52,13 +52,15 @@ import java.util.List;
  * </p>
  *
  * <p>
- * This interface is a model that represents the User_ table in the database.
+ * This interface is a model that represents the User_ table in the
+ * database.
  * </p>
  *
  * @author Brian Wing Shun Chan
  * @see    UserImpl
  * @see    com.liferay.portal.model.User
  * @see    com.liferay.portal.model.UserModel
+ * @generated
  */
 public class UserModelImpl extends BaseModelImpl<User> {
 	public static final String TABLE_NAME = "User_";
