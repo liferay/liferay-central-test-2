@@ -31,6 +31,16 @@ import java.util.Locale;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+/**
+ * <a href="SelectItemList.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class provides a convenient way of building lists of JSF SelectItem
+ * objects, and convenience method for operating against them.
+ * </p>
+ *
+ * @author Neil Griffin
+ */
 public class SelectItemList extends ArrayList<SelectItem> {
 
 	public void prependEmptySelectItem(FacesContext facesContext) {

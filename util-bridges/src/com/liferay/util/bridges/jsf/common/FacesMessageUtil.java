@@ -30,6 +30,18 @@ import javax.faces.application.FacesMessage.Severity;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+/**
+ * <a href="FacesMessageUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This class provides static convenience methods for creating FacesMessage
+ * objects from locale-specific values in the Liferay portal.properties file,
+ * and adding them to the FacesContext either globally, or to individual
+ * components.
+ * </p>
+ *
+ * @author Neil Griffin
+ */
 public class FacesMessageUtil {
 
 	public static void error(FacesContext facesContext, String key) {

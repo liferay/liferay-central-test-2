@@ -26,6 +26,13 @@ import com.liferay.util.bridges.scripting.ScriptingPortlet;
 
 import javax.portlet.RenderRequest;
 
+/**
+ * <a href="JavaScriptPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
+ */
 public class JavaScriptPortlet extends ScriptingPortlet {
 
 	public void init() {

@@ -33,6 +33,12 @@ import javax.faces.context.FacesContext;
 
 import javax.portlet.PortletPreferences;
 
+/**
+ * <a href="PortletPreferencesManagedBean.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Neil Griffin
+ */
 public class PortletPreferencesManagedBean {
 
 	public PortletPreferencesManagedBean() {

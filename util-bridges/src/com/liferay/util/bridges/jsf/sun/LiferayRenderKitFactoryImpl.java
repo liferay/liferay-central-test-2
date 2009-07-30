@@ -28,6 +28,11 @@ import java.util.HashMap;
 
 import javax.faces.render.RenderKitFactory;
 
+/**
+ * <a href="LiferayRenderKitFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Myunghun Kim
+ */
 public class LiferayRenderKitFactoryImpl extends RenderKitFactoryImpl {
 
 	public LiferayRenderKitFactoryImpl() {

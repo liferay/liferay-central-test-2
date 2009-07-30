@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<javadoc>
-	<name>JSPPortlet</name>
-	<type>com.liferay.util.bridges.jsp.JSPPortlet</type>
-	<comment><![CDATA[]]></comment>
-	<author>Brian Wing Shun Chan</author>
-	<deprecated><![CDATA[This class has been renamed to <code>com.liferay.util.bridges.mvc.MVCPortlet</code>.]]></deprecated>
-</javadoc>

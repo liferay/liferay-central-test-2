@@ -28,6 +28,11 @@ import java.io.Writer;
 
 import javax.faces.context.ResponseWriter;
 
+/**
+ * <a href="LiferayRenderKitImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Myunghun Kim
+ */
 public class LiferayRenderKitImpl extends RenderKitImpl {
 
 	public ResponseWriter createResponseWriter(

@@ -27,6 +27,11 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+/**
+ * <a href="LiferayApplicationMap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Neil Griffin
+ */
 public class LiferayApplicationMap extends AbstractMap<String, Object> {
 
 	public LiferayApplicationMap(ServletContext servletContext) {

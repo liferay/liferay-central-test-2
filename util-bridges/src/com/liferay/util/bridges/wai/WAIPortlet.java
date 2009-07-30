@@ -50,6 +50,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * <a href="WAIPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
 public class WAIPortlet extends GenericPortlet {
 
 	public static final String CONNECTOR_IFRAME = "iframe";
