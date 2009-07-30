@@ -198,12 +198,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
-	<div class="breadcrumbs">
-		<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="entries" /></a></span> &raquo;
-
-		<span class="last"><liferay-ui:message key='<%= ((entry == null) ? Constants.ADD : Constants.UPDATE) + "-entry" %>' /></span>
-	</div>
-
 	<aui:fieldset>
 		<c:if test="<%= (entry == null) || entry.isDraft() %>">
 			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
