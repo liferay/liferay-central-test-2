@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<javadoc>
-	<name>UpgradeBlogs</name>
-	<type>com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs</type>
-	<comment><![CDATA[]]></comment>
-	<author>Douglas Wong</author>
-</javadoc>

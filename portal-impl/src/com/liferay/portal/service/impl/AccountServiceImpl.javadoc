@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<javadoc>
-	<name>AccountServiceImpl</name>
-	<type>com.liferay.portal.service.impl.AccountServiceImpl</type>
-	<comment><![CDATA[]]></comment>
-	<author>Brian Wing Shun Chan</author>
-</javadoc>
