@@ -317,17 +317,6 @@
 		/>
 	</target>
 
-	<target name="javadoc-delete">
-		<java
-			classname="com.liferay.portal.tools.JavadocBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg line="--command delete --limit ${limit}" />
-		</java>
-	</target>
-
 	<target name="deploy">
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
