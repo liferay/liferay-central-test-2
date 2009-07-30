@@ -355,9 +355,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		membershipRequestLocalService.deleteMembershipRequests(
 			group.getGroupId());
 
-		// Scheduled staging
+		// Staging
 
 		unscheduleStaging(group);
+
+		if (group.hasStagingGroup()) {
+			deleteGroup(group.getStagingGroup().getGroupId());
+		}
 
 		// Asset
 
