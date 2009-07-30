@@ -70,9 +70,7 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 
 	StringBuilder breadCrumbSB = new StringBuilder();
 
-	breadCrumbSB.append("<li>");
-	breadCrumbSB.append("<span>");
-	breadCrumbSB.append("<a href=\"");
+	breadCrumbSB.append("<li><span><a href=\"");
 	breadCrumbSB.append(layoutURL);
 	breadCrumbSB.append("\" ");
 	breadCrumbSB.append(target);
@@ -80,9 +78,7 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 
 	breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
 
-	breadCrumbSB.append("</a>");
-	breadCrumbSB.append("</span>");
-	breadCrumbSB.append("</li>");
+	breadCrumbSB.append("</a></span></li>");
 
 	Layout layoutParent = null;
 	long layoutParentId = selLayout.getParentLayoutId();
