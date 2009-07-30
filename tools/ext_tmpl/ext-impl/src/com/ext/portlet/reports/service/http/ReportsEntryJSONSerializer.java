@@ -11,6 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * <a href="ReportsEntryJSONSerializer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReportsEntryJSONSerializer {
     public static JSONObject toJSONObject(ReportsEntry model) {
         JSONObject jsonObj = JSONFactoryUtil.createJSONObject();

@@ -3,6 +3,11 @@ package com.ext.portlet.reports.service.persistence;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 
+/**
+ * <a href="ReportsEntryPersistence.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ReportsEntryPersistence extends BasePersistence {
     public void cacheResult(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry);

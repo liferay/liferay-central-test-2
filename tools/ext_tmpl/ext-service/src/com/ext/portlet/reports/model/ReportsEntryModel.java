@@ -5,6 +5,11 @@ import com.liferay.portal.model.BaseModel;
 import java.util.Date;
 
 
+/**
+ * <a href="ReportsEntryModel.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public interface ReportsEntryModel extends BaseModel<ReportsEntry> {
     public String getPrimaryKey();
 

@@ -19,6 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * <a href="ReportsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReportsEntryModelImpl extends BaseModelImpl<ReportsEntry> {
     public static final String TABLE_NAME = "ReportsEntry";
     public static final Object[][] TABLE_COLUMNS = {

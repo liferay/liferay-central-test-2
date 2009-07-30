@@ -7,6 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * <a href="ReportsEntrySoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReportsEntrySoap implements Serializable {
     private String _entryId;
     private String _companyId;

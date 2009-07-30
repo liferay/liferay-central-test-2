@@ -1,5 +1,10 @@
 package com.ext.portlet.reports.service.persistence;
 
+/**
+ * <a href="ReportsEntryUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReportsEntryUtil {
     private static ReportsEntryPersistence _persistence;
 

@@ -1,5 +1,10 @@
 package com.ext.portlet.reports.service;
 
+/**
+ * <a href="ReportsEntryServiceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class ReportsEntryServiceUtil {
     private static ReportsEntryService _service;
 

@@ -2,6 +2,11 @@ package com.ext.portlet.reports;
 
 import com.liferay.portal.PortalException;
 
+/**
+ * <a href="EntryNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ */
 public class EntryNameException extends PortalException {
 
 	public EntryNameException() {
