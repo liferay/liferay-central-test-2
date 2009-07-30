@@ -40,6 +40,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 
 public class IGUtil {
+
 	public static void addPortletBreadcrumbEntries(
 			IGImage image, HttpServletRequest request,
 			RenderResponse renderResponse)
