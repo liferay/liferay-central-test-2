@@ -33,7 +33,8 @@ import java.util.Map;
 public class MapUtil {
 
 	public static<K, V> void copy(
-			Map<K, V> master, Map<? super K, ? super V> copy) {
+		Map<K, V> master, Map<? super K, ? super V> copy) {
+
 		copy.clear();
 
 		merge(master, copy);
@@ -56,6 +57,7 @@ public class MapUtil {
 
 	public static int getInteger(
 		Map<String, ?> map, String key, int defaultValue) {
+
 		return GetterUtil.getInteger(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
@@ -66,6 +68,7 @@ public class MapUtil {
 
 	public static long getLong(
 		Map<Long, Long> map, long key, long defaultValue) {
+
 		Long keyObj = new Long(key);
 
 		if (map.containsKey(keyObj)) {
@@ -81,6 +84,7 @@ public class MapUtil {
 
 	public static short getShort(
 		Map<String, ?> map, String key, short defaultValue) {
+
 		return GetterUtil.getShort(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
@@ -91,6 +95,7 @@ public class MapUtil {
 
 	public static String getString(
 		Map<String, ?> map, String key, String defaultValue) {
+
 		if (map.containsKey(key)) {
 			Object value = map.get(key);
 
@@ -110,16 +115,17 @@ public class MapUtil {
 	}
 
 	public static<K, V> void merge(
-			Map<K, V> master, Map<? super K, ? super V> copy) {
+		Map<K, V> master, Map<? super K, ? super V> copy) {
+
 		copy.putAll(master);
 	}
 
 	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
 		String[] params) {
+
 		return toLinkedHashMap(params, StringPool.COLON);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static<T> LinkedHashMap<String, T> toLinkedHashMap(
 		String[] params, String delimiter) {
 

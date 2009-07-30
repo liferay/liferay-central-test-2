@@ -36,6 +36,20 @@ import java.util.Set;
 
 public class SetUtil {
 
+	public static <E> Set<E> fromArray(E[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return new HashSet<E>();
+		}
+
+		Set<E> set = new HashSet<E>(array.length);
+
+		for (int i = 0; i < array.length; i++) {
+			set.add(array[i]);
+		}
+
+		return set;
+	}
+
 	public static Set<Long> fromArray(long[] array) {
 		if ((array == null) || (array.length == 0)) {
 			return new HashSet<Long>();
@@ -50,22 +64,8 @@ public class SetUtil {
 		return set;
 	}
 
-	public static<E> Set<E> fromArray(E[] array) {
-		if ((array == null) || (array.length == 0)) {
-			return new HashSet<E>();
-		}
-
-		Set<E> set = new HashSet<E>(array.length);
-
-		for (int i = 0; i < array.length; i++) {
-			set.add(array[i]);
-		}
-
-		return set;
-	}
-
 	@SuppressWarnings("unchecked")
-	public static<E> Set<E> fromCollection(Collection<E> c) {
+	public static <E> Set<E> fromCollection(Collection<E> c) {
 		if ((c != null) && (Set.class.isAssignableFrom(c.getClass()))) {
 			return (Set)c;
 		}
@@ -77,7 +77,7 @@ public class SetUtil {
 		return new HashSet<E>(c);
 	}
 
-	public static<E> Set<E> fromEnumeration(Enumeration<E> enu) {
+	public static <E> Set<E> fromEnumeration(Enumeration<E> enu) {
 		Set<E> set = new HashSet<E>();
 
 		while (enu.hasMoreElements()) {
@@ -85,20 +85,6 @@ public class SetUtil {
 		}
 
 		return set;
-	}
-
-	public static<E> Set<E> fromIterator(Iterator<E> itr) {
-		Set<E> set = new HashSet<E>();
-
-		while (itr.hasNext()) {
-			set.add(itr.next());
-		}
-
-		return set;
-	}
-
-	public static Set<String> fromFile(String fileName) throws IOException {
-		return fromFile(new File(fileName));
 	}
 
 	public static Set<String> fromFile(File file) throws IOException {
@@ -117,7 +103,21 @@ public class SetUtil {
 		return set;
 	}
 
-	public static<E> Set<E> fromList(List<E> array) {
+	public static Set<String> fromFile(String fileName) throws IOException {
+		return fromFile(new File(fileName));
+	}
+
+	public static <E> Set<E> fromIterator(Iterator<E> itr) {
+		Set<E> set = new HashSet<E>();
+
+		while (itr.hasNext()) {
+			set.add(itr.next());
+		}
+
+		return set;
+	}
+
+	public static <E> Set<E> fromList(List<E> array) {
 		if ((array == null) || (array.size() == 0)) {
 			return new HashSet<E>();
 		}
