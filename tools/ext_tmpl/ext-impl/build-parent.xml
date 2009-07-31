@@ -77,7 +77,7 @@ ${exception.message}
 		</trycatch>
 
 		<copy todir="classes">
-			<fileset dir="src" excludes="**/*.java,**/*.javadoc" />
+			<fileset dir="src" excludes="**/*.java" />
 		</copy>
 	</target>
 

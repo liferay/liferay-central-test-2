@@ -129,7 +129,7 @@ ECJ was automatically installed. Please rerun your task.
 				<mkdir dir="${compile.file.dest}" />
 
 				<copy todir="${compile.file.dest}">
-					<fileset dir="docroot/WEB-INF/src" excludes="**/*.java,**/*.javadoc" />
+					<fileset dir="docroot/WEB-INF/src" excludes="**/*.java" />
 				</copy>
 
 				<javac

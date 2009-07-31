@@ -96,7 +96,7 @@ ${exception.message}
 		</copy>
 
 		<copy todir="${portal-impl.classes.dir}">
-			<fileset dir="src" excludes="**/*.java,**/*.javadoc" />
+			<fileset dir="src" excludes="**/*.java" />
 		</copy>
 	</target>
 
