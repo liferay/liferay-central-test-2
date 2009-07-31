@@ -30,7 +30,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ContactListener extends BaseModelListener<Contact> {
 

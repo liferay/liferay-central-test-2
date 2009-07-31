@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * <a href="SocialActivitiesTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class SocialActivitiesTag extends IncludeTag {
 

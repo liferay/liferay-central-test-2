@@ -32,7 +32,7 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 /**
  * <a href="JournalFeedPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalFeedPermission {
 

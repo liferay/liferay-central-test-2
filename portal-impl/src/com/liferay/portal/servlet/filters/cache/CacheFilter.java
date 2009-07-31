@@ -64,7 +64,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alexander Chow
  * @author Javier de Ros
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class CacheFilter extends BasePortalFilter {
 

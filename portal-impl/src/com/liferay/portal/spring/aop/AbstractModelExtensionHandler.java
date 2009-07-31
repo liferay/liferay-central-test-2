@@ -33,7 +33,7 @@ import java.util.List;
  * <a href="AbstractModelExtensionHandler.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public abstract class AbstractModelExtensionHandler<T>
 	implements ModelExtensionHandler<T> {

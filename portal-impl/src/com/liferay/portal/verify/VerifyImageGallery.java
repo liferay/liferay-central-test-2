@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * <a href="VerifyImageGallery.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class VerifyImageGallery extends VerifyProcess {
 

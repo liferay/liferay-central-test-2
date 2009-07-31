@@ -150,7 +150,7 @@ public interface WorkflowInstanceInfo {
 	 *
 	 * @return the domain object identifier, if related to one,
 	 *		   <code>null</code> otherwise
-	 * @see    WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
 	 *		   boolean) for more details about related domain objects
 	 */
 	public long getRelationId();
@@ -168,7 +168,7 @@ public interface WorkflowInstanceInfo {
 	 *
 	 * @return the domain object type identifier, if related to one,
 	 *		   <code>null</code> otherwise
-	 * @see    WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
 	 *		   boolean) for more details about related domain objects
 	 */
 	public String getRelationType();

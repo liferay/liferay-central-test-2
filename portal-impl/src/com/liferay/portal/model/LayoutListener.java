@@ -28,7 +28,7 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
  * <a href="LayoutListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class LayoutListener extends BaseModelListener<Layout> {
 

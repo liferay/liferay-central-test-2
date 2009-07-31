@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 /**
  * <a href="Constants.java.html"><b><i>View Source</i></b></a>
  *
- * @author     Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.util</code>.
  */

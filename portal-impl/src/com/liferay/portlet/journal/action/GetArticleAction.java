@@ -57,7 +57,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="GetArticleAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class GetArticleAction extends Action {
 

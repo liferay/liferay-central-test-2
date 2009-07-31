@@ -30,7 +30,7 @@ import com.liferay.portal.verify.VerifyException;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class StartupHelperUtil {
 

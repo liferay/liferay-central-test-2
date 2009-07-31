@@ -41,7 +41,7 @@ import javax.servlet.http.HttpSession;
  * <a href="OpenSSOFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Prashant Dighe
  */
 public class OpenSSOFilter extends BasePortalFilter {

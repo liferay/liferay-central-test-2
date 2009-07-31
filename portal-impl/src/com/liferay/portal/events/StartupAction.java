@@ -56,7 +56,7 @@ import com.liferay.portal.util.PropsValues;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class StartupAction extends SimpleAction {
 

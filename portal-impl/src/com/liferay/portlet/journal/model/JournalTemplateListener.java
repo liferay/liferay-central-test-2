@@ -33,7 +33,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalTemplateListener
 	extends BaseModelListener<JournalTemplate> {

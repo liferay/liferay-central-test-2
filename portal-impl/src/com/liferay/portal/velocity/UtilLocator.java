@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 /**
  * <a href="UtilLocator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class UtilLocator {
 

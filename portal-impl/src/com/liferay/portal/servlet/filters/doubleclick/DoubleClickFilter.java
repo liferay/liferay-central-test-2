@@ -39,7 +39,7 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class DoubleClickFilter extends BasePortalFilter {
 

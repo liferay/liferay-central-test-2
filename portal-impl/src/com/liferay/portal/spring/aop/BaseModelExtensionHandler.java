@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * <a href="BaseModelExtensionHandler.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class BaseModelExtensionHandler<T>
 	extends AbstractModelExtensionHandler<T> {

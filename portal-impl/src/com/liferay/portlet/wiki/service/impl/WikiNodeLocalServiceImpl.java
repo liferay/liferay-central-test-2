@@ -65,7 +65,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Charles May
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 

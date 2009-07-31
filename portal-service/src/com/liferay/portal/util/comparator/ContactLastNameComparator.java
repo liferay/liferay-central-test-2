@@ -25,7 +25,7 @@ package com.liferay.portal.util.comparator;
 /**
  * <a href="ContactLastNameComparator.java.html"><b><i>View Source</i></b></a>
  *
- * @author     Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
  * @deprecated This class has been renamed to <code>UserLastNameComparator
  *			   </code>.
  */

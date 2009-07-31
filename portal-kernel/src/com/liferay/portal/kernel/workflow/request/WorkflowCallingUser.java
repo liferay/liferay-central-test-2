@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.workflow.UserCredential;
  * </p>
  *
  * @author Micha Kiener
- * @see    BaseRequest BaseRequest for more information about the transport
+ * @see	   BaseRequest BaseRequest for more information about the transport
  *		   mechanism used for the credential
  */
 public class WorkflowCallingUser {

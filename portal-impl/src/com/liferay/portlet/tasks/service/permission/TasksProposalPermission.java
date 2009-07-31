@@ -32,7 +32,7 @@ import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 /**
  * <a href="TasksProposalPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class TasksProposalPermission {
 

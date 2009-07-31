@@ -46,7 +46,7 @@ import org.incava.util.diff.Difference;
  * Take a look at <code>DiffTest</code> to see the expected inputs and outputs.
  * </p>
  *
- * @author     Bruno Farache
+ * @author	   Bruno Farache
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.util</code>.
  */

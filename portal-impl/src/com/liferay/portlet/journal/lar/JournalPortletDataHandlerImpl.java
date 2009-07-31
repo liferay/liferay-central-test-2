@@ -108,14 +108,14 @@ import javax.portlet.PortletPreferences;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Karthik Sudarshan
- * @see    com.liferay.portal.lar.PortletDataHandler
- * @see    com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
- * @see    com.liferay.portlet.journal.lar.JournalCreationStrategy
+ * @see	   com.liferay.portal.lar.PortletDataHandler
+ * @see	   com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
+ * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
  */
 public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 

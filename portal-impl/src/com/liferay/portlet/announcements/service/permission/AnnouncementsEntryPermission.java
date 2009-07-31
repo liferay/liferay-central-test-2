@@ -33,7 +33,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceU
  * <a href="AnnouncementsEntryPermission.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class AnnouncementsEntryPermission {
 

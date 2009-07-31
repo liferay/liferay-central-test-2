@@ -28,7 +28,7 @@ import java.io.Serializable;
  * <a href="JournalArticleDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public interface JournalArticleDisplay extends Serializable {
 

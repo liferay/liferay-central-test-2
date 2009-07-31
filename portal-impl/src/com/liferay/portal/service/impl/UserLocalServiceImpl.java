@@ -143,7 +143,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Julio Camarero
  */

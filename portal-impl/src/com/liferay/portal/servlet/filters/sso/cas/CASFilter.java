@@ -47,7 +47,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Michael Young
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class CASFilter extends BasePortalFilter {
 

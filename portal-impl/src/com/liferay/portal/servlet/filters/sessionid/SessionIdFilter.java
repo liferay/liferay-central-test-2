@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class SessionIdFilter extends BasePortalFilter {
 

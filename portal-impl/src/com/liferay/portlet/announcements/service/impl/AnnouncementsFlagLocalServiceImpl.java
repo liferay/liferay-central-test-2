@@ -34,7 +34,7 @@ import java.util.Date;
  * </b></a>
  *
  * @author Thiago Moreira
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class AnnouncementsFlagLocalServiceImpl
 	extends AnnouncementsFlagLocalServiceBaseImpl {

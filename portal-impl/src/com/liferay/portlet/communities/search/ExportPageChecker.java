@@ -29,7 +29,7 @@ import javax.portlet.RenderResponse;
 /**
  * <a href="ExportPageChecker.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ExportPageChecker extends RowChecker {
 

@@ -33,7 +33,7 @@ import com.liferay.portlet.announcements.service.base.AnnouncementsFlagServiceBa
  * </a>
  *
  * @author Thiago Moreira
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class AnnouncementsFlagServiceImpl
 	extends AnnouncementsFlagServiceBaseImpl {

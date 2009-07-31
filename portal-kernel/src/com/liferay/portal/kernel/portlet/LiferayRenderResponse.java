@@ -27,7 +27,7 @@ import javax.portlet.RenderResponse;
 /**
  * <a href="LiferayRenderResponse.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public interface LiferayRenderResponse extends RenderResponse {
 

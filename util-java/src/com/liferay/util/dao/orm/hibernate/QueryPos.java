@@ -29,7 +29,7 @@ import org.hibernate.Query;
 /**
  * <a href="QueryPos.java.html"><b><i>View Source</i></b></a>
  *
- * @author     Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
  *			   <code>com.liferay.portal.kernel.dao.orm</code>.
  */

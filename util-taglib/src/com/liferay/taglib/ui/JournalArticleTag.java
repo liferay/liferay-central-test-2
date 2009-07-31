@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * <a href="JournalArticleTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalArticleTag extends IncludeTag {
 

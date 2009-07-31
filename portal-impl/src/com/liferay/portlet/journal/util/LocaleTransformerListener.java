@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * <a href="LocaleTransformerListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class LocaleTransformerListener extends TransformerListener {
 

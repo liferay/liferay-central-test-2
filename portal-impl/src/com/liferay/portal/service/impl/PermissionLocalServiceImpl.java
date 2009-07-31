@@ -62,7 +62,7 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 

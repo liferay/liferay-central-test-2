@@ -64,7 +64,7 @@ import java.util.List;
  *
  * @author Allen Chiang
  * @author Bruno Farache
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 

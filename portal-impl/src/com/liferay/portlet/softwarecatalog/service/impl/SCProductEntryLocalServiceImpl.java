@@ -81,7 +81,7 @@ import java.util.Properties;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {

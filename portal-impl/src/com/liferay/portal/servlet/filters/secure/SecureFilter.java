@@ -53,7 +53,7 @@ import javax.servlet.http.HttpSession;
  * <a href="SecureFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Alexander Chow
  */
 public class SecureFilter extends BasePortalFilter {

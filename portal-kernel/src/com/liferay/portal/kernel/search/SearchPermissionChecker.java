@@ -27,7 +27,7 @@ package com.liferay.portal.kernel.search;
  *
  * @author Allen Chiang
  * @author Bruno Farache
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public interface SearchPermissionChecker {
 

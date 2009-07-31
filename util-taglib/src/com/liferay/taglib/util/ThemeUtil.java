@@ -51,7 +51,7 @@ import org.apache.struts.tiles.ComponentContext;
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ThemeUtil {
 

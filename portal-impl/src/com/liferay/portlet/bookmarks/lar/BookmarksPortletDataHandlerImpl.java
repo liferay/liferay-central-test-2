@@ -59,7 +59,7 @@ import javax.portlet.PortletPreferences;
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 

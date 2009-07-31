@@ -45,7 +45,7 @@ import org.apache.commons.lang.time.StopWatch;
  * <a href="JournalContentImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Michael Young
  */
 public class JournalContentImpl implements JournalContent {

@@ -60,7 +60,7 @@ import org.apache.velocity.exception.VelocityException;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalVmUtil {
 

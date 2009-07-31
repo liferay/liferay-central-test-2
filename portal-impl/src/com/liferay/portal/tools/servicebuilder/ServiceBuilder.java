@@ -99,7 +99,7 @@ import org.dom4j.DocumentException;
  * @author Harry Mark
  * @author Tariq Dweik
  * @author Glenn Powell
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Prashant Dighe
  */
 public class ServiceBuilder {

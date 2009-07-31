@@ -83,11 +83,11 @@ import javax.portlet.PortletPreferences;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Bruno Farache
- * @see    com.liferay.portal.lar.PortletDataHandler
- * @see    com.liferay.portlet.journal.lar.JournalCreationStrategy
- * @see    com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
+ * @see	   com.liferay.portal.lar.PortletDataHandler
+ * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
+ * @see	   com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  */
 public class JournalContentPortletDataHandlerImpl
 	extends BasePortletDataHandler {

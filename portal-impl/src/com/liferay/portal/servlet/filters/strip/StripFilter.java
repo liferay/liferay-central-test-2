@@ -48,7 +48,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="StripFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class StripFilter extends BasePortalFilter {
 

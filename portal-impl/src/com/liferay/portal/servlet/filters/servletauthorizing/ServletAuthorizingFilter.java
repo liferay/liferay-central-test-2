@@ -49,7 +49,7 @@ import org.apache.struts.Globals;
 /**
  * <a href="ServletAuthorizingFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ServletAuthorizingFilter extends BasePortalFilter {
 

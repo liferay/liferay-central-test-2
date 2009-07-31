@@ -36,7 +36,7 @@ import org.aspectj.lang.Signature;
 /**
  * <a href="ModelExtensionAdvice.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ModelExtensionAdvice<T> {
 

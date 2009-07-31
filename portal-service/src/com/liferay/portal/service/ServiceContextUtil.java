@@ -35,7 +35,7 @@ import javax.portlet.PortletPreferences;
 /**
  * <a href="ServiceContextUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */

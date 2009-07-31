@@ -32,7 +32,7 @@ import javax.servlet.jsp.JspException;
 /**
  * <a href="ToggleAreaTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 

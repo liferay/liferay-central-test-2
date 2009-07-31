@@ -46,7 +46,7 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class PluginPackageIndexer implements Indexer {
 

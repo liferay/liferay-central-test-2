@@ -52,7 +52,7 @@ import java.util.Map;
  * </a>
  *
  * @author Thiago Moreira
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class AnnouncementsEntryFinderImpl
 	extends BasePersistenceImpl implements AnnouncementsEntryFinder {

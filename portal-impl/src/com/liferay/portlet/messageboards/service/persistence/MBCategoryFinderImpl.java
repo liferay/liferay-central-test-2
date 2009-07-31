@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * <a href="MBCategoryFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class MBCategoryFinderImpl
 	extends BasePersistenceImpl implements MBCategoryFinder {

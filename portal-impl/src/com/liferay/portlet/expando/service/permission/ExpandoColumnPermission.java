@@ -32,7 +32,7 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 /**
  * <a href="ExpandoColumnPermission.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class ExpandoColumnPermission {
 

@@ -79,7 +79,7 @@ import javax.xml.stream.XMLStreamReader;
  *
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 

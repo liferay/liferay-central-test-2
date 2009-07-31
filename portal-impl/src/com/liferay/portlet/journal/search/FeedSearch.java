@@ -34,7 +34,7 @@ import javax.portlet.PortletURL;
 /**
  * <a href="FeedSearch.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class FeedSearch extends SearchContainer<JournalFeed> {
 

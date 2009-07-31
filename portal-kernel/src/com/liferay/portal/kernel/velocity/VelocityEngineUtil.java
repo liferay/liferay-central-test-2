@@ -30,7 +30,7 @@ import java.io.Writer;
 /**
  * <a href="VelocityEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class VelocityEngineUtil {
 

@@ -62,7 +62,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class StartupHelper {
 

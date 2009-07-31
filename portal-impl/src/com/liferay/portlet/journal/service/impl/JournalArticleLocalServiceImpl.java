@@ -119,7 +119,7 @@ import javax.portlet.PortletPreferences;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Bruno Farache
  */
 public class JournalArticleLocalServiceImpl

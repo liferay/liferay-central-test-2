@@ -58,7 +58,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="EditFeedAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class EditFeedAction extends PortletAction {
 

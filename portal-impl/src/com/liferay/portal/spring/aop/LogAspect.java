@@ -44,9 +44,9 @@ package com.liferay.portal.spring.aop;
 /**
  * <a href="LogAspect.java.html"><b><i>View Source</i></b></a>
  *
- * @author     Karthik Sudarshan
- * @author     Brian Wing Shun Chan
- * @author     Michael Young
+ * @author	   Karthik Sudarshan
+ * @author	   Brian Wing Shun Chan
+ * @author	   Michael Young
  * @deprecated This class has been renamed to <code>LogAdvice</code>.
  */
 public class LogAspect extends LogAdvice {

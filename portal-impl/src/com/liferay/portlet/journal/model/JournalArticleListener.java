@@ -31,7 +31,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalArticleListener extends BaseModelListener<JournalArticle> {
 

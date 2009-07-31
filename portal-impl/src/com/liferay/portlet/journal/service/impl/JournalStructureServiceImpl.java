@@ -35,7 +35,7 @@ import com.liferay.portlet.journal.service.permission.JournalStructurePermission
  * <a href="JournalStructureServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class JournalStructureServiceImpl
 	extends JournalStructureServiceBaseImpl {

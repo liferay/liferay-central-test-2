@@ -36,7 +36,7 @@ import java.io.OutputStream;
 /**
  * <a href="FileCacheOutputStream.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  */
 public class FileCacheOutputStream extends OutputStream {
 

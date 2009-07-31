@@ -38,7 +38,7 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 /**
  * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */
 public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
