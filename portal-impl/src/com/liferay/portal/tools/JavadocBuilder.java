@@ -127,7 +127,7 @@ public class JavadocBuilder {
 				name.equals("since") || name.equals("version")) {
 
 				if (value.startsWith("Raymond Aug")) {
-					value = "Raymond Augï¿½";
+					value = "Raymond Augé";
 				}
 
 				DocUtil.add(parentElement, name, value);
