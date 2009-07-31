@@ -102,7 +102,7 @@ import javax.portlet.WindowState;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Bruno Farache
  * @author Julio Camarero
  */
@@ -359,8 +359,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Children
 
-		List<WikiPage> children = wikiPagePersistence.findByN_P(
-			page.getNodeId(), page.getTitle());
+		List<WikiPage> children = wikiPagePersistence.findByN_H_P(
+			page.getNodeId(), true, page.getTitle());
 
 		for (WikiPage curPage : children) {
 			deletePage(curPage);
