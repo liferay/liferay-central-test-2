@@ -66,6 +66,17 @@ permissionsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 
+// Public Render Parameters
+
+PortletURL publicRenderParametersURL = renderResponse.createRenderURL();
+
+publicRenderParametersURL.setWindowState(WindowState.MAXIMIZED);
+
+publicRenderParametersURL.setParameter("struts_action", "/portlet_configuration/edit_public_render_parameters");
+publicRenderParametersURL.setParameter("redirect", redirect);
+publicRenderParametersURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+publicRenderParametersURL.setParameter("portletResource", portletResource);
+
 // Sharing
 
 PortletURL sharingURL = renderResponse.createRenderURL();
@@ -107,6 +118,12 @@ if (portlet.hasMultipleMimeTypes()) {
 tabs1Names += ",permissions";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
+
+if (!portlet.getPublicRenderParameters().isEmpty()) {
+	tabs1Names += ",communication";
+
+	request.setAttribute("liferay-ui:tabs:url" + pos++, publicRenderParametersURL.toString());
+}
 
 tabs1Names += ",sharing";
 

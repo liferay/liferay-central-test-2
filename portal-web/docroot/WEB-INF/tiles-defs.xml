@@ -963,6 +963,10 @@
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_archived_setups.jsp" />
 	</definition>
 
+	<definition name="portlet.portlet_configuration.edit_public_render_parameters" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/edit_public_render_parameters.jsp" />
+	</definition>
+
 	<definition name="portlet.portlet_configuration.edit_configuration" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_configuration.jsp" />
 	</definition>

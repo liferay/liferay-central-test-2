@@ -50,6 +50,7 @@ import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
@@ -578,7 +579,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		else {
 			if (!_portletName.equals(ppid)) {
 				putPublicRenderParameters(
-					request, plid, ppid, oldRenderParameters);
+					request, preferences, plid, ppid, oldRenderParameters);
 			}
 
 			enu = Collections.enumeration(oldRenderParameters.keySet());
@@ -695,8 +696,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	protected void putPublicRenderParameters(
-		HttpServletRequest request, long plid, String ppid,
-		Map<String, String[]> renderParameters) {
+		HttpServletRequest request, PortletPreferences preferences, long plid,
+		String ppid, Map<String, String[]> renderParameters) {
 
 		Enumeration<String> names = request.getParameterNames();
 
@@ -705,18 +706,41 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 			QName qName = PortletQNameUtil.getQName(name);
 
+			PublicRenderParameter publicRenderParameter;
+
 			if (qName == null) {
-				continue;
+				String preferencesMappingKey =
+					PublicRenderParameterConfiguration.MAPPING_PREFIX + name;
+
+				String mapping = preferences.getValue(
+					preferencesMappingKey, StringPool.BLANK);
+
+				if (Validator.isNull(mapping)) {
+					continue;
+				}
+
+				publicRenderParameter = _portlet.getPublicRenderParameter(
+					mapping);
+			}
+			else {
+				publicRenderParameter = _portlet.getPublicRenderParameter(
+					qName.getNamespaceURI(), qName.getLocalPart());
 			}
 
-			PublicRenderParameter publicRenderParameter =
-				_portlet.getPublicRenderParameter(
-					qName.getNamespaceURI(), qName.getLocalPart());
-
 			if (publicRenderParameter != null) {
-				renderParameters.put(
-					publicRenderParameter.getIdentifier(),
-					request.getParameterValues(name));
+				String preferencesIgnoreKey =
+					PublicRenderParameterConfiguration.IGNORE_PREFIX +
+						publicRenderParameter.getIdentifier();
+
+				boolean ignore = GetterUtil.getBoolean(
+					preferences.getValue(
+						preferencesIgnoreKey, StringPool.FALSE));
+
+				if (!ignore) {
+					renderParameters.put(
+						publicRenderParameter.getIdentifier(),
+						request.getParameterValues(name));
+				}
 			}
 		}
 
@@ -739,8 +763,33 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 				_portlet.getPublicRenderParameter(name);
 
 			if (publicRenderParameter != null) {
-				renderParameters.put(
-					publicRenderParameter.getIdentifier(), values);
+
+				String preferencesIgnoreKey =
+					PublicRenderParameterConfiguration.IGNORE_PREFIX +
+						publicRenderParameter.getIdentifier();
+				boolean ignore = GetterUtil.getBoolean(
+					preferences.getValue(
+						preferencesIgnoreKey, StringPool.FALSE));
+
+				if (!ignore) {
+					String preferencesMapToKey =
+						PublicRenderParameterConfiguration.MAPPING_PREFIX +
+							publicRenderParameter.getIdentifier();
+					String mappingValue = preferences.getValue(
+						preferencesMapToKey, StringPool.BLANK);
+
+					if (!StringPool.BLANK.equals(mappingValue)) {
+						if (ppidRenderParameters.containsKey(mappingValue)) {
+							renderParameters.put(
+								publicRenderParameter.getIdentifier(),
+								ppidRenderParameters.get(mappingValue));
+						}
+					}
+					else {
+						renderParameters.put(
+							publicRenderParameter.getIdentifier(), values);
+					}
+				}
 			}
 		}
 	}
