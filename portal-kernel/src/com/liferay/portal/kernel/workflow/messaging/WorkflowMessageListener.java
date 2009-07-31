@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow.messaging;
 
+import java.util.Formatter;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -32,8 +34,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.proxy.WorkflowResultContainer;
 import com.liferay.portal.kernel.workflow.request.BaseRequest;
-
-import java.util.Formatter;
 
 /**
  * <a href="WorkflowMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -52,6 +52,11 @@ public class WorkflowMessageListener implements MessageListener {
 	/**
 	 * Constructor using the manager to invoke methods on and the expected
 	 * request class this listener will be able to handle.
+	 * 
+	 * @param manager the manager instance to invoke methods on given by the
+	 *            payload of the message
+	 * @param requestClazz the expected request class as the payload of the
+	 *            message being handled by this listener
 	 */
 	public WorkflowMessageListener(
 		Object manager, Class<? extends BaseRequest> requestClazz,

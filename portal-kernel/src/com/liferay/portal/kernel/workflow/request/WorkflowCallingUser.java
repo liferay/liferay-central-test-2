@@ -56,9 +56,10 @@ public class WorkflowCallingUser {
 	 * workflow engine. <b>IMPORTANT</b> It has to make sure, to remove the
 	 * credential in a finally after the method execution by invoking this
 	 * method again by passing in <code>null</code>.
+	 * 
+	 * @param userCredential the current user credential to be made available
 	 */
 	public static void setCallingUserCredential(UserCredential userCredential) {
-
 		_callingUser.set(userCredential);
 	}
 

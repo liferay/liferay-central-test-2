@@ -64,6 +64,13 @@ public interface WorkflowDefinitionManager {
 	 * old definition, and newly created workflow instances are created by using
 	 * the new version.
 	 * </p>
+	 *
+	 * @param workflowDefinition the workflow definition to be deployed
+	 * @param callingUserId the id of the user deploying the workflow definition
+	 *			(see {@link WorkflowUtil#createUserCredential(long)} for more
+	 *			information)
+	 * @throws WorkflowException is thrown, if deployment of the definition
+	 *			 failed
 	 */
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId)
@@ -75,12 +82,12 @@ public interface WorkflowDefinitionManager {
 	 * workflow definitions but without the definition model file actually, so
 	 * {@link WorkflowDefinition#getJar()} will always return <code>null</code>.
 	 * The list will only contain the newest (actual) version of a definition,
-	 * if you need all versions for a specific version, use the method {@link
-	 * #getWorkflowDefinitions(String)} instead where all versions for a
+	 * if you need all versions for a specific version, use the method
+	 * {@link #getWorkflowDefinitions(String)} instead where all versions for a
 	 * specific workflow definition are being returned.
 	 *
 	 * @return the list of available workflow definitions, never
-	 *		   <code>null</code>
+	 *         <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions();
 
@@ -90,9 +97,11 @@ public interface WorkflowDefinitionManager {
 	 * there is only one version available or versioning is not supported at all
 	 * by the underlying workflow engine.
 	 *
+	 * @param workflowDefinitionName the name of the workflow definition to
+	 *            retrieve all versions for
 	 * @return the list of all versions, if any found, an empty list otherwise
-	 *		   or a list containing just one element, must never be
-	 *		   <code>null</code>
+	 *         or a list containing just one element, must never be
+	 *         <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName);

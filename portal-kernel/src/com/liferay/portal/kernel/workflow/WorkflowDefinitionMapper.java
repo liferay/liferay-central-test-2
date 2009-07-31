@@ -48,8 +48,10 @@ public interface WorkflowDefinitionMapper {
 	 * Returns the workflow definition name mapped to the given domain class, if
 	 * any, <code>null</code> otherwise.
 	 *
+	 * @param domainClass the domain class to return its mapped workflow
+	 *            definition
 	 * @return the name of the workflow definition mapped to the given domain
-	 *		   class or <code>null</code> if no such mapping available
+	 *         class or <code>null</code> if no such mapping available
 	 */
 	public String getWorkflowDefinitionName(Class<?> domainClass);
 
@@ -57,8 +59,10 @@ public interface WorkflowDefinitionMapper {
 	 * Returns <code>true</code>, if there is a mapping for the given domain
 	 * class, <code>false</code>, if no mapping was made.
 	 *
+	 * @param domainClass the domain class to check for having a mapping to a
+	 *            workflow definition name
 	 * @return <code>true</code>, if there is a mapping between the given domain
-	 *		   class and a workflow definition
+	 *         class and a workflow definition
 	 */
 	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
 
@@ -66,8 +70,11 @@ public interface WorkflowDefinitionMapper {
 	 * Specifies a new mapping between a domain class and a workflow definition
 	 * name.
 	 *
+	 * @param domainClass the domain class to be mapped
+	 * @param workflowDefinitionName the workflow definition name as the mapping
+	 *            to the given domain class
 	 * @return the old workflow definition name, if any previously set,
-	 *		   <code>null</code> otherwise
+	 *         <code>null</code> otherwise
 	 */
 	public String setWorkflowDefinitionMapping(
 		Class<?> domainClass, String workflowDefinitionName);

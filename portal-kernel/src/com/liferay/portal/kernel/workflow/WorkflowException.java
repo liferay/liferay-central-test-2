@@ -53,6 +53,8 @@ public class WorkflowException extends PortalException {
 	/**
 	 * This constructor just takes a message as the exception descriptor and
 	 * does not include an original cause.
+	 *
+	 * @param msg the message for the exception
 	 */
 	public WorkflowException(String msg) {
 		super(msg);
@@ -62,6 +64,8 @@ public class WorkflowException extends PortalException {
 	 * This constructor, taking the original cause, should only be used, if the
 	 * engine lives in the same JVM as the client or if the class of the cause
 	 * is serializable and available within the client system.
+	 *
+	 * @param cause the original cause for this exception
 	 */
 	public WorkflowException(Throwable cause) {
 		super(cause);
@@ -72,6 +76,9 @@ public class WorkflowException extends PortalException {
 	 * should only be used, if the engine lives in the same JVM as the client or
 	 * if the class of the cause is serializable and available within the client
 	 * system.
+	 *
+	 * @param msg the additional message for the exception
+	 * @param cause the original cause for this exception
 	 */
 	public WorkflowException(String msg, Throwable cause) {
 		super(msg, cause);
