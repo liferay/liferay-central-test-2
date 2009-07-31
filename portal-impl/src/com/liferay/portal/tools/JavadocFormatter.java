@@ -45,6 +45,7 @@ import com.thoughtworks.qdox.model.Type;
 import jargs.gnu.CmdLineParser;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -61,16 +62,10 @@ import org.apache.tools.ant.DirectoryScanner;
 /**
  * <a href="JavadocFormatter.java.html"><b><i>View Source</i></b></a>
  *
- * 
- *
+ * @author Brian Wing Shun Chan
  */
 public class JavadocFormatter {
 
-	/**
-	 * 
-	 *
-	 * @param args 
-	 */
 	public static void main(String[] args) {
 		try {
 			new JavadocFormatter(args);
@@ -80,12 +75,6 @@ public class JavadocFormatter {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param args 
-	 * @throws Exception 
-	 */
 	public JavadocFormatter(String[] args) throws Exception {
 		CmdLineParser cmdLineParser = new CmdLineParser();
 
@@ -140,12 +129,6 @@ public class JavadocFormatter {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param rootElement 
-	 * @param javaClass 
-	 */
 	private void _addClassCommentElement(
 		Element rootElement, JavaClass javaClass) {
 
@@ -168,16 +151,10 @@ public class JavadocFormatter {
 		commentElement.addCDATA(comment);
 	}
 
-	/**
-	 * 
-	 *
-	 * @param parentElement 
-	 * @param abstractJavaEntity 
-	 * @param name 
-	 */
 	private void _addDocletElements(
-		Element parentElement, AbstractJavaEntity abstractJavaEntity,
-		String name) {
+			Element parentElement, AbstractJavaEntity abstractJavaEntity,
+			String name)
+		throws Exception {
 
 		DocletTag[] docletTags = abstractJavaEntity.getTagsByName(name);
 
@@ -188,30 +165,23 @@ public class JavadocFormatter {
 				name.equals("since") || name.equals("version")) {
 
 				if (value.startsWith("Raymond Aug")) {
-					value = "Raymond Augé";
+					value = new String(
+						"Raymond Augé".getBytes(), StringPool.UTF8);
 				}
-
-				DocUtil.add(parentElement, name, value);
 			}
-			else {
-				Element element = parentElement.addElement(name);
 
-				element.addCDATA(value);
-			}
+			Element element = parentElement.addElement(name);
+
+			element.addCDATA(value);
 		}
 
 		if ((docletTags.length == 0) && name.equals("author")) {
-			DocUtil.add(parentElement, name, ServiceBuilder.AUTHOR);
+			Element element = parentElement.addElement(name);
+
+			element.addCDATA(ServiceBuilder.AUTHOR);
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param parentElement 
-	 * @param names 
-	 * @param indent 
-	 */
 	private String _addDocletTags(
 		Element parentElement, String[] names, String indent) {
 
@@ -260,6 +230,42 @@ public class JavadocFormatter {
 			maxNameIndent, StringPool.FOUR_SPACES, "\t");
 
 		for (String name : names) {
+			String curNameIndent = " ";
+
+			if (name.length() < maxNameLength) {
+				int firstTab = 4 - (name.length() % 4);
+
+				int delta = (maxNameLength + 1) - (name.length() + firstTab);
+
+				if (delta == 0) {
+					curNameIndent = "\t";
+				}
+				else if (delta < 0) {
+					for (int i = 0; i < (maxNameLength - name.length()); i++) {
+						curNameIndent += " ";
+					}
+				}
+				else if (delta > 0) {
+					curNameIndent = "\t";
+
+					int numberOfTabs = delta / 4;
+
+					if (numberOfTabs > 0) {
+						for (int i = 0; i < numberOfTabs; i++) {
+							curNameIndent += "\t";
+						}
+					}
+
+					int numberOfSpaces = delta % 4;
+
+					if (numberOfSpaces > 0) {
+						for (int i = 0; i < numberOfSpaces; i++) {
+							curNameIndent += " ";
+						}
+					}
+				}
+			}
+
 			List<Element> elements = parentElement.elements(name);
 
 			for (Element element : elements) {
@@ -281,11 +287,7 @@ public class JavadocFormatter {
 				sb.append(indent);
 				sb.append(" * @");
 				sb.append(name);
-				sb.append(" ");
-
-				for (int i = 0; i < maxNameLength - name.length(); i++) {
-					sb.append(" ");
-				}
+				sb.append(curNameIndent);
 
 				if (commentElement != null) {
 					comment = element.elementText("name") + " " + comment;
@@ -314,13 +316,9 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param rootElement 
-	 * @param javaField 
-	 */
-	private void _addFieldElement(Element rootElement, JavaField javaField) {
+	private void _addFieldElement(Element rootElement, JavaField javaField)
+		throws Exception {
+
 		Element fieldElement = rootElement.addElement("field");
 
 		DocUtil.add(fieldElement, "name", javaField.getName());
@@ -335,13 +333,9 @@ public class JavadocFormatter {
 		_addDocletElements(fieldElement, javaField, "deprecated");
 	}
 
-	/**
-	 * 
-	 *
-	 * @param rootElement 
-	 * @param javaMethod 
-	 */
-	private void _addMethodElement(Element rootElement, JavaMethod javaMethod) {
+	private void _addMethodElement(Element rootElement, JavaMethod javaMethod)
+		throws Exception {
+
 		Element methodElement = rootElement.addElement("method");
 
 		DocUtil.add(methodElement, "name", javaMethod.getName());
@@ -359,13 +353,6 @@ public class JavadocFormatter {
 		_addDocletElements(methodElement, javaMethod, "deprecated");
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 * @param javaParameter 
-	 * @param paramDocletTags 
-	 */
 	private void _addParamElement(
 		Element methodElement, JavaParameter javaParameter,
 		DocletTag[] paramDocletTags) {
@@ -401,12 +388,6 @@ public class JavadocFormatter {
 		commentElement.addCDATA(_getCDATA(value));
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 * @param javaMethod 
-	 */
 	private void _addParamElements(
 		Element methodElement, JavaMethod javaMethod) {
 
@@ -419,14 +400,9 @@ public class JavadocFormatter {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 * @param javaMethod 
-	 */
 	private void _addReturnElement(
-		Element methodElement, JavaMethod javaMethod) {
+			Element methodElement, JavaMethod javaMethod)
+		throws Exception {
 
 		Type returns = javaMethod.getReturns();
 
@@ -437,13 +413,6 @@ public class JavadocFormatter {
 		_addDocletElements(methodElement, javaMethod, "return");
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 * @param exception 
-	 * @param throwsDocletTags 
-	 */
 	private void _addThrowsElement(
 		Element methodElement, Type exception, DocletTag[] throwsDocletTags) {
 
@@ -478,12 +447,6 @@ public class JavadocFormatter {
 
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 * @param javaMethod 
-	 */
 	private void _addThrowsElements(
 		Element methodElement, JavaMethod javaMethod) {
 
@@ -496,20 +459,10 @@ public class JavadocFormatter {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param abstractJavaEntity 
-	 */
 	private String _getCDATA(AbstractJavaEntity abstractJavaEntity) {
 		return _getCDATA(abstractJavaEntity.getComment());
 	}
 
-	/**
-	 * 
-	 *
-	 * @param cdata 
-	 */
 	private String _getCDATA(String cdata) {
 		if (cdata == null) {
 			return StringPool.BLANK;
@@ -533,29 +486,14 @@ public class JavadocFormatter {
 		return cdata.trim();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param fieldElement 
-	 */
 	private String _getFieldKey(Element fieldElement) {
 		return fieldElement.elementText("name");
 	}
 
-	/**
-	 * 
-	 *
-	 * @param javaField 
-	 */
 	private String _getFieldKey(JavaField javaField) {
 		return javaField.getName();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param indent 
-	 */
 	private int _getIndentLength(String indent) {
 		int indentLength = 0;
 
@@ -571,13 +509,6 @@ public class JavadocFormatter {
 		return indentLength;
 	}
 
-	/**
-	 * 
-	 *
-	 * @param fileName 
-	 * @param reader 
-	 * @throws Exception 
-	 */
 	private JavaClass _getJavaClass(String fileName, Reader reader)
 		throws Exception {
 
@@ -615,12 +546,6 @@ public class JavadocFormatter {
 		return builder.getClassByName(className);
 	}
 
-	/**
-	 * 
-	 *
-	 * @param rootElement 
-	 * @param javaClass 
-	 */
 	private String _getJavaClassComment(
 		Element rootElement, JavaClass javaClass) {
 
@@ -665,8 +590,7 @@ public class JavadocFormatter {
 		String docletTags = _addDocletTags(
 			rootElement,
 			new String[] {
-				"author", "verversionsion", "see", "since", "serial",
-				"deprecated"
+				"author", "version", "see", "since", "serial", "deprecated"
 			},
 			indent);
 
@@ -683,12 +607,6 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param javaClass 
-	 * @throws Exception 
-	 */
 	private Document _getJavadocDocument(JavaClass javaClass) throws Exception {
 		Element rootElement = _saxReaderUtil.createElement("javadoc");
 
@@ -720,13 +638,6 @@ public class JavadocFormatter {
 		return document;
 	}
 
-	/**
-	 * 
-	 *
-	 * @param lines 
-	 * @param fieldElementsMap 
-	 * @param javaField 
-	 */
 	private String _getJavaFieldComment(
 		String[] lines, Map<String, Element> fieldElementsMap,
 		JavaField javaField) {
@@ -789,13 +700,6 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param lines 
-	 * @param methodElementsMap 
-	 * @param javaMethod 
-	 */
 	private String _getJavaMethodComment(
 		String[] lines, Map<String, Element> methodElementsMap,
 		JavaMethod javaMethod) {
@@ -862,11 +766,6 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param methodElement 
-	 */
 	private String _getMethodKey(Element methodElement) {
 		StringBuilder sb = new StringBuilder();
 
@@ -887,11 +786,6 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param javaMethod 
-	 */
 	private String _getMethodKey(JavaMethod javaMethod) {
 		StringBuilder sb = new StringBuilder();
 
@@ -912,11 +806,6 @@ public class JavadocFormatter {
 		return sb.toString();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param content 
-	 */
 	private boolean _isGenerated(String content) {
 		if (content.contains("* @generated")) {
 			return true;
@@ -926,12 +815,6 @@ public class JavadocFormatter {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param javaClass 
-	 * @param content 
-	 */
 	private String _removeJavadocFromJava(
 		JavaClass javaClass, String content) {
 
@@ -983,17 +866,21 @@ public class JavadocFormatter {
 		return sb.toString().trim();
 	}
 
-	/**
-	 * 
-	 *
-	 * @param fileName 
-	 * @throws Exception 
-	 */
 	private void _format(String fileName) throws Exception {
-		String originalContent = _fileUtil.read(
+		FileInputStream fis = new FileInputStream(
 			new File(_basedir + fileName));
 
-		if (_isGenerated(originalContent)) {
+		byte[] bytes = new byte[fis.available()];
+
+		fis.read(bytes);
+
+		fis.close();
+
+		String originalContent = new String(bytes);
+
+		if (!fileName.endsWith("JavadocFormatter.java") &&
+			_isGenerated(originalContent)) {
+
 			return;
 		}
 
@@ -1009,15 +896,6 @@ public class JavadocFormatter {
 			fileName, originalContent, javadocLessContent, document);
 	}
 
-	/**
-	 * 
-	 *
-	 * @param fileName 
-	 * @param originalContent 
-	 * @param javadocLessContent 
-	 * @param document 
-	 * @throws Exception 
-	 */
 	private void _updateJavaFromDocument(
 			String fileName, String originalContent, String javadocLessContent,
 			Document document)
@@ -1097,24 +975,15 @@ public class JavadocFormatter {
 
 		String formattedContent = sb.toString().trim();
 
-		formattedContent = new String(
-			formattedContent.getBytes(), StringPool.UTF8);
-
 		if (!originalContent.equals(formattedContent)) {
 			File file = new File(_basedir + fileName);
 
-			_fileUtil.write(file, formattedContent);
+			_fileUtil.write(file, formattedContent.getBytes());
 
 			System.out.println("Writing " + file);
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 * @param text 
-	 * @param indent 
-	 */
 	private String _wrapText(String text, String indent) {
 		int indentLength = _getIndentLength(indent);
 
@@ -1135,26 +1004,10 @@ public class JavadocFormatter {
 		return text;
 	}
 
-	/**
-	 * 
-	 *
-	 */
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-	/**
-	 * 
-	 *
-	 */
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 
-	/**
-	 * 
-	 *
-	 */
 	private String _basedir = "./";
-	/**
-	 * 
-	 *
-	 */
 	private boolean _initializeMissingJavadocs;
 
 }
