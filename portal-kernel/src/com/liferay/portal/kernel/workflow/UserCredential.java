@@ -33,19 +33,20 @@ import java.util.Set;
  * <p>
  * The user credential is a container for a user's id and its roles and is used
  * as the credential towards the workflow engine. For convenience, it is just
- * added automatically through the request by creating it using the
- * {@link WorkflowUtil#createUserCredential(long)} as the API just takes the
- * user id, the role set and additional information is being added by the
- * {@link UserCredentialFactory} invoked by the proxy (most likely the request
- * builder) in order to avoid the implementation or adapter having to call back
- * the portal for the set of roles of a user's id.
+ * added automatically through the request by creating it using the {@link
+ * WorkflowUtil#createUserCredential(long)} as the API just takes the user id,
+ * the role set and additional information is being added by the {@link
+ * UserCredentialFactory} invoked by the proxy (most likely the request builder)
+ * in order to avoid the implementation or adapter having to call back the
+ * portal for the set of roles of a user's id.
  * </p>
  *
  * @author Micha Kiener
- *
  */
 public class UserCredential implements Serializable {
-	/** The serialization id. */
+	/**
+	 * The serialization id.
+	 */
 	private static final long serialVersionUID = -2223408262504608474L;
 
 	/**
@@ -58,7 +59,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @return the id of the company the user represented by this credential
-	 *		 belongs to
+	 *		   belongs to
 	 */
 	public long getCompanyId() {
 		return _companyId;
@@ -108,7 +109,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param companyId the id of the company the user reflected by this
-	 *			credential should be assigned to
+	 *		  credential should be assigned to
 	 */
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
@@ -116,7 +117,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param emailAddress the email address of the user reflected by this
-	 *			credential
+	 *		  credential
 	 */
 	public void setEmailAddress(String emailAddress) {
 		_emailAddress = emailAddress;
@@ -138,7 +139,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param roleSet the set of roles the user of this credential is assigned
-	 *			to
+	 *		  to
 	 */
 	public void setRoleSet(Set<Long> roleSet) {
 		_roleSet = roleSet;
@@ -146,7 +147,7 @@ public class UserCredential implements Serializable {
 
 	/**
 	 * @param screenName the screen name of the user reflected by this
-	 *			credential
+	 *		  credential
 	 */
 	public void setScreenName(String screenName) {
 		_screenName = screenName;

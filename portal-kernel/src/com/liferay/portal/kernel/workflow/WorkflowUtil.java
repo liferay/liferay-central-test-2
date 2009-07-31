@@ -49,15 +49,15 @@ public class WorkflowUtil {
 	 * to the underlying workflow engine. Some engines want to track users
 	 * invoking methods and thus executing activities, creating history entries
 	 * or starting new workflows. Thats why most methods of the workflow API are
-	 * taking the caller's user id to pass it on to the engine through a
-	 * {@link UserCredential}.
+	 * taking the caller's user id to pass it on to the engine through a {@link
+	 * UserCredential}.
 	 * </p>
 	 *
-	 * @param userId the id of the user to create a credential object for
+	 * @param  userId the id of the user to create a credential object for
 	 * @return the user credential object acting as the container representing
-	 *		 the set of roles and additional information for the given user
+	 *		   the set of roles and additional information for the given user
 	 * @throws WorkflowException if requesting the user information through the
-	 *			 service failed
+	 *		   service failed
 	 */
 	public static UserCredential createUserCredential(long userId)
 		throws WorkflowException {
@@ -123,7 +123,7 @@ public class WorkflowUtil {
 	}
 	/**
 	 * @param taskInstanceManager the task manager to be made available through
-	 * this utility
+	 *		  this utility
 	 */
 	public static void setTaskInstanceManager(
 		TaskInstanceManager taskInstanceManager) {
@@ -132,7 +132,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param factory the factory this utility will use to produce user
-	 *			credential objects based on a users id
+	 *		  credential objects based on a users id
 	 */
 	public static void setUserCredentialFactory(UserCredentialFactory factory) {
 		_userCredentialFactory = factory;
@@ -140,7 +140,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowDefinitionManager the definition manager to be made
-	 * available through this utility
+	 *		  available through this utility
 	 */
 	public static void setWorkflowDefinitionManager(
 		WorkflowDefinitionManager workflowDefinitionManager) {
@@ -149,7 +149,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowDefinitionMapper the definition mapper to be made
-	 * available through this utility
+	 *		  available through this utility
 	 */
 	public static void setWorkflowDefinitionMapper(
 			WorkflowDefinitionMapper workflowDefinitionMapper) {
@@ -158,7 +158,7 @@ public class WorkflowUtil {
 
 	/**
 	 * @param workflowInstanceManager the instance manager to be made available
-	 * through this utility
+	 *		  through this utility
 	 */
 	public static void setWorkflowInstanceManager(
 		WorkflowInstanceManager workflowInstanceManager) {

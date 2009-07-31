@@ -52,11 +52,11 @@ public class WorkflowMessageListener implements MessageListener {
 	/**
 	 * Constructor using the manager to invoke methods on and the expected
 	 * request class this listener will be able to handle.
-	 * 
+	 *
 	 * @param manager the manager instance to invoke methods on given by the
-	 *            payload of the message
+	 *		  payload of the message
 	 * @param requestClazz the expected request class as the payload of the
-	 *            message being handled by this listener
+	 *		  message being handled by this listener
 	 */
 	public WorkflowMessageListener(
 		Object manager, Class<? extends BaseRequest> requestClazz,

@@ -26,9 +26,9 @@ package com.liferay.portal.kernel.workflow;
  * <a href="UserCredentialFactory.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * This service provider interface is going to be injected into the
- * {@link WorkflowUtil} to create {@link UserCredential} objects based on the id
- * of the user to be represented.
+ * This service provider interface is going to be injected into the {@link
+ * WorkflowUtil} to create {@link UserCredential} objects based on the id of the
+ * user to be represented.
  * </p>
  *
  * <p>
@@ -37,7 +37,6 @@ package com.liferay.portal.kernel.workflow;
  * </p>
  *
  * @author Micha Kiener
- *
  */
 public interface UserCredentialFactory {
 
@@ -46,10 +45,10 @@ public interface UserCredentialFactory {
 	 * The credential will represent that user, some attributes and its role
 	 * set.
 	 *
-	 * @param userId the id of the user to create a credential for
+	 * @param  userId the id of the user to create a credential for
 	 * @return the credential representing the specified user
 	 * @throws WorkflowException is thrown, if creating the credential failed
-	 *			 due to a failure to load the user's information
+	 *		   due to a failure to load the user's information
 	 */
 	public UserCredential createCredential(long userId)
 		throws WorkflowException;

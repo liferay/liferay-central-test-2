@@ -61,15 +61,14 @@ public interface TaskInstanceManager {
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
 	 *
-	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param roleId the role id to assign the task to
-	 * @param comment the optional comment for the assignment
-	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
-	 * @param callingUserId the id of the calling user (see
-	 *			{@link WorkflowUtil#createUserCredential(long)} for more
-	 *			information)
+	 * @param  taskInstanceId the id of the task instance to be assigned
+	 * @param  roleId the role id to assign the task to
+	 * @param  comment the optional comment for the assignment
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   WorkflowUtil#createUserCredential(long)} for more information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
@@ -83,18 +82,17 @@ public interface TaskInstanceManager {
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
 	 *
-	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param userCredential the credential of the user to assign the task to,
-	 *			representing the user's attributes and its role set, a
-	 *			credential can be created using the id of the user through
-	 *			{@link WorkflowUtil#createUserCredential(long)}
-	 * @param comment the optional comment for the user being the new assignee
-	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
-	 * @param callingUserId the id of the calling user (see
-	 *			{@link WorkflowUtil#createUserCredential(long)} for more
-	 *			information)
+	 * @param  taskInstanceId the id of the task instance to be assigned
+	 * @param  userCredential the credential of the user to assign the task to,
+	 *		   representing the user's attributes and its role set, a credential
+	 *		   can be created using the id of the user through {@link
+	 *		   WorkflowUtil#createUserCredential(long)}
+	 * @param  comment the optional comment for the user being the new assignee
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   WorkflowUtil#createUserCredential(long)} for more information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
@@ -134,16 +132,16 @@ public interface TaskInstanceManager {
 	 * the next default activity, if it was not an asynchronous task.
 	 * </p>
 	 *
-	 * @param taskInstanceId the id of the task instance to be completed
-	 * @param userId the id of the user completing the task
-	 * @param comment an optional comment made by completing the task (just as a
-	 *			comment, not a structured information)
-	 * @param attributes the optional attributes to be passed on to the context
-	 *			information of the workflow instance (they can be empty or
-	 *			even <code>null</code>)
+	 * @param  taskInstanceId the id of the task instance to be completed
+	 * @param  userId the id of the user completing the task
+	 * @param  comment an optional comment made by completing the task (just as
+	 *		   a comment, not a structured information)
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
 	 * @return the task information reflecting the changes
 	 * @throws WorkflowException is thrown, if completing the task failed or the
-	 *			 workflow could not be continued
+	 *		   workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
@@ -173,18 +171,18 @@ public interface TaskInstanceManager {
 	 * the workflow instance or its domain object instance.</li>
 	 * </p>
 	 *
-	 * @param taskInstanceId the id of the task instance to be completed
-	 * @param userId the id of the user completing the task
-	 * @param activityName the name of the next activity to continue the
-	 *            workflow by completing this task
-	 * @param comment an optional comment made by completing the task (just as a
-	 *            comment, not a structured information)
-	 * @param attributes the optional attributes to be passed on to the context
-	 *            information of the workflow instance (they can be empty or
-	 *            even <code>null</code>)
+	 * @param  taskInstanceId the id of the task instance to be completed
+	 * @param  userId the id of the user completing the task
+	 * @param  activityName the name of the next activity to continue the
+	 *		   workflow by completing this task
+	 * @param  comment an optional comment made by completing the task (just as
+	 *		   a comment, not a structured information)
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
 	 * @return the task information reflecting the changes
 	 * @throws WorkflowException is thrown, if completing the task failed or the
-	 *             workflow could not be continued
+	 *		   workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String activityName, String comment,
@@ -194,11 +192,11 @@ public interface TaskInstanceManager {
 	/**
 	 * <p>
 	 * Returns a list of activity names to be possible next activities for the
-	 * given task to be passed on through the method
-	 * {@link #completeTaskInstance(long, long, String, String, Map)}. The
-	 * method should return the same as if invoking
-	 * {@link WorkflowInstanceManager#getPossibleNextActivityNames(long, long)}
-	 * using the workflow instance id the task is attached to.
+	 * given task to be passed on through the method {@link
+	 * #completeTaskInstance(long, long, String, String, Map)}. The method
+	 * should return the same as if invoking {@link
+	 * WorkflowInstanceManager#getPossibleNextActivityNames(long, long)} using
+	 * the workflow instance id the task is attached to.
 	 * </p>
 	 *
 	 * <p>
@@ -206,13 +204,13 @@ public interface TaskInstanceManager {
 	 * specified user to only return activity names the user is allowed to
 	 * execute.
 	 * </p>
-	 * 
-	 * @param taskInstanceId the id of the task instance to return a list of
-	 *            possible next activities for
-	 * @param userId the id of the user requesting the list to check the
-	 *            activities being executable by the user
+	 *
+	 * @param  taskInstanceId the id of the task instance to return a list of
+	 *		   possible next activities for
+	 * @param  userId the id of the user requesting the list to check the
+	 *		   activities being executable by the user
 	 * @return the list of activity names possible to follow on by completing
-	 *         the given task
+	 *		   the given task
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
 	public List<String> getPossibleNextActivityNames(
@@ -223,12 +221,12 @@ public interface TaskInstanceManager {
 	 * Returns the total count of open tasks currently assigned to the user
 	 * represented by the given credential or indirectly assigned to one of its
 	 * roles. The implementation of this method should be fast.
-	 * 
-	 * @param userCredential the credential representing the user and its role
-	 *            set to return the count of tasks assigned to either the user
-	 *            or one of its roles
+	 *
+	 * @param  userCredential the credential representing the user and its role
+	 *		   set to return the count of tasks assigned to either the user or
+	 *		   one of its roles
 	 * @return the total count of open tasks of the user represented by the
-	 *         credential
+	 *		   credential
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
 	public int getTaskInstanceCountForCredential(UserCredential userCredential)
@@ -237,8 +235,8 @@ public interface TaskInstanceManager {
 	/**
 	 * Returns the total count of open tasks currently assigned to the specified
 	 * role. The implementation of this method should be fast.
-	 * 
-	 * @param roleId the id of the role to count the assigned, open tasks for
+	 *
+	 * @param  roleId the id of the role to count the assigned, open tasks for
 	 * @return the total count of open tasks of the specified role
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
@@ -250,11 +248,11 @@ public interface TaskInstanceManager {
 	 * user and only to ones directly assigned to the user, not the ones
 	 * assigned to one of its roles. The implementation of this method should be
 	 * fast.
-	 * 
-	 * @param userId the id of the user to count the directly assigned, open
-	 *            tasks for
+	 *
+	 * @param  userId the id of the user to count the directly assigned, open
+	 *		   tasks for
 	 * @return the total count of open, directly assigned tasks of the specified
-	 *         user
+	 *		   user
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
 	public int getTaskInstanceCountForUser(long userId)
@@ -265,14 +263,13 @@ public interface TaskInstanceManager {
 	 * given credential or indirectly assigned to one of the roles the user is
 	 * assigned to. So a task being returned could either be directly assigned
 	 * to the user or assigned to a role the user is a member of. If only open
-	 * tasks should be returned, use
-	 * {@link #getTaskInstanceInfosByCredential(UserCredential, boolean)}
-	 * instead.
-	 * 
-	 * @param userCredential the credential representing the user to return
-	 *            tasks for
+	 * tasks should be returned, use {@link
+	 * #getTaskInstanceInfosByCredential(UserCredential, boolean)} instead.
+	 *
+	 * @param  userCredential the credential representing the user to return
+	 *		   tasks for
 	 * @return all tasks either be assigned to the user directly or indirectly
-	 *         assigned to one of its roles
+	 *		   assigned to one of its roles
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
@@ -284,13 +281,13 @@ public interface TaskInstanceManager {
 	 * given credential or indirectly assigned to one of the roles the user is
 	 * assigned to. So a task being returned could either be directly assigned
 	 * to the user or assigned to a role the user is a member of.
-	 * 
-	 * @param userCredential the credential representing the user to return
-	 *            tasks for
-	 * @param completed <code>true</code>, if only completed tasks should be
-	 *            returned, <code>false</code> for all open tasks
+	 *
+	 * @param  userCredential the credential representing the user to return
+	 *		   tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
 	 * @return all tasks either be assigned to the user directly or indirectly
-	 *         assigned to one of its roles
+	 *		   assigned to one of its roles
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
@@ -299,10 +296,10 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks currently assigned to the given role. If only open
-	 * tasks should be returned, use
-	 * {@link #getTaskInstanceInfosByRole(long, boolean)} instead.
-	 * 
-	 * @param roleId the id of the role to return tasks for
+	 * tasks should be returned, use {@link #getTaskInstanceInfosByRole(long,
+	 * boolean)} instead.
+	 *
+	 * @param  roleId the id of the role to return tasks for
 	 * @return all tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -312,9 +309,9 @@ public interface TaskInstanceManager {
 	/**
 	 * Queries for open or completed tasks currently assigned to the given role.
 	 *
-	 * @param roleId the id of the role to return tasks for
-	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * @param  roleId the id of the role to return tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
 	 * @return all open or completed tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -324,10 +321,10 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks currently assigned to the given user. If only open
-	 * tasks should be returned, use
-	 * {@link #getTaskInstanceInfosByUser(long, boolean)} instead.
+	 * tasks should be returned, use {@link #getTaskInstanceInfosByUser(long,
+	 * boolean)} instead.
 	 *
-	 * @param userId the id of the user to return tasks for
+	 * @param  userId the id of the user to return tasks for
 	 * @return all tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -337,9 +334,9 @@ public interface TaskInstanceManager {
 	/**
 	 * Queries for open or completed tasks currently assigned to the given user.
 	 *
-	 * @param userId the id of the user to return tasks for
-	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * @param  userId the id of the user to return tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
 	 * @return all open or completed tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -349,11 +346,11 @@ public interface TaskInstanceManager {
 
 	/**
 	 * Queries for all tasks for the specified workflow instance. If only open
-	 * tasks should be returned, use
-	 * {@link #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.
+	 * tasks should be returned, use {@link
+	 * #getTaskInstanceInfosByWorkflowInstance(long, boolean)} instead.
 	 *
-	 * @param workflowInstanceId the id of the workflow instance to return tasks
-	 *			for
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
 	 * @return all tasks related to the specified workflow instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
@@ -364,12 +361,12 @@ public interface TaskInstanceManager {
 	/**
 	 * Queries for open or completed tasks for the specified workflow instance.
 	 *
-	 * @param workflowInstanceId the id of the workflow instance to return tasks
-	 *			for
-	 * @param completed <code>true</code>, if only completed tasks should be
-	 *			returned, <code>false</code> for all open tasks
+	 * @param  workflowInstanceId the id of the workflow instance to return
+	 *		   tasks for
+	 * @param  completed <code>true</code>, if only completed tasks should be
+	 *		   returned, <code>false</code> for all open tasks
 	 * @return all completed or open tasks related to the specified workflow
-	 *		 instance
+	 *		   instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
