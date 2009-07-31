@@ -32,6 +32,7 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)row.getObject();
+Group group = layoutSetPrototype.getGroup();
 
 long layoutSetPrototypeId = layoutSetPrototype.getLayoutSetPrototypeId();
 %>
@@ -45,6 +46,16 @@ long layoutSetPrototypeId = layoutSetPrototype.getLayoutSetPrototypeId();
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	</c:if>
+
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
+			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_pages" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 	</c:if>
 
 	<c:if test="<%= LayoutSetPrototypePermissionUtil.contains(permissionChecker, layoutSetPrototypeId, ActionKeys.PERMISSIONS) %>">

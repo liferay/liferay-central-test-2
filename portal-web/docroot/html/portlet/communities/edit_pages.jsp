@@ -87,6 +87,10 @@ long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = tabs1.equals("private-pages");
 
+if (selGroup.isLayoutSetPrototype()) {
+	privateLayout = true;
+}
+
 if (privateLayout) {
 	if (group != null) {
 		pagesCount = group.getPrivateLayoutsPageCount();
