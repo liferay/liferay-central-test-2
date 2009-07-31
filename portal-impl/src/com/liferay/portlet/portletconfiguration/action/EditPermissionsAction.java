@@ -33,14 +33,12 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -286,14 +284,11 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ParamUtil.getString(
 				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 
-		List<Role> roles = RoleLocalServiceUtil.getRoles(roleIds);
-
-		for (Role role : roles) {
-			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
+		for (long roleId : roleIds) {
+			String[] actionIds = getActionIds(actionRequest, roleId);
 
 			PermissionServiceUtil.setRolePermissions(
-				role.getRoleId(), themeDisplay.getScopeGroupId(), actionIds,
-				resourceId);
+				roleId, themeDisplay.getScopeGroupId(), actionIds, resourceId);
 		}
 	}
 
@@ -320,14 +315,12 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		String resourcePrimKey = ParamUtil.getString(
 			actionRequest, "resourcePrimKey");
 
-		List<Role> roles = RoleLocalServiceUtil.getRoles(roleIds);
-
-		for (Role role : roles) {
-			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
+		for (long roleId : roleIds) {
+			String[] actionIds = getActionIds(actionRequest, roleId);
 
 			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
 				themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
-				selResource, resourcePrimKey, role.getRoleId(), actionIds);
+				selResource, resourcePrimKey, roleId, actionIds);
 		}
 	}
 
