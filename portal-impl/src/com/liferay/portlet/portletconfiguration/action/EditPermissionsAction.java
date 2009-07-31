@@ -308,8 +308,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
 		long[] roleIds = StringUtil.split(
-				ParamUtil.getString(
-					actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
+			ParamUtil.getString(
+				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 
 		String selResource = portletResource;
 

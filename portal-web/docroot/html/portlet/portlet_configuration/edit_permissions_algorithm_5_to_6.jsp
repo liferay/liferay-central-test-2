@@ -165,6 +165,8 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 	RoleSearch searchContainer = new RoleSearch(renderRequest, renderPortletURL);
 
+	searchContainer.setId("rolesSearchContainer");
+
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("role");
@@ -201,8 +203,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 	List<Role> results = ListUtil.subList(allRoles, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
-
-	searchContainer.setId("rolesSearchContainer");
 
 	List resultRows = searchContainer.getResultRows();
 
