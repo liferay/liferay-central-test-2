@@ -102,7 +102,7 @@ import javax.portlet.WindowState;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  * @author Bruno Farache
  * @author Julio Camarero
  */
