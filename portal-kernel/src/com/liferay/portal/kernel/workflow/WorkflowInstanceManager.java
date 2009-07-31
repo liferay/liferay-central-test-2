@@ -301,10 +301,12 @@ public interface WorkflowInstanceManager {
 	 * history, tasks, timers and anything related to it. Using this method
 	 * means the same as if the instance was never started. It also removes the
 	 * attached, persisted context information, but it does not rollback
-	 * anything that happened during the execution of the workflow.
-	 *
+	 * anything that happened during the execution of the workflow. If the given
+	 * workflow instance id is a child instance, the root instance and all of
+	 * its children is removed anyhow.
+	 * 
 	 * @param workflowInstanceId the identifier of the workflow instance to be
-	 *			removed
+	 *            removed
 	 * @throws WorkflowException is thrown, if removing failed
 	 */
 	public void removeWorkflowInstance(long workflowInstanceId)
