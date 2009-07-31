@@ -42,7 +42,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 		<c:choose>
 			<c:when test="<%= ((organization == null) || (organization.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
 				<select id="<portlet:namespace />publicLayoutPrototypeId" name="<portlet:namespace />publicLayoutSetPrototypeId">
-					<option selected value="">(<liferay-ui:message key='<%= selUser == null ? "default" : "none" %>' />)</option>
+					<option selected value="">(<liferay-ui:message key='<%= organization == null ? "default" : "none" %>' />)</option>
 
 					<%
 					for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
@@ -77,7 +77,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 		<c:choose>
 			<c:when test="<%= ((organization == null) || (organization.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
 				<select id="<portlet:namespace />privateLayoutPrototypeId" name="<portlet:namespace />privateLayoutSetPrototypeId">
-					<option selected value="">(<liferay-ui:message key='<%= selUser == null ? "default" : "none" %>' />)</option>
+					<option selected value="">(<liferay-ui:message key='<%= organization == null ? "default" : "none" %>' />)</option>
 
 					<%
 					for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
