@@ -479,7 +479,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-file-size" /> (<liferay-ui:message key="medium-image" />)
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />shoppindImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />shoppingImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -529,7 +529,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="maximum-thumbnail-width" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnalMaxWidth" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />scImageThumbnailMaxWidth" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH) %>" />
 					</td>
 				</tr>
 				<tr>
