@@ -32,9 +32,10 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)row.getObject();
-Group group = layoutSetPrototype.getGroup();
 
 long layoutSetPrototypeId = layoutSetPrototype.getLayoutSetPrototypeId();
+
+Group group = layoutSetPrototype.getGroup();
 %>
 
 <liferay-ui:icon-menu>
