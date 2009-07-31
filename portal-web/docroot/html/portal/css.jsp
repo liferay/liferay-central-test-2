@@ -28,6 +28,7 @@
 
 <%@ include file="/html/portal/alloy/base.css.jsp" %>
 <%@ include file="/html/portal/alloy/form.css.jsp" %>
+<%@ include file="/html/portal/alloy/layout.css.jsp" %>
 
 /* ---------- Modules ---------- */
 
