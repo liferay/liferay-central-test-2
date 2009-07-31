@@ -202,6 +202,8 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 	searchContainer.setResults(results);
 
+	searchContainer.setId("rolesSearchContainer");
+
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {

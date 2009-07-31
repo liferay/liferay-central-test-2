@@ -25,11 +25,9 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
@@ -38,12 +36,11 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -284,22 +281,12 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String modelResource = ParamUtil.getString(
-			actionRequest, "modelResource");
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
-		long resourcePrimKey = ParamUtil.getLong(
-			actionRequest, "resourcePrimKey");
+		long[] roleIds = StringUtil.split(
+			ParamUtil.getString(
+				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 
-		Group group = themeDisplay.getScopeGroup();
-
-		if (modelResource.equals(Layout.class.getName())) {
-			Layout layout = LayoutLocalServiceUtil.getLayout(
-				resourcePrimKey);
-
-			group = layout.getGroup();
-		}
-
-		List<Role> roles = ResourceActionsUtil.getRoles(group, modelResource);
+		List<Role> roles = RoleLocalServiceUtil.getRoles(roleIds);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
@@ -320,6 +307,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			actionRequest, "portletResource");
 		String modelResource = ParamUtil.getString(
 			actionRequest, "modelResource");
+		long[] roleIds = StringUtil.split(
+				ParamUtil.getString(
+					actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
 
 		String selResource = portletResource;
 
@@ -330,17 +320,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		String resourcePrimKey = ParamUtil.getString(
 			actionRequest, "resourcePrimKey");
 
-		Group group = themeDisplay.getScopeGroup();
-
-		if (modelResource.equals(Layout.class.getName())) {
-			long plid = GetterUtil.getLong(resourcePrimKey);
-
-			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-			group = layout.getGroup();
-		}
-
-		List<Role> roles = ResourceActionsUtil.getRoles(group, modelResource);
+		List<Role> roles = RoleLocalServiceUtil.getRoles(roleIds);
 
 		for (Role role : roles) {
 			String[] actionIds = getActionIds(actionRequest, role.getRoleId());
