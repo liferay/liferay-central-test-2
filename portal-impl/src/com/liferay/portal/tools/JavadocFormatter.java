@@ -368,7 +368,7 @@ public class JavadocFormatter {
 				continue;
 			}
 			else {
-				curValue = value;
+				value = curValue;
 
 				break;
 			}
@@ -426,7 +426,7 @@ public class JavadocFormatter {
 				continue;
 			}
 			else {
-				curValue = value;
+				value = curValue;
 
 				break;
 			}
