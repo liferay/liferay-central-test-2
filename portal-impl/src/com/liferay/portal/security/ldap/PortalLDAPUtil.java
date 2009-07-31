@@ -86,7 +86,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Brian Wing Shun Chan
  * @author Jerry Niu
  * @author Scott Lee
- * @author Hervï¿½ Mï¿½nage
+ * @author Hervé Ménage
  * @author Samuel Kong
  */
 public class PortalLDAPUtil {
