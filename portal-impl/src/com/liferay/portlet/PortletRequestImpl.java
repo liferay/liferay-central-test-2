@@ -706,14 +706,12 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 			QName qName = PortletQNameUtil.getQName(name);
 
-			PublicRenderParameter publicRenderParameter;
+			PublicRenderParameter publicRenderParameter = null;
 
 			if (qName == null) {
-				String preferencesMappingKey =
-					PublicRenderParameterConfiguration.MAPPING_PREFIX + name;
-
 				String mapping = preferences.getValue(
-					preferencesMappingKey, StringPool.BLANK);
+					PublicRenderParameterConfiguration.MAPPING_PREFIX + name,
+					null);
 
 				if (Validator.isNull(mapping)) {
 					continue;
@@ -727,21 +725,23 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 					qName.getNamespaceURI(), qName.getLocalPart());
 			}
 
-			if (publicRenderParameter != null) {
-				String preferencesIgnoreKey =
-					PublicRenderParameterConfiguration.IGNORE_PREFIX +
-						publicRenderParameter.getIdentifier();
-
-				boolean ignore = GetterUtil.getBoolean(
-					preferences.getValue(
-						preferencesIgnoreKey, StringPool.FALSE));
-
-				if (!ignore) {
-					renderParameters.put(
-						publicRenderParameter.getIdentifier(),
-						request.getParameterValues(name));
-				}
+			if (publicRenderParameter == null) {
+				continue;
 			}
+
+			boolean ignore = GetterUtil.getBoolean(
+				preferences.getValue(
+					PublicRenderParameterConfiguration.IGNORE_PREFIX +
+						publicRenderParameter.getIdentifier(),
+					null));
+
+			if (ignore) {
+				continue;
+			}
+
+			renderParameters.put(
+				publicRenderParameter.getIdentifier(),
+				request.getParameterValues(name));
 		}
 
 		String ppidNamespace = PortalUtil.getPortletNamespace(ppid);
@@ -762,34 +762,36 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			PublicRenderParameter publicRenderParameter =
 				_portlet.getPublicRenderParameter(name);
 
-			if (publicRenderParameter != null) {
+			if (publicRenderParameter == null) {
+				continue;
+			}
 
-				String preferencesIgnoreKey =
+			boolean ignore = GetterUtil.getBoolean(
+				preferences.getValue(
 					PublicRenderParameterConfiguration.IGNORE_PREFIX +
-						publicRenderParameter.getIdentifier();
-				boolean ignore = GetterUtil.getBoolean(
-					preferences.getValue(
-						preferencesIgnoreKey, StringPool.FALSE));
+						publicRenderParameter.getIdentifier(),
+					null));
 
-				if (!ignore) {
-					String preferencesMapToKey =
-						PublicRenderParameterConfiguration.MAPPING_PREFIX +
-							publicRenderParameter.getIdentifier();
-					String mappingValue = preferences.getValue(
-						preferencesMapToKey, StringPool.BLANK);
+			if (ignore) {
+				continue;
+			}
 
-					if (!StringPool.BLANK.equals(mappingValue)) {
-						if (ppidRenderParameters.containsKey(mappingValue)) {
-							renderParameters.put(
-								publicRenderParameter.getIdentifier(),
-								ppidRenderParameters.get(mappingValue));
-						}
-					}
-					else {
-						renderParameters.put(
-							publicRenderParameter.getIdentifier(), values);
-					}
+			String mapping = GetterUtil.getString(
+				preferences.getValue(
+					PublicRenderParameterConfiguration.MAPPING_PREFIX +
+						publicRenderParameter.getIdentifier(),
+					null));
+
+			if (Validator.isNotNull(mapping)) {
+				if (ppidRenderParameters.containsKey(mapping)) {
+					renderParameters.put(
+						publicRenderParameter.getIdentifier(),
+						ppidRenderParameters.get(mapping));
 				}
+			}
+			else {
+				renderParameters.put(
+					publicRenderParameter.getIdentifier(), values);
 			}
 		}
 	}

@@ -27,17 +27,22 @@ import com.liferay.portal.model.PublicRenderParameter;
 import java.util.Comparator;
 
 /**
- * <a href="PublicRenderParameterIdentifierComparator.java.html"><b>
- * <i>View Source</i></b></a>
+ * <a href="PublicRenderParameterIdentifierComparator.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Alberto Montero
- *
-*/
+ */
 public class PublicRenderParameterIdentifierComparator
 	implements Comparator<PublicRenderParameter> {
 
-	public int compare(PublicRenderParameter o1, PublicRenderParameter o2) {
-		return o1.getIdentifier().compareTo(o2.getIdentifier());
+	public int compare(
+		PublicRenderParameter publicRenderParameter1,
+		PublicRenderParameter publicRenderParameter2) {
+
+		String identifier1 = publicRenderParameter1.getIdentifier();
+		String identifier2 = publicRenderParameter2.getIdentifier();
+
+		return identifier1.compareTo(identifier2);
 	}
 
 }

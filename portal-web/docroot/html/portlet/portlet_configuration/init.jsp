@@ -43,11 +43,9 @@
 <%@ page import="com.liferay.portal.lar.PortletDataHandlerControl" %>
 <%@ page import="com.liferay.portal.lar.PortletDataHandlerKeys" %>
 <%@ page import="com.liferay.portal.lar.UserIdStrategy" %>
-<%@ page import="com.liferay.portal.model.PublicRenderParameter" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
-<%@ page import="com.liferay.portal.util.WebKeys" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
@@ -64,11 +62,7 @@
 <%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
-<%@ page import="java.util.Collections" %>
-<%@ page import="java.util.Comparator" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="java.util.MissingResourceException" %>
-<%@ page import="java.util.Set" %>
 
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

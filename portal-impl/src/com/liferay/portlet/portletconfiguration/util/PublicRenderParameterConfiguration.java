@@ -32,13 +32,17 @@ import com.liferay.portal.model.PublicRenderParameter;
  */
 public class PublicRenderParameterConfiguration {
 
+	public static final String IGNORE_PREFIX = "lfr-prp-ignore-";
+
+	public static final String MAPPING_PREFIX = "lfr-prp-mapping-";
+
 	public PublicRenderParameterConfiguration(
 		PublicRenderParameter publicRenderParameter, String mapping,
 		boolean ignore) {
 
-		_ignore = ignore;
-		_mapping = mapping;
 		_publicRenderParameter = publicRenderParameter;
+		_mapping = mapping;
+		_ignore = ignore;
 	}
 
 	public String getIgnoreKey() {
@@ -65,6 +69,4 @@ public class PublicRenderParameterConfiguration {
 	private String _mapping;
 	private PublicRenderParameter _publicRenderParameter;
 
-	public static final String MAPPING_PREFIX = "lfr-prp-mapping-";
-	public static final String IGNORE_PREFIX = "lfr-prp-ignore-";
 }

@@ -35,10 +35,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -56,7 +53,6 @@ import org.apache.struts.action.ActionMapping;
  * </b></a>
  *
  * @author Alberto Montero
- *
  */
 public class EditPublicRenderParametersAction extends EditConfigurationAction {
 
@@ -114,7 +110,7 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 	}
 
 	protected void updatePreferences(
-			ActionRequest actionRequest,Portlet portlet)
+			ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -126,60 +122,47 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Set<PublicRenderParameter> publicRenderParameters =
-			portlet.getPublicRenderParameters();
+		Enumeration<String> enu = preferences.getNames();
 
-		List<String> prpPreferenceNames = new ArrayList<String>();
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
 
-		for (Enumeration e = preferences.getNames(); e.hasMoreElements();) {
-			String preferenceName = (String)e.nextElement();
+			if (name.startsWith(_IGNORE_PREFIX) ||
+				name.startsWith(_MAPPING_PREFIX)) {
 
-			if (preferenceName.startsWith(_MAPPING_PREFIX) ||
-				preferenceName.startsWith(_IGNORE_PREFIX)) {
-
-				prpPreferenceNames.add(preferenceName);
+				preferences.reset(name);
 			}
 		}
 
-		// Reset existing preferences
+		for (PublicRenderParameter publicRenderParameter :
+				portlet.getPublicRenderParameters()) {
 
-		for (String preferenceName: prpPreferenceNames) {
-			preferences.reset(preferenceName);
-		}
-
-		// Set new values
-
-		for (PublicRenderParameter publicRenderParameter:
-			publicRenderParameters) {
-
-			String ignoreParamName =
+			String ignoreName =
 				_IGNORE_PREFIX + publicRenderParameter.getIdentifier();
 
 			if (Validator.isNotNull(
-					ParamUtil.getString(actionRequest, ignoreParamName))) {
-				preferences.setValue(ignoreParamName, StringPool.TRUE);
+					ParamUtil.getString(actionRequest, ignoreName))) {
+
+				preferences.setValue(ignoreName, StringPool.TRUE);
 			}
 			else {
-				String mappingParamName =
+				String mappingName =
 					_MAPPING_PREFIX + publicRenderParameter.getIdentifier();
 
-				String mappingParamValue = ParamUtil.getString(
-					actionRequest, mappingParamName);
+				String mappingValue = ParamUtil.getString(
+					actionRequest, mappingName);
 
-				if (Validator.isNotNull(mappingParamValue)) {
+				if (Validator.isNotNull(mappingValue)) {
+					String mappingKey = _MAPPING_PREFIX + mappingValue;
 
-					String mappingPreferenceKey =
-						_MAPPING_PREFIX + mappingParamValue;
-
-					if (Validator.isNull(preferences.getValue(
-						mappingPreferenceKey, StringPool.BLANK))) {
+					if (Validator.isNull(
+							preferences.getValue(mappingKey, null))) {
 
 						preferences.setValue(
-							mappingPreferenceKey,
-							publicRenderParameter.getIdentifier());
+							mappingKey, publicRenderParameter.getIdentifier());
 					}
 					else {
-						SessionErrors.add(actionRequest, "duplicatedMapping");
+						SessionErrors.add(actionRequest, "duplicateMapping");
 
 						break;
 					}
@@ -194,6 +177,7 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 
 	private static final String _IGNORE_PREFIX =
 		PublicRenderParameterConfiguration.IGNORE_PREFIX;
+
 	private static final String _MAPPING_PREFIX =
 		PublicRenderParameterConfiguration.MAPPING_PREFIX;
 

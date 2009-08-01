@@ -28,10 +28,10 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
-List<PublicRenderParameterConfiguration> prpConfigurationList = (List<PublicRenderParameterConfiguration>)request.getAttribute(WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATION_LIST);
-Set<PublicRenderParameter> layoutPublicRenderParameters = (Set<PublicRenderParameter>)request.getAttribute(WebKeys.LAYOUT_PUBLIC_RENDER_PARAMETERS);
-
 String portletResource = ParamUtil.getString(request, "portletResource");
+
+List<PublicRenderParameterConfiguration> publicRenderParameterConfigurations = (List<PublicRenderParameterConfiguration>)request.getAttribute(WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATIONS);
+Set<PublicRenderParameter> publicRenderParameters = (Set<PublicRenderParameter>)request.getAttribute(WebKeys.PUBLIC_RENDER_PARAMETERS);
 
 PortletURL editPublicRenderParameterURL = renderResponse.createRenderURL();
 
@@ -47,7 +47,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	<liferay-util:param name="tabs1" value="communication" />
 </liferay-util:include>
 
-<liferay-ui:error key="duplicatedMapping" message="several-shared-parameters-are-mapped-to-the-same-parameter" />
+<liferay-ui:error key="duplicateMapping" message="several-shared-parameters-are-mapped-to-the-same-parameter" />
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_public_render_parameters" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(editPublicRenderParameterURL.toString()) %>" />
@@ -56,43 +56,41 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results
-		results="<%= ListUtil.subList(prpConfigurationList, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= prpConfigurationList.size() %>"
+		results="<%= ListUtil.subList(publicRenderParameterConfigurations, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= publicRenderParameterConfigurations.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
 		className="PublicRenderParameterConfiguration"
-		keyProperty=""
-		modelVar="parameterConfiguration"
+		modelVar="publicRenderParameterConfiguration"
 	>
 		<liferay-ui:search-container-column-text
 			name="shared-parameter"
-			value="<%= parameterConfiguration.getPublicRenderParameter().getIdentifier() %>"
+			value="<%= publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier() %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			name="ignore"
 		>
-			<input <%= parameterConfiguration.isIgnore() ? "checked=\"true\"" :  "" %> id="<%= parameterConfiguration.getIgnoreKey() %>" name="<%= parameterConfiguration.getIgnoreKey() %>" type="checkbox" />
+			<input <%= publicRenderParameterConfiguration.isIgnore() ? "checked=\"true\"" :  "" %> id="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" name="<%= publicRenderParameterConfiguration.getIgnoreKey() %>" type="checkbox" />
 		</liferay-ui:search-container-column-text>
-
 
 		<liferay-ui:search-container-column-text
 			name="mapping"
 		>
-			<select <%= parameterConfiguration.isIgnore() ? "disabled=\"disabled\"" : "" %> id="<%= parameterConfiguration.getMappingKey() %>" name="<%= parameterConfiguration.getMappingKey() %>">
+			<select <%= publicRenderParameterConfiguration.isIgnore() ? "disabled=\"disabled\"" : "" %> id="<%= publicRenderParameterConfiguration.getMappingKey() %>" name="<%= publicRenderParameterConfiguration.getMappingKey() %>">
 				<option value=""><liferay-ui:message key="no-mapping" /></option>
 
 				<%
-				for (PublicRenderParameter prp: layoutPublicRenderParameters) {
-					String identifier = prp.getIdentifier();
+				for (PublicRenderParameter publicRenderParameter : publicRenderParameters) {
+					String identifier = publicRenderParameter.getIdentifier();
 
-					if (identifier.equals(parameterConfiguration.getPublicRenderParameter().getIdentifier())) {
+					if (identifier.equals(publicRenderParameterConfiguration.getPublicRenderParameter().getIdentifier())) {
 						continue;
 					}
 				%>
 
-					<option <%= identifier.equals(parameterConfiguration.getMapping()) ? "selected" : "" %> value="<%= identifier %>"><%= identifier %></option>
+					<option <%= identifier.equals(publicRenderParameterConfiguration.getMapping()) ? "selected" : "" %> value="<%= identifier %>"><%= identifier %></option>
 
 				<%
 				}
@@ -103,32 +101,33 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator paginate="<%= false %>" />
-
 </liferay-ui:search-container>
-
-<script type="text/javascript">
-
-	<%
-	for (PublicRenderParameterConfiguration prpc: prpConfigurationList) {
-	%>
-
-		jQuery("input#<%= prpc.getIgnoreKey() %>").click(function() {
-			if (jQuery(this).attr("checked") == true) {
-				jQuery("select#<%= prpc.getMappingKey() %>").attr("disabled", "disabled");
-			}
-			else {
-				jQuery("select#<%= prpc.getMappingKey() %>").removeAttr("disabled");
-			}
-		});
-
-	<%
-	}
-	%>
-
-</script>
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
+
+<script type="text/javascript">
+
+	<%
+	for (PublicRenderParameterConfiguration publicRenderParameterConfiguration : publicRenderParameterConfigurations) {
+	%>
+
+		jQuery("input#<%= publicRenderParameterConfiguration.getIgnoreKey() %>").click(
+			function() {
+				if (jQuery(this).attr("checked") == true) {
+					jQuery("select#<%= publicRenderParameterConfiguration.getMappingKey() %>").attr("disabled", "disabled");
+				}
+				else {
+					jQuery("select#<%= publicRenderParameterConfiguration.getMappingKey() %>").removeAttr("disabled");
+				}
+			}
+		);
+
+	<%
+	}
+	%>
+
+</script>

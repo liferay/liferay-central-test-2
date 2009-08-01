@@ -26,7 +26,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -65,35 +64,33 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Set<PublicRenderParameter> layoutPublicRenderParameters =
+		Set<String> identifiers = new HashSet<String>();
+
+		Set<PublicRenderParameter> publicRenderParameters =
 			new TreeSet<PublicRenderParameter>(
 				new PublicRenderParameterIdentifierComparator());
-		Set<String> prpIdendifiersInLayout = new HashSet<String>();
 
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
-		List<Portlet> layoutPortlets = layoutTypePortlet.getAllPortlets();
 
-		for (Portlet portletInLayout: layoutPortlets ) {
-			Set<PublicRenderParameter> publicRenderParameters =
-				portletInLayout.getPublicRenderParameters();
+		List<Portlet> portlets = layoutTypePortlet.getAllPortlets();
 
+		for (Portlet portlet : portlets) {
 			for (PublicRenderParameter publicRenderParameter:
-				publicRenderParameters) {
+					portlet.getPublicRenderParameters()) {
 
-				if (!prpIdendifiersInLayout.contains(
-					publicRenderParameter.getIdentifier())) {
+				if (!identifiers.contains(
+						publicRenderParameter.getIdentifier())) {
 
-					prpIdendifiersInLayout.add(
-						publicRenderParameter.getIdentifier());
-					layoutPublicRenderParameters.add(publicRenderParameter);
+					identifiers.add(publicRenderParameter.getIdentifier());
+
+					publicRenderParameters.add(publicRenderParameter);
 				}
 			}
 		}
 
 		renderRequest.setAttribute(
-			WebKeys.LAYOUT_PUBLIC_RENDER_PARAMETERS,
-			layoutPublicRenderParameters);
+			WebKeys.PUBLIC_RENDER_PARAMETERS, publicRenderParameters);
 	}
 
 	public static void getPublicRenderParameterConfigurationList(
@@ -109,79 +106,78 @@ public class ActionUtil {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		Set<PublicRenderParameter> portletPublicRenderParameters =
-			portlet.getPublicRenderParameters();
-
-		Set<PublicRenderParameter> layoutPublicRenderParameters =
-			(Set<PublicRenderParameter>)renderRequest.getAttribute(
-				WebKeys.LAYOUT_PUBLIC_RENDER_PARAMETERS);
-
-		Map<String, String> prpMappings = new HashMap<String, String>();
+		Map<String, String> mappings = new HashMap<String, String>();
 
 		if (SessionErrors.isEmpty(renderRequest)) {
-			for (PublicRenderParameter layoutPrp:
-				layoutPublicRenderParameters) {
+			Set<PublicRenderParameter> publicRenderParameters =
+				(Set<PublicRenderParameter>)renderRequest.getAttribute(
+					WebKeys.PUBLIC_RENDER_PARAMETERS);
 
-				String portletPrpId = preferences.getValue(
-					_MAPPING_PREFIX + layoutPrp.getIdentifier(),
-					StringPool.BLANK);
+			for (PublicRenderParameter publicRenderParameter :
+					publicRenderParameters) {
 
-				if (Validator.isNotNull(portletPrpId)) {
-					prpMappings.put(portletPrpId, layoutPrp.getIdentifier());
+				String mapping = preferences.getValue(
+					_MAPPING_PREFIX + publicRenderParameter.getIdentifier(),
+					null);
+
+				if (Validator.isNotNull(mapping)) {
+					mappings.put(
+						mapping, publicRenderParameter.getIdentifier());
 				}
 			}
 		}
 		else {
-			for (PublicRenderParameter portletPrp:
-				portletPublicRenderParameters) {
+			for (PublicRenderParameter publicRenderParameter :
+					portlet.getPublicRenderParameters()) {
 
-				String prpIdentifier = portletPrp.getIdentifier();
+				String mapping = ParamUtil.getString(
+					renderRequest,
+					_MAPPING_PREFIX + publicRenderParameter.getIdentifier());
 
-				String layoutPrpId = ParamUtil.getString(
-					renderRequest, _MAPPING_PREFIX + prpIdentifier);
-
-				prpMappings.put(portletPrp.getIdentifier(), layoutPrpId);
+				mappings.put(publicRenderParameter.getIdentifier(), mapping);
 			}
 		}
 
-		List<PublicRenderParameterConfiguration> prpConfigurationList =
-			new ArrayList<PublicRenderParameterConfiguration>();
+		List<PublicRenderParameterConfiguration>
+			publicRenderParameterConfigurations =
+				new ArrayList<PublicRenderParameterConfiguration>();
 
 		for (PublicRenderParameter publicRenderParameter:
-				portletPublicRenderParameters) {
+				portlet.getPublicRenderParameters()) {
 
-			String ignoreKey = _IGNORE_PREFIX +
-				publicRenderParameter.getIdentifier();
+			boolean ignore = false;
 
-			boolean ignore;
+			String ignoreKey =
+				_IGNORE_PREFIX + publicRenderParameter.getIdentifier();
 
 			if (SessionErrors.isEmpty(renderRequest)) {
-				ignore = GetterUtil.getBoolean(preferences.getValue(
-					ignoreKey, StringPool.FALSE));
+				ignore = GetterUtil.getBoolean(
+					preferences.getValue(ignoreKey, null));
 			}
 			else {
 				ignore = GetterUtil.getBoolean(
 					ParamUtil.getString(renderRequest, ignoreKey));
 			}
 
-			prpConfigurationList.add(
+			publicRenderParameterConfigurations.add(
 				new PublicRenderParameterConfiguration(
 					publicRenderParameter,
-					prpMappings.get(publicRenderParameter.getIdentifier()),
+					mappings.get(publicRenderParameter.getIdentifier()),
 					ignore));
 		}
 
 		Collections.sort(
-			prpConfigurationList,
+			publicRenderParameterConfigurations,
 			new PublicRenderParameterIdentifierConfigurationComparator());
 
 		renderRequest.setAttribute(
-			WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATION_LIST,
-			prpConfigurationList);
+			WebKeys.PUBLIC_RENDER_PARAMETER_CONFIGURATIONS,
+			publicRenderParameterConfigurations);
 	}
 
 	private static final String _IGNORE_PREFIX =
 		PublicRenderParameterConfiguration.IGNORE_PREFIX;
+
 	private static final String _MAPPING_PREFIX =
 		PublicRenderParameterConfiguration.MAPPING_PREFIX;
 

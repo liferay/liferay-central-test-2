@@ -66,7 +66,7 @@ permissionsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
 
-// Public Render Parameters
+// Public render parameters
 
 PortletURL publicRenderParametersURL = renderResponse.createRenderURL();
 

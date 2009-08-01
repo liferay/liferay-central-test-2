@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.portletconfiguration.util;
 
+import com.liferay.portal.model.PublicRenderParameter;
+
 import java.util.Comparator;
 
 /**
@@ -29,17 +31,24 @@ import java.util.Comparator;
  * <b><i>View Source</i></b></a>
  *
  * @author Alberto Montero
- *
-*/
+ */
 public class PublicRenderParameterIdentifierConfigurationComparator
 	implements Comparator<PublicRenderParameterConfiguration> {
 
 	public int compare(
-		PublicRenderParameterConfiguration o1,
-		PublicRenderParameterConfiguration o2) {
+		PublicRenderParameterConfiguration publicRenderParameterConfiguration1,
+		PublicRenderParameterConfiguration
+			publicRenderParameterConfiguration2) {
 
-		return o1.getPublicRenderParameter().getIdentifier().compareTo(
-			o2.getPublicRenderParameter().getIdentifier());
+		PublicRenderParameter publicRenderParameter1 =
+			publicRenderParameterConfiguration1.getPublicRenderParameter();
+		PublicRenderParameter publicRenderParameter2 =
+			publicRenderParameterConfiguration2.getPublicRenderParameter();
+
+		String identifier1 = publicRenderParameter1.getIdentifier();
+		String identifier2 = publicRenderParameter2.getIdentifier();
+
+		return identifier1.compareTo(identifier2);
 	}
 
 }

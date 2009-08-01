@@ -174,8 +174,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LAYOUT_PROTOTYPE = "LAYOUT_PROTOTYPE";
 
-	public static final String LAYOUT_PUBLIC_RENDER_PARAMETERS = "LAYOUT_PUBLIC_RENDER_PARAMETERS";
-
 	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";
 
 	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
@@ -288,7 +286,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTLET_STRUTS_PROCESSOR = "PORTLET_STRUTS_PROCESSOR";
 
-	public static final String PUBLIC_RENDER_PARAMETER_CONFIGURATION_LIST = "PUBLIC_RENDER_PARAMETER_CONFIGURATION_LIST";
+	public static final String PUBLIC_RENDER_PARAMETER_CONFIGURATIONS = "PUBLIC_RENDER_PARAMETER_CONFIGURATIONS";
+
+	public static final String PUBLIC_RENDER_PARAMETERS = "PUBLIC_RENDER_PARAMETERS";
 
 	public static final String REFERER = "referer";
 
