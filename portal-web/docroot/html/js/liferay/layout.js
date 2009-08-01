@@ -137,7 +137,7 @@
 				instance.dropZones[i] = columns[i];
 			}
 
-			var portlets = columns.children(0).find('> ' + instance._boxSelector);
+			var portlets = columns.find(instance._boxSelector);
 
 			for (var i = portlets.length - 1; i >= 0; i--) {
 				instance.add(portlets[i]);
@@ -534,7 +534,7 @@
 				var target = Dom.get(id);
 				var portlet = instance.getEl();
 
-				if (target.tagName.toLowerCase() == 'td') {
+				if (instance._isValidDropZone(target)) {
 					jQuery('> .empty', target).removeClass('empty');
 				}
 
@@ -542,12 +542,9 @@
 					var inNested = (id.indexOf('118_INSTANCE') === 0);
 
 					if ((inNested || !instance._eventProcessed(event)) && instance._hasMoved(portlet) && !event.stopProcessing) {
-						var position = Layout._findIndex(portlet, Dom.getFirstChild(target));
+						var position = Layout._findIndex(portlet, instance._getPortletColumn(target));
 						var currentColumnId = Liferay.Util.getColumnId(portlet.parentNode.id);
 						var portletId = Liferay.Util.getPortletId(portlet.id);
-
-						var viewport = Liferay.Util.viewport.scroll();
-						var portletOffset = jQuery(portlet).offset();
 
 						Layout._saveLayout(
 							{
@@ -557,10 +554,6 @@
 								p_p_id: portletId
 							}
 						);
-
-						if (viewport.y > portletOffset.top) {
-							window.scrollTo(portletOffset.left, portletOffset.top - 10);
-						}
 
 						event.eventProcessed = true;
 						event.stopProcessing = true;
@@ -573,10 +566,10 @@
 
 				var target = Dom.get(id);
 
-				if (target.tagName.toLowerCase() == 'td') {
+				if (instance._isValidDropZone(target)) {
 					Dom.addClass(target, 'active-area');
 
-					var divColumn = Dom.getFirstChild(target);
+					var divColumn = instance._getPortletColumn(target);
 					var portlet = instance.getEl();
 
 					if (divColumn != instance._originalParent || (portlet.parentNode == divColumn)) {
@@ -603,7 +596,7 @@
 				var portlet = instance._getPlaceholder();
 		        var target = Dom.get(id);
 
-				if (target.tagName.toLowerCase() == 'td') {
+				if (instance._isValidDropZone(target)) {
 
 					Dom.removeClass(target, 'active-area');
 
@@ -643,17 +636,17 @@
 
 		            DDM.refreshCache();
 		        }
-				else if (target.tagName.toLowerCase() == 'td') {
+				else if (instance._isValidDropZone(target)) {
 					var column = target;
 
-					var divColumn = Dom.getFirstChild(target);
+					var divColumn = instance._getPortletColumn(target);
 
 					instance._getProxy().removeClass('not-intersecting');
 
 					if (Dom.hasClass(column, 'active-area')) {
 						if (Dom.hasClass(divColumn, 'empty')) {
 							try {
-								Dom.getFirstChild(target).appendChild(portlet);
+								divColumn.appendChild(portlet);
 							}
 							catch (e) {}
 						}
@@ -691,6 +684,12 @@
 				return alreadyProcessed;
 			},
 
+			_getPortletColumn: function(target) {
+				var instance = this;
+
+				return jQuery('.lfr-portlet-column:first', target)[0];
+			},
+
 			_hasMoved: function(portlet) {
 				var instance = this;
 
@@ -698,6 +697,12 @@
 				var columnContainerChanged = (portlet.parentNode != instance._originalParent);
 
 				return columnOrderChanged || columnContainerChanged;
+			},
+
+			_isValidDropZone: function(target) {
+				var instance = this;
+
+				return target.className.indexOf('lfr-column') > -1;
 			}
 		}
 	);
