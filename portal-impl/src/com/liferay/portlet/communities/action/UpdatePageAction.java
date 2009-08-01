@@ -161,9 +161,9 @@ public class UpdatePageAction extends JSONAction {
 		long layoutPrototypeId = ParamUtil.getLong(
 			request, "layoutPrototypeId");
 
-		Layout layout = null;
-
 		ServiceContext serviceContext = new ServiceContext();
+
+		Layout layout = null;
 
 		if (layoutPrototypeId > 0) {
 			LayoutPrototype layoutPrototype =

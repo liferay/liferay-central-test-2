@@ -92,7 +92,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
  */
@@ -207,15 +207,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, user.getUserId(),
 			Layout.class.getName(), layout.getPlid(), false, true, true);
 
+		// Layout set
+
+		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+
 		// Expando
 
 		ExpandoBridge expandoBridge = layout.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Layout set
-
-		layoutSetLocalService.updatePageCount(groupId, privateLayout);
 
 		// Message boards
 
@@ -826,12 +826,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layoutPersistence.update(layout, false);
 
-		// Expando
-
-		ExpandoBridge expandoBridge = layout.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Icon
 
 		if (iconImage != null) {
@@ -843,6 +837,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					layout.getIconImageId(), iconBytes);
 			}
 		}
+
+		// Document library
 
 		try {
 			if (layout.getDlFolderId() > 0) {
@@ -863,6 +859,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 		catch (NoSuchFolderException nsfe) {
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = layout.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return layout;
 	}
