@@ -196,7 +196,7 @@ import org.apache.struts.Globals;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Eduardo Lundgren
  */
 public class PortalImpl implements Portal {
@@ -3447,9 +3447,19 @@ public class PortalImpl implements Portal {
 			Portlet portlet = itr.next();
 
 			try {
+
+				long plid = LayoutConstants.DEFAULT_PLID;
+
+				if (contentCategory) {
+					plid = scopeGroup.getDefaultPublicPlid();
+
+					if (plid == LayoutConstants.DEFAULT_PLID) {
+						plid = scopeGroup.getDefaultPrivatePlid();
+					}
+				}
+
 				if (PortletPermissionUtil.contains(
-						permissionChecker, LayoutConstants.DEFAULT_PLID,
-						portlet.getPortletId(),
+						permissionChecker, plid, portlet.getPortletId(),
 						ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
 
 					continue;
