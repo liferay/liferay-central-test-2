@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.workflow.proxy;
 
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.kernel.workflow.request.BaseRequest;
 
 /**
  * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>

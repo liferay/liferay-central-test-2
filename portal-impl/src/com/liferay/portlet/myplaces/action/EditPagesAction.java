@@ -28,6 +28,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -84,9 +86,12 @@ public class EditPagesAction extends PortletAction {
 			boolean hidden = false;
 			String friendlyURL = StringPool.BLANK;
 
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				Layout.class.getName(), actionRequest);
+
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
-				description, type, hidden, friendlyURL);
+				description, type, hidden, friendlyURL, serviceContext);
 		}
 
 		if (layout != null) {

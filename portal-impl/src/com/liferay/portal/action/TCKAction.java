@@ -91,11 +91,14 @@ public class TCKAction extends Action {
 			long userId = user.getUserId();
 			long groupId = user.getGroup().getGroupId();
 
+			ServiceContext serviceContext = new ServiceContext();
+
 			Layout layout = LayoutLocalServiceUtil.addLayout(
 				userId, groupId, false,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "TCKAction",
 				StringPool.BLANK, StringPool.BLANK,
-				LayoutConstants.TYPE_PORTLET, false, StringPool.BLANK);
+				LayoutConstants.TYPE_PORTLET, false, StringPool.BLANK,
+				serviceContext);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();

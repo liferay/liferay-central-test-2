@@ -22,12 +22,14 @@
 
 package com.liferay.portal.kernel.workflow.request;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.WorkflowException;
+
+import java.io.Serializable;
+
+import java.lang.reflect.Method;
+
+import java.util.Arrays;
 
 /**
  * <a href="BaseRequest.java.html"><b><i>View Source</i></b></a>

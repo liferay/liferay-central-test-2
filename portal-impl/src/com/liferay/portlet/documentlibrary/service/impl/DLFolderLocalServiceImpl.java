@@ -172,7 +172,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				layoutLocalService.addLayout(
 					userId, groupId, privateLayout, parentLayoutId, name, title,
 					layoutDescription, type, hidden, friendlyURL,
-					folder.getFolderId());
+					folder.getFolderId(), new ServiceContext());
 			}
 		}
 

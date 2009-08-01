@@ -31,6 +31,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetPrototypeLocalServiceBaseImpl;
 
 import java.util.List;
@@ -85,10 +86,12 @@ public class LayoutSetPrototypeLocalServiceImpl
 			layoutSetPrototype.getName(LocaleUtil.getDefault()), null, 0,
 			friendlyURL, true, null);
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "home", null, null,
-			LayoutConstants.TYPE_PORTLET, false, "/home");
+			LayoutConstants.TYPE_PORTLET, false, "/home", serviceContext);
 
 		return layoutSetPrototype;
 	}

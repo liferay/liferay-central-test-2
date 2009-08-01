@@ -40,6 +40,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -162,6 +163,8 @@ public class UpdatePageAction extends JSONAction {
 
 		Layout layout = null;
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		if (layoutPrototypeId > 0) {
 			LayoutPrototype layoutPrototype =
 				LayoutPrototypeServiceUtil.getLayoutPrototype(
@@ -171,7 +174,8 @@ public class UpdatePageAction extends JSONAction {
 
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
-				description, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+				description, LayoutConstants.TYPE_PORTLET, false, friendlyURL,
+				serviceContext);
 
 			LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
@@ -182,7 +186,7 @@ public class UpdatePageAction extends JSONAction {
 		else {
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
-				description, type, hidden, friendlyURL);
+				description, type, hidden, friendlyURL, serviceContext);
 		}
 
 		String[] eventClasses = StringUtil.split(

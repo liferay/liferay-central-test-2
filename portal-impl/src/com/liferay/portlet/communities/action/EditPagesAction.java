@@ -59,6 +59,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -458,6 +460,9 @@ public class EditPagesAction extends PortletAction {
 		Map<Locale, String> localeTitlesMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "title");
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Layout.class.getName(), actionRequest);
+
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add layout
@@ -469,7 +474,8 @@ public class EditPagesAction extends PortletAction {
 				Layout layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, parentLayout.getType(),
-					parentLayout.isHidden(), friendlyURL);
+					parentLayout.isHidden(), friendlyURL,
+					serviceContext);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
@@ -492,7 +498,7 @@ public class EditPagesAction extends PortletAction {
 				Layout layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, LayoutConstants.TYPE_PORTLET,
-					false, friendlyURL);
+					false, friendlyURL, serviceContext);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
@@ -505,7 +511,8 @@ public class EditPagesAction extends PortletAction {
 			else {
 				LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
-					localeTitlesMap, description, type, hidden, friendlyURL);
+					localeTitlesMap, description, type, hidden, friendlyURL,
+					serviceContext);
 			}
 		}
 		else {
@@ -518,7 +525,8 @@ public class EditPagesAction extends PortletAction {
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
 				localeNamesMap, localeTitlesMap, description, type, hidden,
-				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
+				friendlyURL, Boolean.valueOf(iconImage), iconBytes,
+				serviceContext);
 
 			UnicodeProperties formTypeSettingsProperties =
 				getTypeSettingsProperties(actionRequest);

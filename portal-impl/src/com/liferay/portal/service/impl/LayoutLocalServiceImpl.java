@@ -67,6 +67,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -91,7 +92,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jorge Ferrer
  * @author Bruno Farache
  */
@@ -100,7 +101,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, String name, String title, String description,
-			String type, boolean hidden, String friendlyURL)
+			String type, boolean hidden, String friendlyURL,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
@@ -112,26 +114,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap<Locale, String>(), description, type, hidden,
-			friendlyURL);
+			friendlyURL, serviceContext);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL)
+			String type, boolean hidden, String friendlyURL,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			localeTitlesMap, description, type, hidden, friendlyURL,
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, String name, String title, String description,
-			String type, boolean hidden, String friendlyURL, long dlFolderId)
+			String type, boolean hidden, String friendlyURL, long dlFolderId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
@@ -142,14 +146,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			null, description, type, hidden, friendlyURL, dlFolderId);
+			null, description, type, hidden, friendlyURL, dlFolderId,
+			serviceContext);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL, long dlFolderId)
+			String type, boolean hidden, String friendlyURL, long dlFolderId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -200,6 +206,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		resourceLocalService.addResources(
 			user.getCompanyId(), groupId, user.getUserId(),
 			Layout.class.getName(), layout.getPlid(), false, true, true);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = layout.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Layout set
 
@@ -749,13 +761,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL)
+			String type, boolean hidden, String friendlyURL,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
 			localeTitlesMap, description, type, hidden, friendlyURL, null,
-			null);
+			null, serviceContext);
 	}
 
 	public Layout updateLayout(
@@ -763,7 +776,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
 			String type, boolean hidden, String friendlyURL, Boolean iconImage,
-			byte[] iconBytes)
+			byte[] iconBytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -813,6 +826,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layoutPersistence.update(layout, false);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = layout.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
 		// Icon
 
 		if (iconImage != null) {
@@ -830,12 +849,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
 
-				ServiceContext serviceContext = new ServiceContext();
-
 				if (!name.equals(folder.getName())) {
 					dlFolderLocalService.updateFolder(
 						folder.getFolderId(), folder.getParentFolderId(), name,
-						folder.getDescription(), serviceContext);
+						folder.getDescription(), new ServiceContext());
 				}
 			}
 		}

@@ -919,12 +919,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String friendlyURL = getFriendlyURL(
 			PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
 			StringPool.BLANK, LayoutConstants.TYPE_CONTROL_PANEL, false,
-			friendlyURL);
+			friendlyURL, serviceContext);
 	}
 
 	protected void addDefaultGuestPublicLayoutByProperties(Group group)
@@ -935,11 +937,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String friendlyURL = getFriendlyURL(
 			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL);
 
+		ServiceContext serviceContext = new ServiceContext();
+
 		Layout layout = layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), false,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_NAME, StringPool.BLANK,
-			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL,
+			serviceContext);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
