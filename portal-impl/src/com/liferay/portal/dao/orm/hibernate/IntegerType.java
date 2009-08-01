@@ -39,7 +39,7 @@ import org.hibernate.usertype.UserType;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  */
-public class IntegerType implements UserType {
+public class IntegerType implements Serializable, UserType {
 
 	public final static int DEFAULT_VALUE = 0;
 

@@ -40,7 +40,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Brian Wing Shun Chan
  */
-public class LongType implements UserType {
+public class LongType implements Serializable, UserType {
 
 	public final static long DEFAULT_VALUE = 0;
 

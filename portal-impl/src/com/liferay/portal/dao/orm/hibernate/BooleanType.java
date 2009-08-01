@@ -38,7 +38,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Brian Wing Shun Chan
  */
-public class BooleanType implements UserType {
+public class BooleanType implements Serializable, UserType {
 
 	public final static boolean DEFAULT_VALUE = false;
 

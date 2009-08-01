@@ -38,7 +38,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Brian Wing Shun Chan
  */
-public class ShortType implements UserType {
+public class ShortType implements Serializable, UserType {
 
 	public final static short DEFAULT_VALUE = 0;
 

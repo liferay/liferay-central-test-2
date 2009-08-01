@@ -38,7 +38,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Brian Wing Shun Chan
  */
-public class FloatType implements UserType {
+public class FloatType implements Serializable, UserType {
 
 	public final static float DEFAULT_VALUE = 0.0F;
 

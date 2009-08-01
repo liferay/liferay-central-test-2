@@ -38,7 +38,7 @@ import org.hibernate.usertype.UserType;
  *
  * @author Brian Wing Shun Chan
  */
-public class DoubleType implements UserType {
+public class DoubleType implements Serializable, UserType {
 
 	public final static double DEFAULT_VALUE = 0.0;
 
