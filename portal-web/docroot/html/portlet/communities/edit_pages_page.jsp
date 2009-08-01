@@ -317,6 +317,25 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				<input name="TypeSettingsProperties(target)" size="15" type="text" value="<%= curTarget %>" />
 			</td>
 		</tr>
+
+		<liferay-ui:custom-attributes-available className="<%= Layout.class.getName() %>">
+			<tr>
+				<td colspan="2">
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<liferay-ui:custom-attribute-list
+						className="<%= Layout.class.getName() %>"
+						classPK="<%= (selLayout != null) ? selLayout.getPlid() : 0 %>"
+						editable="<%= true %>"
+						label="<%= true %>"
+					/>
+				</td>
+			</tr>
+		</liferay-ui:custom-attributes-available>
+
 		</table>
 	</td>
 </tr>
