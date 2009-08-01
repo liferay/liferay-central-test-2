@@ -425,6 +425,12 @@ Liferay.Util = {
 				else if (match == '&') {
 					str = '&amp;';
 				}
+				else if (match == '\"') {
+					str = '&#034;';
+				}
+				else if (match == '\'') {
+					str = '&#039;';
+				}
 
 				return str;
 			}
@@ -1193,6 +1199,33 @@ Liferay.Util = {
 		value = value.replace(/([a-z])([A-Z])/g, '$1' + separator + '$2');
 
 		return value;
+	},
+
+	unescapeHTML: function(str) {
+		return str.replace(
+			/&lt;|&gt;|&amp;|&#034;|&#039;/gi,
+			function(match) {
+				var str = '';
+
+				if (match == '&lt;') {
+					str = '<';
+				}
+				else if (match == '&gt;') {
+					str = '>';
+				}
+				else if (match == '&amp;') {
+					str = '&';
+				}
+				else if (match == '&#034;') {
+					str = '\"';
+				}
+				else if (match == '&#039;') {
+					str = '\'';
+				}
+
+				return str;
+			}
+		);
 	},
 
 	viewport: {

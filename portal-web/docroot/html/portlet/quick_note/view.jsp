@@ -46,7 +46,7 @@
 		</div>
 	</c:if>
 
-	<div id="<portlet:namespace />note"><%= data %></div>
+	<div id="<portlet:namespace />note"><%= StringUtil.replace(HtmlUtil.escape(data), "&lt;br /&gt;", "<br />") %></div>
 </div>
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
@@ -91,7 +91,9 @@
 								}
 							);
 						}
-						return newValue;
+
+						return Liferay.Util.escapeHTML(newValue).replace(
+							/&lt;br \/&gt;/gi, '<br />');
 					},
 					{
 						data: function(value, settings) {
@@ -99,6 +101,8 @@
 
 							settings._LFR_ = {};
 							settings._LFR_.oldText = newValue;
+
+							newValue = Liferay.Util.unescapeHTML(newValue);
 
 							return newValue;
 						},
