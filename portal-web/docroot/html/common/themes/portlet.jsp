@@ -57,21 +57,20 @@ if (portletDecorateObj != null) {
 	request.removeAttribute(WebKeys.PORTLET_DECORATE);
 }
 
-// Portlet title and Portlet description
+// Portlet title and description
 
 ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
+String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());
 String portletDescription = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 
-String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());
-
 if (portletDisplay.isAccess() && portletDisplay.isActive()) {
-	if (Validator.isNull(portletDescription)) {
-		portletDescription = renderResponseImpl.getDescription();
-	}
-
 	if (Validator.isNull(portletTitle)) {
 		portletTitle = renderResponseImpl.getTitle();
+	}
+
+	if (Validator.isNull(portletDescription)) {
+		portletDescription = renderResponseImpl.getDescription();
 	}
 }
 
@@ -79,11 +78,10 @@ if (Validator.isNull(portletTitle)) {
 	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 }
 
-Group group = layout.getGroup();
-
+portletDisplay.setTitle(portletTitle);
 portletDisplay.setDescription(portletDescription);
 
-portletDisplay.setTitle(portletTitle);
+Group group = layout.getGroup();
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 

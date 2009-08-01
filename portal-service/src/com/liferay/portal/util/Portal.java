@@ -318,6 +318,19 @@ public interface Portal {
 	public Map<String, String> getPortletBreadcrumbMap(
 		HttpServletRequest request);
 
+	public String getPortletDescription(
+		Portlet portlet, ServletContext servletContext, Locale locale);
+
+	public String getPortletDescription(Portlet portlet, User user);
+
+	public String getPortletDescription(
+		String portletId, long companyId, Locale locale);
+
+	public String getPortletDescription(
+		String portletId, long companyId, String languageId);
+
+	public String getPortletDescription(String portletId, User user);
+
 	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException;
@@ -357,19 +370,6 @@ public interface Portal {
 	public String getPortletId(PortletRequest portletRequest);
 
 	public String getPortletNamespace(String portletId);
-
-	public String getPortletDescription(
-		Portlet portlet, ServletContext servletContext, Locale locale);
-
-	public String getPortletDescription(Portlet portlet, User user);
-
-	public String getPortletDescription(
-		String portletId, long companyId, Locale locale);
-
-	public String getPortletDescription(
-		String portletId, long companyId, String languageId);
-
-	public String getPortletDescription(String portletId, User user);
 
 	public String getPortletTitle(
 		Portlet portlet, long companyId, Locale locale);

@@ -153,11 +153,6 @@ public class PortletConfigImpl implements PortletConfig {
 				try {
 					PortletInfo portletInfo = _portlet.getPortletInfo();
 
-					sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
-					sb.append("=");
-					sb.append(portletInfo.getDescription());
-					sb.append("\n");
-
 					sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
 					sb.append("=");
 					sb.append(portletInfo.getTitle());
@@ -171,6 +166,11 @@ public class PortletConfigImpl implements PortletConfig {
 					sb.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
 					sb.append("=");
 					sb.append(portletInfo.getKeywords());
+					sb.append("\n");
+
+					sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+					sb.append("=");
+					sb.append(portletInfo.getDescription());
 					sb.append("\n");
 
 					bundle = new PropertyResourceBundle(

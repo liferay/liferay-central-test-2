@@ -536,6 +536,34 @@ public class PortalUtil {
 		return getPortal().getPortletBreadcrumbMap(request);
 	}
 
+	public static String getPortletDescription(
+		Portlet portlet, ServletContext servletContext, Locale locale) {
+
+		return getPortal().getPortletDescription(
+			portlet, servletContext, locale);
+	}
+
+	public static String getPortletDescription(Portlet portlet, User user) {
+		return getPortal().getPortletDescription(portlet, user);
+	}
+
+	public static String getPortletDescription(
+		String portletId, long companyId, Locale locale) {
+
+		return getPortal().getPortletDescription(portletId, companyId, locale);
+	}
+
+	public static String getPortletDescription(
+		String portletId, long companyId, String languageId) {
+
+		return getPortal().getPortletDescription(
+			portletId, companyId, languageId);
+	}
+
+	public static String getPortletDescription(String portletId, User user) {
+		return getPortal().getPortletDescription(portletId, user);
+	}
+
 	public static Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException {
@@ -598,34 +626,6 @@ public class PortalUtil {
 
 	public static String getPortletNamespace(String portletId) {
 		return getPortal().getPortletNamespace(portletId);
-	}
-
-	public static String getPortletDescription(
-		Portlet portlet, ServletContext servletContext, Locale locale) {
-
-		return getPortal().getPortletDescription(
-			portlet, servletContext, locale);
-	}
-
-	public static String getPortletDescription(Portlet portlet, User user) {
-		return getPortal().getPortletDescription(portlet, user);
-	}
-
-	public static String getPortletDescription(
-		String portletId, long companyId, Locale locale) {
-
-		return getPortal().getPortletDescription(portletId, companyId, locale);
-	}
-
-	public static String getPortletDescription(
-		String portletId, long companyId, String languageId) {
-
-		return getPortal().getPortletDescription(
-			portletId, companyId, languageId);
-	}
-
-	public static String getPortletDescription(String portletId, User user) {
-		return getPortal().getPortletDescription(portletId, user);
 	}
 
 	public static String getPortletTitle(

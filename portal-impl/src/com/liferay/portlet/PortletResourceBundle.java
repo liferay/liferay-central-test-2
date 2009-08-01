@@ -78,9 +78,6 @@ public class PortletResourceBundle extends ResourceBundle {
 		if (key == null) {
 			return null;
 		}
-		else if (key.equals(JavaConstants.JAVAX_PORTLET_DESCRIPTION)) {
-			return _portletInfo.getDescription();
-		}
 		else if (key.equals(JavaConstants.JAVAX_PORTLET_TITLE)) {
 			return _portletInfo.getTitle();
 		}
@@ -89,6 +86,9 @@ public class PortletResourceBundle extends ResourceBundle {
 		}
 		else if (key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS)) {
 			return _portletInfo.getKeywords();
+		}
+		else if (key.equals(JavaConstants.JAVAX_PORTLET_DESCRIPTION)) {
+			return _portletInfo.getDescription();
 		}
 
 		return null;

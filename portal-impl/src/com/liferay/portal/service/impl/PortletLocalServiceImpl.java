@@ -310,8 +310,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portlet.getWindowStates().put(
 					ContentTypes.TEXT_HTML, mimeTypeWindowStates);
 
-				portlet.setPortletInfo(new PortletInfo(
-					portletId, portletId, portletId, portletId));
+				portlet.setPortletInfo(
+					new PortletInfo(
+						portletId, portletId, portletId, portletId));
 
 				if (portletId.indexOf("_INSTANCE_") != -1) {
 					portlet.setInstanceable(true);
@@ -1539,10 +1540,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Element portletInfo = portlet.element("portlet-info");
 
-			String portletInfoDescription = null;
 			String portletInfoTitle = null;
 			String portletInfoShortTitle = null;
 			String portletInfoKeyWords = null;
+			String portletInfoDescription = null;
 
 			if (portletInfo != null) {
 				portletInfoTitle = portletInfo.elementText("title");
@@ -1550,9 +1551,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletInfoKeyWords = portletInfo.elementText("keywords");
 			}
 
-			portletModel.setPortletInfo(new PortletInfo(
-				portletInfoDescription, portletInfoTitle, portletInfoShortTitle,
-				portletInfoKeyWords));
+			portletModel.setPortletInfo(
+				new PortletInfo(
+					portletInfoTitle, portletInfoShortTitle,
+					portletInfoKeyWords, portletInfoDescription));
 
 			Element portletPreferences = portlet.element("portlet-preferences");
 

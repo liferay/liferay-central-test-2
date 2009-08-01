@@ -51,10 +51,6 @@ public class RenderResponseImpl
 		return _resourceName;
 	}
 
-	public String getDescription() {
-		return _description;
-	}
-
 	public String getTitle() {
 		return _title;
 	}
@@ -69,20 +65,6 @@ public class RenderResponseImpl
 
 	public void setNextPossiblePortletModes(
 		Collection<PortletMode> portletModes) {
-	}
-
-	public void setDescription(String description) {
-		_description = description;
-
-		// See LEP-2188
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		portletDisplay.setDescription(_description);
 	}
 
 	public void setTitle(String title) {
@@ -113,7 +95,6 @@ public class RenderResponseImpl
 	}
 
 	private PortletRequestImpl _portletRequestImpl;
-	private String _description;
 	private String _title;
  	private Boolean _useDefaultTemplate;
 	private String _resourceName;
