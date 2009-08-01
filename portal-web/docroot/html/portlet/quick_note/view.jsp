@@ -92,8 +92,7 @@
 							);
 						}
 
-						return Liferay.Util.escapeHTML(newValue).replace(
-							/&lt;br \/&gt;/gi, '<br />');
+						return Liferay.Util.escapeHTML(newValue).replace(/&lt;br \/&gt;/gi, '<br />');
 					},
 					{
 						data: function(value, settings) {
