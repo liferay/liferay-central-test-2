@@ -116,6 +116,7 @@ if (Validator.isNotNull(ppid)) {
 					<liferay-portlet:runtime portletName="87" />
 				</div>
 			</div>
+
 			<div class="aui-column aui-w75 aui-column-last panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
 				<div class="aui-column-content">
 					<div class="aui-column-container panel-page-content-menu">
@@ -124,30 +125,30 @@ if (Validator.isNotNull(ppid)) {
 								<c:choose>
 									<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 
-								<%
-								String curGroupName = null;
+										<%
+										String curGroupName = null;
 
-								if (curGroup.isCompany()) {
-									curGroupName = LanguageUtil.get(pageContext, "global");
-								}
-								else if (curGroup.isUser()) {
-									curGroupName = LanguageUtil.get(pageContext, "my-community");
-								}
-								else {
-									curGroupName = HtmlUtil.escape(curGroup.getDescriptiveName());
-								}
+										if (curGroup.isCompany()) {
+											curGroupName = LanguageUtil.get(pageContext, "global");
+										}
+										else if (curGroup.isUser()) {
+											curGroupName = LanguageUtil.get(pageContext, "my-community");
+										}
+										else {
+											curGroupName = HtmlUtil.escape(curGroup.getDescriptiveName());
+										}
 
-								PortalUtil.addPortletBreadcrumbEntry(request, curGroupName, null);
+										PortalUtil.addPortletBreadcrumbEntry(request, curGroupName, null);
 
-								String curGroupLabel = null;
+										String curGroupLabel = null;
 
-								if (scopeLayout == null) {
-									curGroupLabel = LanguageUtil.get(pageContext, "default");
-								}
-								else {
-									curGroupLabel = scopeLayout.getName(locale);
-									PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
-								}
+										if (scopeLayout == null) {
+											curGroupLabel = LanguageUtil.get(pageContext, "default");
+										}
+										else {
+											curGroupLabel = scopeLayout.getName(locale);
+											PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
+										}
 
 										List<Layout> curGroupLayouts = new ArrayList<Layout>();
 
@@ -164,7 +165,7 @@ if (Validator.isNotNull(ppid)) {
 										<h2>
 											<liferay-ui:message key="content-for" />
 
-									<a href="javascript:;" class="lfr-group-selector"><%= curGroupName %></a>
+											<a href="javascript:;" class="lfr-group-selector"><%= curGroupName %></a>
 												<c:choose>
 													<c:when test="<%= curGroup.isCompany() %>">
 														<liferay-ui:message key="global" />
@@ -178,12 +179,12 @@ if (Validator.isNotNull(ppid)) {
 												</c:choose>
 											</a>
 
-									<c:if test="<%= !scopeLayouts.isEmpty() %>">
-										<span class="nobr lfr-title-scope-selector">
-											<liferay-ui:message key="with-scope" /> <a href="javascript:;" class="lfr-scope-selector"><%= curGroupLabel %></a>
-										</span>
-									</c:if>
-								</h2>
+											<c:if test="<%= !scopeLayouts.isEmpty() %>">
+												<span class="nobr lfr-title-scope-selector">
+													<liferay-ui:message key="with-scope" /> <a href="javascript:;" class="lfr-scope-selector"><%= curGroupLabel %></a>
+												</span>
+											</c:if>
+										</h2>
 
 										<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
 											<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
@@ -254,13 +255,13 @@ if (Validator.isNotNull(ppid)) {
 											</c:if>
 										</liferay-ui:panel-floating-container>
 
-								<c:if test="<%= !scopeLayouts.isEmpty() %>">
-									<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
-										<liferay-ui:panel id="" title="">
-											<ul>
-												<li>
-													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><liferay-ui:message key="default" /></a>
-												</li>
+										<c:if test="<%= !scopeLayouts.isEmpty() %>">
+											<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
+												<liferay-ui:panel id="" title="">
+													<ul>
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><liferay-ui:message key="default" /></a>
+														</li>
 
 														<%
 														for (Layout curScopeLayout : scopeLayouts) {
@@ -307,8 +308,10 @@ if (Validator.isNotNull(ppid)) {
 								</c:choose>
 							</div>
 						</div>
+
 						<div class="aui-column aui-w50 aui-column-last">
 							<div class="aui-column-content">
+
 								<%
 								String refererGroupDescriptiveName = null;
 								String backURL = null;
@@ -375,19 +378,19 @@ if (Validator.isNotNull(ppid)) {
 					</div>
 </c:if>
 
-					<%
-					if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
-						String velocityTemplateId = null;
+<%
+if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
+	String velocityTemplateId = null;
 
-						String content = null;
+	String content = null;
 
-						if (themeDisplay.isStateExclusive()) {
-							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
+	if (themeDisplay.isStateExclusive()) {
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
 
-							content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-						}
-						else if (themeDisplay.isStatePopUp()) {
-							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
+		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
+	}
+	else if (themeDisplay.isStatePopUp()) {
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
 
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
@@ -403,39 +406,39 @@ if (Validator.isNotNull(ppid)) {
 
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
+		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
 
-							content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-						}
-					%>
+		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
+	}
+%>
 
-						<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
 
-					<%
-					}
-					else {
-						String description = StringPool.BLANK;
+<%
+}
+else {
+	String description = StringPool.BLANK;
 
-						String className = "portlet-msg-info";
+	String className = "portlet-msg-info";
 
-						if (denyAccess) {
-							description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
+	if (denyAccess) {
+		description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
 
-							className = "portlet-msg-error";
-						}
+		className = "portlet-msg-error";
+	}
 
-						if (Validator.isNull(description)) {
-							description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-						}
-					%>
+	if (Validator.isNull(description)) {
+		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
+	}
+%>
 
-						<div class="<%= className %>">
-							<%= description %>
-						</div>
+	<div class="<%= className %>">
+		<%= description %>
+	</div>
 
-					<%
-					}
-					%>
+<%
+}
+%>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 				</div>
