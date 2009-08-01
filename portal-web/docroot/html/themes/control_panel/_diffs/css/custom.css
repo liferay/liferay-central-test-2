@@ -72,7 +72,10 @@ body {
 	background-image: url(../images/control_panel/panel_shadow.png);
 	background-position: 100% 0;
 	background-repeat: repeat-y;
-	width: 225px;
+}
+
+.lfr-ctrl-panel .panel-page-menu .aui-column-content {
+	padding: 0;
 }
 
 .ie6 .lfr-ctrl-panel .panel-page-menu {
@@ -123,9 +126,22 @@ body {
 	width: 100%;
 }
 
-.lfr-ctrl-panel .panel-page-content-menu td {
+.lfr-ctrl-panel .panel-page-content .aui-column-content {
+	padding-left: 0;
+}
+
+.lfr-ctrl-panel .panel-page-content-menu .aui-column-last {
+	text-align: right;
+}
+
+.lfr-ctrl-panel .panel-page-content-menu .aui-column-content {
 	line-height: 34px;
 	padding: 0 15px;
+}
+
+.lfr-ctrl-panel .panel-page-menu {
+	padding-bottom: 10000px;
+	margin-bottom: -10000px;
 }
 
 .lfr-ctrl-panel .lfr-add-content {

@@ -110,17 +110,19 @@ if (Validator.isNotNull(ppid)) {
 	%>
 
 	<div id="content-wrapper">
-		<table class="lfr-ctrl-panel <%= panelCategory %>">
-		<tr>
-			<td class="panel-page-menu" valign="top">
-				<liferay-portlet:runtime portletName="87" />
-			</td>
-			<td class="panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>" valign="top">
-				<table class="panel-page-content-menu">
-				<tr>
-					<td>
-						<c:choose>
-							<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
+		<div class="aui-column-container lfr-ctrl-panel <%= panelCategory %>">
+			<div class="aui-column aui-w25 aui-column-first panel-page-menu">
+				<div class="aui-column-content">
+					<liferay-portlet:runtime portletName="87" />
+				</div>
+			</div>
+			<div class="aui-column aui-w75 aui-column-last panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
+				<div class="aui-column-content">
+					<div class="aui-column-container panel-page-content-menu">
+						<div class="aui-column aui-w50 aui-column-first">
+							<div class="aui-column-content">
+								<c:choose>
+									<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 
 								<%
 								String curGroupName = null;
@@ -147,22 +149,34 @@ if (Validator.isNotNull(ppid)) {
 									PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
 								}
 
-								List<Layout> curGroupLayouts = new ArrayList<Layout>();
+										List<Layout> curGroupLayouts = new ArrayList<Layout>();
 
-								curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), false));
-								curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), true));
+										curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), false));
+										curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), true));
 
-								for (Layout curGroupLayout : curGroupLayouts) {
-									if (curGroupLayout.hasScopeGroup()) {
-										scopeLayouts.add(curGroupLayout);
-									}
-								}
-								%>
+										for (Layout curGroupLayout : curGroupLayouts) {
+											if (curGroupLayout.hasScopeGroup()) {
+												scopeLayouts.add(curGroupLayout);
+											}
+										}
+										%>
 
-								<h2>
-									<liferay-ui:message key="content-for" />
+										<h2>
+											<liferay-ui:message key="content-for" />
 
 									<a href="javascript:;" class="lfr-group-selector"><%= curGroupName %></a>
+												<c:choose>
+													<c:when test="<%= curGroup.isCompany() %>">
+														<liferay-ui:message key="global" />
+													</c:when>
+													<c:when test="<%= curGroup.isUser() %>">
+														<liferay-ui:message key="my-community" />
+													</c:when>
+													<c:otherwise>
+														<%= HtmlUtil.escape(curGroup.getDescriptiveName()) %>
+													</c:otherwise>
+												</c:choose>
+											</a>
 
 									<c:if test="<%= !scopeLayouts.isEmpty() %>">
 										<span class="nobr lfr-title-scope-selector">
@@ -171,74 +185,74 @@ if (Validator.isNotNull(ppid)) {
 									</c:if>
 								</h2>
 
-								<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
-									<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
-										<liferay-ui:panel id="globalPanel" title='<%= LanguageUtil.get(pageContext, "shared") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
-											<ul>
-												<li>
-													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
-												</li>
-											</ul>
-										</liferay-ui:panel>
-									</c:if>
+										<liferay-ui:panel-floating-container id="groupSelectorPanel" trigger=".lfr-group-selector" paging="<%= true %>">
+											<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
+												<liferay-ui:panel id="globalPanel" title='<%= LanguageUtil.get(pageContext, "shared") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+													<ul>
+														<li>
+															<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
+														</li>
+													</ul>
+												</liferay-ui:panel>
+											</c:if>
 
-									<%
-									List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-									List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
-									%>
+											<%
+											List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+											List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+											%>
 
-									<c:if test="<%= !manageableGroups.isEmpty() %>">
-										<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "communities") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
-											<ul>
+											<c:if test="<%= !manageableGroups.isEmpty() %>">
+												<liferay-ui:panel id="communityPanel" title='<%= LanguageUtil.get(pageContext, "communities") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+													<ul>
 
-												<%
-												for (int i = 0; i < manageableGroups.size(); i++) {
-													Group group = manageableGroups.get(i);
-												%>
+														<%
+														for (int i = 0; i < manageableGroups.size(); i++) {
+															Group group = manageableGroups.get(i);
+														%>
 
-													<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
-														</ul>
-														<ul>
-													</c:if>
+															<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+																</ul>
+																<ul>
+															</c:if>
 
-													<li>
-														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
-													</li>
+															<li>
+																<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
+															</li>
 
-												<%
-												}
-												%>
+														<%
+														}
+														%>
 
-											</ul>
-										</liferay-ui:panel>
-									</c:if>
+													</ul>
+												</liferay-ui:panel>
+											</c:if>
 
-									<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-										<liferay-ui:panel id="organizationsPanel" title='<%= LanguageUtil.get(pageContext, "organizations") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
-											<ul>
+											<c:if test="<%= !manageableOrganizations.isEmpty() %>">
+												<liferay-ui:panel id="organizationsPanel" title='<%= LanguageUtil.get(pageContext, "organizations") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+													<ul>
 
-												<%
-												for (int i = 0; i < manageableOrganizations.size(); i++) {
-													Organization organization = manageableOrganizations.get(i);
-												%>
+														<%
+														for (int i = 0; i < manageableOrganizations.size(); i++) {
+															Organization organization = manageableOrganizations.get(i);
+														%>
 
-													<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
-														</ul>
-														<ul>
-													</c:if>
+															<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
+																</ul>
+																<ul>
+															</c:if>
 
-													<li>
-														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
-													</li>
+															<li>
+																<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
+															</li>
 
-												<%
-												}
-												%>
+														<%
+														}
+														%>
 
-											</ul>
-										</liferay-ui:panel>
-									</c:if>
-								</liferay-ui:panel-floating-container>
+													</ul>
+												</liferay-ui:panel>
+											</c:if>
+										</liferay-ui:panel-floating-container>
 
 								<c:if test="<%= !scopeLayouts.isEmpty() %>">
 									<liferay-ui:panel-floating-container id="scopePanel" trigger=".lfr-scope-selector">
@@ -248,112 +262,132 @@ if (Validator.isNotNull(ppid)) {
 													<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><liferay-ui:message key="default" /></a>
 												</li>
 
-												<%
-												for (Layout curScopeLayout : scopeLayouts) {
-												%>
+														<%
+														for (Layout curScopeLayout : scopeLayouts) {
+														%>
 
-													<li>
-														<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
-													</li>
+															<li>
+																<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
+															</li>
 
-												<%
-												}
-												%>
+														<%
+														}
+														%>
 
-											</ul>
-										</liferay-ui:panel>
-									</liferay-ui:panel-floating-container>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<h2><%= categoryTitle %></h2>
-							</c:otherwise>
-						</c:choose>
-					</td>
-					<td align="right">
+													</ul>
+												</liferay-ui:panel>
+											</liferay-ui:panel-floating-container>
+										</c:if>
+									</c:when>
+									<c:when test="<%= category.equals(PortletCategoryKeys.PORTAL) %>">
+										<h2>
+											<liferay-ui:message key="portal" />
 
-						<%
-						String refererGroupDescriptiveName = null;
-						String backURL = null;
+											<c:if test="<%= CompanyLocalServiceUtil.getCompaniesCount(false) > 1 %>">
+												<%= HtmlUtil.escape(company.getName()) %>
+											</c:if>
+										</h2>
+									</c:when>
+									<c:otherwise>
 
-						if (themeDisplay.getRefererPlid() > 0) {
-							Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
+										<%
+										String title = category;
 
-							Group refererGroup = refererLayout.getGroup();
+										if (category.equals(PortletCategoryKeys.MY)) {
+											title = HtmlUtil.escape(user.getFullName());
+										}
 
-							refererGroupDescriptiveName = refererGroup.getDescriptiveName();
+										if (Validator.isNotNull(category)) {
+											category = "category." + category;
+										}
+										%>
 
-							if (refererGroup.isUser()) {
-								refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-community");
-							}
+										<h2><liferay-ui:message key="<%= title %>" /></h2>
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</div>
+						<div class="aui-column aui-w50 aui-column-last">
+							<div class="aui-column-content">
+								<%
+								String refererGroupDescriptiveName = null;
+								String backURL = null;
 
-							backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
-						}
-						else {
-							List<Group> myPlaces = user.getMyPlaces(1);
+								if (themeDisplay.getRefererPlid() > 0) {
+									Layout refererLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getRefererPlid());
 
-							if (myPlaces.isEmpty()) {
-								refererGroupDescriptiveName = GroupConstants.GUEST;
-								backURL = themeDisplay.getURLHome();
-							}
-							else {
-								Group myPlace = myPlaces.get(0);
+									Group refererGroup = refererLayout.getGroup();
 
-								refererGroupDescriptiveName = myPlace.getDescriptiveName();
+									refererGroupDescriptiveName = refererGroup.getDescriptiveName();
 
-								PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+									if (refererGroup.isUser()) {
+										refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-community");
+									}
 
-								portletURL.setWindowState(WindowState.NORMAL);
-								portletURL.setPortletMode(PortletMode.VIEW);
-
-								portletURL.setParameter("struts_action", "/my_places/view");
-
-								portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
-
-								if (myPlace.getPublicLayoutsPageCount() > 0) {
-									portletURL.setParameter("privateLayout", "0");
+									backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
 								}
 								else {
-									portletURL.setParameter("privateLayout", "1");
+									List<Group> myPlaces = user.getMyPlaces(1);
+
+									if (myPlaces.isEmpty()) {
+										refererGroupDescriptiveName = GroupConstants.GUEST;
+										backURL = themeDisplay.getURLHome();
+									}
+									else {
+										Group myPlace = myPlaces.get(0);
+
+										refererGroupDescriptiveName = myPlace.getDescriptiveName();
+
+										PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
+
+										portletURL.setWindowState(WindowState.NORMAL);
+										portletURL.setPortletMode(PortletMode.VIEW);
+
+										portletURL.setParameter("struts_action", "/my_places/view");
+
+										portletURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
+
+										if (myPlace.getPublicLayoutsPageCount() > 0) {
+											portletURL.setParameter("privateLayout", "0");
+										}
+										else {
+											portletURL.setParameter("privateLayout", "1");
+										}
+
+										backURL = portletURL.toString();
+									}
+
+									if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+										backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
+									}
+
+									if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+										backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
+									}
 								}
+								%>
 
-								backURL = portletURL.toString();
-							}
-
-							if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-								backURL = HttpUtil.addParameter(backURL, "doAsUserId", themeDisplay.getDoAsUserId());
-							}
-
-							if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
-								backURL = HttpUtil.addParameter(backURL, "doAsUserLanguageId", themeDisplay.getDoAsUserLanguageId());
-							}
-						}
-						%>
-
-						<div>
-							<span class="nobr">
-								<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %></a>
-							</span>
+								<span class="nobr">
+									<a class="portlet-icon-back" href="<%= backURL %>"><%= LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(refererGroupDescriptiveName)) %></a>
+								</span>
+							</div>
 						</div>
-
-					</td>
-				</tr>
-				</table>
+					</div>
 </c:if>
 
-<%
-if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
-	String velocityTemplateId = null;
+					<%
+					if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
+						String velocityTemplateId = null;
 
-	String content = null;
+						String content = null;
 
-	if (themeDisplay.isStateExclusive()) {
-		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
+						if (themeDisplay.isStateExclusive()) {
+							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "exclusive";
 
-		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-	}
-	else if (themeDisplay.isStatePopUp()) {
-		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
+							content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
+						}
+						else if (themeDisplay.isStatePopUp()) {
+							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "pop_up";
 
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
@@ -369,44 +403,44 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-		velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
+							velocityTemplateId = theme.getThemeId() + LayoutTemplateConstants.STANDARD_SEPARATOR + "max";
 
-		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-	}
-%>
+							content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
+						}
+					%>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
+						<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, velocityTemplateId, content) %>
 
-<%
-}
-else {
-	String description = StringPool.BLANK;
+					<%
+					}
+					else {
+						String description = StringPool.BLANK;
 
-	String className = "portlet-msg-info";
+						String className = "portlet-msg-info";
 
-	if (denyAccess) {
-		description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
+						if (denyAccess) {
+							description = LanguageUtil.get(pageContext, "you-do-not-have-enough-permissions-to-access-this-application");
 
-		className = "portlet-msg-error";
-	}
+							className = "portlet-msg-error";
+						}
 
-	if (Validator.isNull(description)) {
-		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-	}
-%>
+						if (Validator.isNull(description)) {
+							description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
+						}
+					%>
 
-	<div class="<%= className %>">
-		<%= description %>
-	</div>
+						<div class="<%= className %>">
+							<%= description %>
+						</div>
 
-<%
-}
-%>
+					<%
+					}
+					%>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-			</td>
-		</tr>
-		</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </c:if>
 
