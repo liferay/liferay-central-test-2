@@ -131,7 +131,7 @@ if (Validator.isNotNull(ppid)) {
 										if (curGroup.isCompany()) {
 											curGroupName = LanguageUtil.get(pageContext, "global");
 										}
-										else if (curGroup.isUser()) {
+										else if (curGroup.isUser() && (curGroup.getClassPK() == user.getUserId())) {
 											curGroupName = LanguageUtil.get(pageContext, "my-community");
 										}
 										else {
@@ -205,7 +205,7 @@ if (Validator.isNotNull(ppid)) {
 															</c:if>
 
 															<li>
-																<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= group.isUser() ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
+																<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-community") : group.getDescriptiveName() %></a>
 															</li>
 
 														<%
@@ -311,7 +311,7 @@ if (Validator.isNotNull(ppid)) {
 
 									refererGroupDescriptiveName = refererGroup.getDescriptiveName();
 
-									if (refererGroup.isUser()) {
+									if (refererGroup.isUser() && (refererGroup.getClassPK() == user.getUserId())) {
 										refererGroupDescriptiveName = LanguageUtil.get(pageContext, "my-community");
 									}
 
