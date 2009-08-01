@@ -371,8 +371,12 @@ public class MBUtil {
 		sb.append(StringPool.PERIOD);
 		sb.append(messageId);
 		sb.append(StringPool.AT);
-		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sb.append(StringPool.PERIOD);
+
+		if (Validator.isNotNull(PropsValues.POP_SERVER_SUBDOMAIN)) {
+			sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
+			sb.append(StringPool.PERIOD);
+		}
+
 		sb.append(mx);
 		sb.append(StringPool.GREATER_THAN);
 
