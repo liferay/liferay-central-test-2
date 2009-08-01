@@ -3447,7 +3447,6 @@ public class PortalImpl implements Portal {
 			Portlet portlet = itr.next();
 
 			try {
-
 				long plid = LayoutConstants.DEFAULT_PLID;
 
 				if (contentCategory) {
