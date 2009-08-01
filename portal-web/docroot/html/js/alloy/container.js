@@ -65,6 +65,19 @@
 			}
 		},
 
+		toggle: function() {
+			var instance = this;
+
+			var visible = instance.cfg.getProperty('visible');
+
+			if (visible) {
+				instance.hide();
+			}
+			else {
+				instance.show();
+			}
+		},
+
 		_loadBody: function() {
 			var instance = this;
 
@@ -179,10 +192,10 @@
 	* set of options. It automatically renders itself into the page (though this is configurable),
 	* automatically registers itself with Alloy.Popup.Manager, and allows itself to be automatically
 	* destroyed when it is closed.
-	* 
+	*
 	* Example:
 	* <br /><a href="panel_example.html">Using the Alloy.Popup class</a>.
-	* 
+	*
 	* @namespace Alloy
 	* @class Popup
 	* @extends Alloy.Panel
@@ -292,7 +305,7 @@
 			* Closes the current popup. If it has been configured to be destroyed when
 			* it's closed, then the destroy method will be called, otherwise it
 			* will just be hidden.
-			* 
+			*
 			* @method closePopup
 			*/
 
@@ -389,7 +402,7 @@
 
 	/**
 	* The OverlayManager that keeps track of the Popups added to the page
-	* 
+	*
 	* @property Alloy.Popup.Manager
 	* @static
 	* @final
@@ -404,7 +417,7 @@
 
 			/**
 			* Closes any instance of a popup
-			* 
+			*
 			* @method Alloy.Popup.close
 			* @static
 			* @param {HTMLElement} el The representing the Popup
@@ -436,7 +449,7 @@
 			/**
 			* Updates the body of any Popup with the
 			* result of an ajax request.
-			* 
+			*
 			* @method Alloy.Popup.update
 			* @static
 			* @param {String} id The id of the popup
@@ -450,6 +463,27 @@
 
 				obj.html('<div class="loading-animation"></div>');
 				obj.load(url);
+			}
+		}
+	);
+
+	/**
+	* The OverlayManager that keeps track of the ContextPanel added to the page
+	*
+	* @property Alloy.ContextPanel
+	*/
+
+	Alloy.ContextPanel = Alloy.Panel.extend(
+		{
+			initialize: function(options) {
+				var classNames = 'aui-context-panel liferay-shadow aui-context-panel-arrow-tl aui-context-panel-container aui-corner-all';
+				var arrowEl = jQuery('<div class="aui-context-panel-pointer aui-context-panel-container"><div class="aui-context-panel-pointer-inner"></div></div>');
+
+				this._super.apply(this, arguments);
+
+				Alloy.Dom.addClass(this.innerElement, classNames);
+
+				jQuery(this.innerElement).append(arrowEl);
 			}
 		}
 	);

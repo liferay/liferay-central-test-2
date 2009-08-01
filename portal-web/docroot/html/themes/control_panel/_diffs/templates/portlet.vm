@@ -1,0 +1,41 @@
+#set ($portlet_display = $portletDisplay)
+
+#set ($portlet_id = $htmlUtil.escape($portlet_display.getId()))
+#set ($portlet_title = $portlet_display.getTitle())
+#set ($portlet_description = $portlet_display.getDescription())
+#set ($portlet_content = $portlet_display.getContent())
+#set ($portlet_back_url = $htmlUtil.escape($portlet_display.getURLBack()))
+#set ($show_portlet_description = $sessionClicks.get($request, "show-portlet-description-$portlet_id", "true"))
+#set ($valid_portlet_description = $portlet_description.indexOf('javax.portlet.description') == -1)
+
+<div class="portlet" id="portlet-wrapper-$portlet_id">
+	<div class="portlet-topper">
+		<span class="portlet-title" id="cpPortletTitle">
+			$portlet_title
+			#if ($valid_portlet_description)
+				<img id="cpPortletTitleHelpIcon" src="$themeDisplay.getPathThemeImages()/portlet/help.png" />
+			#end
+		</span>
+
+		<div class="portlet-icons" id="portlet-small-icon-bar_$portlet_id">
+			#if ($portlet_display.isShowBackIcon())
+				<a href="$portlet_back_url" class="portlet-icon-back">#language ("return-to-full-page")</a>
+			#else
+				$theme.iconOptions()
+				$theme.iconMinimize()
+				$theme.iconMaximize()
+				$theme.iconClose()
+			#end
+		</div>
+	</div>
+
+	#if ($valid_portlet_description)
+		<div id="cpContextPanelTemplate" class="aui-context-pane" data-portlet-id="$portlet_id" data-visible-panel="$show_portlet_description">
+			$portlet_description
+		</div>
+	#end
+
+	<div class="portlet-content">
+		$portlet_content
+	</div>
+</div>

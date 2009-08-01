@@ -605,7 +605,7 @@
 	height: 29px;
 }
 
-.aui-panel .container-close {
+.aui-overlay .container-close {
 	background: url(../images/application/close.png) no-repeat;
 	cursor: pointer;
 	height: 15px;
@@ -678,6 +678,68 @@
 
 .aui-panel-container.show-scrollbars .underlay {
 	overflow: auto;
+}
+
+.aui-context-panel-container {
+	border: 1px solid #A7CEDF;
+	background: #DFF4FF;
+	color: #34404F;
+}
+
+.aui-corner-all {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.aui-context-panel {
+	padding: 8px 20px 8px 8px;
+	width: 300px;
+	position: absolute;
+	z-index: 9999;
+	border-width: 2px;
+	overflow: visible;
+	margin-top: 12px;
+	visibility: hidden;
+}
+
+.aui-context-panel .container-close {
+	top: 6px;
+	right: 6px;
+}
+
+.aui-context-panel .aui-context-panel-pointer,.aui-context-panel .aui-context-panel-pointer-inner {
+	position: absolute;
+	width: 0;
+	height: 0;
+	background: none;
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer {
+	top: -14px;
+	border-top: 0;
+	border-bottom-width: 14px;
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer {
+	border-left: 0;
+	border-right: 18px dotted transparent;
+	left: 10px;
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+	border-bottom: 10px solid #DFF4FF;
+	bottom: -14px;
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+	border-left: 0;
+	border-right: 12px dotted transparent;
+	left: 2px;
+}
+
+.liferay-shadow {
+	-moz-box-shadow: 4px 4px 14px #777777;
+	-webkit-box-shadow: 4px 4px 14px #777777;
 }
 
 /* ---------- Portal tool tips ---------- */
