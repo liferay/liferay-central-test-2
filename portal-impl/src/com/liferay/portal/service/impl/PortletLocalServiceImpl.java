@@ -94,6 +94,7 @@ import javax.servlet.ServletContext;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
@@ -309,8 +310,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portlet.getWindowStates().put(
 					ContentTypes.TEXT_HTML, mimeTypeWindowStates);
 
-				portlet.setPortletInfo(
-					new PortletInfo(portletId, portletId, portletId));
+				portlet.setPortletInfo(new PortletInfo(
+					portletId, portletId, portletId, portletId));
 
 				if (portletId.indexOf("_INSTANCE_") != -1) {
 					portlet.setInstanceable(true);
@@ -1538,6 +1539,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Element portletInfo = portlet.element("portlet-info");
 
+			String portletInfoDescription = null;
 			String portletInfoTitle = null;
 			String portletInfoShortTitle = null;
 			String portletInfoKeyWords = null;
@@ -1549,7 +1551,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.setPortletInfo(new PortletInfo(
-				portletInfoTitle, portletInfoShortTitle, portletInfoKeyWords));
+				portletInfoDescription, portletInfoTitle, portletInfoShortTitle,
+				portletInfoKeyWords));
 
 			Element portletPreferences = portlet.element("portlet-preferences");
 

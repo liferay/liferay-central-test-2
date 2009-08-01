@@ -197,6 +197,7 @@ import org.apache.struts.Globals;
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  */
 public class PortalImpl implements Portal {
 
@@ -2026,6 +2027,53 @@ public class PortalImpl implements Portal {
 		Portlet portlet, long companyId, String languageId) {
 
 		return getPortletTitle(portlet.getPortletId(), companyId, languageId);
+	}
+
+	public String getPortletDescription(
+		Portlet portlet, ServletContext servletContext, Locale locale) {
+
+		PortletConfig portletConfig = PortletConfigFactory.create(
+			portlet, servletContext);
+
+		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
+		return resourceBundle.getString(
+			JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+	}
+
+	public String getPortletDescription(Portlet portlet, User user) {
+		return getPortletDescription(portlet.getPortletId(), user);
+	}
+
+	public String getPortletDescription(
+		String portletId, long companyId, Locale locale) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+		sb.append(StringPool.PERIOD);
+		sb.append(portletId);
+
+		return LanguageUtil.get(companyId, locale, sb.toString());
+	}
+
+	public String getPortletDescription(
+		String portletId, long companyId, String languageId) {
+
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		return getPortletDescription(portletId, companyId, locale);
+	}
+
+	public String getPortletDescription(String portletId, User user) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+		sb.append(StringPool.PERIOD);
+		sb.append(portletId);
+
+		return LanguageUtil.get(
+			user.getCompanyId(), user.getLocale(), sb.toString());
 	}
 
 	public String getPortletTitle(

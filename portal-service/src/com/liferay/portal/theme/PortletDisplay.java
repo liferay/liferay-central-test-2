@@ -36,6 +36,7 @@ import javax.portlet.PortletPreferences;
  * <a href="PortletDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class PortletDisplay implements Serializable {
 
@@ -115,6 +116,16 @@ public class PortletDisplay implements Serializable {
 		if (Validator.isNull(_id)) {
 			setId(_themeDisplay.getTilesTitle());
 		}
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		description = HtmlUtil.escape(description);
+
+		_description = description;
 	}
 
 	public boolean isAccess() {
@@ -528,6 +539,7 @@ public class PortletDisplay implements Serializable {
 		_resourcePK = StringPool.BLANK;
 		_portletName = StringPool.BLANK;
 		_namespace = StringPool.BLANK;
+		_description = StringPool.BLANK;
 		_title = StringPool.BLANK;
 		_access = false;
 		_active = false;
@@ -586,6 +598,7 @@ public class PortletDisplay implements Serializable {
 		_resourcePK = master.getResourcePK();
 		_portletName = master.getPortletName();
 		_namespace = master.getNamespace();
+		_description = master.getDescription();
 		_title = master.getTitle();
 		_access = master.isAccess();
 		_active = master.isActive();
@@ -643,6 +656,7 @@ public class PortletDisplay implements Serializable {
 		slave.setResourcePK(_resourcePK);
 		slave.setPortletName(_portletName);
 		slave.setNamespace(_namespace);
+		slave.setDescription(_description);
 		slave.setTitle(_title);
 		slave.setAccess(_access);
 		slave.setActive(_active);
@@ -702,6 +716,7 @@ public class PortletDisplay implements Serializable {
 	private String _resourcePK = StringPool.BLANK;
 	private String _portletName = StringPool.BLANK;
 	private String _namespace = StringPool.BLANK;
+	private String _description = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
 	private boolean _access;
 	private boolean _active;

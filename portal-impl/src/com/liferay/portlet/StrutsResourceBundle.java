@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
  * <a href="StrutsResourceBundle.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class StrutsResourceBundle extends ResourceBundle {
 
@@ -63,7 +64,8 @@ public class StrutsResourceBundle extends ResourceBundle {
 		if ((key != null) &&
 			(key.equals(JavaConstants.JAVAX_PORTLET_TITLE) ||
 			 key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE) ||
-			 key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS))) {
+			 key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS) ||
+			 key.equals(JavaConstants.JAVAX_PORTLET_DESCRIPTION))) {
 
 			StringBuilder sb = new StringBuilder();
 

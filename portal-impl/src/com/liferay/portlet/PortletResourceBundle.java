@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
  * <a href="PortletResourceBundle.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class PortletResourceBundle extends ResourceBundle {
 
@@ -76,6 +77,9 @@ public class PortletResourceBundle extends ResourceBundle {
 	private String _getJavaxPortletString(String key) {
 		if (key == null) {
 			return null;
+		}
+		else if (key.equals(JavaConstants.JAVAX_PORTLET_DESCRIPTION)) {
+			return _portletInfo.getDescription();
 		}
 		else if (key.equals(JavaConstants.JAVAX_PORTLET_TITLE)) {
 			return _portletInfo.getTitle();

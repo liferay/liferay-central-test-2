@@ -59,6 +59,7 @@ import javax.xml.namespace.QName;
  * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class PortletConfigImpl implements PortletConfig {
 
@@ -151,6 +152,11 @@ public class PortletConfigImpl implements PortletConfig {
 
 				try {
 					PortletInfo portletInfo = _portlet.getPortletInfo();
+
+					sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
+					sb.append("=");
+					sb.append(portletInfo.getDescription());
+					sb.append("\n");
 
 					sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
 					sb.append("=");

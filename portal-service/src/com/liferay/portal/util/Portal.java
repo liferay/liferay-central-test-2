@@ -71,6 +71,7 @@ import javax.servlet.jsp.PageContext;
  * <a href="Portal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public interface Portal {
 
@@ -356,6 +357,19 @@ public interface Portal {
 	public String getPortletId(PortletRequest portletRequest);
 
 	public String getPortletNamespace(String portletId);
+
+	public String getPortletDescription(
+		Portlet portlet, ServletContext servletContext, Locale locale);
+
+	public String getPortletDescription(Portlet portlet, User user);
+
+	public String getPortletDescription(
+		String portletId, long companyId, Locale locale);
+
+	public String getPortletDescription(
+		String portletId, long companyId, String languageId);
+
+	public String getPortletDescription(String portletId, User user);
 
 	public String getPortletTitle(
 		Portlet portlet, long companyId, Locale locale);

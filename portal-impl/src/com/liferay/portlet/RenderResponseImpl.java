@@ -38,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="RenderResponseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class RenderResponseImpl
 	extends MimeResponseImpl implements LiferayRenderResponse {
@@ -48,6 +49,10 @@ public class RenderResponseImpl
 
 	public String getResourceName() {
 		return _resourceName;
+	}
+
+	public String getDescription() {
+		return _description;
 	}
 
 	public String getTitle() {
@@ -64,6 +69,20 @@ public class RenderResponseImpl
 
 	public void setNextPossiblePortletModes(
 		Collection<PortletMode> portletModes) {
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+
+		// See LEP-2188
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_portletRequestImpl.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		portletDisplay.setDescription(_description);
 	}
 
 	public void setTitle(String title) {
@@ -94,6 +113,7 @@ public class RenderResponseImpl
 	}
 
 	private PortletRequestImpl _portletRequestImpl;
+	private String _description;
 	private String _title;
  	private Boolean _useDefaultTemplate;
 	private String _resourceName;

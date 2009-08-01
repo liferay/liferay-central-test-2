@@ -71,6 +71,7 @@ import javax.servlet.jsp.PageContext;
  * <a href="PortalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class PortalUtil {
 
@@ -597,6 +598,34 @@ public class PortalUtil {
 
 	public static String getPortletNamespace(String portletId) {
 		return getPortal().getPortletNamespace(portletId);
+	}
+
+	public static String getPortletDescription(
+		Portlet portlet, ServletContext servletContext, Locale locale) {
+
+		return getPortal().getPortletDescription(
+			portlet, servletContext, locale);
+	}
+
+	public static String getPortletDescription(Portlet portlet, User user) {
+		return getPortal().getPortletDescription(portlet, user);
+	}
+
+	public static String getPortletDescription(
+		String portletId, long companyId, Locale locale) {
+
+		return getPortal().getPortletDescription(portletId, companyId, locale);
+	}
+
+	public static String getPortletDescription(
+		String portletId, long companyId, String languageId) {
+
+		return getPortal().getPortletDescription(
+			portletId, companyId, languageId);
+	}
+
+	public static String getPortletDescription(String portletId, User user) {
+		return getPortal().getPortletDescription(portletId, user);
 	}
 
 	public static String getPortletTitle(

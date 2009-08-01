@@ -57,23 +57,31 @@ if (portletDecorateObj != null) {
 	request.removeAttribute(WebKeys.PORTLET_DECORATE);
 }
 
-// Portlet title
+// Portlet title and Portlet description
+
+ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
+
+String portletDescription = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());
 
 if (portletDisplay.isAccess() && portletDisplay.isActive()) {
+	if (Validator.isNull(portletDescription)) {
+		portletDescription = renderResponseImpl.getDescription();
+	}
+
 	if (Validator.isNull(portletTitle)) {
 		portletTitle = renderResponseImpl.getTitle();
 	}
 }
 
 if (Validator.isNull(portletTitle)) {
-	ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
-
 	portletTitle = resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 }
 
 Group group = layout.getGroup();
+
+portletDisplay.setDescription(portletDescription);
 
 portletDisplay.setTitle(portletTitle);
 

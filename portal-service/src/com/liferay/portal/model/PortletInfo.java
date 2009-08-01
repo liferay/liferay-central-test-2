@@ -28,16 +28,25 @@ import java.io.Serializable;
  * <a href="PortletInfo.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class PortletInfo implements Serializable {
 
 	public PortletInfo() {
 	}
 
-	public PortletInfo(String title, String shortTitle, String keywords) {
+	public PortletInfo(
+			String title, String shortTitle, String keywords,
+			String description) {
+
+		_description = description;
 		_title = title;
 		_shortTitle = shortTitle;
 		_keywords = keywords;
+	}
+
+	public String getDescription() {
+		return _description;
 	}
 
 	public String getTitle() {
@@ -52,6 +61,7 @@ public class PortletInfo implements Serializable {
 		return _keywords;
 	}
 
+	private String _description;
 	private String _title;
 	private String _shortTitle;
 	private String _keywords;

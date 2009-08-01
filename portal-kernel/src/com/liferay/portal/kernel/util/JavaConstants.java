@@ -26,10 +26,14 @@ package com.liferay.portal.kernel.util;
  * <a href="JavaConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public interface JavaConstants {
 
 	public static final String JAVAX_PORTLET_CONFIG = "javax.portlet.config";
+
+	public static final String JAVAX_PORTLET_DESCRIPTION =
+		"javax.portlet.description";
 
 	public static final String JAVAX_PORTLET_KEYWORDS =
 		"javax.portlet.keywords";
