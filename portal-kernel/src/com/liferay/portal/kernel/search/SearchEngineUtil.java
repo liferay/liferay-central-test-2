@@ -31,8 +31,8 @@ package com.liferay.portal.kernel.search;
 public class SearchEngineUtil {
 
 	/**
-	 * @deprecated Use
-	 *			   <code>com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS</code>.
+	 * @deprecated Use {@link
+	 *			   com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}.
 	 */
 	public static final int ALL_POS = -1;
 
