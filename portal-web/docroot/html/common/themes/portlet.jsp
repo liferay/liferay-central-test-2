@@ -68,10 +68,6 @@ if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 	if (Validator.isNull(portletTitle)) {
 		portletTitle = renderResponseImpl.getTitle();
 	}
-
-	if (Validator.isNull(portletDescription)) {
-		portletDescription = renderResponseImpl.getDescription();
-	}
 }
 
 if (Validator.isNull(portletTitle)) {
