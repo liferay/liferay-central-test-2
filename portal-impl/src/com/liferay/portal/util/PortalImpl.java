@@ -1138,28 +1138,6 @@ public class PortalImpl implements Portal {
 			PropsKeys.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
 	}
 
-	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay) {
-		return getLayoutFullURL(layout, themeDisplay, true);
-	}
-
-	public String getLayoutFullURL(
-		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
-
-		String layoutURL = getLayoutURL(layout, themeDisplay, doAsUser);
-		String portalURL = themeDisplay.getPortalURL();
-
-		if (StringUtil.startsWith(layoutURL, portalURL)) {
-			return layoutURL;
-		}
-		else {
-			return portalURL + layoutURL;
-		}
-	}
-
-	public String getLayoutFullURL(ThemeDisplay themeDisplay) {
-		return getLayoutFullURL(themeDisplay.getLayout(), themeDisplay);
-	}
-
 	public String getLayoutFriendlyURL(
 		Layout layout, ThemeDisplay themeDisplay) {
 
@@ -1246,6 +1224,28 @@ public class PortalImpl implements Portal {
 
 		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL() +
 			layoutFriendlyURL;
+	}
+
+	public String getLayoutFullURL(Layout layout, ThemeDisplay themeDisplay) {
+		return getLayoutFullURL(layout, themeDisplay, true);
+	}
+
+	public String getLayoutFullURL(
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
+
+		String layoutURL = getLayoutURL(layout, themeDisplay, doAsUser);
+		String portalURL = themeDisplay.getPortalURL();
+
+		if (StringUtil.startsWith(layoutURL, portalURL)) {
+			return layoutURL;
+		}
+		else {
+			return portalURL + layoutURL;
+		}
+	}
+
+	public String getLayoutFullURL(ThemeDisplay themeDisplay) {
+		return getLayoutFullURL(themeDisplay.getLayout(), themeDisplay);
 	}
 
 	public String getLayoutSetFriendlyURL(
