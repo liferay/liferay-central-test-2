@@ -32,7 +32,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:o
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
 
-Boolean disabled = dynamicAttributes.get("disabled");
+Boolean disabled = (Boolean)dynamicAttributes.get("disabled");
 
 if (disabled == null) {
 	disabled = Boolean.FALSE;
