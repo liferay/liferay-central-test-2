@@ -23,3 +23,12 @@
 %>
 
 <%@ include file="/html/portlet/css_init.jsp" %>
+
+.portlet-document-library .edit-file-entry-title {
+	float: left;
+}
+
+.portlet-document-library .edit-file-entry-title-extension {
+	clear: right;
+	margin-top: 2em;
+}
