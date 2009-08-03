@@ -130,6 +130,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/journal/css.jsp</header-portlet-css>
+		<header-portlet-javascript>/html/portlet/journal/javascript.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-journal</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>

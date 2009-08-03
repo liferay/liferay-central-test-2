@@ -63,6 +63,7 @@ long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");
+String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
 
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleImpl.DEFAULT_VERSION);
 boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
@@ -109,13 +110,25 @@ String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 JournalStructure structure = null;
 
-String structureName = StringPool.BLANK;
+String structureName = LanguageUtil.get(pageContext, "default");
+
+String structureDescription = StringPool.BLANK;
+
+String structureXSD = StringPool.BLANK;
+
+String parentStructureId = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
 		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
 		structureName = structure.getName();
+
+		structureDescription = structure.getDescription();
+
+		structureXSD = structure.getMergedXsd();
+
+		parentStructureId = structure.getParentStructureId();
 	}
 	catch (NoSuchStructureException nsse) {
 	}
@@ -216,6 +229,14 @@ if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
+
+String editorImpl = PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY);
+
+String doAsUserId = themeDisplay.getDoAsUserId();
+
+if (Validator.isNull(doAsUserId)) {
+	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+}
 %>
 
 <script type="text/javascript">
@@ -224,90 +245,12 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	var <portlet:namespace />imageGalleryInput = null;
 	var <portlet:namespace />contentChangedFlag = false;
 
-	function <portlet:namespace />approveArticle() {
-		<portlet:namespace />saveArticle("<%= Constants.APPROVE %>");
-	}
-
-	function <portlet:namespace />changeLanguageView() {
-		if (<portlet:namespace />contentChangedFlag) {
-			if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
-				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-				document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-			}
-			else {
-				if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
-					var languageIdOptions = document.<portlet:namespace />fm1.<portlet:namespace />languageId.options;
-
-					for (var i = 0; i < languageIdOptions.length; i++) {
-						if (languageIdOptions[i].value == "<%= languageId %>") {
-							languageIdOptions[i].selected = true;
-						}
-					}
-
-					return;
-				}
-				else {
-					document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
-				}
-			}
-		}
-		else {
-			document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
-		}
-
-		document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value;
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
 	function <portlet:namespace />changeVersionView(version) {
 		location.href = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
 	}
 
 	function <portlet:namespace />contentChanged() {
 		<portlet:namespace />contentChangedFlag = true;
-	}
-
-	function <portlet:namespace />createSubelement(i) {
-		var xsd = "";
-
-		var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
-		var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
-		var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
-		var elContent = document.getElementById("<portlet:namespace />structure_el" + i + "_content");
-		var elLanguage = document.getElementById("<portlet:namespace />structure_el" + i + "_localized");
-
-		if ((elDepth != null) && (elName != null) && (elType != null)) {
-			var elDepthValue = Number(elDepth.value);
-			var elInstanceIdValue = <portlet:namespace />generateInstanceId();
-			var elNameValue = elName.value;
-			var elTypeValue = elType.value;
-			var elContentValue = "";
-			var elLanguageValue = elLanguage.value;
-
-			xsd = "<dynamic-element instance-id='" + elInstanceIdValue + "' name='" + elNameValue + "' type='" + elTypeValue + "'><dynamic-content></dynamic-content>";
-
-			for (var j = 1;; j++) {
-				var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + j) + "_depth");
-
-				if (nextElDepth != null) {
-					var nextElDepthValue = Number(nextElDepth.value);
-
-					if ((elDepthValue + 1) == nextElDepthValue) {
-						xsd += <portlet:namespace />createSubelement(i + j);
-					}
-					else {
-						break;
-					}
-				}
-				else {
-					break;
-				}
-			}
-
-			xsd += "</dynamic-element>";
-		}
-
-		return xsd;
 	}
 
 	function <portlet:namespace />deleteArticle() {
@@ -328,18 +271,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		jQuery(document.<portlet:namespace />fm1["<portlet:namespace />" + date + "ImageInputIdInput"]).toggleClass('disabled');
 	}
 
-	function <portlet:namespace />downloadArticleContent() {
-		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/get_article_content";
-		document.<portlet:namespace />fm2.target = "_self";
-		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getArticleContent();
-		document.<portlet:namespace />fm2.submit();
-	}
-
-	function <portlet:namespace />editElement(cmd, elCount) {
-		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent(cmd, elCount);
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
 	function <portlet:namespace />editorContentChanged(text) {
 		<portlet:namespace />contentChanged();
 	}
@@ -347,218 +278,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	function <portlet:namespace />expireArticle() {
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
 		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />generateInstanceId() {
-		var instanceId = "";
-
-		var key = "<%= PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3 %>";
-
-		for (var i = 0; i < 8; i++) {
-			var pos = Math.floor(Math.random() * key.length);
-
-			instanceId += key.substring(pos, pos + 1);
-		}
-
-		return instanceId;
-	}
-
-	function <portlet:namespace />getArticleContent(cmd, elCount) {
-		<c:choose>
-			<c:when test="<%= structure == null %>">
-				return window.<portlet:namespace />editor.getHTML();
-			</c:when>
-			<c:otherwise>
-				var stillLocalized = false;
-
-				for (var i = 0; i < <portlet:namespace />count; i++) {
-					var elLanguage = document.getElementById("<portlet:namespace />structure_el" + i + "_localized");
-
-					if (elLanguage.value != "false") {
-						stillLocalized = true;
-					}
-				}
-
-				var xsd = "<root";
-
-				if (stillLocalized) {
-					xsd += " default-locale='<%= HtmlUtil.escape(defaultLanguageId) %>'";
-				}
-
-				var availableLocales = document.<portlet:namespace />fm1.<portlet:namespace />available_locales;
-
-				if (stillLocalized && availableLocales.length > 1) {
-					xsd += " available-locales='";
-
-					for (var i = 1; i < availableLocales.length; i++) {
-						if ((i + 1) == availableLocales.length) {
-							xsd += availableLocales[i].value + "'";
-						}
-						else{
-							xsd += availableLocales[i].value + ",";
-						}
-					}
-				}
-
-				xsd += ">";
-
-				for (i = 0; i >= 0; i++) {
-					var elDepth = document.getElementById("<portlet:namespace />structure_el" + i + "_depth");
-					var elInstanceId = document.getElementById("<portlet:namespace />structure_el" + i + "_instanceId");
-					var elName = document.getElementById("<portlet:namespace />structure_el" + i + "_name");
-					var elType = document.getElementById("<portlet:namespace />structure_el" + i + "_type");
-					var elContent = document.getElementById("<portlet:namespace />structure_el" + i + "_content");
-					var elLanguage = document.getElementById("<portlet:namespace />structure_el" + i + "_localized");
-
-					if ((elDepth != null) && (elName != null) && (elType != null)) {
-						var elDepthValue = elDepth.value;
-						var elInstanceIdValue = elInstanceId.value;
-						var elNameValue = elName.value;
-						var elTypeValue = elType.value;
-						var elContentValue = "";
-						var elLanguageValue = elLanguage.value;
-
-						if (elCount == i) {
-							if (cmd == "add") {
-								xsd += <portlet:namespace />createSubelement(i);
-							}
-							else if (cmd == "remove") {
-								var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
-
-								if (nextElDepth != null) {
-									var nextElDepthValue = nextElDepth.value;
-
-									while (elDepthValue < nextElDepthValue) {
-										i = i + 1;
-
-										nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
-
-										if (nextElDepth == null) {
-											for (var j = 0; j < elDepthValue; j++) {
-												xsd += "</dynamic-element>";
-											}
-
-											break;
-										}
-
-										nextElDepthValue = nextElDepth.value;
-									}
-
-									if (elDepthValue > nextElDepthValue) {
-										var depthDiff = elDepthValue - nextElDepthValue;
-
-										for (var j = 0; j < depthDiff; j++) {
-											xsd += "</dynamic-element>";
-										}
-									}
-								}
-								else {
-									for (var j = 0; j < elDepthValue; j++) {
-										xsd += "</dynamic-element>";
-									}
-								}
-
-								continue;
-							}
-						}
-
-						if ((elTypeValue == "text") || (elTypeValue == "text_box") || (elTypeValue == "image_gallery") || (elTypeValue == "document_library") || (elTypeValue == "link_to_layout")) {
-							elContentValue = elContent.value;
-							elContentValue = "<![CDATA[" + elContentValue + "]]>";
-						}
-						else if (elTypeValue == "text_area") {
-							eval("elContentValue = window.<portlet:namespace />structure_el" + i + "_content.getHTML();");
-
-							elContentValue = "<![CDATA[" + elContentValue + "]]>";
-						}
-						else if (elTypeValue == "image") {
-							var elContentName = elContent.getAttribute("name");
-
-							var elContentNameCurrent = elContentName  + "_current";
-							var elContentValueCurrent = null;
-
-							try {
-								elContentValueCurrent = document.getElementById(elContentNameCurrent).value;
-							}
-							catch (e) {
-							}
-
-							if (stillLocalized && (elLanguageValue != null) && (elLanguageValue != "false") && (elLanguageValue != "") && (!elContentName.match(new RegExp(elLanguageValue + "$")))) {
-								elContent.setAttribute("name", elContentName + "_" + elLanguageValue);
-							}
-
-							var elDeleteState = document.getElementById("<portlet:namespace />structure_el" + i + "_delete_state");
-
-							if ((elDeleteState != null) && (elDeleteState.value == "yes")) {
-								elContentValue = "delete";
-							}
-							else if (elContentValueCurrent != null) {
-								elContentValue = elContentValueCurrent;
-							}
-
-							elContentValue = "<![CDATA[" + elContentValue + "]]>";
-						}
-						else if (elTypeValue == "boolean") {
-							elContentValue = elContent.checked ? "true" : "false";
-							elContentValue = "<![CDATA[" + elContentValue + "]]>";
-						}
-						else if (elTypeValue == "list") {
-							elContentValue = "";
-
-							if (elContent.selectedIndex > -1) {
-								elContentValue = elContent.options[elContent.selectedIndex].value;
-							}
-
-							elContentValue = "<![CDATA[" + elContentValue + "]]>";
-						}
-						else if (elTypeValue == "multi-list") {
-							for (var l = 0; l < elContent.length; l++) {
-								if (elContent.options[l].selected) {
-									elContentValue += "<option><![CDATA[" + elContent.options[l].value + "]]></option>";
-								}
-							}
-						}
-
-						xsd += "<dynamic-element instance-id='" + elInstanceIdValue + "' name='" + elNameValue + "' type='" + elTypeValue + "'><dynamic-content";
-
-						if (stillLocalized && (elLanguageValue != null) && (elLanguageValue != "false") && (elLanguageValue != "")) {
-							xsd += " language-id='" + elLanguageValue + "'";
-						}
-
-						xsd += ">" + elContentValue + "</dynamic-content>"
-
-						var nextElDepth = document.getElementById("<portlet:namespace />structure_el" + (i + 1) + "_depth");
-
-						if (nextElDepth != null) {
-							var nextElDepthValue = nextElDepth.value;
-
-							if (elDepthValue == nextElDepthValue) {
-								xsd += "</dynamic-element>";
-							}
-							else if (elDepthValue > nextElDepthValue) {
-								var depthDiff = elDepthValue - nextElDepthValue;
-
-								for (var j = 0; j <= depthDiff; j++) {
-									xsd += "</dynamic-element>";
-								}
-							}
-						}
-						else {
-							for (var j = 0; j <= elDepthValue; j++) {
-								xsd += "</dynamic-element>";
-							}
-						}
-					}
-					else {
-						break;
-					}
-				}
-
-				xsd += "</root>";
-
-				return xsd;
-			</c:otherwise>
-		</c:choose>
 	}
 
 	function <portlet:namespace />getChoice(value) {
@@ -584,52 +303,12 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
-	function <portlet:namespace />previewArticle() {
-		document.<portlet:namespace />fm2.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= String.valueOf(groupId) %>&articleId=<%= HttpUtil.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value + "&type=" + document.<portlet:namespace />fm1.<portlet:namespace />type.value + "&structureId=" + document.<portlet:namespace />fm1.<portlet:namespace />structureId.value + "&templateId=" + Liferay.Util.getSelectedRadioValue(document.<portlet:namespace />fm1.<portlet:namespace />templateId);
-		document.<portlet:namespace />fm2.target = "_blank";
-		document.<portlet:namespace />fm2.title.value = document.<portlet:namespace />fm1.<portlet:namespace />title.value;
-		document.<portlet:namespace />fm2.xml.value = <portlet:namespace />getArticleContent();
-		document.<portlet:namespace />fm2.submit();
-	}
-
 	function <portlet:namespace />removeArticleLocale() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
 			document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}
-	}
-
-	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = "";
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-		document.<portlet:namespace />fm1.<portlet:namespace />content.value = "";
-		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />saveAndApproveArticle() {
-		document.<portlet:namespace />fm1.<portlet:namespace />approve.value = "1";
-		<portlet:namespace />saveArticle();
-	}
-
-	function <portlet:namespace />saveAndContinueArticle() {
-		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
-		<portlet:namespace />saveArticle();
-	}
-
-	function <portlet:namespace />saveArticle(cmd) {
-		if (cmd == null) {
-			cmd = "<%= article == null ? Constants.ADD : Constants.UPDATE %>";
-		}
-
-		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-
-		<c:if test="<%= article == null %>">
-			document.<portlet:namespace />fm1.<portlet:namespace />articleId.value = document.<portlet:namespace />fm1.<portlet:namespace />newArticleId.value;
-		</c:if>
-
-		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-		submitForm(document.<portlet:namespace />fm1);
 	}
 
 	function <portlet:namespace />selectDocumentLibrary(url) {
@@ -644,7 +323,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
-			document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
@@ -652,25 +330,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	function <portlet:namespace />selectTemplate(structureId, templateId) {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
-		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />setImageDeleteState(button, hidden, img, file) {
-		var deleteState = document.getElementById(hidden);
-
-		if (deleteState.value != "yes") {
-			deleteState.value = "yes";
-			document.images[img].style.display = "none";
-			document.getElementById(file).disabled = true;
-			button.value = "<%= UnicodeLanguageUtil.get(pageContext, "cancel") %>";
-		}
-		else {
-			deleteState.value = "no";
-			document.images[img].style.display = "block";
-			document.getElementById(file).disabled = false;
-			button.value = "<%= UnicodeLanguageUtil.get(pageContext, "delete") %>";
-		}
 	}
 </script>
 
@@ -698,6 +358,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
+<input name="<portlet:namespace />defaultLocale" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" id="<portlet:namespace />defaultLocale" />
+<input name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" id="<portlet:namespace />parentStructureId" />
 
 <liferay-ui:tabs
 	names="web-content"
@@ -714,7 +376,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 		<liferay-ui:asset-tags-error />
 
-		<table class="lfr-table">
+		<table class="lfr-table" id="<portlet:namespace />articleHeaderEdit">
 		<tr>
 			<td>
 				<liferay-ui:message key="id" />
@@ -778,7 +440,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<select <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
+						<select id="<portlet:namespace />languageIdSelect" <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />languageId">
 
 							<%
 							Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -814,7 +476,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											name="<portlet:namespace />defaultLanguageId"
 										</c:otherwise>
 									</c:choose>
-
+									id="<portlet:namespace />defaultLanguageIdSelect"
 									onChange="<portlet:namespace />changeLanguageView();"
 								>
 
@@ -847,7 +509,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									else {
 									%>
 
-										<option value="<%= HtmlUtil.escape(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
+										<option value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
 
 									<%
 									}
@@ -856,7 +518,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								</select>
 
 								<c:if test="<%= article == null %>">
-									<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
+									<input name="<portlet:namespace />defaultLanguageId" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 								</c:if>
 							</td>
 						</tr>
@@ -870,104 +532,149 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 		<br />
 
-		<c:choose>
-			<c:when test="<%= structure == null %>">
-				<div>
-					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
-				</div>
-			</c:when>
-			<c:otherwise>
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<div id="<portlet:namespace />journalArticleContainer" class="journal-article-container">
+			<c:choose>
+				<c:when test="<%= structure == null %>">
+				<div id="<portlet:namespace />structureTreeWrapper">
 
-				<input name="<portlet:namespace />available_locales" type="hidden" value="" />
+					<ul id="<portlet:namespace />structureTree" class="structure-tree">
+						<li class="structure-field" data-component-type="text" data-component-name="TextField">
+							<span class='journal-article-close'></span>
+							<span class='folder'>
+								<div class="field-container">
+									<div class="journal-article-move-handler"></div>
+									<label for="" class="journal-article-field-label"><span>TextField</span></label>
+									<div class="journal-article-component-container">
+										<input class="principal-field-element" type="text" value="" size="75" />
+									</div>
+
+									<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
+
+									<div class="journal-article-buttons">
+										<input type="button" class="edit-button" value="<liferay-ui:message key="edit-options" />" />
+										<input type="button" class="repeatable-button" value="<liferay-ui:message key="repeat" />" />
+									</div>
+								</div>
+								<ul class='folder-droppable'></ul>
+							</span>
+						</li>
+						<li class="structure-field" data-component-type="text_area" data-component-name="TextAreaField">
+							<span class='journal-article-close'></span>
+							<span class='folder'>
+								<div class="field-container">
+									<div class="journal-article-move-handler"></div>
+									<label for="" class="journal-article-field-label"><span>TextAreaField</span></label>
+									<div class="journal-article-component-container">
+										<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+									</div>
+
+									<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
+
+									<div class="journal-article-buttons">
+										<input type="button" class="edit-button" value="<liferay-ui:message key="edit-options" />" />
+										<input type="button" class="repeatable-button" value="<liferay-ui:message key="repeat" />" />
+									</div>
+								</div>
+								<ul class='folder-droppable'></ul>
+							</span>
+						</li>
+					</ul>
+
+				</div>
+				</c:when>
+				<c:otherwise>
 
 				<%
 				Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
 
-				if (contentDoc != null) {
-				%>
 
-					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
+					if (contentDoc != null) {
+					%>
 
-				<%
-					boolean languageFound = false;
+						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
-					if ((availableLocales != null) && (availableLocales.length > 0)) {
-						for (int i = 0; i < availableLocales.length ;i++) {
-							if (!availableLocales[i].equals(defaultLanguageId)) {
-				%>
+					<%
+						boolean languageFound = false;
 
-								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
+						if ((availableLocales != null) && (availableLocales.length > 0)) {
+							for (int i = 0; i < availableLocales.length ; i++) {
+								if (!availableLocales[i].equals(defaultLanguageId)) {
+					%>
 
-								<script type="text/javascript">
-									document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-								</script>
+									<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
-				<%
+									<script type="text/javascript">
+										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+									</script>
+
+					<%
+								}
+								else{
+								%>
+
+									<script type="text/javascript">
+										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
+									</script>
+
+					<%
+								}
+
+								if (availableLocales[i].equals(languageId)) {
+									languageFound = true;
+								}
 							}
-							else{
-							%>
+						}
 
-								<script type="text/javascript">
-									document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-								</script>
+						if (!languageFound && !languageId.equals(defaultLanguageId)) {
+					%>
 
-				<%
-							}
+							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
 
-							if (availableLocales[i].equals(languageId)) {
-								languageFound = true;
-							}
+							<script type="text/javascript">
+								document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
+							</script>
+
+					<%
 						}
 					}
 
-					if (!languageFound && !languageId.equals(defaultLanguageId)) {
-				%>
-
-						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
-
-						<script type="text/javascript">
-							document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
-						</script>
-
-				<%
-					}
-				}
 				else {
 					contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
 				%>
 
-					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
+						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
 				<%
 				}
-
-				_format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request);
 				%>
+					<div id="<portlet:namespace />structureTreeWrapper" class="structure-tree-wrapper">
+						<ul id="<portlet:namespace />structureTree" class="structure-tree">
+							<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request); %>
+						</ul>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
+			<c:if test="<%= article == null %>">
+				<table class="lfr-table">
+				<tr>
+					<td colspan="2">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="permissions" />
+					</td>
+					<td>
+						<liferay-ui:input-permissions
+							modelName="<%= JournalArticle.class.getName() %>"
+						/>
+					</td>
+				</tr>
 				</table>
-			</c:otherwise>
-		</c:choose>
-
-		<c:if test="<%= article == null %>">
-			<table class="lfr-table">
-			<tr>
-				<td colspan="2">
-					<br />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="permissions" />
-				</td>
-				<td>
-					<liferay-ui:input-permissions
-						modelName="<%= JournalArticle.class.getName() %>"
-					/>
-				</td>
-			</tr>
-			</table>
-		</c:if>
+			</c:if>
+		</div>
 
 		<br />
 
@@ -979,11 +686,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		<liferay-ui:panel id="<%= abstractId %>" title="<%= abstractTitle %>" defaultState="closed" persistState="<%= true %>" extended="<%= false %>">
 			<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
-				<%
-				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
-				%>
+			<%
+			String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
+			%>
 
-				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
@@ -1063,26 +770,27 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			%>
 
 			<c:if test="<%= hasSavePermission %>">
-				<input type="submit" value="<liferay-ui:message key="save" />" />
+				<input id="<portlet:namespace />saveArticleBtn" type="button" value="<liferay-ui:message key="save" />" />
 
-				<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueArticle();" />
+				<input id="<portlet:namespace />saveArticleAndContinueBtn" name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" />
 
 				<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
-					<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
+					<input id="<portlet:namespace />saveArticleAndApproveBtn"  type="button" value="<liferay-ui:message key="save-and-approve" />" />
 				</c:if>
 			</c:if>
 
 			<c:if test="<%= Validator.isNotNull(structureId) %>">
-				<input type="button" value="<liferay-ui:message key="preview" />" onClick="<portlet:namespace />previewArticle();" />
+				<input id="<portlet:namespace />previewArticleBtn" type="button" value="<liferay-ui:message key="preview" />" />
 			</c:if>
 
 			<c:if test="<%= structure != null %>">
-				<input type="button" value="<liferay-ui:message key="download" />" onClick="<portlet:namespace />downloadArticleContent();" />
+				<input id="<portlet:namespace />downloadArticleContentBtn" type="button" value="<liferay-ui:message key="download" />" />
 			</c:if>
 
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escapeAttribute(redirect) %>';" />
 		</div>
 	</td>
+
 	<td valign="top">
 		<%@ include file="edit_article_extra.jspf" %>
 	</td>
@@ -1090,6 +798,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 </table>
 
 </form>
+
+<%@ include file="edit_article_structure_extra.jspf" %>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
@@ -1104,6 +814,20 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	</script>
 </c:if>
 
+<script>
+	jQuery(
+		function() {
+			Liferay.Portlet.Journal.PROXY = {};
+			Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
+			Liferay.Portlet.Journal.PROXY.editorImpl = '<%= editorImpl %>';
+			Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
+			Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+
+			new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
+		}
+	);
+</script>
+
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
 
@@ -1115,9 +839,24 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 	List<Element> xsdElements = xsdParentElement.elements();
 
 	for (Element xsdElement : xsdElements) {
+
+		String nodeName = xsdElement.getName();
+
 		String elName = xsdElement.attributeValue("name", StringPool.BLANK);
+
 		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
-		boolean elRepeatable = GetterUtil.getBoolean(xsdElement.attributeValue("repeatable"));
+
+		String repeatable = xsdElement.attributeValue("repeatable");
+
+		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
+
+		String elParentStructureId = xsdElement.attributeValue("parent-structure-id");
+
+		if (nodeName.equals("meta-data") || nodeName.equals("entry")) {
+			continue;
+		}
+
+		HashMap<String, String> metaDataEl = _getMetaData(xsdElement, elName);
 
 		List<Element> elSiblings = null;
 
@@ -1169,27 +908,38 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 
 			request.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
 
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, xsdElement);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT, elContent);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
-
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID, elInstanceId);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA, metaDataEl);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_PARENT_ID, elParentStructureId);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, (i == 0) ? "1" : "0");
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT, elContent);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
-
-			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);
 
 			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el.jsp");
 
 			count.increment();
 
-			if (!elType.equals("list") && !elType.equals("multi-list")) {
+			if (!elType.equals("list") && !elType.equals("multi-list") && (contentElement.elements().size() > 0)) {
+
+				pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_top.jsp");
+
 				_format(groupId, contentElement, xsdElement, count, depth, pageContext, request);
+
+				request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, "true");
+
+				pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 			}
+
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, "false");
+
+			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 		}
 	}
 }
@@ -1208,5 +958,27 @@ private List<Element> _getSiblings(Element element, String name) {
 	}
 
 	return elements;
+}
+
+private HashMap<String, String> _getMetaData(Element xsdElement, String elName) {
+	HashMap<String, String> metaDataEl = new HashMap<String, String>();
+
+	Element metaData = xsdElement.element("meta-data");
+
+	if (Validator.isNotNull(metaData)) {
+		List<Element> metaDataElements = metaData.elements();
+
+		for (Element metaDataElement : metaDataElements) {
+			String name = metaDataElement.attributeValue("name");
+			String content = metaDataElement.getText().trim();
+
+			metaDataEl.put(name, content);
+		}
+	}
+	else {
+		metaDataEl.put("label", elName);
+	}
+
+	return metaDataEl;
 }
 %>

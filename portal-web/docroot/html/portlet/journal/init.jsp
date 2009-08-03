@@ -98,6 +98,7 @@
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 <%@ page import="com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl" %>
 
+<%@ page import="com.liferay.util.Encryptor" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%

@@ -134,6 +134,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE = "JOURNAL_STRUCTURE";
 
+	public static final String JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG = "JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG";
+
 	public static final String JOURNAL_STRUCTURE_EL = "JOURNAL_STRUCTURE_EL";
 
 	public static final String JOURNAL_STRUCTURE_EL_CONTENT = "JOURNAL_STRUCTURE_EL_CONTENT";
@@ -146,7 +148,11 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE_EL_LANGUAGE_ID = "JOURNAL_STRUCTURE_EL_LANGUAGE_ID";
 
+	public static final String JOURNAL_STRUCTURE_EL_META_DATA = "JOURNAL_STRUCTURE_EL_META_DATA";
+
 	public static final String JOURNAL_STRUCTURE_EL_NAME = "JOURNAL_STRUCTURE_EL_NAME";
+
+	public static final String JOURNAL_STRUCTURE_EL_PARENT_ID = "JOURNAL_STRUCTURE_EL_PARENT_ID";
 
 	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE = "JOURNAL_STRUCTURE_EL_REPEATABLE";
 
