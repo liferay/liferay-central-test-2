@@ -140,5 +140,5 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 </table>
 
 <%
-	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 %>

@@ -93,12 +93,12 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />createSelectFileEntryURL(URL) {
-		URL += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
-		URL += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
-		URL += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
+	function <portlet:namespace />createSelectFileEntryURL(url) {
+		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
+		url += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
+		url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
 
-		return URL;
+		return url;
 	}
 
 	function <portlet:namespace />saveFileShortcut() {
