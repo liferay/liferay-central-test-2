@@ -167,207 +167,147 @@ portletURL.setParameter("name", name);
 	<div class="lfr-fallback" id="<portlet:namespace />fallback">
 </c:if>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
-<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= HtmlUtil.escapeAttribute(uploadProgressId) %>" />
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />newFolderId" type="hidden" value="" />
-<input name="<portlet:namespace />name" type="hidden" value="<%= HtmlUtil.escapeAttribute(name) %>" />
+<portlet:actionURL var="editFileEntryURL">
+	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
-<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
+<aui:form action="<%= editFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFileEntry(false); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
+	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+	<aui:input name="newFolderId" type="hidden" />
+	<aui:input name="name" type="hidden" value="<%= name %>" />
 
-<liferay-ui:error exception="<%= FileNameException.class %>">
-	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
-</liferay-ui:error>
+	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
+	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
 
-<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
+	<liferay-ui:error exception="<%= FileNameException.class %>">
+		<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
+	</liferay-ui:error>
 
-<liferay-ui:error exception="<%= SourceFileNameException.class %>">
-	<liferay-ui:message key="document-extensions-does-not-match" />
-</liferay-ui:error>
+	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= SourceFileNameException.class %>">
+		<liferay-ui:message key="document-extensions-does-not-match" />
+	</liferay-ui:error>
 
-<liferay-ui:asset-tags-error />
+	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<%
-String fileMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024);
-%>
+	<liferay-ui:asset-tags-error />
 
-<c:if test='<%= !fileMaxSize.equals("0") %>'>
-	<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %>
+	<aui:model-context bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />
 
-	<br /><br />
-</c:if>
-
-<table class="lfr-table">
-
-<c:if test="<%= (fileEntry != null) || (folderId <= 0) %>">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="folder" />
-		</td>
-		<td>
-
+	<aui:fieldset>
+		<aui:field-wrapper>
 			<%
-			String folderName = StringPool.BLANK;
-
-			if (folderId > 0) {
-				folder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-				folder = folder.toEscapedModel();
-
-				folderId = folder.getFolderId();
-				folderName = folder.getName();
-			}
-
+			String fileMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024);
 			%>
 
-			<a href="javascript:window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>'; void('');" id="<portlet:namespace />folderName">
-			<%= folderName %></a>
+			<c:if test='<%= !fileMaxSize.equals("0") %>'>
+				<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %>
+			</c:if>
+		</aui:field-wrapper>
 
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+		<c:if test="<%= (fileEntry != null) || (folderId <= 0) %>">
+			<aui:field-wrapper label="folder">
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="file" />
-	</td>
-	<td>
-		<input class="lfr-input-text" id="<portlet:namespace />file" name="<portlet:namespace />file" type="file" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="title" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" /><%= extension %>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
-	</td>
-</tr>
+				<%
+				String folderName = StringPool.BLANK;
 
-<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+				if (folderId > 0) {
+					folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+					folder = folder.toEscapedModel();
+
+					folderId = folder.getFolderId();
+					folderName = folder.getName();
+				}
+
+				%>
+
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+					<portlet:param name="struts_action" value="/document_library/view" />
+					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+				</portlet:renderURL>
+
+				<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
+
+				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
+					<portlet:param name="struts_action" value="/document_library/select_folder" />
+					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+				</portlet:renderURL>
+
+				<%
+				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+				%>
+
+				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:input name="file" type="file" />
+
+		<aui:input cssClass="edit-file-entry-title" name="title" /><div class="edit-file-entry-title-extension"><%= extension %></div>
+
+		<aui:input name="description" />
+
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= DLFileEntry.class.getName() %>"
 				classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="categories" />
-	</td>
-	<td>
-		<liferay-ui:asset-categories-selector
-			className="<%= DLFileEntry.class.getName() %>"
-			classPK="<%= fileEntryId %>"
-		/>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
-		<liferay-ui:asset-tags-selector
-			className="<%= DLFileEntry.class.getName() %>"
-			classPK="<%= fileEntryId %>"
-		/>
-	</td>
-</tr>
+		<aui:input name="categories" type="assetCategories" />
 
-<%
-if (fileEntry == null) {
-	request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, new DLFileEntryImpl());
-}
-%>
+		<aui:input name="tags" type="assetTags" />
 
-<%@ include file="/html/portlet/document_library/edit_file_entry_form_extra_fields.jsp" %>
+		<%
+		if (fileEntry == null) {
+			request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, new DLFileEntryImpl());
+		}
+		%>
 
-<%
-if (fileEntry == null) {
-	request.removeAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
-}
-%>
+		<%@ include file="/html/portlet/document_library/edit_file_entry_form_extra_fields.jsp" %>
 
-<c:if test="<%= fileEntry == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= DLFileEntry.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<%
+		if (fileEntry == null) {
+			request.removeAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+		}
+		%>
 
-</table>
+		<c:if test="<%= fileEntry == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= DLFileEntry.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
 
-<br />
+		<aui:button-row>
+			<c:if test="<%= !(isLocked.booleanValue() && !hasLock.booleanValue()) %>">
+				<aui:button type="submit" value="save" />
+			</c:if>
 
-<c:if test="<%= !(isLocked.booleanValue() && !hasLock.booleanValue()) %>">
-	<input type="submit" value="<liferay-ui:message key="save" />">
-</c:if>
+			<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
+				<c:choose>
+					<c:when test="<%= !hasLock.booleanValue() %>">
+						<aui:button value="lock" onClick='<%= renderResponse.getNamespace() + "lock();" %>' />
+					</c:when>
+					<c:otherwise>
+						<aui:button value="unlock" onClick='<%= renderResponse.getNamespace() + "unlock();" %>' />
+					</c:otherwise>
+				</c:choose>
+			</c:if>
 
-<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
-	<c:choose>
-		<c:when test="<%= !hasLock.booleanValue() %>">
-			<input type="button" value="<liferay-ui:message key="lock" />" onClick="<portlet:namespace />lock();" />
-		</c:when>
-		<c:otherwise>
-			<input type="button" value="<liferay-ui:message key="unlock" />" onClick="<portlet:namespace />unlock();" />
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
-
-<c:if test="<%= fileEntry == null %>">
-	<br />
-</c:if>
+			<aui:button value="cancel" onClick="<%= redirect %>" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

@@ -93,6 +93,14 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />createSelectFileEntryURL(URL) {
+		URL += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
+		URL += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
+		URL += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
+
+		return URL;
+	}
+
 	function <portlet:namespace />saveFileShortcut() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileShortcut == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -124,99 +132,93 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 		nameEl.innerHTML = groupName + "&nbsp;";
 
-		document.getElementById("<portlet:namespace />selectToFileEntryButton").disabled = false;
+		jQuery('#<portlet:namespace />selectToFileEntryButton').parent().removeClass('disabled');
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileShortcut(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />toGroupId" type="hidden" value="<%= toGroupId %>" />
-<input name="<portlet:namespace />toFolderId" type="hidden" value="<%= toFolderId %>" />
-<input name="<portlet:namespace />toName" type="hidden" value="<%= HtmlUtil.escapeAttribute(toName) %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFileShortcutURL">
+	<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
-<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
+<aui:form action="<%= editFileShortcutURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFileShortcut(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
+	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+	<aui:input name="toGroupId" type="hidden" value="<%= toGroupId %>" />
+	<aui:input name="toFolderId" type="hidden" value="<%= toFolderId %>" />
+	<aui:input name="toName" type="hidden" value="<%= toName %>" />
 
-<liferay-ui:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
+	<liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
+	<liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 
-<br /><br />
+	<aui:fieldset>
+		<liferay-ui:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="community" />
-	</td>
-	<td>
+		<aui:field-wrapper label="community">
 
-		<%
-		String toGroupName = BeanPropertiesUtil.getString(toGroup, "name");
-		%>
+			<%
+			String toGroupName = BeanPropertiesUtil.getString(toGroup, "name");
+			%>
 
-		<span id="<portlet:namespace />toGroupName">
-		<%= toGroupName %>
-		</span>
+			<span id="<portlet:namespace />toGroupName">
+			<%= toGroupName %>
+			</span>
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="document" />
-	</td>
-	<td>
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectGroupURL">
+				<portlet:param name="struts_action" value="/document_library/select_group" />
+			</portlet:renderURL>
 
-		<%
-		String toFileEntryTitle = BeanPropertiesUtil.getString(toFileEntry, "title");
-		%>
+			<%
+			String taglibOpenGroupWindow = "var toGroupWindow = window.open('" + selectGroupURL + "','toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();";
+			%>
 
-		<span id="<portlet:namespace />toFileEntryTitle">
-		<%= toFileEntryTitle %>
-		</span>
+			<aui:button  onClick='<%= taglibOpenGroupWindow %>' value="select" />
+		</aui:field-wrapper>
 
-		<input <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value="<liferay-ui:message key="select" />" onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
-	</td>
-</tr>
+		<aui:field-wrapper label="document">
 
-<c:if test="<%= fileShortcut == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= DLFileShortcut.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+			<%
+			String toFileEntryTitle = BeanPropertiesUtil.getString(toFileEntry, "title");
+			%>
 
-</table>
+			<span id="<portlet:namespace />toFileEntryTitle">
+			<%= toFileEntryTitle %>
+			</span>
 
-<br />
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFileEntryURL">
+				<portlet:param name="struts_action" value="/document_library/select_file_entry" />
+			</portlet:renderURL>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+			<%
+			String taglibOpenFileEntryWindow = "var toFileEntryWindow = window.open(" + renderResponse.getNamespace() + "createSelectFileEntryURL('" + selectFileEntryURL.toString() + "'),'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();";
+			%>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			<aui:button disabled="<%= (toGroup == null) %>" name="selectToFileEntryButton" onClick='<%= taglibOpenFileEntryWindow %>' value="select" />
+		</aui:field-wrapper>
 
-<br />
+		<c:if test="<%= fileShortcut == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= DLFileShortcut.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
 
-</form>
+		<aui:button-row>
+			<aui:button type="submit" value="save" />
+
+			<aui:button value="cancel" onClick="<%= redirect %>" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <%
 if (fileShortcut != null) {
 	DLUtil.addPortletBreadcrumbEntries(fileShortcut, request, renderResponse);
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-file-shortcut"), currentURL);
-	}
 }
 else {
 	DLUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
