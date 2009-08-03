@@ -195,8 +195,8 @@ public class IconMenuTag extends BodyTagSupport {
 	private String _startPage;
 	private String _endPage;
 	private String _message = "actions";
-	private boolean _showExpanded = false;
-	private boolean _showWhenSingleIcon = false;
+	private boolean _showExpanded;
+	private boolean _showWhenSingleIcon;
 	private String _align = "right";
 	private String _cssClass;
 	private String _bodyContentString = StringPool.BLANK;

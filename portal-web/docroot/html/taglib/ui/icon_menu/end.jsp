@@ -28,7 +28,7 @@
 boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showExpanded"));
 %>
 
-		</ul>
+</ul>
 
 <c:choose>
 	<c:when test="<%= showExpanded %>">
@@ -41,5 +41,4 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 </c:choose>
 
 <c:if test="<%= !showExpanded %>">
-
 </c:if>
