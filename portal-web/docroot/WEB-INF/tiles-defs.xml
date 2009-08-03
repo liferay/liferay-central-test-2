@@ -361,6 +361,18 @@
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.view_file_entry" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_file_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.view_file_shortcut" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_file_shortcut.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.view_folder" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_folder.jsp" />
+	</definition>
+
 	<!-- Enterprise Admin -->
 
 	<definition name="portlet.enterprise_admin" extends="portlet" />

@@ -146,39 +146,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			<br />
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="webdav-url" />
-		</td>
-		<td>
-
-			<%
-			StringBuffer sb = new StringBuffer();
-
-			if (folder != null) {
-				DLFolder curFolder = folder;
-
-				while (true) {
-					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-					sb.insert(0, StringPool.SLASH);
-
-					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-						break;
-					}
-					else {
-						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-					}
-				}
-			}
-
-			Group group = layout.getGroup();
-			%>
-
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-			/>
-		</td>
-	</tr>
 </c:if>
 
 <c:if test="<%= folder == null %>">
