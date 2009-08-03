@@ -1242,6 +1242,7 @@ li.toggle-expand a {
 }
 
 /* ---------- Liferay forms ---------- */
+
 .aui-form-button.aui-input-disabled input, .aui-form-button.aui-input-disabled button {
 	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
 	color: #ccc;

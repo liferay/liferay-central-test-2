@@ -32,10 +32,10 @@ String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:o
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
 
-Boolean disabled = false;
+Boolean disabled = dynamicAttributes.get("disabled");
 
-if (dynamicAttributes.get("disabled") != null) {
-	disabled = (Boolean)dynamicAttributes.get("disabled");
+if (disabled == null) {
+	disabled = Boolean.FALSE;
 }
 
 if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
