@@ -32,11 +32,17 @@ String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:o
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
 
+Boolean disabled = false;
+
+if (dynamicAttributes.get("disabled") != null) {
+	disabled = (Boolean)dynamicAttributes.get("disabled");
+}
+
 if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
 	onClick = "location.href = '" +  HtmlUtil.escape(onClick) + "';";
 }
 %>
 
-<span class="aui-form-button <%= !type.equals("button") ? "aui-form-" + type : StringPool.BLANK %> <%= cssClass %>">
+<span class="aui-form-button <%= !type.equals("button") ? "aui-form-" + type : StringPool.BLANK %> <%= cssClass %> <%= disabled ? "disabled" : StringPool.BLANK %>">
 	<input id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 </span>

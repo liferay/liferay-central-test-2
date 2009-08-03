@@ -1242,6 +1242,17 @@ li.toggle-expand a {
 }
 
 /* ---------- Liferay forms ---------- */
+.aui-form-button.disabled input, .aui-form-button.disabled button {
+	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
+	color: #ccc;
+}
+
+.aui-form-button.disabled input:hover, .aui-form-button.disabled button:hover {
+	background: #F5F5F5 url(../images/forms/button.png) repeat-x 0 0;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
+	color: #ccc;
+	cursor: auto;
+}
 
 .lfr-input-text {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
