@@ -39,6 +39,3 @@ boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("lifer
 		</ul>
 	</c:otherwise>
 </c:choose>
-
-<c:if test="<%= !showExpanded %>">
-</c:if>
