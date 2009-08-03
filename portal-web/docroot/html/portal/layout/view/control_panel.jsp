@@ -120,7 +120,7 @@ if (Validator.isNotNull(ppid)) {
 			<div class="aui-column aui-w75 aui-column-last panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
 				<div class="aui-column-content">
 					<div class="aui-column-container panel-page-content-menu">
-						<div class="aui-column aui-w50 aui-column-first">
+						<div class="aui-column aui-w75 aui-column-first">
 							<div class="aui-column-content">
 								<c:choose>
 									<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
@@ -297,7 +297,7 @@ if (Validator.isNotNull(ppid)) {
 							</div>
 						</div>
 
-						<div class="aui-column aui-w50 aui-column-last">
+						<div class="aui-column aui-w25 aui-column-last">
 							<div class="aui-column-content">
 
 								<%
