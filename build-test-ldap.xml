@@ -8,15 +8,13 @@
 			<or>
 				<equals arg1="${apache.directory.win32.dir}" arg2="$${apache.directory.win32.dir}" />
 				<equals arg1="${apache.directory.win32.install}" arg2="$${apache.directory.win32.install}" />
-				<equals arg1="${apache.directory.win32.users}" arg2="$${apache.directory.win32.users}" />
 			</or>
 			<then>
 				<fail>
 .
 
-Please set "apache.directory.win32.dir", "apache.directory.win32.install", and
-"apache.directory.win32.users" in test.properties to point to an ApacheDS
-installation file.
+Please set "apache.directory.win32.dir" and "apache.directory.win32.install" in
+test.properties to point to an ApacheDS installation file.
 				</fail>
 			</then>
 		</if>
@@ -33,12 +31,58 @@ installation file.
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} sc start apacheds" />
 		</exec>
 
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<echo file="${tstamp.value}">version: 1
+dn: dc=example,dc=com
+objectClass: domain
+objectClass: extensibleObject
+objectClass: top
+dc: example
+
+dn: cn=janesmith,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: janesmith
+givenname: Jane
+mail: janesmith@liferay.com
+sn: Smith
+userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09
+
+dn: cn=lukeskywalker,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: lukeskywalker
+givenname: Luke
+mail: lukeskywalker@liferay.com
+sn: Skywalker
+userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09
+
+dn: cn=martinluther,dc=example,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: martinluther
+givenname: Martin
+mail: martinluther@liferay.com
+sn: Luther
+userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
+
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.users} ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${vm.host}:/" />
 		</exec>
 
+		<delete file="${tstamp.value}" />
+
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\Java\jdk1.6.0_14\bin\java.exe -jar C:\Progra~1\apacheds-1.0.2\bin\apacheds-tools.jar import -e -f C:/${apache.directory.win32.users}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\Java\jdk1.6.0_14\bin\java.exe -jar C:\Progra~1\apacheds-1.0.2\bin\apacheds-tools.jar import -e -f C:/${tstamp.value}" />
 		</exec>
 	</target>
 
