@@ -22,6 +22,24 @@
  */
 %>
 
+<%@ include file="/html/taglib/init.jsp" %>
+
+<%
+boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showExpanded"));
+%>
+
 		</ul>
-	</li>
-</ul>
+
+<c:choose>
+	<c:when test="<%= showExpanded %>">
+		</div>
+	</c:when>
+	<c:otherwise >
+			</li>
+		</ul>
+	</c:otherwise>
+</c:choose>
+
+<c:if test="<%= !showExpanded %>">
+
+</c:if>

@@ -46,6 +46,8 @@ public class IconMenuTag extends BodyTagSupport {
 
 		request.setAttribute("liferay-ui:icon-menu:message", _message);
 		request.setAttribute(
+			"liferay-ui:icon-menu:showExpanded",String.valueOf(_showExpanded));
+		request.setAttribute(
 			"liferay-ui:icon-menu:showWhenSingleIcon",
 			String.valueOf(_showWhenSingleIcon));
 		request.setAttribute("liferay-ui:icon-menu:align", _align);
@@ -115,6 +117,7 @@ public class IconMenuTag extends BodyTagSupport {
 			}
 
 			request.removeAttribute("liferay-ui:icon-menu:message");
+			request.removeAttribute("liferay-ui:icon-menu:showExpanded");
 			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
 			request.removeAttribute("liferay-ui:icon-menu:align");
 			request.removeAttribute("liferay-ui:icon-menu:cssClass");
@@ -129,6 +132,7 @@ public class IconMenuTag extends BodyTagSupport {
 				_startPage = null;
 				_endPage = null;
 				_message = "actions";
+				_showExpanded = false;
 				_showWhenSingleIcon = false;
 				_align = "right";
 				_cssClass = null;
@@ -167,6 +171,10 @@ public class IconMenuTag extends BodyTagSupport {
 		_message = message;
 	}
 
+	public void setShowExpanded(boolean showExpanded) {
+		_showExpanded = showExpanded;
+	}
+
 	public void setShowWhenSingleIcon(boolean showWhenSingleIcon) {
 		_showWhenSingleIcon = showWhenSingleIcon;
 	}
@@ -187,6 +195,7 @@ public class IconMenuTag extends BodyTagSupport {
 	private String _startPage;
 	private String _endPage;
 	private String _message = "actions";
+	private boolean _showExpanded = false;
 	private boolean _showWhenSingleIcon = false;
 	private String _align = "right";
 	private String _cssClass;

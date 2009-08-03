@@ -891,6 +891,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>showExpanded</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>showWhenSingleIcon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

@@ -28,9 +28,19 @@
 String message = (String)request.getAttribute("liferay-ui:icon-menu:message");
 String align = (String)request.getAttribute("liferay-ui:icon-menu:align");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon-menu:cssClass"));
+boolean showExpanded = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showExpanded"));
 %>
 
-<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">
-	<li class="lfr-trigger">
-		<strong><span><liferay-ui:message key="<%= message %>" /></span></strong>
-			<ul>
+<c:choose>
+	<c:when test="<%= showExpanded %>">
+		<div class="lfr-component lfr-menu-list <%= align %> <%= cssClass %>">
+	</c:when>
+	<c:otherwise >
+		<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">
+
+			<li class="lfr-trigger">
+				<strong><span><liferay-ui:message key="<%= message %>" /></span></strong>
+	</c:otherwise>
+</c:choose>
+
+<ul>
