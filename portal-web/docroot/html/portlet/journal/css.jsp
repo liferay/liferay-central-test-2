@@ -135,9 +135,8 @@
 	display: none;
 }
 
-.portlet-journal .journal-edit-mode .structure-tree .aui-placeholder,
-.portlet-journal .journal-edit-mode .structure-tree .aui-tree-placeholder,
-.portlet-journal .journal-edit-mode .structure-tree .aui-tree-sub-placeholder {
+.portlet-journal .journal-edit-mode .structure-tree .aui-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-placeholder, .portlet-journal .journal-edit-mode .structure-tree .aui-tree-sub-placeholder {
+	-ms-filter: alpha(opacity=75);
 	background: #fff;
 	border: 1px #cdcdcd dashed;
 	filter: alpha(opacity=75);
@@ -147,14 +146,6 @@
 
 .portlet-journal .structure-tree .aui-tree-sub-placeholder {
 	margin-top: 10px;
-}
-
-.portlet-journal .structure-tree .hover-up {
-
-}
-
-.portlet-journal .structure-tree .hover-down {
-
 }
 
 .portlet-journal .structure-tree li {
@@ -398,6 +389,10 @@
 }
 
 .ie .journal-article-helper {
+	-ms-filter: alpha(opacity=80);
+}
+
+.ie6 .journal-article-helper, .ie7 .journal-article-helper {
 	filter: alpha(opacity=80);
 }
 
