@@ -132,7 +132,10 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 		nameEl.innerHTML = groupName + "&nbsp;";
 
-		jQuery('#<portlet:namespace />selectToFileEntryButton').parent().removeClass('aui-input-disabled');
+		var button = jQuery('#<portlet:namespace />selectToFileEntryButton');
+
+		button.attr('disabled', false);
+		button.parent().removeClass('aui-input-disabled');
 	}
 </script>
 
