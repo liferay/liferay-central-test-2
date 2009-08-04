@@ -93,13 +93,16 @@
 .site-breadcrumbs li {
 }
 
-.site-breadcrumbs li a {
+.site-breadcrumbs li span {
+}
+
+.site-breadcrumbs li span a {
 }
 
 .site-breadcrumbs .last {
 }
 
-.site-breadcrumbs .last a {
+.site-breadcrumbs .last span {
 }
 
 /* ---------- Dragging/sorting indicators ---------- */
