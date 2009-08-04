@@ -38,8 +38,10 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
@@ -365,6 +367,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout()) {
+					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+
+					groupId = group.getParentGroupId();
+				}
+
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 

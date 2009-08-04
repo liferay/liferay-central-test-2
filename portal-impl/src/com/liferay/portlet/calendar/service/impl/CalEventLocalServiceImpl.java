@@ -57,9 +57,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -742,6 +744,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout()) {
+					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+
+					groupId = group.getParentGroupId();
+				}
+
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 

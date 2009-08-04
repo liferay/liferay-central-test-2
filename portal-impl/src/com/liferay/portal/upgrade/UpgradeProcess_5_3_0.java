@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeAssetPublisher;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v5_3_0.UpgradePolls;
 import com.liferay.portal.upgrade.v5_3_0.UpgradePortletId;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
@@ -52,6 +53,7 @@ public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeAssetPublisher.class);
 		upgrade(UpgradeBlogs.class);
+		upgrade(UpgradeGroup.class);
 		upgrade(UpgradePolls.class);
 		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeSocial.class);

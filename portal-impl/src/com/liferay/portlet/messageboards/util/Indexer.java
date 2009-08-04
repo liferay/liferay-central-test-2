@@ -37,6 +37,8 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -57,7 +59,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
@@ -109,6 +111,18 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String content, boolean anonymous, Date modifiedDate,
 		String[] assetTagNames, ExpandoBridge expandoBridge) {
 
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				groupId = group.getParentGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
 		userName = PortalUtil.getUserName(userId, userName);
 
 		try {
@@ -130,6 +144,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
+		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		doc.addKeyword(Field.USER_ID, userId);
 
 		if (!anonymous) {

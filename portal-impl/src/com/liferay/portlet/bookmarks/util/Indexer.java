@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
@@ -44,7 +46,7 @@ import javax.portlet.PortletURL;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
@@ -74,6 +76,18 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		String url, String comments, Date modifiedDate, String[] assetTagNames,
 		ExpandoBridge expandoBridge) {
 
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				groupId = group.getParentGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
 		Document doc = new DocumentImpl();
 
 		doc.addUID(PORTLET_ID, entryId);
@@ -83,6 +97,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
+		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
 		doc.addText(Field.TITLE, name);
 		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);

@@ -43,9 +43,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -483,7 +485,18 @@ public class SCProductEntryLocalServiceImpl
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
-			contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
+
+			if (groupId > 0) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout()) {
+					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+
+					groupId = group.getParentGroupId();
+				}
+
+				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
+			}
 
 			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 

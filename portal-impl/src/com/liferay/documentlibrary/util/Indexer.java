@@ -35,6 +35,8 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -172,10 +174,22 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			Date modifiedDate, long[] assetCategoryIds, String[] assetTagNames)
 		throws SearchException {
 
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				groupId = group.getParentGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
 		if (fileEntryId <= 0) {
 			_log.debug(
 				"Not indexing document " + companyId + " " + portletId + " " +
-					groupId + " " + repositoryId + " " + fileName + " " +
+					scopeGroupId + " " + repositoryId + " " + fileName + " " +
 						fileEntryId);
 
 			return null;
@@ -184,7 +198,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Indexing document " + companyId + " " + portletId + " " +
-					groupId + " " + repositoryId + " " + fileName + " " +
+					scopeGroupId + " " + repositoryId + " " + fileName + " " +
 						fileEntryId);
 		}
 
@@ -221,9 +235,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		if (is == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Document " + companyId + " " + portletId + " " + groupId +
-						" " + repositoryId + " " + fileName + " " +
-							fileEntryId + " does not have any content");
+					"Document " + companyId + " " + portletId + " " +
+						scopeGroupId + " " + repositoryId + " " + fileName +
+							" " + fileEntryId + " does not have any content");
 			}
 
 			return null;
@@ -238,6 +252,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, portletId);
 		doc.addKeyword(Field.GROUP_ID, groupId);
+		doc.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 
 		try {
 			doc.addFile(Field.CONTENT, is, fileExt);
@@ -245,7 +260,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		catch (IOException ioe) {
 			throw new SearchException(
 				"Cannot extract text from file" + companyId + " " + portletId +
-					" " + groupId + " " + repositoryId + " " + fileName);
+					" " + scopeGroupId + " " + repositoryId + " " + fileName);
 		}
 
 		doc.addText(Field.PROPERTIES, properties);
@@ -264,9 +279,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Document " + companyId + " " + portletId + " " + groupId +
-					" " + repositoryId + " " + fileName + " " + fileEntryId +
-						" indexed successfully");
+				"Document " + companyId + " " + portletId + " " +
+					scopeGroupId + " " + repositoryId + " " + fileName + " " +
+						fileEntryId + " indexed successfully");
 		}
 
 		return doc;

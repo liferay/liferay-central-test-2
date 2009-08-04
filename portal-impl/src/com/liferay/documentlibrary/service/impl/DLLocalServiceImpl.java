@@ -43,6 +43,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -132,6 +134,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, portletId);
 
 			if (groupId > 0) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout()) {
+					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
+
+					groupId = group.getParentGroupId();
+				}
+
 				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 

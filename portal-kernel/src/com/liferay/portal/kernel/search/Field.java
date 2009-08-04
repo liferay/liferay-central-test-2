@@ -62,6 +62,8 @@ public class Field {
 
 	public static final String ROOT_ENTRY_CLASS_PK = "rootEntryClassPK";
 
+	public static final String SCOPE_GROUP_ID = "scopeGroupId";
+
 	public static final String TITLE = "title";
 
 	public static final String TYPE = "type";
