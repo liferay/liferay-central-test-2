@@ -467,21 +467,14 @@
 		}
 	);
 
-	/**
-	* The OverlayManager that keeps track of the ContextPanel added to the page
-	*
-	* @property Alloy.ContextPanel
-	*/
-
 	Alloy.ContextPanel = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
-				var classNames = 'aui-context-panel liferay-shadow aui-context-panel-arrow-tl aui-context-panel-container aui-corner-all';
 				var arrowEl = jQuery('<div class="aui-context-panel-pointer aui-context-panel-container"><div class="aui-context-panel-pointer-inner"></div></div>');
 
 				this._super.apply(this, arguments);
 
-				Alloy.Dom.addClass(this.innerElement, classNames);
+				Dom.addClass(this.innerElement, 'aui-context-panel aui-context-panel-arrow-tl aui-context-panel-container');
 
 				jQuery(this.innerElement).append(arrowEl);
 			}

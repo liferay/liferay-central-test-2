@@ -346,7 +346,7 @@
 .ie6 .aui-panel .aui-header {
 }
 
-.aui-panel .container-close {
+.aui-overlay .container-close {
 }
 
 .aui-panel .aui-body {
@@ -386,6 +386,32 @@
 }
 
 .aui-panel-container.show-scrollbars .underlay {
+}
+
+/* ---------- Context Panel ---------- */
+
+.aui-context-panel-container {
+}
+
+.aui-context-panel {
+}
+
+.aui-context-panel .container-close {
+}
+
+.aui-context-panel .aui-context-panel-pointer, .aui-context-panel .aui-context-panel-pointer-inner {
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer {
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer {
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+}
+
+.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
 }
 
 /* ---------- Portal tool tips ---------- */
@@ -726,6 +752,7 @@ li.aui-autocomplete-highlight strong {
 
 .tag-cloud .tag-popularity-6 {
 }
+
 /* ---------- Treeview ---------- */
 
 .treeview {
@@ -795,4 +822,14 @@ li.aui-autocomplete-highlight strong {
 }
 
 .filetree span.file {
+}
+
+/* ---------- Rounded corners ---------- */
+
+.aui-context-panel {
+}
+
+/* ---------- Drop shadows ---------- */
+
+.aui-context-panel {
 }

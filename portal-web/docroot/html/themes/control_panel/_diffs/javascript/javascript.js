@@ -3,8 +3,9 @@ Liferay.Util.portletTitleEdit = function() {
 
 jQuery(
 	function() {
-		var cpPortletTitle = jQuery('#cpPortletTitle');
 		var portletInformationEl = jQuery('#cpContextPanelTemplate');
+		var portletInformationIcon = jQuery('#cpPortletTitleHelpIcon');
+
 		var portletId = portletInformationEl.attr('data-portlet-id');
 		var visible = (portletInformationEl.attr('data-visible-panel') == "true");
 
@@ -15,27 +16,26 @@ jQuery(
 
 		var cpContextPanel = new Alloy.ContextPanel(
 			{
-				el: 'cpContextPanelTemplate',
-				context: [ 'cpPortletTitleHelpIcon', 'tl', 'bl', ['render', 'beforeShow', 'windowResize']],
+				el: portletInformationEl[0],
+				context: [ portletInformationIcon[0], 'tl', 'bl', ['render', 'beforeShow', 'windowResize']],
 				visible: visible,
-				draggable: false
+				draggable: false,
+				on: {
+					hide: function() {
+						jQuery.ajax(
+							{
+								url: themeDisplay.getPathMain() + '/portal/session_click',
+								data: sessionData
+							}
+						);
+					}
+				}
 			}
 		);
 
 		cpContextPanel.render(document.body);
 
-		cpContextPanel.hideEvent.subscribe(
-			function() {
-				jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portal/session_click',
-						data: sessionData
-					}
-				);
-			}
-		);
-
-		jQuery('#cpPortletTitleHelpIcon').click(
+		portletInformationIcon.click(
 			function() {
 				cpContextPanel.toggle();
 			}
