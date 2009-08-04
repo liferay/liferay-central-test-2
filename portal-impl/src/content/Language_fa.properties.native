@@ -542,6 +542,7 @@ city-state=شهر، استان
 city=شهر
 class=کلاس
 clear-all=پاک کردن تمام
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 close=بستن
 club-event=رويداد کلاب
 code=کد

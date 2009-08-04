@@ -382,6 +382,7 @@ city-state=Thành phố, bang
 city=Thành phố
 class=Lớp
 clear-all=Xóa tất
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 close=Đóng
 club-event=Sự kiện câu lạc bộ
 code=Mã

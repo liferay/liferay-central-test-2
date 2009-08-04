@@ -348,6 +348,7 @@ city-state=Město, země
 city=Město
 class=Třída
 clear-all=Vyčisti vše
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 close=Zavři
 club-event=Klubová událost
 code=Kód

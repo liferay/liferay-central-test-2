@@ -965,6 +965,7 @@ clear-content-cached-by-this-vm=Wyczyść zawartość pamięci podręcznej tej m
 clear-history=Wyczyść historię
 clear-recent-uploads=Wyczyść ostatnio załadowane elementy
 clear-the-database-cache=Wyczyść pamięć podręczną bazy danych.
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 click-ok-to-create-a-new-thread-with-the-following-messages=Kliknij OK aby utworzyć nowy wątek z następującymi wiadomościami.
 click-on-any-tag-to-edit-it=Kliknij na etykiecie aby ją edytować.
 click-to-edit-me=Kliknij aby mnie edytować...

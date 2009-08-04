@@ -959,6 +959,7 @@ clear-content-cached-by-this-vm=Очистить контент, закэшир�
 clear-history=Очистить историю
 clear-recent-uploads=Удалить недавние закачки.
 clear-the-database-cache=Очистить кэш БД.
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 click-ok-to-create-a-new-thread-with-the-following-messages=Щелкните сюда, чтобы создать новую нить со следующими сообщениями.
 click-on-any-tag-to-edit-it=Щелкните на любой тег, чтобы редактировать его.
 click-to-edit-me=Щелкните, чтобы редактировать меня...

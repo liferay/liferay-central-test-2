@@ -748,6 +748,7 @@ clear-content-cached-across-the-cluster=Slett cache på klustret.
 clear-content-cached-by-this-vm=Slett cache i denne Java-VM.
 clear-recent-uploads=Slett siste opplastninger
 clear-the-database-cache=Slett cache for databasen.
+click-here-to-save-it-now=<a class="{0}" href="{1}">Click here</a> to save it now. (Automatic Copy)
 click-on-any-tag-to-edit-it=Trykk på tagger for å endre dem.
 click-to-edit-me=Trykk for å redigere meg...
 clickable-emoticons=Trykkbare känsloikoner
