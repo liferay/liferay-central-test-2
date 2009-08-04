@@ -32,12 +32,11 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
+fileShortcut = fileShortcut.toEscapedModel();
 
-long fileShortcutId = BeanParamUtil.getLong(fileShortcut, request, "fileShortcutId");
-long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
-long toGroupId = ParamUtil.getLong(request, "toGroupId");
-long toFolderId = BeanParamUtil.getLong(fileShortcut, request, "toFolderId");
-String toName = BeanParamUtil.getString(fileShortcut, request, "toName");
+long fileShortcutId = fileShortcut.getFileShortcutId();
+long toFolderId = fileShortcut.getToFolderId();
+String toName = fileShortcut.getToName();
 
 Group toGroup = null;
 DLFolder toFolder = null;
@@ -61,26 +60,39 @@ else if ((toFolderId > 0)) {
 	}
 }
 
-if ((toGroup == null) && (toGroupId > 0)) {
-	try {
-		toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
-	}
-	catch (Exception e) {
-	}
-}
-
 if (toGroup != null) {
 	toGroup = toGroup.toEscapedModel();
-
-	toGroupId = toGroup.getGroupId();
 }
 
-if (toFileEntry != null) {
-	toFileEntry = toFileEntry.toEscapedModel();
+toFileEntry = toFileEntry.toEscapedModel();
+
+String extension = null;
+
+if (Validator.isNotNull(toFileEntry.getName())) {
+	extension = FileUtil.getExtension(toFileEntry.getName());
 }
 
-Boolean isLocked = Boolean.TRUE;
+String[] conversions = new String[0];
+
+if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
+	conversions = (String[])DocumentConversionUtil.getConversions(extension);
+}
+
+Lock lock = null;
+Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
+
+try {
+	lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(toFileEntry.getFolderId(), toFileEntry.getName()));
+
+	isLocked = Boolean.TRUE;
+
+	if (lock.getUserId() == user.getUserId()) {
+		hasLock = Boolean.TRUE;
+	}
+}
+catch (Exception e) {
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -90,102 +102,129 @@ portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
+
+request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&fileShortcutId=<%= fileShortcutId %>">
-		<%= toFileEntry.getTitle() %>
-		</a>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="version" />
-	</td>
-	<td>
-		<%= toFileEntry.getVersion() %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="size" />
-	</td>
-	<td>
-		<%= TextFormatter.formatKB(toFileEntry.getSize(), locale) %>k
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="downloads" />
-	</td>
-	<td>
-		<%= toFileEntry.getReadCount() %>
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="url" />
-	</td>
-	<td>
-		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
-		/>
-	</td>
-</tr>
-</table>
+<div class="aui-column aui-w75 aui-column-first file-entry-left-column">
+	<div class="aui-column-content">
+		<h3><liferay-ui:message key="shortcut-to" /> <%= toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")" %></h3>
 
-<br /><br />
+		<div class="file-entry-categories">
+			<liferay-ui:asset-categories-summary
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= toFileEntry.getFileEntryId() %>"
+			/>
+		</div>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="community" />
-	</td>
-	<td>
+		<div class="file-entry-tags">
+			<liferay-ui:asset-tags-summary
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= toFileEntry.getFileEntryId() %>"
+				message="tags"
+			/>
+		</div>
 
-		<%
-		String toGroupName = BeanPropertiesUtil.getString(toGroup, "name");
-		%>
+		<div class="file-entry-description">
+			<%= toFileEntry.getDescription() %>
+		</div>
 
-		<span id="<portlet:namespace />toGroupName">
-		<%= toGroupName %>
-		</span>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="document" />
-	</td>
-	<td>
+		<div class="custom-attributes">
+			<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</div>
 
-		<%
-		String toFileEntryTitle = BeanPropertiesUtil.getString(toFileEntry, "title");
-		%>
+		<div class="file-entry-author">
+			<liferay-ui:message key="last-updated-by" /> <%= toFileEntry.getUserName() %>
+		</div>
 
-		<span id="<portlet:namespace />toFileEntryTitle">
-		<%= toFileEntryTitle %>
-		</span>
-	</td>
-</tr>
+		<div class="file-entry-date">
+			<%= dateFormatDateTime.format(toFileEntry.getModifiedDate()) %>
+		</div>
 
-<br />
+		<div class="file-entry-downloads">
+			<%= toFileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
+		</div>
 
-<liferay-ui:ratings
-	className="<%= DLFileEntry.class.getName() %>"
-	classPK="<%= toFileEntry.getFileEntryId() %>"
-/>
+		<div class="file-entry-ratings">
+			<liferay-ui:ratings
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= toFileEntry.getFileEntryId() %>"
+			/>
+		</div>
 
-<br />
+		<div class="file-entry-field">
+			<label><liferay-ui:message key="url" /></label>
+
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+			/>
+		</div>
+
+		<div class="file-entry-field">
+			<label><liferay-ui:message key="community" /></label>
+
+			<%= toGroup.getDescriptiveName() %>
+		</div>
+	</div>
+</div>
+
+<div class="aui-column aui-w25 aui-column-last file-entry-right-column">
+	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
+
+	<c:if test="<%= isLocked %>">
+		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+	</c:if>
+
+	<div class="aui-column-content">
+		<div class="file-entry-download">
+			<liferay-ui:icon
+				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
+				cssClass="file-entry-avatar"
+				message='download'
+				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+			/>
+
+			<div class="file-entry-name">
+				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
+					<%= toFileEntry.getTitleWithExtension() %>
+				</a>
+			</div>
+
+			<c:if test="<%= conversions.length > 0 %>">
+				<div class="file-entry-field file-entry-conversions">
+					<label><liferay-ui:message key="other-available-formats" /></label>
+
+					<%
+					for (int i = 0; i < conversions.length; i++) {
+						String conversion = conversions[i];
+
+					%>
+
+						<liferay-ui:icon
+							image='<%= "../document_library/" + conversion %>'
+							message="<%= conversion.toUpperCase() %>"
+							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + toFolder.getFolderId() + "&name=" + HttpUtil.encodeURL(toFileEntry.getName()) + "&targetExtension=" + conversion %>'
+							label="<%= true %>"
+						/>
+
+					<%
+					}
+					%>
+
+				</div>
+			</c:if>
+		</div>
+
+		<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
+	</div>
+</div>
 
 <%
 String tabs2Names = "version-history,comments";
@@ -195,84 +234,86 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 }
 %>
 
-<liferay-ui:tabs
-	names="<%= tabs2Names %>"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
+<div class="file-entry-tabs">
+	<liferay-ui:tabs
+		names="<%= tabs2Names %>"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("version-history") %>'>
+	<c:choose>
+		<c:when test='<%= tabs2.equals("version-history") %>'>
 
-		<%
-		SearchContainer searchContainer = new SearchContainer();
+			<%
+			SearchContainer searchContainer = new SearchContainer();
 
-		List<String> headerNames = new ArrayList<String>();
+			List<String> headerNames = new ArrayList<String>();
 
-		headerNames.add("version");
-		headerNames.add("date");
-		headerNames.add("size");
-		headerNames.add(StringPool.BLANK);
+			headerNames.add("version");
+			headerNames.add("date");
+			headerNames.add("size");
+			headerNames.add(StringPool.BLANK);
 
-		searchContainer.setHeaderNames(headerNames);
+			searchContainer.setHeaderNames(headerNames);
 
-		List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
-		List resultRows = searchContainer.getResultRows();
+			List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
+			List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+			for (int i = 0; i < results.size(); i++) {
+				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
 
-			ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
+				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
-			StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder();
 
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/document_library/get_file?p_l_id=");
-			sb.append(themeDisplay.getPlid());
-			sb.append("&fileShortcutId=");
-			sb.append(fileShortcutId);
-			sb.append("&version=");
-			sb.append(String.valueOf(fileVersion.getVersion()));
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/document_library/get_file?p_l_id=");
+				sb.append(themeDisplay.getPlid());
+				sb.append("&fileShortcutId=");
+				sb.append(fileShortcutId);
+				sb.append("&version=");
+				sb.append(String.valueOf(fileVersion.getVersion()));
 
-			String rowHREF = sb.toString();
+				String rowHREF = sb.toString();
 
-			// Statistics
+				// Statistics
 
-			row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
-			row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
-			row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+				row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
+				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
+				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
 
-			// Action
+				// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
 
-			// Add result row
+				// Add result row
 
-			resultRows.add(row);
-		}
-		%>
+				resultRows.add(row);
+			}
+			%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("comments") %>'>
-		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION) %>">
-			<portlet:actionURL var="discussionURL">
-				<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
-			</portlet:actionURL>
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("comments") %>'>
+			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION) %>">
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
+				</portlet:actionURL>
 
-			<liferay-ui:discussion
-				formName="fm2"
-				formAction="<%= discussionURL %>"
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= toFileEntry.getFileEntryId() %>"
-				userId="<%= toFileEntry.getUserId() %>"
-				subject="<%= toFileEntry.getTitle() %>"
-				redirect="<%= currentURL %>"
-				ratingsEnabled="<%= enableCommentRatings %>"
-			/>
-		</c:if>
-	</c:when>
-</c:choose>
+				<liferay-ui:discussion
+					formName="fm2"
+					formAction="<%= discussionURL %>"
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= toFileEntry.getFileEntryId() %>"
+					userId="<%= toFileEntry.getUserId() %>"
+					subject="<%= toFileEntry.getTitle() %>"
+					redirect="<%= currentURL %>"
+					ratingsEnabled="<%= enableCommentRatings %>"
+				/>
+			</c:if>
+		</c:when>
+	</c:choose>
+</div>
 
 <%
 DLUtil.addPortletBreadcrumbEntries(fileShortcut, request, renderResponse);

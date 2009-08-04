@@ -28,116 +28,110 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+folder = folder.toEscapedModel();
 
-long folderId = BeanParamUtil.getLong(folder, request, "folderId");
+List subfolderIds = new ArrayList();
 
-long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+subfolderIds.add(new Long(folder.getFolderId()));
+
+DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, folder.getFolderId());
+
+int foldersCount = subfolderIds.size() - 1;
+int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
+
+request.setAttribute("view_folder.jsp-folder", folder);
 %>
 
-<table class="lfr-table">
+<div class="aui-column aui-w75 aui-column-first file-entry-left-column">
+	<div class="aui-column-content">
+		<h3><%= folder.getName() %></h3>
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="parent-folder" />
-	</td>
-	<td>
+		<div class="folder-description">
+			<%= folder.getDescription() %>
+		</div>
 
-		<%
-		String parentFolderName = "";
+		<div class="folder-date">
+			<liferay-ui:message key="last-updated" /> <%= dateFormatDateTime.format(folder.getModifiedDate()) %>
+		</div>
 
-		try {
-			DLFolder parentFolder = DLFolderLocalServiceUtil.getFolder(parentFolderId);
+		<div class="folder-subfolders">
+			<%= foldersCount %> <liferay-ui:message key="subfolders" />
+		</div>
 
-			parentFolderName = parentFolder.getName();
-		}
-		catch (NoSuchFolderException nscce) {
-		}
-		%>
+		<div class="folder-file-entries">
+			<%= fileEntriesCount %> <liferay-ui:message key="files" />
+		</div>
 
-		<%= parentFolderName %>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
+		<div class="custom-attributes">
+			<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFolder.class.getName() %>"
+					classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</div>
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<%= folder.getName() %>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<%= folder.getDescription() %>
-	</td>
-</tr>
+		<div class="folder-field">
+			<label><liferay-ui:message key="webdav-url" /></label>
 
-<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<liferay-ui:custom-attribute-list
-				className="<%= DLFolder.class.getName() %>"
-				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
-				editable="<%= false %>"
-				label="<%= true %>"
-			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+			<%
+			StringBuffer sb = new StringBuffer();
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="webdav-url" />
-	</td>
-	<td>
+			if (folder != null) {
+				DLFolder curFolder = folder;
 
-		<%
-		StringBuffer sb = new StringBuffer();
+				while (true) {
+					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+					sb.insert(0, StringPool.SLASH);
 
-		if (folder != null) {
-			DLFolder curFolder = folder;
-
-			while (true) {
-				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-				sb.insert(0, StringPool.SLASH);
-
-				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+						break;
+					}
+					else {
+						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					}
 				}
 			}
-		}
 
-		Group group = layout.getGroup();
-		%>
+			Group group = layout.getGroup();
+			%>
 
-		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-		/>
-	</td>
-</tr>
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+			/>
+		</div>
+	</div>
+</div>
 
-</table>
+<div class="aui-column aui-w25 aui-column-last file-entry-right-column">
+	<div class="aui-column-content">
+
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+			<portlet:param name="struts_action" value="/document_library/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
+		</portlet:renderURL>
+
+		<div class="folder-icon">
+			<liferay-ui:icon
+				image='<%= "../document_library/folder" + (((foldersCount + fileEntriesCount) > 0) ? "_full" : StringPool.BLANK) %>'
+				cssClass="folder-avatar"
+				message='open'
+				url='<%= viewFolderURL %>'
+			/>
+
+			<div class="folder-name">
+				<a href="<%= viewFolderURL %>">
+					<%= HtmlUtil.escape(folder.getName()) %>
+				</a>
+			</div>
+		</div>
+
+		<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
+	</div>
+</div>
+
 
 <%
 DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);

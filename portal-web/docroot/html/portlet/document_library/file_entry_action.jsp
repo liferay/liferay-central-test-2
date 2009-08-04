@@ -27,23 +27,42 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object result = row.getObject();
-
 DLFileEntry fileEntry = null;
 DLFileShortcut fileShortcut = null;
 
-if (result instanceof DLFileEntry) {
-	fileEntry = (DLFileEntry)result;
+boolean view = false;
+
+if (row != null) {
+	Object result = row.getObject();
+
+	if (result instanceof DLFileEntry) {
+		fileEntry = (DLFileEntry)result;
+	}
+	else {
+		fileShortcut = (DLFileShortcut)result;
+	}
 }
 else {
-	fileShortcut = (DLFileShortcut)result;
+	if (request.getAttribute("view_file_entry.jsp-fileEntry") != null) {
+		fileEntry = (DLFileEntry)request.getAttribute("view_file_entry.jsp-fileEntry");
+	}
+	else {
+		fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
+	}
+	view = true;
 }
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:choose>
 		<c:when test="<%= fileEntry != null %>">
-			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+			<liferay-ui:icon
+					image='download'
+					url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
+					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
+				/>
+
+			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -93,8 +112,13 @@ else {
 			<%
 			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 			%>
+			<liferay-ui:icon
+				image='download'
+				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
+				message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
+			/>
 
-			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
+			<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_shortcut" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -102,6 +126,17 @@ else {
 				</portlet:renderURL>
 
 				<liferay-ui:icon image="view" url="<%= viewShortcutURL %>" />
+			</c:if>
+
+			<c:if test="<%= view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewOriginalFileURL">
+					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="folderId" value="<%= String.valueOf(fileShortcut.getToFolderId()) %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileShortcut.getToName()) %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon image="view" message="view-original-file" url="<%= viewOriginalFileURL %>" />
 			</c:if>
 
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">

@@ -163,6 +163,52 @@ public class DLUtil {
 		return _instance._getFileExtension(name);
 	}
 
+	public static String getGenericName (String extension) {
+		String genericName = "default";
+
+		if (extension.equals("doc") || extension.equals("docx") ||
+			extension.equals("odt") || extension.equals("rtf")) {
+			genericName = "document";
+		}
+		else if (extension.equals("xls")||extension.equals("xlsx") ||
+				 extension.equals("ods")|| extension.equals("csv")) {
+			genericName = "spreadsheet";
+		}
+		else if (extension.equals("ppt") || extension.equals("pptx") ||
+				 extension.equals("odp")) {
+					genericName = "presentation";
+		}
+		else if (extension.equals("pdf")) {
+					genericName = "pdfs";
+		}
+		else if (extension.equals("bmp") || extension.equals("jpeg") ||
+				 extension.equals("jpg") || extension.equals("gif") ||
+				 extension.equals("png") || extension.equals("odg") ||
+				 extension.equals("svg")) {
+					genericName = "image";
+		}
+		else if (extension.equals("mp3") || extension.equals("wav") ||
+				 extension.equals("wma") || extension.equals("mid") ||
+				 extension.equals("acc")) {
+					genericName = "music";
+		}
+		else if (extension.equals("wmv") || extension.equals("avi") ||
+				 extension.equals("mpg") || extension.equals("mp4") ||
+				 extension.equals("mov") || extension.equals("qt") ||
+				 extension.equals("rm")) {
+					genericName = "video";
+		}
+		else if (extension.equals("swf") || extension.equals("flv")) {
+					genericName = "flash";
+		}
+		else if (extension.equals("zip")||extension.equals("rar")||
+				 extension.equals("lar")) {
+					genericName = "compressed";
+		}
+
+		return genericName;
+	}
+
 	public static String getLockId(long folderId, String name) {
 		StringBuilder sb = new StringBuilder();
 

@@ -28,12 +28,21 @@
 String redirect = currentURL;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+DLFolder folder = null;
 
-DLFolder folder = (DLFolder)row.getObject();
+boolean view = false;
+
+if (row != null) {
+	folder = (DLFolder)row.getObject();
+}
+else {
+	folder = (DLFolder)request.getAttribute("view_folder.jsp-folder");
+	view = true;
+}
 %>
 
-<liferay-ui:icon-menu>
-	<c:if test="<%= DLFolderPermission.contains(permissionChecker, folder, ActionKeys.VIEW) %>">
+<liferay-ui:icon-menu showExpanded="<%= view %>">
+	<c:if test="<%= !view && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.VIEW) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
 			<portlet:param name="struts_action" value="/document_library/view_folder" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
