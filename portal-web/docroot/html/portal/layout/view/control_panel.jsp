@@ -112,14 +112,14 @@ if (Validator.isNotNull(ppid)) {
 	<div id="content-wrapper">
 		<div class="aui-column-container lfr-ctrl-panel <%= panelCategory %>">
 			<div class="aui-column aui-w25 aui-column-first panel-page-menu">
-				<div class="aui-column-content">
+				<div class="aui-column-content panel-page-menu-content">
 					<liferay-portlet:runtime portletName="87" />
 				</div>
 			</div>
 
-			<div class="aui-column aui-w75 aui-column-last panel-page-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
-				<div class="aui-column-content">
-					<div class="aui-column-container panel-page-content-menu">
+			<div class="aui-column aui-w75 aui-column-last panel-page-body <%= (!layoutTypePortlet.hasStateMax()) ? "panel-page-frontpage" : "panel-page-application" %>">
+				<div class="aui-column-content panel-page-body-content">
+					<div class="aui-column-container panel-page-body-menu">
 						<div class="aui-column aui-w75 aui-column-first">
 							<div class="aui-column-content">
 								<c:choose>

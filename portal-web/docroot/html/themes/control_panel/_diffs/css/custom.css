@@ -112,29 +112,29 @@ body {
 	font-weight: bold;
 }
 
-.lfr-ctrl-panel .panel-page-content.panel-page-frontpage .lfr-panel-titlebar {
+.lfr-ctrl-panel .panel-page-body.panel-page-frontpage .lfr-panel-titlebar {
 	margin-top: 0;
 }
 
-.lfr-ctrl-panel .panel-page-content.panel-page-frontpage .portlet-msg-info {
+.lfr-ctrl-panel .panel-page-body.panel-page-frontpage .portlet-msg-info {
 	margin-left: 15px;
 }
 
-.lfr-ctrl-panel .panel-page-content-menu {
+.lfr-ctrl-panel .panel-page-body-menu {
 	background-color: #F3F5F5;
 	margin-bottom: 10px;
 	width: 100%;
 }
 
-.lfr-ctrl-panel .panel-page-content .aui-column-content {
+.lfr-ctrl-panel .panel-page-body-content {
 	padding-left: 0;
 }
 
-.lfr-ctrl-panel .panel-page-content-menu .aui-column-last {
+.lfr-ctrl-panel .panel-page-body-menu .aui-column-last {
 	text-align: right;
 }
 
-.lfr-ctrl-panel .panel-page-content-menu .aui-column-content {
+.lfr-ctrl-panel .panel-page-body-menu .aui-column-content {
 	line-height: 34px;
 	padding: 0 15px;
 }
