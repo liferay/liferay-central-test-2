@@ -233,7 +233,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<select class="principal-field-element" multiple="true">
 
 							<%
-							itr = el.elements().iterator();
+							Iterator<Element> itr = el.elements().iterator();
 
 							while (itr.hasNext()) {
 								Element child = itr.next();

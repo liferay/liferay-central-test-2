@@ -188,9 +188,9 @@
 
 	<div data-component-type="boolean">
 		<div class="journal-subfield">
-			<input class="principal-field-element" id="<portlet:namespace />BooleanField" type="checkbox" />
+			<input class="principal-field-element" type="checkbox" />
 
-			<label class="journal-article-field-label" for="<portlet:namespace />BooleanField"><span>BooleanField</span></label>
+			<label class="journal-article-field-label"><span>BooleanField</span></label>
 		</div>
 	</div>
 
