@@ -166,8 +166,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
-<div class="aui-column aui-w75 aui-column-first file-entry-left-column">
-	<div class="aui-column-content">
+<div class="aui-column aui-w75 aui-column-first file-entry-column file-entry-column-first">
+	<div class="aui-column-content file-entry-column-content">
 		<h3><%= fileEntry.getTitle() + " (" + fileEntry.getVersion() + ")" %></h3>
 
 		<div class="file-entry-categories">
@@ -260,12 +260,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</div>
 </div>
 
-<div class="aui-column aui-w25 aui-column-last file-entry-right-column">
-	<c:if test="<%= isLocked %>">
-		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
-	</c:if>
+<div class="aui-column aui-w25 aui-column-last file-entry-column file-entry-column-last">
+	<div class="aui-column-content file-entry-column-content">
+		<c:if test="<%= isLocked %>">
+			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+		</c:if>
 
-	<div class="aui-column-content">
 		<div class="file-entry-download">
 			<liferay-ui:icon
 				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'

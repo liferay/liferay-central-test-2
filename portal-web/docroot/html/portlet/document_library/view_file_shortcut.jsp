@@ -107,8 +107,8 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<div class="aui-column aui-w75 aui-column-first file-entry-left-column">
-	<div class="aui-column-content">
+<div class="aui-column aui-w75 aui-column-first file-entry-column file-entry-column-first">
+	<div class="aui-column-content file-entry-column-content">
 		<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")" %></h3>
 
 		<div class="file-entry-categories">
@@ -176,14 +176,14 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 	</div>
 </div>
 
-<div class="aui-column aui-w25 aui-column-last file-entry-right-column">
-	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
+<div class="aui-column aui-w25 aui-column-last file-entry-column file-entry-column-last">
+	<div class="aui-column-content file-entry-column-content">
+		<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
 
-	<c:if test="<%= isLocked %>">
-		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
-	</c:if>
+		<c:if test="<%= isLocked %>">
+			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+		</c:if>
 
-	<div class="aui-column-content">
 		<div class="file-entry-download">
 			<liferay-ui:icon
 				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'

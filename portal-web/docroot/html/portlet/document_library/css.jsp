@@ -24,24 +24,24 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-document-library .aui-column-first .aui-column-content {
+.portlet-document-library .file-entry-column-first .file-entry-column-content {
 	margin-right: 4em;
 }
 
-.portlet-document-library .aui-column-first h3 {
+.portlet-document-library .file-entry-column-first h3 {
 	border-bottom: 1px solid #000;
 	font-size: 14px;
 	font-weight: 700;
 	margin: 10px 0;
 }
 
-.portlet-document-library .aui-column-last {
+.portlet-document-library .file-entry-column-last {
 	background-color: #D7F1FF;
-	border: 1px solid #88C5D9;
 	overflow: visible;
 }
 
-.portlet-document-library .aui-column-last.file-entry-right-column .aui-column-content {
+.portlet-document-library .file-entry-column-last .file-entry-column-content {
+	border: 1px solid #88C5D9;
 	padding: 1em;
 }
 
