@@ -163,47 +163,11 @@ public class DLUtil {
 		return _instance._getFileExtension(name);
 	}
 
-	public static String getGenericName (String extension) {
-		String genericName = "default";
+	public static String getGenericName(String extension) {
+		String genericName = _genericNames.get(extension);
 
-		if (extension.equals("doc") || extension.equals("docx") ||
-			extension.equals("odt") || extension.equals("rtf")) {
-			genericName = "document";
-		}
-		else if (extension.equals("xls")||extension.equals("xlsx") ||
-				 extension.equals("ods")|| extension.equals("csv")) {
-			genericName = "spreadsheet";
-		}
-		else if (extension.equals("ppt") || extension.equals("pptx") ||
-				 extension.equals("odp")) {
-					genericName = "presentation";
-		}
-		else if (extension.equals("pdf")) {
-					genericName = "pdfs";
-		}
-		else if (extension.equals("bmp") || extension.equals("jpeg") ||
-				 extension.equals("jpg") || extension.equals("gif") ||
-				 extension.equals("png") || extension.equals("odg") ||
-				 extension.equals("svg")) {
-					genericName = "image";
-		}
-		else if (extension.equals("mp3") || extension.equals("wav") ||
-				 extension.equals("wma") || extension.equals("mid") ||
-				 extension.equals("acc")) {
-					genericName = "music";
-		}
-		else if (extension.equals("wmv") || extension.equals("avi") ||
-				 extension.equals("mpg") || extension.equals("mp4") ||
-				 extension.equals("mov") || extension.equals("qt") ||
-				 extension.equals("rm")) {
-					genericName = "video";
-		}
-		else if (extension.equals("swf") || extension.equals("flv")) {
-					genericName = "flash";
-		}
-		else if (extension.equals("zip")||extension.equals("rar")||
-				 extension.equals("lar")) {
-					genericName = "compressed";
+		if (genericName == null) {
+			genericName = _DEFAULT_GENERIC_NAME;
 		}
 
 		return genericName;
@@ -248,6 +212,53 @@ public class DLUtil {
 				_fileExtensions.add(extension);
 			}
 		}
+
+		_genericNames = new HashMap<String, String>();
+
+		_genericNames.put("lar", "compressed");
+		_genericNames.put("rar", "compressed");
+		_genericNames.put("zip", "compressed");
+
+		_genericNames.put("doc", "document");
+		_genericNames.put("docx", "document");
+		_genericNames.put("rtf", "document");
+		_genericNames.put("odt", "document");
+
+		_genericNames.put("flv", "flash");
+		_genericNames.put("swf", "flash");
+
+		_genericNames.put("bmp", "image");
+		_genericNames.put("gif", "image");
+		_genericNames.put("jpeg", "image");
+		_genericNames.put("jpg", "image");
+		_genericNames.put("odg", "image");
+		_genericNames.put("png", "image");
+		_genericNames.put("svg", "image");
+
+		_genericNames.put("acc", "music);
+		_genericNames.put("mid", "music);
+		_genericNames.put("mp3", "music);
+		_genericNames.put("wav", "music);
+		_genericNames.put("wma", "music);
+
+		_genericNames.put("pdf", "pdfs");
+
+		_genericNames.put("odp", "presentation");
+		_genericNames.put("ppt", "presentation");
+		_genericNames.put("pptx", "presentation");
+
+		_genericNames.put("csv", "spreadsheet");
+		_genericNames.put("ods", "spreadsheet");
+		_genericNames.put("xls", "spreadsheet");
+		_genericNames.put("xlsx", "spreadsheet");
+
+		_genericNames.put("avi", "video");
+		_genericNames.put("mov", "video");
+		_genericNames.put("mp4", "video");
+		_genericNames.put("mpg", "video");
+		_genericNames.put("qt", "video");
+		_genericNames.put("rm", "video");
+		_genericNames.put("wmv", "video");
 	}
 
 	private String _getFileExtension(String name) {
@@ -266,12 +277,15 @@ public class DLUtil {
 		return extension;
 	}
 
+	private static final String _DEFAULT_GENERIC_NAME = "default";
+
 	private static final String _DEFAULT_FILE_EXTENSION = "page";
 
 	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 
 	private static DLUtil _instance = new DLUtil();
 
+	private Map<String> _genericNames;
 	private Set<String> _fileExtensions;
 
 }

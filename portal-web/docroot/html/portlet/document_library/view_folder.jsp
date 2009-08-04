@@ -28,9 +28,10 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+
 folder = folder.toEscapedModel();
 
-List subfolderIds = new ArrayList();
+List<Long> subfolderIds = new ArrayList<Long>();
 
 subfolderIds.add(new Long(folder.getFolderId()));
 
@@ -51,7 +52,7 @@ request.setAttribute("view_folder.jsp-folder", folder);
 		</div>
 
 		<div class="folder-date">
-			<liferay-ui:message key="last-updated" /> <%= dateFormatDateTime.format(folder.getModifiedDate()) %>
+			<%= LanguageUtil.format(pageContext, "last-updated-x", dateFormatDateTime.format(folder.getModifiedDate())) %>
 		</div>
 
 		<div class="folder-subfolders">
@@ -107,7 +108,6 @@ request.setAttribute("view_folder.jsp-folder", folder);
 
 <div class="aui-column aui-w25 aui-column-last file-entry-right-column">
 	<div class="aui-column-content">
-
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />

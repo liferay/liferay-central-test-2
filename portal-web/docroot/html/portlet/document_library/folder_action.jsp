@@ -28,6 +28,7 @@
 String redirect = currentURL;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+
 DLFolder folder = null;
 
 boolean view = false;
@@ -37,6 +38,7 @@ if (row != null) {
 }
 else {
 	folder = (DLFolder)request.getAttribute("view_folder.jsp-folder");
+
 	view = true;
 }
 %>

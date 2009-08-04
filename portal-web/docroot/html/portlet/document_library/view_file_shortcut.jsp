@@ -32,6 +32,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
+
 fileShortcut = fileShortcut.toEscapedModel();
 
 long fileShortcutId = fileShortcut.getFileShortcutId();
@@ -108,7 +109,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 <div class="aui-column aui-w75 aui-column-first file-entry-left-column">
 	<div class="aui-column-content">
-		<h3><liferay-ui:message key="shortcut-to" /> <%= toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")" %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")" %></h3>
 
 		<div class="file-entry-categories">
 			<liferay-ui:asset-categories-summary
@@ -141,7 +142,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 		</div>
 
 		<div class="file-entry-author">
-			<liferay-ui:message key="last-updated-by" /> <%= toFileEntry.getUserName() %>
+			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName())) %>
 		</div>
 
 		<div class="file-entry-date">

@@ -36,6 +36,7 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 String uploadProgressId = "dlFileEntryUploadProgress";
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+
 fileEntry = fileEntry.toEscapedModel();
 
 long fileEntryId = fileEntry.getFileEntryId();
@@ -56,7 +57,7 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
-DLFolder folder = fileEntry.getFolder();;
+DLFolder folder = fileEntry.getFolder();
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
@@ -200,7 +201,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		</div>
 
 		<div class="file-entry-author">
-			<liferay-ui:message key="last-updated-by" /> <%= fileEntry.getUserName() %>
+			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName())) %>
 		</div>
 
 		<div class="file-entry-date">
@@ -268,14 +269,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<div class="file-entry-download">
 			<liferay-ui:icon
 				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
-				cssClass="file-entry-avatar"
 				message='download'
 				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+				cssClass="file-entry-avatar"
 			/>
 
 			<div class="file-entry-name">
 				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
-					<%= HtmlUtil.escape(fileEntry.getTitleWithExtension()) %>
+					<%= HtmlUtil.escape(titleWithExtension) %>
 				</a>
 			</div>
 
@@ -431,7 +432,6 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 
 				<aui:button type="submit" value="compare-versions" />
-
 			</aui:form>
 
 			<%
