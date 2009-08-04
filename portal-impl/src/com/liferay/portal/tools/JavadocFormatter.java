@@ -166,7 +166,7 @@ public class JavadocFormatter {
 
 				if (value.startsWith("Raymond Aug")) {
 					value = new String(
-						"Raymond Augé".getBytes(), StringPool.UTF8);
+						"Raymond Aug\u00c3\u00a9".getBytes(), StringPool.UTF8);
 				}
 			}
 
