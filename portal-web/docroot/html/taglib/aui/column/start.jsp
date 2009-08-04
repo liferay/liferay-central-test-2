@@ -30,7 +30,15 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:column:
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:column:dynamicAttributes");
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:column:first"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:column:last"));
+
+String cssClasses = StringPool.BLANK;
+
+if (Validator.isNotNull(cssClass)) {
+	for (String curCssClass : StringUtil.split(cssClass, " ")) {
+		cssClasses += curCssClass + "-content ";
+	}
+}
 %>
 
 <div class="aui-column <%= (columnWidth > 0) ? "aui-w" + columnWidth : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-column-first" : StringPool.BLANK %> <%= last ? "aui-column-last" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="aui-column-content">
+	<div class="aui-column-content <%= cssClasses %>">

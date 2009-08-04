@@ -27,7 +27,15 @@
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:layout:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:layout:dynamicAttributes");
+
+String cssClasses = StringPool.BLANK;
+
+if (Validator.isNotNull(cssClass)) {
+	for (String curCssClass : StringUtil.split(cssClass, " ")) {
+		cssClasses += curCssClass + "-container ";
+	}
+}
 %>
 
 <div class="aui-layout <%= cssClass %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
-	<div class="aui-column-container">
+	<div class="aui-column-container <%= cssClasses %>">
