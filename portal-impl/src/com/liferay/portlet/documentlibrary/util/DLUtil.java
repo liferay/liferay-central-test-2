@@ -235,11 +235,11 @@ public class DLUtil {
 		_genericNames.put("png", "image");
 		_genericNames.put("svg", "image");
 
-		_genericNames.put("acc", "music);
-		_genericNames.put("mid", "music);
-		_genericNames.put("mp3", "music);
-		_genericNames.put("wav", "music);
-		_genericNames.put("wma", "music);
+		_genericNames.put("acc", "music");
+		_genericNames.put("mid", "music");
+		_genericNames.put("mp3", "music");
+		_genericNames.put("wav", "music");
+		_genericNames.put("wma", "music");
 
 		_genericNames.put("pdf", "pdfs");
 
