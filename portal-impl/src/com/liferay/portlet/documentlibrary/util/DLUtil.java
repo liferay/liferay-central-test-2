@@ -39,8 +39,10 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
@@ -164,13 +166,7 @@ public class DLUtil {
 	}
 
 	public static String getGenericName(String extension) {
-		String genericName = _genericNames.get(extension);
-
-		if (genericName == null) {
-			genericName = _DEFAULT_GENERIC_NAME;
-		}
-
-		return genericName;
+		return _instance._getGenericName(extension);
 	}
 
 	public static String getLockId(long folderId, String name) {
@@ -277,6 +273,16 @@ public class DLUtil {
 		return extension;
 	}
 
+	private String _getGenericName(String extension) {
+		String genericName = _genericNames.get(extension);
+
+		if (genericName == null) {
+			genericName = _DEFAULT_GENERIC_NAME;
+		}
+
+		return genericName;
+	}
+
 	private static final String _DEFAULT_GENERIC_NAME = "default";
 
 	private static final String _DEFAULT_FILE_EXTENSION = "page";
@@ -285,7 +291,7 @@ public class DLUtil {
 
 	private static DLUtil _instance = new DLUtil();
 
-	private Map<String> _genericNames;
+	private Map<String, String> _genericNames;
 	private Set<String> _fileExtensions;
 
 }
