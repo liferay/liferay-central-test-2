@@ -53,8 +53,10 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 				<input name="<portlet:namespace />structureXSD" type="hidden" value="<%= JS.encodeURIComponent(structureXSD) %>" />
 
 				<liferay-ui:message key="name" />:
+
 				<span id="<portlet:namespace />structureNameLabel" class="structure-name-label">
 					<%= structureName %>
+
 					<c:if test="<%= Validator.isNotNull(structureId) %>">
 						<span class="default-link">(<a href="javascript:;" id="<portlet:namespace />loadDefaultStructure"><liferay-ui:message key="use-default" /></a>)</span>
 					</c:if>
@@ -62,18 +64,20 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			</div>
 
 			<div id="<portlet:namespace />structureMessage" class="portlet-msg-alert structure-message">
-				<liferay-ui:message key="this-structure-has-not-been-saved" />.
-				<a class="journal-save-structure-trigger" href="#"><liferay-ui:message key="click-here" /></a> <liferay-ui:message key="to-save-it-now" />.
+				<liferay-ui:message key="this-structure-has-not-been-saved" />
+
+				<%= LanguageUtil.format(pageContext, "click-here-to-save-it-now", new Object[] {"journal-save-structure-trigger", "#"}) %>
 			</div>
 
 			<div class="structure-controls">
 				<span class="structure-buttons">
-					<input type="button" id="<portlet:namespace />saveStructureBtn" class="save-structure-button" value="<liferay-ui:message key="save" />" />
-					<input type="button" id="<portlet:namespace />editStructureBtn" class="edit-structure-button" value="<liferay-ui:message key="edit" />" />
+					<input class="save-structure-button" id="<portlet:namespace />saveStructureBtn" type="button" value="<liferay-ui:message key="save" />" />
+
+					<input class="edit-structure-button" id="<portlet:namespace />editStructureBtn" type="button" value="<liferay-ui:message key="edit" />" />
 				</span>
 
 				<span class="structure-links">
-					<a href="javascript:;" data-changeStructureUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" id="<portlet:namespace />changeStructureBtn">
+					<a data-changeStructureUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" href="javascript:;" id="<portlet:namespace />changeStructureBtn">
 						<liferay-ui:message key="choose" />
 					</a>
 				</span>
@@ -81,26 +85,69 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 
 			<div id="<portlet:namespace />journalComponentList" class="journal-article-component-list">
 				<div class="component-group form-controls">
-					<div class="component-group-title"><liferay-ui:message key="form-controls" /></div>
-					<div class="journal-component journal-component-text" data-component-type="text"><liferay-ui:message key="text-field" /></div>
-					<div class="journal-component journal-component-textbox" data-component-type="text_box"><liferay-ui:message key="text-box" /></div>
-					<div class="journal-component journal-component-textarea" data-component-type="text_area"><liferay-ui:message key="text-area" /></div>
-					<div class="journal-component journal-component-boolean" data-component-type="boolean"><liferay-ui:message key="checkbox" /></div>
-					<div class="journal-component journal-component-list" data-component-type="list"><liferay-ui:message key="selectbox" /></div>
-					<div class="journal-component journal-component-multilist" data-component-type="multi-list"><liferay-ui:message key="multi-selection-list" /></div>
+					<div class="component-group-title">
+						<liferay-ui:message key="form-controls" />
+					</div>
+
+					<div class="journal-component journal-component-text" data-component-type="text">
+						<liferay-ui:message key="text-field" />
+					</div>
+
+					<div class="journal-component journal-component-textbox" data-component-type="text_box">
+						<liferay-ui:message key="text-box" />
+					</div>
+
+					<div class="journal-component journal-component-textarea" data-component-type="text_area">
+						<liferay-ui:message key="text-area" />
+					</div>
+
+					<div class="journal-component journal-component-boolean" data-component-type="boolean">
+						<liferay-ui:message key="checkbox" />
+					</div>
+
+					<div class="journal-component journal-component-list" data-component-type="list">
+						<liferay-ui:message key="selectbox" />
+					</div>
+
+					<div class="journal-component journal-component-multilist" data-component-type="multi-list">
+						<liferay-ui:message key="multi-selection-list" />
+					</div>
 				</div>
+
 				<br />
+
 				<div class="component-group form-controls">
-					<div class="component-group-title"><liferay-ui:message key="application-fields" /></div>
-					<div class="journal-component journal-component-imagegallery" data-component-type="image_gallery"><liferay-ui:message key="image-gallery" /></div>
-					<div class="journal-component journal-component-image" data-component-type="image"><liferay-ui:message key="image-uploader" /></div>
-					<div class="journal-component journal-component-documentlibrary" data-component-type="document_library"><liferay-ui:message key="document-library" /></div>
+					<div class="component-group-title">
+						<liferay-ui:message key="application-fields" />
+					</div>
+
+					<div class="journal-component journal-component-imagegallery" data-component-type="image_gallery">
+						<liferay-ui:message key="image-gallery" />
+					</div>
+
+					<div class="journal-component journal-component-image" data-component-type="image">
+						<liferay-ui:message key="image-uploader" />
+					</div>
+
+					<div class="journal-component journal-component-documentlibrary" data-component-type="document_library">
+						<liferay-ui:message key="document-library" />
+					</div>
 				</div>
+
 				<br />
+
 				<div class="component-group form-controls">
-					<div class="component-group-title"><liferay-ui:message key="misc" /></div>
-					<div class="journal-component journal-component-linktolayout" data-component-type="link_to_layout"><liferay-ui:message key="link-to-page" /></div>
-					<div class="journal-component journal-component-selectionbreak" data-component-type="selection_break"><liferay-ui:message key="selection-break" /></div>
+					<div class="component-group-title">
+						<liferay-ui:message key="misc" />
+					</div>
+
+					<div class="journal-component journal-component-linktolayout" data-component-type="link_to_layout">
+						<liferay-ui:message key="link-to-page" />
+					</div>
+
+					<div class="journal-component journal-component-selectionbreak" data-component-type="selection_break">
+						<liferay-ui:message key="selection-break" />
+					</div>
 				</div>
 			</div>
 		</liferay-ui:panel>
@@ -109,19 +156,20 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			<div class="journal-form-presentation-label">
 				<c:choose>
 					<c:when test="<%= templates.size() == 0 %>">
-					<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
+						<input name="<portlet:namespace />templateId" type="hidden" value="<%= templateId %>" />
 
-					<div class="journal-article-required-message portlet-msg-info"><liferay-ui:message key="please-select-a-template-first" /></div>
+						<div class="journal-article-required-message portlet-msg-info">
+							<liferay-ui:message key="please-select-a-template-first" />
+						</div>
 
-					<input type="button" value="<liferay-ui:message key="select" />"
-						onClick="
-							if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
-								var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-								void('');
-								templateWindow.focus();
-							}"
-					/>
-
+						<input type="button" value="<liferay-ui:message key="select" />"
+							onClick="
+								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
+									var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
+									void('');
+									templateWindow.focus();
+								}"
+						/>
 					</c:when>
 					<c:otherwise>
 

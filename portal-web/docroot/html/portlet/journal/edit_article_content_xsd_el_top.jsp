@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
-<ul class='folder-droppable'>
+<ul class="folder-droppable">

@@ -25,13 +25,11 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-
-boolean closeContainer = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG));
-
+boolean closeDroppableTag = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG));
 %>
 
 <c:choose>
-	<c:when test="<%= closeContainer %>">
+	<c:when test="<%= closeDroppableTag %>">
 		</ul>
 	</c:when>
 	<c:otherwise>

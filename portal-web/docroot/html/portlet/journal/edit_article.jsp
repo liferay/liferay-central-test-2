@@ -110,25 +110,19 @@ String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 JournalStructure structure = null;
 
-String structureName = LanguageUtil.get(pageContext, "default");
-
-String structureDescription = StringPool.BLANK;
-
-String structureXSD = StringPool.BLANK;
-
 String parentStructureId = StringPool.BLANK;
+String structureName = LanguageUtil.get(pageContext, "default");
+String structureDescription = StringPool.BLANK;
+String structureXSD = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
 		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
-		structureName = structure.getName();
-
-		structureDescription = structure.getDescription();
-
-		structureXSD = structure.getMergedXsd();
-
 		parentStructureId = structure.getParentStructureId();
+		structureName = structure.getName();
+		structureDescription = structure.getDescription();
+		structureXSD = structure.getMergedXsd();
 	}
 	catch (NoSuchStructureException nsse) {
 	}
@@ -229,18 +223,9 @@ if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
-
-String editorImpl = PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY);
-
-String doAsUserId = themeDisplay.getDoAsUserId();
-
-if (Validator.isNull(doAsUserId)) {
-	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
-}
 %>
 
 <script type="text/javascript">
-	var <portlet:namespace />count = 0;
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
 	var <portlet:namespace />contentChangedFlag = false;
@@ -353,13 +338,13 @@ if (Validator.isNull(doAsUserId)) {
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>" />
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
 <input name="<portlet:namespace />content" type="hidden" value="" />
+<input id="<portlet:namespace />defaultLocale" name="<portlet:namespace />defaultLocale" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
+<input id="<portlet:namespace />parentStructureId" name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 <input name="<portlet:namespace />articleURL" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /></portlet:renderURL>" />
 <input name="<portlet:namespace />approve" type="hidden" value="" />
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 <input name="<portlet:namespace />deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 <input name="<portlet:namespace />expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-<input name="<portlet:namespace />defaultLocale" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" id="<portlet:namespace />defaultLocale" />
-<input name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" id="<portlet:namespace />parentStructureId" />
 
 <liferay-ui:tabs
 	names="web-content"
@@ -440,7 +425,7 @@ if (Validator.isNull(doAsUserId)) {
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<select id="<portlet:namespace />languageIdSelect" <%= (article == null) ? "disabled" : "" %> name="<portlet:namespace />languageId">
+						<select <%= (article == null) ? "disabled" : "" %> id="<portlet:namespace />languageIdSelect" name="<portlet:namespace />languageId">
 
 							<%
 							Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -457,7 +442,7 @@ if (Validator.isNull(doAsUserId)) {
 						</select>
 
 						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-							<input type="button" name="<portlet:namespace />removeArticleLocaleButton" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
+							<input name="<portlet:namespace />removeArticleLocaleButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeArticleLocale();" />
 						</c:if>
 					</td>
 					<td>
@@ -532,74 +517,88 @@ if (Validator.isNull(doAsUserId)) {
 
 		<br />
 
-		<div id="<portlet:namespace />journalArticleContainer" class="journal-article-container">
+		<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
 			<c:choose>
 				<c:when test="<%= structure == null %>">
-				<div id="<portlet:namespace />structureTreeWrapper">
+					<div id="<portlet:namespace />structureTreeWrapper">
+						<ul class="structure-tree" id="<portlet:namespace />structureTree">
+							<li class="structure-field" data-component-name="TextField" data-component-type="text">
+								<span class="journal-article-close"></span>
 
-					<ul id="<portlet:namespace />structureTree" class="structure-tree">
-						<li class="structure-field" data-component-type="text" data-component-name="TextField">
-							<span class='journal-article-close'></span>
-							<span class='folder'>
-								<div class="field-container">
-									<div class="journal-article-move-handler"></div>
-									<label for="" class="journal-article-field-label"><span>TextField</span></label>
-									<div class="journal-article-component-container">
-										<input class="principal-field-element" type="text" value="" size="75" />
+								<span class="folder">
+									<div class="field-container">
+										<div class="journal-article-move-handler"></div>
+
+										<label class="journal-article-field-label" for="">
+											<span>TextField</span>
+										</label>
+
+										<div class="journal-article-component-container">
+											<input class="principal-field-element" size="75" type="text" value="" />
+										</div>
+
+										<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
+
+										<div class="journal-article-buttons">
+											<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
+
+											<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+										</div>
 									</div>
 
-									<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
+									<ul class="folder-droppable"></ul>
+								</span>
+							</li>
 
-									<div class="journal-article-buttons">
-										<input type="button" class="edit-button" value="<liferay-ui:message key="edit-options" />" />
-										<input type="button" class="repeatable-button" value="<liferay-ui:message key="repeat" />" />
+							<li class="structure-field" data-component-name="TextAreaField" data-component-type="text_area">
+								<span class="journal-article-close"></span>
+
+								<span class="folder">
+									<div class="field-container">
+										<div class="journal-article-move-handler"></div>
+
+										<label class="journal-article-field-label" for="">
+											<span>TextAreaField</span>
+										</label>
+
+										<div class="journal-article-component-container">
+											<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+										</div>
+
+										<div class="journal-article-required-message portlet-msg-error">
+											<liferay-ui:message key="this-field-is-required" />
+										</div>
+
+										<div class="journal-article-buttons">
+											<input class="edit-button" type="button" value="<liferay-ui:message key="edit-options" />" />
+
+											<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
+										</div>
 									</div>
-								</div>
-								<ul class='folder-droppable'></ul>
-							</span>
-						</li>
-						<li class="structure-field" data-component-type="text_area" data-component-name="TextAreaField">
-							<span class='journal-article-close'></span>
-							<span class='folder'>
-								<div class="field-container">
-									<div class="journal-article-move-handler"></div>
-									<label for="" class="journal-article-field-label"><span>TextAreaField</span></label>
-									<div class="journal-article-component-container">
-										<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
-									</div>
 
-									<div class="journal-article-required-message portlet-msg-error"><liferay-ui:message key="this-field-is-required" /></div>
-
-									<div class="journal-article-buttons">
-										<input type="button" class="edit-button" value="<liferay-ui:message key="edit-options" />" />
-										<input type="button" class="repeatable-button" value="<liferay-ui:message key="repeat" />" />
-									</div>
-								</div>
-								<ul class='folder-droppable'></ul>
-							</span>
-						</li>
-					</ul>
-
-				</div>
+									<ul class="folder-droppable"></ul>
+								</span>
+							</li>
+						</ul>
+					</div>
 				</c:when>
 				<c:otherwise>
 
-				<%
-				Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
-
+					<%
+					Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
 
 					if (contentDoc != null) {
 					%>
 
 						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
-					<%
+						<%
 						boolean languageFound = false;
 
 						if ((availableLocales != null) && (availableLocales.length > 0)) {
 							for (int i = 0; i < availableLocales.length ; i++) {
 								if (!availableLocales[i].equals(defaultLanguageId)) {
-					%>
+						%>
 
 									<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
 
@@ -607,7 +606,7 @@ if (Validator.isNull(doAsUserId)) {
 										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 									</script>
 
-					<%
+								<%
 								}
 								else{
 								%>
@@ -616,7 +615,7 @@ if (Validator.isNull(doAsUserId)) {
 										document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
 									</script>
 
-					<%
+						<%
 								}
 
 								if (availableLocales[i].equals(languageId)) {
@@ -626,7 +625,7 @@ if (Validator.isNull(doAsUserId)) {
 						}
 
 						if (!languageFound && !languageId.equals(defaultLanguageId)) {
-					%>
+						%>
 
 							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
 
@@ -637,18 +636,18 @@ if (Validator.isNull(doAsUserId)) {
 					<%
 						}
 					}
-
-				else {
-					contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
-				%>
+					else {
+						contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
+					%>
 
 						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
 
-				<%
-				}
-				%>
-					<div id="<portlet:namespace />structureTreeWrapper" class="structure-tree-wrapper">
-						<ul id="<portlet:namespace />structureTree" class="structure-tree">
+					<%
+					}
+					%>
+
+					<div class="structure-tree-wrapper" id="<portlet:namespace />structureTreeWrapper">
+						<ul class="structure-tree" id="<portlet:namespace />structureTree">
 							<% _format(groupId, contentDoc.getRootElement(), xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request); %>
 						</ul>
 					</div>
@@ -801,8 +800,29 @@ if (Validator.isNull(doAsUserId)) {
 
 <%@ include file="edit_article_structure_extra.jspf" %>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+
+	<%
+	String doAsUserId = themeDisplay.getDoAsUserId();
+
+	if (Validator.isNull(doAsUserId)) {
+		doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+	}
+	%>
+
+	jQuery(
+		function() {
+			Liferay.Portlet.Journal.PROXY = {};
+			Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
+			Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
+			Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
+			Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
+
+			new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
+		}
+	);
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		<c:choose>
 			<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />title);
@@ -811,21 +831,7 @@ if (Validator.isNull(doAsUserId)) {
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace /><%= (article == null) ? "newArticleId" : "title" %>);
 			</c:otherwise>
 		</c:choose>
-	</script>
-</c:if>
-
-<script>
-	jQuery(
-		function() {
-			Liferay.Portlet.Journal.PROXY = {};
-			Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
-			Liferay.Portlet.Journal.PROXY.editorImpl = '<%= editorImpl %>';
-			Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
-			Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
-
-			new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= articleId %>', '<%= instanceIdKey %>');
-		}
-	);
+	</c:if>
 </script>
 
 <%!
@@ -839,24 +845,19 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 	List<Element> xsdElements = xsdParentElement.elements();
 
 	for (Element xsdElement : xsdElements) {
-
 		String nodeName = xsdElement.getName();
-
-		String elName = xsdElement.attributeValue("name", StringPool.BLANK);
-
-		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
-
-		String repeatable = xsdElement.attributeValue("repeatable");
-
-		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
-
-		String elParentStructureId = xsdElement.attributeValue("parent-structure-id");
 
 		if (nodeName.equals("meta-data") || nodeName.equals("entry")) {
 			continue;
 		}
 
-		HashMap<String, String> metaDataEl = _getMetaData(xsdElement, elName);
+		String elName = xsdElement.attributeValue("name", StringPool.BLANK);
+		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
+		String repeatable = xsdElement.attributeValue("repeatable");
+		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
+		String elParentStructureId = xsdElement.attributeValue("parent-structure-id");
+
+		Map<String, String> elMetaData = _getMetaData(xsdElement, elName);
 
 		List<Element> elSiblings = null;
 
@@ -915,7 +916,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID, elInstanceId);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA, metaDataEl);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA, elMetaData);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_PARENT_ID, elParentStructureId);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
@@ -926,22 +927,43 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 
 			count.increment();
 
-			if (!elType.equals("list") && !elType.equals("multi-list") && (contentElement.elements().size() > 0)) {
-
+			if (!elType.equals("list") && !elType.equals("multi-list") && !contentElement.elements().isEmpty()) {
 				pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_top.jsp");
 
 				_format(groupId, contentElement, xsdElement, count, depth, pageContext, request);
 
-				request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, "true");
+				request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, Boolean.TRUE.toString());
 
 				pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 			}
 
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, "false");
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_CLOSE_DROPPABLE_TAG, Boolean.FALSE.toString());
 
 			pageContext.include("/html/portlet/journal/edit_article_content_xsd_el_bottom.jsp");
 		}
 	}
+}
+
+private Map<String, String> _getMetaData(Element xsdElement, String elName) {
+	Map<String, String> elMetaData = new HashMap<String, String>();
+
+	Element metaData = xsdElement.element("meta-data");
+
+	if (Validator.isNotNull(metaData)) {
+		List<Element> elMetaDataements = metaData.elements();
+
+		for (Element elMetaDataement : elMetaDataements) {
+			String name = elMetaDataement.attributeValue("name");
+			String content = elMetaDataement.getText().trim();
+
+			elMetaData.put(name, content);
+		}
+	}
+	else {
+		elMetaData.put("label", elName);
+	}
+
+	return elMetaData;
 }
 
 private List<Element> _getSiblings(Element element, String name) {
@@ -958,27 +980,5 @@ private List<Element> _getSiblings(Element element, String name) {
 	}
 
 	return elements;
-}
-
-private HashMap<String, String> _getMetaData(Element xsdElement, String elName) {
-	HashMap<String, String> metaDataEl = new HashMap<String, String>();
-
-	Element metaData = xsdElement.element("meta-data");
-
-	if (Validator.isNotNull(metaData)) {
-		List<Element> metaDataElements = metaData.elements();
-
-		for (Element metaDataElement : metaDataElements) {
-			String name = metaDataElement.attributeValue("name");
-			String content = metaDataElement.getText().trim();
-
-			metaDataEl.put(name, content);
-		}
-	}
-	else {
-		metaDataEl.put("label", elName);
-	}
-
-	return metaDataEl;
 }
 %>

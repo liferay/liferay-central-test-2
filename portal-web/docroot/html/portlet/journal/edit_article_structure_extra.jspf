@@ -22,140 +22,182 @@
  */
 %>
 
-<div id="<portlet:namespace />saveStructureTemplateDialogWrapper" style="display:none;">
+<div id="<portlet:namespace />saveStructureTemplateDialogWrapper" style="display: none;">
 	<div id="<portlet:namespace />saveStructureTemplateDialog" class="save-structure-template-dialog">
-		<div id="<portlet:namespace />saveStructureMessage" class="portlet-msg-success save-structure-message"><liferay-ui:message key="your-request-processed-successfully" /></div>
-		<div><liferay-ui:message key="structure-name" />:</div>
-		<input class="save-structure-name lfr-input-text" type="text" value="" id="<portlet:namespace />saveStructureStructureName" />
-		<div><liferay-ui:message key="description" />:</div>
-		<textarea class="save-structure-description" id="<portlet:namespace />saveStructureStructureDescription"></textarea>
-		<br />
-		<a id="<portlet:namespace />showStructureIdContainer" href="#"><liferay-ui:message key="change-structure-id" /> &raquo;</a>
-		<div id="<portlet:namespace />structureIdContainer" class="journal-structureid-field">
-			<div><liferay-ui:message key="structure-id" />:</div>
-			<input class="input-text" type="text" value="" id="<portlet:namespace />saveStructureStructureId" />
-			<input type="checkbox" checked="checked" value="" id="<portlet:namespace />saveStructureAutogenerateId" title="<liferay-ui:message key="autogenerate-id" />" />
+		<div class="portlet-msg-success save-structure-message" id="<portlet:namespace />saveStructureMessage">
+			<liferay-ui:message key="your-request-processed-successfully" />
 		</div>
-		<br /><br />
+
 		<div>
-			<input class="save-structure-btn" type="button" name="saveStructureBtn" value="<liferay-ui:message key="save" />" />
-			<input class="cancel-structure-btn" type="button" name="cancelStructureBtn" value="<liferay-ui:message key="cancel" />" />
+			<liferay-ui:message key="structure-name" />:
+		</div>
+
+		<input class="save-structure-name lfr-input-text" id="<portlet:namespace />saveStructureStructureName" type="text" value="" />
+
+		<div>
+			<liferay-ui:message key="description" />:
+		</div>
+
+		<textarea class="save-structure-description" id="<portlet:namespace />saveStructureStructureDescription"></textarea>
+
+		<br />
+
+		<a href="#" id="<portlet:namespace />showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</a>
+
+		<div class="journal-structureid-field" id="<portlet:namespace />structureIdContainer">
+			<div>
+				<liferay-ui:message key="structure-id" />:
+			</div>
+
+			<input class="input-text" id="<portlet:namespace />saveStructureStructureId" type="text" value="" />
+
+			<input checked="checked" id="<portlet:namespace />saveStructureAutogenerateId" title="<liferay-ui:message key="autogenerate-id" />" type="checkbox" value="" />
+		</div>
+
+		<br /><br />
+
+		<div>
+			<input class="save-structure-btn" name="saveStructureBtn" type="button" value="<liferay-ui:message key="save" />" />
+
+			<input class="cancel-structure-btn" name="cancelStructureBtn" type="button" value="<liferay-ui:message key="cancel" />" />
 		</div>
 	</div>
 </div>
 
-<div id="<portlet:namespace />journalArticleEditFieldWrapper" class="journal-article-edit-field-wrapper">
-	<form action="" method="post" class="aui-form">
-		<div id="<portlet:namespace />journalArticleEditField" class="journal-article-edit-field aui-block-labels">
-			<div id="<portlet:namespace />journalMessage" class="portlet-msg-success journal-message"><liferay-ui:message key="your-request-processed-successfully" /></div>
-		 	<strong>Options</strong>
+<div class="journal-article-edit-field-wrapper" id="<portlet:namespace />journalArticleEditFieldWrapper">
+	<form action="" class="aui-form" method="post">
+		<div class="journal-article-edit-field aui-block-labels" id="<portlet:namespace />journalArticleEditField">
+			<div class="portlet-msg-success journal-message" id="<portlet:namespace />journalMessage">
+				<liferay-ui:message key="your-request-processed-successfully" />
+			</div>
+
+			<strong>Options</strong>
 
 		 	<div class="aui-ctrl-holder">
 			 	<label class="journal-edit-label" for="<portlet:namespace />fieldType">Field type</label>
-			 	<select disabled='disabled' id="<portlet:namespace />fieldType" class="aui-select-input">
-				    <option value="text"><liferay-ui:message key="text-field" /></option>
-				    <option value="text_box"><liferay-ui:message key="text-box" /></option>
-				    <option value="text_area"><liferay-ui:message key="text-area" /></option>
+
+				<select class="aui-select-input" disabled="disabled" id="<portlet:namespace />fieldType">
+					<option value="text"><liferay-ui:message key="text-field" /></option>
+					<option value="text_box"><liferay-ui:message key="text-box" /></option>
+					<option value="text_area"><liferay-ui:message key="text-area" /></option>
 					<option value="boolean"><liferay-ui:message key="checkbox" /></option>
 					<option value="options"><liferay-ui:message key="options" /></option>
-					<option value="list"><liferay-ui:message key="selectbox" /></option>
-				    <option value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
-				    <option value="image"><liferay-ui:message key="image-uploader" /></option>
-				    <option value="image_gallery"><liferay-ui:message key="image-gallery" /></option>
-				    <option value="document_library"><liferay-ui:message key="document-library" /></option>
-				    <option value="link_to_layout"><liferay-ui:message key="link-to-page" /></option>
+					<option value="list"><liferay-ui:message key="select-box" /></option>
+					<option value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
+					<option value="image"><liferay-ui:message key="image-uploader" /></option>
+					<option value="image_gallery"><liferay-ui:message key="image-gallery" /></option>
+					<option value="document_library"><liferay-ui:message key="document-library" /></option>
+					<option value="link_to_layout"><liferay-ui:message key="link-to-page" /></option>
 					<option value="selection_break"><liferay-ui:message key="selection-break" /></option>
 				</select>
 			</div>
 
 			<div class="aui-ctrl-holder">
 		 		<label class="journal-edit-label" for="<portlet:namespace />fieldLabel"><liferay-ui:message key="field-label" /></label>
-		 		<input type="text" name="fieldLabel" id="<portlet:namespace />fieldLabel" value="" />
+
+				<input id="<portlet:namespace />fieldLabel" name="fieldLabel" type="text" value="" />
 		 	</div>
 
 		 	<div class="aui-ctrl-holder">
 		 		<label class="journal-edit-label" for="<portlet:namespace />predefinedValue"><liferay-ui:message key="predefined-value" /></label>
-		 		<input class="text-input" type="text" name="predefinedValue" id="<portlet:namespace />predefinedValue" value="" />
+
+				<input class="text-input" id="<portlet:namespace />predefinedValue" name="predefinedValue" type="text" value="" />
 		 	</div>
 
 			<fieldset class="user-instructions">
 			 	<div class="aui-ctrl-holder">
 			 		<label class="journal-edit-label" for="<portlet:namespace />instructions"><liferay-ui:message key="instructions-for-the-user" /></label>
-			 		<textarea class="textarea" name="instructions" id="<portlet:namespace />instructions"></textarea>
+
+					<textarea class="textarea" id="<portlet:namespace />instructions" name="instructions"></textarea>
 			 	</div>
 
 				<div class="aui-ctrl-holder">
 			 		<label for="<portlet:namespace />displayAsTooltip">
-			 			<input type="checkbox" name="displayAsTooltip" value="true" id="<portlet:namespace />displayAsTooltip"> <liferay-ui:message key="display-as-tooltip" />
+			 			<input id="<portlet:namespace />displayAsTooltip" name="displayAsTooltip" type="checkbox" value="true" /> <liferay-ui:message key="display-as-tooltip" />
 			 		</label>
 		 		</div>
 			</fieldset>
 
 	 		<div class="aui-ctrl-holder">
 		 		<label class="journal-edit-label" for="<portlet:namespace />variableName"><liferay-ui:message key="variable-name" /></label>
-		 		<input type="text" name="variableName" id="<portlet:namespace />variableName" value="" />
+
+				<input id="<portlet:namespace />variableName" name="variableName" type="text" value="" />
 		 	</div>
 
 			<br />
 
 		 	<div class="aui-ctrl-holder">
 		 		<label for="<portlet:namespace />repeatable">
-		 			<input type="checkbox" name="repeatable" value="true" id="<portlet:namespace />repeatable"> <liferay-ui:message key="repeatable" />
+		 			<input id="<portlet:namespace />repeatable" name="repeatable" type="checkbox" value="true" /> <liferay-ui:message key="repeatable" />
 		 		</label>
 	 		</div>
 
 	 		<div class="aui-ctrl-holder">
 		 		<label for="<portlet:namespace />required">
-		 			<input type="checkbox" name="required" value="true" id="<portlet:namespace />required"> <liferay-ui:message key="required" />
+		 			<input id="<portlet:namespace />required" name="required" type="checkbox" value="true" /> <liferay-ui:message key="required" />
 		 		</label>
 	 		</div>
 
 			<div class="aui-ctrl-holder">
 		 		<label for="<portlet:namespace />localized">
-		 			<input type="checkbox" name="localized" value="true" id="<portlet:namespace />localized"> <liferay-ui:message key="localized" />
+		 			<input id="<portlet:namespace />localized" name="localized" type="checkbox" value="true" /> <liferay-ui:message key="localized" />
 		 		</label>
 	 		</div>
 
 	 		<div class="aui-button-holder">
-	 			<input class="save-button" type="button" name="save" value="<liferay-ui:message key="save" />" />
-	 			<input class="cancel-button" type="button" name="cancel" value="<liferay-ui:message key="cancel" />" />
-	 			<input class="close-button" type="button" name="close" value="<liferay-ui:message key="close" />" />
+	 			<input class="save-button" name="save" type="button" value="<liferay-ui:message key="save" />" />
+
+				<input class="cancel-button" name="cancel" type="button" value="<liferay-ui:message key="cancel" />" />
+
+				<input class="close-button" name="close" type="button" value="<liferay-ui:message key="close" />" />
 	 		</div>
  		</div>
- 		<div id="<portlet:namespace />journalArticleEditFieldArrow" class="journal-article-edit-field-arrow"></div>
+
+		<div class="journal-article-edit-field-arrow" id="<portlet:namespace />journalArticleEditFieldArrow"></div>
 	</form>
 </div>
 
-<div id="journalFieldModelContainer" class="journal-fieldmodel-container">
+<div class="journal-fieldmodel-container" id="journalFieldModelContainer">
 	<div data-component-type="text">
-		<input class="principal-field-element lfr-input-text" type="text" value="" size="75" />
+		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
 	</div>
+
 	<div data-component-type="text_area">
-		<input class="principal-field-element lfr-input-text" type="text" value="" size="75" />
+		<input class="principal-field-element lfr-input-text" size="75" type="text" value="" />
 	</div>
+
 	<div data-component-type="text_box">
-		<textarea class="principal-field-element lfr-textarea" rows="10" cols="80"></textarea>
+		<textarea class="principal-field-element lfr-textarea" cols="80" rows="10"></textarea>
 	</div>
+
 	<div data-component-type="image">
-		<input class="principal-field-element lfr-input-text flexible" type="file" value="" size="75" />
+		<input class="principal-field-element lfr-input-text flexible" size="75"  type="file" value="" />
 	</div>
+
 	<div data-component-type="image_gallery">
-		<input class="principal-field-element lfr-input-text journal-imagegallery-text" type="text" value="" size="75" />
-		<input class="journal-imagegallery-button" type="button" value="<liferay-ui:message key="select" />" data-imagegallery-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" />
+		<input class="principal-field-element lfr-input-text journal-imagegallery-text" size="75" type="text" value="" />
+
+		<input class="journal-imagegallery-button" data-imagegallery-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
+
 	<div data-component-type="document_library">
-		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" type="text" value="" size="75" />
-		<input class="journal-documentlibrary-button" type="button" value="<liferay-ui:message key="select" />" data-documentlibrary-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" />
+		<input class="principal-field-element lfr-input-text journal-documentlibrary-text" size="75" type="text" value="" />
+
+		<input class="journal-documentlibrary-button" data-documentlibrary-url="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>" type="button" value="<liferay-ui:message key="select" />" />
 	</div>
+
 	<div data-component-type="boolean">
 		<div class="journal-subfield">
-			<input class="principal-field-element" type="checkbox" id="<portlet:namespace />BooleanField" />
+			<input class="principal-field-element" id="<portlet:namespace />BooleanField" type="checkbox" />
+
 			<label class="journal-article-field-label" for="<portlet:namespace />BooleanField"><span>BooleanField</span></label>
 		</div>
 	</div>
+
 	<div data-component-type="selection_break">
 		<div class="principal-field-element separator"></div>
 	</div>
+
 	<div data-component-type="list">
 		<div class="journal-list-subfield">
 			<select class="principal-field-element"></select>
@@ -166,12 +208,18 @@
 
 			<div class="journal-edit-field-control">
 				<br /><br />
-				<input class="journal-list-key" type="text" value="<liferay-ui:message key="new-item" />" title="<liferay-ui:message key="new-item" />" size="15" />
-				<input class="journal-list-value" type="text" value="value" title="<liferay-ui:message key="item-value" />" size="15" />
-				<span class="journal-icon-button journal-add-field"><liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" /></span>
+
+				<input class="journal-list-key" title="<liferay-ui:message key="new-item" />" size="15" type="text" value="<liferay-ui:message key="new-item" />" />
+
+				<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
+
+				<span class="journal-icon-button journal-add-field">
+					<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+				</span>
 			</div>
 		</div>
 	</div>
+
 	<div data-component-type="multi-list">
 		<div class="journal-list-subfield">
 			<select class="principal-field-element" multiple="true"></select>
@@ -182,12 +230,18 @@
 
 			<div class="journal-edit-field-control">
 				<br /><br />
-				<input class="journal-list-key" type="text" value="<liferay-ui:message key="new-item" />" title="<liferay-ui:message key="new-item" />" size="15" />
-				<input class="journal-list-value" type="text" value="value" title="<liferay-ui:message key="item-value" />" size="15" />
-				<span class="journal-icon-button journal-add-field"><liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" /></span>
+
+				<input class="journal-list-key" size="15" title="<liferay-ui:message key="new-item" />" type="text" value="<liferay-ui:message key="new-item" />" />
+
+				<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
+
+				<span class="journal-icon-button journal-add-field">
+					<liferay-ui:icon image="add" /> <liferay-ui:message key="add-to-list" />
+				</span>
 			</div>
 		</div>
 	</div>
+
 	<div data-component-type="link_to_layout">
 		<select class="principal-field-element">
 			<option value=""></option>
@@ -237,13 +291,17 @@
 			}
 				}
 			%>
+
 		</select>
 	</div>
+
 	<div id="repeatable-field-image-model">
-		<span class="repeatable-field-image"><liferay-ui:icon image="add" /></span>
+		<span class="repeatable-field-image">
+			<liferay-ui:icon image="add" />
+		</span>
 	</div>
 </div>
 
 <div id="<portlet:namespace />repeatableBtnTemplate">
-	<input type="button" class="repeatable-button" value="<liferay-ui:message key="repeat" />" />
+	<input class="repeatable-button" type="button" value="<liferay-ui:message key="repeat" />" />
 </div>
