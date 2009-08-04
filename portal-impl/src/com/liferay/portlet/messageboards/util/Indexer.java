@@ -59,7 +59,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
- * @author Raymond Aug�
+ * @author Raymond Augé
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 

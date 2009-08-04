@@ -40,7 +40,7 @@ import java.sql.ResultSet;
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class UpgradeGroup extends UpgradeProcess {
 

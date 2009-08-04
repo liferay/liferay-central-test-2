@@ -44,7 +44,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -134,7 +134,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, portletId);
 
 			if (groupId > 0) {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
+				Group group = groupLocalService.getGroup(groupId);
 
 				if (group.isLayout()) {
 					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);
@@ -328,8 +328,14 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
+	@BeanReference(name = _GROUP_LOCAL_SERVICE)
+	protected GroupLocalService groupLocalService;
+
 	@BeanReference(name = _DL_FOLDER_SERVICE)
 	protected DLFolderService dlFolderService;
+
+	private static final String _GROUP_LOCAL_SERVICE =
+		"com.liferay.portal.service.GroupLocalService.impl";
 
 	private static final String _DL_FOLDER_SERVICE =
 		"com.liferay.portlet.documentlibrary.service.DLFolderService.impl";

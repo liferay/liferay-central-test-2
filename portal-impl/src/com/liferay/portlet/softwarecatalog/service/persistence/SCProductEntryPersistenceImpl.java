@@ -2182,6 +2182,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence;
 	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
 	protected com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected com.liferay.portal.service.persistence.ImagePersistence imagePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")

@@ -29,11 +29,15 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
@@ -210,6 +214,38 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -324,6 +360,14 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	protected GroupLocalService groupLocalService;
+	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	protected GroupService groupService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	protected GroupFinder groupFinder;
 	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")

@@ -2165,6 +2165,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
 	protected com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")

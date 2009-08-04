@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -297,7 +296,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
+				Group group = groupLocalService.getGroup(groupId);
 
 				if (group.isLayout()) {
 					contextQuery.addRequiredTerm(Field.SCOPE_GROUP_ID, groupId);

@@ -31,6 +31,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -39,6 +41,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
@@ -152,6 +156,38 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -404,6 +440,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected CompanyService companyService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	protected GroupLocalService groupLocalService;
+	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	protected GroupService groupService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	protected GroupFinder groupFinder;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	@BeanReference(name = "com.liferay.portal.service.PortletPreferencesService.impl")

@@ -64,7 +64,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
@@ -147,7 +146,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 
 		if (className.equals(Layout.class.getName())) {
-			Layout layout = LayoutLocalServiceUtil.getLayout(classPK);
+			Layout layout = layoutLocalService.getLayout(classPK);
 
 			parentGroupId = layout.getGroupId();
 		}

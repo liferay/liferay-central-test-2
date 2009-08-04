@@ -1979,6 +1979,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence;
 	@BeanReference(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
 	protected com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected com.liferay.portal.service.persistence.GroupPersistence groupPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
