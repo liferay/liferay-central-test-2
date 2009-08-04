@@ -54,8 +54,8 @@ public class ColumnTag extends IncludeTag implements DynamicAttributes {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
-				_cssClass = null;
 				_columnWidth = 0;
+				_cssClass = null;
 				_dynamicAttributes.clear();
 				_endPage = null;
 				_first = false;
