@@ -22,8 +22,6 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
-
 <%
 if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax())) {
 	String velocityTemplateId = null;

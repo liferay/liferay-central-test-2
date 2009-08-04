@@ -73,6 +73,7 @@ if (Validator.isNotNull(ppid)) {
 
 <c:choose>
 	<c:when test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
+
 		<%
 		String panelBodyCssClass = "panel-page-body";
 		String panelCategory = "lfr-ctrl-panel";
@@ -123,7 +124,7 @@ if (Validator.isNotNull(ppid)) {
 					<liferay-portlet:runtime portletName="87" />
 				</aui:column>
 
-				<aui:column columnWidth="75" cssClass="<%= panelBodyCssClass %>" last="true">
+				<aui:column columnWidth="75" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">
 					<aui:layout cssClass="panel-page-body-menu">
 						<aui:column columnWidth="75" first="true">
 							<c:choose>
@@ -300,7 +301,8 @@ if (Validator.isNotNull(ppid)) {
 							</c:choose>
 						</aui:column>
 
-						<aui:column columnWidth="25" last="true">
+						<aui:column columnWidth="25" last="<%= true %>">
+
 							<%
 							String refererGroupDescriptiveName = null;
 							String backURL = null;
