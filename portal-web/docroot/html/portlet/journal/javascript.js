@@ -1876,6 +1876,7 @@
 				}
 
 				instance._editContainerNormalMode();
+
 				var row = jQuery(source);
 				var offset = row.offset();
 
