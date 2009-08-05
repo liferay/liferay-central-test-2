@@ -456,30 +456,38 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<br />
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.MY_PAGES) %>">
-		<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
-			<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
-		</liferay-util:include>
-	</c:if>
+	<c:choose>
+		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
+			<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
+				<liferay-util:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
+			</liferay-util:include>
+		</c:when>
+		<c:when test="<%= portletName.equals(PortletKeys.MY_PAGES) %>">
+			<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
+				<liferay-util:param name="userId" value="<%= String.valueOf(user.getUserId()) %>" />
+			</liferay-util:include>
+		</c:when>
+		<c:otherwise>
+			<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() || liveGroup.isUserGroup() %>">
 
-	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() || liveGroup.isUserGroup() %>">
+				<%
+				String tabs1Names = "public-pages,private-pages";
 
-		<%
-		String tabs1Names = "public-pages,private-pages";
+				if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
+					tabs1Names += ",settings";
+				}
+				%>
 
-		if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
-			tabs1Names += ",settings";
-		}
-		%>
-
-		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
-			param="tabs1"
-			value="<%= tabs1 %>"
-			url="<%= portletURL.toString() %>"
-			backURL="<%= redirect %>"
-		/>
-	</c:if>
+				<liferay-ui:tabs
+					names="<%= tabs1Names %>"
+					param="tabs1"
+					value="<%= tabs1 %>"
+					url="<%= portletURL.toString() %>"
+					backURL="<%= redirect %>"
+				/>
+			</c:if>
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <c:if test="<%= liveGroup.isUserGroup() %>">

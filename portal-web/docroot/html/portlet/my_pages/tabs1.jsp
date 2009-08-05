@@ -25,7 +25,11 @@
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
 <%
-boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
+long userId = ParamUtil.getLong(request, "userId");
+
+User user2 = UserLocalServiceUtil.getUserById(userId);
+
+boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(userId, company.getCompanyId(), RoleConstants.POWER_USER, true);
 
 boolean privateLayoutsModifiable = PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
 boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
@@ -42,7 +46,7 @@ boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIA
 		<portlet:param name="tabs1" value="public-pages" />
 		<portlet:param name="privateLayout" value="<%= String.valueOf(false) %>" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
-		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="privatePagesURL">
@@ -50,7 +54,7 @@ boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIA
 		<portlet:param name="tabs1" value="private-pages" />
 		<portlet:param name="privateLayout" value="<%= String.valueOf(true) %>" />
 		<portlet:param name="backURL" value="<%= backURL %>" />
-		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<c:choose>
