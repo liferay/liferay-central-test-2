@@ -213,7 +213,19 @@
 
 				var editContainerWrapper = instance._getById(instance._editFieldWrapperClass);
 
-				editContainerWrapper.appendTo('body');
+				instance.editContainerContextPanel = new Alloy.ContextPanel(
+					{
+						el: editContainerWrapper.get(0),
+						arrowPosition: 'rt',
+						context: [ null, 'tr', 'tl', [ 'render', 'beforeShow', 'windowResize' ]],
+						draggable: false,
+						visible: false,
+						width: 'auto',
+						zIndex: 10000
+					}
+				);
+
+				instance.editContainerContextPanel.render(document.body);
 
 				instance._initializePageLoadFieldInstances();
 				instance._attachEvents();
@@ -1079,11 +1091,9 @@
 					structureTree.data('revertHeight', false);
 				}
 
-				editButton.show();
+				instance.editContainerContextPanel.hide();
 
-				editContainerWrapper.hide();
 				instance._unselectFields();
-				fieldsContainer.css('paddingRight', 0);
 			},
 
 			_closeField: function(source) {
@@ -1866,10 +1876,6 @@
 				}
 
 				instance._editContainerNormalMode();
-
-				editButtons.show();
-				editButton.hide();
-
 				var row = jQuery(source);
 				var offset = row.offset();
 
@@ -1877,9 +1883,7 @@
 				var editContainerWrapper = instance._getById(instance._editFieldWrapperClass);
 				var fieldsContainer = instance._getById(instance._fieldsContainerClass);
 				var structureTree = instance._getById(instance._structureTreeClass)
-				var journalArticleEditFieldArrow = instance._getById('journalArticleEditFieldArrow');
 
-				var editContainerWidth = editContainerWrapper.width();
 				var editContainerHeight = editContainerWrapper.height();
 				var fieldsContainerWidth = fieldsContainer.width();
 				var fieldsContainerHeight = fieldsContainer.height();
@@ -1888,40 +1892,14 @@
 
 				fields.removeClass('selected');
 				row.addClass('selected');
-				fieldsContainer.css('paddingRight', editContainerWidth);
 
-				if (offset) {
-					var editContainerTop = offset.top - 10;
-					var fieldContainerTop = fieldsContainerOffset.top;
-					var isAfterFieldContainerBottom = (editContainerHeight + editContainerTop > fieldsContainerHeight + fieldContainerTop);
+				instance.editContainerContextPanel.show();
+				var context = instance.editContainerContextPanel.cfg.getProperty('context');
 
-					if (isAfterFieldContainerBottom) {
-						var afterFieldContainerBottomOffset = Math.abs((fieldContainerTop + fieldsContainerHeight) - (editContainerTop + editContainerHeight));
+				context[0] = editButton[0];
 
-						editContainerTop = (fieldsContainerHeight + fieldContainerTop) - editContainerHeight;
-
-						var arrowPosition = {
-							top: afterFieldContainerBottomOffset + 50
-						};
-
-						journalArticleEditFieldArrow.animate(arrowPosition, 'fast', 'swing');
-					}
-					else {
-						journalArticleEditFieldArrow.css('top', 30);
-					}
-
-					var position = {
-						top: editContainerTop,
-						left: structureTree.offset().left + structureTree.width() - 5
-					};
-
-					if (isVisible) {
-						editContainerWrapper.animate(position, 'fast', 'swing');
-					}
-					else {
-						editContainerWrapper.show().css(position);
-					}
-				}
+				instance.editContainerContextPanel.cfg.setProperty('context', context);
+				instance.editContainerContextPanel.align();
 
 				instance._hideEditContainerMessage();
 				instance._loadEditFieldOptions(source);

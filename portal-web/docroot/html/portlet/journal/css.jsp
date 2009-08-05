@@ -385,7 +385,6 @@
 	position: absolute;
 	visibility: hidden;
 	width: 100px;
-	z-index: 999;
 }
 
 .ie .journal-article-helper {
@@ -448,7 +447,6 @@
 }
 
 .journal-article-edit-field-wrapper {
-	display: none;
 	position: absolute;
 }
 
@@ -456,11 +454,28 @@
 	width: auto;
 }
 
+.journal-article-edit-field-wrapper.aui-context-panel-container,
+.journal-article-edit-field-wrapper .aui-context-panel-container {
+
+	background-color: #EBFFEE;
+	border-color: #C3E7CC;
+}
+
+.journal-article-edit-field-wrapper.aui-context-panel {
+	margin: 0 13px 0 0;
+	padding: 0;
+	position: relative;
+}
+
+.journal-article-edit-field-wrapper.aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+	border-bottom: 10px solid #EBFFEE;
+}
+
+.journal-article-edit-field-wrapper .container-close {
+	display: none;
+}
+
 .journal-article-edit-field {
-	background: #EBFFEE;
-	border: 1px #C3E7CC solid;
-	margin-left: 26px;
-	margin-top: 10px;
 	padding: 10px 15px 10px 20px;
 	position: relative;
 	width: 180px;
@@ -496,13 +511,8 @@
 	width: 98%;
 }
 
-.journal-article-edit-field-arrow {
-	background: url(<%= themeImagesPath %>/journal/form_builder_arrow.png);
-	height: 38px;
-	position: absolute;
-	top: 30px;
-	width: 33px;
-	z-index: 420;
+.journal-article-edit-field .aui-ctrl-holder .textarea {
+	height: 6em;
 }
 
 .portlet-journal .journal-message, div.save-structure-message, .portlet-journal .structure-message {

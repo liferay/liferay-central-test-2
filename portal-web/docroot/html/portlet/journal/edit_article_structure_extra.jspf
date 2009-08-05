@@ -152,8 +152,6 @@
 				<input class="close-button" name="close" type="button" value="<liferay-ui:message key="close" />" />
 	 		</div>
  		</div>
-
-		<div class="journal-article-edit-field-arrow" id="<portlet:namespace />journalArticleEditFieldArrow"></div>
 	</form>
 </div>
 

@@ -690,7 +690,7 @@
 
 .aui-context-panel {
 	border-width: 2px;
-	margin-top: 12px;
+	margin-top: 18px;
 	overflow: visible;
 	padding: 8px 20px 8px 8px;
 	position: absolute;
@@ -732,6 +732,29 @@
 	border-left-width: 0;
 	border-right: 12px dotted transparent;
 	left: 2px;
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer {
+	right: -14px;
+	border-right: 0;
+	border-left-width: 14px;
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer {
+	border-bottom: 18px dotted transparent;
+	border-top: 0;
+	top: 10px;
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
+	border-left: 10px solid #fff;
+	left: -14px;
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
+	border-bottom: 12px dotted transparent;
+	border-top: 0;
+	top: 2px;
 }
 
 /* ---------- Portal tool tips ---------- */

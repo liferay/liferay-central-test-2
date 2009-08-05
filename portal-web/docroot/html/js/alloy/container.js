@@ -470,11 +470,21 @@
 	Alloy.ContextPanel = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
+
+				var arrowPosition = 'tl';
+
+				if (options && options.arrowPosition) {
+					arrowPosition = options.arrowPosition;
+					delete options.arrowPosition;
+				}
+
 				var arrowEl = jQuery('<div class="aui-context-panel-pointer aui-context-panel-container"><div class="aui-context-panel-pointer-inner"></div></div>');
 
 				this._super.apply(this, arguments);
 
-				Dom.addClass(this.innerElement, 'aui-context-panel aui-context-panel-arrow-tl aui-context-panel-container');
+				var innerClass = 'aui-context-panel aui-context-panel-arrow-' + arrowPosition + ' aui-context-panel-container';
+
+				Dom.addClass(this.innerElement, innerClass);
 
 				jQuery(this.innerElement).append(arrowEl);
 			}
