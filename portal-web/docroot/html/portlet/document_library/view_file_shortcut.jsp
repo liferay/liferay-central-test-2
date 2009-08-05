@@ -109,7 +109,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 
 <div class="aui-column aui-w75 aui-column-first file-entry-column file-entry-column-first">
 	<div class="aui-column-content file-entry-column-content">
-		<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")" %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")") %></h3>
 
 		<div class="file-entry-categories">
 			<liferay-ui:asset-categories-summary

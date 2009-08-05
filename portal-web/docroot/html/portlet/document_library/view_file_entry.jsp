@@ -276,7 +276,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 			<div class="file-entry-name">
 				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
-					<%= HtmlUtil.escape(titleWithExtension) %>
+					<%= titleWithExtension %>
 				</a>
 			</div>
 

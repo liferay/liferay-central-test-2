@@ -123,7 +123,7 @@ request.setAttribute("view_folder.jsp-folder", folder);
 
 			<div class="folder-name">
 				<a href="<%= viewFolderURL %>">
-					<%= HtmlUtil.escape(folder.getName()) %>
+					<%= folder.getName() %>
 				</a>
 			</div>
 		</div>
