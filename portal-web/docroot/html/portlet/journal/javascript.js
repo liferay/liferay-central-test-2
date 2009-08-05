@@ -1954,7 +1954,7 @@
 				var instance = this;
 
 				var editContainerWrapper = instance._getById(instance._editFieldWrapperClass);
-				var isVisible = editContainerWrapper.is(':visible');
+				var isVisible = editContainerWrapper.parent().is(':visible');
 
 				if (isVisible) {
 					setTimeout(
