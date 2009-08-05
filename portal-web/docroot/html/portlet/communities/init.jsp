@@ -93,8 +93,6 @@
 <%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
 <%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
-<%@ page import="java.util.MissingResourceException" %>
-
 <%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
