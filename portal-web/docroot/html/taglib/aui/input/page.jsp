@@ -139,7 +139,14 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		}
 		%>
 
-		<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		<c:choose>
+			<c:when test='<%= type.equals("textarea") %>'>
+				<textarea id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+			</c:when>
+			<c:otherwise>
+				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			</c:otherwise>
+		</c:choose>
 
 		<c:if test='<%= !type.equals("hidden") %>'>
 			</span>
