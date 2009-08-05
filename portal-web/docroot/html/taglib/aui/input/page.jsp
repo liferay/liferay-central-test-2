@@ -52,7 +52,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 }
 %>
 
-<c:if test='<%= !type.equals("hidden") %>'>
+<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 	<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 		<c:if test="<%= Validator.isNotNull(label) %>">
 			<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
@@ -116,6 +116,24 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</span>
 	</c:when>
+	<c:when test='<%= type.equals("radio") %>'>
+		<span class="aui-form-field aui-form-radio">
+			<label class="aui-form-label">
+
+				<%
+				String valueString = StringPool.BLANK;
+
+				if (value != null) {
+					valueString = value.toString();
+				}
+				%>
+
+				<input <%= checked ? "checked" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+
+				<liferay-ui:message key="<%= label %>" />
+			</label>
+		</span>
+	</c:when>
 	<c:otherwise>
 
 		<%
@@ -144,15 +162,12 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 			<c:when test='<%= type.equals("textarea") %>'>
 				<textarea id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
 			</c:when>
-			<c:when test='<%= type.equals("radio") %>'>
-				<input <%= checked ? "checked" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
-			</c:when>
 			<c:otherwise>
 				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test='<%= !type.equals("hidden") %>'>
+		<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 			</span>
 		</c:if>
 	</c:otherwise>
@@ -162,7 +177,7 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 	</label>
 </c:if>
 
-<c:if test='<%= !type.equals("hidden") %>'>
+<c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 	</div>
 </c:if>
 
