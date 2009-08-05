@@ -162,14 +162,14 @@ if (tabs2.equals("look-and-feel") || tabs3.equals("look-and-feel")) {
 long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Organization organization = null;
-User user2 = null;
+User selUser = null;
 UserGroup userGroup = null;
 
 if (liveGroup.isOrganization()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getClassPK());
 }
 else if (liveGroup.isUser()) {
-	user2 = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
+	selUser = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
 }
 else if (liveGroup.isUserGroup()) {
 	userGroup = UserGroupLocalServiceUtil.getUserGroup(liveGroup.getClassPK());
@@ -183,7 +183,7 @@ if (liveGroup.isOrganization()) {
 	rootNodeName = organization.getName();
 }
 else if (liveGroup.isUser()) {
-	rootNodeName = user2.getFullName();
+	rootNodeName = selUser.getFullName();
 }
 else if (liveGroup.isUserGroup()) {
 	rootNodeName = userGroup.getName();
@@ -445,7 +445,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 					<liferay-ui:message key='<%= "edit-pages-for-" + (organization.isRoot() ? "organization" : "location" ) %>' />: <%= HtmlUtil.escape(organization.getName()) %>
 				</c:when>
 				<c:when test="<%= liveGroup.isUser() %>">
-					<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
+					<liferay-ui:message key="edit-pages-for-user" />: <%= selUser.getFullName() %>
 				</c:when>
 				<c:when test="<%= liveGroup.isUserGroup() %>">
 					<liferay-ui:message key="edit-pages-for-user-group" />: <%= HtmlUtil.escape(group.getDescriptiveName()) %>
@@ -459,7 +459,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
 			<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
-				<liferay-util:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
+				<liferay-util:param name="userId" value="<%= String.valueOf(selUser.getUserId()) %>" />
 			</liferay-util:include>
 		</c:when>
 		<c:when test="<%= portletName.equals(PortletKeys.MY_PAGES) %>">
