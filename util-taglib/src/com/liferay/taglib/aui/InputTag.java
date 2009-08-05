@@ -97,7 +97,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		}
 
 		request.setAttribute("aui:input:bean", _bean);
-		request.setAttribute("aui:input:checked",String.valueOf(_checked));
+		request.setAttribute("aui:input:checked", String.valueOf(_checked));
 		request.setAttribute("aui:input:cssClass", _cssClass);
 		request.setAttribute("aui:input:field", _field);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
