@@ -470,7 +470,6 @@
 	Alloy.ContextPanel = Alloy.Panel.extend(
 		{
 			initialize: function(options) {
-
 				var arrowPosition = 'tl';
 
 				if (options && options.arrowPosition) {

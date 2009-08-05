@@ -1894,6 +1894,7 @@
 				row.addClass('selected');
 
 				instance.editContainerContextPanel.show();
+
 				var context = instance.editContainerContextPanel.cfg.getProperty('context');
 
 				context[0] = editButton[0];
