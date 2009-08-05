@@ -28,6 +28,7 @@
 
 <%
 BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
+boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
 String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
@@ -142,6 +143,9 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 		<c:choose>
 			<c:when test='<%= type.equals("textarea") %>'>
 				<textarea id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+			</c:when>
+			<c:when test='<%= type.equals("radio") %>'>
+				<input <%= checked ? "checked" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</c:when>
 			<c:otherwise>
 				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />

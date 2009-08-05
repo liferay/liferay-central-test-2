@@ -53,6 +53,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_bean = null;
+				_checked = false;
 				_cssClass = null;
 				_dynamicAttributes.clear();
 				_field = null;
@@ -96,6 +97,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		}
 
 		request.setAttribute("aui:input:bean", _bean);
+		request.setAttribute("aui:input:checked",String.valueOf(_checked));
 		request.setAttribute("aui:input:cssClass", _cssClass);
 		request.setAttribute("aui:input:field", _field);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
@@ -117,6 +119,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	public void setBean(Object bean) {
 		_bean = bean;
+	}
+
+	public void setChecked(boolean checked) {
+		_checked = checked;
 	}
 
 	public void setCssClass(String cssClass) {
@@ -180,6 +186,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
 
 	private Object _bean;
+	private boolean _checked;
 	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
