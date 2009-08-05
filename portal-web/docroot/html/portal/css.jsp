@@ -1255,7 +1255,7 @@ li.toggle-expand a {
 	cursor: auto;
 }
 
-.lfr-input-text {
+.lfr-input-text,  .lfr-input-text input{
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 

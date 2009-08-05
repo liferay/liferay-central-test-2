@@ -24,7 +24,7 @@ input[type="text"], input[type="password"], input[type="file"],input[type="submi
 	border: 1px solid;
 	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
 	font: 1em Arial,Helvetica,Verdana,sans-serif;
-	padding: 5px 1px;
+	padding: 5px 1px 5px 0px;
 }
 
 select {
