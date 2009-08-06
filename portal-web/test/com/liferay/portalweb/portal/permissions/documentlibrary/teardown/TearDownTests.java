@@ -20,29 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary;
+package com.liferay.portalweb.portal.permissions.documentlibrary.teardown;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="TearDownTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentLibraryTests extends BaseTests {
+public class TearDownTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_TearDownTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

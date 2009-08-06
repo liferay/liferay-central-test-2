@@ -20,31 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_AssertDeleteActionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentLibraryTests extends BaseTests {
-
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(TearDownTests.suite());
-
-		return testSuite;
+public class CA_AssertDeleteActionsTest extends BaseTestCase {
+	public void testCA_AssertDeleteActions() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Test Subfolder"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=My Documents"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Delete"));
+		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Delete"));
 	}
-
 }

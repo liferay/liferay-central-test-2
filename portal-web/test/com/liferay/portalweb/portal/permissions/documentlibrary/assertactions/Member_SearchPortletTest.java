@@ -20,31 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="Member_SearchPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentLibraryTests extends BaseTests {
+public class Member_SearchPortletTest extends BaseTestCase {
+	public void testMember_SearchPortlet() throws Exception {
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+			try {
+				if (selenium.isElementPresent("_20_keywords1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		return testSuite;
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search File Entries']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Member Permissions Upload Edited"));
+		assertTrue(selenium.isElementPresent(
+				"link=Admin Permissions Upload Edited 1"));
 	}
-
 }

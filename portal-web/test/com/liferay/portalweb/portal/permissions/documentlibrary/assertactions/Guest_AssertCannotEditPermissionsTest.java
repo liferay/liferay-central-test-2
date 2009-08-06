@@ -20,31 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="Guest_AssertCannotEditPermissionsTest.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentLibraryTests extends BaseTests {
+public class Guest_AssertCannotEditPermissionsTest extends BaseTestCase {
+	public void testGuest_AssertCannotEditPermissions()
+		throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Configuration"));
+		assertFalse(selenium.isElementPresent("//td[4]/ul/li/strong/span"));
+		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
+		assertFalse(selenium.isElementPresent("link=Permissions"));
 	}
-
 }

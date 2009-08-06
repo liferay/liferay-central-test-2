@@ -20,31 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="DocumentLibraryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="CA_LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DocumentLibraryTests extends BaseTests {
+public class CA_LoginTest extends BaseTestCase {
+	public void testCA_Login() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent("link=Welcome")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_58_login", RuntimeVariables.replace("CA@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
