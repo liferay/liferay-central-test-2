@@ -107,126 +107,121 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<div class="aui-column aui-w75 aui-column-first file-entry-column file-entry-column-first">
-	<div class="aui-column-content file-entry-column-content">
-		<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")") %></h3>
+<aui:column columnWidth="75" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+	<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")") %></h3>
 
-		<div class="file-entry-categories">
-			<liferay-ui:asset-categories-summary
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= toFileEntry.getFileEntryId() %>"
-			/>
-		</div>
-
-		<div class="file-entry-tags">
-			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= toFileEntry.getFileEntryId() %>"
-				message="tags"
-			/>
-		</div>
-
-		<div class="file-entry-description">
-			<%= toFileEntry.getDescription() %>
-		</div>
-
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
-
-		<div class="file-entry-author">
-			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName())) %>
-		</div>
-
-		<div class="file-entry-date">
-			<%= dateFormatDateTime.format(toFileEntry.getModifiedDate()) %>
-		</div>
-
-		<div class="file-entry-downloads">
-			<%= toFileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
-		</div>
-
-		<div class="file-entry-ratings">
-			<liferay-ui:ratings
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= toFileEntry.getFileEntryId() %>"
-			/>
-		</div>
-
-		<div class="file-entry-field">
-			<label><liferay-ui:message key="url" /></label>
-
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
-			/>
-		</div>
-
-		<div class="file-entry-field">
-			<label><liferay-ui:message key="community" /></label>
-
-			<%= toGroup.getDescriptiveName() %>
-		</div>
+	<div class="file-entry-categories">
+		<liferay-ui:asset-categories-summary
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= toFileEntry.getFileEntryId() %>"
+		/>
 	</div>
-</div>
 
-<div class="aui-column aui-w25 aui-column-last file-entry-column file-entry-column-last">
-	<div class="aui-column-content file-entry-column-content">
-		<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
+	<div class="file-entry-tags">
+		<liferay-ui:asset-tags-summary
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= toFileEntry.getFileEntryId() %>"
+			message="tags"
+		/>
+	</div>
 
-		<c:if test="<%= isLocked %>">
-			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
-		</c:if>
+	<div class="file-entry-description">
+		<%= toFileEntry.getDescription() %>
+	</div>
 
-		<div class="file-entry-download">
-			<liferay-ui:icon
-				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
-				cssClass="file-entry-avatar"
-				message='download'
-				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+	<div class="custom-attributes">
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
+				className="<%= DLFileEntry.class.getName() %>"
+				classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
 			/>
+		</liferay-ui:custom-attributes-available>
+	</div>
 
-			<div class="file-entry-name">
-				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
-					<%= toFileEntry.getTitleWithExtension() %>
-				</a>
+	<div class="file-entry-author">
+		<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(toFileEntry.getUserId(), toFileEntry.getUserName())) %>
+	</div>
+
+	<div class="file-entry-date">
+		<%= dateFormatDateTime.format(toFileEntry.getModifiedDate()) %>
+	</div>
+
+	<div class="file-entry-downloads">
+		<%= toFileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
+	</div>
+
+	<div class="file-entry-ratings">
+		<liferay-ui:ratings
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= toFileEntry.getFileEntryId() %>"
+		/>
+	</div>
+
+	<div class="file-entry-field">
+		<label><liferay-ui:message key="url" /></label>
+
+		<liferay-ui:input-resource
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+		/>
+	</div>
+
+	<div class="file-entry-field">
+		<label><liferay-ui:message key="community" /></label>
+
+		<%= toGroup.getDescriptiveName() %>
+	</div>
+</aui:column>
+
+<aui:column columnWidth="25" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
+
+	<c:if test="<%= isLocked %>">
+		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+	</c:if>
+
+	<div class="file-entry-download">
+		<liferay-ui:icon
+			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
+			cssClass="file-entry-avatar"
+			message='download'
+			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>'
+		/>
+
+		<div class="file-entry-name">
+			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcutId %>">
+				<%= toFileEntry.getTitleWithExtension() %>
+			</a>
+		</div>
+
+		<c:if test="<%= conversions.length > 0 %>">
+			<div class="file-entry-field file-entry-conversions">
+				<label><liferay-ui:message key="other-available-formats" /></label>
+
+				<%
+				for (int i = 0; i < conversions.length; i++) {
+					String conversion = conversions[i];
+
+				%>
+
+					<liferay-ui:icon
+						image='<%= "../document_library/" + conversion %>'
+						message="<%= conversion.toUpperCase() %>"
+						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + toFolder.getFolderId() + "&name=" + HttpUtil.encodeURL(toFileEntry.getName()) + "&targetExtension=" + conversion %>'
+						label="<%= true %>"
+					/>
+
+				<%
+				}
+				%>
+
 			</div>
-
-			<c:if test="<%= conversions.length > 0 %>">
-				<div class="file-entry-field file-entry-conversions">
-					<label><liferay-ui:message key="other-available-formats" /></label>
-
-					<%
-					for (int i = 0; i < conversions.length; i++) {
-						String conversion = conversions[i];
-
-					%>
-
-						<liferay-ui:icon
-							image='<%= "../document_library/" + conversion %>'
-							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + toFolder.getFolderId() + "&name=" + HttpUtil.encodeURL(toFileEntry.getName()) + "&targetExtension=" + conversion %>'
-							label="<%= true %>"
-						/>
-
-					<%
-					}
-					%>
-
-				</div>
-			</c:if>
-		</div>
-
-		<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
+		</c:if>
 	</div>
-</div>
 
+	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
+</aui:column>
 <%
 String tabs2Names = "version-history,comments";
 

@@ -166,148 +166,143 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
-<div class="aui-column aui-w75 aui-column-first file-entry-column file-entry-column-first">
-	<div class="aui-column-content file-entry-column-content">
-		<h3><%= fileEntry.getTitle() + " (" + fileEntry.getVersion() + ")" %></h3>
+<aui:column columnWidth="75" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+	<h3><%= fileEntry.getTitle() + " (" + fileEntry.getVersion() + ")" %></h3>
 
-		<div class="file-entry-categories">
-			<liferay-ui:asset-categories-summary
+	<div class="file-entry-categories">
+		<liferay-ui:asset-categories-summary
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= fileEntryId %>"
+		/>
+	</div>
+
+	<div class="file-entry-tags">
+		<liferay-ui:asset-tags-summary
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= fileEntryId %>"
+			message="tags"
+		/>
+	</div>
+
+	<div class="file-entry-description">
+		<%= fileEntry.getDescription() %>
+	</div>
+
+	<div class="custom-attributes">
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+			<liferay-ui:custom-attribute-list
 				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntryId %>"
+				classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
+				editable="<%= false %>"
+				label="<%= true %>"
 			/>
-		</div>
+		</liferay-ui:custom-attributes-available>
+	</div>
 
-		<div class="file-entry-tags">
-			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntryId %>"
-				message="tags"
-			/>
-		</div>
+	<div class="file-entry-author">
+		<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName())) %>
+	</div>
 
-		<div class="file-entry-description">
-			<%= fileEntry.getDescription() %>
-		</div>
+	<div class="file-entry-date">
+		<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
+	</div>
 
-		<div class="custom-attributes">
-			<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
-				<liferay-ui:custom-attribute-list
-					className="<%= DLFileEntry.class.getName() %>"
-					classPK="<%= (fileEntry != null) ? fileEntry.getFileEntryId() : 0 %>"
-					editable="<%= false %>"
-					label="<%= true %>"
-				/>
-			</liferay-ui:custom-attributes-available>
-		</div>
+	<div class="file-entry-downloads">
+		<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
+	</div>
 
-		<div class="file-entry-author">
-			<%= LanguageUtil.format(pageContext, "last-updated-by-x", PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName())) %>
-		</div>
+	<div class="file-entry-ratings">
+		<liferay-ui:ratings
+			className="<%= DLFileEntry.class.getName() %>"
+			classPK="<%= fileEntryId %>"
+		/>
+	</div>
 
-		<div class="file-entry-date">
-			<%= dateFormatDateTime.format(fileEntry.getModifiedDate()) %>
-		</div>
+	<div class="file-entry-field">
+		<label><liferay-ui:message key="url" /></label>
 
-		<div class="file-entry-downloads">
-			<%= fileEntry.getReadCount() %> <liferay-ui:message key="downloads" />
-		</div>
+		<liferay-ui:input-resource
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
+		/>
+	</div>
 
-		<div class="file-entry-ratings">
-			<liferay-ui:ratings
-				className="<%= DLFileEntry.class.getName() %>"
-				classPK="<%= fileEntryId %>"
-			/>
-		</div>
+	<div class="file-entry-field">
+		<label><liferay-ui:message key="webdav-url" /></label>
 
-		<div class="file-entry-field">
-			<label><liferay-ui:message key="url" /></label>
+		<%
+		StringBuffer sbf = new StringBuffer();
 
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
-			/>
-		</div>
+		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-		<div class="file-entry-field">
-			<label><liferay-ui:message key="webdav-url" /></label>
+		while (true) {
+			sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+			sbf.insert(0, StringPool.SLASH);
 
-			<%
-			StringBuffer sbf = new StringBuffer();
-
-			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-			while (true) {
-				sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-				sbf.insert(0, StringPool.SLASH);
-
-				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-				}
+			if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				break;
 			}
+			else {
+				curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+			}
+		}
 
-			sbf.append(StringPool.SLASH);
-			sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
+		sbf.append(StringPool.SLASH);
+		sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
 
-			Group group = layout.getGroup();
-			%>
+		Group group = layout.getGroup();
+		%>
 
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
-			/>
-		</div>
+		<liferay-ui:input-resource
+			url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
+		/>
 	</div>
-</div>
+</aui:column>
 
-<div class="aui-column aui-w25 aui-column-last file-entry-column file-entry-column-last">
-	<div class="aui-column-content file-entry-column-content">
-		<c:if test="<%= isLocked %>">
-			<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
-		</c:if>
+<aui:column columnWidth="25" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+	<c:if test="<%= isLocked %>">
+		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
+	</c:if>
 
-		<div class="file-entry-download">
-			<liferay-ui:icon
-				image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
-				message='download'
-				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
-				cssClass="file-entry-avatar"
-			/>
+	<div class="file-entry-download">
+		<liferay-ui:icon
+			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
+			message='download'
+			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+			cssClass="file-entry-avatar"
+		/>
 
-			<div class="file-entry-name">
-				<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
-					<%= titleWithExtension %>
-				</a>
+		<div class="file-entry-name">
+			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
+				<%= titleWithExtension %>
+			</a>
+		</div>
+
+		<c:if test="<%= conversions.length > 0 %>">
+			<div class="file-entry-field file-entry-conversions">
+				<label><liferay-ui:message key="other-available-formats" /></label>
+
+				<%
+				for (int i = 0; i < conversions.length; i++) {
+					String conversion = conversions[i];
+				%>
+
+					<liferay-ui:icon
+						image='<%= "../document_library/" + conversion %>'
+						message="<%= conversion.toUpperCase() %>"
+						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
+						label="<%= true %>"
+					/>
+
+				<%
+				}
+				%>
+
 			</div>
-
-			<c:if test="<%= conversions.length > 0 %>">
-				<div class="file-entry-field file-entry-conversions">
-					<label><liferay-ui:message key="other-available-formats" /></label>
-
-					<%
-					for (int i = 0; i < conversions.length; i++) {
-						String conversion = conversions[i];
-					%>
-
-						<liferay-ui:icon
-							image='<%= "../document_library/" + conversion %>'
-							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
-							label="<%= true %>"
-						/>
-
-					<%
-					}
-					%>
-
-				</div>
-			</c:if>
-		</div>
-
-		<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
+		</c:if>
 	</div>
-</div>
 
+	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
+</aui:column>
 
 <%
 String tabs2Names = "version-history,comments";
