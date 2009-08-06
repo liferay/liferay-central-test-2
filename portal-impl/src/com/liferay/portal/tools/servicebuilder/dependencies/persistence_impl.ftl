@@ -1456,7 +1456,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					}
 				}
 				else {
-					if (result instanceof List) {
+					if (result instanceof List<?>) {
 						return null;
 					}
 					else {
