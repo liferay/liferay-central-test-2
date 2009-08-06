@@ -29,7 +29,18 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", defaultFolderId);
+
+if ((folder == null) && (defaultFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+	try {
+		folder = IGFolderLocalServiceUtil.getFolder(folderId);
+	}
+	catch (NoSuchFolderException nsfe) {
+		folderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+	}
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
