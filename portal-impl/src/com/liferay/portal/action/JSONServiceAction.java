@@ -567,7 +567,7 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonObj.toString();
 		}
-		else if (returnObj instanceof BaseModel) {
+		else if (returnObj instanceof BaseModel<?>) {
 			String serlializerClassName = getSerializerClassName(returnObj);
 
 			MethodWrapper methodWrapper = new MethodWrapper(
@@ -578,7 +578,7 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonObj.toString();
 		}
-		else if (returnObj instanceof BaseModel[]) {
+		else if (returnObj instanceof BaseModel<?>[]) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 			BaseModel<?>[] returnArray = (BaseModel[])returnObj;
@@ -598,10 +598,10 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonArray.toString();
 		}
-		else if (returnObj instanceof BaseModel[][]) {
+		else if (returnObj instanceof BaseModel<?>[][]) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-			BaseModel<?>[][] returnArray = (BaseModel[][])returnObj;
+			BaseModel<?>[][] returnArray = (BaseModel<?>[][])returnObj;
 
 			if ((returnArray.length > 0) &&
 				(returnArray[0].length > 0)) {
@@ -620,7 +620,7 @@ public class JSONServiceAction extends JSONAction {
 
 			return jsonArray.toString();
 		}
-		else if (returnObj instanceof List) {
+		else if (returnObj instanceof List<?>) {
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 			List<Object> returnList = (List<Object>)returnObj;
