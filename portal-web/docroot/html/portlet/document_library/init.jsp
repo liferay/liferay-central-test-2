@@ -92,7 +92,7 @@ if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), "", serviceContext);
+		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), StringPool.BLANK, serviceContext);
 
 		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
 
@@ -111,7 +111,7 @@ if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), "", serviceContext);
+		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), StringPool.BLANK, serviceContext);
 	}
 
 	rootFolderId = dynamicRootFolder.getFolderId();

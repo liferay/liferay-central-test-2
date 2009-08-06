@@ -73,7 +73,7 @@ if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), "", serviceContext);
+		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
 
 		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
 
@@ -92,7 +92,7 @@ if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), "", serviceContext);
+		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
 	}
 
 	rootFolderId = dynamicRootFolder.getFolderId();
