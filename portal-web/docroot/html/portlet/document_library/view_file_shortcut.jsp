@@ -107,7 +107,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<aui:column columnWidth="75" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
 	<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")") %></h3>
 
 	<div class="file-entry-categories">
@@ -174,7 +174,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 	</div>
 </aui:column>
 
-<aui:column columnWidth="25" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
 	<img alt="" class="shortcut-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_link.png">
 
 	<c:if test="<%= isLocked %>">

@@ -120,13 +120,13 @@ if (Validator.isNotNull(ppid)) {
 
 		<div id="content-wrapper">
 			<aui:layout cssClass="<%= panelCategory %>">
-				<aui:column columnWidth="25" cssClass="panel-page-menu" first="true">
+				<aui:column columnWidth="<%= 25 %>" cssClass="panel-page-menu" first="<%= true %>">
 					<liferay-portlet:runtime portletName="87" />
 				</aui:column>
 
-				<aui:column columnWidth="75" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">
+				<aui:column columnWidth="<%= 75 %>" cssClass="<%= panelBodyCssClass %>" last="<%= true %>">
 					<aui:layout cssClass="panel-page-body-menu">
-						<aui:column columnWidth="75" first="true">
+						<aui:column columnWidth="<%= 75 %>" first="<%= true %>">
 							<c:choose>
 								<c:when test="<%= category.equals(PortletCategoryKeys.CONTENT) %>">
 
@@ -301,7 +301,7 @@ if (Validator.isNotNull(ppid)) {
 							</c:choose>
 						</aui:column>
 
-						<aui:column columnWidth="25" last="<%= true %>">
+						<aui:column columnWidth="<%= 25 %>" last="<%= true %>">
 
 							<%
 							String refererGroupDescriptiveName = null;

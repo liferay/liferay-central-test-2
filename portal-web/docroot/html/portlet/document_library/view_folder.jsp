@@ -43,7 +43,7 @@ int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCo
 request.setAttribute("view_folder.jsp-folder", folder);
 %>
 
-<aui:column columnWidth="75" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
 	<h3><%= folder.getName() %></h3>
 
 	<div class="folder-description">
@@ -104,7 +104,7 @@ request.setAttribute("view_folder.jsp-folder", folder);
 	</div>
 </aui:column>
 
-<aui:column columnWidth="25" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
 		<portlet:param name="struts_action" value="/document_library/view" />
 		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />

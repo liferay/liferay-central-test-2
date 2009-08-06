@@ -166,7 +166,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</c:choose>
 </c:if>
 
-<aui:column columnWidth="75" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
+<aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
 	<h3><%= fileEntry.getTitle() + " (" + fileEntry.getVersion() + ")" %></h3>
 
 	<div class="file-entry-categories">
@@ -258,7 +258,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	</div>
 </aui:column>
 
-<aui:column columnWidth="25" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
+<aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
 	<c:if test="<%= isLocked %>">
 		<img alt="" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/overlay_lock.png">
 	</c:if>
