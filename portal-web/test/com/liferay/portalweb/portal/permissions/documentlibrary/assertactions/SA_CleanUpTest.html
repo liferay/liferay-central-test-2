@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SA_TearDownTest</title>
+<title>SA_CleanUpTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">SA_TearDownTest</td></tr>
+<tr><td rowspan="1" colspan="3">SA_CleanUpTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -17,6 +17,21 @@
 	<td>clickAndWait</td>
 	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//span[3]/a/img'))</td>
+	<td>PortletPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${PortletPresent}</td>
+	<td>PortletNotPresent</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -35,12 +50,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[3]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[3]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,12 +85,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[3]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[3]/a</td>
+	<td>//div[5]/ul/li[4]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,11 +104,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//img[@alt='Remove']</td>
 	<td></td>
@@ -104,38 +114,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Welcome</td>
+	<td>label</td>
+	<td>PortletNotPresent</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Manage Pages</td>
+	<td>click</td>
+	<td>_145_addApplication</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span</td>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='ContentManagement-DocumentLibrary']/p/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//li[@id='_88_tabs3pageTabsId']/a</td>
+	<td>click</td>
+	<td>//div[@id='ContentManagement-DocumentLibrary']/p/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>waitForElementPresent</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete the selected page?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>assertElementPresent</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 

@@ -38,7 +38,8 @@ public class SetupTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(SA_SetupTest.class);
+		testSuite.addTestSuite(SA_AddPageTest.class);
+		testSuite.addTestSuite(SA_AddPortletTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;

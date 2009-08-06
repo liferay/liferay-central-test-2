@@ -20,44 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary.setup;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_SetupTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LogoutTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_SetupTest extends BaseTestCase {
-	public void testSA_Setup() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("Document Librar Permissions Test Page"));
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Document Library Permissions Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
-
+public class SA_LogoutTest extends BaseTestCase {
+	public void testSA_Logout() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='ContentManagement-DocumentLibrary']/p")) {
+				if (selenium.isElementPresent("link=Sign Out")) {
 					break;
 				}
 			}
@@ -67,7 +48,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-DocumentLibrary']/p/a");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,7 +57,7 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("_58_login")) {
 					break;
 				}
 			}

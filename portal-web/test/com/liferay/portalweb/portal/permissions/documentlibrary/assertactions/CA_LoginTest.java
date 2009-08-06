@@ -52,10 +52,8 @@ public class CA_LoginTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("CA@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("_58_rememberMeCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

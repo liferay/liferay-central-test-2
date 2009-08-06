@@ -20,25 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
+package com.liferay.portalweb.portal.permissions.documentlibrary.setup;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Member_LoginTest extends BaseTestCase {
-	public void testMember_Login() throws Exception {
+public class SA_AddPortletTest extends BaseTestCase {
+	public void testSA_AddPortlet() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Welcome")) {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -48,13 +49,46 @@ public class Member_LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_58_login",
-			RuntimeVariables.replace("member@liferay.com"));
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='ContentManagement-DocumentLibrary']/p")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id='ContentManagement-DocumentLibrary']/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

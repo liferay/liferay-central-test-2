@@ -38,7 +38,8 @@ public class TearDownTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(SA_TearDownTest.class);
+		testSuite.addTestSuite(SA_RemovePortletTest.class);
+		testSuite.addTestSuite(SA_DeletePageTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;

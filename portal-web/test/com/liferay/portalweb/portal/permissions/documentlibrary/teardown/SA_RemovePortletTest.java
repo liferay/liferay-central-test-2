@@ -20,41 +20,62 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
+package com.liferay.portalweb.portal.permissions.documentlibrary.teardown;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_RemovePortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Member_LoginTest extends BaseTestCase {
-	public void testMember_Login() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+public class SA_RemovePortletTest extends BaseTestCase {
+	public void testSA_RemovePortlet() throws Exception {
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Welcome")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Document Library Permissions Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Document Library Permissions Test Page"));
+				selenium.waitForPageToLoad("30000");
+
+				boolean PortletPresent = selenium.isElementPresent(
+						"//span[3]/a/img");
+
+				if (!PortletPresent) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click("//img[@alt='Remove']");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+
+			case 2:
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_58_login",
-			RuntimeVariables.replace("member@liferay.com"));
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

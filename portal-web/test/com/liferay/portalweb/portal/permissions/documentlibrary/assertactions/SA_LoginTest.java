@@ -26,12 +26,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Member_LoginTest extends BaseTestCase {
-	public void testMember_Login() throws Exception {
+public class SA_LoginTest extends BaseTestCase {
+	public void testSA_Login() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,8 +50,7 @@ public class Member_LoginTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_58_login",
-			RuntimeVariables.replace("member@liferay.com"));
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("_58_rememberMeCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
