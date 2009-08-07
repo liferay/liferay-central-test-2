@@ -78,6 +78,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	<aui:fieldset>
 		<c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
 			<aui:field-wrapper label="folder">
+
 					<%
 					String folderName = StringPool.BLANK;
 

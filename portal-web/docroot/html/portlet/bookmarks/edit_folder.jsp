@@ -88,6 +88,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 	<aui:fieldset>
 		<c:if test="<%= folder != null %>">
 			<aui:field-wrapper label="parent-folder">
+
 				<%
 				String parentFolderName = "";
 
