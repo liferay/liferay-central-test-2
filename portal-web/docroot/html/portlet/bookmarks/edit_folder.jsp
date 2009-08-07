@@ -90,7 +90,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 			<aui:field-wrapper label="parent-folder">
 
 				<%
-				String parentFolderName = "";
+				String parentFolderName = StringPool.BLANK;
 
 				try {
 					BookmarksFolder parentFolder = BookmarksFolderLocalServiceUtil.getFolder(parentFolderId);
@@ -100,6 +100,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 				catch (NoSuchFolderException nscce) {
 				}
 				%>
+
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
 					<portlet:param name="struts_action" value="/bookmarks/view" />
 					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
@@ -116,7 +117,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
 				%>
 
-				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+				<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
 
 				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 
