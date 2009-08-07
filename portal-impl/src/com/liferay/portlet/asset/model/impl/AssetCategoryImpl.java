@@ -24,8 +24,6 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -79,7 +77,5 @@ public class AssetCategoryImpl
 			return false;
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryImpl.class);
 
 }
