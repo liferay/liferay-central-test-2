@@ -119,7 +119,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 
-				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= folder.getParentFolderId() == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
 					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
 				</div>
 			</aui:field-wrapper>
