@@ -230,7 +230,7 @@ public interface PropsKeys {
 	public static final String CLUSTER_LINK_CHANNEL_PROPERTIES = "cluster.link.channel.properties";
 
 	public static final String CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES = "cluster.link.channel.system.properties";
-	
+
 	public static final String COMM_LINK_PROPERTIES = "comm.link.properties";
 
 	public static final String COMMUNITIES_EMAIL_FROM_ADDRESS = "communities.email.from.address";

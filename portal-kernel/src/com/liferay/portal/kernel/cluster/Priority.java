@@ -23,25 +23,11 @@
 package com.liferay.portal.kernel.cluster;
 
 /**
- * <a href="PortalClusterMessagePriority.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="Priority.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * A message sent by PortalClusterLink can have one of the 10 level priorities.
- * The priority is used to pick up a channel to send the message. The mapping
- * strategy from priority to channel depends on the implementation of
- * PortalClusterLink. Usually high level priority means important message,
- * the implementation should try to pick up a faster and less crowd channel for
- * it, but there is no guarantee for this.
- * </p>
- *
- * <p>
- * It is also very possible for several different level priorities map to a
- * same channel.
- * </p>
  * @author Shuyang Zhou
  */
-public enum PortalClusterMessagePriority {
+public enum Priority {
 
 	LEVEL1, LEVEL2, LEVEL3, LEVEL4, LEVEL5, LEVEL6, LEVEL7, LEVEL8, LEVEL9,
 	LEVEL10;

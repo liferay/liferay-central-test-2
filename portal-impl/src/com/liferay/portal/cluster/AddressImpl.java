@@ -22,37 +22,31 @@
 
 package com.liferay.portal.cluster;
 
-import com.liferay.portal.kernel.cluster.PortalClusterAddress;
-
 import org.jgroups.Address;
 
 /**
- * <a href="PortalClusterAddressImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AddressImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
- *
  */
-public class PortalClusterAddressImpl implements
-	PortalClusterAddress {
+public class AddressImpl implements com.liferay.portal.kernel.cluster.Address {
 
-	public PortalClusterAddressImpl(Address jgroupsAddress) {
-		_jgroupsAddress = jgroupsAddress;
-	}
-
-	public Address getRealAddress() {
-		return _jgroupsAddress;
+	public AddressImpl(Address address) {
+		_address = address;
 	}
 
 	public String getDescription() {
-		return _jgroupsAddress.toString();
+		return _address.toString();
 	}
 
-	@Override
+	public Address getRealAddress() {
+		return _address;
+	}
+
 	public String toString() {
-		return _jgroupsAddress.toString();
+		return _address.toString();
 	}
 
-	private final Address _jgroupsAddress;
+	private Address _address;
 
 }

@@ -20,31 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.cluster;
+package com.liferay.portal.kernel.util;
+
+import java.io.IOException;
+import java.net.Socket;
 
 /**
- * <a href="PortalClusterAddress.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocketUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * An abstraction of cluster member's id. Actual implementation of
- * PortalClusterLink should also create a implementation for this interface.
- * </p>
  * @author Shuyang Zhou
  */
-public interface PortalClusterAddress {
+public class SocketUtil {
 
-	/**
-	 * Get the real cluster member address(or an id).
-	 *
-	 * @return The real cluster member address(or an id)
-	 */
-	Object getRealAddress();
+	public static String getHostAddress(String host, int port)
+		throws IOException {
 
-	/**
-	 * Get a human readable representation of this address for display.
-	 *
-	 * @return A human readable representation of this address
-	 */
-	String getDescription();
+		Socket socket = null;
+
+		try {
+			socket = new Socket(host, port);
+
+			return socket.getLocalAddress().getHostAddress();
+		}
+		finally {
+			if (socket != null) {
+				try {
+					socket.close();
+				}
+				catch (IOException ioe) {
+				}
+			}
+		}
+	}
 
 }

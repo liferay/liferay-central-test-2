@@ -22,56 +22,57 @@
 
 package com.liferay.portal.kernel.cluster.messaging;
 
-import com.liferay.portal.kernel.cluster.PortalClusterUtil;
+import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.cluster.Priority;
+import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="PortalClusterForwardMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ClusterBridgeMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * PortalClusterForwardMessageListener is a PortalClusterMessageListener. It
- * listens to the cluster. When it receives a MessageBus message from the
- * cluster, it forwards the message to local MessageBus.
  * @author Shuyang Zhou
  */
-public class PortalClusterForwardMessageListener implements
-	PortalClusterMessageListener {
+public class ClusterBridgeMessageListener implements MessageListener {
 
-	/**
-	 * This method is called when PortalClusterLink receive a cluster message
-	 * whose payload is a MessageBus message.
-	 * This listener forwards the MessageBus message to local MessageBus base on
-	 * the MessageBus destination property of the message, if the property is
-	 *null (which is actually impossible), then do nothing.
-	 *
-	 * @param message The received MessageBus message.
-	 */
+	public ClusterBridgeMessageListener(Priority priority) {
+		_priority = priority;
+	}
+
 	public void receive(Message message) {
-		String destination = message.getDestinationName();
 
-		if (Validator.isNotNull(destination)) {
+		// Prevent circular message sending
+
+		if (ClusterLinkUtil.isForwardMessage(message)) {
+			return;
+		}
+
+		Address address = ClusterLinkUtil.getAddress(message);
+
+		if (address == null) {
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Forwarding portal cluster link message:" + message +
-					" to " + destination);
+				_log.info("Bridging cluster link multicast message " + message);
 			}
-			PortalClusterUtil.setForwardMessage(message);
-			MessageBusUtil.sendMessage(destination, message);
+
+			ClusterLinkUtil.sendMulticastMessage(message, _priority);
 		}
 		else {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Forwarded portal cluster link message has no " +
-					"destination:" + message);
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Bridging cluster link unicast message " + message +
+						" to " + address);
 			}
+
+			ClusterLinkUtil.sendUnicastMessage(address, message, _priority);
 		}
 	}
 
 	private static Log _log =
-		LogFactoryUtil.getLog(PortalClusterForwardMessageListener.class);
+		LogFactoryUtil.getLog(ClusterBridgeMessageListener.class);
+
+	private Priority _priority;
 
 }

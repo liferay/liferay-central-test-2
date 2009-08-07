@@ -50,9 +50,9 @@
 	</bean>
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.management" class="com.liferay.portal.kernel.management.messaging.ManagementMessageListener" />
-	<bean id="messageListener.management_cluster" class="com.liferay.portal.kernel.cluster.messaging.PortalClusterBridgeMessageListener">
+	<bean id="messageListener.management_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
 		<constructor-arg index="0" >
-			<util:constant static-field="com.liferay.portal.kernel.cluster.PortalClusterMessagePriority.LEVEL5" />
+			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
 		</constructor-arg>
 	</bean>
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />

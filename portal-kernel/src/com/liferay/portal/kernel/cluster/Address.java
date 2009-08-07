@@ -20,30 +20,17 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.cluster.messaging;
-
-import com.liferay.portal.kernel.messaging.Message;
+package com.liferay.portal.kernel.cluster;
 
 /**
- * <a href="PortalClusterMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="Address.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * PortalClusterMessageListener listens to the cluster. When the
- * PortalClusterLink receive a cluster message whose payload is a MessageBus
- * message, it will notify all registered PortalClusterMessageListeners with the
- * MessageBus message.
- * </p>
  * @author Shuyang Zhou
  */
-public interface PortalClusterMessageListener {
+public interface Address {
 
-	/**
-	 * This method is called when PortalClusterLink receive a cluster message
-	 * whose payload is a MessageBus message.
-	 *
-	 * @param message The received MessageBus message.
-	 */
-	void receive(Message message);
+	public String getDescription();
+
+	public Object getRealAddress();
 
 }
