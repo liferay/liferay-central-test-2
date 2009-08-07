@@ -354,10 +354,14 @@ tabs1Names += ",recent-images";
 				}
 			}
 
-			IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+			if (folder.getParentFolderId() != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 
-			PortalUtil.setPageSubtitle(folder.getName(), request);
-			PortalUtil.setPageDescription(folder.getDescription(), request);
+				if (portletName.equals(PortletKeys.IMAGE_GALLERY)) {
+					PortalUtil.setPageSubtitle(folder.getName(), request);
+					PortalUtil.setPageDescription(folder.getDescription(), request);
+				}
+			}
 		}
 		%>
 

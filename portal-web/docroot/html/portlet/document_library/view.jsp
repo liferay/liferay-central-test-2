@@ -310,21 +310,18 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				}
 			}
 
-			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY) && (folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
-				PortalUtil.setPageSubtitle(folder.getName(), request);
-				PortalUtil.setPageDescription(folder.getDescription(), request);
+			if (folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
+				if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+					PortalUtil.setPageSubtitle(folder.getName(), request);
+					PortalUtil.setPageDescription(folder.getDescription(), request);
+				}
 			}
 		}
 		%>
 
 		<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
-
-		<%
-		if ((folder!= null) && ((folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID))) {
-			DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-		}
-		%>
-
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 
