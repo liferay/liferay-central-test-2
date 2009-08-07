@@ -129,7 +129,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 		<c:when test='<%= folderColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = LockServiceUtil.isLocked(DLFolder.class.getName(), DLUtil.getLockId(curFolder.getFolderId(), HtmlUtil.unescape(curFolder.getName())));
+			boolean isLocked = LockLocalServiceUtil.isLocked(DLFolder.class.getName(), DLUtil.getLockId(curFolder.getFolderId(), HtmlUtil.unescape(curFolder.getName())));
 			%>
 
 			<liferay-ui:search-container-column-text

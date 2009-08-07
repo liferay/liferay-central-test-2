@@ -51,9 +51,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %>
-<%@ page import="com.liferay.lock.DuplicateLockException" %>
-<%@ page import="com.liferay.lock.model.Lock" %>
-<%@ page import="com.liferay.lock.service.LockServiceUtil" %>
 <%@ page import="com.liferay.portal.NoSuchUserException" %>
 <%@ page import="com.liferay.portal.PortalException" %>
 <%@ page import="com.liferay.portal.SystemException" %>

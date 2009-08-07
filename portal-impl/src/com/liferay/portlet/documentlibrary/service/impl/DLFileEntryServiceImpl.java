@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.lock.ExpiredLockException;
-import com.liferay.lock.InvalidLockException;
-import com.liferay.lock.NoSuchLockException;
-import com.liferay.lock.model.Lock;
+import com.liferay.portal.ExpiredLockException;
+import com.liferay.portal.InvalidLockException;
+import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -188,12 +188,12 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public boolean hasFileEntryLock(long folderId, String name)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
-		boolean hasLock = lockService.hasLock(
-			DLFileEntry.class.getName(), lockId, getUserId());
+		boolean hasLock = lockLocalService.hasLock(
+			getUserId(), DLFileEntry.class.getName(), lockId);
 
 		if (!hasLock) {
 			hasLock = dlFolderService.hasInheritableLock(folderId);
@@ -221,31 +221,33 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
-		return lockService.lock(
-			DLFileEntry.class.getName(), lockId, getUser().getUserId(), owner,
-			expirationTime);
+		return lockLocalService.lock(
+			getUser().getUserId(), DLFileEntry.class.getName(), lockId, owner,
+			false, expirationTime);
 	}
 
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
-		throws PortalException {
+		throws PortalException, SystemException {
 
-		return lockService.refresh(lockUuid, expirationTime);
+		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
-	public void unlockFileEntry(long folderId, String name) {
+	public void unlockFileEntry(long folderId, String name)
+		throws SystemException {
+
 		String lockId = DLUtil.getLockId(folderId, name);
 
-		lockService.unlock(DLFileEntry.class.getName(), lockId);
+		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
 	public void unlockFileEntry(long folderId, String name, String lockUuid)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
-				Lock lock = lockService.getLock(
+				Lock lock = lockLocalService.getLock(
 					DLFileEntry.class.getName(), lockId);
 
 				if (!lock.getUuid().equals(lockUuid)) {
@@ -262,7 +264,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			}
 		}
 
-		lockService.unlock(DLFileEntry.class.getName(), lockId);
+		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -304,14 +306,14 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public boolean verifyFileEntryLock(
 			long folderId, String name, String lockUuid)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		boolean verified = false;
 
 		try {
 			String lockId = DLUtil.getLockId(folderId, name);
 
-			Lock lock = lockService.getLock(
+			Lock lock = lockLocalService.getLock(
 				DLFileEntry.class.getName(), lockId);
 
 			if (lock.getUuid().equals(lockUuid)) {

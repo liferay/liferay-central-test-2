@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.lock;
+package com.liferay.portal;
 
-import com.liferay.lock.model.Lock;
-import com.liferay.portal.PortalException;
+import com.liferay.portal.model.Lock;
 
 /**
  * <a href="DuplicateLockException.java.html"><b><i>View Source</i></b></a>

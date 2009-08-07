@@ -22,8 +22,8 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.lock.model.Lock;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import javax.servlet.http.HttpServletResponse;

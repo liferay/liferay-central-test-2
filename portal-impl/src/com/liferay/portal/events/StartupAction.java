@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -46,6 +45,7 @@ import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
@@ -56,7 +56,7 @@ import com.liferay.portal.util.PropsValues;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class StartupAction extends SimpleAction {
 
@@ -84,7 +84,7 @@ public class StartupAction extends SimpleAction {
 		// Clear locks
 
 		try {
-			LockServiceUtil.clear();
+			LockLocalServiceUtil.clear();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

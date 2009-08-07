@@ -22,7 +22,7 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.lock.model.Lock;
+import com.liferay.portal.model.Lock;
 
 import java.util.List;
 

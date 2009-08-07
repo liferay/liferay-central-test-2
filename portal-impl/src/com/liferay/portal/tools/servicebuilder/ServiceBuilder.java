@@ -1627,7 +1627,8 @@ public class ServiceBuilder {
 	public boolean isSoapMethod(JavaMethod method) {
 		String returnValueName = method.getReturns().getValue();
 
-		if (returnValueName.equals(
+		if (returnValueName.equals("com.liferay.portal.model.Lock") ||
+			returnValueName.equals(
 				"com.liferay.portlet.messageboards.model.MBMessageDisplay") ||
 			returnValueName.startsWith("java.io") ||
 			returnValueName.equals("java.util.Map") ||

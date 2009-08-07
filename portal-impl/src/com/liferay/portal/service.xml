@@ -676,6 +676,41 @@
 			<finder-column name="type" />
 		</finder>
 	</entity>
+	<entity name="Lock" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="lockId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="className" type="String" />
+		<column name="key" type="String" />
+		<column name="owner" type="String" />
+		<column name="inheritable" type="boolean" />
+		<column name="expirationDate" type="Date" />
+
+		<!-- Finder methods -->
+
+		<finder name="ExpirationDate" return-type="Collection">
+			<finder-column name="expirationDate" comparator="&lt;" />
+		</finder>
+		<finder name="C_K" return-type="Lock">
+			<finder-column name="className" />
+			<finder-column name="key" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+	</entity>
 	<entity name="MembershipRequest" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -1095,7 +1130,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.lock" entity="Lock" />
 	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 
@@ -1965,6 +1999,7 @@
 		<exception>CountryName</exception>
 		<exception>CountryNumber</exception>
 		<exception>DuplicateGroup</exception>
+		<exception>DuplicateLock</exception>
 		<exception>DuplicateOrganization</exception>
 		<exception>DuplicatePasswordPolicy</exception>
 		<exception>DuplicateRole</exception>
@@ -1975,6 +2010,8 @@
 		<exception>GroupFriendlyURL</exception>
 		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
+		<exception>ExpiredLock</exception>
+		<exception>InvalidLock</exception>
 		<exception>LARFile</exception>
 		<exception>LARType</exception>
 		<exception>LayoutFriendlyURL</exception>

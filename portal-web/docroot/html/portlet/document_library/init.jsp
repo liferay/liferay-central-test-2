@@ -32,6 +32,7 @@
 <%@ page import="com.liferay.documentlibrary.NoSuchDirectoryException" %>
 <%@ page import="com.liferay.documentlibrary.NoSuchFileException" %>
 <%@ page import="com.liferay.documentlibrary.SourceFileNameException" %>
+<%@ page import="com.liferay.portal.DuplicateLockException" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.webdav.WebDAVUtil" %>

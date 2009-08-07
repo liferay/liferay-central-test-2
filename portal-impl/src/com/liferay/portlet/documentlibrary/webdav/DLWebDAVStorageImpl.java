@@ -23,10 +23,9 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.lock.DuplicateLockException;
-import com.liferay.lock.InvalidLockException;
-import com.liferay.lock.NoSuchLockException;
-import com.liferay.lock.model.Lock;
+import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.InvalidLockException;
+import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,6 +33,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.webdav.BaseResourceImpl;

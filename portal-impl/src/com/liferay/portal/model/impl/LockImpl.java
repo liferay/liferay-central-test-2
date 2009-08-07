@@ -20,31 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.lock;
+package com.liferay.portal.model.impl;
 
-import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.model.Lock;
+
+import java.util.Date;
 
 /**
- * <a href="InvalidLockException.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  */
-public class InvalidLockException extends PortalException {
+public class LockImpl extends LockModelImpl implements Lock {
 
-	public InvalidLockException() {
-		super();
+	public LockImpl() {
 	}
 
-	public InvalidLockException(String msg) {
-		super(msg);
+	public long getExpirationTime() {
+		return getExpirationDate().getTime() - getCreateDate().getTime();
 	}
 
-	public InvalidLockException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public InvalidLockException(Throwable cause) {
-		super(cause);
+	public boolean isExpired() {
+		if (DateUtil.compareTo(new Date(), getExpirationDate()) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

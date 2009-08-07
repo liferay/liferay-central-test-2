@@ -27,8 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -59,15 +58,6 @@ public class CommLink implements MessageListener {
 		}
 		catch (Exception e) {
 			return null;
-		}
-	}
-
-	public void setState(byte[] state) {
-		try {
-			_history = (List<Object>)Util.objectFromByteBuffer(state);
-		}
-		catch (Exception e) {
-			_log.error("Error setting state", e);
 		}
 	}
 
@@ -107,12 +97,19 @@ public class CommLink implements MessageListener {
 		}
 	}
 
+	public void setState(byte[] state) {
+		try {
+			_history = (List<Object>)Util.objectFromByteBuffer(state);
+		}
+		catch (Exception e) {
+			_log.error("Error setting state", e);
+		}
+	}
+
 	private CommLink() {
 		try {
-			String properties = PropsUtil.get(PropsKeys.COMM_LINK_PROPERTIES);
-
-			if (Validator.isNotNull(properties)) {
-				_channel = new JChannel(properties);
+			if (Validator.isNotNull(PropsValues.COMM_LINK_PROPERTIES)) {
+				_channel = new JChannel(PropsValues.COMM_LINK_PROPERTIES);
 
 				_channel.connect("PortalMessageListener");
 

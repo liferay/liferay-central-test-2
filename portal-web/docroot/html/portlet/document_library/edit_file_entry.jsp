@@ -68,7 +68,7 @@ if (fileEntry != null) {
 	folder = fileEntry.getFolder();
 
 	try {
-		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
 		isLocked = Boolean.TRUE;
 
@@ -135,7 +135,7 @@ portletURL.setParameter("name", name);
 		</c:when>
 		<c:otherwise>
 			<span class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getDate())}, false) %>
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 			</span>
 		</c:otherwise>
 	</c:choose>

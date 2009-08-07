@@ -22,10 +22,9 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.lock.ExpiredLockException;
-import com.liferay.lock.InvalidLockException;
-import com.liferay.lock.NoSuchLockException;
-import com.liferay.lock.model.Lock;
+import com.liferay.portal.ExpiredLockException;
+import com.liferay.portal.InvalidLockException;
+import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -33,6 +32,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -94,8 +94,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.DELETE);
 
-		boolean hasLock = lockService.hasLock(
-			DLFolder.class.getName(), folderId, getUserId());
+		boolean hasLock = lockLocalService.hasLock(
+			getUserId(), DLFolder.class.getName(), folderId);
 
 		Lock lock = null;
 
@@ -180,11 +180,14 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return folders;
 	}
 
-	public boolean hasInheritableLock(long folderId) throws PortalException {
+	public boolean hasInheritableLock(long folderId)
+		throws PortalException, SystemException {
+
 		boolean inheritable = false;
 
 		try {
-			Lock lock = lockService.getLock(DLFolder.class.getName(), folderId);
+			Lock lock = lockLocalService.getLock(
+				DLFolder.class.getName(), folderId);
 
 			inheritable = lock.isInheritable();
 		}
@@ -214,8 +217,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
 		}
 
-		Lock lock = lockService.lock(
-			DLFolder.class.getName(), folderId, getUser().getUserId(), owner,
+		Lock lock = lockLocalService.lock(
+			getUser().getUserId(), DLFolder.class.getName(), folderId, owner,
 			inheritable, expirationTime);
 
 		Set<String> fileNames = new HashSet<String>();
@@ -256,9 +259,9 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public Lock refreshFolderLock(String lockUuid, long expirationTime)
-		throws PortalException {
+		throws PortalException, SystemException {
 
-		return lockService.refresh(lockUuid, expirationTime);
+		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
 	public void reIndexSearch(long companyId)
@@ -274,11 +277,11 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public void unlockFolder(long folderId, String lockUuid)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
-				Lock lock = lockService.getLock(
+				Lock lock = lockLocalService.getLock(
 					DLFolder.class.getName(), folderId);
 
 				if (!lock.getUuid().equals(lockUuid)) {
@@ -295,7 +298,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			}
 		}
 
-		lockService.unlock(DLFolder.class.getName(), folderId);
+		lockLocalService.unlock(DLFolder.class.getName(), folderId);
 
 		try {
 			List<DLFileEntry> fileEntries = dlFileEntryService.getFileEntries(
@@ -328,8 +331,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.UPDATE);
 
-		boolean hasLock = lockService.hasLock(
-			DLFolder.class.getName(), folderId, getUserId());
+		boolean hasLock = lockLocalService.hasLock(
+			getUserId(), DLFolder.class.getName(), folderId);
 
 		Lock lock = null;
 
@@ -355,12 +358,13 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		boolean verified = false;
 
 		try {
-			Lock lock = lockService.getLock(DLFolder.class.getName(), folderId);
+			Lock lock = lockLocalService.getLock(
+				DLFolder.class.getName(), folderId);
 
 			if (!lock.isInheritable()) {
 				throw new NoSuchLockException();

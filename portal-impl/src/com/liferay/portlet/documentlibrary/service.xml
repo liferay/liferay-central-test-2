@@ -69,7 +69,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
-		<reference package-path="com.liferay.lock" entity="Lock" />
+		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
@@ -283,7 +283,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
-		<reference package-path="com.liferay.lock" entity="Lock" />
+		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="Layout" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
