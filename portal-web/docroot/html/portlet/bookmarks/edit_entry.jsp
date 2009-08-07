@@ -52,165 +52,103 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
-<input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
+	<portlet:param name="struts_action" value="/bookmarks/edit_entry" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="entry"
-	backURL="<%= redirect %>"
-/>
+<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEntry(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
+	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
-<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
+	<liferay-ui:tabs
+		names="entry"
+		backURL="<%= redirect %>"
+	/>
 
-<liferay-ui:asset-tags-error />
+	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />
+	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-<table class="lfr-table">
+	<liferay-ui:asset-tags-error />
 
-<c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="folder" />
-		</td>
-		<td>
+	<aui:model-context bean="<%= entry %>" model="<%= BookmarksEntry.class %>" />
 
-			<%
-			String folderName = StringPool.BLANK;
+	<aui:fieldset>
+		<c:if test="<%= ((entry != null) || (folderId <= 0)) %>">
+			<aui:field-wrapper label="folder">
+					<%
+					String folderName = StringPool.BLANK;
 
-			if (folderId > 0) {
-				BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+					if (folderId > 0) {
+						BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
 
-				folderId = folder.getFolderId();
-				folderName = folder.getName();
-			}
-			%>
+						folderId = folder.getFolderId();
+						folderName = folder.getName();
+					}
+					%>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
-			<%= folderName %></a>
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+						<portlet:param name="struts_action" value="/bookmarks/view" />
+						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+					</portlet:renderURL>
 
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/bookmarks/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+					<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="url" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="url" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= BookmarksEntry.class %>" bean="<%= entry %>" field="comments" />
-	</td>
-</tr>
+					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
+						<portlet:param name="struts_action" value="/bookmarks/select_folder" />
+						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+					</portlet:renderURL>
 
-<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+					<%
+					String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+					%>
+
+					<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:input name="name"  />
+
+		<aui:input name="url"  />
+
+		<aui:input name="description"  />
+
+		<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= BookmarksEntry.class.getName() %>"
 				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<c:if test="<%= entry != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="visits" />
-		</td>
-		<td>
-			<%= entry.getVisits() %>
-		</td>
-	</tr>
-</c:if>
+		<c:if test="<%= entry != null %>">
+			<aui:field-wrapper label="visits">
+				<%= entry.getVisits() %>
+			</aui:field-wrapper>
+		</c:if>
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="categories" />
-	</td>
-	<td>
-		<liferay-ui:asset-categories-selector
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= entryId %>"
-		/>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
-		<liferay-ui:asset-tags-selector
-			className="<%= BookmarksEntry.class.getName() %>"
-			classPK="<%= entryId %>"
-		/>
-	</td>
-</tr>
+		<aui:input name="categories" type="assetCategories" />
 
-<c:if test="<%= entry == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= BookmarksEntry.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<aui:input name="tags" type="assetTags" />
 
-</table>
+		<c:if test="<%= entry == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= BookmarksEntry.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button value="cancel" onClick="<%= redirect %>" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
