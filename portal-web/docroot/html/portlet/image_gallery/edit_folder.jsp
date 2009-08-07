@@ -66,132 +66,91 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_folder" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFolder(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />parentFolderId" type="hidden" value="<%= parentFolderId %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editFolderURL">
+	<portlet:param name="struts_action" value="/image_gallery/edit_folder" />
+</portlet:actionURL>
+
+<aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFolder(); return false;" %>'>
+<aui:input name="<%= Constants.CMD %>" type="hidden" />
+<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
 <liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="lfr-table">
+<aui:model-context bean="<%= folder %>" model="<%= IGFolder.class %>" />
 
-<c:if test="<%= folder != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="parent-folder" />
-		</td>
-		<td>
-			<table class="lfr-table">
-			<tr>
-				<td>
+	<aui:fieldset>
+		<c:if test="<%= folder != null %>">
+			<aui:field-wrapper label="parent-folder">
+				<%
+				String parentFolderName = "";
 
-					<%
-					String parentFolderName = "";
+				try {
+					IGFolder parentFolder = IGFolderLocalServiceUtil.getFolder(parentFolderId);
 
-					try {
-						IGFolder parentFolder = IGFolderLocalServiceUtil.getFolder(parentFolderId);
+					parentFolder = parentFolder.toEscapedModel();
 
-						parentFolder = parentFolder.toEscapedModel();
+					parentFolderName = parentFolder.getName();
+				}
+				catch (NoSuchFolderException nscce) {
+				}
+				%>
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+					<portlet:param name="struts_action" value="/image_gallery/view" />
+					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+				</portlet:renderURL>
 
-						parentFolderName = parentFolder.getName();
-					}
-					catch (NoSuchFolderException nscce) {
-					}
-					%>
+				<aui:a href="<%= viewFolderURL %>" id="parentFolderName"><%= parentFolderName %></aui:a>
 
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentFolderName">
-					<%= parentFolderName %></a>
+				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
+					<portlet:param name="struts_action" value="/image_gallery/select_folder" />
+					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+				</portlet:renderURL>
 
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
+				<%
+				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+				%>
 
-					<input id="<portlet:namespace />removeFolderButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeFolder();" />
-				</td>
-				<td>
-					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
-						<c:if test="<%= folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
-							style="display: none;"
-						</c:if>
-					>
-						<liferay-ui:input-checkbox param="mergeWithParentFolder" />
+				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
 
-						<liferay-ui:message key="merge-with-parent-folder" />
-					</div>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= IGFolder.class %>" bean="<%= folder %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= IGFolder.class %>" bean="<%= folder %>" field="description" />
-	</td>
-</tr>
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
+					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
+				</div>
+			</aui:field-wrapper>
+		</c:if>
 
-<liferay-ui:custom-attributes-available className="<%= IGFolder.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+		<aui:input name="name" />
+
+		<aui:input name="description" />
+
+		<liferay-ui:custom-attributes-available className="<%= IGFolder.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= IGFolder.class.getName() %>"
 				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<c:if test="<%= folder == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= IGFolder.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<c:if test="<%= folder == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= IGFolder.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
 
-</table>
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button value="cancel" onClick="<%= redirect %>" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
 	<script type="text/javascript">

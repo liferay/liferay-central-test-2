@@ -192,168 +192,110 @@ if (image != null) {
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveImage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(referringPortletResource) %>" />
-<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= HtmlUtil.escapeAttribute(uploadProgressId) %>" />
-<input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
-<input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
+<portlet:actionURL var="editImageURL">
+	<portlet:param name="struts_action" value="/image_gallery/edit_image" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
+<aui:form action="<%= editImageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveImage(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
+	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
+	<aui:input name="imageId" type="hidden" value="<%= imageId %>" />
+	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 
-<liferay-ui:error exception="<%= ImageNameException.class %>">
-	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
-</liferay-ui:error>
+	<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 
-<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
-<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
+	<liferay-ui:error exception="<%= ImageNameException.class %>">
+		<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
+	</liferay-ui:error>
 
-<liferay-ui:asset-tags-error />
+	<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-<%
-String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024);
-%>
+	<liferay-ui:asset-tags-error />
 
-<c:if test='<%= !imageMaxSize.equals("0") %>'>
-	<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", imageMaxSize, false) %>
+	<aui:model-context bean="<%= image %>" model="<%= IGImage.class %>" />
 
-	<br /><br />
-</c:if>
+	<aui:field-wrapper>
+		<%
+		String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024);
+		%>
+		<c:if test='<%= !imageMaxSize.equals("0") %>'>
+			<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", imageMaxSize, false) %>
+		</c:if>
+	</aui:field-wrapper>
 
-<table class="lfr-table">
+	<aui:fieldset>
+		<c:if test="<%= ((image != null) || (folderId <= 0)) %>">
+			<aui:field-wrapper label="folder">
+					<%
+					String folderName = StringPool.BLANK;
 
-<c:if test="<%= ((image != null) || (folderId <= 0)) %>">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="folder" />
-		</td>
-		<td>
+					if (folderId > 0) {
+						folder = IGFolderLocalServiceUtil.getFolder(folderId);
 
-			<%
-			String folderName = StringPool.BLANK;
+						folder = folder.toEscapedModel();
 
-			if (folderId > 0) {
-				folder = IGFolderLocalServiceUtil.getFolder(folderId);
+						folderId = folder.getFolderId();
+						folderName = folder.getName();
+					}
+					%>
 
-				folder = folder.toEscapedModel();
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
+						<portlet:param name="struts_action" value="/image_gallery/view" />
+						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+					</portlet:renderURL>
 
-				folderId = folder.getFolderId();
-				folderName = folder.getName();
-			}
-			%>
+					<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>" id="<portlet:namespace />folderName">
-			<%= folderName %></a>
+					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
+						<portlet:param name="struts_action" value="/image_gallery/select_folder" />
+						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+					</portlet:renderURL>
 
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var folderWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/select_folder" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+					<%
+					String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
+					%>
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="file" />
-	</td>
-	<td>
-		<input class="lfr-input-text" id="<portlet:namespace />file" name="<portlet:namespace />file" type="file" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="name" /><%= extension %>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="description" />
-	</td>
-</tr>
+					<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+			</aui:field-wrapper>
+		</c:if>
 
-<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+		<aui:input name="file" type="file" />
+
+		<aui:input name="name" />
+
+		<aui:input name="description" />
+
+		<liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= IGImage.class.getName() %>"
 				classPK="<%= imageId %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="categories" />
-	</td>
-	<td>
-		<liferay-ui:asset-categories-selector
-			className="<%= IGImage.class.getName() %>"
-			classPK="<%= imageId %>"
-		/>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
-		<liferay-ui:asset-tags-selector
-			className="<%= IGImage.class.getName() %>"
-			classPK="<%= imageId %>"
-		/>
-	</td>
-</tr>
+		<aui:input name="categories" type="assetCategories" />
 
-<c:if test="<%= image == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= IGImage.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<aui:input name="tags" type="assetTags" />
 
-</table>
+		<c:if test="<%= image == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= IGImage.class.getName() %>"
+				/>
+			</aui:field-wrapper><tr>
+		</c:if>
+	</aui:fieldset>
 
-<br />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="window.location = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button value="cancel" onClick="<%= redirect %>" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
