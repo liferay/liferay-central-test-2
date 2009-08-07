@@ -1771,6 +1771,9 @@
 				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See LPS-4474.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/jodconverter.jar</file-name>
