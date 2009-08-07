@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901" xmlns:alf="http://www.alfresco.org">
+	<author>
+		<name>admin</name>
+	</author>
+	<content type="application/octet-stream" src="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/content.xml" />
+	<id>urn:uuid:d9293ee9-b9fb-4497-8dbd-c169bf740955</id>
+	<link rel="self" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955" />
+	<link rel="enclosure" type="application/octet-stream" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/content.xml" />
+	<link rel="edit" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955" />
+	<link rel="edit-media" type="application/octet-stream" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/content.xml" />
+	<link rel="allowableactions" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/permissions" />
+	<link rel="relationships" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/associations" />
+	<link rel="parents" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/parents" />
+	<link rel="allversions" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/versions" />
+	<link rel="stream" type="application/octet-stream" href="http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/content.xml" />
+	<link rel="type" href="http://localhost:8080/cmis/type/document" />
+	<link rel="repository" href="http://localhost:8080/cmis/repository" />
+	<published>2009-05-27T11:36:57.551+01:00</published>
+	<summary>test.xml</summary>
+	<title>test.xml</title>
+	<updated>2009-05-27T11:36:57.808+01:00</updated>
+	<cmis:object>
+		<cmis:properties>
+			<cmis:propertyString cmis:name="BaseType">
+				<cmis:value>document</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyString cmis:name="ContentStreamFilename">
+				<cmis:value>test.xml</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyString cmis:name="CheckinComment" />
+			<cmis:propertyDateTime cmis:name="LastModificationDate">
+				<cmis:value>2009-05-27T11:36:57.808+01:00</cmis:value>
+			</cmis:propertyDateTime>
+			<cmis:propertyInteger cmis:name="ContentStreamLength">
+				<cmis:value>6568</cmis:value>
+			</cmis:propertyInteger>
+			<cmis:propertyBoolean cmis:name="IsLatestMajorVersion">
+				<cmis:value>false</cmis:value>
+			</cmis:propertyBoolean>
+			<cmis:propertyBoolean cmis:name="IsImmutable">
+				<cmis:value>false</cmis:value>
+			</cmis:propertyBoolean>
+			<cmis:propertyString cmis:name="ContentStreamMimeType">
+				<cmis:value>application/octet-stream</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyString cmis:name="LastModifiedBy">
+				<cmis:value>admin</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyBoolean cmis:name="IsMajorVersion">
+				<cmis:value>false</cmis:value>
+			</cmis:propertyBoolean>
+			<cmis:propertyString cmis:name="ContentStreamAllowed">
+				<cmis:value>ALLOWED</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyUri cmis:name="Uri" />
+			<cmis:propertyId cmis:name="ObjectTypeId">
+				<cmis:value>document</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyBoolean cmis:name="IsLatestVersion">
+				<cmis:value>true</cmis:value>
+			</cmis:propertyBoolean>
+			<cmis:propertyString cmis:name="VersionLabel" />
+			<cmis:propertyId cmis:name="VersionSeriesCheckedOutId" />
+			<cmis:propertyBoolean cmis:name="IsVersionSeriesCheckedOut">
+				<cmis:value>false</cmis:value>
+			</cmis:propertyBoolean>
+			<cmis:propertyString cmis:name="VersionSeriesCheckedOutBy" />
+			<cmis:propertyString cmis:name="ChangeToken" />
+			<cmis:propertyString cmis:name="CreatedBy">
+				<cmis:value>admin</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyId cmis:name="ObjectId">
+				<cmis:value>d9293ee9-b9fb-4497-8dbd-c169bf740955</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyUri cmis:name="ContentStreamUri">
+				<cmis:value>http://localhost:8080/cmis/path/root/d9293ee9-b9fb-4497-8dbd-c169bf740955/content.xml</cmis:value>
+			</cmis:propertyUri>
+			<cmis:propertyId cmis:name="VersionSeriesId">
+				<cmis:value>d9293ee9-b9fb-4497-8dbd-c169bf740955</cmis:value>
+			</cmis:propertyId>
+			<cmis:propertyString cmis:name="Name">
+				<cmis:value>test.xml</cmis:value>
+			</cmis:propertyString>
+			<cmis:propertyDateTime cmis:name="CreationDate">
+				<cmis:value>2009-05-27T11:36:57.551+01:00</cmis:value>
+			</cmis:propertyDateTime>
+		</cmis:properties>
+	</cmis:object>
+	<cmis:terminator />
+	<app:edited>2009-05-27T11:36:57.808+01:00</app:edited>
+</entry>
