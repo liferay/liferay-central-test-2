@@ -104,26 +104,31 @@ public interface DLFileEntryService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
-	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
+	public com.liferay.portal.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
+	public com.liferay.portal.model.Lock lockFileEntry(long folderId,
 		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.lock.model.Lock refreshFileEntryLock(
+	public com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
-	public void unlockFileEntry(long folderId, java.lang.String name);
+	public void unlockFileEntry(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String lockUuid) throws com.liferay.portal.PortalException;
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long folderId, long newFolderId, java.lang.String name,
@@ -134,5 +139,7 @@ public interface DLFileEntryService {
 			com.liferay.portal.SystemException;
 
 	public boolean verifyFileEntryLock(long folderId, java.lang.String name,
-		java.lang.String lockUuid) throws com.liferay.portal.PortalException;
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

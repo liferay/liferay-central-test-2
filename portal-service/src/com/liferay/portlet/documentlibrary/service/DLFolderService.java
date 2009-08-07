@@ -104,20 +104,22 @@ public interface DLFolderService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasInheritableLock(long folderId)
-		throws com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
-	public com.liferay.lock.model.Lock lockFolder(long folderId)
+	public com.liferay.portal.model.Lock lockFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public com.liferay.lock.model.Lock lockFolder(long folderId,
+	public com.liferay.portal.model.Lock lockFolder(long folderId,
 		java.lang.String owner, boolean inheritable, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public com.liferay.lock.model.Lock refreshFolderLock(
+	public com.liferay.portal.model.Lock refreshFolderLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void reIndexSearch(long companyId)
@@ -125,7 +127,8 @@ public interface DLFolderService {
 			com.liferay.portal.SystemException;
 
 	public void unlockFolder(long folderId, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void unlockFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String lockUuid)
@@ -140,5 +143,7 @@ public interface DLFolderService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid) throws com.liferay.portal.PortalException;
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

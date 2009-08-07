@@ -109,36 +109,41 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static boolean hasFileEntryLock(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().hasFileEntryLock(folderId, name);
 	}
 
-	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+	public static com.liferay.portal.model.Lock lockFileEntry(long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().lockFileEntry(folderId, name);
 	}
 
-	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+	public static com.liferay.portal.model.Lock lockFileEntry(long folderId,
 		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().lockFileEntry(folderId, name, owner, expirationTime);
 	}
 
-	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+	public static com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().refreshFileEntryLock(lockUuid, expirationTime);
 	}
 
-	public static void unlockFileEntry(long folderId, java.lang.String name) {
+	public static void unlockFileEntry(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		getService().unlockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String lockUuid) throws com.liferay.portal.PortalException {
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().unlockFileEntry(folderId, name, lockUuid);
 	}
 
@@ -157,7 +162,8 @@ public class DLFileEntryServiceUtil {
 
 	public static boolean verifyFileEntryLock(long folderId,
 		java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().verifyFileEntryLock(folderId, name, lockUuid);
 	}
 

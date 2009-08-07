@@ -108,17 +108,18 @@ public class DLFolderServiceUtil {
 	}
 
 	public static boolean hasInheritableLock(long folderId)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().hasInheritableLock(folderId);
 	}
 
-	public static com.liferay.lock.model.Lock lockFolder(long folderId)
+	public static com.liferay.portal.model.Lock lockFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService().lockFolder(folderId);
 	}
 
-	public static com.liferay.lock.model.Lock lockFolder(long folderId,
+	public static com.liferay.portal.model.Lock lockFolder(long folderId,
 		java.lang.String owner, boolean inheritable, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -126,9 +127,10 @@ public class DLFolderServiceUtil {
 				   .lockFolder(folderId, owner, inheritable, expirationTime);
 	}
 
-	public static com.liferay.lock.model.Lock refreshFolderLock(
+	public static com.liferay.portal.model.Lock refreshFolderLock(
 		java.lang.String lockUuid, long expirationTime)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().refreshFolderLock(lockUuid, expirationTime);
 	}
 
@@ -139,7 +141,8 @@ public class DLFolderServiceUtil {
 	}
 
 	public static void unlockFolder(long folderId, java.lang.String lockUuid)
-		throws com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		getService().unlockFolder(folderId, lockUuid);
 	}
 
@@ -162,7 +165,9 @@ public class DLFolderServiceUtil {
 	}
 
 	public static boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid) throws com.liferay.portal.PortalException {
+		java.lang.String lockUuid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		return getService().verifyInheritableLock(folderId, lockUuid);
 	}
 

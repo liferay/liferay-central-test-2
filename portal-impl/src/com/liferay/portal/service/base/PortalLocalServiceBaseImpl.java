@@ -25,8 +25,6 @@ package com.liferay.portal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.lock.service.LockService;
-
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.AccountLocalService;
@@ -56,6 +54,7 @@ import com.liferay.portal.service.LayoutSetPrototypeService;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.LayoutTemplateLocalService;
 import com.liferay.portal.service.ListTypeService;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.MembershipRequestLocalService;
 import com.liferay.portal.service.MembershipRequestService;
 import com.liferay.portal.service.OrgLaborLocalService;
@@ -126,6 +125,7 @@ import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
 import com.liferay.portal.service.persistence.ListTypePersistence;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.MembershipRequestPersistence;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPersistence;
@@ -542,6 +542,22 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 
 	public void setListTypePersistence(ListTypePersistence listTypePersistence) {
 		this.listTypePersistence = listTypePersistence;
+	}
+
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
+	}
+
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
 	}
 
 	public MembershipRequestLocalService getMembershipRequestLocalService() {
@@ -1385,14 +1401,6 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 		this.counterService = counterService;
 	}
 
-	public LockService getLockService() {
-		return lockService;
-	}
-
-	public void setLockService(LockService lockService) {
-		this.lockService = lockService;
-	}
-
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -1490,6 +1498,10 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 	protected ListTypeService listTypeService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
 	protected ListTypePersistence listTypePersistence;
+	@BeanReference(name = "com.liferay.portal.service.LockLocalService.impl")
+	protected LockLocalService lockLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	protected LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.MembershipRequestLocalService.impl")
 	protected MembershipRequestLocalService membershipRequestLocalService;
 	@BeanReference(name = "com.liferay.portal.service.MembershipRequestService.impl")
@@ -1686,6 +1698,4 @@ public abstract class PortalLocalServiceBaseImpl implements PortalLocalService {
 	protected CounterLocalService counterLocalService;
 	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
-	@BeanReference(name = "com.liferay.lock.service.LockService.impl")
-	protected LockService lockService;
 }

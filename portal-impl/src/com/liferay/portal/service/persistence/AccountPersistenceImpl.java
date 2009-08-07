@@ -521,6 +521,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.LayoutSetPrototypePersistence layoutSetPrototypePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
 	protected com.liferay.portal.service.persistence.ListTypePersistence listTypePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
 	protected com.liferay.portal.service.persistence.MembershipRequestPersistence membershipRequestPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")

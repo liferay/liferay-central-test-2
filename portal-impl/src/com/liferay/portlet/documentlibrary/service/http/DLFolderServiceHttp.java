@@ -450,8 +450,8 @@ public class DLFolderServiceHttp {
 
 	public static boolean hasInheritableLock(HttpPrincipal httpPrincipal,
 		long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -468,6 +468,10 @@ public class DLFolderServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -480,7 +484,7 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock lockFolder(
+	public static com.liferay.portal.model.Lock lockFolder(
 		HttpPrincipal httpPrincipal, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -511,7 +515,7 @@ public class DLFolderServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -520,7 +524,7 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock lockFolder(
+	public static com.liferay.portal.model.Lock lockFolder(
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String owner,
 		boolean inheritable, long expirationTime)
 		throws com.liferay.portal.PortalException,
@@ -563,7 +567,7 @@ public class DLFolderServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -572,11 +576,11 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock refreshFolderLock(
+	public static com.liferay.portal.model.Lock refreshFolderLock(
 		HttpPrincipal httpPrincipal, java.lang.String lockUuid,
 		long expirationTime)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = lockUuid;
 
@@ -599,10 +603,14 @@ public class DLFolderServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -644,8 +652,8 @@ public class DLFolderServiceHttp {
 
 	public static void unlockFolder(HttpPrincipal httpPrincipal, long folderId,
 		java.lang.String lockUuid)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -664,6 +672,10 @@ public class DLFolderServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -791,8 +803,8 @@ public class DLFolderServiceHttp {
 
 	public static boolean verifyInheritableLock(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String lockUuid)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -814,6 +826,10 @@ public class DLFolderServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

@@ -28,12 +28,11 @@ import com.liferay.counter.service.CounterService;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 
-import com.liferay.lock.service.LockService;
-
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -42,6 +41,7 @@ import com.liferay.portal.service.WebDAVPropsLocalService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -237,12 +237,20 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.dlService = dlService;
 	}
 
-	public LockService getLockService() {
-		return lockService;
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
 	}
 
-	public void setLockService(LockService lockService) {
-		this.lockService = lockService;
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
 	}
 
 	public LayoutLocalService getLayoutLocalService() {
@@ -433,8 +441,10 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLLocalService dlLocalService;
 	@BeanReference(name = "com.liferay.documentlibrary.service.DLService.impl")
 	protected DLService dlService;
-	@BeanReference(name = "com.liferay.lock.service.LockService.impl")
-	protected LockService lockService;
+	@BeanReference(name = "com.liferay.portal.service.LockLocalService.impl")
+	protected LockLocalService lockLocalService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	protected LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
 	@BeanReference(name = "com.liferay.portal.service.LayoutService.impl")

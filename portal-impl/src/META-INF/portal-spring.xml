@@ -258,6 +258,17 @@
 	<bean id="com.liferay.portal.service.persistence.ListTypeUtil" class="com.liferay.portal.service.persistence.ListTypeUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ListTypePersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.LockLocalService.impl" class="com.liferay.portal.service.impl.LockLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.LockLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
+		<property name="target" ref="com.liferay.portal.service.LockLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.LockLocalServiceUtil" class="com.liferay.portal.service.LockLocalServiceUtil">
+		<property name="service" ref="com.liferay.portal.service.LockLocalService.impl" />
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LockPersistence.impl" class="com.liferay.portal.service.persistence.LockPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.LockUtil" class="com.liferay.portal.service.persistence.LockUtil">
+		<property name="persistence" ref="com.liferay.portal.service.persistence.LockPersistence.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestLocalService.impl" class="com.liferay.portal.service.impl.MembershipRequestLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.MembershipRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.MembershipRequestLocalService.impl" />

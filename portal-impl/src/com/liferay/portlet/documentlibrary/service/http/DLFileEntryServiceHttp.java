@@ -472,8 +472,8 @@ public class DLFileEntryServiceHttp {
 
 	public static boolean hasFileEntryLock(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -496,6 +496,10 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -508,7 +512,7 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock lockFileEntry(
+	public static com.liferay.portal.model.Lock lockFileEntry(
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -541,7 +545,7 @@ public class DLFileEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -550,7 +554,7 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock lockFileEntry(
+	public static com.liferay.portal.model.Lock lockFileEntry(
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
 		java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
@@ -593,7 +597,7 @@ public class DLFileEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -602,11 +606,11 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+	public static com.liferay.portal.model.Lock refreshFileEntryLock(
 		HttpPrincipal httpPrincipal, java.lang.String lockUuid,
 		long expirationTime)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = lockUuid;
 
@@ -630,10 +634,14 @@ public class DLFileEntryServiceHttp {
 					throw (com.liferay.portal.PortalException)e;
 				}
 
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (com.liferay.lock.model.Lock)returnObj;
+			return (com.liferay.portal.model.Lock)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -661,6 +669,10 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
 				throw new com.liferay.portal.SystemException(e);
 			}
 		}
@@ -673,8 +685,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -700,6 +712,10 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -803,8 +819,8 @@ public class DLFileEntryServiceHttp {
 
 	public static boolean verifyFileEntryLock(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name, java.lang.String lockUuid)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -832,6 +848,10 @@ public class DLFileEntryServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

@@ -314,6 +314,30 @@
 			</basic>
 		</attributes>
 	</entity>
+	<entity class="com.liferay.portal.model.impl.LockImpl" name="Lock">
+		<table name="Lock_" />
+		<attributes>
+			<id name="lockId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="className" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="owner" />
+			<basic name="inheritable" />
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+		</attributes>
+	</entity>
 	<entity class="com.liferay.portal.model.impl.MembershipRequestImpl" name="MembershipRequest">
 		<table name="MembershipRequest" />
 		<attributes>
