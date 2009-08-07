@@ -3,7 +3,8 @@
 <beans
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
 >
 
 	<!-- Destinations -->
@@ -22,6 +23,9 @@
 	</bean>
 	<bean id="destination.live_users" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/live_users" />
+	</bean>
+	<bean id="destination.management" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/management" />
 	</bean>
 	<bean id="destination.message_boards" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/message_boards" />
@@ -45,6 +49,12 @@
 		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
+	<bean id="messageListener.management" class="com.liferay.portal.kernel.management.messaging.ManagementMessageListener" />
+	<bean id="messageListener.management_cluster" class="com.liferay.portal.kernel.cluster.messaging.PortalClusterBridgeMessageListener">
+		<constructor-arg index="0" >
+			<util:constant static-field="com.liferay.portal.kernel.cluster.PortalClusterMessagePriority.LEVEL5" />
+		</constructor-arg>
+	</bean>
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
@@ -59,6 +69,7 @@
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
 				<ref bean="destination.live_users" />
+				<ref bean="destination.management" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
 				<ref bean="destination.wiki" />
@@ -87,6 +98,12 @@
 				<entry key="liferay/live_users">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.live_users" />
+					</list>
+				</entry>
+				<entry key="liferay/management">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.management" />
+						<ref bean="messageListener.management_cluster" />
 					</list>
 				</entry>
 				<entry key="liferay/message_boards">
