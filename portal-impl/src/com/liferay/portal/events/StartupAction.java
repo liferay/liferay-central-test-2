@@ -87,7 +87,10 @@ public class StartupAction extends SimpleAction {
 			LockLocalServiceUtil.clear();
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to clear locks because Lock table does not exist");
+			}
 		}
 
 		// Shutdown hook
