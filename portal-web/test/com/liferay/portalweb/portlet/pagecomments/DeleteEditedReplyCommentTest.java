@@ -59,6 +59,6 @@ public class DeleteEditedReplyCommentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent(
-				"This is a edtied test reply comment!"));
+				"This is a edtied test reply comment."));
 	}
 }

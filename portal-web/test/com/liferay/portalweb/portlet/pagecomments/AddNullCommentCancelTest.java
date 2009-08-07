@@ -58,7 +58,7 @@ public class AddNullCommentCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isElementPresent("//input[@value='Cancel']")) {
 					break;
 				}
 			}
@@ -68,9 +68,6 @@ public class AddNullCommentCancelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a null comment cancel test."));
-		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
 		selenium.click("//input[@value='Cancel']");
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));

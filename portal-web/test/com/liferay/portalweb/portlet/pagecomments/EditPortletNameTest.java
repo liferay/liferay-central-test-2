@@ -68,7 +68,6 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("value", RuntimeVariables.replace("T\u00e9st Name"));
 		selenium.type("value", RuntimeVariables.replace("T\u00e9st Name"));
 		selenium.click("link=Application");
 		Thread.sleep(500);
@@ -96,7 +95,6 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("value", RuntimeVariables.replace("Page Comments"));
 		selenium.type("value", RuntimeVariables.replace("Page Comments"));
 		selenium.click("link=Application");
 		Thread.sleep(500);

@@ -68,12 +68,10 @@ public class AddSpaceReplyCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody1",
-			RuntimeVariables.replace("This is a test Space repl comment"));
-		selenium.type("_107_postReplyBody1", RuntimeVariables.replace("   "));
-		selenium.click(RuntimeVariables.replace("_107_postReplyButton1"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		selenium.type("_107_postReplyBody1", RuntimeVariables.replace(""));
+		selenium.click("_107_postReplyButton1");
+		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

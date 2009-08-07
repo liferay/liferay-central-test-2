@@ -58,7 +58,7 @@ public class AddNullCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isElementPresent("_107_postReplyButton0")) {
 					break;
 				}
 			}
@@ -68,12 +68,9 @@ public class AddNullCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a null test."));
-		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		selenium.click("_107_postReplyButton0");
+		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

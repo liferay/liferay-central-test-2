@@ -68,15 +68,13 @@ public class AddSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
 		selenium.type("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment 2!"));
+			RuntimeVariables.replace("This is a test page comment 2."));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("This is a test page comment 2!"),
+		assertEquals(RuntimeVariables.replace("This is a test page comment 2."),
 			selenium.getText("//tr[5]/td[2]/div[1]"));
 	}
 }

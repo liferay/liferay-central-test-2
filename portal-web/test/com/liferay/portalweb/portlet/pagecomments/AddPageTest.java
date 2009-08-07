@@ -57,8 +57,6 @@ public class AddPageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("Page Comments Test Page"));
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Page Comments Test Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));

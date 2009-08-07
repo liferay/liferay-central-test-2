@@ -69,13 +69,13 @@ public class EditReplyCommentTest extends BaseTestCase {
 		}
 
 		selenium.type("_107_editReplyBody3",
-			RuntimeVariables.replace("This is a edtied test reply comment!"));
+			RuntimeVariables.replace("This is a edtied test reply comment."));
 		selenium.click(RuntimeVariables.replace("_107_editReplyButton3"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(
-				"This is a edtied test reply comment!"),
+				"This is a edtied test reply comment."),
 			selenium.getText("//tr[8]/td[2]/div[1]"));
 	}
 }

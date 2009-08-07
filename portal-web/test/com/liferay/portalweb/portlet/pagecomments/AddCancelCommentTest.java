@@ -68,14 +68,12 @@ public class AddCancelCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a cancel test page comment!"));
 		selenium.type("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a cancel test page comment!"));
+			RuntimeVariables.replace("This is a cancel test page comment."));
 		selenium.click("//input[@value='Cancel']");
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent(
-				"link=This is a cancel test page comment!"));
+				"link=This is a cancel test page comment."));
 	}
 }
