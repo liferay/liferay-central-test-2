@@ -1,0 +1,49 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.kernel.cluster;
+
+/**
+ * <a href="PortalClusterMessagePriority.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * <p>
+ * A message sent by PortalClusterLink can have one of the 10 level priorities.
+ * The priority is used to pick up a channel to send the message. The mapping
+ * strategy from priority to channel depends on the implementation of
+ * PortalClusterLink. Usually high level priority means important message,
+ * the implementation should try to pick up a faster and less crowd channel for
+ * it, but there is no guarantee for this.
+ * </p>
+ *
+ * <p>
+ * It is also very possible for several different level priorities map to a
+ * same channel.
+ * </p>
+ * @author Shuyang Zhou
+ */
+public enum PortalClusterMessagePriority {
+
+	LEVEL1, LEVEL2, LEVEL3, LEVEL4, LEVEL5, LEVEL6, LEVEL7, LEVEL8, LEVEL9,
+	LEVEL10;
+
+}
