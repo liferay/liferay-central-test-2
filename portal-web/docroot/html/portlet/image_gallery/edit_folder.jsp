@@ -71,21 +71,22 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 </portlet:actionURL>
 
 <aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveFolder(); return false;" %>'>
-<aui:input name="<%= Constants.CMD %>" type="hidden" />
-<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+	<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
-<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
-<liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-folder-name" />
+	<liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<aui:model-context bean="<%= folder %>" model="<%= IGFolder.class %>" />
+	<aui:model-context bean="<%= folder %>" model="<%= IGFolder.class %>" />
 
 	<aui:fieldset>
 		<c:if test="<%= folder != null %>">
 			<aui:field-wrapper label="parent-folder">
+
 				<%
-				String parentFolderName = "";
+				String parentFolderName = StringPool.BLANK;
 
 				try {
 					IGFolder parentFolder = IGFolderLocalServiceUtil.getFolder(parentFolderId);
@@ -97,6 +98,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 				catch (NoSuchFolderException nscce) {
 				}
 				%>
+
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewFolderURL">
 					<portlet:param name="struts_action" value="/image_gallery/view" />
 					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
@@ -113,7 +115,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
 				%>
 
-				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+				<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
 
 				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 

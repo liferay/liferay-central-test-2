@@ -218,11 +218,13 @@ if (image != null) {
 	<aui:model-context bean="<%= image %>" model="<%= IGImage.class %>" />
 
 	<aui:field-wrapper>
+
 		<%
-		String imageMaxSize = String.valueOf(PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024);
+		long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 		%>
-		<c:if test='<%= !imageMaxSize.equals("0") %>'>
-			<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", imageMaxSize, false) %>
+
+		<c:if test='<%= imageMaxSize != 0 %>'>
+			<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %>
 		</c:if>
 	</aui:field-wrapper>
 
@@ -258,7 +260,7 @@ if (image != null) {
 					String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
 					%>
 
-					<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+					<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
 			</aui:field-wrapper>
 		</c:if>
 
@@ -286,7 +288,7 @@ if (image != null) {
 				<liferay-ui:input-permissions
 					modelName="<%= IGImage.class.getName() %>"
 				/>
-			</aui:field-wrapper><tr>
+			</aui:field-wrapper>
 		</c:if>
 	</aui:fieldset>
 
