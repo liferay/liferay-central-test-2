@@ -129,40 +129,64 @@ public class DocUtil {
 		childElement.addText(GetterUtil.getString(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, boolean text) {
 
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, double text) {
 
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(org.dom4j.Element element, String name, float text) {
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(org.dom4j.Element element, String name, int text) {
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(org.dom4j.Element element, String name, long text) {
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(org.dom4j.Element element, String name, short text) {
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, Object text) {
 
 		add(element, name, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, String text) {
 
@@ -171,6 +195,9 @@ public class DocUtil {
 		childElement.addText(GetterUtil.getString(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static org.dom4j.Element add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace) {
 
@@ -179,6 +206,9 @@ public class DocUtil {
 		return element.addElement(qName);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		boolean text) {
@@ -186,6 +216,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		double text) {
@@ -193,6 +226,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		float text) {
@@ -200,6 +236,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		int text) {
@@ -207,6 +246,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		long text) {
@@ -214,6 +256,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		short text) {
@@ -221,6 +266,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		Object text) {
@@ -228,6 +276,9 @@ public class DocUtil {
 		add(element, name, namespace, String.valueOf(text));
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void add(
 		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
 		String text) {

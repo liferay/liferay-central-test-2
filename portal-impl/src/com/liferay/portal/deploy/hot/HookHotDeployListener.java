@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -959,7 +958,6 @@ public class HookHotDeployListener
 		public CustomJspBag(String customJspDir, List<String> customJsps) {
 			_customJspDir = customJspDir;
 			_customJsps = customJsps;
-			_timestamp = Time.getTimestamp();
 		}
 
 		public String getCustomJspDir() {
@@ -970,13 +968,8 @@ public class HookHotDeployListener
 			return _customJsps;
 		}
 
-		public String getTimestamp() {
-			return _timestamp;
-		}
-
 		private String _customJspDir;
 		private List<String> _customJsps;
-		private String _timestamp;
 
 	}
 

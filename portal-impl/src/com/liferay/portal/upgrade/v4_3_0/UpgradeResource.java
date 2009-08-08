@@ -75,6 +75,7 @@ import java.util.Map;
  *
  * @author Alexander Chow
  * @author Brian Wing Shun Chan
+ * @deprecated
  */
 public class UpgradeResource extends UpgradeProcess {
 

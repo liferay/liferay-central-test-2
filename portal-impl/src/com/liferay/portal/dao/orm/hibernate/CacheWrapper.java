@@ -36,6 +36,7 @@ import org.hibernate.cache.CacheException;
  * <a href="CacheWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @deprecated
  */
 public class CacheWrapper implements Cache, CacheRegistryItem {
 
@@ -108,7 +109,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 		_cache.remove(key);
 	}
 
-	public Map toMap() {
+	public Map<?, ?> toMap() {
 		return _cache.toMap();
 	}
 

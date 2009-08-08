@@ -170,6 +170,9 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long organizationId, long locationId)
 		throws PortalException, SystemException {

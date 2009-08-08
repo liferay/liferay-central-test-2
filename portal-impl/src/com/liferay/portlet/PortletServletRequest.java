@@ -397,6 +397,9 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _request.isRequestedSessionIdFromURL();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public boolean isRequestedSessionIdFromUrl() {
 		return _request.isRequestedSessionIdFromUrl();
 	}

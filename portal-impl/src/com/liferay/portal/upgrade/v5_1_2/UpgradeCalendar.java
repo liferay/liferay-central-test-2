@@ -36,6 +36,7 @@ import com.liferay.portlet.calendar.model.impl.CalEventImpl;
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
  *
  * @author Samuel Kong
+ * @deprecated
  */
 public class UpgradeCalendar extends UpgradeProcess {
 

@@ -92,7 +92,7 @@ public class QueryUtil {
 				}
 
 				if (unmodifiable) {
-					return new UnmodifiableList(list);
+					return new UnmodifiableList<Object>(list);
 				}
 				else {
 					return list;
@@ -136,7 +136,7 @@ public class QueryUtil {
 		}
 
 		if (unmodifiable) {
-			return new UnmodifiableList(list);
+			return new UnmodifiableList<Object>(list);
 		}
 		else {
 			return list;

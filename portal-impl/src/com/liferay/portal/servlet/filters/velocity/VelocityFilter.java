@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @deprecated
  */
 public class VelocityFilter extends BasePortalFilter {
 

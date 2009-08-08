@@ -64,7 +64,7 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
  * <a href="PortletRequestUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class PortletRequestUtil {
 
@@ -467,7 +467,7 @@ public class PortletRequestUtil {
 		if (obj == null) {
 			return false;
 		}
-		else if (obj instanceof Collection) {
+		else if (obj instanceof Collection<?>) {
 			Collection<?> col = (Collection<?>)obj;
 
 			if (col.size() == 0) {
@@ -477,7 +477,7 @@ public class PortletRequestUtil {
 				return true;
 			}
 		}
-		else if (obj instanceof Map) {
+		else if (obj instanceof Map<?, ?>) {
 			Map<?, ?> map = (Map<?, ?>)obj;
 
 			if (map.size() == 0) {

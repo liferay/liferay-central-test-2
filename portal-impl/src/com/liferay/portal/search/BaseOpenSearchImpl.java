@@ -228,6 +228,9 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			item, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	protected Object[] addSearchResults(
 		String keywords, int startPage, int itemsPerPage, int total, int start,
 		String title, String searchPath, String format,

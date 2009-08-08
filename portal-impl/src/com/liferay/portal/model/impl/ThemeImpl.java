@@ -55,6 +55,9 @@ import java.util.Properties;
  */
 public class ThemeImpl extends PluginBaseImpl implements Theme {
 
+	/**
+	 * @deprecated
+	 */
 	public static String getDefaultRegularThemeId() {
 		return PortalUtil.getJsSafePortletId(
 			PropsValues.DEFAULT_REGULAR_THEME_ID);
@@ -69,6 +72,9 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return PortalUtil.getJsSafePortletId(defaultRegularThemeId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static String getDefaultWapThemeId() {
 		return PortalUtil.getJsSafePortletId(PropsValues.DEFAULT_WAP_THEME_ID);
 	}

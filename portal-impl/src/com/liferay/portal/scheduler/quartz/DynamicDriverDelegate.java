@@ -427,6 +427,9 @@ public class DynamicDriverDelegate extends StdJDBCDelegate {
 			arg0, arg1, arg2, arg3, arg4, arg5);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public long selectNextFireTime(Connection conn) throws SQLException {
 		return _jdbcDelegate.selectNextFireTime(conn);
 	}

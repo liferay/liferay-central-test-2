@@ -41,6 +41,7 @@ import java.util.TimeZone;
  * </b></a>
  *
  * @author Samuel Kong
+ * @deprecated
  */
 public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 

@@ -48,6 +48,9 @@ public class UserPermissionImpl implements UserPermission {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
@@ -76,6 +79,9 @@ public class UserPermissionImpl implements UserPermission {
 		return contains(permissionChecker, userId, null, actionId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {

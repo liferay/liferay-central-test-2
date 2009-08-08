@@ -47,6 +47,7 @@ import java.sql.ResultSet;
  * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @deprecated
  */
 public class UpgradePermission extends UpgradeProcess {
 

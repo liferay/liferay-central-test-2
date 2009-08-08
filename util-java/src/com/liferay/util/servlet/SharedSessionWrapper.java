@@ -116,6 +116,9 @@ public class SharedSessionWrapper implements HttpSession {
 		return _session.getServletContext();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
 		return _session.getSessionContext();
 	}

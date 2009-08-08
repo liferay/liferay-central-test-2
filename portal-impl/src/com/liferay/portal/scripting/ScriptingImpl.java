@@ -22,8 +22,6 @@
 
 package com.liferay.portal.scripting;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
@@ -214,8 +212,6 @@ public class ScriptingImpl implements Scripting {
 
 		return sb.toString();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ScriptingImpl.class);
 
 	private Map<String, ScriptingExecutor> _scriptingExecutors =
 		new HashMap<String, ScriptingExecutor>();

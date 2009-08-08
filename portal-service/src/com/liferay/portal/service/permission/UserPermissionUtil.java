@@ -39,6 +39,9 @@ public class UserPermissionUtil {
 		getUserPermission().check(permissionChecker, userId, actionId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void check(
 			PermissionChecker permissionChecker, long userId,
 			long organizationId, long locationId, String actionId)
@@ -65,6 +68,9 @@ public class UserPermissionUtil {
 			permissionChecker, userId, actionId);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static boolean contains(
 		PermissionChecker permissionChecker, long userId, long organizationId,
 		long locationId, String actionId) {

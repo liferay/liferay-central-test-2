@@ -82,6 +82,9 @@ public class NullSession implements HttpSession {
 		return _servletContext;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
 		return null;
 	}

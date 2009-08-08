@@ -208,7 +208,9 @@ public class JavadocFormatter {
 					comment = element.getText();
 				}
 
-				if (!_initializeMissingJavadocs && Validator.isNull(comment)) {
+				if (!name.equals("deprecated") && !_initializeMissingJavadocs &&
+					Validator.isNull(comment)) {
+
 					continue;
 				}
 
@@ -280,14 +282,19 @@ public class JavadocFormatter {
 					comment = element.getText();
 				}
 
-				if (!_initializeMissingJavadocs && Validator.isNull(comment)) {
+				if (!name.equals("deprecated") && !_initializeMissingJavadocs &&
+					Validator.isNull(comment)) {
+
 					continue;
 				}
 
 				sb.append(indent);
 				sb.append(" * @");
 				sb.append(name);
-				sb.append(curNameIndent);
+
+				if (Validator.isNotNull(comment) || (commentElement != null)) {
+					sb.append(curNameIndent);
+				}
 
 				if (commentElement != null) {
 					comment = element.elementText("name") + " " + comment;

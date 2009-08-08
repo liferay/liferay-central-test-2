@@ -76,7 +76,7 @@ public class BeanToXMLUtil {
 				try {
 					Object returnValue = method.invoke(obj, new Object[] {});
 
-					if (returnValue instanceof List) {
+					if (returnValue instanceof List<?>) {
 						List<Object> list = (List<Object>)returnValue;
 
 						Element listEl = parentEl.addElement(memberName);
@@ -117,7 +117,7 @@ public class BeanToXMLUtil {
 				try {
 					Object returnValue = method.invoke(obj, new Object[] {});
 
-					if (returnValue instanceof List) {
+					if (returnValue instanceof List<?>) {
 						List<Object> list = (List<Object>)returnValue;
 
 						org.dom4j.Element listEl = parentEl.addElement(

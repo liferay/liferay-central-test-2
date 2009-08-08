@@ -58,40 +58,61 @@ public class LiferayClassicSession extends LiferaySession implements Session {
 		return _session;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Query createSQLQuery(
 		String sql, String returnAlias, Class returnClass) {
 
 		return _session.createSQLQuery(sql, returnAlias, returnClass);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Query createSQLQuery(
 		String sql, String[] returnAliases, Class[] returnClasses) {
 
 		return _session.createSQLQuery(sql, returnAliases, returnClasses);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public int delete(String query) throws HibernateException {
 		return _session.delete(query);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public int delete(String query, Object value, Type type)
 		throws HibernateException {
 
 		return _session.delete(query, value, type);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public int delete(String query, Object[] values, Type[] types)
 		throws HibernateException {
 
 		return _session.delete(query, values, types);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Collection filter(Object collection, String filter)
 		throws HibernateException {
 
 		return _session.filter(collection, filter);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Collection filter(
 			Object collection, String filter, Object value, Type type)
 		throws HibernateException {
@@ -99,6 +120,9 @@ public class LiferayClassicSession extends LiferaySession implements Session {
 		return _session.filter(collection, filter, value, type);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Collection filter(
 			Object collection, String filter, Object[] values, Type[] types)
 		throws HibernateException {
@@ -106,64 +130,100 @@ public class LiferayClassicSession extends LiferaySession implements Session {
 		return _session.filter(collection, filter, values, types);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public List find(String query) throws HibernateException {
 		return _session.find(query);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public List find(String query, Object value, Type type)
 		throws HibernateException {
 
 		return _session.find(query, value, type);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public List find(String query, Object[] values, Type[] types)
 		throws HibernateException {
 
 		return _session.find(query, values, types);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Iterator iterate(String query) throws HibernateException {
 		return _session.iterate(query);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Iterator iterate(String query, Object value, Type type)
 		throws HibernateException {
 
 		return _session.iterate(query, value, type);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Iterator iterate(String query, Object[] values, Type[] types)
 		throws HibernateException {
 
 		return _session.iterate(query, values, types);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void save(Object object, Serializable id) throws HibernateException {
 		_session.save(object, id);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void save(String entityName, Object object, Serializable id)
 		throws HibernateException {
 
 		_session.save(entityName, object, id);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Object saveOrUpdateCopy(Object object) throws HibernateException {
 		return _session.saveOrUpdateCopy(object);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Object saveOrUpdateCopy(Object object, Serializable id)
 		throws HibernateException {
 
 		return _session.saveOrUpdateCopy(object, id);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Object saveOrUpdateCopy(String entityName, Object object)
 		throws HibernateException {
 
 		return _session.saveOrUpdateCopy(entityName, object);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public Object saveOrUpdateCopy(
 			String entityName, Object object, Serializable id)
 		throws HibernateException {
@@ -171,12 +231,18 @@ public class LiferayClassicSession extends LiferaySession implements Session {
 		return _session.saveOrUpdateCopy(entityName, object, id);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void update(Object object, Serializable id)
 		throws HibernateException {
 
 		_session.update(object, id);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void update(String entityName, Object object, Serializable id)
 		throws HibernateException {
 
