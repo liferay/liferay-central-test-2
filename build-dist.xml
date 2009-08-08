@@ -551,6 +551,66 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		</antcall>
 	</target>
 
+	<target name="build-shelf">
+		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<exec dir="${lp.source.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update -r ${svn.revision}" />
+		</exec>
+
+		<if>
+			<or>
+				<equals arg1="${shelf.drive}" arg2="$${shelf.drive}" />
+				<equals arg1="${shelf.branch}" arg2="$${shelf.branch}" />
+				<equals arg1="${shelf.path}" arg2="$${shelf.path}" />
+			</or>
+			<then>
+				<fail>
+					Please set the appropriate properties. Do not run this task unless you really
+					know what you are doing as it can cause loss of data.
+				</fail>
+			</then>
+		</if>
+
+		<exec executable="cmd">
+			<arg line="/c format /v:${shelf.branch}-shelf /q /y ${shelf.drive}" />
+		</exec>
+
+		<exec executable="xcopy">
+			<arg line="/e /i /q /y \bundles ${shelf.drive}\bundles" />
+		</exec>
+
+		<exec executable="xcopy">
+			<arg line="/e /i /q /h /y \vanilla ${shelf.drive}\projects" />
+		</exec>
+
+		<exec executable="xcopy">
+			<arg line="/e /i /q /h /y \vanilla ${shelf.drive}\vanilla" />
+		</exec>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmm" />
+		</tstamp>
+
+		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn copy --username ${svn.username} --password ${svn.password} -r ${svn.revision} -m ' ' svn://svn.liferay.com/repos/public/portal/branches/${shelf.branch} ${shelf.path}/${tstamp.value}" />
+		</exec>
+
+		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn switch ${shelf.path}/${tstamp.value}" />
+		</exec>
+
+		<exec dir="${shelf.drive}\vanilla\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn switch ${shelf.path}/${tstamp.value}" />
+		</exec>
+	</target>
+
 	<target name="prepare-generated-files">
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
 		<ant dir="portal-impl" target="build-services" inheritAll="false" />
