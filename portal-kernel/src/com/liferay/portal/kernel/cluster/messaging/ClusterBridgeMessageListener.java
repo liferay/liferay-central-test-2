@@ -23,8 +23,8 @@
 package com.liferay.portal.kernel.cluster.messaging;
 
 import com.liferay.portal.kernel.cluster.Address;
-import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
+import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
