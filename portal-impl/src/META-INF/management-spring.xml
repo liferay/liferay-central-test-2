@@ -8,12 +8,4 @@
 	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
 		 <property name="locateExistingServerIfPossible" value="true" />
 	</bean>
-
-	<!-- Managemenet Service -->
-	<bean id="com.liferay.portal.management.ManagementServiceImpl" class="com.liferay.portal.management.ManagementServiceImpl" />
-
-	<bean id="com.liferay.portal.kernel.management.ManagementServiceUtil" class="com.liferay.portal.kernel.management.ManagementServiceUtil">
-		<constructor-arg index="0" ref="com.liferay.portal.management.ManagementServiceImpl" />
-	</bean>
-	
 </beans>

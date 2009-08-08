@@ -56,8 +56,6 @@ public interface DestinationNames {
 
 	public static final String MAIL_SYNCHRONIZER = "liferay/mail_synchronizer";
 
-	public static final String MANAGEMENT = "liferay/management";
-
 	public static final String MESSAGE_BOARDS = "liferay/message_boards";
 
 	public static final String MESSAGE_BOARDS_MAILING_LIST =
