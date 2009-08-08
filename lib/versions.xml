@@ -827,11 +827,10 @@
 		<file-name>portal/abdera.jar</file-name>
 		<version>0.4.0</version>
 		<project-name>Abdera</project-name>
-		<project-url>http://abdera.apache.org/</project-url>
+		<project-url>http://abdera.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2006-2008 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -905,31 +904,23 @@
 		<file-name>portal/axiom-api.jar</file-name>
 		<version>1.2.8</version>
 		<project-name>Axiom</project-name>
-		<project-url>http://ws.apache.org/commons/axiom/</project-url>
+		<project-url>http://ws.apache.org/commons/axiom</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2004-2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
-		<comments>
-			This is included as a dependency of Abdera.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/axiom-impl.jar</file-name>
 		<version>1.2.8</version>
 		<project-name>Axiom</project-name>
-		<project-url>http://ws.apache.org/commons/axiom/</project-url>
+		<project-url>http://ws.apache.org/commons/axiom</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2004-2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
-		<comments>
-			This is included as a dependency of Abdera.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/axis.jar</file-name>
