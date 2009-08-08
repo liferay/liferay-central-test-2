@@ -201,15 +201,17 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				entryTitle = fileEntry.getTitle();
 
-				if (dlLinkToFolder) {
+				if (dlLinkToViewURL) {
 					long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
 
-					PortletURL viewFolderURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
+					PortletURL viewURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
 
-					viewFolderURL.setParameter("struts_action", "/document_library/view");
-					viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+					viewURL.setParameter("struts_action", "/document_library/view_file_entry");
+					viewURL.setParameter("redirect", currentURL);
+					viewURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+					viewURL.setParameter("name", HtmlUtil.unescape(name));
 
-					entryHref = viewFolderURL.toString();
+					entryHref = viewURL.toString();
 				}
 			}
 

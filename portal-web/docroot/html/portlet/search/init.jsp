@@ -36,7 +36,7 @@
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-boolean dlLinkToFolder = false;
+boolean dlLinkToViewURL = false;
 %>
 
 <%@ include file="/html/portlet/search/init-ext.jsp" %>
