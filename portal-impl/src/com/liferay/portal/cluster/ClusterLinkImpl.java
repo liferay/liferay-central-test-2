@@ -22,8 +22,8 @@
 
 package com.liferay.portal.cluster;
 
-import com.liferay.portal.kernel.cluster.ClusterLink;
 import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.cluster.ClusterLink;
 import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener;
 import com.liferay.portal.kernel.log.Log;
@@ -34,8 +34,8 @@ import com.liferay.portal.kernel.util.SocketUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -141,7 +141,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		channel.setReceiver(
 			new ReceiverAdapter() {
-	
+
 				public void receive(org.jgroups.Message message) {
 					if (!_addresses.contains(message.getSrc())) {
 						_clusterForwardMessageListener.receive(
@@ -153,13 +153,13 @@ public class ClusterLinkImpl implements ClusterLink {
 						}
 					}
 				}
-	
+
 				public void viewAccepted(View view) {
 					if (_log.isInfoEnabled()) {
 						_log.info("Cluster link accepted view " + view);
 					}
 				}
-	
+
 			}
 		);
 
@@ -173,7 +173,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		return channel;
 	}
-	
+
 	protected JChannel getChannel(Priority priority) {
 		int channelIndex =
 			priority.ordinal() * _channelCount / _MAX_CHANNEL_COUNT;
@@ -214,7 +214,7 @@ public class ClusterLinkImpl implements ClusterLink {
 				"Set JGroups outgoing IP address to " + bindAddress + "}");
 		}
 	}
-	
+
 	protected void initChannels() throws ChannelException {
 		Properties properties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES, true);
