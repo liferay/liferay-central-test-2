@@ -71,7 +71,7 @@ if (rootFolderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmark-home"), StringPool.BLANK, serviceContext);
+		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmarks-home"), StringPool.BLANK, serviceContext);
 
 		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
 
@@ -90,7 +90,7 @@ if (rootFolderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmark-home"), StringPool.BLANK, serviceContext);
+		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmarks-home"), StringPool.BLANK, serviceContext);
 	}
 
 	rootFolderId = dynamicRootFolder.getFolderId();
