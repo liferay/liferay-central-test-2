@@ -321,6 +321,7 @@
 	</target>
 
 	<target name="deploy">
+		<antcall target="build-alloy" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
