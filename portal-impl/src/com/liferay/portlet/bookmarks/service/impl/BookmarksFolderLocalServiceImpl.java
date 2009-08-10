@@ -55,6 +55,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class BookmarksFolderLocalServiceImpl
 	extends BookmarksFolderLocalServiceBaseImpl {
@@ -223,6 +224,18 @@ public class BookmarksFolderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
+	}
+
+	public List<BookmarksFolder> getFolders(long groupId)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.findByGroupId(groupId);
+	}
+
+	public List<BookmarksFolder> getFolders(long groupId, long parentFolderId)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.findByG_P(groupId, parentFolderId);
 	}
 
 	public List<BookmarksFolder> getFolders(

@@ -195,6 +195,17 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId) throws com.liferay.portal.SystemException {
+		return getService().getFolders(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.SystemException {
+		return getService().getFolders(groupId, parentFolderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
 		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService().getFolders(groupId, parentFolderId, start, end);

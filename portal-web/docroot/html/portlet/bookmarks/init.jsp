@@ -44,4 +44,59 @@
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+
+PortletPreferences preferences = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
+	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.BOOKMARKS, null);
+}
+
+long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+if (rootFolderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+	BookmarksFolder dynamicRootFolder = null;
+
+	int count = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+	if (count > 1) {
+		List<BookmarksFolder> folders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(BookmarksFolder.class.getName(), renderRequest);
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmark-home"), StringPool.BLANK, serviceContext);
+
+		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
+
+		for (BookmarksFolder folder : folders) {
+			BookmarksFolderLocalServiceUtil.updateFolder(folder.getFolderId(), dynamicRootFolderId, folder.getName(), folder.getDescription(), false, serviceContext);
+		}
+	}
+	else if (count == 1) {
+		List<BookmarksFolder> folders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, 0, 1);
+
+		dynamicRootFolder = folders.get(0);
+	}
+	else {
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(BookmarksFolder.class.getName(), renderRequest);
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmark-home"), StringPool.BLANK, serviceContext);
+	}
+
+	rootFolderId = dynamicRootFolder.getFolderId();
+
+	preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
+
+	preferences.store();
+}
 %>
