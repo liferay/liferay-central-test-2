@@ -503,36 +503,39 @@ public class LayoutExporter {
 				fcos = exportTheme(layoutSet);
 				themeZip = fcos.getFileInputStream();
 			}
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
 
-		// Log
+			// Log
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
-		}
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Exporting layouts takes " + stopWatch.getTime() + " ms");
+			}
 
-		// Zip
+			// Zip
 
-		try {
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
 			if (themeZip != null) {
-				try {
-					context.addZipEntry("/theme.zip", themeZip);
-				}
-				finally {
-					fcos.cleanUp();
-					themeZip.close();
-				}
+				context.addZipEntry("/theme.zip", themeZip);
 			}
 
 			return zipWriter.finishWithStream();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+		finally {
+			try {
+				if (themeZip != null) {
+					themeZip.close();
+				}
+
+				if (fcos != null) {
+					fcos.cleanUp();
+				}
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 
