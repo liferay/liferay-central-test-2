@@ -11,6 +11,7 @@
 
 	<property name="codepress.file" value="codepress-v.0.9.6.zip" />
 
+	<property name="alloy.file" value="alloy-0.1a.zip" />
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
 	<property name="vaadin.file" value="vaadin-6.0.1.zip" />
@@ -421,6 +422,75 @@
 						<include name="**/*.xml" />
 					</fileset>
 				</copy>
+			</then>
+		</if>
+	</target>
+
+	<target name="build-alloy">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${alloy.file}"
+					targetfile="docroot/html/js/aui"
+				/>
+			</not>
+			<then>
+
+				<property name="alloy.core.css" value="reset.css, base.css, layout.css, forms.css, icons.css, widget.css, extras.css" />
+
+				<delete dir="docroot/html/ALLOY_ZIP" />
+				<delete dir="docroot/html/js/aui" />
+				<delete dir="docroot/html/themes/classic/_diffs/images/aui/" />
+
+				<unzip src="third-party/${alloy.file}" dest="docroot/html/ALLOY_ZIP" />
+
+				<!--
+				Source JavaScript
+				-->
+
+				<copy todir="docroot/html/js/aui">
+					<fileset dir="docroot/html/ALLOY_ZIP/src/javascript/" includes="*.js" excludes="alloy.js, *-min.js" />
+				</copy>
+
+				<copy todir="docroot/html/js/aui/lib/yui/build">
+					<fileset dir="docroot/html/ALLOY_ZIP/lib/yui/build" includes="**" excludes="*.zip" />
+				</copy>
+
+				<!--
+				Theme CSS
+				-->
+
+				<concat destfile="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/" files="${alloy.core.css}"/>
+			        <fileset dir="docroot/html/ALLOY_ZIP/themes/base/css/" includes="*.css" excludes="${alloy.core.css}, custom.css, main.css, *-min.css"/>
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/" files="custom.css"/>
+			    </concat>
+
+				<replace file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
+					<replacefilter token="../images/" value="../images/aui/" />
+				</replace>
+
+				<copy todir="docroot/html/themes/classic/_diffs/css/" overwrite="yes">
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
+				</copy>
+
+				<copy todir="docroot/html/themes/classic/_diffs/images/aui/">
+					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/images/" includes="**"/>
+				</copy>
+
+				<replaceregexp match="\u007B[^\u007D]*\u007D([\r\n])?" replace="{\1}\1" flags="g" byline="false">
+					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" includes="alloy.css"/>
+				</replaceregexp>
+
+				<copy todir="docroot/html/themes/_styled/css/" overwrite="yes">
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
+				</copy>
+
+				<copy todir="docroot/html/themes/_unstyled/css/" overwrite="yes">
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
+				</copy>
+
+				<delete dir="docroot/html/ALLOY_ZIP" />
 			</then>
 		</if>
 	</target>
