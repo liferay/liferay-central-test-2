@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Portlet_AssertCannotViewDocumentTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Portlet_AssertCannotViewDocumentTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SA1 Portlet1 Permissions1 Folder1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Portlet1 Temporary1 Document1.txt</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/h3</td>
+	<td>Forbidden</td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You do not have permission to access the requested resource.</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

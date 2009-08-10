@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Portlet_AddMyCommunityDocumentTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Portlet_AddMyCommunityDocumentTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Document Library</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My1 Community1 Folder1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Document']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Use the classic uploader.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_20_file</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_20_file</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\permissions\documentlibrary\portlet\Portlet_TestDocument.txt</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_20_title</td>
+	<td>My1 Community1 Document1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=My1 Community1 Document1.txt</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

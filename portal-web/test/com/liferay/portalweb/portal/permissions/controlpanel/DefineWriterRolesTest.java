@@ -34,7 +34,7 @@ public class DefineWriterRolesTest extends BaseTestCase {
 	public void testDefineWriterRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[18]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[19]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

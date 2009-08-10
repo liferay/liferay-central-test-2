@@ -52,6 +52,14 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Member"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_128_name", RuntimeVariables.replace("Portlet"));
+		selenium.type("_128_description",
+			RuntimeVariables.replace("This is the Portlet Role."));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Portlet"));
+		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.waitForPageToLoad("30000");
 		selenium.type("_128_name", RuntimeVariables.replace("Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Publisher Role."));

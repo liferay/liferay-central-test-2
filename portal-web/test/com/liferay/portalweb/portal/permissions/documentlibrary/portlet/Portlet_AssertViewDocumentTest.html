@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Portlet_AssertViewDocumentTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Portlet_AssertViewDocumentTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=SA1 Portlet1 Permissions1 Folder1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span/a[2]</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=View</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>Portlet1 Temporary1 Document1.txt</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

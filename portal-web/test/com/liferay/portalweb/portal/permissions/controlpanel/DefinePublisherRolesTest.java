@@ -34,7 +34,7 @@ public class DefinePublisherRolesTest extends BaseTestCase {
 	public void testDefinePublisherRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[15]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[16]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

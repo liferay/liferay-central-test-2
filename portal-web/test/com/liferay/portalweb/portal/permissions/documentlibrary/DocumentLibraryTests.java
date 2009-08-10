@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal.permissions.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.permissions.documentlibrary.assertactions.AssertActionsTests;
+import com.liferay.portalweb.portal.permissions.documentlibrary.portlet.PortletTests;
 import com.liferay.portalweb.portal.permissions.documentlibrary.setup.SetupTests;
 import com.liferay.portalweb.portal.permissions.documentlibrary.teardown.TearDownTests;
 
@@ -42,6 +43,7 @@ public class DocumentLibraryTests extends BaseTests {
 
 		testSuite.addTest(SetupTests.suite());
 		testSuite.addTest(AssertActionsTests.suite());
+		testSuite.addTest(PortletTests.suite());
 		testSuite.addTest(TearDownTests.suite());
 
 		return testSuite;

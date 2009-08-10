@@ -68,6 +68,7 @@ public class ControlPanelTests extends BaseTests {
 		testSuite.addTestSuite(Writer_WebContentSearchRolesTest.class);
 		testSuite.addTestSuite(AddCATest.class);
 		testSuite.addTestSuite(AddMemberTest.class);
+		testSuite.addTestSuite(AddPortletMemberTest.class);
 		testSuite.addTestSuite(AddPublisherTest.class);
 		testSuite.addTestSuite(AddScopeTest.class);
 		testSuite.addTestSuite(AddWriterTest.class);
