@@ -22,9 +22,9 @@
 
 package com.liferay.portal.cmis.model;
 
-import javax.xml.namespace.QName;
-
 import com.liferay.portal.util.PropsValues;
+
+import javax.xml.namespace.QName;
 
 /**
  * <a href="CMISConstants.java.html"><b><i>View Source</i></b></a>
