@@ -457,7 +457,7 @@
 					/>
 				</copy>
 
-				<copy todir="docroot/html/js/aui/lib/yui/build">
+				<copy todir="docroot/html/js/aui/lib/yui">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/lib/yui/build"
 						excludes="*.zip"
