@@ -231,9 +231,9 @@ public interface PropsKeys {
 
 	public static final String CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES = "cluster.link.channel.system.properties";
 
-	public static final String CMIS_CREDENTIALS_USERNAME = "cmis.credentials.username";
-
 	public static final String CMIS_CREDENTIALS_PASSWORD = "cmis.credentials.password";
+
+	public static final String CMIS_CREDENTIALS_USERNAME = "cmis.credentials.username";
 
 	public static final String CMIS_REPOSITORY_URL = "cmis.repository.url";
 

@@ -32,48 +32,33 @@ import java.io.FileInputStream;
 import junit.framework.TestCase;
 
 import org.apache.abdera.Abdera;
+import org.apache.abdera.factory.Factory;
 import org.apache.abdera.i18n.iri.IRI;
 import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Element;
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
+import org.apache.abdera.parser.Parser;
 
 /**
  * <a href="ParserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class ParserTest extends TestCase {
 
-	public void testService() throws Exception {
-		Service service = (Service)getElement("cmis-service.xml");
+	public void testDocument() throws Exception {
+		Entry entry = (Entry)getElement("cmis-document.xml");
 
-		assertNotNull(service);
+		assertNotNull(entry);
 
-		for (Workspace ws : service.getWorkspaces()) {
-			assertNotNull(ws);
+		CMISObject cmisObject = entry.getFirstChild(_cmisConstants.OBJECT);
 
-			CMISRepositoryInfo info =
-				ws.getFirstChild(_constants.REPOSITORY_INFO);
-
-			assertNotNull(info.getId());
-			assertEquals(_constants.VERSION, info.getVersionSupported());
-
-			IRI rootChildren = null;
-
-			for (Collection col : ws.getCollections()) {
-				String type =
-					col.getAttributeValue(_constants.COLLECTION_TYPE);
-
-				if (_constants.COLLECTION_ROOT_CHILDREN.equals(type)) {
-					rootChildren = col.getHref();
-				}
-			}
-
-			assertNotNull(rootChildren);
-		}
+		assertNotNull(cmisObject);
+		assertNotNull(cmisObject.getObjectId());
+		assertEquals(
+			_cmisConstants.BASE_TYPE_DOCUMENT, cmisObject.getBaseType());
 	}
 
 	public void testFolder() throws Exception {
@@ -81,40 +66,63 @@ public class ParserTest extends TestCase {
 
 		assertNotNull(entry);
 
-		CMISObject folder = entry.getFirstChild(_constants.OBJECT);
+		CMISObject cmisObject = entry.getFirstChild(_cmisConstants.OBJECT);
 
-		assertNotNull(folder);
-		assertNotNull(folder.getObjectId());
-		assertEquals(_constants.BASE_TYPE_FOLDER, folder.getBaseType());
+		assertNotNull(cmisObject);
+		assertNotNull(cmisObject.getObjectId());
+		assertEquals(_cmisConstants.BASE_TYPE_FOLDER, cmisObject.getBaseType());
 	}
 
-	public void testDocument() throws Exception {
-		Entry entry = (Entry)getElement("cmis-document.xml");
+	public void testService() throws Exception {
+		Service service = (Service)getElement("cmis-service.xml");
 
-		assertNotNull(entry);
+		assertNotNull(service);
 
-		CMISObject doc = entry.getFirstChild(_constants.OBJECT);
+		for (Workspace workspace : service.getWorkspaces()) {
+			assertNotNull(workspace);
 
-		assertNotNull(doc);
-		assertNotNull(doc.getObjectId());
-		assertEquals(_constants.BASE_TYPE_DOCUMENT, doc.getBaseType());
+			CMISRepositoryInfo cmisRepositoryInfo = workspace.getFirstChild(
+				_cmisConstants.REPOSITORY_INFO);
+
+			assertNotNull(cmisRepositoryInfo.getId());
+			assertEquals(
+				_cmisConstants.VERSION,
+				cmisRepositoryInfo.getVersionSupported());
+
+			IRI rootChildrenIRI = null;
+
+			for (Collection collection : workspace.getCollections()) {
+				String type = collection.getAttributeValue(
+					_cmisConstants.COLLECTION_TYPE);
+
+				if (_cmisConstants.COLLECTION_ROOT_CHILDREN.equals(type)) {
+					rootChildrenIRI = collection.getHref();
+				}
+			}
+
+			assertNotNull(rootChildrenIRI);
+		}
 	}
 
 	protected Element getElement(String filename) throws Exception {
 		String path =
 			"portal-impl/test/com/liferay/portal/cmis/dependencies/" + filename;
 
-		return _abdera.getParser().parse(new FileInputStream(path)).getRoot();
+		Parser parser = _abdera.getParser();
+
+		return parser.parse(new FileInputStream(path)).getRoot();
 	}
 
 	protected void setUp() throws Exception {
 		_abdera = Abdera.getInstance();
 
-		_abdera.getFactory().registerExtension(new CMISExtensionFactory());
+		Factory factory = _abdera.getFactory();
+
+		factory.registerExtension(new CMISExtensionFactory());
 	}
 
-	private Abdera _abdera;
+	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
 
-	private final CMISConstants _constants = CMISUtil.getConstants();
+	private Abdera _abdera;
 
 }

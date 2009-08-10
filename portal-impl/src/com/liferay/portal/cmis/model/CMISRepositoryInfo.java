@@ -34,74 +34,73 @@ import org.apache.abdera.model.ElementWrapper;
  * <a href="CMISRepositoryInfo.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISRepositoryInfo extends ElementWrapper {
 
-	public CMISRepositoryInfo(Element internal) {
-		super(internal);
+	public CMISRepositoryInfo(Element element) {
+		super(element);
 
-		_constants = CMISUtil.getConstants();
+		_cmisConstants = CMISUtil.getCMISConstants();
 	}
 
 	public CMISRepositoryInfo(Factory factory) {
-		super(factory, CMISUtil.getConstants().REPOSITORY_INFO);
+		super(factory, CMISUtil.getCMISConstants().REPOSITORY_INFO);
 
-		_constants = CMISUtil.getConstants();
-	}
-
-	public String getId() {
-		return getFirstChildText(_constants.REPOSITORY_ID);
-	}
-
-	public String getName() {
-		return getFirstChildText(_constants.REPOSITORY_NAME);
-	}
-
-	public String getRelatonship() {
-		return getFirstChildText(_constants.REPOSITORY_RELATIONSHIP);
+		_cmisConstants = CMISUtil.getCMISConstants();
 	}
 
 	public String getDescription() {
-		return getFirstChildText(_constants.REPOSITORY_DESCRIPTION);
+		return getFirstChildText(_cmisConstants.REPOSITORY_DESCRIPTION);
 	}
 
-	public String getVendorName() {
-		return getFirstChildText(_constants.REPOSITORY_VENDOR_NAME);
+	public String getId() {
+		return getFirstChildText(_cmisConstants.REPOSITORY_ID);
+	}
+
+	public String getName() {
+		return getFirstChildText(_cmisConstants.REPOSITORY_NAME);
 	}
 
 	public String getProductName() {
-		return getFirstChildText(_constants.REPOSITORY_PRODUCT_NAME);
+		return getFirstChildText(_cmisConstants.REPOSITORY_PRODUCT_NAME);
 	}
 
 	public String getProductVersion() {
-		return getFirstChildText(_constants.REPOSITORY_PRODUCT_VERSION);
+		return getFirstChildText(_cmisConstants.REPOSITORY_PRODUCT_VERSION);
+	}
+
+	public String getRelatonship() {
+		return getFirstChildText(_cmisConstants.REPOSITORY_RELATIONSHIP);
 	}
 
 	public String getRootFolderId() {
-		return getFirstChildText(_constants.REPOSITORY_ROOT_FOLDER_ID);
-	}
-
-	public String getVersionSupported() {
-		return getFirstChildText(_constants.REPOSITORY_VERSION_SUPPORTED);
+		return getFirstChildText(_cmisConstants.REPOSITORY_ROOT_FOLDER_ID);
 	}
 
 	public Element getSpecificInfo() {
-		return getFirstChild(_constants.REPOSITORY_SPECIFIC_INFO);
+		return getFirstChild(_cmisConstants.REPOSITORY_SPECIFIC_INFO);
 	}
 
-	protected String getFirstChildText(QName qname) {
+	public String getVendorName() {
+		return getFirstChildText(_cmisConstants.REPOSITORY_VENDOR_NAME);
+	}
+
+	public String getVersionSupported() {
+		return getFirstChildText(_cmisConstants.REPOSITORY_VERSION_SUPPORTED);
+	}
+
+	protected String getFirstChildText(QName qName) {
 		String text = null;
 
-		Element child = getFirstChild(qname);
+		Element element = getFirstChild(qName);
 
-		if (child != null) {
-			text = child.getText();
+		if (element != null) {
+			text = element.getText();
 		}
 
 		return text;
 	}
 
-	private CMISConstants _constants;
+	private CMISConstants _cmisConstants;
 
 }

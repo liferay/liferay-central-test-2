@@ -29,7 +29,6 @@ import junit.framework.TestSuite;
  * <a href="CMISTestSuite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISTestSuite extends TestSuite {
 

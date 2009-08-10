@@ -246,6 +246,21 @@ public class PropsValues {
 	public static final String[] CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES =
 		PropsUtil.getArray(PropsKeys.CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES);
 
+	public static final String CMIS_CREDENTIALS_PASSWORD =
+		PropsUtil.get(PropsKeys.CMIS_CREDENTIALS_PASSWORD);
+
+	public static final String CMIS_CREDENTIALS_USERNAME =
+		PropsUtil.get(PropsKeys.CMIS_CREDENTIALS_USERNAME);
+
+	public static final String CMIS_REPOSITORY_URL =
+		PropsUtil.get(PropsKeys.CMIS_REPOSITORY_URL);
+
+	public static final String CMIS_REPOSITORY_VERSION =
+		PropsUtil.get(PropsKeys.CMIS_REPOSITORY_VERSION);
+
+	public static final String CMIS_SYSTEM_ROOT_DIR =
+		PropsUtil.get(PropsKeys.CMIS_SYSTEM_ROOT_DIR);
+
 	public static final String COMM_LINK_PROPERTIES =
 		PropsUtil.get(PropsKeys.COMM_LINK_PROPERTIES);
 

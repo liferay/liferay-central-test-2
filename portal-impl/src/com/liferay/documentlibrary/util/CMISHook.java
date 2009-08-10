@@ -37,12 +37,10 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +51,6 @@ import org.apache.abdera.model.Link;
  * <a href="CMISHook.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISHook extends BaseHook {
 
@@ -61,18 +58,19 @@ public class CMISHook extends BaseHook {
 	}
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		Entry repositoryFolder = getRepositoryFolder(companyId, repositoryId);
+		Entry repositoryFolderEntry = getRepositoryFolderEntry(
+			companyId, repositoryId);
 
-		CMISUtil.createFolder(repositoryFolder, dirName);
+		CMISUtil.createFolder(repositoryFolderEntry, dirName);
 	}
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
@@ -80,17 +78,17 @@ public class CMISHook extends BaseHook {
 			serviceContext, is);
 	}
 
-	public void checkRoot(long companyId) throws SystemException {
-		// None
+	public void checkRoot(long companyId) {
 	}
 
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		Entry repositoryFolder = getRepositoryFolder(companyId, repositoryId);
+		Entry repositoryFolderEntry = getRepositoryFolderEntry(
+			companyId, repositoryId);
 
-		Entry directory = CMISUtil.getFolder(repositoryFolder, dirName);
+		Entry directory = CMISUtil.getFolder(repositoryFolderEntry, dirName);
 
 		if (directory != null) {
 			CMISUtil.delete(directory);
@@ -100,16 +98,16 @@ public class CMISHook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		Entry versioningFolder =
-			getVersioningFolder(companyId, repositoryId, fileName, false);
+		Entry versioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, false);
 
-		if (versioningFolder == null) {
+		if (versioningFolderEntry == null) {
 			throw new NoSuchFileException();
 		}
 
-		CMISUtil.delete(versioningFolder);
+		CMISUtil.delete(versioningFolderEntry);
 
 		Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
@@ -117,10 +115,10 @@ public class CMISHook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		Entry fileEntry =
-			getVersionedFile(companyId, repositoryId, fileName, versionNumber);
+		Entry fileEntry = getVersionedFileEntry(
+			companyId, repositoryId, fileName, versionNumber);
 
 		CMISUtil.delete(fileEntry);
 
@@ -130,41 +128,42 @@ public class CMISHook extends BaseHook {
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (versionNumber == 0) {
 			versionNumber = getHeadVersionNumber(
 				companyId, repositoryId, fileName);
 		}
 
-		Entry fileEntry =
-			getVersionedFile(companyId, repositoryId, fileName, versionNumber);
+		Entry fileEntry = getVersionedFileEntry(
+			companyId, repositoryId, fileName, versionNumber);
 
 		return CMISUtil.getInputStream(fileEntry);
 	}
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		Entry repositoryFolder = getRepositoryFolder(companyId, repositoryId);
+		Entry repositoryFolderEntry = getRepositoryFolderEntry(
+			companyId, repositoryId);
 
-		List<String> list = CMISUtil.getFolderList(repositoryFolder);
+		List<String> fileNames = CMISUtil.getFolders(repositoryFolderEntry);
 
-		return list.toArray(new String[0]);
+		return fileNames.toArray(new String[fileNames.size()]);
 	}
 
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		double versionNumber =
-			getHeadVersionNumber(companyId, repositoryId, fileName);
+		double versionNumber = getHeadVersionNumber(
+			companyId, repositoryId, fileName);
 
-		Entry fileEntry =
-			getVersionedFile(companyId, repositoryId, fileName, versionNumber);
+		Entry fileEntry = getVersionedFileEntry(
+			companyId, repositoryId, fileName, versionNumber);
 
-		CMISObject cmisObject = fileEntry.getFirstChild(_constants.OBJECT);
+		CMISObject cmisObject = fileEntry.getFirstChild(_cmisConstants.OBJECT);
 
 		return cmisObject.getContentStreamLength();
 	}
@@ -173,42 +172,45 @@ public class CMISHook extends BaseHook {
 			long companyId, long repositoryId, String dirName)
 		throws CMISException, NoSuchFileException {
 
-		Entry versioningFolder =
-			getVersioningFolder(companyId, repositoryId, dirName, false);
+		Entry versioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, dirName, false);
 
-		if (versioningFolder == null) {
+		if (versioningFolderEntry == null) {
 			throw new NoSuchFileException();
 		}
 
-		List<String> list = CMISUtil.getFolderList(versioningFolder);
+		List<String> versionNumbers = CMISUtil.getFolders(
+			versioningFolderEntry);
 
-		List<Double> versions = new ArrayList<Double>();
+		double headVersionNumber = DEFAULT_VERSION;
 
-		for (String entry : list) {
-			versions.add(Double.parseDouble(entry));
+		for (int i = 0; i < versionNumbers.size(); i++) {
+			double versionNumber = GetterUtil.getDouble(versionNumbers.get(i));
+
+			if (versionNumber > headVersionNumber) {
+				headVersionNumber = versionNumber;
+			}
 		}
 
-		versions = ListUtil.sort(versions);
-
-		return versions.get(versions.size() - 1);
+		return headVersionNumber;
 	}
 
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		String versionString = Double.toString(versionNumber);
+		Entry versioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, true);
 
-		Entry versioningFolder =
-			getVersioningFolder(companyId, repositoryId, fileName);
+		Link link = versioningFolderEntry.getLink(
+			_cmisConstants.LINK_DESCENDANTS);
 
-		Link link = versioningFolder.getLink(_constants.LINK_DESCENDANTS);
-
-		String descendantsUrl = link.getHref().toString();
+		String url = link.getHref().toString();
 
 		Entry fileEntry = CMISUtil.getEntry(
-			descendantsUrl, versionString, _constants.BASE_TYPE_DOCUMENT);
+			url, String.valueOf(versionNumber),
+			_cmisConstants.BASE_TYPE_DOCUMENT);
 
 		if (fileEntry == null) {
 			return false;
@@ -218,36 +220,76 @@ public class CMISHook extends BaseHook {
 		}
 	}
 
-	public void move(String srcDir, String destDir) throws SystemException {
+	public void move(String srcDir, String destDir) {
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reIndex(String[] ids) {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);
 			String portletId = ids[1];
 			long groupId = GetterUtil.getLong(ids[2]);
 			long repositoryId = GetterUtil.getLong(ids[3]);
 
-			Entry repositoryFolder =
-				getRepositoryFolder(companyId, repositoryId);
+			Entry repositoryFolderEntry = getRepositoryFolderEntry(
+				companyId, repositoryId);
 
-			List<String> list = CMISUtil.getFolderList(repositoryFolder);
+			List<String> fileNames = CMISUtil.getFolders(repositoryFolderEntry);
 
-			for (String fileName : list) {
+			for (String fileName : fileNames) {
 				try {
-					Document doc = Indexer.getFileDocument(
+					Document document = Indexer.getFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
 					SearchEngineUtil.updateDocument(
-						companyId, doc.get(Field.UID), doc);
+						companyId, document.get(Field.UID), document);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);
 				}
 			}
 		}
-		catch (CMISException ce) {
+		catch (CMISException cmise) {
+		}
+	}
 
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String fileName, long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			Entry oldVersioningFolderEntry = getVersioningFolderEntry(
+				companyId, repositoryId, fileName, true);
+			Entry newVersioningFolderEntry = getVersioningFolderEntry(
+				companyId, newRepositoryId, fileName, true);
+
+			List<String> fileNames = CMISUtil.getFolders(
+				oldVersioningFolderEntry);
+
+			for (String curFileName : fileNames) {
+				Entry entry = CMISUtil.getDocument(
+					oldVersioningFolderEntry, curFileName);
+
+				InputStream is = CMISUtil.getInputStream(entry);
+
+				CMISUtil.createDocument(
+					newVersioningFolderEntry, curFileName, is);
+			}
+
+			CMISUtil.delete(oldVersioningFolderEntry);
+
+			try {
+				Indexer.deleteFile(
+					companyId, portletId, repositoryId, fileName);
+			}
+			catch (SearchException se) {
+			}
+
+			Indexer.addFile(
+				companyId, portletId, groupId, newRepositoryId, fileName);
+		}
+		catch (SearchException se) {
+			throw new SystemException();
 		}
 	}
 
@@ -256,25 +298,26 @@ public class CMISHook extends BaseHook {
 			String fileName, double versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		String versionString = Double.toString(versionNumber);
+		Entry versioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, true);
 
-		Entry versioningFolder =
-			getVersioningFolder(companyId, repositoryId, fileName);
+		Link link = versioningFolderEntry.getLink(
+			_cmisConstants.LINK_DESCENDANTS);
 
-		Link link = versioningFolder.getLink(_constants.LINK_DESCENDANTS);
+		String url = link.getHref().toString();
 
-		String descendantsUrl = link.getHref().toString();
+		String title = String.valueOf(versionNumber);
 
 		Entry fileEntry = CMISUtil.getEntry(
-			descendantsUrl, versionString, _constants.BASE_TYPE_DOCUMENT);
+			url, title, _cmisConstants.BASE_TYPE_DOCUMENT);
 
 		if (fileEntry != null) {
 			throw new DuplicateFileException();
 		}
 
-		fileEntry = CMISUtil.createDocument(descendantsUrl, versionString, is);
+		fileEntry = CMISUtil.createDocument(url, title, is);
 
 		if (sourceFileName == null) {
 			Indexer.addFile(
@@ -292,123 +335,58 @@ public class CMISHook extends BaseHook {
 		}
 	}
 
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName, long fileEntryId)
-		throws PortalException, SystemException {
+	protected Entry getCompanyFolderEntry(long companyId) throws CMISException {
+		String title = String.valueOf(companyId);
 
-		try {
-			Entry versioningFolder =
-				getVersioningFolder(companyId, repositoryId, fileName);
-			Entry newVersioningFolder =
-				getVersioningFolder(companyId, newRepositoryId, fileName);
+		Entry companyFolderEntry = CMISUtil.getFolder(title);
 
-			List<String> folderList = CMISUtil.getFolderList(versioningFolder);
-
-			for (String title : folderList) {
-				Entry document = CMISUtil.getDocument(versioningFolder, title);
-
-				InputStream is = CMISUtil.getInputStream(document);
-
-				CMISUtil.createDocument(newVersioningFolder, title, is);
-			}
-
-			CMISUtil.delete(versioningFolder);
-
-			try {
-				Indexer.deleteFile(
-					companyId, portletId, repositoryId, fileName);
-			}
-			catch (SearchException se) {
-			}
-
-			Indexer.addFile(
-				companyId, portletId, groupId, newRepositoryId, fileName);
+		if (companyFolderEntry == null) {
+			companyFolderEntry = CMISUtil.createFolder(title);
 		}
-		catch (SearchException se) {
-			throw new SystemException();
-		}
+
+		return companyFolderEntry;
 	}
 
-	protected Entry getCompanyFolder(long companyId) throws CMISException {
-		String name = Long.toString(companyId);
-
-		Entry companyFolder = CMISUtil.getFolder(name);
-
-		if (companyFolder == null) {
-			companyFolder = CMISUtil.createFolder(name);
-		}
-
-		return companyFolder;
-	}
-
-	protected Entry getRepositoryFolder(long companyId, long repositoryId)
+	protected Entry getRepositoryFolderEntry(long companyId, long repositoryId)
 		throws CMISException {
 
-		String name = Long.toString(repositoryId);
+		Entry companyFolderEntry = getCompanyFolderEntry(companyId);
 
-		Entry companyFolder = getCompanyFolder(companyId);
+		Link link = companyFolderEntry.getLink(_cmisConstants.LINK_DESCENDANTS);
 
-		Link link = companyFolder.getLink(_constants.LINK_DESCENDANTS);
+		String url = link.getHref().toString();
 
-		String descendantsUrl = link.getHref().toString();
+		String title = String.valueOf(repositoryId);
 
-		Entry repositoryFolder = CMISUtil.getFolder(descendantsUrl, name);
+		Entry repositoryFolderEntry = CMISUtil.getFolder(url, title);
 
-		if (repositoryFolder == null) {
-			repositoryFolder = CMISUtil.createFolder(descendantsUrl, name);
+		if (repositoryFolderEntry == null) {
+			repositoryFolderEntry = CMISUtil.createFolder(url, title);
 		}
 
-		return repositoryFolder;
+		return repositoryFolderEntry;
 	}
 
-	protected Entry getVersioningFolder(
-			long companyId, long repositoryId, String fileName)
-		throws CMISException {
-
-		return getVersioningFolder(companyId, repositoryId, fileName, true);
-	}
-
-	protected Entry getVersioningFolder(
-			long companyId, long repositoryId, String fileName, boolean create)
-		throws CMISException {
-
-		Entry repositoryFolder = getRepositoryFolder(companyId, repositoryId);
-
-		Link link = repositoryFolder.getLink(_constants.LINK_DESCENDANTS);
-
-		String descendantsUrl = link.getHref().toString();
-
-		Entry versioningFolder = CMISUtil.getEntry(
-			descendantsUrl, fileName, _constants.BASE_TYPE_FOLDER);
-
-		if (create && (versioningFolder == null)) {
-			versioningFolder = CMISUtil.createFolder(descendantsUrl, fileName);
-		}
-
-		return versioningFolder;
-	}
-
-	protected Entry getVersionedFile(
+	protected Entry getVersionedFileEntry(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
 		throws CMISException, NoSuchFileException {
 
-		String versionString = Double.toString(versionNumber);
+		Entry versioningFolderEntry = getVersioningFolderEntry(
+			companyId, repositoryId, fileName, false);
 
-		Entry versioningFolder =
-			getVersioningFolder(companyId, repositoryId, fileName, false);
-
-		if (versioningFolder == null) {
+		if (versioningFolderEntry == null) {
 			throw new NoSuchFileException();
 		}
 
-		Link link = versioningFolder.getLink(_constants.LINK_DESCENDANTS);
+		Link link = versioningFolderEntry.getLink(
+			_cmisConstants.LINK_DESCENDANTS);
 
-		String descendantsUrl = link.getHref().toString();
+		String url = link.getHref().toString();
 
 		Entry fileEntry = CMISUtil.getEntry(
-			descendantsUrl, versionString, _constants.BASE_TYPE_DOCUMENT);
+			url, String.valueOf(versionNumber),
+			_cmisConstants.BASE_TYPE_DOCUMENT);
 
 		if (fileEntry == null) {
 			throw new NoSuchFileException();
@@ -417,8 +395,30 @@ public class CMISHook extends BaseHook {
 		return fileEntry;
 	}
 
-	private static final CMISConstants _constants = CMISUtil.getConstants();
+	protected Entry getVersioningFolderEntry(
+			long companyId, long repositoryId, String fileName, boolean create)
+		throws CMISException {
+
+		Entry repositoryFolderEntry = getRepositoryFolderEntry(
+			companyId, repositoryId);
+
+		Link link = repositoryFolderEntry.getLink(
+			_cmisConstants.LINK_DESCENDANTS);
+
+		String url = link.getHref().toString();
+
+		Entry versioningFolderEntry = CMISUtil.getEntry(
+			url, fileName, _cmisConstants.BASE_TYPE_FOLDER);
+
+		if (create && (versioningFolderEntry == null)) {
+			versioningFolderEntry = CMISUtil.createFolder(url, fileName);
+		}
+
+		return versioningFolderEntry;
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISHook.class);
+
+	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
 
 }

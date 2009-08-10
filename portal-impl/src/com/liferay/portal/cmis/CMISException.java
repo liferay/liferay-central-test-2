@@ -28,7 +28,6 @@ import com.liferay.portal.PortalException;
  * <a href="CMISException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISException extends PortalException {
 
@@ -40,12 +39,12 @@ public class CMISException extends PortalException {
 		super(msg);
 	}
 
-	public CMISException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
 	public CMISException(Throwable cause) {
 		super(cause);
+	}
+
+	public CMISException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
 }

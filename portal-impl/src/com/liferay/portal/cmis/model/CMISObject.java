@@ -42,180 +42,183 @@ import org.apache.abdera.model.ExtensibleElementWrapper;
  * <a href="CMISObject.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISObject extends ExtensibleElementWrapper {
 
-	public CMISObject(Element internal) {
-		super(internal);
+	public CMISObject(Element element) {
+		super(element);
 
-		_constants = CMISUtil.getConstants();
+		_cmisConstants = CMISUtil.getCMISConstants();
 	}
 
 	public CMISObject(Factory factory) {
-		super(factory, CMISUtil.getConstants().OBJECT);
+		super(factory, CMISUtil.getCMISConstants().OBJECT);
 
-		_constants = CMISUtil.getConstants();
+		_cmisConstants = CMISUtil.getCMISConstants();
 	}
 
 	public String getBaseType() {
-		return getPropertyValue(_constants.PROPERTY_NAME_BASETYPE);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_BASETYPE);
 	}
 
 	public String getCheckinComment() {
-		return getPropertyValue(_constants.PROPERTY_NAME_CHECKIN_COMMENT);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_CHECKIN_COMMENT);
 	}
 
 	public String getContentStreamFilename() {
 		return getPropertyValue(
-			_constants.PROPERTY_NAME_CONTENT_STREAM_FILENAME);
+			_cmisConstants.PROPERTY_NAME_CONTENT_STREAM_FILENAME);
 	}
 
 	public int getContentStreamLength() {
-		String value =
-			getPropertyValue(_constants.PROPERTY_NAME_CONTENT_STREAM_LENGTH);
+		String value = getPropertyValue(
+			_cmisConstants.PROPERTY_NAME_CONTENT_STREAM_LENGTH);
 
 		return GetterUtil.getInteger(value);
 	}
 
 	public String getContentStreamMimetype() {
 		return getPropertyValue(
-			_constants.PROPERTY_NAME_CONTENT_STREAM_MIMETYPE);
+			_cmisConstants.PROPERTY_NAME_CONTENT_STREAM_MIMETYPE);
 	}
 
 	public String getContentStreamUri() {
-		return getPropertyValue(_constants.PROPERTY_NAME_CONTENT_STREAM_URI);
+		return getPropertyValue(
+			_cmisConstants.PROPERTY_NAME_CONTENT_STREAM_URI);
 	}
 
 	public String getCreatedBy() {
-		return getPropertyValue(_constants.PROPERTY_NAME_CREATED_BY);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_CREATED_BY);
 	}
 
 	public Date getCreationDate() {
-		return getDate(_constants.PROPERTY_NAME_CREATION_DATE);
-	}
-	public String getLastModifiedBy() {
-		return getPropertyValue(_constants.PROPERTY_NAME_LAST_MODIFIED_BY);
+		return getDate(_cmisConstants.PROPERTY_NAME_CREATION_DATE);
 	}
 
 	public Date getLastModificationDate() {
-		return getDate(_constants.PROPERTY_NAME_LAST_MODIFICATION_DATE);
+		return getDate(_cmisConstants.PROPERTY_NAME_LAST_MODIFICATION_DATE);
+	}
+
+	public String getLastModifiedBy() {
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_LAST_MODIFIED_BY);
 	}
 
 	public String getName() {
-		return getPropertyValue(_constants.PROPERTY_NAME_NAME);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_NAME);
 	}
 
 	public String getObjectId() {
-		return getPropertyValue(_constants.PROPERTY_NAME_OBJECT_ID);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_OBJECT_ID);
 	}
 
 	public String getObjectTypeId() {
-		return getPropertyValue(_constants.PROPERTY_NAME_OBJECT_TYPE_ID);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_OBJECT_TYPE_ID);
 	}
 
 	public String getSourceId() {
-		return getPropertyValue(_constants.PROPERTY_NAME_SOURCE_ID);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_SOURCE_ID);
 	}
 
 	public String getTargetId() {
-		return getPropertyValue(_constants.PROPERTY_NAME_TARGET_ID);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_TARGET_ID);
 	}
 
 	public String getVersionLabel() {
-		return getPropertyValue(_constants.PROPERTY_NAME_VERSION_LABEL);
+		return getPropertyValue(_cmisConstants.PROPERTY_NAME_VERSION_LABEL);
 	}
 
 	public String getVersionSeriesCheckedOutBy() {
 		return getPropertyValue(
-			_constants.PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY);
+			_cmisConstants.PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY);
 	}
 
 	public String getVersionSeriesCheckedOutId() {
 		return getPropertyValue(
-			_constants.PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID);
+			_cmisConstants.PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID);
 	}
 
 	public String getVersionSeriesId() {
 		return getPropertyValue(
-			_constants.PROPERTY_NAME_VERSION_SERIES_ID);
+			_cmisConstants.PROPERTY_NAME_VERSION_SERIES_ID);
 	}
 
 	public boolean isImmutable() {
 		return GetterUtil.getBoolean(
-			getPropertyValue(_constants.PROPERTY_NAME_IS_IMMUTABLE));
+			getPropertyValue(_cmisConstants.PROPERTY_NAME_IS_IMMUTABLE));
 	}
 
 	public boolean isLatestMajorVersion() {
 		return GetterUtil.getBoolean(
-			getPropertyValue(_constants.PROPERTY_NAME_IS_LATEST_MAJOR_VERSION));
+			getPropertyValue(
+				_cmisConstants.PROPERTY_NAME_IS_LATEST_MAJOR_VERSION));
 	}
 
 	public boolean isLatestVersion() {
 		return GetterUtil.getBoolean(
-			getPropertyValue(_constants.PROPERTY_NAME_IS_LATEST_VERSION));
+			getPropertyValue(_cmisConstants.PROPERTY_NAME_IS_LATEST_VERSION));
 	}
 
 	public boolean isMajorVersion() {
 		return GetterUtil.getBoolean(
-			getPropertyValue(_constants.PROPERTY_NAME_IS_MAJOR_VERSION));
+			getPropertyValue(_cmisConstants.PROPERTY_NAME_IS_MAJOR_VERSION));
 	}
 
 	public boolean isVersionSeriesCheckedOut() {
 		return GetterUtil.getBoolean(
 			getPropertyValue(
-				_constants.PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT));
+				_cmisConstants.PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT));
 	}
 
-	public void setValue(String name, Serializable value) {
-		Element properties = getFirstChild(_constants.PROPERTIES);
-
+	public void setValue(String propertyName, Serializable propertyValue) {
 		Factory factory = getFactory();
 
-		if (properties == null) {
-			properties = factory.newElement(_constants.PROPERTIES);
+		Element propertiesElement = getFirstChild(_cmisConstants.PROPERTIES);
 
-			this.addExtension(properties);
+		if (propertiesElement == null) {
+			propertiesElement = factory.newElement(_cmisConstants.PROPERTIES);
+
+			addExtension(propertiesElement);
 		}
 
-		Element property;
+		Element propertyElement = null;
 
-		if (value instanceof Integer) {
-			property = factory.newElement(
-				_constants.PROPERTY_TYPE_INTEGER, properties);
-		}
-		else if (value instanceof Double) {
-			property = factory.newElement(
-				_constants.PROPERTY_TYPE_DECIMAL, properties);
-		}
-		else if (value instanceof Date) {
-			property = factory.newElement(
-				_constants.PROPERTY_TYPE_DATETIME, properties);
+		if (propertyValue instanceof Date) {
+			propertyElement = factory.newElement(
+				_cmisConstants.PROPERTY_TYPE_DATETIME, propertiesElement);
 
-			value = _formatter.format((Date)value);
+			propertyValue = _dateFormat.format((Date)propertyValue);
 		}
-		else if ((value.toString()).startsWith("http")) {
-			property = factory.newElement(
-				_constants.PROPERTY_TYPE_URI, properties);
+		else if (propertyValue instanceof Double) {
+			propertyElement = factory.newElement(
+				_cmisConstants.PROPERTY_TYPE_DECIMAL, propertiesElement);
+		}
+		else if (propertyValue instanceof Integer) {
+			propertyElement = factory.newElement(
+				_cmisConstants.PROPERTY_TYPE_INTEGER, propertiesElement);
+		}
+		else if ((propertyValue.toString()).startsWith("http")) {
+			propertyElement = factory.newElement(
+				_cmisConstants.PROPERTY_TYPE_URI, propertiesElement);
 		}
 		else {
-			property = factory.newElement(
-				_constants.PROPERTY_TYPE_STRING, properties);
+			propertyElement = factory.newElement(
+				_cmisConstants.PROPERTY_TYPE_STRING, propertiesElement);
 		}
 
-		property.setAttributeValue(_constants.PROPERTY_NAME, name);
+		propertyElement.setAttributeValue(
+			_cmisConstants.PROPERTY_NAME, propertyName);
 
-		Element valueNode =
-			factory.newElement(_constants.PROPERTY_VALUE, property);
+		Element valueElement = factory.newElement(
+			_cmisConstants.PROPERTY_VALUE, propertyElement);
 
-		valueNode.setText(value.toString());
+		valueElement.setText(propertyValue.toString());
 	}
 
 	protected Date getDate(String propertyName) {
 		try {
 			String value = getPropertyValue(propertyName);
 
-			return _formatter.parse(value);
+			return _dateFormat.parse(value);
 		}
 		catch (Exception e) {
 			return new Date();
@@ -223,48 +226,47 @@ public class CMISObject extends ExtensibleElementWrapper {
 	}
 
 	protected List<String> getPropertyNames() {
-		Element element = getFirstChild(_constants.PROPERTIES);
+		List<String> propertyNames = new ArrayList<String>();
 
-		List<Element> properties = element.getElements();
+		Element propertiesElement = getFirstChild(_cmisConstants.PROPERTIES);
 
-		List<String> names = new ArrayList<String>(properties.size());
+		for (Element propertyElement : propertiesElement.getElements()) {
+			String propertyName = propertyElement.getAttributeValue(
+				_cmisConstants.PROPERTY_NAME);
 
-		for (Element property : properties) {
-			names.add(property.getAttributeValue(_constants.PROPERTY_NAME));
+			propertyNames.add(propertyName);
 		}
 
-		return names;
+		return propertyNames;
 	}
 
 	protected String getPropertyValue(String propertyName) {
-		String text = null;
+		String propertyValue = null;
 
-		Element element = getFirstChild(_constants.PROPERTIES);
+		Element propertiesElement = getFirstChild(_cmisConstants.PROPERTIES);
 
-		List<Element> properties = element.getElements();
+		for (Element propertyElement : propertiesElement.getElements()) {
+			String curPropertyName = propertyElement.getAttributeValue(
+				_cmisConstants.PROPERTY_NAME);
 
-		for (Element property : properties) {
-			String attributeValue =
-				property.getAttributeValue(_constants.PROPERTY_NAME);
+			if (propertyName.equals(curPropertyName)) {
+				Element propertyValueElement = propertyElement.getFirstChild(
+					_cmisConstants.PROPERTY_VALUE);
 
-			if (propertyName.equals(attributeValue)) {
-				Element value =
-					property.getFirstChild(_constants.PROPERTY_VALUE);
-
-				if (value != null) {
-					text = value.getText();
+				if (propertyValueElement != null) {
+					propertyValue = propertyValueElement.getText();
 				}
 
 				break;
 			}
 		}
 
-		return text;
+		return propertyValue;
 	}
 
-	private CMISConstants _constants;
+	private static DateFormat _dateFormat = new SimpleDateFormat(
+		"yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
-	private static final DateFormat _formatter =
-		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private CMISConstants _cmisConstants;
 
 }

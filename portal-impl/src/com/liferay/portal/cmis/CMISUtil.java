@@ -28,8 +28,7 @@ import com.liferay.portal.cmis.model.CMISObject;
 import com.liferay.portal.cmis.model.CMISRepositoryInfo;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 
@@ -37,8 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.abdera.Abdera;
+import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
-import org.apache.abdera.model.Element;
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Feed;
 import org.apache.abdera.model.Link;
@@ -53,287 +52,116 @@ import org.apache.commons.httpclient.UsernamePasswordCredentials;
  * <a href="CMISUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISUtil {
 
-	public static final CMISConstants getConstants() {
-		return _constants;
-	}
-
-	public static Entry createFolder(String name) throws CMISException {
-		return createFolder(_liferayChildrenUrl, name);
-	}
-
-	public static Entry createFolder(Entry parent, String name)
-		throws CMISException {
-
-		return createDocument(parent, name, null);
-	}
-
-	public static Entry createFolder(String parentChildrenUrl, String name)
-		throws CMISException {
-
-		return createDocument(parentChildrenUrl, name, null);
-	}
-
 	public static Entry createDocument(
-			Entry parent, String name, InputStream is)
+			Entry entry, String title, InputStream is)
 		throws CMISException {
 
-		Link link = parent.getLink(_constants.LINK_CHILDREN);
-
-		return createDocument(link.getHref().toString(), name, is);
+		return _instance._createDocument(entry, title, is);
 	}
 
-	public static Entry createDocument(
-			String parentChildrenUrl, String name, InputStream is)
+	public static Entry createDocument(String url, String title, InputStream is)
 		throws CMISException {
 
-		Entry entry = _abdera.newEntry();
+		return _instance._createDocument(url, title, is);
+	}
 
-		entry.setTitle(name);
+	public static Entry createFolder(Entry entry, String title)
+		throws CMISException {
 
-		if (is == null) {
-			CMISObject object = entry.addExtension(_constants.OBJECT);
+		return _instance._createFolder(entry, title);
+	}
 
-			object.setValue(
-				_constants.PROPERTY_NAME_OBJECT_TYPE_ID,
-				_constants.BASE_TYPE_FOLDER);
-		}
-		else {
-			entry.setContent(is);
+	public static Entry createFolder(String title) throws CMISException {
+		return _instance._createFolder(title);
+	}
 
-			CMISObject object = entry.addExtension(_constants.OBJECT);
+	public static Entry createFolder(String url, String title)
+		throws CMISException {
 
-			object.setValue(
-				_constants.PROPERTY_NAME_OBJECT_TYPE_ID,
-				_constants.BASE_TYPE_DOCUMENT);
-		}
-
-		ClientResponse resp = _getClient().post(parentChildrenUrl, entry);
-
-		if (ResponseType.select(resp.getStatus()) != ResponseType.SUCCESS) {
-			throw new CMISException(
-				"Error creating " + name + " " + resp.getStatusText());
-		}
-
-		return (Entry)resp.getDocument().getRoot();
+		return _instance._createFolder(url, title);
 	}
 
 	public static void delete(Entry entry) throws CMISException {
-		Link link = null;
-
-		CMISObject cmisObject = entry.getFirstChild(_constants.OBJECT);
-
-		if (cmisObject.getBaseType().equals(_constants.BASE_TYPE_FOLDER)) {
-			link = entry.getLink(_constants.LINK_CHILDREN);
-		}
-		else {
-			link = entry.getLink(_constants.LINK_ALL_VERSIONS);
-		}
-
-		delete(link.getHref().toString());
+		_instance._delete(entry);
 	}
 
 	public static void delete(String url) throws CMISException {
-		ClientResponse resp = _getClient().delete(url);
-
-		if (ResponseType.select(resp.getStatus()) != ResponseType.SUCCESS) {
-			throw new CMISException(
-				"Error deleting object at " + url + " " +
-					resp.getStatusText());
-		}
+		_instance._delete(url);
 	}
 
-	public static String getCollectionUrl(Workspace ws, String collectionType) {
-		for (Collection coll : ws.getCollections()) {
-			String collType =
-				coll.getAttributeValue(_constants.COLLECTION_TYPE);
-
-			if (collType.equals(collectionType)) {
-				return coll.getHref().toString();
-			}
-		}
-
-		return null;
+	public static CMISConstants getCMISConstants() {
+		return _instance._cmisConstants;
 	}
 
-	public static Entry getDocument(Entry parent, String title)
+	public static String getCollectionUrl(
+		Workspace workspace, String collectionType) {
+
+		return _instance._getCollectionUrl(workspace, collectionType);
+	}
+
+	public static Entry getDocument(Entry entry, String title)
 		throws CMISException {
 
-		Link link = parent.getLink(_constants.LINK_CHILDREN);
-
-		return getDocument(link.getHref().toString(), title);
+		return _instance._getDocument(entry, title);
 	}
 
-	public static Entry getDocument(String childrenUrl, String title)
+	public static Entry getDocument(String url, String title)
 		throws CMISException {
 
-		return getEntry(childrenUrl, title, _constants.BASE_TYPE_DOCUMENT);
+		return _instance._getDocument(url, title);
 	}
 
-	public static Entry getEntry(
-			String childrenUrl, String title, String baseType)
+	public static Entry getEntry(String url, String title, String baseType)
 		throws CMISException {
 
-		Feed feed = (Feed)_getClient().get(childrenUrl).getDocument().getRoot();
+		return _instance._getEntry(url, title, baseType);
+	}
 
-		for (Entry entry : feed.getEntries()) {
-			if (entry.getTitle().equals(title)) {
-				CMISObject cmisObject = entry.getFirstChild(_constants.OBJECT);
+	public static Entry getFolder(Entry entry, String title)
+		throws CMISException {
 
-				if (cmisObject.getBaseType().equals(baseType)) {
-					return entry;
-				}
-			}
-		}
-
-		return null;
+		return _instance._getFolder(entry, title);
 	}
 
 	public static Entry getFolder(String title) throws CMISException {
-		return getFolder(_liferayChildrenUrl, title);
+		return _instance._getFolder(title);
 	}
 
-	public static Entry getFolder(Entry parent, String title)
+	public static Entry getFolder(String url, String title)
 		throws CMISException {
 
-		Link link = parent.getLink(_constants.LINK_CHILDREN);
-
-		return getFolder(link.getHref().toString(), title);
+		return _instance._getFolder(url, title);
 	}
 
-	public static Entry getFolder(String childrenUrl, String title)
-		throws CMISException {
-
-		return getEntry(childrenUrl, title, _constants.BASE_TYPE_FOLDER);
+	public static List<String> getFolders(Entry entry) throws CMISException {
+		return _instance._getFolders(entry);
 	}
 
-	public static List<String> getFolderList(Entry parent)
-		throws CMISException {
-
-		List<String> list = new ArrayList<String>();
-
-		Link link = parent.getLink(_constants.LINK_CHILDREN);
-
-		String childrenUrl = link.getHref().toString();
-
-		Feed feed = (Feed)_getClient().get(childrenUrl).getDocument().getRoot();
-
-		for (Entry entry : feed.getEntries()) {
-			list.add(entry.getTitle());
-		}
-
-		return list;
-	}
-
-	public static InputStream getInputStream(Entry file) throws CMISException {
-		try {
-			Link link = file.getLink(_constants.LINK_STREAM);
-
-			ClientResponse resp = _getClient().get(link.getHref().toString());
-
-			return resp.getInputStream();
-		}
-		catch (Exception e) {
-			throw new CMISException(e);
-		}
+	public static InputStream getInputStream(Entry entry) throws CMISException {
+		return _instance._getInputStream(entry);
 	}
 
 	public static Service getService() throws CMISException {
-		Element element =
-			_getClient().get(_REPOSITORY_URL).getDocument().getRoot();
-
-		return (Service)element;
+		return _instance._getService();
 	}
 
-	private static AbderaClient _getClient() throws CMISException {
-		try {
-			AbderaClient client = new AbderaClient(_abdera);
-
-			client.addCredentials(null, null, null,
-				new UsernamePasswordCredentials(_USERNAME, _PASSWORD));
-
-			return client;
-		}
-		catch (Exception e) {
-			throw new CMISException(e);
-		}
-	}
-
-	private static void _verifyRepository(String repositoryUrl)
-		throws Exception {
-
-		Service service =
-			(Service)_getClient().get(repositoryUrl).getDocument().getRoot();
-
-		Workspace ws = service.getWorkspaces().get(0);
-
-		CMISRepositoryInfo info = ws.getFirstChild(_constants.REPOSITORY_INFO);
-
-		// CMIS Version
-
-		String version = info.getVersionSupported();
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Using CMIS repository " + info.getProductName() + " " +
-					info.getProductVersion());
-			_log.info("CMIS repository supports CMIS version " + version);
-		}
-
-		if (!version.equals(_constants.VERSION)) {
-			throw new RuntimeException(
-				"CMIS repository is running an unsupported version");
-		}
-
-		// Find Root Folder
-
-		String childrenUrl =
-			getCollectionUrl(ws, _constants.COLLECTION_ROOT_CHILDREN);
-
-		Entry entry =
-			getEntry(childrenUrl, _ROOT_DIR, _constants.BASE_TYPE_FOLDER);
-
-		if (entry == null) {
-			entry = createFolder(childrenUrl, _ROOT_DIR);
-		}
-
-		_liferayChildrenUrl =
-			entry.getLink(_constants.LINK_CHILDREN).getHref().toString();
-	}
-
-	private static Abdera _abdera;
-
-	private static String _liferayChildrenUrl;
-
-	private static Log _log = LogFactoryUtil.getLog(CMISUtil.class);
-
-	private static final String _ROOT_DIR = PropsUtil.get(
-		PropsKeys.CMIS_SYSTEM_ROOT_DIR);
-
-	private static final String _PASSWORD = PropsUtil.get(
-		PropsKeys.CMIS_CREDENTIALS_PASSWORD);
-
-	private static final String _REPOSITORY_URL = PropsUtil.get(
-		PropsKeys.CMIS_REPOSITORY_URL);
-
-	private static final String _USERNAME = PropsUtil.get(
-		PropsKeys.CMIS_CREDENTIALS_USERNAME);
-
-	private static final String _CMIS_VERSION = PropsUtil.get(
-		PropsKeys.CMIS_REPOSITORY_VERSION);
-
-	private static final CMISConstants _constants =
-		CMISConstants.getInstance(_CMIS_VERSION);
-
-	static {
+	private CMISUtil() {
 		try {
 			_abdera = Abdera.getInstance();
-			_abdera.getFactory().registerExtension(new CMISExtensionFactory());
+			_cmisConstants = CMISConstants.getInstance(
+				PropsValues.CMIS_REPOSITORY_VERSION);
+			_usernamePasswordCredentials = new UsernamePasswordCredentials(
+				PropsValues.CMIS_CREDENTIALS_USERNAME,
+				PropsValues.CMIS_CREDENTIALS_PASSWORD);
 
-			_verifyRepository(_REPOSITORY_URL);
+			Factory factory = _abdera.getFactory();
+
+			factory.registerExtension(new CMISExtensionFactory());
+
+			_verifyRepository();
 		}
 		catch (Exception e) {
 			if (e instanceof RuntimeException) {
@@ -344,5 +172,257 @@ public class CMISUtil {
 			}
 		}
 	}
+
+	private Entry _createDocument(Entry entry, String title, InputStream is)
+		throws CMISException {
+
+		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+
+		return createDocument(link.getHref().toString(), title, is);
+	}
+
+	private Entry _createDocument(String url, String title, InputStream is)
+		throws CMISException {
+
+		Entry entry = _abdera.newEntry();
+
+		entry.setTitle(title);
+
+		if (is == null) {
+			CMISObject cmisObject = entry.addExtension(_cmisConstants.OBJECT);
+
+			cmisObject.setValue(
+				_cmisConstants.PROPERTY_NAME_OBJECT_TYPE_ID,
+				_cmisConstants.BASE_TYPE_FOLDER);
+		}
+		else {
+			entry.setContent(is);
+
+			CMISObject cmisObject = entry.addExtension(_cmisConstants.OBJECT);
+
+			cmisObject.setValue(
+				_cmisConstants.PROPERTY_NAME_OBJECT_TYPE_ID,
+				_cmisConstants.BASE_TYPE_DOCUMENT);
+		}
+
+		ClientResponse clientResponse = _getAbedraClient().post(
+			url, entry);
+
+		if (ResponseType.select(
+				clientResponse.getStatus()) != ResponseType.SUCCESS) {
+
+			throw new CMISException(
+				"Error creating " + title + " " +
+					clientResponse.getStatusText());
+		}
+
+		return (Entry)clientResponse.getDocument().getRoot();
+	}
+
+	private Entry _createFolder(Entry entry, String title)
+		throws CMISException {
+
+		return _createDocument(entry, title, null);
+	}
+
+	private Entry _createFolder(String title) throws CMISException {
+		return _createFolder(_linkChildrenURL, title);
+	}
+
+	private Entry _createFolder(String url, String title) throws CMISException {
+		return _createDocument(url, title, null);
+	}
+
+	private void _delete(Entry entry) throws CMISException {
+		Link link = null;
+
+		CMISObject cmisObject = entry.getFirstChild(_cmisConstants.OBJECT);
+
+		if (cmisObject.getBaseType().equals(_cmisConstants.BASE_TYPE_FOLDER)) {
+			link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+		}
+		else {
+			link = entry.getLink(_cmisConstants.LINK_ALL_VERSIONS);
+		}
+
+		delete(link.getHref().toString());
+	}
+
+	private void _delete(String url) throws CMISException {
+		ClientResponse clientResponse = _getAbedraClient().delete(url);
+
+		if (ResponseType.select(
+				clientResponse.getStatus()) != ResponseType.SUCCESS) {
+
+			throw new CMISException(
+				"Error deleting object at " + url + " " +
+					clientResponse.getStatusText());
+		}
+	}
+
+	private AbderaClient _getAbedraClient() throws CMISException {
+		try {
+			AbderaClient abderaClient = new AbderaClient(_abdera);
+
+			abderaClient.addCredentials(
+				null, null, null, _usernamePasswordCredentials);
+
+			return abderaClient;
+		}
+		catch (Exception e) {
+			throw new CMISException(e);
+		}
+	}
+
+	private String _getCollectionUrl(
+		Workspace workspace, String collectionType) {
+
+		for (Collection collection : workspace.getCollections()) {
+			String curCollectionType = collection.getAttributeValue(
+				_cmisConstants.COLLECTION_TYPE);
+
+			if (collectionType.equals(curCollectionType)) {
+				return collection.getHref().toString();
+			}
+		}
+
+		return null;
+	}
+
+	private Entry _getDocument(Entry entry, String title) throws CMISException {
+		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+
+		return _getDocument(link.getHref().toString(), title);
+	}
+
+	private Entry _getDocument(String url, String title) throws CMISException {
+		return _getEntry(url, title, _cmisConstants.BASE_TYPE_DOCUMENT);
+	}
+
+	private Entry _getEntry(String url, String title, String baseType)
+		throws CMISException {
+
+		ClientResponse clientResponse = _getAbedraClient().get(url);
+
+		Feed feed = (Feed)clientResponse.getDocument().getRoot();
+
+		for (Entry entry : feed.getEntries()) {
+			if (entry.getTitle().equals(title)) {
+				CMISObject cmisObject = entry.getFirstChild(
+					_cmisConstants.OBJECT);
+
+				if (baseType.equals(cmisObject.getBaseType())) {
+					return entry;
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private Entry _getFolder(Entry entry, String title) throws CMISException {
+		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+
+		return _getFolder(link.getHref().toString(), title);
+	}
+
+	private Entry _getFolder(String title) throws CMISException {
+		return _getFolder(_linkChildrenURL, title);
+	}
+
+	private Entry _getFolder(String url, String title) throws CMISException {
+		return _getEntry(url, title, _cmisConstants.BASE_TYPE_FOLDER);
+	}
+
+	private List<String> _getFolders(Entry entry) throws CMISException {
+		List<String> folders = new ArrayList<String>();
+
+		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+
+		String url = link.getHref().toString();
+
+		ClientResponse clientResponse = _getAbedraClient().get(url);
+
+		Feed feed = (Feed)clientResponse.getDocument().getRoot();
+
+		for (Entry curEntry : feed.getEntries()) {
+			folders.add(curEntry.getTitle());
+		}
+
+		return folders;
+	}
+
+	private InputStream _getInputStream(Entry entry) throws CMISException {
+		try {
+			Link link = entry.getLink(_cmisConstants.LINK_STREAM);
+
+			String url = link.getHref().toString();
+
+			ClientResponse clientResponse = _getAbedraClient().get(url);
+
+			return clientResponse.getInputStream();
+		}
+		catch (Exception e) {
+			throw new CMISException(e);
+		}
+	}
+
+	private Service _getService() throws CMISException {
+		ClientResponse clientResponse = _getAbedraClient().get(
+			PropsValues.CMIS_REPOSITORY_URL);
+
+		return (Service)clientResponse.getDocument().getRoot();
+	}
+
+	private void _verifyRepository() throws Exception {
+		Service service = _getService();
+
+		Workspace workspace = service.getWorkspaces().get(0);
+
+		CMISRepositoryInfo cmisRepositoryInfo = workspace.getFirstChild(
+			_cmisConstants.REPOSITORY_INFO);
+
+		// CMIS version
+
+		String version = cmisRepositoryInfo.getVersionSupported();
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Using CMIS repository " + cmisRepositoryInfo.getProductName() +
+					" " + cmisRepositoryInfo.getProductVersion());
+			_log.info("CMIS repository supports CMIS version " + version);
+		}
+
+		if (!version.equals(_cmisConstants.VERSION)) {
+			throw new RuntimeException(
+				"CMIS repository is running an unsupported version");
+		}
+
+		// Find root folder
+
+		String url = getCollectionUrl(
+			workspace, _cmisConstants.COLLECTION_ROOT_CHILDREN);
+
+		Entry entry = getEntry(
+			url, PropsValues.CMIS_SYSTEM_ROOT_DIR,
+			_cmisConstants.BASE_TYPE_FOLDER);
+
+		if (entry == null) {
+			entry = createFolder(url, PropsValues.CMIS_SYSTEM_ROOT_DIR);
+		}
+
+		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);
+
+		_linkChildrenURL = link.getHref().toString();
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CMISUtil.class);
+
+	private static CMISUtil _instance = new CMISUtil();
+
+	private Abdera _abdera;
+	private CMISConstants _cmisConstants;
+	private String _linkChildrenURL;
+	private UsernamePasswordCredentials _usernamePasswordCredentials;
 
 }

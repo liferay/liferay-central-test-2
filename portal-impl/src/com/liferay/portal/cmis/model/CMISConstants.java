@@ -28,12 +28,11 @@ import javax.xml.namespace.QName;
  * <a href="CMISConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public abstract class CMISConstants {
 
-	public static CMISConstants getInstance(String cmisVersion) {
-		if (cmisVersion.equals("0.61")) {
+	public static CMISConstants getInstance(String version) {
+		if (version.equals("0.61")) {
 			return CMISConstants_0_6_1.getInstance();
 		}
 		else {
@@ -41,160 +40,160 @@ public abstract class CMISConstants {
 		}
 	}
 
-	public String NS;
+	public String NS = null;
 
-	public String PREFIX;
+	public String PREFIX = null;
 
-	public String VERSION;
+	public String VERSION = null;
 
 	// Repository
 
-	public QName REPOSITORY_DESCRIPTION;
+	public QName REPOSITORY_DESCRIPTION = null;
 
-	public QName REPOSITORY_ID;
+	public QName REPOSITORY_ID = null;
 
-	public QName REPOSITORY_INFO;
+	public QName REPOSITORY_INFO = null;
 
-	public QName REPOSITORY_NAME;
+	public QName REPOSITORY_NAME = null;
 
-	public QName REPOSITORY_PRODUCT_NAME;
+	public QName REPOSITORY_PRODUCT_NAME = null;
 
-	public QName REPOSITORY_PRODUCT_VERSION;
+	public QName REPOSITORY_PRODUCT_VERSION = null;
 
-	public QName REPOSITORY_RELATIONSHIP;
+	public QName REPOSITORY_RELATIONSHIP = null;
 
-	public QName REPOSITORY_ROOT_FOLDER_ID;
+	public QName REPOSITORY_ROOT_FOLDER_ID = null;
 
-	public QName REPOSITORY_SPECIFIC_INFO;
+	public QName REPOSITORY_SPECIFIC_INFO = null;
 
-	public QName REPOSITORY_VENDOR_NAME;
+	public QName REPOSITORY_VENDOR_NAME = null;
 
-	public QName REPOSITORY_VERSION_SUPPORTED;
+	public QName REPOSITORY_VERSION_SUPPORTED = null;
 
 	// Collection
 
-	public QName COLLECTION_TYPE;
+	public QName COLLECTION_TYPE = null;
 
-	public String COLLECTION_CHECKEDOUT;
+	public String COLLECTION_CHECKEDOUT = null;
 
-	public String COLLECTION_QUERY;
+	public String COLLECTION_QUERY = null;
 
-	public String COLLECTION_ROOT_CHILDREN;
+	public String COLLECTION_ROOT_CHILDREN = null;
 
-	public String COLLECTION_ROOT_DESCENDANTS;
+	public String COLLECTION_ROOT_DESCENDANTS = null;
 
-	public String COLLECTION_TYPES_CHILDREN;
+	public String COLLECTION_TYPES_CHILDREN = null;
 
-	public String COLLECTION_TYPES_DESCENDANTS;
+	public String COLLECTION_TYPES_DESCENDANTS = null;
 
-	public String COLLECTION_UNFILED;
+	public String COLLECTION_UNFILED = null;
 
 	// Object
 
-	public QName OBJECT;
+	public QName OBJECT = null;
 
-	public String BASE_TYPE_DOCUMENT;
+	public String BASE_TYPE_DOCUMENT = null;
 
-	public String BASE_TYPE_FOLDER;
+	public String BASE_TYPE_FOLDER = null;
 
-	public String LINK_ALL_VERSIONS;
+	public String LINK_ALL_VERSIONS = null;
 
-	public String LINK_ALLOWABLE_ACTIONS;
+	public String LINK_ALLOWABLE_ACTIONS = null;
 
-	public String LINK_CHILDREN;
+	public String LINK_CHILDREN = null;
 
-	public String LINK_DESCENDANTS;
+	public String LINK_DESCENDANTS = null;
 
-	public String LINK_LATEST_VERSION;
+	public String LINK_LATEST_VERSION = null;
 
-	public String LINK_PARENT;
+	public String LINK_PARENT = null;
 
-	public String LINK_PARENTS;
+	public String LINK_PARENTS = null;
 
-	public String LINK_POLICIES;
+	public String LINK_POLICIES = null;
 
-	public String LINK_RELATIONSHIPS;
+	public String LINK_RELATIONSHIPS = null;
 
-	public String LINK_REPOSITORY;
+	public String LINK_REPOSITORY = null;
 
-	public String LINK_SOURCE;
+	public String LINK_SOURCE = null;
 
-	public String LINK_STREAM;
+	public String LINK_STREAM = null;
 
-	public String LINK_TARGET;
+	public String LINK_TARGET = null;
 
-	public String LINK_TYPE;
+	public String LINK_TYPE = null;
 
-	public QName PROPERTIES;
+	public QName PROPERTIES = null;
 
-	public QName PROPERTY_NAME;
+	public QName PROPERTY_NAME = null;
 
-	public QName PROPERTY_TYPE_STRING;
+	public QName PROPERTY_TYPE_STRING = null;
 
-	public QName PROPERTY_TYPE_DECIMAL;
+	public QName PROPERTY_TYPE_DECIMAL = null;
 
-	public QName PROPERTY_TYPE_INTEGER;
+	public QName PROPERTY_TYPE_INTEGER = null;
 
-	public QName PROPERTY_TYPE_BOOLEAN;
+	public QName PROPERTY_TYPE_BOOLEAN = null;
 
-	public QName PROPERTY_TYPE_DATETIME;
+	public QName PROPERTY_TYPE_DATETIME = null;
 
-	public QName PROPERTY_TYPE_URI;
+	public QName PROPERTY_TYPE_URI = null;
 
-	public QName PROPERTY_TYPE_ID;
+	public QName PROPERTY_TYPE_ID = null;
 
-	public QName PROPERTY_TYPE_XML;
+	public QName PROPERTY_TYPE_XML = null;
 
-	public QName PROPERTY_TYPE_HTML;
+	public QName PROPERTY_TYPE_HTML = null;
 
-	public QName PROPERTY_VALUE;
+	public QName PROPERTY_VALUE = null;
 
-	public String PROPERTY_NAME_BASETYPE;
+	public String PROPERTY_NAME_BASETYPE = null;
 
-	public String PROPERTY_NAME_CHECKIN_COMMENT;
+	public String PROPERTY_NAME_CHECKIN_COMMENT = null;
 
-	public String PROPERTY_NAME_CONTENT_STREAM_FILENAME;
+	public String PROPERTY_NAME_CONTENT_STREAM_FILENAME = null;
 
-	public String PROPERTY_NAME_CONTENT_STREAM_LENGTH;
+	public String PROPERTY_NAME_CONTENT_STREAM_LENGTH = null;
 
-	public String PROPERTY_NAME_CONTENT_STREAM_MIMETYPE;
+	public String PROPERTY_NAME_CONTENT_STREAM_MIMETYPE = null;
 
-	public String PROPERTY_NAME_CONTENT_STREAM_URI;
+	public String PROPERTY_NAME_CONTENT_STREAM_URI = null;
 
-	public String PROPERTY_NAME_CREATED_BY;
+	public String PROPERTY_NAME_CREATED_BY = null;
 
-	public String PROPERTY_NAME_CREATION_DATE;
+	public String PROPERTY_NAME_CREATION_DATE = null;
 
-	public String PROPERTY_NAME_IS_IMMUTABLE;
+	public String PROPERTY_NAME_IS_IMMUTABLE = null;
 
-	public String PROPERTY_NAME_IS_LATEST_MAJOR_VERSION;
+	public String PROPERTY_NAME_IS_LATEST_MAJOR_VERSION = null;
 
-	public String PROPERTY_NAME_IS_LATEST_VERSION;
+	public String PROPERTY_NAME_IS_LATEST_VERSION = null;
 
-	public String PROPERTY_NAME_IS_MAJOR_VERSION;
+	public String PROPERTY_NAME_IS_MAJOR_VERSION = null;
 
-	public String PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT;
+	public String PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT = null;
 
-	public String PROPERTY_NAME_LAST_MODIFIED_BY;
+	public String PROPERTY_NAME_LAST_MODIFIED_BY = null;
 
-	public String PROPERTY_NAME_LAST_MODIFICATION_DATE;
+	public String PROPERTY_NAME_LAST_MODIFICATION_DATE = null;
 
-	public String PROPERTY_NAME_NAME;
+	public String PROPERTY_NAME_NAME = null;
 
-	public String PROPERTY_NAME_OBJECT_ID;
+	public String PROPERTY_NAME_OBJECT_ID = null;
 
-	public String PROPERTY_NAME_OBJECT_TYPE_ID;
+	public String PROPERTY_NAME_OBJECT_TYPE_ID = null;
 
-	public String PROPERTY_NAME_SOURCE_ID;
+	public String PROPERTY_NAME_SOURCE_ID = null;
 
-	public String PROPERTY_NAME_TARGET_ID;
+	public String PROPERTY_NAME_TARGET_ID = null;
 
-	public String PROPERTY_NAME_VERSION_LABEL;
+	public String PROPERTY_NAME_VERSION_LABEL = null;
 
-	public String PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY;
+	public String PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY = null;
 
-	public String PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID;
+	public String PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID = null;
 
-	public String PROPERTY_NAME_VERSION_SERIES_ID;
+	public String PROPERTY_NAME_VERSION_SERIES_ID = null;
 
 }

@@ -30,19 +30,18 @@ import org.apache.abdera.util.AbstractExtensionFactory;
  * <a href="CMISExtensionFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISExtensionFactory extends AbstractExtensionFactory {
 
 	public CMISExtensionFactory() {
-		super(CMISUtil.getConstants().NS);
+		super(CMISUtil.getCMISConstants().NS);
 
-		_constants = CMISUtil.getConstants();
+		_cmisConstants = CMISUtil.getCMISConstants();
 
-		addImpl(_constants.REPOSITORY_INFO, CMISRepositoryInfo.class);
-		addImpl(_constants.OBJECT, CMISObject.class);
+		addImpl(_cmisConstants.REPOSITORY_INFO, CMISRepositoryInfo.class);
+		addImpl(_cmisConstants.OBJECT, CMISObject.class);
 	}
 
-	private CMISConstants _constants;
+	private CMISConstants _cmisConstants;
 
 }

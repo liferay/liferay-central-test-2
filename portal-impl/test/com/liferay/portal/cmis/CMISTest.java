@@ -24,10 +24,10 @@ package com.liferay.portal.cmis;
 
 import com.liferay.portal.cmis.model.CMISConstants;
 import com.liferay.portal.cmis.model.CMISRepositoryInfo;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
 
 import java.util.List;
 
@@ -42,30 +42,59 @@ import org.apache.abdera.model.Workspace;
  * <a href="CMISTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- *
  */
 public class CMISTest extends TestCase {
+
+	public void testCRUD() throws Exception {
+		FileInputStream fis = new FileInputStream(_TEST_FILE);
+
+		Entry folderEntry = CMISUtil.createFolder(
+			_BASE_CHILDREN_URL, _LIFERAY_TEST);
+
+		Entry fileEntry = CMISUtil.createDocument(folderEntry, "test.txt", fis);
+
+		assertNotNull(fileEntry);
+
+		String repositoryFileContent = StringUtil.read(
+			CMISUtil.getInputStream(fileEntry));
+
+		String originalFileContent = _fileUtil.read(_TEST_FILE);
+
+		assertEquals(originalFileContent, repositoryFileContent);
+
+		List<String> fileNames = CMISUtil.getFolders(folderEntry);
+
+		assertEquals(1, fileNames.size());
+
+		assertEquals("test.txt", fileNames.get(0));
+
+		CMISUtil.delete(fileEntry);
+		CMISUtil.delete(folderEntry);
+	}
 
 	public void testService() throws Exception {
 		Service service = CMISUtil.getService();
 
 		assertNotNull(service);
 
-		for (Workspace ws : service.getWorkspaces()) {
-			assertNotNull(ws);
+		for (Workspace workspace : service.getWorkspaces()) {
+			assertNotNull(workspace);
 
-			CMISRepositoryInfo info =
-				ws.getFirstChild(_constants.REPOSITORY_INFO);
+			CMISRepositoryInfo cmisRepositoryInfo = workspace.getFirstChild(
+				_cmisConstants.REPOSITORY_INFO);
 
-			assertNotNull(info.getId());
-			assertEquals(_constants.VERSION, info.getVersionSupported());
+			assertNotNull(cmisRepositoryInfo.getId());
+			assertEquals(
+				_cmisConstants.VERSION,
+				cmisRepositoryInfo.getVersionSupported());
 
 			boolean found = false;
 
-			for (Collection col : ws.getCollections()) {
-				String type = col.getAttributeValue(_constants.COLLECTION_TYPE);
+			for (Collection collection : workspace.getCollections()) {
+				String type = collection.getAttributeValue(
+					_cmisConstants.COLLECTION_TYPE);
 
-				if (_constants.COLLECTION_ROOT_CHILDREN.equals(type)) {
+				if (_cmisConstants.COLLECTION_ROOT_CHILDREN.equals(type)) {
 					found = true;
 				}
 			}
@@ -74,68 +103,25 @@ public class CMISTest extends TestCase {
 		}
 	}
 
-	public void testCRUD() throws Exception {
-		FileInputStream fis = new FileInputStream(_TEST_FILE);
-
-		Entry folder =
-			CMISUtil.createFolder(_BASE_CHILDREN_URL, _LIFERAY_TEST);
-
-		Entry file = CMISUtil.createDocument(folder, "test.txt", fis);
-
-		assertNotNull(file);
-
-		String repositoryFile = _readStream(CMISUtil.getInputStream(file));
-
-		String originalFile = _readStream(new FileInputStream(_TEST_FILE));
-
-		assertEquals(originalFile, repositoryFile);
-
-		List<String> list = CMISUtil.getFolderList(folder);
-
-		assertEquals(1, list.size());
-
-		assertEquals("test.txt", list.get(0));
-
-		CMISUtil.delete(file);
-		CMISUtil.delete(folder);
-	}
-
 	protected void setUp() throws Exception {
 		Entry folder = CMISUtil.getEntry(
-			_BASE_CHILDREN_URL, _LIFERAY_TEST, _constants.BASE_TYPE_FOLDER);
+			_BASE_CHILDREN_URL, _LIFERAY_TEST, _cmisConstants.BASE_TYPE_FOLDER);
 
 		if (folder != null) {
 			CMISUtil.delete(folder);
 		}
 	}
 
-	private String _readStream(InputStream is) throws Exception {
-		String str = null;
-
-		try {
-			byte[] bytes = new byte[is.available()];
-
-			is.read(bytes);
-
-			str = new String(bytes, StringPool.UTF8);
-		}
-		finally {
-			if (is != null) {
-				is.close();
-			}
-		}
-
-		return str;
-	}
-
-	private static final CMISConstants _constants = CMISUtil.getConstants();
-
 	private static final String _BASE_CHILDREN_URL =
-		"http://localhost:8080/alfresco/service/api/path/workspace/SpacesStore/Company%20Home/descendants";
+		"http://localhost:8080/alfresco/service/api/path/workspace/" +
+			"SpacesStore/Company%20Home/descendants";
+
+	private static final String _LIFERAY_TEST = "Liferay Test";
 
 	private static final String _TEST_FILE =
 		"portal-impl/test/com/liferay/portal/cmis/dependencies/test.txt";
 
-	private static final String _LIFERAY_TEST = "Liferay Test";
+	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

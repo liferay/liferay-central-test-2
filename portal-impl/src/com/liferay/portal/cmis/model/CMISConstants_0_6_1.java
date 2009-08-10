@@ -27,16 +27,15 @@ import javax.xml.namespace.QName;
 /**
  * <a href="CMISConstants_0_6_1.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * CMIS constants supporting the draft version 0.61.
- * </p>
- *
  * @author Alexander Chow
- *
  */
 public class CMISConstants_0_6_1 extends CMISConstants {
 
-	public CMISConstants_0_6_1() {
+	public static CMISConstants getInstance() {
+		return _instance;
+	}
+
+	private CMISConstants_0_6_1() {
 		NS = "http://docs.oasis-open.org/ns/cmis/core/200901";
 
 		PREFIX = "cmis";
@@ -57,15 +56,18 @@ public class CMISConstants_0_6_1 extends CMISConstants {
 
 		REPOSITORY_PRODUCT_VERSION = new QName(NS, "productVersion", PREFIX);
 
-		REPOSITORY_RELATIONSHIP = new QName(NS, "repositoryRelationship", PREFIX);
+		REPOSITORY_RELATIONSHIP = new QName(
+			NS, "repositoryRelationship", PREFIX);
 
 		REPOSITORY_ROOT_FOLDER_ID = new QName(NS, "rootFolderId", PREFIX);
 
-		REPOSITORY_SPECIFIC_INFO = new QName(NS, "repositorySpecificInformation", PREFIX);
+		REPOSITORY_SPECIFIC_INFO = new QName(
+			NS, "repositorySpecificInformation", PREFIX);
 
 		REPOSITORY_VENDOR_NAME = new QName(NS, "vendorName", PREFIX);
 
-		REPOSITORY_VERSION_SUPPORTED = new QName(NS, "cmisVersionSupported", PREFIX);
+		REPOSITORY_VERSION_SUPPORTED = new QName(
+			NS, "cmisVersionSupported", PREFIX);
 
 		// Collection
 
@@ -169,7 +171,8 @@ public class CMISConstants_0_6_1 extends CMISConstants {
 
 		PROPERTY_NAME_IS_MAJOR_VERSION = "IsMajorVersion";
 
-		PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT = "IsVersionSeriesCheckedOut";
+		PROPERTY_NAME_IS_VERSION_SERIES_CHECKED_OUT =
+			"IsVersionSeriesCheckedOut";
 
 		PROPERTY_NAME_LAST_MODIFIED_BY = "LastModifiedBy";
 
@@ -187,15 +190,13 @@ public class CMISConstants_0_6_1 extends CMISConstants {
 
 		PROPERTY_NAME_VERSION_LABEL = "VersionLabel";
 
-		PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY = "VersionSeriesCheckedOutBy";
+		PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_BY =
+			"VersionSeriesCheckedOutBy";
 
-		PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID = "VersionSeriesCheckedOutId";
+		PROPERTY_NAME_VERSION_SERIES_CHECKED_OUT_ID =
+			"VersionSeriesCheckedOutId";
 
 		PROPERTY_NAME_VERSION_SERIES_ID = "VersionSeriesId";
-	}
-
-	public static CMISConstants getInstance() {
-		return _instance;
 	}
 
 	private static CMISConstants _instance = new CMISConstants_0_6_1();
