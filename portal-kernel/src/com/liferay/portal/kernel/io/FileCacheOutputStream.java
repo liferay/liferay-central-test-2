@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.io;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -46,6 +48,20 @@ public class FileCacheOutputStream extends OutputStream {
 
 		_bos = new BufferedOutputStream(
 			new FileOutputStream(_tempFile), _BUFFER);
+	}
+
+	public void cleanUp() {
+		try {
+			flush();
+			close();
+
+			FileUtil.delete(_tempFile);
+		}
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe.getMessage());
+			}
+		}
 	}
 
 	public void close() throws IOException {
@@ -99,5 +115,8 @@ public class FileCacheOutputStream extends OutputStream {
 
 	protected BufferedOutputStream _bos;
 	protected File _tempFile;
+
+	private static Log _log = LogFactoryUtil.getLog(
+		FileCacheOutputStream.class);
 
 }

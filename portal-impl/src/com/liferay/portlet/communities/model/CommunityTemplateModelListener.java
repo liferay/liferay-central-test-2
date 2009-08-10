@@ -37,6 +37,8 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
+import java.io.InputStream;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -83,6 +85,9 @@ public class CommunityTemplateModelListener
 	}
 
 	public void onAfterCreate(LayoutSet layoutSet) {
+		FileCacheOutputStream fcos = null;
+		InputStream is = null;
+
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(
 				layoutSet.getGroupId());
@@ -105,21 +110,33 @@ public class CommunityTemplateModelListener
 				return;
 			}
 
-			FileCacheOutputStream fileCacheOutputStream =
-				LayoutLocalServiceUtil.exportLayoutsAsStream(
-					templateStagingGroup.getGroupId(),
-					layoutSet.isPrivateLayout(), null, _templateParameters,
-					null, null);
+			fcos = LayoutLocalServiceUtil.exportLayoutsAsStream(
+				templateStagingGroup.getGroupId(), layoutSet.isPrivateLayout(),
+				null, _templateParameters, null, null);
+
+			is = fcos.getFileInputStream();
 
 			LayoutLocalServiceUtil.importLayouts(
 				group.getCreatorUserId(), group.getGroupId(),
-				layoutSet.isPrivateLayout(), _templateParameters,
-				fileCacheOutputStream.getFileInputStream());
+				layoutSet.isPrivateLayout(), _templateParameters, is);
 		}
 		catch (Exception e) {
 			_log.error(
 				"Unble to import layouts for group " + layoutSet.getGroupId(),
 				e);
+		}
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+
+				if (fcos != null) {
+					fcos.cleanUp();
+				}
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 

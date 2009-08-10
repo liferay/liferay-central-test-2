@@ -131,11 +131,16 @@ public class ExportPagesAction extends PortletAction {
 					groupId, privateLayout, null,
 					actionRequest.getParameterMap(), startDate, endDate);
 
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
+			try {
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
 
-			ServletResponseUtil.sendFile(
-				response, fileName, fcos.getFileInputStream());
+				ServletResponseUtil.sendFile(
+					response, fileName, fcos.getFileInputStream());
+			}
+			finally {
+				fcos.cleanUp();
+			}
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}

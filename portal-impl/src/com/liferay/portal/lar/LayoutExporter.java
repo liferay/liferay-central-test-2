@@ -139,12 +139,19 @@ public class LayoutExporter {
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
+		byte[] bytes = null;
+
 		try {
-			return fcos.getBytes();
+			bytes = fcos.getBytes();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+		finally {
+			fcos.cleanUp();
+		}
+
+		return bytes;
 	}
 
 	public FileCacheOutputStream exportLayoutsAsStream(
@@ -488,11 +495,13 @@ public class LayoutExporter {
 
 		// Look and feel
 
+		FileCacheOutputStream fcos = null;
 		InputStream themeZip = null;
 
 		try {
 			if (exportTheme) {
-				themeZip = exportTheme(layoutSet).getFileInputStream();
+				fcos = exportTheme(layoutSet);
+				themeZip = fcos.getFileInputStream();
 			}
 		}
 		catch (IOException ioe) {
@@ -511,7 +520,13 @@ public class LayoutExporter {
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
 			if (themeZip != null) {
-				context.addZipEntry("/theme.zip", themeZip);
+				try {
+					context.addZipEntry("/theme.zip", themeZip);
+				}
+				finally {
+					fcos.cleanUp();
+					themeZip.close();
+				}
 			}
 
 			return zipWriter.finishWithStream();

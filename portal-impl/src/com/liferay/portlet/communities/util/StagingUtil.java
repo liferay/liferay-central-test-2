@@ -70,6 +70,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -137,17 +139,23 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			actionRequest);
 
-		FileCacheOutputStream fileCacheOutputStream =
+		FileCacheOutputStream fcos =
 			LayoutLocalServiceUtil.exportPortletInfoAsStream(
 				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
+		InputStream is = fcos.getFileInputStream();
+
 		try {
 			LayoutServiceUtil.importPortletInfo(
-				targetPlid, targetGroupId, portletId, parameterMap,
-				fileCacheOutputStream.getFileInputStream());
+				targetPlid, targetGroupId, portletId, parameterMap, is);
 		}
 		finally {
-			fileCacheOutputStream.close();
+			try {
+				is.close();
+				fcos.cleanUp();
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 
@@ -503,18 +511,24 @@ public class StagingUtil {
 			Date startDate, Date endDate)
 		throws Exception {
 
-		FileCacheOutputStream fileCacheOutputStream =
+		FileCacheOutputStream fcos =
 			LayoutLocalServiceUtil.exportLayoutsAsStream(
 				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);
 
+		InputStream is = fcos.getFileInputStream();
+
 		try {
 			LayoutServiceUtil.importLayouts(
-				targetGroupId, privateLayout, parameterMap,
-				fileCacheOutputStream.getFileInputStream());
+				targetGroupId, privateLayout, parameterMap, is);
 		}
 		finally {
-			fileCacheOutputStream.close();
+			try {
+				is.close();
+				fcos.cleanUp();
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 
