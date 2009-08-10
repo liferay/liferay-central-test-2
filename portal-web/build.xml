@@ -23,7 +23,7 @@
 		<delete dir="docroot/html/js/editor/codepress" />
 		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/js/editor/tinymce" />
-		<delete dir="docroot/html/skin/color" />
+		<delete dir="docroot/html/portal/aui" />
 		<delete dir="docroot/html/themes/_unstyled/images/aui/" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/html/VAADIN" />
@@ -440,10 +440,9 @@
 
 				<!-- Prepare -->
 
-				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,widget.css,extras.css" />
-
 				<delete dir="docroot/html/ALLOY_ZIP" />
 				<delete dir="docroot/html/js/aui" />
+				<delete dir="docroot/html/portal/aui" />
 				<delete dir="docroot/html/themes/_unstyled/images/aui/" />
 
 				<unzip src="third-party/${alloy.file}" dest="docroot/html/ALLOY_ZIP" />
@@ -465,7 +464,11 @@
 					/>
 				</copy>
 
+				<!--<touch file="docroot/html/portal/aui/js.jsp" />-->
+
 				<!-- CSS -->
+
+				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,widget.css,extras.css" />
 
 				<concat destfile="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
 					<filelist
@@ -487,30 +490,11 @@
 					<replacefilter token="../images/" value="../images/aui/" />
 				</replace>
 
-				<copy todir="docroot/html/themes/classic/_diffs/css/" overwrite="yes">
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css" />
-				</copy>
-
-				<replaceregexp match="\u007B[^\u007D]*\u007D([\r\n])?" replace="{\1}\1" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
-						includes="alloy.css"
-					/>
-				</replaceregexp>
-
-				<copy todir="docroot/html/themes/_styled/css/" overwrite="yes">
-					<filelist
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
-						files="alloy.css"
-					/>
-				</copy>
-
-				<copy todir="docroot/html/themes/_unstyled/css/" overwrite="yes">
-					<filelist
-						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
-						files="alloy.css"
-					/>
-				</copy>
+				<copy
+					file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css"
+					tofile="docroot/html/portal/aui/css.jsp"
+					overwrite="yes"
+				/>
 
 				<!-- Images -->
 
