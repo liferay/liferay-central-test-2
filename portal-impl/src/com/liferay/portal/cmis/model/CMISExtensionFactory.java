@@ -22,8 +22,6 @@
 
 package com.liferay.portal.cmis.model;
 
-import com.liferay.portal.cmis.CMISUtil;
-
 import org.apache.abdera.util.AbstractExtensionFactory;
 
 /**
@@ -34,9 +32,9 @@ import org.apache.abdera.util.AbstractExtensionFactory;
 public class CMISExtensionFactory extends AbstractExtensionFactory {
 
 	public CMISExtensionFactory() {
-		super(CMISUtil.getCMISConstants().NS);
+		super(CMISConstants.getInstance().NS);
 
-		_cmisConstants = CMISUtil.getCMISConstants();
+		_cmisConstants = CMISConstants.getInstance();
 
 		addImpl(_cmisConstants.REPOSITORY_INFO, CMISRepositoryInfo.class);
 		addImpl(_cmisConstants.OBJECT, CMISObject.class);

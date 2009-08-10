@@ -121,7 +121,7 @@ public class CMISTest extends TestCase {
 	private static final String _TEST_FILE =
 		"portal-impl/test/com/liferay/portal/cmis/dependencies/test.txt";
 
-	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
+	private static CMISConstants _cmisConstants = CMISConstants.getInstance();
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

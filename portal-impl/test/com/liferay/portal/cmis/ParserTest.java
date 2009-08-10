@@ -121,7 +121,7 @@ public class ParserTest extends TestCase {
 		factory.registerExtension(new CMISExtensionFactory());
 	}
 
-	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
+	private static CMISConstants _cmisConstants = CMISConstants.getInstance();
 
 	private Abdera _abdera;
 

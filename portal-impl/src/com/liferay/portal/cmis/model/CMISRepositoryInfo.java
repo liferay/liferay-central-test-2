@@ -22,8 +22,6 @@
 
 package com.liferay.portal.cmis.model;
 
-import com.liferay.portal.cmis.CMISUtil;
-
 import javax.xml.namespace.QName;
 
 import org.apache.abdera.factory.Factory;
@@ -40,13 +38,13 @@ public class CMISRepositoryInfo extends ElementWrapper {
 	public CMISRepositoryInfo(Element element) {
 		super(element);
 
-		_cmisConstants = CMISUtil.getCMISConstants();
+		_cmisConstants = CMISConstants.getInstance();
 	}
 
 	public CMISRepositoryInfo(Factory factory) {
-		super(factory, CMISUtil.getCMISConstants().REPOSITORY_INFO);
+		super(factory, CMISConstants.getInstance().REPOSITORY_INFO);
 
-		_cmisConstants = CMISUtil.getCMISConstants();
+		_cmisConstants = CMISConstants.getInstance();
 	}
 
 	public String getDescription() {

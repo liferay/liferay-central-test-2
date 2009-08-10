@@ -92,10 +92,6 @@ public class CMISUtil {
 		_instance._delete(url);
 	}
 
-	public static CMISConstants getCMISConstants() {
-		return _instance._cmisConstants;
-	}
-
 	public static String getCollectionUrl(
 		Workspace workspace, String collectionType) {
 
@@ -151,8 +147,7 @@ public class CMISUtil {
 	private CMISUtil() {
 		try {
 			_abdera = Abdera.getInstance();
-			_cmisConstants = CMISConstants.getInstance(
-				PropsValues.CMIS_REPOSITORY_VERSION);
+			_cmisConstants = CMISConstants.getInstance();
 			_usernamePasswordCredentials = new UsernamePasswordCredentials(
 				PropsValues.CMIS_CREDENTIALS_USERNAME,
 				PropsValues.CMIS_CREDENTIALS_PASSWORD);
@@ -400,15 +395,15 @@ public class CMISUtil {
 
 		// Find root folder
 
-		String url = getCollectionUrl(
+		String url = _getCollectionUrl(
 			workspace, _cmisConstants.COLLECTION_ROOT_CHILDREN);
 
-		Entry entry = getEntry(
+		Entry entry = _getEntry(
 			url, PropsValues.CMIS_SYSTEM_ROOT_DIR,
 			_cmisConstants.BASE_TYPE_FOLDER);
 
 		if (entry == null) {
-			entry = createFolder(url, PropsValues.CMIS_SYSTEM_ROOT_DIR);
+			entry = _createFolder(url, PropsValues.CMIS_SYSTEM_ROOT_DIR);
 		}
 
 		Link link = entry.getLink(_cmisConstants.LINK_CHILDREN);

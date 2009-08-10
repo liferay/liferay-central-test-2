@@ -24,6 +24,8 @@ package com.liferay.portal.cmis.model;
 
 import javax.xml.namespace.QName;
 
+import com.liferay.portal.util.PropsValues;
+
 /**
  * <a href="CMISConstants.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +33,9 @@ import javax.xml.namespace.QName;
  */
 public abstract class CMISConstants {
 
-	public static CMISConstants getInstance(String version) {
+	public static CMISConstants getInstance() {
+		String version = PropsValues.CMIS_REPOSITORY_VERSION;
+
 		if (version.equals("0.61")) {
 			return CMISConstants_0_6_1.getInstance();
 		}

@@ -419,6 +419,6 @@ public class CMISHook extends BaseHook {
 
 	private static Log _log = LogFactoryUtil.getLog(CMISHook.class);
 
-	private static CMISConstants _cmisConstants = CMISUtil.getCMISConstants();
+	private static CMISConstants _cmisConstants = CMISConstants.getInstance();
 
 }

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.cmis.model;
 
-import com.liferay.portal.cmis.CMISUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
@@ -48,13 +47,13 @@ public class CMISObject extends ExtensibleElementWrapper {
 	public CMISObject(Element element) {
 		super(element);
 
-		_cmisConstants = CMISUtil.getCMISConstants();
+		_cmisConstants = CMISConstants.getInstance();
 	}
 
 	public CMISObject(Factory factory) {
-		super(factory, CMISUtil.getCMISConstants().OBJECT);
+		super(factory, CMISConstants.getInstance().OBJECT);
 
-		_cmisConstants = CMISUtil.getCMISConstants();
+		_cmisConstants = CMISConstants.getInstance();
 	}
 
 	public String getBaseType() {
