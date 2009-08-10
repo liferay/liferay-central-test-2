@@ -31,7 +31,7 @@ import com.liferay.portal.upgrade.v5_1_2.UpgradeSchema;
 /**
  * <a href="UpgradeProcess_5_1_2.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author	   Jorge Ferrer
  * @deprecated
  */
 public class UpgradeProcess_5_1_2 extends UpgradeProcess {

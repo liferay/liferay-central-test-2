@@ -40,7 +40,7 @@ import java.util.TimeZone;
  * <a href="CalEventRecurrenceUpgradeColumnImpl.java.html"><b><i>View Source</i>
  * </b></a>
  *
- * @author Samuel Kong
+ * @author	   Samuel Kong
  * @deprecated
  */
 public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {

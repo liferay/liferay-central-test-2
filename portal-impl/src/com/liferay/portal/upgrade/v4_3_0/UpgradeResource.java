@@ -73,8 +73,8 @@ import java.util.Map;
 /**
  * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @author Brian Wing Shun Chan
+ * @author	   Alexander Chow
+ * @author	   Brian Wing Shun Chan
  * @deprecated
  */
 public class UpgradeResource extends UpgradeProcess {

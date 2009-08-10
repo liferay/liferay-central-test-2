@@ -31,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author	   Brian Wing Shun Chan
+ * @author	   Raymond AugÃ©
  * @deprecated
  */
 public class VelocityFilter extends BasePortalFilter {
