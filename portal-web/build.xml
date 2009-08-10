@@ -19,10 +19,12 @@
 	<target name="clean" depends="build-common-web.clean">
 		<delete dir="classes" />
 		<delete dir="docroot/dtd" />
+		<delete dir="docroot/html/js/aui" />
 		<delete dir="docroot/html/js/editor/codepress" />
 		<delete dir="docroot/html/js/editor/fckeditor" />
 		<delete dir="docroot/html/js/editor/tinymce" />
 		<delete dir="docroot/html/skin/color" />
+		<delete dir="docroot/html/themes/_unstyled/images/aui/" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
 		<delete dir="docroot/html/VAADIN" />
 		<delete dir="docroot/WEB-INF/classes" />
@@ -436,34 +438,49 @@
 			</not>
 			<then>
 
-				<property name="alloy.core.css" value="reset.css, base.css, layout.css, forms.css, icons.css, widget.css, extras.css" />
+				<!-- Prepare -->
+
+				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,widget.css,extras.css" />
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
 				<delete dir="docroot/html/js/aui" />
-				<delete dir="docroot/html/themes/classic/_diffs/images/aui/" />
+				<delete dir="docroot/html/themes/_unstyled/images/aui/" />
 
 				<unzip src="third-party/${alloy.file}" dest="docroot/html/ALLOY_ZIP" />
 
-				<!--
-				Source JavaScript
-				-->
+				<!-- JavaScript -->
 
 				<copy todir="docroot/html/js/aui">
-					<fileset dir="docroot/html/ALLOY_ZIP/src/javascript/" includes="*.js" excludes="alloy.js, *-min.js" />
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						excludes="alloy.js,*-min.js"
+						includes="*.js"
+					/>
 				</copy>
 
 				<copy todir="docroot/html/js/aui/lib/yui/build">
-					<fileset dir="docroot/html/ALLOY_ZIP/lib/yui/build" includes="**" excludes="*.zip" />
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/lib/yui/build"
+						excludes="*.zip"
+					/>
 				</copy>
 
-				<!--
-				Theme CSS
-				-->
+				<!-- CSS -->
 
 				<concat destfile="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/" files="${alloy.core.css}"/>
-			        <fileset dir="docroot/html/ALLOY_ZIP/themes/base/css/" includes="*.css" excludes="${alloy.core.css}, custom.css, main.css, *-min.css"/>
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/" files="custom.css"/>
+					<filelist
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
+						files="${alloy.core.css}"
+					/>
+			        <fileset
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
+						excludes="${alloy.core.css},custom.css,main.css,*-min.css"
+						includes="*.css"
+					/>
+					<filelist
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
+						files="custom.css"
+					/>
 			    </concat>
 
 				<replace file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
@@ -471,24 +488,37 @@
 				</replace>
 
 				<copy todir="docroot/html/themes/classic/_diffs/css/" overwrite="yes">
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
-				</copy>
-
-				<copy todir="docroot/html/themes/classic/_diffs/images/aui/">
-					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/images/" includes="**"/>
+					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css" />
 				</copy>
 
 				<replaceregexp match="\u007B[^\u007D]*\u007D([\r\n])?" replace="{\1}\1" flags="g" byline="false">
-					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" includes="alloy.css"/>
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
+						includes="alloy.css"
+					/>
 				</replaceregexp>
 
 				<copy todir="docroot/html/themes/_styled/css/" overwrite="yes">
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
+					<filelist
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
+						files="alloy.css"
+					/>
 				</copy>
 
 				<copy todir="docroot/html/themes/_unstyled/css/" overwrite="yes">
-					<filelist dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/" files="alloy.css"/>
+					<filelist
+						dir="docroot/html/ALLOY_ZIP/themes/base/css/tmp/"
+						files="alloy.css"
+					/>
 				</copy>
+
+				<!-- Images -->
+
+				<copy todir="docroot/html/themes/_unstyled/images/aui/">
+					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/images/" />
+				</copy>
+
+				<!-- Cleanup -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
 			</then>
