@@ -27,7 +27,7 @@ import java.sql.Types;
 /**
  * <a href="MBBanTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Edward Shin
+ * @author Brian Wing Shun Chan
  */
 public class MBBanTable {
 
