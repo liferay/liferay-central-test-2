@@ -306,6 +306,7 @@
 	</target>
 
 	<target name="war" depends="compile">
+		<antcall target="build-alloy" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
 		<antcall target="build-fckeditor" />
@@ -450,10 +451,37 @@
 
 				<!-- JavaScript -->
 
+				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathJavaScript() %&gt;/aui/';" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<replaceregexp match="\w+\.css" replace="alloy.css" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
+				<copy
+					file="docroot/html/ALLOY_ZIP/src/javascript/defaults.js"
+					tofile="docroot/html/portal/aui/js.jsp"
+					overwrite="yes"
+				/>
+
 				<copy todir="docroot/html/js/aui">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
-						excludes="alloy.js,*-min.js"
+						excludes="alloy.js,defaults.js,*-min.js"
 						includes="*.js"
 					/>
 				</copy>
@@ -488,7 +516,7 @@
 			    </concat>
 
 				<replace file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
-					<replacefilter token="../images/" value="../images/aui/" />
+					<replacefilter token="../images/" value="&lt;%= themeImagesPath %&gt;/aui/" />
 				</replace>
 
 				<copy
@@ -684,6 +712,8 @@
 	</target>
 
 	<target name="build-themes">
+		<antcall target="build-alloy" />
+
 		<for param="module.name">
 			<path>
 				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
