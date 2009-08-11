@@ -474,7 +474,7 @@
 
 				<copy
 					file="docroot/html/ALLOY_ZIP/src/javascript/defaults.js"
-					tofile="docroot/html/portal/aui/js.jsp"
+					tofile="docroot/html/portal/aui/js.jspf"
 					overwrite="yes"
 				/>
 
@@ -492,8 +492,6 @@
 						excludes="*.zip"
 					/>
 				</copy>
-
-				<!--<touch file="docroot/html/portal/aui/js.jsp" />-->
 
 				<!-- CSS -->
 
@@ -521,7 +519,7 @@
 
 				<copy
 					file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css"
-					tofile="docroot/html/portal/aui/css.jsp"
+					tofile="docroot/html/portal/aui/css.jspf"
 					overwrite="yes"
 				/>
 
@@ -531,7 +529,7 @@
 					<fileset dir="docroot/html/ALLOY_ZIP/themes/base/images/" />
 				</copy>
 
-				<!-- Cleanup -->
+				<!-- Clean up -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
 			</then>
