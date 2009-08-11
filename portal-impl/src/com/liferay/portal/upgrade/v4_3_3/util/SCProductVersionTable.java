@@ -25,36 +25,29 @@ package com.liferay.portal.upgrade.v4_3_3.util;
 import java.sql.Types;
 
 /**
- * <a href="TagsAssetTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsAssetTable {
+public class SCProductVersionTable {
 
-	public static String TABLE_NAME = "TagsAsset";
+	public static String TABLE_NAME = "SCProductVersion";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"assetId", new Integer(Types.BIGINT)},
+		{"productVersionId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"publishDate", new Integer(Types.TIMESTAMP)},
-		{"expirationDate", new Integer(Types.TIMESTAMP)},
-		{"mimeType", new Integer(Types.VARCHAR)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"summary", new Integer(Types.VARCHAR)},
-		{"url", new Integer(Types.VARCHAR)},
-		{"height", new Integer(Types.INTEGER)},
-		{"width", new Integer(Types.INTEGER)}
+		{"productEntryId", new Integer(Types.BIGINT)},
+		{"version", new Integer(Types.VARCHAR)},
+		{"changeLog", new Integer(Types.VARCHAR)},
+		{"downloadPageURL", new Integer(Types.VARCHAR)},
+		{"directDownloadURL", new Integer(Types.VARCHAR)},
+		{"repoStoreArtifact", new Integer(Types.BOOLEAN)}
 	};
 
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER)";
+	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";
 
 }

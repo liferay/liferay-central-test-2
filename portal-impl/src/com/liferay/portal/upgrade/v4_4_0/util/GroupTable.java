@@ -20,41 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_3.util;
+package com.liferay.portal.upgrade.v4_4_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="TagsAssetTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsAssetTable {
+public class GroupTable {
 
-	public static String TABLE_NAME = "TagsAsset";
+	public static final String TABLE_NAME = "Group_";
 
-	public static Object[][] TABLE_COLUMNS = {
-		{"assetId", new Integer(Types.BIGINT)},
+	public static final Object[][] TABLE_COLUMNS = {
+		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"creatorUserId", new Integer(Types.BIGINT)},
 		{"classNameId", new Integer(Types.BIGINT)},
 		{"classPK", new Integer(Types.BIGINT)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"publishDate", new Integer(Types.TIMESTAMP)},
-		{"expirationDate", new Integer(Types.TIMESTAMP)},
-		{"mimeType", new Integer(Types.VARCHAR)},
-		{"title", new Integer(Types.VARCHAR)},
+		{"parentGroupId", new Integer(Types.BIGINT)},
+		{"liveGroupId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
 		{"description", new Integer(Types.VARCHAR)},
-		{"summary", new Integer(Types.VARCHAR)},
-		{"url", new Integer(Types.VARCHAR)},
-		{"height", new Integer(Types.INTEGER)},
-		{"width", new Integer(Types.INTEGER)}
+		{"type_", new Integer(Types.INTEGER)},
+		{"typeSettings", new Integer(Types.VARCHAR)},
+		{"friendlyURL", new Integer(Types.VARCHAR)},
+		{"active_", new Integer(Types.BOOLEAN)}
 	};
 
-	public static String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(300) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 
 }
