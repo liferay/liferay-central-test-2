@@ -28,22 +28,21 @@ import java.sql.Types;
  * <a href="DLFileVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class DLFileVersionTable {
 
 	public static String TABLE_NAME = "DLFileVersion";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "fileVersionId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "userName", new Integer(Types.VARCHAR) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "folderId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "version", new Integer(Types.DOUBLE) },
-		{ "size_", new Integer(Types.INTEGER) }
+		{"fileVersionId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"version", new Integer(Types.DOUBLE)},
+		{"size_", new Integer(Types.INTEGER)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(300) null,version DOUBLE,size_ INTEGER)";

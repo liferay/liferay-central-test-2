@@ -28,18 +28,17 @@ import java.sql.Types;
  * <a href="UserGroupTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class UserGroupTable {
 
 	public static String TABLE_NAME = "UserGroup";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "userGroupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "parentUserGroupId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) }
+		{"userGroupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"parentUserGroupId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null)";

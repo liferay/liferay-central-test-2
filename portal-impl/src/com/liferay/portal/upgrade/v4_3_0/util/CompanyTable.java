@@ -28,20 +28,19 @@ import java.sql.Types;
  * <a href="CompanyTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class CompanyTable {
 
 	public static String TABLE_NAME = "Company";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "accountId", new Integer(Types.BIGINT) },
-		{ "webId", new Integer(Types.VARCHAR) },
-		{ "key_", new Integer(Types.CLOB) },
-		{ "virtualHost", new Integer(Types.VARCHAR) },
-		{ "mx", new Integer(Types.VARCHAR) },
-		{ "logoId", new Integer(Types.BIGINT) }
+		{"companyId", new Integer(Types.BIGINT)},
+		{"accountId", new Integer(Types.BIGINT)},
+		{"webId", new Integer(Types.VARCHAR)},
+		{"key_", new Integer(Types.CLOB)},
+		{"virtualHost", new Integer(Types.VARCHAR)},
+		{"mx", new Integer(Types.VARCHAR)},
+		{"logoId", new Integer(Types.BIGINT)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";

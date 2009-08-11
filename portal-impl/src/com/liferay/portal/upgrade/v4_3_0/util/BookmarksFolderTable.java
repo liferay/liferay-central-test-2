@@ -28,22 +28,21 @@ import java.sql.Types;
  * <a href="BookmarksFolderTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class BookmarksFolderTable {
 
 	public static String TABLE_NAME = "BookmarksFolder";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "folderId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-		{ "parentFolderId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) }
+		{"folderId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"parentFolderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table BookmarksFolder (folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";

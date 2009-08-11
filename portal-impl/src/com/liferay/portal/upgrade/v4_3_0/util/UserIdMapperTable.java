@@ -28,18 +28,17 @@ import java.sql.Types;
  * <a href="UserIdMapperTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class UserIdMapperTable {
 
 	public static String TABLE_NAME = "UserIdMapper";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "userIdMapperId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "type_", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) },
-		{ "externalUserId", new Integer(Types.VARCHAR) }
+		{"userIdMapperId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"type_", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)},
+		{"externalUserId", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";

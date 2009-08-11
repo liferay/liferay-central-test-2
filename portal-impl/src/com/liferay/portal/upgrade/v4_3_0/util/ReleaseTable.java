@@ -28,19 +28,18 @@ import java.sql.Types;
  * <a href="ReleaseTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class ReleaseTable {
 
 	public static String TABLE_NAME = "Release_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "releaseId", new Integer(Types.BIGINT) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-		{ "buildNumber", new Integer(Types.INTEGER) },
-		{ "buildDate", new Integer(Types.TIMESTAMP) },
-		{ "verified", new Integer(Types.BOOLEAN) }
+		{"releaseId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"buildNumber", new Integer(Types.INTEGER)},
+		{"buildDate", new Integer(Types.TIMESTAMP)},
+		{"verified", new Integer(Types.BOOLEAN)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN)";

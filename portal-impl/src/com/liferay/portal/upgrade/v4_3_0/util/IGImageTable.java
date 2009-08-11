@@ -28,22 +28,21 @@ import java.sql.Types;
  * <a href="IGImageTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class IGImageTable {
 
 	public static String TABLE_NAME = "IGImage";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "imageId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-		{ "folderId", new Integer(Types.BIGINT) },
-		{ "description", new Integer(Types.VARCHAR) },
-		{ "smallImageId", new Integer(Types.BIGINT) },
-		{ "largeImageId", new Integer(Types.BIGINT) }
+		{"imageId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"description", new Integer(Types.VARCHAR)},
+		{"smallImageId", new Integer(Types.BIGINT)},
+		{"largeImageId", new Integer(Types.BIGINT)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table IGImage (imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG)";

@@ -28,18 +28,17 @@ import java.sql.Types;
  * <a href="MBStatsUserTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class MBStatsUserTable {
 
 	public static String TABLE_NAME = "MBStatsUser";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "statsUserId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "messageCount", new Integer(Types.INTEGER) },
-		{ "lastPostDate", new Integer(Types.TIMESTAMP) }
+		{"statsUserId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"messageCount", new Integer(Types.INTEGER)},
+		{"lastPostDate", new Integer(Types.TIMESTAMP)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";

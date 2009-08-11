@@ -28,26 +28,25 @@ import java.sql.Types;
  * <a href="LayoutSetTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class LayoutSetTable {
 
 	public static String TABLE_NAME = "LayoutSet";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "layoutSetId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "privateLayout", new Integer(Types.BOOLEAN) },
-		{ "logo", new Integer(Types.BOOLEAN) },
-		{ "logoId", new Integer(Types.BIGINT) },
-		{ "themeId", new Integer(Types.VARCHAR) },
-		{ "colorSchemeId", new Integer(Types.VARCHAR) },
-		{ "wapThemeId", new Integer(Types.VARCHAR) },
-		{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
-		{ "css", new Integer(Types.VARCHAR) },
-		{ "pageCount", new Integer(Types.INTEGER) },
-		{ "virtualHost", new Integer(Types.VARCHAR) }
+		{"layoutSetId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"privateLayout", new Integer(Types.BOOLEAN)},
+		{"logo", new Integer(Types.BOOLEAN)},
+		{"logoId", new Integer(Types.BIGINT)},
+		{"themeId", new Integer(Types.VARCHAR)},
+		{"colorSchemeId", new Integer(Types.VARCHAR)},
+		{"wapThemeId", new Integer(Types.VARCHAR)},
+		{"wapColorSchemeId", new Integer(Types.VARCHAR)},
+		{"css", new Integer(Types.VARCHAR)},
+		{"pageCount", new Integer(Types.INTEGER)},
+		{"virtualHost", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css VARCHAR(75) null,pageCount INTEGER,virtualHost VARCHAR(75) null)";

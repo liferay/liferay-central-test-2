@@ -28,25 +28,24 @@ import java.sql.Types;
  * <a href="GroupTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class GroupTable {
 
 	public static String TABLE_NAME = "Group_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "creatorUserId", new Integer(Types.BIGINT) },
-		{ "classNameId", new Integer(Types.BIGINT) },
-		{ "classPK", new Integer(Types.BIGINT) },
-		{ "parentGroupId", new Integer(Types.BIGINT) },
-		{ "liveGroupId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) },
-		{ "type_", new Integer(Types.VARCHAR) },
-		{ "friendlyURL", new Integer(Types.VARCHAR) },
-		{ "active_", new Integer(Types.BOOLEAN) }
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"creatorUserId", new Integer(Types.BIGINT)},
+		{"classNameId", new Integer(Types.BIGINT)},
+		{"classPK", new Integer(Types.BIGINT)},
+		{"parentGroupId", new Integer(Types.BIGINT)},
+		{"liveGroupId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)},
+		{"type_", new Integer(Types.VARCHAR)},
+		{"friendlyURL", new Integer(Types.VARCHAR)},
+		{"active_", new Integer(Types.BOOLEAN)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ VARCHAR(75) null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";

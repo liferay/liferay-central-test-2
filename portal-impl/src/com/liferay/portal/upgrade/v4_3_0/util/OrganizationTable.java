@@ -28,22 +28,21 @@ import java.sql.Types;
  * <a href="OrganizationTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class OrganizationTable {
 
 	public static String TABLE_NAME = "Organization_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "organizationId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "parentOrganizationId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "recursable", new Integer(Types.BOOLEAN) },
-		{ "regionId", new Integer(Types.BIGINT) },
-		{ "countryId", new Integer(Types.BIGINT) },
-		{ "statusId", new Integer(Types.INTEGER) },
-		{ "comments", new Integer(Types.VARCHAR) }
+		{"organizationId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"parentOrganizationId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"recursable", new Integer(Types.BOOLEAN)},
+		{"regionId", new Integer(Types.BIGINT)},
+		{"countryId", new Integer(Types.BIGINT)},
+		{"statusId", new Integer(Types.INTEGER)},
+		{"comments", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";

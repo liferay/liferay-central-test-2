@@ -28,16 +28,15 @@ import java.sql.Types;
  * <a href="OrgGroupPermissionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class OrgGroupPermissionTable {
 
 	public static String TABLE_NAME = "OrgGroupPermission";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "organizationId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "permissionId", new Integer(Types.BIGINT) }
+		{"organizationId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";

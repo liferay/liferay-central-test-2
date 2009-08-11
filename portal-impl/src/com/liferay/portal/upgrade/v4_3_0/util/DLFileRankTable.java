@@ -28,19 +28,18 @@ import java.sql.Types;
  * <a href="DLFileRankTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class DLFileRankTable {
 
 	public static String TABLE_NAME = "DLFileRank";
 
 	public static Object[][] TABLE_COLUMNS = {
-			{ "fileRankId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) }
+			{"fileRankId", new Integer(Types.BIGINT)},
+			{"companyId", new Integer(Types.BIGINT)},
+			{"userId", new Integer(Types.BIGINT)},
+			{"createDate", new Integer(Types.TIMESTAMP)},
+			{"folderId", new Integer(Types.BIGINT)},
+			{"name", new Integer(Types.VARCHAR)}
 		};
 
 	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";

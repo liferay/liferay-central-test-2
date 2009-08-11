@@ -28,21 +28,20 @@ import java.sql.Types;
  * <a href="MBThreadTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class MBThreadTable {
 
 	public static String TABLE_NAME = "MBThread";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "threadId", new Integer(Types.BIGINT) },
-		{ "categoryId", new Integer(Types.BIGINT) },
-		{ "rootMessageId", new Integer(Types.BIGINT) },
-		{ "messageCount", new Integer(Types.INTEGER) },
-		{ "viewCount", new Integer(Types.INTEGER) },
-		{ "lastPostByUserId", new Integer(Types.BIGINT) },
-		{ "lastPostDate", new Integer(Types.TIMESTAMP) },
-		{ "priority", new Integer(Types.DOUBLE) }
+		{"threadId", new Integer(Types.BIGINT)},
+		{"categoryId", new Integer(Types.BIGINT)},
+		{"rootMessageId", new Integer(Types.BIGINT)},
+		{"messageCount", new Integer(Types.INTEGER)},
+		{"viewCount", new Integer(Types.INTEGER)},
+		{"lastPostByUserId", new Integer(Types.BIGINT)},
+		{"lastPostDate", new Integer(Types.TIMESTAMP)},
+		{"priority", new Integer(Types.DOUBLE)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";

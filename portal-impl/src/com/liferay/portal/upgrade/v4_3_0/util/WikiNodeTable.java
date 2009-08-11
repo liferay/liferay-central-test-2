@@ -28,23 +28,22 @@ import java.sql.Types;
  * <a href="WikiNodeTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class WikiNodeTable {
 
 	public static String TABLE_NAME = "WikiNode";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "nodeId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "userName", new Integer(Types.VARCHAR) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) },
-		{ "lastPostDate", new Integer(Types.TIMESTAMP) }
+		{"nodeId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)},
+		{"lastPostDate", new Integer(Types.TIMESTAMP)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table WikiNode (nodeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,lastPostDate DATE null)";

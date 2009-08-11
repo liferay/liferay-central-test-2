@@ -28,18 +28,17 @@ import java.sql.Types;
  * <a href="RegionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class RegionTable {
 
 	public static String TABLE_NAME = "Region";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "regionId", new Integer(Types.BIGINT) },
-		{ "countryId", new Integer(Types.BIGINT) },
-		{ "regionCode", new Integer(Types.VARCHAR) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "active_", new Integer(Types.BOOLEAN) }
+		{"regionId", new Integer(Types.BIGINT)},
+		{"countryId", new Integer(Types.BIGINT)},
+		{"regionCode", new Integer(Types.VARCHAR)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"active_", new Integer(Types.BOOLEAN)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";

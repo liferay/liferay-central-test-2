@@ -28,16 +28,15 @@ import java.sql.Types;
  * <a href="UpgradeResourceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class ResourceTable {
 
 	public static String TABLE_NAME = "Resource_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "resourceId", new Integer(Types.BIGINT) },
-		{ "codeId", new Integer(Types.BIGINT) },
-		{ "primKey", new Integer(Types.VARCHAR) }
+		{"resourceId", new Integer(Types.BIGINT)},
+		{"codeId", new Integer(Types.BIGINT)},
+		{"primKey", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Resource_ (resourceId LONG not null primary key,codeId LONG,primKey VARCHAR(300) null)";

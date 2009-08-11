@@ -28,20 +28,19 @@ import java.sql.Types;
  * <a href="JournalContentSearchTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class JournalContentSearchTable {
 
 	public static String TABLE_NAME = "JournalContentSearch";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "contentSearchId", new Integer(Types.BIGINT) },
-		{ "groupId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.BIGINT) },
-		{ "privateLayout", new Integer(Types.BOOLEAN) },
-		{ "layoutId", new Integer(Types.BIGINT) },
-		{ "portletId", new Integer(Types.VARCHAR) },
-		{ "articleId", new Integer(Types.VARCHAR) }
+		{"contentSearchId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"privateLayout", new Integer(Types.BOOLEAN)},
+		{"layoutId", new Integer(Types.BIGINT)},
+		{"portletId", new Integer(Types.VARCHAR)},
+		{"articleId", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";

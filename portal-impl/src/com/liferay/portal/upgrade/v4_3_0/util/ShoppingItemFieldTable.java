@@ -28,18 +28,17 @@ import java.sql.Types;
  * <a href="ShoppingItemFieldTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class ShoppingItemFieldTable {
 
 	public static String TABLE_NAME = "ShoppingItemField";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "itemFieldId", new Integer(Types.BIGINT) },
-		{ "itemId", new Integer(Types.BIGINT) },
-		{ "name", new Integer(Types.VARCHAR) },
-		{ "values_", new Integer(Types.VARCHAR) },
-		{ "description", new Integer(Types.VARCHAR) }
+		{"itemFieldId", new Integer(Types.BIGINT)},
+		{"itemId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"values_", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemField (itemFieldId LONG not null primary key,itemId LONG,name VARCHAR(75) null,values_ STRING null,description STRING null)";

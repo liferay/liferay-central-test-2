@@ -28,17 +28,16 @@ import java.sql.Types;
  * <a href="PasswordTrackerTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class PasswordTrackerTable {
 
 	public static String TABLE_NAME = "PasswordTracker";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{ "passwordTrackerId", new Integer(Types.BIGINT) },
-		{ "userId", new Integer(Types.BIGINT) },
-		{ "createDate", new Integer(Types.TIMESTAMP) },
-		{ "password_", new Integer(Types.VARCHAR) }
+		{"passwordTrackerId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"password_", new Integer(Types.VARCHAR)}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";
