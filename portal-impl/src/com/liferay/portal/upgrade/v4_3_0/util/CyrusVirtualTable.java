@@ -27,7 +27,7 @@ import java.sql.Types;
 /**
  * <a href="CyrusVirtualTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Edward Shin
  */
 public class CyrusVirtualTable {
 
