@@ -148,6 +148,31 @@ public class CalEventLocalServiceUtil {
 			recurrence, remindBy, firstReminder, secondReminder, serviceContext);
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
+		java.lang.String uuid, long userId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addEvent(uuid, userId, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
+			serviceContext, extCalServerUrl, extCalId, extCalUserId,
+			extCalPassword, extCalSessionId);
+	}
+
 	public static void addEventResources(long eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -198,6 +223,17 @@ public class CalEventLocalServiceUtil {
 		getService().deleteEvent(eventId);
 	}
 
+	public static void deleteEvent(long eventId,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.deleteEvent(eventId, extCalServerUrl, extCalId, extCalUserId,
+			extCalPassword, extCalSessionId);
+	}
+
 	public static void deleteEvent(
 		com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.PortalException,
@@ -231,6 +267,17 @@ public class CalEventLocalServiceUtil {
 		return getService().getEvent(eventId);
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
+		long eventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getEvent(eventId, extCalServerUrl, extCalId, extCalUserId,
+			extCalPassword, extCalSessionId);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.SystemException {
@@ -238,9 +285,31 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String type, int start, int end,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getEvents(groupId, type, start, end, extCalServerUrl,
+			extCalId, extCalUserId, extCalPassword, extCalSessionId);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
 		return getService().getEvents(groupId, cal);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String type,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getEvents(groupId, cal, type, extCalServerUrl, extCalId,
+			extCalUserId, extCalPassword, extCalSessionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
@@ -252,6 +321,26 @@ public class CalEventLocalServiceUtil {
 	public static int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		return getService().getEventsCount(groupId, type);
+	}
+
+	public static int getEventsCount(long groupId, java.lang.String type,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getEventsCount(groupId, type, extCalServerUrl, extCalId,
+			extCalUserId, extCalPassword, extCalSessionId);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent getRemoteEvent(
+		java.lang.String eventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getRemoteEvent(eventId, extCalServerUrl, extCalId,
+			extCalUserId, extCalPassword, extCalSessionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
@@ -318,6 +407,31 @@ public class CalEventLocalServiceUtil {
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
 			repeating, recurrence, remindBy, firstReminder, secondReminder,
 			serviceContext);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
+		long userId, long eventId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalEventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateEvent(userId, eventId, title, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			durationHour, durationMinute, allDay, timeZoneSensitive, type,
+			repeating, recurrence, remindBy, firstReminder, secondReminder,
+			serviceContext, extCalEventId, extCalServerUrl, extCalId,
+			extCalUserId, extCalPassword, extCalSessionId);
 	}
 
 	public static CalEventLocalService getService() {

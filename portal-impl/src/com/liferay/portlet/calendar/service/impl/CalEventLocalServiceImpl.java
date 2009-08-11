@@ -31,6 +31,7 @@ import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -64,6 +65,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
@@ -71,6 +74,7 @@ import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portlet.calendar.service.ExternalCalEventService;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.social.CalendarActivityKeys;
 import com.liferay.portlet.calendar.util.CalUtil;
@@ -135,8 +139,27 @@ import net.fortuna.ical4j.model.property.Version;
  * @author Samuel Kong
  * @author Ganesh Ram
  * @author Brett Swaim
+ *
  */
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
+
+	public CalEventLocalServiceImpl(){
+
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.CALENDAR_EXTERNAL_ENABLED))) {
+
+			String implClass = PropsUtil.get(PropsKeys.
+					CALENDAR_EXTERNAL_IMPL_CLASS);
+
+			try{
+				_service = (ExternalCalEventService)Class.forName(
+						implClass).newInstance();
+			}
+			catch(Exception e) {
+				_log.error(e);
+			}
+		}
+	}
 
 	public CalEvent addEvent(
 			long userId, String title, String description, int startDateMonth,
@@ -285,6 +308,57 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return event;
 	}
 
+	public CalEvent addEvent(
+			String uuid, long userId, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext,String extCalServerUrl,
+			String extCalId,String extCalUserId,String extCalPassword,
+			String extCalSessionId)
+		throws PortalException, SystemException {
+
+		String extCalEventId = null;
+
+		if (_service != null){
+			CalEvent remoteCalEvent = _service.addEvent(
+					null,userId,title, description, startDateMonth,
+					startDateDay,startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext,extCalServerUrl,extCalId,extCalUserId,
+					extCalPassword,extCalSessionId);
+
+			extCalEventId = remoteCalEvent.getExtCalEventId();
+
+		}
+
+		CalEvent localEvent = addEvent(
+				uuid, userId, title, description, startDateMonth, startDateDay,
+				startDateYear,startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, durationHour, durationMinute, allDay,
+				timeZoneSensitive, type, repeating, recurrence, remindBy,
+				firstReminder, secondReminder, serviceContext);
+
+		if (Validator.isNotNull(extCalEventId)){
+			CalEvent event = calEventPersistence.findByPrimaryKey(
+					localEvent.getEventId());
+
+			event.setSaveToExternalSystem(true);
+			event.setExtCalEventId(extCalEventId);
+			calEventPersistence.update(event, false);
+
+			return event;
+		}
+		else {
+			return localEvent;
+		}
+	}
+
 	public void addEventResources(
 			long eventId, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -404,6 +478,26 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		deleteEvent(event);
 	}
 
+	public void deleteEvent(
+			long eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
+
+		if (_service != null){
+
+			if (event.getSaveToExternalSystem() == true){
+
+				_service.deleteEvent(
+						event.getExtCalEventId(),extCalServerUrl,extCalId,
+						extCalUserId,extCalPassword,extCalSessionId);
+			}
+
+		}
+		deleteEvent(event);
+	}
+
 	public void deleteEvent(CalEvent event)
 		throws PortalException, SystemException {
 
@@ -471,6 +565,37 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return calEventPersistence.findByPrimaryKey(eventId);
 	}
 
+	public CalEvent getEvent(
+			long eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEvent calEvent = getEvent(eventId);
+
+		if (calEvent.getSaveToExternalSystem() == true){
+
+			if (_service != null){
+
+				CalEvent remoteCalEvent = _service.getEvent(
+						calEvent.getExtCalEventId(),extCalServerUrl,extCalId,
+						extCalUserId,extCalPassword,extCalSessionId);
+
+				CalEvent syncCalEvent = CalendarEventSynchronizer.
+					synchronizeEvent(calEvent,remoteCalEvent);
+
+				return syncCalEvent;
+			}
+			else {
+				return calEvent;
+			}
+
+		}
+		else {
+			return calEvent;
+		}
+
+	}
+
 	public List<CalEvent> getEvents(
 			long groupId, String type, int start, int end)
 		throws SystemException {
@@ -481,6 +606,22 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		else {
 			return calEventPersistence.findByG_T(groupId, type, start, end);
 		}
+	}
+
+	public List<CalEvent> getEvents(
+			long groupId, String type, int start, int end,
+			String extCalServerUrl,String extCalId,String extCalUserId,
+			String extCalPassword,String extCalSessionId)
+		throws SystemException {
+
+		List<CalEvent> localEvents = getEvents(groupId,type,start,end);;
+
+		List<CalEvent> remoteEvents = getAllRemoteEvents(
+				groupId,type,extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword,extCalSessionId);
+
+		return removeDuplicateEvents(localEvents,remoteEvents);
+
 	}
 
 	public List<CalEvent> getEvents(long groupId, Calendar cal)
@@ -563,6 +704,20 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return events;
 	}
 
+	public List<CalEvent> getEvents(
+			long groupId, Calendar cal,String type,
+			String extCalServerUrl,String extCalId,String extCalUserId,
+			String extCalPassword,String extCalSessionId)
+		throws SystemException {
+
+		List<CalEvent> localEvents = getEvents(groupId,cal,type);
+		List<CalEvent> remoteEvents = getRemoteEventsByDay(
+				groupId, cal,type,extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword,extCalSessionId);
+
+		return removeDuplicateEvents(localEvents,remoteEvents);
+	}
+
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
@@ -597,6 +752,46 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		else {
 			return calEventPersistence.countByG_T(groupId, type);
 		}
+	}
+
+	public int getEventsCount(
+			long groupId, String type,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws SystemException {
+
+		int count = 0;
+		List<CalEvent> localEvents = getEvents(
+				groupId,type,QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+
+		List<CalEvent> remoteEvents = getAllRemoteEvents(
+				groupId,type,extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword,extCalSessionId);
+
+		List<CalEvent> events = removeDuplicateEvents(
+				localEvents, remoteEvents);
+
+		if (events != null){
+			count = events.size();
+		}
+
+		return count;
+	}
+
+	public CalEvent getRemoteEvent(
+			String eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws SystemException {
+
+		CalEvent remoteEvent = null;
+
+		if (_service != null){
+
+			remoteEvent = _service.getEvent(
+					eventId,extCalServerUrl,extCalId,extCalUserId,
+					extCalPassword,extCalSessionId);
+
+		}
+		return remoteEvent;
 	}
 
 	public List<CalEvent> getRepeatingEvents(long groupId)
@@ -887,6 +1082,54 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return event;
 	}
 
+	public CalEvent updateEvent(
+			long userId, long eventId, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext,String extCalEventId,
+			String extCalServerUrl,String extCalId,String extCalUserId,
+			String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEvent remoteEvent = null;
+
+		if (_service != null){
+
+			remoteEvent = _service.updateEvent(
+					userId, eventId, title, description, startDateMonth,
+					startDateDay, startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext, extCalEventId,extCalServerUrl,extCalId,
+					extCalUserId,extCalPassword,extCalSessionId);
+
+			extCalEventId = remoteEvent.getExtCalEventId();
+		}
+
+		CalEvent updatedLocalEvent =  updateEvent(
+				userId, eventId, title, description, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
+				endDateMonth, endDateDay, endDateYear, durationHour,
+				durationMinute, allDay, timeZoneSensitive, type, repeating,
+				recurrence, remindBy, firstReminder, secondReminder,
+				serviceContext);
+
+		CalEvent event = calEventPersistence.findByPrimaryKey(
+				updatedLocalEvent.getEventId());
+
+		event.setSaveToExternalSystem(true);
+		event.setExtCalEventId(extCalEventId);
+		calEventPersistence.update(event, false);
+
+		return event;
+
+	}
+
 	protected File exportICal4j(
 			net.fortuna.ical4j.model.Calendar cal, String fileName)
 		throws SystemException {
@@ -932,6 +1175,23 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	protected List<CalEvent> getAllRemoteEvents(
+			long groupId, String type, String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,
+			String extCalSessionId)
+		throws SystemException{
+
+		List<CalEvent> remoteEvents = null;
+
+		if (_service != null){
+
+			remoteEvents = _service.getEvents(groupId,null,type,
+					extCalServerUrl,extCalId,extCalUserId,
+					extCalPassword,extCalSessionId);
+		}
+		return remoteEvents;
+	}
+
 	protected Calendar getRecurrenceCal(
 		Calendar cal, Calendar tzICal, CalEvent event) {
 
@@ -972,6 +1232,24 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		return recurrenceCal;
+	}
+
+	protected List<CalEvent> getRemoteEventsByDay(
+			long groupId, Calendar cal,String type, String extCalServerUrl,
+			String extCalId,String extCalUserId,String extCalPassword,
+			String extCalSessionId)
+		throws SystemException{
+
+		List<CalEvent> remoteEvents = null;
+
+		if (_service != null){
+
+			remoteEvents = _service.getEvents(
+				groupId, cal, type, extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword, extCalSessionId);
+		}
+
+		return remoteEvents;
 	}
 
 	protected void importICal4j(
@@ -1324,6 +1602,59 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			remindUser(event, user, startDate);
 		}
+	}
+
+	protected List<CalEvent> removeDuplicateEvents(
+			List<CalEvent> localEvents,List<CalEvent> remoteEvents)
+		throws  SystemException{
+
+		List<CalEvent> localAndRemoteEvents = new ArrayList<CalEvent>();
+		List<String> extCalEventIds = new ArrayList<String>();
+		String extCalId = null;
+		int index = 0;
+		CalEvent localEvent = null;
+		boolean isSameEvent = true;
+
+		if (remoteEvents == null){
+			return new UnmodifiableList<CalEvent>(localEvents);
+		}
+
+		for (Iterator<CalEvent> it = localEvents.iterator(); it.hasNext();) {
+
+			CalEvent calEvent = it.next();
+			if (calEvent.getSaveToExternalSystem()){
+				localAndRemoteEvents.add(calEvent);
+				extCalEventIds.add(calEvent.getExtCalEventId());
+			}
+		}
+
+		for (Iterator<CalEvent> iterator = remoteEvents.iterator();
+				iterator.hasNext();) {
+
+			CalEvent remoteEvent = iterator.next();
+			extCalId = remoteEvent.getExtCalEventId();
+
+			if (extCalEventIds.size() > 0){
+				if (extCalEventIds.contains(extCalId)){
+					index = extCalEventIds.indexOf(extCalId);
+					localEvent = localAndRemoteEvents.get(index);
+
+					isSameEvent = CalendarEventSynchronizer.isSameEvent(
+							localEvent, remoteEvent);
+
+					if (isSameEvent == true){
+						iterator.remove();
+					}
+				}
+			}
+		}
+
+		List<CalEvent> events = new ArrayList<CalEvent>();
+		events.addAll(localEvents);
+		events.addAll(remoteEvents);
+
+		return new UnmodifiableList<CalEvent>(events);
+
 	}
 
 	protected Calendar toCalendar(
@@ -1752,5 +2083,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	private static Log _log =
 		LogFactoryUtil.getLog(CalEventLocalServiceImpl.class);
+
+	private static ExternalCalEventService _service;
 
 }

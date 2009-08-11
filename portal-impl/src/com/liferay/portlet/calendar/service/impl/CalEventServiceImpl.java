@@ -38,6 +38,7 @@ import java.io.File;
  * <a href="CalEventServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ganesh Ram
  */
 public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 
@@ -64,6 +65,33 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			firstReminder, secondReminder, serviceContext);
 	}
 
+	public CalEvent addEvent(
+			String uuid, long userId, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext,String extCalServerUrl,
+			String extCalId,String extCalUserId,String extCalPassword,
+			String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalendarPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_EVENT);
+
+		return calEventLocalService.addEvent(
+				uuid,getUserId(), title, description, startDateMonth,
+				startDateDay,startDateYear, startDateHour, startDateMinute,
+				endDateMonth,endDateDay, endDateYear, durationHour,
+				durationMinute, allDay,timeZoneSensitive, type, repeating,
+				recurrence, remindBy,firstReminder, secondReminder,
+				serviceContext,extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword,extCalSessionId);
+	}
+
 	public void deleteEvent(long eventId)
 		throws PortalException, SystemException {
 
@@ -71,6 +99,19 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), eventId, ActionKeys.DELETE);
 
 		calEventLocalService.deleteEvent(eventId);
+	}
+
+	public void deleteEvent(
+			long eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEventPermission.check(
+				getPermissionChecker(), eventId, ActionKeys.DELETE);
+
+		calEventLocalService.deleteEvent(
+				eventId,extCalServerUrl,extCalId,extCalUserId,
+				extCalPassword,extCalSessionId);
 	}
 
 	public File exportEvent(long eventId)
@@ -99,6 +140,29 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
 		return calEventLocalService.getEvent(eventId);
+	}
+
+	public CalEvent getEvent(
+			long eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEventPermission.check(
+				getPermissionChecker(), eventId, ActionKeys.VIEW);
+
+		return calEventLocalService.getEvent(
+				eventId,extCalServerUrl,extCalId,extCalUserId,extCalPassword,
+				extCalSessionId);
+	}
+
+	public CalEvent getRemoteEvent(
+			String eventId,String extCalServerUrl,String extCalId,
+			String extCalUserId,String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException{
+
+		return calEventLocalService.getRemoteEvent(
+				eventId,extCalServerUrl,extCalId,extCalUserId,extCalPassword,
+				extCalSessionId);
 	}
 
 	public void importICal4j(long groupId, File file)
@@ -130,6 +194,32 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
 			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder, serviceContext);
+	}
+
+	public CalEvent updateEvent(
+			long eventId, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
+			ServiceContext serviceContext,String extCalEventId,
+			String extCalServerUrl,String extCalId,String extCalUserId,
+			String extCalPassword,String extCalSessionId)
+		throws PortalException, SystemException {
+
+		CalEventPermission.check(
+			getPermissionChecker(), eventId, ActionKeys.UPDATE);
+
+		return calEventLocalService.updateEvent(
+			getUserId(), eventId, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
+			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, serviceContext,extCalEventId,
+			extCalServerUrl,extCalId,extCalUserId,extCalPassword,
+			extCalSessionId);
 	}
 
 }

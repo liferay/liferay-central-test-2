@@ -108,9 +108,56 @@ public class CalEventServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(
+		java.lang.String uuid, long userId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId) throws RemoteException {
+		try {
+			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(uuid,
+					userId, title, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext, extCalServerUrl, extCalId, extCalUserId,
+					extCalPassword, extCalSessionId);
+
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteEvent(long eventId) throws RemoteException {
 		try {
 			CalEventServiceUtil.deleteEvent(eventId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteEvent(long eventId,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId) throws RemoteException {
+		try {
+			CalEventServiceUtil.deleteEvent(eventId, extCalServerUrl, extCalId,
+				extCalUserId, extCalPassword, extCalSessionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -123,6 +170,44 @@ public class CalEventServiceSoap {
 		long eventId) throws RemoteException {
 		try {
 			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId);
+
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEventSoap getEvent(
+		long eventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId,
+					extCalServerUrl, extCalId, extCalUserId, extCalPassword,
+					extCalSessionId);
+
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEventSoap getRemoteEvent(
+		java.lang.String eventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getRemoteEvent(eventId,
+					extCalServerUrl, extCalId, extCalUserId, extCalPassword,
+					extCalSessionId);
 
 			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}
@@ -152,6 +237,39 @@ public class CalEventServiceSoap {
 					durationMinute, allDay, timeZoneSensitive, type, repeating,
 					recurrence, remindBy, firstReminder, secondReminder,
 					serviceContext);
+
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEventSoap updateEvent(
+		long eventId, java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalEventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.updateEvent(eventId,
+					title, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext, extCalEventId, extCalServerUrl, extCalId,
+					extCalUserId, extCalPassword, extCalSessionId);
 
 			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}

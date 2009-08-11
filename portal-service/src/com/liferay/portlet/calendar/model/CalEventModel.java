@@ -149,5 +149,15 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 
 	public void setSecondReminder(int secondReminder);
 
+	public boolean getSaveToExternalSystem();
+
+	public boolean isSaveToExternalSystem();
+
+	public void setSaveToExternalSystem(boolean saveToExternalSystem);
+
+	public String getExtCalEventId();
+
+	public void setExtCalEventId(String extCalEventId);
+
 	public CalEvent toEscapedModel();
 }

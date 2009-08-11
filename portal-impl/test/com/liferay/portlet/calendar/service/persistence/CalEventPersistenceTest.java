@@ -92,6 +92,8 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		newCalEvent.setRemindBy(nextInt());
 		newCalEvent.setFirstReminder(nextInt());
 		newCalEvent.setSecondReminder(nextInt());
+		newCalEvent.setSaveToExternalSystem(randomBoolean());
+		newCalEvent.setExtCalEventId(randomString());
 
 		_persistence.update(newCalEvent, false);
 
@@ -130,6 +132,10 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 			newCalEvent.getFirstReminder());
 		assertEquals(existingCalEvent.getSecondReminder(),
 			newCalEvent.getSecondReminder());
+		assertEquals(existingCalEvent.getSaveToExternalSystem(),
+			newCalEvent.getSaveToExternalSystem());
+		assertEquals(existingCalEvent.getExtCalEventId(),
+			newCalEvent.getExtCalEventId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -194,6 +200,8 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		calEvent.setRemindBy(nextInt());
 		calEvent.setFirstReminder(nextInt());
 		calEvent.setSecondReminder(nextInt());
+		calEvent.setSaveToExternalSystem(randomBoolean());
+		calEvent.setExtCalEventId(randomString());
 
 		_persistence.update(calEvent, false);
 

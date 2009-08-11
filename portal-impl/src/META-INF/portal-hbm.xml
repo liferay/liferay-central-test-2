@@ -1059,6 +1059,8 @@
 		<property name="remindBy" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="firstReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="saveToExternalSystem" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="extCalEventId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" table="DLFileEntry">
 		<cache usage="read-write" />

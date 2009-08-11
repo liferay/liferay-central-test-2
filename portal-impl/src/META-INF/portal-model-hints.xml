@@ -937,6 +937,8 @@
 		<field name="remindBy" type="int" />
 		<field name="firstReminder" type="int" />
 		<field name="secondReminder" type="int" />
+		<field name="saveToExternalSystem" type="boolean" />
+		<field name="extCalEventId" type="String" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 		<field name="uuid" type="String" />

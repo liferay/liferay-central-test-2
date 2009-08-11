@@ -110,6 +110,8 @@ public class CalEventJSONSerializer {
 		jsonObj.put("remindBy", model.getRemindBy());
 		jsonObj.put("firstReminder", model.getFirstReminder());
 		jsonObj.put("secondReminder", model.getSecondReminder());
+		jsonObj.put("saveToExternalSystem", model.getSaveToExternalSystem());
+		jsonObj.put("extCalEventId", model.getExtCalEventId());
 
 		return jsonObj;
 	}

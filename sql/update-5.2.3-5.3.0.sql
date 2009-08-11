@@ -106,6 +106,9 @@ create table AssetVocabulary (
 	description VARCHAR(75) null
 );
 
+alter table CalEvent add saveToExternalSystem BOOLEAN;
+alter table CalEvent add extCalEventId VARCHAR(75);
+
 alter table Layout add layoutPrototypeId LONG;
 
 create table LayoutPrototype (

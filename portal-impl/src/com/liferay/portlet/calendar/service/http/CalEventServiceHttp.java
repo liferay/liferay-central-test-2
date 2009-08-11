@@ -185,6 +185,163 @@ public class CalEventServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
+		HttpPrincipal httpPrincipal, java.lang.String uuid, long userId,
+		java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = uuid;
+
+			if (uuid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(userId);
+
+			Object paramObj2 = title;
+
+			if (title == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new IntegerWrapper(startDateMonth);
+
+			Object paramObj5 = new IntegerWrapper(startDateDay);
+
+			Object paramObj6 = new IntegerWrapper(startDateYear);
+
+			Object paramObj7 = new IntegerWrapper(startDateHour);
+
+			Object paramObj8 = new IntegerWrapper(startDateMinute);
+
+			Object paramObj9 = new IntegerWrapper(endDateMonth);
+
+			Object paramObj10 = new IntegerWrapper(endDateDay);
+
+			Object paramObj11 = new IntegerWrapper(endDateYear);
+
+			Object paramObj12 = new IntegerWrapper(durationHour);
+
+			Object paramObj13 = new IntegerWrapper(durationMinute);
+
+			Object paramObj14 = new BooleanWrapper(allDay);
+
+			Object paramObj15 = new BooleanWrapper(timeZoneSensitive);
+
+			Object paramObj16 = type;
+
+			if (type == null) {
+				paramObj16 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj17 = new BooleanWrapper(repeating);
+
+			Object paramObj18 = recurrence;
+
+			if (recurrence == null) {
+				paramObj18 = new NullWrapper(
+						"com.liferay.portal.kernel.cal.TZSRecurrence");
+			}
+
+			Object paramObj19 = new IntegerWrapper(remindBy);
+
+			Object paramObj20 = new IntegerWrapper(firstReminder);
+
+			Object paramObj21 = new IntegerWrapper(secondReminder);
+
+			Object paramObj22 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj22 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			Object paramObj23 = extCalServerUrl;
+
+			if (extCalServerUrl == null) {
+				paramObj23 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj24 = extCalId;
+
+			if (extCalId == null) {
+				paramObj24 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj25 = extCalUserId;
+
+			if (extCalUserId == null) {
+				paramObj25 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj26 = extCalPassword;
+
+			if (extCalPassword == null) {
+				paramObj26 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj27 = extCalSessionId;
+
+			if (extCalSessionId == null) {
+				paramObj27 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"addEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23, paramObj24, paramObj25,
+						paramObj26, paramObj27
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteEvent(HttpPrincipal httpPrincipal, long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -193,6 +350,74 @@ public class CalEventServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
 					"deleteEvent", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteEvent(HttpPrincipal httpPrincipal, long eventId,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(eventId);
+
+			Object paramObj1 = extCalServerUrl;
+
+			if (extCalServerUrl == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = extCalId;
+
+			if (extCalId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = extCalUserId;
+
+			if (extCalUserId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = extCalPassword;
+
+			if (extCalPassword == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = extCalSessionId;
+
+			if (extCalSessionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"deleteEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -303,6 +528,156 @@ public class CalEventServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
 					"getEvent", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
+		HttpPrincipal httpPrincipal, long eventId,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(eventId);
+
+			Object paramObj1 = extCalServerUrl;
+
+			if (extCalServerUrl == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = extCalId;
+
+			if (extCalId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = extCalUserId;
+
+			if (extCalUserId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = extCalPassword;
+
+			if (extCalPassword == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = extCalSessionId;
+
+			if (extCalSessionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"getEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent getRemoteEvent(
+		HttpPrincipal httpPrincipal, java.lang.String eventId,
+		java.lang.String extCalServerUrl, java.lang.String extCalId,
+		java.lang.String extCalUserId, java.lang.String extCalPassword,
+		java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = eventId;
+
+			if (eventId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = extCalServerUrl;
+
+			if (extCalServerUrl == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = extCalId;
+
+			if (extCalId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = extCalUserId;
+
+			if (extCalUserId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = extCalPassword;
+
+			if (extCalPassword == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = extCalSessionId;
+
+			if (extCalSessionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"getRemoteEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
@@ -455,6 +830,162 @@ public class CalEventServiceHttp {
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
+		HttpPrincipal httpPrincipal, long eventId, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
+		int firstReminder, int secondReminder,
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.lang.String extCalEventId, java.lang.String extCalServerUrl,
+		java.lang.String extCalId, java.lang.String extCalUserId,
+		java.lang.String extCalPassword, java.lang.String extCalSessionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(eventId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(startDateMonth);
+
+			Object paramObj4 = new IntegerWrapper(startDateDay);
+
+			Object paramObj5 = new IntegerWrapper(startDateYear);
+
+			Object paramObj6 = new IntegerWrapper(startDateHour);
+
+			Object paramObj7 = new IntegerWrapper(startDateMinute);
+
+			Object paramObj8 = new IntegerWrapper(endDateMonth);
+
+			Object paramObj9 = new IntegerWrapper(endDateDay);
+
+			Object paramObj10 = new IntegerWrapper(endDateYear);
+
+			Object paramObj11 = new IntegerWrapper(durationHour);
+
+			Object paramObj12 = new IntegerWrapper(durationMinute);
+
+			Object paramObj13 = new BooleanWrapper(allDay);
+
+			Object paramObj14 = new BooleanWrapper(timeZoneSensitive);
+
+			Object paramObj15 = type;
+
+			if (type == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj16 = new BooleanWrapper(repeating);
+
+			Object paramObj17 = recurrence;
+
+			if (recurrence == null) {
+				paramObj17 = new NullWrapper(
+						"com.liferay.portal.kernel.cal.TZSRecurrence");
+			}
+
+			Object paramObj18 = new IntegerWrapper(remindBy);
+
+			Object paramObj19 = new IntegerWrapper(firstReminder);
+
+			Object paramObj20 = new IntegerWrapper(secondReminder);
+
+			Object paramObj21 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj21 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			Object paramObj22 = extCalEventId;
+
+			if (extCalEventId == null) {
+				paramObj22 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj23 = extCalServerUrl;
+
+			if (extCalServerUrl == null) {
+				paramObj23 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj24 = extCalId;
+
+			if (extCalId == null) {
+				paramObj24 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj25 = extCalUserId;
+
+			if (extCalUserId == null) {
+				paramObj25 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj26 = extCalPassword;
+
+			if (extCalPassword == null) {
+				paramObj26 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj27 = extCalSessionId;
+
+			if (extCalSessionId == null) {
+				paramObj27 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"updateEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23, paramObj24, paramObj25,
+						paramObj26, paramObj27
 					});
 
 			Object returnObj = null;
