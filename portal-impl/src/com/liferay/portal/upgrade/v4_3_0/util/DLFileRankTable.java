@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,13 +34,13 @@ public class DLFileRankTable {
 	public static String TABLE_NAME = "DLFileRank";
 
 	public static Object[][] TABLE_COLUMNS = {
-			{"fileRankId", new Integer(Types.BIGINT)},
-			{"companyId", new Integer(Types.BIGINT)},
-			{"userId", new Integer(Types.BIGINT)},
-			{"createDate", new Integer(Types.TIMESTAMP)},
-			{"folderId", new Integer(Types.BIGINT)},
-			{"name", new Integer(Types.VARCHAR)}
-		};
+		{"fileRankId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)}
+	};
 
 	public static String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(300) null)";
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,14 +30,18 @@ import java.sql.Types;
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesTable {
+
 	public static String TABLE_NAME = "PortletPreferences";
+
 	public static Object[][] TABLE_COLUMNS = {
-			{"portletPreferencesId", new Integer(Types.BIGINT)},
-			{"ownerId", new Integer(Types.BIGINT)},
-			{"ownerType", new Integer(Types.INTEGER)},
-			{"plid", new Integer(Types.BIGINT)},
-			{"portletId", new Integer(Types.VARCHAR)},
-			{"preferences", new Integer(Types.CLOB)}
-		};
+		{"portletPreferencesId", new Integer(Types.BIGINT)},
+		{"ownerId", new Integer(Types.BIGINT)},
+		{"ownerType", new Integer(Types.INTEGER)},
+		{"plid", new Integer(Types.BIGINT)},
+		{"portletId", new Integer(Types.VARCHAR)},
+		{"preferences", new Integer(Types.CLOB)}
+	};
+
 	public static String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";
+
 }
