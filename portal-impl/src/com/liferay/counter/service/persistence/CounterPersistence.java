@@ -57,14 +57,14 @@ public class CounterPersistence extends BasePersistenceImpl {
 	}
 
 	public List<String> getNames() throws SystemException {
-		Connection con = null;
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			con = getConnection();
+			connection = getConnection();
 
-			ps = con.prepareStatement(_SQL_SELECT_NAMES);
+			ps = connection.prepareStatement(_SQL_SELECT_NAMES);
 
 			rs = ps.executeQuery();
 
@@ -80,7 +80,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 			throw processException(sqle);
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(connection, ps, rs);
 		}
 	}
 
@@ -111,13 +111,13 @@ public class CounterPersistence extends BasePersistenceImpl {
 					"Cannot rename " + oldName + " to " + newName);
 			}
 
-			Connection con = null;
+			Connection connection = null;
 			PreparedStatement ps = null;
 
 			try {
-				con = getConnection();
+				connection = getConnection();
 
-				ps = con.prepareStatement(_SQL_UPDATE_NAME_BY_NAME);
+				ps = connection.prepareStatement(_SQL_UPDATE_NAME_BY_NAME);
 
 				ps.setString(1, newName);
 				ps.setString(2, oldName);
@@ -130,7 +130,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 				throw processException(e);
 			}
 			finally {
-				DataAccess.cleanUp(con, ps);
+				DataAccess.cleanUp(connection, ps);
 			}
 
 			register.setName(newName);
@@ -144,13 +144,13 @@ public class CounterPersistence extends BasePersistenceImpl {
 		CounterRegister register = getCounterRegister(name);
 
 		synchronized (register) {
-			Connection con = null;
+			Connection connection = null;
 			PreparedStatement ps = null;
 
 			try {
-				con = getConnection();
+				connection = getConnection();
 
-				ps = con.prepareStatement(_SQL_DELETE_BY_NAME);
+				ps = connection.prepareStatement(_SQL_DELETE_BY_NAME);
 
 				ps.setString(1, name);
 
@@ -162,7 +162,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 				throw processException(e);
 			}
 			finally {
-				DataAccess.cleanUp(con, ps);
+				DataAccess.cleanUp(connection, ps);
 			}
 
 			_registerLookup.remove(name);
@@ -187,14 +187,14 @@ public class CounterPersistence extends BasePersistenceImpl {
 		long rangeMin = -1;
 		long rangeMax = -1;
 
-		Connection con = null;
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			con = getConnection();
+			connection = getConnection();
 
-			ps = con.prepareStatement(_SQL_SELECT_ID_BY_NAME);
+			ps = connection.prepareStatement(_SQL_SELECT_ID_BY_NAME);
 
 			ps.setString(1, name);
 
@@ -206,7 +206,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 				ps.close();
 
-				ps = con.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
+				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
 
 				ps.setLong(1, rangeMax);
 				ps.setString(2, name);
@@ -217,7 +217,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 				ps.close();
 
-				ps = con.prepareStatement(_SQL_INSERT);
+				ps = connection.prepareStatement(_SQL_INSERT);
 
 				ps.setString(1, name);
 				ps.setLong(2, rangeMax);
@@ -229,7 +229,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 			throw processException(e);
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(connection, ps, rs);
 		}
 
 		if (size > rangeMin) {
@@ -243,11 +243,11 @@ public class CounterPersistence extends BasePersistenceImpl {
 	}
 
 	protected Connection getConnection() throws SQLException {
-		Connection con = getDataSource().getConnection();
+		Connection connection = getDataSource().getConnection();
 
-		con.setAutoCommit(true);
+		connection.setAutoCommit(true);
 
-		return con;
+		return connection;
 	}
 
 	protected CounterRegister getCounterRegister(String name)
@@ -306,7 +306,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 		// Winner thread
 
-		Connection con = null;
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -318,9 +318,9 @@ public class CounterPersistence extends BasePersistenceImpl {
 			newValue = holder.addAndGet(size);
 
 			if (newValue > holder.getRangeMax()) {
-				con = getConnection();
+				connection = getConnection();
 
-				ps = con.prepareStatement(_SQL_SELECT_ID_BY_NAME);
+				ps = connection.prepareStatement(_SQL_SELECT_ID_BY_NAME);
 
 				ps.setString(1, register.getName());
 
@@ -335,7 +335,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 
 				ps.close();
 
-				ps = con.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
+				ps = connection.prepareStatement(_SQL_UPDATE_ID_BY_NAME);
 
 				ps.setLong(1, rangeMax);
 				ps.setString(2, register.getName());
@@ -350,7 +350,7 @@ public class CounterPersistence extends BasePersistenceImpl {
 			throw processException(e);
 		}
 		finally {
-			DataAccess.cleanUp(con, ps, rs);
+			DataAccess.cleanUp(connection, ps, rs);
 
 			// Winner thread opens the latch so that loser threads can continue
 
