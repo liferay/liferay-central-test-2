@@ -203,7 +203,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 		</c:if>
 
-		<aui:input name="title"  />
+		<aui:input name="title" />
 
 		<aui:input name="displayDate" value="<%= displayDate %>" />
 
@@ -224,6 +224,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED %>">
 			<aui:input defaultValue="<%= allowTrackbacks %>" inlineLabel="<%= true %>" label="allow-incoming-trackbacks" name="allowTrackbacks" />
+
+			<aui:input label="trackbacks-to-send" name="trackbacks" />
 
 			<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
 				<aui:field-wrapper name="trackbacks-already-sent">
