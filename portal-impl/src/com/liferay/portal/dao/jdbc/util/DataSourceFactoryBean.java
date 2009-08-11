@@ -57,6 +57,10 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		_propertyPrefix = propertyPrefix;
 	}
 
+	public void setPropertyPrefixLookup(String propertyPrefixLookup) {
+		_propertyPrefix = PropsUtil.get(propertyPrefixLookup);
+	}
+
 	protected Object createInstance() throws Exception {
 		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
 
