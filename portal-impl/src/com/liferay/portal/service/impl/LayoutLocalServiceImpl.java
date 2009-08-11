@@ -363,10 +363,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
-		byte[] bytes = null;
-
 		try {
-			bytes = fcos.getBytes();
+			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -374,8 +372,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		finally {
 			fcos.cleanUp();
 		}
-
-		return bytes;
 	}
 
 	public FileCacheOutputStream exportLayoutsAsStream(
@@ -398,10 +394,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		FileCacheOutputStream fcos = exportPortletInfoAsStream(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
-		byte[] bytes = null;
-
 		try {
-			bytes = fcos.getBytes();
+			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -409,8 +403,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		finally {
 			fcos.cleanUp();
 		}
-
-		return bytes;
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(

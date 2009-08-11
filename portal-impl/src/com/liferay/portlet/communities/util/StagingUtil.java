@@ -70,8 +70,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
-import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -143,19 +141,13 @@ public class StagingUtil {
 			LayoutLocalServiceUtil.exportPortletInfoAsStream(
 				sourcePlid, sourceGroupId, portletId, parameterMap, null, null);
 
-		InputStream is = fcos.getFileInputStream();
-
 		try {
 			LayoutServiceUtil.importPortletInfo(
-				targetPlid, targetGroupId, portletId, parameterMap, is);
+				targetPlid, targetGroupId, portletId, parameterMap,
+				fcos.getFileInputStream());
 		}
 		finally {
-			try {
-				is.close();
-				fcos.cleanUp();
-			}
-			catch (Exception e) {
-			}
+			fcos.cleanUp();
 		}
 	}
 
@@ -516,19 +508,13 @@ public class StagingUtil {
 				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);
 
-		InputStream is = fcos.getFileInputStream();
-
 		try {
 			LayoutServiceUtil.importLayouts(
-				targetGroupId, privateLayout, parameterMap, is);
+				targetGroupId, privateLayout, parameterMap,
+				fcos.getFileInputStream());
 		}
 		finally {
-			try {
-				is.close();
-				fcos.cleanUp();
-			}
-			catch (Exception e) {
-			}
+			fcos.cleanUp();
 		}
 	}
 

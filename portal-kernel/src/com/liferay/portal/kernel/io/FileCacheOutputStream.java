@@ -55,6 +55,10 @@ public class FileCacheOutputStream extends OutputStream {
 			flush();
 			close();
 
+			if (_fis != null) {
+				_fis.close();
+			}
+
 			FileUtil.delete(_tempFile);
 		}
 		catch (IOException ioe) {
@@ -87,10 +91,14 @@ public class FileCacheOutputStream extends OutputStream {
 	}
 
 	public FileInputStream getFileInputStream() throws IOException {
-		flush();
-		close();
+		if (_fis == null) {
+			flush();
+			close();
 
-		return new FileInputStream(_tempFile);
+			_fis = new FileInputStream(_tempFile);
+		}
+
+		return _fis;
 	}
 
 	public long getSize() {
@@ -114,9 +122,10 @@ public class FileCacheOutputStream extends OutputStream {
 	private static final String _EXTENSION = ".fcos";
 
 	protected BufferedOutputStream _bos;
+	protected FileInputStream _fis;
 	protected File _tempFile;
 
-	private static Log _log = LogFactoryUtil.getLog(
-		FileCacheOutputStream.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(FileCacheOutputStream.class);
 
 }

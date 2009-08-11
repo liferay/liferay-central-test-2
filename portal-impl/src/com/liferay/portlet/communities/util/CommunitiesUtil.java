@@ -47,8 +47,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
-import java.io.InputStream;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -104,20 +102,13 @@ public class CommunitiesUtil {
 				sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
 				null, parameterMap, null, null);
 
-		InputStream is = fcos.getFileInputStream();
-
 		try {
 			LayoutServiceUtil.importLayouts(
 				targetLayoutSet.getGroupId(), targetLayoutSet.isPrivateLayout(),
-				parameterMap, is);
+				parameterMap, fcos.getFileInputStream());
 		}
 		finally {
-			try {
-				is.close();
-				fcos.cleanUp();
-			}
-			catch (Exception e) {
-			}
+			fcos.cleanUp();
 		}
 	}
 

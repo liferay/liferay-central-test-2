@@ -104,10 +104,8 @@ public class PortletExporter {
 		FileCacheOutputStream fcos = exportPortletInfoAsStream(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
 
-		byte[] bytes = null;
-
 		try {
-			bytes = fcos.getBytes();
+			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -115,8 +113,6 @@ public class PortletExporter {
 		finally {
 			fcos.cleanUp();
 		}
-
-		return bytes;
 	}
 
 	public FileCacheOutputStream exportPortletInfoAsStream(

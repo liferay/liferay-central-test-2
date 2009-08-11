@@ -37,8 +37,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
-import java.io.InputStream;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -86,7 +84,6 @@ public class CommunityTemplateModelListener
 
 	public void onAfterCreate(LayoutSet layoutSet) {
 		FileCacheOutputStream fcos = null;
-		InputStream is = null;
 
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(
@@ -114,11 +111,10 @@ public class CommunityTemplateModelListener
 				templateStagingGroup.getGroupId(), layoutSet.isPrivateLayout(),
 				null, _templateParameters, null, null);
 
-			is = fcos.getFileInputStream();
-
 			LayoutLocalServiceUtil.importLayouts(
 				group.getCreatorUserId(), group.getGroupId(),
-				layoutSet.isPrivateLayout(), _templateParameters, is);
+				layoutSet.isPrivateLayout(), _templateParameters,
+				fcos.getFileInputStream());
 		}
 		catch (Exception e) {
 			_log.error(
@@ -126,16 +122,8 @@ public class CommunityTemplateModelListener
 				e);
 		}
 		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-
-				if (fcos != null) {
-					fcos.cleanUp();
-				}
-			}
-			catch (Exception e) {
+			if (fcos != null) {
+				fcos.cleanUp();
 			}
 		}
 	}

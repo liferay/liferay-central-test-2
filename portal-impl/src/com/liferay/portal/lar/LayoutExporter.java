@@ -74,7 +74,6 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -139,10 +138,8 @@ public class LayoutExporter {
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
 
-		byte[] bytes = null;
-
 		try {
-			bytes = fcos.getBytes();
+			return fcos.getBytes();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -150,8 +147,6 @@ public class LayoutExporter {
 		finally {
 			fcos.cleanUp();
 		}
-
-		return bytes;
 	}
 
 	public FileCacheOutputStream exportLayoutsAsStream(
@@ -496,12 +491,10 @@ public class LayoutExporter {
 		// Look and feel
 
 		FileCacheOutputStream fcos = null;
-		InputStream themeZip = null;
 
 		try {
 			if (exportTheme) {
 				fcos = exportTheme(layoutSet);
-				themeZip = fcos.getFileInputStream();
 			}
 
 			// Log
@@ -515,8 +508,8 @@ public class LayoutExporter {
 
 			context.addZipEntry("/manifest.xml", doc.formattedString());
 
-			if (themeZip != null) {
-				context.addZipEntry("/theme.zip", themeZip);
+			if (fcos != null) {
+				context.addZipEntry("/theme.zip", fcos.getFileInputStream());
 			}
 
 			return zipWriter.finishWithStream();
@@ -525,16 +518,8 @@ public class LayoutExporter {
 			throw new SystemException(ioe);
 		}
 		finally {
-			try {
-				if (themeZip != null) {
-					themeZip.close();
-				}
-
-				if (fcos != null) {
-					fcos.cleanUp();
-				}
-			}
-			catch (Exception e) {
+			if (fcos != null) {
+				fcos.cleanUp();
 			}
 		}
 	}
