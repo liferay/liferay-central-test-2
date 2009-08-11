@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal.permissions.blogs;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.permissions.blogs.assertactions.AssertActionsTests;
+import com.liferay.portalweb.portal.permissions.blogs.portlet.PortletTests;
 import com.liferay.portalweb.portal.permissions.blogs.scope.ScopeTests;
 import com.liferay.portalweb.portal.permissions.blogs.setup.SetupTests;
 import com.liferay.portalweb.portal.permissions.blogs.teardown.TearDownTests;
@@ -43,6 +44,7 @@ public class BlogsTests extends BaseTests {
 
 		testSuite.addTest(SetupTests.suite());
 		testSuite.addTest(AssertActionsTests.suite());
+		testSuite.addTest(PortletTests.suite());
 		testSuite.addTest(ScopeTests.suite());
 		testSuite.addTest(TearDownTests.suite());
 

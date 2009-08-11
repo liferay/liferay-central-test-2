@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs.setup;
+package com.liferay.portalweb.portal.permissions.blogs.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Portlet_DeleteEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_AddPortletTest extends BaseTestCase {
-	public void testSA_AddPortlet() throws Exception {
+public class Portlet_DeleteEntryTest extends BaseTestCase {
+	public void testPortlet_DeleteEntry() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,43 +50,16 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Blogs\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		assertTrue(selenium.isPartialText("//div[2]/div[1]/div[1]/a",
+				"Portlet1 Temporary1 Entry1"));
+		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/div[1]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertFalse(selenium.isElementPresent(
+				"link=Edited1 Portlet1 Temporary1 Entry1"));
+		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));
 	}
 }

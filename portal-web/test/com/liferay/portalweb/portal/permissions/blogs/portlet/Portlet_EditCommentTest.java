@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs.setup;
+package com.liferay.portalweb.portal.permissions.blogs.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Portlet_EditCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_AddPortletTest extends BaseTestCase {
-	public void testSA_AddPortlet() throws Exception {
+public class Portlet_EditCommentTest extends BaseTestCase {
+	public void testPortlet_EditComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,7 +50,10 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.click(RuntimeVariables.replace(
+				"link=Portlet1 Temporary1 Entry1"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Edit");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,8 +61,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Blogs\"]")) {
+				if (selenium.isElementPresent("_33_editReplyBody1")) {
 					break;
 				}
 			}
@@ -69,24 +71,16 @@ public class SA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		selenium.type("_33_editReplyBody1",
+			RuntimeVariables.replace("This is a portlet comment! Edited!"));
+		selenium.click(RuntimeVariables.replace("_33_editReplyButton1"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"This is a portlet comment! Edited!"),
+			selenium.getText("//td[2]/div[1]"));
+		assertNotEquals(RuntimeVariables.replace("This is a portlet comment!"),
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

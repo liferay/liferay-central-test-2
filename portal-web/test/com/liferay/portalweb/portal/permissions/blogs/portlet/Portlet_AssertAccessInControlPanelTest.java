@@ -20,25 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs.setup;
+package com.liferay.portalweb.portal.permissions.blogs.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="Portlet_AssertAccessInControlPanelTest.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_AddPortletTest extends BaseTestCase {
-	public void testSA_AddPortlet() throws Exception {
+public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
+	public void testPortlet_AssertAccessInControlPanel()
+		throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -48,45 +50,13 @@ public class SA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Blogs\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		assertTrue(selenium.isElementPresent("link=Blogs"));
+		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//input[@value='Search Folders']"));
+		assertTrue(selenium.isElementPresent(
+				"link=SA1 Portlet1 Permissions1 Folder1"));
 	}
 }

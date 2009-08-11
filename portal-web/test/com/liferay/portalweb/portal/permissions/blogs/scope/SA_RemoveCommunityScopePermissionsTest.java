@@ -56,7 +56,7 @@ public class SA_RemoveCommunityScopePermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[16]/td[4]/ul/li/strong/span");
+		selenium.click("//tr[17]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +64,7 @@ public class SA_RemoveCommunityScopePermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -74,7 +74,7 @@ public class SA_RemoveCommunityScopePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");

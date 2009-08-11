@@ -20,18 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs.setup;
+package com.liferay.portalweb.portal.permissions.blogs.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_AllowAddEntryPermissionsTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_AddPortletTest extends BaseTestCase {
-	public void testSA_AddPortlet() throws Exception {
+public class SA_AllowAddEntryPermissionsTest extends BaseTestCase {
+	public void testSA_AllowAddEntryPermissions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,43 +51,13 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Blogs\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Permissions']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("//tr[7]/td[2]/input");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isChecked("//tr[7]/td[2]/input"));
 	}
 }
