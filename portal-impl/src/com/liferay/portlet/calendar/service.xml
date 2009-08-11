@@ -38,11 +38,6 @@
 		<column name="firstReminder" type="int" />
 		<column name="secondReminder" type="int" />
 
-		<!-- External Calendar Server fields -->
-
-		<column name="saveToExternalSystem" type="boolean" />
-		<column name="extCalEventId" type="String" />
-
 		<!-- Order -->
 
 		<order by="asc">

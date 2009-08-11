@@ -71,8 +71,6 @@ public class CalEventSoap implements Serializable {
 		soapModel.setRemindBy(model.getRemindBy());
 		soapModel.setFirstReminder(model.getFirstReminder());
 		soapModel.setSecondReminder(model.getSecondReminder());
-		soapModel.setSaveToExternalSystem(model.getSaveToExternalSystem());
-		soapModel.setExtCalEventId(model.getExtCalEventId());
 
 		return soapModel;
 	}
@@ -313,26 +311,6 @@ public class CalEventSoap implements Serializable {
 		_secondReminder = secondReminder;
 	}
 
-	public boolean getSaveToExternalSystem() {
-		return _saveToExternalSystem;
-	}
-
-	public boolean isSaveToExternalSystem() {
-		return _saveToExternalSystem;
-	}
-
-	public void setSaveToExternalSystem(boolean saveToExternalSystem) {
-		_saveToExternalSystem = saveToExternalSystem;
-	}
-
-	public String getExtCalEventId() {
-		return _extCalEventId;
-	}
-
-	public void setExtCalEventId(String extCalEventId) {
-		_extCalEventId = extCalEventId;
-	}
-
 	private String _uuid;
 	private long _eventId;
 	private long _groupId;
@@ -355,6 +333,4 @@ public class CalEventSoap implements Serializable {
 	private int _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
-	private boolean _saveToExternalSystem;
-	private String _extCalEventId;
 }

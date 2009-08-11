@@ -130,15 +130,9 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			{ "firstReminder", new Integer(Types.INTEGER) },
 			
 
-			{ "secondReminder", new Integer(Types.INTEGER) },
-			
-
-			{ "saveToExternalSystem", new Integer(Types.BOOLEAN) },
-			
-
-			{ "extCalEventId", new Integer(Types.VARCHAR) }
+			{ "secondReminder", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy INTEGER,firstReminder INTEGER,secondReminder INTEGER,saveToExternalSystem BOOLEAN,extCalEventId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy INTEGER,firstReminder INTEGER,secondReminder INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CalEvent";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -175,8 +169,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 		model.setRemindBy(soapModel.getRemindBy());
 		model.setFirstReminder(soapModel.getFirstReminder());
 		model.setSecondReminder(soapModel.getSecondReminder());
-		model.setSaveToExternalSystem(soapModel.getSaveToExternalSystem());
-		model.setExtCalEventId(soapModel.getExtCalEventId());
 
 		return model;
 	}
@@ -423,26 +415,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 		_secondReminder = secondReminder;
 	}
 
-	public boolean getSaveToExternalSystem() {
-		return _saveToExternalSystem;
-	}
-
-	public boolean isSaveToExternalSystem() {
-		return _saveToExternalSystem;
-	}
-
-	public void setSaveToExternalSystem(boolean saveToExternalSystem) {
-		_saveToExternalSystem = saveToExternalSystem;
-	}
-
-	public String getExtCalEventId() {
-		return GetterUtil.getString(_extCalEventId);
-	}
-
-	public void setExtCalEventId(String extCalEventId) {
-		_extCalEventId = extCalEventId;
-	}
-
 	public CalEvent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (CalEvent)this;
@@ -475,8 +447,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			model.setRemindBy(getRemindBy());
 			model.setFirstReminder(getFirstReminder());
 			model.setSecondReminder(getSecondReminder());
-			model.setSaveToExternalSystem(getSaveToExternalSystem());
-			model.setExtCalEventId(HtmlUtil.escape(getExtCalEventId()));
 
 			model = (CalEvent)Proxy.newProxyInstance(CalEvent.class.getClassLoader(),
 					new Class[] { CalEvent.class },
@@ -520,8 +490,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 		clone.setRemindBy(getRemindBy());
 		clone.setFirstReminder(getFirstReminder());
 		clone.setSecondReminder(getSecondReminder());
-		clone.setSaveToExternalSystem(getSaveToExternalSystem());
-		clone.setExtCalEventId(getExtCalEventId());
 
 		return clone;
 	}
@@ -620,10 +588,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 		sb.append(getFirstReminder());
 		sb.append(", secondReminder=");
 		sb.append(getSecondReminder());
-		sb.append(", saveToExternalSystem=");
-		sb.append(getSaveToExternalSystem());
-		sb.append(", extCalEventId=");
-		sb.append(getExtCalEventId());
 		sb.append("}");
 
 		return sb.toString();
@@ -724,14 +688,6 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 			"<column><column-name>secondReminder</column-name><column-value><![CDATA[");
 		sb.append(getSecondReminder());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>saveToExternalSystem</column-name><column-value><![CDATA[");
-		sb.append(getSaveToExternalSystem());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>extCalEventId</column-name><column-value><![CDATA[");
-		sb.append(getExtCalEventId());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -764,7 +720,5 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent> {
 	private int _remindBy;
 	private int _firstReminder;
 	private int _secondReminder;
-	private boolean _saveToExternalSystem;
-	private String _extCalEventId;
 	private transient ExpandoBridge _expandoBridge;
 }

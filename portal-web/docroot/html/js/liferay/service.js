@@ -545,7 +545,6 @@ Liferay.Service.registerClass(
 		addEvent: true,
 		deleteEvent: true,
 		getEvent: true,
-		getRemoteEvent: true,
 		updateEvent: true
 	}
 );

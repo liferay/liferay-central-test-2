@@ -1278,8 +1278,6 @@
 			<basic name="remindBy" />
 			<basic name="firstReminder" />
 			<basic name="secondReminder" />
-			<basic name="saveToExternalSystem" />
-			<basic name="extCalEventId" />
 			<transient name="recurrenceObj" />
 		</attributes>
 	</entity>

@@ -68,29 +68,7 @@ public interface CalEventService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.calendar.model.CalEvent addEvent(
-		java.lang.String uuid, long userId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
-		int firstReminder, int secondReminder,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.lang.String extCalServerUrl, java.lang.String extCalId,
-		java.lang.String extCalUserId, java.lang.String extCalPassword,
-		java.lang.String extCalSessionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void deleteEvent(long eventId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteEvent(long eventId, java.lang.String extCalServerUrl,
-		java.lang.String extCalId, java.lang.String extCalUserId,
-		java.lang.String extCalPassword, java.lang.String extCalSessionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -108,22 +86,6 @@ public interface CalEventService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId,
-		java.lang.String extCalServerUrl, java.lang.String extCalId,
-		java.lang.String extCalUserId, java.lang.String extCalPassword,
-		java.lang.String extCalSessionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.calendar.model.CalEvent getRemoteEvent(
-		java.lang.String eventId, java.lang.String extCalServerUrl,
-		java.lang.String extCalId, java.lang.String extCalUserId,
-		java.lang.String extCalPassword, java.lang.String extCalSessionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void importICal4j(long groupId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -138,22 +100,6 @@ public interface CalEventService {
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
 		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
-		long eventId, java.lang.String title, java.lang.String description,
-		int startDateMonth, int startDateDay, int startDateYear,
-		int startDateHour, int startDateMinute, int endDateMonth,
-		int endDateDay, int endDateYear, int durationHour, int durationMinute,
-		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating,
-		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
-		int firstReminder, int secondReminder,
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.lang.String extCalEventId, java.lang.String extCalServerUrl,
-		java.lang.String extCalId, java.lang.String extCalUserId,
-		java.lang.String extCalPassword, java.lang.String extCalSessionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

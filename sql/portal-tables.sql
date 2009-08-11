@@ -271,9 +271,7 @@ create table CalEvent (
 	recurrence TEXT null,
 	remindBy INTEGER,
 	firstReminder INTEGER,
-	secondReminder INTEGER,
-	saveToExternalSystem BOOLEAN,
-	extCalEventId VARCHAR(75) null
+	secondReminder INTEGER
 );
 
 create table ClassName_ (
