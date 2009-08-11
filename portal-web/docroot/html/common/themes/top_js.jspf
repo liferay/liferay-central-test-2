@@ -189,7 +189,7 @@
 		};
 
 		var themeDisplay = Liferay.ThemeDisplay;
-		
+
 		<%@ include file="/html/portal/aui/js.jsp" %>
 	// ]]>
 </script>
