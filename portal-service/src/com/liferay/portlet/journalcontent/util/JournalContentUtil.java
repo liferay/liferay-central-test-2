@@ -47,7 +47,7 @@ public class JournalContentUtil {
 		String languageId, String xmlRequest) {
 
 		return getJournalContent().getContent(
-			groupId, articleId, viewMode, languageId, xmlRequest);
+			groupId, articleId, templateId, viewMode, languageId, xmlRequest);
 	}
 
 	public static String getContent(
@@ -55,7 +55,7 @@ public class JournalContentUtil {
 		String languageId, ThemeDisplay themeDisplay, String xmlRequest) {
 
 		return getJournalContent().getContent(
-			groupId, articleId, viewMode, languageId, themeDisplay);
+			groupId, articleId, templateId, viewMode, languageId, themeDisplay);
 	}
 
 	public static String getContent(
