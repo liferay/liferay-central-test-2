@@ -24,6 +24,8 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -35,8 +37,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ContactIdUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.ContactTable;
-import com.liferay.portal.upgrade.v4_3_0.util.UserTable;
 
 import java.sql.Types;
 
@@ -67,10 +67,9 @@ public class UpgradeContact extends UpgradeProcess {
 			"contactId", new Integer(Types.VARCHAR), true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ContactTable.TABLE_NAME, ContactTable.TABLE_COLUMNS,
-			upgradePKColumn);
+			ContactImpl.TABLE_NAME, ContactImpl.TABLE_COLUMNS, upgradePKColumn);
 
-		upgradeTable.setCreateSQL(ContactTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ContactImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -88,10 +87,10 @@ public class UpgradeContact extends UpgradeProcess {
 			upgradeScreenNameColumn, contactIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			UserTable.TABLE_NAME, UserTable.TABLE_COLUMNS,
+			UserImpl.TABLE_NAME, UserImpl.TABLE_COLUMNS,
 			upgradeScreenNameColumn, upgradeContactIdColumn);
 
-		upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(UserImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

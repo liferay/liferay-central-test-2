@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.CountryTable;
 
 /**
  * <a href="UpgradeCountry.java.html"><b><i>View Source</i></b></a>
@@ -53,9 +53,9 @@ public class UpgradeCountry extends UpgradeProcess {
 		// Country
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			CountryTable.TABLE_NAME, CountryTable.TABLE_COLUMNS);
+			CountryImpl.TABLE_NAME, CountryImpl.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(CountryTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(CountryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

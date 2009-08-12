@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -33,7 +34,6 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.AddressTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
@@ -96,16 +96,14 @@ public class UpgradeAddress extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			AddressTable.TABLE_NAME, AddressTable.TABLE_COLUMNS,
-			upgradePKColumn, upgradeUserIdColumn, classNameIdColumn,
-			upgradeClassPKColumn);
+			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS, upgradePKColumn,
+			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(AddressTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(AddressImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
-		ValueMapperUtil.persist(
-			upgradePKColumn.getValueMapper(), "address-id");
+		ValueMapperUtil.persist(upgradePKColumn.getValueMapper(), "address-id");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeAddress.class);

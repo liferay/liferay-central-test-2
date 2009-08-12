@@ -32,6 +32,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -43,7 +44,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.MBMessageIdMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourceCodeIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ResourcePrimKeyUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.ResourceTable;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -293,7 +293,7 @@ public class UpgradeResource extends UpgradeProcess {
 			{"name", new Integer(Types.VARCHAR)},
 			{"scope", new Integer(Types.VARCHAR)}
 		};
-		Object[][] resourceColumns2 = ResourceTable.TABLE_COLUMNS.clone();
+		Object[][] resourceColumns2 = ResourceImpl.TABLE_COLUMNS.clone();
 
 		Object[][] resourceColumns = ArrayUtil.append(
 			resourceColumns1, resourceColumns2);
@@ -313,10 +313,10 @@ public class UpgradeResource extends UpgradeProcess {
 			getClassPKContainers(), AvailableMappersUtil.getLayoutPlidMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ResourceTable.TABLE_NAME, resourceColumns, companyIdColumn,
+			ResourceImpl.TABLE_NAME, resourceColumns, companyIdColumn,
 			nameColumn, scopeColumn, codeIdColumn, primKeyColumn);
 
-		String createSQL = ResourceTable.TABLE_SQL_CREATE;
+		String createSQL = ResourceImpl.TABLE_SQL_CREATE;
 
 		createSQL =
 			createSQL.substring(0, createSQL.length() - 1) +
