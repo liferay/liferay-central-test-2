@@ -52,7 +52,8 @@ public class CA_AddFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("Image Permissions Test Folder"));

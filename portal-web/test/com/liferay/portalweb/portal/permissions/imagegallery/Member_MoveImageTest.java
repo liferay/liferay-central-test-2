@@ -56,7 +56,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[2]/a/img");
+		selenium.click("//img[@alt='Third Permissions Image Test. ']");
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
@@ -79,6 +79,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +87,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Folders")) {
+				if (selenium.isElementPresent("link=Image Home")) {
 					break;
 				}
 			}
@@ -96,10 +97,11 @@ public class Member_MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.click(RuntimeVariables.replace("link=Image Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

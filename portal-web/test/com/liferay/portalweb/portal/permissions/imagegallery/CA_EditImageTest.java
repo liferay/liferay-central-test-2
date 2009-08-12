@@ -56,7 +56,7 @@ public class CA_EditImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Permissions Image Test. ']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

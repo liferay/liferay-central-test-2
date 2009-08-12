@@ -72,8 +72,6 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("Image Gallery Permissions Test Page"));
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Image Gallery Permissions Test Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
@@ -126,7 +124,7 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -135,5 +133,7 @@ public class SA_SetupTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

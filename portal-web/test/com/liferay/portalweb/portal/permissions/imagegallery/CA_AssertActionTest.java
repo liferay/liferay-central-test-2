@@ -56,7 +56,7 @@ public class CA_AssertActionTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Look and Feel"));
 		assertTrue(selenium.isElementPresent("link=Export / Import"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Add Folder']"));
+		assertTrue(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		selenium.click("//td[4]/ul/li/strong");
 		assertTrue(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
 		assertTrue(selenium.isElementPresent("//div[5]/ul/li[2]/a"));

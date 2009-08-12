@@ -56,7 +56,7 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Edited Third Permissions Image. ']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

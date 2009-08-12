@@ -56,7 +56,7 @@ public class Member_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Look and Feel"));
 		assertFalse(selenium.isElementPresent("link=Export / Import"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Remove']"));
-		assertFalse(selenium.isElementPresent("//input[@value='Add Folder']"));
+		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[2]/a"));
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));

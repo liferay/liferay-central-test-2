@@ -57,7 +57,7 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Second Permissions Image Test. ']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +86,8 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Image']")) {
+				if (selenium.isElementPresent(
+							"//img[@alt='Second Permissions Image Test. ']")) {
 					break;
 				}
 			}

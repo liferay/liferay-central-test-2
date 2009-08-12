@@ -53,6 +53,6 @@ public class Guest_AssertCannotAddFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Folder']"));
+		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 	}
 }

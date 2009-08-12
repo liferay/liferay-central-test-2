@@ -56,7 +56,7 @@ public class CA_DeleteImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Edited Permissions Image. ']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,6 +82,7 @@ public class CA_DeleteImageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("Edited Permissions Image"));
-		assertFalse(selenium.isElementPresent("//img[@alt='Image']"));
+		assertFalse(selenium.isElementPresent(
+				"//img[@alt='Edited Permissions Image. ']"));
 	}
 }

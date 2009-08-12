@@ -56,24 +56,9 @@ public class CA_MoveImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//img[@alt='Image']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//img[@alt='Image']");
+		selenium.click(RuntimeVariables.replace(
+				"//img[@alt='Permissions Image Test. ']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,6 +97,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -119,7 +105,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Folders")) {
+				if (selenium.isElementPresent("link=Image Home")) {
 					break;
 				}
 			}
@@ -129,13 +115,14 @@ public class CA_MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.click(RuntimeVariables.replace("link=Image Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Permissions Test Folder 2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
+		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent(
 				"link=Image Permissions Test Subfolder 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

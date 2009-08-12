@@ -86,6 +86,7 @@ public class Member_AddImageTest extends BaseTestCase {
 			RuntimeVariables.replace("Third Permissions Image Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Third Permissions Image Test"));
