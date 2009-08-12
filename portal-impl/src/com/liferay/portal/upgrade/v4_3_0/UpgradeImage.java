@@ -66,8 +66,7 @@ public class UpgradeImage extends UpgradeProcess {
 
 		String[] webIds = WebIdUtil.getWebIds();
 
-		for (int i = 0; i < webIds.length; i++) {
-			String webId = webIds[i];
+		for (String webId : webIds) {
 			runSQL("delete from Image where imageId = '" + webId + "'");
 
 			runSQL("delete from Image where imageId = '" + webId + ".wbmp'");
