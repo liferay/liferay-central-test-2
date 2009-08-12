@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.PermissionTable;
 
 /**
  * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
@@ -53,9 +53,9 @@ public class UpgradePermission extends UpgradeProcess {
 		// Permission
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PermissionImpl.TABLE_NAME, PermissionImpl.TABLE_COLUMNS);
+			PermissionTable.TABLE_NAME, PermissionTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(PermissionImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(PermissionTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

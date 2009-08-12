@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_4_0.util.GroupTable;
 
 /**
  * <a href="UpgradeGroup.java.html"><b><i>View Source</i></b></a>
@@ -53,9 +53,9 @@ public class UpgradeGroup extends UpgradeProcess {
 		// Group_
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			GroupImpl.TABLE_NAME, GroupImpl.TABLE_COLUMNS);
+			GroupTable.TABLE_NAME, GroupTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(GroupImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(GroupTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

@@ -38,16 +38,16 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleContentUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticlePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleResourcePrimKeyUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalArticleTable;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalStructurePKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalStructureTable;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalStructureXSDUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplatePKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateSmallImageIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateTable;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateXSLUpgradeColumnImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 
 import java.sql.Types;
 
@@ -113,14 +113,14 @@ public class UpgradeJournal extends UpgradeProcess {
 				AvailableMappersUtil.getImageIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			JournalArticleImpl.TABLE_NAME, JournalArticleImpl.TABLE_COLUMNS,
+			JournalArticleTable.TABLE_NAME, JournalArticleTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn, upgradeUserIdColumn,
 			upgradeApprovedByUserIdColumn, upgradeArticlePKColumn,
 			upgradeArticleResourcePrimKeyColumn, upgradeArticleIdColumn,
 			upgradeVersionColumn, upgradeStructureIdColumn,
 			upgradeContentColumn);
 
-		upgradeTable.setCreateSQL(JournalArticleImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -139,11 +139,12 @@ public class UpgradeJournal extends UpgradeProcess {
 			new JournalStructureXSDUpgradeColumnImpl();
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalStructureImpl.TABLE_NAME, JournalStructureImpl.TABLE_COLUMNS,
-			upgradeCompanyIdColumn, upgradeGroupIdColumn,
-			upgradeStructurePKColumn, upgradeUserIdColumn, upgradeXSDColumn);
+			JournalStructureTable.TABLE_NAME,
+			JournalStructureTable.TABLE_COLUMNS, upgradeCompanyIdColumn,
+			upgradeGroupIdColumn, upgradeStructurePKColumn,
+			upgradeUserIdColumn, upgradeXSDColumn);
 
-		upgradeTable.setCreateSQL(JournalStructureImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(JournalStructureTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -171,13 +172,14 @@ public class UpgradeJournal extends UpgradeProcess {
 				AvailableMappersUtil.getImageIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			JournalTemplateImpl.TABLE_NAME, JournalTemplateImpl.TABLE_COLUMNS,
+			JournalTemplateTable.TABLE_NAME,
+			JournalTemplateTable.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeGroupIdColumn,
 			upgradeTemplatePKColumn, upgradeUserIdColumn,
 			upgradeTemplateIdColumn, upgradeXSLColumn,
 			upgradeSmallImageIdColumn);
 
-		upgradeTable.setCreateSQL(JournalTemplateImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(JournalTemplateTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

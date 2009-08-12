@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -33,6 +32,7 @@ import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.UserIdMapperTable;
 
 import java.sql.Types;
 
@@ -63,11 +63,11 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 			AvailableMappersUtil.getUserIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			UserIdMapperImpl.TABLE_NAME, UserIdMapperImpl.TABLE_COLUMNS,
+			UserIdMapperTable.TABLE_NAME, UserIdMapperTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("userIdMapperId", false),
 			upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(UserIdMapperImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(UserIdMapperTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -32,6 +31,7 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.RoleTable;
 
 /**
  * <a href="UpgradeRole.java.html"><b><i>View Source</i></b></a>
@@ -59,9 +59,9 @@ public class UpgradeRole extends UpgradeProcess {
 			"roleId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RoleImpl.TABLE_NAME, RoleImpl.TABLE_COLUMNS, upgradePKColumn);
+			RoleTable.TABLE_NAME, RoleTable.TABLE_COLUMNS, upgradePKColumn);
 
-		upgradeTable.setCreateSQL(RoleImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(RoleTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

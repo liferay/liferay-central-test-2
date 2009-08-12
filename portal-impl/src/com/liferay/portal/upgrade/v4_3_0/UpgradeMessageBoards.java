@@ -39,15 +39,15 @@ import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.MBCategoryIdUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.MBCategoryTable;
+import com.liferay.portal.upgrade.v4_3_0.util.MBDiscussionTable;
 import com.liferay.portal.upgrade.v4_3_0.util.MBMessageAttachmentsUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v4_3_0.util.MBMessageFlagTable;
+import com.liferay.portal.upgrade.v4_3_0.util.MBMessageTable;
+import com.liferay.portal.upgrade.v4_3_0.util.MBStatsUserTable;
+import com.liferay.portal.upgrade.v4_3_0.util.MBThreadTable;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
-import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 
 import java.sql.Types;
 
@@ -91,10 +91,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			new MBCategoryIdUpgradeColumnImpl();
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
+			MBCategoryTable.TABLE_NAME, MBCategoryTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(MBCategoryImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBCategoryTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -107,7 +107,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"parentCategoryId", categoryIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBCategoryImpl.TABLE_NAME, MBCategoryImpl.TABLE_COLUMNS,
+			MBCategoryTable.TABLE_NAME, MBCategoryTable.TABLE_COLUMNS,
 			upgradeParentCategoryIdColumn);
 
 		upgradeTable.updateTable();
@@ -128,12 +128,12 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			upgradeThreadIdPKColumn);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
+			MBMessageTable.TABLE_NAME, MBMessageTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeCompanyIdColumn, upgradeUserIdColumn,
 			upgradeCategoryIdColumn, upgradeThreadIdPKColumn,
 			upgradeAttachmentsColumn);
 
-		upgradeTable.setCreateSQL(MBMessageImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBMessageTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -150,7 +150,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			"parentMessageId", messageIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageImpl.TABLE_NAME, MBMessageImpl.TABLE_COLUMNS,
+			MBMessageTable.TABLE_NAME, MBMessageTable.TABLE_COLUMNS,
 			upgradeParentMessageIdColumn);
 
 		upgradeTable.updateTable();
@@ -166,21 +166,21 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		upgradePKColumn = new PKUpgradeColumnImpl("messageFlagId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBMessageFlagImpl.TABLE_NAME, MBMessageFlagImpl.TABLE_COLUMNS,
+			MBMessageFlagTable.TABLE_NAME, MBMessageFlagTable.TABLE_COLUMNS,
 			upgradePKColumn, upgradeUserIdColumn, upgradeMessageIdColumn);
 
-		upgradeTable.setCreateSQL(MBMessageFlagImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBMessageFlagTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// MBStatsUser
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBStatsUserImpl.TABLE_NAME, MBStatsUserImpl.TABLE_COLUMNS,
+			MBStatsUserTable.TABLE_NAME, MBStatsUserTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("statsUserId", false),
 			upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(MBStatsUserImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBStatsUserTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -194,11 +194,11 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			AvailableMappersUtil.getUserIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBThreadImpl.TABLE_NAME, MBThreadImpl.TABLE_COLUMNS,
+			MBThreadTable.TABLE_NAME, MBThreadTable.TABLE_COLUMNS,
 			upgradeThreadIdColumn, upgradeCategoryIdColumn,
 			upgradeRootMessageIdColumn, upgradeLastPostByUserIdColumn);
 
-		upgradeTable.setCreateSQL(MBThreadImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBThreadTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -219,11 +219,11 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			MBDiscussionImpl.TABLE_NAME, MBDiscussionImpl.TABLE_COLUMNS,
+			MBDiscussionTable.TABLE_NAME, MBDiscussionTable.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("discussionId", false),
 			classNameIdColumn, upgradeClassPKColumn, upgradeThreadIdColumn);
 
-		upgradeTable.setCreateSQL(MBDiscussionImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(MBDiscussionTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}
