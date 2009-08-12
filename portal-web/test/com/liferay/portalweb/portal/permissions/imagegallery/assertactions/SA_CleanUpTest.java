@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery.teardown;
+package com.liferay.portalweb.portal.permissions.imagegallery.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_TearDownTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_CleanUpTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_TearDownTest extends BaseTestCase {
-	public void testSA_TearDown() throws Exception {
+public class SA_CleanUpTest extends BaseTestCase {
+	public void testSA_CleanUp() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -59,10 +59,19 @@ public class SA_TearDownTest extends BaseTestCase {
 						"link=Image Gallery Permissions Test Page"));
 				selenium.waitForPageToLoad("30000");
 
-				boolean FolderPresent = selenium.isElementPresent(
+				boolean PortletPresent = selenium.isElementPresent(
+						"//span[3]/a/img");
+
+				if (!PortletPresent) {
+					label = 4;
+
+					continue;
+				}
+
+				boolean Folder1Present = selenium.isElementPresent(
 						"//td[4]/ul/li/strong/span");
 
-				if (!FolderPresent) {
+				if (!Folder1Present) {
 					label = 2;
 
 					continue;
@@ -76,7 +85,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Delete")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -86,33 +95,90 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
+
+				boolean Folder2Present = selenium.isElementPresent(
+						"//td[4]/ul/li/strong/span");
+
+				if (!Folder2Present) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.click("//td[4]/ul/li/strong/span");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 3:
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("link=Welcome"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//li[@id='_88_tabs3pageTabsId']/a"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Return to Full Page"));
-				selenium.waitForPageToLoad("30000");
+
+			case 4:
+				selenium.click("link=Application");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//div[@id='ContentManagement-ImageGallery']/p/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(
+					"//div[@id='ContentManagement-ImageGallery']/p/a");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 
 			case 100:
 				label = -1;

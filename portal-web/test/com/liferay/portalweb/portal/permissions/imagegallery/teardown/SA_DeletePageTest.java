@@ -26,12 +26,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_DeletePageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_LoginTest extends BaseTestCase {
-	public void testSA_Login() throws Exception {
+public class SA_DeletePageTest extends BaseTestCase {
+	public void testSA_DeletePage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,10 +50,37 @@ public class SA_LoginTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@type='checkbox']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//li[@id='_88_tabs3pageTabsId']/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

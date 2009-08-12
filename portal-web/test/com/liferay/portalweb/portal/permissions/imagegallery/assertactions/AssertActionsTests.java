@@ -82,6 +82,9 @@ public class AssertActionsTests extends BaseTests {
 		testSuite.addTestSuite(Guest_AssertCannotEditFolderTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotEditImageTest.class);
 		testSuite.addTestSuite(Guest_AssertActionTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_CleanUpTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

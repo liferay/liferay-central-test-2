@@ -20,29 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery.setup;
+package com.liferay.portalweb.portal.permissions.imagegallery.teardown;
 
-import com.liferay.portalweb.portal.BaseTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SetupTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_RemovePortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SetupTests extends BaseTests {
+public class SA_RemovePortletTest extends BaseTestCase {
+	public void testSA_RemovePortlet() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(SA_AddPageTest.class);
-		testSuite.addTestSuite(SA_AddPortletTest.class);
-		testSuite.addTestSuite(SA_LogoutTest.class);
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace(
+				"link=Image Gallery Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 	}
-
 }

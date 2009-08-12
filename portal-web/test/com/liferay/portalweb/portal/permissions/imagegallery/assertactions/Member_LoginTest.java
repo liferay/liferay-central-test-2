@@ -53,10 +53,8 @@ public class Member_LoginTest extends BaseTestCase {
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.click("//input[@type='checkbox']");
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }
