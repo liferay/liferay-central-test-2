@@ -64,7 +64,9 @@ import java.util.Locale;
 import java.util.Properties;
 
 import javax.naming.Binding;
+import javax.naming.CompositeName;
 import javax.naming.Context;
+import javax.naming.Name;
 import javax.naming.NameNotFoundException;
 import javax.naming.NamingEnumeration;
 import javax.naming.OperationNotSupportedException;
@@ -115,7 +117,7 @@ public class PortalLDAPUtil {
 			Properties userMappings = getUserMappings(companyId);
 			Binding binding = getUser(
 				contact.getCompanyId(), user.getScreenName());
-			String name = StringPool.BLANK;
+			Name name = new CompositeName();
 
 			if (binding == null) {
 
@@ -129,7 +131,7 @@ public class PortalLDAPUtil {
 				sb.append(StringPool.COMMA);
 				sb.append(getUsersDN(companyId));
 
-				name = sb.toString();
+				name.add(sb.toString());
 
 				// Create new user in LDAP
 
@@ -144,7 +146,7 @@ public class PortalLDAPUtil {
 
 				// Modify existing LDAP user record
 
-				name = getNameInNamespace(companyId, binding);
+				name.add(getNameInNamespace(companyId, binding));
 
 				Modifications mods = Modifications.getInstance();
 
@@ -199,7 +201,7 @@ public class PortalLDAPUtil {
 			Properties userMappings = getUserMappings(companyId);
 			Binding binding = getUser(
 				user.getCompanyId(), user.getScreenName());
-			String name = StringPool.BLANK;
+			Name name = new CompositeName();
 
 			if (binding == null) {
 
@@ -210,7 +212,7 @@ public class PortalLDAPUtil {
 
 			// Modify existing LDAP user record
 
-			name = getNameInNamespace(companyId, binding);
+			name.add(getNameInNamespace(companyId, binding));
 
 			Modifications mods = Modifications.getInstance();
 
@@ -460,13 +462,21 @@ public class PortalLDAPUtil {
 		String baseDN = PrefsPropsUtil.getString(
 			companyId, PropsKeys.LDAP_BASE_DN);
 
+		String name = binding.getName();
+
+		if (name.startsWith(StringPool.QUOTE) &&
+			name.endsWith(StringPool.QUOTE)) {
+
+			name = name.substring(1, name.length() - 1);
+		}
+
 		if (Validator.isNull(baseDN)) {
-			return binding.getName();
+			return name.toString();
 		}
 		else {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(binding.getName());
+			sb.append(name);
 			sb.append(StringPool.COMMA);
 			sb.append(baseDN);
 
@@ -502,8 +512,7 @@ public class PortalLDAPUtil {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			enu = ctx.search(
-				baseDN, filter.toString(), cons);
+			enu = ctx.search(baseDN, filter.toString(), cons);
 		}
 		catch (Exception e) {
 			throw e;
@@ -1110,6 +1119,8 @@ public class PortalLDAPUtil {
 			String[] attributeIds)
 		throws Exception {
 
+		Name fullDN = new CompositeName().add(fullDistinguishedName);
+
 		Attributes attributes = null;
 
 		String[] auditAttributeIds = {
@@ -1121,10 +1132,10 @@ public class PortalLDAPUtil {
 
 			// Get complete listing of LDAP attributes (slow)
 
-			attributes = ctx.getAttributes(fullDistinguishedName);
+			attributes = ctx.getAttributes(fullDN);
 
 			NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
-				fullDistinguishedName, auditAttributeIds).getAll();
+				fullDN, auditAttributeIds).getAll();
 
 			while (enu.hasMoreElements()) {
 				attributes.put(enu.nextElement());
@@ -1146,8 +1157,7 @@ public class PortalLDAPUtil {
 				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
 				auditAttributeIds.length);
 
-			attributes = ctx.getAttributes(
-				fullDistinguishedName, allAttributeIds);
+			attributes = ctx.getAttributes(fullDN, allAttributeIds);
 		}
 
 		return attributes;
@@ -1271,8 +1281,7 @@ public class PortalLDAPUtil {
 				userAttrs = getUserAttributes(companyId, ctx, fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
-				_log.error(
-					"LDAP user not found with fullUserDN " + fullUserDN);
+				_log.error("LDAP user not found with fullUserDN " + fullUserDN);
 
 				_log.error(nnfe, nnfe);
 
