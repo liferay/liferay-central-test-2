@@ -215,9 +215,11 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 					curPageURL.setParameter("title", curPage.getTitle());
 				%>
 
-					<li>
-						<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
-					</li>
+					<c:if test="<%= Validator.isNull(curPage.getRedirectTitle()) %>">
+						<li>
+							<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
+						</li>
+					</c:if>
 
 				<%
 				}
