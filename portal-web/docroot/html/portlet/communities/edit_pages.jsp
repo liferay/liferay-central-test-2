@@ -85,23 +85,6 @@ long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLI
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
-boolean privateLayout = tabs1.equals("private-pages");
-
-if (selGroup.isLayoutSetPrototype()) {
-	privateLayout = true;
-}
-
-if (privateLayout) {
-	if (group != null) {
-		pagesCount = group.getPrivateLayoutsPageCount();
-	}
-}
-else {
-	if (group != null) {
-		pagesCount = group.getPublicLayoutsPageCount();
-	}
-}
-
 UnicodeProperties groupTypeSettings = null;
 
 if (group != null) {
@@ -187,6 +170,46 @@ else if (liveGroup.isUser()) {
 }
 else if (liveGroup.isUserGroup()) {
 	rootNodeName = userGroup.getName();
+}
+
+boolean privateLayout = tabs1.equals("private-pages");
+String tabs1Names = "public-pages,private-pages";
+
+if (liveGroup.isUser()) {
+	boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(selUser.getUserId(), company.getCompanyId(), RoleConstants.POWER_USER, true);
+
+	boolean privateLayoutsModifiable = PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
+	boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
+
+	if (privateLayoutsModifiable && publicLayoutsModifiable) {
+		tabs1Names = "public-pages,private-pages";
+	}
+	else if (privateLayoutsModifiable) {
+		tabs1Names = "private-pages";
+	}
+	else if (publicLayoutsModifiable) {
+		tabs1Names = "public-pages";
+	}
+
+	if (!publicLayoutsModifiable && privateLayoutsModifiable && !privateLayout) {
+		privateLayout = true;
+		tabs1 = "private-pages";
+	}
+}
+
+if (selGroup.isLayoutSetPrototype()) {
+	privateLayout = true;
+}
+
+if (privateLayout) {
+	if (group != null) {
+		pagesCount = group.getPrivateLayoutsPageCount();
+	}
+}
+else {
+	if (group != null) {
+		pagesCount = group.getPublicLayoutsPageCount();
+	}
 }
 
 LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
@@ -456,38 +479,32 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<br />
 	</c:if>
 
-	<c:choose>
-		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
-			<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
-				<liferay-util:param name="userId" value="<%= String.valueOf(selUser.getUserId()) %>" />
-			</liferay-util:include>
-		</c:when>
-		<c:when test="<%= portletName.equals(PortletKeys.MY_PAGES) %>">
-			<liferay-util:include page="/html/portlet/my_pages/tabs1.jsp">
-				<liferay-util:param name="userId" value="<%= String.valueOf(user.getUserId()) %>" />
-			</liferay-util:include>
-		</c:when>
-		<c:otherwise>
-			<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() || liveGroup.isUserGroup() %>">
+	<%
+	String tabs1URL = portletURL.toString();
 
-				<%
-				String tabs1Names = "public-pages,private-pages";
+	if (liveGroup.isUser()) {
+		PortletURL userTabs1URL = renderResponse.createRenderURL();
 
-				if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
-					tabs1Names += ",settings";
-				}
-				%>
+		userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
+		userTabs1URL.setParameter("tabs1", tabs1);
+		userTabs1URL.setParameter("backURL", backURL);
+		userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
+		userTabs1URL.setWindowState(WindowState.MAXIMIZED);
 
-				<liferay-ui:tabs
-					names="<%= tabs1Names %>"
-					param="tabs1"
-					value="<%= tabs1 %>"
-					url="<%= portletURL.toString() %>"
-					backURL="<%= redirect %>"
-				/>
-			</c:if>
-		</c:otherwise>
-	</c:choose>
+		tabs1URL = userTabs1URL.toString();
+	}
+	else if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
+		tabs1Names += ",settings";
+	}
+	%>
+
+	<liferay-ui:tabs
+		names="<%= tabs1Names %>"
+		param="tabs1"
+		value="<%= tabs1 %>"
+		url="<%= tabs1URL %>"
+		backURL="<%= backURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= liveGroup.isUserGroup() %>">
