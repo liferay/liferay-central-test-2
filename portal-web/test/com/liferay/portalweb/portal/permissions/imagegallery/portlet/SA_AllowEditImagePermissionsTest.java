@@ -20,25 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery.setup;
+package com.liferay.portalweb.portal.permissions.imagegallery.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="SA_AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_AllowEditImagePermissionsTest.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class SA_AddPageTest extends BaseTestCase {
-	public void testSA_AddPage() throws Exception {
+public class SA_AllowEditImagePermissionsTest extends BaseTestCase {
+	public void testSA_AllowEditImagePermissions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Welcome")) {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
 					break;
 				}
 			}
@@ -48,54 +50,54 @@ public class SA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Image Gallery Permissions Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Portlet2 Temporary2 Folder2"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//img[@alt='Portlet2 Temporary2 Image2. ']");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Permissions")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("//tr[7]/td[4]/input");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isChecked("//tr[7]/td[4]/input"));
 	}
 }

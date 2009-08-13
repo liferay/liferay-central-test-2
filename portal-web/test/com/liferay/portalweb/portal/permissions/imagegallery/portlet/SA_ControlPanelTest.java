@@ -20,33 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery;
+package com.liferay.portalweb.portal.permissions.imagegallery.portlet;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.portlet.PortletTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_ControlPanelTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ImageGalleryTests extends BaseTests {
+public class SA_ControlPanelTest extends BaseTestCase {
+	public void testSA_ControlPanel() throws Exception {
+		int label = 1;
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+		while (label >= 1) {
+			switch (label) {
+			case 1:
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+				boolean NotInControlPanel = selenium.isElementPresent(
+						"//li[4]/ul/li[1]/a[1]");
 
-		return testSuite;
+				if (!NotInControlPanel) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
+		}
 	}
-
 }

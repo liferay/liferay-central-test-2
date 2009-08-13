@@ -20,33 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery;
+package com.liferay.portalweb.portal.permissions.imagegallery.portlet;
 
-import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.assertactions.AssertActionsTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.portlet.PortletTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.setup.SetupTests;
-import com.liferay.portalweb.portal.permissions.imagegallery.teardown.TearDownTests;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="Portlet_AssertCannotAddSubfolderTest.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ImageGalleryTests extends BaseTests {
+public class Portlet_AssertCannotAddSubfolderTest extends BaseTestCase {
+	public void testPortlet_AssertCannotAddSubfolder()
+		throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public static Test suite() {
-		TestSuite testSuite = new TestSuite();
+			try {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
 
-		testSuite.addTest(SetupTests.suite());
-		testSuite.addTest(AssertActionsTests.suite());
-		testSuite.addTest(PortletTests.suite());
-		testSuite.addTest(TearDownTests.suite());
+			Thread.sleep(1000);
+		}
 
-		return testSuite;
+		selenium.click(RuntimeVariables.replace(
+				"link=Image Gallery Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Portlet2 Temporary2 Folder2"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 	}
-
 }
