@@ -46,13 +46,15 @@ childPages = ListUtil.sort(childPages);
 
 <%
 for (WikiPage childPage : childPages) {
-	request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
-	request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
-	request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, depth + 1);
+	if (Validator.isNull(childPage.getRedirectTitle())) {
+		request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
+		request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
+		request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, depth + 1);
 %>
 
-	<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+		<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
 
 <%
+	}
 }
 %>

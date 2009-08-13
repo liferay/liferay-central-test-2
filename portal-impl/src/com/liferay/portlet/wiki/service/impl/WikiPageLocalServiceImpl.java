@@ -314,6 +314,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		WikiPage parentPage = getPage(nodeId, newParentTitle);
+
+		if (Validator.isNotNull(parentPage.getRedirectTitle())) {
+			newParentTitle = parentPage.getRedirectTitle();
+		}
+
 		WikiPage page = getPage(nodeId, title);
 
 		String originalParentTitle = page.getParentTitle();
