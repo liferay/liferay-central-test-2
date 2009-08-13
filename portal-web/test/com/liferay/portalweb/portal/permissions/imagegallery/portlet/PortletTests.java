@@ -50,7 +50,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LoginTest.class);
 		testSuite.addTestSuite(Portlet_AssertViewPortletTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
-
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveConfigurePortletPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
@@ -65,8 +64,8 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveConfigurePortletPermissionsTest.class);
-
-		testSuite.addTestSuite(SA_RemoveAccessInControlPanelPermissionsTest.class);
+		testSuite.addTestSuite(
+			SA_RemoveAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
 		testSuite.addTestSuite(Portlet_ControlPanelTest.class);
@@ -74,7 +73,8 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_EndControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(SA_AllowAccessInControlPanelPermissionsTest.class);
+		testSuite.addTestSuite(
+			SA_AllowAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
 		testSuite.addTestSuite(Portlet_ControlPanelTest.class);
@@ -82,8 +82,8 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_EndControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(SA_RemoveAccessInControlPanelPermissionsTest.class);
-
+		testSuite.addTestSuite(
+			SA_RemoveAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_AddTemporaryFolderTest.class);
 		testSuite.addTestSuite(SA_RemoveViewFolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
@@ -97,7 +97,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_AssertViewFolderTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-
 		testSuite.addTestSuite(SA_RemoveAddImagePermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -112,7 +111,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveAddImagePermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemoveAddSubfolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -127,11 +125,11 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveAddSubfolderPermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemovePermissionsFolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
-		testSuite.addTestSuite(Portlet_AssertCannotEditFolderPermissionsTest.class);
+		testSuite.addTestSuite(
+			Portlet_AssertCannotEditFolderPermissionsTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_AllowPermissionsFolderPermissionsTest.class);
@@ -141,7 +139,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemovePermissionsFolderPermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemoveEditFolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -155,7 +152,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveEditFolderPermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemoveDeleteFolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -168,7 +164,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_DeleteFolderTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-
 		testSuite.addTestSuite(SA_AddTemporaryFolderTest.class);
 		testSuite.addTestSuite(SA_AddTemporaryImageTest.class);
 		testSuite.addTestSuite(SA_RemoveViewImagePermissionsTest.class);
@@ -183,11 +178,11 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_AssertViewImageTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-
 		testSuite.addTestSuite(SA_RemovePermissionsImagePermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
-		testSuite.addTestSuite(Portlet_AssertCannotEditImagePermissionsTest.class);
+		testSuite.addTestSuite(
+			Portlet_AssertCannotEditImagePermissionsTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_AllowPermissionsImagePermissionsTest.class);
@@ -197,7 +192,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemovePermissionsImagePermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemoveEditImagePermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -211,7 +205,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveEditImagePermissionsTest.class);
-
 		testSuite.addTestSuite(SA_RemoveDeleteImagePermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
@@ -223,7 +216,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(Portlet_LoginTest.class);
 		testSuite.addTestSuite(Portlet_DeleteImageTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
-
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_CleanUpTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
