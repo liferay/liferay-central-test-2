@@ -95,7 +95,7 @@ public interface WorkflowInstanceHistory {
 	 * also be created by the system (e.g. in an asynchronous thread processing
 	 * a job or branches), this method could return <code>null</code> or a
 	 * system user id, depending on the underlying engine.
-	 * 
+	 *
 	 * @return the user id creating this entry or <code>0</code>, if none
 	 *         available
 	 */

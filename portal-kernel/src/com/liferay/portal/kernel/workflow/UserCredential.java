@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Set;
 

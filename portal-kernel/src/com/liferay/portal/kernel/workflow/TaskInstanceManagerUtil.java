@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * <a href="TaskInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The utility class supporting static access to all methods for the
  * {@link TaskInstanceManager} interface. The target manager object is injected
@@ -35,12 +35,11 @@ import java.util.Map;
  * Besides the static method access, it is also available through
  * {@link #getTaskInstanceManager()}.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class TaskInstanceManagerUtil {
-
 
 	/**
 	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#assignTaskInstanceToRole(long, long, java.lang.String, java.util.Map, long)
@@ -223,7 +222,7 @@ public class TaskInstanceManagerUtil {
 	public static TaskInstanceManager getTaskInstanceManager() {
 		return _taskInstanceManager;
 	}
-	
+
 	public void setTaskInstanceManager(TaskInstanceManager taskInstanceManager) {
 		TaskInstanceManagerUtil._taskInstanceManager = taskInstanceManager;
 	}

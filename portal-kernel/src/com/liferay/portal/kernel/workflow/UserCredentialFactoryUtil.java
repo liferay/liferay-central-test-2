@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.workflow;
 
 /**
  * <a href="UserCredentialFactoryUtil.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The utility class supporting static access to all methods for the
  * {@link UserCredentialFactory} interface. The target manager object is
@@ -32,9 +32,9 @@ package com.liferay.portal.kernel.workflow;
  * method. Besides the static method access, it is also available through
  * {@link #getUserCredentialFactory()}.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class UserCredentialFactoryUtil {
 
@@ -45,7 +45,7 @@ public class UserCredentialFactoryUtil {
 		throws WorkflowException {
 		return _userCredentialFactory.createCredential(userId);
 	}
-	
+
 	public static UserCredentialFactory getUserCredentialFactory() {
 		return _userCredentialFactory;
 	}

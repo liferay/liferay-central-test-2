@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * <a href="WorkflowInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The utility class supporting static access to all methods for the
  * {@link WorkflowInstanceManager} interface. The target manager object is
@@ -36,13 +36,12 @@ import java.util.Map;
  * the static method access, it is also available through
  * {@link #getWorkflowInstanceManager()}.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class WorkflowInstanceManagerUtil {
 
-	
 	/**
 	 * @see com.liferay.portal.kernel.workflow.WorkflowInstanceManager#addContextInformation(long,
 	 *      java.util.Map)
@@ -134,7 +133,7 @@ public class WorkflowInstanceManagerUtil {
 		return _workflowInstanceManager.getWorkflowInstanceInfos(
 			relationType, relationId, retrieveChildrenInfo);
 	}
-	
+
 	public static WorkflowInstanceManager getWorkflowInstanceManager() {
 		return _workflowInstanceManager;
 	}

@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.workflow;
 /**
  * <a href="WorkflowDefinitionMapperUtil.java.html"><b><i>View
  * Source</i></b></a>
- * 
+ *
  * <p>
  * The utility class supporting static access to all methods for the
  * {@link WorkflowDefinitionMapper} interface. The target manager object is
@@ -34,9 +34,9 @@ package com.liferay.portal.kernel.workflow;
  * Besides the static method access, it is also available through
  * {@link #getWorkflowDefinitionMapper()}.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class WorkflowDefinitionMapperUtil {
 
@@ -72,6 +72,6 @@ public class WorkflowDefinitionMapperUtil {
 		WorkflowDefinitionMapper definitionMapper) {
 		_workflowDefinitionMapper = definitionMapper;
 	}
-	
+
 	private static WorkflowDefinitionMapper _workflowDefinitionMapper;
 }

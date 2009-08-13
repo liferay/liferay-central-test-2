@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * <a href="WorkflowDefinitionManagerUtil.java.html"><b><i>View
  * Source</i></b></a>
- * 
+ *
  * <p>
  * The utility class supporting static access to all methods for the
  * {@link WorkflowDefinitionManager} interface. The target manager object is
@@ -36,9 +36,9 @@ import java.util.List;
  * Besides the static method access, it is also available through
  * {@link #getWorkflowDefinitionManager()}.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class WorkflowDefinitionManagerUtil {
 
@@ -52,7 +52,7 @@ public class WorkflowDefinitionManagerUtil {
 		_workflowDefinitionManager.deployWorkflowDefinition(
 			workflowDefinition, callingUserId);
 	}
-	
+
 	public static WorkflowDefinitionManager getWorkflowDefinitionManager() {
 		return _workflowDefinitionManager;
 	}
@@ -84,6 +84,6 @@ public class WorkflowDefinitionManagerUtil {
 
 		_workflowDefinitionManager = definitionManager;
 	}
-	
+
 	private static WorkflowDefinitionManager _workflowDefinitionManager;
 }
