@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
-
 import java.util.Locale;
 import java.util.Set;
 
@@ -85,7 +84,7 @@ public class UserCredential implements Serializable {
 	 * @return the set of the role ids the user reflected by this credential has
 	 */
 	public Set<Long> getRoleIds() {
-		return _roleSet;
+		return _roleIds;
 	}
 
 	/**
