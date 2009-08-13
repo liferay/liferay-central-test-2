@@ -107,6 +107,7 @@ public class BaseDeployer {
 		baseDir = System.getProperty("deployer.base.dir");
 		destDir = System.getProperty("deployer.dest.dir");
 		appServerType = System.getProperty("deployer.app.server.type");
+		auiTaglibDTD = System.getProperty("deployer.aui.taglib.dtd");
 		portletTaglibDTD = System.getProperty("deployer.portlet.taglib.dtd");
 		portletExtTaglibDTD = System.getProperty(
 			"deployer.portlet.ext.taglib.dtd");
@@ -319,6 +320,11 @@ public class BaseDeployer {
 
 	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
+
+		if (Validator.isNotNull(auiTaglibDTD)) {
+			FileUtil.copyFile(
+				auiTaglibDTD, srcFile + "/WEB-INF/tld/liferay-aui.tld", true);
+		}
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
 			FileUtil.copyFile(
@@ -813,7 +819,8 @@ public class BaseDeployer {
 
 		boolean hasTaglib = false;
 
-		if (Validator.isNotNull(portletTaglibDTD) ||
+		if (Validator.isNotNull(auiTaglibDTD) ||
+			Validator.isNotNull(portletTaglibDTD) ||
 			Validator.isNotNull(portletExtTaglibDTD) ||
 			Validator.isNotNull(securityTaglibDTD) ||
 			Validator.isNotNull(themeTaglibDTD) ||
@@ -825,6 +832,15 @@ public class BaseDeployer {
 
 		if (hasTaglib && (webXmlVersion > 2.3)) {
 			sb.append("<jsp-config>");
+		}
+
+		if (Validator.isNotNull(auiTaglibDTD)) {
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>http://liferay.com/tld/aui</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-aui.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
@@ -1294,6 +1310,7 @@ public class BaseDeployer {
 	protected String baseDir;
 	protected String destDir;
 	protected String appServerType;
+	protected String auiTaglibDTD;
 	protected String portletTaglibDTD;
 	protected String portletExtTaglibDTD;
 	protected String securityTaglibDTD;
