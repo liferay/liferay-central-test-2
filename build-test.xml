@@ -40,6 +40,8 @@ plugins.includes=${plugins.includes}</echo>
 	</target>
 
 	<target name="prepare-common">
+		<antcall target="prepare-portal-properties" inheritAll="false" />
+
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
 		<exec executable="cmd.exe">
@@ -66,6 +68,25 @@ plugins.includes=${plugins.includes}</echo>
 		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
 
 		<antcall target="prepare-common" />
+	</target>
+
+	<target name="prepare-portal-properties">
+		<replace file="portal-impl/src/portal.properties">
+			<replacefilter
+				token="#upgrade.processes="
+
+				value="upgrade.processes="
+			/>
+			<replacefilter
+				token="#com.liferay.portal.upgrade.UpgradeProcess_"
+				value="com.liferay.portal.upgrade.UpgradeProcess_"
+			/>
+
+			<replacefilter
+				token="verify.frequency=0"
+				value="verify.frequency=1"
+			/>
+		</replace>
 	</target>
 
 	<target name="prepare-portal-ext-properties">
