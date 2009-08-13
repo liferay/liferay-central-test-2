@@ -55,20 +55,20 @@ public interface TaskInstanceInfo {
 
 	/**
 	 * If this task has been assigned to a role, it is returned by this method.
-	 *
-	 * @return the role id this task has been assigned to or <code>null</code>,
-	 *		   if not assigned yet
+	 * 
+	 * @return the role id this task has been assigned to or <code>0</code>, if
+	 *         not assigned yet
 	 */
-	public Long getAssignedRoleId();
+	public long getAssignedRoleId();
 
 	/**
 	 * If this task has been assigned to a specific user already, its user id is
 	 * being returned by this method, otherwise <code>null</code> is returned.
-	 *
-	 * @return the id of the user being assigned to this task or
-	 *		   <code>null</code> if not assigned yet
+	 * 
+	 * @return the id of the user being assigned to this task or <code>0</code>
+	 *         if not assigned yet
 	 */
-	public Long getAssignedUserId();
+	public long getAssignedUserId();
 
 	/**
 	 * Returns optional attributes of this task which are dependent on the

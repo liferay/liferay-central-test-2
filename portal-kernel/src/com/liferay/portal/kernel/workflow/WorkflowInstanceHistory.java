@@ -95,11 +95,11 @@ public interface WorkflowInstanceHistory {
 	 * also be created by the system (e.g. in an asynchronous thread processing
 	 * a job or branches), this method could return <code>null</code> or a
 	 * system user id, depending on the underlying engine.
-	 *
-	 * @return the user id creating this entry or <code>null</code>, if none
-	 *		   available
+	 * 
+	 * @return the user id creating this entry or <code>0</code>, if none
+	 *         available
 	 */
-	public Long getUserId();
+	public long getUserId();
 
 	/**
 	 * Returns the workflow instance id in relation to which this history entry

@@ -142,16 +142,16 @@ public interface WorkflowInstanceInfo {
 	 * If this workflow instance was created in relation of a domain object
 	 * instance, its identifier is returned by this method.
 	 * </p>
-	 *
+	 * 
 	 * <p>
 	 * <b><i>Note</i></b> The support of a related domain object however is
 	 * optional and might not be supported by the underlying engine.
 	 * </p>
-	 *
-	 * @return the domain object identifier, if related to one,
-	 *		   <code>null</code> otherwise
-	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
-	 *		   boolean) for more details about related domain objects
+	 * 
+	 * @return the domain object identifier, if related to one, <code>0</code>
+	 *         otherwise
+	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 *      boolean) for more details about related domain objects
 	 */
 	public long getRelationId();
 
