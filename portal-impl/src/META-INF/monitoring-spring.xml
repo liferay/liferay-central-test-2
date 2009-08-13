@@ -7,14 +7,13 @@
 >
 
 	<!-- Monitoring service -->
+
 	<bean id="portalStatistics" class="com.liferay.portal.monitoring.statistics.portal.ServerStatistics">
 		<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
-
 	<bean id="portletStatistics" class="com.liferay.portal.monitoring.statistics.portlet.ServerStatistics">
 		<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
-
 	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
 		<property name="dataSampleProcessors">
 			<map>
@@ -78,7 +77,6 @@
 			</bean>
 		</constructor-arg>
 	</bean>
-
 	<bean id="monitoringMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
