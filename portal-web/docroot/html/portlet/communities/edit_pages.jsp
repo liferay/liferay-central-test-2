@@ -158,22 +158,9 @@ else if (liveGroup.isUserGroup()) {
 	userGroup = UserGroupLocalServiceUtil.getUserGroup(liveGroup.getClassPK());
 }
 
-LayoutLister layoutLister = new LayoutLister();
-
-String rootNodeName = liveGroup.getName();
-
-if (liveGroup.isOrganization()) {
-	rootNodeName = organization.getName();
-}
-else if (liveGroup.isUser()) {
-	rootNodeName = selUser.getFullName();
-}
-else if (liveGroup.isUserGroup()) {
-	rootNodeName = userGroup.getName();
-}
+String tabs1Names = "public-pages,private-pages";
 
 boolean privateLayout = tabs1.equals("private-pages");
-String tabs1Names = "public-pages,private-pages";
 
 if (liveGroup.isUser()) {
 	boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(selUser.getUserId(), company.getCompanyId(), RoleConstants.POWER_USER, true);
@@ -192,8 +179,9 @@ if (liveGroup.isUser()) {
 	}
 
 	if (!publicLayoutsModifiable && privateLayoutsModifiable && !privateLayout) {
-		privateLayout = true;
 		tabs1 = "private-pages";
+
+		privateLayout = true;
 	}
 }
 
@@ -210,6 +198,20 @@ else {
 	if (group != null) {
 		pagesCount = group.getPublicLayoutsPageCount();
 	}
+}
+
+LayoutLister layoutLister = new LayoutLister();
+
+String rootNodeName = liveGroup.getName();
+
+if (liveGroup.isOrganization()) {
+	rootNodeName = organization.getName();
+}
+else if (liveGroup.isUser()) {
+	rootNodeName = selUser.getFullName();
+}
+else if (liveGroup.isUserGroup()) {
+	rootNodeName = userGroup.getName();
 }
 
 LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
@@ -485,11 +487,12 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	if (liveGroup.isUser()) {
 		PortletURL userTabs1URL = renderResponse.createRenderURL();
 
+		userTabs1URL.setWindowState(WindowState.MAXIMIZED);
+
 		userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
 		userTabs1URL.setParameter("tabs1", tabs1);
 		userTabs1URL.setParameter("backURL", backURL);
 		userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
-		userTabs1URL.setWindowState(WindowState.MAXIMIZED);
 
 		tabs1URL = userTabs1URL.toString();
 	}
