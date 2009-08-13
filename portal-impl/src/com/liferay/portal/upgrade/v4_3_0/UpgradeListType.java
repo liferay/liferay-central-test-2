@@ -24,11 +24,11 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_0.util.ListTypeTable;
 
 /**
  * <a href="UpgradeListType.java.html"><b><i>View Source</i></b></a>
@@ -53,9 +53,9 @@ public class UpgradeListType extends UpgradeProcess {
 		// ListType
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ListTypeImpl.TABLE_NAME, ListTypeImpl.TABLE_COLUMNS);
+			ListTypeTable.TABLE_NAME, ListTypeTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(ListTypeImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(ListTypeTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

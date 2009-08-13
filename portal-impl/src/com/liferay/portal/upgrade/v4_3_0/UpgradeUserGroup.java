@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -32,6 +31,7 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.UserGroupTable;
 
 /**
  * <a href="UpgradeUserGroup.java.html"><b><i>View Source</i></b></a>
@@ -59,10 +59,10 @@ public class UpgradeUserGroup extends UpgradeProcess {
 			"userGroupId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			UserGroupImpl.TABLE_NAME, UserGroupImpl.TABLE_COLUMNS,
+			UserGroupTable.TABLE_NAME, UserGroupTable.TABLE_COLUMNS,
 			upgradePKColumn);
 
-		upgradeTable.setCreateSQL(UserGroupImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(UserGroupTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

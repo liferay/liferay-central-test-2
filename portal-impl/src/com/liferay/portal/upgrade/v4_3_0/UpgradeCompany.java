@@ -23,12 +23,9 @@
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -36,6 +33,7 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
+import com.liferay.portal.upgrade.v4_3_0.util.CompanyTable;
 import com.liferay.portal.upgrade.v4_3_0.util.WebIdUtil;
 import com.liferay.portal.util.PortletKeys;
 
@@ -79,18 +77,18 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		// Delay checking of Lucene and Document Library. See LEP-3492.
 
-		for (int i = 0; i < companyIds.length; i++) {
+		/*for (int i = 0; i < companyIds.length; i++) {
 			long companyId = companyIds[i];
 
 			LuceneUtil.checkLuceneDir(companyId);
 
 			DLLocalServiceUtil.checkRoot(companyId);
-		}
+		}*/
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			CompanyImpl.TABLE_NAME, CompanyImpl.TABLE_COLUMNS);
+			CompanyTable.TABLE_NAME, CompanyTable.TABLE_COLUMNS);
 
-		upgradeTable.setCreateSQL(CompanyImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(CompanyTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
