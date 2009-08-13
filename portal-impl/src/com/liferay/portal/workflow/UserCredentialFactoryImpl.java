@@ -22,14 +22,12 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.UserCredentialFactory;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserServiceUtil;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
  * <a href="UserCredentialFactoryImpl.java.html"><b><i>View Source</i></b></a>
@@ -63,7 +61,7 @@ public class UserCredentialFactoryImpl implements UserCredentialFactory {
 			userCredential.setEmailAddress(user.getEmailAddress());
 			userCredential.setLocale(user.getLocale());
 			userCredential.setLogin(user.getLogin());
-			userCredential.setRoleIds(SetUtil.fromArray(roleIds));
+			userCredential.setRoleIds(SetUtil.fromArray(user.getRoleIds()));
 			userCredential.setScreenName(user.getScreenName());
 			userCredential.setUserId(user.getUserId());
 
