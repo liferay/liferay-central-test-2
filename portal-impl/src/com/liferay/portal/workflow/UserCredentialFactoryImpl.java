@@ -49,36 +49,29 @@ public class UserCredentialFactoryImpl implements UserCredentialFactory {
 	 */
 	public UserCredential createCredential(long userId)
 		throws WorkflowException {
-		// check for a valid user id
+
 		if (userId <= 0) {
 			return null;
 		}
 
 		try {
-			User user = UserServiceUtil.getUserById(userId);
+			User user = UserLocalServiceUtil.getUserById(userId);
+
 			UserCredential userCredential = new UserCredential();
 
 			userCredential.setCompanyId(user.getCompanyId());
 			userCredential.setEmailAddress(user.getEmailAddress());
 			userCredential.setLocale(user.getLocale());
 			userCredential.setLogin(user.getLogin());
+			userCredential.setRoleIds(SetUtil.fromArray(roleIds));
 			userCredential.setScreenName(user.getScreenName());
 			userCredential.setUserId(user.getUserId());
-
-			// create the role set
-			long[] roleIds = user.getRoleIds();
-			Set<Long> roleSet = new HashSet<Long>(roleIds.length);
-			for (long roleId : roleIds) {
-				roleSet.add(Long.valueOf(roleId));
-			}
-			userCredential.setRoleSet(roleSet);
 
 			return userCredential;
 		}
 		catch (Exception e) {
 			throw new WorkflowException(
-				"Could not request user information through UserService " +
-					"for user id [" + userId + "]");
+				"Error requesting user credentials for user id " + userId, e);
 		}
 	}
 

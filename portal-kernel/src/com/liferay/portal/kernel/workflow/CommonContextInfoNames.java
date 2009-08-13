@@ -30,6 +30,7 @@ package com.liferay.portal.kernel.workflow;
 public interface CommonContextInfoNames {
 
 	public String GROUP_ID = "GROUP_ID";
-	public String JOURNAL_ARTICLEID = "JOURNAL_ARTICLEID";
+
+	public String JOURNAL_ARTICLE_ID = "JOURNAL_ARTICLE_ID";
 
 }

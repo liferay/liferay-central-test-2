@@ -44,17 +44,6 @@ import java.util.Map;
 public interface WorkflowInstanceHistory {
 
 	/**
-	 * Returns the id (usually the primary key) of this history entry. It could
-	 * be used for sorting as the creation date and time could be in a different
-	 * order than the id (saving time). It will most likely be the same but if
-	 * parallel processing is done, the creation date and the saving id could
-	 * slightly be different.
-	 *
-	 * @return the id of the history entry
-	 */
-	public long getHistoryEntryId();
-
-	/**
 	 * Returns any additional data attached to this entry. The map and its
 	 * information is optional and depending on the underlying engine used. It
 	 * might support additional attributes of this history entry dependent on
@@ -79,6 +68,17 @@ public interface WorkflowInstanceHistory {
 	 * @return the description of this entry
 	 */
 	public String getDescription();
+
+	/**
+	 * Returns the id (usually the primary key) of this history entry. It could
+	 * be used for sorting as the creation date and time could be in a different
+	 * order than the id (saving time). It will most likely be the same but if
+	 * parallel processing is done, the creation date and the saving id could
+	 * slightly be different.
+	 *
+	 * @return the id of the history entry
+	 */
+	public long getHistoryEntryId();
 
 	/**
 	 * Returns the type of this entry, depending on the underlying engine.

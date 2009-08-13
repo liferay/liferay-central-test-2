@@ -157,18 +157,25 @@ public interface TaskInstanceManager {
 	 * </p>
 	 *
 	 * <p>
-	 * There are two possible strategies to model around tasks: <li>Completing a
-	 * task always moves on to the next node which could be a decision and hence
-	 * the information needed for the engine to execute the decision would have
-	 * been made by the user completing the task, adding those information to
-	 * the context of the workflow instance or to the domain object related to
-	 * it.</li> <li>Completing the task could list possible next activities to
-	 * the user he has to choose one from, so completing the task would be done
-	 * using this method by providing the name of the next activity to continue
-	 * with, so no additional information has to be stored within the context to
-	 * achieve the same goal, however, the documentation of the decision is only
-	 * available through the history not through structured information within
-	 * the workflow instance or its domain object instance.</li>
+	 * There are two possible strategies to model around tasks:
+	 * <li>
+	 * Completing a task always moves on to the next node which could be a
+	 * decision and hence the information needed for the engine to execute the
+	 * decision would have been made by the user completing the task, adding
+	 * those information to the context of the workflow instance or to the
+	 * domain object related to it.
+	 * </li>
+	 *
+	 * <li>
+	 * Completing the task could list possible next activities to the user he
+	 * has to choose one from, so completing the task would be done using this
+	 * method by providing the name of the next activity to continue with, so no
+	 * additional information has to be stored within the context to achieve the
+	 * same goal, however, the documentation of the decision is only available
+	 * through the history not through structured information within the
+	 * workflow instance or its domain object instance.
+	 * </li>
+	 *
 	 * </p>
 	 *
 	 * @param  taskInstanceId the id of the task instance to be completed
@@ -185,8 +192,8 @@ public interface TaskInstanceManager {
 	 *		   workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
-			long taskInstanceId, long userId, String activityName, String comment,
-			Map<String, Object> attributes)
+			long taskInstanceId, long userId, String activityName,
+			String comment, Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**

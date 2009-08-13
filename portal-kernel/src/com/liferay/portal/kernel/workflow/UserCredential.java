@@ -44,17 +44,12 @@ import java.util.Set;
  * @author Micha Kiener
  */
 public class UserCredential implements Serializable {
-	/**
-	 * The serialization id.
-	 */
-	private static final long serialVersionUID = -2223408262504608474L;
 
 	/**
 	 * Default constructor, just used for de-serialization, never for
 	 * construction.
 	 */
 	public UserCredential() {
-
 	}
 
 	/**
@@ -138,11 +133,11 @@ public class UserCredential implements Serializable {
 	}
 
 	/**
-	 * @param roleSet the set of roles the user of this credential is assigned
+	 * @param roleIds the set of roles the user of this credential is assigned
 	 *		  to
 	 */
-	public void setRoleSet(Set<Long> roleSet) {
-		_roleSet = roleSet;
+	public void setRoleIds(Set<Long> roleIds) {
+		_roleIds = roleIds;
 	}
 
 	/**
@@ -164,7 +159,7 @@ public class UserCredential implements Serializable {
 	private String _emailAddress;
 	private Locale _locale;
 	private String _login;
-	private Set<Long> _roleSet;
+	private Set<Long> _roleIds;
 	private String _screenName;
 	private long _userId;
 
