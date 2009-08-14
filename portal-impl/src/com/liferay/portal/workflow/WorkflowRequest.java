@@ -2,6 +2,7 @@
 package com.liferay.portal.workflow;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -68,15 +69,29 @@ public class WorkflowRequest implements Serializable {
 	protected UserCredential inspectForCallingUserCredential(
 		MethodInvocation invocation)
 		throws WorkflowException {
-		CallingUserId id =
-			invocation.getMethod().getAnnotation(CallingUserId.class);
-		if (id == null) {
+		Annotation[][] annotations =
+			invocation.getMethod().getParameterAnnotations();
+		if (annotations == null || annotations.length == 0) {
 			return null;
 		}
 
-		// get the calling user id as annotated and create a user credential out
-		// of it through the factory
-		return UserCredentialFactoryUtil.createCredential((Long) invocation.getArguments()[id.value()]);
+		// lookout for any annotations on the parameters, loop through and
+		// eventually find a CallingUserId annotation and if so, take this
+		// parameter as the calling user id and turn it into a credential
+		for (int ii = 0; ii < annotations.length; ii++) {
+			Annotation[] paramAnnotations = annotations[ii];
+			if (paramAnnotations != null && paramAnnotations.length > 0) {
+				for (int jj = 0; jj < paramAnnotations.length; jj++) {
+					if (CallingUserId.class.isAssignableFrom(paramAnnotations[jj].annotationType())) {
+						// get the calling user id as annotated and create a
+						// user credential out of it through the factory
+						return UserCredentialFactoryUtil.createCredential((Long) invocation.getArguments()[ii]);
+					}
+				}
+			}
+		}
+		
+		return null;
 	}
 
 	/**

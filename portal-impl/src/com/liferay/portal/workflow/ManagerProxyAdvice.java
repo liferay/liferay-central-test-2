@@ -48,11 +48,12 @@ public class ManagerProxyAdvice implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation)
 		throws Throwable {
 		try {
-			// create a request to be serialized through the event bus
+			// create a request out of the invocation information to be
+			// serialized through the event bus
 			WorkflowRequest request = new WorkflowRequest(invocation);
 			
-			// send the message over the event bus, invoke it on the target and
-			// return the result
+			// send the message over the event bus, the listener will then
+			// invoke it on the target and return the result
 			WorkflowResultContainer response =
 				(WorkflowResultContainer) ((BaseWorkflowProxy) invocation.getThis()).getMessageSender().send(
 					request);
