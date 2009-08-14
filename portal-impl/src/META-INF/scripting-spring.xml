@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+>
+	<bean id="com.liferay.portal.kernel.scripting.ScriptingUtil" class="com.liferay.portal.kernel.scripting.ScriptingUtil">
+		<property name="scripting">
+			<bean class="com.liferay.portal.kernel.scripting.proxy.ScriptingProxy" />
+		</property>
+	</bean>
+
+	<!-- Messaging -->
+
+	<bean id="destination.scripting" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/scripting" />
+	</bean>
+	<bean id="destination.scripting.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/scripting/response" />
+	</bean>
+	<bean id="messageListener.scripting" class="com.liferay.portal.kernel.scripting.messaging.ScriptingMessageListener">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portal.scripting.ScriptingImpl" />
+		</constructor-arg>
+	</bean>
+	<bean id="messageListener.scripting_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
+		<constructor-arg index="0">
+			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
+		</constructor-arg>
+	</bean>
+	<bean id="messagingConfigurator.scripting" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.scripting" />
+				<ref bean="destination.scripting.response" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+		<property name="messageListeners">
+			<map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/scripting">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.scripting" />
+						<ref bean="messageListener.scripting_cluster" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
