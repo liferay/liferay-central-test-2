@@ -55,8 +55,7 @@ public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Blogs"));
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//input[@value='Search Folders']"));
-		assertTrue(selenium.isElementPresent(
-				"link=SA1 Portlet1 Permissions1 Folder1"));
+		assertTrue(selenium.isTextPresent("Showing 0 results."));
+		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
 	}
 }

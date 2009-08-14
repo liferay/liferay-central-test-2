@@ -53,6 +53,23 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Portlet1 Temporary1 Entry1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Edit");
 
 		for (int second = 0;; second++) {

@@ -61,7 +61,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Show")) {
+				if (selenium.isVisible("link=Show")) {
 					break;
 				}
 			}
@@ -79,7 +79,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Hide")) {
+				if (selenium.isVisible("link=Hide")) {
 					break;
 				}
 			}
@@ -97,7 +97,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Show")) {
+				if (selenium.isVisible("link=Show")) {
 					break;
 				}
 			}

@@ -32,8 +32,41 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DefinePublisherRolesTest extends BaseTestCase {
 	public void testDefinePublisherRoles() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Roles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//tr[16]/td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//tr[16]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -54,7 +87,9 @@ public class DefinePublisherRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Add Permissions"));
-		assertTrue(selenium.isTextPresent("Publisher"));
+		assertEquals(RuntimeVariables.replace("Add Permissions"),
+			selenium.getText("//label"));
+		assertEquals(RuntimeVariables.replace("Publisher"),
+			selenium.getText("//strong"));
 	}
 }

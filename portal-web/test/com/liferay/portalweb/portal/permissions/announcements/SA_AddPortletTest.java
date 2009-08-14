@@ -52,23 +52,6 @@ public class SA_AddPortletTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
@@ -78,7 +61,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"News-Announcements\"]")) {
+							"//div[@id=\"News-Announcements\"]/p/a")) {
 					break;
 				}
 			}
@@ -96,7 +79,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Entries")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -105,5 +88,7 @@ public class SA_AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

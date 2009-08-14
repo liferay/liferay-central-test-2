@@ -53,7 +53,24 @@ public class Guest_ViewCommentsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Blogs Test Entry"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("CA Permissions Blogs Test Comment "));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertTrue(selenium.isTextPresent("CA Permissions Blogs Test Comment"));
 		assertTrue(selenium.isTextPresent(
 				"Member Permissions Blogs Test Comment"));
 	}

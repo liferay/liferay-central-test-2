@@ -54,6 +54,23 @@ public class Portlet_DeleteEntryTest extends BaseTestCase {
 				"Portlet1 Temporary1 Entry1"));
 		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/div[1]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()

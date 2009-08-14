@@ -55,6 +55,23 @@ public class SA_CleanUpTest extends BaseTestCase {
 						"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span"));
 				selenium.waitForPageToLoad("30000");
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//div[3]/ul/li[3]/span/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean ScopePagePresent = selenium.isElementPresent(
 						"link=Blogs Scope Permissions Page");
 
@@ -123,7 +140,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
+						if (selenium.isVisible(
 									"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/a/span")) {
 							break;
 						}
@@ -149,6 +166,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			case 6:
 				selenium.click(RuntimeVariables.replace("link=Guest"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.click(RuntimeVariables.replace(
 						"link=Blogs Permissions Page"));
 				selenium.waitForPageToLoad("30000");

@@ -32,10 +32,60 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CreateRolesTest extends BaseTestCase {
 	public void testCreateRoles() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Roles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Community Admin"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the CommunityAdmin Role."));
@@ -44,6 +94,23 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Community Admin"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Member"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Member Role."));
@@ -52,6 +119,23 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Member"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Portlet"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Portlet Role."));
@@ -60,6 +144,23 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Portlet"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Publisher Role."));
@@ -68,6 +169,23 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Publisher"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Scope"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Scope Role."));
@@ -76,6 +194,23 @@ public class CreateRolesTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Scope"));
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_128_name", RuntimeVariables.replace("Writer"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Writer Role."));

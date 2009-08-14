@@ -52,6 +52,23 @@ public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@id='_145_myPlacesContainer']/ul/li[6]/a/span"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 
@@ -61,7 +78,7 @@ public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
 					break;
 				}
@@ -75,14 +92,27 @@ public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_88_name_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Scope Permissions Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=Blogs Scope Permissions Page"));
 		selenium.click(RuntimeVariables.replace(
 				"link=Blogs Scope Permissions Page"));
 		selenium.waitForPageToLoad("30000");

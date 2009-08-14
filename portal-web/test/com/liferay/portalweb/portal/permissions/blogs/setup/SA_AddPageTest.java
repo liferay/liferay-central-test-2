@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddPageTest extends BaseTestCase {
 	public void testSA_AddPage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Welcome")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Welcome"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
@@ -57,6 +73,23 @@ public class SA_AddPageTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_88_name_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Permissions Page"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));

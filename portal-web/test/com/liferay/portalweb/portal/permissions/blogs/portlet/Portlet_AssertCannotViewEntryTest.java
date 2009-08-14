@@ -56,6 +56,23 @@ public class Portlet_AssertCannotViewEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("Portlet1 Temporary1 Entry1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));
 	}
 }

@@ -114,7 +114,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
+						if (selenium.isVisible(
 									"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/a/span")) {
 							break;
 						}
