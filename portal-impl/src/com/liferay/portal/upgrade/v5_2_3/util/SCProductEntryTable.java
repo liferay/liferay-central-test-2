@@ -25,40 +25,33 @@ package com.liferay.portal.upgrade.v5_2_3.util;
 import java.sql.Types;
 
 /**
- * <a href="TagsAssetTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductEntryTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsAssetTable {
+public class SCProductEntryTable {
 
-	public static final String TABLE_NAME = "TagsAsset";
+	public static final String TABLE_NAME = "SCProductEntry";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"assetId", new Integer(Types.BIGINT)},
+		{"productEntryId", new Integer(Types.BIGINT)},
 		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"visible", new Integer(Types.BOOLEAN)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"publishDate", new Integer(Types.TIMESTAMP)},
-		{"expirationDate", new Integer(Types.TIMESTAMP)},
-		{"mimeType", new Integer(Types.VARCHAR)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"summary", new Integer(Types.VARCHAR)},
-		{"url", new Integer(Types.VARCHAR)},
-		{"height", new Integer(Types.INTEGER)},
-		{"width", new Integer(Types.INTEGER)},
-		{"priority", new Integer(Types.DOUBLE)},
-		{"viewCount", new Integer(Types.INTEGER)}
+		{"name", new Integer(Types.VARCHAR)},
+		{"type_", new Integer(Types.VARCHAR)},
+		{"tags", new Integer(Types.VARCHAR)},
+		{"shortDescription", new Integer(Types.VARCHAR)},
+		{"longDescription", new Integer(Types.VARCHAR)},
+		{"pageURL", new Integer(Types.VARCHAR)},
+		{"author", new Integer(Types.VARCHAR)},
+		{"repoGroupId", new Integer(Types.VARCHAR)},
+		{"repoArtifactId", new Integer(Types.VARCHAR)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(255) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
 
 }

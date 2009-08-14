@@ -20,31 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3.util;
+package com.liferay.portal.upgrade.v5_2_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="TagsPropertyTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsPropertyTable {
+public class OrganizationTable {
 
-	public static final String TABLE_NAME = "TagsProperty";
+	public static final String TABLE_NAME = "Organization_";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"propertyId", new Integer(Types.BIGINT)},
+		{"organizationId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"entryId", new Integer(Types.BIGINT)},
-		{"key_", new Integer(Types.VARCHAR)},
-		{"value", new Integer(Types.VARCHAR)}
+		{"parentOrganizationId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"location", new Integer(Types.BOOLEAN)},
+		{"recursable", new Integer(Types.BOOLEAN)},
+		{"regionId", new Integer(Types.BIGINT)},
+		{"countryId", new Integer(Types.BIGINT)},
+		{"statusId", new Integer(Types.INTEGER)},
+		{"comments", new Integer(Types.VARCHAR)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,name VARCHAR(100) null,location BOOLEAN,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";
 
 }

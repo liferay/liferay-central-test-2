@@ -20,31 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3.util;
+package com.liferay.portal.upgrade.v5_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="TagsPropertyTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGImageTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsPropertyTable {
+public class IGImageTable {
 
-	public static final String TABLE_NAME = "TagsProperty";
+	public static final String TABLE_NAME = "IGImage";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"propertyId", new Integer(Types.BIGINT)},
+		{"uuid_", new Integer(Types.VARCHAR)},
+		{"imageId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"entryId", new Integer(Types.BIGINT)},
-		{"key_", new Integer(Types.VARCHAR)},
-		{"value", new Integer(Types.VARCHAR)}
+		{"folderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)},
+		{"smallImageId", new Integer(Types.BIGINT)},
+		{"largeImageId", new Integer(Types.BIGINT)},
+		{"custom1ImageId", new Integer(Types.BIGINT)},
+		{"custom2ImageId", new Integer(Types.BIGINT)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 
 }

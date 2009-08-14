@@ -20,31 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3.util;
+package com.liferay.portal.upgrade.v5_3_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="TagsPropertyTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsPropertyTable {
+public class SocialRelationTable {
 
-	public static final String TABLE_NAME = "TagsProperty";
+	public static final String TABLE_NAME = "SocialRelation";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"propertyId", new Integer(Types.BIGINT)},
+		{"uuid_", new Integer(Types.VARCHAR)},
+		{"relationId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"entryId", new Integer(Types.BIGINT)},
-		{"key_", new Integer(Types.VARCHAR)},
-		{"value", new Integer(Types.VARCHAR)}
+		{"createDate", new Integer(Types.BIGINT)},
+		{"userId1", new Integer(Types.BIGINT)},
+		{"userId2", new Integer(Types.BIGINT)},
+		{"ype_", new Integer(Types.INTEGER)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";
 
 }

@@ -25,40 +25,29 @@ package com.liferay.portal.upgrade.v5_2_3.util;
 import java.sql.Types;
 
 /**
- * <a href="TagsAssetTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookmarksEntryTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsAssetTable {
+public class BookmarksEntryTable {
 
-	public static final String TABLE_NAME = "TagsAsset";
+	public static final String TABLE_NAME = "BookmarksEntry";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"assetId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
+		{"uuid_", new Integer(Types.VARCHAR)},
+		{"entryId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"visible", new Integer(Types.BOOLEAN)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"publishDate", new Integer(Types.TIMESTAMP)},
-		{"expirationDate", new Integer(Types.TIMESTAMP)},
-		{"mimeType", new Integer(Types.VARCHAR)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"summary", new Integer(Types.VARCHAR)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
 		{"url", new Integer(Types.VARCHAR)},
-		{"height", new Integer(Types.INTEGER)},
-		{"width", new Integer(Types.INTEGER)},
-		{"priority", new Integer(Types.DOUBLE)},
-		{"viewCount", new Integer(Types.INTEGER)}
+		{"comments", new Integer(Types.VARCHAR)},
+		{"visits", new Integer(Types.INTEGER)},
+		{"priority", new Integer(Types.INTEGER)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsAsset (assetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 
 }

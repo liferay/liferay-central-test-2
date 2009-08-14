@@ -20,31 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3.util;
+package com.liferay.portal.upgrade.v5_0_0.util;
 
 import java.sql.Types;
 
 /**
- * <a href="TagsPropertyTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCProductVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class TagsPropertyTable {
+public class SCProductVersionTable {
 
-	public static final String TABLE_NAME = "TagsProperty";
+	public static final String TABLE_NAME = "SCProductVersion";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"propertyId", new Integer(Types.BIGINT)},
+		{"productVersionId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
 		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"entryId", new Integer(Types.BIGINT)},
-		{"key_", new Integer(Types.VARCHAR)},
-		{"value", new Integer(Types.VARCHAR)}
+		{"productEntryId", new Integer(Types.BIGINT)},
+		{"version", new Integer(Types.VARCHAR)},
+		{"changeLog", new Integer(Types.VARCHAR)},
+		{"downloadPageURL", new Integer(Types.VARCHAR)},
+		{"directDownloadURL", new Integer(Types.VARCHAR)},
+		{"repoStoreArtifact", new Integer(Types.BOOLEAN)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table TagsProperty (propertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,entryId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL VARCHAR(2000) null,repoStoreArtifact BOOLEAN)";
 
 }
