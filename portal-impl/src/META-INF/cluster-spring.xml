@@ -6,7 +6,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<bean id="com.liferay.portal.kernel.cluster.ClusterLink" class="com.liferay.portal.cluster.ClusterLinkImpl">
+	<bean id="com.liferay.portal.kernel.cluster.ClusterLink" class="com.liferay.portal.cluster.ClusterLinkImpl" destroy-method="destory">
 		<property name="clusterForwardMessageListener">
 			<bean class="com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener" />
 		</property>
