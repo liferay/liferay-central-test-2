@@ -35,10 +35,10 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.RatingsEntryTable;
-import com.liferay.portal.upgrade.v4_3_0.util.RatingsStatsTable;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
+import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 
 import java.sql.Types;
 
@@ -86,22 +86,22 @@ public class UpgradeRatings extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			RatingsEntryTable.TABLE_NAME, RatingsEntryTable.TABLE_COLUMNS,
+			RatingsEntryImpl.TABLE_NAME, RatingsEntryImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("entryId", false), upgradeUserIdColumn,
 			classNameIdColumn, upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(RatingsEntryTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(RatingsEntryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// RatingsStats
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			RatingsStatsTable.TABLE_NAME, RatingsStatsTable.TABLE_COLUMNS,
+			RatingsStatsImpl.TABLE_NAME, RatingsStatsImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("statsId", false), classNameIdColumn,
 			upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(RatingsStatsTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(RatingsStatsImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

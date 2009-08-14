@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.v4_3_0;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -34,7 +35,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.PortletPreferencesTable;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsOwnerTypeUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.PrefsPlidUpgradeColumnImpl;
@@ -89,7 +89,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		Object[][] preferencesColumns1 =
 			{{"layoutId", new Integer(Types.VARCHAR)}};
 		Object[][] preferencesColumns2 =
-			PortletPreferencesTable.TABLE_COLUMNS.clone();
+			PortletPreferencesImpl.TABLE_COLUMNS.clone();
 
 		Object[][] preferencesColumns = ArrayUtil.append(
 			preferencesColumns1, preferencesColumns2);
@@ -119,13 +119,13 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 			AvailableMappersUtil.getWikiNodeIdMapper());
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PortletPreferencesTable.TABLE_NAME, preferencesColumns,
+			PortletPreferencesImpl.TABLE_NAME, preferencesColumns,
 			new PKUpgradeColumnImpl("portletPreferencesId", false),
 			upgradeOwnerIdColumn, upgradeOwnerTypeColumn, upgradeLayoutIdColumn,
 			upgradePlidColumn, upgradePortletIdColumn,
 			upgradePreferencesColumn);
 
-		String createSQL = PortletPreferencesTable.TABLE_SQL_CREATE;
+		String createSQL = PortletPreferencesImpl.TABLE_SQL_CREATE;
 
 		createSQL =
 			createSQL.substring(0, createSQL.length() - 1) +

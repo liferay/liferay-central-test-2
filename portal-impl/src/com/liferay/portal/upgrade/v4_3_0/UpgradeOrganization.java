@@ -24,6 +24,9 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
+import com.liferay.portal.model.impl.OrgLaborImpl;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -34,9 +37,6 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.OrgGroupPermissionTable;
-import com.liferay.portal.upgrade.v4_3_0.util.OrgLaborTable;
-import com.liferay.portal.upgrade.v4_3_0.util.OrganizationTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 
 /**
@@ -65,10 +65,10 @@ public class UpgradeOrganization extends UpgradeProcess {
 			"organizationId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			OrganizationTable.TABLE_NAME, OrganizationTable.TABLE_COLUMNS,
+			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
 			upgradePKColumn);
 
-		upgradeTable.setCreateSQL(OrganizationTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(OrganizationImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -82,7 +82,7 @@ public class UpgradeOrganization extends UpgradeProcess {
 				"parentOrganizationId", organizationIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			OrganizationTable.TABLE_NAME, OrganizationTable.TABLE_COLUMNS,
+			OrganizationImpl.TABLE_NAME, OrganizationImpl.TABLE_COLUMNS,
 			upgradeParentOrganizationIdColumn);
 
 		upgradeTable.updateTable();
@@ -93,10 +93,10 @@ public class UpgradeOrganization extends UpgradeProcess {
 		// OrgGroupPermission
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgGroupPermissionTable.TABLE_NAME,
-			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeOrganizationIdColumn);
+			OrgGroupPermissionImpl.TABLE_NAME,
+			OrgGroupPermissionImpl.TABLE_COLUMNS, upgradeOrganizationIdColumn);
 
-		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(OrgGroupPermissionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -105,10 +105,10 @@ public class UpgradeOrganization extends UpgradeProcess {
 		upgradePKColumn = new PKUpgradeColumnImpl("orgLaborId", true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			OrgLaborTable.TABLE_NAME, OrgLaborTable.TABLE_COLUMNS,
+			OrgLaborImpl.TABLE_NAME, OrgLaborImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeOrganizationIdColumn);
 
-		upgradeTable.setCreateSQL(OrgLaborTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(OrgLaborImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -35,7 +36,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.SubscriptionTable;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 
@@ -86,11 +86,11 @@ public class UpgradeSubscription extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SubscriptionTable.TABLE_NAME, SubscriptionTable.TABLE_COLUMNS,
+			SubscriptionImpl.TABLE_NAME, SubscriptionImpl.TABLE_COLUMNS,
 			new PKUpgradeColumnImpl("subscriptionId", false),
 			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(SubscriptionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SubscriptionImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

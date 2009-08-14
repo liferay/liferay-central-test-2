@@ -33,7 +33,7 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.BlogsEntryTable;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import java.sql.Types;
 
@@ -71,10 +71,10 @@ public class UpgradeBlogs extends UpgradeProcess {
 			"entryId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			BlogsEntryTable.TABLE_NAME, BlogsEntryTable.TABLE_COLUMNS,
+			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(BlogsEntryTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(BlogsEntryImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -37,7 +38,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassNameIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKContainer;
 import com.liferay.portal.upgrade.v4_3_0.util.ClassPKUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.PhoneTable;
 import com.liferay.portal.upgrade.v4_3_0.util.ValueMapperUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -96,10 +96,10 @@ public class UpgradePhone extends UpgradeProcess {
 			classNameIdColumn, classPKContainers);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			PhoneTable.TABLE_NAME, PhoneTable.TABLE_COLUMNS, upgradePKColumn,
+			PhoneImpl.TABLE_NAME, PhoneImpl.TABLE_COLUMNS, upgradePKColumn,
 			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
-		upgradeTable.setCreateSQL(PhoneTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(PhoneImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 

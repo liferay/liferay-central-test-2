@@ -34,11 +34,11 @@ import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.v4_3_0.util.AvailableMappersUtil;
-import com.liferay.portal.upgrade.v4_3_0.util.IGFolderTable;
 import com.liferay.portal.upgrade.v4_3_0.util.IGImageIdUpgradeColumnImpl;
-import com.liferay.portal.upgrade.v4_3_0.util.IGImageTable;
 import com.liferay.portal.upgrade.v4_3_0.util.IGLargeImageIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.IGSmallImageIdUpgradeColumnImpl;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 
 import java.sql.Types;
 
@@ -79,10 +79,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			"folderId", true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			IGFolderTable.TABLE_NAME, IGFolderTable.TABLE_COLUMNS,
+			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
-		upgradeTable.setCreateSQL(IGFolderTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(IGFolderImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
@@ -95,7 +95,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			"parentFolderId", folderIdMapper);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			IGFolderTable.TABLE_NAME, IGFolderTable.TABLE_COLUMNS,
+			IGFolderImpl.TABLE_NAME, IGFolderImpl.TABLE_COLUMNS,
 			upgradeParentFolderIdColumn);
 
 		upgradeTable.updateTable();
@@ -119,12 +119,12 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				AvailableMappersUtil.getImageIdMapper());
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			IGImageTable.TABLE_NAME, IGImageTable.TABLE_COLUMNS,
+			IGImageImpl.TABLE_NAME, IGImageImpl.TABLE_COLUMNS,
 			upgradeCompanyIdColumn, upgradeImageIdColumn, upgradeUserIdColumn,
 			upgradeFolderIdColumn, upgradeSmallImageIdColumn,
 			upgradeLargeImageIdColumn);
 
-		upgradeTable.setCreateSQL(IGImageTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(IGImageImpl.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
