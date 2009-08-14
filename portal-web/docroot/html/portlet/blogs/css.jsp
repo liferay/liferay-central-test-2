@@ -140,10 +140,6 @@
 	padding-right: 10px;
 }
 
-.portlet-blogs .taglib-ratings.stars {
-	margin-top: 0.5em;
-}
-
 .portlet-blogs .taglib-social-bookmarks {
 	clear: both;
 	margin-top: 1.5em;

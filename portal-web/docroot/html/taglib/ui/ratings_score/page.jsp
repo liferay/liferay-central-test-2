@@ -42,17 +42,24 @@ String scoreString = numberFormat.format(score);
 		<%= scoreString %> Stars
 	</c:when>
 	<c:otherwise>
-		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating" onmouseover="Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars')">
-			<img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" class="no-png-fix" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
-		</div>
+		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating"></div>
 
 		<script type="text/javascript">
-			<%= randomNamespace %>averageRatingObj = new Liferay.Portal.StarRating(
-				"<%= randomNamespace %>averageRating",
-				{
-					displayOnly: true,
-					rating: <%= MathUtil.format(score, 1, 1) %>
+			AUI().ready('rating', function(A) {
+				var ratingScore = new A.Rating({
+					boundingBox: '#<%= randomNamespace %>averageRating',
+					defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
+					disabled: true
 				});
+
+				var ratingBoundingBox = A.Node.getDOMNode(ratingScore.get('boundingBox'));
+
+				jQuery(ratingBoundingBox).mouseover(
+					function(event) {
+						Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars');
+					}
+				);
+			});
 		</script>
 	</c:otherwise>
 </c:choose>
