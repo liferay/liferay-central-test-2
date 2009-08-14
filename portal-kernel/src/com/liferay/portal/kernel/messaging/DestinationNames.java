@@ -76,11 +76,6 @@ public interface DestinationNames {
 	public static final String SCHEDULER_RESPONSE =
 		"liferay/scheduler/response";
 
-	public static final String SCRIPTING = "liferay/scripting";
-
-	public static final String SCRIPTING_RESPONSE =
-		"liferay/scripting/response";
-	
 	public static final String SEARCH_READER = "liferay/search_reader";
 
 	public static final String SEARCH_READER_RESPONSE =
