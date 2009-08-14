@@ -423,7 +423,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 					</td>
 				</tr>
 
-				<c:if test="<%= (treeWalker == null) || ((i + 1) < messages.size()) %>">
+				<c:if test="<%= i < messages.size() %>">
 					<tr>
 						<td colspan="2">
 							<div class="separator"><!-- --></div>
