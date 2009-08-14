@@ -147,14 +147,16 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 						<%
 						for (WikiPage childPage : childPages) {
-							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
-							request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
-							request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
+							if (Validator.isNull(childPage.getRedirectTitle())) {
+								request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
+								request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
+								request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
 						%>
 
-							<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+								<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
 
 						<%
+							}
 						}
 						%>
 
