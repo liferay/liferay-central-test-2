@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * <a href="PortalClassInvoker.java.html"><b><i>View Source</i></b></a>
  *
@@ -114,6 +116,9 @@ public class PortalClassInvoker {
 				className, methodName, args);
 
 			return MethodInvoker.invoke(methodWrapper, newInstance);
+		}
+		catch (InvocationTargetException ite) {
+			throw (Exception)ite.getCause();
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
