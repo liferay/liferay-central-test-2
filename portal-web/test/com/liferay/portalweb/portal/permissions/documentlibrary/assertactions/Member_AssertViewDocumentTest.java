@@ -56,6 +56,23 @@ public class Member_AssertViewDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Edited Test Document.txt"));
 	}

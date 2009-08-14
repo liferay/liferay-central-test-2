@@ -34,51 +34,115 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 	public void testMember_AssertCannotEditPermissions()
 		throws Exception {
-		int label = 1;
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Edited Test Folder"));
+		selenium.waitForPageToLoad("30000");
 
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Permissions Test Page"));
-				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent("link=Permissions"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Permissions Edited Test Folder"));
-				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent("link=Permissions"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Permissions Test Subfolder"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=View"));
-				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isElementPresent("link=Permissions"));
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Permissions Test Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"link=Permissions2 Test2 Subfolder2"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean MemberDLActionBar = selenium.isElementPresent(
-						"//strong/span");
-
-				if (!MemberDLActionBar) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click("//strong/span");
-				selenium.click(RuntimeVariables.replace("link=Permissions"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.isTextPresent(
-						"You do not have the required permissions."));
-
-			case 2:
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions Test Subfolder"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("link=Permissions"));
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Subfolder2"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You do not have the required permissions."));
 	}
 }

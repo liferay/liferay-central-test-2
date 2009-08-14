@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CA_EditPermissionsTest</title>
+<title>SA_EditPermissionsTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">CA_EditPermissionsTest</td></tr>
+<tr><td rowspan="1" colspan="3">SA_EditPermissionsTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -19,18 +19,43 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Permissions']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>check</td>
+	<td>15_ACTION_VIEW</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Submit']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//td[4]/ul/li/strong</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//td[4]/ul/li/strong</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[2]/a</td>
+	<td>//div[5]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[2]/a</td>
+	<td>//div[5]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -56,6 +81,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Permissions Edited Test Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -96,6 +126,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Permissions Edited Test Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,6 +139,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[5]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//strong/span</td>
 	<td></td>
@@ -136,6 +176,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[4]/td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -145,12 +190,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[2]/a</td>
+	<td>//div[5]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[2]/a</td>
+	<td>//div[5]/ul/li[3]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -176,6 +221,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Permissions2 Test2 Folder2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -219,8 +269,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Permissions2 Test2 Subfolder2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[5]/span/a</td>
 	<td></td>
 </tr>
 <tr>

@@ -51,6 +51,7 @@ public class Portlet_MyCommunityControlPanelTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 			case 2:
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));

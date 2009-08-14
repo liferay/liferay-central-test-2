@@ -61,9 +61,43 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Portlet2 Temporary2 Folder2"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//li[4]/span/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Add Shortcut']"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//li[5]/span/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("//input[@value='Select']");
 				selenium.waitForPopUp("toGroup",
 					RuntimeVariables.replace("30000"));
@@ -107,6 +141,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				Thread.sleep(5000);
 				selenium.click(RuntimeVariables.replace("link=Document Home"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean FolderPresent1 = selenium.isElementPresent(
 						"link=My1 Community1 Folder1");
@@ -137,6 +172,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 
 				boolean DocumentPresent1 = selenium.isElementPresent(
 						"link=My1 Community1 Document1.txt");
+				Thread.sleep(5000);
 
 				if (DocumentPresent1) {
 					label = 5;

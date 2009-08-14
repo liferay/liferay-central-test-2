@@ -24,8 +24,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[4]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Shortcut']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[5]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -134,6 +144,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('link=My1 Community1 Folder1'))</td>
 	<td>FolderPresent1</td>
@@ -177,6 +192,11 @@
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('link=My1 Community1 Document1.txt'))</td>
 	<td>DocumentPresent1</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>gotoIf</td>

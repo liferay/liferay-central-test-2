@@ -141,7 +141,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 4:
-				selenium.click("_145_addApplication");
+				selenium.click("link=Application");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

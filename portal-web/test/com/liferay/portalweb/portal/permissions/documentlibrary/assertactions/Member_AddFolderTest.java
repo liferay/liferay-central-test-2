@@ -26,13 +26,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="Member_AssertCannotAddFoldersTest.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="Member_AddFolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class Member_AssertCannotAddFoldersTest extends BaseTestCase {
-	public void testMember_AssertCannotAddFolders() throws Exception {
+public class Member_AddFolderTest extends BaseTestCase {
+	public void testMember_AddFolder() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -53,6 +52,33 @@ public class Member_AssertCannotAddFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_20_name",
+			RuntimeVariables.replace("Member1 Temporary1 Folder1"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("Member1 Temporary1 Folder1"),
+			selenium.getText("//b"));
 	}
 }

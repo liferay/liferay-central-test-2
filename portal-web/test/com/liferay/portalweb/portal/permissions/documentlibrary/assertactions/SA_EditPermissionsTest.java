@@ -26,12 +26,12 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="CA_EditPermissionsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SA_EditPermissionsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CA_EditPermissionsTest extends BaseTestCase {
-	public void testCA_EditPermissions() throws Exception {
+public class SA_EditPermissionsTest extends BaseTestCase {
+	public void testSA_EditPermissions() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -52,6 +52,31 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("//input[@value='Permissions']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.check("15_ACTION_VIEW");
+		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Document Library Permissions Test Page"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[4]/ul/li/strong")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//td[4]/ul/li/strong");
 
 		for (int second = 0;; second++) {
@@ -60,7 +85,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -70,7 +95,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
@@ -83,6 +108,23 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -114,9 +156,43 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -145,6 +221,23 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Document Library Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//tr[4]/td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -153,7 +246,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -163,7 +256,7 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("15_ACTION_VIEW");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
@@ -176,6 +269,23 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -207,9 +317,43 @@ public class CA_EditPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {

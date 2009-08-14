@@ -62,6 +62,23 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		assertFalse(selenium.isElementPresent("//input[@value='Add Image']"));
 		selenium.click(RuntimeVariables.replace(
@@ -69,6 +86,23 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Recent Images"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
 	}
 }

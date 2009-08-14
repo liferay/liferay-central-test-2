@@ -55,9 +55,43 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -88,7 +122,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Folders")) {
+				if (selenium.isElementPresent("link=Document Home")) {
 					break;
 				}
 			}
@@ -98,8 +132,6 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Document Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
@@ -117,6 +149,23 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Edited Test Document.txt"));
 		selenium.click("//strong/span");
@@ -149,7 +198,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Folders")) {
+				if (selenium.isElementPresent("link=Document Home")) {
 					break;
 				}
 			}
@@ -159,8 +208,6 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
-		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Document Home"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
@@ -178,6 +225,23 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Edited Test Document.txt"));
 	}

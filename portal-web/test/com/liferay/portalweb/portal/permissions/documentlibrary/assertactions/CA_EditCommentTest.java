@@ -55,9 +55,43 @@ public class CA_EditCommentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Edited Test Folder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -80,7 +114,24 @@ public class CA_EditCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Comments"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[4]/span/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +151,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 
 		selenium.typeKeys("_20_editReplyBody1",
 			RuntimeVariables.replace(
-				"I am a Community Admin and I can write comments!"));
+				"I am a Communit Admin and I can write comments!"));
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Community Admin and I can write comments!\nThis is an edited comment."));

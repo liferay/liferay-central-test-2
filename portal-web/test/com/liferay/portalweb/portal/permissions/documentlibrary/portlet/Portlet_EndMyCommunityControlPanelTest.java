@@ -52,6 +52,7 @@ public class Portlet_EndMyCommunityControlPanelTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Back to My Community"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 			case 2:
 				selenium.click(RuntimeVariables.replace(

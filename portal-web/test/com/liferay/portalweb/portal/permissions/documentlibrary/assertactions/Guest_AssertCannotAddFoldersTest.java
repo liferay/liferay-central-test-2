@@ -57,10 +57,44 @@ public class Guest_AssertCannotAddFoldersTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Folder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		selenium.click(RuntimeVariables.replace(
 				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 	}
 }

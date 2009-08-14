@@ -60,7 +60,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -70,8 +70,25 @@ public class CA_EditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_20_name",
 			RuntimeVariables.replace("Permissions Edited Test Folder"));
 		selenium.type("_20_name",

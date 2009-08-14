@@ -52,6 +52,23 @@ public class CA_EditFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Image Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//tr[4]/td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -72,6 +89,23 @@ public class CA_EditFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("Edited Image Permissions Folder 2"));
 		selenium.type("_31_name",

@@ -74,6 +74,23 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Edited2 Portlet2 Temporary2 Folder2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Portlet_AddDocumentTest</title>
+<title>Member_AddFolderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Portlet_AddDocumentTest</td></tr>
+<tr><td rowspan="1" colspan="3">Member_AddFolderTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
@@ -20,7 +20,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Portlet2 Temporary2 Folder2</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,29 +29,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//input[@value='Add Document']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Use the classic uploader.</td>
-	<td></td>
-</tr>
-<tr>
 	<td>type</td>
-	<td>_20_file</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portal\permissions\documentlibrary\portlet\Portlet_TestDocument.txt</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_20_title</td>
-	<td>Portlet1 Portlet1 Permissions1 Document1</td>
+	<td>_20_name</td>
+	<td>Member1 Temporary1 Folder1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -64,9 +44,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Portlet1 Portlet1 Permissions1 Document1.txt</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//b</td>
+	<td>Member1 Temporary1 Folder1</td>
 </tr>
 
 </tbody></table>

@@ -51,9 +51,43 @@ public class Portlet_AddMyCommunityFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Document Library"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Subfolder']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_20_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_20_name",
 			RuntimeVariables.replace("My1 Community1 Folder1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

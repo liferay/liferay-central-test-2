@@ -65,7 +65,8 @@ public class AssertActionsTests extends BaseTests {
 		testSuite.addTestSuite(Member_AddCommentTest.class);
 		testSuite.addTestSuite(Member_EditCommentTest.class);
 		testSuite.addTestSuite(Member_AssertDeleteCommentTest.class);
-		testSuite.addTestSuite(Member_AssertCannotAddFoldersTest.class);
+		testSuite.addTestSuite(Member_AddFolderTest.class);
+		testSuite.addTestSuite(Member_DeleteFolderTest.class);
 		testSuite.addTestSuite(Member_AssertCannotEditFoldersTest.class);
 		testSuite.addTestSuite(Member_AssertCannotDeleteFoldersTest.class);
 		testSuite.addTestSuite(Member_AssertCannotEditUserCommentsTest.class);
@@ -78,9 +79,9 @@ public class AssertActionsTests extends BaseTests {
 		testSuite.addTestSuite(Member_AssertCannotEditConfigurationTest.class);
 		testSuite.addTestSuite(Member_AssertCannotRemovePortletTest.class);
 		testSuite.addTestSuite(Member_LogoutTest.class);
-		testSuite.addTestSuite(CA_LoginTest.class);
-		testSuite.addTestSuite(CA_EditPermissionsTest.class);
-		testSuite.addTestSuite(CA_LogoutTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_EditPermissionsTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertNotSignedInTest.class);
 		testSuite.addTestSuite(Guest_AssertViewFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertViewDocumentsTest.class);

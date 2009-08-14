@@ -38,7 +38,6 @@ public class PortletTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(SA_LoginTest.class);
-
 		testSuite.addTestSuite(SA_RemoveViewPortletPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);

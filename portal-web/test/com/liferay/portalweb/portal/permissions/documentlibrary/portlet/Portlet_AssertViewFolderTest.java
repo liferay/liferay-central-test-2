@@ -58,6 +58,23 @@ public class Portlet_AssertViewFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent(
 				"You do not have the required permissions."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Document Home"),
 			selenium.getText("//div[3]/ul/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),

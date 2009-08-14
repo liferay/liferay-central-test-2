@@ -57,6 +57,23 @@ public class SA_AllowDeleteCommentPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=SA1 Portlet1 Permissions1 Folder1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -77,6 +94,23 @@ public class SA_AllowDeleteCommentPermissionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.check("//tr[7]/td[4]/input");
 		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
 		selenium.waitForPageToLoad("30000");
