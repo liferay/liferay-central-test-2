@@ -72,6 +72,7 @@ public interface TaskInstanceManager {
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
+	@CallingUserId(4)
 	public TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, long callingUserId)
@@ -96,6 +97,7 @@ public interface TaskInstanceManager {
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
+	@CallingUserId(4)
 	public TaskInstanceInfo assignTaskInstanceToUser(
 			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes, long callingUserId)
@@ -143,6 +145,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if completing the task failed or the
 	 *		   workflow could not be continued
 	 */
+	@CallingUserId(1)
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String comment,
 			Map<String, Object> attributes)
@@ -191,6 +194,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if completing the task failed or the
 	 *		   workflow could not be continued
 	 */
+	@CallingUserId(1)
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, long userId, String activityName,
 			String comment, Map<String, Object> attributes)
@@ -220,6 +224,7 @@ public interface TaskInstanceManager {
 	 *		   the given task
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
+	@CallingUserId(1)
 	public List<String> getPossibleNextActivityNames(
 			long taskInstanceId, long userId)
 		throws WorkflowException;

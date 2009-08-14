@@ -72,6 +72,7 @@ public interface WorkflowDefinitionManager {
 	 * @throws WorkflowException is thrown, if deployment of the definition
 	 *		   failed
 	 */
+	@CallingUserId(1)
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId)
 		throws WorkflowException;

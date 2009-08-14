@@ -108,6 +108,7 @@ public interface WorkflowInstanceManager {
 	 * @return the list of activity names possible to be signaled
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
+	@CallingUserId(1)
 	public List<String> getPossibleNextActivityNames(
 			long workflowInstanceId, long userId)
 		throws WorkflowException;
@@ -336,6 +337,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if triggering the next activity
 	 *		   failed
 	 */
+	@CallingUserId(2)
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
 			long callingUserId)
@@ -377,6 +379,7 @@ public interface WorkflowInstanceManager {
 	 *		   the activity was not found or is not executable due to the
 	 *		   current state of the instance
 	 */
+	@CallingUserId(3)
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, long callingUserId)
@@ -403,6 +406,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@CallingUserId(3)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, long callingUserId)
@@ -433,6 +437,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@CallingUserId(3)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, long callingUserId,
@@ -474,6 +479,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@CallingUserId(5)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			String relationType, long relationId, Map<String, Object> context,
@@ -516,6 +522,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@CallingUserId(5)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			String relationType, long relationId, Map<String, Object> context,
