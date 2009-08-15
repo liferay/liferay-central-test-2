@@ -1616,16 +1616,20 @@ fieldset:last-child, .aui-form fieldset:last-child {
 /* ---------- Taglib ratings ---------- */
 
 .taglib-ratings.stars {
+	overflow: hidden;
 	padding-top: 10px;
-	height: 35px;
 }
 
 .taglib-ratings.stars .liferay-rating-score {
 	padding-left: 15px;
 }
 
+.taglib-ratings .aui-rating-content {
+	display: block;
+}
+
 .taglib-ratings.stars .liferay-rating-vote, .taglib-ratings.stars .liferay-rating-score {
-	height: 35px;
+	float: left;
 }
 
 .taglib-ratings.score {
@@ -1637,7 +1641,6 @@ fieldset:last-child, .aui-form fieldset:last-child {
 }
 
 .taglib-ratings.thumbs .aui-thumbrating .aui-rating-label-element {
-	font-size: 11px;
 	padding: 0 5px;
 }
 

@@ -45,21 +45,27 @@ String scoreString = numberFormat.format(score);
 		<div class="taglib-ratings score" id="<%= randomNamespace %>averageRating"></div>
 
 		<script type="text/javascript">
-			AUI().ready('rating', function(A) {
-				var ratingScore = new A.Rating({
-					boundingBox: '#<%= randomNamespace %>averageRating',
-					defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
-					disabled: true
-				});
+			AUI().ready(
+				'rating',
+				function(A) {
+					var ratingScore = new A.Rating(
+						{
+							boundingBox: '#<%= randomNamespace %>averageRating',
+							defaultSelected: <%= MathUtil.format(score, 1, 1) %>,
+							disabled: true
+						}
+					);
 
-				var ratingBoundingBox = A.Node.getDOMNode(ratingScore.get('boundingBox'));
+					ratingScore.get('boundingBox').on(
+						'mouseenter',
+						function(event) {
+							var el = A.Node.getDOMNode(event.currentTarget);
 
-				jQuery(ratingBoundingBox).mouseover(
-					function(event) {
-						Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars');
-					}
-				);
-			});
+							Liferay.Portal.ToolTip.show(event, el, '<%= scoreString %> Stars');
+						}
+					);
+				}
+			);
 		</script>
 	</c:otherwise>
 </c:choose>

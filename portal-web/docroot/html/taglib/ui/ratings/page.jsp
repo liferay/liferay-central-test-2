@@ -56,153 +56,190 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() %>">
-<div class="taglib-ratings <%= type %>">
-	<c:choose>
-		<c:when test='<%= type.equals("stars") %>'>
-			<span class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar"></span>
-			<span class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></span>
-		</c:when>
-		<c:when test='<%= type.equals("thumbs") %>'>
-			<c:choose>
-				<c:when test='<%= themeDisplay.isSignedIn() %>'>
-					<div id="<%= randomNamespace %>ratingThumb">
-						<input name="<%= randomNamespace %>ratingThumb" title="Good" type="hidden" value="up" />
-						<input name="<%= randomNamespace %>ratingThumb" title="Bad" type="hidden" value="down" />
-					</div>
-				</c:when>
-				<c:otherwise>
-					<a href="<%= themeDisplay.getURLSignIn() %>"><liferay-ui:message key="sign-in-to-vote" /></a>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-	</c:choose>
-</div>
-
-<script type="text/javascript">
-	AUI().ready('io-base', 'json', 'rating', 'substitute', function(A) {
-		var _getLabel = function(desc, totalEntries) {
-			var labelScoreTmpl = '{desc} ({totalEntries} {voteLabel})';
-			var voteLabel = (totalEntries == 1) ? '<%= UnicodeLanguageUtil.get(pageContext, "vote") %>' : '<%= UnicodeLanguageUtil.get(pageContext, "votes") %>';
-
-			return A.substitute(labelScoreTmpl, { desc: desc, totalEntries: totalEntries, voteLabel: voteLabel });
-		};
-
-		var _sendVoteRequest = function(url, score, callback) {
-			var params = jQuery.param(
-				{
-					className: '<%= className %>',
-					classPK: '<%= classPK %>',
-					p_l_id: '<%= themeDisplay.getPlid() %>',
-					score: score
-				}
-			);
-
-			A.io(url, {
-				method: 'POST',
-				data: params,
-				on: { success: callback }
-			});
-		};
-
-		var _showScoreTooltip = function(event) {
-			var stars = ratingScore.get('selectedIndex') + 1;
-			var message = (stars == 1) ? ' <%= UnicodeLanguageUtil.get(pageContext, "star") %>' : ' <%= UnicodeLanguageUtil.get(pageContext, "stars") %>';
-
-			Liferay.Portal.ToolTip.show(event, this, stars + message);
-		};
-
-		var _fixScore = function(score) {
-			return (score == 1) ? '+1' : (score + '');
-		};
-
-		var _convertToIndex = function(score) {
-			var scoreIndex = -1;
-
-			if (score == 1.0) {
-				scoreIndex = 0;
-			}
-			else if (score == -1.0) {
-				scoreIndex = 1;
-			}
-
-			return scoreIndex;
-		};
-
+	<div class="taglib-ratings <%= type %>">
 		<c:choose>
 			<c:when test='<%= type.equals("stars") %>'>
-
-				var rating = new A.StarRating({
-					autoRender: false,
-					boundingBox: '#<%= randomNamespace %>ratingStar',
-					canReset: false,
-					label: '<liferay-ui:message key="your-rating" />',
-					on: {
-						click: function() {
-							var url = '<%= url %>';
-							var score = this.get('selectedIndex') + 1;
-
-							var saveCallback = function(id, o) {
-								var json = A.JSON.parse(o.responseText);
-								var label = _getLabel('<liferay-ui:message key="average" />', json.totalEntries);
-								var averageIndex = json.averageScore - 1;
-
-								ratingScore.set('label', label);
-								ratingScore.select(averageIndex);
-							};
-
-							_sendVoteRequest(url, score, saveCallback);
-						}
-					}
-				});
-
-				var ratingScore = new A.StarRating({
-					autoRender: false,
-					boundingBox: '#<%= randomNamespace %>ratingScore',
-					canReset: false,
-					defaultSelected: <%= stats.getAverageScore() %>,
-					disabled: true,
-					label: _getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>)
-				});
-
-				var ratingBoundingBox = A.Node.getDOMNode(ratingScore.get('boundingBox'));
-				jQuery(ratingBoundingBox).mouseover(_showScoreTooltip);
-
-				rating.render();
-				ratingScore.render();
-
+				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar"></div>
+				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></div>
 			</c:when>
-			<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
-
-				var label = _getLabel(_fixScore(<%= stats.getAverageScore() %>), <%= stats.getTotalEntries() %>);
-				var yourScoreIndex = _convertToIndex(<%= yourScore %>);
-
-				var ratingThumb = new A.ThumbRating({
-					boundingBox: '#<%= randomNamespace %>ratingThumb',
-					label: label,
-					on: {
-						click: function() {
-							var instance = this;
-							var url = '<%= url %>';
-							var value = this.get('value');
-							var translate = { '-1': 0, 'down': -1, 'up': 1 };
-
-							var saveCallback = function(id, o) {
-								var json = A.JSON.parse(o.responseText);
-								var score = Math.round(json.totalEntries * json.averageScore);
-								var label = _getLabel(_fixScore(score), json.totalEntries);
-
-								instance.set('label', label);
-							};
-
-							_sendVoteRequest(url, translate[value], saveCallback);
-						}
-					}
-				});
-
-				ratingThumb.select(yourScoreIndex);
-
+			<c:when test='<%= type.equals("thumbs") %>'>
+				<c:choose>
+					<c:when test='<%= themeDisplay.isSignedIn() %>'>
+						<div id="<%= randomNamespace %>ratingThumb">
+							<input name="<%= randomNamespace %>ratingThumb" title="Good" type="hidden" value="up" />
+							<input name="<%= randomNamespace %>ratingThumb" title="Bad" type="hidden" value="down" />
+						</div>
+					</c:when>
+					<c:otherwise>
+						<a href="<%= themeDisplay.getURLSignIn() %>"><liferay-ui:message key="sign-in-to-vote" /></a>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 		</c:choose>
-	});
-</script>
+	</div>
+
+	<script type="text/javascript">
+		AUI().ready(
+			'io-base', 'json', 'rating', 'substitute',
+			function(A) {
+				var getLabel = function(desc, totalEntries) {
+					var labelScoreTpl = '{desc} ({totalEntries} {voteLabel})';
+
+					var voteLabel = '<%= UnicodeLanguageUtil.get(pageContext, "votes") %>';
+
+					if (totalEntries == 1) {
+						voteLabel = '<%= UnicodeLanguageUtil.get(pageContext, "vote") %>';
+					}
+
+					return A.substitute(
+						labelScoreTpl,
+						{
+							desc: desc,
+							totalEntries: totalEntries,
+							voteLabel: voteLabel
+						}
+					);
+				};
+
+				var sendVoteRequest = function(url, score, callback) {
+					var params = A.toQueryString(
+						{
+							className: '<%= className %>',
+							classPK: '<%= classPK %>',
+							p_l_id: '<%= themeDisplay.getPlid() %>',
+							score: score
+						}
+					);
+
+					A.io(
+						url,
+						{
+							method: 'POST',
+							data: params,
+							on: {
+								success: callback
+							}
+						}
+					);
+				};
+
+				var showScoreTooltip = function(event) {
+					var stars = ratingScore.get('selectedIndex') + 1;
+
+					var message = ' <%= UnicodeLanguageUtil.get(pageContext, "stars") %>';
+
+					if (stars == 1) {
+						message = ' <%= UnicodeLanguageUtil.get(pageContext, "star") %>';
+					}
+
+					var el = A.Node.getDOMNode(event.currentTarget);
+
+					Liferay.Portal.ToolTip.show(event, el, stars + message);
+				};
+
+				var fixScore = function(score) {
+					return (score == 1) ? '+1' : (score + '');
+				};
+
+				var convertToIndex = function(score) {
+					var scoreIndex = -1;
+
+					if (score == 1.0) {
+						scoreIndex = 0;
+					}
+					else if (score == -1.0) {
+						scoreIndex = 1;
+					}
+
+					return scoreIndex;
+				};
+
+				<c:choose>
+					<c:when test='<%= type.equals("stars") %>'>
+
+						var saveCallback = function(id, obj) {
+							var json = A.JSON.parse(obj.responseText);
+							var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries);
+							var averageIndex = json.averageScore - 1;
+
+							ratingScore.set('label', label);
+							ratingScore.select(averageIndex);
+						};
+
+						var rating = new A.StarRating(
+							{
+								autoRender: false,
+								boundingBox: '#<%= randomNamespace %>ratingStar',
+								canReset: false,
+								defaultSelected: <%= yourScore %>,
+								label: '<liferay-ui:message key="your-rating" />',
+								on: {
+									click: function() {
+										var url = '<%= url %>';
+										var score = this.get('selectedIndex') + 1;
+
+										sendVoteRequest(url, score, saveCallback);
+									}
+								}
+							}
+						);
+
+						var ratingScore = new A.StarRating(
+							{
+								autoRender: false,
+								boundingBox: '#<%= randomNamespace %>ratingScore',
+								canReset: false,
+								defaultSelected: <%= stats.getAverageScore() %>,
+								disabled: true,
+								label: getLabel('<liferay-ui:message key="average" />', <%= stats.getTotalEntries() %>)
+							}
+						);
+
+						ratingScore.get('boundingBox').on('mouseenter', showScoreTooltip);
+
+						rating.render();
+						ratingScore.render();
+					</c:when>
+					<c:when test='<%= type.equals("thumbs") && themeDisplay.isSignedIn() %>'>
+
+						var label = getLabel(fixScore(<%= stats.getAverageScore() %>), <%= stats.getTotalEntries() %>);
+						var yourScoreIndex = convertToIndex(<%= yourScore %>);
+
+						var ratingThumb = new A.ThumbRating(
+							{
+								boundingBox: '#<%= randomNamespace %>ratingThumb',
+								label: label,
+								on: {
+									click: function() {
+										var instance = this;
+
+										var saveCallback = function(id, obj) {
+											var json = A.JSON.parse(obj.responseText);
+											var score = Math.round(json.totalEntries * json.averageScore);
+											var label = getLabel(fixScore(score), json.totalEntries);
+
+											instance.set('label', label);
+										};
+
+										var url = '<%= url %>';
+										var value = this.get('value');
+
+										var translate = {
+											'-1': 0,
+											'down': -1,
+											'up': 1
+										};
+
+										sendVoteRequest(url, translate[value], saveCallback);
+									}
+								}
+							}
+						);
+
+						ratingThumb.select(yourScoreIndex);
+					</c:when>
+				</c:choose>
+			}
+		);
+	</script>
 </c:if>
