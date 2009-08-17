@@ -34,7 +34,7 @@ public interface AutoLogin {
 
 	/**
 	 * Set a request attribute with this variable to tell the AutoLoginFilter to
-	 * stop processing filters and redirect the user to a specified location
+	 * stop processing filters and redirect the user to a specified location.
 	 */
 	public static final String AUTO_LOGIN_REDIRECT = "AUTO_LOGIN_REDIRECT";
 
