@@ -5,7 +5,7 @@ import com.liferay.portal.kernel.workflow.UserCredential;
 
 /**
  * <a href="WorkflowCallingUser.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * This class represents the {@link UserCredential} attached to a
  * {@link ThreadLocal}, made available through
@@ -14,9 +14,9 @@ import com.liferay.portal.kernel.workflow.UserCredential;
  * might not be present for all requests and thus the method
  * {@link #getCallingUserCredential()} could return <code>null</code>.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  * @see WorkflowRequest WorkflowRequest for more information about the transport
  *      mechanism used for the credential
  */

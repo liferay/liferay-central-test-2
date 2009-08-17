@@ -1,28 +1,30 @@
 
 package com.liferay.portal.workflow;
 
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
-import org.aopalliance.intercept.MethodInvocation;
-
 import com.liferay.portal.kernel.workflow.CallingUserId;
 import com.liferay.portal.kernel.workflow.UserCredential;
 import com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 
+import java.io.Serializable;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+
+import java.util.Arrays;
+
+import org.aopalliance.intercept.MethodInvocation;
+
 /**
  * <a href="WorkflowRequest.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The workflow request acts as the basic implementation of a workflow API
  * request transported through the message bus. It contains the {@link Method}
  * to be invoked on its target as well as the arguments needed for the
  * invocation.
  * </p>
- * 
+ *
  * <p>
  * Additionally, most methods provide a {@link UserCredential} representing the
  * calling user, some of its attributes as well as its role set to avoid the
@@ -30,13 +32,13 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
  * information. Every method most likely being transitional (not read only)
  * should provide its calling user.
  * </p>
- * 
+ *
  * <p>
  * The calling user (if it was passed on) will be made available through
  * {@link WorkflowCallingUser#getCallingUserCredential()} before the method is
  * invoked and is immediately removed, if the method was finished.
  * </p>
- * 
+ *
  * @author Micha Kiener
  */
 public class WorkflowRequest implements Serializable {
@@ -44,7 +46,7 @@ public class WorkflowRequest implements Serializable {
 	/**
 	 * Creates a new workflow request based on the given invocation provided by
 	 * Spring using a method interceptor.
-	 * 
+	 *
 	 * @param invocation
 	 * @throws WorkflowException is thrown, if the request could not be
 	 *             initialized
@@ -59,7 +61,7 @@ public class WorkflowRequest implements Serializable {
 	/**
 	 * Inspects for an argument being the calling user id given by the
 	 * {@link CallingUserId} annotation on the method, if available.
-	 * 
+	 *
 	 * @param invocation the invocation creating this request
 	 * @return the credential of the calling user, if available,
 	 *         <code>null</code> otherwise
@@ -90,7 +92,7 @@ public class WorkflowRequest implements Serializable {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -99,7 +101,7 @@ public class WorkflowRequest implements Serializable {
 	 * returns its value. Before the method is being invoked, the calling user
 	 * credential is attached, if available, and after the invocation removed
 	 * again through a thread local.
-	 * 
+	 *
 	 * @param implObject the object to invoke the method on
 	 * @return the return value as being provided by the method invocation
 	 * @throws WorkflowException is thrown, if any exception occurred within the

@@ -5,13 +5,13 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
 
 /**
  * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The workflow result container is used to return an argument or an exception
  * which was the result of the workflow engine invocation through the
  * {@link ManagerProxyAdvice} which is weaved into the abstract proxies.
  * </p>
- * 
+ *
  * @author Micha Kiener
  */
 public class WorkflowResultContainer {

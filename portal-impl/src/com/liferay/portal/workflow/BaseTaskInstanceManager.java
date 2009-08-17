@@ -27,16 +27,16 @@ import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 
 /**
  * <a href="BaseTaskInstanceManager.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The abstract proxy class implementing the {@link TaskInstanceManager} and
  * gets instrumented by Spring using the {@link ManagerProxyAdvice} by
  * serializing the method and its arguments being invoked on the proxy using the
  * event bus to finally invoke it on the target.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public abstract class BaseTaskInstanceManager extends BaseWorkflowProxy
 	implements TaskInstanceManager {

@@ -314,7 +314,7 @@ public interface WorkflowInstanceManager {
 	 * engines do not allow to attach context information to the instance itself
 	 * but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering the next activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -322,7 +322,7 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
+	 *
 	 * @param workflowInstanceId the id of the workflow instance being triggered
 	 * @param attributes the optional context information to be passed on to the
 	 *            engine in order to execute the next default activity, they
@@ -349,7 +349,7 @@ public interface WorkflowInstanceManager {
 	 * info map. Some engines do not allow to attach context information to the
 	 * instance itself but rather use them on a per method basis.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * Triggering this activity could eventually execute some following
 	 * activities as well, if they are to be executed automatically (depending
@@ -357,12 +357,12 @@ public interface WorkflowInstanceManager {
 	 * next node or state which is not executable without user interaction or
 	 * any other signaling invocation.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * This method is usually used to execute a global activity which does not
 	 * depend on the current state nor does the activity change it afterwards.
 	 * </p>
-	 * 
+	 *
 	 * @param workflowInstanceId the id of the workflow instance being triggered
 	 * @param activityName the name of the activity to be triggered
 	 * @param attributes the optional context information to be passed on to the

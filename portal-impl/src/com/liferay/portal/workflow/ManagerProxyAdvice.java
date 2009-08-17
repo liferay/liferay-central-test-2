@@ -22,23 +22,23 @@
 
 package com.liferay.portal.workflow;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
-
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+
 /**
  * <a href="ManagerProxyAdvice.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The advice being weaved into all methods of the proxy managers to use the
  * event bus transporting the method and arguments to be invoked on the final
  * target implementation.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public class ManagerProxyAdvice implements MethodInterceptor {
 
@@ -51,7 +51,7 @@ public class ManagerProxyAdvice implements MethodInterceptor {
 			// create a request out of the invocation information to be
 			// serialized through the event bus
 			WorkflowRequest request = new WorkflowRequest(invocation);
-			
+
 			// send the message over the event bus, the listener will then
 			// invoke it on the target and return the result
 			WorkflowResultContainer response =

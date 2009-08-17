@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
 
 /**
  * <a href="CallingUserId.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * This annotation might be placed on a workflow manager interface method to
  * declare the calling user id parameter index as the method will be intercepted
@@ -39,9 +39,9 @@ import java.lang.annotation.Target;
  * in order to be available within the generic advice being weaved into the
  * intercepted method.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)

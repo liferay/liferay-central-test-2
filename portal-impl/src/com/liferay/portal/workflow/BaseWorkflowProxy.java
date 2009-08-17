@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMe
 
 /**
  * <a href="BaseWorkflowProxy.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The abstract base class for a workflow proxy implementing one of the manager
  * interfaces and using the event bus to serialize the invocation to the target
@@ -34,9 +34,9 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMe
  * the {@link ManagerProxyAdvice} to all methods being specified by the manager
  * interface.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public abstract class BaseWorkflowProxy {
 
@@ -44,10 +44,10 @@ public abstract class BaseWorkflowProxy {
 		SingleDestinationSynchronousMessageSender synchronousMessageSender) {
 		_synchronousMessageSender = synchronousMessageSender;
 	}
-	
+
 	/**
 	 * Declared final to not let Spring intercept this method.
-	 * 
+	 *
 	 * @return the message sender used within the proxy
 	 */
 	public final SingleDestinationSynchronousMessageSender getMessageSender() {

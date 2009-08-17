@@ -27,16 +27,16 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 
 /**
  * <a href="BaseWorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
- * 
+ *
  * <p>
  * The abstract proxy class implementing the {@link WorkflowInstanceManager} and
  * gets instrumented by Spring using the {@link ManagerProxyAdvice} by
  * serializing the method and its arguments being invoked on the proxy using the
  * event bus to finally invoke it on the target.
  * </p>
- * 
+ *
  * @author Micha Kiener
- * 
+ *
  */
 public abstract class BaseWorkflowInstanceManager extends BaseWorkflowProxy
 	implements WorkflowInstanceManager {

@@ -60,7 +60,7 @@ public interface TaskInstanceManager {
 	 * Assign the task instance with the given id to the specified role with an
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
-	 * 
+	 *
 	 * @param taskInstanceId the id of the task instance to be assigned
 	 * @param roleId the role id to assign the task to
 	 * @param comment the optional comment for the assignment
@@ -82,7 +82,7 @@ public interface TaskInstanceManager {
 	 * Assign the task instance with the given id to the specified user with an
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
-	 * 
+	 *
 	 * @param taskInstanceId the id of the task instance to be assigned
 	 * @param userCredential the credential of the user to assign the task to,
 	 *            representing the user's attributes and its role set, a
