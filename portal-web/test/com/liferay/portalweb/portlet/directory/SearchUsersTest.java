@@ -52,6 +52,23 @@ public class SearchUsersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_11_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_11_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.type("_11_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));

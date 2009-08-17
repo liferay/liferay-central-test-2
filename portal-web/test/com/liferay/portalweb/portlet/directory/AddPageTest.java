@@ -77,11 +77,44 @@ public class AddPageTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
 				selenium.waitForPageToLoad("30000");
-				selenium.typeKeys("_88_name_en_US",
-					RuntimeVariables.replace("Director Test Page"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_88_name_en_US")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("Directory Test Page"));
 				selenium.click(RuntimeVariables.replace(

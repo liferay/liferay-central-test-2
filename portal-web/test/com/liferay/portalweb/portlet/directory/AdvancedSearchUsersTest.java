@@ -60,7 +60,7 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_11_firstName")) {
+				if (selenium.isVisible("_11_firstName")) {
 					break;
 				}
 			}

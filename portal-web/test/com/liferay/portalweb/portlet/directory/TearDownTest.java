@@ -58,6 +58,23 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Users"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_125_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.typeKeys("_125_keywords",
 					RuntimeVariables.replace("TestFirst"));
 				selenium.type("_125_keywords",
@@ -65,6 +82,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean UsersPresent = selenium.isElementPresent("_125_rowIds");
 
@@ -88,7 +106,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_125_active")) {
+						if (selenium.isVisible("_125_active")) {
 							break;
 						}
 					}
@@ -103,6 +121,23 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_125_allRowIds")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("_125_allRowIds");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -112,8 +147,42 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click("link=\u00ab Basic");
 
 			case 2:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Organizations")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=Organizations"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.typeKeys("_126_keywords",
 					RuntimeVariables.replace("Cerritos"));
 				selenium.type("_126_keywords",
@@ -121,6 +190,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean SuborganizationPresent = selenium.isElementPresent(
 						"_126_rowIds");
@@ -151,12 +221,47 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace("link=Assign Members"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//input[@value='Update Associations']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("_126_allRowIds");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Update Associations']"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("_126_tabs2TabsBack"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Test Child")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("_126_allRowIds");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -165,8 +270,42 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Organizations")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=Organizations"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.typeKeys("_126_keywords",
 					RuntimeVariables.replace("Diamond Bar"));
 				selenium.type("_126_keywords",
@@ -174,6 +313,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean OrganizationPresent = selenium.isElementPresent(
 						"//strong/span");
@@ -204,12 +344,64 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace("link=Assign Members"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//input[@value='Update Associations']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("_126_allRowIds");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Update Associations']"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Organizations")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=Organizations"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_keywords")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.typeKeys("_126_keywords",
 					RuntimeVariables.replace("Diamond Bar"));
 				selenium.type("_126_keywords",
@@ -217,6 +409,23 @@ public class TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Search']"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Test Organization")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("_126_allRowIds");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -225,8 +434,26 @@ public class TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 4:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=User Groups")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=User Groups"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean UserGroupPresent = selenium.isElementPresent(
 						"_127_rowIds");
@@ -310,6 +537,24 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");

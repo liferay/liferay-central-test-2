@@ -60,6 +60,23 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_84_distributionScope")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.select("_84_distributionScope", "label=General");
 				selenium.waitForPageToLoad("30000");
 
@@ -80,8 +97,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[2]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -91,8 +107,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -116,8 +131,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[2]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -127,8 +141,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[2]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -163,6 +176,24 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/a/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace(
 						"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/a/span"));
 				selenium.waitForPageToLoad("30000");
@@ -175,7 +206,7 @@ public class TearDownTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[2]/ul/li[1]/a/span"));
+						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

@@ -52,6 +52,23 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_84_distributionScope")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
 
@@ -61,7 +78,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Entry']")) {
+				if (selenium.isVisible("//input[@value='Add Entry']")) {
 					break;
 				}
 			}
@@ -80,7 +97,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_84_title")) {
+				if (selenium.isVisible("_84_title")) {
 					break;
 				}
 			}
@@ -100,8 +117,42 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 				"Hello Everyone! This is a test general announcement for everyone! Yay."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Entries")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Entries"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Test General Announcement")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Test General Announcement"));
 	}
 }

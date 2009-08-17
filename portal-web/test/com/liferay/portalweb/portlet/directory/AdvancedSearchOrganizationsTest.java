@@ -61,7 +61,7 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_11_name")) {
+				if (selenium.isVisible("_11_name")) {
 					break;
 				}
 			}
