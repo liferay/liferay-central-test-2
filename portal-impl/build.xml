@@ -552,6 +552,7 @@ ${exception.message}
 			<jvmarg value="-Dservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<jvmarg value="-Dservice.props.util=com.liferay.portal.util.PropsUtil" />
 			<jvmarg value="-Dservice.test.dir=test" />
+			<jvmarg value="-Dservice.release.version=${lp.version}" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

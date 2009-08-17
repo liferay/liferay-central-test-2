@@ -477,8 +477,12 @@ public class JavadocFormatter {
 
 		cdata = StringUtil.replace(
 			cdata,
-			new String[] {"\n", "<p>", "</p>", "<li>", "</li>"},
-			new String[] {" ", " \n<p>\n", "\n</p>\n", " \n<li>\n", "\n</li>\n"});
+			new String[] {
+				"\n", "<p>", "</p>", "<li>", "</li>"
+			},
+			new String[] {
+				" ", " \n<p>\n", "\n</p>\n", " \n<li>\n", "\n</li>\n"
+			});
 
 		while (cdata.contains("\n ")) {
 			cdata = StringUtil.replace(cdata, "\n ", "\n");
