@@ -823,7 +823,7 @@ public class SourceFormatter {
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
 				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\tools\\tck\\**", "**\\upgrade\\**\\*Table.java"
+				"**\\tools\\tck\\**"
 			});
 		ds.setIncludes(new String[] {"**\\*.java"});
 
