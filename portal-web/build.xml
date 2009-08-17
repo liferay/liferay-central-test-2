@@ -701,7 +701,7 @@
 			classname="com.liferay.portal.tools.SeleneseToJavaBuilder"
 			classpathref="project.classpath"
 			fork="true"
-			maxmemory="256m"
+			maxmemory="512m"
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
