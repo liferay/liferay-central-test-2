@@ -20,28 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.login;
+package com.liferay.portalweb.portal.failover;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class LoginTest extends BaseTestCase {
-	public void testLogin() throws Exception {
-		selenium.open("/web/guest/home");
-		Thread.sleep(5000);
-
+public class AddPortletTest extends BaseTestCase {
+	public void testAddPortlet() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isVisible("link=Sign In")) {
+				if (selenium.isElementPresent(
+							"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9")) {
 					break;
 				}
 			}
@@ -51,11 +49,9 @@ public class LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Sign In"));
+		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +59,7 @@ public class LoginTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Sign In']")) {
+				if (selenium.isElementPresent("link=Application")) {
 					break;
 				}
 			}
@@ -73,8 +69,7 @@ public class LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +77,8 @@ public class LoginTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='I Agree']")) {
+				if (selenium.isElementPresent(
+							"//div[@id=\"Collaboration-MessageBoards\"]")) {
 					break;
 				}
 			}
@@ -92,9 +88,7 @@ public class LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("reminderQueryAnswer", RuntimeVariables.replace("Test"));
+		selenium.click("//div[@id=\"Collaboration-MessageBoards\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -102,7 +96,7 @@ public class LoginTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Save']")) {
+				if (selenium.isElementPresent("//input[@value='Add Category']")) {
 					break;
 				}
 			}
@@ -111,27 +105,5 @@ public class LoginTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[2]/a/span[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

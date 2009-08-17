@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test-cluster.xml" />
+
+	<target name="prepare-db-failover-tomcat">
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-6.0-${lp.version}.zip -oC:\" />
+		</exec>
+
+		<antcall target="replace-remote-file">
+			<param name="remote.host" value="${vm.host}" />
+			<param name="remote.file" value="/liferay-portal-${lp.version}/tomcat-6.0.18/bin/startup.bat" />
+			<param name="remote.replace.token" value="set CATALINA_HOME=%cd%" />
+			<param name="remote.replace.value" value="set CATALINA_HOME=C:\liferay-portal-${lp.version}\tomcat-6.0.18" />
+		</antcall>
+	</target>
+
+	<target name="prepare-db-failover-vm">
+		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
+
+		<exec executable="cmd">
+			<arg line="/c copy /y ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} ${vm.drive}\${vm.host}\${vm.host}.vmdk" />
+		</exec>
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx start" />
+		</exec>
+
+		<sleep seconds="60" />
+	</target>
+
+	<target name="test-db-failover">
+		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
+
+		<mkdir dir="dist" />
+
+		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
+
+		<antcall target="prepare-db-failover-vm">
+			<param name="vm.vmdk.suffix" value="ldap" />
+		 </antcall>
+
+		<antcall target="prepare-db-failover-tomcat" />
+
+		<echo file="portal-impl/src/portal-ext.properties" append="true">
+		
+counter.increment=5</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${vm.host}:/liferay-portal-${lp.version}/tomcat-6.0.18/webapps/ROOT/WEB-INF/classes" />
+		</exec>
+
+		<delete file="portal-impl/src/portal-ext.properties" />
+
+		<antcall target="rebuild-database" inheritAll="false" />
+
+		<antcall target="revert-test-properties" />
+
+		<replace
+			file="portal-impl/test/test-portal-impl.properties"
+			token="localhost:8080"
+			value="${vm.host}:8080"
+		/>
+
+		<replace
+			file="portal-web/test/test-portal-web.properties"
+			token="localhost:8080"
+			value="${vm.host}:8080"
+		/>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.18\bin\startup.bat" />
+		</exec>
+
+		<sleep seconds="60" />
+		
+		<antcall target="start-selenium" />
+
+		<exec executable="cmd.exe">
+			<arg line="/c net stop mysql" />
+		</exec>
+
+		<sleep seconds="60" />
+
+		<exec executable="cmd.exe">
+			<arg line="/c net start mysql" />
+		</exec>
+
+		<sleep seconds="60" />
+		
+		<antcall target="run-selenium-test">
+			<param name="test.class" value="DBFailoverTestSuite" />
+		</antcall>
+
+		<antcall target="stop-selenium" />
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
+		</exec>
+	</target>
+</project>
