@@ -22,7 +22,7 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.failover.DBFailoverTests;
+import com.liferay.portalweb.portal.dbfailover.DBFailoverTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;

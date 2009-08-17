@@ -20,36 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.failover;
+package com.liferay.portalweb.portal.dbfailover;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddMessage1Test.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddMessage1Test extends BaseTestCase {
-	public void testAddMessage1() throws Exception {
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("_88_name_en_US",
+			RuntimeVariables.replace(
+				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace(
+				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace(
 				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Category"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value=\"Post New Thread\"]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_19_subject", RuntimeVariables.replace("Test Message 1"));
-		selenium.type("_19_textArea",
-			RuntimeVariables.replace("This is Test Message 1."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is Test Message 1."));
-		assertTrue(selenium.isElementPresent("link=Test Message 1"));
-		selenium.click(RuntimeVariables.replace("link=Test Category"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Message 1"));
-		System.out.println("Sample data 1 added successfully.\n");
 	}
 }

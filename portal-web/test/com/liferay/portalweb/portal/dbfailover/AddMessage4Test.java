@@ -20,27 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.failover;
+package com.liferay.portalweb.portal.dbfailover;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddMessage4Test.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddCategoryTest extends BaseTestCase {
-	public void testAddCategory() throws Exception {
+public class AddMessage4Test extends BaseTestCase {
+	public void testAddMessage4() throws Exception {
 		selenium.click(RuntimeVariables.replace(
 				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Category']"));
+		selenium.click(RuntimeVariables.replace("link=Test Category"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_19_name", RuntimeVariables.replace("Test Category"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value=\"Post New Thread\"]"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_subject", RuntimeVariables.replace("Test Message 4"));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is Test Message 4."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Category"));
+		assertTrue(selenium.isTextPresent("This is Test Message 4."));
+		assertTrue(selenium.isElementPresent("link=Test Message 4"));
+		selenium.click(RuntimeVariables.replace("link=Test Category"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Test Message 4"));
+		System.out.println("Sample data 4 added successfully.\n");
 	}
 }

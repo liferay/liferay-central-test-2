@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
-<project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portal-test-dbfailover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test-cluster.xml" />
 
-	<target name="prepare-db-failover-tomcat">
+	<target name="prepare-dbfailover-tomcat">
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-6.0-${lp.version}.zip ${vm.username}@${vm.host}:/" />
 		</exec>
@@ -20,7 +20,7 @@
 		</antcall>
 	</target>
 
-	<target name="prepare-db-failover-vm">
+	<target name="prepare-dbfailover-vm">
 		<echo>Copying ${vm.drive}\${vm.host}\${vm.host}.vmdk.${vm.vmdk.suffix} to ${vm.drive}\${vm.host}\${vm.host}.vmdk</echo>
 
 		<exec executable="cmd">
@@ -34,21 +34,21 @@
 		<sleep seconds="60" />
 	</target>
 
-	<target name="test-db-failover">
+	<target name="test-dbfailover">
 		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
 		<mkdir dir="dist" />
 
 		<ant antfile="build-dist.xml" target="zip-tomcat-6.0" />
 
-		<antcall target="prepare-db-failover-vm">
+		<antcall target="prepare-dbfailover-vm">
 			<param name="vm.vmdk.suffix" value="ldap" />
 		 </antcall>
 
-		<antcall target="prepare-db-failover-tomcat" />
+		<antcall target="prepare-dbfailover-tomcat" />
 
 		<echo file="portal-impl/src/portal-ext.properties" append="true">
-		
+
 counter.increment=5</echo>
 
 		<exec executable="${pscp.executable}">
@@ -78,7 +78,7 @@ counter.increment=5</echo>
 		</exec>
 
 		<sleep seconds="60" />
-		
+
 		<antcall target="start-selenium" />
 
 		<exec executable="cmd.exe">
@@ -92,7 +92,7 @@ counter.increment=5</echo>
 		</exec>
 
 		<sleep seconds="60" />
-		
+
 		<antcall target="run-selenium-test">
 			<param name="test.class" value="DBFailoverTestSuite" />
 		</antcall>

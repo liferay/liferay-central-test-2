@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portal.failover;
+package com.liferay.portalweb.portal.dbfailover;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.StopSeleniumTest;
