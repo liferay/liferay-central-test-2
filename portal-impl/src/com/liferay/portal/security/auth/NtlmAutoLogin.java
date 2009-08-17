@@ -24,7 +24,9 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -67,6 +69,13 @@ public class NtlmAutoLogin implements AutoLogin {
 			User user = getUser(companyId, screenName);
 
 			if (user != null) {
+				String redirect = ParamUtil.getString(request, "redirect");
+
+				if (Validator.isNotNull(redirect)) {
+					request.setAttribute(
+						AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE, redirect);
+				}
+
 				credentials = new String[3];
 
 				credentials[0] = String.valueOf(user.getUserId());

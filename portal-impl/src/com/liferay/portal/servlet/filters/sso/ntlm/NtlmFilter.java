@@ -155,7 +155,7 @@ public class NtlmFilter extends BasePortalFilter {
 
 			String path = request.getPathInfo();
 
-			if (path != null && path.endsWith("/login")) {
+			if ((path != null) && path.endsWith("/login")) {
 				NtlmPasswordAuthentication ntlm = negotiate(
 					request, response, false);
 

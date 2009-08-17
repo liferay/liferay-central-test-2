@@ -209,7 +209,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 					String redirect = (String)request.getAttribute(
 						AutoLogin.AUTO_LOGIN_REDIRECT);
 
-					if (redirect != null) {
+					if (Validator.isNotNull(redirect)) {
 						response.sendRedirect(redirect);
 
 						return;
@@ -224,6 +224,15 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 						if (PropsValues.PORTAL_JAAS_ENABLE) {
 							return;
+						}
+
+						redirect = (String)request.getAttribute(
+							AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE);
+
+						if (Validator.isNotNull(redirect)) {
+							response.sendRedirect(redirect);
+
+							break;
 						}
 					}
 				}
