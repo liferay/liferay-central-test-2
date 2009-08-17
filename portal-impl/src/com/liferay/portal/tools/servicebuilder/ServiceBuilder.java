@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -100,7 +99,7 @@ import org.dom4j.DocumentException;
  * @author Harry Mark
  * @author Tariq Dweik
  * @author Glenn Powell
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  * @author Prashant Dighe
  */
 public class ServiceBuilder {
@@ -226,7 +225,6 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.model_hints_xml=" + _TPL_ROOT + "model_hints_xml.ftl\n"+
 				"\t-Dservice.tpl.model_impl=" + _TPL_ROOT + "model_impl.ftl\n"+
 				"\t-Dservice.tpl.model_soap=" + _TPL_ROOT + "model_soap.ftl\n"+
-				"\t-Dservice.tpl.model_table=" + _TPL_ROOT + "model_table.ftl\n"+
 				"\t-Dservice.tpl.persistence=" + _TPL_ROOT + "persistence.ftl\n"+
 				"\t-Dservice.tpl.persistence_impl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
 				"\t-Dservice.tpl.persistence_util=" + _TPL_ROOT + "persistence_util.ftl\n"+
@@ -458,7 +456,6 @@ public class ServiceBuilder {
 			"model_hints_xml", _tplModelHintsXml);
 		_tplModelImpl = _getTplProperty("model_impl", _tplModelImpl);
 		_tplModelSoap = _getTplProperty("model_soap", _tplModelSoap);
-		_tplModelTable = _getTplProperty("model_table", _tplModelTable);
 		_tplPersistence = _getTplProperty("persistence", _tplPersistence);
 		_tplPersistenceImpl = _getTplProperty(
 			"persistence_impl", _tplPersistenceImpl);
@@ -989,7 +986,6 @@ public class ServiceBuilder {
 							}
 
 							_createModelImpl(entity);
-							_createModelTable(entity);
 							_createExtendedModelImpl(entity);
 
 							List<String> transients = _getTransients(entity);
@@ -2259,34 +2255,6 @@ public class ServiceBuilder {
 				modelFile.delete();
 			}
 		}
-	}
-
-	private void _createModelTable(Entity entity) throws Exception {
-		Map<String, Object> context = _getContext();
-
-		String version = ReleaseInfo.getVersion();
-
-		String packageVersion = "v" + StringUtil.replace(
-			version, StringPool.PERIOD, StringPool.UNDERLINE);
-
-		context.put("entity", entity);
-		context.put("packageVersion", packageVersion);
-
-		// Content
-
-		String content = _processTemplate(_tplModelTable, context);
-
-		// Write file
-
-		File modelFile = new File(
-			"src/com/liferay/portal/upgrade/" + packageVersion + "/table/" +
-				entity.getName() + "Table.java");
-
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
 	}
 
 	private void _createOrmXml() throws Exception {
@@ -4105,7 +4073,6 @@ public class ServiceBuilder {
 	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
 	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
-	private String _tplModelTable = _TPL_ROOT + "model_table.ftl";
 	private String _tplOrmXml = _TPL_ROOT + "orm_xml.ftl";
 	private String _tplPersistence = _TPL_ROOT + "persistence.ftl";
 	private String _tplPersistenceImpl = _TPL_ROOT + "persistence_impl.ftl";
