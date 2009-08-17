@@ -61,7 +61,7 @@ public class AddMonthlyDateRepeatingEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[4]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[5]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class AddMonthlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//td[1]/input[4]");
 

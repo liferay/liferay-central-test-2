@@ -50,23 +50,6 @@ public class AddChildPageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 
@@ -76,7 +59,7 @@ public class AddChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Children")) {
+				if (selenium.isVisible("link=Children")) {
 					break;
 				}
 			}
@@ -95,7 +78,7 @@ public class AddChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_88_name_en_US")) {
+				if (selenium.isVisible("_88_name_en_US")) {
 					break;
 				}
 			}
@@ -105,31 +88,10 @@ public class AddChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("Child Test Page"));
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Child Test Page"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Page']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -152,5 +114,21 @@ public class AddChildPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Child Test Page"));
 		selenium.click(RuntimeVariables.replace("link=Child Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

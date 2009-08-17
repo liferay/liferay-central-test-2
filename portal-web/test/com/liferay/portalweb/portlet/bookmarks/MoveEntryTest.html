@@ -29,8 +29,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[7]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,12 +50,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//body/div[4]/ul/li[1]/a</td>
+	<td>//div[5]/ul/li[1]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//body/div[4]/ul/li[1]/a</td>
+	<td>//div[5]/ul/li[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[8]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,12 +80,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Folders</td>
+	<td>link=Bookmarks Home</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Folders</td>
+	<td>link=Bookmarks Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -94,6 +109,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>//li[8]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
@@ -106,6 +126,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Test Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//li[7]/span/a</td>
 	<td></td>
 </tr>
 <tr>

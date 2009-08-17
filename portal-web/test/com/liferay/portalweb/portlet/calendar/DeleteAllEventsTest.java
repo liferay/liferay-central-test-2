@@ -77,8 +77,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -88,8 +87,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -115,8 +113,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -126,8 +123,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -153,8 +149,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[4]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -164,8 +159,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[4]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

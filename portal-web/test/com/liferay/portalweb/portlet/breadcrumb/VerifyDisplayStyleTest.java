@@ -52,8 +52,27 @@ public class VerifyDisplayStyleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Child Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Breadcrumb Test Page \u00bb"));
-		assertFalse(selenium.isElementPresent("//div[2]/div/div/ul/li[4]/a"));
-		assertFalse(selenium.isElementPresent("//div[2]/div/div/ul/li[5]/a"));
+		assertFalse(selenium.isElementPresent(
+				"//div[2]/div/div/ul/li[4]/span/a"));
+		assertFalse(selenium.isElementPresent(
+				"//div[2]/div/div/ul/li[5]/span/a"));
 	}
 }

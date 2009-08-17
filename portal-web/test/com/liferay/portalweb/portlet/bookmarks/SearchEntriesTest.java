@@ -50,11 +50,44 @@ public class SearchEntriesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_keywords1", RuntimeVariables.replace("Test"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_28_keywords1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_28_keywords1", RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Folders']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Test Bookmark"));
 		assertTrue(selenium.isElementPresent("link=Test Bookmark 2"));
 	}

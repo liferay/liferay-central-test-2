@@ -38,25 +38,6 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[4]/ul/li[2]/a/span[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent(
 							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
 					break;
@@ -73,19 +54,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_88_name_en_US",
-			RuntimeVariables.replace("BA Setup Test Page"));
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("BA Setup Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=BA Setup Test Page"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,7 +61,8 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Application")) {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
 					break;
 				}
 			}
@@ -103,6 +72,32 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_88_name_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("BA Setup Test Page"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=BA Setup Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
@@ -130,8 +125,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -151,7 +145,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_title")) {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
 					break;
 				}
 			}
@@ -161,8 +155,6 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("BA Setup Test Entr"));
 		selenium.type("_33_title",
 			RuntimeVariables.replace("BA Setup Test Entry"));
 		Thread.sleep(5000);
@@ -218,8 +210,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a BA setup test entr"));
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a BA setup test entry!"));
 		selenium.selectFrame("relative=top");
