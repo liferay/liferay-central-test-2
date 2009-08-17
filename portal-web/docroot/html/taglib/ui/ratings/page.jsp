@@ -60,6 +60,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		<c:choose>
 			<c:when test='<%= type.equals("stars") %>'>
 				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar"></div>
+
 				<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore"></div>
 			</c:when>
 			<c:when test='<%= type.equals("thumbs") %>'>
@@ -156,7 +157,6 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				<c:choose>
 					<c:when test='<%= type.equals("stars") %>'>
-
 						var saveCallback = function(id, obj) {
 							var json = A.JSON.parse(obj.responseText);
 							var label = getLabel('<liferay-ui:message key="average" />', json.totalEntries);
