@@ -23,8 +23,8 @@ import java.util.List;
  * This class is used by {@link ${entity.name}ServiceJSON} to translate objects.
  * </p>
  *
- * @author ${author}
- * @see    ${packagePath}.service.http.${entity.name}ServiceJSON
+ * @author    ${author}
+ * @see       ${packagePath}.service.http.${entity.name}ServiceJSON
  * @generated
  */
 public class ${entity.name}JSONSerializer {

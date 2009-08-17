@@ -18,10 +18,10 @@ package ${packagePath}.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author ${author}
- * @see ${entity.name}Model
- * @see ${packagePath}.model.impl.${entity.name}Impl
- * @see ${packagePath}.model.impl.${entity.name}ModelImpl
+ * @author    ${author}
+ * @see       ${entity.name}Model
+ * @see       ${packagePath}.model.impl.${entity.name}Impl
+ * @see       ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
  public interface ${entity.name} extends ${entity.name}Model {

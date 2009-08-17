@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * ${serviceComments}
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}${sessionTypeName}ServiceUtil
+ * @author    ${author}
+ * @see       ${entity.name}${sessionTypeName}ServiceUtil
  * @generated
  */
 public interface ${entity.name}${sessionTypeName}Service {

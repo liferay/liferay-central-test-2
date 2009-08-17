@@ -23,8 +23,8 @@ import java.util.List;
  * {@link ${packagePath}.service.http.${entity.name}ServiceSoap}.
  * </p>
  *
- * @author ${author}
- * @see    ${packagePath}.service.http.${entity.name}ServiceSoap
+ * @author    ${author}
+ * @see       ${packagePath}.service.http.${entity.name}ServiceSoap
  * @generated
  */
 public class ${entity.name}Soap implements Serializable {

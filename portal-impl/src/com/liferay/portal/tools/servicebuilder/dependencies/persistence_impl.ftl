@@ -66,9 +66,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}Persistence
- * @see    ${entity.name}Util
+ * @author    ${author}
+ * @see       ${entity.name}Persistence
+ * @see       ${entity.name}Util
  * @generated
  */
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {

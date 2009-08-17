@@ -10,9 +10,9 @@ import java.util.Date;
  * overwritten the next time is generated.
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}Persistence
- * @see    ${entity.name}PersistenceImpl
+ * @author    ${author}
+ * @see       ${entity.name}Persistence
+ * @see       ${entity.name}PersistenceImpl
  * @generated
  */
 public class ${entity.name}Util {

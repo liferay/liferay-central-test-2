@@ -16,9 +16,9 @@ import java.util.Date;
  * overwritten the next time is generated.
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}PersistenceImpl
- * @see    ${entity.name}Util
+ * @author    ${author}
+ * @see       ${entity.name}PersistenceImpl
+ * @see       ${entity.name}Util
  * @generated
  */
 public interface ${entity.name}Persistence extends BasePersistence {

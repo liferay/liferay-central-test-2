@@ -63,10 +63,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}Impl
- * @see    ${packagePath}.model.${entity.name}
- * @see    ${packagePath}.model.${entity.name}Model
+ * @author    ${author}
+ * @see       ${entity.name}Impl
+ * @see       ${packagePath}.model.${entity.name}
+ * @see       ${packagePath}.model.${entity.name}Model
  * @generated
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {

@@ -27,10 +27,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author ${author}
- * @see    ${entity.name}
- * @see    ${packagePath}.model.impl.${entity.name}Impl
- * @see    ${packagePath}.model.impl.${entity.name}ModelImpl
+ * @author    ${author}
+ * @see       ${entity.name}
+ * @see       ${packagePath}.model.impl.${entity.name}Impl
+ * @see       ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
 public interface ${entity.name}Model extends BaseModel<${entity.name}> {
