@@ -34,8 +34,42 @@ public class Member_ViewMessageTest extends BaseTestCase {
 	public void testMember_ViewMessage() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Delete"));

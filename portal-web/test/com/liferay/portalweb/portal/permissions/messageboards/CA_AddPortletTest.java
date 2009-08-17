@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CA_AddPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +38,8 @@ public class CA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Application")) {
+				if (selenium.isElementPresent(
+							"link=Message Boards Permissions Page")) {
 					break;
 				}
 			}
@@ -47,6 +49,9 @@ public class CA_AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace(
+				"link=Message Boards Permissions Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
@@ -74,7 +79,7 @@ public class CA_AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Add Category']")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -83,5 +88,7 @@ public class CA_AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

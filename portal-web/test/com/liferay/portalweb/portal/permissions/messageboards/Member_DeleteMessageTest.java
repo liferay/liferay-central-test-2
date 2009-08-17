@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="Member_DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +50,8 @@ public class Member_DeleteMessageTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=Delete");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

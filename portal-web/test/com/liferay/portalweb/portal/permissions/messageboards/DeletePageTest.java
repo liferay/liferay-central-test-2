@@ -40,6 +40,24 @@ public class DeletePageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");

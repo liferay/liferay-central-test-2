@@ -86,9 +86,42 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"link=Message Boards Permissions Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
 		selenium.click("//td[5]/ul/li/strong/span");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Permissions']"));
@@ -139,6 +172,22 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isTextPresent("There are no banned users.")) {
 					break;
 				}
@@ -151,8 +200,42 @@ public class CA_AssertActionsTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=RSS"));
@@ -161,6 +244,23 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Reply"));
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");

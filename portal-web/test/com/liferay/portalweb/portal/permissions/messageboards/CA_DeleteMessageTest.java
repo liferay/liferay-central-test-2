@@ -50,6 +50,23 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Test Thread 1"));
 
 		for (int second = 0;; second++) {
@@ -69,7 +86,8 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[7]/ul/li/strong/span");
-		selenium.click("link=Delete");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

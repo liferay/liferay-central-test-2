@@ -53,6 +53,23 @@ public class Member_PostNewThreadTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 2"));
 		selenium.type("_19_textArea", RuntimeVariables.replace("Test Thread 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

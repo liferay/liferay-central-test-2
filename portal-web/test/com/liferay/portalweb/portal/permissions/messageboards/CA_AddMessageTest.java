@@ -50,11 +50,44 @@ public class CA_AddMessageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Post New Thread']"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,5 +145,21 @@ public class CA_AddMessageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

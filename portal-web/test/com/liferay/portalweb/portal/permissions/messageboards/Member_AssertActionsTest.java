@@ -60,6 +60,23 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
 		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Test Thread 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Move"));
@@ -68,6 +85,23 @@ public class Member_AssertActionsTest extends BaseTestCase {
 				"//input[@value='Post New Thread']"));
 		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[4]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Reply"));
 		assertTrue(selenium.isElementPresent("link=Reply with Quote"));
 		assertFalse(selenium.isElementPresent("link=Delete"));

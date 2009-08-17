@@ -51,6 +51,23 @@ public class Member_EditThreadTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("Test Thread 2 Edited"));
 		selenium.type("_19_textArea",
