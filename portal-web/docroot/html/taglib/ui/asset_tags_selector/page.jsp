@@ -51,21 +51,23 @@ if (curTagsParam != null) {
 }
 %>
 
-<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
+<div class="lfr-asset-tags-selector" id="<%= randomNamespace %>assetTagsSelector">
+	<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-<span class="ui-tags empty" id="<%= randomNamespace %>assetTagsSummary"></span>
-	<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
+	<span class="ui-tags empty" id="<%= randomNamespace %>assetTagsSummary"></span>
+		<input class="ui-tags-input" id="<%= randomNamespace %>assetTagNames" size="15" type="text" />
 
-	<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
-</span>
+		<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+	</span>
 
-<liferay-ui:message key="or" />
+	<liferay-ui:message key="or" />
 
-<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
+	<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
 
-<c:if test="<%= suggestible %>">
-	<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
-</c:if>
+	<c:if test="<%= suggestible %>">
+		<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
+	</c:if>
+</div>
 
 <script type="text/javascript">
 	jQuery(

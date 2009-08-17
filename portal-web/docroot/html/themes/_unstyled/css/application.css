@@ -337,7 +337,7 @@
 
 /* ---------- Container ---------- */
 
-.aui-overlay, .aui-panel-container {
+.aui-overlay-content {
 }
 
 .aui-panel {
@@ -415,6 +415,18 @@
 }
 
 .aui-context-panel-arrow-tl .aui-context-panel-pointer-inner {
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer {
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer {
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
+}
+
+.aui-context-panel-arrow-rt .aui-context-panel-pointer-inner {
 }
 
 /* ---------- Portal tool tips ---------- */
@@ -640,50 +652,6 @@ img.aui-datepicker-button {
 }
 
 .yui-picker-thumb {
-}
-
-/* ---------- Autocomplete ---------- */
-
-.aui-autocomplete-input {
-}
-
-.aui-autocomplete-container {
-}
-
-.aui-autocomplete-content {
-}
-
-.aui-autocomplete-shadow {
-}
-
-.ie .aui-autocomplete-shadow{
-}
-
-.aui-autocomplete-iframe {
-}
-
-.ie6 .aui-autocomplete-iframe {
-}
-
-.aui-autocomplete-content ul {
-}
-
-.aui-autocomplete-content li {
-}
-
-.ie .aui-autocomplete-content li {
-}
-
-.aui-autocomplete-content li strong {
-}
-
-.aui-autocomplete-highlight {
-}
-
-li.aui-autocomplete-highlight strong {
-}
-
-.aui-autocomplete-loading, .aui-autocomplete-loading.focus {
 }
 
 /* ---------- Tags ---------- */

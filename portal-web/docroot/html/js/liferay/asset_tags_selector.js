@@ -39,126 +39,119 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 
 			var textInput = jQuery('#' + options.textInput + instance._seed);
 
-			var autoComplete = new Alloy.AutoComplete(
-				{
-					dataSource: {
-						source: instance._searchTags,
-						responseSchema: {
-							fields: ['text', 'value']
+			AUI().use(
+				'autocomplete',
+				function(A) {
+					var autoComplete = new A.AutoComplete(
+						{
+							dataSource: instance._searchTags,
+							schema: {
+								resultFields: ['text', 'value']
+							},
+							delimChar: ',',
+							input: textInput[0],
+							contentBox: '#' + instance._ns + 'assetTagsSelector'
 						}
-					},
-					delimChar: ',',
-					input: textInput[0]
-				}
-			);
+					);
 
-			autoComplete.containerExpandEvent.subscribe(
-				function(event) {
-					textInput.addClass('showing-list');
-					this._LFR_listShowing = true;
-				}
-			);
+					autoComplete.render();
 
-			autoComplete.containerCollapseEvent.subscribe(
-				function(event) {
-					textInput.removeClass('showing-list');
-				}
-			);
+					instance._autoComplete = autoComplete;
 
-			instance._popupVisible = false;
+					instance._popupVisible = false;
 
-			instance._setupSelectTags();
-			instance._setupSuggestions();
+					instance._setupSelectTags();
+					instance._setupSuggestions();
 
-			var addTagButton = jQuery('#' + instance._namespace('addTag'));
+					var addTagButton = jQuery('#' + instance._namespace('addTag'));
 
-			addTagButton.click(
-				function() {
-						var curTags = instance._curTags;
-						var newTags = textInput.val().split(',');
+					addTagButton.click(
+						function() {
+								var curTags = instance._curTags;
+								var newTags = textInput.val().split(',');
 
-						jQuery.each(
-							newTags,
-							function(i, n) {
-								n = jQuery.trim(n);
+								jQuery.each(
+									newTags,
+									function(i, n) {
+										n = jQuery.trim(n);
 
-								if (curTags.indexOf(n) == -1) {
-									if (n != '') {
-										curTags.push(n);
+										if (curTags.indexOf(n) == -1) {
+											if (n != '') {
+												curTags.push(n);
 
-										if (instance._popupVisible) {
-											jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagPopup.body).attr('checked', true);
+												if (instance._popupVisible) {
+													jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagPopup.body).attr('checked', true);
+												}
+											}
 										}
 									}
-								}
-							}
-						);
+								);
 
-						curTags = curTags.sort();
-						textInput.val('');
+								curTags = curTags.sort();
+								textInput.val('');
+
+								instance._update();
+							}
+					);
+
+					textInput.keyup(
+						function() {
+							addTagButton.attr('disabled', !this.value.length);
+						}
+					);
+
+					textInput.keypress(
+						function(event) {
+							if (event.keyCode == 13) {
+								if (!autoComplete.get('visible')) {
+									addTagButton.trigger('click');
+								}
+
+								return false;
+							}
+						}
+					);
+
+					if (options.focus) {
+						textInput.focus();
+					}
+
+					if (options.curTags != '') {
+						instance._curTags = options.curTags.split(',');
 
 						instance._update();
 					}
-			);
 
-			textInput.keyup(
-				function() {
-					addTagButton.attr('disabled', !this.value.length);
-				}
-			);
+					Liferay.Util.actsAsAspect(window);
 
-			textInput.keypress(
-				function(event) {
-					if (event.keyCode == 13) {
-						if (!autoComplete._LFR_listShowing) {
-							addTagButton.trigger('click');
+					window.before(
+						'submitForm',
+						function() {
+							var val = jQuery.trim(textInput.val());
+
+							if (val.length) {
+								addTagButton.trigger('click');
+							}
 						}
+					);
 
-						autoComplete._LFR_listShowing = null;
+					instance._summarySpan.unbind('click');
 
-						return false;
-					}
-				}
-			);
+					instance._summarySpan.click(
+						function(event) {
+							var target = jQuery(event.target);
 
-			if (options.focus) {
-				textInput.focus();
-			}
+							if (!target.hasClass('ui-tag-delete')) {
+								target = target.parent();
+							}
 
-			if (options.curTags != '') {
-				instance._curTags = options.curTags.split(',');
+							if (target.hasClass('ui-tag-delete')) {
+								var id = target.attr('data-tagIndex');
 
-				instance._update();
-			}
-
-			Liferay.Util.actsAsAspect(window);
-
-			window.before(
-				'submitForm',
-				function() {
-					var val = jQuery.trim(textInput.val());
-
-					if (val.length) {
-						addTagButton.trigger('click');
-					}
-				}
-			);
-
-			instance._summarySpan.unbind('click');
-
-			instance._summarySpan.click(
-				function(event) {
-					var target = jQuery(event.target);
-
-					if (!target.hasClass('ui-tag-delete')) {
-						target = target.parent();
-					}
-
-					if (target.hasClass('ui-tag-delete')) {
-						var id = target.attr('data-tagIndex');
-
-						instance.deleteTag(id);
-					}
+								instance.deleteTag(id);
+							}
+						}
+					);
 				}
 			);
 		},
@@ -308,6 +301,10 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 		_searchTags: function(term) {
 			var beginning = 0;
 			var end = 20;
+
+			if (term == '*') {
+				term = '';
+			}
 
 			return Liferay.Service.Asset.AssetTag.search(
 				{

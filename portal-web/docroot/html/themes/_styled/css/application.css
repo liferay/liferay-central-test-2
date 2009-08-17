@@ -576,10 +576,8 @@
 
 /* ---------- Container ---------- */
 
-.aui-overlay, .aui-panel-container {
-	position: absolute;
-	visibility: hidden;
-	z-index: 2;
+.aui-overlay-content {
+	background: #fff;
 }
 
 .aui-panel {
@@ -1225,94 +1223,6 @@ img.aui-datepicker-button {
 	position: absolute;
 	top: -4px;
 	width: 11px;
-}
-
-/* ---------- Autocomplete ---------- */
-
-.aui-autocomplete-input {
-	width: 100%;
-}
-
-.aui-autocomplete-container {
-	position: absolute;
-	top: 1.6em;
-	width: 100%;
-}
-
-.aui-autocomplete-content {
-	background: #fff;
-	border: 1px solid;
-	border-color: #bfbfbf #dedede #dedede #bfbfbf;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 100%;
-	z-index: 300;
-}
-
-.aui-autocomplete-shadow {
-	background: #000;	
-	margin: 0.3em;
-	opacity: 0.10;
-	position: absolute;
-	width: 100%;
-	z-index: 299;
-}
-
-.ie .aui-autocomplete-shadow{
-	filter: alpha(opacity=10);
-}
-
-.aui-autocomplete-iframe {
-	opacity: 0;
-	padding-bottom: 0.3em;
-	padding-right: 0.3em;
-}
-
-.ie6 .aui-autocomplete-iframe {
-	filter: alpha(opacity=0);
-}
-
-.aui-autocomplete-content ul {
-	list-style: none;
-	list-style-position: outside;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-}
-
-.aui-autocomplete-content li {
-	cursor: pointer;
-	display: block;
-	line-height: 16px;
-	margin: 0;
-	overflow: hidden;
-	padding: 2px 5px;
-	white-space: nowrap;
-}
-
-.ie .aui-autocomplete-content li {
-	zoom: 1;
-}
-
-.aui-autocomplete-content li strong {
-	color: #06c;
-	font-weight: bold;
-}
-
-.aui-autocomplete-highlight {
-	background: #06c;
-	color: #fff;
-}
-
-li.aui-autocomplete-highlight strong {
-	color: #fff;
-}
-
-.aui-autocomplete-loading, .aui-autocomplete-loading.focus {
-	background-image: url(../images/application/loading_indicator.gif);
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 
 /* ---------- Tags ---------- */
