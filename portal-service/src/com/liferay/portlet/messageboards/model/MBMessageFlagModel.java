@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessageFlag
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessageFlag
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  * @generated
  */
 public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {

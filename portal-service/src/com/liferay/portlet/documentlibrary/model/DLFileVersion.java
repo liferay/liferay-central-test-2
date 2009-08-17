@@ -41,10 +41,10 @@ package com.liferay.portlet.documentlibrary.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see DLFileVersionModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileVersionModel
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {

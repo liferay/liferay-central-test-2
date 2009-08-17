@@ -41,10 +41,10 @@ package com.liferay.portlet.softwarecatalog.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see SCLicenseModel
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCLicenseModel
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
  * @generated
  */
 public interface SCLicense extends SCLicenseModel {

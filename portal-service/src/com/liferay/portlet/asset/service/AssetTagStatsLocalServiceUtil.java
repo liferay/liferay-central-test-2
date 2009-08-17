@@ -39,8 +39,8 @@ package com.liferay.portlet.asset.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagStatsLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagStatsLocalService
  * @generated
  */
 public class AssetTagStatsLocalServiceUtil {

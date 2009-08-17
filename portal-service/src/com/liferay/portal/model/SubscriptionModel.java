@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Subscription
- * @see    com.liferay.portal.model.impl.SubscriptionImpl
- * @see    com.liferay.portal.model.impl.SubscriptionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Subscription
+ * @see       com.liferay.portal.model.impl.SubscriptionImpl
+ * @see       com.liferay.portal.model.impl.SubscriptionModelImpl
  * @generated
  */
 public interface SubscriptionModel extends BaseModel<Subscription> {

@@ -62,10 +62,10 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessageFlagServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessageFlagServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
  * @generated
  */
 public class MBMessageFlagServiceHttp {

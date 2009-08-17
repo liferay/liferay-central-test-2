@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileShortcutPersistenceImpl
- * @see    DLFileShortcutUtil
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcutPersistenceImpl
+ * @see       DLFileShortcutUtil
  * @generated
  */
 public interface DLFileShortcutPersistence extends BasePersistence {

@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebDAVPropsPersistence
- * @see    WebDAVPropsUtil
+ * @author    Brian Wing Shun Chan
+ * @see       WebDAVPropsPersistence
+ * @see       WebDAVPropsUtil
  * @generated
  */
 public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl

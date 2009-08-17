@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AccountPersistence
- * @see    AccountPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AccountPersistence
+ * @see       AccountPersistenceImpl
  * @generated
  */
 public class AccountUtil {

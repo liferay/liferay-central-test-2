@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see OrgLaborModel
- * @see com.liferay.portal.model.impl.OrgLaborImpl
- * @see com.liferay.portal.model.impl.OrgLaborModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       OrgLaborModel
+ * @see       com.liferay.portal.model.impl.OrgLaborImpl
+ * @see       com.liferay.portal.model.impl.OrgLaborModelImpl
  * @generated
  */
 public interface OrgLabor extends OrgLaborModel {

@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PhoneImpl
- * @see    com.liferay.portal.model.Phone
- * @see    com.liferay.portal.model.PhoneModel
+ * @author    Brian Wing Shun Chan
+ * @see       PhoneImpl
+ * @see       com.liferay.portal.model.Phone
+ * @see       com.liferay.portal.model.PhoneModel
  * @generated
  */
 public class PhoneModelImpl extends BaseModelImpl<Phone> {

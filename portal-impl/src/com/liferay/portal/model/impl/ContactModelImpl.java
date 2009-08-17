@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ContactImpl
- * @see    com.liferay.portal.model.Contact
- * @see    com.liferay.portal.model.ContactModel
+ * @author    Brian Wing Shun Chan
+ * @see       ContactImpl
+ * @see       com.liferay.portal.model.Contact
+ * @see       com.liferay.portal.model.ContactModel
  * @generated
  */
 public class ContactModelImpl extends BaseModelImpl<Contact> {

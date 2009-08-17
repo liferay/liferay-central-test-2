@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletItemImpl
- * @see    com.liferay.portal.model.PortletItem
- * @see    com.liferay.portal.model.PortletItemModel
+ * @author    Brian Wing Shun Chan
+ * @see       PortletItemImpl
+ * @see       com.liferay.portal.model.PortletItem
+ * @see       com.liferay.portal.model.PortletItemModel
  * @generated
  */
 public class PortletItemModelImpl extends BaseModelImpl<PortletItem> {

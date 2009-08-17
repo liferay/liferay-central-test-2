@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBBanPersistence
- * @see    MBBanUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBBanPersistence
+ * @see       MBBanUtil
  * @generated
  */
 public class MBBanPersistenceImpl extends BasePersistenceImpl

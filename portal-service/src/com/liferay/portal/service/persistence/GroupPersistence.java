@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    GroupPersistenceImpl
- * @see    GroupUtil
+ * @author    Brian Wing Shun Chan
+ * @see       GroupPersistenceImpl
+ * @see       GroupUtil
  * @generated
  */
 public interface GroupPersistence extends BasePersistence {

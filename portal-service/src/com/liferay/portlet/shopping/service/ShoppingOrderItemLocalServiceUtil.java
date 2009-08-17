@@ -39,8 +39,8 @@ package com.liferay.portlet.shopping.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingOrderItemLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingOrderItemLocalService
  * @generated
  */
 public class ShoppingOrderItemLocalServiceUtil {

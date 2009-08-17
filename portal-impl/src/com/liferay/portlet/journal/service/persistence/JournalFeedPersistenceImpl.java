@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalFeedPersistence
- * @see    JournalFeedUtil
+ * @author    Brian Wing Shun Chan
+ * @see       JournalFeedPersistence
+ * @see       JournalFeedUtil
  * @generated
  */
 public class JournalFeedPersistenceImpl extends BasePersistenceImpl

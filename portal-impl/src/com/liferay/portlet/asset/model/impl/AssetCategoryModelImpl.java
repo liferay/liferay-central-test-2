@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetCategoryImpl
- * @see    com.liferay.portlet.asset.model.AssetCategory
- * @see    com.liferay.portlet.asset.model.AssetCategoryModel
+ * @author    Brian Wing Shun Chan
+ * @see       AssetCategoryImpl
+ * @see       com.liferay.portlet.asset.model.AssetCategory
+ * @see       com.liferay.portlet.asset.model.AssetCategoryModel
  * @generated
  */
 public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {

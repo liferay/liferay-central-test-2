@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiNodePersistence
- * @see    WikiNodeUtil
+ * @author    Brian Wing Shun Chan
+ * @see       WikiNodePersistence
+ * @see       WikiNodeUtil
  * @generated
  */
 public class WikiNodePersistenceImpl extends BasePersistenceImpl

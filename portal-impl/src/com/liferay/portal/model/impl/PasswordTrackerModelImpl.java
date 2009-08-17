@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordTrackerImpl
- * @see    com.liferay.portal.model.PasswordTracker
- * @see    com.liferay.portal.model.PasswordTrackerModel
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordTrackerImpl
+ * @see       com.liferay.portal.model.PasswordTracker
+ * @see       com.liferay.portal.model.PasswordTrackerModel
  * @generated
  */
 public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {

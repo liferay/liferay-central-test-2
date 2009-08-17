@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductScreenshotPersistenceImpl
- * @see    SCProductScreenshotUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductScreenshotPersistenceImpl
+ * @see       SCProductScreenshotUtil
  * @generated
  */
 public interface SCProductScreenshotPersistence extends BasePersistence {

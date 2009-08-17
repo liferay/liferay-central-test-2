@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksReviewImpl
- * @see    com.liferay.portlet.tasks.model.TasksReview
- * @see    com.liferay.portlet.tasks.model.TasksReviewModel
+ * @author    Brian Wing Shun Chan
+ * @see       TasksReviewImpl
+ * @see       com.liferay.portlet.tasks.model.TasksReview
+ * @see       com.liferay.portlet.tasks.model.TasksReviewModel
  * @generated
  */
 public class TasksReviewModelImpl extends BaseModelImpl<TasksReview> {

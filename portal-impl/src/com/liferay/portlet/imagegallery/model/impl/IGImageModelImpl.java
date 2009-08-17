@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGImageImpl
- * @see    com.liferay.portlet.imagegallery.model.IGImage
- * @see    com.liferay.portlet.imagegallery.model.IGImageModel
+ * @author    Brian Wing Shun Chan
+ * @see       IGImageImpl
+ * @see       com.liferay.portlet.imagegallery.model.IGImage
+ * @see       com.liferay.portlet.imagegallery.model.IGImageModel
  * @generated
  */
 public class IGImageModelImpl extends BaseModelImpl<IGImage> {

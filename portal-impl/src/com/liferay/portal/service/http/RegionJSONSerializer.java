@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link RegionServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.RegionServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.RegionServiceJSON
  * @generated
  */
 public class RegionJSONSerializer {

@@ -41,10 +41,10 @@ package com.liferay.portlet.messageboards.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MBCategoryModel
- * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
- * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategoryModel
+ * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  * @generated
  */
 public interface MBCategory extends MBCategoryModel {

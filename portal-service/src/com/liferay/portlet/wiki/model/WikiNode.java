@@ -41,10 +41,10 @@ package com.liferay.portlet.wiki.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see WikiNodeModel
- * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
- * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WikiNodeModel
+ * @see       com.liferay.portlet.wiki.model.impl.WikiNodeImpl
+ * @see       com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
  * @generated
  */
 public interface WikiNode extends WikiNodeModel {

@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ClassName
- * @see    com.liferay.portal.model.impl.ClassNameImpl
- * @see    com.liferay.portal.model.impl.ClassNameModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ClassName
+ * @see       com.liferay.portal.model.impl.ClassNameImpl
+ * @see       com.liferay.portal.model.impl.ClassNameModelImpl
  * @generated
  */
 public interface ClassNameModel extends BaseModel<ClassName> {

@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutSetPrototypePersistence
- * @see    LayoutSetPrototypePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutSetPrototypePersistence
+ * @see       LayoutSetPrototypePersistenceImpl
  * @generated
  */
 public class LayoutSetPrototypeUtil {

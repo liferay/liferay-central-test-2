@@ -41,10 +41,10 @@ package com.liferay.portlet.shopping.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ShoppingItemFieldModel
- * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
- * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingItemFieldModel
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
  * @generated
  */
 public interface ShoppingItemField extends ShoppingItemFieldModel {

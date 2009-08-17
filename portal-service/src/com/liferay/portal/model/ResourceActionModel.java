@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourceAction
- * @see    com.liferay.portal.model.impl.ResourceActionImpl
- * @see    com.liferay.portal.model.impl.ResourceActionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceAction
+ * @see       com.liferay.portal.model.impl.ResourceActionImpl
+ * @see       com.liferay.portal.model.impl.ResourceActionModelImpl
  * @generated
  */
 public interface ResourceActionModel extends BaseModel<ResourceAction> {

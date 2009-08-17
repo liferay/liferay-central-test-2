@@ -59,10 +59,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksProposalImpl
- * @see    com.liferay.portlet.tasks.model.TasksProposal
- * @see    com.liferay.portlet.tasks.model.TasksProposalModel
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalImpl
+ * @see       com.liferay.portlet.tasks.model.TasksProposal
+ * @see       com.liferay.portlet.tasks.model.TasksProposalModel
  * @generated
  */
 public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal> {

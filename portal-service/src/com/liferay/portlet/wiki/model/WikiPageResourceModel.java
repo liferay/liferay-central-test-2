@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPageResource
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageResource
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
  * @generated
  */
 public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {

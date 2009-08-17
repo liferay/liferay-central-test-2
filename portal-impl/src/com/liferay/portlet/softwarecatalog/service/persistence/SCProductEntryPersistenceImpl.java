@@ -70,9 +70,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductEntryPersistence
- * @see    SCProductEntryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductEntryPersistence
+ * @see       SCProductEntryUtil
  * @generated
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl

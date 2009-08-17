@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link SCFrameworkVersionServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceJSON
  * @generated
  */
 public class SCFrameworkVersionJSONSerializer {

@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LockImpl
- * @see    com.liferay.portal.model.Lock
- * @see    com.liferay.portal.model.LockModel
+ * @author    Brian Wing Shun Chan
+ * @see       LockImpl
+ * @see       com.liferay.portal.model.Lock
+ * @see       com.liferay.portal.model.LockModel
  * @generated
  */
 public class LockModelImpl extends BaseModelImpl<Lock> {

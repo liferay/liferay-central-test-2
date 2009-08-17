@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link PermissionServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.PermissionServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.PermissionServiceJSON
  * @generated
  */
 public class PermissionJSONSerializer {

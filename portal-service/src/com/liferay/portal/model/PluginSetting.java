@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PluginSettingModel
- * @see com.liferay.portal.model.impl.PluginSettingImpl
- * @see com.liferay.portal.model.impl.PluginSettingModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PluginSettingModel
+ * @see       com.liferay.portal.model.impl.PluginSettingImpl
+ * @see       com.liferay.portal.model.impl.PluginSettingModelImpl
  * @generated
  */
 public interface PluginSetting extends PluginSettingModel {

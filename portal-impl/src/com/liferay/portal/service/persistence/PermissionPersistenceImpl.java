@@ -68,9 +68,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PermissionPersistence
- * @see    PermissionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PermissionPersistence
+ * @see       PermissionUtil
  * @generated
  */
 public class PermissionPersistenceImpl extends BasePersistenceImpl

@@ -31,9 +31,9 @@ package com.liferay.portlet.wiki.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPageResourcePersistence
- * @see    WikiPageResourcePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageResourcePersistence
+ * @see       WikiPageResourcePersistenceImpl
  * @generated
  */
 public class WikiPageResourceUtil {

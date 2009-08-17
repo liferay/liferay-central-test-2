@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicy
- * @see    com.liferay.portal.model.impl.PasswordPolicyImpl
- * @see    com.liferay.portal.model.impl.PasswordPolicyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicy
+ * @see       com.liferay.portal.model.impl.PasswordPolicyImpl
+ * @see       com.liferay.portal.model.impl.PasswordPolicyModelImpl
  * @generated
  */
 public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {

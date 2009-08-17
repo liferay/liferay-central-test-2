@@ -55,10 +55,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ClassNameImpl
- * @see    com.liferay.portal.model.ClassName
- * @see    com.liferay.portal.model.ClassNameModel
+ * @author    Brian Wing Shun Chan
+ * @see       ClassNameImpl
+ * @see       com.liferay.portal.model.ClassName
+ * @see       com.liferay.portal.model.ClassNameModel
  * @generated
  */
 public class ClassNameModelImpl extends BaseModelImpl<ClassName> {

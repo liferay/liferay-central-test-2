@@ -61,9 +61,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileRankPersistence
- * @see    DLFileRankUtil
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileRankPersistence
+ * @see       DLFileRankUtil
  * @generated
  */
 public class DLFileRankPersistenceImpl extends BasePersistenceImpl

@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BrowserTrackerPersistence
- * @see    BrowserTrackerUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BrowserTrackerPersistence
+ * @see       BrowserTrackerUtil
  * @generated
  */
 public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl

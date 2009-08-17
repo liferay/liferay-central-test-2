@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PermissionModel
- * @see com.liferay.portal.model.impl.PermissionImpl
- * @see com.liferay.portal.model.impl.PermissionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PermissionModel
+ * @see       com.liferay.portal.model.impl.PermissionImpl
+ * @see       com.liferay.portal.model.impl.PermissionModelImpl
  * @generated
  */
 public interface Permission extends PermissionModel {

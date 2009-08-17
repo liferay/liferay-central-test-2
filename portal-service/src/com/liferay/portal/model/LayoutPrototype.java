@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see LayoutPrototypeModel
- * @see com.liferay.portal.model.impl.LayoutPrototypeImpl
- * @see com.liferay.portal.model.impl.LayoutPrototypeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutPrototypeModel
+ * @see       com.liferay.portal.model.impl.LayoutPrototypeImpl
+ * @see       com.liferay.portal.model.impl.LayoutPrototypeModelImpl
  * @generated
  */
 public interface LayoutPrototype extends LayoutPrototypeModel {

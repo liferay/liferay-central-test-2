@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessageFlagImpl
- * @see    com.liferay.portlet.messageboards.model.MBMessageFlag
- * @see    com.liferay.portlet.messageboards.model.MBMessageFlagModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessageFlagImpl
+ * @see       com.liferay.portlet.messageboards.model.MBMessageFlag
+ * @see       com.liferay.portlet.messageboards.model.MBMessageFlagModel
  * @generated
  */
 public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {

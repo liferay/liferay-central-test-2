@@ -66,10 +66,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsQuestionImpl
- * @see    com.liferay.portlet.polls.model.PollsQuestion
- * @see    com.liferay.portlet.polls.model.PollsQuestionModel
+ * @author    Brian Wing Shun Chan
+ * @see       PollsQuestionImpl
+ * @see       com.liferay.portlet.polls.model.PollsQuestion
+ * @see       com.liferay.portlet.polls.model.PollsQuestionModel
  * @generated
  */
 public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion> {

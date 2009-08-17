@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link AssetCategoryPropertyServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.asset.service.http.AssetCategoryPropertyServiceJSON
  * @generated
  */
 public class AssetCategoryPropertyJSONSerializer {

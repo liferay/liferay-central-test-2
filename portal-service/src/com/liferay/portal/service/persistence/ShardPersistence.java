@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShardPersistenceImpl
- * @see    ShardUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ShardPersistenceImpl
+ * @see       ShardUtil
  * @generated
  */
 public interface ShardPersistence extends BasePersistence {

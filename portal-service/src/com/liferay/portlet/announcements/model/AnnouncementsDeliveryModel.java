@@ -38,10 +38,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsDelivery
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
- * @see    com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsDelivery
+ * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  * @generated
  */
 public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDelivery> {

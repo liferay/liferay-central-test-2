@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsVote
- * @see    com.liferay.portlet.polls.model.impl.PollsVoteImpl
- * @see    com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PollsVote
+ * @see       com.liferay.portlet.polls.model.impl.PollsVoteImpl
+ * @see       com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
  * @generated
  */
 public interface PollsVoteModel extends BaseModel<PollsVote> {

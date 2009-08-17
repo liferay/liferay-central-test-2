@@ -55,10 +55,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserIdMapperImpl
- * @see    com.liferay.portal.model.UserIdMapper
- * @see    com.liferay.portal.model.UserIdMapperModel
+ * @author    Brian Wing Shun Chan
+ * @see       UserIdMapperImpl
+ * @see       com.liferay.portal.model.UserIdMapper
+ * @see       com.liferay.portal.model.UserIdMapperModel
  * @generated
  */
 public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper> {

@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link BlogsEntryServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.blogs.service.http.BlogsEntryServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.blogs.service.http.BlogsEntryServiceJSON
  * @generated
  */
 public class BlogsEntryJSONSerializer {

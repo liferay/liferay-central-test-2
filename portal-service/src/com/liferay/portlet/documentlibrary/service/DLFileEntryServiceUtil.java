@@ -39,8 +39,8 @@ package com.liferay.portlet.documentlibrary.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileEntryService
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileEntryService
  * @generated
  */
 public class DLFileEntryServiceUtil {

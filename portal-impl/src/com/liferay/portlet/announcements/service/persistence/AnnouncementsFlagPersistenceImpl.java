@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsFlagPersistence
- * @see    AnnouncementsFlagUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsFlagPersistence
+ * @see       AnnouncementsFlagUtil
  * @generated
  */
 public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl

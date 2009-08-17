@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    EmailAddressPersistence
- * @see    EmailAddressUtil
+ * @author    Brian Wing Shun Chan
+ * @see       EmailAddressPersistence
+ * @see       EmailAddressUtil
  * @generated
  */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl

@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserImpl
- * @see    com.liferay.portal.model.User
- * @see    com.liferay.portal.model.UserModel
+ * @author    Brian Wing Shun Chan
+ * @see       UserImpl
+ * @see       com.liferay.portal.model.User
+ * @see       com.liferay.portal.model.UserModel
  * @generated
  */
 public class UserModelImpl extends BaseModelImpl<User> {

@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link OrgLaborServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.OrgLaborServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.OrgLaborServiceJSON
  * @generated
  */
 public class OrgLaborJSONSerializer {

@@ -63,10 +63,10 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGImageServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.imagegallery.service.IGImageServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGImageServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.imagegallery.service.IGImageServiceUtil
  * @generated
  */
 public class IGImageServiceHttp {

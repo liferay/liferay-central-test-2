@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ServiceComponentImpl
- * @see    com.liferay.portal.model.ServiceComponent
- * @see    com.liferay.portal.model.ServiceComponentModel
+ * @author    Brian Wing Shun Chan
+ * @see       ServiceComponentImpl
+ * @see       com.liferay.portal.model.ServiceComponent
+ * @see       com.liferay.portal.model.ServiceComponentModel
  * @generated
  */
 public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {

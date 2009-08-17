@@ -42,8 +42,8 @@ import java.util.List;
  * This class is used by {@link ExpandoValueServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.expando.service.http.ExpandoValueServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.expando.service.http.ExpandoValueServiceJSON
  * @generated
  */
 public class ExpandoValueJSONSerializer {

@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourceCodeImpl
- * @see    com.liferay.portal.model.ResourceCode
- * @see    com.liferay.portal.model.ResourceCodeModel
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceCodeImpl
+ * @see       com.liferay.portal.model.ResourceCode
+ * @see       com.liferay.portal.model.ResourceCodeModel
  * @generated
  */
 public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {

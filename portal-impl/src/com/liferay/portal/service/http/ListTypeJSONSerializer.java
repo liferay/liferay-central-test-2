@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link ListTypeServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.ListTypeServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.ListTypeServiceJSON
  * @generated
  */
 public class ListTypeJSONSerializer {

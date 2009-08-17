@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link MBMessageFlagServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceJSON
  * @generated
  */
 public class MBMessageFlagJSONSerializer {

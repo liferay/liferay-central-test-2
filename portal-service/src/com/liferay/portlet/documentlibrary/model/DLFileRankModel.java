@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileRank
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileRank
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  * @generated
  */
 public interface DLFileRankModel extends BaseModel<DLFileRank> {

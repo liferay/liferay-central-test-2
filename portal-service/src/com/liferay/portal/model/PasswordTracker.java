@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PasswordTrackerModel
- * @see com.liferay.portal.model.impl.PasswordTrackerImpl
- * @see com.liferay.portal.model.impl.PasswordTrackerModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordTrackerModel
+ * @see       com.liferay.portal.model.impl.PasswordTrackerImpl
+ * @see       com.liferay.portal.model.impl.PasswordTrackerModelImpl
  * @generated
  */
 public interface PasswordTracker extends PasswordTrackerModel {

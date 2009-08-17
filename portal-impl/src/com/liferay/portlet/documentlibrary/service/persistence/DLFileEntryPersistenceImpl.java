@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileEntryPersistence
- * @see    DLFileEntryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileEntryPersistence
+ * @see       DLFileEntryUtil
  * @generated
  */
 public class DLFileEntryPersistenceImpl extends BasePersistenceImpl

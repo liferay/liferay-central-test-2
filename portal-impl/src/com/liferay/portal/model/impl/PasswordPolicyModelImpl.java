@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicyImpl
- * @see    com.liferay.portal.model.PasswordPolicy
- * @see    com.liferay.portal.model.PasswordPolicyModel
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyImpl
+ * @see       com.liferay.portal.model.PasswordPolicy
+ * @see       com.liferay.portal.model.PasswordPolicyModel
  * @generated
  */
 public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {

@@ -38,10 +38,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialRequest
- * @see    com.liferay.portlet.social.model.impl.SocialRequestImpl
- * @see    com.liferay.portlet.social.model.impl.SocialRequestModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRequest
+ * @see       com.liferay.portlet.social.model.impl.SocialRequestImpl
+ * @see       com.liferay.portlet.social.model.impl.SocialRequestModelImpl
  * @generated
  */
 public interface SocialRequestModel extends BaseModel<SocialRequest> {

@@ -68,9 +68,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    GroupPersistence
- * @see    GroupUtil
+ * @author    Brian Wing Shun Chan
+ * @see       GroupPersistence
+ * @see       GroupUtil
  * @generated
  */
 public class GroupPersistenceImpl extends BasePersistenceImpl

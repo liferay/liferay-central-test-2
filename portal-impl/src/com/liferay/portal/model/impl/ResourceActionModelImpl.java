@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourceActionImpl
- * @see    com.liferay.portal.model.ResourceAction
- * @see    com.liferay.portal.model.ResourceActionModel
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceActionImpl
+ * @see       com.liferay.portal.model.ResourceAction
+ * @see       com.liferay.portal.model.ResourceActionModel
  * @generated
  */
 public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PhoneModel
- * @see com.liferay.portal.model.impl.PhoneImpl
- * @see com.liferay.portal.model.impl.PhoneModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PhoneModel
+ * @see       com.liferay.portal.model.impl.PhoneImpl
+ * @see       com.liferay.portal.model.impl.PhoneModelImpl
  * @generated
  */
 public interface Phone extends PhoneModel {

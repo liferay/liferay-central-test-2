@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see WebsiteModel
- * @see com.liferay.portal.model.impl.WebsiteImpl
- * @see com.liferay.portal.model.impl.WebsiteModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WebsiteModel
+ * @see       com.liferay.portal.model.impl.WebsiteImpl
+ * @see       com.liferay.portal.model.impl.WebsiteModelImpl
  * @generated
  */
 public interface Website extends WebsiteModel {

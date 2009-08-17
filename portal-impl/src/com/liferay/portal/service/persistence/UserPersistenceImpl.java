@@ -69,9 +69,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserPersistence
- * @see    UserUtil
+ * @author    Brian Wing Shun Chan
+ * @see       UserPersistence
+ * @see       UserUtil
  * @generated
  */
 public class UserPersistenceImpl extends BasePersistenceImpl

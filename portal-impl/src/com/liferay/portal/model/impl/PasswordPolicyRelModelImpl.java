@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicyRelImpl
- * @see    com.liferay.portal.model.PasswordPolicyRel
- * @see    com.liferay.portal.model.PasswordPolicyRelModel
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyRelImpl
+ * @see       com.liferay.portal.model.PasswordPolicyRel
+ * @see       com.liferay.portal.model.PasswordPolicyRelModel
  * @generated
  */
 public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel> {

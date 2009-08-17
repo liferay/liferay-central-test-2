@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PortletItemModel
- * @see com.liferay.portal.model.impl.PortletItemImpl
- * @see com.liferay.portal.model.impl.PortletItemModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PortletItemModel
+ * @see       com.liferay.portal.model.impl.PortletItemImpl
+ * @see       com.liferay.portal.model.impl.PortletItemModelImpl
  * @generated
  */
 public interface PortletItem extends PortletItemModel {

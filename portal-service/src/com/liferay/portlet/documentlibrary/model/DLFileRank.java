@@ -41,10 +41,10 @@ package com.liferay.portlet.documentlibrary.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see DLFileRankModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileRankModel
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  * @generated
  */
 public interface DLFileRank extends DLFileRankModel {

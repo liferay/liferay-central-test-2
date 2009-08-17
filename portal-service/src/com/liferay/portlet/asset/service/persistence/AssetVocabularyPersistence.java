@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetVocabularyPersistenceImpl
- * @see    AssetVocabularyUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabularyPersistenceImpl
+ * @see       AssetVocabularyUtil
  * @generated
  */
 public interface AssetVocabularyPersistence extends BasePersistence {

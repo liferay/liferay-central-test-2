@@ -71,9 +71,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetCategoryPersistence
- * @see    AssetCategoryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetCategoryPersistence
+ * @see       AssetCategoryUtil
  * @generated
  */
 public class AssetCategoryPersistenceImpl extends BasePersistenceImpl

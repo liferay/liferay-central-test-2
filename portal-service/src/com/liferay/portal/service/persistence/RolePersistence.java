@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RolePersistenceImpl
- * @see    RoleUtil
+ * @author    Brian Wing Shun Chan
+ * @see       RolePersistenceImpl
+ * @see       RoleUtil
  * @generated
  */
 public interface RolePersistence extends BasePersistence {

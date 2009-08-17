@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link MBThreadServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBThreadServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBThreadServiceJSON
  * @generated
  */
 public class MBThreadJSONSerializer {

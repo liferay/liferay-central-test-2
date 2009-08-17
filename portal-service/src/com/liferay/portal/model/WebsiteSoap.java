@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.WebsiteServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.WebsiteServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.WebsiteServiceSoap
  * @generated
  */
 public class WebsiteSoap implements Serializable {

@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEvent
- * @see    com.liferay.portlet.calendar.model.impl.CalEventImpl
- * @see    com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       CalEvent
+ * @see       com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see       com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  * @generated
  */
 public interface CalEventModel extends BaseModel<CalEvent> {

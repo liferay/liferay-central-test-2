@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceSoap
  * @generated
  */
 public class DLFileShortcutSoap implements Serializable {

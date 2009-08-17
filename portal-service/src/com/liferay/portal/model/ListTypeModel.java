@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ListType
- * @see    com.liferay.portal.model.impl.ListTypeImpl
- * @see    com.liferay.portal.model.impl.ListTypeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ListType
+ * @see       com.liferay.portal.model.impl.ListTypeImpl
+ * @see       com.liferay.portal.model.impl.ListTypeModelImpl
  * @generated
  */
 public interface ListTypeModel extends BaseModel<ListType> {

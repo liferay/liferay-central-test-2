@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEventPersistenceImpl
- * @see    CalEventUtil
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventPersistenceImpl
+ * @see       CalEventUtil
  * @generated
  */
 public interface CalEventPersistence extends BasePersistence {

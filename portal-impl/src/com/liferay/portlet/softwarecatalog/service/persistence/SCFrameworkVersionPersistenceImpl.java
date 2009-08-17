@@ -69,9 +69,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCFrameworkVersionPersistence
- * @see    SCFrameworkVersionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SCFrameworkVersionPersistence
+ * @see       SCFrameworkVersionUtil
  * @generated
  */
 public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl

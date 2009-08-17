@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserTrackerPathPersistence
- * @see    UserTrackerPathUtil
+ * @author    Brian Wing Shun Chan
+ * @see       UserTrackerPathPersistence
+ * @see       UserTrackerPathUtil
  * @generated
  */
 public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl

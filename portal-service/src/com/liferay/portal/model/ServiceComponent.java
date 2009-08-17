@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ServiceComponentModel
- * @see com.liferay.portal.model.impl.ServiceComponentImpl
- * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ServiceComponentModel
+ * @see       com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see       com.liferay.portal.model.impl.ServiceComponentModelImpl
  * @generated
  */
 public interface ServiceComponent extends ServiceComponentModel {

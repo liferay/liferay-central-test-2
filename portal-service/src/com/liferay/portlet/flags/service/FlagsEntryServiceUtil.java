@@ -39,8 +39,8 @@ package com.liferay.portlet.flags.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    FlagsEntryService
+ * @author    Brian Wing Shun Chan
+ * @see       FlagsEntryService
  * @generated
  */
 public class FlagsEntryServiceUtil {

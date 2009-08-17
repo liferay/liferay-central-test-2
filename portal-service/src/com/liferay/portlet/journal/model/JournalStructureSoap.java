@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.journal.service.http.JournalStructureServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.journal.service.http.JournalStructureServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.journal.service.http.JournalStructureServiceSoap
  * @generated
  */
 public class JournalStructureSoap implements Serializable {

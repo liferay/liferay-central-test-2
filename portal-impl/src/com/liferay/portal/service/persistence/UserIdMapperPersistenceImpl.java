@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserIdMapperPersistence
- * @see    UserIdMapperUtil
+ * @author    Brian Wing Shun Chan
+ * @see       UserIdMapperPersistence
+ * @see       UserIdMapperUtil
  * @generated
  */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl

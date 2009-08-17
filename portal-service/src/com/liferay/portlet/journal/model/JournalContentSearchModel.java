@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalContentSearch
- * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
- * @see    com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       JournalContentSearch
+ * @see       com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
+ * @see       com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
  * @generated
  */
 public interface JournalContentSearchModel extends BaseModel<JournalContentSearch> {

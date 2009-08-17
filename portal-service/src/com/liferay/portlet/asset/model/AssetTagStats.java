@@ -41,10 +41,10 @@ package com.liferay.portlet.asset.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AssetTagStatsModel
- * @see com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
- * @see com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagStatsModel
+ * @see       com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
  * @generated
  */
 public interface AssetTagStats extends AssetTagStatsModel {

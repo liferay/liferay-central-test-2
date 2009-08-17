@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShardPersistence
- * @see    ShardUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ShardPersistence
+ * @see       ShardUtil
  * @generated
  */
 public class ShardPersistenceImpl extends BasePersistenceImpl

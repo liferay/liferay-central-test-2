@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link PollsVoteServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.polls.service.http.PollsVoteServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.polls.service.http.PollsVoteServiceJSON
  * @generated
  */
 public class PollsVoteJSONSerializer {

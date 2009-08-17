@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see RegionModel
- * @see com.liferay.portal.model.impl.RegionImpl
- * @see com.liferay.portal.model.impl.RegionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       RegionModel
+ * @see       com.liferay.portal.model.impl.RegionImpl
+ * @see       com.liferay.portal.model.impl.RegionModelImpl
  * @generated
  */
 public interface Region extends RegionModel {

@@ -41,10 +41,10 @@ package com.liferay.portlet.messageboards.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MBThreadModel
- * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl
- * @see com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBThreadModel
+ * @see       com.liferay.portlet.messageboards.model.impl.MBThreadImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
  * @generated
  */
 public interface MBThread extends MBThreadModel {

@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link BookmarksEntryServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.bookmarks.service.http.BookmarksEntryServiceJSON
  * @generated
  */
 public class BookmarksEntryJSONSerializer {

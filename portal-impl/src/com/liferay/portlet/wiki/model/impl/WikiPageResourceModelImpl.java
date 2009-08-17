@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPageResourceImpl
- * @see    com.liferay.portlet.wiki.model.WikiPageResource
- * @see    com.liferay.portlet.wiki.model.WikiPageResourceModel
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageResourceImpl
+ * @see       com.liferay.portlet.wiki.model.WikiPageResource
+ * @see       com.liferay.portlet.wiki.model.WikiPageResourceModel
  * @generated
  */
 public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource> {

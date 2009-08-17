@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.PasswordPolicyServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.PasswordPolicyServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.PasswordPolicyServiceSoap
  * @generated
  */
 public class PasswordPolicySoap implements Serializable {

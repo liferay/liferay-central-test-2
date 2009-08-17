@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BrowserTrackerImpl
- * @see    com.liferay.portal.model.BrowserTracker
- * @see    com.liferay.portal.model.BrowserTrackerModel
+ * @author    Brian Wing Shun Chan
+ * @see       BrowserTrackerImpl
+ * @see       com.liferay.portal.model.BrowserTracker
+ * @see       com.liferay.portal.model.BrowserTrackerModel
  * @generated
  */
 public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {

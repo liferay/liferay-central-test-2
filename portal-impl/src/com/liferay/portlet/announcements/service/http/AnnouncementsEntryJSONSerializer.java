@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link AnnouncementsEntryServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.announcements.service.http.AnnouncementsEntryServiceJSON
  * @generated
  */
 public class AnnouncementsEntryJSONSerializer {

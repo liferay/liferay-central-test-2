@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCFrameworkVersion
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCFrameworkVersion
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
  * @generated
  */
 public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {

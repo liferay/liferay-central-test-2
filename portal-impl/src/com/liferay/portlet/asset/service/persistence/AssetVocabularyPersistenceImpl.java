@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetVocabularyPersistence
- * @see    AssetVocabularyUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabularyPersistence
+ * @see       AssetVocabularyUtil
  * @generated
  */
 public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl

@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBCategoryPersistence
- * @see    MBCategoryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategoryPersistence
+ * @see       MBCategoryUtil
  * @generated
  */
 public class MBCategoryPersistenceImpl extends BasePersistenceImpl

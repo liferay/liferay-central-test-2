@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBThreadImpl
- * @see    com.liferay.portlet.messageboards.model.MBThread
- * @see    com.liferay.portlet.messageboards.model.MBThreadModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBThreadImpl
+ * @see       com.liferay.portlet.messageboards.model.MBThread
+ * @see       com.liferay.portlet.messageboards.model.MBThreadModel
  * @generated
  */
 public class MBThreadModelImpl extends BaseModelImpl<MBThread> {

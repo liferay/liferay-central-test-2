@@ -41,10 +41,10 @@ package com.liferay.portlet.imagegallery.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see IGFolderModel
- * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
- * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderModel
+ * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
+ * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  * @generated
  */
 public interface IGFolder extends IGFolderModel {

@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBCategoryPersistenceImpl
- * @see    MBCategoryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategoryPersistenceImpl
+ * @see       MBCategoryUtil
  * @generated
  */
 public interface MBCategoryPersistence extends BasePersistence {

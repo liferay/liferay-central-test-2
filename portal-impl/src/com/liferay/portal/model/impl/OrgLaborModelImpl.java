@@ -52,10 +52,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    OrgLaborImpl
- * @see    com.liferay.portal.model.OrgLabor
- * @see    com.liferay.portal.model.OrgLaborModel
+ * @author    Brian Wing Shun Chan
+ * @see       OrgLaborImpl
+ * @see       com.liferay.portal.model.OrgLabor
+ * @see       com.liferay.portal.model.OrgLaborModel
  * @generated
  */
 public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor> {

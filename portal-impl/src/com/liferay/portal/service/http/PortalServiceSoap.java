@@ -72,10 +72,10 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortalServiceHttp
- * @see    com.liferay.portal.model.PortalSoap
- * @see    com.liferay.portal.service.PortalServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PortalServiceHttp
+ * @see       com.liferay.portal.model.PortalSoap
+ * @see       com.liferay.portal.service.PortalServiceUtil
  * @generated
  */
 public class PortalServiceSoap {

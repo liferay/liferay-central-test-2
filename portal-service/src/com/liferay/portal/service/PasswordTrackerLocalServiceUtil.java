@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordTrackerLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordTrackerLocalService
  * @generated
  */
 public class PasswordTrackerLocalServiceUtil {

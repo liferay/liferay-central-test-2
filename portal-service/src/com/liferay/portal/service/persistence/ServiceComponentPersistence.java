@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ServiceComponentPersistenceImpl
- * @see    ServiceComponentUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ServiceComponentPersistenceImpl
+ * @see       ServiceComponentUtil
  * @generated
  */
 public interface ServiceComponentPersistence extends BasePersistence {

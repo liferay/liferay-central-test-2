@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PluginSetting
- * @see    com.liferay.portal.model.impl.PluginSettingImpl
- * @see    com.liferay.portal.model.impl.PluginSettingModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PluginSetting
+ * @see       com.liferay.portal.model.impl.PluginSettingImpl
+ * @see       com.liferay.portal.model.impl.PluginSettingModelImpl
  * @generated
  */
 public interface PluginSettingModel extends BaseModel<PluginSetting> {

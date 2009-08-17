@@ -41,10 +41,10 @@ package com.liferay.portlet.blogs.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see BlogsStatsUserModel
- * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
- * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsStatsUserModel
+ * @see       com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
+ * @see       com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl
  * @generated
  */
 public interface BlogsStatsUser extends BlogsStatsUserModel {

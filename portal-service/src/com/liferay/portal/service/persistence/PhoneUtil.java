@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PhonePersistence
- * @see    PhonePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PhonePersistence
+ * @see       PhonePersistenceImpl
  * @generated
  */
 public class PhoneUtil {

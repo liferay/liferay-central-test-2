@@ -64,10 +64,10 @@ import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
  * @generated
  */
 public class IGFolderServiceHttp {

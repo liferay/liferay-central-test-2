@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBThreadServiceSoap
  * @generated
  */
 public class MBThreadSoap implements Serializable {

@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ClassNameService
+ * @author    Brian Wing Shun Chan
+ * @see       ClassNameService
  * @generated
  */
 public class ClassNameServiceUtil {

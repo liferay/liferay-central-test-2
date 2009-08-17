@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingCartPersistenceImpl
- * @see    ShoppingCartUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingCartPersistenceImpl
+ * @see       ShoppingCartUtil
  * @generated
  */
 public interface ShoppingCartPersistence extends BasePersistence {

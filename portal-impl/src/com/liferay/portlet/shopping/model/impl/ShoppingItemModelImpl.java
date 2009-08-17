@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingItemImpl
- * @see    com.liferay.portlet.shopping.model.ShoppingItem
- * @see    com.liferay.portlet.shopping.model.ShoppingItemModel
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingItemImpl
+ * @see       com.liferay.portlet.shopping.model.ShoppingItem
+ * @see       com.liferay.portlet.shopping.model.ShoppingItemModel
  * @generated
  */
 public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {

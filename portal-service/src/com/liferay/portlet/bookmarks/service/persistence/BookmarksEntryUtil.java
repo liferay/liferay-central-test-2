@@ -31,9 +31,9 @@ package com.liferay.portlet.bookmarks.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksEntryPersistence
- * @see    BookmarksEntryPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksEntryPersistence
+ * @see       BookmarksEntryPersistenceImpl
  * @generated
  */
 public class BookmarksEntryUtil {

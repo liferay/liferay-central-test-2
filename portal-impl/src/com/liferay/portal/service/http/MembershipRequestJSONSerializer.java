@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link MembershipRequestServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.MembershipRequestServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.MembershipRequestServiceJSON
  * @generated
  */
 public class MembershipRequestJSONSerializer {

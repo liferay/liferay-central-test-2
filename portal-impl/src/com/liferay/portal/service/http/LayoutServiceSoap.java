@@ -72,10 +72,10 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutServiceHttp
- * @see    com.liferay.portal.model.LayoutSoap
- * @see    com.liferay.portal.service.LayoutServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutServiceHttp
+ * @see       com.liferay.portal.model.LayoutSoap
+ * @see       com.liferay.portal.service.LayoutServiceUtil
  * @generated
  */
 public class LayoutServiceSoap {

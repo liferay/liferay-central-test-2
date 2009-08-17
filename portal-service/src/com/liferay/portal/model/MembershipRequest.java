@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MembershipRequestModel
- * @see com.liferay.portal.model.impl.MembershipRequestImpl
- * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MembershipRequestModel
+ * @see       com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see       com.liferay.portal.model.impl.MembershipRequestModelImpl
  * @generated
  */
 public interface MembershipRequest extends MembershipRequestModel {

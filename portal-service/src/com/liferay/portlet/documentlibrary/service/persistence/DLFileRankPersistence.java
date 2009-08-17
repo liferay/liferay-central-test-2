@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileRankPersistenceImpl
- * @see    DLFileRankUtil
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileRankPersistenceImpl
+ * @see       DLFileRankUtil
  * @generated
  */
 public interface DLFileRankPersistence extends BasePersistence {

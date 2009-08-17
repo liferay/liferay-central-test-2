@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPage
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageImpl
- * @see    com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPage
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  * @generated
  */
 public interface WikiPageModel extends BaseModel<WikiPage> {

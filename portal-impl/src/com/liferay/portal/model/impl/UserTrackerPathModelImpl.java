@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserTrackerPathImpl
- * @see    com.liferay.portal.model.UserTrackerPath
- * @see    com.liferay.portal.model.UserTrackerPathModel
+ * @author    Brian Wing Shun Chan
+ * @see       UserTrackerPathImpl
+ * @see       com.liferay.portal.model.UserTrackerPath
+ * @see       com.liferay.portal.model.UserTrackerPathModel
  * @generated
  */
 public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath> {

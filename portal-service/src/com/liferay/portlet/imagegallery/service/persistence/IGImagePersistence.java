@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGImagePersistenceImpl
- * @see    IGImageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGImagePersistenceImpl
+ * @see       IGImageUtil
  * @generated
  */
 public interface IGImagePersistence extends BasePersistence {

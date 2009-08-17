@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link WikiPageServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.wiki.service.http.WikiPageServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.wiki.service.http.WikiPageServiceJSON
  * @generated
  */
 public class WikiPageJSONSerializer {

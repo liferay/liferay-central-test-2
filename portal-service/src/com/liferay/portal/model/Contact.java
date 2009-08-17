@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ContactModel
- * @see com.liferay.portal.model.impl.ContactImpl
- * @see com.liferay.portal.model.impl.ContactModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ContactModel
+ * @see       com.liferay.portal.model.impl.ContactImpl
+ * @see       com.liferay.portal.model.impl.ContactModelImpl
  * @generated
  */
 public interface Contact extends ContactModel {

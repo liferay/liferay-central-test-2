@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    OrgLaborPersistence
- * @see    OrgLaborUtil
+ * @author    Brian Wing Shun Chan
+ * @see       OrgLaborPersistence
+ * @see       OrgLaborUtil
  * @generated
  */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl

@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourcePermissionPersistenceImpl
- * @see    ResourcePermissionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ResourcePermissionPersistenceImpl
+ * @see       ResourcePermissionUtil
  * @generated
  */
 public interface ResourcePermissionPersistence extends BasePersistence {

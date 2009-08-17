@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoRowPersistenceImpl
- * @see    ExpandoRowUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoRowPersistenceImpl
+ * @see       ExpandoRowUtil
  * @generated
  */
 public interface ExpandoRowPersistence extends BasePersistence {

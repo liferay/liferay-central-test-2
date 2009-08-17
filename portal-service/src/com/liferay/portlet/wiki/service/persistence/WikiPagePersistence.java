@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPagePersistenceImpl
- * @see    WikiPageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPagePersistenceImpl
+ * @see       WikiPageUtil
  * @generated
  */
 public interface WikiPagePersistence extends BasePersistence {

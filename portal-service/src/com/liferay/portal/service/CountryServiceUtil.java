@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CountryService
+ * @author    Brian Wing Shun Chan
+ * @see       CountryService
  * @generated
  */
 public class CountryServiceUtil {

@@ -39,8 +39,8 @@ package com.liferay.portlet.imagegallery.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderService
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderService
  * @generated
  */
 public class IGFolderServiceUtil {

@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderPersistence
- * @see    IGFolderUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderPersistence
+ * @see       IGFolderUtil
  * @generated
  */
 public class IGFolderPersistenceImpl extends BasePersistenceImpl

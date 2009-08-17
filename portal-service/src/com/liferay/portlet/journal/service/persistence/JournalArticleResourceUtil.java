@@ -31,9 +31,9 @@ package com.liferay.portlet.journal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalArticleResourcePersistence
- * @see    JournalArticleResourcePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       JournalArticleResourcePersistence
+ * @see       JournalArticleResourcePersistenceImpl
  * @generated
  */
 public class JournalArticleResourceUtil {

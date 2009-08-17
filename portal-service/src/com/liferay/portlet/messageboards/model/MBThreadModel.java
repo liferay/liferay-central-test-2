@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBThread
- * @see    com.liferay.portlet.messageboards.model.impl.MBThreadImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBThread
+ * @see       com.liferay.portlet.messageboards.model.impl.MBThreadImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
  * @generated
  */
 public interface MBThreadModel extends BaseModel<MBThread> {

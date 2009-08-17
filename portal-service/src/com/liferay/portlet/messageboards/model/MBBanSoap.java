@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.messageboards.service.http.MBBanServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBBanServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBBanServiceSoap
  * @generated
  */
 public class MBBanSoap implements Serializable {

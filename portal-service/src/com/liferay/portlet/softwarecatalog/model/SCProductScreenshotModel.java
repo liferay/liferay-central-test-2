@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductScreenshot
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
- * @see    com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductScreenshot
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  * @generated
  */
 public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot> {

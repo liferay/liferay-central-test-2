@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see UserTrackerPathModel
- * @see com.liferay.portal.model.impl.UserTrackerPathImpl
- * @see com.liferay.portal.model.impl.UserTrackerPathModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserTrackerPathModel
+ * @see       com.liferay.portal.model.impl.UserTrackerPathImpl
+ * @see       com.liferay.portal.model.impl.UserTrackerPathModelImpl
  * @generated
  */
 public interface UserTrackerPath extends UserTrackerPathModel {

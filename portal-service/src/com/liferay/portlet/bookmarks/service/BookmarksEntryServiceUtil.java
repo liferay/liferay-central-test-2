@@ -39,8 +39,8 @@ package com.liferay.portlet.bookmarks.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksEntryService
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksEntryService
  * @generated
  */
 public class BookmarksEntryServiceUtil {

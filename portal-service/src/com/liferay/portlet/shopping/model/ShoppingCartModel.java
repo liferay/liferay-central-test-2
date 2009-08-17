@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingCart
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingCart
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
  * @generated
  */
 public interface ShoppingCartModel extends BaseModel<ShoppingCart> {

@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagPropertyPersistenceImpl
- * @see    AssetTagPropertyUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagPropertyPersistenceImpl
+ * @see       AssetTagPropertyUtil
  * @generated
  */
 public interface AssetTagPropertyPersistence extends BasePersistence {

@@ -31,9 +31,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileShortcutPersistence
- * @see    DLFileShortcutPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcutPersistence
+ * @see       DLFileShortcutPersistenceImpl
  * @generated
  */
 public class DLFileShortcutUtil {

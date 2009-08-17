@@ -63,10 +63,10 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksEntryServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksEntryServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil
  * @generated
  */
 public class BookmarksEntryServiceHttp {

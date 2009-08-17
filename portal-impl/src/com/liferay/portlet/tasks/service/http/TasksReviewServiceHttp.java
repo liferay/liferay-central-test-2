@@ -64,10 +64,10 @@ import com.liferay.portlet.tasks.service.TasksReviewServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksReviewServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.tasks.service.TasksReviewServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       TasksReviewServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.tasks.service.TasksReviewServiceUtil
  * @generated
  */
 public class TasksReviewServiceHttp {

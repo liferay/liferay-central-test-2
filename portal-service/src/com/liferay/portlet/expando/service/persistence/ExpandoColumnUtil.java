@@ -31,9 +31,9 @@ package com.liferay.portlet.expando.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoColumnPersistence
- * @see    ExpandoColumnPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoColumnPersistence
+ * @see       ExpandoColumnPersistenceImpl
  * @generated
  */
 public class ExpandoColumnUtil {

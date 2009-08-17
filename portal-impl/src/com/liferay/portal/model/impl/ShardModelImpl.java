@@ -55,10 +55,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShardImpl
- * @see    com.liferay.portal.model.Shard
- * @see    com.liferay.portal.model.ShardModel
+ * @author    Brian Wing Shun Chan
+ * @see       ShardImpl
+ * @see       com.liferay.portal.model.Shard
+ * @see       com.liferay.portal.model.ShardModel
  * @generated
  */
 public class ShardModelImpl extends BaseModelImpl<Shard> {

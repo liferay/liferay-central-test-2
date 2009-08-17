@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link WebsiteServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.WebsiteServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.WebsiteServiceJSON
  * @generated
  */
 public class WebsiteJSONSerializer {

@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ImageImpl
- * @see    com.liferay.portal.model.Image
- * @see    com.liferay.portal.model.ImageModel
+ * @author    Brian Wing Shun Chan
+ * @see       ImageImpl
+ * @see       com.liferay.portal.model.Image
+ * @see       com.liferay.portal.model.ImageModel
  * @generated
  */
 public class ImageModelImpl extends BaseModelImpl<Image> {

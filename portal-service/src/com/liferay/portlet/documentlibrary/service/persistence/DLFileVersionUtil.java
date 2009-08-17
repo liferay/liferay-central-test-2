@@ -31,9 +31,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileVersionPersistence
- * @see    DLFileVersionPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileVersionPersistence
+ * @see       DLFileVersionPersistenceImpl
  * @generated
  */
 public class DLFileVersionUtil {

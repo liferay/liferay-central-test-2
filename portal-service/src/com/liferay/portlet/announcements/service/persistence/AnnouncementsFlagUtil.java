@@ -31,9 +31,9 @@ package com.liferay.portlet.announcements.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsFlagPersistence
- * @see    AnnouncementsFlagPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsFlagPersistence
+ * @see       AnnouncementsFlagPersistenceImpl
  * @generated
  */
 public class AnnouncementsFlagUtil {

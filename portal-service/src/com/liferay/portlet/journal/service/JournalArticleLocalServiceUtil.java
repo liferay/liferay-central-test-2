@@ -39,8 +39,8 @@ package com.liferay.portlet.journal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalArticleLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       JournalArticleLocalService
  * @generated
  */
 public class JournalArticleLocalServiceUtil {

@@ -41,10 +41,10 @@ package com.liferay.portlet.softwarecatalog.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see SCFrameworkVersionModel
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCFrameworkVersionModel
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
  * @generated
  */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {

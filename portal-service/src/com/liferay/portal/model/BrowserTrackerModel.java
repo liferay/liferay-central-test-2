@@ -37,10 +37,10 @@ import com.liferay.portal.SystemException;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BrowserTracker
- * @see    com.liferay.portal.model.impl.BrowserTrackerImpl
- * @see    com.liferay.portal.model.impl.BrowserTrackerModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BrowserTracker
+ * @see       com.liferay.portal.model.impl.BrowserTrackerImpl
+ * @see       com.liferay.portal.model.impl.BrowserTrackerModelImpl
  * @generated
  */
 public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {

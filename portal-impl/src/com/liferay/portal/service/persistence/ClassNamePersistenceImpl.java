@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ClassNamePersistence
- * @see    ClassNameUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ClassNamePersistence
+ * @see       ClassNameUtil
  * @generated
  */
 public class ClassNamePersistenceImpl extends BasePersistenceImpl

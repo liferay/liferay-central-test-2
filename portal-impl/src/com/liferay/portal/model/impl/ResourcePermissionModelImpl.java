@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourcePermissionImpl
- * @see    com.liferay.portal.model.ResourcePermission
- * @see    com.liferay.portal.model.ResourcePermissionModel
+ * @author    Brian Wing Shun Chan
+ * @see       ResourcePermissionImpl
+ * @see       com.liferay.portal.model.ResourcePermission
+ * @see       com.liferay.portal.model.ResourcePermissionModel
  * @generated
  */
 public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermission> {

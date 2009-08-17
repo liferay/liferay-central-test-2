@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletPreferencesImpl
- * @see    com.liferay.portal.model.PortletPreferences
- * @see    com.liferay.portal.model.PortletPreferencesModel
+ * @author    Brian Wing Shun Chan
+ * @see       PortletPreferencesImpl
+ * @see       com.liferay.portal.model.PortletPreferences
+ * @see       com.liferay.portal.model.PortletPreferencesModel
  * @generated
  */
 public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreferences> {

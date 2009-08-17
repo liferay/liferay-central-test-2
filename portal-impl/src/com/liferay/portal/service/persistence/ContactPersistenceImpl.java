@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ContactPersistence
- * @see    ContactUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ContactPersistence
+ * @see       ContactUtil
  * @generated
  */
 public class ContactPersistenceImpl extends BasePersistenceImpl

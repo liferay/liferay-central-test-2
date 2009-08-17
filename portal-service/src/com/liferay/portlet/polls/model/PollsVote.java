@@ -41,10 +41,10 @@ package com.liferay.portlet.polls.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PollsVoteModel
- * @see com.liferay.portlet.polls.model.impl.PollsVoteImpl
- * @see com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PollsVoteModel
+ * @see       com.liferay.portlet.polls.model.impl.PollsVoteImpl
+ * @see       com.liferay.portlet.polls.model.impl.PollsVoteModelImpl
  * @generated
  */
 public interface PollsVote extends PollsVoteModel {

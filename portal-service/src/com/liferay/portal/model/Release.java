@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ReleaseModel
- * @see com.liferay.portal.model.impl.ReleaseImpl
- * @see com.liferay.portal.model.impl.ReleaseModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ReleaseModel
+ * @see       com.liferay.portal.model.impl.ReleaseImpl
+ * @see       com.liferay.portal.model.impl.ReleaseModelImpl
  * @generated
  */
 public interface Release extends ReleaseModel {

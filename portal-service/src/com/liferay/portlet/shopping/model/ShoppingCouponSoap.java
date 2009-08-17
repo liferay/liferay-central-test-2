@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.shopping.service.http.ShoppingCouponServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.shopping.service.http.ShoppingCouponServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.shopping.service.http.ShoppingCouponServiceSoap
  * @generated
  */
 public class ShoppingCouponSoap implements Serializable {

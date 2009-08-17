@@ -39,8 +39,8 @@ package com.liferay.portlet.polls.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsVoteService
+ * @author    Brian Wing Shun Chan
+ * @see       PollsVoteService
  * @generated
  */
 public class PollsVoteServiceUtil {

@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBMessageServiceSoap
  * @generated
  */
 public class MBMessageSoap implements Serializable {

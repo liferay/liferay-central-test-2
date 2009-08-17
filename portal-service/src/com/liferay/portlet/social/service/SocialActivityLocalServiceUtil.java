@@ -39,8 +39,8 @@ package com.liferay.portlet.social.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialActivityLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       SocialActivityLocalService
  * @generated
  */
 public class SocialActivityLocalServiceUtil {

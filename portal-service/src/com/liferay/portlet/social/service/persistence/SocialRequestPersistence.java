@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialRequestPersistenceImpl
- * @see    SocialRequestUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRequestPersistenceImpl
+ * @see       SocialRequestUtil
  * @generated
  */
 public interface SocialRequestPersistence extends BasePersistence {

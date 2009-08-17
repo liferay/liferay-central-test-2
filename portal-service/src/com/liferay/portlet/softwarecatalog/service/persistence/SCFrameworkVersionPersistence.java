@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCFrameworkVersionPersistenceImpl
- * @see    SCFrameworkVersionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SCFrameworkVersionPersistenceImpl
+ * @see       SCFrameworkVersionUtil
  * @generated
  */
 public interface SCFrameworkVersionPersistence extends BasePersistence {

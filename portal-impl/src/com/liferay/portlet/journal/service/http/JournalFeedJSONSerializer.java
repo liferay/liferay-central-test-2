@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link JournalFeedServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.journal.service.http.JournalFeedServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.journal.service.http.JournalFeedServiceJSON
  * @generated
  */
 public class JournalFeedJSONSerializer {

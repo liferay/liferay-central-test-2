@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see OrgGroupRoleModel
- * @see com.liferay.portal.model.impl.OrgGroupRoleImpl
- * @see com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       OrgGroupRoleModel
+ * @see       com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see       com.liferay.portal.model.impl.OrgGroupRoleModelImpl
  * @generated
  */
 public interface OrgGroupRole extends OrgGroupRoleModel {

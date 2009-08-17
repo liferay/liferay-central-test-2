@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link PortletServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.PortletServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.PortletServiceJSON
  * @generated
  */
 public class PortletJSONSerializer {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see SubscriptionModel
- * @see com.liferay.portal.model.impl.SubscriptionImpl
- * @see com.liferay.portal.model.impl.SubscriptionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SubscriptionModel
+ * @see       com.liferay.portal.model.impl.SubscriptionImpl
+ * @see       com.liferay.portal.model.impl.SubscriptionModelImpl
  * @generated
  */
 public interface Subscription extends SubscriptionModel {

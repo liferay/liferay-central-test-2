@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see LockModel
- * @see com.liferay.portal.model.impl.LockImpl
- * @see com.liferay.portal.model.impl.LockModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       LockModel
+ * @see       com.liferay.portal.model.impl.LockImpl
+ * @see       com.liferay.portal.model.impl.LockModelImpl
  * @generated
  */
 public interface Lock extends LockModel {

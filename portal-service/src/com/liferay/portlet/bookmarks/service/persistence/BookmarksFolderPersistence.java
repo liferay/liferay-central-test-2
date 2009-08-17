@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksFolderPersistenceImpl
- * @see    BookmarksFolderUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksFolderPersistenceImpl
+ * @see       BookmarksFolderUtil
  * @generated
  */
 public interface BookmarksFolderPersistence extends BasePersistence {

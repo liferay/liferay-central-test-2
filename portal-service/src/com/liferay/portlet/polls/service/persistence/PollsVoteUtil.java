@@ -31,9 +31,9 @@ package com.liferay.portlet.polls.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsVotePersistence
- * @see    PollsVotePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PollsVotePersistence
+ * @see       PollsVotePersistenceImpl
  * @generated
  */
 public class PollsVoteUtil {

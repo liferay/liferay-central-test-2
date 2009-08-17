@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ServiceComponentPersistence
- * @see    ServiceComponentUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ServiceComponentPersistence
+ * @see       ServiceComponentUtil
  * @generated
  */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl

@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoValueImpl
- * @see    com.liferay.portlet.expando.model.ExpandoValue
- * @see    com.liferay.portlet.expando.model.ExpandoValueModel
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoValueImpl
+ * @see       com.liferay.portlet.expando.model.ExpandoValue
+ * @see       com.liferay.portlet.expando.model.ExpandoValueModel
  * @generated
  */
 public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue> {

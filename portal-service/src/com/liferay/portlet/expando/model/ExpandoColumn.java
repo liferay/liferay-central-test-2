@@ -41,10 +41,10 @@ package com.liferay.portlet.expando.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ExpandoColumnModel
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
- * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoColumnModel
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
  * @generated
  */
 public interface ExpandoColumn extends ExpandoColumnModel {

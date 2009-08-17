@@ -41,10 +41,10 @@ package com.liferay.portlet.expando.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ExpandoValueModel
- * @see com.liferay.portlet.expando.model.impl.ExpandoValueImpl
- * @see com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoValueModel
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoValueImpl
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
  * @generated
  */
 public interface ExpandoValue extends ExpandoValueModel {

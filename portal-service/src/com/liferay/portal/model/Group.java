@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see GroupModel
- * @see com.liferay.portal.model.impl.GroupImpl
- * @see com.liferay.portal.model.impl.GroupModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       GroupModel
+ * @see       com.liferay.portal.model.impl.GroupImpl
+ * @see       com.liferay.portal.model.impl.GroupModelImpl
  * @generated
  */
 public interface Group extends GroupModel {

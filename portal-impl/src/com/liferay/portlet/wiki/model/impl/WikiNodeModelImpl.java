@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiNodeImpl
- * @see    com.liferay.portlet.wiki.model.WikiNode
- * @see    com.liferay.portlet.wiki.model.WikiNodeModel
+ * @author    Brian Wing Shun Chan
+ * @see       WikiNodeImpl
+ * @see       com.liferay.portlet.wiki.model.WikiNode
+ * @see       com.liferay.portlet.wiki.model.WikiNodeModel
  * @generated
  */
 public class WikiNodeModelImpl extends BaseModelImpl<WikiNode> {

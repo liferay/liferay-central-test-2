@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicyRelPersistence
- * @see    PasswordPolicyRelUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyRelPersistence
+ * @see       PasswordPolicyRelUtil
  * @generated
  */
 public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl

@@ -31,9 +31,9 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCFrameworkVersionPersistence
- * @see    SCFrameworkVersionPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCFrameworkVersionPersistence
+ * @see       SCFrameworkVersionPersistenceImpl
  * @generated
  */
 public class SCFrameworkVersionUtil {

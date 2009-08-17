@@ -59,10 +59,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessageImpl
- * @see    com.liferay.portlet.messageboards.model.MBMessage
- * @see    com.liferay.portlet.messageboards.model.MBMessageModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessageImpl
+ * @see       com.liferay.portlet.messageboards.model.MBMessage
+ * @see       com.liferay.portlet.messageboards.model.MBMessageModel
  * @generated
  */
 public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {

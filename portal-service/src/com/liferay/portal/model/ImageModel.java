@@ -37,10 +37,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Image
- * @see    com.liferay.portal.model.impl.ImageImpl
- * @see    com.liferay.portal.model.impl.ImageModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Image
+ * @see       com.liferay.portal.model.impl.ImageImpl
+ * @see       com.liferay.portal.model.impl.ImageModelImpl
  * @generated
  */
 public interface ImageModel extends BaseModel<Image> {

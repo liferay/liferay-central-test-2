@@ -63,10 +63,10 @@ import com.liferay.portal.service.LayoutServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portal.service.LayoutServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portal.service.LayoutServiceUtil
  * @generated
  */
 public class LayoutServiceHttp {

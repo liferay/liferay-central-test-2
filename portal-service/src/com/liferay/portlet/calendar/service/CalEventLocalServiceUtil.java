@@ -39,8 +39,8 @@ package com.liferay.portlet.calendar.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEventLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventLocalService
  * @generated
  */
 public class CalEventLocalServiceUtil {

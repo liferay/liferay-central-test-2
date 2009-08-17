@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletService
+ * @author    Brian Wing Shun Chan
+ * @see       PortletService
  * @generated
  */
 public class PortletServiceUtil {

@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourceCode
- * @see    com.liferay.portal.model.impl.ResourceCodeImpl
- * @see    com.liferay.portal.model.impl.ResourceCodeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceCode
+ * @see       com.liferay.portal.model.impl.ResourceCodeImpl
+ * @see       com.liferay.portal.model.impl.ResourceCodeModelImpl
  * @generated
  */
 public interface ResourceCodeModel extends BaseModel<ResourceCode> {

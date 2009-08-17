@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    OrgGroupPermissionPersistence
- * @see    OrgGroupPermissionPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       OrgGroupPermissionPersistence
+ * @see       OrgGroupPermissionPersistenceImpl
  * @generated
  */
 public class OrgGroupPermissionUtil {

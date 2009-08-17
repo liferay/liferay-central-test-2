@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BrowserTrackerPersistenceImpl
- * @see    BrowserTrackerUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BrowserTrackerPersistenceImpl
+ * @see       BrowserTrackerUtil
  * @generated
  */
 public interface BrowserTrackerPersistence extends BasePersistence {

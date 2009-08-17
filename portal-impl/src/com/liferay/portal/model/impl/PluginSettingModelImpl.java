@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PluginSettingImpl
- * @see    com.liferay.portal.model.PluginSetting
- * @see    com.liferay.portal.model.PluginSettingModel
+ * @author    Brian Wing Shun Chan
+ * @see       PluginSettingImpl
+ * @see       com.liferay.portal.model.PluginSetting
+ * @see       com.liferay.portal.model.PluginSettingModel
  * @generated
  */
 public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {

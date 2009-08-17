@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalArticlePersistenceImpl
- * @see    JournalArticleUtil
+ * @author    Brian Wing Shun Chan
+ * @see       JournalArticlePersistenceImpl
+ * @see       JournalArticleUtil
  * @generated
  */
 public interface JournalArticlePersistence extends BasePersistence {

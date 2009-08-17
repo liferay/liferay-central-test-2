@@ -38,10 +38,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutPrototype
- * @see    com.liferay.portal.model.impl.LayoutPrototypeImpl
- * @see    com.liferay.portal.model.impl.LayoutPrototypeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutPrototype
+ * @see       com.liferay.portal.model.impl.LayoutPrototypeImpl
+ * @see       com.liferay.portal.model.impl.LayoutPrototypeModelImpl
  * @generated
  */
 public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {

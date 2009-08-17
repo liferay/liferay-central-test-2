@@ -31,9 +31,9 @@ package com.liferay.portlet.messageboards.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBDiscussionPersistence
- * @see    MBDiscussionPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBDiscussionPersistence
+ * @see       MBDiscussionPersistenceImpl
  * @generated
  */
 public class MBDiscussionUtil {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see PasswordPolicyModel
- * @see com.liferay.portal.model.impl.PasswordPolicyImpl
- * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyModel
+ * @see       com.liferay.portal.model.impl.PasswordPolicyImpl
+ * @see       com.liferay.portal.model.impl.PasswordPolicyModelImpl
  * @generated
  */
 public interface PasswordPolicy extends PasswordPolicyModel {

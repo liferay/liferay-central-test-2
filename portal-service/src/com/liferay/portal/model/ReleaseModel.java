@@ -37,10 +37,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Release
- * @see    com.liferay.portal.model.impl.ReleaseImpl
- * @see    com.liferay.portal.model.impl.ReleaseModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Release
+ * @see       com.liferay.portal.model.impl.ReleaseImpl
+ * @see       com.liferay.portal.model.impl.ReleaseModelImpl
  * @generated
  */
 public interface ReleaseModel extends BaseModel<Release> {

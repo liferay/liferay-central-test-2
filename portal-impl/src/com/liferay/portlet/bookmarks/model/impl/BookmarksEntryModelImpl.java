@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksEntryImpl
- * @see    com.liferay.portlet.bookmarks.model.BookmarksEntry
- * @see    com.liferay.portlet.bookmarks.model.BookmarksEntryModel
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksEntryImpl
+ * @see       com.liferay.portlet.bookmarks.model.BookmarksEntry
+ * @see       com.liferay.portlet.bookmarks.model.BookmarksEntryModel
  * @generated
  */
 public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry> {

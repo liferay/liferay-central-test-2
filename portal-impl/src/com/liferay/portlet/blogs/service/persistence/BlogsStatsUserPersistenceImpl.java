@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BlogsStatsUserPersistence
- * @see    BlogsStatsUserUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsStatsUserPersistence
+ * @see       BlogsStatsUserUtil
  * @generated
  */
 public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl

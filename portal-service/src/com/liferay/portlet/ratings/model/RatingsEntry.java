@@ -41,10 +41,10 @@ package com.liferay.portlet.ratings.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see RatingsEntryModel
- * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
- * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       RatingsEntryModel
+ * @see       com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
+ * @see       com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
  * @generated
  */
 public interface RatingsEntry extends RatingsEntryModel {

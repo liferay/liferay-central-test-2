@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBCategoryImpl
- * @see    com.liferay.portlet.messageboards.model.MBCategory
- * @see    com.liferay.portlet.messageboards.model.MBCategoryModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategoryImpl
+ * @see       com.liferay.portlet.messageboards.model.MBCategory
+ * @see       com.liferay.portlet.messageboards.model.MBCategoryModel
  * @generated
  */
 public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {

@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileShortcutImpl
- * @see    com.liferay.portlet.documentlibrary.model.DLFileShortcut
- * @see    com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcutImpl
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileShortcut
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
  * @generated
  */
 public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {

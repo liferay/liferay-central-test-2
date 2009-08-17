@@ -41,10 +41,10 @@ package com.liferay.portlet.calendar.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see CalEventModel
- * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
- * @see com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventModel
+ * @see       com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see       com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  * @generated
  */
 public interface CalEvent extends CalEventModel {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ResourceCodeModel
- * @see com.liferay.portal.model.impl.ResourceCodeImpl
- * @see com.liferay.portal.model.impl.ResourceCodeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceCodeModel
+ * @see       com.liferay.portal.model.impl.ResourceCodeImpl
+ * @see       com.liferay.portal.model.impl.ResourceCodeModelImpl
  * @generated
  */
 public interface ResourceCode extends ResourceCodeModel {

@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Organization
- * @see    com.liferay.portal.model.impl.OrganizationImpl
- * @see    com.liferay.portal.model.impl.OrganizationModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Organization
+ * @see       com.liferay.portal.model.impl.OrganizationImpl
+ * @see       com.liferay.portal.model.impl.OrganizationModelImpl
  * @generated
  */
 public interface OrganizationModel extends BaseModel<Organization> {

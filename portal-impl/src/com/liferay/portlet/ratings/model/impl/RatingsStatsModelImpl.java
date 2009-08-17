@@ -55,10 +55,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RatingsStatsImpl
- * @see    com.liferay.portlet.ratings.model.RatingsStats
- * @see    com.liferay.portlet.ratings.model.RatingsStatsModel
+ * @author    Brian Wing Shun Chan
+ * @see       RatingsStatsImpl
+ * @see       com.liferay.portlet.ratings.model.RatingsStats
+ * @see       com.liferay.portlet.ratings.model.RatingsStatsModel
  * @generated
  */
 public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats> {

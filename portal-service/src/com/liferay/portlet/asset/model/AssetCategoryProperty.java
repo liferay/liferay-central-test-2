@@ -41,10 +41,10 @@ package com.liferay.portlet.asset.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AssetCategoryPropertyModel
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
- * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetCategoryPropertyModel
+ * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
  * @generated
  */
 public interface AssetCategoryProperty extends AssetCategoryPropertyModel {

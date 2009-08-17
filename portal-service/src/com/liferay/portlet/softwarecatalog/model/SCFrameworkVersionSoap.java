@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceSoap
  * @generated
  */
 public class SCFrameworkVersionSoap implements Serializable {

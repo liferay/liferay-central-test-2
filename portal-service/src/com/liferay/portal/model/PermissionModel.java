@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Permission
- * @see    com.liferay.portal.model.impl.PermissionImpl
- * @see    com.liferay.portal.model.impl.PermissionModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Permission
+ * @see       com.liferay.portal.model.impl.PermissionImpl
+ * @see       com.liferay.portal.model.impl.PermissionModelImpl
  * @generated
  */
 public interface PermissionModel extends BaseModel<Permission> {

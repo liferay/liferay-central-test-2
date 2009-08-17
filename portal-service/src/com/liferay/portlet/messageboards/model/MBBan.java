@@ -41,10 +41,10 @@ package com.liferay.portlet.messageboards.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MBBanModel
- * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
- * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBBanModel
+ * @see       com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  * @generated
  */
 public interface MBBan extends MBBanModel {

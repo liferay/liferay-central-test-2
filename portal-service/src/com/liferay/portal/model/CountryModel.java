@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Country
- * @see    com.liferay.portal.model.impl.CountryImpl
- * @see    com.liferay.portal.model.impl.CountryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Country
+ * @see       com.liferay.portal.model.impl.CountryImpl
+ * @see       com.liferay.portal.model.impl.CountryModelImpl
  * @generated
  */
 public interface CountryModel extends BaseModel<Country> {

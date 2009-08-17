@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see ListTypeModel
- * @see com.liferay.portal.model.impl.ListTypeImpl
- * @see com.liferay.portal.model.impl.ListTypeModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ListTypeModel
+ * @see       com.liferay.portal.model.impl.ListTypeImpl
+ * @see       com.liferay.portal.model.impl.ListTypeModelImpl
  * @generated
  */
 public interface ListType extends ListTypeModel {

@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutSetImpl
- * @see    com.liferay.portal.model.LayoutSet
- * @see    com.liferay.portal.model.LayoutSetModel
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutSetImpl
+ * @see       com.liferay.portal.model.LayoutSet
+ * @see       com.liferay.portal.model.LayoutSetModel
  * @generated
  */
 public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {

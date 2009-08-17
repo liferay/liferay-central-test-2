@@ -73,10 +73,10 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetVocabularyServiceHttp
- * @see    com.liferay.portlet.asset.model.AssetVocabularySoap
- * @see    com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabularyServiceHttp
+ * @see       com.liferay.portlet.asset.model.AssetVocabularySoap
+ * @see       com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
  * @generated
  */
 public class AssetVocabularyServiceSoap {

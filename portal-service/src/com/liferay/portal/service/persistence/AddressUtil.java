@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AddressPersistence
- * @see    AddressPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AddressPersistence
+ * @see       AddressPersistenceImpl
  * @generated
  */
 public class AddressUtil {

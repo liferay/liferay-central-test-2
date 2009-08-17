@@ -50,10 +50,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ListTypeImpl
- * @see    com.liferay.portal.model.ListType
- * @see    com.liferay.portal.model.ListTypeModel
+ * @author    Brian Wing Shun Chan
+ * @see       ListTypeImpl
+ * @see       com.liferay.portal.model.ListType
+ * @see       com.liferay.portal.model.ListTypeModel
  * @generated
  */
 public class ListTypeModelImpl extends BaseModelImpl<ListType> {

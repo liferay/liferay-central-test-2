@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBBan
- * @see    com.liferay.portlet.messageboards.model.impl.MBBanImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBBan
+ * @see       com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  * @generated
  */
 public interface MBBanModel extends BaseModel<MBBan> {

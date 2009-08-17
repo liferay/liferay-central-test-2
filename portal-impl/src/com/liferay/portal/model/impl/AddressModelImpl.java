@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AddressImpl
- * @see    com.liferay.portal.model.Address
- * @see    com.liferay.portal.model.AddressModel
+ * @author    Brian Wing Shun Chan
+ * @see       AddressImpl
+ * @see       com.liferay.portal.model.Address
+ * @see       com.liferay.portal.model.AddressModel
  * @generated
  */
 public class AddressModelImpl extends BaseModelImpl<Address> {

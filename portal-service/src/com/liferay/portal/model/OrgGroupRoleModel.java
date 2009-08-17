@@ -37,10 +37,10 @@ import com.liferay.portal.service.persistence.OrgGroupRolePK;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    OrgGroupRole
- * @see    com.liferay.portal.model.impl.OrgGroupRoleImpl
- * @see    com.liferay.portal.model.impl.OrgGroupRoleModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       OrgGroupRole
+ * @see       com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see       com.liferay.portal.model.impl.OrgGroupRoleModelImpl
  * @generated
  */
 public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {

@@ -39,8 +39,8 @@ package com.liferay.portlet.documentlibrary.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileShortcutLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcutLocalService
  * @generated
  */
 public class DLFileShortcutLocalServiceUtil {

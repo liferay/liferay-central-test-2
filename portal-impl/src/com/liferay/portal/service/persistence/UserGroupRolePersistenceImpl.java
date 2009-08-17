@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserGroupRolePersistence
- * @see    UserGroupRoleUtil
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroupRolePersistence
+ * @see       UserGroupRoleUtil
  * @generated
  */
 public class UserGroupRolePersistenceImpl extends BasePersistenceImpl

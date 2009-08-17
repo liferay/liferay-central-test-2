@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MembershipRequestImpl
- * @see    com.liferay.portal.model.MembershipRequest
- * @see    com.liferay.portal.model.MembershipRequestModel
+ * @author    Brian Wing Shun Chan
+ * @see       MembershipRequestImpl
+ * @see       com.liferay.portal.model.MembershipRequest
+ * @see       com.liferay.portal.model.MembershipRequestModel
  * @generated
  */
 public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest> {

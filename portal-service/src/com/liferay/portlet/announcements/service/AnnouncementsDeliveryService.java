@@ -47,8 +47,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsDeliveryServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsDeliveryServiceUtil
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

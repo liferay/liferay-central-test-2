@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link OrganizationServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.OrganizationServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.OrganizationServiceJSON
  * @generated
  */
 public class OrganizationJSONSerializer {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AddressModel
- * @see com.liferay.portal.model.impl.AddressImpl
- * @see com.liferay.portal.model.impl.AddressModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AddressModel
+ * @see       com.liferay.portal.model.impl.AddressImpl
+ * @see       com.liferay.portal.model.impl.AddressModelImpl
  * @generated
  */
 public interface Address extends AddressModel {

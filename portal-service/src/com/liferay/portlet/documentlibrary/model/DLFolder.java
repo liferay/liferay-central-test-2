@@ -41,10 +41,10 @@ package com.liferay.portlet.documentlibrary.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see DLFolderModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFolderModel
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
  * @generated
  */
 public interface DLFolder extends DLFolderModel {

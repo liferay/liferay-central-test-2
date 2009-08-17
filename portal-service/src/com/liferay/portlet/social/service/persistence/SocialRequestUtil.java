@@ -31,9 +31,9 @@ package com.liferay.portlet.social.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialRequestPersistence
- * @see    SocialRequestPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRequestPersistence
+ * @see       SocialRequestPersistenceImpl
  * @generated
  */
 public class SocialRequestUtil {

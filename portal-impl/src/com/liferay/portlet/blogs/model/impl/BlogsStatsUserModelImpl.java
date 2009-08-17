@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BlogsStatsUserImpl
- * @see    com.liferay.portlet.blogs.model.BlogsStatsUser
- * @see    com.liferay.portlet.blogs.model.BlogsStatsUserModel
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsStatsUserImpl
+ * @see       com.liferay.portlet.blogs.model.BlogsStatsUser
+ * @see       com.liferay.portlet.blogs.model.BlogsStatsUserModel
  * @generated
  */
 public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {

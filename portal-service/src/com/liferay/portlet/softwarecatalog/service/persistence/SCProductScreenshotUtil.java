@@ -31,9 +31,9 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductScreenshotPersistence
- * @see    SCProductScreenshotPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductScreenshotPersistence
+ * @see       SCProductScreenshotPersistenceImpl
  * @generated
  */
 public class SCProductScreenshotUtil {

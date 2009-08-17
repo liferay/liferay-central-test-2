@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialRelationPersistence
- * @see    SocialRelationUtil
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRelationPersistence
+ * @see       SocialRelationUtil
  * @generated
  */
 public class SocialRelationPersistenceImpl extends BasePersistenceImpl

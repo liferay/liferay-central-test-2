@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link DLFileShortcutServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.documentlibrary.service.http.DLFileShortcutServiceJSON
  * @generated
  */
 public class DLFileShortcutJSONSerializer {

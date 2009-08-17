@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CountryPersistence
- * @see    CountryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       CountryPersistence
+ * @see       CountryUtil
  * @generated
  */
 public class CountryPersistenceImpl extends BasePersistenceImpl

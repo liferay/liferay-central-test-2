@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileShortcut
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcut
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  * @generated
  */
 public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {

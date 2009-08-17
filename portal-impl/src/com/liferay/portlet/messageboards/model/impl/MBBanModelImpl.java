@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBBanImpl
- * @see    com.liferay.portlet.messageboards.model.MBBan
- * @see    com.liferay.portlet.messageboards.model.MBBanModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBBanImpl
+ * @see       com.liferay.portlet.messageboards.model.MBBan
+ * @see       com.liferay.portlet.messageboards.model.MBBanModel
  * @generated
  */
 public class MBBanModelImpl extends BaseModelImpl<MBBan> {

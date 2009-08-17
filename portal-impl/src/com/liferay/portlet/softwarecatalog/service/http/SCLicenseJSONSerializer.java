@@ -42,8 +42,8 @@ import java.util.List;
  * This class is used by {@link SCLicenseServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceJSON
  * @generated
  */
 public class SCLicenseJSONSerializer {

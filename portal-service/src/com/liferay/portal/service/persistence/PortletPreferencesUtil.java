@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletPreferencesPersistence
- * @see    PortletPreferencesPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PortletPreferencesPersistence
+ * @see       PortletPreferencesPersistenceImpl
  * @generated
  */
 public class PortletPreferencesUtil {

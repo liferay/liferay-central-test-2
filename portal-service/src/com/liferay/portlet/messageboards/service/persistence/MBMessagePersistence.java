@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessagePersistenceImpl
- * @see    MBMessageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessagePersistenceImpl
+ * @see       MBMessageUtil
  * @generated
  */
 public interface MBMessagePersistence extends BasePersistence {

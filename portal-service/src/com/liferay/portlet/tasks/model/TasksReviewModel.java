@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksReview
- * @see    com.liferay.portlet.tasks.model.impl.TasksReviewImpl
- * @see    com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       TasksReview
+ * @see       com.liferay.portlet.tasks.model.impl.TasksReviewImpl
+ * @see       com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
  * @generated
  */
 public interface TasksReviewModel extends BaseModel<TasksReview> {

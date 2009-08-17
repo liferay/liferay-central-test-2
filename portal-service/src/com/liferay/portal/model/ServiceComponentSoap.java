@@ -40,8 +40,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.ServiceComponentServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.ServiceComponentServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.ServiceComponentServiceSoap
  * @generated
  */
 public class ServiceComponentSoap implements Serializable {

@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Lock
- * @see    com.liferay.portal.model.impl.LockImpl
- * @see    com.liferay.portal.model.impl.LockModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Lock
+ * @see       com.liferay.portal.model.impl.LockImpl
+ * @see       com.liferay.portal.model.impl.LockModelImpl
  * @generated
  */
 public interface LockModel extends BaseModel<Lock> {

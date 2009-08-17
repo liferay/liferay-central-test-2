@@ -31,9 +31,9 @@ package com.liferay.portlet.asset.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagPropertyPersistence
- * @see    AssetTagPropertyPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagPropertyPersistence
+ * @see       AssetTagPropertyPersistenceImpl
  * @generated
  */
 public class AssetTagPropertyUtil {

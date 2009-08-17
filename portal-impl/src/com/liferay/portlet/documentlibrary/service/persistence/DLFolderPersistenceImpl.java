@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFolderPersistence
- * @see    DLFolderUtil
+ * @author    Brian Wing Shun Chan
+ * @see       DLFolderPersistence
+ * @see       DLFolderUtil
  * @generated
  */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl

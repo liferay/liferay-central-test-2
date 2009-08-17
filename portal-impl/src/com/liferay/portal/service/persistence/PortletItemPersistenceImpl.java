@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletItemPersistence
- * @see    PortletItemUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PortletItemPersistence
+ * @see       PortletItemUtil
  * @generated
  */
 public class PortletItemPersistenceImpl extends BasePersistenceImpl

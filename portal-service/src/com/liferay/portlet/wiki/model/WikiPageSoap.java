@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.wiki.service.http.WikiPageServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.wiki.service.http.WikiPageServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.wiki.service.http.WikiPageServiceSoap
  * @generated
  */
 public class WikiPageSoap implements Serializable {

@@ -40,8 +40,8 @@ import java.util.List;
  * {@link com.liferay.portlet.ratings.service.http.RatingsStatsServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.ratings.service.http.RatingsStatsServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.ratings.service.http.RatingsStatsServiceSoap
  * @generated
  */
 public class RatingsStatsSoap implements Serializable {

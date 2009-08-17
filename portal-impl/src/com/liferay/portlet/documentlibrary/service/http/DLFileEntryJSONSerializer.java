@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link DLFileEntryServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceJSON
  * @generated
  */
 public class DLFileEntryJSONSerializer {

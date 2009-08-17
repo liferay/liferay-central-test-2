@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PortletItem
- * @see    com.liferay.portal.model.impl.PortletItemImpl
- * @see    com.liferay.portal.model.impl.PortletItemModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PortletItem
+ * @see       com.liferay.portal.model.impl.PortletItemImpl
+ * @see       com.liferay.portal.model.impl.PortletItemModelImpl
  * @generated
  */
 public interface PortletItemModel extends BaseModel<PortletItem> {

@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.ReleaseServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.ReleaseServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.ReleaseServiceSoap
  * @generated
  */
 public class ReleaseSoap implements Serializable {

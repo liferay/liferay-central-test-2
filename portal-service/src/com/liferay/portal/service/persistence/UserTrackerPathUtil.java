@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserTrackerPathPersistence
- * @see    UserTrackerPathPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserTrackerPathPersistence
+ * @see       UserTrackerPathPersistenceImpl
  * @generated
  */
 public class UserTrackerPathUtil {

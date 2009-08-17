@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link MBBanServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.messageboards.service.http.MBBanServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.messageboards.service.http.MBBanServiceJSON
  * @generated
  */
 public class MBBanJSONSerializer {

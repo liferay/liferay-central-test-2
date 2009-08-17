@@ -39,8 +39,8 @@ package com.liferay.portlet.softwarecatalog.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductVersionService
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductVersionService
  * @generated
  */
 public class SCProductVersionServiceUtil {

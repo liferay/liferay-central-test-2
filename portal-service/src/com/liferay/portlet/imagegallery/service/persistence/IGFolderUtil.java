@@ -31,9 +31,9 @@ package com.liferay.portlet.imagegallery.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderPersistence
- * @see    IGFolderPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderPersistence
+ * @see       IGFolderPersistenceImpl
  * @generated
  */
 public class IGFolderUtil {

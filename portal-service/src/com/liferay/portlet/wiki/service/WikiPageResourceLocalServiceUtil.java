@@ -39,8 +39,8 @@ package com.liferay.portlet.wiki.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPageResourceLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageResourceLocalService
  * @generated
  */
 public class WikiPageResourceLocalServiceUtil {

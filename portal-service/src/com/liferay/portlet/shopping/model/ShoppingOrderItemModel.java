@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingOrderItem
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingOrderItem
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl
  * @generated
  */
 public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {

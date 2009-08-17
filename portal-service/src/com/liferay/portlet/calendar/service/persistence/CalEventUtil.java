@@ -31,9 +31,9 @@ package com.liferay.portlet.calendar.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEventPersistence
- * @see    CalEventPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventPersistence
+ * @see       CalEventPersistenceImpl
  * @generated
  */
 public class CalEventUtil {

@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.WebDAVPropsServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.WebDAVPropsServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.WebDAVPropsServiceSoap
  * @generated
  */
 public class WebDAVPropsSoap implements Serializable {

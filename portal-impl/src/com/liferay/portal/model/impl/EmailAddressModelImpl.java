@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    EmailAddressImpl
- * @see    com.liferay.portal.model.EmailAddress
- * @see    com.liferay.portal.model.EmailAddressModel
+ * @author    Brian Wing Shun Chan
+ * @see       EmailAddressImpl
+ * @see       com.liferay.portal.model.EmailAddress
+ * @see       com.liferay.portal.model.EmailAddressModel
  * @generated
  */
 public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress> {

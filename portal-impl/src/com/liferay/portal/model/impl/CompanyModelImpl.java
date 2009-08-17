@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CompanyImpl
- * @see    com.liferay.portal.model.Company
- * @see    com.liferay.portal.model.CompanyModel
+ * @author    Brian Wing Shun Chan
+ * @see       CompanyImpl
+ * @see       com.liferay.portal.model.Company
+ * @see       com.liferay.portal.model.CompanyModel
  * @generated
  */
 public class CompanyModelImpl extends BaseModelImpl<Company> {

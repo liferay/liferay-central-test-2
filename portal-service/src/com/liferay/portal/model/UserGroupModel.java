@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserGroup
- * @see    com.liferay.portal.model.impl.UserGroupImpl
- * @see    com.liferay.portal.model.impl.UserGroupModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroup
+ * @see       com.liferay.portal.model.impl.UserGroupImpl
+ * @see       com.liferay.portal.model.impl.UserGroupModelImpl
  * @generated
  */
 public interface UserGroupModel extends BaseModel<UserGroup> {

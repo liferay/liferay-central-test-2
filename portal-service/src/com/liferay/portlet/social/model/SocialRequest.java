@@ -41,10 +41,10 @@ package com.liferay.portlet.social.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see SocialRequestModel
- * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
- * @see com.liferay.portlet.social.model.impl.SocialRequestModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRequestModel
+ * @see       com.liferay.portlet.social.model.impl.SocialRequestImpl
+ * @see       com.liferay.portlet.social.model.impl.SocialRequestModelImpl
  * @generated
  */
 public interface SocialRequest extends SocialRequestModel {

@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderPersistenceImpl
- * @see    IGFolderUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderPersistenceImpl
+ * @see       IGFolderUtil
  * @generated
  */
 public interface IGFolderPersistence extends BasePersistence {

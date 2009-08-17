@@ -41,10 +41,10 @@ package com.liferay.portlet.bookmarks.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see BookmarksFolderModel
- * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
- * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksFolderModel
+ * @see       com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
+ * @see       com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
  * @generated
  */
 public interface BookmarksFolder extends BookmarksFolderModel {

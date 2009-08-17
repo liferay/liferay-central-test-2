@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagStats
- * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagStats
+ * @see       com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl
  * @generated
  */
 public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {

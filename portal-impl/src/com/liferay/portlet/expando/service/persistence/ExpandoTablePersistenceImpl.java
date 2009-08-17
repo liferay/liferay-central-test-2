@@ -61,9 +61,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoTablePersistence
- * @see    ExpandoTableUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoTablePersistence
+ * @see       ExpandoTableUtil
  * @generated
  */
 public class ExpandoTablePersistenceImpl extends BasePersistenceImpl

@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Address
- * @see    com.liferay.portal.model.impl.AddressImpl
- * @see    com.liferay.portal.model.impl.AddressModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Address
+ * @see       com.liferay.portal.model.impl.AddressImpl
+ * @see       com.liferay.portal.model.impl.AddressModelImpl
  * @generated
  */
 public interface AddressModel extends BaseModel<Address> {

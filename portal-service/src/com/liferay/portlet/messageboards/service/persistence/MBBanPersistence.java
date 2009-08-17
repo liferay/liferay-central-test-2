@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBBanPersistenceImpl
- * @see    MBBanUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBBanPersistenceImpl
+ * @see       MBBanUtil
  * @generated
  */
 public interface MBBanPersistence extends BasePersistence {

@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileRankImpl
- * @see    com.liferay.portlet.documentlibrary.model.DLFileRank
- * @see    com.liferay.portlet.documentlibrary.model.DLFileRankModel
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileRankImpl
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileRank
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileRankModel
  * @generated
  */
 public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank> {

@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RatingsStats
- * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
- * @see    com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       RatingsStats
+ * @see       com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
+ * @see       com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
  * @generated
  */
 public interface RatingsStatsModel extends BaseModel<RatingsStats> {

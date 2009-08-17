@@ -73,10 +73,10 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolderServiceHttp
- * @see    com.liferay.portlet.imagegallery.model.IGFolderSoap
- * @see    com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolderServiceHttp
+ * @see       com.liferay.portlet.imagegallery.model.IGFolderSoap
+ * @see       com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
  * @generated
  */
 public class IGFolderServiceSoap {

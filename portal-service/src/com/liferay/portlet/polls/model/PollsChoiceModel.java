@@ -40,10 +40,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsChoice
- * @see    com.liferay.portlet.polls.model.impl.PollsChoiceImpl
- * @see    com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PollsChoice
+ * @see       com.liferay.portlet.polls.model.impl.PollsChoiceImpl
+ * @see       com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
  * @generated
  */
 public interface PollsChoiceModel extends BaseModel<PollsChoice> {

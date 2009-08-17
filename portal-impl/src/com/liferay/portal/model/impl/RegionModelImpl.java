@@ -53,10 +53,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RegionImpl
- * @see    com.liferay.portal.model.Region
- * @see    com.liferay.portal.model.RegionModel
+ * @author    Brian Wing Shun Chan
+ * @see       RegionImpl
+ * @see       com.liferay.portal.model.Region
+ * @see       com.liferay.portal.model.RegionModel
  * @generated
  */
 public class RegionModelImpl extends BaseModelImpl<Region> {

@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetVocabulary
- * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabulary
+ * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
  * @generated
  */
 public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {

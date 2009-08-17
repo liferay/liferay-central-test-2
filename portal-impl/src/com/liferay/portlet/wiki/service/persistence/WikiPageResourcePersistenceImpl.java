@@ -61,9 +61,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WikiPageResourcePersistence
- * @see    WikiPageResourceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageResourcePersistence
+ * @see       WikiPageResourceUtil
  * @generated
  */
 public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl

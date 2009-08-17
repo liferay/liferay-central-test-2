@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see UserModel
- * @see com.liferay.portal.model.impl.UserImpl
- * @see com.liferay.portal.model.impl.UserModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserModel
+ * @see       com.liferay.portal.model.impl.UserImpl
+ * @see       com.liferay.portal.model.impl.UserModelImpl
  * @generated
  */
 public interface User extends UserModel {

@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserIdMapperPersistenceImpl
- * @see    UserIdMapperUtil
+ * @author    Brian Wing Shun Chan
+ * @see       UserIdMapperPersistenceImpl
+ * @see       UserIdMapperUtil
  * @generated
  */
 public interface UserIdMapperPersistence extends BasePersistence {

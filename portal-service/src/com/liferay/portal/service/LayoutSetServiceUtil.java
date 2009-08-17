@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutSetService
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutSetService
  * @generated
  */
 public class LayoutSetServiceUtil {

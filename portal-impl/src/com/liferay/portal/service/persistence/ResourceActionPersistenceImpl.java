@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourceActionPersistence
- * @see    ResourceActionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ResourceActionPersistence
+ * @see       ResourceActionUtil
  * @generated
  */
 public class ResourceActionPersistenceImpl extends BasePersistenceImpl

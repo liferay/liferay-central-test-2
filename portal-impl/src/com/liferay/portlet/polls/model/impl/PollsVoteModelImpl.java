@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsVoteImpl
- * @see    com.liferay.portlet.polls.model.PollsVote
- * @see    com.liferay.portlet.polls.model.PollsVoteModel
+ * @author    Brian Wing Shun Chan
+ * @see       PollsVoteImpl
+ * @see       com.liferay.portlet.polls.model.PollsVote
+ * @see       com.liferay.portlet.polls.model.PollsVoteModel
  * @generated
  */
 public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {

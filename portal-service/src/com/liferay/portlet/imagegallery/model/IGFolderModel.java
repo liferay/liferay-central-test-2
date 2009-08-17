@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    IGFolder
- * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
- * @see    com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       IGFolder
+ * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
+ * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  * @generated
  */
 public interface IGFolderModel extends BaseModel<IGFolder> {

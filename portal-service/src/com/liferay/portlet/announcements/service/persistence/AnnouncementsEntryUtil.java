@@ -31,9 +31,9 @@ package com.liferay.portlet.announcements.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsEntryPersistence
- * @see    AnnouncementsEntryPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsEntryPersistence
+ * @see       AnnouncementsEntryPersistenceImpl
  * @generated
  */
 public class AnnouncementsEntryUtil {

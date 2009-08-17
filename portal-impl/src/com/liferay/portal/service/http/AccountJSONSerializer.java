@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link AccountServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.AccountServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.AccountServiceJSON
  * @generated
  */
 public class AccountJSONSerializer {

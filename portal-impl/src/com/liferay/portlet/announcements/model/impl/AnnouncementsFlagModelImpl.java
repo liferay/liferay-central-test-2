@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsFlagImpl
- * @see    com.liferay.portlet.announcements.model.AnnouncementsFlag
- * @see    com.liferay.portlet.announcements.model.AnnouncementsFlagModel
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsFlagImpl
+ * @see       com.liferay.portlet.announcements.model.AnnouncementsFlag
+ * @see       com.liferay.portlet.announcements.model.AnnouncementsFlagModel
  * @generated
  */
 public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag> {

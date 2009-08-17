@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ReleaseImpl
- * @see    com.liferay.portal.model.Release
- * @see    com.liferay.portal.model.ReleaseModel
+ * @author    Brian Wing Shun Chan
+ * @see       ReleaseImpl
+ * @see       com.liferay.portal.model.Release
+ * @see       com.liferay.portal.model.ReleaseModel
  * @generated
  */
 public class ReleaseModelImpl extends BaseModelImpl<Release> {

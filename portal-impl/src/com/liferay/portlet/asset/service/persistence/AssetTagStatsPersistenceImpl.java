@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagStatsPersistence
- * @see    AssetTagStatsUtil
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagStatsPersistence
+ * @see       AssetTagStatsUtil
  * @generated
  */
 public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl

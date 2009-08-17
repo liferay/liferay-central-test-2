@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MembershipRequestPersistence
- * @see    MembershipRequestUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MembershipRequestPersistence
+ * @see       MembershipRequestUtil
  * @generated
  */
 public class MembershipRequestPersistenceImpl extends BasePersistenceImpl

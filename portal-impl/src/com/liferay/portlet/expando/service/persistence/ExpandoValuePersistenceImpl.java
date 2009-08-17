@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoValuePersistence
- * @see    ExpandoValueUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoValuePersistence
+ * @see       ExpandoValueUtil
  * @generated
  */
 public class ExpandoValuePersistenceImpl extends BasePersistenceImpl

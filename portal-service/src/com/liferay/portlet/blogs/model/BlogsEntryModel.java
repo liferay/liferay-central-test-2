@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BlogsEntry
- * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
- * @see    com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsEntry
+ * @see       com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
+ * @see       com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
  * @generated
  */
 public interface BlogsEntryModel extends BaseModel<BlogsEntry> {

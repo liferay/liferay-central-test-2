@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link IGFolderServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.imagegallery.service.http.IGFolderServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.imagegallery.service.http.IGFolderServiceJSON
  * @generated
  */
 public class IGFolderJSONSerializer {

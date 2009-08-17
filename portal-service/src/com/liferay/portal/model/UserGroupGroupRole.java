@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see UserGroupGroupRoleModel
- * @see com.liferay.portal.model.impl.UserGroupGroupRoleImpl
- * @see com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroupGroupRoleModel
+ * @see       com.liferay.portal.model.impl.UserGroupGroupRoleImpl
+ * @see       com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
  * @generated
  */
 public interface UserGroupGroupRole extends UserGroupGroupRoleModel {

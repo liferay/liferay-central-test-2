@@ -37,10 +37,10 @@ import com.liferay.portal.SystemException;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Group
- * @see    com.liferay.portal.model.impl.GroupImpl
- * @see    com.liferay.portal.model.impl.GroupModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Group
+ * @see       com.liferay.portal.model.impl.GroupImpl
+ * @see       com.liferay.portal.model.impl.GroupModelImpl
  * @generated
  */
 public interface GroupModel extends BaseModel<Group> {

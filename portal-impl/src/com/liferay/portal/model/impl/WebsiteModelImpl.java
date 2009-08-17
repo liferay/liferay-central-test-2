@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebsiteImpl
- * @see    com.liferay.portal.model.Website
- * @see    com.liferay.portal.model.WebsiteModel
+ * @author    Brian Wing Shun Chan
+ * @see       WebsiteImpl
+ * @see       com.liferay.portal.model.Website
+ * @see       com.liferay.portal.model.WebsiteModel
  * @generated
  */
 public class WebsiteModelImpl extends BaseModelImpl<Website> {

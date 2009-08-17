@@ -38,10 +38,10 @@ import com.liferay.portal.service.persistence.UserGroupRolePK;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserGroupRole
- * @see    com.liferay.portal.model.impl.UserGroupRoleImpl
- * @see    com.liferay.portal.model.impl.UserGroupRoleModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroupRole
+ * @see       com.liferay.portal.model.impl.UserGroupRoleImpl
+ * @see       com.liferay.portal.model.impl.UserGroupRoleModelImpl
  * @generated
  */
 public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {

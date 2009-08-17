@@ -31,9 +31,9 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCLicensePersistence
- * @see    SCLicensePersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCLicensePersistence
+ * @see       SCLicensePersistenceImpl
  * @generated
  */
 public class SCLicenseUtil {

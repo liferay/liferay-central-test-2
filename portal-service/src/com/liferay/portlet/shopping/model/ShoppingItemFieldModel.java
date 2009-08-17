@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingItemField
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
- * @see    com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingItemField
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
+ * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl
  * @generated
  */
 public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {

@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CountryPersistenceImpl
- * @see    CountryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       CountryPersistenceImpl
+ * @see       CountryUtil
  * @generated
  */
 public interface CountryPersistence extends BasePersistence {

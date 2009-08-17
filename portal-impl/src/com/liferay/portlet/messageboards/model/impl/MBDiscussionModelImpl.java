@@ -55,10 +55,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBDiscussionImpl
- * @see    com.liferay.portlet.messageboards.model.MBDiscussion
- * @see    com.liferay.portlet.messageboards.model.MBDiscussionModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBDiscussionImpl
+ * @see       com.liferay.portlet.messageboards.model.MBDiscussion
+ * @see       com.liferay.portlet.messageboards.model.MBDiscussionModel
  * @generated
  */
 public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion> {

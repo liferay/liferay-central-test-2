@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserGroupPersistence
- * @see    UserGroupPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroupPersistence
+ * @see       UserGroupPersistenceImpl
  * @generated
  */
 public class UserGroupUtil {

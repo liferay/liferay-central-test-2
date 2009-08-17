@@ -41,10 +41,10 @@ package com.liferay.portlet.asset.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AssetEntryModel
- * @see com.liferay.portlet.asset.model.impl.AssetEntryImpl
- * @see com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetEntryModel
+ * @see       com.liferay.portlet.asset.model.impl.AssetEntryImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
  * @generated
  */
 public interface AssetEntry extends AssetEntryModel {

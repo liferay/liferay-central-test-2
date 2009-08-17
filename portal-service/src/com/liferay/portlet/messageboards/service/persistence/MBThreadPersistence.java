@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBThreadPersistenceImpl
- * @see    MBThreadUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBThreadPersistenceImpl
+ * @see       MBThreadUtil
  * @generated
  */
 public interface MBThreadPersistence extends BasePersistence {

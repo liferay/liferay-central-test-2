@@ -59,9 +59,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PluginSettingPersistence
- * @see    PluginSettingUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PluginSettingPersistence
+ * @see       PluginSettingUtil
  * @generated
  */
 public class PluginSettingPersistenceImpl extends BasePersistenceImpl

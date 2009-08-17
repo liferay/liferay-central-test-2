@@ -54,10 +54,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCLicenseImpl
- * @see    com.liferay.portlet.softwarecatalog.model.SCLicense
- * @see    com.liferay.portlet.softwarecatalog.model.SCLicenseModel
+ * @author    Brian Wing Shun Chan
+ * @see       SCLicenseImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.SCLicense
+ * @see       com.liferay.portlet.softwarecatalog.model.SCLicenseModel
  * @generated
  */
 public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {

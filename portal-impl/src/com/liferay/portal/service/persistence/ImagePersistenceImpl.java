@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ImagePersistence
- * @see    ImageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ImagePersistence
+ * @see       ImageUtil
  * @generated
  */
 public class ImagePersistenceImpl extends BasePersistenceImpl

@@ -41,10 +41,10 @@ package com.liferay.portlet.asset.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AssetVocabularyModel
- * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
- * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabularyModel
+ * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
  * @generated
  */
 public interface AssetVocabulary extends AssetVocabularyModel {

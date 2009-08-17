@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portal.service.http.UserTrackerServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.UserTrackerServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.UserTrackerServiceSoap
  * @generated
  */
 public class UserTrackerSoap implements Serializable {

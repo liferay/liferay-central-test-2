@@ -63,10 +63,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RoleImpl
- * @see    com.liferay.portal.model.Role
- * @see    com.liferay.portal.model.RoleModel
+ * @author    Brian Wing Shun Chan
+ * @see       RoleImpl
+ * @see       com.liferay.portal.model.Role
+ * @see       com.liferay.portal.model.RoleModel
  * @generated
  */
 public class RoleModelImpl extends BaseModelImpl<Role> {

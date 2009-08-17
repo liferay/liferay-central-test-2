@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEventImpl
- * @see    com.liferay.portlet.calendar.model.CalEvent
- * @see    com.liferay.portlet.calendar.model.CalEventModel
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventImpl
+ * @see       com.liferay.portlet.calendar.model.CalEvent
+ * @see       com.liferay.portlet.calendar.model.CalEventModel
  * @generated
  */
 public class CalEventModelImpl extends BaseModelImpl<CalEvent> {

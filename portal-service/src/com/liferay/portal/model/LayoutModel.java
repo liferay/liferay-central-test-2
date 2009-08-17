@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Layout
- * @see    com.liferay.portal.model.impl.LayoutImpl
- * @see    com.liferay.portal.model.impl.LayoutModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Layout
+ * @see       com.liferay.portal.model.impl.LayoutImpl
+ * @see       com.liferay.portal.model.impl.LayoutModelImpl
  * @generated
  */
 public interface LayoutModel extends BaseModel<Layout> {

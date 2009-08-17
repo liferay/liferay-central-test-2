@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link SCProductVersionServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.softwarecatalog.service.http.SCProductVersionServiceJSON
  * @generated
  */
 public class SCProductVersionJSONSerializer {

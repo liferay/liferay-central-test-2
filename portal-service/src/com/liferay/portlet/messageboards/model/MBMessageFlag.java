@@ -41,10 +41,10 @@ package com.liferay.portlet.messageboards.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MBMessageFlagModel
- * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
- * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessageFlagModel
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  * @generated
  */
 public interface MBMessageFlag extends MBMessageFlagModel {

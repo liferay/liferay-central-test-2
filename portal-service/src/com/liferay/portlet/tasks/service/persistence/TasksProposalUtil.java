@@ -31,9 +31,9 @@ package com.liferay.portlet.tasks.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksProposalPersistence
- * @see    TasksProposalPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalPersistence
+ * @see       TasksProposalPersistenceImpl
  * @generated
  */
 public class TasksProposalUtil {

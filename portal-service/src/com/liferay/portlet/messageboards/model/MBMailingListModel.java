@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMailingList
- * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBMailingList
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl
  * @generated
  */
 public interface MBMailingListModel extends BaseModel<MBMailingList> {

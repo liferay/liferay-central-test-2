@@ -58,10 +58,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SCProductVersionImpl
- * @see    com.liferay.portlet.softwarecatalog.model.SCProductVersion
- * @see    com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductVersionImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.SCProductVersion
+ * @see       com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
  * @generated
  */
 public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion> {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see UserIdMapperModel
- * @see com.liferay.portal.model.impl.UserIdMapperImpl
- * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserIdMapperModel
+ * @see       com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see       com.liferay.portal.model.impl.UserIdMapperModelImpl
  * @generated
  */
 public interface UserIdMapper extends UserIdMapperModel {

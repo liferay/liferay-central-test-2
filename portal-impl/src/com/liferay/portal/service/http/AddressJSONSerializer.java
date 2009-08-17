@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link AddressServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.AddressServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.AddressServiceJSON
  * @generated
  */
 public class AddressJSONSerializer {

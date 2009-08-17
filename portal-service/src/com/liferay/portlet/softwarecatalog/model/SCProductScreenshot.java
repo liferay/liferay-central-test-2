@@ -41,10 +41,10 @@ package com.liferay.portlet.softwarecatalog.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see SCProductScreenshotModel
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       SCProductScreenshotModel
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  * @generated
  */
 public interface SCProductScreenshot extends SCProductScreenshotModel {

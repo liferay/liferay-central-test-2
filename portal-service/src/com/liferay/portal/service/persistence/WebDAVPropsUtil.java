@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebDAVPropsPersistence
- * @see    WebDAVPropsPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WebDAVPropsPersistence
+ * @see       WebDAVPropsPersistenceImpl
  * @generated
  */
 public class WebDAVPropsUtil {

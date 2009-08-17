@@ -41,10 +41,10 @@ package com.liferay.portlet.journal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see JournalArticleResourceModel
- * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
- * @see com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       JournalArticleResourceModel
+ * @see       com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl
+ * @see       com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl
  * @generated
  */
 public interface JournalArticleResource extends JournalArticleResourceModel {

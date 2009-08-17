@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MembershipRequestPersistenceImpl
- * @see    MembershipRequestUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MembershipRequestPersistenceImpl
+ * @see       MembershipRequestUtil
  * @generated
  */
 public interface MembershipRequestPersistence extends BasePersistence {

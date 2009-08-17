@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Portlet
- * @see    com.liferay.portal.model.impl.PortletImpl
- * @see    com.liferay.portal.model.impl.PortletModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Portlet
+ * @see       com.liferay.portal.model.impl.PortletImpl
+ * @see       com.liferay.portal.model.impl.PortletModelImpl
  * @generated
  */
 public interface PortletModel extends BaseModel<Portlet> {

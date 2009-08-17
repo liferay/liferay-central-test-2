@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see WebDAVPropsModel
- * @see com.liferay.portal.model.impl.WebDAVPropsImpl
- * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WebDAVPropsModel
+ * @see       com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see       com.liferay.portal.model.impl.WebDAVPropsModelImpl
  * @generated
  */
 public interface WebDAVProps extends WebDAVPropsModel {

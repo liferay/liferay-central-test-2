@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    User
- * @see    com.liferay.portal.model.impl.UserImpl
- * @see    com.liferay.portal.model.impl.UserModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       User
+ * @see       com.liferay.portal.model.impl.UserImpl
+ * @see       com.liferay.portal.model.impl.UserModelImpl
  * @generated
  */
 public interface UserModel extends BaseModel<User> {

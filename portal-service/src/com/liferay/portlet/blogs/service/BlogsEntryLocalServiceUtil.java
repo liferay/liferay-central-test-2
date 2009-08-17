@@ -39,8 +39,8 @@ package com.liferay.portlet.blogs.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BlogsEntryLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsEntryLocalService
  * @generated
  */
 public class BlogsEntryLocalServiceUtil {

@@ -41,10 +41,10 @@ package com.liferay.portal.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see BrowserTrackerModel
- * @see com.liferay.portal.model.impl.BrowserTrackerImpl
- * @see com.liferay.portal.model.impl.BrowserTrackerModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BrowserTrackerModel
+ * @see       com.liferay.portal.model.impl.BrowserTrackerImpl
+ * @see       com.liferay.portal.model.impl.BrowserTrackerModelImpl
  * @generated
  */
 public interface BrowserTracker extends BrowserTrackerModel {

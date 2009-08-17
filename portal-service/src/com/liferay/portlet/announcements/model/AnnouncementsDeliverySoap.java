@@ -40,8 +40,8 @@ import java.util.List;
  * {@link com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceSoap
  * @generated
  */
 public class AnnouncementsDeliverySoap implements Serializable {

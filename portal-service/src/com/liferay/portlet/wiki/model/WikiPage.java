@@ -41,10 +41,10 @@ package com.liferay.portlet.wiki.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see WikiPageModel
- * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       WikiPageModel
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see       com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  * @generated
  */
 public interface WikiPage extends WikiPageModel {

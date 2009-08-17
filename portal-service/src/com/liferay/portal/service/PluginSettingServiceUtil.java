@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PluginSettingService
+ * @author    Brian Wing Shun Chan
+ * @see       PluginSettingService
  * @generated
  */
 public class PluginSettingServiceUtil {

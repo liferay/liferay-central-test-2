@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link RoleServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.RoleServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.RoleServiceJSON
  * @generated
  */
 public class RoleJSONSerializer {

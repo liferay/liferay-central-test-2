@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link TasksReviewServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.tasks.service.http.TasksReviewServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.tasks.service.http.TasksReviewServiceJSON
  * @generated
  */
 public class TasksReviewJSONSerializer {

@@ -60,9 +60,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingItemPricePersistence
- * @see    ShoppingItemPriceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingItemPricePersistence
+ * @see       ShoppingItemPriceUtil
  * @generated
  */
 public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl

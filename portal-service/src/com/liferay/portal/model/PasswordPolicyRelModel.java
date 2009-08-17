@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicyRel
- * @see    com.liferay.portal.model.impl.PasswordPolicyRelImpl
- * @see    com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyRel
+ * @see       com.liferay.portal.model.impl.PasswordPolicyRelImpl
+ * @see       com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
  * @generated
  */
 public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {

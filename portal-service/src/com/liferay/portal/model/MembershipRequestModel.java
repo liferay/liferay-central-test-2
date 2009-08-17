@@ -39,10 +39,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MembershipRequest
- * @see    com.liferay.portal.model.impl.MembershipRequestImpl
- * @see    com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MembershipRequest
+ * @see       com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see       com.liferay.portal.model.impl.MembershipRequestModelImpl
  * @generated
  */
 public interface MembershipRequestModel extends BaseModel<MembershipRequest> {

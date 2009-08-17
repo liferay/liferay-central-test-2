@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link AssetTagServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.asset.service.http.AssetTagServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.asset.service.http.AssetTagServiceJSON
  * @generated
  */
 public class AssetTagJSONSerializer {

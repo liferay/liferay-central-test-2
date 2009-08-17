@@ -41,10 +41,10 @@ package com.liferay.portlet.tasks.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see TasksProposalModel
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
- * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalModel
+ * @see       com.liferay.portlet.tasks.model.impl.TasksProposalImpl
+ * @see       com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
  * @generated
  */
 public interface TasksProposal extends TasksProposalModel {

@@ -31,9 +31,9 @@ package com.liferay.portlet.shopping.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ShoppingItemPersistence
- * @see    ShoppingItemPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ShoppingItemPersistence
+ * @see       ShoppingItemPersistenceImpl
  * @generated
  */
 public class ShoppingItemUtil {

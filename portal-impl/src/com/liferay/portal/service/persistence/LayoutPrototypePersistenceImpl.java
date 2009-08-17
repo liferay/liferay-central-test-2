@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutPrototypePersistence
- * @see    LayoutPrototypeUtil
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutPrototypePersistence
+ * @see       LayoutPrototypeUtil
  * @generated
  */
 public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl

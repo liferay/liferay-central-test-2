@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link ShoppingOrderServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.shopping.service.http.ShoppingOrderServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.shopping.service.http.ShoppingOrderServiceJSON
  * @generated
  */
 public class ShoppingOrderJSONSerializer {

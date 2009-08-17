@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link PasswordPolicyServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.PasswordPolicyServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.PasswordPolicyServiceJSON
  * @generated
  */
 public class PasswordPolicyJSONSerializer {

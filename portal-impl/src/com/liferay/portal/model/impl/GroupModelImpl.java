@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    GroupImpl
- * @see    com.liferay.portal.model.Group
- * @see    com.liferay.portal.model.GroupModel
+ * @author    Brian Wing Shun Chan
+ * @see       GroupImpl
+ * @see       com.liferay.portal.model.Group
+ * @see       com.liferay.portal.model.GroupModel
  * @generated
  */
 public class GroupModelImpl extends BaseModelImpl<Group> {

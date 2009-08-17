@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetTagPropertyImpl
- * @see    com.liferay.portlet.asset.model.AssetTagProperty
- * @see    com.liferay.portlet.asset.model.AssetTagPropertyModel
+ * @author    Brian Wing Shun Chan
+ * @see       AssetTagPropertyImpl
+ * @see       com.liferay.portlet.asset.model.AssetTagProperty
+ * @see       com.liferay.portlet.asset.model.AssetTagPropertyModel
  * @generated
  */
 public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty> {

@@ -41,10 +41,10 @@ package com.liferay.portlet.documentlibrary.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see DLFileShortcutModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileShortcutModel
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  * @generated
  */
 public interface DLFileShortcut extends DLFileShortcutModel {

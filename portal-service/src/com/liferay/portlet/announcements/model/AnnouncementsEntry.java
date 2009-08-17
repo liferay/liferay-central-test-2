@@ -41,10 +41,10 @@ package com.liferay.portlet.announcements.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see AnnouncementsEntryModel
- * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
- * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsEntryModel
+ * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
+ * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
  * @generated
  */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {

@@ -40,8 +40,8 @@ import java.util.List;
  * {@link com.liferay.portlet.social.service.http.SocialRelationServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.social.service.http.SocialRelationServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.social.service.http.SocialRelationServiceSoap
  * @generated
  */
 public class SocialRelationSoap implements Serializable {

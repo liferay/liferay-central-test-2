@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetVocabularyImpl
- * @see    com.liferay.portlet.asset.model.AssetVocabulary
- * @see    com.liferay.portlet.asset.model.AssetVocabularyModel
+ * @author    Brian Wing Shun Chan
+ * @see       AssetVocabularyImpl
+ * @see       com.liferay.portlet.asset.model.AssetVocabulary
+ * @see       com.liferay.portlet.asset.model.AssetVocabularyModel
  * @generated
  */
 public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary> {

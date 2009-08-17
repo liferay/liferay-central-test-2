@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    JournalFeedImpl
- * @see    com.liferay.portlet.journal.model.JournalFeed
- * @see    com.liferay.portlet.journal.model.JournalFeedModel
+ * @author    Brian Wing Shun Chan
+ * @see       JournalFeedImpl
+ * @see       com.liferay.portlet.journal.model.JournalFeed
+ * @see       com.liferay.portlet.journal.model.JournalFeedModel
  * @generated
  */
 public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed> {

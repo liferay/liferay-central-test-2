@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AssetCategoryProperty
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
- * @see    com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       AssetCategoryProperty
+ * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
+ * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
  * @generated
  */
 public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryProperty> {

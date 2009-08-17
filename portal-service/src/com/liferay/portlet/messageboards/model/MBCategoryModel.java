@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBCategory
- * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
- * @see    com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategory
+ * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  * @generated
  */
 public interface MBCategoryModel extends BaseModel<MBCategory> {

@@ -65,10 +65,10 @@ import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksProposalServiceSoap
- * @see    com.liferay.portal.security.auth.HttpPrincipal
- * @see    com.liferay.portlet.tasks.service.TasksProposalServiceUtil
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalServiceSoap
+ * @see       com.liferay.portal.security.auth.HttpPrincipal
+ * @see       com.liferay.portlet.tasks.service.TasksProposalServiceUtil
  * @generated
  */
 public class TasksProposalServiceHttp {

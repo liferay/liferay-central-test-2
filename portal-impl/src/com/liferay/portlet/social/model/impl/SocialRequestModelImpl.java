@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    SocialRequestImpl
- * @see    com.liferay.portlet.social.model.SocialRequest
- * @see    com.liferay.portlet.social.model.SocialRequestModel
+ * @author    Brian Wing Shun Chan
+ * @see       SocialRequestImpl
+ * @see       com.liferay.portlet.social.model.SocialRequest
+ * @see       com.liferay.portlet.social.model.SocialRequestModel
  * @generated
  */
 public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest> {

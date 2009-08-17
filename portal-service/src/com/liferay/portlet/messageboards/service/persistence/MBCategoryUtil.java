@@ -31,9 +31,9 @@ package com.liferay.portlet.messageboards.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBCategoryPersistence
- * @see    MBCategoryPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBCategoryPersistence
+ * @see       MBCategoryPersistenceImpl
  * @generated
  */
 public class MBCategoryUtil {

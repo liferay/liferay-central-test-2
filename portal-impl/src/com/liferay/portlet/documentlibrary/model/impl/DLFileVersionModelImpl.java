@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileVersionImpl
- * @see    com.liferay.portlet.documentlibrary.model.DLFileVersion
- * @see    com.liferay.portlet.documentlibrary.model.DLFileVersionModel
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileVersionImpl
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileVersion
+ * @see       com.liferay.portlet.documentlibrary.model.DLFileVersionModel
  * @generated
  */
 public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {

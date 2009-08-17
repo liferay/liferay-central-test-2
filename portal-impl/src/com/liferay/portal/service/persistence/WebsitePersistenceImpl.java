@@ -58,9 +58,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebsitePersistence
- * @see    WebsiteUtil
+ * @author    Brian Wing Shun Chan
+ * @see       WebsitePersistence
+ * @see       WebsiteUtil
  * @generated
  */
 public class WebsitePersistenceImpl extends BasePersistenceImpl

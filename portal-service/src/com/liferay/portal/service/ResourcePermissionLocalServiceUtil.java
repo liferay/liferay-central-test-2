@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ResourcePermissionLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       ResourcePermissionLocalService
  * @generated
  */
 public class ResourcePermissionLocalServiceUtil {

@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebDAVPropsImpl
- * @see    com.liferay.portal.model.WebDAVProps
- * @see    com.liferay.portal.model.WebDAVPropsModel
+ * @author    Brian Wing Shun Chan
+ * @see       WebDAVPropsImpl
+ * @see       com.liferay.portal.model.WebDAVProps
+ * @see       com.liferay.portal.model.WebDAVPropsModel
  * @generated
  */
 public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {

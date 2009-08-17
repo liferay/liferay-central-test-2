@@ -36,10 +36,10 @@ package com.liferay.portal.model;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Shard
- * @see    com.liferay.portal.model.impl.ShardImpl
- * @see    com.liferay.portal.model.impl.ShardModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Shard
+ * @see       com.liferay.portal.model.impl.ShardImpl
+ * @see       com.liferay.portal.model.impl.ShardModelImpl
  * @generated
  */
 public interface ShardModel extends BaseModel<Shard> {

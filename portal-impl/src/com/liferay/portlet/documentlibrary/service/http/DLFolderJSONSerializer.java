@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link DLFolderServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.documentlibrary.service.http.DLFolderServiceJSON
  * @generated
  */
 public class DLFolderJSONSerializer {

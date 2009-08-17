@@ -57,10 +57,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMailingListImpl
- * @see    com.liferay.portlet.messageboards.model.MBMailingList
- * @see    com.liferay.portlet.messageboards.model.MBMailingListModel
+ * @author    Brian Wing Shun Chan
+ * @see       MBMailingListImpl
+ * @see       com.liferay.portlet.messageboards.model.MBMailingList
+ * @see       com.liferay.portlet.messageboards.model.MBMailingListModel
  * @generated
  */
 public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {

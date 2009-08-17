@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LockPersistenceImpl
- * @see    LockUtil
+ * @author    Brian Wing Shun Chan
+ * @see       LockPersistenceImpl
+ * @see       LockUtil
  * @generated
  */
 public interface LockPersistence extends BasePersistence {

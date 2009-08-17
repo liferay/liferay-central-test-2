@@ -44,8 +44,8 @@ import java.util.List;
  * This class is used by {@link AnnouncementsFlagServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceJSON
  * @generated
  */
 public class AnnouncementsFlagJSONSerializer {

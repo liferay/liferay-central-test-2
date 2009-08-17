@@ -43,8 +43,8 @@ import java.util.List;
  * This class is used by {@link PhoneServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.PhoneServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.PhoneServiceJSON
  * @generated
  */
 public class PhoneJSONSerializer {

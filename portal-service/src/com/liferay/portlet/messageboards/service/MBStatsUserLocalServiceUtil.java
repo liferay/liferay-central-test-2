@@ -39,8 +39,8 @@ package com.liferay.portlet.messageboards.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBStatsUserLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       MBStatsUserLocalService
  * @generated
  */
 public class MBStatsUserLocalServiceUtil {

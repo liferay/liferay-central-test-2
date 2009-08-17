@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link LayoutSetServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.LayoutSetServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.LayoutSetServiceJSON
  * @generated
  */
 public class LayoutSetJSONSerializer {

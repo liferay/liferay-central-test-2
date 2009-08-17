@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LockPersistence
- * @see    LockUtil
+ * @author    Brian Wing Shun Chan
+ * @see       LockPersistence
+ * @see       LockUtil
  * @generated
  */
 public class LockPersistenceImpl extends BasePersistenceImpl

@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordPolicyRelPersistence
- * @see    PasswordPolicyRelPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordPolicyRelPersistence
+ * @see       PasswordPolicyRelPersistenceImpl
  * @generated
  */
 public class PasswordPolicyRelUtil {

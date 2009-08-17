@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BookmarksEntryPersistence
- * @see    BookmarksEntryUtil
+ * @author    Brian Wing Shun Chan
+ * @see       BookmarksEntryPersistence
+ * @see       BookmarksEntryUtil
  * @generated
  */
 public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl

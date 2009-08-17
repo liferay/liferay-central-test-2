@@ -56,10 +56,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsDeliveryImpl
- * @see    com.liferay.portlet.announcements.model.AnnouncementsDelivery
- * @see    com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsDeliveryImpl
+ * @see       com.liferay.portlet.announcements.model.AnnouncementsDelivery
+ * @see       com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
  * @generated
  */
 public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery> {

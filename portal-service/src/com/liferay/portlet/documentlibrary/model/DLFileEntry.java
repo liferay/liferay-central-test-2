@@ -41,10 +41,10 @@ package com.liferay.portlet.documentlibrary.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see DLFileEntryModel
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
- * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileEntryModel
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  * @generated
  */
 public interface DLFileEntry extends DLFileEntryModel {

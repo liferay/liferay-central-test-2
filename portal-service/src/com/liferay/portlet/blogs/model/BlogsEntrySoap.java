@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.blogs.service.http.BlogsEntryServiceSoap
  * @generated
  */
 public class BlogsEntrySoap implements Serializable {

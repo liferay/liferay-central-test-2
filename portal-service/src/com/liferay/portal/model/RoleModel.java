@@ -38,10 +38,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    Role
- * @see    com.liferay.portal.model.impl.RoleImpl
- * @see    com.liferay.portal.model.impl.RoleModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       Role
+ * @see       com.liferay.portal.model.impl.RoleImpl
+ * @see       com.liferay.portal.model.impl.RoleModelImpl
  * @generated
  */
 public interface RoleModel extends BaseModel<Role> {

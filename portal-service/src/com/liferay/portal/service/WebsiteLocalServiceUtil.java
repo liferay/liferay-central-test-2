@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    WebsiteLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       WebsiteLocalService
  * @generated
  */
 public class WebsiteLocalServiceUtil {

@@ -39,8 +39,8 @@ package com.liferay.portlet.tasks.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksProposalLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalLocalService
  * @generated
  */
 public class TasksProposalLocalServiceUtil {

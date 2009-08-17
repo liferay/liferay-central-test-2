@@ -31,9 +31,9 @@ package com.liferay.portlet.blogs.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    BlogsEntryPersistence
- * @see    BlogsEntryPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       BlogsEntryPersistence
+ * @see       BlogsEntryPersistenceImpl
  * @generated
  */
 public class BlogsEntryUtil {

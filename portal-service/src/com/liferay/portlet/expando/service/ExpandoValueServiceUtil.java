@@ -39,8 +39,8 @@ package com.liferay.portlet.expando.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoValueService
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoValueService
  * @generated
  */
 public class ExpandoValueServiceUtil {

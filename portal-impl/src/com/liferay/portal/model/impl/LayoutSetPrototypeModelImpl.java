@@ -61,10 +61,10 @@ import java.util.Map;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    LayoutSetPrototypeImpl
- * @see    com.liferay.portal.model.LayoutSetPrototype
- * @see    com.liferay.portal.model.LayoutSetPrototypeModel
+ * @author    Brian Wing Shun Chan
+ * @see       LayoutSetPrototypeImpl
+ * @see       com.liferay.portal.model.LayoutSetPrototype
+ * @see       com.liferay.portal.model.LayoutSetPrototypeModel
  * @generated
  */
 public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype> {

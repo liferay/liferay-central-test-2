@@ -41,10 +41,10 @@ package com.liferay.portlet.messageboards.model;
  * ServiceBuilder to generate the new methods.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see MBStatsUserModel
- * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
- * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       MBStatsUserModel
+ * @see       com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
+ * @see       com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
  * @generated
  */
 public interface MBStatsUser extends MBStatsUserModel {

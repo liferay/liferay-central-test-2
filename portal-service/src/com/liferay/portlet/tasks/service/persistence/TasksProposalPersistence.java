@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    TasksProposalPersistenceImpl
- * @see    TasksProposalUtil
+ * @author    Brian Wing Shun Chan
+ * @see       TasksProposalPersistenceImpl
+ * @see       TasksProposalUtil
  * @generated
  */
 public interface TasksProposalPersistence extends BasePersistence {

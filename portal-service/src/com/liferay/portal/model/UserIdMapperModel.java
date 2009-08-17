@@ -37,10 +37,10 @@ import com.liferay.portal.SystemException;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserIdMapper
- * @see    com.liferay.portal.model.impl.UserIdMapperImpl
- * @see    com.liferay.portal.model.impl.UserIdMapperModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       UserIdMapper
+ * @see       com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see       com.liferay.portal.model.impl.UserIdMapperModelImpl
  * @generated
  */
 public interface UserIdMapperModel extends BaseModel<UserIdMapper> {

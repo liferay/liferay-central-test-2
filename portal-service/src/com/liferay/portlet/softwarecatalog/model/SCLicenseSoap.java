@@ -40,8 +40,8 @@ import java.util.List;
  * {@link com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.softwarecatalog.service.http.SCLicenseServiceSoap
  * @generated
  */
 public class SCLicenseSoap implements Serializable {

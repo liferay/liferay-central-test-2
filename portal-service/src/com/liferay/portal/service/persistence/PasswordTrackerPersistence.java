@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PasswordTrackerPersistenceImpl
- * @see    PasswordTrackerUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PasswordTrackerPersistenceImpl
+ * @see       PasswordTrackerUtil
  * @generated
  */
 public interface PasswordTrackerPersistence extends BasePersistence {

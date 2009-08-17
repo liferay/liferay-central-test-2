@@ -39,8 +39,8 @@ package com.liferay.portlet.announcements.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    AnnouncementsEntryService
+ * @author    Brian Wing Shun Chan
+ * @see       AnnouncementsEntryService
  * @generated
  */
 public class AnnouncementsEntryServiceUtil {

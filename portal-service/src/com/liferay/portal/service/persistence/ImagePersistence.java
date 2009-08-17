@@ -31,9 +31,9 @@ package com.liferay.portal.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ImagePersistenceImpl
- * @see    ImageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       ImagePersistenceImpl
+ * @see       ImageUtil
  * @generated
  */
 public interface ImagePersistence extends BasePersistence {

@@ -39,8 +39,8 @@ package com.liferay.portal.service;
  * lookup call and a method call.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    EmailAddressLocalService
+ * @author    Brian Wing Shun Chan
+ * @see       EmailAddressLocalService
  * @generated
  */
 public class EmailAddressLocalServiceUtil {

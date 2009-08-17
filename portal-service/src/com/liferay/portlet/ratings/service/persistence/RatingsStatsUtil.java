@@ -31,9 +31,9 @@ package com.liferay.portlet.ratings.service.persistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    RatingsStatsPersistence
- * @see    RatingsStatsPersistenceImpl
+ * @author    Brian Wing Shun Chan
+ * @see       RatingsStatsPersistence
+ * @see       RatingsStatsPersistenceImpl
  * @generated
  */
 public class RatingsStatsUtil {

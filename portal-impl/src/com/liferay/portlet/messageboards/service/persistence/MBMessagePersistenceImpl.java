@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    MBMessagePersistence
- * @see    MBMessageUtil
+ * @author    Brian Wing Shun Chan
+ * @see       MBMessagePersistence
+ * @see       MBMessageUtil
  * @generated
  */
 public class MBMessagePersistenceImpl extends BasePersistenceImpl

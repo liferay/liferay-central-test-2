@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap
  * @generated
  */
 public class AnnouncementsFlagSoap implements Serializable {

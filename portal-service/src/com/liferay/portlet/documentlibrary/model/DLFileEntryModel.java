@@ -40,10 +40,10 @@ import java.util.Date;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    DLFileEntry
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
- * @see    com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       DLFileEntry
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  * @generated
  */
 public interface DLFileEntryModel extends BaseModel<DLFileEntry> {

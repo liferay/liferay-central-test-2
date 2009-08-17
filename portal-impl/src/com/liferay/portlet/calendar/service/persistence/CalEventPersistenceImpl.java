@@ -62,9 +62,9 @@ import java.util.List;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    CalEventPersistence
- * @see    CalEventUtil
+ * @author    Brian Wing Shun Chan
+ * @see       CalEventPersistence
+ * @see       CalEventUtil
  * @generated
  */
 public class CalEventPersistenceImpl extends BasePersistenceImpl

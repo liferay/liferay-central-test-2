@@ -50,10 +50,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    OrgGroupPermissionImpl
- * @see    com.liferay.portal.model.OrgGroupPermission
- * @see    com.liferay.portal.model.OrgGroupPermissionModel
+ * @author    Brian Wing Shun Chan
+ * @see       OrgGroupPermissionImpl
+ * @see       com.liferay.portal.model.OrgGroupPermission
+ * @see       com.liferay.portal.model.OrgGroupPermissionModel
  * @generated
  */
 public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermission> {

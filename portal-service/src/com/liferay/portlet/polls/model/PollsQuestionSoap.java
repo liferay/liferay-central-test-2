@@ -41,8 +41,8 @@ import java.util.List;
  * {@link com.liferay.portlet.polls.service.http.PollsQuestionServiceSoap}.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portlet.polls.service.http.PollsQuestionServiceSoap
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.polls.service.http.PollsQuestionServiceSoap
  * @generated
  */
 public class PollsQuestionSoap implements Serializable {

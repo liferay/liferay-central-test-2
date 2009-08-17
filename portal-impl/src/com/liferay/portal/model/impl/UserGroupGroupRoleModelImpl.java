@@ -50,10 +50,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    UserGroupGroupRoleImpl
- * @see    com.liferay.portal.model.UserGroupGroupRole
- * @see    com.liferay.portal.model.UserGroupGroupRoleModel
+ * @author    Brian Wing Shun Chan
+ * @see       UserGroupGroupRoleImpl
+ * @see       com.liferay.portal.model.UserGroupGroupRole
+ * @see       com.liferay.portal.model.UserGroupGroupRoleModel
  * @generated
  */
 public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRole> {

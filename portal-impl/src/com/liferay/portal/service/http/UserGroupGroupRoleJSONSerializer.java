@@ -41,8 +41,8 @@ import java.util.List;
  * This class is used by {@link UserGroupGroupRoleServiceJSON} to translate objects.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    com.liferay.portal.service.http.UserGroupGroupRoleServiceJSON
+ * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portal.service.http.UserGroupGroupRoleServiceJSON
  * @generated
  */
 public class UserGroupGroupRoleJSONSerializer {

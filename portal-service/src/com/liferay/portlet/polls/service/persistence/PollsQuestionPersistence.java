@@ -32,9 +32,9 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * overwritten the next time is generated.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    PollsQuestionPersistenceImpl
- * @see    PollsQuestionUtil
+ * @author    Brian Wing Shun Chan
+ * @see       PollsQuestionPersistenceImpl
+ * @see       PollsQuestionUtil
  * @generated
  */
 public interface PollsQuestionPersistence extends BasePersistence {

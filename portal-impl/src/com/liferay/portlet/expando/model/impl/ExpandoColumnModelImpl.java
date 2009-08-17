@@ -52,10 +52,10 @@ import java.util.List;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoColumnImpl
- * @see    com.liferay.portlet.expando.model.ExpandoColumn
- * @see    com.liferay.portlet.expando.model.ExpandoColumnModel
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoColumnImpl
+ * @see       com.liferay.portlet.expando.model.ExpandoColumn
+ * @see       com.liferay.portlet.expando.model.ExpandoColumnModel
  * @generated
  */
 public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn> {

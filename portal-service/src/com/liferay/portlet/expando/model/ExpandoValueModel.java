@@ -37,10 +37,10 @@ import com.liferay.portal.model.BaseModel;
  * database.
  * </p>
  *
- * @author Brian Wing Shun Chan
- * @see    ExpandoValue
- * @see    com.liferay.portlet.expando.model.impl.ExpandoValueImpl
- * @see    com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
+ * @author    Brian Wing Shun Chan
+ * @see       ExpandoValue
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoValueImpl
+ * @see       com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
  * @generated
  */
 public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
