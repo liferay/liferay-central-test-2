@@ -57,6 +57,7 @@ public class PageCommentsTests extends BaseTests {
 		testSuite.addTestSuite(DeleteCommentTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
+		testSuite.addTestSuite(TearDownTest.class);
 
 		return testSuite;
 	}

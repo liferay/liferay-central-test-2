@@ -77,7 +77,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div[1]/div")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -87,6 +87,6 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div[1]/div"));
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }
