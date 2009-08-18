@@ -170,9 +170,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		if ((creatorUserId != 0) || !company.isStrangers()) {
-			if (PortalPermissionUtil.contains(
-					getPermissionChecker(), ActionKeys.ADD_USER) ||
-				UserPermissionUtil.contains(
+			if (!PortalPermissionUtil.contains(
+					getPermissionChecker(), ActionKeys.ADD_USER) &&
+				!UserPermissionUtil.contains(
 					getPermissionChecker(), 0, organizationIds,
 					ActionKeys.ADD_USER)) {
 
