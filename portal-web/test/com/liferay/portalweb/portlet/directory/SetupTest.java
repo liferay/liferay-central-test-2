@@ -61,6 +61,22 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isVisible("link=Back to My Community")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isVisible("link=Users")) {
 					break;
 				}
@@ -206,6 +222,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_126_name", RuntimeVariables.replace("Test Organization"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
