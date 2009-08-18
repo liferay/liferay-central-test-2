@@ -34,19 +34,9 @@
 	<td>label=5</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_86_pageDisplayStyle</td>
-	<td></td>
-</tr>
-<tr>
 	<td>select</td>
 	<td>_86_pageDisplayStyle</td>
 	<td>label=Title</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -59,8 +49,43 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>This is a test entry.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@alt='Configuration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_86_pageDelta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_pageDelta</td>
+	<td>label=5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_pageDisplayStyle</td>
+	<td>label=Full Content</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>You have successfully updated the setup.</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,9 +94,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>This is a test entry!</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>This is a test entry.</td>
 </tr>
 
 </tbody></table>

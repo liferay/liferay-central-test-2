@@ -45,8 +45,8 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddRatingTest.class);
 		testSuite.addTestSuite(AddSecondEntryTest.class);
 		testSuite.addTestSuite(AddSecondEntryCommentTest.class);
-		testSuite.addTestSuite(EditSecondCommentTest.class);
 		testSuite.addTestSuite(EditSecondEntryTest.class);
+		testSuite.addTestSuite(EditSecondCommentTest.class);
 		testSuite.addTestSuite(SearchBlogsTest.class);
 		testSuite.addTestSuite(DeleteSecondCommentTest.class);
 		testSuite.addTestSuite(DeleteSecondEntryTest.class);
@@ -54,10 +54,10 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddNullTitleTest.class);
 		testSuite.addTestSuite(AddEscapeCharacterEntryTest.class);
 		testSuite.addTestSuite(DeleteEscapeCharacterEntryTest.class);
-		testSuite.addTestSuite(AddDraftEntryTest.class);
-		testSuite.addTestSuite(PublishDraftEntryTest.class);
 		testSuite.addTestSuite(ConfigureDisplaySettingsTest.class);
 		testSuite.addTestSuite(DeleteEntryTest.class);
+		testSuite.addTestSuite(AddDraftEntryTest.class);
+		testSuite.addTestSuite(PublishDraftEntryTest.class);
 		testSuite.addTestSuite(ImportLARTest.class);
 		testSuite.addTestSuite(AssertImportLARTest.class);
 		testSuite.addTestSuite(TearDownTest.class);

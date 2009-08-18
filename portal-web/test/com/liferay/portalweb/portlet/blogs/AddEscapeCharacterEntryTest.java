@@ -53,23 +53,6 @@ public class AddEscapeCharacterEntryTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_33_title",
 			RuntimeVariables.replace("<!--Html Escape Character Test-->"));
 		Thread.sleep(5000);
@@ -128,30 +111,15 @@ public class AddEscapeCharacterEntryTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is an escape character test entry."));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent(
-				"link=<!--Html Escape Character Test-->"));
-		assertTrue(selenium.isTextPresent(
-				"This is an escape character test entry."));
+		assertEquals(RuntimeVariables.replace(
+				"<!--Html Escape Character Test-->"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"This is an escape character test entry."),
+			selenium.getText("//p"));
 	}
 }

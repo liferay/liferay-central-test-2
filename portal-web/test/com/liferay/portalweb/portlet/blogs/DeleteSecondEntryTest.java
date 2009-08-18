@@ -59,5 +59,7 @@ public class DeleteSecondEntryTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent("link=Second Test Entry"));
+		assertFalse(selenium.isTextPresent(
+				"This is an edited second test entry."));
 	}
 }

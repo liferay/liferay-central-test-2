@@ -53,7 +53,6 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_33_title", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -107,30 +106,13 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id='_33_editor']");
 		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a test null entr"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a test null entry!"));
+			RuntimeVariables.replace("This is a test null entry."));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 
 		for (int second = 0;; second++) {
@@ -151,6 +133,6 @@ public class AddNullTitleTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Test Null Entry"));
+		assertFalse(selenium.isTextPresent("This is a test null entry."));
 	}
 }

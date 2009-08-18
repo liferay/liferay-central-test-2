@@ -24,16 +24,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_33_title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_title</td>
-	<td>Second Test Entr</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_33_title</td>
 	<td>Second Test Entry</td>
@@ -74,23 +64,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is a second test entr</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a second test entry!</td>
+	<td>This is a second test entry.</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_33_saveButton</td>
 	<td></td>
 </tr>
 <tr>
@@ -99,14 +79,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Second Test Entry</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>Second Test Entry</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>This is a second test entry.</td>
 </tr>
 
 </tbody></table>

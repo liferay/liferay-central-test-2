@@ -55,7 +55,7 @@ public class AssertViewCountTest extends BaseTestCase {
 		RuntimeVariables.setValue("Count", Count);
 		selenium.click(RuntimeVariables.replace("link=Test Entry"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span[1]",
 				RuntimeVariables.getValue("Count")));

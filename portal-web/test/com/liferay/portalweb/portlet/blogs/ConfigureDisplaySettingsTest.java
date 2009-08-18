@@ -71,46 +71,17 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 		}
 
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=5"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_86_pageDisplayStyle")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Title"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("This is a test entry."));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -118,7 +89,7 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("_86_pageDelta")) {
 					break;
 				}
 			}
@@ -128,8 +99,16 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=5"));
+		selenium.select("_86_pageDisplayStyle",
+			RuntimeVariables.replace("label=Full Content"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have successfully updated the setup."));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("This is a test entry!"));
+		assertEquals(RuntimeVariables.replace("This is a test entry."),
+			selenium.getText("//p"));
 	}
 }

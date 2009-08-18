@@ -24,29 +24,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAt</td>
 	<td>link=Add Comment</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Add Comment</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>_33_postReplyBody0</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_postReplyBody0</td>
-	<td>This is a second entr comment!</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>_33_postReplyBody0</td>
-	<td>This is a second entry comment!</td>
+	<td>This is a second entry comment.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -54,14 +44,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>This is a second entry comment!</td>
+	<td>assertNotVisible</td>
+	<td>_33_postReplyBody0</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/div[1]</td>
+	<td>This is a second entry comment.</td>
 </tr>
 
 </tbody></table>

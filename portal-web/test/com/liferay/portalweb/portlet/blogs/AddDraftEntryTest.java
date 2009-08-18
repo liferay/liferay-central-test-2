@@ -53,24 +53,6 @@ public class AddDraftEntryTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_title")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_title", RuntimeVariables.replace("Draft Test"));
 		selenium.type("_33_title", RuntimeVariables.replace("Draft Test"));
 		Thread.sleep(5000);
 
@@ -125,30 +107,10 @@ public class AddDraftEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace(
-				"This is a test for the emergenc draft sstem"));
 		selenium.type("//body",
 			RuntimeVariables.replace(
-				"This is a test for the emergency draft system!"));
+				"This is a test for the emergency draft system."));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveStatus")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		Thread.sleep(15000);
 
 		for (int second = 0;; second++) {
@@ -167,42 +129,13 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Pacific Daylight Time")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Draft saved"));
 		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Draft Test"));
-		assertTrue(selenium.isTextPresent(
-				"This is a test for the emergency draft system!"));
+		assertEquals(RuntimeVariables.replace("Draft Test"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a test for the emergency draft system."),
+			selenium.getText("//p"));
 	}
 }
