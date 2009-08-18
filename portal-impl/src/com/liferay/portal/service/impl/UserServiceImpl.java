@@ -170,8 +170,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		if ((creatorUserId != 0) || !company.isStrangers()) {
-			PortalPermissionUtil.check(
-				getPermissionChecker(), ActionKeys.ADD_USER);
+			if (PortalPermissionUtil.contains(
+					getPermissionChecker(), ActionKeys.ADD_USER) ||
+				UserPermissionUtil.contains(
+					getPermissionChecker(), 0, organizationIds,
+					ActionKeys.ADD_USER)) {
+
+				throw new PrincipalException();
+			}
 		}
 
 		if (creatorUserId == 0) {
