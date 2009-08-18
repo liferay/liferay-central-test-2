@@ -54,22 +54,6 @@ public class SetupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Polls"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title",
-			RuntimeVariables.replace("PD Setup Test Question"));
-		selenium.type("_25_title",
-			RuntimeVariables.replace("PD Setup Test Question"));
-		selenium.type("_25_description",
-			RuntimeVariables.replace("This is a PD setup test question."));
-		selenium.type("choiceDescriptiona",
-			RuntimeVariables.replace("PD Setup Choice A"));
-		selenium.type("choiceDescriptionb",
-			RuntimeVariables.replace("PD Setup Choice B"));
-		selenium.click("//input[@value='Add Choice']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +61,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("choiceDescriptionc")) {
+				if (selenium.isVisible("link=Polls")) {
 					break;
 				}
 			}
@@ -87,9 +71,76 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("choiceDescriptionc",
+		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Question']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_25_title_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_25_title_en_US",
+			RuntimeVariables.replace("PD Setup Test Question"));
+		selenium.type("_25_title_en_US",
+			RuntimeVariables.replace("PD Setup Test Question"));
+		selenium.type("_25_description_en_US",
+			RuntimeVariables.replace("This is a PD setup test question."));
+		selenium.type("_25_choiceDescriptiona_en_US",
+			RuntimeVariables.replace("PD Setup Choice A"));
+		selenium.type("_25_choiceDescriptionb_en_US",
+			RuntimeVariables.replace("PD Setup Choice B"));
+		selenium.click("//input[@value='Add Choice']");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_25_choiceDescriptionc_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.typeKeys("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("PD Setup Choice C"));
-		selenium.type("choiceDescriptionc",
+		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("PD Setup Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
