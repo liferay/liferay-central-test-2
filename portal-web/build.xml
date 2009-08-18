@@ -472,6 +472,50 @@
 					/>
 				</replaceregexp>
 
+				<!-- Fix io to allow for synchronous ajax requests -->
+				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
+					<replacetoken><![CDATA[try { _open(o.c, m, uri); } catch(e0) {}]]></replacetoken>
+					<replacevalue><![CDATA[try { _open(o.c, m, uri, c.async); } catch(e0) {}]]></replacevalue>
+				</replace>
+
+				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
+					<replacetoken><![CDATA[function _open(o, m, uri) {]]></replacetoken>
+					<replacevalue><![CDATA[function _open(o, m, uri, async) {]]></replacevalue>
+				</replace>
+
+				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
+					<replacetoken><![CDATA[o.open(m, uri, true);]]></replacetoken>
+					<replacevalue><![CDATA[o.open(m, uri, async === false ? false : true);]]></replacevalue>
+				</replace>
+
+				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
+					<replacetoken><![CDATA[_ioStart(o.id, c);]]></replacetoken>
+					<replacevalue><![CDATA[_ioStart(o.id, c);
+
+					if (c.async === false) {
+						_readyState(o, c);
+					}]]></replacevalue>
+				</replace>
+
+				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
+					<replacetoken><![CDATA[w.setTimeout(
+   				function() {
+   					_ioComplete(o, c);
+   					_handleResponse(o, c);
+   				}, 0);]]></replacetoken>
+					<replacevalue><![CDATA[var complete = function() {
+					_ioComplete(o, c);
+					_handleResponse(o, c);
+				};
+
+				if (c.async === false) {
+					complete();
+				}
+				else {
+					w.setTimeout(complete, 0);
+				}]]></replacevalue>
+				</replace>
+
 				<copy
 					file="docroot/html/ALLOY_ZIP/src/javascript/defaults.js"
 					tofile="docroot/html/portal/aui/js.jspf"
