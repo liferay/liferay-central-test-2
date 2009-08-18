@@ -54,7 +54,7 @@ public class EditSecondImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Test2 Image2. This is Test2 Image2.']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,16 +74,16 @@ public class EditSecondImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test2 Image2 Edit2"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test2 Image2 Edit2"));
+		selenium.type("_31_name",
+			RuntimeVariables.replace("Edited Test2 Image2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is the Liferay2 logo2 Edit2!"));
+			RuntimeVariables.replace("This is Edited Test2 Image2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Image2 Edit2"));
+		assertEquals(RuntimeVariables.replace("Edited Test2 Image2"),
+			selenium.getText("//form[2]/div[3]/div/div[1]"));
 	}
 }

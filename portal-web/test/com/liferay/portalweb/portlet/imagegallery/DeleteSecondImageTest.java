@@ -54,7 +54,8 @@ public class DeleteSecondImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click(
+			"//img[@alt='Edited Test2 Image2. This is Edited Test2 Image2.']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +79,8 @@ public class DeleteSecondImageTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Test2 Image2"));
-		assertFalse(selenium.isTextPresent("Test2 Image2 Edit2"));
+		assertFalse(selenium.isTextPresent("Edited Test2 Image2"));
+		assertFalse(selenium.isElementPresent(
+				"//img[@alt='Edited Test2 Image2. This is Edited Test2 Image2.']"));
 	}
 }

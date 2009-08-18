@@ -65,7 +65,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Folder</td>
+	<td>link=Image Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Test1 Folder1</td>
 	<td></td>
 </tr>
 <tr>
@@ -79,9 +84,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test Subfolder</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[1]/span/a</td>
+	<td>Test1 Subfolder1</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -95,17 +100,7 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Test3 Subfolder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>This is a test3 subfolder3.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Image Gallery Test Page</td>
+	<td>Test3 Subfolder3<br />This is Test3 Subfolder3.</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,14 +119,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test3 Subfolder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a test3 subfolder3.</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Test3 Subfolder3<br />This is Test3 Subfolder3.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -140,12 +130,12 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Image']</td>
+	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Subfolder</td>
+	<td>link=Test1 Subfolder1</td>
 	<td></td>
 </tr>
 <tr>
@@ -189,6 +179,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Image Home</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//tr[4]/td[4]/input</td>
 	<td></td>
@@ -199,9 +194,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test3 Folder3</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[1]/span/a</td>
+	<td>Test3 Folder3</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -215,17 +210,7 @@
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
-	<td>Test3 Subfolder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>This is a test3 subfolder3.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Image Gallery Test Page</td>
+	<td>Test3 Subfolder3<br />This is Test3 Subfolder3.</td>
 	<td></td>
 </tr>
 <tr>
@@ -239,14 +224,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test3 Subfolder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a test3 subfolder3.</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Test3 Subfolder3<br />This is Test3 Subfolder3.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -255,7 +235,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Image']</td>
+	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 

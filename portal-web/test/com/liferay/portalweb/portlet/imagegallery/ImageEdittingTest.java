@@ -54,7 +54,7 @@ public class ImageEdittingTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Test Image. This is the Liferay logo!']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,7 +85,8 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Image']")) {
+				if (selenium.isElementPresent(
+							"//img[@alt='Test Image. This is the Liferay logo!']")) {
 					break;
 				}
 			}
@@ -95,7 +96,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Image']");
+		selenium.click("//img[@alt='Test Image. This is the Liferay logo!']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -103,7 +104,7 @@ public class ImageEdittingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//a")) {
+				if (selenium.isElementPresent("//div[4]/div[1]/div[1]/a")) {
 					break;
 				}
 			}
@@ -114,10 +115,10 @@ public class ImageEdittingTest extends BaseTestCase {
 		}
 
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("link=Permissions"));
-		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click("//a");
+		assertTrue(selenium.isElementPresent("link=Edit"));
+		assertTrue(selenium.isElementPresent("link=Permissions"));
+		assertTrue(selenium.isElementPresent("link=Delete"));
+		selenium.click("//div[4]/div[1]/div[1]/a");
 		Thread.sleep(5000);
 	}
 }

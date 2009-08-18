@@ -70,17 +70,16 @@ public class EditSecondFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test2 Folder2 Edit2"));
 		selenium.type("_31_name",
-			RuntimeVariables.replace("Test2 Folder2 Edit2"));
+			RuntimeVariables.replace("Edited Test2 Folder2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test2 folder2 edit2!"));
+			RuntimeVariables.replace("This is a Edited Test2 Folder2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Folder2 Edit2"));
-		assertTrue(selenium.isTextPresent("This is a test2 folder2 edit2!"));
+		assertEquals(RuntimeVariables.replace(
+				"Edited Test2 Folder2\nThis is a Edited Test2 Folder2."),
+			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }

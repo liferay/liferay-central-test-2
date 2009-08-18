@@ -50,10 +50,9 @@ public class AddNullTitleFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_description",
-			RuntimeVariables.replace("Null Title Folder Test"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("Null Title Folder Test"));
 		selenium.type("_31_name", RuntimeVariables.replace(""));

@@ -50,17 +50,18 @@ public class AddSecondFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test2 Folder2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test2 Folder2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test2 folder2!"));
+			RuntimeVariables.replace("This is a Test2 Folder2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Folder2"));
-		assertTrue(selenium.isTextPresent("This is a test2 folder2!"));
+		assertEquals(RuntimeVariables.replace(
+				"Test2 Folder2\nThis is a Test2 Folder2."),
+			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }

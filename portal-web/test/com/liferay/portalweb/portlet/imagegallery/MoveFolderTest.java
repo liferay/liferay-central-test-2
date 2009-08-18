@@ -94,62 +94,34 @@ public class MoveFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Folder"));
+		selenium.click(RuntimeVariables.replace("link=Image Home"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Subfolder")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
+			selenium.getText("//div[1]/span/a"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Test3 Subfolder3"));
-		assertFalse(selenium.isTextPresent("This is a test3 subfolder3."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertFalse(selenium.isTextPresent(
+				"Test3 Subfolder3\nThis is Test3 Subfolder3."));
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test3 Subfolder3"));
-		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Subfolder3\nThis is Test3 Subfolder3."),
+			selenium.getText("//td[1]/a"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
-		selenium.click(RuntimeVariables.replace("link=Test Subfolder"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
+		selenium.click(RuntimeVariables.replace("link=Test1 Subfolder1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//strong/span");
 
@@ -193,56 +165,28 @@ public class MoveFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Image Home"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//tr[4]/td[4]/input");
 		selenium.selectWindow("null");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test3 Folder3")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals(RuntimeVariables.replace("Test3 Folder3"),
+			selenium.getText("//div[1]/span/a"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Test3 Subfolder3"));
-		assertFalse(selenium.isTextPresent("This is a test3 subfolder3."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Image Gallery Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertFalse(selenium.isTextPresent(
+				"Test3 Subfolder3\nThis is Test3 Subfolder3."));
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Test3 Subfolder3"));
-		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Subfolder3\nThis is Test3 Subfolder3."),
+			selenium.getText("//td[1]/a"));
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 	}
 }

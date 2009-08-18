@@ -50,9 +50,9 @@ public class AddInvalidTitleFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("!@#$%^&amp;*"));
 		selenium.type("_31_name", RuntimeVariables.replace("!@#$%^&amp;*"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("Invaild Title Folder Test"));

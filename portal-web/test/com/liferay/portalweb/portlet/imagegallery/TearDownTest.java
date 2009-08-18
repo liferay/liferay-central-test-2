@@ -157,7 +157,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.click(RuntimeVariables.replace("link=Home"));
+				selenium.click(RuntimeVariables.replace(
+						"link=Return to Full Page"));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

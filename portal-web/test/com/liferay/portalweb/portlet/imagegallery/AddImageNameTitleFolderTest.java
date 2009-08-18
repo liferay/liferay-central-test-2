@@ -57,8 +57,7 @@ public class AddImageNameTitleFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image.jpg"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Image.jpg"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test1 Image1.jpg"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("Image Name Title Folder Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -55,15 +55,15 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Subfolder"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test1 Subfolder1"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test subfolder!"));
+			RuntimeVariables.replace("This is Test1 Subfolder1."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test Subfolder"));
-		assertTrue(selenium.isTextPresent("This is a test subfolder!"));
+		assertEquals(RuntimeVariables.replace(
+				"Test1 Subfolder1\nThis is Test1 Subfolder1."),
+			selenium.getText("//td[1]/a"));
 	}
 }

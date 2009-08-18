@@ -93,8 +93,6 @@ public class AddNullImageTest extends BaseTestCase {
 		}
 
 		selenium.type("_31_file", RuntimeVariables.replace(""));
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Null Image Test"));
 		selenium.type("_31_name", RuntimeVariables.replace("Null Image Test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");

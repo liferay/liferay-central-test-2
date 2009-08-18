@@ -95,8 +95,7 @@ public class AddDuplicateTitleImageTest extends BaseTestCase {
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Image"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test1 Image1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

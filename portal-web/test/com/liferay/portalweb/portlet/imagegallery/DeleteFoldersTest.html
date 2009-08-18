@@ -19,14 +19,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
-	<td>TestFolderAPresent</td>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
+	<td></td>
 </tr>
 <tr>
-	<td>gotoIf</td>
-	<td>!${TestFolderAPresent}</td>
-	<td>No Test FolderA Present</td>
+	<td>waitForElementPresent</td>
+	<td>//div[5]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[5]/ul/li[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Test1 Folder1<br />This is Test1 Folder1.</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -54,58 +74,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>No Test FolderA Present</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
-	<td>TestFolderBPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${TestFolderBPresent}</td>
-	<td>No Test FolderB Present</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No Test FolderB Present</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertTextNotPresent</td>
-	<td>This is a test folder!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextNotPresent</td>
-	<td>This is a second test folder.</td>
+	<td>Test3 Folder3<br />This is Test3 Folder3.</td>
 	<td></td>
 </tr>
 

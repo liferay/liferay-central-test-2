@@ -20,13 +20,8 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Add Folder']</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_31_name</td>
-	<td>Test3 Folder3</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -36,7 +31,7 @@
 <tr>
 	<td>type</td>
 	<td>_31_description</td>
-	<td>This is a test3 folder3.</td>
+	<td>This is Test3 Folder3.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -49,19 +44,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test3 Folder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a test3 folder3.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//tr[4]/td[1]/a/b</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//tr[4]/td[1]/a</td>
+	<td>Test3 Folder3<br />This is Test3 Folder3.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -74,11 +59,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_31_name</td>
-	<td>Test3 Subfolder3</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_31_name</td>
 	<td>Test3 Subfolder3</td>
@@ -86,7 +66,7 @@
 <tr>
 	<td>type</td>
 	<td>_31_description</td>
-	<td>This is a test3 subfolder3.</td>
+	<td>This is Test3 Subfolder3.</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -99,14 +79,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test3 Subfolder3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is a test3 subfolder3.</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Test3 Subfolder3<br />This is Test3 Subfolder3.</td>
 </tr>
 
 </tbody></table>

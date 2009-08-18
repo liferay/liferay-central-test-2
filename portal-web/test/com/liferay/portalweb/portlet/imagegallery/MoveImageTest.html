@@ -20,12 +20,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test Subfolder</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[@alt='Image']</td>
+	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 <tr>
@@ -65,6 +70,11 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=Image Home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Test3 Folder3</td>
 	<td></td>
 </tr>
@@ -79,9 +89,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Test3 Subfolder3</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[1]/span/a</td>
+	<td>Test3 Subfolder3</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -95,12 +105,7 @@
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>//img[@alt='This is the Liferay logo!']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Image Gallery Test Page</td>
+	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 <tr>
@@ -110,12 +115,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test3 Subfolder3</td>
+	<td>//tr[4]/td[1]/a[1]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>//img[@alt='Image']</td>
+	<td>//img[@alt='Test1 Image1. This is Test1 Image1.']</td>
 	<td></td>
 </tr>
 

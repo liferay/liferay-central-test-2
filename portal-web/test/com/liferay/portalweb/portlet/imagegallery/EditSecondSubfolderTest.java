@@ -72,17 +72,16 @@ public class EditSecondSubfolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test2 Subfolder2 Edit2"));
 		selenium.type("_31_name",
-			RuntimeVariables.replace("Test2 Subfolder2 Edit2"));
+			RuntimeVariables.replace("Edited Test2 Subfolder2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test2 subfolder2 edit2!"));
+			RuntimeVariables.replace("This is Edited Test2 Subfolder2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Subfolder2 Edit2"));
-		assertTrue(selenium.isTextPresent("This is a test2 subfolder2 edit2!"));
+		assertEquals(RuntimeVariables.replace(
+				"Edited Test2 Subfolder2\nThis is Edited Test2 Subfolder2."),
+			selenium.getText("//tr[3]/td[1]"));
 	}
 }

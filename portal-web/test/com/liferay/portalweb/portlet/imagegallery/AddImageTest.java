@@ -78,17 +78,17 @@ public class AddImageTest extends BaseTestCase {
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test Image"));
-		selenium.type("_31_name", RuntimeVariables.replace("Test Image"));
+		selenium.type("_31_name", RuntimeVariables.replace("Test1 Image1"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is the Liferay logo!"));
+			RuntimeVariables.replace("This is Test1 Image1."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
-		assertTrue(selenium.isTextPresent("Test Image"));
-		assertTrue(selenium.isTextPresent("Showing 1 result."));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
+		assertEquals(RuntimeVariables.replace("Test1 Image1"),
+			selenium.getText("//form[2]/div[3]/div/div[1]"));
 	}
 }

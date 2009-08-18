@@ -55,16 +55,15 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test2 Subfolder2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test2 Subfolder2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test2 subfolder2!"));
+			RuntimeVariables.replace("This is Test2 Subfolder2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test2 Subfolder2"));
-		assertTrue(selenium.isTextPresent("This is a test2 subfolder2!"));
+		assertEquals(RuntimeVariables.replace(
+				"Test2 Subfolder2\nThis is Test2 Subfolder2."),
+			selenium.getText("//td[1]/a"));
 	}
 }

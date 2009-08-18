@@ -76,9 +76,7 @@ public class DeleteSecondSubfolderTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Test2 Subfolder2"));
-		assertFalse(selenium.isTextPresent("This is a test2 subfolder2 edit2!"));
-		assertFalse(selenium.isTextPresent("Test2 Subfolder2 Edit2"));
-		assertFalse(selenium.isTextPresent("This is a test2 subfolder2!"));
+		assertFalse(selenium.isTextPresent(
+				"Edited Test2 Subfolder2\nThis is Edited Test2 Subfolder2."));
 	}
 }

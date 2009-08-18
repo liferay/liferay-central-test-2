@@ -54,15 +54,19 @@ public class BrowseImageTabsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 		selenium.click(RuntimeVariables.replace("link=My Images"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 		selenium.click(RuntimeVariables.replace("link=Recent Images"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 	}
 }

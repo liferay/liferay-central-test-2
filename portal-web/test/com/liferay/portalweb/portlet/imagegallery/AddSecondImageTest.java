@@ -78,17 +78,17 @@ public class AddSecondImageTest extends BaseTestCase {
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image_2.jpg"));
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test2 Image2"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test2 Image2"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is the Liferay2 logo2!"));
+			RuntimeVariables.replace("This is Test2 Image2."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
-		assertTrue(selenium.isTextPresent("Test2 Image2"));
-		assertTrue(selenium.isTextPresent("Showing 1 result."));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test2 Image2. This is Test2 Image2.']"));
+		assertEquals(RuntimeVariables.replace("Test2 Image2"),
+			selenium.getText("//form[2]/div[3]/div/div[1]"));
 	}
 }

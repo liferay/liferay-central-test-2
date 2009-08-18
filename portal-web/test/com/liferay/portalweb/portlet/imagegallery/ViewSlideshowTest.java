@@ -83,7 +83,8 @@ public class ViewSlideshowTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Image']")) {
+				if (selenium.isElementPresent(
+							"//img[@alt='Test1 Image1. This is Test1 Image1.']")) {
 					break;
 				}
 			}
@@ -92,5 +93,8 @@ public class ViewSlideshowTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
 	}
 }

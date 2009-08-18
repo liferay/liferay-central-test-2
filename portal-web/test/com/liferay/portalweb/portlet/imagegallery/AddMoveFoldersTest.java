@@ -50,50 +50,33 @@ public class AddMoveFoldersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name", RuntimeVariables.replace("Test3 Folder3"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test3 Folder3"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test3 folder3."));
+			RuntimeVariables.replace("This is Test3 Folder3."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test3 Folder3"));
-		assertTrue(selenium.isTextPresent("This is a test3 folder3."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[4]/td[1]/a/b")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Folder3\nThis is Test3 Folder3."),
+			selenium.getText("//tr[4]/td[1]/a"));
 		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_31_name",
-			RuntimeVariables.replace("Test3 Subfolder3"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test3 Subfolder3"));
 		selenium.type("_31_description",
-			RuntimeVariables.replace("This is a test3 subfolder3."));
+			RuntimeVariables.replace("This is Test3 Subfolder3."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isTextPresent("Test3 Subfolder3"));
-		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Subfolder3\nThis is Test3 Subfolder3."),
+			selenium.getText("//td[1]/a"));
 	}
 }
