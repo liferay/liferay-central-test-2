@@ -462,6 +462,8 @@ public class BookmarksFolderLocalServiceImpl
 			entry.setFolderId(toFolderId);
 
 			bookmarksEntryPersistence.update(entry, false);
+
+			bookmarksEntryLocalService.reIndex(entry);
 		}
 
 		deleteFolder(fromFolder);

@@ -459,6 +459,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			image.setFolderId(toFolderId);
 
 			igImagePersistence.update(image, false);
+
+			igImageLocalService.reIndex(image);
 		}
 
 		deleteFolder(fromFolder);
