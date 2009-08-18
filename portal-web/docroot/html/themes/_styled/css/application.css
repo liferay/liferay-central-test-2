@@ -576,6 +576,12 @@
 
 /* ---------- Container ---------- */
 
+.aui-panel-container {
+	position: absolute;
+	visibility: hidden;
+	z-index: 2;
+}
+
 .aui-overlay-content {
 	background: #fff;
 }
