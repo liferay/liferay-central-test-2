@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -104,7 +105,7 @@ public class CacheFilter extends BasePortalFilter {
 		// Url
 
 		sb.append(HttpUtil.getProtocol(request));
-		sb.append("://");
+		sb.append(Http.PROTOCOL_DELIMITER);
 		sb.append(request.getContextPath());
 		sb.append(request.getServletPath());
 		sb.append(request.getPathInfo());
