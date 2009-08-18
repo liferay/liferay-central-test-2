@@ -93,8 +93,12 @@ public class ConfigurationImpl
 				properties.load(url.openStream());
 
 				if (!properties.containsKey("base.path")) {
+					String fileName = url.getFile();
+
+					fileName = fileName.replaceAll("%20", StringPool.SPACE);
+
 					Writer writer = new BufferedWriter(
-						new FileWriter(url.getFile(), true));
+						new FileWriter(fileName, true));
 
 					writer.write("\n\nbase.path=" + basePath);
 
