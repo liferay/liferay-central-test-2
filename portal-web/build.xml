@@ -472,7 +472,10 @@
 					/>
 				</replaceregexp>
 
-				<!-- Fix io to allow for synchronous ajax requests -->
+				<!--
+				Fix io to allow for synchronous ajax requests.
+				-->
+
 				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
 					<replacetoken><![CDATA[try { _open(o.c, m, uri); } catch(e0) {}]]></replacetoken>
 					<replacevalue><![CDATA[try { _open(o.c, m, uri, c.async); } catch(e0) {}]]></replacevalue>
