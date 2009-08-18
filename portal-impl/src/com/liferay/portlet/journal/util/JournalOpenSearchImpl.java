@@ -27,9 +27,14 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
@@ -41,6 +46,7 @@ import javax.portlet.PortletURL;
  * <a href="JournalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
@@ -75,32 +81,78 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		String articleId = result.get(Field.ENTRY_CLASS_PK);
 		String version = result.get("version");
 
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		List<Long> hitLayoutIds =
 			JournalContentSearchLocalServiceUtil.getLayoutIds(
 				layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
-		if (hitLayoutIds.size() > 0) {
-			Long hitLayoutId = hitLayoutIds.get(0);
+		for (Long hitLayoutId : hitLayoutIds) {
+			if (LayoutPermissionUtil.contains(permissionChecker,
+				layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId,
+				ActionKeys.VIEW)) {
 
-			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-				layout.getGroupId(), layout.isPrivateLayout(),
-				hitLayoutId.longValue());
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					hitLayoutId.longValue());
 
-			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			}
 		}
-		else {
-			StringBuilder sb = new StringBuilder();
 
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/journal/view_article_content?groupId=");
-			sb.append(groupId);
-			sb.append("&articleId=");
-			sb.append(articleId);
-			sb.append("&version=");
-			sb.append(version);
+		String URL = null;
 
-			return sb.toString();
+		URL = getLayoutURL(themeDisplay, articleId);
+
+		if (URL != null) {
+			return URL;
 		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/journal/view_article_content?groupId=");
+		sb.append(groupId);
+		sb.append("&articleId=");
+		sb.append(articleId);
+		sb.append("&version=");
+		sb.append(version);
+
+		return sb.toString();
+	}
+
+	protected String getLayoutURL(ThemeDisplay themeDisplay, String articleId)
+		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		List<JournalContentSearch> contentSearches =
+			JournalContentSearchLocalServiceUtil.getArticleContentSearches(
+				articleId);
+
+		for (JournalContentSearch contentSearch : contentSearches) {
+			if (LayoutPermissionUtil.contains(permissionChecker,
+				contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
+				contentSearch.getLayoutId(), ActionKeys.VIEW)) {
+
+				if (contentSearch.isPrivateLayout()) {
+					if (!GroupLocalServiceUtil.hasUserGroup(
+						themeDisplay.getUserId(), contentSearch.getGroupId())) {
+						continue;
+					}
+				}
+
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
+					contentSearch.getLayoutId());
+
+				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			}
+		}
+
+		return null;
 	}
 
 }

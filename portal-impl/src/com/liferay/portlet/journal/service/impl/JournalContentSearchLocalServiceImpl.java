@@ -47,6 +47,7 @@ import javax.portlet.PortletPreferences;
  * </i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class JournalContentSearchLocalServiceImpl
 	extends JournalContentSearchLocalServiceBaseImpl {
@@ -147,6 +148,13 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List<JournalContentSearch> getArticleContentSearches(
+			String articleId)
+		throws SystemException {
+
+		return journalContentSearchPersistence.findByA(articleId);
+	}
+
+	public List<JournalContentSearch> getArticleContentSearches(
 			long groupId, String articleId)
 		throws SystemException {
 
@@ -168,6 +176,13 @@ public class JournalContentSearchLocalServiceImpl
 		}
 
 		return layoutIds;
+	}
+
+	public int getLayoutIdsCount(
+			String articleId)
+		throws SystemException {
+
+		return journalContentSearchPersistence.countByA(articleId);
 	}
 
 	public int getLayoutIdsCount(

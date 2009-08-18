@@ -148,6 +148,12 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches(
+		java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
+		return getService().getArticleContentSearches(articleId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		return getService().getArticleContentSearches(groupId, articleId);
@@ -157,6 +163,11 @@ public class JournalContentSearchLocalServiceUtil {
 		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		return getService().getLayoutIds(groupId, privateLayout, articleId);
+	}
+
+	public static int getLayoutIdsCount(java.lang.String articleId) 
+		throws com.liferay.portal.SystemException {
+		return getService().getLayoutIdsCount(articleId);
 	}
 
 	public static int getLayoutIdsCount(long groupId, boolean privateLayout,
