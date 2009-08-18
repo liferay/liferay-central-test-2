@@ -47,6 +47,7 @@ import com.liferay.portal.service.base.UserServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
+import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
@@ -169,9 +170,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		if ((creatorUserId != 0) || !company.isStrangers()) {
-			UserPermissionUtil.check(
-				getPermissionChecker(), 0, organizationIds,
+			PortalPermissionUtil.check(getPermissionChecker(),
 				ActionKeys.ADD_USER);
+
 		}
 
 		if (creatorUserId == 0) {
