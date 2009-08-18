@@ -127,8 +127,23 @@ public class PortalUtil {
 		getPortal().copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	/**
+	 * @deprecated {@link #getCDNHost(boolean)}
+	 */
 	public static String getCDNHost() {
 		return getPortal().getCDNHost();
+	}
+
+	public static String getCDNHost(boolean secure) {
+		return getPortal().getCDNHost(secure);
+	}
+
+	public static String getCDNHostHttp() {
+		return getPortal().getCDNHostHttp();
+	}
+
+	public static String getCDNHostHttps() {
+		return getPortal().getCDNHostHttps();
 	}
 
 	public static String getClassName(long classNameId) {

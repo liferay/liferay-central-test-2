@@ -233,6 +233,10 @@ public class VerifyProperties extends VerifyProcess {
 			"amazon.access.key.id"
 		},
 		new String[] {
+			"cdn.host",
+			"cdn.host.http"
+		},
+		new String[] {
 			"com.liferay.portal.servlet.filters.compression.CompressionFilter",
 			"com.liferay.portal.servlet.filters.gzip.GZipFilter"
 		},

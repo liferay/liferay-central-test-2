@@ -240,6 +240,12 @@ public class PropsValues {
 	public static final String CAS_VALIDATE_URL =
 		PropsUtil.get(PropsKeys.CAS_VALIDATE_URL);
 
+	public static final String CDN_HOST_HTTP =
+		PropsUtil.get(PropsKeys.CDN_HOST_HTTP);
+
+	public static final String CDN_HOST_HTTPS =
+		PropsUtil.get(PropsKeys.CDN_HOST_HTTPS);
+
 	public static final String CLUSTER_LINK_AUTODETECT_ADDRESS =
 		PropsUtil.get(PropsKeys.CLUSTER_LINK_AUTODETECT_ADDRESS);
 

@@ -928,8 +928,16 @@ public class ServicePreAction extends Action {
 
 		// CDN host
 
-		String cdnHost = ParamUtil.getString(
-			request, "cdn_host", PortalUtil.getCDNHost());
+		String cdnHost = null;
+
+		if (request.isSecure()) {
+			cdnHost = PortalUtil.getCDNHostHttps();
+		}
+		else {
+			cdnHost = PortalUtil.getCDNHostHttp();
+		}
+
+		cdnHost = ParamUtil.getString(request, "cdn_host", cdnHost);
 
 		// Portal URL
 
@@ -943,7 +951,7 @@ public class ServicePreAction extends Action {
 		String friendlyURLPrivateUserPath =
 			PortalUtil.getPathFriendlyURLPrivateUser();
 		String friendlyURLPublicPath = PortalUtil.getPathFriendlyURLPublic();
-		String imagePath = PortalUtil.getPathImage();
+		String imagePath = cdnHost + PortalUtil.getPathImage();
 		String mainPath = PortalUtil.getPathMain();
 
 		String i18nPath = (String)request.getAttribute(WebKeys.I18N_PATH);

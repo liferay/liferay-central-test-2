@@ -119,7 +119,16 @@ public interface Portal {
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
+	/**
+	 * @deprecated {@link #getCDNHost(boolean)}
+	 */
 	public String getCDNHost();
+
+	public String getCDNHost(boolean secure);
+
+	public String getCDNHostHttp();
+
+	public String getCDNHostHttps();
 
 	public String getClassName(long classNameId);
 

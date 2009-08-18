@@ -223,7 +223,9 @@ public interface PropsKeys {
 
 	public static final String CAS_VALIDATE_URL = "cas.validate.url";
 
-	public static final String CDN_HOST = "cdn.host";
+	public static final String CDN_HOST_HTTP = "cdn.host.http";
+
+	public static final String CDN_HOST_HTTPS = "cdn.host.https";
 
 	public static final String CLUSTER_LINK_AUTODETECT_ADDRESS = "cluster.link.autodetect.address";
 

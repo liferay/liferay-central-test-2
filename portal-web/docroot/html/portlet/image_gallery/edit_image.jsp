@@ -107,7 +107,7 @@ if (image != null) {
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= (Validator.isNull(PortalUtil.getCDNHost()) ? themeDisplay.getPortalURL() : "") + themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() + "&groupId=" + folder.getGroupId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
+				url='<%= (Validator.isNull(themeDisplay.getCDNHost()) ? themeDisplay.getPortalURL() : "") + themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() + "&groupId=" + folder.getGroupId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
 			/>
 		</td>
 	</tr>

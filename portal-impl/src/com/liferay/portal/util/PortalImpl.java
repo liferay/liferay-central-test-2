@@ -196,7 +196,7 @@ import org.apache.struts.Globals;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Eduardo Lundgren
  */
 public class PortalImpl implements Portal {
@@ -266,7 +266,17 @@ public class PortalImpl implements Portal {
 
 		// CDN host
 
-		_cdnHost = PropsUtil.get(PropsKeys.CDN_HOST);
+		_cdnHostHttp = PropsValues.CDN_HOST_HTTP;
+
+		if (_cdnHostHttp.startsWith("${")) {
+			_cdnHostHttp = StringPool.BLANK;
+		}
+
+		_cdnHostHttps = PropsValues.CDN_HOST_HTTPS;
+
+		if (_cdnHostHttps.startsWith("${")) {
+			_cdnHostHttps = StringPool.BLANK;
+		}
 
 		// Paths
 
@@ -281,7 +291,7 @@ public class PortalImpl implements Portal {
 		_pathFriendlyURLPrivateUser =
 			_pathContext + _PRIVATE_USER_SERVLET_MAPPING;
 		_pathFriendlyURLPublic = _pathContext + _PUBLIC_GROUP_SERVLET_MAPPING;
-		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
+		_pathImage = _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
 		// Groups
@@ -525,8 +535,28 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #getCDNHost(boolean)}
+	 */
 	public String getCDNHost() {
-		return _cdnHost;
+		return getCDNHostHttp();
+	}
+
+	public String getCDNHost(boolean secure) {
+		if (secure) {
+			return getCDNHostHttps();
+		}
+		else {
+			return getCDNHostHttp();
+		}
+	}
+
+	public String getCDNHostHttp() {
+		return _cdnHostHttp;
+	}
+
+	public String getCDNHostHttps() {
+		return _cdnHostHttps;
 	}
 
 	public String getClassName(long classNameId) {
@@ -3793,7 +3823,8 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
-	private String _cdnHost;
+	private String _cdnHostHttp;
+	private String _cdnHostHttps;
 	private String _computerAddress;
 	private String _computerName;
 	private String[] _customSqlClassNameIds = null;
