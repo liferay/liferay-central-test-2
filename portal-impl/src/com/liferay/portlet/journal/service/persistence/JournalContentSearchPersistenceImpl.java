@@ -71,22 +71,23 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	public static final String FINDER_CLASS_NAME_ENTITY = JournalContentSearchImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_A = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_ARTICLEID = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
 			JournalContentSearchModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByA",
-			new String[] {String.class.getName()});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_A = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByArticleId",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_ARTICLEID = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
 			JournalContentSearchModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByA",
-			new String[] {String.class.getName(),
-
+			FINDER_CLASS_NAME_LIST, "findByArticleId",
+			new String[] {
+				String.class.getName(),
+				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_A = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_ARTICLEID = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
 			JournalContentSearchModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByA",
-			new String[] {String.class.getName()});
+			FINDER_CLASS_NAME_LIST, "countByArticleId",
+			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
 			JournalContentSearchModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_P",
@@ -534,11 +535,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		return journalContentSearch;
 	}
 
-	public List<JournalContentSearch> findByA(String articleId)
+	public List<JournalContentSearch> findByArticleId(String articleId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] {articleId};
+		Object[] finderArgs = new Object[] { articleId };
 
-		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_A,
+		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_ARTICLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -581,7 +582,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ARTICLEID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -591,21 +592,20 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<JournalContentSearch> findByA(String articleId, int start,
-		int end) throws SystemException {
-		return findByA(articleId, start, end, null);
+	public List<JournalContentSearch> findByArticleId(String articleId,
+		int start, int end) throws SystemException {
+		return findByArticleId(articleId, start, end, null);
 	}
 
-	public List<JournalContentSearch> findByA(String articleId, int start,
-		int end, OrderByComparator obc)
-		throws SystemException {
+	public List<JournalContentSearch> findByArticleId(String articleId,
+		int start, int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				articleId,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_A,
+		List<JournalContentSearch> list = (List<JournalContentSearch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_ARTICLEID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -671,7 +671,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_ARTICLEID,
 					finderArgs, list);
 
 				closeSession(session);
@@ -681,10 +681,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public JournalContentSearch findByA_First(String articleId,
+	public JournalContentSearch findByArticleId_First(String articleId,
 		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List<JournalContentSearch> list = findByA(articleId, 0, 1, obc);
+		List<JournalContentSearch> list = findByArticleId(articleId, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -702,13 +702,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalContentSearch findByA_Last(String articleId,
+	public JournalContentSearch findByArticleId_Last(String articleId,
 		OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		int count = countByA(articleId);
+		int count = countByArticleId(articleId);
 
-		List<JournalContentSearch> list = findByA(articleId, count - 1, count,
-			obc);
+		List<JournalContentSearch> list = findByArticleId(articleId, count - 1,
+				count, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -726,12 +726,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalContentSearch[] findByA_PrevAndNext(
+	public JournalContentSearch[] findByArticleId_PrevAndNext(
 		long contentSearchId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(contentSearchId);
 
-		int count = countByA(articleId);
+		int count = countByArticleId(articleId);
 
 		Session session = null;
 
@@ -2644,9 +2644,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public void removeByA(String articleId)
-		throws SystemException {
-		for (JournalContentSearch journalContentSearch : findByA(articleId)) {
+	public void removeByArticleId(String articleId) throws SystemException {
+		for (JournalContentSearch journalContentSearch : findByArticleId(
+				articleId)) {
 			remove(journalContentSearch);
 		}
 	}
@@ -2706,11 +2706,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByA(String articleId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {articleId};
+	public int countByArticleId(String articleId) throws SystemException {
+		Object[] finderArgs = new Object[] { articleId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ARTICLEID,
 				finderArgs, this);
 
 		if (count == null) {
@@ -2752,7 +2751,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_A,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ARTICLEID,
 					finderArgs, count);
 
 				closeSession(session);

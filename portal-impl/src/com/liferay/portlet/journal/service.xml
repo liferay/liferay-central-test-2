@@ -208,6 +208,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="ArticleId" return-type="Collection">
+			<finder-column name="articleId" />
+		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />

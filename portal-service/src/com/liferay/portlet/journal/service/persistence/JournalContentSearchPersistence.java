@@ -93,31 +93,31 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch fetchByPrimaryKey(
 		long contentSearchId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByA(
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByArticleId(
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByA(
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByArticleId(
 		java.lang.String articleId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByA(
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> findByArticleId(
 		java.lang.String articleId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByA_First(
+	public com.liferay.portlet.journal.model.JournalContentSearch findByArticleId_First(
 		java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public com.liferay.portlet.journal.model.JournalContentSearch findByA_Last(
+	public com.liferay.portlet.journal.model.JournalContentSearch findByArticleId_Last(
 		java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchContentSearchException;
 
-	public com.liferay.portlet.journal.model.JournalContentSearch[] findByA_PrevAndNext(
+	public com.liferay.portlet.journal.model.JournalContentSearch[] findByArticleId_PrevAndNext(
 		long contentSearchId, java.lang.String articleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
@@ -318,7 +318,7 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByA(java.lang.String articleId)
+	public void removeByArticleId(java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_P(long groupId, boolean privateLayout)
@@ -344,7 +344,7 @@ public interface JournalContentSearchPersistence extends BasePersistence {
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByA(java.lang.String articleId)
+	public int countByArticleId(java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_P(long groupId, boolean privateLayout)

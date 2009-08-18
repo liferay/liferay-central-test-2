@@ -148,17 +148,17 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List<JournalContentSearch> getArticleContentSearches(
-			String articleId)
-		throws SystemException {
-
-		return journalContentSearchPersistence.findByA(articleId);
-	}
-
-	public List<JournalContentSearch> getArticleContentSearches(
 			long groupId, String articleId)
 		throws SystemException {
 
 		return journalContentSearchPersistence.findByG_A(groupId, articleId);
+	}
+
+	public List<JournalContentSearch> getArticleContentSearches(
+			String articleId)
+		throws SystemException {
+
+		return journalContentSearchPersistence.findByArticleId(articleId);
 	}
 
 	public List<Long> getLayoutIds(
@@ -179,18 +179,15 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public int getLayoutIdsCount(
-			String articleId)
-		throws SystemException {
-
-		return journalContentSearchPersistence.countByA(articleId);
-	}
-
-	public int getLayoutIdsCount(
 			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
 
 		return journalContentSearchPersistence.countByG_P_A(
 			groupId, privateLayout, articleId);
+	}
+
+	public int getLayoutIdsCount(String articleId) throws SystemException {
+		return journalContentSearchPersistence.countByArticleId(articleId);
 	}
 
 	public JournalContentSearch updateContentSearch(

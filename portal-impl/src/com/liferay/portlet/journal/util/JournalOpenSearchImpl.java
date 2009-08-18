@@ -71,57 +71,6 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		return TITLE + keywords;
 	}
 
-	protected String getURL(
-			ThemeDisplay themeDisplay, long groupId, Document result,
-			PortletURL portletURL)
-		throws Exception {
-
-		Layout layout = themeDisplay.getLayout();
-
-		String articleId = result.get(Field.ENTRY_CLASS_PK);
-		String version = result.get("version");
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		List<Long> hitLayoutIds =
-			JournalContentSearchLocalServiceUtil.getLayoutIds(
-				layout.getGroupId(), layout.isPrivateLayout(), articleId);
-
-		for (Long hitLayoutId : hitLayoutIds) {
-			if (LayoutPermissionUtil.contains(permissionChecker,
-				layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId,
-				ActionKeys.VIEW)) {
-
-				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					hitLayoutId.longValue());
-
-				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-			}
-		}
-
-		String URL = null;
-
-		URL = getLayoutURL(themeDisplay, articleId);
-
-		if (URL != null) {
-			return URL;
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/journal/view_article_content?groupId=");
-		sb.append(groupId);
-		sb.append("&articleId=");
-		sb.append(articleId);
-		sb.append("&version=");
-		sb.append(version);
-
-		return sb.toString();
-	}
-
 	protected String getLayoutURL(ThemeDisplay themeDisplay, String articleId)
 		throws Exception {
 
@@ -133,13 +82,16 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 				articleId);
 
 		for (JournalContentSearch contentSearch : contentSearches) {
-			if (LayoutPermissionUtil.contains(permissionChecker,
-				contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
-				contentSearch.getLayoutId(), ActionKeys.VIEW)) {
+			if (LayoutPermissionUtil.contains(
+					permissionChecker, contentSearch.getGroupId(),
+					contentSearch.isPrivateLayout(),
+					contentSearch.getLayoutId(), ActionKeys.VIEW)) {
 
 				if (contentSearch.isPrivateLayout()) {
 					if (!GroupLocalServiceUtil.hasUserGroup(
-						themeDisplay.getUserId(), contentSearch.getGroupId())) {
+							themeDisplay.getUserId(),
+							contentSearch.getGroupId())) {
+
 						continue;
 					}
 				}
@@ -153,6 +105,55 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		}
 
 		return null;
+	}
+
+	protected String getURL(
+			ThemeDisplay themeDisplay, long groupId, Document result,
+			PortletURL portletURL)
+		throws Exception {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		Layout layout = themeDisplay.getLayout();
+
+		String articleId = result.get(Field.ENTRY_CLASS_PK);
+		String version = result.get("version");
+
+		List<Long> hitLayoutIds =
+			JournalContentSearchLocalServiceUtil.getLayoutIds(
+				layout.getGroupId(), layout.isPrivateLayout(), articleId);
+
+		for (Long hitLayoutId : hitLayoutIds) {
+			if (LayoutPermissionUtil.contains(
+					permissionChecker, layout.getGroupId(),
+					layout.isPrivateLayout(), hitLayoutId, ActionKeys.VIEW)) {
+
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					hitLayoutId.longValue());
+
+				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			}
+		}
+
+		String layoutURL = getLayoutURL(themeDisplay, articleId);
+
+		if (layoutURL != null) {
+			return layoutURL;
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/journal/view_article_content?groupId=");
+		sb.append(groupId);
+		sb.append("&articleId=");
+		sb.append(articleId);
+		sb.append("&version=");
+		sb.append(version);
+
+		return sb.toString();
 	}
 
 }

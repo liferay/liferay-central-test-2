@@ -224,6 +224,7 @@ create index IX_D4121315 on JournalArticleImage (tempImage);
 create index IX_F8433677 on JournalArticleResource (groupId);
 create unique index IX_88DF994A on JournalArticleResource (groupId, articleId);
 
+create index IX_9207CB31 on JournalContentSearch (articleId);
 create index IX_6838E427 on JournalContentSearch (groupId, articleId);
 create index IX_20962903 on JournalContentSearch (groupId, privateLayout);
 create index IX_7CC7D73E on JournalContentSearch (groupId, privateLayout, articleId);
