@@ -20,46 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_4;
+package com.liferay.portal.upgrade.v4_3_4.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_4.util.ClassNameTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeClassName.java.html"><b><i>View Source</i></b></a>
+ * <a href="ClassNameTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeClassName extends UpgradeProcess {
+public class ClassNameTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static String TABLE_NAME = "ClassName_";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static Object[][] TABLE_COLUMNS = {
+		{"classNameId", new Integer(Types.BIGINT)},
+		{"value", new Integer(Types.VARCHAR)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";
 
-		// Website
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			ClassNameTable.TABLE_NAME, ClassNameTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(ClassNameTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeClassName.class);
+	public static String TABLE_SQL_DROP = "drop table ClassName_";
 
 }
