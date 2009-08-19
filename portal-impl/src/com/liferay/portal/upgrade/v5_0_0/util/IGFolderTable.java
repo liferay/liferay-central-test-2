@@ -20,48 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_0_0;
+package com.liferay.portal.upgrade.v5_0_0.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_0_0.util.SCProductVersionTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeSoftwareCatalog.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGFolderTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeSoftwareCatalog extends UpgradeProcess {
+public class IGFolderTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static final String TABLE_NAME = "IGFolder";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static final Object[][] TABLE_COLUMNS = {
+		{"uuid_", new Integer(Types.VARCHAR)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"parentFolderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"description", new Integer(Types.VARCHAR)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static final String TABLE_SQL_CREATE = "create table IGFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";
 
-		// SCProductVersion
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SCProductVersionTable.TABLE_NAME,
-			SCProductVersionTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(SCProductVersionTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradeSoftwareCatalog.class);
+	public static final String TABLE_SQL_DROP = "drop table IGFolder";
 
 }
