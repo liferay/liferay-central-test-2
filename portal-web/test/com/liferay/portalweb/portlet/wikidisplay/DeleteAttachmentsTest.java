@@ -53,6 +53,23 @@ public class DeleteAttachmentsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=1 Attachments"));
 		selenium.click(RuntimeVariables.replace("link=1 Attachments"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Wiki-Selenium.portlet.lar"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
@@ -67,6 +84,23 @@ public class DeleteAttachmentsTest extends BaseTestCase {
 				"This page does not have any file attachments."));
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=0 Attachments"));
 	}
 }

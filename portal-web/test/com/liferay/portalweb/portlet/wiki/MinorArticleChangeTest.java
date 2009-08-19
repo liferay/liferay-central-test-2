@@ -52,6 +52,23 @@ public class MinorArticleChangeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Table of Contents")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 
@@ -73,7 +90,7 @@ public class MinorArticleChangeTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
-				"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
+				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!"));
 		assertTrue(selenium.isElementPresent("_36_minorEditCheckbox"));
 		selenium.check("_36_minorEditCheckbox");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

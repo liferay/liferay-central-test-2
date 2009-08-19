@@ -61,7 +61,7 @@ public class CancelAddChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -71,7 +71,7 @@ public class CancelAddChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//td[2]/input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace(
 				"This should be not able to see this when I cancel"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));

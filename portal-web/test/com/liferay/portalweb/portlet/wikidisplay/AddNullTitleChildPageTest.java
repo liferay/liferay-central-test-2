@@ -59,7 +59,7 @@ public class AddNullTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -69,8 +69,8 @@ public class AddNullTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace(""));
-		selenium.type("//td[2]/input", RuntimeVariables.replace(""));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace(""));
+		selenium.type("//span/input", RuntimeVariables.replace(""));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a Null Title Child Test Page!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

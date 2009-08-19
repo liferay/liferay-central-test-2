@@ -72,7 +72,7 @@ public class MinorArticleChangeTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"==WD Setup Wiki Test Article==\n\n*This is a WD wiki test article!\n\nOh NOES! I've made a minor change. Please revert this!"));
-		selenium.check("//tr[7]/td/input[2]");
+		selenium.click("//span/input[2]");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -24,23 +24,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//span/input</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>This page does not exist yet. Use the form below to create it.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[2]/input</td>
-	<td></td>
-</tr>
-<tr>
 	<td>typeKeys</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td>First</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td>First</td>
 </tr>
 <tr>
@@ -51,6 +51,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,13 +74,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Details</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Move</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Move</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Rename</td>
 	<td></td>
 </tr>
 <tr>
@@ -90,17 +110,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td>Rename to Second</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Rename']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -115,7 +140,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div/div/div[3]</td>
+	<td>//div[2]/div/div/div[2]</td>
 	<td>(Redirected from First)</td>
 </tr>
 <tr>

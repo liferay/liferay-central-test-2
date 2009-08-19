@@ -19,18 +19,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Application</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>link=Application</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id="Wiki-Wiki"]</td>
+	<td>//div[@id="Wiki-Wiki"]/p/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,57 +35,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[@alt='Manage Wikis']</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Manage Wikis']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//tr[4]/td[4]/ul/li/strong/span'))</td>
-	<td>ExtraPage</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${ExtraPage}</td>
-	<td>No Extra Page</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//tr[4]/td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//tr[4]/td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[2]/ul/li[6]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No Extra Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Main</td>
+	<td>assertElementPresent</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 

@@ -52,8 +52,6 @@ public class AddChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This page does not exist yet. Use the form below to create it."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,6 +69,8 @@ public class AddChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertTrue(selenium.isTextPresent(
+				"This page does not exist yet. Use the form below to create it."));
 		selenium.typeKeys("_36_title",
 			RuntimeVariables.replace("Test Child Page"));
 		selenium.type("_36_title", RuntimeVariables.replace("Test Child Page"));
@@ -84,7 +84,24 @@ public class AddChildPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Test Child Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Test Child Page"),
-			selenium.getText("//div[3]/div/h2"));
+			selenium.getText("//h2"));
 	}
 }

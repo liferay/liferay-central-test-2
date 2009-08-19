@@ -52,6 +52,23 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//select")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("//select", "label=HTML");
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -62,7 +79,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -72,7 +89,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//td[2]/input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace("This is Test Page Format"));
 		selenium.click(
 			"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/img");
@@ -85,14 +102,66 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=This is Test Page Format"));
 		selenium.click(RuntimeVariables.replace("link=This is Test Page Format"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=Welcome to LIFERAY"));
 		selenium.click(RuntimeVariables.replace("link=Details"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//tr[2]/td")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("HTML"),
 			selenium.getText("//tr[2]/td"));
 	}

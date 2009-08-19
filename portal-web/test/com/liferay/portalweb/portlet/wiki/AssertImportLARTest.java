@@ -59,6 +59,23 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test"));
 		selenium.click(RuntimeVariables.replace("link=Test"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Test Child Article"));
 		assertTrue(selenium.isTextPresent("this is italics"));
 		assertTrue(selenium.isTextPresent("bold"));
@@ -67,6 +84,23 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("this is a sub list item"));
 		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
 		assertTrue(selenium.isTextPresent(
 				"I love Liferay! This Wiki has been EDITED!"));
@@ -74,6 +108,23 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Hi Administrator! Hope you are well! Please link me to another page!"));
 		selenium.click(RuntimeVariables.replace("link=Link Me 2"));

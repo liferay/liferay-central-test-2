@@ -50,6 +50,23 @@ public class AddNullCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Add Comment")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Add Comment");
 
 		for (int second = 0;; second++) {
@@ -68,13 +85,11 @@ public class AddNullCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_postReplyBody0",
-			RuntimeVariables.replace("                                    "));
-		selenium.type("_36_postReplyBody0",
-			RuntimeVariables.replace("                                    "));
-		selenium.click(RuntimeVariables.replace("_36_postReplyButton0"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		selenium.typeKeys("_36_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.type("_36_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.click("_36_postReplyButton0");
+		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

@@ -59,7 +59,7 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -69,13 +69,31 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Link Me 1"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Link Me 1"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Link Me 1"));
+		selenium.type("//span/input", RuntimeVariables.replace("Link Me 1"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
@@ -88,7 +106,7 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -98,13 +116,31 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Link Me 2"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Link Me 2"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Link Me 2"));
+		selenium.type("//span/input", RuntimeVariables.replace("Link Me 2"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));

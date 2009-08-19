@@ -217,11 +217,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_126_name",
-			RuntimeVariables.replace("Test Organization"));
 		selenium.type("_126_name", RuntimeVariables.replace("Test Organization"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Save']");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -241,8 +238,23 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.click("addressesLink");
-		selenium.typeKeys("_126_addressStreet1_0",
-			RuntimeVariables.replace("12345 Test Street"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_126_addressStreet1_0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Test Street"));
 		selenium.select("_126_addressCountryId0",

@@ -24,18 +24,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Add Child Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//td[2]/input</td>
+	<td>//span/input</td>
 	<td>Test Change Parent Child Page</td>
 </tr>
 <tr>
@@ -49,14 +54,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[3]/div/h2</td>
+	<td>assertTextPresent</td>
 	<td>Test Second Child Page</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertElementPresent</td>
@@ -69,18 +79,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[7]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Test Change Parent Child Page</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[1]/a[2]</td>
-	<td>Test Second Child Page</td>
+	<td>assertPartialText</td>
+	<td>//div[2]/div/div/h1</td>
+	<td>Test Change Parent Child Page</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Wiki Display Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>//li[7]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,8 +109,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Test Change Parent Child Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[7]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -99,13 +129,28 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Move</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Move</td>
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Change Parent</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Change Parent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//select</td>
 	<td></td>
 </tr>
 <tr>
@@ -124,13 +169,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertTextPresent</td>
 	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/a[2]</td>
+	<td>//li[6]/span/a</td>
 	<td>Test Child Page</td>
 </tr>
 <tr>
@@ -149,8 +199,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementNotPresent</td>
+	<td>//li[7]/span/a</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Test Second Child Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
 	<td></td>
 </tr>
 <tr>

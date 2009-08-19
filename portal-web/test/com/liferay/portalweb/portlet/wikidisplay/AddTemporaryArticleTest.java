@@ -59,7 +59,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -69,9 +69,8 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input",
-			RuntimeVariables.replace("Delete Me!"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Delete Me!"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Delete Me!"));
+		selenium.type("//span/input", RuntimeVariables.replace("Delete Me!"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock."));
@@ -82,6 +81,23 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Delete Me!"));
 		selenium.click(RuntimeVariables.replace("link=Delete Me!"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Reasons Why to Delete Me"));
 	}
 }

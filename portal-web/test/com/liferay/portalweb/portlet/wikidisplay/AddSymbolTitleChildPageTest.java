@@ -59,7 +59,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -69,8 +69,8 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Test@"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Test@"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Test@"));
+		selenium.type("//span/input", RuntimeVariables.replace("Test@"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -89,7 +89,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -99,8 +99,8 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Test%"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Test%"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Test%"));
+		selenium.type("//span/input", RuntimeVariables.replace("Test%"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -119,7 +119,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -129,8 +129,8 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Test&amp;"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Test&amp;"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Test&amp;"));
+		selenium.type("//span/input", RuntimeVariables.replace("Test&amp;"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -149,7 +149,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -159,8 +159,8 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Test/"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Test/"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Test/"));
+		selenium.type("//span/input", RuntimeVariables.replace("Test/"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -179,7 +179,7 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -189,8 +189,8 @@ public class AddSymbolTitleChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input", RuntimeVariables.replace("Test?"));
-		selenium.type("//td[2]/input", RuntimeVariables.replace("Test?"));
+		selenium.typeKeys("//span/input", RuntimeVariables.replace("Test?"));
+		selenium.type("//span/input", RuntimeVariables.replace("Test?"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

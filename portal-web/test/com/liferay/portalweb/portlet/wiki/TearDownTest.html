@@ -19,43 +19,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Main</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//span[3]/a/img'))</td>
+	<td>PortletPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${PortletPresent}</td>
+	<td>PortletNotPresent</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Test</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=All Pages</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//img[@alt='Manage Wikis']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//td[4]/ul/li/strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[5]/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -69,88 +54,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Second Edited Wiki Test</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//td[4]/ul/li/strong/span'))</td>
+	<td>WikiNodePresent</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=FrontPage</td>
-	<td></td>
+	<td>gotoIf</td>
+	<td>!${WikiNodePresent}</td>
+	<td>WikiNodeNotPresent</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Link Me 1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Second Edited Wiki Test</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=FrontPage</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Link Me 2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Details</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=All Pages</td>
+	<td>click</td>
+	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[5]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//td[5]/ul/li/strong/span</td>
+	<td>//div[5]/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Delete</td>
+	<td>//div[5]/ul/li[6]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
 	<td>Are you sure you want to delete this?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WikiNodeNotPresent</td>
 	<td></td>
 </tr>
 <tr>
@@ -159,48 +94,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Manage Wikis']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[6]/a</td>
+	<td>//img[@alt='Remove']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
+	<td>Are you sure you want to remove this component?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PortletNotPresent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[6]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
+	<td>link=Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -214,33 +124,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span</td>
+	<td>waitForVisible</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Display Order</td>
-	<td></td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_88_layoutIdsBox</td>
-	<td>label=Wiki Test Page</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@id='portlet-wrapper-88']/div[2]/div/div/form/table/tbody/tr/td[2]/table/tbody/tr/td[2]/a[3]/img</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[3]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Update Display Order']</td>
+	<td>//li[@id='_88_tabs3pageTabsId']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete the selected page?</td>
 	<td></td>
 </tr>
 <tr>

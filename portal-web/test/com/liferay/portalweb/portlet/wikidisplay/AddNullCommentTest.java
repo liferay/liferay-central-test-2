@@ -68,11 +68,11 @@ public class AddNullCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//textarea", RuntimeVariables.replace("          "));
-		selenium.type("//textarea", RuntimeVariables.replace("          "));
-		selenium.click(RuntimeVariables.replace("//tr[3]/td/input[1]"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		selenium.typeKeys("//textarea", RuntimeVariables.replace(""));
+		selenium.type("//textarea", RuntimeVariables.replace(""));
+		selenium.click("//tr[3]/td/input[1]");
+		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

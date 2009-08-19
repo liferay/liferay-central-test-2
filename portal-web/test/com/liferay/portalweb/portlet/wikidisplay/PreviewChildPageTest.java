@@ -59,7 +59,7 @@ public class PreviewChildPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[2]/input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -69,9 +69,9 @@ public class PreviewChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//td[2]/input",
+		selenium.typeKeys("//span/input",
 			RuntimeVariables.replace("This is Preview test"));
-		selenium.type("//td[2]/input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace("This is Preview test"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This should be visible when I preview."));

@@ -69,9 +69,6 @@ public class SearchContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_keywords",
-			RuntimeVariables.replace(
-				"\"This is Search Test Child Page Article Content\""));
 		selenium.type("_36_keywords",
 			RuntimeVariables.replace(
 				"\"This is Search Test Child Page Article Content\""));
@@ -81,6 +78,23 @@ public class SearchContentTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Child Page"));
 		selenium.click(RuntimeVariables.replace("link=Test Child Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"This is Search Test Child Page Article Content"));
 	}
