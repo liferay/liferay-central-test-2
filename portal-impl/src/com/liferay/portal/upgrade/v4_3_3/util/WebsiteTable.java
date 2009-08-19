@@ -20,46 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_3;
+package com.liferay.portal.upgrade.v4_3_3.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_3.util.WebsiteTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebsiteTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeWebsite extends UpgradeProcess {
+public class WebsiteTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static String TABLE_NAME = "Website";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static Object[][] TABLE_COLUMNS = {
+		{"websiteId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"classNameId", new Integer(Types.BIGINT)},
+		{"classPK", new Integer(Types.BIGINT)},
+		{"url", new Integer(Types.VARCHAR)},
+		{"typeId", new Integer(Types.INTEGER)},
+		{"primary_", new Integer(Types.BOOLEAN)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
 
-		// Website
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteTable.TABLE_NAME, WebsiteTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeWebsite.class);
+	public static String TABLE_SQL_DROP = "drop table Website";
 
 }

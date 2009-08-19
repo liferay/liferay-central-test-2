@@ -20,46 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_3;
+package com.liferay.portal.upgrade.v4_3_3.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_3.util.WebsiteTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCLicenseTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeWebsite extends UpgradeProcess {
+public class SCLicenseTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static String TABLE_NAME = "SCLicense";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static Object[][] TABLE_COLUMNS = {
+		{"licenseId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"url", new Integer(Types.VARCHAR)},
+		{"openSource", new Integer(Types.BOOLEAN)},
+		{"active_", new Integer(Types.BOOLEAN)},
+		{"recommended", new Integer(Types.BOOLEAN)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
 
-		// Website
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteTable.TABLE_NAME, WebsiteTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeWebsite.class);
+	public static String TABLE_SQL_DROP = "drop table SCLicense";
 
 }

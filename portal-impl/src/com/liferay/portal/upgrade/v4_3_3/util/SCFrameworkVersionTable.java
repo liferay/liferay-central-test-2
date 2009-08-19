@@ -20,46 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v4_3_3;
+package com.liferay.portal.upgrade.v4_3_3.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_3.util.WebsiteTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
+ * <a href="SCFrameworkVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeWebsite extends UpgradeProcess {
+public class SCFrameworkVersionTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static String TABLE_NAME = "SCFrameworkVersion";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static Object[][] TABLE_COLUMNS = {
+		{"frameworkVersionId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"modifiedDate", new Integer(Types.TIMESTAMP)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"url", new Integer(Types.VARCHAR)},
+		{"active_", new Integer(Types.BOOLEAN)},
+		{"priority", new Integer(Types.INTEGER)}
+	};
 
-	protected void doUpgrade() throws Exception {
+	public static String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url STRING null,active_ BOOLEAN,priority INTEGER)";
 
-		// Website
-
-		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			WebsiteTable.TABLE_NAME, WebsiteTable.TABLE_COLUMNS);
-
-		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
-
-		upgradeTable.updateTable();
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeWebsite.class);
+	public static String TABLE_SQL_DROP = "drop table SCFrameworkVersion";
 
 }
