@@ -1180,6 +1180,9 @@ public class JournalUtil {
 		tokens.put(
 			"portal_url",
 			HttpUtil.removeProtocol(themeDisplayEl.elementText("url-portal")));
+		tokens.put(
+			"protocol",
+			HttpUtil.getProtocol(themeDisplayEl.elementText("url-portal")));
 		tokens.put("root_path", themeDisplayEl.elementText("path-context"));
 		tokens.put(
 			"theme_image_path",
@@ -1247,6 +1250,8 @@ public class JournalUtil {
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put(
 			"portal_url", HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
+		tokens.put(
+			"protocol", HttpUtil.getProtocol(themeDisplay.getURLPortal()));
 		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 

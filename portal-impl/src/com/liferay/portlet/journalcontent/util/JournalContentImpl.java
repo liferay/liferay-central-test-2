@@ -171,7 +171,8 @@ public class JournalContentImpl implements JournalContent {
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		String key = encodeKey(
-			groupId, articleId, templateId, viewMode, languageId, page);
+			groupId, articleId, templateId, viewMode, languageId, page,
+			themeDisplay.isSecure());
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(cache, key);
@@ -215,7 +216,7 @@ public class JournalContentImpl implements JournalContent {
 
 	protected String encodeKey(
 		long groupId, String articleId, String templateId, String viewMode,
-		String languageId, int page) {
+		String languageId, int page, boolean secure) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -241,6 +242,9 @@ public class JournalContentImpl implements JournalContent {
 			sb.append(PAGE_SEPARATOR);
 			sb.append(page);
 		}
+
+		sb.append(SECURE_SEPARATOR);
+		sb.append(secure);
 
 		return sb.toString();
 	}

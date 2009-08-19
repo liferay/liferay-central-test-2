@@ -40,6 +40,8 @@ public interface JournalContent {
 
 	public static final String PAGE_SEPARATOR = "_PAGE_";
 
+	public static final String SECURE_SEPARATOR = "_SECURE_";
+
 	public static final String TEMPLATE_SEPARATOR = "_TEMPLATE_";
 
 	public static final String VIEW_MODE_SEPARATOR = "_VIEW_MODE_";
