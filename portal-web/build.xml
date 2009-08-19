@@ -500,24 +500,57 @@
 					}]]></replacevalue>
 				</replace>
 
-				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
-					<replacetoken><![CDATA[w.setTimeout(
-   				function() {
-   					_ioComplete(o, c);
-   					_handleResponse(o, c);
-   				}, 0);]]></replacetoken>
-					<replacevalue><![CDATA[var complete = function() {
-					_ioComplete(o, c);
-					_handleResponse(o, c);
-				};
+				<replaceregexp match="(\n)?(\s+)?w\.setTimeout\((\n+)(\s+)?function\(\) \{(\n+)(\s+)_ioComplete\(o, c\);(\n+)(\s+)_handleResponse\(o, c\);(\n+)(\s+)\}, 0\);" replace="\1var complete = function() {\1
+				_ioComplete(o, c);\1
+				_handleResponse(o, c);\1
+			};\1
+			if (c.async === false) {\1
+				complete();\1
+			}\1
+			else {\1
+				w.setTimeout(complete, 0);\1
+			}\1" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/lib/yui/build/io"
+						includes="**/*.js"
+					/>
+				</replaceregexp>
 
-				if (c.async === false) {
-					complete();
-				}
-				else {
-					w.setTimeout(complete, 0);
-				}]]></replacevalue>
-				</replace>
+				<delete quiet="true" failonerror="false">
+					<fileset dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*-min.js" />
+				</delete>
+
+				<for param="module.name">
+					<path>
+						<fileset
+							dir="docroot/html/ALLOY_ZIP/lib/yui/build/io"
+							excludes="**/*-debug.js"
+							includes="**/*.js"
+						 />
+					</path>
+					<sequential>
+						<echo>@{module.name}</echo>
+						<echo>${minified.name}</echo>
+						<java
+							classname="com.liferay.yahoo.platform.yui.compressor.YUICompressor"
+							classpathref="project.classpath"
+							fork="true"
+							newenvironment="true"
+						>
+							<arg line="--type js -o @{module.name}.min.js @{module.name}" />
+						</java>
+					</sequential>
+				</for>
+
+				<move todir="docroot/html/ALLOY_ZIP/lib/yui/build/io">
+					<fileset dir="docroot/html/ALLOY_ZIP/lib/yui/build/io">
+						<include name="**/*.js.min.js"/>
+					</fileset>
+
+					<mapper type="glob" from="*.js.min.js" to="*-min.js"/>
+				</move>
+
+				<!-- Copy files -->
 
 				<copy
 					file="docroot/html/ALLOY_ZIP/src/javascript/defaults.js"
