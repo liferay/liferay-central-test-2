@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -38,6 +39,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
 
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -67,6 +69,13 @@ public class LangBuilder {
 		try {
 			_langDir = langDir;
 			_langFile = langFile;
+
+			File renameKeysFile = new File(_langDir + "/rename.properties");
+
+			if (renameKeysFile.exists()) {
+				_renameKeys = PropertiesUtil.load(
+					FileUtil.read(renameKeysFile));
+			}
 
 			String content = _orderProps(
 				new File(_langDir + "/" + _langFile + ".properties"));
@@ -162,6 +171,17 @@ public class LangBuilder {
 
 				String nativeValue = nativeProps.getProperty(key);
 				String translatedText = props.getProperty(key);
+
+				if ((nativeValue == null) && (translatedText == null) &&
+					(_renameKeys != null)) {
+
+					String renameKey = _renameKeys.getProperty(key);
+
+					if (renameKey != null) {
+						nativeValue = nativeProps.getProperty(renameKey);
+						translatedText = props.getProperty(renameKey);
+					}
+				}
 
 				if ((translatedText != null) &&
 					((translatedText.indexOf("Babel Fish") != -1) ||
@@ -368,5 +388,6 @@ public class LangBuilder {
 
 	private String _langDir;
 	private String _langFile;
+	private Properties _renameKeys;
 
 }
