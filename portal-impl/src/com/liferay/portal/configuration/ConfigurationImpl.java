@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -93,9 +94,8 @@ public class ConfigurationImpl
 				properties.load(url.openStream());
 
 				if (!properties.containsKey("base.path")) {
-					String fileName = url.getFile();
-
-					fileName = fileName.replaceAll("%20", StringPool.SPACE);
+					String fileName = StringUtil.replace(
+						url.getFile(), "%20", StringPool.SPACE);
 
 					Writer writer = new BufferedWriter(
 						new FileWriter(fileName, true));
