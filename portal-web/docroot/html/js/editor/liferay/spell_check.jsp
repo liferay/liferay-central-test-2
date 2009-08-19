@@ -59,10 +59,10 @@ List invalidWords = WordsUtil.checkSpelling(text);
 		// ]]>
 	</script>
 
-	<script language="JavaScript" src="../../jquery/jquery.js"></script>
-	<script language="JavaScript" src="../../jquery/j2browse.js"></script>
-	<script language="JavaScript" src="../../liferay/liferay.js"></script>
-	<script language="JavaScript" src="../../liferay/util.js"></script>
+	<script type="text/javascript" src="../../jquery/jquery.js"></script>
+	<script type="text/javascript" src="../../jquery/j2browse.js"></script>
+	<script type="text/javascript" src="../../liferay/liferay.js"></script>
+	<script type="text/javascript" src="../../liferay/util.js"></script>
 
 	<script type="text/javascript">
 		var invalidWords = new Array();

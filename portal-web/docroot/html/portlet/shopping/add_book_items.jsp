@@ -57,7 +57,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryImpl.
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script language="JavaScript">
+	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />isbns);
 	</script>
 </c:if>

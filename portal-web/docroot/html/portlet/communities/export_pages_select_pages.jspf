@@ -22,7 +22,7 @@
  */
 %>
 
-<script language="text/javascript">
+<script type="text/javascript">
 	var selectedPages = jQuery('#<portlet:namespace />scope_selected_pages').is(':checked');
 
 	if (selectedPages && <%= !publish %>) {

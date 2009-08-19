@@ -140,7 +140,7 @@
 
 </form>
 
-<script>
+<script type="text/javascript">
 	jQuery(
 		function() {
 			new Liferay.Portlet.AssetTagsAdmin('<%= portletDisplay.getId() %>');

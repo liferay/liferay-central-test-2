@@ -29,7 +29,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, allAss
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
 	<form name="<portlet:namespace/>fm">
 
-	<script language="JavaScript">
+	<script type="text/javascript">
 		function <portlet:namespace/>addNewAsset() {
 			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
 
