@@ -472,9 +472,7 @@
 					/>
 				</replaceregexp>
 
-				<!--
-				Fix io to allow for synchronous ajax requests.
-				-->
+				<!-- Patch for synchronous ajax -->
 
 				<replace dir="docroot/html/ALLOY_ZIP/lib/yui/build/io" includes="**/*.js">
 					<replacetoken><![CDATA[try { _open(o.c, m, uri); } catch(e0) {}]]></replacetoken>
@@ -582,7 +580,7 @@
 						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
 						files="${alloy.core.css}"
 					/>
-			        <fileset
+					<fileset
 						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
 						excludes="${alloy.core.css},custom.css,main.css,*-min.css"
 						includes="*.css"
@@ -591,7 +589,7 @@
 						dir="docroot/html/ALLOY_ZIP/themes/base/css/"
 						files="custom.css"
 					/>
-			    </concat>
+				</concat>
 
 				<replace file="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
 					<replacefilter token="../images/" value="&lt;%= themeImagesPath %&gt;/aui/" />
