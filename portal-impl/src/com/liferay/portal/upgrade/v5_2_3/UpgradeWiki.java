@@ -29,7 +29,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portal.upgrade.v5_2_3.util.WikiPageTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,9 +62,9 @@ public class UpgradeWiki extends UpgradeProcess {
 			// WikiPage
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				WikiPageImpl.TABLE_NAME, WikiPageImpl.TABLE_COLUMNS);
+				WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(WikiPageImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

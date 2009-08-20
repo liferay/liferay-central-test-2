@@ -29,7 +29,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
+import com.liferay.portal.upgrade.v5_2_3.util.BookmarksEntryTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,10 +62,10 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			// BookmarksEntry
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				BookmarksEntryImpl.TABLE_NAME,
-				BookmarksEntryImpl.TABLE_COLUMNS);
+				BookmarksEntryTable.TABLE_NAME,
+				BookmarksEntryTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(BookmarksEntryImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(BookmarksEntryTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

@@ -34,12 +34,12 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
+import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
+import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
+import com.liferay.portal.upgrade.v5_2_3.util.DLFileVersionTable;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -86,37 +86,38 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			// DLFileEntry
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				DLFileEntryImpl.TABLE_NAME, DLFileEntryImpl.TABLE_COLUMNS);
+				DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(DLFileEntryImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 
 			// DLFileRank
 
 			upgradeTable = new DefaultUpgradeTableImpl(
-				DLFileRankImpl.TABLE_NAME, DLFileRankImpl.TABLE_COLUMNS);
+				DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(DLFileRankImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 
 			// DLFileShortcut
 
 			upgradeTable = new DefaultUpgradeTableImpl(
-				DLFileShortcutImpl.TABLE_NAME,
-				DLFileShortcutImpl.TABLE_COLUMNS);
+				DLFileShortcutTable.TABLE_NAME,
+				DLFileShortcutTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(DLFileShortcutImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 
 			// DLFileVersion
 
 			upgradeTable = new DefaultUpgradeTableImpl(
-				DLFileVersionImpl.TABLE_NAME, DLFileVersionImpl.TABLE_COLUMNS);
+				DLFileVersionTable.TABLE_NAME,
+				DLFileVersionTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(DLFileVersionImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}

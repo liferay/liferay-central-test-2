@@ -20,51 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3;
+package com.liferay.portal.upgrade.v5_2_3.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_3.util.ResourceTable;
+import java.sql.Types;
 
 /**
- * <a href="UpgradeResource.java.html"><b><i>View Source</i></b></a>
+ * <a href="DLFileVersionTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeResource extends UpgradeProcess {
+public class DLFileVersionTable {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
+	public static final String TABLE_NAME = "DLFileVersion";
 
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
+	public static final Object[][] TABLE_COLUMNS = {
+		{"fileVersionId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.BIGINT)},
+		{"userId", new Integer(Types.BIGINT)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.TIMESTAMP)},
+		{"folderId", new Integer(Types.BIGINT)},
+		{"name", new Integer(Types.VARCHAR)},
+		{"version", new Integer(Types.DOUBLE)},
+		{"size_", new Integer(Types.INTEGER)}
+	};
 
-	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
-			runSQL("alter_column_type Resource_ primKey VARCHAR(255) null");
-		}
-		else {
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
 
-			// Resource
-
-			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				ResourceTable.TABLE_NAME, ResourceTable.TABLE_COLUMNS);
-
-			upgradeTable.setCreateSQL(ResourceTable.TABLE_SQL_CREATE);
-
-			upgradeTable.updateTable();
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeResource.class);
+	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 
 }
