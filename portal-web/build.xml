@@ -451,6 +451,13 @@
 
 				<!-- JavaScript -->
 
+				<replaceregexp match="(\s*)var PATH_BASE ?= ?[^;]+;" replace="" flags="g" byline="false">
+					<fileset
+						dir="docroot/html/ALLOY_ZIP/src/javascript/"
+						includes="defaults.js"
+					/>
+				</replaceregexp>
+
 				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
