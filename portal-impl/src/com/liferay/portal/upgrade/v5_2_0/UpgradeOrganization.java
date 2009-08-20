@@ -34,6 +34,7 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTable;
 import com.liferay.portal.upgrade.v5_2_0.util.OrganizationTypeUpgradeColumnImpl;
 
 import java.sql.Connection;
@@ -75,8 +76,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 			organizationColumns1, organizationColumns2);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			OrganizationImpl.TABLE_NAME, organizationColumns,
-			locationColumn, typeColumn);
+			OrganizationTable.TABLE_NAME, organizationColumns, locationColumn,
+			typeColumn);
 
 		upgradeTable.updateTable();
 
