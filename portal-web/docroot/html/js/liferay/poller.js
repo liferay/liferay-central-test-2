@@ -12,6 +12,7 @@
 		return _encryptedUserId;
 	};
 
+	var _frozen = false;
 	var _locked = false;
 
 	var _maxDelay = _delays.length - 1;
@@ -58,6 +59,12 @@
 				_timerId = setTimeout(_receive, Poller.getDelay());
 			}
 		}
+	};
+
+	var _freezeConnection = function() {
+		_frozen = true;
+
+		_cancelRequestTimer();
 	};
 
 	var _getReceiveUrl = function() {
@@ -107,13 +114,16 @@
 			}
 
 			if (!meta.suspendPolling) {
-				_createRequestTimer();
+				_thawConnection();
+			}
+			else {
+				_freezeConnection();
 			}
 		}
 	};
 
 	var _receive = function() {
-		if (!_suspended) {
+		if (!_suspended && !_frozen) {
 			_metaData.userId = _getEncryptedUserId();
 			_metaData.timestamp = (new Date()).getTime();
 			_metaData.portletIds = _registeredPortlets.join(',');
@@ -145,7 +155,7 @@
 	};
 
 	var _send = function() {
-		if (_enabled && !_locked && _sendQueue.length && !_suspended) {
+		if (_enabled && !_locked && _sendQueue.length && !_suspended && !_frozen) {
 			_locked = true;
 
 			var data = _sendQueue.shift();
@@ -169,6 +179,12 @@
 				}
 			);
 		}
+	};
+
+	var _thawConnection = function() {
+		_frozen = false;
+
+		_createRequestTimer();
 	};
 
 	var Poller = {
@@ -244,29 +260,31 @@
 		},
 
 		submitRequest: function(key, data, chunkId) {
-			for (var i in data) {
-				var content = data[i];
+			if (!_frozen) {
+				for (var i in data) {
+					var content = data[i];
 
-				if (content.replace) {
-					content = content.replace(_openCurlyBrace, _escapedOpenCurlyBrace);
-					content = content.replace(_closeCurlyBrace, _escapedCloseCurlyBrace);
+					if (content.replace) {
+						content = content.replace(_openCurlyBrace, _escapedOpenCurlyBrace);
+						content = content.replace(_closeCurlyBrace, _escapedCloseCurlyBrace);
 
-					data[i] = content;
+						data[i] = content;
+					}
 				}
+
+				var requestData = {
+					portletId: key,
+					data: data
+				};
+
+				if (chunkId) {
+					requestData.chunkId = chunkId;
+				}
+
+				_sendQueue.push(requestData);
+
+				_send();
 			}
-
-			var requestData = {
-				portletId: key,
-				data: data
-			};
-
-			if (chunkId) {
-				requestData.chunkId = chunkId;
-			}
-
-			_sendQueue.push(requestData);
-
-			_send();
 		},
 
 		suspend: function() {
@@ -281,7 +299,7 @@
 		function(event) {
 			_metaData.startPolling = true;
 
-			_createRequestTimer();
+			_thawConnection();
 		}
 	);
 
