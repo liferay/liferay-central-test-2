@@ -71,11 +71,28 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags3 Blogs3 Test3 Entry3"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.type("//div[6]/input[2]", RuntimeVariables.replace(""));
-		selenium.typeKeys("//div[6]/input[2]",
+		selenium.type("//div[7]/div/input[2]", RuntimeVariables.replace(""));
+		selenium.typeKeys("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium"));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium1 liferay1"),
@@ -86,7 +103,7 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			selenium.getText("//div[6]/div[1]/div[2]/ul/li[3]"));
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
 			selenium.getText("//div[6]/div[1]/div[2]/ul/li[4]"));
-		selenium.typeKeys("//div[6]/input[2]", RuntimeVariables.replace("2 "));
+		selenium.typeKeys("//div[6]/input[2]", RuntimeVariables.replace("2"));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
 			selenium.getText("//div[6]/div[1]/div[2]/ul/li[1]"));

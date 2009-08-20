@@ -70,6 +70,23 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags1 Blogs1 Test1 Entry1"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -80,7 +97,7 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[6]/input[2]")) {
+				if (selenium.isElementPresent("//div[7]/div/input[2]")) {
 					break;
 				}
 			}
@@ -90,11 +107,28 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("//div[6]/input[2]",
+		selenium.typeKeys("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium2 lifera2"));
-		selenium.type("//div[6]/input[2]",
+		selenium.type("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium2 liferay2"));
-		selenium.click("//div[6]/input[3]");
+		selenium.click("//div[7]/div/input[3]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//span/span[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2x"),
 			selenium.getText("//span/span[2]"));
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));

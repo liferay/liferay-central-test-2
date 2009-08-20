@@ -71,6 +71,23 @@ public class RemoveTagThroughJavaScriptTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags3 Blogs3 Test3 Entry3"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);

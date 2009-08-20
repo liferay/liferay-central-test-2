@@ -71,16 +71,33 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags3 Blogs3 Test3 Entry3"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.type("//div[6]/input[2]", RuntimeVariables.replace(""));
-		selenium.typeKeys("//div[6]/input[2]",
+		selenium.type("//div[7]/div/input[2]", RuntimeVariables.replace(""));
+		selenium.typeKeys("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium3 "));
 		Thread.sleep(5000);
 		selenium.click("//div[6]/div[1]/div[2]/ul/li[1]");
 		assertEquals("selenium3 liferay3,",
-			selenium.getValue("//div[6]/input[2]"));
+			selenium.getValue("//div[7]/div/input[2]"));
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

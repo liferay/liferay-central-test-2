@@ -70,6 +70,23 @@ public class AddMultipleTagsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags2 Blogs2 Test2 Entry2"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -80,7 +97,7 @@ public class AddMultipleTagsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[6]/input[2]")) {
+				if (selenium.isElementPresent("//div[7]/div/input[2]")) {
 					break;
 				}
 			}
@@ -90,7 +107,7 @@ public class AddMultipleTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//div[6]/input[2]",
+		selenium.type("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium3 liferay3, selenium4 liferay4"));
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");

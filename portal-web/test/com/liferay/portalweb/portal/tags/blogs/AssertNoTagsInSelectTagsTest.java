@@ -71,8 +71,6 @@ public class AssertNoTagsInSelectTagsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags1 Blogs1 Test1 Entry1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +78,7 @@ public class AssertNoTagsInSelectTagsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[6]/input[4]")) {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
 					break;
 				}
 			}
@@ -90,7 +88,42 @@ public class AssertNoTagsInSelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/input[4]");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div/input[4]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div/input[4]");
 		assertFalse(selenium.isElementPresent("//label[1]/input"));
 		assertFalse(selenium.isElementPresent("//label[2]/input"));
 		assertFalse(selenium.isElementPresent("//label[3]/input"));

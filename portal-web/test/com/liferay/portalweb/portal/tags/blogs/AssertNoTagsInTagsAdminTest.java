@@ -57,7 +57,7 @@ public class AssertNoTagsInTagsAdminTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("no-tags-were-found")) {
+				if (selenium.isTextPresent("No tags were found.")) {
 					break;
 				}
 			}
@@ -67,6 +67,6 @@ public class AssertNoTagsInTagsAdminTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent("no-tags-were-found"));
+		assertTrue(selenium.isTextPresent("No tags were found."));
 	}
 }

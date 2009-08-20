@@ -71,6 +71,23 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Tags3 Blogs3 Test3 Entry3"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -82,7 +99,7 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[6]/input[4]")) {
+				if (selenium.isElementPresent("//div/input[4]")) {
 					break;
 				}
 			}
@@ -92,7 +109,7 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/input[4]");
+		selenium.click("//div/input[4]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,6 +129,23 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 
 		selenium.uncheck("//label[1]/input");
 		selenium.click("//div[2]/div/input");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isTextPresent("selenium1 liferay1x")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertFalse(selenium.isTextPresent("selenium1 liferay1x"));
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");

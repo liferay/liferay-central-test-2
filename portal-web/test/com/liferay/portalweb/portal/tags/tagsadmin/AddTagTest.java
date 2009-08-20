@@ -111,7 +111,8 @@ public class AddTagTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a temporary test tags entry."));
 		selenium.selectFrame("relative=top");
-		selenium.type("//div[7]/input[2]", RuntimeVariables.replace("selenium"));
+		selenium.type("//div[8]/div/input[2]",
+			RuntimeVariables.replace("selenium"));
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Delete"));
