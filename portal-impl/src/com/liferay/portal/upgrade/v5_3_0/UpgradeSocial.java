@@ -35,9 +35,9 @@ import com.liferay.portal.upgrade.util.DateUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portlet.social.model.impl.SocialActivityImpl;
-import com.liferay.portlet.social.model.impl.SocialRelationImpl;
-import com.liferay.portlet.social.model.impl.SocialRequestImpl;
+import com.liferay.portal.upgrade.v5_3_0.util.SocialActivityTable;
+import com.liferay.portal.upgrade.v5_3_0.util.SocialRelationTable;
+import com.liferay.portal.upgrade.v5_3_0.util.SocialRequestTable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,30 +73,30 @@ public class UpgradeSocial extends UpgradeProcess {
 			"modifiedDate");
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			SocialActivityImpl.TABLE_NAME, SocialActivityImpl.TABLE_COLUMNS,
+			SocialActivityTable.TABLE_NAME, SocialActivityTable.TABLE_COLUMNS,
 			createDateColumn);
 
-		upgradeTable.setCreateSQL(SocialActivityImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SocialActivityTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// SocialRelation
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			SocialRelationImpl.TABLE_NAME, SocialRelationImpl.TABLE_COLUMNS,
+			SocialRelationTable.TABLE_NAME, SocialRelationTable.TABLE_COLUMNS,
 			createDateColumn);
 
-		upgradeTable.setCreateSQL(SocialRelationImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SocialRelationTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 
 		// SocialRequest
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			SocialRequestImpl.TABLE_NAME, SocialRequestImpl.TABLE_COLUMNS,
+			SocialRequestTable.TABLE_NAME, SocialRequestTable.TABLE_COLUMNS,
 			createDateColumn, modifiedDateColumn);
 
-		upgradeTable.setCreateSQL(SocialRequestImpl.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(SocialRequestTable.TABLE_SQL_CREATE);
 
 		upgradeTable.updateTable();
 	}

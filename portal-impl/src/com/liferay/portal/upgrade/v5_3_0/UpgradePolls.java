@@ -28,8 +28,8 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
-import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
+import com.liferay.portal.upgrade.v5_3_0.util.PollsChoiceTable;
+import com.liferay.portal.upgrade.v5_3_0.util.PollsQuestionTable;
 
 /**
  * <a href="UpgradePolls.java.html"><b><i>View Source</i></b></a>
@@ -59,18 +59,19 @@ public class UpgradePolls extends UpgradeProcess {
 			// PollsChoice
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				PollsChoiceImpl.TABLE_NAME, PollsChoiceImpl.TABLE_COLUMNS);
+				PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(PollsChoiceImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 
 			// PollsQuestion
 
 			upgradeTable = new DefaultUpgradeTableImpl(
-				PollsQuestionImpl.TABLE_NAME, PollsQuestionImpl.TABLE_COLUMNS);
+				PollsQuestionTable.TABLE_NAME,
+				PollsQuestionTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(PollsQuestionImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
