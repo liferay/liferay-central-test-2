@@ -99,7 +99,8 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_editor")) {
+				if (selenium.isElementPresent(
+							"_15_structure_el_TextAreaField_content")) {
 					break;
 				}
 			}
@@ -141,7 +142,8 @@ public class AddWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id='_15_editor']");
+		selenium.selectFrame(
+			"//iframe[@id='_15_structure_el_TextAreaField_content']");
 		selenium.selectFrame("//iframe[@id='FCKeditor1___Frame']");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",

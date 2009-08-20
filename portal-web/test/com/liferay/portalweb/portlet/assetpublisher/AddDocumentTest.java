@@ -70,32 +70,6 @@ public class AddDocumentTest extends BaseTestCase {
 
 		selenium.select("//select", "label=Document Library Document");
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Folders"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Document Home"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Document']"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Use the classic uploader.");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -123,7 +97,6 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent(
-				"link=AP Setup Test Document 2.txt"));
+		assertTrue(selenium.isElementPresent("link=AP Setup Test Document 2"));
 	}
 }

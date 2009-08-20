@@ -164,96 +164,6 @@
 	<td>No AP Bookmark Folder Present</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=AP Setup Test Bookmark Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>APBookmarkEntryPresentA</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APBookmarkEntryPresentA}</td>
-	<td>No AP Bookmark Entry PresentA</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body/div[4]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//body/div[4]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Bookmark Entry PresentA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//strong/span'))</td>
-	<td>APBookmarkEntryPresentB</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APBookmarkEntryPresentB}</td>
-	<td>No AP Bookmark Entry PresentB</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//body/div[4]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//body/div[4]/ul/li[3]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Bookmark Entry PresentB</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=AP Setup Test Bookmark</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>link=AP Setup Test Bookmark 2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
-</tr>
-<tr>
 	<td>click</td>
 	<td>//td[4]/ul/li/strong/span</td>
 	<td></td>
@@ -350,12 +260,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -385,12 +295,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[5]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[5]/ul/li[4]/a</td>
+	<td>//div[5]/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -467,96 +377,6 @@
 	<td>gotoIf</td>
 	<td>!${APIGFolderPresent}</td>
 	<td>No AP IG Folder Present</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=AP Setup IG Test Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div[1]/a/img'))</td>
-	<td>APImagePresentA</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APImagePresentA}</td>
-	<td>No AP Image PresentA</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@alt='Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[3]/ul/li[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Image PresentA</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div[1]/a/img'))</td>
-	<td>APImagePresentB</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APImagePresentB}</td>
-	<td>No AP Image PresentB</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[@alt='Image']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/ul/li[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[3]/ul/li[3]/a[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Image PresentB</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -682,51 +502,6 @@
 	<td>gotoIf</td>
 	<td>!${APCategoryPresent}</td>
 	<td>No AP Category Present</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=AP Setup MB Test Category</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('//td[7]/ul/li/strong/span'))</td>
-	<td>APThreadPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${APThreadPresent}</td>
-	<td>No AP Thread Present</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//td[7]/ul/li/strong/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Delete</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>No AP Thread Present</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Categories</td>
-	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -959,11 +734,6 @@
 	<td>label=Dynamic</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_86_classNameId</td>
-	<td>label=All</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
@@ -971,11 +741,6 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Display Settings</td>
 	<td></td>
 </tr>
 <tr>
