@@ -73,6 +73,8 @@ public class StringPool {
 
 	public static final String DOUBLE_OPEN_CURLY_BRACE = "{{";
 
+	public static final String DOUBLE_QUOTE = "\"\"";
+
 	public static final String DOUBLE_SLASH = "//";
 
 	public static final String EQUAL = "=";
