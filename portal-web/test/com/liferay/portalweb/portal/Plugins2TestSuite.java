@@ -40,6 +40,7 @@ import com.liferay.portalweb.plugins.sampletesthook.SampleTestHookTests;
 import com.liferay.portalweb.plugins.sampleuitaglibs.SampleUITagLibsTests;
 import com.liferay.portalweb.plugins.samplewap.SampleWAPTests;
 import com.liferay.portalweb.plugins.socialcoding.SocialCodingTests;
+import com.liferay.portalweb.plugins.socialnetworking.SocialNetworkingTests;
 import com.liferay.portalweb.plugins.stocks.StocksTests;
 import com.liferay.portalweb.plugins.sunbookmark.SunBookmarkTests;
 import com.liferay.portalweb.plugins.sunelluminate.SunElluminateTests;
@@ -99,6 +100,7 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(SampleUITagLibsTests.suite());
 		testSuite.addTest(SampleWAPTests.suite());
 		testSuite.addTest(SocialCodingTests.suite());
+		testSuite.addTest(SocialNetworkingTests.suite());
 		testSuite.addTest(StocksTests.suite());
 		testSuite.addTest(SunBookmarkTests.suite());
 		testSuite.addTest(SunElluminateTests.suite());
