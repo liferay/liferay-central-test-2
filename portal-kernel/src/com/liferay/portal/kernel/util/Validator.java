@@ -394,7 +394,7 @@ public class Validator {
 	}
 
 	public static boolean isNull(Long l) {
-		if ((l == null) || l.longValue() == 0) {
+		if ((l == null) || (l.longValue() == 0)) {
 			return true;
 		}
 		else {
@@ -438,7 +438,11 @@ public class Validator {
 			counter++;
 		}
 
-		return true;
+		if ((counter == 0) || (counter == 4)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean isNull(Object[] array) {
