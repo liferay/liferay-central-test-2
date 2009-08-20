@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portal.upgrade.v5_2_3.util.CalEventTable;
 
 /**
  * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
@@ -57,9 +57,9 @@ public class UpgradeCalendar extends UpgradeProcess {
 			// CalEvent
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS);
+				CalEventTable.TABLE_NAME, CalEventTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(CalEventImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(CalEventTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
