@@ -62,7 +62,6 @@ import com.liferay.portalweb.plugins.weather.WeatherTests;
 import com.liferay.portalweb.plugins.webform.WebFormTests;
 import com.liferay.portalweb.plugins.westminstercatechism.WestminsterCatechismTests;
 import com.liferay.portalweb.plugins.widgetconsumer.WidgetConsumerTests;
-import com.liferay.portalweb.plugins.wol.WOLTests;
 import com.liferay.portalweb.plugins.workflow.WorkflowTests;
 import com.liferay.portalweb.portal.login.LoginTests;
 
@@ -121,7 +120,6 @@ public class Plugins2TestSuite extends BaseTests {
 		testSuite.addTest(WebFormTests.suite());
 		testSuite.addTest(WestminsterCatechismTests.suite());
 		testSuite.addTest(WidgetConsumerTests.suite());
-		testSuite.addTest(WOLTests.suite());
 		testSuite.addTest(WorkflowTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
