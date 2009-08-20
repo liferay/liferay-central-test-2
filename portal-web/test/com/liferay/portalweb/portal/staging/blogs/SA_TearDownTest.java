@@ -60,8 +60,42 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace("link=Control Panel"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Communities")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=Communities"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//strong/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click("//strong/span");
 
 				for (int second = 0;; second++) {
@@ -82,10 +116,61 @@ public class SA_TearDownTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//form/ul[1]/li[3]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("//form/ul[1]/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Staging")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("link=Staging"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_134_stagingEnabled")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.click(RuntimeVariables.replace("_134_stagingEnabled"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
@@ -98,6 +183,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Blogs Staging Test Page"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean BlogsPresent = selenium.isElementPresent("link=Delete");
 

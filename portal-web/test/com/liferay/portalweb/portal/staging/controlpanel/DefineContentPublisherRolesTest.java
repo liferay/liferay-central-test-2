@@ -59,7 +59,7 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -69,11 +69,9 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Content Publisher"));
-		assertTrue(selenium.isTextPresent("Add Portal Permission"));
-		assertTrue(selenium.isTextPresent("Add Content Permission"));
-		assertTrue(selenium.isTextPresent("Add Application Permission"));
+		assertTrue(selenium.isTextPresent("Add Permissions"));
 	}
 }

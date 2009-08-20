@@ -34,7 +34,7 @@ public class CC_PortalRolesTest extends BaseTestCase {
 	public void testCC_PortalRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-portal-permission", "label=Communities");
+		selenium.select("add-permissions", "label=Communities");
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("_128_rowIds");
 		selenium.uncheck(

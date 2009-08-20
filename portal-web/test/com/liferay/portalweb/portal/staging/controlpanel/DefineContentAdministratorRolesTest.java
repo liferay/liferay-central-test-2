@@ -51,7 +51,6 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[7]/td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +58,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[3]/a")) {
+				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -69,11 +68,27 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[3]/a"));
+		selenium.click("//tr[7]/td[4]/ul/li/strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[4]/ul/li[3]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Portal Permission"));
-		assertTrue(selenium.isTextPresent("Add Content Permission"));
-		assertTrue(selenium.isTextPresent("Add Application Permission"));
+		assertTrue(selenium.isTextPresent("Add Permissions"));
 	}
 }

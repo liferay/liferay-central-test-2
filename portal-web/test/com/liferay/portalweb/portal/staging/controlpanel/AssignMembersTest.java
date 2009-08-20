@@ -70,8 +70,42 @@ public class AssignMembersTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Available")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_134_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("content"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("content"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));

@@ -50,8 +50,42 @@ public class CreateRolesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_128_name",
 			RuntimeVariables.replace("Content Creator"));
 		selenium.type("_128_name", RuntimeVariables.replace("Content Creator"));
@@ -63,8 +97,42 @@ public class CreateRolesTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_128_name",
 			RuntimeVariables.replace("Content Administrator"));
 		selenium.type("_128_name",
@@ -77,8 +145,42 @@ public class CreateRolesTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Add")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Add"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_128_description")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_128_name",
 			RuntimeVariables.replace("Content Publisher"));
 		selenium.type("_128_name", RuntimeVariables.replace("Content Publisher"));
