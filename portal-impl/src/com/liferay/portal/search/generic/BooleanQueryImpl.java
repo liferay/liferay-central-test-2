@@ -25,7 +25,6 @@ package com.liferay.portal.search.generic;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 
 import java.util.ArrayList;
@@ -39,9 +38,7 @@ import java.util.List;
  */
 public class BooleanQueryImpl implements BooleanQuery {
 
-	public void add(Query query, BooleanClauseOccur occur)
-		throws ParseException {
-
+	public void add(Query query, BooleanClauseOccur occur) {
 		_clauses.add(new BooleanClauseImpl(query, occur));
 	}
 
@@ -89,12 +86,7 @@ public class BooleanQueryImpl implements BooleanQuery {
 		TermQueryImpl termQuery = new TermQueryImpl(
 			new QueryTermImpl(field, String.valueOf(value)));
 
-		try {
-			add(termQuery, BooleanClauseOccur.SHOULD);
-		}
-		catch (ParseException pe) {
-			throw new IllegalStateException("Bad query implementation", pe);
-		}
+		add(termQuery, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRequiredTerm(String field, boolean value) {
@@ -153,25 +145,18 @@ public class BooleanQueryImpl implements BooleanQuery {
 				new QueryTermImpl(field, String.valueOf(value)));
 		}
 
-		try {
-			add(query , BooleanClauseOccur.MUST);
-		}
-		catch (ParseException pe) {
-			throw new IllegalStateException("Bad query implementation", pe);
-		}
+		add(query , BooleanClauseOccur.MUST);
 	}
 
-	public void addTerm(String field, long value) throws ParseException {
+	public void addTerm(String field, long value) {
 		addTerm(field, String.valueOf(value), false);
 	}
 
-	public void addTerm(String field, String value) throws ParseException {
+	public void addTerm(String field, String value) {
 		addTerm(field, value, false);
 	}
 
-	public void addTerm(String field, String value, boolean like)
-		throws ParseException {
-
+	public void addTerm(String field, String value, boolean like) {
 		Query query = null;
 
 		if (like) {
