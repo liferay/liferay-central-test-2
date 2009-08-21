@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
@@ -97,7 +95,5 @@ public class UpgradeLayout extends UpgradeProcess {
 
 		return props.toString();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeLayout.class);
 
 }

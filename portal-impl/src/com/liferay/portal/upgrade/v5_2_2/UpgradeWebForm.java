@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v5_2_2;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -124,7 +122,5 @@ public class UpgradeWebForm extends UpgradeProcess {
 
 	private static final String _OLD_WEBFORM_CLASS_NAME =
 		"com.liferay.portlet.webform.util.WebFormUtil";
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeWebForm.class);
 
 }

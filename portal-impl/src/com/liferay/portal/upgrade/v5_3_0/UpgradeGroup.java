@@ -24,8 +24,6 @@ package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -84,7 +82,5 @@ public class UpgradeGroup extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeGroup.class);
 
 }

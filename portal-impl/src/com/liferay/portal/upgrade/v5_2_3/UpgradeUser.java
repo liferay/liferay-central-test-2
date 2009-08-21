@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v5_2_3;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -110,7 +108,5 @@ public class UpgradeUser extends UpgradeProcess {
 			}
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeUser.class);
 
 }

@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -95,7 +93,5 @@ public class UpgradeUUID extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeUUID.class);
 
 }

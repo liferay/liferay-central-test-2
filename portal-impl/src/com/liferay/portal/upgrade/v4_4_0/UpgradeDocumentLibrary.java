@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_4_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -80,8 +78,5 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_1;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
@@ -38,7 +36,5 @@ public class UpgradeOrganization extends UpgradeProcess {
 			"update Organization_ set location = TRUE where " +
 				"parentOrganizationId > 0");
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeOrganization.class);
 
 }

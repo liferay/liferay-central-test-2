@@ -24,8 +24,6 @@ package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -142,8 +140,5 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
-
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }

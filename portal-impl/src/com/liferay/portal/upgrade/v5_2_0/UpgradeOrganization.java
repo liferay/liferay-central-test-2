@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.impl.OrganizationImpl;
@@ -155,7 +153,5 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 	private static final String _GET_COMPANY_IDS =
 		"select companyId from Company";
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeOrganization.class);
 
 }

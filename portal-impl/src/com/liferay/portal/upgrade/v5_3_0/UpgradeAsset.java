@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
@@ -512,7 +510,5 @@ public class UpgradeAsset extends UpgradeProcess {
 			"update ResourcePermission set name = '" + newCodeName + "' where" +
 				" name = '" + oldCodeName + "';");
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeAsset.class);
 
 }

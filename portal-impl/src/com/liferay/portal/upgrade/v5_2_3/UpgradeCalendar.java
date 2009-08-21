@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -52,7 +50,5 @@ public class UpgradeCalendar extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeCalendar.class);
 
 }

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -44,7 +42,5 @@ public class UpgradeRole extends UpgradeProcess {
 			"update Role_ set classNameId = " + className.getClassNameId() +
 				", classPK = roleId where classNameId = 0");
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeRole.class);
 
 }

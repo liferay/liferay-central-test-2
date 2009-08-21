@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
@@ -393,7 +391,5 @@ public class UpgradePermission extends UpgradeProcess {
 			"ASSIGN_USERS", "ASSIGN_MEMBERS", UserGroup.class
 		}
 	};
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
 
 }

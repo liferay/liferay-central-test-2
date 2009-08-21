@@ -25,8 +25,6 @@ package com.liferay.portal.upgrade.v5_2_0;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.asset.NoSuchTagException;
@@ -299,8 +297,6 @@ public class UpgradeTags extends UpgradeProcess {
 
 		deleteEntries();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeTags.class);
 
 	private Map<String, Long> _entryIdsMap = new HashMap<String, Long>();
 
