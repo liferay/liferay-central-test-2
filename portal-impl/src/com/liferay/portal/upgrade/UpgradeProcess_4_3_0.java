@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeBlogs;
@@ -76,9 +74,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		return ReleaseInfo.RELEASE_4_3_0_BUILD_NUMBER;
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
+	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeClassName.class);
 		upgrade(UpgradeImage.class);
@@ -117,7 +113,5 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(UpgradeResource.class);
 		upgrade(UpgradeMappingTables.class);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_4_3_0.class);
 
 }

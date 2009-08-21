@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_2.UpgradeWebForm;
 
@@ -38,12 +36,8 @@ public class UpgradeProcess_5_2_2 extends UpgradeProcess {
 		return ReleaseInfo.RELEASE_5_2_2_BUILD_NUMBER;
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
+	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeWebForm.class);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_2_2.class);
 
 }

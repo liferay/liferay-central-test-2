@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeBookmarks;
 import com.liferay.portal.upgrade.v5_2_3.UpgradeCalendar;
@@ -53,9 +51,7 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		return ReleaseInfo.RELEASE_5_2_3_BUILD_NUMBER;
 	}
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
+	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBookmarks.class);
 		upgrade(UpgradeCalendar.class);
@@ -74,7 +70,5 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeDuplicates.class);
 		upgrade(DropIndexes.class);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess_5_2_3.class);
 
 }
