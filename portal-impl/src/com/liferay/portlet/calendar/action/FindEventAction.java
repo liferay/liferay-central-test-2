@@ -74,11 +74,12 @@ public class FindEventAction extends Action {
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
+			portletURL.setParameter("struts_action", "/calendar/view_event");
+
 			if (Validator.isNotNull(redirect)) {
 				portletURL.setParameter("redirect", redirect);
 			}
 
-			portletURL.setParameter("struts_action", "/calendar/view_event");
 			portletURL.setParameter("eventId", String.valueOf(eventId));
 
 			response.sendRedirect(portletURL.toString());
