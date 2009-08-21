@@ -66,7 +66,7 @@ public class ExpireQuestionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -76,7 +76,7 @@ public class ExpireQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_25_neverExpireCheckbox");
 
@@ -96,12 +96,12 @@ public class ExpireQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.select("_25_expirationDateYear",
+			RuntimeVariables.replace("label=2008"));
 		selenium.select("_25_expirationDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_25_expirationDateDay",
 			RuntimeVariables.replace("label=1"));
-		selenium.select("_25_expirationDateYear",
-			RuntimeVariables.replace("label=2008"));
 		selenium.select("_25_expirationDateHour",
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_25_expirationDateMinute",

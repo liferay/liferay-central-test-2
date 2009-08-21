@@ -56,7 +56,8 @@ public class AssertExpiredQuestionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//label[2]/input"));
 		assertFalse(selenium.isElementPresent("//label[3]/input"));
 		assertFalse(selenium.isElementPresent("//label[4]/input"));
-		assertTrue(selenium.isTextPresent(
-				"Voting is disabled because this poll expired on 1/1/08 12:00 AM"));
+		assertEquals(RuntimeVariables.replace(
+				"Voting is disabled because this poll expired on 1/1/08 12:00 AM.."),
+			selenium.getText("//div[5]"));
 	}
 }

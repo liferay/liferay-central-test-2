@@ -53,8 +53,6 @@ public class AddNullTitlePollTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_description_en_US",
-			RuntimeVariables.replace("Null Title Poll Test Description"));
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace("Null Title Poll Test Description"));
 		selenium.type("_25_title_en_US", RuntimeVariables.replace(""));

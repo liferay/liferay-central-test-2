@@ -53,8 +53,6 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title_en_US",
-			RuntimeVariables.replace("Delete Choice Title Test"));
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Delete Choice Title Test"));
 		selenium.type("_25_description_en_US",
@@ -65,20 +63,14 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Choice B"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptionc_en_US",
-			RuntimeVariables.replace("Delete Choice C"));
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Delete Choice C"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptiond_en_US",
-			RuntimeVariables.replace("Delete Choice D"));
 		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("Delete Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_choiceDescriptione_en_US",
-			RuntimeVariables.replace("Delete Choice E"));
 		selenium.type("_25_choiceDescriptione_en_US",
 			RuntimeVariables.replace("Delete Choice E"));
 		assertEquals("Delete Choice C",
@@ -89,7 +81,6 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			selenium.getValue("_25_choiceDescriptione_en_US"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("_25_choiceDescriptionc_en_US"));
 		assertEquals("Delete Choice D",
 			selenium.getValue("_25_choiceDescriptiond_en_US"));
 		assertEquals("Delete Choice E",

@@ -58,7 +58,7 @@ public class EditQuestionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -68,15 +68,13 @@ public class EditQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title_en_US",
-			RuntimeVariables.replace("Edited Test Question 2"));
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Edited Test Question 2"));
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace(
-				"This is an edited test poll 2 description!"));
+				"This is an edited test poll 2 description."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
 
@@ -96,8 +94,6 @@ public class EditQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptiond_en_US",
-			RuntimeVariables.replace("NEW Test Choice D"));
 		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("NEW Test Choice D"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
@@ -106,6 +102,7 @@ public class EditQuestionTest extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("NEW Test Choice D"));
+		assertEquals(RuntimeVariables.replace("d. NEW Test Choice D"),
+			selenium.getText("//label[4]"));
 	}
 }
