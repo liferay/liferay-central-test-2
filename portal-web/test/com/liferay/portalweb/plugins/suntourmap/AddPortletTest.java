@@ -23,6 +23,7 @@
 package com.liferay.portalweb.plugins.suntourmap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +38,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Application")) {
+				if (selenium.isElementPresent("link=Sun Tour Map Test Page")) {
 					break;
 				}
 			}
@@ -47,6 +48,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Sun Tour Map Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Application");
 
 		for (int second = 0;; second++) {
@@ -73,7 +76,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -82,5 +85,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }
