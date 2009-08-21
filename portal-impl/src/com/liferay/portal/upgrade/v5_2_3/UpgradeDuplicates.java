@@ -359,7 +359,9 @@ public class UpgradeDuplicates extends UpgradeProcess {
 
 		sb.append(")");
 
-		_log.info(sb.toString());
+		if (_log.isInfoEnabled()) {
+			_log.info(sb.toString());
+		}
 
 		if (dependencyManager != null) {
 			dependencyManager.setTableName(tableName);
@@ -495,7 +497,9 @@ public class UpgradeDuplicates extends UpgradeProcess {
 						sb.append(" and ");
 						sb.append(previousPrimaryKeyValue);
 
-						_log.info(sb.toString());
+						if (_log.isInfoEnabled()) {
+							_log.info(sb.toString());
+						}
 
 						dependencyManager.update(
 							previousPrimaryKeyValue, previousColumnValues,

@@ -66,9 +66,11 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			if (_log.isWarnEnabled()) {
 				String imageId = (String)_imageIdColumn.getOldValue();
 
-				_log.warn(
-					"Unable to get image data for " + imageId + ": " +
-						e.getMessage());
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to get image data for " + imageId + ": " +
+							e.getMessage());
+				}
 			}
 
 			_type = ImageImpl.TYPE_NOT_AVAILABLE;
