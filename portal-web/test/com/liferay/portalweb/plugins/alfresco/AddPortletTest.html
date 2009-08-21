@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">AddPortletTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>pause</td>
+	<td>30000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Alfresco Test Page</td>
 	<td></td>
@@ -34,13 +39,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Alfresco Test Page</td>
+	<td>waitForElementPresent</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//img[@alt='Configuration']</td>
+	<td>assertElementPresent</td>
+	<td>//td[1]/div/div[1]/div</td>
 	<td></td>
 </tr>
 

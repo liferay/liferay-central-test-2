@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
+		Thread.sleep(30000);
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -71,8 +73,6 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.click(
 			"//div[@id='ContentManagement-Alfresco-AlfrescoClient']/p/a");
-		selenium.click(RuntimeVariables.replace("link=Alfresco Test Page"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,7 +80,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
@@ -89,5 +89,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

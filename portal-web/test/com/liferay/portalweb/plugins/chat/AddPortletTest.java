@@ -23,6 +23,7 @@
 package com.liferay.portalweb.plugins.chat;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +48,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Chat Test Page"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Online Friends (0)"));
 		assertTrue(selenium.isElementPresent("//div[1]/span"));
 	}

@@ -73,6 +73,7 @@ public class DisableInputTest extends BaseTestCase {
 				selenium.click("_86_mapInputEnabledCheckbox");
 
 			case 2:
+				Thread.sleep(500);
 
 				boolean DirectionChecked = selenium.isChecked(
 						"_86_directionsInputEnabledCheckbox");
