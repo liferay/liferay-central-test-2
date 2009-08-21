@@ -99,6 +99,9 @@ public class BeanToXMLUtil {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static void addFields(Object obj, org.dom4j.Element parentEl) {
 		Method[] methods = obj.getClass().getMethods();
 
