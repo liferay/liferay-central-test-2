@@ -87,7 +87,14 @@ public abstract class UpgradeProcess {
 		DBUtil.getInstance().runSQLTemplate(path, failOnError);
 	}
 
-	public abstract void upgrade() throws UpgradeException;
+	public void upgrade() throws UpgradeException {
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
 
 	public void upgrade(Class<?> upgradeProcessClass)
 		throws UpgradeException {
@@ -102,6 +109,9 @@ public abstract class UpgradeProcess {
 		throws UpgradeException {
 
 		upgradeProcess.upgrade();
+	}
+
+	protected void doUpgrade() throws Exception {
 	}
 
 }

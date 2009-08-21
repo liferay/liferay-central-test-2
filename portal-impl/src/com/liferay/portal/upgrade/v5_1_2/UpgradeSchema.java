@@ -22,14 +22,14 @@
 
 package com.liferay.portal.upgrade.v5_1_2;
 
-import com.liferay.portal.upgrade.BaseUpgradeProcess;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
  * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class UpgradeSchema extends BaseUpgradeProcess {
+public class UpgradeSchema extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		runSQLTemplate("update-5.1.1-5.1.2.sql", false);
