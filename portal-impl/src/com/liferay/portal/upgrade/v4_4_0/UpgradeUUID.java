@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -39,17 +38,6 @@ import java.sql.ResultSet;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeUUID extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		upgradeTable("BlogsEntry", "entryId");

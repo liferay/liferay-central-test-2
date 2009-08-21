@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -64,17 +63,6 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeGroup extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 

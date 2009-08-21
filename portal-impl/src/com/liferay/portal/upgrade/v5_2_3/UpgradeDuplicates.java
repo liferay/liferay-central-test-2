@@ -50,17 +50,6 @@ import java.sql.Types;
  */
 public class UpgradeDuplicates extends UpgradeProcess {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
-
 	protected void deleteDuplicateAnnouncements() throws Exception {
 		deleteDuplicates(
 			"AnnouncementsDelivery", "deliveryId",

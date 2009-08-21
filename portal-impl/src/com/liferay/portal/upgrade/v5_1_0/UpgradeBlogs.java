@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v5_1_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
@@ -39,17 +38,6 @@ import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImp
  * @author Brian Wing Shun Chan
  */
 public class UpgradeBlogs extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");

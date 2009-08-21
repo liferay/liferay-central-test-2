@@ -31,15 +31,6 @@ import com.liferay.portal.events.StartupHelperUtil;
  */
 public class DropIndexes extends UpgradeProcess {
 
-	public void upgrade() throws UpgradeException {
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
-
 	protected void doUpgrade() throws Exception {
 		StartupHelperUtil.setDropIndexes(true);
 	}

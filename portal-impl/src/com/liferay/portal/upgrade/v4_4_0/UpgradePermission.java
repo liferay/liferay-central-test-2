@@ -31,7 +31,6 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -50,17 +49,6 @@ import java.sql.ResultSet;
  * @deprecated
  */
 public class UpgradePermission extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void deletePermissionByActionIdAndResourceName(
 			String actionId, String resourceName)

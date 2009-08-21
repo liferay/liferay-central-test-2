@@ -30,7 +30,6 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -43,17 +42,6 @@ import java.sql.ResultSet;
  * @author Wesley Gong
  */
 public class UpgradeGroup extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		updateParentGroupId();

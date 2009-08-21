@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -41,19 +40,6 @@ import java.sql.ResultSet;
  * @author Brian Wing Shun Chan
  */
 public class UpgradePortletId extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		Log log = getLog();
-
-		log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 

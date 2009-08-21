@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v5_3_0;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -37,17 +36,6 @@ import com.liferay.portal.upgrade.v5_3_0.util.PollsQuestionTable;
  * @author Julio Camarero Puras
  */
 public class UpgradePolls extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		if (isSupportsAlterColumnType()) {

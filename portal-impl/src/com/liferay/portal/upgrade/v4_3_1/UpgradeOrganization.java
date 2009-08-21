@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_1;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
@@ -33,17 +32,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeOrganization extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		runSQL(

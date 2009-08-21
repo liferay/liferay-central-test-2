@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 /**
@@ -36,17 +35,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeRole extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			doUpgrade();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void doUpgrade() throws Exception {
 		ClassName className = ClassNameLocalServiceUtil.getClassName(
