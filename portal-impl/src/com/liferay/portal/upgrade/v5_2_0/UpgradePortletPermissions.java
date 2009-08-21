@@ -35,7 +35,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
 import java.sql.Connection;
@@ -49,66 +48,53 @@ import java.sql.ResultSet;
  */
 public class UpgradePortletPermissions extends UpgradeProcess {
 
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading portlet permissions");
+	protected void doUpgrade() throws Exception {
+		updatePortletPermissions(
+			"33", "com.liferay.portlet.blogs", new String[] {"ADD_ENTRY"});
 
-		try {
-			updatePortletPermissions(
-				"33", "com.liferay.portlet.blogs",
-				new String[] {"ADD_ENTRY"});
+		updatePortletPermissions(
+			"28", "com.liferay.portlet.bookmarks", new String[] {"ADD_FOLDER"});
 
-			updatePortletPermissions(
-				"28", "com.liferay.portlet.bookmarks",
-				new String[] {"ADD_FOLDER"});
+		updatePortletPermissions(
+			"8", "com.liferay.portlet.calendar",
+			new String[] {"ADD_EVENT", "EXPORT_ALL_EVENTS"});
 
-			updatePortletPermissions(
-				"8", "com.liferay.portlet.calendar",
-				new String[] {"ADD_EVENT", "EXPORT_ALL_EVENTS"});
+		updatePortletPermissions(
+			"20", "com.liferay.portlet.documentlibrary",
+			new String[] {"ADD_FOLDER"});
 
-			updatePortletPermissions(
-				"20", "com.liferay.portlet.documentlibrary",
-				new String[] {"ADD_FOLDER"});
+		updatePortletPermissions(
+			"31", "com.liferay.portlet.imagegallery",
+			new String[] {"ADD_FOLDER"});
 
-			updatePortletPermissions(
-				"31", "com.liferay.portlet.imagegallery",
-				new String[] {"ADD_FOLDER"});
+		updatePortletPermissions(
+			"15", "com.liferay.portlet.journal",
+			new String[] {
+				"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",
+				"APPROVE_ARTICLE"
+			});
 
-			updatePortletPermissions(
-				"15", "com.liferay.portlet.journal",
-				new String[] {
-					"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",
-					"APPROVE_ARTICLE"
-				});
+		updatePortletPermissions(
+			"19", "com.liferay.portlet.messageboards",
+			new String[] {"ADD_CATEGORY", "BAN_USER"});
 
-			updatePortletPermissions(
-				"19", "com.liferay.portlet.messageboards",
-				new String[] {"ADD_CATEGORY", "BAN_USER"});
+		updatePortletPermissions(
+			"25", "com.liferay.portlet.polls", new String[] {"ADD_QUESTION"});
 
-			updatePortletPermissions(
-				"25", "com.liferay.portlet.polls",
-				new String[] {"ADD_QUESTION"});
+		updatePortletPermissions(
+			"34", "com.liferay.portlet.shopping",
+			new String[] {"ADD_CATEGORY", "MANAGE_COUPONS", "MANAGE_ORDERS"});
 
-			updatePortletPermissions(
-				"34", "com.liferay.portlet.shopping",
-				new String[] {
-					"ADD_CATEGORY", "MANAGE_COUPONS", "MANAGE_ORDERS"
-				});
+		updatePortletPermissions(
+			"98", "com.liferay.portlet.softwarecatalog",
+			new String[] {"ADD_FRAMEWORK_VERSION", "ADD_PRODUCT_ENTRY"});
 
-			updatePortletPermissions(
-				"98", "com.liferay.portlet.softwarecatalog",
-				new String[] {"ADD_FRAMEWORK_VERSION", "ADD_PRODUCT_ENTRY"});
+		updatePortletPermissions(
+			"99", "com.liferay.portlet.tags",
+			new String[] {"ADD_ENTRY", "ADD_VOCABULARY"});
 
-			updatePortletPermissions(
-				"99", "com.liferay.portlet.tags",
-				new String[] {"ADD_ENTRY", "ADD_VOCABULARY"});
-
-			updatePortletPermissions(
-				"36", "com.liferay.portlet.wiki",
-				new String[] {"ADD_NODE"});
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
+		updatePortletPermissions(
+			"36", "com.liferay.portlet.wiki", new String[] {"ADD_NODE"});
 	}
 
 	protected long getPortletPermissionsCount(

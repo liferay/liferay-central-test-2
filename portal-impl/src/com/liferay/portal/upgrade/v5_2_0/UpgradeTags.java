@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.asset.NoSuchTagException;
 
@@ -47,18 +46,6 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeTags extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			updateGroupIds();
-			updateAssets();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected long copyEntry(long groupId, long entryId) throws Exception {
 		String key = groupId + StringPool.UNDERLINE + entryId;
@@ -228,6 +215,11 @@ public class UpgradeTags extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void doUpgrade() throws Exception {
+		updateGroupIds();
+		updateAssets();
 	}
 
 	protected void updateAssets() throws Exception {

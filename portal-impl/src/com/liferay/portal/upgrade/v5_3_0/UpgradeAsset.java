@@ -30,7 +30,6 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -49,20 +48,6 @@ import java.sql.Timestamp;
  * @author Brian Wing Shun Chan
  */
 public class UpgradeAsset extends UpgradeProcess {
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		try {
-			updateResourceCodes();
-			updateAssetEntries();
-			updateAssetCategories();
-			updateAssetTags();
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
-		}
-	}
 
 	protected void copyAssociations(
 			long tagsEntryId, String tableName, String pkName)
@@ -237,6 +222,13 @@ public class UpgradeAsset extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void doUpgrade() throws Exception {
+		updateResourceCodes();
+		updateAssetEntries();
+		updateAssetCategories();
+		updateAssetTags();
 	}
 
 	protected void updateAssetCategories() throws Exception {
