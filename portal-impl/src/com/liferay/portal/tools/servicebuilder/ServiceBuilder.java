@@ -99,7 +99,7 @@ import org.dom4j.DocumentException;
  * @author Harry Mark
  * @author Tariq Dweik
  * @author Glenn Powell
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Prashant Dighe
  */
 public class ServiceBuilder {
@@ -988,9 +988,11 @@ public class ServiceBuilder {
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
 
-							List<String> transients = _getTransients(entity);
+							entity.setTransients(
+								_getTransients(entity, false));
 
-							entity.setTransients(transients);
+							entity.setParentTransients(
+								_getTransients(entity, true));
 
 							_createModel(entity);
 							_createExtendedModel(entity);
@@ -2266,12 +2268,26 @@ public class ServiceBuilder {
 
 		String content = _processTemplate(_tplOrmXml, context);
 
+		String mappedClasses = "";
+
+		int lastMappedClassStart = content.lastIndexOf("<mapped-superclass");
+
+		if (lastMappedClassStart != -1) {
+			int lastMappedClassEnd = content.indexOf(
+				"</mapped-superclass>", lastMappedClassStart) +
+				"</mapped-superclass>".length();
+
+			mappedClasses  = content.substring(0, lastMappedClassEnd);
+
+			content = content.substring(lastMappedClassEnd + 1);
+		}
+		
 		File xmlFile = new File(_ormFileName);
 
 		if (!xmlFile.exists()) {
 			String xml =
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-				"<entity-mappings xmlns=\"http://java.sun.com/xml/ns/persistence/orm\"\n" +
+				"<entity-mappings version=\"1.0\" xmlns=\"http://java.sun.com/xml/ns/persistence/orm\"\n" +
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
 				"\txsi:schemaLocation=\"http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd\"\n" +
 				">\n" +
@@ -2288,6 +2304,35 @@ public class ServiceBuilder {
 
 		String oldContent = FileUtil.read(xmlFile);
 		String newContent = oldContent;
+
+		int firstMappedClass = newContent.indexOf(
+			"<mapped-superclass class=\"" + _packagePath + ".model.");
+		int lastMappedClass = newContent.lastIndexOf(
+			"<mapped-superclass class=\"" + _packagePath + ".model.");
+
+		if (firstMappedClass == -1) {
+			int x = newContent.indexOf("<entity class=");
+
+			if (x != -1) {
+				newContent =
+					newContent.substring(0, x) + mappedClasses +
+						newContent.substring(x);
+			}
+			else {
+				content = mappedClasses + content;
+			}
+		}
+		else {
+			firstMappedClass = newContent.indexOf(
+				"<mapped-superclass", firstMappedClass) - 1;
+			lastMappedClass = newContent.indexOf(
+				"</mapped-superclass>", lastMappedClass) +
+				"</mapped-superclass>".length();
+
+			newContent =
+				newContent.substring(0, firstMappedClass) + mappedClasses +
+					newContent.substring(lastMappedClass);
+		}
 
 		int firstEntity = newContent.indexOf(
 			"<entity class=\"" + _packagePath + ".model.impl.");
@@ -3932,9 +3977,20 @@ public class ServiceBuilder {
 		}
 	}
 
-	private List<String> _getTransients(Entity entity) throws Exception {
-		File modelFile = new File(
-			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
+	private List<String> _getTransients(
+		Entity entity, boolean parent) throws Exception {
+
+		File modelFile;
+
+		if (parent) {
+			modelFile = new File(
+				_outputPath + "/model/impl/" + entity.getName() +
+				"ModelImpl.java");
+		}
+		else {
+			modelFile = new File(
+				_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
+		}
 
 		String content = FileUtil.read(modelFile);
 

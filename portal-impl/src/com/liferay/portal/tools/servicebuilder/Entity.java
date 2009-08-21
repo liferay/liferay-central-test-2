@@ -201,6 +201,10 @@ public class Entity {
 		return _packagePath;
 	}
 
+	public List<String> getParentTransients() {
+		return _parentTransients;
+	}
+
 	public String getPersistenceClass() {
 		return _persistenceClass;
 	}
@@ -438,6 +442,10 @@ public class Entity {
 		return _portalReference;
 	}
 
+	public void setParentTransients(List<String> transients) {
+		_parentTransients = transients;
+	}
+
 	public void setPortalReference(boolean portalReference) {
 		_portalReference = portalReference;
 	}
@@ -457,6 +465,7 @@ public class Entity {
 	private String _name;
 	private EntityOrder _order;
 	private String _packagePath;
+	private List<String> _parentTransients;
 	private String _persistenceClass;
 	private List<EntityColumn> _pkList;
 	private boolean _portalReference;
