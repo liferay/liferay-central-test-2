@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd" version="1.0">
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
 	<persistence-unit-metadata>
 		<xml-mapping-metadata-complete/>
 		<persistence-unit-defaults>
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
-		<table name="Account_" />
+	<mapped-superclass class="com.liferay.portal.model.impl.AccountModelImpl">
 		<attributes>
 			<id name="accountId" />
 			<basic name="companyId" />
@@ -34,10 +33,11 @@
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.AddressImpl" name="Address">
-		<table name="Address" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.AddressModelImpl">
 		<attributes>
 			<id name="addressId" />
 			<basic name="companyId" />
@@ -63,25 +63,27 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.BrowserTrackerImpl" name="BrowserTracker">
-		<table name="BrowserTracker" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.BrowserTrackerModelImpl">
 		<attributes>
 			<id name="browserTrackerId" />
 			<basic name="userId" />
 			<basic name="browserKey" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.ClassNameImpl" name="ClassName">
-		<table name="ClassName_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ClassNameModelImpl">
 		<attributes>
 			<id name="classNameId" />
 			<basic name="value" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.CompanyImpl" name="Company">
-		<table name="Company" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.CompanyModelImpl">
 		<attributes>
 			<id name="companyId" />
 			<basic name="accountId" />
@@ -94,11 +96,10 @@
 			<basic name="homeURL" />
 			<basic name="logoId" />
 			<basic name="system" />
-			<transient name="keyObj" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.ContactImpl" name="Contact">
-		<table name="Contact_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ContactModelImpl">
 		<attributes>
 			<id name="contactId" />
 			<basic name="companyId" />
@@ -136,10 +137,11 @@
 			<basic name="jobTitle" />
 			<basic name="jobClass" />
 			<basic name="hoursOfOperation" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.CountryImpl" name="Country">
-		<table name="Country" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.CountryModelImpl">
 		<attributes>
 			<id name="countryId" />
 			<basic name="name" />
@@ -154,10 +156,10 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.EmailAddressImpl" name="EmailAddress">
-		<table name="EmailAddress" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.EmailAddressModelImpl">
 		<attributes>
 			<id name="emailAddressId" />
 			<basic name="companyId" />
@@ -176,10 +178,11 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.GroupImpl" name="Group">
-		<table name="Group_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.GroupModelImpl">
 		<attributes>
 			<id name="groupId" />
 			<basic name="companyId" />
@@ -198,11 +201,11 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<transient name="typeSettingsProperties" />
+			<transient name="creatorUserUuid" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.ImageImpl" name="Image">
-		<table name="Image" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ImageModelImpl">
 		<attributes>
 			<id name="imageId" />
 			<basic name="modifiedDate">
@@ -219,11 +222,10 @@
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>
-			<transient name="textObj" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.LayoutImpl" name="Layout">
-		<table name="Layout" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LayoutModelImpl">
 		<attributes>
 			<id name="plid" />
 			<basic name="groupId" />
@@ -252,11 +254,10 @@
 			<basic name="priority" />
 			<basic name="layoutPrototypeId" />
 			<basic name="dlFolderId" />
-			<transient name="typeSettingsProperties" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.LayoutPrototypeImpl" name="LayoutPrototype">
-		<table name="LayoutPrototype" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LayoutPrototypeModelImpl">
 		<attributes>
 			<id name="layoutPrototypeId" />
 			<basic name="companyId" />
@@ -268,10 +269,11 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="nameMap" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
-		<table name="LayoutSet" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LayoutSetModelImpl">
 		<attributes>
 			<id name="layoutSetId" />
 			<basic name="groupId" />
@@ -287,10 +289,10 @@
 			<basic name="pageCount" />
 			<basic name="virtualHost" />
 			<basic name="layoutSetPrototypeId" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.LayoutSetPrototypeImpl" name="LayoutSetPrototype">
-		<table name="LayoutSetPrototype" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl">
 		<attributes>
 			<id name="layoutSetPrototypeId" />
 			<basic name="companyId" />
@@ -302,20 +304,21 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="nameMap" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.ListTypeImpl" name="ListType">
-		<table name="ListType" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ListTypeModelImpl">
 		<attributes>
 			<id name="listTypeId" />
 			<basic name="name" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.LockImpl" name="Lock">
-		<table name="Lock_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LockModelImpl">
 		<attributes>
 			<id name="lockId" />
 			<basic name="uuid">
@@ -336,10 +339,11 @@
 			<basic name="expirationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.MembershipRequestImpl" name="MembershipRequest">
-		<table name="MembershipRequest" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.MembershipRequestModelImpl">
 		<attributes>
 			<id name="membershipRequestId" />
 			<basic name="companyId" />
@@ -355,10 +359,12 @@
 			</basic>
 			<basic name="replierUserId" />
 			<basic name="statusId" />
+			<transient name="primaryKey" />
+			<transient name="replierUserUuid" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.OrganizationImpl" name="Organization">
-		<table name="Organization_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.OrganizationModelImpl">
 		<attributes>
 			<id name="organizationId" />
 			<basic name="companyId" />
@@ -374,28 +380,28 @@
 			<basic name="countryId" />
 			<basic name="statusId" />
 			<basic name="comments" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.OrgGroupPermissionImpl" name="OrgGroupPermission">
-		<table name="OrgGroupPermission" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.OrgGroupPermissionModelImpl">
 		<id-class class="com.liferay.portal.service.persistence.OrgGroupPermissionPK" />
 		<attributes>
 			<id name="organizationId" />
 			<id name="groupId" />
 			<id name="permissionId" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.OrgGroupRoleImpl" name="OrgGroupRole">
-		<table name="OrgGroupRole" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.OrgGroupRoleModelImpl">
 		<id-class class="com.liferay.portal.service.persistence.OrgGroupRolePK" />
 		<attributes>
 			<id name="organizationId" />
 			<id name="groupId" />
 			<id name="roleId" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.OrgLaborImpl" name="OrgLabor">
-		<table name="OrgLabor" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.OrgLaborModelImpl">
 		<attributes>
 			<id name="orgLaborId" />
 			<basic name="organizationId" />
@@ -414,10 +420,10 @@
 			<basic name="friClose" />
 			<basic name="satOpen" />
 			<basic name="satClose" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PasswordPolicyImpl" name="PasswordPolicy">
-		<table name="PasswordPolicy" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PasswordPolicyModelImpl">
 		<attributes>
 			<id name="passwordPolicyId" />
 			<basic name="companyId" />
@@ -449,19 +455,20 @@
 			<basic name="lockoutDuration" />
 			<basic name="requireUnlock" />
 			<basic name="resetFailureCount" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PasswordPolicyRelImpl" name="PasswordPolicyRel">
-		<table name="PasswordPolicyRel" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PasswordPolicyRelModelImpl">
 		<attributes>
 			<id name="passwordPolicyRelId" />
 			<basic name="passwordPolicyId" />
 			<basic name="classNameId" />
 			<basic name="classPK" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PasswordTrackerImpl" name="PasswordTracker">
-		<table name="PasswordTracker" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PasswordTrackerModelImpl">
 		<attributes>
 			<id name="passwordTrackerId" />
 			<basic name="userId" />
@@ -471,22 +478,20 @@
 			<basic name="password">
 				<column name="PASSWORD_" />
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PermissionImpl" name="Permission">
-		<table name="Permission_" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PermissionModelImpl">
 		<attributes>
 			<id name="permissionId" />
 			<basic name="companyId" />
 			<basic name="actionId" />
 			<basic name="resourceId" />
-			<transient name="name" />
-			<transient name="primKey" />
-			<transient name="scope" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PhoneImpl" name="Phone">
-		<table name="Phone" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PhoneModelImpl">
 		<attributes>
 			<id name="phoneId" />
 			<basic name="companyId" />
@@ -508,10 +513,11 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PluginSettingImpl" name="PluginSetting">
-		<table name="PluginSetting" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PluginSettingModelImpl">
 		<attributes>
 			<id name="pluginSettingId" />
 			<basic name="companyId" />
@@ -521,11 +527,10 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
-			<transient name="rolesArray" />
+			<transient name="primaryKey" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portal.model.impl.PortletImpl" name="Portlet">
-		<table name="Portlet" />
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PortletModelImpl">
 		<attributes>
 			<id name="id">
 				<column name="ID_" />
@@ -536,6 +541,1979 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PortletItemModelImpl">
+		<attributes>
+			<id name="portletItemId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="portletId" />
+			<basic name="classNameId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.PortletPreferencesModelImpl">
+		<attributes>
+			<id name="portletPreferencesId" />
+			<basic name="ownerId" />
+			<basic name="ownerType" />
+			<basic name="plid" />
+			<basic name="portletId" />
+			<basic name="preferences" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.RegionModelImpl">
+		<attributes>
+			<id name="regionId" />
+			<basic name="countryId" />
+			<basic name="regionCode" />
+			<basic name="name" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ReleaseModelImpl">
+		<attributes>
+			<id name="releaseId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="buildNumber" />
+			<basic name="buildDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="verified" />
+			<basic name="testString" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ResourceModelImpl">
+		<attributes>
+			<id name="resourceId" />
+			<basic name="codeId" />
+			<basic name="primKey" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ResourceActionModelImpl">
+		<attributes>
+			<id name="resourceActionId" />
+			<basic name="name" />
+			<basic name="actionId" />
+			<basic name="bitwiseValue" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ResourceCodeModelImpl">
+		<attributes>
+			<id name="codeId" />
+			<basic name="companyId" />
+			<basic name="name" />
+			<basic name="scope" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ResourcePermissionModelImpl">
+		<attributes>
+			<id name="resourcePermissionId" />
+			<basic name="companyId" />
+			<basic name="name" />
+			<basic name="scope" />
+			<basic name="primKey" />
+			<basic name="roleId" />
+			<basic name="actionIds" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.RoleModelImpl">
+		<attributes>
+			<id name="roleId" />
+			<basic name="companyId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="name" />
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="subtype" />
+			<transient name="primaryKey" />
+			<transient name="titleMap" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ServiceComponentModelImpl">
+		<attributes>
+			<id name="serviceComponentId" />
+			<basic name="buildNamespace" />
+			<basic name="buildNumber" />
+			<basic name="buildDate" />
+			<basic name="data">
+				<column name="DATA_" />
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ShardModelImpl">
+		<attributes>
+			<id name="shardId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="name" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.SubscriptionModelImpl">
+		<attributes>
+			<id name="subscriptionId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="frequency" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserModelImpl">
+		<attributes>
+			<id name="userId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="defaultUser" />
+			<basic name="contactId" />
+			<basic name="password">
+				<column name="PASSWORD_" />
+			</basic>
+			<basic name="passwordEncrypted" />
+			<basic name="passwordReset" />
+			<basic name="passwordModifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="reminderQueryQuestion" />
+			<basic name="reminderQueryAnswer" />
+			<basic name="graceLoginCount" />
+			<basic name="screenName" />
+			<basic name="emailAddress" />
+			<basic name="openId" />
+			<basic name="portraitId" />
+			<basic name="languageId" />
+			<basic name="timeZoneId" />
+			<basic name="greeting" />
+			<basic name="comments" />
+			<basic name="firstName" />
+			<basic name="middleName" />
+			<basic name="lastName" />
+			<basic name="jobTitle" />
+			<basic name="loginDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="loginIP" />
+			<basic name="lastLoginDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastLoginIP" />
+			<basic name="lastFailedLoginDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="failedLoginAttempts" />
+			<basic name="lockout" />
+			<basic name="lockoutDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="agreedToTermsOfUse" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserGroupModelImpl">
+		<attributes>
+			<id name="userGroupId" />
+			<basic name="companyId" />
+			<basic name="parentUserGroupId" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl">
+		<id-class class="com.liferay.portal.service.persistence.UserGroupGroupRolePK" />
+		<attributes>
+			<id name="userGroupId" />
+			<id name="groupId" />
+			<id name="roleId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserGroupRoleModelImpl">
+		<id-class class="com.liferay.portal.service.persistence.UserGroupRolePK" />
+		<attributes>
+			<id name="userId" />
+			<id name="groupId" />
+			<id name="roleId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserIdMapperModelImpl">
+		<attributes>
+			<id name="userIdMapperId" />
+			<basic name="userId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="description" />
+			<basic name="externalUserId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserTrackerModelImpl">
+		<attributes>
+			<id name="userTrackerId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="sessionId" />
+			<basic name="remoteAddr" />
+			<basic name="remoteHost" />
+			<basic name="userAgent" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserTrackerPathModelImpl">
+		<attributes>
+			<id name="userTrackerPathId" />
+			<basic name="userTrackerId" />
+			<basic name="path">
+				<column name="PATH_" />
+			</basic>
+			<basic name="pathDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.WebDAVPropsModelImpl">
+		<attributes>
+			<id name="webDavPropsId" />
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="props" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.WebsiteModelImpl">
+		<attributes>
+			<id name="websiteId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="url" />
+			<basic name="typeId" />
+			<basic name="primary">
+				<column name="PRIMARY_" />
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl">
+		<attributes>
+			<id name="deliveryId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="email" />
+			<basic name="sms" />
+			<basic name="website" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="title" />
+			<basic name="content" />
+			<basic name="url" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="displayDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="priority" />
+			<basic name="alert" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl">
+		<attributes>
+			<id name="flagId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="entryId" />
+			<basic name="value" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl">
+		<attributes>
+			<id name="categoryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentCategoryId" />
+			<basic name="name" />
+			<basic name="vocabularyId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl">
+		<attributes>
+			<id name="categoryPropertyId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="categoryId" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="value" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="visible" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="publishDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="mimeType" />
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="summary" />
+			<basic name="url" />
+			<basic name="height" />
+			<basic name="width" />
+			<basic name="priority" />
+			<basic name="viewCount" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetTagModelImpl">
+		<attributes>
+			<id name="tagId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="assetCount" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl">
+		<attributes>
+			<id name="tagPropertyId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="tagId" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="value" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl">
+		<attributes>
+			<id name="tagStatsId" />
+			<basic name="tagId" />
+			<basic name="classNameId" />
+			<basic name="assetCount" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl">
+		<attributes>
+			<id name="vocabularyId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="urlTitle" />
+			<basic name="content" />
+			<basic name="displayDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="draft" />
+			<basic name="allowTrackbacks" />
+			<basic name="trackbacks" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl">
+		<attributes>
+			<id name="statsUserId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="entryCount" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="ratingsTotalEntries" />
+			<basic name="ratingsTotalScore" />
+			<basic name="ratingsAverageScore" />
+			<transient name="primaryKey" />
+			<transient name="statsUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="comments" />
+			<basic name="visits" />
+			<basic name="priority" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl">
+		<attributes>
+			<id name="folderId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentFolderId" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.calendar.model.impl.CalEventModelImpl">
+		<attributes>
+			<id name="eventId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="durationHour" />
+			<basic name="durationMinute" />
+			<basic name="allDay" />
+			<basic name="timeZoneSensitive" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="repeating" />
+			<basic name="recurrence" />
+			<basic name="remindBy" />
+			<basic name="firstReminder" />
+			<basic name="secondReminder" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl">
+		<attributes>
+			<id name="fileEntryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="versionUserId" />
+			<basic name="versionUserName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="name" />
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="version" />
+			<basic name="size">
+				<column name="SIZE_" />
+			</basic>
+			<basic name="readCount" />
+			<basic name="extraSettings" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+			<transient name="versionUserUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl">
+		<attributes>
+			<id name="fileRankId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="name" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl">
+		<attributes>
+			<id name="fileShortcutId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="toFolderId" />
+			<basic name="toName" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl">
+		<attributes>
+			<id name="fileVersionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="name" />
+			<basic name="version" />
+			<basic name="size">
+				<column name="SIZE_" />
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl">
+		<attributes>
+			<id name="folderId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentFolderId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl">
+		<attributes>
+			<id name="columnId" />
+			<basic name="companyId" />
+			<basic name="tableId" />
+			<basic name="name" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="defaultData" />
+			<basic name="typeSettings" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl">
+		<attributes>
+			<id name="rowId">
+				<column name="ROWID_" />
+			</id>
+			<basic name="companyId" />
+			<basic name="tableId" />
+			<basic name="classPK" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl">
+		<attributes>
+			<id name="tableId" />
+			<basic name="companyId" />
+			<basic name="classNameId" />
+			<basic name="name" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl">
+		<attributes>
+			<id name="valueId" />
+			<basic name="companyId" />
+			<basic name="tableId" />
+			<basic name="columnId" />
+			<basic name="rowId">
+				<column name="ROWID_" />
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="data">
+				<column name="DATA_" />
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl">
+		<attributes>
+			<id name="folderId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentFolderId" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl">
+		<attributes>
+			<id name="imageId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="folderId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="smallImageId" />
+			<basic name="largeImageId" />
+			<basic name="custom1ImageId" />
+			<basic name="custom2ImageId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalArticleModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="resourcePrimKey" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="articleId" />
+			<basic name="version" />
+			<basic name="title" />
+			<basic name="urlTitle" />
+			<basic name="description" />
+			<basic name="content" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="structureId" />
+			<basic name="templateId" />
+			<basic name="displayDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="approved" />
+			<basic name="approvedByUserId" />
+			<basic name="approvedByUserName" />
+			<basic name="approvedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="expired" />
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="reviewDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="indexable" />
+			<basic name="smallImage" />
+			<basic name="smallImageId" />
+			<basic name="smallImageURL" />
+			<transient name="approvedByUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl">
+		<attributes>
+			<id name="articleImageId" />
+			<basic name="groupId" />
+			<basic name="articleId" />
+			<basic name="version" />
+			<basic name="elInstanceId" />
+			<basic name="elName" />
+			<basic name="languageId" />
+			<basic name="tempImage" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl">
+		<attributes>
+			<id name="resourcePrimKey" />
+			<basic name="groupId" />
+			<basic name="articleId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl">
+		<attributes>
+			<id name="contentSearchId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="privateLayout" />
+			<basic name="layoutId" />
+			<basic name="portletId" />
+			<basic name="articleId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalFeedModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="feedId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="structureId" />
+			<basic name="templateId" />
+			<basic name="rendererTemplateId" />
+			<basic name="delta" />
+			<basic name="orderByCol" />
+			<basic name="orderByType" />
+			<basic name="targetLayoutFriendlyUrl" />
+			<basic name="targetPortletId" />
+			<basic name="contentField" />
+			<basic name="feedType" />
+			<basic name="feedVersion" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalStructureModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="structureId" />
+			<basic name="parentStructureId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="xsd" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalTemplateModelImpl">
+		<attributes>
+			<id name="id">
+				<column name="ID_" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="templateId" />
+			<basic name="structureId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="xsl" />
+			<basic name="langType" />
+			<basic name="cacheable" />
+			<basic name="smallImage" />
+			<basic name="smallImageId" />
+			<basic name="smallImageURL" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBBanModelImpl">
+		<attributes>
+			<id name="banId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="banUserId" />
+			<transient name="banUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl">
+		<attributes>
+			<id name="categoryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentCategoryId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="threadCount" />
+			<basic name="messageCount" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl">
+		<attributes>
+			<id name="discussionId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="threadId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl">
+		<attributes>
+			<id name="mailingListId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="categoryId" />
+			<basic name="emailAddress" />
+			<basic name="inProtocol" />
+			<basic name="inServerName" />
+			<basic name="inServerPort" />
+			<basic name="inUseSSL" />
+			<basic name="inUserName" />
+			<basic name="inPassword" />
+			<basic name="inReadInterval" />
+			<basic name="outEmailAddress" />
+			<basic name="outCustom" />
+			<basic name="outServerName" />
+			<basic name="outServerPort" />
+			<basic name="outUseSSL" />
+			<basic name="outUserName" />
+			<basic name="outPassword" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl">
+		<attributes>
+			<id name="messageId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="categoryId" />
+			<basic name="threadId" />
+			<basic name="parentMessageId" />
+			<basic name="subject" />
+			<basic name="body" />
+			<basic name="attachments" />
+			<basic name="anonymous" />
+			<basic name="priority" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl">
+		<attributes>
+			<id name="messageFlagId" />
+			<basic name="userId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="threadId" />
+			<basic name="messageId" />
+			<basic name="flag" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl">
+		<attributes>
+			<id name="statsUserId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="messageCount" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="statsUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl">
+		<attributes>
+			<id name="threadId" />
+			<basic name="groupId" />
+			<basic name="categoryId" />
+			<basic name="rootMessageId" />
+			<basic name="messageCount" />
+			<basic name="viewCount" />
+			<basic name="lastPostByUserId" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="priority" />
+			<transient name="lastPostByUserUuid" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl">
+		<attributes>
+			<id name="choiceId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="questionId" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="descriptionMap" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl">
+		<attributes>
+			<id name="questionId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastVoteDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="descriptionMap" />
+			<transient name="primaryKey" />
+			<transient name="titleMap" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.polls.model.impl.PollsVoteModelImpl">
+		<attributes>
+			<id name="voteId" />
+			<basic name="userId" />
+			<basic name="questionId" />
+			<basic name="choiceId" />
+			<basic name="voteDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="score" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl">
+		<attributes>
+			<id name="statsId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="totalEntries" />
+			<basic name="totalScore" />
+			<basic name="averageScore" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl">
+		<attributes>
+			<id name="cartId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="itemIds" />
+			<basic name="couponCodes" />
+			<basic name="altShipping" />
+			<basic name="insure" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl">
+		<attributes>
+			<id name="categoryId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="parentCategoryId" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl">
+		<attributes>
+			<id name="couponId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="code">
+				<column name="CODE_" />
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="limitCategories" />
+			<basic name="limitSkus" />
+			<basic name="minOrder" />
+			<basic name="discount" />
+			<basic name="discountType" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingItemModelImpl">
+		<attributes>
+			<id name="itemId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="categoryId" />
+			<basic name="sku" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="properties" />
+			<basic name="fields">
+				<column name="FIELDS_" />
+			</basic>
+			<basic name="fieldsQuantities" />
+			<basic name="minQuantity" />
+			<basic name="maxQuantity" />
+			<basic name="price" />
+			<basic name="discount" />
+			<basic name="taxable" />
+			<basic name="shipping" />
+			<basic name="useShippingFormula" />
+			<basic name="requiresShipping" />
+			<basic name="stockQuantity" />
+			<basic name="featured">
+				<column name="FEATURED_" />
+			</basic>
+			<basic name="sale">
+				<column name="SALE_" />
+			</basic>
+			<basic name="smallImage" />
+			<basic name="smallImageId" />
+			<basic name="smallImageURL" />
+			<basic name="mediumImage" />
+			<basic name="mediumImageId" />
+			<basic name="mediumImageURL" />
+			<basic name="largeImage" />
+			<basic name="largeImageId" />
+			<basic name="largeImageURL" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl">
+		<attributes>
+			<id name="itemFieldId" />
+			<basic name="itemId" />
+			<basic name="name" />
+			<basic name="values">
+				<column name="VALUES_" />
+			</basic>
+			<basic name="description" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl">
+		<attributes>
+			<id name="itemPriceId" />
+			<basic name="itemId" />
+			<basic name="minQuantity" />
+			<basic name="maxQuantity" />
+			<basic name="price" />
+			<basic name="discount" />
+			<basic name="taxable" />
+			<basic name="shipping" />
+			<basic name="useShippingFormula" />
+			<basic name="status" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl">
+		<attributes>
+			<id name="orderId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="number">
+				<column name="NUMBER_" />
+			</basic>
+			<basic name="tax" />
+			<basic name="shipping" />
+			<basic name="altShipping" />
+			<basic name="requiresShipping" />
+			<basic name="insure" />
+			<basic name="insurance" />
+			<basic name="couponCodes" />
+			<basic name="couponDiscount" />
+			<basic name="billingFirstName" />
+			<basic name="billingLastName" />
+			<basic name="billingEmailAddress" />
+			<basic name="billingCompany" />
+			<basic name="billingStreet" />
+			<basic name="billingCity" />
+			<basic name="billingState" />
+			<basic name="billingZip" />
+			<basic name="billingCountry" />
+			<basic name="billingPhone" />
+			<basic name="shipToBilling" />
+			<basic name="shippingFirstName" />
+			<basic name="shippingLastName" />
+			<basic name="shippingEmailAddress" />
+			<basic name="shippingCompany" />
+			<basic name="shippingStreet" />
+			<basic name="shippingCity" />
+			<basic name="shippingState" />
+			<basic name="shippingZip" />
+			<basic name="shippingCountry" />
+			<basic name="shippingPhone" />
+			<basic name="ccName" />
+			<basic name="ccType" />
+			<basic name="ccNumber" />
+			<basic name="ccExpMonth" />
+			<basic name="ccExpYear" />
+			<basic name="ccVerNumber" />
+			<basic name="comments" />
+			<basic name="ppTxnId" />
+			<basic name="ppPaymentStatus" />
+			<basic name="ppPaymentGross" />
+			<basic name="ppReceiverEmail" />
+			<basic name="ppPayerEmail" />
+			<basic name="sendOrderEmail" />
+			<basic name="sendShippingEmail" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingOrderItemModelImpl">
+		<attributes>
+			<id name="orderItemId" />
+			<basic name="orderId" />
+			<basic name="itemId" />
+			<basic name="sku" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="properties" />
+			<basic name="price" />
+			<basic name="quantity" />
+			<basic name="shippedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialActivityModelImpl">
+		<attributes>
+			<id name="activityId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate" />
+			<basic name="mirrorActivityId" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="extraData" />
+			<basic name="receiverUserId" />
+			<transient name="primaryKey" />
+			<transient name="receiverUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialRelationModelImpl">
+		<attributes>
+			<id name="relationId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="createDate" />
+			<basic name="userId1" />
+			<basic name="userId2" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialRequestModelImpl">
+		<attributes>
+			<id name="requestId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createDate" />
+			<basic name="modifiedDate" />
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="extraData" />
+			<basic name="receiverUserId" />
+			<basic name="status" />
+			<transient name="primaryKey" />
+			<transient name="receiverUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl">
+		<attributes>
+			<id name="licenseId" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="openSource" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="recommended" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl">
+		<attributes>
+			<id name="frameworkVersionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="priority" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl">
+		<attributes>
+			<id name="productEntryId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="tags" />
+			<basic name="shortDescription" />
+			<basic name="longDescription" />
+			<basic name="pageURL" />
+			<basic name="author" />
+			<basic name="repoGroupId" />
+			<basic name="repoArtifactId" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl">
+		<attributes>
+			<id name="productScreenshotId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="productEntryId" />
+			<basic name="thumbnailId" />
+			<basic name="fullImageId" />
+			<basic name="priority" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl">
+		<attributes>
+			<id name="productVersionId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="productEntryId" />
+			<basic name="version" />
+			<basic name="changeLog" />
+			<basic name="downloadPageURL" />
+			<basic name="directDownloadURL" />
+			<basic name="repoStoreArtifact" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl">
+		<attributes>
+			<id name="proposalId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="publishDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dueDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl">
+		<attributes>
+			<id name="reviewId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="proposalId" />
+			<basic name="assignedByUserId" />
+			<basic name="assignedByUserName" />
+			<basic name="stage" />
+			<basic name="completed" />
+			<basic name="rejected" />
+			<transient name="assignedByUserUuid" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl">
+		<attributes>
+			<id name="nodeId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="lastPostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.wiki.model.impl.WikiPageModelImpl">
+		<attributes>
+			<id name="pageId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="resourcePrimKey" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="nodeId" />
+			<basic name="title" />
+			<basic name="version" />
+			<basic name="minorEdit" />
+			<basic name="content" />
+			<basic name="summary" />
+			<basic name="format" />
+			<basic name="head" />
+			<basic name="parentTitle" />
+			<basic name="redirectTitle" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl">
+		<attributes>
+			<id name="resourcePrimKey" />
+			<basic name="nodeId" />
+			<basic name="title" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
+		<table name="Account_" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.AddressImpl" name="Address">
+		<table name="Address" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.BrowserTrackerImpl" name="BrowserTracker">
+		<table name="BrowserTracker" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.ClassNameImpl" name="ClassName">
+		<table name="ClassName_" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.CompanyImpl" name="Company">
+		<table name="Company" />
+		<attributes>
+			<transient name="keyObj" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.ContactImpl" name="Contact">
+		<table name="Contact_" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.CountryImpl" name="Country">
+		<table name="Country" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.EmailAddressImpl" name="EmailAddress">
+		<table name="EmailAddress" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.GroupImpl" name="Group">
+		<table name="Group_" />
+		<attributes>
+			<transient name="typeSettingsProperties" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.ImageImpl" name="Image">
+		<table name="Image" />
+		<attributes>
+			<transient name="textObj" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LayoutImpl" name="Layout">
+		<table name="Layout" />
+		<attributes>
+			<transient name="typeSettingsProperties" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LayoutPrototypeImpl" name="LayoutPrototype">
+		<table name="LayoutPrototype" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
+		<table name="LayoutSet" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LayoutSetPrototypeImpl" name="LayoutSetPrototype">
+		<table name="LayoutSetPrototype" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.ListTypeImpl" name="ListType">
+		<table name="ListType" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LockImpl" name="Lock">
+		<table name="Lock_" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.MembershipRequestImpl" name="MembershipRequest">
+		<table name="MembershipRequest" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.OrganizationImpl" name="Organization">
+		<table name="Organization_" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.OrgGroupPermissionImpl" name="OrgGroupPermission">
+		<table name="OrgGroupPermission" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.OrgGroupRoleImpl" name="OrgGroupRole">
+		<table name="OrgGroupRole" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.OrgLaborImpl" name="OrgLabor">
+		<table name="OrgLabor" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PasswordPolicyImpl" name="PasswordPolicy">
+		<table name="PasswordPolicy" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PasswordPolicyRelImpl" name="PasswordPolicyRel">
+		<table name="PasswordPolicyRel" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PasswordTrackerImpl" name="PasswordTracker">
+		<table name="PasswordTracker" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PermissionImpl" name="Permission">
+		<table name="Permission_" />
+		<attributes>
+			<transient name="name" />
+			<transient name="primKey" />
+			<transient name="scope" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PhoneImpl" name="Phone">
+		<table name="Phone" />
+		<attributes/>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PluginSettingImpl" name="PluginSetting">
+		<table name="PluginSetting" />
+		<attributes>
+			<transient name="rolesArray" />
+		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.PortletImpl" name="Portlet">
+		<table name="Portlet" />
+		<attributes>
 			<transient name="URLEncoderClass" />
 			<transient name="actionURLRedirect" />
 			<transient name="addDefaultResource" />
@@ -619,70 +2597,23 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletItemImpl" name="PortletItem">
 		<table name="PortletItem" />
-		<attributes>
-			<id name="portletItemId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="portletId" />
-			<basic name="classNameId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletPreferencesImpl" name="PortletPreferences">
 		<table name="PortletPreferences" />
-		<attributes>
-			<id name="portletPreferencesId" />
-			<basic name="ownerId" />
-			<basic name="ownerType" />
-			<basic name="plid" />
-			<basic name="portletId" />
-			<basic name="preferences" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.RegionImpl" name="Region">
 		<table name="Region" />
-		<attributes>
-			<id name="regionId" />
-			<basic name="countryId" />
-			<basic name="regionCode" />
-			<basic name="name" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ReleaseImpl" name="Release">
 		<table name="Release_" />
-		<attributes>
-			<id name="releaseId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="buildNumber" />
-			<basic name="buildDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="verified" />
-			<basic name="testString" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceImpl" name="Resource">
 		<table name="Resource_" />
 		<attributes>
-			<id name="resourceId" />
-			<basic name="codeId" />
-			<basic name="primKey" />
 			<transient name="companyId" />
 			<transient name="name" />
 			<transient name="scope" />
@@ -690,759 +2621,172 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceActionImpl" name="ResourceAction">
 		<table name="ResourceAction" />
-		<attributes>
-			<id name="resourceActionId" />
-			<basic name="name" />
-			<basic name="actionId" />
-			<basic name="bitwiseValue" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceCodeImpl" name="ResourceCode">
 		<table name="ResourceCode" />
-		<attributes>
-			<id name="codeId" />
-			<basic name="companyId" />
-			<basic name="name" />
-			<basic name="scope" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourcePermissionImpl" name="ResourcePermission">
 		<table name="ResourcePermission" />
-		<attributes>
-			<id name="resourcePermissionId" />
-			<basic name="companyId" />
-			<basic name="name" />
-			<basic name="scope" />
-			<basic name="primKey" />
-			<basic name="roleId" />
-			<basic name="actionIds" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.RoleImpl" name="Role">
 		<table name="Role_" />
-		<attributes>
-			<id name="roleId" />
-			<basic name="companyId" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="name" />
-			<basic name="title" />
-			<basic name="description" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="subtype" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ServiceComponentImpl" name="ServiceComponent">
 		<table name="ServiceComponent" />
-		<attributes>
-			<id name="serviceComponentId" />
-			<basic name="buildNamespace" />
-			<basic name="buildNumber" />
-			<basic name="buildDate" />
-			<basic name="data">
-				<column name="DATA_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ShardImpl" name="Shard">
 		<table name="Shard" />
-		<attributes>
-			<id name="shardId" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="name" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.SubscriptionImpl" name="Subscription">
 		<table name="Subscription" />
-		<attributes>
-			<id name="subscriptionId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="frequency" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserImpl" name="User">
 		<table name="User_" />
 		<attributes>
-			<id name="userId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="companyId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="defaultUser" />
-			<basic name="contactId" />
-			<basic name="password">
-				<column name="PASSWORD_" />
-			</basic>
-			<basic name="passwordEncrypted" />
-			<basic name="passwordReset" />
-			<basic name="passwordModifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="reminderQueryQuestion" />
-			<basic name="reminderQueryAnswer" />
-			<basic name="graceLoginCount" />
-			<basic name="screenName" />
-			<basic name="emailAddress" />
-			<basic name="openId" />
-			<basic name="portraitId" />
-			<basic name="languageId" />
-			<basic name="timeZoneId" />
-			<basic name="greeting" />
-			<basic name="comments" />
-			<basic name="firstName" />
-			<basic name="middleName" />
-			<basic name="lastName" />
-			<basic name="jobTitle" />
-			<basic name="loginDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="loginIP" />
-			<basic name="lastLoginDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="lastLoginIP" />
-			<basic name="lastFailedLoginDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="failedLoginAttempts" />
-			<basic name="lockout" />
-			<basic name="lockoutDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="agreedToTermsOfUse" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
 			<transient name="passwordModified" />
 			<transient name="passwordUnencrypted" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupImpl" name="UserGroup">
 		<table name="UserGroup" />
-		<attributes>
-			<id name="userGroupId" />
-			<basic name="companyId" />
-			<basic name="parentUserGroupId" />
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupGroupRoleImpl" name="UserGroupGroupRole">
 		<table name="UserGroupGroupRole" />
-		<id-class class="com.liferay.portal.service.persistence.UserGroupGroupRolePK" />
-		<attributes>
-			<id name="userGroupId" />
-			<id name="groupId" />
-			<id name="roleId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupRoleImpl" name="UserGroupRole">
 		<table name="UserGroupRole" />
-		<id-class class="com.liferay.portal.service.persistence.UserGroupRolePK" />
-		<attributes>
-			<id name="userId" />
-			<id name="groupId" />
-			<id name="roleId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserIdMapperImpl" name="UserIdMapper">
 		<table name="UserIdMapper" />
-		<attributes>
-			<id name="userIdMapperId" />
-			<basic name="userId" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="description" />
-			<basic name="externalUserId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserTrackerImpl" name="UserTracker">
 		<table name="UserTracker" />
-		<attributes>
-			<id name="userTrackerId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="sessionId" />
-			<basic name="remoteAddr" />
-			<basic name="remoteHost" />
-			<basic name="userAgent" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserTrackerPathImpl" name="UserTrackerPath">
 		<table name="UserTrackerPath" />
-		<attributes>
-			<id name="userTrackerPathId" />
-			<basic name="userTrackerId" />
-			<basic name="path">
-				<column name="PATH_" />
-			</basic>
-			<basic name="pathDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.WebDAVPropsImpl" name="WebDAVProps">
 		<table name="WebDAVProps" />
-		<attributes>
-			<id name="webDavPropsId" />
-			<basic name="companyId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="props" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.WebsiteImpl" name="Website">
 		<table name="Website" />
-		<attributes>
-			<id name="websiteId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="url" />
-			<basic name="typeId" />
-			<basic name="primary">
-				<column name="PRIMARY_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" name="AnnouncementsDelivery">
 		<table name="AnnouncementsDelivery" />
-		<attributes>
-			<id name="deliveryId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="email" />
-			<basic name="sms" />
-			<basic name="website" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl" name="AnnouncementsEntry">
 		<table name="AnnouncementsEntry" />
-		<attributes>
-			<id name="entryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="title" />
-			<basic name="content" />
-			<basic name="url" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="displayDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="priority" />
-			<basic name="alert" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl" name="AnnouncementsFlag">
 		<table name="AnnouncementsFlag" />
-		<attributes>
-			<id name="flagId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="entryId" />
-			<basic name="value" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetCategoryImpl" name="AssetCategory">
 		<table name="AssetCategory" />
-		<attributes>
-			<id name="categoryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentCategoryId" />
-			<basic name="name" />
-			<basic name="vocabularyId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl" name="AssetCategoryProperty">
 		<table name="AssetCategoryProperty" />
-		<attributes>
-			<id name="categoryPropertyId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="categoryId" />
-			<basic name="key">
-				<column name="KEY_" />
-			</basic>
-			<basic name="value" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetEntryImpl" name="AssetEntry">
 		<table name="AssetEntry" />
-		<attributes>
-			<id name="entryId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="visible" />
-			<basic name="startDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="endDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="publishDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="mimeType" />
-			<basic name="title" />
-			<basic name="description" />
-			<basic name="summary" />
-			<basic name="url" />
-			<basic name="height" />
-			<basic name="width" />
-			<basic name="priority" />
-			<basic name="viewCount" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagImpl" name="AssetTag">
 		<table name="AssetTag" />
-		<attributes>
-			<id name="tagId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="assetCount" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl" name="AssetTagProperty">
 		<table name="AssetTagProperty" />
-		<attributes>
-			<id name="tagPropertyId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="tagId" />
-			<basic name="key">
-				<column name="KEY_" />
-			</basic>
-			<basic name="value" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagStatsImpl" name="AssetTagStats">
 		<table name="AssetTagStats" />
-		<attributes>
-			<id name="tagStatsId" />
-			<basic name="tagId" />
-			<basic name="classNameId" />
-			<basic name="assetCount" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetVocabularyImpl" name="AssetVocabulary">
 		<table name="AssetVocabulary" />
-		<attributes>
-			<id name="vocabularyId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" name="BlogsEntry">
 		<table name="BlogsEntry" />
-		<attributes>
-			<id name="entryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="title" />
-			<basic name="urlTitle" />
-			<basic name="content" />
-			<basic name="displayDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="draft" />
-			<basic name="allowTrackbacks" />
-			<basic name="trackbacks" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" name="BlogsStatsUser">
 		<table name="BlogsStatsUser" />
-		<attributes>
-			<id name="statsUserId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="entryCount" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="ratingsTotalEntries" />
-			<basic name="ratingsTotalScore" />
-			<basic name="ratingsAverageScore" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" name="BookmarksEntry">
 		<table name="BookmarksEntry" />
-		<attributes>
-			<id name="entryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
-			<basic name="url" />
-			<basic name="comments" />
-			<basic name="visits" />
-			<basic name="priority" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" name="BookmarksFolder">
 		<table name="BookmarksFolder" />
-		<attributes>
-			<id name="folderId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentFolderId" />
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.calendar.model.impl.CalEventImpl" name="CalEvent">
 		<table name="CalEvent" />
 		<attributes>
-			<id name="eventId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="title" />
-			<basic name="description" />
-			<basic name="startDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="endDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="durationHour" />
-			<basic name="durationMinute" />
-			<basic name="allDay" />
-			<basic name="timeZoneSensitive" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="repeating" />
-			<basic name="recurrence" />
-			<basic name="remindBy" />
-			<basic name="firstReminder" />
-			<basic name="secondReminder" />
 			<transient name="recurrenceObj" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" name="DLFileEntry">
 		<table name="DLFileEntry" />
 		<attributes>
-			<id name="fileEntryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="versionUserId" />
-			<basic name="versionUserName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
-			<basic name="title" />
-			<basic name="description" />
-			<basic name="version" />
-			<basic name="size">
-				<column name="SIZE_" />
-			</basic>
-			<basic name="readCount" />
-			<basic name="extraSettings" />
 			<transient name="extraSettingsProperties" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" name="DLFileRank">
 		<table name="DLFileRank" />
-		<attributes>
-			<id name="fileRankId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl" name="DLFileShortcut">
 		<table name="DLFileShortcut" />
-		<attributes>
-			<id name="fileShortcutId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="toFolderId" />
-			<basic name="toName" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" name="DLFileVersion">
 		<table name="DLFileVersion" />
-		<attributes>
-			<id name="fileVersionId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
-			<basic name="version" />
-			<basic name="size">
-				<column name="SIZE_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" name="DLFolder">
 		<table name="DLFolder" />
-		<attributes>
-			<id name="folderId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentFolderId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoColumnImpl" name="ExpandoColumn">
 		<table name="ExpandoColumn" />
 		<attributes>
-			<id name="columnId" />
-			<basic name="companyId" />
-			<basic name="tableId" />
-			<basic name="name" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="defaultData" />
-			<basic name="typeSettings" />
 			<transient name="typeSettingsProperties" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoRowImpl" name="ExpandoRow">
 		<table name="ExpandoRow" />
-		<attributes>
-			<id name="rowId">
-				<column name="ROWID_" />
-			</id>
-			<basic name="companyId" />
-			<basic name="tableId" />
-			<basic name="classPK" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoTableImpl" name="ExpandoTable">
 		<table name="ExpandoTable" />
-		<attributes>
-			<id name="tableId" />
-			<basic name="companyId" />
-			<basic name="classNameId" />
-			<basic name="name" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoValueImpl" name="ExpandoValue">
 		<table name="ExpandoValue" />
 		<attributes>
-			<id name="valueId" />
-			<basic name="companyId" />
-			<basic name="tableId" />
-			<basic name="columnId" />
-			<basic name="rowId">
-				<column name="ROWID_" />
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="data">
-				<column name="DATA_" />
-			</basic>
 			<transient name="boolean" />
 			<transient name="booleanArray" />
 			<transient name="date" />
@@ -1463,967 +2807,189 @@
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" name="IGFolder">
 		<table name="IGFolder" />
-		<attributes>
-			<id name="folderId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentFolderId" />
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGImageImpl" name="IGImage">
 		<table name="IGImage" />
 		<attributes>
-			<id name="imageId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="smallImageId" />
-			<basic name="largeImageId" />
-			<basic name="custom1ImageId" />
-			<basic name="custom2ImageId" />
 			<transient name="imageType" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImpl" name="JournalArticle">
 		<table name="JournalArticle" />
 		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="resourcePrimKey" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="articleId" />
-			<basic name="version" />
-			<basic name="title" />
-			<basic name="urlTitle" />
-			<basic name="description" />
-			<basic name="content" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="structureId" />
-			<basic name="templateId" />
-			<basic name="displayDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="approved" />
-			<basic name="approvedByUserId" />
-			<basic name="approvedByUserName" />
-			<basic name="approvedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="expired" />
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="reviewDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="indexable" />
-			<basic name="smallImage" />
-			<basic name="smallImageId" />
-			<basic name="smallImageURL" />
 			<transient name="approvedByUserUuid" />
 			<transient name="smallImageType" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" name="JournalArticleImage">
 		<table name="JournalArticleImage" />
-		<attributes>
-			<id name="articleImageId" />
-			<basic name="groupId" />
-			<basic name="articleId" />
-			<basic name="version" />
-			<basic name="elInstanceId" />
-			<basic name="elName" />
-			<basic name="languageId" />
-			<basic name="tempImage" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl" name="JournalArticleResource">
 		<table name="JournalArticleResource" />
-		<attributes>
-			<id name="resourcePrimKey" />
-			<basic name="groupId" />
-			<basic name="articleId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalContentSearchImpl" name="JournalContentSearch">
 		<table name="JournalContentSearch" />
-		<attributes>
-			<id name="contentSearchId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="privateLayout" />
-			<basic name="layoutId" />
-			<basic name="portletId" />
-			<basic name="articleId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalFeedImpl" name="JournalFeed">
 		<table name="JournalFeed" />
-		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="feedId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="structureId" />
-			<basic name="templateId" />
-			<basic name="rendererTemplateId" />
-			<basic name="delta" />
-			<basic name="orderByCol" />
-			<basic name="orderByType" />
-			<basic name="targetLayoutFriendlyUrl" />
-			<basic name="targetPortletId" />
-			<basic name="contentField" />
-			<basic name="feedType" />
-			<basic name="feedVersion" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalStructureImpl" name="JournalStructure">
 		<table name="JournalStructure" />
-		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="structureId" />
-			<basic name="parentStructureId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="xsd" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" name="JournalTemplate">
 		<table name="JournalTemplate" />
 		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="templateId" />
-			<basic name="structureId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="xsl" />
-			<basic name="langType" />
-			<basic name="cacheable" />
-			<basic name="smallImage" />
-			<basic name="smallImageId" />
-			<basic name="smallImageURL" />
 			<transient name="smallImageType" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBBanImpl" name="MBBan">
 		<table name="MBBan" />
-		<attributes>
-			<id name="banId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="banUserId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" name="MBCategory">
 		<table name="MBCategory" />
-		<attributes>
-			<id name="categoryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentCategoryId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="threadCount" />
-			<basic name="messageCount" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" name="MBDiscussion">
 		<table name="MBDiscussion" />
-		<attributes>
-			<id name="discussionId" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="threadId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMailingListImpl" name="MBMailingList">
 		<table name="MBMailingList" />
-		<attributes>
-			<id name="mailingListId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="categoryId" />
-			<basic name="emailAddress" />
-			<basic name="inProtocol" />
-			<basic name="inServerName" />
-			<basic name="inServerPort" />
-			<basic name="inUseSSL" />
-			<basic name="inUserName" />
-			<basic name="inPassword" />
-			<basic name="inReadInterval" />
-			<basic name="outEmailAddress" />
-			<basic name="outCustom" />
-			<basic name="outServerName" />
-			<basic name="outServerPort" />
-			<basic name="outUseSSL" />
-			<basic name="outUserName" />
-			<basic name="outPassword" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" name="MBMessage">
 		<table name="MBMessage" />
 		<attributes>
-			<id name="messageId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="categoryId" />
-			<basic name="threadId" />
-			<basic name="parentMessageId" />
-			<basic name="subject" />
-			<basic name="body" />
-			<basic name="attachments" />
-			<basic name="anonymous" />
-			<basic name="priority" />
 			<transient name="attachmentsDir" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl" name="MBMessageFlag">
 		<table name="MBMessageFlag" />
-		<attributes>
-			<id name="messageFlagId" />
-			<basic name="userId" />
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="threadId" />
-			<basic name="messageId" />
-			<basic name="flag" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl" name="MBStatsUser">
 		<table name="MBStatsUser" />
-		<attributes>
-			<id name="statsUserId" />
-			<basic name="groupId" />
-			<basic name="userId" />
-			<basic name="messageCount" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" name="MBThread">
 		<table name="MBThread" />
-		<attributes>
-			<id name="threadId" />
-			<basic name="groupId" />
-			<basic name="categoryId" />
-			<basic name="rootMessageId" />
-			<basic name="messageCount" />
-			<basic name="viewCount" />
-			<basic name="lastPostByUserId" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="priority" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsChoiceImpl" name="PollsChoice">
 		<table name="PollsChoice" />
-		<attributes>
-			<id name="choiceId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="questionId" />
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsQuestionImpl" name="PollsQuestion">
 		<table name="PollsQuestion" />
-		<attributes>
-			<id name="questionId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="title" />
-			<basic name="description" />
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="lastVoteDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsVoteImpl" name="PollsVote">
 		<table name="PollsVote" />
-		<attributes>
-			<id name="voteId" />
-			<basic name="userId" />
-			<basic name="questionId" />
-			<basic name="choiceId" />
-			<basic name="voteDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsEntryImpl" name="RatingsEntry">
 		<table name="RatingsEntry" />
-		<attributes>
-			<id name="entryId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="score" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsStatsImpl" name="RatingsStats">
 		<table name="RatingsStats" />
-		<attributes>
-			<id name="statsId" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="totalEntries" />
-			<basic name="totalScore" />
-			<basic name="averageScore" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCartImpl" name="ShoppingCart">
 		<table name="ShoppingCart" />
-		<attributes>
-			<id name="cartId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="itemIds" />
-			<basic name="couponCodes" />
-			<basic name="altShipping" />
-			<basic name="insure" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl" name="ShoppingCategory">
 		<table name="ShoppingCategory" />
-		<attributes>
-			<id name="categoryId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="parentCategoryId" />
-			<basic name="name" />
-			<basic name="description" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl" name="ShoppingCoupon">
 		<table name="ShoppingCoupon" />
-		<attributes>
-			<id name="couponId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="code">
-				<column name="CODE_" />
-			</basic>
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="startDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="endDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-			<basic name="limitCategories" />
-			<basic name="limitSkus" />
-			<basic name="minOrder" />
-			<basic name="discount" />
-			<basic name="discountType" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingItemImpl" name="ShoppingItem">
 		<table name="ShoppingItem" />
 		<attributes>
-			<id name="itemId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="categoryId" />
-			<basic name="sku" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="properties" />
-			<basic name="fields">
-				<column name="FIELDS_" />
-			</basic>
-			<basic name="fieldsQuantities" />
-			<basic name="minQuantity" />
-			<basic name="maxQuantity" />
-			<basic name="price" />
-			<basic name="discount" />
-			<basic name="taxable" />
-			<basic name="shipping" />
-			<basic name="useShippingFormula" />
-			<basic name="requiresShipping" />
-			<basic name="stockQuantity" />
-			<basic name="featured">
-				<column name="FEATURED_" />
-			</basic>
-			<basic name="sale">
-				<column name="SALE_" />
-			</basic>
-			<basic name="smallImage" />
-			<basic name="smallImageId" />
-			<basic name="smallImageURL" />
-			<basic name="mediumImage" />
-			<basic name="mediumImageId" />
-			<basic name="mediumImageURL" />
-			<basic name="largeImage" />
-			<basic name="largeImageId" />
-			<basic name="largeImageURL" />
 			<transient name="fieldsQuantitiesArray" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl" name="ShoppingItemField">
 		<table name="ShoppingItemField" />
 		<attributes>
-			<id name="itemFieldId" />
-			<basic name="itemId" />
-			<basic name="name" />
-			<basic name="values">
-				<column name="VALUES_" />
-			</basic>
-			<basic name="description" />
 			<transient name="valuesArray" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl" name="ShoppingItemPrice">
 		<table name="ShoppingItemPrice" />
-		<attributes>
-			<id name="itemPriceId" />
-			<basic name="itemId" />
-			<basic name="minQuantity" />
-			<basic name="maxQuantity" />
-			<basic name="price" />
-			<basic name="discount" />
-			<basic name="taxable" />
-			<basic name="shipping" />
-			<basic name="useShippingFormula" />
-			<basic name="status" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl" name="ShoppingOrder">
 		<table name="ShoppingOrder" />
-		<attributes>
-			<id name="orderId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="number">
-				<column name="NUMBER_" />
-			</basic>
-			<basic name="tax" />
-			<basic name="shipping" />
-			<basic name="altShipping" />
-			<basic name="requiresShipping" />
-			<basic name="insure" />
-			<basic name="insurance" />
-			<basic name="couponCodes" />
-			<basic name="couponDiscount" />
-			<basic name="billingFirstName" />
-			<basic name="billingLastName" />
-			<basic name="billingEmailAddress" />
-			<basic name="billingCompany" />
-			<basic name="billingStreet" />
-			<basic name="billingCity" />
-			<basic name="billingState" />
-			<basic name="billingZip" />
-			<basic name="billingCountry" />
-			<basic name="billingPhone" />
-			<basic name="shipToBilling" />
-			<basic name="shippingFirstName" />
-			<basic name="shippingLastName" />
-			<basic name="shippingEmailAddress" />
-			<basic name="shippingCompany" />
-			<basic name="shippingStreet" />
-			<basic name="shippingCity" />
-			<basic name="shippingState" />
-			<basic name="shippingZip" />
-			<basic name="shippingCountry" />
-			<basic name="shippingPhone" />
-			<basic name="ccName" />
-			<basic name="ccType" />
-			<basic name="ccNumber" />
-			<basic name="ccExpMonth" />
-			<basic name="ccExpYear" />
-			<basic name="ccVerNumber" />
-			<basic name="comments" />
-			<basic name="ppTxnId" />
-			<basic name="ppPaymentStatus" />
-			<basic name="ppPaymentGross" />
-			<basic name="ppReceiverEmail" />
-			<basic name="ppPayerEmail" />
-			<basic name="sendOrderEmail" />
-			<basic name="sendShippingEmail" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl" name="ShoppingOrderItem">
 		<table name="ShoppingOrderItem" />
-		<attributes>
-			<id name="orderItemId" />
-			<basic name="orderId" />
-			<basic name="itemId" />
-			<basic name="sku" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="properties" />
-			<basic name="price" />
-			<basic name="quantity" />
-			<basic name="shippedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialActivityImpl" name="SocialActivity">
 		<table name="SocialActivity" />
-		<attributes>
-			<id name="activityId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate" />
-			<basic name="mirrorActivityId" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="extraData" />
-			<basic name="receiverUserId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialRelationImpl" name="SocialRelation">
 		<table name="SocialRelation" />
-		<attributes>
-			<id name="relationId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="companyId" />
-			<basic name="createDate" />
-			<basic name="userId1" />
-			<basic name="userId2" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialRequestImpl" name="SocialRequest">
 		<table name="SocialRequest" />
-		<attributes>
-			<id name="requestId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="createDate" />
-			<basic name="modifiedDate" />
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="extraData" />
-			<basic name="receiverUserId" />
-			<basic name="status" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" name="SCLicense">
 		<table name="SCLicense" />
-		<attributes>
-			<id name="licenseId" />
-			<basic name="name" />
-			<basic name="url" />
-			<basic name="openSource" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-			<basic name="recommended" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl" name="SCFrameworkVersion">
 		<table name="SCFrameworkVersion" />
-		<attributes>
-			<id name="frameworkVersionId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="url" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-			<basic name="priority" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl" name="SCProductEntry">
 		<table name="SCProductEntry" />
-		<attributes>
-			<id name="productEntryId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
-			<basic name="tags" />
-			<basic name="shortDescription" />
-			<basic name="longDescription" />
-			<basic name="pageURL" />
-			<basic name="author" />
-			<basic name="repoGroupId" />
-			<basic name="repoArtifactId" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl" name="SCProductScreenshot">
 		<table name="SCProductScreenshot" />
-		<attributes>
-			<id name="productScreenshotId" />
-			<basic name="companyId" />
-			<basic name="groupId" />
-			<basic name="productEntryId" />
-			<basic name="thumbnailId" />
-			<basic name="fullImageId" />
-			<basic name="priority" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl" name="SCProductVersion">
 		<table name="SCProductVersion" />
-		<attributes>
-			<id name="productVersionId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="productEntryId" />
-			<basic name="version" />
-			<basic name="changeLog" />
-			<basic name="downloadPageURL" />
-			<basic name="directDownloadURL" />
-			<basic name="repoStoreArtifact" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.tasks.model.impl.TasksProposalImpl" name="TasksProposal">
 		<table name="TasksProposal" />
-		<attributes>
-			<id name="proposalId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="publishDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="dueDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" name="TasksReview">
 		<table name="TasksReview" />
-		<attributes>
-			<id name="reviewId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="proposalId" />
-			<basic name="assignedByUserId" />
-			<basic name="assignedByUserName" />
-			<basic name="stage" />
-			<basic name="completed" />
-			<basic name="rejected" />
-		</attributes>
+		<attributes/>
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" name="WikiNode">
 		<table name="WikiNode" />
-		<attributes>
-			<id name="nodeId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="lastPostDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-		</attributes>
+		<attributes></attributes>
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageImpl" name="WikiPage">
 		<table name="WikiPage" />
 		<attributes>
-			<id name="pageId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="resourcePrimKey" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="nodeId" />
-			<basic name="title" />
-			<basic name="version" />
-			<basic name="minorEdit" />
-			<basic name="content" />
-			<basic name="summary" />
-			<basic name="format" />
-			<basic name="head" />
-			<basic name="parentTitle" />
-			<basic name="redirectTitle" />
 			<transient name="attachmentsDir" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">
 		<table name="WikiPageResource" />
-		<attributes>
-			<id name="resourcePrimKey" />
-			<basic name="nodeId" />
-			<basic name="title" />
-		</attributes>
+		<attributes></attributes>
 	</entity>
 </entity-mappings>
