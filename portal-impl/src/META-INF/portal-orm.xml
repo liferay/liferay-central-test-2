@@ -2391,19 +2391,19 @@
 	</mapped-superclass>
 	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
 		<table name="Account_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.AddressImpl" name="Address">
 		<table name="Address" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.BrowserTrackerImpl" name="BrowserTracker">
 		<table name="BrowserTracker" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ClassNameImpl" name="ClassName">
 		<table name="ClassName_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.CompanyImpl" name="Company">
 		<table name="Company" />
@@ -2413,15 +2413,15 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ContactImpl" name="Contact">
 		<table name="Contact_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.CountryImpl" name="Country">
 		<table name="Country" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.EmailAddressImpl" name="EmailAddress">
 		<table name="EmailAddress" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.GroupImpl" name="Group">
 		<table name="Group_" />
@@ -2443,55 +2443,55 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutPrototypeImpl" name="LayoutPrototype">
 		<table name="LayoutPrototype" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
 		<table name="LayoutSet" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetPrototypeImpl" name="LayoutSetPrototype">
 		<table name="LayoutSetPrototype" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ListTypeImpl" name="ListType">
 		<table name="ListType" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LockImpl" name="Lock">
 		<table name="Lock_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.MembershipRequestImpl" name="MembershipRequest">
 		<table name="MembershipRequest" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.OrganizationImpl" name="Organization">
 		<table name="Organization_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.OrgGroupPermissionImpl" name="OrgGroupPermission">
 		<table name="OrgGroupPermission" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.OrgGroupRoleImpl" name="OrgGroupRole">
 		<table name="OrgGroupRole" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.OrgLaborImpl" name="OrgLabor">
 		<table name="OrgLabor" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PasswordPolicyImpl" name="PasswordPolicy">
 		<table name="PasswordPolicy" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PasswordPolicyRelImpl" name="PasswordPolicyRel">
 		<table name="PasswordPolicyRel" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PasswordTrackerImpl" name="PasswordTracker">
 		<table name="PasswordTracker" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PermissionImpl" name="Permission">
 		<table name="Permission_" />
@@ -2503,7 +2503,7 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PhoneImpl" name="Phone">
 		<table name="Phone" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PluginSettingImpl" name="PluginSetting">
 		<table name="PluginSetting" />
@@ -2597,19 +2597,19 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletItemImpl" name="PortletItem">
 		<table name="PortletItem" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.PortletPreferencesImpl" name="PortletPreferences">
 		<table name="PortletPreferences" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.RegionImpl" name="Region">
 		<table name="Region" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ReleaseImpl" name="Release">
 		<table name="Release_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceImpl" name="Resource">
 		<table name="Resource_" />
@@ -2621,31 +2621,31 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceActionImpl" name="ResourceAction">
 		<table name="ResourceAction" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceCodeImpl" name="ResourceCode">
 		<table name="ResourceCode" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourcePermissionImpl" name="ResourcePermission">
 		<table name="ResourcePermission" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.RoleImpl" name="Role">
 		<table name="Role_" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ServiceComponentImpl" name="ServiceComponent">
 		<table name="ServiceComponent" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ShardImpl" name="Shard">
 		<table name="Shard" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.SubscriptionImpl" name="Subscription">
 		<table name="Subscription" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserImpl" name="User">
 		<table name="User_" />
@@ -2656,91 +2656,91 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupImpl" name="UserGroup">
 		<table name="UserGroup" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupGroupRoleImpl" name="UserGroupGroupRole">
 		<table name="UserGroupGroupRole" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserGroupRoleImpl" name="UserGroupRole">
 		<table name="UserGroupRole" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserIdMapperImpl" name="UserIdMapper">
 		<table name="UserIdMapper" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserTrackerImpl" name="UserTracker">
 		<table name="UserTracker" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserTrackerPathImpl" name="UserTrackerPath">
 		<table name="UserTrackerPath" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.WebDAVPropsImpl" name="WebDAVProps">
 		<table name="WebDAVProps" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.WebsiteImpl" name="Website">
 		<table name="Website" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" name="AnnouncementsDelivery">
 		<table name="AnnouncementsDelivery" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl" name="AnnouncementsEntry">
 		<table name="AnnouncementsEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl" name="AnnouncementsFlag">
 		<table name="AnnouncementsFlag" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetCategoryImpl" name="AssetCategory">
 		<table name="AssetCategory" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl" name="AssetCategoryProperty">
 		<table name="AssetCategoryProperty" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetEntryImpl" name="AssetEntry">
 		<table name="AssetEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagImpl" name="AssetTag">
 		<table name="AssetTag" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagPropertyImpl" name="AssetTagProperty">
 		<table name="AssetTagProperty" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetTagStatsImpl" name="AssetTagStats">
 		<table name="AssetTagStats" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetVocabularyImpl" name="AssetVocabulary">
 		<table name="AssetVocabulary" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" name="BlogsEntry">
 		<table name="BlogsEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" name="BlogsStatsUser">
 		<table name="BlogsStatsUser" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl" name="BookmarksEntry">
 		<table name="BookmarksEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" name="BookmarksFolder">
 		<table name="BookmarksFolder" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.calendar.model.impl.CalEventImpl" name="CalEvent">
 		<table name="CalEvent" />
@@ -2756,19 +2756,19 @@
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" name="DLFileRank">
 		<table name="DLFileRank" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl" name="DLFileShortcut">
 		<table name="DLFileShortcut" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" name="DLFileVersion">
 		<table name="DLFileVersion" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" name="DLFolder">
 		<table name="DLFolder" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoColumnImpl" name="ExpandoColumn">
 		<table name="ExpandoColumn" />
@@ -2778,11 +2778,11 @@
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoRowImpl" name="ExpandoRow">
 		<table name="ExpandoRow" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoTableImpl" name="ExpandoTable">
 		<table name="ExpandoTable" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoValueImpl" name="ExpandoValue">
 		<table name="ExpandoValue" />
@@ -2807,7 +2807,7 @@
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" name="IGFolder">
 		<table name="IGFolder" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGImageImpl" name="IGImage">
 		<table name="IGImage" />
@@ -2824,23 +2824,23 @@
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" name="JournalArticleImage">
 		<table name="JournalArticleImage" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl" name="JournalArticleResource">
 		<table name="JournalArticleResource" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalContentSearchImpl" name="JournalContentSearch">
 		<table name="JournalContentSearch" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalFeedImpl" name="JournalFeed">
 		<table name="JournalFeed" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalStructureImpl" name="JournalStructure">
 		<table name="JournalStructure" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" name="JournalTemplate">
 		<table name="JournalTemplate" />
@@ -2850,19 +2850,19 @@
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBBanImpl" name="MBBan">
 		<table name="MBBan" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" name="MBCategory">
 		<table name="MBCategory" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" name="MBDiscussion">
 		<table name="MBDiscussion" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMailingListImpl" name="MBMailingList">
 		<table name="MBMailingList" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" name="MBMessage">
 		<table name="MBMessage" />
@@ -2872,47 +2872,47 @@
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl" name="MBMessageFlag">
 		<table name="MBMessageFlag" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl" name="MBStatsUser">
 		<table name="MBStatsUser" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" name="MBThread">
 		<table name="MBThread" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsChoiceImpl" name="PollsChoice">
 		<table name="PollsChoice" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsQuestionImpl" name="PollsQuestion">
 		<table name="PollsQuestion" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.polls.model.impl.PollsVoteImpl" name="PollsVote">
 		<table name="PollsVote" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsEntryImpl" name="RatingsEntry">
 		<table name="RatingsEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.ratings.model.impl.RatingsStatsImpl" name="RatingsStats">
 		<table name="RatingsStats" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCartImpl" name="ShoppingCart">
 		<table name="ShoppingCart" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl" name="ShoppingCategory">
 		<table name="ShoppingCategory" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl" name="ShoppingCoupon">
 		<table name="ShoppingCoupon" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingItemImpl" name="ShoppingItem">
 		<table name="ShoppingItem" />
@@ -2928,59 +2928,59 @@
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl" name="ShoppingItemPrice">
 		<table name="ShoppingItemPrice" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl" name="ShoppingOrder">
 		<table name="ShoppingOrder" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl" name="ShoppingOrderItem">
 		<table name="ShoppingOrderItem" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialActivityImpl" name="SocialActivity">
 		<table name="SocialActivity" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialRelationImpl" name="SocialRelation">
 		<table name="SocialRelation" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialRequestImpl" name="SocialRequest">
 		<table name="SocialRequest" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" name="SCLicense">
 		<table name="SCLicense" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl" name="SCFrameworkVersion">
 		<table name="SCFrameworkVersion" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl" name="SCProductEntry">
 		<table name="SCProductEntry" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl" name="SCProductScreenshot">
 		<table name="SCProductScreenshot" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl" name="SCProductVersion">
 		<table name="SCProductVersion" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.tasks.model.impl.TasksProposalImpl" name="TasksProposal">
 		<table name="TasksProposal" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" name="TasksReview">
 		<table name="TasksReview" />
-		<attributes/>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" name="WikiNode">
 		<table name="WikiNode" />
-		<attributes></attributes>
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageImpl" name="WikiPage">
 		<table name="WikiPage" />
@@ -2990,6 +2990,6 @@
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">
 		<table name="WikiPageResource" />
-		<attributes></attributes>
+		<attributes />
 	</entity>
 </entity-mappings>

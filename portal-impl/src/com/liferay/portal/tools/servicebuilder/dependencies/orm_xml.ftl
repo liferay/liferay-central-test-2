@@ -83,6 +83,7 @@
 	<#if entity.hasColumns()>
 		<entity class="${packagePath}.model.impl.${entity.name}Impl" name="${entity.name}">
 			<table name="${entity.table}" />
+
 			<attributes>
 				<#list entity.transients as transient>
 					<transient name="${transient}" />

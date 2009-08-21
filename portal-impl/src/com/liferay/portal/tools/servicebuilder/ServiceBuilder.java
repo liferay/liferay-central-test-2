@@ -988,9 +988,7 @@ public class ServiceBuilder {
 							_createModelImpl(entity);
 							_createExtendedModelImpl(entity);
 
-							entity.setTransients(
-								_getTransients(entity, false));
-
+							entity.setTransients(_getTransients(entity, false));
 							entity.setParentTransients(
 								_getTransients(entity, true));
 
@@ -2274,8 +2272,7 @@ public class ServiceBuilder {
 
 		if (lastMappedClassStart != -1) {
 			int lastMappedClassEnd = content.indexOf(
-				"</mapped-superclass>", lastMappedClassStart) +
-				"</mapped-superclass>".length();
+				"</mapped-superclass>", lastMappedClassStart) + 20;
 
 			mappedClasses  = content.substring(0, lastMappedClassEnd);
 
@@ -2326,8 +2323,7 @@ public class ServiceBuilder {
 			firstMappedClass = newContent.indexOf(
 				"<mapped-superclass", firstMappedClass) - 1;
 			lastMappedClass = newContent.indexOf(
-				"</mapped-superclass>", lastMappedClass) +
-				"</mapped-superclass>".length();
+				"</mapped-superclass>", lastMappedClass) + 20;
 
 			newContent =
 				newContent.substring(0, firstMappedClass) + mappedClasses +
@@ -2358,6 +2354,11 @@ public class ServiceBuilder {
 		}
 
 		newContent = _formatXml(newContent);
+
+		newContent = StringUtil.replace(
+			newContent,
+			new String[] {"<attributes></attributes>", "<attributes/>"},
+			new String[] {"<attributes />", "<attributes />"});
 
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(xmlFile, newContent);
@@ -3977,15 +3978,15 @@ public class ServiceBuilder {
 		}
 	}
 
-	private List<String> _getTransients(
-		Entity entity, boolean parent) throws Exception {
+	private List<String> _getTransients(Entity entity, boolean parent)
+		throws Exception {
 
-		File modelFile;
+		File modelFile = null;
 
 		if (parent) {
 			modelFile = new File(
 				_outputPath + "/model/impl/" + entity.getName() +
-				"ModelImpl.java");
+					"ModelImpl.java");
 		}
 		else {
 			modelFile = new File(
