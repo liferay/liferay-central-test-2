@@ -77,7 +77,8 @@ public class CalendarActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String link =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/calendar/find_event?eventId=" + activity.getClassPK();
+				"/calendar/find_event?eventId=" + activity.getClassPK() +
+					"&redirect=" + themeDisplay.getURLCurrent();
 
 		// Title
 

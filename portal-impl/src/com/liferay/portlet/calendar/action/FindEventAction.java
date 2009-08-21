@@ -24,6 +24,7 @@ package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -61,6 +62,7 @@ public class FindEventAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
+			String redirect = ParamUtil.getString(request, "redirect");
 			long eventId = ParamUtil.getLong(request, "eventId");
 
 			plid = getPlid(plid, eventId);
@@ -71,6 +73,10 @@ public class FindEventAction extends Action {
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
+
+			if (Validator.isNotNull(redirect)) {
+				portletURL.setParameter("redirect", redirect);
+			}
 
 			portletURL.setParameter("struts_action", "/calendar/view_event");
 			portletURL.setParameter("eventId", String.valueOf(eventId));
