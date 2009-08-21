@@ -251,11 +251,6 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String requestURI = request.getRequestURI();
 
-		if (Validator.isNotNull(request.getContextPath())) {
-			requestURI = requestURI.substring(
-				request.getContextPath().length());
-		}
-
 		String realPath = ServletContextUtil.getRealPath(
 			_servletContext, requestURI);
 
