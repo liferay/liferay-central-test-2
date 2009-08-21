@@ -20,19 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_3;
-
-import com.liferay.portal.upgrade.BaseUpgradeProcess;
+package com.liferay.portal.upgrade;
 
 /**
- * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseUpgradeProcess.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeSchema extends BaseUpgradeProcess {
+public abstract class BaseUpgradeProcess extends UpgradeProcess {
 
-	protected void doUpgrade() throws Exception {
-		runSQLTemplate("update-5.2.2-5.2.3.sql", false);
+	public void upgrade() throws UpgradeException {
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
+
+	protected abstract void doUpgrade() throws Exception;
 
 }
