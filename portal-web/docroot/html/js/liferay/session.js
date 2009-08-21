@@ -109,6 +109,8 @@ Liferay.Session = {
 					if (instance.redirectOnExpire) {
 						location.href = themeDisplay.getURLHome();
 					}
+
+					Liferay.trigger('sessionExpired');
 				}
 			}
 		);

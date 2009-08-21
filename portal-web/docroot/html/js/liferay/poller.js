@@ -237,6 +237,26 @@
 
 		processResponse: _processResponse,
 
+		removeListener: function(key) {
+			var instance = this;
+
+			if (key in _portlets) {
+				delete _portlets[key];
+			}
+
+			var index = jQuery.inArray(key, _registeredPortlets);
+
+			if (index > -1) {
+				_registeredPortlets.splice(index, 1);
+			}
+
+			if (!_registeredPortlets.length) {
+				_enabled = false;
+
+				_cancelRequestTimer();
+			}
+		},
+
 		resume: function() {
 			_suspended = false;
 
@@ -260,7 +280,7 @@
 		},
 
 		submitRequest: function(key, data, chunkId) {
-			if (!_frozen) {
+			if (!_frozen && (key in _portlets)) {
 				for (var i in data) {
 					var content = data[i];
 
