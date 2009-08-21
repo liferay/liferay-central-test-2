@@ -110,7 +110,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String categoryLink =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/message_boards/find_category?categoryId=" +
+				"/message_boards/find_category?mbCategoryId=" +
 					message.getCategoryId();
 
 		String body = wrapLink(categoryLink, "go-to-category", themeDisplay);
