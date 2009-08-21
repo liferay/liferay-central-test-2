@@ -74,16 +74,23 @@ public abstract class BaseSocialActivityInterpreter
 
 			String groupName = group.getDescriptiveName();
 
-			if ((group.getGroupId() == themeDisplay.getScopeGroupId()) ||
-				!group.hasPublicLayouts()) {
-
+			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 				return groupName;
 			}
 
 			String groupDisplayURL =
 				themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-					"/my_places/view?groupId=" +  group.getGroupId() +
-						"&privateLayout=0";
+					"/my_places/view?groupId=" +  group.getGroupId();
+
+			if (group.hasPublicLayouts()) {
+				groupDisplayURL = groupDisplayURL + "&privateLayout=0";
+			}
+			else if (group.hasPrivateLayouts()) {
+				groupDisplayURL = groupDisplayURL + "&privateLayout=1";
+			}
+			else {
+				return groupName;
+			}
 
 			groupName =
 				"<a class=\"group\" href=\"" + groupDisplayURL + "\">" +
