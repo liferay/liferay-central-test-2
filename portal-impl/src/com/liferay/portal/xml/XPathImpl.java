@@ -135,7 +135,7 @@ public class XPathImpl implements XPath {
 
 			return new NodeImpl(node);
 		}
-		else if (context instanceof List) {
+		else if (context instanceof List<?>) {
 			return SAXReaderImpl.toNewNodes((List<org.dom4j.Node>)context);
 		}
 		else {
@@ -157,7 +157,7 @@ public class XPathImpl implements XPath {
 
 			return nodeImpl.getWrappedNode();
 		}
-		else if (context instanceof List) {
+		else if (context instanceof List<?>) {
 			return SAXReaderImpl.toOldNodes((List<Node>)context);
 		}
 		else {

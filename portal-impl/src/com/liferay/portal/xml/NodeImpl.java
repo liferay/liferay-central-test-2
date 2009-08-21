@@ -187,7 +187,7 @@ public class NodeImpl implements Node {
 		if (obj == null) {
 			return null;
 		}
-		else if (obj instanceof List) {
+		else if (obj instanceof List<?>) {
 			return SAXReaderImpl.toNewNodes((List<org.dom4j.Node>)obj);
 		}
 		else {
