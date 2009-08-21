@@ -22,6 +22,9 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="VerifyProcess.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,12 +45,28 @@ public abstract class VerifyProcess {
 
 	public static final int ONCE = 1;
 
-	public abstract void verify() throws VerifyException;
+	public void verify() throws VerifyException {
+		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("Verifying " + getClass().getName());
+			}
+
+			doVerify();
+		}
+		catch (Exception e) {
+			throw new VerifyException(e);
+		}
+	}
 
 	public void verify(VerifyProcess verifyProcess)
 		throws VerifyException {
 
 		verifyProcess.verify();
 	}
+
+	protected void doVerify() throws Exception {
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(VerifyProcess.class);
 
 }

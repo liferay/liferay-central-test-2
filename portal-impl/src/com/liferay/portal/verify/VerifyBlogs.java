@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyBlogs extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyBlogs();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyBlogs() throws Exception {
+	protected void doVerify() throws Exception {
 		List<BlogsEntry> entries =
 			BlogsEntryLocalServiceUtil.getNoAssetEntries();
 

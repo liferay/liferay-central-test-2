@@ -40,18 +40,7 @@ import java.util.List;
  */
 public class VerifyGroup extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyGroup();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyGroup() throws Exception {
+	protected void doVerify() throws Exception {
 		List<Group> groups = GroupLocalServiceUtil.getNullFriendlyURLGroups();
 
 		for (Group group : groups) {
@@ -77,10 +66,12 @@ public class VerifyGroup extends VerifyProcess {
 					long userId = user.getUserId();
 					String screenName = user.getScreenName();
 
-					_log.info(
-						"Updating user screen name " + screenName + " to " +
-							userId + " because it is generating an invalid " +
-								"friendly URL");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Updating user screen name " + screenName + " to " +
+								userId + " because it is generating an " +
+									"invalid friendly URL");
+					}
 
 					UserLocalServiceUtil.updateScreenName(
 						userId, String.valueOf(userId));

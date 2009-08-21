@@ -23,8 +23,6 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
@@ -39,17 +37,6 @@ import java.sql.ResultSet;
  * @author Brian Wing Shun Chan
  */
 public class VerifySocial extends VerifyProcess {
-
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifySocial();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
 
 	protected void deleteDuplicateActivities() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -197,7 +184,7 @@ public class VerifySocial extends VerifyProcess {
 		}
 	}
 
-	protected void verifySocial() throws Exception {
+	protected void doVerify() throws Exception {
 
 		// Temporarily comment these out because of performance issues. This
 		// verification is not needed because activities can be added while
@@ -206,7 +193,5 @@ public class VerifySocial extends VerifyProcess {
 		//deleteDuplicateActivities();
 		//deleteDuplicateRequests();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifySocial.class);
 
 }

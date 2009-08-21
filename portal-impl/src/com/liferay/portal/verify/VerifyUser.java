@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyUser extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyUser();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyUser() throws Exception {
+	protected void doVerify() throws Exception {
 		List<User> users = UserLocalServiceUtil.getNoContacts();
 
 		if (_log.isDebugEnabled()) {

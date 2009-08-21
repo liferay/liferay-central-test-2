@@ -60,14 +60,21 @@ import java.util.List;
  */
 public class VerifyImage extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
+	protected void doVerify() throws Exception {
+		List<Image> images = ImageLocalServiceUtil.getImages();
 
-		try {
-			verifyImage();
+		if (_log.isDebugEnabled()) {
+			_log.debug("Processing " + images.size() + " stale images");
 		}
-		catch (Exception e) {
-			throw new VerifyException(e);
+
+		for (Image image : images) {
+			if (isStaleImage(image)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Deleting stale image " + image.getImageId());
+				}
+
+				ImageLocalServiceUtil.deleteImage(image.getImageId());
+			}
 		}
 	}
 
@@ -196,24 +203,6 @@ public class VerifyImage extends VerifyProcess {
 		}
 
 		return true;
-	}
-
-	protected void verifyImage() throws Exception {
-		List<Image> images = ImageLocalServiceUtil.getImages();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Processing " + images.size() + " stale images");
-		}
-
-		for (Image image : images) {
-			if (isStaleImage(image)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Deleting stale image " + image.getImageId());
-				}
-
-				ImageLocalServiceUtil.deleteImage(image.getImageId());
-			}
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyImage.class);

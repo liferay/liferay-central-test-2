@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.tools.sql.DBUtil;
 
@@ -89,6 +91,10 @@ public abstract class UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("Upgrading " + getClass().getName());
+			}
+
 			doUpgrade();
 		}
 		catch (Exception e) {
@@ -113,5 +119,7 @@ public abstract class UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeProcess.class);
 
 }

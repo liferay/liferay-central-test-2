@@ -39,21 +39,12 @@ import java.sql.ResultSet;
  */
 public class VerifyMySQL extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyMySQL();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
 	protected void alterTableEngine(String tableName) throws Exception {
-		_log.info(
-			"Updating table " + tableName + " to use engine " +
-				PropsValues.DATABASE_MYSQL_ENGINE);
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Updating table " + tableName + " to use engine " +
+					PropsValues.DATABASE_MYSQL_ENGINE);
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -72,7 +63,7 @@ public class VerifyMySQL extends VerifyProcess {
 		}
 	}
 
-	protected void verifyMySQL() throws Exception {
+	protected void doVerify() throws Exception {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		if (!dbUtil.getType().equals(DBUtil.TYPE_MYSQL)) {

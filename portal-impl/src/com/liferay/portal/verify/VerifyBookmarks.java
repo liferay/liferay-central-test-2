@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyBookmarks extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyBookmarks();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyBookmarks() throws Exception {
+	protected void doVerify() throws Exception {
 		List<BookmarksEntry> entries =
 			BookmarksEntryLocalServiceUtil.getNoAssetEntries();
 

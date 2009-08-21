@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyWiki extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyWiki();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyWiki() throws Exception {
+	protected void doVerify() throws Exception {
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getNoAssetPages();
 
 		if (_log.isDebugEnabled()) {

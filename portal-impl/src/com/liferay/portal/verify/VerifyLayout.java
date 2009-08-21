@@ -22,8 +22,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -37,18 +35,7 @@ import java.util.List;
  */
 public class VerifyLayout extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyLayout();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyLayout() throws Exception {
+	protected void doVerify() throws Exception {
 		List<Layout> layouts =
 			LayoutLocalServiceUtil.getNullFriendlyURLLayouts();
 
@@ -59,7 +46,5 @@ public class VerifyLayout extends VerifyProcess {
 				layout.getPlid(), friendlyURL);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyLayout.class);
 
 }

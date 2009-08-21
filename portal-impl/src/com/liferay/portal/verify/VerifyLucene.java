@@ -22,8 +22,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -34,23 +32,10 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class VerifyLucene extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyLucene();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyLucene() throws Exception {
+	protected void doVerify() throws Exception {
 		if (false) {
 			PropsUtil.set(PropsKeys.INDEX_ON_STARTUP, "true");
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyLucene.class);
 
 }

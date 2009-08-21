@@ -41,18 +41,7 @@ import java.util.List;
  */
 public class VerifyMessageBoards extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyMessageBoards();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyMessageBoards() throws Exception {
+	protected void doVerify() throws Exception {
 		List<MBCategory> categories =
 			MBCategoryLocalServiceUtil.getMBCategories(
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);

@@ -23,8 +23,6 @@
 package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
@@ -38,18 +36,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
  */
 public class VerifyCounter extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyCounter();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyCounter() throws Exception {
+	protected void doVerify() throws Exception {
 
 		// Resource
 
@@ -76,7 +63,5 @@ public class VerifyCounter extends VerifyProcess {
 				Permission.class.getName(), latestPermissionId);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyCounter.class);
 
 }

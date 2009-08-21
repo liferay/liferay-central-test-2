@@ -22,9 +22,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 /**
  * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,9 +29,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  */
 public class VerifyProcessSuite extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
+	protected void doVerify() throws Exception {
 		verify(new VerifyProperties());
 		verify(new VerifyLucene());
 
@@ -67,7 +62,5 @@ public class VerifyProcessSuite extends VerifyProcess {
 
 		//verify(new VerifyImage());
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyProcessSuite.class);
 
 }

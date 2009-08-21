@@ -23,8 +23,6 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import java.sql.Connection;
@@ -38,18 +36,7 @@ import java.sql.ResultSet;
  */
 public class VerifyOrganization extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyOrganization();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyOrganization() throws Exception {
+	protected void doVerify() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -74,7 +61,5 @@ public class VerifyOrganization extends VerifyProcess {
 
 	private static final String _GET_COMPANY_IDS =
 		"select companyId from Company";
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyOrganization.class);
 
 }

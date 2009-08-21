@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyImageGallery extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyImageGallery();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyImageGallery() throws Exception {
+	protected void doVerify() throws Exception {
 		List<IGImage> images = IGImageLocalServiceUtil.getNoAssetImages();
 
 		if (_log.isDebugEnabled()) {

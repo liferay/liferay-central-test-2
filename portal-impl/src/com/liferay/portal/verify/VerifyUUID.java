@@ -23,8 +23,6 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -46,14 +44,9 @@ import java.sql.ResultSet;
  */
 public class VerifyUUID extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyUUID();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
+	protected void doVerify() throws Exception {
+		for (String[] model : _MODELS) {
+			verifyModel(model[0], model[1], model[2]);
 		}
 	}
 
@@ -97,12 +90,6 @@ public class VerifyUUID extends VerifyProcess {
 			new MethodWrapper(serviceClassName, "update" + modelName, obj));
 	}
 
-	protected void verifyUUID() throws Exception {
-		for (String[] model : _MODELS) {
-			verifyModel(model[0], model[1], model[2]);
-		}
-	}
-
 	private static final String[][] _MODELS = new String[][] {
 		new String[] {
 			IGFolderLocalServiceUtil.class.getName(),
@@ -135,7 +122,5 @@ public class VerifyUUID extends VerifyProcess {
 			"id_"
 		}
 	};
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyUUID.class);
 
 }

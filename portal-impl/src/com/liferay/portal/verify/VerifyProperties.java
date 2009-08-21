@@ -34,18 +34,7 @@ import com.liferay.util.SystemProperties;
  */
 public class VerifyProperties extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyProperties();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyProperties() throws Exception {
+	protected void doVerify() throws Exception {
 
 		// system.properties
 

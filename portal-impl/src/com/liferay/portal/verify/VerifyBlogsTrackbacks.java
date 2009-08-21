@@ -46,18 +46,7 @@ import java.util.List;
  */
 public class VerifyBlogsTrackbacks extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyBlogsTrackbacks();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyBlogsTrackbacks() throws Exception {
+	protected void doVerify() throws Exception {
 		List<MBDiscussion> discussions =
 			MBMessageLocalServiceUtil.getDiscussions(
 				BlogsEntry.class.getName());

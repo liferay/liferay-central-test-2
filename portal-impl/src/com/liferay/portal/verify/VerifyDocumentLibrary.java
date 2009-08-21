@@ -36,18 +36,7 @@ import java.util.List;
  */
 public class VerifyDocumentLibrary extends VerifyProcess {
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
-
-		try {
-			verifyDocumentLibrary();
-		}
-		catch (Exception e) {
-			throw new VerifyException(e);
-		}
-	}
-
-	protected void verifyDocumentLibrary() throws Exception {
+	protected void doVerify() throws Exception {
 		List<DLFileEntry> fileEntries =
 			DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
 

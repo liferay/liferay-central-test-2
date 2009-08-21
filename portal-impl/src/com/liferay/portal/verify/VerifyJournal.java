@@ -51,14 +51,109 @@ public class VerifyJournal extends VerifyProcess {
 
 	public static final int NUM_OF_ARTICLES = 5;
 
-	public void verify() throws VerifyException {
-		_log.info("Verifying");
+	protected void doVerify() throws Exception {
 
-		try {
-			verifyJournal();
+		// Oracle new line
+
+		verifyOracleNewLine();
+
+		// Structures
+
+		List<JournalStructure> structures =
+			JournalStructureLocalServiceUtil.getStructures();
+
+		for (JournalStructure structure : structures) {
+			ResourceLocalServiceUtil.addResources(
+				structure.getCompanyId(), 0, 0,
+				JournalStructure.class.getName(), structure.getId(), false,
+				true, true);
 		}
-		catch (Exception e) {
-			throw new VerifyException(e);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Permissions verified for Journal structures");
+		}
+
+		// Templates
+
+		List<JournalTemplate> templates =
+			JournalTemplateLocalServiceUtil.getTemplates();
+
+		for (JournalTemplate template : templates) {
+			ResourceLocalServiceUtil.addResources(
+				template.getCompanyId(), 0, 0,
+				JournalTemplate.class.getName(), template.getId(), false, true,
+				true);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Permissions verified for Journal templates");
+		}
+
+		// Articles
+
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getArticles();
+
+		for (JournalArticle article : articles) {
+			long groupId = article.getGroupId();
+			String articleId = article.getArticleId();
+			double version = article.getVersion();
+			String structureId = article.getStructureId();
+
+			if (article.getResourcePrimKey() <= 0) {
+				article =
+					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
+						groupId, articleId, version);
+			}
+
+			ResourceLocalServiceUtil.addResources(
+				article.getCompanyId(), 0, 0, JournalArticle.class.getName(),
+				article.getResourcePrimKey(), false, true, true);
+
+			try {
+				AssetEntryLocalServiceUtil.getEntry(
+					JournalArticle.class.getName(),
+					article.getResourcePrimKey());
+			}
+			catch (NoSuchEntryException nsee) {
+				try {
+					JournalArticleLocalServiceUtil.updateAsset(
+						article.getUserId(), article, null, null);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to update tags asset for article " +
+								article.getId() + ": " + e.getMessage());
+					}
+				}
+			}
+
+			String content = GetterUtil.getString(article.getContent());
+
+			String newContent = HtmlUtil.replaceMsWordCharacters(content);
+
+			if (Validator.isNotNull(structureId)) {
+				/*JournalStructure structure =
+					JournalStructureLocalServiceUtil.getStructure(
+						groupId, structureId);
+
+				newContent = JournalUtil.removeOldContent(
+					newContent, structure.getXsd());*/
+			}
+
+			if (!content.equals(newContent)) {
+				JournalArticleLocalServiceUtil.updateContent(
+					groupId, articleId, version, newContent);
+			}
+
+			JournalArticleLocalServiceUtil.checkStructure(
+				groupId, articleId, version);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Permissions and Tags assets verified for Journal articles");
 		}
 	}
 
@@ -168,112 +263,6 @@ public class VerifyJournal extends VerifyProcess {
 						template.getGroupId(), template.getTemplateId());
 				}
 			}
-		}
-	}
-
-	protected void verifyJournal() throws Exception {
-
-		// Oracle new line
-
-		verifyOracleNewLine();
-
-		// Structures
-
-		List<JournalStructure> structures =
-			JournalStructureLocalServiceUtil.getStructures();
-
-		for (JournalStructure structure : structures) {
-			ResourceLocalServiceUtil.addResources(
-				structure.getCompanyId(), 0, 0,
-				JournalStructure.class.getName(), structure.getId(), false,
-				true, true);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions verified for Journal structures");
-		}
-
-		// Templates
-
-		List<JournalTemplate> templates =
-			JournalTemplateLocalServiceUtil.getTemplates();
-
-		for (JournalTemplate template : templates) {
-			ResourceLocalServiceUtil.addResources(
-				template.getCompanyId(), 0, 0,
-				JournalTemplate.class.getName(), template.getId(), false, true,
-				true);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions verified for Journal templates");
-		}
-
-		// Articles
-
-		List<JournalArticle> articles =
-			JournalArticleLocalServiceUtil.getArticles();
-
-		for (JournalArticle article : articles) {
-			long groupId = article.getGroupId();
-			String articleId = article.getArticleId();
-			double version = article.getVersion();
-			String structureId = article.getStructureId();
-
-			if (article.getResourcePrimKey() <= 0) {
-				article =
-					JournalArticleLocalServiceUtil.checkArticleResourcePrimKey(
-						groupId, articleId, version);
-			}
-
-			ResourceLocalServiceUtil.addResources(
-				article.getCompanyId(), 0, 0, JournalArticle.class.getName(),
-				article.getResourcePrimKey(), false, true, true);
-
-			try {
-				AssetEntryLocalServiceUtil.getEntry(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey());
-			}
-			catch (NoSuchEntryException nsee) {
-				try {
-					JournalArticleLocalServiceUtil.updateAsset(
-						article.getUserId(), article, null, null);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to update tags asset for article " +
-								article.getId() + ": " + e.getMessage());
-					}
-				}
-			}
-
-			String content = GetterUtil.getString(article.getContent());
-
-			String newContent = HtmlUtil.replaceMsWordCharacters(content);
-
-			if (Validator.isNotNull(structureId)) {
-				/*JournalStructure structure =
-					JournalStructureLocalServiceUtil.getStructure(
-						groupId, structureId);
-
-				newContent = JournalUtil.removeOldContent(
-					newContent, structure.getXsd());*/
-			}
-
-			if (!content.equals(newContent)) {
-				JournalArticleLocalServiceUtil.updateContent(
-					groupId, articleId, version, newContent);
-			}
-
-			JournalArticleLocalServiceUtil.checkStructure(
-				groupId, articleId, version);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Permissions and Tags assets verified for Journal articles");
 		}
 	}
 
