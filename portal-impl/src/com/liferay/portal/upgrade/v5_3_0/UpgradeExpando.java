@@ -38,10 +38,10 @@ import java.sql.ResultSet;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		upgradeExpandoTables();
+		upgradeTables();
 	}
 
-	protected void upgradeExpandoColumns(
+	protected void upgradeColumns(
 			long scTableId, long snTableId, long wolTableId)
 		throws Exception {
 
@@ -90,17 +90,15 @@ public class UpgradeExpando extends UpgradeProcess {
 				ps.close();
 			}
 
-			upgradeExpandoRows(
+			upgradeRows(
 				scColumnId, scTableId, snColumnId, snTableId, wolTableId);
-
-			ps.close();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void upgradeExpandoRows(
+	protected void upgradeRows(
 			long scColumnId, long scTableId, long snColumnId, long snTableId,
 			long wolTableId)
 		throws Exception {
@@ -163,19 +161,17 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				ps.close();
 
-				upgradeExpandoValues(
+				upgradeValues(
 					scColumnId, scRowId, scTableId, snColumnId, snRowId,
 					snTableId, wolRowId, wolTableId);
 			}
-
-			ps.close();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void upgradeExpandoTables() throws Exception {
+	protected void upgradeTables() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -234,17 +230,15 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				ps.close();
 
-				upgradeExpandoColumns(scTableId, snTableId, wolTableId);
+				upgradeColumns(scTableId, snTableId, wolTableId);
 			}
-
-			ps.close();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void upgradeExpandoValues(
+	protected void upgradeValues(
 			long scColumnId, long scRowId, long scTableId, long snColumnId,
 			long snRowId, long snTableId, long wolRowId, long wolTableId)
 		throws Exception {
@@ -292,8 +286,6 @@ public class UpgradeExpando extends UpgradeProcess {
 
 				ps.close();
 			}
-
-			ps.close();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);

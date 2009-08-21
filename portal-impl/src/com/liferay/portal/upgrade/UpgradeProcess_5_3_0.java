@@ -50,12 +50,12 @@ public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeAssetPublisher.class);
 		upgrade(UpgradeBlogs.class);
+		upgrade(UpgradeExpando.class);
 		upgrade(UpgradeGroup.class);
 		upgrade(UpgradePolls.class);
 		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeSocial.class);
 		upgrade(UpgradeWiki.class);
-		upgrade(UpgradeExpando.class);
 	}
 
 }
