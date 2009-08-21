@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -95,7 +93,5 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		ValueMapperUtil.persist(
 			upgradePKColumn.getValueMapper(), "email-address-id");
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeEmailAddress.class);
 
 }

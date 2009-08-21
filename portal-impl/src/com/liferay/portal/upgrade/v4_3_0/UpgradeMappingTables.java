@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
@@ -402,7 +400,5 @@ public class UpgradeMappingTables extends UpgradeProcess {
 			"userGroupId LONG not null," +
 			"primary key (userId, userGroupId)" +
 		")";
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeMappingTables.class);
 
 }

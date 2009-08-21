@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -83,7 +81,5 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeContact.class);
 
 }

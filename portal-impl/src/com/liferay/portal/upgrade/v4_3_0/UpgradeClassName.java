@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -40,7 +38,5 @@ public class UpgradeClassName extends UpgradeProcess {
 
 		ClassNameLocalServiceUtil.checkClassNames();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeClassName.class);
 
 }

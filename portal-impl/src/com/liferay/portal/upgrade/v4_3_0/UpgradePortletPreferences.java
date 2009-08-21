@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -131,8 +129,5 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	private static final String[] _UPGRADE_SCHEMA = {
 		"alter table PortletPreferences drop column layoutId"
 	};
-
-	private static Log _log =
-		LogFactoryUtil.getLog(UpgradePortletPreferences.class);
 
 }

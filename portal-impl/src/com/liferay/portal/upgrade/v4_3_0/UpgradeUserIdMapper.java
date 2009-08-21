@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
@@ -59,7 +57,5 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeUserIdMapper.class);
 
 }

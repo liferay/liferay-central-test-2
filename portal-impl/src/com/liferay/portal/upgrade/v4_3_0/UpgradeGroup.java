@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -215,7 +213,5 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		"alter table LayoutSet drop column ownerId"
 	};
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradeGroup.class);
 
 }
