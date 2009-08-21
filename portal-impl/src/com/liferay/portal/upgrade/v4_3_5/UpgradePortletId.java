@@ -23,8 +23,6 @@
 package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PortletConstants;
@@ -57,10 +55,6 @@ public class UpgradePortletId extends UpgradeProcess {
 			upgradeResource(oldRootPortletId, newRootPortletId);
 			upgradeResourceCode(oldRootPortletId, newRootPortletId);
 		}
-	}
-
-	protected Log getLog() {
-		return _log;
 	}
 
 	protected String[][] getPortletIdsArray() {
@@ -211,7 +205,5 @@ public class UpgradePortletId extends UpgradeProcess {
 
 		return StringUtil.replace(typeSettings, oldPortletId, newPortletId);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradePortletId.class);
 
 }
