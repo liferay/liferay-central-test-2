@@ -2436,7 +2436,7 @@ public class PortalImpl implements Portal {
 					minifierType = "css";
 				}
 			}
-			else if (themeDisplay.isThemeJsFastLoad()){
+			else if (themeDisplay.isThemeJsFastLoad()) {
 				minifierType = "js";
 			}
 
@@ -2457,6 +2457,12 @@ public class PortalImpl implements Portal {
 		}
 
 		// Timestamp
+
+		if (Validator.isNotNull(request.getContextPath()) &&
+			uri.startsWith(request.getContextPath())) {
+
+			uri = uri.substring(request.getContextPath().length());
+		}
 
 		boolean appendedTimestamp = false;
 
