@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -72,7 +71,6 @@ import java.util.TreeSet;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Wesley Gong
  */
 public class UserImpl extends UserModelImpl implements User {
 
@@ -145,23 +143,6 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return StringPool.BLANK;
-	}
-
-	public boolean getDisplayDummyEmailAddress() {
-		return _displayDummyEmailAddress;
-	}
-
-	public String getEmailAddress() {
-		String emailAddress = super.getEmailAddress();
-
-		if ((!_displayDummyEmailAddress) &&
-			(StringUtil.endsWith(
-				emailAddress, PropsValues.USERS_NO_EMAIL_ADDRESS_NAME))) {
-
-			emailAddress = StringPool.BLANK;
-		}
-
-		return emailAddress;
 	}
 
 	public boolean getFemale() {
@@ -597,10 +578,6 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public boolean isDisplayDummyEmailAddress() {
-		return getDisplayDummyEmailAddress();
-	}
-
 	public boolean isFemale() {
 		return getFemale();
 	}
@@ -611,21 +588,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public boolean isPasswordModified() {
 		return _passwordModified;
-	}
-
-	public void setDisplayDummyEmailAddress(boolean displayDummyEmailAddress) {
-		_displayDummyEmailAddress = displayDummyEmailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		if (Validator.isNull(emailAddress) &&
-			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
-
-			emailAddress = String.valueOf(this.getUserId()) +
-				PropsValues.USERS_NO_EMAIL_ADDRESS_NAME;
-		}
-
-		super.setEmailAddress(emailAddress);
 	}
 
 	public void setLanguageId(String languageId) {
@@ -654,7 +616,6 @@ public class UserImpl extends UserModelImpl implements User {
 
 	private static Log _log = LogFactoryUtil.getLog(UserImpl.class);
 
-	private boolean _displayDummyEmailAddress = false;
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;
 	private Locale _locale;
