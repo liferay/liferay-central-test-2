@@ -146,6 +146,7 @@ import javax.mail.internet.InternetAddress;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Julio Camarero
+ * @author Wesley Gong
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
@@ -333,6 +334,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
 		user.setActive(true);
+		user.setDisplayDummyEmailAddress(true);
 
 		userPersistence.update(user, false);
 
@@ -1941,6 +1943,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user, password, user.getFirstName(), user.getMiddleName(),
 			user.getLastName(), emailAddress1);
 
+		user.setDisplayDummyEmailAddress(true);
+
 		userPersistence.update(user, false);
 
 		return user;
@@ -2369,6 +2373,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setMiddleName(middleName);
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
+		user.setDisplayDummyEmailAddress(true);
+		user.setCachedModel(false);
 
 		userPersistence.update(user, false);
 

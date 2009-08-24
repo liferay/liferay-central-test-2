@@ -60,6 +60,10 @@ public interface User extends UserModel {
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
 		java.lang.String mainPath);
 
+	public boolean getDisplayDummyEmailAddress();
+
+	public java.lang.String getEmailAddress();
+
 	public boolean getFemale();
 
 	public java.lang.String getFullName();
@@ -126,11 +130,17 @@ public interface User extends UserModel {
 
 	public boolean hasReminderQuery();
 
+	public boolean isDisplayDummyEmailAddress();
+
 	public boolean isFemale();
 
 	public boolean isMale();
 
 	public boolean isPasswordModified();
+
+	public void setDisplayDummyEmailAddress(boolean displayDummyEmailAddress);
+
+	public void setEmailAddress(java.lang.String emailAddress);
 
 	public void setLanguageId(java.lang.String languageId);
 

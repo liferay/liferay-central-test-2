@@ -1455,6 +1455,9 @@ public class PropsValues {
 	public static final String[] USERS_FORM_UPDATE_MISCELLANEOUS =
 		PropsUtil.getArray(PropsKeys.USERS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final String USERS_NO_EMAIL_ADDRESS_NAME = PropsUtil.get(
+		PropsKeys.USERS_NO_EMAIL_ADDRESS_NAME);
+
 	public static final boolean USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED =
 		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 			USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED));

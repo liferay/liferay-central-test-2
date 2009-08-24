@@ -2650,6 +2650,7 @@
 	<entity class="com.liferay.portal.model.impl.UserImpl" name="User">
 		<table name="User_" />
 		<attributes>
+			<transient name="displayDummyEmailAddress" />
 			<transient name="passwordModified" />
 			<transient name="passwordUnencrypted" />
 		</attributes>
