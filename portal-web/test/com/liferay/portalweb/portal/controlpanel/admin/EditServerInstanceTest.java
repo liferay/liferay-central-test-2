@@ -50,6 +50,23 @@ public class EditServerInstanceTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=test.com"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_135_virtualHost", RuntimeVariables.replace("edited"));

@@ -50,9 +50,43 @@ public class AddFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Subfolder']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Folder"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_28_name", RuntimeVariables.replace("Test Folder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder!"));

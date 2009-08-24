@@ -52,6 +52,23 @@ public class AssertEntriesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=My Entries"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
 		selenium.click(RuntimeVariables.replace("link=Recent Entries"));

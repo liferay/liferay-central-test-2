@@ -51,6 +51,23 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Plugins Installation"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[3]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Portlets']"));
 		selenium.select("//div[2]/select", "label=4");

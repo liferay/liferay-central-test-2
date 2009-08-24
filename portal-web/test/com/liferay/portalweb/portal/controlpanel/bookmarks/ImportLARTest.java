@@ -50,6 +50,23 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
@@ -75,7 +92,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.click("_86_DELETE_PORTLET_DATA");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\bookmarks\\Bookmarks-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -50,6 +50,23 @@ public class EditFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//td[4]/ul/li/strong/span");
 
 		for (int second = 0;; second++) {
@@ -70,13 +87,45 @@ public class EditFolderTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name",
-			RuntimeVariables.replace("Edited Test Folder"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[7]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_28_name", RuntimeVariables.replace("Edited Test Folder"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is an edited test folder!"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//li[7]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Edited Test Folder"));
