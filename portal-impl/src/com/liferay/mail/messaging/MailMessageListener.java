@@ -30,8 +30,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.mail.MailEngine;
 
 import javax.mail.internet.InternetAddress;
@@ -54,7 +53,7 @@ public class MailMessageListener implements MessageListener {
 
 	public void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
-			PropsUtil.get(PropsKeys.MAIL_AUDIT_TRAIL));
+			PropsValues.MAIL_AUDIT_TRAIL);
 
 		if (auditTrail.length > 0) {
 			InternetAddress[] bcc = mailMessage.getBCC();

@@ -857,6 +857,9 @@ public class PropsValues {
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(
 		PropsKeys.LUCENE_STORE_TYPE);
 
+	public static final String MAIL_AUDIT_TRAIL = PropsUtil.get(
+		PropsKeys.MAIL_AUDIT_TRAIL);
+
 	public static final String MAIL_HOOK_IMPL = PropsUtil.get(
 		PropsKeys.MAIL_HOOK_IMPL);
 
