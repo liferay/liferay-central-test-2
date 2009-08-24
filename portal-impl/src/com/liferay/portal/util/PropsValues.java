@@ -643,6 +643,9 @@ public class PropsValues {
 	public static final String JBI_WORKFLOW_URL =
 		PropsUtil.get(PropsKeys.JBI_WORKFLOW_URL);
 
+	public static final String JDBC_DEFAULT_LIFERAY_POOL_PROVIDER =
+		PropsUtil.get(PropsKeys.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER);
+
 	public static final boolean JOURNAL_ARTICLE_COMMENTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_COMMENTS_ENABLED));

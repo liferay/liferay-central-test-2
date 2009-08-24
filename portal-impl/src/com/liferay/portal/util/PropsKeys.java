@@ -549,6 +549,8 @@ public interface PropsKeys {
 
 	public static final String JCR_WORKSPACE_NAME = "jcr.workspace.name";
 
+	public static final String JDBC_DEFAULT_LIFERAY_POOL_PROVIDER = "jdbc.default.liferay.pool.provider";
+
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 
 	public static final String JOURNAL_ARTICLE_COMMENTS_ENABLED = "journal.article.comments.enabled";

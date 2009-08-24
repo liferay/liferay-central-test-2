@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
@@ -39,8 +40,11 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 import org.springframework.beans.factory.config.AbstractFactoryBean;
+
+import uk.org.primrose.pool.datasource.GenericDataSourceFactory;
 
 /**
  * <a href="DataSourceFactoryBean.java.html"><b><i>View Source</i></b></a>
@@ -61,19 +65,8 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 		_propertyPrefix = PropsUtil.get(propertyPrefixLookup);
 	}
 
-	protected Object createInstance() throws Exception {
-		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
-
-		String jndiName = properties.getProperty("jndi.name");
-
-		if (Validator.isNotNull(jndiName)) {
-			try {
-				return JNDIUtil.lookup(new InitialContext(), jndiName);
-			}
-			catch (Exception e) {
-				_log.error("Unable to lookup " + jndiName, e);
-			}
-		}
+	protected DataSource createDataSourceC3PO(Properties properties)
+		throws Exception {
 
 		DataSource dataSource = new ComboPooledDataSource();
 
@@ -100,7 +93,82 @@ public class DataSourceFactoryBean extends AbstractFactoryBean {
 			BeanUtils.setProperty(dataSource, key, value);
 		}
 
+		return dataSource;
+	}
+
+	protected DataSource createDataSourceDBCP(Properties properties)
+		throws Exception {
+
+		return BasicDataSourceFactory.createDataSource(properties);
+	}
+
+	protected DataSource createDataSourcePrimrose(Properties properties)
+		throws Exception {
+
+		properties.setProperty("poolName", _propertyPrefix);
+
+		Enumeration<String> enu =
+			(Enumeration<String>)properties.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = enu.nextElement();
+
+			String value = properties.getProperty(key);
+
+			// Map org.apache.commons.dbcp.BasicDataSource to Primrose
+
+			if (key.equalsIgnoreCase("driverClassName")) {
+				key = "driverClass";
+			}
+			else if (key.equalsIgnoreCase("url")) {
+				key = "driverURL";
+			}
+			else if (key.equalsIgnoreCase("username")) {
+				key = "user";
+			}
+
+			properties.setProperty(key, value);
+		}
+
+		GenericDataSourceFactory genericDataSourceFactory =
+			new GenericDataSourceFactory();
+
+		return genericDataSourceFactory.loadPool(_propertyPrefix, properties);
+	}
+
+	protected Object createInstance() throws Exception {
+		Properties properties = PropsUtil.getProperties(_propertyPrefix, true);
+
+		String jndiName = properties.getProperty("jndi.name");
+
+		if (Validator.isNotNull(jndiName)) {
+			try {
+				return JNDIUtil.lookup(new InitialContext(), jndiName);
+			}
+			catch (Exception e) {
+				_log.error("Unable to lookup " + jndiName, e);
+			}
+		}
+
+		DataSource dataSource = null;
+
+		String liferayPoolProvider =
+			PropsValues.JDBC_DEFAULT_LIFERAY_POOL_PROVIDER;
+
+		if (liferayPoolProvider.equals("c3po")) {
+			dataSource = createDataSourceC3PO(properties);
+		}
+		else if (liferayPoolProvider.equals("dbcp")) {
+			dataSource = createDataSourceDBCP(properties);
+		}
+		else {
+			dataSource = createDataSourcePrimrose(properties);
+		}
+
 		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Creating data source " + dataSource.getClass().getName());
+
 			SortedProperties sortedProperties = new SortedProperties(
 				properties);
 
