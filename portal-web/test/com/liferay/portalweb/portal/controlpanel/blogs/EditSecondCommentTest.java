@@ -50,9 +50,6 @@ public class EditSecondCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Test Entry"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/span/a[2]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +57,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_editReplyBody1")) {
+				if (selenium.isVisible("link=Second Test Entry")) {
 					break;
 				}
 			}
@@ -70,15 +67,52 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_editReplyBody1",
-			RuntimeVariables.replace("This is an edited second entr comment"));
+		selenium.click(RuntimeVariables.replace("link=Second Test Entry"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//td[4]/span/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_33_editReplyBody1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_33_editReplyBody1",
-			RuntimeVariables.replace("This is an edited second entry comment!"));
+			RuntimeVariables.replace("This is an edited second entry comment."));
 		selenium.click(RuntimeVariables.replace("_33_editReplyButton1"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"This is an edited second entry comment!"));
+		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"This is an edited second entry comment."),
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

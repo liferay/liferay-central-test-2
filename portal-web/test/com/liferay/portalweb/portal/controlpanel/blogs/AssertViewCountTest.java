@@ -51,12 +51,62 @@ public class AssertViewCountTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[2]/span[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		String Count = selenium.getIncrementedText("//div[2]/span[1]");
 		RuntimeVariables.setValue("Count", Count);
 		selenium.click(RuntimeVariables.replace("link=Test Entry"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/span[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isPartialText("//div[2]/span[1]",
 				RuntimeVariables.getValue("Count")));
 	}

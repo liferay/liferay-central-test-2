@@ -19,14 +19,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Add Blog Entry']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>_33_title</td>
-	<td></td>
+	<td><!--Html Escape Character Test--></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -79,11 +84,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_33_saveButton</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>_33_saveButton</td>
 	<td></td>
@@ -94,14 +94,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=<!--Html Escape Character Test--></td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[2]/div[1]/div[1]/a</td>
+	<td><!--Html Escape Character Test--></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//p</td>
 	<td>This is an escape character test entry.</td>
-	<td></td>
 </tr>
 
 </tbody></table>

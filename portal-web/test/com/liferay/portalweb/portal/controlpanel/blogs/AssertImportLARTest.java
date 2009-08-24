@@ -50,9 +50,47 @@ public class AssertImportLARTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Test Entry"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//form/div[2]/div[1]/div[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Test Entry"),
+			selenium.getText("//form/div[2]/div[1]/div[1]/a"));
 		selenium.click(RuntimeVariables.replace("link=Test Entry"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a test entry comment!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//form/div/div[1]/div[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Test Entry"),
+			selenium.getText("//form/div/div[1]/div[1]"));
+		assertEquals(RuntimeVariables.replace("This is a test entry comment!"),
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

@@ -19,14 +19,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=<!--Html Escape Character Test-->'))</td>
-	<td>EscapeCharacterEntryPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${EscapeCharacterEntryPresent}</td>
-	<td>EscapeCharacterEntryNotPresent</td>
+	<td>waitForVisible</td>
+	<td>link=Delete</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -44,8 +39,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>EscapeCharacterEntryNotPresent</td>
+	<td>assertElementNotPresent</td>
+	<td>link=<!--Html Escape Character Test--></td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>This is an escape character test entry.</td>
 	<td></td>
 </tr>
 

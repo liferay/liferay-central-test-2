@@ -19,19 +19,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Add Blog Entry']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>_33_title</td>
 	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_title</td>
-	<td>Draft Test</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -74,23 +74,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is a test for the emergenc draft sstem</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a test for the emergency draft system!</td>
+	<td>This is a test for the emergency draft system.</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_33_saveStatus</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,13 +94,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>Pacific Daylight Time</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Blogs</td>
+	<td>assertTextPresent</td>
+	<td>Draft saved</td>
 	<td></td>
 </tr>
 <tr>
@@ -119,14 +104,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Draft Test</td>
+	<td>waitForVisible</td>
+	<td>//form/div[2]/div[1]/div[1]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>This is a test for the emergency draft system!</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//form/div[2]/div[1]/div[1]/a</td>
+	<td>Draft Test</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>This is a test for the emergency draft system.</td>
 </tr>
 
 </tbody></table>

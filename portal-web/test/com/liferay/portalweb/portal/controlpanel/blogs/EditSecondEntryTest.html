@@ -19,8 +19,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>link=Second Test Entry</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Second Test Entry</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,14 +39,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>_33_title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_title</td>
-	<td>Second Test Entr</td>
+	<td>Second Test Entry</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -79,14 +84,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is an edited second test entr</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is an edited second test entry!</td>
+	<td>This is an edited second test entry.</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -94,13 +94,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>_33_saveButton</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>_33_saveButton</td>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -109,19 +109,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Blogs</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Blogs</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>This is an edited second test entry!</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>This is an edited second test entry.</td>
 </tr>
 
 </tbody></table>

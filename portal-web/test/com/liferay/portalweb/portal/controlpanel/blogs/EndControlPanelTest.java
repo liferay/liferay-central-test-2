@@ -32,23 +32,33 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EndControlPanelTest extends BaseTestCase {
 	public void testEndControlPanel() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Back to My Community")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				boolean InControlPanel = selenium.isElementPresent(
+						"link=Back to My Community");
+
+				if (!InControlPanel) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"link=Back to My Community"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

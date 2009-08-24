@@ -70,7 +70,7 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
+		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -33,51 +33,50 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteEscapeCharacterEntryTest extends BaseTestCase {
 	public void testDeleteEscapeCharacterEntry() throws Exception {
-		int label = 1;
-
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Blogs")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Blogs"));
-				selenium.waitForPageToLoad("30000");
-
-				boolean EscapeCharacterEntryPresent = selenium.isElementPresent(
-						"link=<!--Html Escape Character Test-->");
-
-				if (!EscapeCharacterEntryPresent) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Delete"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-
-			case 2:
-			case 100:
-				label = -1;
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
 			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
 		}
+
+		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertFalse(selenium.isElementPresent(
+				"link=<!--Html Escape Character Test-->"));
+		assertFalse(selenium.isTextPresent(
+				"This is an escape character test entry."));
 	}
 }

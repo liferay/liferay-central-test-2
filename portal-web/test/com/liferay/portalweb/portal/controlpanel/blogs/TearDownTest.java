@@ -134,25 +134,6 @@ public class TearDownTest extends BaseTestCase {
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
 
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Blogs")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace("link=Blogs"));
-				selenium.waitForPageToLoad("30000");
-
 			case 100:
 				label = -1;
 			}

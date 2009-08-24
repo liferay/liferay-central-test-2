@@ -50,6 +50,23 @@ public class AddSecondEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Blog Entry']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Blog Entry']"));
 		selenium.waitForPageToLoad("30000");
@@ -60,7 +77,7 @@ public class AddSecondEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_title")) {
+				if (selenium.isVisible("_33_title")) {
 					break;
 				}
 			}
@@ -70,8 +87,6 @@ public class AddSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Second Test Entr"));
 		selenium.type("_33_title", RuntimeVariables.replace("Second Test Entry"));
 		Thread.sleep(5000);
 
@@ -126,32 +141,16 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a second test entr"));
 		selenium.type("//body",
-			RuntimeVariables.replace("This is a second test entry!"));
+			RuntimeVariables.replace("This is a second test entry."));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Second Test Entry"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("Second Test Entry"),
+			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace("This is a second test entry."),
+			selenium.getText("//p"));
 	}
 }

@@ -32,27 +32,32 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ControlPanelTest extends BaseTestCase {
 	public void testControlPanel() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+
+				boolean NotInControlPanel = selenium.isElementPresent(
+						"//div[4]/ul/li[2]/a/span[1]");
+
+				if (!NotInControlPanel) {
+					label = 2;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.click(RuntimeVariables.replace(
+						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.waitForPageToLoad("30000");
+
+			case 2:
+				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.waitForPageToLoad("30000");
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
 	}
 }

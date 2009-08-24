@@ -19,14 +19,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=Delete'))</td>
-	<td>EntryPresent</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${EntryPresent}</td>
-	<td>No Entry Present</td>
+	<td>waitForVisible</td>
+	<td>link=Delete</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -39,13 +34,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
 	<td>assertElementNotPresent</td>
 	<td>link=Test Entry</td>
 	<td></td>
 </tr>
 <tr>
-	<td>label</td>
-	<td>No Entry Present</td>
+	<td>assertTextNotPresent</td>
+	<td>This is a test entry.</td>
 	<td></td>
 </tr>
 

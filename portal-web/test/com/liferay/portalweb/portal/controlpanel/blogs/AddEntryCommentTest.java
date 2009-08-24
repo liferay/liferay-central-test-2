@@ -50,6 +50,23 @@ public class AddEntryCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=0 Comments")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=0 Comments"));
 		selenium.waitForPageToLoad("30000");
 
@@ -59,7 +76,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Add Comment")) {
+				if (selenium.isVisible("link=Add Comment")) {
 					break;
 				}
 			}
@@ -69,7 +86,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Comment");
+		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +94,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_postReplyBody0")) {
+				if (selenium.isVisible("_33_postReplyBody0")) {
 					break;
 				}
 			}
@@ -87,14 +104,14 @@ public class AddEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_postReplyBody0",
-			RuntimeVariables.replace("This is a test entr comment"));
 		selenium.type("_33_postReplyBody0",
-			RuntimeVariables.replace("This is a test entry comment!"));
+			RuntimeVariables.replace("This is a test entry comment."));
 		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a test entry comment!"));
+		assertFalse(selenium.isVisible("_33_postReplyBody0"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("This is a test entry comment."),
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

@@ -19,13 +19,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>waitForVisible</td>
 	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_33_title</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
@@ -64,14 +64,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is a test null entr</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>//body</td>
-	<td>This is a test null entry!</td>
+	<td>This is a test null entry.</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -79,13 +74,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>clickAndWait</td>
 	<td>_33_saveButton</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>_33_saveButton</td>
+	<td>assertTextPresent</td>
+	<td>You have entered invalid data. Please try again.</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,8 +99,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>link=Test Null Entry</td>
+	<td>assertTextNotPresent</td>
+	<td>This is a test null entry.</td>
 	<td></td>
 </tr>
 

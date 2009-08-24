@@ -9,13 +9,28 @@
 <tr><td rowspan="1" colspan="3">EndControlPanelTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Back to My Community</td>
-	<td></td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Back to My Community'))</td>
+	<td>InControlPanel</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${InControlPanel}</td>
+	<td>notInControlPanel</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Back to My Community</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>notInControlPanel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]</td>
 	<td></td>
 </tr>
 

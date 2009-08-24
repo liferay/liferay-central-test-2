@@ -50,11 +50,6 @@ public class PublishDraftEntryTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Draft Test"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +57,7 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
+				if (selenium.isVisible("link=Draft Test")) {
 					break;
 				}
 			}
@@ -72,15 +67,34 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click(RuntimeVariables.replace("link=Draft Test"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Draft Test"));
-		selenium.click(RuntimeVariables.replace("link=Draft Test"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -88,7 +102,7 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isVisible("//form/div[2]/div[1]/div[1]/a")) {
 					break;
 				}
 			}
@@ -98,12 +112,10 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertFalse(selenium.isElementPresent("link=Draft Test"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace("Draft Test"),
+			selenium.getText("//form/div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a test for the emergency draft system."),
+			selenium.getText("//p"));
 	}
 }
