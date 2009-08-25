@@ -226,36 +226,38 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		/>
 	</div>
 
-	<div class="file-entry-field">
-		<label><liferay-ui:message key="webdav-url" /></label>
+	<c:if test="<%= webdavEnabled %>">
+		<div class="file-entry-field">
+			<label><liferay-ui:message key="webdav-url" /></label>
 
-		<%
-		StringBuffer sbf = new StringBuffer();
+			<%
+			StringBuffer sbf = new StringBuffer();
 
-		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-		while (true) {
-			sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-			sbf.insert(0, StringPool.SLASH);
+			while (true) {
+				sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+				sbf.insert(0, StringPool.SLASH);
 
-			if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				break;
+				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+					break;
+				}
+				else {
+					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				}
 			}
-			else {
-				curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-			}
-		}
 
-		sbf.append(StringPool.SLASH);
-		sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
+			sbf.append(StringPool.SLASH);
+			sbf.append(WebDAVUtil.encodeURL(titleWithExtension));
 
-		Group group = layout.getGroup();
-		%>
+			Group group = layout.getGroup();
+			%>
 
-		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
-		/>
-	</div>
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sbf.toString() %>'
+			/>
+		</div>
+	</c:if>
 </aui:column>
 
 <aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">

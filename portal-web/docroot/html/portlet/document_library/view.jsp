@@ -321,7 +321,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		}
 		%>
 
-		<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
+		<c:if test="<%= webdavEnabled %>">
+			<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
+		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-documents") || tabs1.equals("recent-documents") %>'>
 

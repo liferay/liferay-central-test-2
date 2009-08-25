@@ -262,16 +262,18 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			/>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="webdav-url" />
-		</td>
-		<td>
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Templates/" + templateId %>'
-			/>
-		</td>
-	</tr>
+	<c:if test="<%= webdavEnabled %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="webdav-url" />
+			</td>
+			<td>
+				<liferay-ui:input-resource
+					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Templates/" + templateId %>'
+				/>
+			</td>
+		</tr>
+	</c:if>
 </c:if>
 
 <tr>

@@ -398,16 +398,18 @@ int tabIndex = 1;
 			/>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="webdav-url" />
-		</td>
-		<td>
-			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Structures/" + structureId %>'
-			/>
-		</td>
-	</tr>
+	<c:if test="<%= webdavEnabled %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="webdav-url" />
+			</td>
+			<td>
+				<liferay-ui:input-resource
+					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Structures/" + structureId %>'
+				/>
+			</td>
+		</tr>
+	</c:if>
 </c:if>
 
 <c:if test="<%= structure == null %>">

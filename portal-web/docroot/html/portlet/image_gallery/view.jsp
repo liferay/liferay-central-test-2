@@ -365,7 +365,9 @@ tabs1Names += ",recent-images";
 		}
 		%>
 
-		<liferay-ui:webdav path='<%= "/image_gallery" + sb.toString() %>' />
+		<c:if test="<%= webdavEnabled %>">
+			<liferay-ui:webdav path='<%= "/image_gallery" + sb.toString() %>' />
+		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-images") || tabs1.equals("recent-images") %>'>
 

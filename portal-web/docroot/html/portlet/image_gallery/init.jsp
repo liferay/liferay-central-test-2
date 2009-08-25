@@ -101,4 +101,12 @@ if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 	preferences.store();
 }
+
+Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+
+boolean webdavEnabled = true;
+
+if (portlet.getWebDAVStorageInstance() == null) {
+	webdavEnabled = false;
+}
 %>

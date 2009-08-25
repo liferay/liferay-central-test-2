@@ -73,35 +73,37 @@ request.setAttribute("view_folder.jsp-folder", folder);
 		</liferay-ui:custom-attributes-available>
 	</div>
 
-	<div class="folder-field">
-		<label><liferay-ui:message key="webdav-url" /></label>
+	<c:if test="<%= webdavEnabled %>">
+		<div class="folder-field">
+			<label><liferay-ui:message key="webdav-url" /></label>
 
-		<%
-		StringBuffer sb = new StringBuffer();
+			<%
+			StringBuffer sb = new StringBuffer();
 
-		if (folder != null) {
-			DLFolder curFolder = folder;
+			if (folder != null) {
+				DLFolder curFolder = folder;
 
-			while (true) {
-				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-				sb.insert(0, StringPool.SLASH);
+				while (true) {
+					sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+					sb.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+						break;
+					}
+					else {
+						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					}
 				}
 			}
-		}
 
-		Group group = layout.getGroup();
-		%>
+			Group group = layout.getGroup();
+			%>
 
-		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-		/>
-	</div>
+			<liferay-ui:input-resource
+				url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+			/>
+		</div>
+	</c:if>
 </aui:column>
 
 <aui:column columnWidth="<%= 25 %>" cssClass="file-entry-column file-entry-column-last" last="<%= true %>">
