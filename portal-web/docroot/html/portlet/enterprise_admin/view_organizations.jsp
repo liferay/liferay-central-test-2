@@ -92,6 +92,12 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 				<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
 			</portlet:renderURL>
 
+			<%
+			if (!OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
+				rowURL = null;
+			}
+			%>
+
 			<%@ include file="/html/portlet/enterprise_admin/organization/search_columns.jspf" %>
 
 			<liferay-ui:search-container-column-jsp
