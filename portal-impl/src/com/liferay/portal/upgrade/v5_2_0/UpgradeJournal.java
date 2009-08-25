@@ -29,18 +29,16 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * <a href="UpgradeJournal.java.html"><b><i>View Source</i></b></a>
@@ -50,21 +48,50 @@ import java.util.List;
 public class UpgradeJournal extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		List<JournalArticle> articles =
-			JournalArticleLocalServiceUtil.getArticles();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		for (JournalArticle article : articles) {
-			String content = GetterUtil.getString(article.getContent());
+		try {
+			con = DataAccess.getConnection();
 
-			if (Validator.isNotNull(article.getStructureId())) {
+			ps = con.prepareStatement(
+				"select id_, groupId, articleId, version, content, " +
+					"structureId from JournalArticle");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long id = rs.getLong("id_");
+				long groupId = rs.getLong("groupId");
+				String articleId = rs.getString("articleId");
+				double version = rs.getDouble("version");
+				String content = GetterUtil.getString(rs.getString("content"));
+				String structureId = rs.getString("structureId");
+
+				if (Validator.isNull(structureId)) {
+					continue;
+				}
+
 				String newContent = addDynamicElementInstanceId(content);
 
-				if (!content.equals(newContent)) {
-					JournalArticleLocalServiceUtil.updateContent(
-						article.getGroupId(), article.getArticleId(),
-						article.getVersion(), newContent);
+				if (content.equals(newContent)) {
+					continue;
 				}
+
+				ps = con.prepareStatement(
+					"update JournalArticle set content = ? where id_ = ?");
+
+				ps.setString(1, newContent);
+				ps.setLong(2, id);
+
+				ps.executeUpdate();
+
+				ps.close();
 			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 
 		deleteJournalArticleImages();
@@ -110,21 +137,9 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	protected void deleteJournalArticleImages() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"delete from JournalArticleImage where elInstanceId is null " +
-					"or elInstanceId = ''");
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
+		runSQL(
+			"delete from JournalArticleImage where elInstanceId is null or " +
+				"elInstanceId = ''");
 	}
 
 	protected void updateJournalArticleImageInstanceId(
@@ -150,8 +165,9 @@ public class UpgradeJournal extends UpgradeProcess {
 
 			articleImage.setElInstanceId(instanceId);
 
-			JournalArticleImageLocalServiceUtil.updateJournalArticleImage(
-				articleImage);
+			runSQL(
+				"update JournalArticleImage set elInstanceId = '" + instanceId +
+					"' where articleImageId = " + articleImageId);
 		}
 	}
 
