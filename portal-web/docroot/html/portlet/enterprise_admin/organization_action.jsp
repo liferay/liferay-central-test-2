@@ -70,7 +70,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 	</c:if>
 
-	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) %>">
+	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

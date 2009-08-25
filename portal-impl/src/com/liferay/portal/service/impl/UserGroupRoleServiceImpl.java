@@ -25,8 +25,10 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 
 /**
  * <a href="UserGroupRoleServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,7 +42,10 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isCommunityOwner(groupId) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
+
 			throw new PrincipalException();
 		}
 
@@ -52,7 +57,10 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isCommunityOwner(groupId) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
+
 			throw new PrincipalException();
 		}
 
@@ -77,7 +85,10 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isCommunityOwner(groupId) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
+
 			throw new PrincipalException();
 		}
 

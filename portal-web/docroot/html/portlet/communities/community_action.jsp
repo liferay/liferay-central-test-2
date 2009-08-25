@@ -65,7 +65,7 @@ String tabs1 = (String)objArray[1];
 		<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 	</c:if>
 
-	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) %>">
+	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/communities/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
