@@ -40,7 +40,7 @@ import java.sql.ResultSet;
  *
  * @author Samuel Kong
  * @author Brian Wing Shun Chan
- * @author Ed Shin
+ * @author Edward Shin
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
@@ -75,12 +75,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				long companyId = getCompanyId(plid);
-
 				try {
 					String newPreferences = upgradePreferences(
-						companyId, ownerId, ownerType, plid, portletId,
-						preferences);
+						ownerId, ownerType, plid, portletId, preferences);
 
 					updatePortletPreferences(
 						portletPreferencesId, newPreferences);
@@ -93,34 +90,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-	}
-
-	protected long getCompanyId(long plid) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select companyId from Layout where plid = ?");
-
-			ps.setLong(1, plid);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-
-				return companyId;
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return 0;
 	}
 
 	protected void updatePortletPreferences(
@@ -147,9 +116,37 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected String upgradePreferences(
-			long companyId, long ownerId, int ownerType, long plid,
-			String portletId, String xml)
+			long ownerId, int ownerType, long plid, String portletId,
+			String xml)
 		throws Exception {
+
+		long companyId = 0;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select companyId from Layout where plid = ?");
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				companyId = rs.getLong("companyId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		if (companyId <= 0) {
+			throw new NoSuchLayoutException();
+		}
 
 		PortletPreferencesImpl preferences =
 			PortletPreferencesSerializer.fromXML(
