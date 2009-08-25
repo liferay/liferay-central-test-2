@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -42,6 +40,7 @@ import java.sql.ResultSet;
  *
  * @author Samuel Kong
  * @author Brian Wing Shun Chan
+ * @author Ed Shin
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
@@ -76,12 +75,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				try {
-					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				long companyId = getCompanyId(plid);
 
+				try {
 					String newPreferences = upgradePreferences(
-						layout.getCompanyId(), ownerId, ownerType, plid,
-						portletId, preferences);
+						companyId, ownerId, ownerType, plid, portletId,
+						preferences);
 
 					updatePortletPreferences(
 						portletPreferencesId, newPreferences);
@@ -94,6 +93,34 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected long getCompanyId(long plid) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select companyId from Layout where plid = ?");
+
+			ps.setLong(1, plid);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				return companyId;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return 0;
 	}
 
 	protected void updatePortletPreferences(
