@@ -24,10 +24,19 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ContactLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 
 import java.util.List;
+import java.util.Date;
 
 /**
  * <a href="VerifyUser.java.html"><b><i>View Source</i></b></a>
@@ -44,8 +53,42 @@ public class VerifyUser extends VerifyProcess {
 				"Processing " + users.size() + " users with no contacts");
 		}
 
+		Date now = new Date();
+
 		for (User user : users) {
-			UserLocalServiceUtil.deleteUser(user.getUserId());
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Creating contact for the user: " + user.getUserId());
+			}
+
+			Long contactId = CounterLocalServiceUtil.increment();
+
+			Contact contact = ContactLocalServiceUtil.createContact(contactId);
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				user.getCompanyId());
+
+			contact.setCompanyId(user.getCompanyId());
+			contact.setUserId(user.getUserId());
+			contact.setUserName(StringPool.BLANK);
+			contact.setCreateDate(now);
+			contact.setModifiedDate(now);
+			contact.setAccountId(company.getAccountId());
+			contact.setParentContactId(
+				ContactConstants.DEFAULT_PARENT_CONTACT_ID);
+			contact.setFirstName(user.getFirstName());
+			contact.setMiddleName(user.getMiddleName());
+			contact.setLastName(user.getLastName());
+			contact.setPrefixId(0);
+			contact.setSuffixId(0);
+			contact.setMale(user.isMale());
+			contact.setBirthday(user.getBirthday());
+			contact.setJobTitle(user.getJobTitle());
+
+			ContactLocalServiceUtil.updateContact(contact);
+
+			user.setContactId(contactId);
+
+			UserLocalServiceUtil.updateUser(user);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -59,7 +102,13 @@ public class VerifyUser extends VerifyProcess {
 		}
 
 		for (User user : users) {
-			UserLocalServiceUtil.deleteUser(user.getUserId());
+			if (_log.isDebugEnabled()) {
+				_log.debug("Creating user group for the user: " + user.getUserId());
+			}
+
+			GroupLocalServiceUtil.addGroup(
+				user.getUserId(), User.class.getName(), user.getUserId(), null,
+				null, 0, StringPool.SLASH + user.getScreenName(), true, null);
 		}
 
 		if (_log.isDebugEnabled()) {
