@@ -240,6 +240,10 @@ public abstract class DBUtil {
 		}
 	}
 
+	public static void setInstance(String type) {
+		_dbUtil = getInstance(type);
+	}
+
 	public void buildCreateFile(String databaseName) throws IOException {
 		buildCreateFile(databaseName, true);
 		buildCreateFile(databaseName, false);

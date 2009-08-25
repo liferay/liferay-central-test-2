@@ -26,8 +26,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.FileNotFoundException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -65,7 +70,17 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 			return;
 		}
 
-		for (String configLocation : configLocations) {
+		List<String> configList = new ArrayList<String>(
+			Arrays.asList(configLocations));
+
+		if ("jpa".equalsIgnoreCase(PropsValues.PERSISTENCE)) {
+			configList.remove("META-INF/hibernate-spring.xml");
+		}
+		else {
+			configList.remove("META-INF/jpa-spring.xml");
+		}
+
+		for (String configLocation : configList) {
 			try {
 				reader.loadBeanDefinitions(configLocation);
 			}

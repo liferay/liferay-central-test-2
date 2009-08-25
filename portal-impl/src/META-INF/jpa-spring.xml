@@ -10,17 +10,7 @@
 	<context:annotation-config />
 	<context:load-time-weaver />
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" p:dataSource-ref="liferayDataSource">
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" p:databasePlatform="org.eclipse.persistence.platform.database.MySQLPlatform" p:showSql="false" />
-			<!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="MYSQL" p:showSql="false" />-->
-			<!--<bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter" p:database="MYSQL" p:showSql="false" />-->
-			<!--<bean class="org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter" p:databasePlatform="oracle.toplink.essentials.platform.database.MySQL4Platform" p:showSql="false" />-->
-		</property>
-		<property name="loadTimeWeaver">
-			<bean class="org.springframework.instrument.classloading.ReflectiveLoadTimeWeaver" />
-		</property>
-	</bean>
+	<bean id="entityManagerFactory" class="com.liferay.portal.spring.jpa.LocalContainerEntityManagerFactoryBean" p:dataSource-ref="liferayDataSource" />
 	<bean id="liferaySession" class="com.liferay.portal.dao.orm.jpa.SessionImpl" />
 	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl">
 		<property name="session" ref="liferaySession" />
