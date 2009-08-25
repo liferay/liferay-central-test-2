@@ -33,9 +33,12 @@ import com.liferay.portal.util.PropsValues;
  */
 public class EmailAddressGenerator {
 
-	public String generate(long userId) {
-		return String.valueOf(userId) +
-			PropsValues.USERS_EMAIL_ADDRESS_AUTO_SUFFIX;
+	public String generate(long companyId, long userId) {
+		return userId + PropsValues.USERS_EMAIL_ADDRESS_AUTO_SUFFIX;
+	}
+
+	public boolean isGenerated(String emailAddress) {
+		return isFake(emailAddress);
 	}
 
 	public boolean isFake(String emailAddress) {
@@ -45,8 +48,9 @@ public class EmailAddressGenerator {
 
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 }

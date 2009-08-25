@@ -144,7 +144,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jorge Ferrer
  * @author Julio Camarero
  * @author Wesley Gong
@@ -276,14 +276,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		long userId = counterLocalService.increment();
 
-		if (Validator.isNull(emailAddress) &&
-			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
+		EmailAddressGenerator emailAddressGenerator =
+			(EmailAddressGenerator)InstancePool.get(
+				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
 
-			EmailAddressGenerator emailAddressGenerator =
-				(EmailAddressGenerator)InstancePool.get(
-					PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+		if (emailAddressGenerator.isGenerated(emailAddress)) {
+			emailAddress = StringPool.BLANK;
+		}
 
-			emailAddress = emailAddressGenerator.generate(userId);
+		if (!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED &&
+			Validator.isNull(emailAddress)) {
+
+			emailAddress = emailAddressGenerator.generate(companyId, userId);
 		}
 
 		validate(
@@ -2323,6 +2327,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
+		User user = userPersistence.findByPrimaryKey(userId);
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
 		String password = oldPassword;
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
@@ -2338,14 +2345,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		ymSn = ymSn.trim().toLowerCase();
 		Date now = new Date();
 
-		if (Validator.isNull(emailAddress) &&
-			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
+		EmailAddressGenerator emailAddressGenerator =
+			(EmailAddressGenerator)InstancePool.get(
+				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
 
-			EmailAddressGenerator emailAddressGenerator =
-				(EmailAddressGenerator)InstancePool.get(
-					PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+		if (emailAddressGenerator.isGenerated(emailAddress)) {
+			emailAddress = StringPool.BLANK;
+		}
 
-			emailAddress = emailAddressGenerator.generate(userId);
+		if (!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED &&
+			Validator.isNull(emailAddress)) {
+
+			emailAddress = emailAddressGenerator.generate(
+				user.getCompanyId(), userId);
 		}
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
@@ -2357,10 +2369,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			password = newPassword1;
 		}
-
-		User user = userPersistence.findByPrimaryKey(userId);
-		Company company = companyPersistence.findByPrimaryKey(
-			user.getCompanyId());
 
 		user.setModifiedDate(now);
 

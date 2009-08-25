@@ -77,66 +77,37 @@ public class MailMessageListener implements MessageListener {
 			}
 		}
 
-		 if (getInternetAddress(mailMessage.getFrom()) == null) {
-			 return;
-		 }
+		InternetAddress from = filterInternetAddress(mailMessage.getFrom());
 
-		 boolean sendMail = false;
+		if (from == null) {
+			return;
+		}
+		else {
+			mailMessage.setFrom(from);
+		}
 
-		 InternetAddress[] to = getInternetAddresses(mailMessage.getTo());
+		InternetAddress[] to = filterInternetAddresses(mailMessage.getTo());
 
-		 if (to != null) {
-			 if (mailMessage.getTo().length > to.length) {
-				 mailMessage.setTo(to);
-			 }
+		mailMessage.setTo(to);
 
-			 sendMail = true;
-		 }
-		 else {
-			 mailMessage.setTo(to);
-		 }
+		InternetAddress[] cc = filterInternetAddresses(mailMessage.getCC());
 
-		 InternetAddress[] cc = getInternetAddresses(mailMessage.getCC());
+		mailMessage.setCC(cc);
 
-		 if (cc != null) {
-			 if (mailMessage.getCC().length > cc.length) {
-				 mailMessage.setCC(cc);
-			 }
+		InternetAddress[] bcc = filterInternetAddresses(mailMessage.getBCC());
 
-			 sendMail = true;
-		 }
-		 else {
-			 mailMessage.setCC(cc);
-		 }
+		mailMessage.setBCC(bcc);
 
-		 InternetAddress[] bcc = getInternetAddresses(mailMessage.getBCC());
+		InternetAddress[] bulkAddresses = filterInternetAddresses(
+			mailMessage.getBulkAddresses());
 
-		 if (bcc != null) {
-			 if (mailMessage.getBCC().length > bcc.length) {
-				 mailMessage.setBCC(bcc);
-			 }
+		mailMessage.setBulkAddresses(bulkAddresses);
 
-			 sendMail = true;
-		 }
-		 else {
-			 mailMessage.setBCC(bcc);
-		 }
+		if (((to != null) && (to.length > 0)) ||
+			((cc != null) && (cc.length > 0)) ||
+			((bcc != null) && (bcc.length > 0)) ||
+			((bulkAddresses != null) && (bulkAddresses.length > 0))) {
 
-		 InternetAddress[] bulkAddresses =
-			 getInternetAddresses(mailMessage.getBulkAddresses());
-
-		 if (bulkAddresses != null) {
-			 if (mailMessage.getBulkAddresses().length > bulkAddresses.length) {
-				 mailMessage.setBulkAddresses(bulkAddresses);
-			 }
-
-			 sendMail = true;
-		 }
-		 else {
-			 mailMessage.setBulkAddresses(bulkAddresses);
-		 }
-
-		if (sendMail) {
 			MailEngine.send(mailMessage);
 		}
 	}
@@ -156,7 +127,7 @@ public class MailMessageListener implements MessageListener {
 		}
 	}
 
-	protected InternetAddress getInternetAddress(
+	protected InternetAddress filterInternetAddress(
 		InternetAddress internetAddress) {
 
 		EmailAddressGenerator emailAddressGenerator =
@@ -170,25 +141,27 @@ public class MailMessageListener implements MessageListener {
 		return internetAddress;
 	}
 
-	protected InternetAddress[] getInternetAddresses(
+	protected InternetAddress[] filterInternetAddresses(
 		InternetAddress[] internetAddresses) {
 
-		List<InternetAddress> list = new ArrayList<InternetAddress>();
+		if (internetAddresses == null) {
+			return null;
+		}
 
-		if (internetAddresses != null) {
-			for (InternetAddress internetAddress : internetAddresses) {
-				if (getInternetAddress(internetAddress) != null) {
-					list.add(internetAddress);
-				}
+		List<InternetAddress> filteredInternetAddresses =
+			new ArrayList<InternetAddress>(internetAddresses.length);
+
+		for (InternetAddress internetAddress : internetAddresses) {
+			InternetAddress filteredInternetAddress = filterInternetAddress(
+				internetAddress);
+
+			if (filteredInternetAddress != null) {
+				filteredInternetAddresses.add(filteredInternetAddress);
 			}
 		}
 
-		if (list.size() == 0) {
-			return null;
-		}
-		else {
-			return list.toArray(new InternetAddress[list.size()]);
-		}
+		return filteredInternetAddresses.toArray(
+			new InternetAddress[filteredInternetAddresses.size()]);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MailMessageListener.class);
