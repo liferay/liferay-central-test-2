@@ -59,7 +59,8 @@ Liferay.Util = {
 				try {
 					this.focus();
 				}
-				catch(e) {}
+				catch (e) {
+				}
 			}
 		};
 
