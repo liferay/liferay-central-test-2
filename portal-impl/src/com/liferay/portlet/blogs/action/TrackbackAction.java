@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -54,6 +55,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -109,6 +111,22 @@ public class TrackbackAction extends PortletAction {
 		if (Validator.isNull(url)) {
 			sendError(
 				actionResponse, "Trackback requires a valid permanent URL.");
+
+			return;
+		}
+
+		String trackbackIp = HttpUtil.getIpAddress(url);
+
+		HttpServletRequest servletRequest =
+			PortalUtil.getHttpServletRequest(actionRequest);
+
+		String remoteIp = servletRequest.getRemoteAddr();
+
+		if (!remoteIp.equals(trackbackIp)) {
+			sendError(
+				actionResponse,
+				"Remote IP " + remoteIp + " does not match trackback URL's IP "
+					+ trackbackIp);
 
 			return;
 		}
