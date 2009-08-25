@@ -24,14 +24,11 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.FileNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -64,23 +61,21 @@ public class PortalApplicationContext extends XmlWebApplicationContext {
 
 		reader.setResourceLoader(new DefaultResourceLoader());
 
-		String[] configLocations = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
-
-		if (configLocations == null) {
+		if (PropsValues.SPRING_CONFIGS == null) {
 			return;
 		}
 
-		List<String> configList = new ArrayList<String>(
-			Arrays.asList(configLocations));
+		List<String> configLocations = ListUtil.fromArray(
+			PropsValues.SPRING_CONFIGS);
 
-		if ("jpa".equalsIgnoreCase(PropsValues.PERSISTENCE)) {
-			configList.remove("META-INF/hibernate-spring.xml");
+		if (PropsValues.PERSISTENCE_PROVIDER.equalsIgnoreCase("jpa")) {
+			configLocations.remove("META-INF/hibernate-spring.xml");
 		}
 		else {
-			configList.remove("META-INF/jpa-spring.xml");
+			configLocations.remove("META-INF/jpa-spring.xml");
 		}
 
-		for (String configLocation : configList) {
+		for (String configLocation : configLocations) {
 			try {
 				reader.loadBeanDefinitions(configLocation);
 			}

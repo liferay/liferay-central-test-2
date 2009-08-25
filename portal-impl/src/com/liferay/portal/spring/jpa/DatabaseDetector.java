@@ -65,35 +65,33 @@ import org.springframework.orm.jpa.vendor.Database;
 public class DatabaseDetector {
 
 	public static Database determineDatabase(DataSource dataSource) {
-		Connection con = null;
-
-		Database db = null;
+		Database database = null;
 		String type = null;
 
+		Connection connection = null;
+
 		try {
-			con = dataSource.getConnection();
+			connection = dataSource.getConnection();
 
-			DatabaseMetaData metaData = con.getMetaData();
+			DatabaseMetaData databaseMetaData = connection.getMetaData();
 
-			String dbName = metaData.getDatabaseProductName();
-			int dbMajorVersion = metaData.getDatabaseMajorVersion();
+			String dbName = databaseMetaData.getDatabaseProductName();
+			int dbMajorVersion = databaseMetaData.getDatabaseMajorVersion();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Determining DB type for " + dbName + " " + dbMajorVersion);
 			}
 
-			if (dbName.startsWith("DB2/")) {
-				db = Database.DB2;
-
-				type = DBUtil.TYPE_DB2;
-			}
-			else if ("Apache Derby".equals(dbName)) {
-				db = Database.DERBY;
-
+			if (dbName.equals("Apache Derby")) {
+				database = Database.DERBY;
 				type = DBUtil.TYPE_DERBY;
 			}
-			else if ("HSQL Database Engine".equals(dbName)) {
+			else if (dbName.startsWith("DB2/")) {
+				database = Database.DB2;
+				type = DBUtil.TYPE_DB2;
+			}
+			else if (dbName.equals("HSQL Database Engine")) {
 				if (_log.isWarnEnabled()) {
 					StringBuilder sb = new StringBuilder();
 
@@ -107,44 +105,36 @@ public class DatabaseDetector {
 					_log.warn(sb.toString());
 				}
 
-				db = Database.HSQL;
-
+				database = Database.HSQL;
 				type = DBUtil.TYPE_HYPERSONIC;
 			}
-			else if ("Informix Dynamic Server".equals(dbName)) {
-				db = Database.INFORMIX;
-
+			else if (dbName.equals("Informix Dynamic Server")) {
+				database = Database.INFORMIX;
 				type = DBUtil.TYPE_INFORMIX;
 			}
-			else if ("MySQL".equals(dbName)) {
-				db = Database.MYSQL;
-
-				type = DBUtil.TYPE_MYSQL;
-			}
-			else if ("Oracle".equals(dbName)) {
-				db = Database.ORACLE;
-
-				type = DBUtil.TYPE_ORACLE;
-			}
-			else if ("PostgreSQL".equals(dbName)) {
-				db = Database.POSTGRESQL;
-
-				type = DBUtil.TYPE_POSTGRESQL;
-			}
 			else if (dbName.startsWith("Microsoft SQL Server")) {
-				db = Database.SQL_SERVER;
-
+				database = Database.SQL_SERVER;
 				type = DBUtil.TYPE_SQLSERVER;
 			}
-			else if ("Sybase SQL Server".equals(dbName)) {
-				db = Database.SYBASE;
-
+			else if (dbName.equals("MySQL")) {
+				database = Database.MYSQL;
+				type = DBUtil.TYPE_MYSQL;
+			}
+			else if (dbName.equals("Oracle")) {
+				database = Database.ORACLE;
+				type = DBUtil.TYPE_ORACLE;
+			}
+			else if (dbName.equals("PostgreSQL")) {
+				database = Database.POSTGRESQL;
+				type = DBUtil.TYPE_POSTGRESQL;
+			}
+			else if (dbName.equals("Sybase SQL Server")) {
+				database = Database.SYBASE;
 				type = DBUtil.TYPE_SYBASE;
 			}
 
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
-				db = Database.SYBASE;
-
+				database = Database.SYBASE;
 				type = DBUtil.TYPE_SYBASE;
 			}
 		}
@@ -152,7 +142,7 @@ public class DatabaseDetector {
 			String msg = GetterUtil.getString(e.getMessage());
 
 			if (msg.indexOf("explicitly set for database: DB2") != -1) {
-				db = Database.DB2;
+				database = Database.DB2;
 
 				type = DBUtil.TYPE_DB2;
 			}
@@ -161,15 +151,15 @@ public class DatabaseDetector {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con);
+			DataAccess.cleanUp(connection);
 		}
 
-		if (db == null) {
+		if (database == null) {
 			throw new RuntimeException("Unable to detect the database");
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Detected database " + db.toString());
+			_log.info("Detected database " + database.toString());
 		}
 
 		if (Validator.isNotNull(PropsValues.JPA_DATABASE_TYPE)) {
@@ -179,7 +169,7 @@ public class DatabaseDetector {
 			DBUtil.setInstance(type);
 		}
 
-		return db;
+		return database;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DatabaseDetector.class);

@@ -621,13 +621,13 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
+	public static final String JPA_DATABASE_PLATFORM = "jpa.database.platform";
+
 	public static final String JPA_DATABASE_TYPE = "jpa.database.type";
 
-	public static final String JPA_LOADTIME_WEAVER = "jpa.loadtime.weaver";
+	public static final String JPA_LOAD_TIME_WEAVER = "jpa.load.time.weaver";
 
 	public static final String JPA_PROVIDER = "jpa.provider";
-
-	public static final String JPA_PROVIDER_DATABASE = "jpa.provider.database";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 
@@ -1045,7 +1045,7 @@ public interface PropsKeys {
 
 	public static final String PERMISSIONS_VIEW_DYNAMIC_INHERITANCE = "permissions.view.dynamic.inheritance";
 
-	public static final String PERSISTENCE = "persistence";
+	public static final String PERSISTENCE_PROVIDER = "persistence.provider";
 
 	public static final String PLUGIN_NOTIFICATIONS_ENABLED = "plugin.notifications.enabled";
 

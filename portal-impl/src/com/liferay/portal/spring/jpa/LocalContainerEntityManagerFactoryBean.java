@@ -51,9 +51,14 @@ import javax.sql.DataSource;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter;
 
 /**
- * <a href="LocalContainerEntityManagerFactoryBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="LocalContainerEntityManagerFactoryBean.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
@@ -63,174 +68,165 @@ public class LocalContainerEntityManagerFactoryBean extends
 
 	public LocalContainerEntityManagerFactoryBean() {
 		try {
-			String weaverClassName = PropsValues.JPA_LOADTIME_WEAVER;
+			if (Validator.isNotNull(PropsValues.JPA_LOAD_TIME_WEAVER)) {
+				Class<?> loadTimeWeaverClass = Class.forName(
+					PropsValues.JPA_LOAD_TIME_WEAVER);
 
-			if (Validator.isNotNull(weaverClassName)) {
+				LoadTimeWeaver loadTimeWeaver =
+					(LoadTimeWeaver)loadTimeWeaverClass.newInstance();
 
-				Class weaverClass = Class.forName(weaverClassName);
-
-				LoadTimeWeaver weaver =
-					(LoadTimeWeaver)weaverClass.newInstance();
-
-				setLoadTimeWeaver(weaver);
+				setLoadTimeWeaver(loadTimeWeaver);
 			}
 		}
-		catch(Exception ex) {
-			_log.error(ex);
+		catch(Exception e) {
+			_log.error(e, e);
 
-			throw new RuntimeException(ex);
+			throw new RuntimeException(e);
 		}
 	 }
 
-	@Override
 	public void setDataSource(DataSource dataSource) {
-		Database dbType = DatabaseDetector.determineDatabase(dataSource);
+		Database database = DatabaseDetector.determineDatabase(dataSource);
+
+		AbstractJpaVendorAdapter jpaVendorAdapter = null;
 
 		String provider = PropsValues.JPA_PROVIDER;
 
-		AbstractJpaVendorAdapter adapter = null;
-
 		try {
-			Class providerClass = _getProviderClass(provider);
+			Class<?> providerClass = getProviderClass(provider);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Using provider class " + providerClass.getName());
 			}
 
-			adapter = (AbstractJpaVendorAdapter)providerClass.newInstance();
+			jpaVendorAdapter =
+				(AbstractJpaVendorAdapter)providerClass.newInstance();
 		}
-		catch(Exception ex) {
-			_log.error(ex);
+		catch(Exception e) {
+			_log.error(e, e);
 
 			return;
 		}
 
-		String dbName = PropsValues.JPA_PROVIDER_DATABASE;
+		String databasePlatform = PropsValues.JPA_DATABASE_PLATFORM;
 
-		if ("EclipseLink".equalsIgnoreCase(provider) ||
-			"TopLink".equalsIgnoreCase(provider)) {
+		if (provider.equalsIgnoreCase("eclipselink") ||
+			provider.equalsIgnoreCase("toplink")) {
 
-			if (dbName == null) {
-				dbName = _getDatabasePlatform(provider, dbType);
+			if (databasePlatform == null) {
+				databasePlatform = getDatabasePlatform(database);
 			}
 
 			if (_log.isInfoEnabled()) {
-				_log.info("Using database platform " + dbName);
+				_log.info("Using database platform " + databasePlatform);
 			}
 
-			adapter.setDatabasePlatform(dbName);
+			jpaVendorAdapter.setDatabasePlatform(databasePlatform);
 		}
 		else {
-			if (dbName == null) {
-				adapter.setDatabase(dbType);
+			if (databasePlatform == null) {
+				jpaVendorAdapter.setDatabase(database);
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Using database name " + dbType.toString());
+					_log.info("Using database name " + database.toString());
 				}
 			}
 			else {
-				adapter.setDatabase(Database.valueOf(dbName));
+				jpaVendorAdapter.setDatabase(
+					Database.valueOf(databasePlatform));
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Using database name " + dbName);
+					_log.info("Using database name " + databasePlatform);
 				}
-
 			}
 		}
 
-		setJpaVendorAdapter(adapter);
+		setJpaVendorAdapter(jpaVendorAdapter);
 
 		super.setDataSource(dataSource);
 	}
 
-	private String _getDatabasePlatform(String provider, Database dbType) {
-		String dbPlatform = null;
+	protected String getDatabasePlatform(Database database) {
+		String databasePlatform = null;
 
-		String pkg = null;
+		String packageName = null;
 
-		boolean eclipselink = false;
+		boolean eclipseLink = false;
 
-		if ("EclipseLink".equalsIgnoreCase(provider)) {
-			pkg = "org.eclipse.persistence.platform.database.";
+		if (PropsValues.JPA_PROVIDER.equalsIgnoreCase("eclipselink")) {
+			packageName = "org.eclipse.persistence.platform.database.";
 
-			eclipselink = true;
+			eclipseLink = true;
 		}
 		else {
-			pkg = "oracle.toplink.essentials.platform.database.";
+			packageName = "oracle.toplink.essentials.platform.database.";
 		}
 
-		if (dbType.equals(Database.DB2)) {
-			dbPlatform = pkg + "DB2Platform";
+		if (database.equals(Database.DB2)) {
+			databasePlatform = packageName + "DB2Platform";
 		}
-		else if (dbType.equals(Database.DERBY)) {
-			dbPlatform = pkg + "DerbyPlatform";
+		else if (database.equals(Database.DERBY)) {
+			databasePlatform = packageName + "DerbyPlatform";
 		}
-		else if (dbType.equals(Database.HSQL)) {
-			dbPlatform = pkg + "HSQLPlatform";
+		else if (database.equals(Database.HSQL)) {
+			databasePlatform = packageName + "HSQLPlatform";
 		}
-		else if (dbType.equals(Database.INFORMIX)) {
-			dbPlatform = pkg + "InformixPlatform";
+		else if (database.equals(Database.INFORMIX)) {
+			databasePlatform = packageName + "InformixPlatform";
 		}
-		else if (dbType.equals(Database.MYSQL)) {
-			if (eclipselink) {
-				dbPlatform = pkg + "MySQLPlatform";
+		else if (database.equals(Database.MYSQL)) {
+			if (eclipseLink) {
+				databasePlatform = packageName + "MySQLPlatform";
 			}
 			else {
-				dbPlatform = pkg + "MySQL4Platform";
+				databasePlatform = packageName + "MySQL4Platform";
 			}
 		}
-		else if (dbType.equals(Database.ORACLE)) {
-			if (eclipselink) {
-				dbPlatform = pkg + "OraclePlatform";
+		else if (database.equals(Database.ORACLE)) {
+			if (eclipseLink) {
+				databasePlatform = packageName + "OraclePlatform";
 			}
 			else {
-				dbPlatform = pkg + "oracle.OraclePlatform";
+				databasePlatform = packageName + "oracle.OraclePlatform";
 			}
 		}
-		else if (dbType.equals(Database.POSTGRESQL)) {
-			dbPlatform = pkg + "PostgreSQLPlatform";
+		else if (database.equals(Database.POSTGRESQL)) {
+			databasePlatform = packageName + "PostgreSQLPlatform";
 		}
-		else if (dbType.equals(Database.SQL_SERVER)) {
-			dbPlatform = pkg + "SQLServerPlatform";
+		else if (database.equals(Database.SQL_SERVER)) {
+			databasePlatform = packageName + "SQLServerPlatform";
 		}
-		else if (dbType.equals(Database.SYBASE)) {
-			dbPlatform = pkg + "SybasePlatform";
+		else if (database.equals(Database.SYBASE)) {
+			databasePlatform = packageName + "SybasePlatform";
 		}
 		else {
 			_log.error(
-				"Unable to detect database platform for  \"" +
-				dbType.toString() +
-				"\". Override using \"jpa.provider.database\" property.");
+				"Unable to detect database platform for \"" +
+					database.toString() + "\". Override by configuring the " +
+						"\"jpa.database.platform\" property.");
 		}
 
-		return dbPlatform;
+		return databasePlatform;
 	}
 
-	private Class _getProviderClass(String provider) throws Exception {
-		Class clazz = null;
-
-		if ("EclipseLink".equalsIgnoreCase(provider)) {
-			clazz = Class.forName(
-				"org.springframework.orm.jpa.vendor." +
-				"EclipseLinkJpaVendorAdapter");
+	protected Class<?> getProviderClass(String provider) throws Exception {
+		if (provider.equalsIgnoreCase("eclipselink")) {
+			return EclipseLinkJpaVendorAdapter.class;
 		}
-		else if ("TopLink".equalsIgnoreCase(provider)) {
-			clazz = Class.forName(
-				"org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter");
+		else if (provider.equalsIgnoreCase("hibernate")) {
+			return HibernateJpaVendorAdapter.class;
 		}
-		else if ("Hibernate".equalsIgnoreCase(provider)) {
-			clazz = Class.forName(
-				"org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter");
+		else if (provider.equalsIgnoreCase("openjpa")) {
+			return OpenJpaVendorAdapter.class;
 		}
-		else if ("OpenJPA".equalsIgnoreCase(provider)) {
-			clazz = Class.forName(
-				"org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter");
+		else if (provider.equalsIgnoreCase("toplink")) {
+			return TopLinkJpaVendorAdapter.class;
 		}
 
-		return clazz;
+		return null;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LocalContainerEntityManagerFactoryBean.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(LocalContainerEntityManagerFactoryBean.class);
 
 }

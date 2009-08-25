@@ -695,17 +695,17 @@ public class PropsValues {
 		JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = PropsUtil.getArray(
 			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
+	public static final String JPA_DATABASE_PLATFORM =
+		PropsUtil.get(PropsKeys.JPA_DATABASE_PLATFORM);
+
 	public static final String JPA_DATABASE_TYPE =
 		PropsUtil.get(PropsKeys.JPA_DATABASE_TYPE);
 
-	public static final String JPA_LOADTIME_WEAVER =
-		PropsUtil.get(PropsKeys.JPA_LOADTIME_WEAVER);
+	public static final String JPA_LOAD_TIME_WEAVER =
+		PropsUtil.get(PropsKeys.JPA_LOAD_TIME_WEAVER);
 
 	public static final String JPA_PROVIDER =
 		PropsUtil.get(PropsKeys.JPA_PROVIDER);
-
-	public static final String JPA_PROVIDER_DATABASE =
-		PropsUtil.get(PropsKeys.JPA_PROVIDER_DATABASE);
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);
@@ -1158,8 +1158,8 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE));
 
-	public static final String PERSISTENCE	=
-		PropsUtil.get(PropsKeys.PERSISTENCE);
+	public static final String PERSISTENCE_PROVIDER	=
+		PropsUtil.get(PropsKeys.PERSISTENCE_PROVIDER);
 
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
@@ -1379,6 +1379,9 @@ public class PropsValues {
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(
 		PropsKeys.SITEMINDER_USER_HEADER);
+
+	public static final String[] SPRING_CONFIGS =
+		PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
 
 	public static boolean SPRING_HIBERNATE_SESSION_DELEGATED =
 		GetterUtil.getBoolean(
