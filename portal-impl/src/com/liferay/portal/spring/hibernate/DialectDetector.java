@@ -49,15 +49,15 @@ public class DialectDetector {
 	public static String determineDialect(DataSource dataSource) {
 		Dialect dialect = null;
 
-		Connection con = null;
+		Connection connection = null;
 
 		try {
-			con = dataSource.getConnection();
+			connection = dataSource.getConnection();
 
-			DatabaseMetaData metaData = con.getMetaData();
+			DatabaseMetaData databaseMetaData = connection.getMetaData();
 
-			String dbName = metaData.getDatabaseProductName();
-			int dbMajorVersion = metaData.getDatabaseMajorVersion();
+			String dbName = databaseMetaData.getDatabaseProductName();
+			int dbMajorVersion = databaseMetaData.getDatabaseMajorVersion();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -114,7 +114,7 @@ public class DialectDetector {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con);
+			DataAccess.cleanUp(connection);
 		}
 
 		if (dialect == null) {
