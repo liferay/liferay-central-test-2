@@ -22,21 +22,21 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="VerifyUser.java.html"><b><i>View Source</i></b></a>
@@ -57,13 +57,13 @@ public class VerifyUser extends VerifyProcess {
 
 		for (User user : users) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Creating contact for the user: " + user.getUserId());
+				_log.debug("Creating contact for user " + user.getUserId());
 			}
 
-			Long contactId = CounterLocalServiceUtil.increment();
+			long contactId = CounterLocalServiceUtil.increment();
 
 			Contact contact = ContactLocalServiceUtil.createContact(contactId);
+
 			Company company = CompanyLocalServiceUtil.getCompanyById(
 				user.getCompanyId());
 
@@ -103,7 +103,7 @@ public class VerifyUser extends VerifyProcess {
 
 		for (User user : users) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Creating user group for the user: " + user.getUserId());
+				_log.debug("Creating group for user " + user.getUserId());
 			}
 
 			GroupLocalServiceUtil.addGroup(
