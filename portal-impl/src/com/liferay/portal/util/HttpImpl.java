@@ -39,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -311,9 +310,9 @@ public class HttpImpl implements Http {
 
 	public String getIpAddress(String url) {
 		try {
-			URL url2 = new URL(url);
+			URL urlObj = new URL(url);
 
-			InetAddress address = InetAddress.getByName(url2.getHost());
+			InetAddress address = InetAddress.getByName(urlObj.getHost());
 
 			return address.getHostAddress();
 		}
@@ -870,7 +869,7 @@ public class HttpImpl implements Http {
 				return bytes;
 			}
 			else if (!location.startsWith(Http.HTTP_WITH_SLASH) &&
-					!location.startsWith(Http.HTTPS_WITH_SLASH)) {
+					 !location.startsWith(Http.HTTPS_WITH_SLASH)) {
 
 				location = Http.HTTP_WITH_SLASH + location;
 			}
@@ -900,7 +899,7 @@ public class HttpImpl implements Http {
 					entityEnclosingMethod.setRequestEntity(requestEntity);
 				}
 				else if ((parts != null) && (parts.size() > 0) &&
-						(method == Http.Method.POST)) {
+						 (method == Http.Method.POST)) {
 
 					List<NameValuePair> nvpList =
 						new ArrayList<NameValuePair>();
