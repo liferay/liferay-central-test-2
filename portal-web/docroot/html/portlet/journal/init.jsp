@@ -105,12 +105,4 @@ PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferenc
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
-Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
-
-boolean webdavEnabled = true;
-
-if (portlet.getWebDAVStorageInstance() == null) {
-	webdavEnabled = false;
-}
 %>

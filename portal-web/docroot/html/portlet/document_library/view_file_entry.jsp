@@ -226,7 +226,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		/>
 	</div>
 
-	<c:if test="<%= webdavEnabled %>">
+	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="file-entry-field">
 			<label><liferay-ui:message key="webdav-url" /></label>
 

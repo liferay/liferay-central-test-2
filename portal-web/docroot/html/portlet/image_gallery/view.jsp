@@ -365,7 +365,7 @@ tabs1Names += ",recent-images";
 		}
 		%>
 
-		<c:if test="<%= webdavEnabled %>">
+		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 			<liferay-ui:webdav path='<%= "/image_gallery" + sb.toString() %>' />
 		</c:if>
 	</c:when>

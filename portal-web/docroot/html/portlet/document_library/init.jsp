@@ -194,14 +194,6 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-
-Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
-
-boolean webdavEnabled = true;
-
-if (portlet.getWebDAVStorageInstance() == null) {
-	webdavEnabled = false;
-}
 %>
 
 <%@ include file="/html/portlet/document_library/init-ext.jsp" %>

@@ -262,7 +262,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			/>
 		</td>
 	</tr>
-	<c:if test="<%= webdavEnabled %>">
+	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />

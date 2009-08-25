@@ -321,7 +321,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		}
 		%>
 
-		<c:if test="<%= webdavEnabled %>">
+		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 			<liferay-ui:webdav path='<%= "/document_library" + sb.toString() %>' />
 		</c:if>
 	</c:when>

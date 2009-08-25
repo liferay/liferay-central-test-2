@@ -416,6 +416,7 @@ portletDisplay.setShowPortletIcon(showPortletIcon);
 portletDisplay.setShowPrintIcon(showPrintIcon);
 portletDisplay.setShowRefreshIcon(showRefreshIcon);
 
+portletDisplay.setWebDAVEnabled(portlet.getWebDAVStorageInstance() != null);
 portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 
 portletDisplay.setPortletSetup(portletSetup);

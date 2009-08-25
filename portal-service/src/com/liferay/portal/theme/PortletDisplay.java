@@ -504,6 +504,14 @@ public class PortletDisplay implements Serializable {
 		_urlRefresh = urlRefresh;
 	}
 
+	public boolean isWebDAVEnabled() {
+		return _webDAVEnabled;
+	}
+
+	public void setWebDAVEnabled(boolean webDAVEnabled) {
+		_webDAVEnabled = webDAVEnabled;
+	}
+
 	public boolean isRestoreCurrentView() {
 		return _restoreCurrentView;
 	}
@@ -585,6 +593,7 @@ public class PortletDisplay implements Serializable {
 		_urlPortletCss = StringPool.BLANK;
 		_urlPrint = StringPool.BLANK;
 		_urlRefresh = StringPool.BLANK;
+		_webDAVEnabled = false;
 		_restoreCurrentView = false;
 		_content = StringPool.BLANK;
 		_portletSetup = null;
@@ -643,6 +652,7 @@ public class PortletDisplay implements Serializable {
 		_urlPortletCss = master.getURLPortletCss();
 		_urlPrint = master.getURLPrint();
 		_urlRefresh = master.getURLRefresh();
+		_webDAVEnabled = master.isWebDAVEnabled();
 		_restoreCurrentView = master.isRestoreCurrentView();
 		_content = master.getContent();
 		_portletSetup = master.getPortletSetup();
@@ -702,6 +712,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLPortletCss(_urlPortletCss);
 		slave.setURLPrint(_urlPrint);
 		slave.setURLRefresh(_urlRefresh);
+		slave.setWebDAVEnabled(_webDAVEnabled);
 		slave.setRestoreCurrentView(_restoreCurrentView);
 		slave.setContent(_content);
 		slave.setPortletSetup(_portletSetup);
@@ -765,6 +776,7 @@ public class PortletDisplay implements Serializable {
 	private String _urlPortletCss = StringPool.BLANK;
 	private String _urlPrint = StringPool.BLANK;
 	private String _urlRefresh = StringPool.BLANK;
+	private boolean _webDAVEnabled;
 	private boolean _restoreCurrentView;
 	private String _content = StringPool.BLANK;
 	private PortletPreferences _portletSetup;

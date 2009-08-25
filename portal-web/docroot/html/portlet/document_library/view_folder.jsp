@@ -73,7 +73,7 @@ request.setAttribute("view_folder.jsp-folder", folder);
 		</liferay-ui:custom-attributes-available>
 	</div>
 
-	<c:if test="<%= webdavEnabled %>">
+	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<div class="folder-field">
 			<label><liferay-ui:message key="webdav-url" /></label>
 

@@ -398,7 +398,7 @@ int tabIndex = 1;
 			/>
 		</td>
 	</tr>
-	<c:if test="<%= webdavEnabled %>">
+	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />
