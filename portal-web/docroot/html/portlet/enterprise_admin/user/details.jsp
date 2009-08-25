@@ -28,6 +28,12 @@
 User selUser = (User)request.getAttribute("user.selUser");
 Contact selContact = (Contact)request.getAttribute("user.selContact");
 
+String displayEmailAddress = StringPool.BLANK;
+
+if (selUser != null) {
+	displayEmailAddress = selUser.getDisplayEmailAddress();
+}
+
 int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
 int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
 boolean male = BeanParamUtil.getBoolean(selContact, request, "male", true);
@@ -134,12 +140,12 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 		<c:choose>
 			<c:when test="<%= (selUser != null) && (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
-				<%= selUser.getEmailAddress() %>
+				<%= displayEmailAddress %>
 
 				<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= selUser.getEmailAddress() %>" />
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="emailAddress" />
+				<liferay-ui:input-field model="<%= User.class %>" field="emailAddress" defaultValue="<%= displayEmailAddress %>" />
 			</c:otherwise>
 		</c:choose>
 	</div>

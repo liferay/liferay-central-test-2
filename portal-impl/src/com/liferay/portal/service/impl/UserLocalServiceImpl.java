@@ -95,6 +95,7 @@ import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
+import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameValidator;
@@ -146,6 +147,7 @@ import javax.mail.internet.InternetAddress;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Julio Camarero
+ * @author Wesley Gong
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
@@ -273,6 +275,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		long userId = counterLocalService.increment();
+
+		if (Validator.isNull(emailAddress) &&
+			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
+
+			EmailAddressGenerator emailAddressGenerator =
+				(EmailAddressGenerator)InstancePool.get(
+					PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+
+			emailAddress = emailAddressGenerator.generate(userId);
+		}
 
 		validate(
 			companyId, userId, autoPassword, password1, password2,
@@ -2325,6 +2337,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		twitterSn = twitterSn.trim().toLowerCase();
 		ymSn = ymSn.trim().toLowerCase();
 		Date now = new Date();
+
+		if (Validator.isNull(emailAddress) &&
+			!PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) {
+
+			EmailAddressGenerator emailAddressGenerator =
+				(EmailAddressGenerator)InstancePool.get(
+					PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+
+			emailAddress = emailAddressGenerator.generate(userId);
+		}
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);
 

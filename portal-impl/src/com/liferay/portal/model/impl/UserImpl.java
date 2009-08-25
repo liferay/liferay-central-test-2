@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -44,6 +45,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -71,6 +73,7 @@ import java.util.TreeSet;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Wesley Gong
  */
 public class UserImpl extends UserModelImpl implements User {
 
@@ -110,6 +113,20 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return contact;
+	}
+
+	public String getDisplayEmailAddress() {
+		String emailAddress = super.getEmailAddress();
+
+		EmailAddressGenerator emailAddressGenerator =
+			(EmailAddressGenerator)InstancePool.get(
+				PropsValues.USERS_EMAIL_ADDRESS_GENERATOR);
+
+		if (emailAddressGenerator.isFake(emailAddress)) {
+			emailAddress = StringPool.BLANK;
+		}
+
+		return emailAddress;
 	}
 
 	public String getDisplayURL(ThemeDisplay themeDisplay) {

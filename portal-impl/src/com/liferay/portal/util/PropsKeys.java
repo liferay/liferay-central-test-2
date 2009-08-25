@@ -1311,6 +1311,10 @@ public interface PropsKeys {
 
 	public static final String USERS_DELETE = "users.delete";
 
+	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = "users.email.address.auto.suffix";
+
+	public static final String USERS_EMAIL_ADDRESS_GENERATOR = "users.email.address.generator";
+
 	public static final String USERS_EMAIL_ADDRESS_REQUIRED = "users.email.address.required";
 
 	public static final String USERS_FORM_ADD_IDENTIFICATION = "users.form.add.identification";

@@ -54,6 +54,8 @@ public interface User extends UserModel {
 
 	public com.liferay.portal.model.Contact getContact();
 
+	public java.lang.String getDisplayEmailAddress();
+
 	public java.lang.String getDisplayURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
