@@ -262,6 +262,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			/>
 		</td>
 	</tr>
+
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<tr>
 			<td>

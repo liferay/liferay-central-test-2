@@ -398,6 +398,7 @@ int tabIndex = 1;
 			/>
 		</td>
 	</tr>
+
 	<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 		<tr>
 			<td>
