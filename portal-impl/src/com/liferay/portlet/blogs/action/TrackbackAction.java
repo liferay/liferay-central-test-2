@@ -115,12 +115,12 @@ public class TrackbackAction extends PortletAction {
 			return;
 		}
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		String remoteIp = request.getRemoteAddr();
+
 		String trackbackIp = HttpUtil.getIpAddress(url);
-
-		HttpServletRequest servletRequest =
-			PortalUtil.getHttpServletRequest(actionRequest);
-
-		String remoteIp = servletRequest.getRemoteAddr();
 
 		if (!remoteIp.equals(trackbackIp)) {
 			sendError(
