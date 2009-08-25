@@ -56,7 +56,10 @@ Liferay.Util = {
 			}
 
 			if (Liferay.Browser.isIe() && (this != document.activeElement)) {
-				this.focus();
+				try {
+					this.focus();
+				}
+				catch(e) {}
 			}
 		};
 
