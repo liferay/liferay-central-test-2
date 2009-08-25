@@ -75,7 +75,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.click("_86_DELETE_PORTLET_DATA");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\messageboards\\Message_Boards-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\messageboards\\dependencies\\Message_Boards-Selenium.portlet.lar"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

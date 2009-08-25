@@ -126,7 +126,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.click("_86_DELETE_PORTLET_DATA");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\blogs\\Blogs-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\blogs\\dependencies\\Blogs-Selenium.portlet.lar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

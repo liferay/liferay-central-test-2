@@ -97,7 +97,7 @@ public class ImportCommunityLARTest extends BaseTestCase {
 
 		selenium.type("_134_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\Community.Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\dependencies\\Community.Selenium.portlet.lar"));
 		selenium.click("_134_PERMISSIONS");
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
