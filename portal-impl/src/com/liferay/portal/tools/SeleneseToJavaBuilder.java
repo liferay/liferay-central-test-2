@@ -447,9 +447,9 @@ public class SeleneseToJavaBuilder {
 			}
 			else if (param1.equals("check") || param1.equals("click") ||
 					 param1.equals("doubleClick") ||
-					 param1.equals("mouseDown") || param1.equals("mouseUp") ||
-					 param1.equals("open") || param1.equals("uncheck") ||
-					 param1.equals("selectFrame") ||
+					 param1.equals("mouseDown") || param1.equals("mouseOver") ||
+					 param1.equals("mouseUp") || param1.equals("open") ||
+					 param1.equals("uncheck") || param1.equals("selectFrame") ||
 					 param1.equals("selectWindow")) {
 
 				sb.append("selenium.");
