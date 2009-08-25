@@ -89,7 +89,7 @@ public class AddDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\AP_test_document_2.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\AP_test_document_2.txt"));
 		selenium.typeKeys("_20_title",
 			RuntimeVariables.replace("AP Setup Test Document 2"));
 		selenium.type("_20_title",

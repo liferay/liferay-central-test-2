@@ -128,7 +128,7 @@ public class AddIncorrectNameImageTest extends BaseTestCase {
 
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jp"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\dependencies\\test_image.jp"));
 		assertEquals("Image names must end with one of the following extensions: .bmp, .gif, .jpeg, .jpg, .png, .tif, .tiff",
 			selenium.getAlert());
 	}

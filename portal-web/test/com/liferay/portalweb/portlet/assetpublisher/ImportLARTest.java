@@ -91,7 +91,7 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\Asset_Publisher-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\Asset_Publisher-Selenium.portlet.lar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

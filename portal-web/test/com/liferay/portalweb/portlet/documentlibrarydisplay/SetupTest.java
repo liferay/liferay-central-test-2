@@ -176,7 +176,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrarydisplay\\DLD_test_document.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrarydisplay\\dependencies\\DLD_test_document.txt"));
 		selenium.typeKeys("_20_title",
 			RuntimeVariables.replace("DLD Test Document"));
 		selenium.type("_20_title", RuntimeVariables.replace("DLD Test Document"));

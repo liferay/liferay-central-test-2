@@ -79,7 +79,7 @@ public class AddAttachmentsTest extends BaseTestCase {
 		selenium.click("link=Use the classic uploader.");
 		selenium.type("//fieldset/div[1]/input",
 			RuntimeVariables.replace(
-				"L:\\sf.net\\portal\\trunk\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wiki\\Wiki-Selenium.portlet.lar"));
+				"L:\\sf.net\\portal\\trunk\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wikidisplay\\dependencies\\Wiki-Selenium.portlet.lar"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 

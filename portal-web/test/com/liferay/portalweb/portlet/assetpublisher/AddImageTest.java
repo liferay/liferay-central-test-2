@@ -89,7 +89,7 @@ public class AddImageTest extends BaseTestCase {
 
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\AP_test_image_2.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\AP_test_image_2.jpg"));
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("AP Setup Test Image 2"));
 		selenium.type("_31_name",

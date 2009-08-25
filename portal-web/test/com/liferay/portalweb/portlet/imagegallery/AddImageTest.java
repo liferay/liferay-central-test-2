@@ -111,7 +111,7 @@ public class AddImageTest extends BaseTestCase {
 		selenium.click("link=Use the classic uploader.");
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\dependencies\\test_image.jpg"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test1 Image1"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is Test1 Image1."));

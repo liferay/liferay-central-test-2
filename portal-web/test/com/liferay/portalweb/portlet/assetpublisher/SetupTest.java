@@ -558,7 +558,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\AP_test_document.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\AP_test_document.txt"));
 		selenium.typeKeys("_20_title",
 			RuntimeVariables.replace("AP Setup Test Document"));
 		selenium.type("_20_title",
@@ -753,7 +753,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\AP_test_image.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\AP_test_image.jpg"));
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("AP Setup Test Image"));
 		selenium.type("_31_name",
