@@ -61,20 +61,8 @@ public class PortletAppImpl implements PortletApp {
 		}
 	}
 
-	public String getServletContextName() {
-		return _servletContextName;
-	}
-
-	public Set<String> getServletURLPatterns() {
-		return _servletURLPatterns;
-	}
-
-	public Set<String> getUserAttributes() {
-		return _userAttributes;
-	}
-
-	public Map<String, String> getCustomUserAttributes() {
-		return _customUserAttributes;
+	public void addEventDefinition(EventDefinition eventDefinition) {
+		_eventDefinitions.add(eventDefinition);
 	}
 
 	public void addPortletFilter(PortletFilter portletFilter) {
@@ -83,31 +71,10 @@ public class PortletAppImpl implements PortletApp {
 			portletFilter.getFilterName(), portletFilter);
 	}
 
-	public PortletFilter getPortletFilter(String filterName) {
-		return _portletFiltersByFilterName.get(filterName);
-	}
-
-	public Set<PortletFilter> getPortletFilters() {
-		return _portletFilters;
-	}
-
-	public String getDefaultNamespace() {
-		return _defaultNamespace;
-	}
-
-	public void setDefaultNamespace(String defaultNamespace) {
-		_defaultNamespace = defaultNamespace;
-	}
-
-	public void addEventDefinition(EventDefinition eventDefinition) {
-		_eventDefinitions.add(eventDefinition);
-	}
-
-	public void addPublicRenderParameter(String identifier, QName qName) {
-		PublicRenderParameter publicRenderParameter =
-			new PublicRenderParameterImpl(identifier, qName, this);
-
-		addPublicRenderParameter(publicRenderParameter);
+	public void addPortletURLListener(PortletURLListener portletURLListener) {
+		_portletURLListeners.add(portletURLListener);
+		_portletURLListenersByListenerClass.put(
+			portletURLListener.getListenerClass(), portletURLListener);
 	}
 
 	public void addPublicRenderParameter(
@@ -118,14 +85,31 @@ public class PortletAppImpl implements PortletApp {
 			publicRenderParameter.getIdentifier(), publicRenderParameter);
 	}
 
-	public PublicRenderParameter getPublicRenderParameter(String identifier) {
-		return _publicRenderParametersByIdentifier.get(identifier);
+	public void addPublicRenderParameter(String identifier, QName qName) {
+		PublicRenderParameter publicRenderParameter =
+			new PublicRenderParameterImpl(identifier, qName, this);
+
+		addPublicRenderParameter(publicRenderParameter);
 	}
 
-	public void addPortletURLListener(PortletURLListener portletURLListener) {
-		_portletURLListeners.add(portletURLListener);
-		_portletURLListenersByListenerClass.put(
-			portletURLListener.getListenerClass(), portletURLListener);
+	public Map<String, String[]> getContainerRuntimeOptions() {
+		return _containerRuntimeOptions;
+	}
+
+	public Map<String, String> getCustomUserAttributes() {
+		return _customUserAttributes;
+	}
+
+	public String getDefaultNamespace() {
+		return _defaultNamespace;
+	}
+
+	public PortletFilter getPortletFilter(String filterName) {
+		return _portletFiltersByFilterName.get(filterName);
+	}
+
+	public Set<PortletFilter> getPortletFilters() {
+		return _portletFilters;
 	}
 
 	public PortletURLListener getPortletURLListener(String listenerClass) {
@@ -136,12 +120,32 @@ public class PortletAppImpl implements PortletApp {
 		return _portletURLListeners;
 	}
 
-	public Map<String, String[]> getContainerRuntimeOptions() {
-		return _containerRuntimeOptions;
+	public PublicRenderParameter getPublicRenderParameter(String identifier) {
+		return _publicRenderParametersByIdentifier.get(identifier);
+	}
+
+	public String getServletContextName() {
+		return _servletContextName;
+	}
+
+	public Set<String> getServletURLPatterns() {
+		return _servletURLPatterns;
 	}
 
 	public SpriteImage getSpriteImage(String fileName) {
 		return _spriteImagesMap.get(fileName);
+	}
+
+	public Set<String> getUserAttributes() {
+		return _userAttributes;
+	}
+
+	public boolean isWARFile() {
+		return _warFile;
+	}
+
+	public void setDefaultNamespace(String defaultNamespace) {
+		_defaultNamespace = defaultNamespace;
 	}
 
 	public void setSpriteImages(
@@ -169,40 +173,36 @@ public class PortletAppImpl implements PortletApp {
 		}
 	}
 
-	public boolean isWARFile() {
-		return _warFile;
-	}
-
 	public void setWARFile(boolean warFile) {
 		_warFile = warFile;
 	}
 
-	private String _servletContextName = StringPool.BLANK;
-	private Set<String> _servletURLPatterns = new LinkedHashSet<String>();
-	private Set<String> _userAttributes = new LinkedHashSet<String>();
+	private Map<String, String[]> _containerRuntimeOptions =
+		new HashMap<String, String[]>();
 	private Map<String, String> _customUserAttributes =
 		new LinkedHashMap<String, String>();
+	private String _defaultNamespace = XMLConstants.NULL_NS_URI;
+	private Set<EventDefinition> _eventDefinitions =
+		new LinkedHashSet<EventDefinition>();
 	private Set<PortletFilter> _portletFilters =
 		new LinkedHashSet<PortletFilter>();
 	private Map<String, PortletFilter> _portletFiltersByFilterName =
 		new HashMap<String, PortletFilter>();
-	private String _defaultNamespace = XMLConstants.NULL_NS_URI;
-	private Set<EventDefinition> _eventDefinitions =
-		new LinkedHashSet<EventDefinition>();
-	private Set<PublicRenderParameter> _publicRenderParameters =
-		new LinkedHashSet<PublicRenderParameter>();
-	private Map<String, PublicRenderParameter>
-		_publicRenderParametersByIdentifier =
-			new HashMap<String, PublicRenderParameter>();
 	private Set<PortletURLListener> _portletURLListeners =
 		new LinkedHashSet<PortletURLListener>();
 	private Map<String, PortletURLListener>
 		_portletURLListenersByListenerClass =
 			new HashMap<String, PortletURLListener>();
-	private Map<String, String[]> _containerRuntimeOptions =
-		new HashMap<String, String[]>();
+	private Set<PublicRenderParameter> _publicRenderParameters =
+		new LinkedHashSet<PublicRenderParameter>();
+	private Map<String, PublicRenderParameter>
+		_publicRenderParametersByIdentifier =
+			new HashMap<String, PublicRenderParameter>();
+	private String _servletContextName = StringPool.BLANK;
+	private Set<String> _servletURLPatterns = new LinkedHashSet<String>();
 	private Map<String, SpriteImage> _spriteImagesMap =
 		new HashMap<String, SpriteImage>();
+	private Set<String> _userAttributes = new LinkedHashSet<String>();
 	private boolean _warFile;
 
 }

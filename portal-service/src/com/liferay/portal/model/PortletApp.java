@@ -37,46 +37,46 @@ import java.util.Set;
  */
 public interface PortletApp extends Serializable {
 
-	public String getServletContextName();
+	public void addEventDefinition(EventDefinition eventDefinition);
 
-	public Set<String> getServletURLPatterns();
+	public void addPortletFilter(PortletFilter portletFilter);
 
-	public Set<String> getUserAttributes();
+	public void addPortletURLListener(PortletURLListener portletURLListener);
+
+	public void addPublicRenderParameter(
+		PublicRenderParameter publicRenderParameter);
+
+	public void addPublicRenderParameter(String identifier, QName qName);
+
+	public Map<String, String[]> getContainerRuntimeOptions();
 
 	public Map<String, String> getCustomUserAttributes();
 
-	public void addPortletFilter(PortletFilter portletFilter);
+	public String getDefaultNamespace();
 
 	public PortletFilter getPortletFilter(String filterName);
 
 	public Set<PortletFilter> getPortletFilters();
 
-	public String getDefaultNamespace();
-
-	public void setDefaultNamespace(String defaultNamespace);
-
-	public void addEventDefinition(EventDefinition eventDefinition);
-
-	public void addPublicRenderParameter(String identifier, QName qName);
-
-	public void addPublicRenderParameter(
-		PublicRenderParameter publicRenderParameter);
-
-	public PublicRenderParameter getPublicRenderParameter(String identifier);
-
-	public void addPortletURLListener(PortletURLListener portletURLListener);
-
 	public PortletURLListener getPortletURLListener(String listenerClass);
 
 	public Set<PortletURLListener> getPortletURLListeners();
 
-	public Map<String, String[]> getContainerRuntimeOptions();
+	public PublicRenderParameter getPublicRenderParameter(String identifier);
+
+	public String getServletContextName();
+
+	public Set<String> getServletURLPatterns();
 
 	public SpriteImage getSpriteImage(String fileName);
 
-	public void setSpriteImages(String spriteFileName, Properties properties);
+	public Set<String> getUserAttributes();
 
 	public boolean isWARFile();
+
+	public void setDefaultNamespace(String defaultNamespace);
+
+	public void setSpriteImages(String spriteFileName, Properties properties);
 
 	public void setWARFile(boolean warFile);
 
