@@ -85,7 +85,7 @@ public class LocalContainerEntityManagerFactoryBean extends
 		}
 
 		setPersistenceXmlLocation("classpath*:META-INF/persistence-custom.xml");
-	 }
+	}
 
 	public void setDataSource(DataSource dataSource) {
 		Database database = DatabaseDetector.determineDatabase(dataSource);
