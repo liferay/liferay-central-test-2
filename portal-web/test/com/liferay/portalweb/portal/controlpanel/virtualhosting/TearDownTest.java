@@ -50,14 +50,46 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Communities"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Communities"));
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_134_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_134_name",
 			RuntimeVariables.replace("Virtual Hosting Communit"));
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Virtual Hosting Community"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {

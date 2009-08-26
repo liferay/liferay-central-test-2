@@ -58,7 +58,7 @@ public class EditCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//body/div[2]/ul/li[1]/a")) {
+				if (selenium.isElementPresent("//div[4]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -68,8 +68,25 @@ public class EditCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[6]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gor Edit\u00e9d"));
 		selenium.type("_19_name",

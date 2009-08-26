@@ -24,18 +24,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//b</td>
+	<td>waitForElementPresent</td>
+	<td>//li[5]/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[6]/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[7]/span/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Tést Méssagé to bé Délétéd</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[8]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -46,6 +66,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>link=Move Thread</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[9]/span/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -89,8 +114,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Choose']</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('link=Categories'))</td>
+	<td>CategoriesPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${CategoriesPresent}</td>
+	<td>categoriesNotPresent</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Categories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>categoriesNotPresent</td>
 	<td></td>
 </tr>
 <tr>
@@ -101,6 +146,11 @@
 <tr>
 	<td>selectWindow</td>
 	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
 	<td></td>
 </tr>
 <tr>

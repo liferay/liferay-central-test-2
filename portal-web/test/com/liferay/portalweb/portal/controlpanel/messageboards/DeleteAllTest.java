@@ -74,8 +74,7 @@ public class DeleteAllTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[5]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[5]/a")) {
 							break;
 						}
 					}
@@ -85,8 +84,7 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -112,8 +110,7 @@ public class DeleteAllTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[5]/a")) {
+						if (selenium.isElementPresent("//div[4]/ul/li[5]/a")) {
 							break;
 						}
 					}
@@ -123,8 +120,7 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace("//div[4]/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
