@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -98,14 +97,10 @@ public class DB2Util extends DBUtil {
 		super(TYPE_DB2);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
+	protected String buildCreateFileContent(String databaseName, int population)
 		throws IOException {
 
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-db2.sql");
+		String suffix = getSuffix(population);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -113,14 +108,14 @@ public class DB2Util extends DBUtil {
 		sb.append("create database " + databaseName + ";\n");
 		sb.append("connect to " + databaseName + ";\n");
 		sb.append(
-			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
-				minimalSuffix + "-db2.sql"));
+			FileUtil.read("../sql/portal" + suffix + "/portal" +
+				suffix + "-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
-		FileUtil.write(file, sb.toString());
+		return sb.toString();
 	}
 
 	protected String getServerName() {

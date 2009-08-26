@@ -54,7 +54,8 @@ public class SAPUtil extends DBUtil {
 		super(TYPE_SAP);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal) {
+	protected String buildCreateFileContent(String databaseName, int population) {
+		return null;
 	}
 
 	protected String getServerName() {

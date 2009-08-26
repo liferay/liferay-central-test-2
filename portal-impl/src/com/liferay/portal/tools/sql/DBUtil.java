@@ -77,6 +77,12 @@ import org.hibernate.dialect.SybaseDialect;
  */
 public abstract class DBUtil {
 
+	public static final int POPULATED = 0;
+
+	public static final int MINIMAL = 1;
+
+	public static final int SHARDED = 2;
+
 	public static final String TYPE_DB2 = "db2";
 
 	public static final String TYPE_DERBY = "derby";
@@ -217,10 +223,10 @@ public abstract class DBUtil {
 			_dbUtil = MySQLUtil.getInstance();
 		}
 		else if (dialect instanceof OracleDialect ||
-				 dialect instanceof Oracle8iDialect ||
-				 dialect instanceof Oracle9Dialect ||
-				 dialect instanceof Oracle9iDialect ||
-				 dialect instanceof Oracle10gDialect) {
+				dialect instanceof Oracle8iDialect ||
+				dialect instanceof Oracle9Dialect ||
+				dialect instanceof Oracle9iDialect ||
+				dialect instanceof Oracle10gDialect) {
 
 			_dbUtil = OracleUtil.getInstance();
 		}
@@ -245,8 +251,46 @@ public abstract class DBUtil {
 	}
 
 	public void buildCreateFile(String databaseName) throws IOException {
-		buildCreateFile(databaseName, true);
-		buildCreateFile(databaseName, false);
+		buildCreateFile(databaseName, POPULATED);
+		buildCreateFile(databaseName, MINIMAL);
+		buildCreateFile(databaseName, SHARDED);
+	}
+
+	public void buildCreateFile(String databaseName, int population)
+		throws IOException {
+
+		String suffix = getSuffix(population);
+
+		File file = new File(
+			"../sql/create" + suffix + "/create" + suffix +
+				"-" + getServerName() + ".sql");
+
+		if (population != SHARDED) {
+			String content = buildCreateFileContent(databaseName, population);
+
+			if (content != null) {
+				FileUtil.write(file, content);
+			}
+		}
+		else {
+			String content = buildCreateFileContent(databaseName, MINIMAL);
+
+			if (content != null) {
+				FileUtil.write(file, content);
+			}
+
+			content = buildCreateFileContent(databaseName + "1", MINIMAL);
+
+			if (content != null) {
+				FileUtil.write(file, content, false, true);
+			}
+
+			content = buildCreateFileContent(databaseName + "2", MINIMAL);
+
+			if (content != null) {
+				FileUtil.write(file, content, false, true);
+			}
+		}
 	}
 
 	public abstract String buildSQL(String template) throws IOException;
@@ -512,8 +556,8 @@ public abstract class DBUtil {
 		_type = type;
 	}
 
-	protected abstract void buildCreateFile(
-			String databaseName, boolean minimal)
+	protected abstract String buildCreateFileContent(
+			String databaseName, int population)
 		throws IOException;
 
 	protected String[] buildColumnNameTokens(String line) {
@@ -661,9 +705,12 @@ public abstract class DBUtil {
 		return template;
 	}
 
-	protected String getMinimalSuffix(boolean minimal) {
-		if (minimal) {
+	protected String getSuffix(int type) {
+		if (type == MINIMAL) {
 			return "-minimal";
+		}
+		else if (type == SHARDED) {
+			return "-sharded";
 		}
 		else {
 			return StringPool.BLANK;

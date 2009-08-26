@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -58,14 +57,10 @@ public class InformixUtil extends DBUtil {
 		super(TYPE_INFORMIX);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
+	protected String buildCreateFileContent(String databaseName, int population)
 		throws IOException {
 
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-informix.sql");
+		String suffix = getSuffix(population);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -84,14 +79,14 @@ public class InformixUtil extends DBUtil {
 		sb.append("\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+				"../sql/portal" + suffix + "/portal" + suffix +
 					"-informix.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-informix.sql"));
 
-		FileUtil.write(file, sb.toString());
+		return sb.toString();
 	}
 
 	protected String getServerName() {

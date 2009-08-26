@@ -22,11 +22,9 @@
 
 package com.liferay.portal.tools.sql;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -62,14 +60,10 @@ public class FirebirdUtil extends DBUtil {
 		super(type);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
+	protected String buildCreateFileContent(String databaseName, int population)
 		throws IOException {
 
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-firebird.sql");
+		String suffix = getSuffix(population);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -81,11 +75,11 @@ public class FirebirdUtil extends DBUtil {
 				".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			readSQL(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+				"../sql/portal" + suffix + "/portal" + suffix +
 					"-firebird.sql",
 				_FIREBIRD[0], ";\n"));
 
-		FileUtil.write(file, sb.toString());
+		return sb.toString();
 	}
 
 	protected String getServerName() {

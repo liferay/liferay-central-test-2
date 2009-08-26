@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -63,14 +62,10 @@ public class SybaseUtil extends DBUtil {
 		super(TYPE_SYBASE);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
+	protected String buildCreateFileContent(String databaseName, int population)
 		throws IOException {
 
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-sybase.sql");
+		String suffix = getSuffix(population);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -89,14 +84,14 @@ public class SybaseUtil extends DBUtil {
 		sb.append("use " + databaseName + "\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+				"../sql/portal" + suffix + "/portal" + suffix +
 					"-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
-		FileUtil.write(file, sb.toString());
+		return sb.toString();
 	}
 
 	protected String getServerName() {

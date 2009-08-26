@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -69,14 +68,10 @@ public class DerbyUtil extends DBUtil {
 		super(TYPE_DERBY);
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
+	protected String buildCreateFileContent(String databaseName, int population)
 		throws IOException {
 
-		String minimalSuffix = getMinimalSuffix(minimal);
-
-		File file = new File(
-			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
-				"-derby.sql");
+		String suffix = getSuffix(population);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -85,14 +80,14 @@ public class DerbyUtil extends DBUtil {
 		sb.append("connect to " + databaseName + ";\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+				"../sql/portal" + suffix + "/portal" + suffix +
 					"-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
 
-		FileUtil.write(file, sb.toString());
+		return sb.toString();
 	}
 
 	protected String getServerName() {
