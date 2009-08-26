@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.xml.QName;
+
 import java.io.Serializable;
 
 import java.util.Map;
@@ -54,6 +56,8 @@ public interface PortletApp extends Serializable {
 	public void setDefaultNamespace(String defaultNamespace);
 
 	public void addEventDefinition(EventDefinition eventDefinition);
+
+	public void addPublicRenderParameter(String identifier, QName qName);
 
 	public void addPublicRenderParameter(
 		PublicRenderParameter publicRenderParameter);

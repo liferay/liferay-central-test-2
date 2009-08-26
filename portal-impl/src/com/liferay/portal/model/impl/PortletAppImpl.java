@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
@@ -100,6 +101,13 @@ public class PortletAppImpl implements PortletApp {
 
 	public void addEventDefinition(EventDefinition eventDefinition) {
 		_eventDefinitions.add(eventDefinition);
+	}
+
+	public void addPublicRenderParameter(String identifier, QName qName) {
+		PublicRenderParameter publicRenderParameter =
+			new PublicRenderParameterImpl(identifier, qName, this);
+
+		addPublicRenderParameter(publicRenderParameter);
 	}
 
 	public void addPublicRenderParameter(
