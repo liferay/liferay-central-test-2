@@ -130,7 +130,7 @@ public class CA_AddImageTest extends BaseTestCase {
 
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\assertactions\\DLP_test_image.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\assertactions\\dependencies\\DLP_test_image.jpg"));
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("Permissions Image Test"));
 		selenium.type("_31_name",

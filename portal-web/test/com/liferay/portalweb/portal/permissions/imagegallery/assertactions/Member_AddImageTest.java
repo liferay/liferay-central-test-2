@@ -113,7 +113,7 @@ public class Member_AddImageTest extends BaseTestCase {
 		selenium.click("link=Use the classic uploader.");
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\assertactions\\DLP_test_image_3.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\assertactions\\dependencies\\DLP_test_image_3.jpg"));
 		selenium.typeKeys("_31_name",
 			RuntimeVariables.replace("Third Permissions Image Test"));
 		selenium.type("_31_name",

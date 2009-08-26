@@ -94,7 +94,7 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\Portlet_TestDocument.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\dependencies\\Portlet_TestDocument.txt"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("My1 Community1 Document1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

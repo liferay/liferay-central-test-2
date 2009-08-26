@@ -96,7 +96,7 @@ public class SA_AddTemporaryDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\SA_TestDocument.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\dependencies\\SA_TestDocument.txt"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Portlet1 Temporary1 Document1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

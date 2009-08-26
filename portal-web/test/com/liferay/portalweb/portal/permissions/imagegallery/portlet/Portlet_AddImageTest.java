@@ -114,7 +114,7 @@ public class Portlet_AddImageTest extends BaseTestCase {
 
 				selenium.type("_31_file",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\Portlet_TestImage.jpg"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\Portlet_TestImage.jpg"));
 				selenium.type("_31_name",
 					RuntimeVariables.replace("Portlet1 Permissions1 Image1"));
 				selenium.click(RuntimeVariables.replace(

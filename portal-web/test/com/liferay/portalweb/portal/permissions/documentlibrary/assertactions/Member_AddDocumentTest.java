@@ -113,7 +113,7 @@ public class Member_AddDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\Member_TestDocument.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\dependencies\\Member_TestDocument.txt"));
 		selenium.typeKeys("_20_title",
 			RuntimeVariables.replace("Member Permissions Test Document"));
 		selenium.type("_20_title",

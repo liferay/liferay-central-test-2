@@ -112,7 +112,7 @@ public class SA_AddTemporaryImageTest extends BaseTestCase {
 
 				selenium.type("_31_file",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\SA_TestImage.jpg"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\SA_TestImage.jpg"));
 				selenium.type("_31_name",
 					RuntimeVariables.replace("Portlet2 Temporary2 Image2"));
 				selenium.click(RuntimeVariables.replace(

@@ -79,7 +79,7 @@ public class Portlet_AddDocumentTest extends BaseTestCase {
 		selenium.click("link=Use the classic uploader.");
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\Portlet_TestDocument.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\dependencies\\Portlet_TestDocument.txt"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Portlet1 Portlet1 Permissions1 Document1"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -132,7 +132,7 @@ public class CA_AddDocumentTest extends BaseTestCase {
 
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\CA_TestDocument.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\dependencies\\CA_TestDocument.txt"));
 		selenium.typeKeys("_20_title",
 			RuntimeVariables.replace("Admin Permissions Test Document"));
 		selenium.type("_20_title",
