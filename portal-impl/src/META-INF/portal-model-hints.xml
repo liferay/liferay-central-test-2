@@ -212,7 +212,7 @@
 		</field>
 		<field name="hidden" type="boolean" />
 		<field name="friendlyURL" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">255</hint>
 		</field>
 		<field name="iconImage" type="boolean" />
 		<field name="iconImageId" type="long" />
