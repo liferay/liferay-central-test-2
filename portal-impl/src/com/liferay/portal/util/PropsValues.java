@@ -1159,7 +1159,7 @@ public class PropsValues {
 			PropsUtil.get(PropsKeys.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE));
 
 	public static final String PERSISTENCE_PROVIDER	=
-		PropsUtil.get(PropsKeys.PERSISTENCE_PROVIDER);
+		GetterUtil.getString(PropsUtil.get(PropsKeys.PERSISTENCE_PROVIDER));
 
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
