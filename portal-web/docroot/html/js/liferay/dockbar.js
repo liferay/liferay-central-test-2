@@ -449,7 +449,7 @@
 	);
 })();
 
-jQuery(
+AUI().ready(
 	function() {
 		Liferay.Dockbar.init();
 	}

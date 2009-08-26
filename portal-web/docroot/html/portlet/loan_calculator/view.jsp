@@ -49,7 +49,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 %>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var form = jQuery('#<portlet:namespace />fm');
 			form.ajaxForm(

@@ -32,7 +32,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 %>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			new Liferay.Upload(
 				{
@@ -101,7 +101,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			for (var i = 1; i < 4; i++) {
 				jQuery("#<portlet:namespace />file" + i).change(

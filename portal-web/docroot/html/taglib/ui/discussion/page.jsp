@@ -111,7 +111,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 				submitForm(document.<%= formName %>);
 			}
 
-			jQuery(
+			AUI().ready(
 				function() {
 					var form = jQuery(document.<%= formName %>);
 

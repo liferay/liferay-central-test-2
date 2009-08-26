@@ -132,7 +132,7 @@ if (organizationId > 0) {
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var selectionMethod = jQuery('#<portlet:namespace />selectionMethod');
 

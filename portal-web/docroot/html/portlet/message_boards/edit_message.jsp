@@ -446,7 +446,7 @@ if ((message != null) && message.isAttachments()) {
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);

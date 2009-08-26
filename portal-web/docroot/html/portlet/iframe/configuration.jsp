@@ -46,7 +46,7 @@ String htmlAttributes =
 </style>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var authCheckbox = jQuery('#<portlet:namespace />authCheckbox');
 			var auth = jQuery('#<portlet:namespace />auth');

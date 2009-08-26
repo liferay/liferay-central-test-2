@@ -27,7 +27,7 @@
 </div>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			var panel = new Liferay.PanelFloating(
 				{

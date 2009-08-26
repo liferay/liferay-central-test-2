@@ -51,7 +51,7 @@
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				jQuery('#<portlet:namespace />pad .note-color').click(
 					function() {

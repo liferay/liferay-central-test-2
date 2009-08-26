@@ -71,7 +71,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 <input id="<%= randomNamespace %>selectAssetCategories" type="button" value="<liferay-ui:message key="select-categories" />" />
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			new Liferay.AssetCategoriesSelector(
 				{

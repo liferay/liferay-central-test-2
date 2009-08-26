@@ -48,7 +48,7 @@ String path = (String)request.getAttribute("liferay-ui:webdav:path");
 </div>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			var webdavDiv = jQuery('#<%= randomNamespace %>webdav');
 			var webdavLink = webdavDiv.find('.show-webdav');

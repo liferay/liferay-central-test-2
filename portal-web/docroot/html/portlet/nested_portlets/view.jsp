@@ -30,7 +30,7 @@
 	</div>
 
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				var portletWrapper = jQuery('#portlet-wrapper-<%= portletDisplay.getId() %>');
 

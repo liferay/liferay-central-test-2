@@ -286,7 +286,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 </fieldset>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			new Liferay.AutoFields(
 				{

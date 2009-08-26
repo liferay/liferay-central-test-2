@@ -275,7 +275,7 @@ Liferay.Portlet = {
 			instance.registerStatic(portletId);
 		}
 
-		jQuery(
+		AUI().ready(
 			function () {
 				var jPortlet = jQuery('#' + namespacedId);
 				var portlet = jPortlet[0];

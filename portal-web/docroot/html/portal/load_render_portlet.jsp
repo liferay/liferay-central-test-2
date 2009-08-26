@@ -134,7 +134,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		%>
 
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					var ns = '<%= portletDisplay.getNamespace() %>';
 

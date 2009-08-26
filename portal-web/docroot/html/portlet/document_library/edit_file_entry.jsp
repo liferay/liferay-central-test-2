@@ -143,7 +143,7 @@ portletURL.setParameter("name", name);
 
 <c:if test="<%= fileEntry == null %>">
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				new Liferay.Upload(
 					{
@@ -314,7 +314,7 @@ portletURL.setParameter("name", name);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery("#<portlet:namespace />file").change(
 				function() {

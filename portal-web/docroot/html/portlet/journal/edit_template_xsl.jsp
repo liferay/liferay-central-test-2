@@ -141,7 +141,7 @@ else {
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
 

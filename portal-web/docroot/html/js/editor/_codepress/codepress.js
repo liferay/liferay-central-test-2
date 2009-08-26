@@ -144,8 +144,8 @@ CodePress.run = function() {
 
 // Liferay
 
-if (jQuery) {
-	jQuery(CodePress.run);
+if (AUI) {
+	AUI().ready(CodePress.run);
 }
 else {
 	if(window.attachEvent) window.attachEvent('onload',CodePress.run);

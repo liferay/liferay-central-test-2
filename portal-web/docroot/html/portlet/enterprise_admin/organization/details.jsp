@@ -113,7 +113,7 @@ if (organization != null) {
 		jQuery('.selected .modify-link').trigger('change');
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('span.modify-link').bind(
 				'click',
@@ -359,7 +359,7 @@ if (parentOrganization != null) {
 />
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			new Liferay.DynamicSelect(
 				[

@@ -203,7 +203,7 @@
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			new Liferay.Portlet.AssetCategoryAdmin('<%= portletDisplay.getId() %>');
 		}

@@ -198,7 +198,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		}
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			<portlet:namespace />init();
 		}

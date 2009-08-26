@@ -174,7 +174,7 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 		}
 	);
 
-	jQuery(
+	AUI().ready(
 		function() {
 			var fm = jQuery(document.<portlet:namespace />fm);
 

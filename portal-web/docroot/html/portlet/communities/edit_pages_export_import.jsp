@@ -150,7 +150,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 </c:choose>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('.<portlet:namespace />handler-control input[type=checkbox]:not([checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
 

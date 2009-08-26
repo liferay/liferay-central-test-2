@@ -81,7 +81,7 @@
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var reminderQueryQuestion = jQuery('#reminderQueryQuestion');
 			var customQuestionDiv = jQuery('#customQuestionDiv');

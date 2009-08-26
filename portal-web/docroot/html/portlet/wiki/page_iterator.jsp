@@ -148,7 +148,7 @@ else if (type.equals("tagged_pages")) {
 			}
 		}
 
-		jQuery(
+		AUI().ready(
 			function() {
 				<portlet:namespace />initRowsChecked();
 

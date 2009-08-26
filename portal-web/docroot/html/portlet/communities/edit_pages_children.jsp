@@ -172,7 +172,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">
-				jQuery(
+				AUI().ready(
 					function() {
 						<c:if test="<%= !layoutPrototypes.isEmpty() %>">
 							var layoutPrototypeIdSelect = jQuery('#<portlet:namespace />layoutPrototypeId');

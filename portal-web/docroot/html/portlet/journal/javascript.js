@@ -2777,7 +2777,7 @@
 
 	Liferay.Portlet.Journal.FieldModel = {};
 
-	jQuery(document).ready(
+	AUI().ready(
 		function() {
 			var fieldModel = Liferay.Portlet.Journal.FieldModel;
 

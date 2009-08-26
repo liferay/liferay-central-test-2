@@ -536,7 +536,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						</div>
 
 						<script type="text/javascript">
-							jQuery(
+							AUI().ready(
 								function () {
 									Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 									Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');

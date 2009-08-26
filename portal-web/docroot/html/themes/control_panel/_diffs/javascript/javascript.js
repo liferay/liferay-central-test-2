@@ -1,7 +1,7 @@
 Liferay.Util.portletTitleEdit = function() {
 };
 
-jQuery(
+AUI().ready(
 	function() {
 		var portletInformationEl = jQuery('#cpContextPanelTemplate');
 		var portletInformationIcon = jQuery('#cpPortletTitleHelpIcon');

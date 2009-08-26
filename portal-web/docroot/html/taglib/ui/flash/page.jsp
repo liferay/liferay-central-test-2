@@ -51,7 +51,7 @@ String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 <div id="<%= randomNamespace %>flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
 

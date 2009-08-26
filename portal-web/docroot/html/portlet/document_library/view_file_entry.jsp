@@ -133,7 +133,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		}
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			<portlet:namespace />initRowsChecked();
 

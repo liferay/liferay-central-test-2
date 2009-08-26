@@ -73,7 +73,7 @@ if (hidePortletWhenEmpty) {
 %>
 
 <script type="text/javascript">
-	jQuery(document).ready(
+	AUI().ready(
 		function() {
 			var treeview = jQuery('#<%= namespace %>taglibAssetCategoriesNavigation .treeview');
 

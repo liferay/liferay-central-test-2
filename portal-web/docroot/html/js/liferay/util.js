@@ -452,7 +452,7 @@ Liferay.Util = {
 			}
 		);
 
-		jQuery(
+		AUI().ready(
 			function() {
 				if (el && (el.offsetHeight != 0) && !interacting) {
 					var elObj = jQuery(el);
@@ -880,7 +880,7 @@ Liferay.Util = {
 			}
 		};
 
-		jQuery(init);
+		AUI().ready(init);
 	},
 
 	resubmitCountdown: function(formName) {

@@ -160,7 +160,7 @@ if (dateFormatPattern.indexOf("y") == 0) {
 		);
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			new Liferay.DatePicker(
 				{

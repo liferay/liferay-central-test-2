@@ -160,7 +160,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 </div>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			<c:if test="<%= !disabled %>">
 				new Liferay.AutoFields(

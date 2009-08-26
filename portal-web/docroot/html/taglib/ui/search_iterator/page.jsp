@@ -281,7 +281,7 @@ List<String> primaryKeys = new ArrayList<String>();
 	<input id="<%= id %>PrimaryKeys" name="<%= id %>PrimaryKeys" type="hidden" value="<%= StringUtil.merge(primaryKeys) %>" />
 
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function () {
 				new Liferay.SearchContainer(
 					{

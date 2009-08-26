@@ -163,7 +163,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		}
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('#<portlet:namespace />cancelButton').click(
 				function() {

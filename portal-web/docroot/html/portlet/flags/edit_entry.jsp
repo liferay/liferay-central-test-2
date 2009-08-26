@@ -45,7 +45,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 </style>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			Liferay.Util.toggleSelectBox('<portlet:namespace />reason', 'other', '<portlet:namespace />otherReasonDiv');
 		}

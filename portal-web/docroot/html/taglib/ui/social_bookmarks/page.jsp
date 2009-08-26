@@ -51,7 +51,7 @@
 	</div>
 
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function () {
 				var socialBookmarks = jQuery('#<%= randomNamespace %>socialBookmarks');
 				var linkSocialBookmarks = socialBookmarks.find('.show-bookmarks');

@@ -124,7 +124,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
 

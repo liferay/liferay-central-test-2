@@ -54,7 +54,7 @@ catch (Exception e) {
 %>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var form = jQuery('#<portlet:namespace />fm');
 

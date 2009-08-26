@@ -72,7 +72,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		editUserPortraitWindow.focus();
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('span.modify-link').bind(
 				'click',

@@ -97,7 +97,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 		new Option(4, 'Réaumure')
 	];
 
-	jQuery(
+	AUI().ready(
 		function() {
 			var form = jQuery('#<portlet:namespace />fm');
 

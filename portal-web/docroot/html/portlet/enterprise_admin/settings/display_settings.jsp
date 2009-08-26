@@ -63,7 +63,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 		editCompanyLogoWindow.focus();
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('span.modify-link').bind(
 				'click',

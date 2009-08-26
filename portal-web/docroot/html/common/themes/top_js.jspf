@@ -401,7 +401,7 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 			);
 		}
 
-		jQuery(
+		AUI().ready(
 			function() {
 				if (Liferay.Dock) {
 					Liferay.Dock.init();

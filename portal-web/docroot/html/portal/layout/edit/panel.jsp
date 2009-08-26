@@ -94,7 +94,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	}
 	%>
 
-	jQuery(
+	AUI().ready(
 		function() {
 			new Liferay.Tree(
 				{

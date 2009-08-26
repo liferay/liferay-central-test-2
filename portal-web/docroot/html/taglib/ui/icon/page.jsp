@@ -133,7 +133,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 
 <c:if test="<%= srcHoverIsNotNull %>">
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				var icon = jQuery('#<%= randomId %>');
 

@@ -260,7 +260,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		</form>
 
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					var form = jQuery("#<portlet:namespace />fm");
 

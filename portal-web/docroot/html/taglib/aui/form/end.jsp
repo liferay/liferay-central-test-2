@@ -33,7 +33,7 @@ name = portletResponse.getNamespace() + name;
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery('#<%= name %> :input').focus(
 				function(event) {

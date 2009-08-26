@@ -58,7 +58,7 @@ for (int i = 0; i < urls.length; i++) {
 %>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var minusAlt = '<liferay-ui:message key="collapse" />';
 			var minusImage = '01_minus.png';

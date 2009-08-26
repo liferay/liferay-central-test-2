@@ -154,7 +154,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	</fieldset>
 
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				var reminderQueryQuestion = jQuery('#<portlet:namespace />reminderQueryQuestion');
 				var customQuestionDiv = jQuery('#<portlet:namespace />customQuestionDiv');

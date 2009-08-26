@@ -43,7 +43,7 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 		%>
 
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					window.close();
 					opener.<portlet:namespace />changeLogo('<%= logoURL %>');

@@ -129,7 +129,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 </c:if>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			new Liferay.DynamicSelect(
 				[

@@ -1,4 +1,4 @@
-jQuery(document).ready(
+AUI().ready(
 
 	/*
 	This function gets loaded when all the HTML, not including the portlets, is
@@ -22,8 +22,8 @@ Liferay.Portlet.ready(
 	}
 );
 
-jQuery(document).last(
-
+Liferay.bind(
+	'allPortletsReady',
 	/*
 	This function gets loaded when everything, including the portlets, is on
 	the page.

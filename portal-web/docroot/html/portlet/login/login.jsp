@@ -131,7 +131,7 @@
 		<%@ include file="/html/portlet/login/navigation.jspf" %>
 
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					jQuery('#<portlet:namespace />password').keypress(
 						function(event) {

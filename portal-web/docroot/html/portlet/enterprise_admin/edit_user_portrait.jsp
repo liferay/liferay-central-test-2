@@ -31,7 +31,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					window.close();
 					opener.<portlet:namespace />changePortrait('<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>');

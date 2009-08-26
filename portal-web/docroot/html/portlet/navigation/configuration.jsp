@@ -162,7 +162,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 </form>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var selects = jQuery('#<portlet:namespace/>displayStyle');
 

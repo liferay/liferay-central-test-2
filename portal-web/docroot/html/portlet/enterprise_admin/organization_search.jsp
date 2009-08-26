@@ -125,7 +125,7 @@ if (displayTerms.getParentOrganizationId() > 0) {
 </liferay-ui:search-toggle>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			new Liferay.DynamicSelect(
 				[

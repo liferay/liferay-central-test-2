@@ -85,7 +85,7 @@ String threadView = messageDisplay.getThreadView();
 	}
 
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
-		jQuery(
+		AUI().ready(
 			function() {
 				document.getElementById("<portlet:namespace />message_" + <%= message.getMessageId() %>).scrollIntoView(true);
 			}

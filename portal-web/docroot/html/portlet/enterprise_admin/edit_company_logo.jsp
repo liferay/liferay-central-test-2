@@ -27,7 +27,7 @@
 <c:choose>
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function() {
 					window.close();
 					opener.<portlet:namespace />changeLogo('<%= themeDisplay.getPathImage() + "/company_logo?img_id=" + company.getLogoId() + "&t=" + ImageServletTokenUtil.getToken(company.getLogoId()) %>');

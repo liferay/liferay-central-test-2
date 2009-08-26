@@ -152,7 +152,7 @@ if (image != null) {
 
 <c:if test="<%= image == null %>">
 	<script type="text/javascript">
-		jQuery(
+		AUI().ready(
 			function() {
 				new Liferay.Upload(
 					{
@@ -306,7 +306,7 @@ if (image != null) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	jQuery(
+	AUI().ready(
 		function() {
 			jQuery("#<portlet:namespace />file").change(
 				function() {

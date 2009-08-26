@@ -223,7 +223,7 @@ else {
 		</div>
 
 		<script type="text/javascript">
-			jQuery(
+			AUI().ready(
 				function () {
 					new Liferay.DynamicSelect(
 						[
@@ -254,7 +254,7 @@ else {
 </fieldset>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			var addresses = new Liferay.AutoFields(
 				{

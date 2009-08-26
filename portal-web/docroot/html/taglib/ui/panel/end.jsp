@@ -30,7 +30,7 @@
 <c:if test="<%= collapsible && (panelCount == null) %>">
 	<script type="text/javascript">
 		if (Liferay.Panel) {
-			jQuery(
+			AUI().ready(
 				function () {
 					var panel = new Liferay.Panel(
 						{
