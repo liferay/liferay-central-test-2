@@ -22,11 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.portal.model.impl.LayoutModelImpl;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v4_3_0.util.LayoutTable;
+import com.liferay.portal.upgrade.v5_3_0.util.LayoutTable;
 
 /**
  * <a href="UpgradeLayout.java.html"><b><i>View Source</i></b></a>
@@ -44,10 +43,9 @@ public class UpgradeLayout extends UpgradeProcess {
 			// Layout
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-				LayoutTable.TABLE_NAME,
-				LayoutModelImpl.TABLE_COLUMNS);
+				LayoutTable.TABLE_NAME, LayoutTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(LayoutModelImpl.TABLE_SQL_CREATE);
+			upgradeTable.setCreateSQL(LayoutTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
 		}
