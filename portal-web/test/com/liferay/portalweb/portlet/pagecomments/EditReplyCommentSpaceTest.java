@@ -51,27 +51,14 @@ public class EditReplyCommentSpaceTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//tr[8]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_107_editReplyBody3")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isVisible("_107_editReplyBody3"));
 		selenium.type("_107_editReplyBody3", RuntimeVariables.replace(""));
 		selenium.click("_107_editReplyButton3");
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isVisible("_107_editReplyBody3"));
+		selenium.click("//tr[8]/td[2]/table[2]/tbody/tr[2]/td/input[2]");
+		assertFalse(selenium.isVisible("_107_editReplyBody3"));
 	}
 }

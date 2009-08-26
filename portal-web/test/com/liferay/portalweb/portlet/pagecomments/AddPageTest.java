@@ -62,7 +62,7 @@ public class AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
 					break;
 				}
 			}
@@ -73,7 +73,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

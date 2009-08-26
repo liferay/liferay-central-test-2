@@ -56,7 +56,7 @@ public class AssertRatingsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("+1"),
 			selenium.getText("//td[1]/ul/li[1]/span"));
 		assertEquals(RuntimeVariables.replace("(1 Vote)"),
-			selenium.getText("//td[1]/ul/li[3]/span"));
+			selenium.getText("//li[3]/span"));
 		assertEquals(RuntimeVariables.replace("-1"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
@@ -69,7 +69,7 @@ public class AssertRatingsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText("//td[1]/ul/li[1]/span"));
 		assertEquals(RuntimeVariables.replace("(0 Votes)"),
-			selenium.getText("//td[1]/ul/li[3]/span"));
+			selenium.getText("//li[3]/span"));
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));

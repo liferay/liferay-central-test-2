@@ -58,7 +58,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("value")) {
+				if (selenium.isVisible("value")) {
 					break;
 				}
 			}
@@ -69,8 +69,41 @@ public class EditPortletNameTest extends BaseTestCase {
 		}
 
 		selenium.type("value", RuntimeVariables.replace("T\u00e9st Name"));
-		selenium.click("link=Application");
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[2]/ul/li[1]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st Name"),
@@ -85,7 +118,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("value")) {
+				if (selenium.isVisible("value")) {
 					break;
 				}
 			}
@@ -96,8 +129,41 @@ public class EditPortletNameTest extends BaseTestCase {
 		}
 
 		selenium.type("value", RuntimeVariables.replace("Page Comments"));
-		selenium.click("link=Application");
-		Thread.sleep(500);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[2]/ul/li[1]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Page Comments"),

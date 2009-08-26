@@ -26,12 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddNullCommentCancelTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddCancelNullReplyCommentTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  */
-public class AddNullCommentCancelTest extends BaseTestCase {
-	public void testAddNullCommentCancel() throws Exception {
+public class AddCancelNullReplyCommentTest extends BaseTestCase {
+	public void testAddCancelNullReplyComment() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,7 +51,7 @@ public class AddNullCommentCancelTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Comment");
+		selenium.click("link=Post Reply");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -58,7 +59,7 @@ public class AddNullCommentCancelTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Cancel']")) {
+				if (selenium.isVisible("_107_postReplyBody1")) {
 					break;
 				}
 			}
@@ -68,10 +69,8 @@ public class AddNullCommentCancelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Cancel']");
-		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent(
-				"link=This is a null comment cancel test."));
+		assertTrue(selenium.isVisible("_107_postReplyBody1"));
+		selenium.click("//td[2]/table[2]/tbody/tr[1]/td/input[2]");
+		assertFalse(selenium.isVisible("_107_postReplyBody1"));
 	}
 }

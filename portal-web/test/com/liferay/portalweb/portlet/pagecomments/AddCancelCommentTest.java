@@ -58,7 +58,7 @@ public class AddCancelCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isVisible("_107_postReplyBody0")) {
 					break;
 				}
 			}
@@ -73,6 +73,7 @@ public class AddCancelCommentTest extends BaseTestCase {
 		selenium.click("//input[@value='Cancel']");
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isVisible("_107_postReplyBody0"));
 		assertFalse(selenium.isElementPresent(
 				"link=This is a cancel test page comment."));
 	}

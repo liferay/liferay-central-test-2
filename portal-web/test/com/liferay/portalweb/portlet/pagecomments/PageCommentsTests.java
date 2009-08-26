@@ -44,12 +44,12 @@ public class PageCommentsTests extends BaseTests {
 		testSuite.addTestSuite(AddNullCommentTest.class);
 		testSuite.addTestSuite(AddSpaceCommentTest.class);
 		testSuite.addTestSuite(AddCancelCommentTest.class);
-		testSuite.addTestSuite(AddNullCommentCancelTest.class);
+		testSuite.addTestSuite(AddCancelNullReplyCommentTest.class);
 		testSuite.addTestSuite(AddSecondCommentTest.class);
 		testSuite.addTestSuite(EditCommentSpaceTest.class);
 		testSuite.addTestSuite(EditCommentTest.class);
 		testSuite.addTestSuite(AddReplyCommentTest.class);
-		testSuite.addTestSuite(AssertRatingsTest.class);
+		//testSuite.addTestSuite(AssertRatingsTest.class);
 		testSuite.addTestSuite(AddSpaceReplyCommentTest.class);
 		testSuite.addTestSuite(EditReplyCommentTest.class);
 		testSuite.addTestSuite(EditReplyCommentSpaceTest.class);

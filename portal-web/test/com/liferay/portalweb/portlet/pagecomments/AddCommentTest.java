@@ -58,7 +58,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isVisible("_107_postReplyBody0")) {
 					break;
 				}
 			}
@@ -68,12 +68,14 @@ public class AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertTrue(selenium.isVisible("_107_postReplyBody0"));
 		selenium.type("_107_postReplyBody0",
 			RuntimeVariables.replace("This is a test page comment."));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertFalse(selenium.isVisible("_107_postReplyBody0"));
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}

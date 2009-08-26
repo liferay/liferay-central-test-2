@@ -58,7 +58,7 @@ public class AddNullCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyButton0")) {
+				if (selenium.isVisible("_107_postReplyButton0")) {
 					break;
 				}
 			}
@@ -72,5 +72,8 @@ public class AddNullCommentTest extends BaseTestCase {
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isVisible("_107_postReplyBody0"));
+		selenium.click("//input[@value='Cancel']");
+		assertFalse(selenium.isVisible("_107_postReplyBody0"));
 	}
 }

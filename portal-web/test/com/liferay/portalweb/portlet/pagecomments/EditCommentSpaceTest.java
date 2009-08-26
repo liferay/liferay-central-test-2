@@ -58,7 +58,7 @@ public class EditCommentSpaceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_editReplyBody1")) {
+				if (selenium.isVisible("_107_editReplyBody1")) {
 					break;
 				}
 			}
@@ -73,5 +73,10 @@ public class EditCommentSpaceTest extends BaseTestCase {
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isVisible("_107_editReplyBody1"));
+		selenium.click("//tr[2]/td/input[2]");
+		assertFalse(selenium.isVisible("_107_editReplyBody1"));
+		assertEquals(RuntimeVariables.replace("This is a test page comment."),
+			selenium.getText("//td[2]/div[1]"));
 	}
 }

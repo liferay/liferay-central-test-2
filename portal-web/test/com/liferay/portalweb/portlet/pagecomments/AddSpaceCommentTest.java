@@ -58,7 +58,7 @@ public class AddSpaceCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_107_postReplyBody0")) {
+				if (selenium.isVisible("_107_postReplyBody0")) {
 					break;
 				}
 			}
@@ -73,5 +73,8 @@ public class AddSpaceCommentTest extends BaseTestCase {
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
+		assertTrue(selenium.isVisible("_107_postReplyBody0"));
+		selenium.click("//input[@value='Cancel']");
+		assertFalse(selenium.isVisible("_107_postReplyBody0"));
 	}
 }
