@@ -744,6 +744,7 @@
 	padding-top: 5px;
 	position: absolute;
 	width: 180px;
+	z-index: 99999;
 }
 
 .lfr-emoticon-container .lfr-button {
