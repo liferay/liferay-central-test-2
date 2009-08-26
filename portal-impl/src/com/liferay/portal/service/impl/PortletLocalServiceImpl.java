@@ -1300,13 +1300,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		boolean portletXMLValidate = PropsValues.PORTLET_XML_VALIDATE;
-
-		if (ServerDetector.isGeronimo() || ServerDetector.isResin()) {
-			portletXMLValidate = false;
-		}
-
-		Document doc = SAXReaderUtil.read(xml, portletXMLValidate);
+		Document doc = SAXReaderUtil.read(
+			xml, PropsValues.PORTLET_XML_VALIDATE);
 
 		Element root = doc.getRootElement();
 

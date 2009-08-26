@@ -50,6 +50,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.xerces.parsers.SAXParser;
+
 import org.dom4j.DocumentFactory;
 import org.dom4j.DocumentHelper;
 
@@ -419,17 +421,10 @@ public class SAXReaderImpl implements SAXReader {
 	}
 
 	protected org.dom4j.io.SAXReader getSAXReader(boolean validate) {
-
-		// Crimson cannot do XSD validation. See the following links:
-		//
-		// http://www.geocities.com/herong_yang/jdk/xsd_validation.html
-		// http://www.burnthacker.com/archives/000086.html
-		// http://www.theserverside.com/news/thread.tss?thread_id=22525
-
 		org.dom4j.io.SAXReader reader = null;
 
 		try {
-			reader = new org.dom4j.io.SAXReader(_SAX_PARSER_IMPL, validate);
+			reader = new org.dom4j.io.SAXReader(new SAXParser(), validate);
 
 			reader.setEntityResolver(new EntityResolver());
 
@@ -445,16 +440,13 @@ public class SAXReaderImpl implements SAXReader {
 					"XSD validation is diasabled because " + e.getMessage());
 			}
 
-			reader = new org.dom4j.io.SAXReader(validate);
+			reader = new org.dom4j.io.SAXReader(false);
 
 			reader.setEntityResolver(new EntityResolver());
 		}
 
 		return reader;
 	}
-
-	private static final String _SAX_PARSER_IMPL =
-		"org.apache.xerces.parsers.SAXParser";
 
 	private static final String _FEATURES_VALIDATION =
 		"http://xml.org/sax/features/validation";
