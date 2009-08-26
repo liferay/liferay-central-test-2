@@ -25,6 +25,8 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -41,6 +43,44 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
+
+	public DLFileRank addFileRank(
+			long groupId, long companyId, long userId, long folderId,
+			String name)
+		throws SystemException {
+
+		long fileRankId = counterLocalService.increment();
+
+		DLFileRank fileRank = dlFileRankPersistence.create(fileRankId);
+
+		fileRank.setGroupId(groupId);
+		fileRank.setCompanyId(companyId);
+		fileRank.setUserId(userId);
+		fileRank.setCreateDate(new Date());
+		fileRank.setFolderId(folderId);
+		fileRank.setName(name);
+
+		try {
+			dlFileRankPersistence.update(fileRank, false);
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Add failed, fetch {companyId=" + companyId + ", userId=" +
+						userId + ", folderId=" + folderId + ", name=" + name +
+							"}");
+			}
+
+			fileRank = dlFileRankPersistence.fetchByC_U_F_N(
+				companyId, userId, folderId, name, false);
+
+			if (fileRank == null) {
+				throw se;
+			}
+		}
+
+		return fileRank;
+	}
 
 	public void deleteFileRanks(long userId) throws SystemException {
 		dlFileRankPersistence.removeByUserId(userId);
@@ -85,18 +125,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		long fileRankId = counterLocalService.increment();
-
-		DLFileRank fileRank = dlFileRankPersistence.create(fileRankId);
-
-		fileRank.setGroupId(folder.getGroupId());
-		fileRank.setCompanyId(companyId);
-		fileRank.setUserId(userId);
-		fileRank.setCreateDate(new Date());
-		fileRank.setFolderId(folderId);
-		fileRank.setName(name);
-
-		dlFileRankPersistence.update(fileRank, false);
+		DLFileRank fileRank = addFileRank(
+			groupId, companyId, userId, folderId, name);
 
 		if (dlFileRankPersistence.countByG_U(groupId, userId) > 5) {
 			List<DLFileRank> fileRanks = getFileRanks(groupId, userId);
@@ -108,5 +138,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		return fileRank;
 	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(DLFileRankLocalServiceImpl.class);
 
 }
