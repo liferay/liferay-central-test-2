@@ -83,6 +83,8 @@ public class LocalContainerEntityManagerFactoryBean extends
 
 			throw new RuntimeException(e);
 		}
+
+		setPersistenceXmlLocation("classpath*:META-INF/persistence-custom.xml");
 	 }
 
 	public void setDataSource(DataSource dataSource) {
