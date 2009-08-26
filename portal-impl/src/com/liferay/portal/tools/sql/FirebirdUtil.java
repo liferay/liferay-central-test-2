@@ -75,8 +75,7 @@ public class FirebirdUtil extends DBUtil {
 				".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			readSQL(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-firebird.sql",
+				"../sql/portal" + suffix + "/portal" + suffix + "-firebird.sql",
 				_FIREBIRD[0], ";\n"));
 
 		return sb.toString();

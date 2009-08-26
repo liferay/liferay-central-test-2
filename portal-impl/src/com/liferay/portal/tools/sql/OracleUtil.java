@@ -139,8 +139,7 @@ public class OracleUtil extends DBUtil {
 		sb.append("\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-oracle.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-oracle.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
 		sb.append("\n\n");

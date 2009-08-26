@@ -80,8 +80,7 @@ public class DerbyUtil extends DBUtil {
 		sb.append("connect to " + databaseName + ";\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-derby.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
 		sb.append("\n\n");

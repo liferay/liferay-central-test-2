@@ -77,9 +77,9 @@ import org.hibernate.dialect.SybaseDialect;
  */
 public abstract class DBUtil {
 
-	public static final int POPULATED = 0;
-
 	public static final int MINIMAL = 1;
+
+	public static final int POPULATED = 0;
 
 	public static final int SHARDED = 2;
 
@@ -223,10 +223,10 @@ public abstract class DBUtil {
 			_dbUtil = MySQLUtil.getInstance();
 		}
 		else if (dialect instanceof OracleDialect ||
-				dialect instanceof Oracle8iDialect ||
-				dialect instanceof Oracle9Dialect ||
-				dialect instanceof Oracle9iDialect ||
-				dialect instanceof Oracle10gDialect) {
+				 dialect instanceof Oracle8iDialect ||
+				 dialect instanceof Oracle9Dialect ||
+				 dialect instanceof Oracle9iDialect ||
+				 dialect instanceof Oracle10gDialect) {
 
 			_dbUtil = OracleUtil.getInstance();
 		}
@@ -262,8 +262,8 @@ public abstract class DBUtil {
 		String suffix = getSuffix(population);
 
 		File file = new File(
-			"../sql/create" + suffix + "/create" + suffix +
-				"-" + getServerName() + ".sql");
+			"../sql/create" + suffix + "/create" + suffix + "-" +
+				getServerName() + ".sql");
 
 		if (population != SHARDED) {
 			String content = buildCreateFileContent(databaseName, population);
@@ -705,6 +705,8 @@ public abstract class DBUtil {
 		return template;
 	}
 
+	protected abstract String getServerName();
+
 	protected String getSuffix(int type) {
 		if (type == MINIMAL) {
 			return "-minimal";
@@ -716,8 +718,6 @@ public abstract class DBUtil {
 			return StringPool.BLANK;
 		}
 	}
-
-	protected abstract String getServerName();
 
 	protected abstract String[] getTemplate();
 

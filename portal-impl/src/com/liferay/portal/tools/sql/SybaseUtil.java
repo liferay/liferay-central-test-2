@@ -84,8 +84,7 @@ public class SybaseUtil extends DBUtil {
 		sb.append("use " + databaseName + "\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-sybase.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");

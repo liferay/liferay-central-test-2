@@ -108,8 +108,8 @@ public class DB2Util extends DBUtil {
 		sb.append("create database " + databaseName + ";\n");
 		sb.append("connect to " + databaseName + ";\n");
 		sb.append(
-			FileUtil.read("../sql/portal" + suffix + "/portal" +
-				suffix + "-db2.sql"));
+			FileUtil.read("../sql/portal" + suffix + "/portal" + suffix +
+				"-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
 		sb.append("\n\n");

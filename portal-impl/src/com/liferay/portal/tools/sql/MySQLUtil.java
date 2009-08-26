@@ -75,8 +75,7 @@ public class MySQLUtil extends DBUtil {
 		sb.append(";\n\n");
 		sb.append(
 			FileUtil.read(
-				"../sql/portal" + suffix + "/portal" + suffix +
-					"-mysql.sql"));
+				"../sql/portal" + suffix + "/portal" + suffix + "-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
 		sb.append("\n\n");

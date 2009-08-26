@@ -59,7 +59,9 @@ public class IngresUtil extends DBUtil {
 		super(TYPE_INGRES);
 	}
 
-	protected String buildCreateFileContent(String databaseName, int population) {
+	protected String buildCreateFileContent(
+		String databaseName, int population) {
+
 		return null;
 	}
 
