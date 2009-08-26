@@ -264,20 +264,19 @@ public class MinifierFilter extends BasePortalFilter {
 		File file = new File(realPath);
 
 		if (!file.exists()) {
-			if (Validator.isNotNull(request.getContextPath())) {
+			if (Validator.isNotNull(_servletContextName)) {
 
 				// Tomcat incorrectly returns the a real path to a resource that
-				// exists in another web application or if Liferay is run in a
-				// non-root context. For example, it returns
+				// exists in another web application. For example, it returns
 				// ".../webapps/abc-theme/abc-theme/css/main.css" instead of
 				// ".../webapps/abc-theme/css/main.css".
 
 				int lastIndex = realPath.lastIndexOf(
-					StringPool.SLASH + request.getContextPath());
+					StringPool.SLASH + _servletContextName);
 
 				if (lastIndex > -1) {
 					realPath = StringUtil.replace(
-						realPath, StringPool.SLASH + request.getContextPath(),
+						realPath, StringPool.SLASH + _servletContextName,
 						StringPool.BLANK, lastIndex);
 				}
 
