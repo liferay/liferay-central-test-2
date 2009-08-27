@@ -73,17 +73,19 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 
 	public static final String TABLE_NAME = "${entity.table}";
 
-	public static final Object[][] TABLE_COLUMNS = {
-		<#list entity.getRegularColList() as column>
-			<#assign sqlType = serviceBuilder.getSqlType(packagePath + ".model." + entity.getName(), column.getName(), column.getType())>
+	<#compress>
+		public static final Object[][] TABLE_COLUMNS = {
+			<#list entity.getRegularColList() as column>
+				<#assign sqlType = serviceBuilder.getSqlType(packagePath + ".model." + entity.getName(), column.getName(), column.getType())>
 
-			{"${column.DBName}", new Integer(Types.${sqlType})}
+				{"${column.DBName}", new Integer(Types.${sqlType})}
 
-			<#if column_has_next>
-				,
-			</#if>
-		</#list>
-	};
+				<#if column_has_next>
+					,
+				</#if>
+			</#list>
+		};
+	</#compress>
 
 	public static final String TABLE_SQL_CREATE = "${serviceBuilder.getCreateTableSQL(entity)}";
 
