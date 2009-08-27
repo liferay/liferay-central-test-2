@@ -612,22 +612,6 @@ public class LayoutTypePortletImpl
 			}
 		}
 
-		for (int i = oldColumns.size(); i <= 20; i++) {
-			String oldColumnId = "column-" + i;
-
-			if (!newColumns.contains(oldColumnId)) {
-				String oldColumnValue = getTypeSettingsProperties().remove(
-					oldColumnId);
-
-				String[] portletIds = StringUtil.split(oldColumnValue);
-
-				for (String portletId : portletIds) {
-					lastNewColumnValue = StringUtil.add(
-						lastNewColumnValue, portletId);
-				}
-			}
-		}
-
 		getTypeSettingsProperties().setProperty(
 			lastNewColumnId, lastNewColumnValue);
 	}
