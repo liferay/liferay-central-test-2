@@ -39,9 +39,9 @@ public class CacheControlImpl implements CacheControl {
 
 		_eTag = eTag;
 		_expirationTime = expirationTime;
-		_mimeResponseImpl = mimeResponseImpl;
 		_publicScope = publicScope;
 		_useCachedContent = useCachedContent;
+		_mimeResponseImpl = mimeResponseImpl;
 	}
 
 	public String getETag() {
@@ -58,37 +58,38 @@ public class CacheControlImpl implements CacheControl {
 
 	public void setETag(String eTag) {
 		_eTag = eTag;
-		_setProperty(MimeResponse.ETAG, eTag);
+
+		_mimeResponseImpl.setProperty(MimeResponse.ETAG, eTag);
 	}
 
 	public void setExpirationTime(int expirationTime) {
 		_expirationTime = expirationTime;
-		_setProperty(
+
+		_mimeResponseImpl.setProperty(
 			MimeResponse.EXPIRATION_CACHE, String.valueOf(expirationTime));
 	}
 
 	public void setPublicScope(boolean publicScope) {
 		_publicScope = publicScope;
-		_setProperty(MimeResponse.PUBLIC_SCOPE, String.valueOf(publicScope));
+
+		_mimeResponseImpl.setProperty(
+			MimeResponse.PUBLIC_SCOPE, String.valueOf(publicScope));
 	}
 
 	public void setUseCachedContent(boolean useCachedContent) {
 		_useCachedContent = useCachedContent;
-		_setProperty(MimeResponse.USE_CACHED_CONTENT,
-			String.valueOf(useCachedContent));
+
+		_mimeResponseImpl.setProperty(
+			MimeResponse.USE_CACHED_CONTENT, String.valueOf(useCachedContent));
 	}
 
 	public boolean useCachedContent() {
 		return _useCachedContent;
 	}
 
-	private void _setProperty(String key, String value) {
-		_mimeResponseImpl.setProperty(key, value);
-	}
-
-	private MimeResponseImpl _mimeResponseImpl;
 	private String _eTag;
 	private int _expirationTime;
+	private MimeResponseImpl _mimeResponseImpl;
 	private boolean _publicScope;
 	private boolean _useCachedContent;
 
