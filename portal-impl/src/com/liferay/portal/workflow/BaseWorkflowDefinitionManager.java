@@ -23,7 +23,11 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
+import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+
+import java.util.List;
 
 /**
  * <a href="BaseWorkflowDefinitionManager.java.html"><b><i>View
@@ -39,11 +43,31 @@ import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
  * @author Micha Kiener
  *
  */
-public abstract class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
+public class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
 	implements WorkflowDefinitionManager {
 
 	public BaseWorkflowDefinitionManager(
 		SingleDestinationSynchronousMessageSender synchronousMessageSender) {
 		super(synchronousMessageSender);
 	}
+
+	public void deployWorkflowDefinition(
+			WorkflowDefinition workflowDefinition, long callingUserId)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<WorkflowDefinition> getWorkflowDefinitions() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		String workflowDefinitionName) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public boolean isSupportsVersioning() {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 }

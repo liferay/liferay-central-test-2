@@ -23,7 +23,13 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
+import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
+import com.liferay.portal.kernel.workflow.UserCredential;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="BaseTaskInstanceManager.java.html"><b><i>View Source</i></b></a>
@@ -38,11 +44,99 @@ import com.liferay.portal.kernel.workflow.TaskInstanceManager;
  * @author Micha Kiener
  *
  */
-public abstract class BaseTaskInstanceManager extends BaseWorkflowProxy
+public class BaseTaskInstanceManager extends BaseWorkflowProxy
 	implements TaskInstanceManager {
 
 	public BaseTaskInstanceManager(
 		SingleDestinationSynchronousMessageSender synchronousMessageSender) {
 		super(synchronousMessageSender);
 	}
+
+	public TaskInstanceInfo assignTaskInstanceToRole(
+			long taskInstanceId, long roleId, String comment,
+			Map<String, Object> attributes, long callingUserId)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public TaskInstanceInfo assignTaskInstanceToUser(
+			long taskInstanceId, UserCredential userCredential, String comment,
+			Map<String, Object> attributes, long callingUserId)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public TaskInstanceInfo completeTaskInstance(
+		long taskInstanceId, long userId, String comment,
+		Map<String, Object> attributes) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public TaskInstanceInfo completeTaskInstance(
+		long taskInstanceId, long userId, String activityName, String comment,
+		Map<String, Object> attributes) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<String> getPossibleNextActivityNames(
+		long taskInstanceId, long userId) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int getTaskInstanceCountForCredential(UserCredential userCredential)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int getTaskInstanceCountForRole(long roleId)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int getTaskInstanceCountForUser(long userId)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+		UserCredential userCredential) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
+			UserCredential userCredential, boolean completed)
+		throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
+		long roleId) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(long roleId,
+		boolean completed) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
+		long userId) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
+		long userId, boolean completed) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
+		long workflowInstanceId) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
+		long workflowInstanceId, boolean completed) throws WorkflowException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 }

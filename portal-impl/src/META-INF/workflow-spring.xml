@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+
+	<!-- Workflow ManagerProxyAdvice -->
+	<bean id="com.liferay.portal.workflow.ManagerProxyAdvice" class="com.liferay.portal.workflow.ManagerProxyAdvice" />
+
+	<!-- Workflow Base Managers -->
+	<bean id="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" class="com.liferay.portal.workflow.BaseWorkflowDefinitionManager">
+		<constructor-arg>
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_definition" />
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.workflow.BaseWorkflowInstanceManager" class="com.liferay.portal.workflow.BaseWorkflowInstanceManager">
+		<constructor-arg>
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_instance" />
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="com.liferay.portal.workflow.BaseTaskInstanceManager" class="com.liferay.portal.workflow.BaseTaskInstanceManager">
+		<constructor-arg>
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/workflow_task" />
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!-- Workflow Utils -->
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
+		<property name="workflowDefinitionManager">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.workflow.WorkflowDefinitionManager</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" />
+				<property name="interceptorNames">
+					<list>
+						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil">
+		<property name="workflowInstanceManager">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.workflow.WorkflowInstanceManager</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.workflow.BaseWorkflowInstanceManager" />
+				<property name="interceptorNames">
+					<list>
+						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.TaskInstanceManagerUtil">
+		<property name="taskInstanceManager">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.workflow.TaskInstanceManager</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.workflow.BaseTaskInstanceManager" />
+				<property name="interceptorNames">
+					<list>
+						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil">
+		<property name="userCredentialFactory">
+			<bean class="com.liferay.portal.workflow.UserCredentialFactoryImpl" />
+		</property>
+	</bean>
+
+</beans>
