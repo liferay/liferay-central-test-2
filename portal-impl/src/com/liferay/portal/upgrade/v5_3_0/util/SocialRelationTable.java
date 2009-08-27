@@ -40,7 +40,7 @@ public class SocialRelationTable {
 		{"createDate", new Integer(Types.BIGINT)},
 		{"userId1", new Integer(Types.BIGINT)},
 		{"userId2", new Integer(Types.BIGINT)},
-		{"ype_", new Integer(Types.INTEGER)}
+		{"type_", new Integer(Types.INTEGER)}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";
