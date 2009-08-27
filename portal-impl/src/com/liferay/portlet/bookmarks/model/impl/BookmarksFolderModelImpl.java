@@ -67,32 +67,14 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder> {
 	public static final String TABLE_NAME = "BookmarksFolder";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "folderId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "parentFolderId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table BookmarksFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";

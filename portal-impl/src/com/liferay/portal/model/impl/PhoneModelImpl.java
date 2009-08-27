@@ -68,38 +68,16 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 	public static final String TABLE_NAME = "Phone";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "phoneId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "classPK", new Integer(Types.BIGINT) },
-			
-
 			{ "number_", new Integer(Types.VARCHAR) },
-			
-
 			{ "extension", new Integer(Types.VARCHAR) },
-			
-
 			{ "typeId", new Integer(Types.INTEGER) },
-			
-
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Phone (phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";

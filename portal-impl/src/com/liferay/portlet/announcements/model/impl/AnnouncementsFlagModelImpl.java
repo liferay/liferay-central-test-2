@@ -67,17 +67,9 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public static final String TABLE_NAME = "AnnouncementsFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "flagId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "entryId", new Integer(Types.BIGINT) },
-			
-
 			{ "value", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AnnouncementsFlag (flagId LONG not null primary key,userId LONG,createDate DATE null,entryId LONG,value INTEGER)";

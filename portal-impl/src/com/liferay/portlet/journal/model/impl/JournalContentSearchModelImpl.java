@@ -64,23 +64,11 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public static final String TABLE_NAME = "JournalContentSearch";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contentSearchId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "privateLayout", new Integer(Types.BOOLEAN) },
-			
-
 			{ "layoutId", new Integer(Types.BIGINT) },
-			
-
 			{ "portletId", new Integer(Types.VARCHAR) },
-			
-
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalContentSearch (contentSearchId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,portletId VARCHAR(200) null,articleId VARCHAR(75) null)";

@@ -69,56 +69,22 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	public static final String TABLE_NAME = "MBMessage";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "messageId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "classPK", new Integer(Types.BIGINT) },
-			
-
 			{ "categoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "threadId", new Integer(Types.BIGINT) },
-			
-
 			{ "parentMessageId", new Integer(Types.BIGINT) },
-			
-
 			{ "subject", new Integer(Types.VARCHAR) },
-			
-
 			{ "body", new Integer(Types.CLOB) },
-			
-
 			{ "attachments", new Integer(Types.BOOLEAN) },
-			
-
 			{ "anonymous", new Integer(Types.BOOLEAN) },
-			
-
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE)";

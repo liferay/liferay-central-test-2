@@ -64,11 +64,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker> {
 	public static final String TABLE_NAME = "BrowserTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "browserTrackerId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "browserKey", new Integer(Types.BIGINT) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table BrowserTracker (browserTrackerId LONG not null primary key,userId LONG,browserKey LONG)";

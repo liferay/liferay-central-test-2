@@ -63,23 +63,11 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public static final String TABLE_NAME = "SCProductScreenshot";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "productScreenshotId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "productEntryId", new Integer(Types.BIGINT) },
-			
-
 			{ "thumbnailId", new Integer(Types.BIGINT) },
-			
-
 			{ "fullImageId", new Integer(Types.BIGINT) },
-			
-
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SCProductScreenshot (productScreenshotId LONG not null primary key,companyId LONG,groupId LONG,productEntryId LONG,thumbnailId LONG,fullImageId LONG,priority INTEGER)";

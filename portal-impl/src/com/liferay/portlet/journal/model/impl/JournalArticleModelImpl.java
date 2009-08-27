@@ -67,92 +67,34 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	public static final String TABLE_NAME = "JournalArticle";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "id_", new Integer(Types.BIGINT) },
-			
-
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "articleId", new Integer(Types.VARCHAR) },
-			
-
 			{ "version", new Integer(Types.DOUBLE) },
-			
-
 			{ "title", new Integer(Types.VARCHAR) },
-			
-
 			{ "urlTitle", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
-			
-
 			{ "content", new Integer(Types.CLOB) },
-			
-
 			{ "type_", new Integer(Types.VARCHAR) },
-			
-
 			{ "structureId", new Integer(Types.VARCHAR) },
-			
-
 			{ "templateId", new Integer(Types.VARCHAR) },
-			
-
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "approved", new Integer(Types.BOOLEAN) },
-			
-
 			{ "approvedByUserId", new Integer(Types.BIGINT) },
-			
-
 			{ "approvedByUserName", new Integer(Types.VARCHAR) },
-			
-
 			{ "approvedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "expired", new Integer(Types.BOOLEAN) },
-			
-
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "reviewDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "indexable", new Integer(Types.BOOLEAN) },
-			
-
 			{ "smallImage", new Integer(Types.BOOLEAN) },
-			
-
 			{ "smallImageId", new Integer(Types.BIGINT) },
-			
-
 			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";

@@ -65,8 +65,6 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName> {
 	public static final String TABLE_NAME = "ClassName_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "value", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ClassName_ (classNameId LONG not null primary key,value VARCHAR(200) null)";

@@ -69,53 +69,21 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	public static final String TABLE_NAME = "AnnouncementsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "entryId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "classPK", new Integer(Types.BIGINT) },
-			
-
 			{ "title", new Integer(Types.VARCHAR) },
-			
-
 			{ "content", new Integer(Types.VARCHAR) },
-			
-
 			{ "url", new Integer(Types.VARCHAR) },
-			
-
 			{ "type_", new Integer(Types.VARCHAR) },
-			
-
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "priority", new Integer(Types.INTEGER) },
-			
-
 			{ "alert", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AnnouncementsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,title VARCHAR(75) null,content STRING null,url STRING null,type_ VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,priority INTEGER,alert BOOLEAN)";

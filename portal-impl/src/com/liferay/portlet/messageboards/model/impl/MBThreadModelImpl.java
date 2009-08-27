@@ -67,29 +67,13 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	public static final String TABLE_NAME = "MBThread";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "categoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "rootMessageId", new Integer(Types.BIGINT) },
-			
-
 			{ "messageCount", new Integer(Types.INTEGER) },
-			
-
 			{ "viewCount", new Integer(Types.INTEGER) },
-			
-
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
-			
-
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";

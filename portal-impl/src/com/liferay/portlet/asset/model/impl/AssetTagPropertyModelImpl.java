@@ -67,29 +67,13 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty> {
 	public static final String TABLE_NAME = "AssetTagProperty";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tagPropertyId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "tagId", new Integer(Types.BIGINT) },
-			
-
 			{ "key_", new Integer(Types.VARCHAR) },
-			
-
 			{ "value", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetTagProperty (tagPropertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,tagId LONG,key_ VARCHAR(75) null,value VARCHAR(255) null)";

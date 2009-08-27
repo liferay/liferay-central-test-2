@@ -67,44 +67,18 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 	public static final String TABLE_NAME = "MBCategory";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "categoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "parentCategoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
-			
-
 			{ "threadCount", new Integer(Types.INTEGER) },
-			
-
 			{ "messageCount", new Integer(Types.INTEGER) },
-			
-
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,threadCount INTEGER,messageCount INTEGER,lastPostDate DATE null)";

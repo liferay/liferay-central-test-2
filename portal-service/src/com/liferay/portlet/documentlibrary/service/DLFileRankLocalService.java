@@ -99,6 +99,10 @@ public interface DLFileRankLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
 		boolean merge) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
+		long groupId, long companyId, long userId, long folderId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
 	public void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException;
 

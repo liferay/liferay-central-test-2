@@ -64,20 +64,10 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 	public static final String TABLE_NAME = "SCLicense";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "licenseId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "url", new Integer(Types.VARCHAR) },
-			
-
 			{ "openSource", new Integer(Types.BOOLEAN) },
-			
-
 			{ "active_", new Integer(Types.BOOLEAN) },
-			
-
 			{ "recommended", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";

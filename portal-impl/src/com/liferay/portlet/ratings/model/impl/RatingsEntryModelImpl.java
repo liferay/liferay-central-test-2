@@ -68,29 +68,13 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry> {
 	public static final String TABLE_NAME = "RatingsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "classPK", new Integer(Types.BIGINT) },
-			
-
 			{ "score", new Integer(Types.DOUBLE) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table RatingsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,score DOUBLE)";

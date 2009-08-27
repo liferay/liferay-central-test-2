@@ -66,20 +66,10 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 	public static final String TABLE_NAME = "MBMessageFlag";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "messageFlagId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "threadId", new Integer(Types.BIGINT) },
-			
-
 			{ "messageId", new Integer(Types.BIGINT) },
-			
-
 			{ "flag", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,modifiedDate DATE null,threadId LONG,messageId LONG,flag INTEGER)";

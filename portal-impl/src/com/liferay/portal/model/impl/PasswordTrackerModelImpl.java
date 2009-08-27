@@ -67,14 +67,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 	public static final String TABLE_NAME = "PasswordTracker";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";

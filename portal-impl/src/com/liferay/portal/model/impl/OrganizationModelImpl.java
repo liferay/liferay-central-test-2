@@ -63,38 +63,16 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization> {
 	public static final String TABLE_NAME = "Organization_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "organizationId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "parentOrganizationId", new Integer(Types.BIGINT) },
-			
-
 			{ "leftOrganizationId", new Integer(Types.BIGINT) },
-			
-
 			{ "rightOrganizationId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "type_", new Integer(Types.VARCHAR) },
-			
-
 			{ "recursable", new Integer(Types.BOOLEAN) },
-			
-
 			{ "regionId", new Integer(Types.BIGINT) },
-			
-
 			{ "countryId", new Integer(Types.BIGINT) },
-			
-
 			{ "statusId", new Integer(Types.INTEGER) },
-			
-
 			{ "comments", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Organization_ (organizationId LONG not null primary key,companyId LONG,parentOrganizationId LONG,leftOrganizationId LONG,rightOrganizationId LONG,name VARCHAR(100) null,type_ VARCHAR(75) null,recursable BOOLEAN,regionId LONG,countryId LONG,statusId INTEGER,comments STRING null)";

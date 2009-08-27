@@ -63,14 +63,8 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction> {
 	public static final String TABLE_NAME = "ResourceAction";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourceActionId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "actionId", new Integer(Types.VARCHAR) },
-			
-
 			{ "bitwiseValue", new Integer(Types.BIGINT) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ResourceAction (resourceActionId LONG not null primary key,name VARCHAR(75) null,actionId VARCHAR(75) null,bitwiseValue LONG)";

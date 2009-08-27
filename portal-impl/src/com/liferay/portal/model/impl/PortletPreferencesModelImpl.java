@@ -63,20 +63,10 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public static final String TABLE_NAME = "PortletPreferences";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletPreferencesId", new Integer(Types.BIGINT) },
-			
-
 			{ "ownerId", new Integer(Types.BIGINT) },
-			
-
 			{ "ownerType", new Integer(Types.INTEGER) },
-			
-
 			{ "plid", new Integer(Types.BIGINT) },
-			
-
 			{ "portletId", new Integer(Types.VARCHAR) },
-			
-
 			{ "preferences", new Integer(Types.CLOB) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table PortletPreferences (portletPreferencesId LONG not null primary key,ownerId LONG,ownerType INTEGER,plid LONG,portletId VARCHAR(200) null,preferences TEXT null)";

@@ -68,71 +68,27 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry> {
 	public static final String TABLE_NAME = "AssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "entryId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "classPK", new Integer(Types.BIGINT) },
-			
-
 			{ "visible", new Integer(Types.BOOLEAN) },
-			
-
 			{ "startDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "endDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "publishDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "mimeType", new Integer(Types.VARCHAR) },
-			
-
 			{ "title", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
-			
-
 			{ "summary", new Integer(Types.VARCHAR) },
-			
-
 			{ "url", new Integer(Types.VARCHAR) },
-			
-
 			{ "height", new Integer(Types.INTEGER) },
-			
-
 			{ "width", new Integer(Types.INTEGER) },
-			
-
 			{ "priority", new Integer(Types.DOUBLE) },
-			
-
 			{ "viewCount", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";

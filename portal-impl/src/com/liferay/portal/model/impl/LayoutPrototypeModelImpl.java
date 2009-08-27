@@ -71,20 +71,10 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 	public static final String TABLE_NAME = "LayoutPrototype";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "layoutPrototypeId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
-			
-
 			{ "settings_", new Integer(Types.VARCHAR) },
-			
-
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table LayoutPrototype (layoutPrototypeId LONG not null primary key,companyId LONG,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";

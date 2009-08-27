@@ -64,11 +64,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public static final String TABLE_NAME = "JournalArticleResource";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";

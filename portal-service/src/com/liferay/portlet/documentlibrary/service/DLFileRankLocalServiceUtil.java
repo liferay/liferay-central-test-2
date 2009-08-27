@@ -108,6 +108,13 @@ public class DLFileRankLocalServiceUtil {
 		return getService().updateDLFileRank(dlFileRank, merge);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
+		long groupId, long companyId, long userId, long folderId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getService()
+				   .addFileRank(groupId, companyId, userId, folderId, name);
+	}
+
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteFileRanks(userId);

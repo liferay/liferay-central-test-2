@@ -64,23 +64,11 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation> {
 	public static final String TABLE_NAME = "SocialRelation";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "relationId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "createDate", new Integer(Types.BIGINT) },
-			
-
 			{ "userId1", new Integer(Types.BIGINT) },
-			
-
 			{ "userId2", new Integer(Types.BIGINT) },
-			
-
 			{ "type_", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate LONG,userId1 LONG,userId2 LONG,type_ INTEGER)";

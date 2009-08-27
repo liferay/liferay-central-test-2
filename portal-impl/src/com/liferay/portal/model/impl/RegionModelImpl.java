@@ -63,17 +63,9 @@ public class RegionModelImpl extends BaseModelImpl<Region> {
 	public static final String TABLE_NAME = "Region";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "regionId", new Integer(Types.BIGINT) },
-			
-
 			{ "countryId", new Integer(Types.BIGINT) },
-			
-
 			{ "regionCode", new Integer(Types.VARCHAR) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";

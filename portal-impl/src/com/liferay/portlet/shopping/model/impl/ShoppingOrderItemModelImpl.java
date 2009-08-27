@@ -65,32 +65,14 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	public static final String TABLE_NAME = "ShoppingOrderItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "orderItemId", new Integer(Types.BIGINT) },
-			
-
 			{ "orderId", new Integer(Types.BIGINT) },
-			
-
 			{ "itemId", new Integer(Types.VARCHAR) },
-			
-
 			{ "sku", new Integer(Types.VARCHAR) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "description", new Integer(Types.VARCHAR) },
-			
-
 			{ "properties", new Integer(Types.VARCHAR) },
-			
-
 			{ "price", new Integer(Types.DOUBLE) },
-			
-
 			{ "quantity", new Integer(Types.INTEGER) },
-			
-
 			{ "shippedDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ShoppingOrderItem (orderItemId LONG not null primary key,orderId LONG,itemId VARCHAR(75) null,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,price DOUBLE,quantity INTEGER,shippedDate DATE null)";

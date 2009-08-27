@@ -67,35 +67,15 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	public static final String TABLE_NAME = "SCFrameworkVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "frameworkVersionId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) },
-			
-
 			{ "url", new Integer(Types.VARCHAR) },
-			
-
 			{ "active_", new Integer(Types.BOOLEAN) },
-			
-
 			{ "priority", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SCFrameworkVersion (frameworkVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,url STRING null,active_ BOOLEAN,priority INTEGER)";

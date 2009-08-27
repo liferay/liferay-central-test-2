@@ -66,29 +66,13 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser> {
 	public static final String TABLE_NAME = "BlogsStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsUserId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "entryCount", new Integer(Types.INTEGER) },
-			
-
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "ratingsTotalEntries", new Integer(Types.INTEGER) },
-			
-
 			{ "ratingsTotalScore", new Integer(Types.DOUBLE) },
-			
-
 			{ "ratingsAverageScore", new Integer(Types.DOUBLE) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table BlogsStatsUser (statsUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,entryCount INTEGER,lastPostDate DATE null,ratingsTotalEntries INTEGER,ratingsTotalScore DOUBLE,ratingsAverageScore DOUBLE)";

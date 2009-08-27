@@ -67,77 +67,29 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList> {
 	public static final String TABLE_NAME = "MBMailingList";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
-
 			{ "mailingListId", new Integer(Types.BIGINT) },
-			
-
 			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
-			
-
 			{ "userId", new Integer(Types.BIGINT) },
-			
-
 			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
-
 			{ "categoryId", new Integer(Types.BIGINT) },
-			
-
 			{ "emailAddress", new Integer(Types.VARCHAR) },
-			
-
 			{ "inProtocol", new Integer(Types.VARCHAR) },
-			
-
 			{ "inServerName", new Integer(Types.VARCHAR) },
-			
-
 			{ "inServerPort", new Integer(Types.INTEGER) },
-			
-
 			{ "inUseSSL", new Integer(Types.BOOLEAN) },
-			
-
 			{ "inUserName", new Integer(Types.VARCHAR) },
-			
-
 			{ "inPassword", new Integer(Types.VARCHAR) },
-			
-
 			{ "inReadInterval", new Integer(Types.INTEGER) },
-			
-
 			{ "outEmailAddress", new Integer(Types.VARCHAR) },
-			
-
 			{ "outCustom", new Integer(Types.BOOLEAN) },
-			
-
 			{ "outServerName", new Integer(Types.VARCHAR) },
-			
-
 			{ "outServerPort", new Integer(Types.INTEGER) },
-			
-
 			{ "outUseSSL", new Integer(Types.BOOLEAN) },
-			
-
 			{ "outUserName", new Integer(Types.VARCHAR) },
-			
-
 			{ "outPassword", new Integer(Types.VARCHAR) },
-			
-
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBMailingList (uuid_ VARCHAR(75) null,mailingListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,emailAddress VARCHAR(75) null,inProtocol VARCHAR(75) null,inServerName VARCHAR(75) null,inServerPort INTEGER,inUseSSL BOOLEAN,inUserName VARCHAR(75) null,inPassword VARCHAR(75) null,inReadInterval INTEGER,outEmailAddress VARCHAR(75) null,outCustom BOOLEAN,outServerName VARCHAR(75) null,outServerPort INTEGER,outUseSSL BOOLEAN,outUserName VARCHAR(75) null,outPassword VARCHAR(75) null,active_ BOOLEAN)";

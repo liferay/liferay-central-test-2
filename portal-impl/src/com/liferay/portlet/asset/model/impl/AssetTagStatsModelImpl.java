@@ -65,14 +65,8 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
 	public static final String TABLE_NAME = "AssetTagStats";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tagStatsId", new Integer(Types.BIGINT) },
-			
-
 			{ "tagId", new Integer(Types.BIGINT) },
-			
-
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
 			{ "assetCount", new Integer(Types.INTEGER) }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetTagStats (tagStatsId LONG not null primary key,tagId LONG,classNameId LONG,assetCount INTEGER)";
