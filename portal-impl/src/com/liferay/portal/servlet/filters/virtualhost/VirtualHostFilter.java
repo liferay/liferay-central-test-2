@@ -64,7 +64,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
@@ -117,19 +117,13 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		String url = requestURL.toString();
 
-		if (url.endsWith(_EXT_C) || url.endsWith(_EXT_CSS) ||
-			url.endsWith(_EXT_GIF) || url.endsWith(_EXT_IMAGE_COMPANY_LOGO) ||
-			url.endsWith(_EXT_ICO) || url.endsWith(_EXT_JS) ||
-			url.endsWith(_EXT_JPEG) || url.endsWith(_EXT_JSP) ||
-			url.endsWith(_EXT_PORTAL_LAYOUT) ||
-			url.endsWith(_EXT_PORTAL_LOGIN) ||
-			url.endsWith(_EXT_PORTAL_LOGOUT) || url.endsWith(_EXT_PNG)) {
+		for (String extension : PropsValues.VIRTUAL_HOSTS_IGNORE_EXTENSIONS) {
+			if (url.endsWith(extension)) {
+				return false;
+			}
+		}
 
-			return false;
-		}
-		else {
-			return true;
-		}
+		return true;
 	}
 
 	protected void processFilter(
@@ -316,30 +310,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);
-
-	private static String _EXT_C = "/c";
-
-	private static String _EXT_CSS = ".css";
-
-	private static String _EXT_GIF = ".gif";
-
-	private static String _EXT_IMAGE_COMPANY_LOGO = "/image/company_logo";
-
-	private static String _EXT_ICO = ".ico";
-
-	private static String _EXT_JS = ".js";
-
-	private static String _EXT_JPEG = ".jpeg";
-
-	private static String _EXT_JSP = ".jsp";
-
-	private static String _EXT_PORTAL_LAYOUT = "/portal/layout";
-
-	private static String _EXT_PORTAL_LOGIN = "/portal/login";
-
-	private static String _EXT_PORTAL_LOGOUT = "/portal/logout";
-
-	private static String _EXT_PNG = ".png";
 
 	private static String _PATH_C = "/c/";
 

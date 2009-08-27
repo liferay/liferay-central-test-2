@@ -1543,6 +1543,9 @@ public class PropsValues {
 	public static final String[] VELOCITY_ENGINE_RESOURCE_LISTENERS =
 		PropsUtil.getArray(PropsKeys.VELOCITY_ENGINE_RESOURCE_LISTENERS);
 
+	public static final String[] VIRTUAL_HOSTS_IGNORE_EXTENSIONS =
+		PropsUtil.getArray(PropsKeys.VIRTUAL_HOSTS_IGNORE_EXTENSIONS);
+
 	public static final boolean WEB_SERVER_DISPLAY_NODE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.WEB_SERVER_DISPLAY_NODE));
 
