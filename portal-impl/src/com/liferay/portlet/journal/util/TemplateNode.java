@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -33,7 +34,7 @@ import java.util.Map;
  * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class TemplateNode extends LinkedHashMap<String, Object> {
 
@@ -99,13 +100,34 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public String getUrl() {
 		if (getType().equals("link_to_layout")) {
+			String layoutLink = getData();
+			String layoutId = layoutLink;
+
+			int pos = layoutId.indexOf(StringPool.AT);
+
+			if (pos != -1) {
+				layoutId = layoutId.substring(0, pos);
+			}
+
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("@friendly_url_current@");
+			if (layoutLink.endsWith("@public")) {
+				sb.append(PortalUtil.getPathFriendlyURLPublic());
+			}
+			else if (layoutLink.endsWith("@private-group")) {
+				sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+			}
+			else if (layoutLink.endsWith("@private-user")) {
+				sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
+			}
+			else {
+				sb.append("@friendly_url_current@");
+			}
+
 			sb.append(StringPool.SLASH);
 			sb.append("@group_id@");
 			sb.append(StringPool.SLASH);
-			sb.append(getData());
+			sb.append(layoutId);
 
 			return sb.toString();
 		}

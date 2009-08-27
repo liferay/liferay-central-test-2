@@ -63,9 +63,28 @@ if (layoutList.size() > 1) {
 		}
 
 		if (linkableLayout != null) {
+			if (elContent.indexOf(StringPool.AT) == -1) {
+				elContent += "@public";
+			}
+
+			String suffix = null;
+
+			if (privateLayout) {
+				if (linkableLayout.getGroup().isUser()) {
+					suffix = "private-user";
+				}
+				else {
+					suffix = "private-group";
+				}
+			}
+			else {
+				suffix = "public";
+			}
+
+			String layoutLink = linkableLayout.getLayoutId() + StringPool.AT + suffix;
 	%>
 
-			<option <%= elContent.equals(String.valueOf(linkableLayout.getLayoutId())) ? "selected" : "" %> value="<%= linkableLayout.getLayoutId() %>"><%= name %></option>
+			<option <%= elContent.equals(layoutLink) ? "selected" : "" %> value="<%= layoutLink %>"><%= name %></option>
 
 	<%
 		}
