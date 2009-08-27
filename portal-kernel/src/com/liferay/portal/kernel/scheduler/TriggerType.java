@@ -22,45 +22,13 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.Date;
-import java.util.List;
-
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="TriggerType.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  */
-public interface SchedulerEngine {
+public enum TriggerType {
 
-	public static final String CRON_TEXT = "cronText";
-
-	public static final String DESCRIPTION = "description";
-
-	public static final String DESTINATION = "destination";
-
-	public static final String MESSAGE_BODY = "messageBody";
-
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
-
-	public void schedule(
-			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
-		throws SchedulerException;
-
-	public void schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
-		throws SchedulerException;
-
-	public void shutdown() throws SchedulerException;
-
-	public void start() throws SchedulerException;
-
-	public void unschedule(String jobName, String groupName)
-		throws SchedulerException;
+	CRON, SIMPLE
 
 }

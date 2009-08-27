@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler.messaging;
 
+import com.liferay.portal.kernel.scheduler.TriggerType;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -42,10 +44,6 @@ import java.util.Date;
  */
 public class SchedulerRequest implements Serializable {
 
-	public static enum TriggerType{
-		CRON, SIMPLE
-	}
-
 	public static final String COMMAND_REGISTER = "REGISTER";
 
 	public static final String COMMAND_RETRIEVE = "RETRIEVE";
@@ -56,16 +54,74 @@ public class SchedulerRequest implements Serializable {
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
-	@Deprecated
+	public static SchedulerRequest createRegisterRequest(
+		String groupName, long interval, Date startDate, Date endDate,
+		String description, String destination, String messageBody) {
+
+		return new SchedulerRequest(
+			COMMAND_REGISTER, null, groupName, interval, startDate, endDate,
+			description, destination, messageBody);
+	}
+
+	public static SchedulerRequest createRegisterRequest(
+		String groupName, String cronText, Date startDate, Date endDate,
+		String description, String destination, String messageBody) {
+
+		return new SchedulerRequest(
+			COMMAND_REGISTER, null, groupName, cronText, startDate, endDate,
+			description, destination, messageBody);
+	}
+
+	public static SchedulerRequest createRetrieveRequest(String groupName) {
+		return new SchedulerRequest(COMMAND_RETRIEVE, null, groupName);
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest(
+		String jobName, String groupName, long interval, Date startDate,
+		Date endDate, String description, String messageBody) {
+
+		return new SchedulerRequest(
+			null, jobName, groupName, interval, startDate, endDate, description,
+			null, messageBody);
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest(
+		String jobName, String groupName, String cronText,
+		Date startDate, Date endDate, String description, String messageBody) {
+
+		return new SchedulerRequest(
+			null, jobName, groupName, cronText, startDate, endDate, description,
+			null, messageBody);
+	}
+
+	public static SchedulerRequest createShutdownRequest() {
+		return new SchedulerRequest(COMMAND_SHUTDOWN);
+	}
+
+	public static SchedulerRequest createStartupRequest() {
+		return new SchedulerRequest(COMMAND_STARTUP);
+	}
+
+	public static SchedulerRequest createUnregisterRequest(String groupName) {
+		return new SchedulerRequest(COMMAND_UNREGISTER, groupName, groupName);
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public SchedulerRequest() {
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public SchedulerRequest(String command) {
 		_command = command;
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public SchedulerRequest(
 		String command, String jobName, String groupName) {
 
@@ -74,25 +130,9 @@ public class SchedulerRequest implements Serializable {
 		_groupName = groupName;
 	}
 
-	@Deprecated
-	public SchedulerRequest(
-		String command, String jobName, String groupName, String cronText,
-		Date startDate, Date endDate, String description, String destination,
-		String messageBody) {
-
-		_command = command;
-		_jobName = jobName;
-		_groupName = groupName;
-		_triggerType=TriggerType.CRON;
-		_cronText = cronText;
-		_startDate = startDate;
-		_endDate = endDate;
-		_description = description;
-		_destination = destination;
-		_messageBody = messageBody;
-	}
-
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public SchedulerRequest(
 		String command, String jobName, String groupName, long interval,
 		Date startDate, Date endDate, String description, String destination,
@@ -101,7 +141,7 @@ public class SchedulerRequest implements Serializable {
 		_command = command;
 		_jobName = jobName;
 		_groupName = groupName;
-		_triggerType=TriggerType.SIMPLE;
+		_triggerType = TriggerType.SIMPLE;
 		_interval = interval;
 		_startDate = startDate;
 		_endDate = endDate;
@@ -110,152 +150,124 @@ public class SchedulerRequest implements Serializable {
 		_messageBody = messageBody;
 	}
 
-	public static SchedulerRequest createRegisterRequest(
-		String groupName, String cronText, Date startDate, Date endDate,
-		String description, String destination, String messageBody){
-		return new SchedulerRequest(
-			COMMAND_REGISTER, null, groupName, cronText, startDate, endDate,
-			description, destination, messageBody);
-	}
+	/**
+	 * @deprecated
+	 */
+	public SchedulerRequest(
+		String command, String jobName, String groupName, String cronText,
+		Date startDate, Date endDate, String description, String destination,
+		String messageBody) {
 
-	public static SchedulerRequest createRegisterRequest(
-		String groupName, long interval, Date startDate, Date endDate,
-		String description, String destination, String messageBody){
-		return new SchedulerRequest(
-			COMMAND_REGISTER, null, groupName, interval, startDate, endDate,
-			description, destination, messageBody);
-	}
-
-	public static SchedulerRequest createRetrieveRequest(String groupName){
-		return new SchedulerRequest(COMMAND_RETRIEVE, null, groupName);
-	}
-
-	public static SchedulerRequest createRetrieveResponseRequest(
-		String jobName, String groupName, long interval,
-		Date startDate, Date endDate, String description, String messageBody){
-		return new SchedulerRequest(
-			null, jobName, groupName, interval, startDate, endDate, description,
-			null, messageBody);
-	}
-
-	public static SchedulerRequest createRetrieveResponseRequest(
-		String jobName, String groupName, String cronText,
-		Date startDate, Date endDate, String description, String messageBody){
-		return new SchedulerRequest(
-			null, jobName, groupName, cronText, startDate, endDate, description,
-			null, messageBody);
-	}
-
-	public static SchedulerRequest createShutdownRequest(){
-		return new SchedulerRequest(COMMAND_SHUTDOWN);
-	}
-
-	public static SchedulerRequest createStartupRequest(){
-		return new SchedulerRequest(COMMAND_STARTUP);
-	}
-
-	public static SchedulerRequest createUnregisterRequest(String groupName){
-		return new SchedulerRequest(COMMAND_UNREGISTER, groupName, groupName);
+		_command = command;
+		_jobName = jobName;
+		_groupName = groupName;
+		_triggerType = TriggerType.CRON;
+		_cronText = cronText;
+		_startDate = startDate;
+		_endDate = endDate;
+		_description = description;
+		_destination = destination;
+		_messageBody = messageBody;
 	}
 
 	public String getCommand() {
 		return _command;
 	}
 
-	public void setCommand(String command) {
-		_command = command;
-	}
-
-	public String getJobName() {
-		return _jobName;
-	}
-
-	public void setJobName(String jobName) {
-		_jobName = jobName;
-	}
-
-	public String getGroupName() {
-		return _groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		_groupName = groupName;
-	}
-
 	public String getCronText() {
 		return _cronText;
-	}
-
-	public void setCronText(String cronText) {
-		_cronText = cronText;
-	}
-
-	public Date getStartDate() {
-		return _startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		_startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return _endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		_endDate = endDate;
 	}
 
 	public String getDescription() {
 		return _description;
 	}
 
-	public void setDescription(String description) {
-		_description = description;
-	}
-
 	public String getDestination() {
 		return _destination;
 	}
 
-	public void setDestination(String destination) {
-		_destination = destination;
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	public String getGroupName() {
+		return _groupName;
 	}
 
 	public long getInterval() {
 		return _interval;
 	}
 
-	public void setInterval(long interval) {
-		this._interval = interval;
+	public String getJobName() {
+		return _jobName;
 	}
 
 	public String getMessageBody() {
 		return _messageBody;
 	}
 
-	public void setMessageBody(String messageBody) {
-		_messageBody = messageBody;
+	public Date getStartDate() {
+		return _startDate;
 	}
 
 	public TriggerType getTriggerType() {
 		return _triggerType;
 	}
 
+	public void setCommand(String command) {
+		_command = command;
+	}
+
+	public void setCronText(String cronText) {
+		_cronText = cronText;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
+	public void setDestination(String destination) {
+		_destination = destination;
+	}
+
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public void setInterval(long interval) {
+		this._interval = interval;
+	}
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
+	}
+
+	public void setMessageBody(String messageBody) {
+		_messageBody = messageBody;
+	}
+
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
 	public void setTriggerType(TriggerType triggerType) {
 		_triggerType = triggerType;
 	}
 
-	private TriggerType _triggerType;
 	private String _command;
-	private String _jobName;
-	private String _groupName;
 	private String _cronText;
-	private long _interval;
-	private Date _startDate;
-	private Date _endDate;
 	private String _description;
 	private String _destination;
+	private Date _endDate;
+	private String _groupName;
+	private long _interval;
+	private String _jobName;
 	private String _messageBody;
+	private Date _startDate;
+	private TriggerType _triggerType;
 
 }

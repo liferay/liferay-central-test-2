@@ -100,17 +100,22 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				SchedulerRequest schedulerRequest = null;
 
 				Trigger trigger = _scheduler.getTrigger(jobName, groupName);
-				if (CronTrigger.class.isAssignableFrom(trigger.getClass())){
+
+				if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
 					CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
+
 					schedulerRequest =
 						SchedulerRequest.createRetrieveResponseRequest(
 							jobName, groupName, cronTrigger.getCronExpression(),
 							cronTrigger.getStartTime(),
 							cronTrigger.getEndTime(), description, messageBody);
-				}else if (
-					SimpleTrigger.class.isAssignableFrom(trigger.getClass())){
-					SimpleTrigger simpleTrigger=
-						SimpleTrigger.class.cast(trigger);
+				}
+				else if (SimpleTrigger.class.isAssignableFrom(
+							trigger.getClass())) {
+
+					SimpleTrigger simpleTrigger = SimpleTrigger.class.cast(
+						trigger);
+
 					schedulerRequest =
 						SchedulerRequest.createRetrieveResponseRequest(
 							jobName, groupName,
@@ -119,7 +124,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 							simpleTrigger.getEndTime(), description,
 							messageBody);
 				}
-				if (schedulerRequest != null){
+
+				if (schedulerRequest != null) {
 					requests.add(schedulerRequest);
 				}
 			}
@@ -132,6 +138,30 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destination, String messageBody)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		SimpleTrigger simpleTrigger = new SimpleTrigger(
+			groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY, interval);
+
+		if (startDate != null) {
+			simpleTrigger.setStartTime(startDate);
+		}
+
+		if (endDate != null) {
+			simpleTrigger.setEndTime(endDate);
+		}
+
+		schedule(
+			groupName, simpleTrigger, description, destination, messageBody);
+	}
+
+	public void schedule(
 			String groupName, String cronText, Date startDate, Date endDate,
 			String description, String destination, String messageBody)
 		throws SchedulerException {
@@ -139,6 +169,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
+
 		try {
 			CronTrigger cronTrigger = new CronTrigger(
 				groupName, groupName, cronText);
@@ -150,36 +181,13 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			if (endDate != null) {
 				cronTrigger.setEndTime(endDate);
 			}
-			_schdule(
+
+			schedule(
 				groupName, cronTrigger, description, destination, messageBody);
-		}catch(ParseException pe){
+		}
+		catch(ParseException pe) {
 			throw new SchedulerException("Unable to parse cron text", pe);
 		}
-	}
-
-	public void schedule(
-			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destination, String messageBody)
-		throws SchedulerException {
-
-		if (!PropsValues.SCHEDULER_ENABLED) {
-			return;
-		}
-
-		SimpleTrigger simpleTrigger =
-			new SimpleTrigger(
-				groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
-				interval);
-
-		if (startDate != null) {
-			simpleTrigger.setStartTime(startDate);
-		}
-
-		if (endDate != null) {
-			simpleTrigger.setEndTime(endDate);
-		}
-		_schdule(
-			groupName, simpleTrigger, description, destination, messageBody);
 	}
 
 	public void shutdown() throws SchedulerException {
@@ -226,11 +234,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	private void _schdule(
-		String groupName, Trigger trigger, String description,
-		String destination, String messageBody) throws SchedulerException {
-		try {
+	protected void schedule(
+			String groupName, Trigger trigger, String description,
+			String destination, String messageBody)
+		throws SchedulerException {
 
+		try {
 			JobDetail jobDetail = new JobDetail(
 				groupName, groupName, MessageSenderJob.class);
 

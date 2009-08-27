@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.List;
@@ -64,9 +65,9 @@ public class SchedulerMessageListener implements MessageListener {
 		String command = schedulerRequest.getCommand();
 
 		if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
-			SchedulerRequest.TriggerType triggerType =
-				schedulerRequest.getTriggerType();
-			if (triggerType.equals(SchedulerRequest.TriggerType.CRON)) {
+			TriggerType triggerType = schedulerRequest.getTriggerType();
+
+			if (triggerType.equals(TriggerType.CRON)) {
 				_schedulerEngine.schedule(
 					schedulerRequest.getGroupName(),
 					schedulerRequest.getCronText(),
@@ -75,7 +76,8 @@ public class SchedulerMessageListener implements MessageListener {
 					schedulerRequest.getDescription(),
 					schedulerRequest.getDestination(),
 					schedulerRequest.getMessageBody());
-			}else if (triggerType.equals(SchedulerRequest.TriggerType.SIMPLE)) {
+			}
+			else if (triggerType.equals(TriggerType.SIMPLE)) {
 				_schedulerEngine.schedule(
 					schedulerRequest.getGroupName(),
 					schedulerRequest.getInterval(),

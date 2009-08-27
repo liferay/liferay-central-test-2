@@ -58,12 +58,12 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void schedule(
-		String groupName, String cronText, Date startDate, Date endDate,
+		String groupName, long interval, Date startDate, Date endDate,
 		String description, String destinationName, String messageBody) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
-				groupName, cronText, startDate, endDate, description,
+				groupName, interval, startDate, endDate, description,
 				destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
@@ -71,12 +71,12 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void schedule(
-		String groupName, long interval, Date startDate, Date endDate,
+		String groupName, String cronText, Date startDate, Date endDate,
 		String description, String destinationName, String messageBody) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
-				groupName, interval, startDate, endDate, description,
+				groupName, cronText, startDate, endDate, description,
 				destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(

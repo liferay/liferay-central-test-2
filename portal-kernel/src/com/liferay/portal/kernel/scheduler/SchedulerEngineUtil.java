@@ -45,22 +45,22 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
-		throws SchedulerException {
-
-		_instance._schedule(
-			groupName, cronText, startDate, endDate, description,
-			destinationName, messageBody);
-	}
-
-	public static void schedule(
 			String groupName, long interval, Date startDate, Date endDate,
 			String description, String destinationName, String messageBody)
 		throws SchedulerException {
 
 		_instance._schedule(
 			groupName, interval, startDate, endDate, description,
+			destinationName, messageBody);
+	}
+
+	public static void schedule(
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
+		throws SchedulerException {
+
+		_instance._schedule(
+			groupName, cronText, startDate, endDate, description,
 			destinationName, messageBody);
 	}
 
@@ -89,22 +89,22 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
-		throws SchedulerException {
-
-		_schedulerEngine.schedule(
-			groupName, cronText, startDate, endDate, description,
-			destinationName, messageBody);
-	}
-
-	private void _schedule(
 			String groupName, long interval, Date startDate, Date endDate,
 			String description, String destinationName, String messageBody)
 		throws SchedulerException {
 
 		_schedulerEngine.schedule(
 			groupName, interval, startDate, endDate, description,
+			destinationName, messageBody);
+	}
+
+	private void _schedule(
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
+		throws SchedulerException {
+
+		_schedulerEngine.schedule(
+			groupName, cronText, startDate, endDate, description,
 			destinationName, messageBody);
 	}
 
