@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -30,7 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.comparator.FileRankCreateDateComparator;
 
@@ -110,23 +108,24 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public DLFileRank updateFileRank(
 			long groupId, long companyId, long userId, long folderId,
 			String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!PropsValues.DL_FILE_RANK_ENABLED) {
 			return null;
 		}
 
-		try {
-			dlFileRankPersistence.removeByC_U_F_N(
-				companyId, userId, folderId, name);
-		}
-		catch (NoSuchFileRankException nsfre) {
-		}
+		DLFileRank fileRank = dlFileRankPersistence.fetchByC_U_F_N(
+			companyId, userId, folderId, name);
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		if (fileRank != null) {
+			fileRank.setCreateDate(new Date());
 
-		DLFileRank fileRank = addFileRank(
-			groupId, companyId, userId, folderId, name);
+			dlFileRankPersistence.update(fileRank, false);
+		}
+		else {
+			fileRank = addFileRank(
+				groupId, companyId, userId, folderId, name);
+		}
 
 		if (dlFileRankPersistence.countByG_U(groupId, userId) > 5) {
 			List<DLFileRank> fileRanks = getFileRanks(groupId, userId);
