@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.journal.model.JournalArticleImage;
-import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -56,16 +54,12 @@ public class UpgradeJournal extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select id_, groupId, articleId, version, content, " +
-					"structureId from JournalArticle");
+				"select id_, content, structureId from JournalArticle");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long id = rs.getLong("id_");
-				long groupId = rs.getLong("groupId");
-				String articleId = rs.getString("articleId");
-				double version = rs.getDouble("version");
 				String content = GetterUtil.getString(rs.getString("content"));
 				String structureId = rs.getString("structureId");
 
@@ -158,12 +152,6 @@ public class UpgradeJournal extends UpgradeProcess {
 			if (articleImageId <= 0) {
 				continue;
 			}
-
-			JournalArticleImage articleImage =
-				JournalArticleImageLocalServiceUtil.getArticleImage(
-					articleImageId);
-
-			articleImage.setElInstanceId(instanceId);
 
 			runSQL(
 				"update JournalArticleImage set elInstanceId = '" + instanceId +
