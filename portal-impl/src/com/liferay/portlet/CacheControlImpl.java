@@ -23,20 +23,23 @@
 package com.liferay.portlet;
 
 import javax.portlet.CacheControl;
+import javax.portlet.MimeResponse;
 
 /**
  * <a href="CacheControlImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Deepak Gothe
  */
 public class CacheControlImpl implements CacheControl {
 
 	public CacheControlImpl(
 		String eTag, int expirationTime, boolean publicScope,
-		boolean useCachedContent) {
+		boolean useCachedContent, MimeResponseImpl mimeResponseImpl) {
 
 		_eTag = eTag;
 		_expirationTime = expirationTime;
+		_mimeResponseImpl = mimeResponseImpl;
 		_publicScope = publicScope;
 		_useCachedContent = useCachedContent;
 	}
@@ -55,24 +58,35 @@ public class CacheControlImpl implements CacheControl {
 
 	public void setETag(String eTag) {
 		_eTag = eTag;
+		_setProperty(MimeResponse.ETAG, eTag);
 	}
 
 	public void setExpirationTime(int expirationTime) {
 		_expirationTime = expirationTime;
+		_setProperty(
+			MimeResponse.EXPIRATION_CACHE, String.valueOf(expirationTime));
 	}
 
 	public void setPublicScope(boolean publicScope) {
 		_publicScope = publicScope;
+		_setProperty(MimeResponse.PUBLIC_SCOPE, String.valueOf(publicScope));
 	}
 
 	public void setUseCachedContent(boolean useCachedContent) {
 		_useCachedContent = useCachedContent;
+		_setProperty(MimeResponse.USE_CACHED_CONTENT,
+			String.valueOf(useCachedContent));
 	}
 
 	public boolean useCachedContent() {
 		return _useCachedContent;
 	}
 
+	private void _setProperty(String key, String value) {
+		_mimeResponseImpl.setProperty(key, value);
+	}
+
+	private MimeResponseImpl _mimeResponseImpl;
 	private String _eTag;
 	private int _expirationTime;
 	private boolean _publicScope;
