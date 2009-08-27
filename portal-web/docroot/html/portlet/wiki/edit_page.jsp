@@ -303,7 +303,7 @@ if (Validator.isNull(redirect)) {
 			<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
 		</div>
 
-		<c:if test="<%= Validator.isNotNull(wikiPage) %>">
+		<c:if test="<%= wikiPage != null %>">
 			<liferay-ui:custom-attributes-available className="<%= WikiPage.class.getName() %>">
 				<aui:fieldset>
 					<liferay-ui:custom-attribute-list
