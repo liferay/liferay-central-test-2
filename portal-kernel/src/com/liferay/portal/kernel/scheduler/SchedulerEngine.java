@@ -51,6 +51,11 @@ public interface SchedulerEngine {
 			String description, String destinationName, String messageBody)
 		throws SchedulerException;
 
+	public void schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
+		throws SchedulerException;
+
 	public void shutdown() throws SchedulerException;
 
 	public void start() throws SchedulerException;

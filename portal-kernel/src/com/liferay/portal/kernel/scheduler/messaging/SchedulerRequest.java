@@ -42,6 +42,10 @@ import java.util.Date;
  */
 public class SchedulerRequest implements Serializable {
 
+	public static enum TriggerType{
+		CRON, SIMPLE
+	}
+
 	public static final String COMMAND_REGISTER = "REGISTER";
 
 	public static final String COMMAND_RETRIEVE = "RETRIEVE";
@@ -52,13 +56,16 @@ public class SchedulerRequest implements Serializable {
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
+	@Deprecated
 	public SchedulerRequest() {
 	}
 
+	@Deprecated
 	public SchedulerRequest(String command) {
 		_command = command;
 	}
 
+	@Deprecated
 	public SchedulerRequest(
 		String command, String jobName, String groupName) {
 
@@ -67,6 +74,7 @@ public class SchedulerRequest implements Serializable {
 		_groupName = groupName;
 	}
 
+	@Deprecated
 	public SchedulerRequest(
 		String command, String jobName, String groupName, String cronText,
 		Date startDate, Date endDate, String description, String destination,
@@ -75,12 +83,79 @@ public class SchedulerRequest implements Serializable {
 		_command = command;
 		_jobName = jobName;
 		_groupName = groupName;
+		_triggerType=TriggerType.CRON;
 		_cronText = cronText;
 		_startDate = startDate;
 		_endDate = endDate;
 		_description = description;
 		_destination = destination;
 		_messageBody = messageBody;
+	}
+
+	@Deprecated
+	public SchedulerRequest(
+		String command, String jobName, String groupName, long interval,
+		Date startDate, Date endDate, String description, String destination,
+		String messageBody) {
+
+		_command = command;
+		_jobName = jobName;
+		_groupName = groupName;
+		_triggerType=TriggerType.SIMPLE;
+		_interval = interval;
+		_startDate = startDate;
+		_endDate = endDate;
+		_description = description;
+		_destination = destination;
+		_messageBody = messageBody;
+	}
+
+	public static SchedulerRequest createRegisterRequest(
+		String groupName, String cronText, Date startDate, Date endDate,
+		String description, String destination, String messageBody){
+		return new SchedulerRequest(
+			COMMAND_REGISTER, null, groupName, cronText, startDate, endDate,
+			description, destination, messageBody);
+	}
+
+	public static SchedulerRequest createRegisterRequest(
+		String groupName, long interval, Date startDate, Date endDate,
+		String description, String destination, String messageBody){
+		return new SchedulerRequest(
+			COMMAND_REGISTER, null, groupName, interval, startDate, endDate,
+			description, destination, messageBody);
+	}
+
+	public static SchedulerRequest createRetrieveRequest(String groupName){
+		return new SchedulerRequest(COMMAND_RETRIEVE, null, groupName);
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest(
+		String jobName, String groupName, long interval,
+		Date startDate, Date endDate, String description, String messageBody){
+		return new SchedulerRequest(
+			null, jobName, groupName, interval, startDate, endDate, description,
+			null, messageBody);
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest(
+		String jobName, String groupName, String cronText,
+		Date startDate, Date endDate, String description, String messageBody){
+		return new SchedulerRequest(
+			null, jobName, groupName, cronText, startDate, endDate, description,
+			null, messageBody);
+	}
+
+	public static SchedulerRequest createShutdownRequest(){
+		return new SchedulerRequest(COMMAND_SHUTDOWN);
+	}
+
+	public static SchedulerRequest createStartupRequest(){
+		return new SchedulerRequest(COMMAND_STARTUP);
+	}
+
+	public static SchedulerRequest createUnregisterRequest(String groupName){
+		return new SchedulerRequest(COMMAND_UNREGISTER, groupName, groupName);
 	}
 
 	public String getCommand() {
@@ -147,6 +222,14 @@ public class SchedulerRequest implements Serializable {
 		_destination = destination;
 	}
 
+	public long getInterval() {
+		return _interval;
+	}
+
+	public void setInterval(long interval) {
+		this._interval = interval;
+	}
+
 	public String getMessageBody() {
 		return _messageBody;
 	}
@@ -155,10 +238,20 @@ public class SchedulerRequest implements Serializable {
 		_messageBody = messageBody;
 	}
 
+	public TriggerType getTriggerType() {
+		return _triggerType;
+	}
+
+	public void setTriggerType(TriggerType triggerType) {
+		_triggerType = triggerType;
+	}
+
+	private TriggerType _triggerType;
 	private String _command;
 	private String _jobName;
 	private String _groupName;
 	private String _cronText;
+	private long _interval;
 	private Date _startDate;
 	private Date _endDate;
 	private String _description;

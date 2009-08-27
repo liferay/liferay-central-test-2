@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.scheduler.job.MessageSenderJob;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.util.PropsUtil;
@@ -45,6 +44,8 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
+import org.quartz.SimpleTrigger;
+import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 /**
@@ -96,15 +97,31 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				String description = jobDataMap.getString(DESCRIPTION);
 				String messageBody = jobDataMap.getString(MESSAGE_BODY);
 
-				CronTrigger cronTrigger = (CronTrigger)_scheduler.getTrigger(
-					jobName, groupName);
+				SchedulerRequest schedulerRequest = null;
 
-				SchedulerRequest schedulerRequest = new SchedulerRequest(
-					null, jobName, groupName, cronTrigger.getCronExpression(),
-					cronTrigger.getStartTime(), cronTrigger.getEndTime(),
-					description, null, messageBody);
-
-				requests.add(schedulerRequest);
+				Trigger trigger = _scheduler.getTrigger(jobName, groupName);
+				if (CronTrigger.class.isAssignableFrom(trigger.getClass())){
+					CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
+					schedulerRequest =
+						SchedulerRequest.createRetrieveResponseRequest(
+							jobName, groupName, cronTrigger.getCronExpression(),
+							cronTrigger.getStartTime(),
+							cronTrigger.getEndTime(), description, messageBody);
+				}else if (
+					SimpleTrigger.class.isAssignableFrom(trigger.getClass())){
+					SimpleTrigger simpleTrigger=
+						SimpleTrigger.class.cast(trigger);
+					schedulerRequest =
+						SchedulerRequest.createRetrieveResponseRequest(
+							jobName, groupName,
+							simpleTrigger.getRepeatInterval(),
+							simpleTrigger.getStartTime(),
+							simpleTrigger.getEndTime(), description,
+							messageBody);
+				}
+				if (schedulerRequest != null){
+					requests.add(schedulerRequest);
+				}
 			}
 
 			return requests;
@@ -122,12 +139,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
-
 		try {
-			String jobName = PortalUUIDUtil.generate();
-
 			CronTrigger cronTrigger = new CronTrigger(
-				jobName, groupName, cronText);
+				groupName, groupName, cronText);
 
 			if (startDate != null) {
 				cronTrigger.setStartTime(startDate);
@@ -136,29 +150,36 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			if (endDate != null) {
 				cronTrigger.setEndTime(endDate);
 			}
-
-			JobDetail jobDetail = new JobDetail(
-				jobName, groupName, MessageSenderJob.class);
-
-			JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-			jobDataMap.put(DESCRIPTION, description);
-			jobDataMap.put(DESTINATION, destination);
-			jobDataMap.put(MESSAGE_BODY, messageBody);
-
-			_scheduler.scheduleJob(jobDetail, cronTrigger);
-		}
-		catch (ObjectAlreadyExistsException oare) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Message is already scheduled");
-			}
-		}
-		catch (ParseException pe) {
+			_schdule(
+				groupName, cronTrigger, description, destination, messageBody);
+		}catch(ParseException pe){
 			throw new SchedulerException("Unable to parse cron text", pe);
 		}
-		catch (org.quartz.SchedulerException se) {
-			throw new SchedulerException("Unable to scheduled job", se);
+	}
+
+	public void schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destination, String messageBody)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
 		}
+
+		SimpleTrigger simpleTrigger =
+			new SimpleTrigger(
+				groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
+				interval);
+
+		if (startDate != null) {
+			simpleTrigger.setStartTime(startDate);
+		}
+
+		if (endDate != null) {
+			simpleTrigger.setEndTime(endDate);
+		}
+		_schdule(
+			groupName, simpleTrigger, description, destination, messageBody);
 	}
 
 	public void shutdown() throws SchedulerException {
@@ -202,6 +223,32 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				"Unable to unschedule job {jobName=" + jobName +
 					", groupName=" + groupName + "}",
 				se);
+		}
+	}
+
+	private void _schdule(
+		String groupName, Trigger trigger, String description,
+		String destination, String messageBody) throws SchedulerException {
+		try {
+
+			JobDetail jobDetail = new JobDetail(
+				groupName, groupName, MessageSenderJob.class);
+
+			JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+			jobDataMap.put(DESCRIPTION, description);
+			jobDataMap.put(DESTINATION, destination);
+			jobDataMap.put(MESSAGE_BODY, messageBody);
+
+			_scheduler.scheduleJob(jobDetail, trigger);
+		}
+		catch (ObjectAlreadyExistsException oare) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Message is already scheduled");
+			}
+		}
+		catch (org.quartz.SchedulerException se) {
+			throw new SchedulerException("Unable to scheduled job", se);
 		}
 	}
 

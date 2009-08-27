@@ -42,9 +42,8 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		throws SchedulerException {
 
 		try {
-			SchedulerRequest schedulerRequest = new SchedulerRequest(
-				SchedulerRequest.COMMAND_RETRIEVE, null, groupName, null, null,
-				null, null, null, null);
+			SchedulerRequest schedulerRequest =
+				SchedulerRequest.createRetrieveRequest(groupName);
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
@@ -62,9 +61,23 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		String groupName, String cronText, Date startDate, Date endDate,
 		String description, String destinationName, String messageBody) {
 
-		SchedulerRequest schedulerRequest = new SchedulerRequest(
-			SchedulerRequest.COMMAND_REGISTER, null, groupName, cronText,
-			startDate, endDate, description, destinationName, messageBody);
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createRegisterRequest(
+				groupName, cronText, startDate, endDate, description,
+				destinationName, messageBody);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER, schedulerRequest);
+	}
+
+	public void schedule(
+		String groupName, long interval, Date startDate, Date endDate,
+		String description, String destinationName, String messageBody) {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createRegisterRequest(
+				groupName, interval, startDate, endDate, description,
+				destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);
@@ -73,18 +86,18 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	public void shutdown() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
-			new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN));
+			SchedulerRequest.createShutdownRequest());
 	}
 
 	public void start() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
-			new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP));
+			SchedulerRequest.createStartupRequest());
 	}
 
 	public void unschedule(String jobName, String groupName) {
-		SchedulerRequest schedulerRequest = new SchedulerRequest(
-			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createUnregisterRequest(groupName);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);

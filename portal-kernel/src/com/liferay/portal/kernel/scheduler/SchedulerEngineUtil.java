@@ -54,6 +54,16 @@ public class SchedulerEngineUtil {
 			destinationName, messageBody);
 	}
 
+	public static void schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
+		throws SchedulerException {
+
+		_instance._schedule(
+			groupName, interval, startDate, endDate, description,
+			destinationName, messageBody);
+	}
+
 	public static void shutdown() throws SchedulerException {
 		_instance._shutdown();
 	}
@@ -85,6 +95,16 @@ public class SchedulerEngineUtil {
 
 		_schedulerEngine.schedule(
 			groupName, cronText, startDate, endDate, description,
+			destinationName, messageBody);
+	}
+
+	private void _schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
+		throws SchedulerException {
+
+		_schedulerEngine.schedule(
+			groupName, interval, startDate, endDate, description,
 			destinationName, messageBody);
 	}
 

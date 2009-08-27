@@ -64,12 +64,27 @@ public class SchedulerMessageListener implements MessageListener {
 		String command = schedulerRequest.getCommand();
 
 		if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
-			_schedulerEngine.schedule(
-				schedulerRequest.getGroupName(), schedulerRequest.getCronText(),
-				schedulerRequest.getStartDate(), schedulerRequest.getEndDate(),
-				schedulerRequest.getDescription(),
-				schedulerRequest.getDestination(),
-				schedulerRequest.getMessageBody());
+			SchedulerRequest.TriggerType triggerType =
+				schedulerRequest.getTriggerType();
+			if (triggerType.equals(SchedulerRequest.TriggerType.CRON)) {
+				_schedulerEngine.schedule(
+					schedulerRequest.getGroupName(),
+					schedulerRequest.getCronText(),
+					schedulerRequest.getStartDate(),
+					schedulerRequest.getEndDate(),
+					schedulerRequest.getDescription(),
+					schedulerRequest.getDestination(),
+					schedulerRequest.getMessageBody());
+			}else if (triggerType.equals(SchedulerRequest.TriggerType.SIMPLE)) {
+				_schedulerEngine.schedule(
+					schedulerRequest.getGroupName(),
+					schedulerRequest.getInterval(),
+					schedulerRequest.getStartDate(),
+					schedulerRequest.getEndDate(),
+					schedulerRequest.getDescription(),
+					schedulerRequest.getDestination(),
+					schedulerRequest.getMessageBody());
+			}
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {
 			doCommandRetrieve(message, schedulerRequest);
