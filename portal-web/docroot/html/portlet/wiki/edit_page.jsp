@@ -303,16 +303,18 @@ if (Validator.isNull(redirect)) {
 			<liferay-util:include page="<%= WikiUtil.getEditPage(format) %>" />
 		</div>
 
-		<liferay-ui:custom-attributes-available className="<%= WikiPage.class.getName() %>">
-			<aui:fieldset>
-				<liferay-ui:custom-attribute-list
-					className="<%= WikiPage.class.getName() %>"
-					classPK="<%= (page != null) ? wikiPage.getResourcePrimKey() : 0 %>"
-					editable="<%= true %>"
-					label="<%= true %>"
-				/>
-			</aui:fieldset>
-		</liferay-ui:custom-attributes-available>
+		<c:if test="<%= Validator.isNotNull(wikiPage) %>">
+			<liferay-ui:custom-attributes-available className="<%= WikiPage.class.getName() %>">
+				<aui:fieldset>
+					<liferay-ui:custom-attribute-list
+						className="<%= WikiPage.class.getName() %>"
+						classPK="<%= (page != null) ? wikiPage.getResourcePrimKey() : 0 %>"
+						editable="<%= true %>"
+						label="<%= true %>"
+					/>
+				</aui:fieldset>
+			</liferay-ui:custom-attributes-available>
+		</c:if>
 
 		<aui:fieldset>
 			<c:if test="<%= attachments.length > 0 %>">
