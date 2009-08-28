@@ -62,23 +62,7 @@ public class DisplayOrderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Display Order']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isTextPresent("Child Test Page 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertFalse(selenium.isTextPresent("Child Test Page 2"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

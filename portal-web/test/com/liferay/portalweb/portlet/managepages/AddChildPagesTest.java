@@ -32,43 +32,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildPagesTest extends BaseTestCase {
 	public void testAddChildPages() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Manage Pages Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Manage Pages Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Children")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace("link=Children"));
 		selenium.waitForPageToLoad("30000");
 
@@ -78,7 +45,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_88_name_en_US")) {
+				if (selenium.isElementPresent("_88_name_en_US")) {
 					break;
 				}
 			}
@@ -101,7 +68,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_88_name_en_US")) {
+				if (selenium.isElementPresent("_88_name_en_US")) {
 					break;
 				}
 			}
@@ -121,39 +88,8 @@ public class AddChildPagesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Child Test Page"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Child Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Child Test Page 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent("Child Test Page"));
+		assertTrue(selenium.isTextPresent("Child Test Page 2"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

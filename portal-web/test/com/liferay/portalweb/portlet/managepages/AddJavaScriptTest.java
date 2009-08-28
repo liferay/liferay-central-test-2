@@ -40,41 +40,10 @@ public class AddJavaScriptTest extends BaseTestCase {
 				"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"&lt;script type=\"text/javascript\"&gt; $layout.getTypeSettingsProperties().getProperty(\"javascript-1\") $layout.getTypeSettingsProperties().getProperty(\"javascript-2\") $layout.getTypeSettingsProperties().getProperty(\"javascript-3\") &lt;/script&gt;")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		assertTrue(selenium.isTextPresent(
+				"&lt;script type=\"text/javascript\"&gt; $layout.getTypeSettingsProperties().getProperty(\"javascript-1\") $layout.getTypeSettingsProperties().getProperty(\"javascript-2\") $layout.getTypeSettingsProperties().getProperty(\"javascript-3\") &lt;/script&gt;"));
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
