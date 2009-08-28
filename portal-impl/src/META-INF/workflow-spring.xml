@@ -6,10 +6,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 
-	<!-- Workflow ManagerProxyAdvice -->
+	<!-- Workflow advice -->
+
 	<bean id="com.liferay.portal.workflow.ManagerProxyAdvice" class="com.liferay.portal.workflow.ManagerProxyAdvice" />
 
-	<!-- Workflow Base Managers -->
+	<!-- Workflow base managers -->
+
 	<bean id="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" class="com.liferay.portal.workflow.BaseWorkflowDefinitionManager">
 		<constructor-arg>
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
@@ -35,7 +37,8 @@
 		</constructor-arg>
 	</bean>
 
-	<!-- Workflow Utils -->
+	<!-- Workflow utils -->
+
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
 		<property name="workflowDefinitionManager">
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -86,5 +89,4 @@
 			<bean class="com.liferay.portal.workflow.UserCredentialFactoryImpl" />
 		</property>
 	</bean>
-
 </beans>
