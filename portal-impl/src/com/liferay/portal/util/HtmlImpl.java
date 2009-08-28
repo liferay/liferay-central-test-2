@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import au.id.jericho.lib.html.Source;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -129,7 +130,9 @@ public class HtmlImpl implements Html {
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 
-			if (Character.isLetterOrDigit(c)) {
+			if ((Character.isLetterOrDigit(c)) ||
+				(c == CharPool.DASH) || (c == CharPool.UNDERLINE)) {
+
 				sb.append(c);
 			}
 			else {
