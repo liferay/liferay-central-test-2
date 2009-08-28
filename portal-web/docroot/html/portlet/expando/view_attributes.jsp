@@ -211,3 +211,7 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 
 	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, modelResourceName, portletURL.toString());
+%>

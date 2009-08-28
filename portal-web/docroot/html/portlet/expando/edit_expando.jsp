@@ -51,6 +51,12 @@ boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIn
 boolean propertySecret = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SECRET));
 int propertyHeight = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_HEIGHT));
 int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_WIDTH));
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/expando/view_attributes");
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("modelResource", modelResource);
 %>
 
 <script type="text/javascript">
@@ -381,3 +387,8 @@ int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, modelResourceName, portletURL.toString());
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (column == null ? Constants.ADD : Constants.UPDATE) + "-attribute"), currentURL);
+%>
