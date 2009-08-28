@@ -120,73 +120,73 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 		<div class="taglib-social-activities">
 			<table>
 
-				<%
-				boolean hasActivities = false;
+			<%
+			boolean hasActivities = false;
 
-				boolean firstDaySeparator = true;
+			boolean firstDaySeparator = true;
 
-				Date now = new Date();
+			Date now = new Date();
 
-				int daysBetween = -1;
+			int daysBetween = -1;
 
-				for (SocialActivity activity : activities) {
-					SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
+			for (SocialActivity activity : activities) {
+				SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
-					if (activityFeedEntry == null) {
-						continue;
-					}
+				if (activityFeedEntry == null) {
+					continue;
+				}
 
-					if (!hasActivities) {
-						hasActivities = true;
-					}
+				if (!hasActivities) {
+					hasActivities = true;
+				}
 
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
 
-					int curDaysBetween = DateUtil.getDaysBetween(new Date(activity.getCreateDate()), now, timeZone);
-				%>
+				int curDaysBetween = DateUtil.getDaysBetween(new Date(activity.getCreateDate()), now, timeZone);
+			%>
 
-					<c:if test="<%= curDaysBetween > daysBetween %>">
+				<c:if test="<%= curDaysBetween > daysBetween %>">
 
-						<%
-						daysBetween = curDaysBetween;
-						%>
-
-						<tr>
-							<td class="day-separator" colspan="2">
-								<c:choose>
-									<c:when test="<%= curDaysBetween == 0 %>">
-										<liferay-ui:message key="today" />
-									</c:when>
-									<c:when test="<%= curDaysBetween == 1 %>">
-										<liferay-ui:message key="yesterday" />
-									</c:when>
-									<c:otherwise>
-										<%= dateFormatDate.format(activity.getCreateDate()) %>
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:if>
+					<%
+					daysBetween = curDaysBetween;
+					%>
 
 					<tr>
-						<td class="portlet-icon">
-							<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
-						</td>
-						<td class="activity-data">
-							<div class="activity-title">
-								<%= activityFeedEntry.getTitle() %>
-							</div>
-							<div class="activity-body">
-								<span class="time"><%= timeFormatDate.format(activity.getCreateDate()) %></span>
-
-								<%= activityFeedEntry.getBody() %>
-							</div>
+						<td class="day-separator" colspan="2">
+							<c:choose>
+								<c:when test="<%= curDaysBetween == 0 %>">
+									<liferay-ui:message key="today" />
+								</c:when>
+								<c:when test="<%= curDaysBetween == 1 %>">
+									<liferay-ui:message key="yesterday" />
+								</c:when>
+								<c:otherwise>
+									<%= dateFormatDate.format(activity.getCreateDate()) %>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
+				</c:if>
 
-				<%
-				}
-				%>
+				<tr>
+					<td class="portlet-icon">
+						<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
+					</td>
+					<td class="activity-data">
+						<div class="activity-title">
+							<%= activityFeedEntry.getTitle() %>
+						</div>
+						<div class="activity-body">
+							<span class="time"><%= timeFormatDate.format(activity.getCreateDate()) %></span>
+
+							<%= activityFeedEntry.getBody() %>
+						</div>
+					</td>
+				</tr>
+
+			<%
+			}
+			%>
 
 			</table>
 
