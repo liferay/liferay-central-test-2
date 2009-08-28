@@ -175,5 +175,5 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 </c:if>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (role == null ? Constants.ADD : Constants.UPDATE) + "-role"), currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (role == null ? "add-role" : "edit")), currentURL);
 %>
