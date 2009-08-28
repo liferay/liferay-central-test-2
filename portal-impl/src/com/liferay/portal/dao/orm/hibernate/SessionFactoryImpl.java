@@ -22,13 +22,17 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.util.PropsValues;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Connection;
 
@@ -56,10 +60,8 @@ public class SessionFactoryImpl implements SessionFactory {
 	}
 
 	public Session openNewSession(Connection connection) throws ORMException {
-		Session session = new SessionImpl(
+		return transformSession(
 			_sessionFactoryImplementor.openSession(connection));
-
-		return session;
 	}
 
 	public Session openSession() throws ORMException {
@@ -85,7 +87,13 @@ public class SessionFactoryImpl implements SessionFactory {
 					sessionImpl.getConnectionReleaseMode());
 		}
 
-		return new SessionImpl(session);
+		return transformSession(session);
+	}
+
+	public void setSessionFactoryClassLoader(
+		ClassLoader sessionFactoryClassLoader) {
+
+		_sessionFactoryClassLoader = sessionFactoryClassLoader;
 	}
 
 	public void setSessionFactoryImplementor(
@@ -94,8 +102,27 @@ public class SessionFactoryImpl implements SessionFactory {
 		_sessionFactoryImplementor = sessionFactoryImplementor;
 	}
 
+	protected Session transformSession(org.hibernate.Session session) {
+		Session liferaySession = new SessionImpl(session);
+
+		if ((_sessionFactoryClassLoader != null) &&
+			(ServerDetector.isWebLogic())) {
+
+			// LPS-4190
+
+			liferaySession = (Session)Proxy.newProxyInstance(
+				_sessionFactoryClassLoader,
+				new Class[] {Session.class},
+				new ContextClassLoaderBeanHandler(
+					liferaySession, _sessionFactoryClassLoader));
+		}
+
+		return liferaySession;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
 
+	private ClassLoader _sessionFactoryClassLoader;
 	private SessionFactoryImplementor _sessionFactoryImplementor;
 
 }
