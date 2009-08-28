@@ -29,7 +29,7 @@ import java.io.Serializable;
  *
  * @author Bruno Farache
  */
-public class Sort implements Serializable{
+public class Sort implements Serializable {
 
 	public static final int AUTO_TYPE = 2;
 

@@ -32,7 +32,7 @@ import java.io.Serializable;
  * @author Allen Chiang
  * @author Alex Wallace
  */
-public class Field implements Serializable{
+public class Field implements Serializable {
 
 	public static final String ASSET_CATEGORY_IDS = "assetCategoryIds";
 

@@ -29,7 +29,7 @@ import java.io.Serializable;
  *
  * @author Michael C. Han
  */
-public interface QueryTerm extends Serializable{
+public interface QueryTerm extends Serializable {
 
 	public String getField();
 

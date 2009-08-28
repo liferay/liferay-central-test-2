@@ -29,7 +29,7 @@ import java.io.Serializable;
  *
  * @author Brian Wing Shun Chan
  */
-public interface BooleanClause extends Serializable{
+public interface BooleanClause extends Serializable {
 
 	public BooleanClauseOccur getBooleanClauseOccur();
 

@@ -29,5 +29,5 @@ import java.io.Serializable;
  *
  * @author Brian Wing Shun Chan
  */
-public interface Query extends Serializable{
+public interface Query extends Serializable {
 }
