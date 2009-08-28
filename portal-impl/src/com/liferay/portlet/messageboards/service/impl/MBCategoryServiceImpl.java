@@ -138,7 +138,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
 			String outPassword, boolean mailingListActive,
-			boolean mergeWithParentCategory)
+			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -149,7 +149,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, mergeWithParentCategory);
+			mailingListActive, mergeWithParentCategory, serviceContext);
 	}
 
 }

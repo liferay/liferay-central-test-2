@@ -75,7 +75,7 @@ import javax.portlet.PortletPreferences;
  * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -526,7 +526,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 							inServerPort, inUseSSL, inUserName, inPassword,
 							inReadInterval, outEmailAddress, outCustom,
 							outServerName, outServerPort, outUseSSL,
-							outUserName, outPassword, mailingListActive, false);
+							outUserName, outPassword, mailingListActive, false,
+							serviceContext);
 				}
 			}
 			else {

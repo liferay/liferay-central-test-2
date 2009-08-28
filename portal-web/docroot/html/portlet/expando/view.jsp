@@ -116,6 +116,8 @@ private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
 		IGImage.class.getName(),
 		JournalArticle.class.getName(),
 		Layout.class.getName(),
+		MBCategory.class.getName(),
+		MBMessage.class.getName(),
 		Organization.class.getName(),
 		User.class.getName(),
 		WikiPage.class.getName()
@@ -151,6 +153,12 @@ private String _getIconPath(String modelResource) {
 	}
 	else if (modelResource.equals(Layout.class.getName())) {
 		return "/common/page.png";
+	}
+	else if (modelResource.equals(MBCategory.class.getName())) {
+		return "/common/folder.png";
+	}
+	else if (modelResource.equals(MBMessage.class.getName())) {
+		return "/common/conversation.png";
 	}
 	else if (modelResource.equals(Organization.class.getName())) {
 		return "/common/organization_icon.png";

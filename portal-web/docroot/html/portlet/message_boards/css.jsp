@@ -132,6 +132,15 @@ td.user-info {
 	clear: both;
 }
 
+.portlet-message-boards .custom-attributes {
+	margin-bottom: 1em;
+}
+
+.portlet-message-boards .custom-attributes label {
+	display: block;
+	font-weight: bold;
+}
+
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
 	border: 1px solid #ccc;
 	margin: 5px 0px 0px 0px;

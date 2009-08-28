@@ -163,6 +163,24 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	</td>
 </tr>
 
+<liferay-ui:custom-attributes-available className="<%= MBCategory.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= MBCategory.class.getName() %>"
+				classPK="<%= (category != null) ? category.getCategoryId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= category == null %>">
 	<tr>
 		<td colspan="2">

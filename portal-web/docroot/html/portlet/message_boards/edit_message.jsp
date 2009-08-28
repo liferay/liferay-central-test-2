@@ -198,6 +198,24 @@ if ((message != null) && message.isAttachments()) {
 	</td>
 </tr>
 
+<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<liferay-ui:custom-attribute-list
+				className="<%= MBMessage.class.getName() %>"
+				classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
+				editable="<%= true %>"
+				label="<%= true %>"
+			/>
+		</td>
+	</tr>
+</liferay-ui:custom-attributes-available>
+
 <c:if test="<%= attachments %>">
 	<tr>
 		<td colspan="2">

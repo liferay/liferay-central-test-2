@@ -105,7 +105,7 @@ import org.apache.commons.lang.time.StopWatch;
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
@@ -413,6 +413,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		logAddMessage(messageId, stopWatch, 5);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Statistics
 
@@ -1240,6 +1246,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
+
+		// Expando
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		// Subscriptions
 

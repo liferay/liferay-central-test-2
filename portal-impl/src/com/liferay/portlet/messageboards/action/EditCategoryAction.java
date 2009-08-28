@@ -222,7 +222,8 @@ public class EditCategoryAction extends PortletAction {
 				inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 				inPassword, inReadInterval, outEmailAddress, outCustom,
 				outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive, mergeWithParentCategory);
+				outPassword, mailingListActive, mergeWithParentCategory,
+				serviceContext);
 		}
 	}
 
