@@ -1052,7 +1052,9 @@ public class LayoutTypePortletImpl
 		for (int i = 0; i < portletIds.length; i++) {
 			String portletId = portletIds[i];
 
-			if (hasNonstaticPortletId(portletId)) {
+			if (Validator.isNull(portletId) ||
+				hasNonstaticPortletId(portletId)) {
+
 				continue;
 			}
 
