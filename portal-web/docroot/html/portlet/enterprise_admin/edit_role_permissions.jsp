@@ -320,8 +320,8 @@ PortletURL definePermissionsURL = renderResponse.createRenderURL();
 definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
 
 definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+definePermissionsURL.setParameter("redirect", backURL);
 definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "define-permissions"), definePermissionsURL.toString());
