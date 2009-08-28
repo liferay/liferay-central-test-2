@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.io.Serializable;
 import java.text.ParseException;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  */
-public interface Document {
+public interface Document extends Serializable{
 
 	public void add(Field field);
 

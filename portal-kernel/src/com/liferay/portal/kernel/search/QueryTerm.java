@@ -22,12 +22,14 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.io.Serializable;
+
 /**
  * <a href="QueryTerm.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public interface QueryTerm {
+public interface QueryTerm extends Serializable{
 
 	public String getField();
 

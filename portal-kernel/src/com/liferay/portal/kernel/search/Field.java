@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.io.Serializable;
+
 /**
  * <a href="Field.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,7 +32,7 @@ package com.liferay.portal.kernel.search;
  * @author Allen Chiang
  * @author Alex Wallace
  */
-public class Field {
+public class Field implements Serializable{
 
 	public static final String ASSET_CATEGORY_IDS = "assetCategoryIds";
 

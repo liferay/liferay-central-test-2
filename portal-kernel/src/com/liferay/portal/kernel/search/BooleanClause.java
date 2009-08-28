@@ -22,12 +22,14 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.io.Serializable;
+
 /**
  * <a href="BooleanClause.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public interface BooleanClause {
+public interface BooleanClause extends Serializable{
 
 	public BooleanClauseOccur getBooleanClauseOccur();
 

@@ -25,13 +25,14 @@ package com.liferay.portal.kernel.search.messaging;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.Sort;
+import java.io.Serializable;
 
 /**
  * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  */
-public class SearchRequest {
+public class SearchRequest implements Serializable {
 
 	public static SearchRequest add(long companyId, Document document) {
 		SearchRequest searchRequest = new SearchRequest(
