@@ -1319,6 +1319,10 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			Removed org.apache.*, org.cyberneko.*, and org.w3c.* because it
+			conflicts with nekohtml.jar and xercesImpl.jar.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/displaytag.jar</file-name>
