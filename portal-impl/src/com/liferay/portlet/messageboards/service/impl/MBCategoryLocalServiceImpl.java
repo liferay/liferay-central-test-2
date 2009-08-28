@@ -134,12 +134,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				serviceContext.getGuestPermissions());
 		}
 
-		// Expando
-
-		ExpandoBridge expandoBridge = category.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Mailing list
 
 		mbMailingListLocalService.addMailingList(
@@ -148,6 +142,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			inReadInterval, outEmailAddress, outCustom, outServerName,
 			outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive);
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}
@@ -239,6 +239,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		catch (SearchException se) {
 			_log.error("Deleting index " + category.getCategoryId(), se);
 		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			MBCategory.class.getName(), category.getCategoryId());
 
 		// Threads
 
@@ -455,12 +460,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		mbCategoryPersistence.update(category, false);
 
-		// Expando
-
-		ExpandoBridge expandoBridge = category.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Merge categories
 
 		if (mergeWithParentCategory &&
@@ -491,6 +490,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
 				outPassword, mailingListActive);
 		}
+
+		// Expando
+
+		ExpandoBridge expandoBridge = category.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 
 		return category;
 	}

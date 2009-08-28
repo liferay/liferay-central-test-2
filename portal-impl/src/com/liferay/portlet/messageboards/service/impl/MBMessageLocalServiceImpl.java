@@ -414,12 +414,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 5);
 
-		// Expando
-
-		ExpandoBridge expandoBridge = message.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
 		// Statistics
 
 		if (!category.isDiscussion()) {
@@ -446,6 +440,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 8);
 
+		// Expando
+
+		ExpandoBridge expandoBridge = message.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
+		logAddMessage(messageId, stopWatch, 9);
+
 		// Social
 
 		if (!message.isDiscussion() && !message.isAnonymous() &&
@@ -464,13 +466,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				messageId, activityType, StringPool.BLANK, receiverUserId);
 		}
 
-		logAddMessage(messageId, stopWatch, 9);
+		logAddMessage(messageId, stopWatch, 10);
 
 		// Subscriptions
 
 		notifySubscribers(category, message, serviceContext, false);
 
-		logAddMessage(messageId, stopWatch, 10);
+		logAddMessage(messageId, stopWatch, 11);
 
 		// Testing roll back
 
@@ -482,7 +484,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		reIndex(message);
 
-		logAddMessage(messageId, stopWatch, 11);
+		logAddMessage(messageId, stopWatch, 12);
 
 		return message;
 	}
@@ -736,6 +738,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
+			MBMessage.class.getName(), message.getMessageId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
 			MBMessage.class.getName(), message.getMessageId());
 
 		// Social
