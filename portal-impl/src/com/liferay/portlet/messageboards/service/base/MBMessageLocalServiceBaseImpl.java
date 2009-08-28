@@ -69,6 +69,9 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -736,6 +739,32 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.assetTagFinder = assetTagFinder;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -879,4 +908,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected AssetTagPersistence assetTagPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagFinder.impl")
 	protected AssetTagFinder assetTagFinder;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected ExpandoValuePersistence expandoValuePersistence;
 }

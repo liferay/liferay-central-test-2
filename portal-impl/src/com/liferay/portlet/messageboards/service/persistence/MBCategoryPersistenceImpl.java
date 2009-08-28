@@ -2162,5 +2162,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetTagPersistence.impl")
 	protected com.liferay.portlet.asset.service.persistence.AssetTagPersistence assetTagPersistence;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence;
 	private static Log _log = LogFactoryUtil.getLog(MBCategoryPersistenceImpl.class);
 }
