@@ -54,6 +54,7 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringComparator;
@@ -153,7 +154,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -476,18 +476,18 @@ public class PortalImpl implements Portal {
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url) {
 
-		Map<String, String> portletBreadcrumbMap =
-			(Map<String, String>)request.getAttribute(
+		List<KeyValuePair> portletBreadcrumbList =
+			(List<KeyValuePair>)request.getAttribute(
 				WebKeys.PORTLET_BREADCRUMB_MAP);
 
-		if (portletBreadcrumbMap == null) {
-			portletBreadcrumbMap = new LinkedHashMap<String, String>();
+		if (portletBreadcrumbList == null) {
+			portletBreadcrumbList = new ArrayList<KeyValuePair>();
 
 			request.setAttribute(
-				WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbMap);
+				WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbList);
 		}
 
-		portletBreadcrumbMap.put(title, url);
+		portletBreadcrumbList.add(new KeyValuePair(title, url));
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -1793,10 +1793,10 @@ public class PortalImpl implements Portal {
 		return _portalWebDir;
 	}
 
-	public Map<String, String> getPortletBreadcrumbMap(
+	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
-		return (Map<String, String>)request.getAttribute(
+		return (List<KeyValuePair>)request.getAttribute(
 			WebKeys.PORTLET_BREADCRUMB_MAP);
 	}
 

@@ -116,15 +116,15 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 }
 
 private void _buildPortletBreadcrumb(HttpServletRequest request, StringBuilder sb) throws Exception {
-	Map<String, String> portletBreadcrumbMap = PortalUtil.getPortletBreadcrumbMap(request);
+	List<KeyValuePair> portletBreadcrumbList = PortalUtil.getPortletBreadcrumbList(request);
 
-	if (portletBreadcrumbMap == null) {
+	if (portletBreadcrumbList == null) {
 		return;
 	}
 
-	for (Map.Entry<String, String> entry : portletBreadcrumbMap.entrySet()) {
-		String breadcrumbText = entry.getKey();
-		String breadcrumbURL = entry.getValue();
+	for (KeyValuePair kvp : portletBreadcrumbList) {
+		String breadcrumbText = kvp.getKey();
+		String breadcrumbURL = kvp.getValue();
 
 		sb.append("<li><span>");
 

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
@@ -324,7 +325,7 @@ public interface Portal {
 
 	public String getPortalWebDir();
 
-	public Map<String, String> getPortletBreadcrumbMap(
+	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request);
 
 	public String getPortletDescription(
