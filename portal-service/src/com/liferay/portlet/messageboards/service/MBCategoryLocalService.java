@@ -229,7 +229,8 @@ public interface MBCategoryLocalService {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean mergeWithParentCategory)
+		boolean mailingListActive, boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

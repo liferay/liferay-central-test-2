@@ -430,7 +430,8 @@ public class MBCategoryServiceHttp {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
-		boolean mergeWithParentCategory)
+		boolean mergeWithParentCategory,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -520,6 +521,13 @@ public class MBCategoryServiceHttp {
 
 			Object paramObj20 = new BooleanWrapper(mergeWithParentCategory);
 
+			Object paramObj21 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj21 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"updateCategory",
 					new Object[] {
@@ -527,7 +535,7 @@ public class MBCategoryServiceHttp {
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
 						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20
+						paramObj18, paramObj19, paramObj20, paramObj21
 					});
 
 			Object returnObj = null;
