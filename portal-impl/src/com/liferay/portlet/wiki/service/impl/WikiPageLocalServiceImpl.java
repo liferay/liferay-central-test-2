@@ -411,6 +411,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		mbMessageLocalService.deleteDiscussionMessages(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			WikiPage.class.getName(), page.getResourcePrimKey());
+
 		// Asset
 
 		assetEntryLocalService.deleteEntry(

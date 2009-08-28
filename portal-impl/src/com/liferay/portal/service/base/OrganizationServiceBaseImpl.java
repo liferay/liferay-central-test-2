@@ -175,6 +175,9 @@ import com.liferay.portlet.asset.service.AssetEntryLocalService;
 import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 /**
  * <a href="OrganizationServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -1441,6 +1444,32 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 		this.assetEntryFinder = assetEntryFinder;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -1746,4 +1775,10 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	protected AssetEntryPersistence assetEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryFinder.impl")
 	protected AssetEntryFinder assetEntryFinder;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
+	protected ExpandoValuePersistence expandoValuePersistence;
 }

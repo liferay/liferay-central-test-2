@@ -240,11 +240,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			_log.error("Deleting index " + category.getCategoryId(), se);
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			MBCategory.class.getName(), category.getCategoryId());
-
 		// Threads
 
 		mbThreadLocalService.deleteThreads(category.getCategoryId());
@@ -257,6 +252,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 		catch (NoSuchMailingListException nsmle) {
 		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			MBCategory.class.getName(), category.getCategoryId());
 
 		// Resources
 

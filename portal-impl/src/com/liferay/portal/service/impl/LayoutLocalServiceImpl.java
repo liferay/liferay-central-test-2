@@ -284,6 +284,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId());
 
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			Layout.class.getName(), layout.getPlid());
+
 		// Icon
 
 		imageLocalService.deleteImage(layout.getIconImageId());

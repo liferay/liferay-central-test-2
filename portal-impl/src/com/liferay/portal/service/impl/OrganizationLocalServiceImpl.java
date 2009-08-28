@@ -244,6 +244,11 @@ public class OrganizationLocalServiceImpl
 			organization.getCompanyId(), Organization.class.getName(),
 			organization.getOrganizationId());
 
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			Organization.class.getName(), organization.getOrganizationId());
+
 		// Password policy relation
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRel(
