@@ -1749,8 +1749,13 @@ fieldset:last-child, .aui-form fieldset:last-child {
 
 /* ---------- Taglib social activities ---------- */
 
-.taglib-social-activities .activity-separator {
-	padding-bottom: 10px;
+.taglib-social-activities table {
+	width: 100%;
+}
+
+.taglib-social-activities td {
+	padding: 5px;
+	vertical-align: top;
 }
 
 .taglib-social-activities .day-separator {
@@ -1760,11 +1765,8 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding-bottom: 2px;
 }
 
-.taglib-social-activities .first-day-separator {
-	border-bottom: 1px dotted #CCC;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	padding-bottom: 2px;
+.taglib-social-activities .portlet-icon {
+	width: 16px;
 }
 
 /* ---------- Taglib social bookmark ---------- */
