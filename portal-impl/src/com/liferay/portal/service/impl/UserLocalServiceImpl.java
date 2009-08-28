@@ -2365,7 +2365,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (Validator.isNotNull(newPassword1) ||
 			Validator.isNotNull(newPassword2)) {
 
-			updatePassword(userId, newPassword1, newPassword2, passwordReset);
+			user = updatePassword(userId, newPassword1, newPassword2,
+				passwordReset);
 
 			password = newPassword1;
 		}
