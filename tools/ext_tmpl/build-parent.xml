@@ -141,7 +141,7 @@
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/portal"
-						includes="ccpp.jar,log4j.jar,xercesImpl.jar"
+						includes="ccpp.jar,log4j.jar"
 					/>
 				</copy>
 			</then>
@@ -175,6 +175,18 @@
 						includes="jaxrpc.jar,stax.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="jetty" />
+			<then>
+				<copy todir="${app.server.lib.global.dir}">
+					<fileset
+						dir="lib/development"
+						includes="jta.jar"
+					/>
+				</copy>
 			</then>
 		</if>
 
