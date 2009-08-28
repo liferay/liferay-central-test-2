@@ -313,3 +313,29 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		</script>
 	</c:otherwise>
 </c:choose>
+
+<%
+PortletURL definePermissionsURL = renderResponse.createRenderURL();
+
+definePermissionsURL.setWindowState(WindowState.MAXIMIZED);
+
+definePermissionsURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+definePermissionsURL.setParameter("redirect", backURL);
+definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "define-permissions"), definePermissionsURL.toString());
+
+if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
+	PortletURL resourceURL = renderResponse.createRenderURL();
+
+	resourceURL.setWindowState(WindowState.MAXIMIZED);
+
+	resourceURL.setParameter("struts_action", "/enterprise_admin/edit_role");
+	resourceURL.setParameter(Constants.CMD, Constants.EDIT);
+	resourceURL.setParameter("tabs1", tabs1);
+	resourceURL.setParameter("portletResource", portletResource);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, portletResourceLabel, resourceURL.toString());
+}
+%>

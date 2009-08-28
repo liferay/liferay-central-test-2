@@ -71,14 +71,6 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 <liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
 <fieldset class="aui-block-labels">
-	<c:if test="<%= role != null %>">
-		<div class="aui-ctrl-holder">
-			<label><%= LanguageUtil.get(pageContext, PortalUtil.isSystemRole(role.getName()) ? "name" : "old-name") %></label>
-
-			<%= HtmlUtil.escape(role.getName()) %>
-		</div>
-	</c:if>
-
 	<c:choose>
 		<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
 			<input type="hidden" name="name" value="<%= HtmlUtil.escape(role.getName()) %>" />
@@ -181,3 +173,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (role == null ? Constants.ADD : Constants.UPDATE) + "-role"), currentURL);
+%>

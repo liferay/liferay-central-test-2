@@ -112,42 +112,13 @@ if (tabs1Names.startsWith(",")) {
 
 // Breadcrumbs
 
-PortletURL breadcrumbsURL = renderResponse.createRenderURL();
-
-breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
-
-breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/view");
-breadcrumbsURL.setParameter("tabs1", tabs1);
-
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "roles") + "</a> &raquo; ";
-
-breadcrumbsURL.setParameter("struts_action", "/enterprise_admin/edit_role");
-breadcrumbsURL.setParameter(Constants.CMD, Constants.VIEW);
-
-breadcrumbs += "<strong>" + HtmlUtil.escape(role.getTitle(locale)) + "</strong>";
-
-breadcrumbsURL.setParameter(Constants.CMD, Constants.EDIT);
-
-if (Validator.isNotNull(tabs1) && tabs1.equals("define-permissions")) {
-	breadcrumbs += " &raquo; <a href=\"" + definePermissionsURL.toString() + "\">" + LanguageUtil.get(pageContext, "define-permissions") + "</a>";
-}
-else if (Validator.isNotNull(tabs1) && tabs1.equals("assign-members")) {
-	breadcrumbs += " &raquo; <a href=\"" + assignMembersURL.toString() + "\">" + LanguageUtil.get(pageContext, "assign-members") + "</a>";
-}
-
-if (!cmd.equals(Constants.VIEW) && Validator.isNotNull(portletResource)) {
-	breadcrumbsURL.setParameter("portletResource", portletResource);
-
-	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + portletResourceLabel + "</a>";
-}
+PortalUtil.addPortletBreadcrumbEntry(request, role.getTitle(locale), null);
 
 request.setAttribute("edit_role_permissions.jsp-role", role);
 
 request.setAttribute("edit_role_permissions.jsp-portletResource", portletResource);
 %>
 
-<div class="breadcrumbs">
-	<%= breadcrumbs %>
-</div>
+<h3><%= role.getTitle(locale) %></h3>
 
 <liferay-ui:tabs names="<%= tabs1Names %>" />

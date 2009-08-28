@@ -111,3 +111,19 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 </c:choose>
 
 </form>
+
+<%
+PortletURL assignMembersURL = renderResponse.createRenderURL();
+
+assignMembersURL.setWindowState(WindowState.MAXIMIZED);
+
+assignMembersURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
+assignMembersURL.setParameter("redirect", redirect);
+assignMembersURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), assignMembersURL.toString());
+
+assignMembersURL.setParameter("tabs2", tabs2);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs2), assignMembersURL.toString());
+%>
