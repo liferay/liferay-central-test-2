@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.search.messaging;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.Sort;
+
 import java.io.Serializable;
 
 /**
