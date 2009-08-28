@@ -83,6 +83,26 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					instance._yearRange = options.yearRange.join(':');
 					instance._firstDay = options.firstDay;
 
+					if ((options.dayField != options.monthField) &&
+						(options.dayField != options.yearField)) {
+
+						instance._setDayField();
+
+						instance._yearField.bind(
+							'change keypress',
+							function() {
+								instance._setDayField();
+							}
+						);
+
+						instance._monthField.bind(
+							'change keypress',
+							function() {
+								instance._setDayField();
+							}
+						);
+					}
+
 					var button = jQuery('<img alt="<liferay-ui:message key="display-a-datapicker" />" class="aui-datepicker-button" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png" />');
 
 					instance._input.after(button);
@@ -128,6 +148,16 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					);
 				},
 
+				_getDaysInMonth: function(year, month) {
+					var daysInMonth = 31;
+
+					if (year != '' && month != '') {
+						daysInMonth = 32 - (new Date(year, month, 32)).getDate();
+					}
+
+					return daysInMonth;
+				},
+
 				_onSelect: function(eventName, dates) {
 					var instance = this;
 
@@ -147,6 +177,26 @@ if (dateFormatPattern.indexOf("y") == 0) {
 					}
 
 					instance._dayField.val(day);
+				},
+
+				_setDayField: function() {
+					var instance = this;
+
+					var daysInMonth = instance._getDaysInMonth(instance._yearField.val(), instance._monthField.val());
+
+					var dayFieldValue = instance._dayField.val();
+
+					if (dayFieldValue > daysInMonth) {
+						dayFieldValue = daysInMonth;
+					}
+
+					if (!instance._dayOptions) {
+						instance._dayOptions = instance._dayField.find('option');
+					}
+
+					instance._dayField.empty();
+					instance._dayField.append(instance._dayOptions.slice(0, daysInMonth));
+					instance._dayField.val(dayFieldValue);
 				},
 
 				_showDatePicker: function() {
