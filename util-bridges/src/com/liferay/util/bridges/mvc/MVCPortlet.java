@@ -26,9 +26,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -48,6 +51,7 @@ import javax.portlet.ResourceResponse;
  */
 public class MVCPortlet extends LiferayPortlet {
 
+	@Override
 	public void init() {
 		aboutJSP = getInitParameter("about-jsp");
 		configJSP = getInitParameter("config-jsp");
@@ -63,6 +67,12 @@ public class MVCPortlet extends LiferayPortlet {
 			getInitParameter("clear-request-parameters"));
 		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"));
+
+		String packagePrefix =
+			getInitParameter(ActionCommandCache.ACTION_PACKAGE_NAME);
+		if (Validator.isNotNull(packagePrefix)) {
+			_actionCommandCache = new ActionCommandCache(packagePrefix);
+		}
 	}
 
 	public void doAbout(
@@ -170,6 +180,51 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
+   	protected boolean callActionMethod(
+		ActionRequest request, ActionResponse response)
+		throws PortletException {
+
+		if ((_actionCommandCache == null) || _actionCommandCache.isEmpty()) {
+			//use previous reflection mechanism
+			return super.callActionMethod(request, response);
+		}
+
+		String actionName =
+			ParamUtil.getString(request, ActionRequest.ACTION_NAME);
+
+		if (actionName.indexOf(',') == -1) {
+
+			ActionCommand actionCommand = _actionCommandCache.getActionCommand(
+				actionName);
+
+			if (actionCommand != ActionCommandCache.EMPTY) {
+				return actionCommand.processCommand(request, response);
+			}
+		}
+		else {
+			// find multiple ActionCommands and process..
+			List<ActionCommand> actionCommands =
+				_actionCommandCache.getActionCommandChain(actionName);
+
+			int size = actionCommands.size();
+
+			if (size == 0) {
+				return false;
+			}
+
+			for (int i = 0; i < size; i++) {
+				if (!actionCommands.get(i).processCommand(request, response)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -215,6 +270,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	protected ActionCommandCache _actionCommandCache;
 	protected String aboutJSP;
 	protected String configJSP;
 	protected String editJSP;
