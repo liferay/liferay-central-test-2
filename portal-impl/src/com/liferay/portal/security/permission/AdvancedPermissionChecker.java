@@ -531,6 +531,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				defaultUserId, groupId, resources, actionId, bag);
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+
 			return false;
 		}
 	}
