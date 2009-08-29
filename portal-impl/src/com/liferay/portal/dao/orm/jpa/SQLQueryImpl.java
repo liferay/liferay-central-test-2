@@ -258,14 +258,14 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 				list = newList;
 			}
-			else if ( (_scalars.size() == 1) &&
-				(list.get(0) instanceof Object) ) {
-				
+			else if ((_scalars.size() == 1) &&
+					 (list.get(0) instanceof Object)) {
+
 				List<Object> newList = new ArrayList<Object>();
 
-				for (Object value: list) {
+				for (Object value : list) {
 					value = _transformType(value, _scalarTypes.get(0));
-					
+
 					newList.add(value);
 				}
 
@@ -295,24 +295,18 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 	private Object _transformType(Object object, Type type) {
 		Object result = object;
 
-		switch(type) {
-			case STRING:
-				result = object.toString();
-
-				break;
-
-			case LONG:
-				if (object instanceof Integer) {
-					result = new Long((((Integer)object).longValue()));
-				}
-				
-				break;
-
-			default:
-				throw new UnsupportedOperationException(
-					"Type conversion from " +
-						object.getClass().getName() +
-							" to " + type + " is not supported");
+		if (type.equals(Type.LONG)) {
+			if (object instanceof Integer) {
+				result = new Long((((Integer)object).longValue()));
+			}
+		}
+		else if (type.equals(Type.STRING)) {
+			result = object.toString();
+		}
+		else {
+			throw new UnsupportedOperationException(
+				"Type conversion from " + object.getClass().getName() + " to " +
+					type + " is not supported");
 		}
 
 		return result;
