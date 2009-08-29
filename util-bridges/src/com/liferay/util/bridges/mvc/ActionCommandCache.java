@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,23 +22,20 @@
 
 package com.liferay.util.bridges.mvc;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
-
 /**
- * <a href="ActionCache.java.html"><b><i>View Source</i></b></a>
- * <p/>
- * Cache for Portlet Actions to avoid reflection costs per call.
+ * <a href="ActionCommandCache.java.html"><b><i>View Source</i></b></a><p/>
  *
  * @author Michael C. Han
  */
@@ -47,11 +44,13 @@ public class ActionCommandCache {
 	public static final String ACTION_PACKAGE_NAME = "action.package.prefix";
 
 	public static final ActionCommand EMPTY = new ActionCommand() {
+
 		public boolean processCommand(
-			PortletRequest request, PortletResponse response)
-			throws PortletException {
+			PortletRequest portletRequest, PortletResponse portletResponse) {
+
 			return false;
 		}
+
 	};
 
 	public ActionCommandCache(String packagePrefix) {
@@ -62,9 +61,7 @@ public class ActionCommandCache {
 		_packagePrefix = packagePrefix;
 	}
 
-	public ActionCommand getActionCommand(String actionCommandName)
-		throws PortletException {
-
+	public ActionCommand getActionCommand(String actionCommandName) {
 		String className = null;
 
 		try {
@@ -72,11 +69,15 @@ public class ActionCommandCache {
 				actionCommandName);
 
 			if (actionCommand == null) {
-				className =
-					_packagePrefix +
-					Character.toUpperCase(actionCommandName.charAt(0)) +
-					actionCommandName.substring(1, actionCommandName.length()) +
-					_ACTION_COMMAND_POSTFIX;
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(_packagePrefix);
+				sb.append(Character.toUpperCase(actionCommandName.charAt(0)));
+				sb.append(
+					actionCommandName.substring(1, actionCommandName.length()));
+				sb.append(_ACTION_COMMAND_POSTFIX);
+
+				className = sb.toString();
 
 				actionCommand =
 					(ActionCommand)Class.forName(className).newInstance();
@@ -87,10 +88,8 @@ public class ActionCommandCache {
 			return actionCommand;
 		}
 		catch (Exception e) {
-
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to find an ActionCommand class: " + className);
+				_log.warn("Unable to instantiate ActionCommand " + className);
 			}
 
 			_actionCommandCache.put(actionCommandName, EMPTY);
@@ -99,24 +98,22 @@ public class ActionCommandCache {
 		}
 	}
 
-	public List<ActionCommand> getActionCommandChain(String actionCommandChain)
-		throws PortletException {
+	public List<ActionCommand> getActionCommandChain(
+		String actionCommandChain) {
+
 		List<ActionCommand> actionCommands = _actionCommandChainCache.get(
 			actionCommandChain);
 
 		if (actionCommands == null) {
-
 			actionCommands = new ArrayList<ActionCommand>();
-
-			int length = actionCommandChain.length();
 
 			int nextSeparator = actionCommandChain.indexOf(StringPool.COMMA);
 
 			int currentIndex = 0;
 
-			do {
-				String parsedName =
-					actionCommandChain.substring(currentIndex, nextSeparator);
+			while (currentIndex < actionCommandChain.length()) {
+				String parsedName = actionCommandChain.substring(
+					currentIndex, nextSeparator);
 
 				ActionCommand actionCommand = getActionCommand(
 					parsedName);
@@ -127,8 +124,8 @@ public class ActionCommandCache {
 				else {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to find ActionCommand: " +
-							actionCommandChain);
+							"Unable to find ActionCommand " +
+								actionCommandChain);
 					}
 				}
 
@@ -141,7 +138,6 @@ public class ActionCommandCache {
 					break;
 				}
 			}
-			while ((currentIndex < length));
 
 			_actionCommandChainCache.put(actionCommandChain, actionCommands);
 		}
@@ -153,16 +149,15 @@ public class ActionCommandCache {
 		return _actionCommandCache.isEmpty();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		ActionCommandCache.class);
-
 	private static final String _ACTION_COMMAND_POSTFIX = "ActionCommand";
+
+	private static final Log _log =
+		LogFactoryUtil.getLog(ActionCommandCache.class);
 
 	private Map<String, ActionCommand> _actionCommandCache =
 		new ConcurrentHashMap<String, ActionCommand>();
-
 	private Map<String, List<ActionCommand>> _actionCommandChainCache =
 		new ConcurrentHashMap<String, List<ActionCommand>>();
-
 	private String _packagePrefix;
+
 }

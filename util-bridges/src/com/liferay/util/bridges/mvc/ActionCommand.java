@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,9 +22,9 @@
 
 package com.liferay.util.bridges.mvc;
 
+import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletException;
 
 /**
  * <a href="ActionCommand.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +32,9 @@ import javax.portlet.PortletException;
  * @author Michael C. Han
  */
 public interface ActionCommand {
-	boolean processCommand(
-		PortletRequest portletRequest, PortletResponse portletResponse)
-		throws PortletException;	
+
+	public boolean processCommand(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws PortletException;
+
 }
