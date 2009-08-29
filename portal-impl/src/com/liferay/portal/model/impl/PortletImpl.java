@@ -868,8 +868,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Gets the name of the social activity interpreter class of the portlet.
 	 *
-	 * @return the name of the social activity interpreter class of the
-	 *		   portlet
+	 * @return the name of the social activity interpreter class of the portlet
 	 */
 	public String getSocialActivityInterpreterClass() {
 		return _socialActivityInterpreterClass;
@@ -912,8 +911,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Gets the name of the social request interpreter class of the portlet.
 	 *
-	 * @return the name of the social request interpreter class of the
-	 *		   portlet
+	 * @return the name of the social request interpreter class of the portlet
 	 */
 	public String getSocialRequestInterpreterClass() {
 		return _socialRequestInterpreterClass;
@@ -1038,8 +1036,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the relative weight of the portlet with respect to the other
 	 * portlets in the same category of the Control Panel.
 	 *
-	 * @return the relative weight of the portlet with respect to the
-	 *		   other portlets in the same category of the Control Panel
+	 * @return the relative weight of the portlet with respect to the other
+	 *		   portlets in the same category of the Control Panel
 	 */
 	public double getControlPanelEntryWeight() {
 		return _controlPanelEntryWeight;
@@ -1061,8 +1059,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the name of the class that will control when the portlet will be
 	 * shown in the Control Panel.
 	 *
-	 * @return the name of the class that will control when the portlet
-	 *		   will be shown in the Control Panel
+	 * @return the name of the class that will control when the portlet will be
+	 *		   shown in the Control Panel
 	 */
 	public String getControlPanelEntryClass() {
 		return _controlPanelEntryClass;
@@ -1083,8 +1081,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets an instance of the class that will control when the portlet will be
 	 * shown in the Control Panel
 	 *
-	 * @return the instance of the class that will control when the portlet
-	 *		   will be shown in the Control Panel
+	 * @return the instance of the class that will control when the portlet will
+	 *		   be shown in the Control Panel
 	 */
 	public ControlPanelEntry getControlPanelEntryInstance() {
 		if (Validator.isNull(getControlPanelEntryClass())) {
@@ -1215,9 +1213,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * shown in a group layout. Returns false if preferences are owned by the
 	 * user at all times.
 	 *
-	 * @return true if preferences are owned by the group when the portlet
-	 *		   is shown in a group layout; false if preferences are owned
-	 *		   by the user at all times.
+	 * @return true if preferences are owned by the group when the portlet is
+	 *		   shown in a group layout; false if preferences are owned by the
+	 *		   user at all times.
 	 */
 	public boolean getPreferencesOwnedByGroup() {
 		return _preferencesOwnedByGroup;
@@ -1228,9 +1226,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * shown in a group layout. Returns false if preferences are owned by the
 	 * user at all times.
 	 *
-	 * @return true if preferences are owned by the group when the portlet
-	 *		   is shown in a group layout; false if preferences are owned
-	 *		   by the user at all times.
+	 * @return true if preferences are owned by the group when the portlet is
+	 *		   shown in a group layout; false if preferences are owned by the
+	 *		   user at all times.
 	 */
 	public boolean isPreferencesOwnedByGroup() {
 		return _preferencesOwnedByGroup;
@@ -1408,8 +1406,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the maximized state when the user
 	 * goes into the edit mode.
 	 *
-	 * @return true if the portlet goes into the maximized state when the
-	 *		   user goes into the edit mode
+	 * @return true if the portlet goes into the maximized state when the user
+	 *		   goes into the edit mode
 	 */
 	public boolean getMaximizeEdit() {
 		return _maximizeEdit;
@@ -1419,8 +1417,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the maximized state when the user
 	 * goes into the edit mode.
 	 *
-	 * @return true if the portlet goes into the maximized state when the
-	 *		   user goes into the edit mode
+	 * @return true if the portlet goes into the maximized state when the user
+	 *		   goes into the edit mode
 	 */
 	public boolean isMaximizeEdit() {
 		return _maximizeEdit;
@@ -1441,8 +1439,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the maximized state when the user
 	 * goes into the help mode.
 	 *
-	 * @return true if the portlet goes into the maximized state when the
-	 *		   user goes into the help mode
+	 * @return true if the portlet goes into the maximized state when the user
+	 *		   goes into the help mode
 	 */
 	public boolean getMaximizeHelp() {
 		return _maximizeHelp;
@@ -1452,8 +1450,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the maximized state when the user
 	 * goes into the help mode.
 	 *
-	 * @return true if the portlet goes into the maximized state when the
-	 *		   user goes into the help mode
+	 * @return true if the portlet goes into the maximized state when the user
+	 *		   goes into the help mode
 	 */
 	public boolean isMaximizeHelp() {
 		return _maximizeHelp;
@@ -1474,8 +1472,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the pop up state when the user goes
 	 * into the print mode.
 	 *
-	 * @return true if the portlet goes into the pop up state when the user
-	 *		   goes into the print mode
+	 * @return true if the portlet goes into the pop up state when the user goes
+	 *		   into the print mode
 	 */
 	public boolean getPopUpPrint() {
 		return _popUpPrint;
@@ -1485,8 +1483,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet goes into the pop up state when the user goes
 	 * into the print mode.
 	 *
-	 * @return true if the portlet goes into the pop up state when the user
-	 *		   goes into the print mode
+	 * @return true if the portlet goes into the pop up state when the user goes
+	 *		   into the print mode
 	 */
 	public boolean isPopUpPrint() {
 		return _popUpPrint;
@@ -1611,8 +1609,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet does not share request attributes with the
 	 * portal or portlets from another WAR.
 	 *
-	 * @return true if the portlet does not share request attributes with
-	 *		   the portal or portlets from another WAR
+	 * @return true if the portlet does not share request attributes with the
+	 *		   portal or portlets from another WAR
 	 */
 	public boolean getPrivateRequestAttributes() {
 		return _privateRequestAttributes;
@@ -1622,8 +1620,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet does not share request attributes with the
 	 * portal or portlets from another WAR.
 	 *
-	 * @return true if the portlet does not share request attributes with
-	 *		   the portal or portlets from another WAR
+	 * @return true if the portlet does not share request attributes with the
+	 *		   portal or portlets from another WAR
 	 */
 	public boolean isPrivateRequestAttributes() {
 		return _privateRequestAttributes;
@@ -1645,8 +1643,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet does not share session attributes with the
 	 * portal.
 	 *
-	 * @return true if the portlet does not share session attributes with
-	 *		   the portal
+	 * @return true if the portlet does not share session attributes with the
+	 *		   portal
 	 */
 	public boolean getPrivateSessionAttributes() {
 		return _privateSessionAttributes;
@@ -1656,8 +1654,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet does not share session attributes with the
 	 * portal.
 	 *
-	 * @return true if the portlet does not share session attributes with
-	 *		   the portal
+	 * @return true if the portlet does not share session attributes with the
+	 *		   portal
 	 */
 	public boolean isPrivateSessionAttributes() {
 		return _privateSessionAttributes;
@@ -1908,8 +1906,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the name of the CSS class that will be injected in the DIV that
 	 * wraps this portlet.
 	 *
-	 * @return the name of the CSS class that will be injected in the DIV
-	 *		   that wraps this portlet
+	 * @return the name of the CSS class that will be injected in the DIV that
+	 *		   wraps this portlet
 	 */
 	public String getCssClassWrapper() {
 		return _cssClassWrapper;
@@ -1949,8 +1947,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
-	 * @return true if default resources for the portlet are added to a
-	 *		   page
+	 * @return true if default resources for the portlet are added to a page
 	 */
 	public boolean getAddDefaultResource() {
 		return _addDefaultResource;
@@ -1959,8 +1956,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
-	 * @return true if default resources for the portlet are added to a
-	 *		   page
+	 * @return true if default resources for the portlet are added to a page
 	 */
 	public boolean isAddDefaultResource() {
 		return _addDefaultResource;
@@ -2265,8 +2261,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet supports the specified mime type and portlet
 	 * mode.
 	 *
-	 * @return true if the portlet supports the specified mime type and
-	 *		   portlet mode
+	 * @return true if the portlet supports the specified mime type and portlet
+	 *		   mode
 	 */
 	public boolean hasPortletMode(String mimeType, PortletMode portletMode) {
 		if (mimeType == null) {
@@ -2351,8 +2347,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet supports the specified mime type and window
 	 * state.
 	 *
-	 * @return true if the portlet supports the specified mime type and
-	 *		   window state
+	 * @return true if the portlet supports the specified mime type and window
+	 *		   state
 	 */
 	public boolean hasWindowState(String mimeType, WindowState windowState) {
 		if (mimeType == null) {
@@ -2486,8 +2482,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the supported processing event from a namespace URI and a local
 	 * part.
 	 *
-	 * @return the supported processing event from a namespace URI and a
-	 *		   local part
+	 * @return the supported processing event from a namespace URI and a local
+	 *		   part
 	 */
 	public QName getProcessingEvent(String uri, String localPart) {
 		return _processingEventsByQName.get(
@@ -2570,8 +2566,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Gets the supported public render parameter from a namespace URI and a
 	 * local part.
 	 *
-	 * @return the supported public render parameter from a namespace URI
-	 *		   and a local part
+	 * @return the supported public render parameter from a namespace URI and a
+	 *		   local part
 	 */
 	public PublicRenderParameter getPublicRenderParameter(
 		String uri, String localPart) {
@@ -2685,8 +2681,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if the portlet is a static portlet that is cannot be moved.
 	 *
-	 * @return true if the portlet is a static portlet that is cannot be
-	 *		   moved
+	 * @return true if the portlet is a static portlet that is cannot be moved
 	 */
 	public boolean getStatic() {
 		return _staticPortlet;
@@ -2695,8 +2690,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if the portlet is a static portlet that is cannot be moved.
 	 *
-	 * @return true if the portlet is a static portlet that is cannot be
-	 *		   moved
+	 * @return true if the portlet is a static portlet that is cannot be moved
 	 */
 	public boolean isStatic() {
 		return _staticPortlet;
@@ -2716,8 +2710,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet is a static portlet at the start of a list of
 	 * portlets.
 	 *
-	 * @return true if the portlet is a static portlet at the start of a
-	 *		   list of portlets
+	 * @return true if the portlet is a static portlet at the start of a list of
+	 *		   portlets
 	 */
 	public boolean getStaticStart() {
 		return _staticPortletStart;
@@ -2727,8 +2721,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet is a static portlet at the start of a list of
 	 * portlets.
 	 *
-	 * @return true if the portlet is a static portlet at the start of a
-	 *		   list of portlets
+	 * @return true if the portlet is a static portlet at the start of a list of
+	 *		   portlets
 	 */
 	public boolean isStaticStart() {
 		return _staticPortletStart;
@@ -2749,8 +2743,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet is a static portlet at the end of a list of
 	 * portlets.
 	 *
-	 * @return true if the portlet is a static portlet at the end of a
-	 *		   list of portlets
+	 * @return true if the portlet is a static portlet at the end of a list of
+	 *		   portlets
 	 */
 	public boolean getStaticEnd() {
 		return !_staticPortletStart;
@@ -2760,8 +2754,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Returns true if the portlet is a static portlet at the end of a list of
 	 * portlets.
 	 *
-	 * @return true if the portlet is a static portlet at the end of a
-	 *		   list of portlets
+	 * @return true if the portlet is a static portlet at the end of a list of
+	 *		   portlets
 	 */
 	public boolean isStaticEnd() {
 		return !_staticPortletStart;
@@ -2770,8 +2764,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if the portlet is an undeployed portlet.
 	 *
-	 * @return true if the portlet is a placeholder of an undeployed
-	 *		   portlet
+	 * @return true if the portlet is a placeholder of an undeployed portlet
 	 */
 	public boolean getUndeployedPortlet() {
 		return _undeployedPortlet;
@@ -2780,8 +2773,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Returns true if the portlet is an undeployed portlet.
 	 *
-	 * @return true if the portlet is a placeholder of an undeployed
-	 *		   portlet
+	 * @return true if the portlet is a placeholder of an undeployed portlet
 	 */
 	public boolean isUndeployedPortlet() {
 		return _undeployedPortlet;
@@ -2846,10 +2838,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Compares this portlet to the specified object.
 	 *
 	 * @param  portlet the portlet to compare this portlet against
-	 * @return the value 0 if the argument portlet is equal to this
-	 *		   portlet; a value less than -1 if this portlet is less than
-	 *		   the portlet argument; and 1 if this portlet is greater than
-	 *		   the portlet argument
+	 * @return the value 0 if the argument portlet is equal to this portlet; a
+	 *		   value less than -1 if this portlet is less than the portlet
+	 *		   argument; and 1 if this portlet is greater than the portlet
+	 *		   argument
 	 */
 	public int compareTo(Portlet portlet) {
 		return getPortletId().compareTo(portlet.getPortletId());

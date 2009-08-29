@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author	   Brian Wing Shun Chan
- * @author	   Raymond AugÃ©
+ * @author	   Raymond Augé
  * @deprecated
  */
 public class VelocityFilter extends BasePortalFilter {

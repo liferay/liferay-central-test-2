@@ -196,7 +196,7 @@ import org.apache.struts.Globals;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  * @author Eduardo Lundgren
  */
 public class PortalImpl implements Portal {

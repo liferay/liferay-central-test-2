@@ -50,8 +50,8 @@ public interface PortletDataHandler {
 	 * @param  context the context of the data deletion
 	 * @param  portletId the portlet id of the portlet
 	 * @param  preferences the portlet preferences of the portlet
-	 * @return A modified version of preferences that should be saved. Null
-	 *		   if the preferences were unmodified by this data handler.
+	 * @return A modified version of preferences that should be saved. Null if
+	 *		   the preferences were unmodified by this data handler.
 	 */
 	public PortletPreferences deleteData(
 			PortletDataContext context, String portletId,
@@ -66,9 +66,9 @@ public interface PortletDataHandler {
 	 * @param  context the context of the data export
 	 * @param  portletId the portlet id of the portlet
 	 * @param  preferences the portlet preferences of the portlet
-	 * @return A string of data to be placed in the LAR. It may be XML,
-	 *		   but not necessarily. Null should be returned if no portlet
-	 *		   data is to be written out.
+	 * @return A string of data to be placed in the LAR. It may be XML, but not
+	 *		   necessarily. Null should be returned if no portlet data is to be
+	 *		   written out.
 	 */
 	public String exportData(
 			PortletDataContext context, String portletId,
@@ -105,9 +105,8 @@ public interface PortletDataHandler {
 	 * @param  preferences the portlet preferences of the portlet
 	 * @param  data the string data that was returned by
 	 *		   <code>exportData()</code>
-	 * @return A modified version of preferences that should be
-	 *		   saved. Null if the preferences were unmodified by this data
-	 *		   handler.
+	 * @return A modified version of preferences that should be saved. Null if
+	 *		   the preferences were unmodified by this data handler.
 	 */
 	public PortletPreferences importData(
 			PortletDataContext context, String portletId,
