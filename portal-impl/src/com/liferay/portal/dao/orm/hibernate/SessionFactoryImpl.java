@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Proxy;
@@ -105,8 +104,7 @@ public class SessionFactoryImpl implements SessionFactory {
 	protected Session transformSession(org.hibernate.Session session) {
 		Session liferaySession = new SessionImpl(session);
 
-		if ((_sessionFactoryClassLoader != null) &&
-			(ServerDetector.isWebLogic())) {
+		if (_sessionFactoryClassLoader != null) {
 
 			// LPS-4190
 
