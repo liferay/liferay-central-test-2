@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
@@ -37,13 +36,6 @@ import java.util.Map;
  */
 public class BaseTaskInstanceManager
 	extends BaseWorkflowProxy implements TaskInstanceManager {
-
-	public BaseTaskInstanceManager(
-		SingleDestinationSynchronousMessageSender
-		singleDestinationSynchronousMessageSender) {
-
-		super(singleDestinationSynchronousMessageSender);
-	}
 
 	public TaskInstanceInfo assignTaskInstanceToRole(
 		long taskInstanceId, long roleId, String comment,

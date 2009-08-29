@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 
@@ -36,13 +35,6 @@ import java.util.List;
  */
 public class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
 	implements WorkflowDefinitionManager {
-
-	public BaseWorkflowDefinitionManager(
-		SingleDestinationSynchronousMessageSender
-		singleDestinationSynchronousMessageSender) {
-
-		super(singleDestinationSynchronousMessageSender);
-	}
 
 	public void deployWorkflowDefinition(
 		WorkflowDefinition workflowDefinition, long callingUserId) {

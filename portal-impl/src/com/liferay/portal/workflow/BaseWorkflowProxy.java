@@ -31,16 +31,18 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMe
  */
 public abstract class BaseWorkflowProxy {
 
-	public BaseWorkflowProxy(
+	public final SingleDestinationSynchronousMessageSender
+		getSingleDestinationSynchronousMessageSender() {
+
+		return _singleDestinationSynchronousMessageSender;
+	}
+
+	public void setSingleDestinationSynchronousMessageSender(
 		SingleDestinationSynchronousMessageSender
 		singleDestinationSynchronousMessageSender) {
 
 		_singleDestinationSynchronousMessageSender =
 			singleDestinationSynchronousMessageSender;
-	}
-
-	public final SingleDestinationSynchronousMessageSender getMessageSender() {
-		return _singleDestinationSynchronousMessageSender;
 	}
 
 	private SingleDestinationSynchronousMessageSender

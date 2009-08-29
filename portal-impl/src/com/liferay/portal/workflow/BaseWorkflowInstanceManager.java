@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
@@ -37,13 +36,6 @@ import java.util.Map;
  */
 public class BaseWorkflowInstanceManager extends BaseWorkflowProxy
 	implements WorkflowInstanceManager {
-
-	public BaseWorkflowInstanceManager(
-		SingleDestinationSynchronousMessageSender
-		singleDestinationSynchronousMessageSender) {
-
-		super(singleDestinationSynchronousMessageSender);
-	}
 
 	public WorkflowInstanceInfo addContextInformation(
 		long workflowInstanceId, Map<String, Object> context) {
