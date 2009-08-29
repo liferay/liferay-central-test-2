@@ -570,7 +570,10 @@ public class SourceFormatter {
 
 		ds.setBasedir(basedir);
 		ds.setExcludes(
-			new String[] {"**\\null.jsp", "**\\tmp\\**", "**\\tools\\tck\\**"});
+			new String[] {
+				"**\\aui\\css.jspf", "**\\null.jsp", "**\\tmp\\**",
+				"**\\tools\\tck\\**"
+			});
 		ds.setIncludes(new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
 		ds.scan();
