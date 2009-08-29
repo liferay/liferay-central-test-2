@@ -25,49 +25,43 @@ package com.liferay.portal.workflow;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 
 import java.util.List;
 
 /**
- * <a href="BaseWorkflowDefinitionManager.java.html"><b><i>View
- * Source</i></b></a>
- *
- * <p>
- * The abstract proxy class implementing the {@link WorkflowDefinitionManager}
- * and gets instrumented by Spring using the {@link ManagerProxyAdvice} by
- * serializing the method and its arguments being invoked on the proxy using the
- * event bus to finally invoke it on the target.
- * </p>
+ * <a href="BaseWorkflowDefinitionManager.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Micha Kiener
- *
  */
 public class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
 	implements WorkflowDefinitionManager {
 
 	public BaseWorkflowDefinitionManager(
-		SingleDestinationSynchronousMessageSender synchronousMessageSender) {
-		super(synchronousMessageSender);
+		SingleDestinationSynchronousMessageSender
+		singleDestinationSynchronousMessageSender) {
+
+		super(singleDestinationSynchronousMessageSender);
 	}
 
 	public void deployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition, long callingUserId)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		WorkflowDefinition workflowDefinition, long callingUserId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName) {
-		throw new UnsupportedOperationException("Not supported yet.");
+
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean isSupportsVersioning() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

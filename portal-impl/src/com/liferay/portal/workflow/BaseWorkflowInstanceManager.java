@@ -23,7 +23,6 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
@@ -34,116 +33,114 @@ import java.util.Map;
 /**
  * <a href="BaseWorkflowInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The abstract proxy class implementing the {@link WorkflowInstanceManager} and
- * gets instrumented by Spring using the {@link ManagerProxyAdvice} by
- * serializing the method and its arguments being invoked on the proxy using the
- * event bus to finally invoke it on the target.
- * </p>
- *
  * @author Micha Kiener
- *
  */
 public class BaseWorkflowInstanceManager extends BaseWorkflowProxy
 	implements WorkflowInstanceManager {
 
 	public BaseWorkflowInstanceManager(
-		SingleDestinationSynchronousMessageSender synchronousMessageSender) {
-		super(synchronousMessageSender);
+		SingleDestinationSynchronousMessageSender
+		singleDestinationSynchronousMessageSender) {
+
+		super(singleDestinationSynchronousMessageSender);
 	}
 
 	public WorkflowInstanceInfo addContextInformation(
-			long workflowInstanceId, Map<String, Object> context)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long workflowInstanceId, Map<String, Object> context) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<String> getPossibleNextActivityNames(
-		long workflowInstanceId, long userId) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long workflowInstanceId, long userId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
-			long workflowInstanceId, boolean includeChildren)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long workflowInstanceId, boolean includeChildren) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-			long workflowInstanceId, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long workflowInstanceId, boolean retrieveChildrenInfo) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		String relationType, long relationId, boolean retrieveChildrenInfo) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
-		boolean retrieveChildrenInfo) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		boolean retrieveChildrenInfo) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			boolean finished, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		boolean finished, boolean retrieveChildrenInfo) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
-			String relationType, long relationId, boolean retrieveChildrenInfo)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		String relationType, long relationId, boolean retrieveChildrenInfo) {
+
+		throw new UnsupportedOperationException();
 	}
 
-	public void removeWorkflowInstance(long workflowInstanceId)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void removeWorkflowInstance(long workflowInstanceId) {
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo signalWorkflowInstance(
 		long workflowInstanceId, Map<String, Object> attributes,
-		long callingUserId) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long callingUserId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo signalWorkflowInstance(
-			long workflowInstanceId, String activityName,
-			Map<String, Object> attributes, long callingUserId)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long workflowInstanceId, String activityName,
+		Map<String, Object> attributes, long callingUserId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId)
-		throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		Map<String, Object> context, long callingUserId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo startWorkflowInstance(
-			String workflowDefinitionName, Integer workflowDefinitionVersion,
-			Map<String, Object> context, long callingUserId,
-			String activityName) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		String workflowDefinitionName, Integer workflowDefinitionVersion,
+		Map<String, Object> context, long callingUserId, String activityName) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		String relationType, long relationId, Map<String, Object> context,
-		long callingUserId) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long callingUserId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	public WorkflowInstanceInfo startWorkflowInstance(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		String relationType, long relationId, Map<String, Object> context,
-		long callingUserId, String activityName) throws WorkflowException {
-		throw new UnsupportedOperationException("Not supported yet.");
+		long callingUserId, String activityName) {
+
+		throw new UnsupportedOperationException();
 	}
 
 }

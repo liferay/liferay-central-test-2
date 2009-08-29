@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -31,42 +30,38 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * <a href="ManagerProxyAdvice.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * The advice being weaved into all methods of the proxy managers to use the
- * event bus transporting the method and arguments to be invoked on the final
- * target implementation.
- * </p>
- *
  * @author Micha Kiener
- *
  */
 public class ManagerProxyAdvice implements MethodInterceptor {
 
-	/**
-	 * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
-	 */
-	public Object invoke(MethodInvocation invocation)
-		throws Throwable {
+	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
-			// create a request out of the invocation information to be
-			// serialized through the event bus
-			WorkflowRequest request = new WorkflowRequest(invocation);
-
-			// send the message over the event bus, the listener will then
-			// invoke it on the target and return the result
-			WorkflowResultContainer response =
-				(WorkflowResultContainer) ((BaseWorkflowProxy) invocation.getThis()).getMessageSender().send(
-					request);
-			if (response.hasError()) {
-				throw response.getException();
-			}
-			else {
-				return response.getResult();
-			}
+			return doInvoke(methodInvocation);
 		}
-		catch (MessageBusException ex) {
-			throw new WorkflowException(
-				"Unable to invoke workflow method.", ex);
+		catch (Exception e) {
+			throw new WorkflowException(e);
 		}
 	}
+
+	protected Object doInvoke(MethodInvocation methodInvocation)
+		throws Exception {
+
+		WorkflowRequest workflowRequest = new WorkflowRequest(
+			methodInvocation);
+
+		BaseWorkflowProxy baseWorkflowProxy =
+			(BaseWorkflowProxy)methodInvocation.getThis();
+
+		WorkflowResultContainer workflowResultContainer =
+			(WorkflowResultContainer)baseWorkflowProxy.getMessageSender().send(
+				workflowRequest);
+
+		if (workflowResultContainer.hasError()) {
+			throw workflowResultContainer.getWorkflowException();
+		}
+		else {
+			return workflowResultContainer.getResult();
+		}
+	}
+
 }
