@@ -350,6 +350,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setJobTitle(jobTitle);
 		user.setActive(true);
 
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
+		UserIndexer.setEnabled(true);
+
 		userPersistence.update(user, false);
 
 		// Resources
@@ -515,16 +525,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				creatorUserId, user, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
-
-		// Expando
-
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		UserIndexer.setEnabled(true);
 
 		// Email
 
@@ -2401,6 +2401,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
 
+		// Expando
+
+		UserIndexer.setEnabled(false);
+
+		ExpandoBridge expandoBridge = user.getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+
+		UserIndexer.setEnabled(true);
+
 		userPersistence.update(user, false);
 
 		// Contact
@@ -2520,16 +2530,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, user, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
-
-		// Expando
-
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		UserIndexer.setEnabled(true);
 
 		// Indexer
 
