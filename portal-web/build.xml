@@ -539,8 +539,6 @@
 						 />
 					</path>
 					<sequential>
-						<echo>@{module.name}</echo>
-						<echo>${minified.name}</echo>
 						<java
 							classname="com.liferay.yahoo.platform.yui.compressor.YUICompressor"
 							classpathref="project.classpath"
