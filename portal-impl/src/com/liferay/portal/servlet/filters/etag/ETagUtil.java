@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet.filters.etag;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.Arrays;
 
@@ -40,7 +42,9 @@ public class ETagUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		byte[] bytes) {
 
-		boolean continueProcessingFilter = false;
+		if (!_ETAG_FILTER_ENABLED) {
+			return false;
+		}
 
 		String eTag = Integer.toHexString(Arrays.hashCode(bytes));
 
@@ -50,11 +54,13 @@ public class ETagUtil {
 
 		if (eTag.equals(ifNoneMatch)) {
 			response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+			response.setContentLength(0);
 
-			continueProcessingFilter = true;
+			return true;
 		}
-
-		return continueProcessingFilter;
+		else {
+			return false;
+		}
 	}
 
 	public static boolean processETag(
@@ -62,5 +68,8 @@ public class ETagUtil {
 
 		return processETag(request, response, s.getBytes());
 	}
+
+	private static final boolean _ETAG_FILTER_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(ETagFilter.class.getName()), true);
 
 }
