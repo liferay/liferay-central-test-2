@@ -103,7 +103,8 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(UserCredential)
+	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(
+	 *		UserCredential)
 	 */
 	public static int getTaskInstanceCountForCredential(
 			UserCredential userCredential)

@@ -41,8 +41,8 @@ import java.util.List;
 public class WorkflowDefinitionManagerUtil {
 
 	/**
-	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(WorkflowDefinition,
-	 *		long)
+	 * @see WorkflowDefinitionManager#deployWorkflowDefinition(
+	 *		WorkflowDefinition, long)
 	 */
 	public static void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition, long callingUserId)
