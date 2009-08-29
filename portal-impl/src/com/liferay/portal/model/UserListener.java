@@ -23,6 +23,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.security.ldap.LDAPUserTransactionThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 
 /**
@@ -34,9 +35,22 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  */
 public class UserListener extends BaseModelListener<User> {
 
+	public void onAfterCreate(User user) throws ModelListenerException {
+		try {
+			if (!user.isDefaultUser() &&
+					!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
+				PortalLDAPUtil.exportToLDAP(user);
+			}
+		}
+		catch (Exception e) {
+			throw new ModelListenerException(e);
+		}
+	}
+
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
-			if (!user.isDefaultUser()) {
+			if (!user.isDefaultUser() &&
+					!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
 				PortalLDAPUtil.exportToLDAP(user);
 			}
 		}
