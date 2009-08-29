@@ -122,14 +122,14 @@ public class UserCredential implements Serializable {
 	 * @param locale the locale of the user reflected by this credential
 	 */
 	public void setLocale(Locale locale) {
-		this._locale = locale;
+		_locale = locale;
 	}
 
 	/**
 	 * @param login the login name of the user reflected by this credential
 	 */
 	public void setLogin(String login) {
-		this._login = login;
+		_login = login;
 	}
 
 	/**

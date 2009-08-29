@@ -29,24 +29,24 @@ import java.util.Map;
  * <a href="TaskInstanceManagerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * The utility class supporting static access to all methods for the
- * {@link TaskInstanceManager} interface. The target manager object is injected
- * using the {@link #setTaskInstanceManager(TaskInstanceManager)} method.
- * Besides the static method access, it is also available through
- * {@link #getTaskInstanceManager()}.
+ * The utility class supporting static access to all methods for the {@link
+ * TaskInstanceManager} interface. The target manager object is injected using
+ * the {@link #setTaskInstanceManager(TaskInstanceManager)} method. Besides the
+ * static method access, it is also available through {@link
+ * #getTaskInstanceManager()}.
  * </p>
  *
  * @author Micha Kiener
- *
  */
 public class TaskInstanceManagerUtil {
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#assignTaskInstanceToRole(long, long, java.lang.String, java.util.Map, long)
+	 * @see TaskInstanceManager#assignTaskInstanceToRole(long, long, String,
+	 *		Map, long)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToRole(
-		long taskInstanceId, long roleId, String comment,
-		Map<String, Object> attributes, long callingUserId)
+			long taskInstanceId, long roleId, String comment,
+			Map<String, Object> attributes, long callingUserId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToRole(
@@ -54,13 +54,12 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#assignTaskInstanceToUser(long,
-	 *      com.liferay.portal.kernel.workflow.UserCredential, java.lang.String,
-	 *      java.util.Map, long)
+	 * @see TaskInstanceManager#assignTaskInstanceToUser(long, UserCredential,
+	 *		String, Map, long)
 	 */
 	public static TaskInstanceInfo assignTaskInstanceToUser(
-		long taskInstanceId, UserCredential userCredential, String comment,
-		Map<String, Object> attributes, long callingUserId)
+			long taskInstanceId, UserCredential userCredential, String comment,
+			Map<String, Object> attributes, long callingUserId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.assignTaskInstanceToUser(
@@ -68,12 +67,11 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#completeTaskInstance(long,
-	 *      long, java.lang.String, java.util.Map)
+	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
-		long taskInstanceId, long userId, String comment,
-		Map<String, Object> attributes)
+			long taskInstanceId, long userId, String comment,
+			Map<String, Object> attributes)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(
@@ -81,12 +79,12 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#completeTaskInstance(long,
-	 *      long, java.lang.String, java.lang.String, java.util.Map)
+	 * @see TaskInstanceManager#completeTaskInstance(long, long, String, String,
+	 *		Map)
 	 */
 	public static TaskInstanceInfo completeTaskInstance(
-		long taskInstanceId, long userId, String activityName, String comment,
-		Map<String, Object> attributes)
+			long taskInstanceId, long userId, String activityName,
+			String comment, Map<String, Object> attributes)
 		throws WorkflowException {
 
 		return _taskInstanceManager.completeTaskInstance(
@@ -94,11 +92,10 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getPossibleNextActivityNames(long,
-	 *      long)
+	 * @see TaskInstanceManager#getPossibleNextActivityNames(long, long)
 	 */
 	public static List<String> getPossibleNextActivityNames(
-		long taskInstanceId, long userId)
+			long taskInstanceId, long userId)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getPossibleNextActivityNames(
@@ -106,17 +103,18 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceCountForCredential(com.liferay.portal.kernel.workflow.UserCredential)
+	 * @see TaskInstanceManager#getTaskInstanceCountForCredential(UserCredential)
 	 */
 	public static int getTaskInstanceCountForCredential(
-		UserCredential userCredential)
+			UserCredential userCredential)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceCountForCredential(userCredential);
+		return _taskInstanceManager.getTaskInstanceCountForCredential(
+			userCredential);
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceCountForRole(long)
+	 * @see TaskInstanceManager#getTaskInstanceCountForRole(long)
 	 */
 	public static int getTaskInstanceCountForRole(long roleId)
 		throws WorkflowException {
@@ -125,7 +123,7 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceCountForUser(long)
+	 * @see TaskInstanceManager#getTaskInstanceCountForUser(long)
 	 */
 	public static int getTaskInstanceCountForUser(long userId)
 		throws WorkflowException {
@@ -134,21 +132,22 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByCredential(com.liferay.portal.kernel.workflow.UserCredential)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential)
+			UserCredential userCredential)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceInfosByCredential(userCredential);
+		return _taskInstanceManager.getTaskInstanceInfosByCredential(
+			userCredential);
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByCredential(com.liferay.portal.kernel.workflow.UserCredential,
-	 *      boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByCredential(UserCredential,
+	 *		boolean)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
-		UserCredential userCredential, boolean completed)
+			UserCredential userCredential, boolean completed)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfosByCredential(
@@ -156,7 +155,7 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByRole(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(long roleId)
 		throws WorkflowException {
@@ -165,11 +164,10 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByRole(long,
-	 *      boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByRole(long, boolean)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByRole(
-		long roleId, boolean completed)
+			long roleId, boolean completed)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfosByRole(
@@ -177,7 +175,7 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByUser(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(long userId)
 		throws WorkflowException {
@@ -186,11 +184,10 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByUser(long,
-	 *      boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByUser(long, boolean)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByUser(
-		long userId, boolean completed)
+			long userId, boolean completed)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfosByUser(
@@ -198,21 +195,22 @@ public class TaskInstanceManagerUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId)
+			long workflowInstanceId)
 		throws WorkflowException {
 
-		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(workflowInstanceId);
+		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(
+			workflowInstanceId);
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
-	 *      boolean)
+	 * @see TaskInstanceManager#getTaskInstanceInfosByWorkflowInstance(long,
+	 *		boolean)
 	 */
 	public static List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
-		long workflowInstanceId, boolean completed)
+			long workflowInstanceId, boolean completed)
 		throws WorkflowException {
 
 		return _taskInstanceManager.getTaskInstanceInfosByWorkflowInstance(
@@ -223,9 +221,12 @@ public class TaskInstanceManagerUtil {
 		return _taskInstanceManager;
 	}
 
-	public void setTaskInstanceManager(TaskInstanceManager taskInstanceManager) {
-		TaskInstanceManagerUtil._taskInstanceManager = taskInstanceManager;
+	public void setTaskInstanceManager(
+		TaskInstanceManager taskInstanceManager) {
+
+		_taskInstanceManager = taskInstanceManager;
 	}
 
 	private static TaskInstanceManager _taskInstanceManager;
+
 }

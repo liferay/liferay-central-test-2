@@ -23,20 +23,18 @@
 package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="WorkflowDefinitionMapperUtil.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="WorkflowDefinitionMapperUtil.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * <p>
- * The utility class supporting static access to all methods for the
- * {@link WorkflowDefinitionMapper} interface. The target manager object is
- * injected using the
- * {@link #setWorkflowDefinitionMapper(WorkflowDefinitionMapper)} method.
- * Besides the static method access, it is also available through
- * {@link #getWorkflowDefinitionMapper()}.
+ * The utility class supporting static access to all methods for the {@link
+ * WorkflowDefinitionMapper} interface. The target manager object is injected
+ * using the {@link #setWorkflowDefinitionMapper(WorkflowDefinitionMapper)}
+ * method. Besides the static method access, it is also available through {@link
+ * #getWorkflowDefinitionMapper()}.
  * </p>
  *
  * @author Micha Kiener
- *
  */
 public class WorkflowDefinitionMapperUtil {
 
@@ -45,33 +43,36 @@ public class WorkflowDefinitionMapperUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionMapper#getWorkflowDefinitionName(java.lang.Class)
+	 * @see WorkflowDefinitionMapper#getWorkflowDefinitionName(Class)
 	 */
 	public static String getWorkflowDefinitionName(Class<?> domainClass) {
 		return _workflowDefinitionMapper.getWorkflowDefinitionName(domainClass);
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionMapper#hasWorkflowDefinitionMapping(java.lang.Class)
+	 * @see WorkflowDefinitionMapper#hasWorkflowDefinitionMapping(Class)
 	 */
 	public static boolean hasWorkflowDefinitionMapping(Class<?> domainClass) {
-		return _workflowDefinitionMapper.hasWorkflowDefinitionMapping(domainClass);
+		return _workflowDefinitionMapper.hasWorkflowDefinitionMapping(
+			domainClass);
 	}
 
 	/**
-	 * @see com.liferay.portal.kernel.workflow.WorkflowDefinitionMapper#setWorkflowDefinitionMapping(java.lang.Class,
-	 *      java.lang.String)
+	 * @see WorkflowDefinitionMapper#setWorkflowDefinitionMapping(Class, String)
 	 */
 	public static String setWorkflowDefinitionMapping(
 		Class<?> domainClass, String workflowDefinitionName) {
+
 		return _workflowDefinitionMapper.setWorkflowDefinitionMapping(
 			domainClass, workflowDefinitionName);
 	}
 
 	public void setWorkflowDefinitionMapper(
-		WorkflowDefinitionMapper definitionMapper) {
-		_workflowDefinitionMapper = definitionMapper;
+		WorkflowDefinitionMapper workflowDefinitionMapper) {
+
+		_workflowDefinitionMapper = workflowDefinitionMapper;
 	}
 
 	private static WorkflowDefinitionMapper _workflowDefinitionMapper;
+
 }

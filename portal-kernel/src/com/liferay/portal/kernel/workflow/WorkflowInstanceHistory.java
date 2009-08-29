@@ -97,7 +97,7 @@ public interface WorkflowInstanceHistory {
 	 * system user id, depending on the underlying engine.
 	 *
 	 * @return the user id creating this entry or <code>0</code>, if none
-	 *         available
+	 *		   available
 	 */
 	public long getUserId();
 

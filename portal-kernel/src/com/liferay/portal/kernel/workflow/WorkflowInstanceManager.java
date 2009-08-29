@@ -323,18 +323,19 @@ public interface WorkflowInstanceManager {
 	 * any other signaling invocation.
 	 * </p>
 	 *
-	 * @param workflowInstanceId the id of the workflow instance being triggered
-	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
+	 * @param  workflowInstanceId the id of the workflow instance being
+	 *		   triggered
+	 * @param  attributes the optional context information to be passed on to
+	 *		   the engine in order to execute the next default activity, they
+	 *		   will be merged into the existing context information map
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the next default activity has
-	 *         been executed
+	 *		   node (state) of the process after the next default activity has
+	 *		   been executed
 	 * @throws WorkflowException is thrown, if triggering the next activity
-	 *             failed
+	 *		   failed
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
@@ -363,19 +364,20 @@ public interface WorkflowInstanceManager {
 	 * depend on the current state nor does the activity change it afterwards.
 	 * </p>
 	 *
-	 * @param workflowInstanceId the id of the workflow instance being triggered
-	 * @param activityName the name of the activity to be triggered
-	 * @param attributes the optional context information to be passed on to the
-	 *            engine in order to execute the next default activity, they
-	 *            will be merged into the existing context information map
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
+	 * @param  workflowInstanceId the id of the workflow instance being
+	 *		   triggered
+	 * @param  activityName the name of the activity to be triggered
+	 * @param  attributes the optional context information to be passed on to
+	 *		   the engine in order to execute the next default activity, they
+	 *		   will be merged into the existing context information map
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
 	 * @return the updated workflow instance information reflecting the current
-	 *         node (state) of the process after the activity has been executed
+	 *		   node (state) of the process after the activity has been executed
 	 * @throws WorkflowException is thrown, if triggering the activity failed or
-	 *             the activity was not found or is not executable due to the
-	 *             current state of the instance
+	 *		   the activity was not found or is not executable due to the
+	 *		   current state of the instance
 	 */
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,

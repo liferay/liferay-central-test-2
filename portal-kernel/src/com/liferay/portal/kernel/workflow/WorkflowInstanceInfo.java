@@ -149,9 +149,9 @@ public interface WorkflowInstanceInfo {
 	 * </p>
 	 *
 	 * @return the domain object identifier, if related to one, <code>0</code>
-	 *         otherwise
-	 * @see WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
-	 *      boolean) for more details about related domain objects
+	 *		   otherwise
+	 * @see	   WorkflowInstanceManager#getWorkflowInstanceInfo(String, long,
+	 *		   boolean) for more details about related domain objects
 	 */
 	public long getRelationId();
 

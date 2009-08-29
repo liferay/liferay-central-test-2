@@ -73,7 +73,8 @@ public interface WorkflowDefinitionManager {
 	 *		   failed
 	 */
 	public void deployWorkflowDefinition(
-			WorkflowDefinition workflowDefinition, @CallingUserId long callingUserId)
+			WorkflowDefinition workflowDefinition,
+			@CallingUserId long callingUserId)
 		throws WorkflowException;
 
 	/**

@@ -61,17 +61,6 @@ public class WorkflowException extends PortalException {
 	}
 
 	/**
-	 * This constructor, taking the original cause, should only be used, if the
-	 * engine lives in the same JVM as the client or if the class of the cause
-	 * is serializable and available within the client system.
-	 *
-	 * @param cause the original cause for this exception
-	 */
-	public WorkflowException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
 	 * This constructor, taking the original cause and an additional message,
 	 * should only be used, if the engine lives in the same JVM as the client or
 	 * if the class of the cause is serializable and available within the client
@@ -82,6 +71,17 @@ public class WorkflowException extends PortalException {
 	 */
 	public WorkflowException(String msg, Throwable cause) {
 		super(msg, cause);
+	}
+
+	/**
+	 * This constructor, taking the original cause, should only be used, if the
+	 * engine lives in the same JVM as the client or if the class of the cause
+	 * is serializable and available within the client system.
+	 *
+	 * @param cause the original cause for this exception
+	 */
+	public WorkflowException(Throwable cause) {
+		super(cause);
 	}
 
 }

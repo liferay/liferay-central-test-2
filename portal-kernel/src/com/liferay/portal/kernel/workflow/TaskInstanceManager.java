@@ -61,15 +61,15 @@ public interface TaskInstanceManager {
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
 	 *
-	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param roleId the role id to assign the task to
-	 * @param comment the optional comment for the assignment
-	 * @param attributes the optional attributes to be passed on to the context
-	 *            information of the workflow instance (they can be empty or
-	 *            even <code>null</code>)
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
+	 * @param  taskInstanceId the id of the task instance to be assigned
+	 * @param  roleId the role id to assign the task to
+	 * @param  comment the optional comment for the assignment
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
@@ -83,18 +83,18 @@ public interface TaskInstanceManager {
 	 * optional comment. The task instance information being returned will
 	 * reflect those changes made to the task instance.
 	 *
-	 * @param taskInstanceId the id of the task instance to be assigned
-	 * @param userCredential the credential of the user to assign the task to,
-	 *            representing the user's attributes and its role set, a
-	 *            credential can be created using the id of the user through
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)}
-	 * @param comment the optional comment for the user being the new assignee
-	 * @param attributes the optional attributes to be passed on to the context
-	 *            information of the workflow instance (they can be empty or
-	 *            even <code>null</code>)
-	 * @param callingUserId the id of the calling user (see
-	 *            {@link UserCredentialFactoryUtil#createCredential(long)} for
-	 *            more information)
+	 * @param  taskInstanceId the id of the task instance to be assigned
+	 * @param  userCredential the credential of the user to assign the task to,
+	 *		   representing the user's attributes and its role set, a credential
+	 *		   can be created using the id of the user through {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)}
+	 * @param  comment the optional comment for the user being the new assignee
+	 * @param  attributes the optional attributes to be passed on to the context
+	 *		   information of the workflow instance (they can be empty or even
+	 *		   <code>null</code>)
+	 * @param  callingUserId the id of the calling user (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
@@ -194,8 +194,8 @@ public interface TaskInstanceManager {
 	 *		   workflow could not be continued
 	 */
 	public TaskInstanceInfo completeTaskInstance(
-			long taskInstanceId, @CallingUserId long userId, String activityName,
-			String comment, Map<String, Object> attributes)
+			long taskInstanceId, @CallingUserId long userId,
+			String activityName, String comment, Map<String, Object> attributes)
 		throws WorkflowException;
 
 	/**
