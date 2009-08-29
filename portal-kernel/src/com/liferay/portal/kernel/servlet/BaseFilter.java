@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="BaseFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public abstract class BaseFilter implements Filter {
 
@@ -57,6 +57,9 @@ public abstract class BaseFilter implements Filter {
 		if (Validator.isNotNull(urlRegexPattern)) {
 			_urlRegexPattern = Pattern.compile(urlRegexPattern);
 		}
+
+		_servlet24Dispatcher = filterConfig.getInitParameter(
+			"servlet-2.4-dispatcher");
 	}
 
 	public void doFilter(
@@ -79,6 +82,15 @@ public abstract class BaseFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
 		boolean filterEnabled = isFilterEnabled();
+
+		if (filterEnabled && Validator.isNotNull(_servlet24Dispatcher)) {
+			if ((_servlet24Dispatcher.equalsIgnoreCase(
+					_SERVLET_24_DISPATCHER_REQUEST)) &&
+				(request.getRequestURL() == null)) {
+
+				filterEnabled = false;
+			}
+		}
 
 		if (filterEnabled && (_urlRegexPattern != null)) {
 			StringBuilder sb = new StringBuilder();
@@ -192,9 +204,12 @@ public abstract class BaseFilter implements Filter {
 
 	private static final String _DEPTHER = "DEPTHER";
 
+	private static final String _SERVLET_24_DISPATCHER_REQUEST = "REQUEST";
+
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
+	private String _servlet24Dispatcher;
 	private Pattern _urlRegexPattern;
 
 }

@@ -9,6 +9,10 @@
 		<param-name>pattern</param-name>
 		<param-value>2</param-value>
 	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
+	</init-param>
 </filter>
 <filter>
 	<filter-name>Cache Filter - Resource JSP</filter-name>
@@ -25,6 +29,10 @@
 		<param-name>pattern</param-name>
 		<param-value>2</param-value>
 	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
+	</init-param>
 </filter>
 <filter>
 	<filter-name>ETag Filter</filter-name>
@@ -32,6 +40,10 @@
 	<init-param>
 		<param-name>filter-class</param-name>
 		<param-value>com.liferay.portal.servlet.filters.etag.ETagFilter</param-value>
+	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -45,6 +57,10 @@
 		<param-name>url-regex-pattern</param-name>
 		<param-value>.+/css\.jsp</param-value>
 	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
+	</init-param>
 </filter>
 <filter>
 	<filter-name>GZip Filter</filter-name>
@@ -52,6 +68,10 @@
 	<init-param>
 		<param-name>filter-class</param-name>
 		<param-value>com.liferay.portal.servlet.filters.gzip.GZipFilter</param-value>
+	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -68,6 +88,10 @@
 	<init-param>
 		<param-name>Expires</param-name>
 		<param-value>315360000</param-value>
+	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -89,6 +113,10 @@
 		<param-name>Expires</param-name>
 		<param-value>315360000</param-value>
 	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
+	</init-param>
 </filter>
 <filter>
 	<filter-name>Minifier Filter</filter-name>
@@ -96,6 +124,10 @@
 	<init-param>
 		<param-name>filter-class</param-name>
 		<param-value>com.liferay.portal.servlet.filters.minifier.MinifierFilter</param-value>
+	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -108,6 +140,10 @@
 	<init-param>
 		<param-name>url-regex-pattern</param-name>
 		<param-value>.+/css\.jsp</param-value>
+	</init-param>
+	<init-param>
+		<param-name>servlet-2.4-dispatcher</param-name>
+		<param-value>REQUEST</param-value>
 	</init-param>
 </filter>
 <filter-mapping>

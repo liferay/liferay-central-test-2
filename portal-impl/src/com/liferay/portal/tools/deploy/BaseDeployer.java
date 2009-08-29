@@ -1286,6 +1286,24 @@ public class BaseDeployer {
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
+		if (webXmlVersion > 2.3) {
+			while (true) {
+				int pos = extraContent.indexOf(
+					"<param-name>servlet-2.4-dispatcher</param-name>");
+
+				if (pos == -1) {
+					break;
+				}
+
+				x = extraContent.lastIndexOf("<init-param>", pos);
+				int y = extraContent.indexOf("</init-param>", pos);
+
+				extraContent =
+					extraContent.substring(0, x) +
+						extraContent.substring(y + 13);
+			}
+		}
+
 		int pos = content.indexOf("</web-app>");
 
 		String newContent =
