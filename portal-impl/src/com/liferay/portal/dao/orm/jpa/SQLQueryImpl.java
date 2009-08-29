@@ -129,6 +129,8 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 			if (s.indexOf(columnAlias) != -1) {
 				_scalars.add(pos);
+
+				_scalarTypes.add(type);
 			}
 		}
 
@@ -169,6 +171,10 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 				if (collection.size() == 1) {
 					object = collection.iterator().next();
 				}
+			}
+
+			if (_scalars.size() == 1) {
+				object = _transformType(object, _scalarTypes.get(0));
 			}
 
 			return object;
@@ -252,6 +258,19 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 
 				list = newList;
 			}
+			else if ( (_scalars.size() == 1) &&
+				(list.get(0) instanceof Object) ) {
+				
+				List<Object> newList = new ArrayList<Object>();
+
+				for (Object value: list) {
+					value = _transformType(value, _scalarTypes.get(0));
+					
+					newList.add(value);
+				}
+
+				list = newList;
+			}
 		}
 		else if (list.get(0) instanceof Collection) {
 			List<Object> newList = new ArrayList<Object>();
@@ -273,9 +292,36 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		return list;
 	}
 
+	private Object _transformType(Object object, Type type) {
+		Object result = object;
+
+		switch(type) {
+			case STRING:
+				result = object.toString();
+
+				break;
+
+			case LONG:
+				if (object instanceof Integer) {
+					result = new Long((((Integer)object).longValue()));
+				}
+				
+				break;
+
+			default:
+				throw new UnsupportedOperationException(
+					"Type conversion from " +
+						object.getClass().getName() +
+							" to " + type + " is not supported");
+		}
+
+		return result;
+	}
+
 	private static Map<Class<?>, String[]> _entityColumns =
 		new ConcurrentHashMap<Class<?>, String[]>();
 
 	private List<Integer> _scalars = new ArrayList<Integer>();
+	private List<Type> _scalarTypes = new ArrayList<Type>();
 
 }
