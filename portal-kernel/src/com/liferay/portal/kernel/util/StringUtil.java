@@ -1432,9 +1432,30 @@ public class StringUtil {
 						sb.append(lineSeparator);
 					}
 
-					sb.append(token);
+					if (token.length() > width) {
+						int pos = token.indexOf(StringPool.OPEN_PARENTHESIS);
 
-					lineLength = token.length();
+						if (pos != -1) {
+							sb.append(token.substring(0, pos + 1));
+							sb.append(lineSeparator);
+
+							token = token.substring(pos + 1);
+
+							sb.append(token);
+
+							lineLength = token.length();
+						}
+						else {
+							sb.append(token);
+
+							lineLength = token.length();
+						}
+					}
+					else {
+						sb.append(token);
+
+						lineLength = token.length();
+					}
 				}
 				else {
 					if (lineLength > 0) {

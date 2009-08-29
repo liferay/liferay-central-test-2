@@ -161,6 +161,8 @@ public class JavadocFormatter {
 		for (DocletTag docletTag : docletTags) {
 			String value = docletTag.getValue();
 
+			value = StringUtil.replace(value, "\n", " ");
+
 			if (name.equals("author") || name.equals("see") ||
 				name.equals("since") || name.equals("version")) {
 
