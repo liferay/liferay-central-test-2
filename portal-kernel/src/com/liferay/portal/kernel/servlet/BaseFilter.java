@@ -44,7 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="BaseFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  */
 public abstract class BaseFilter implements Filter {
 
