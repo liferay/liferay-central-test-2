@@ -114,7 +114,11 @@ public class FileSystemHook extends BaseHook {
 		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
 		if (!dirNameDir.exists()) {
-			throw new NoSuchDirectoryException();
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignoring non-existent directory " +  dirName);
+			}
+
+			return;
 		}
 
 		FileUtil.deltree(dirNameDir);

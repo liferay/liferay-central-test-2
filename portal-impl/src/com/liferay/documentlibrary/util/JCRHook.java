@@ -212,7 +212,9 @@ public class JCRHook extends BaseHook {
 			session.save();
 		}
 		catch (PathNotFoundException pnfe) {
-			throw new NoSuchDirectoryException(dirName);
+			if (_log.isDebugEnabled()) {
+				_log.debug(pnfe, pnfe);
+			}
 		}
 		catch (RepositoryException e) {
 			throw new PortalException(e);
