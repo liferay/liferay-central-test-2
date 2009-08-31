@@ -60,15 +60,12 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 			User user = null;
 
 			try {
-				user = addUser(companyId, screenName);
+				user = importLDAPUser(companyId, screenName);
 			}
 			catch (SystemException se) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(se.getMessage());
-				}
 			}
 
-			if (Validator.isNull(user)) {
+			if (user == null) {
 				user = UserLocalServiceUtil.getUserByScreenName(
 					companyId, screenName);
 			}

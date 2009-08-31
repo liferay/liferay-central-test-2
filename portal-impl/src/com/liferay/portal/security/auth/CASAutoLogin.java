@@ -91,16 +91,13 @@ public class CASAutoLogin implements AutoLogin {
 					PropsValues.CAS_IMPORT_FROM_LDAP)) {
 
 				try {
-					user = addUser(companyId, screenName);
+					user = importLDAPUser(companyId, screenName);
 				}
 				catch (SystemException se) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(se.getMessage());
-					}
 				}
 			}
 
-			if (Validator.isNull(user)) {
+			if (user == null) {
 				user = UserLocalServiceUtil.getUserByScreenName(
 					companyId, screenName);
 			}
@@ -126,7 +123,18 @@ public class CASAutoLogin implements AutoLogin {
 		return credentials;
 	}
 
-	protected User addUser(long companyId, String screenName) throws Exception {
+	/**
+	 * @deprecated Use <code>importLDAPUser</code>.
+	 */
+	protected User addPUser(long companyId, String screenName)
+		throws Exception {
+
+		return importLDAPUser(companyId, screenName);
+	}
+
+	protected User importLDAPUser(long companyId, String screenName)
+		throws Exception {
+
 		LdapContext ctx = null;
 
 		try {
@@ -185,8 +193,12 @@ public class CASAutoLogin implements AutoLogin {
 			}
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Problem accessing LDAP server " + e.getMessage());
+			}
+
 			if (_log.isDebugEnabled()) {
-				_log.debug("Problem accessing LDAP server ", e);
+				_log.debug(e, e);
 			}
 
 			throw new SystemException(
