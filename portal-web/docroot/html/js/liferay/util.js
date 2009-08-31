@@ -698,50 +698,53 @@ Liferay.Util = {
 
 		var title = obj.find('.portlet-title');
 
-		if (!title.is('.not-editable')) {
-			title.editable(
-				function(value, settings) {
-					var cruft = settings._LFR_.cruft || [];
+		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
 
-					cruft = cruft.join('');
+		if (!title.is('.not-editable') && title.length) {
+			AUI().use(
+				'editable',
+				function(A) {
+					var editableTitle = new A.Editable(
+						{
+							node: title[0],
+							formatOutput: function(value) {
+								var instance = this;
 
-					if (value != settings._LFR_.oldText) {
-						Liferay.Util.savePortletTitle(
-							{
-								plid: plid,
-								doAsUserId: doAsUserId,
-								portletId: portletId,
-								title: value
+								value = instance._toHTML(value);
+
+								var cruft = instance._LFR_cruft || [];
+
+								cruft = cruft.join('');
+
+								return cruft + value;
+							},
+
+							after: {
+								contentTextChange: function(event) {
+									var instance = this;
+
+									if (!event.initial) {
+										Liferay.Util.savePortletTitle(
+											{
+												plid: plid,
+												doAsUserId: doAsUserId,
+												portletId: portletId,
+												title: event.newVal
+											}
+										);
+									}
+								},
+
+								startEditing: function(event) {
+									var instance = this;
+
+									var value = instance.get('node').get('innerHTML');
+
+									instance._LFR_cruft = value.match(re);
+								}
 							}
-						);
-					}
-
-					return cruft + instance.escapeHTML(value);
-				},
-				{
-					cssclass: 'text',
-					data: function(value, settings) {
-						var input = jQuery(this);
-						var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
-
-						var cruft = value.match(re);
-
-						settings._LFR_ = {};
-						settings._LFR_.oldText = value;
-						settings._LFR_.cruft = cruft;
-
-						value = value.replace(re, '');
-						settings._LFR_.oldText = value;
-
-						return value;
-					},
-					height: '',
-					width: '',
-					onblur: 'submit',
-					type: 'text',
-					select: false,
-					style: '',
-					submit: ''
+						}
+					);
 				}
 			);
 		}

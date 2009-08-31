@@ -75,40 +75,37 @@
 					}
 				);
 
-				jQuery('#<portlet:namespace />note').editable(
-					function(value, settings) {
-						var newValue = value.replace(/\n/gi, '<br />');
+				AUI().use(
+					'editable',
+					function(A) {
+						new A.Editable(
+							{
+								node: '#<portlet:namespace />note',
+								inputType: 'textarea',
+								on: {
+									contentTextChange: function(event) {
+										var instance = this;
 
-						if (value != settings._LFR_.oldText) {
-							jQuery.ajax(
-								{
-									url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
-									data: {
-										p_l_id: '<%= plid %>',
-										portletId: '<%= portletDisplay.getId() %>',
-										data: newValue
+										if (!event.initial) {
+											var newValue = event.newVal.replace(/\n/gi, '<br />');
+
+											event.newVal = instance._toText(event.newVal);
+
+											jQuery.ajax(
+												{
+													url: '<%= themeDisplay.getPathMain() %>/quick_note/save',
+													data: {
+														p_l_id: '<%= plid %>',
+														portletId: '<%= portletDisplay.getId() %>',
+														data: newValue
+													}
+												}
+											);
+										}
 									}
 								}
-							);
-						}
-
-						return Liferay.Util.escapeHTML(newValue).replace(/&lt;br \/&gt;/gi, '<br />');
-					},
-					{
-						data: function(value, settings) {
-							var newValue = value.replace(/<br[\s\/]?>/gi, '\n');
-
-							settings._LFR_ = {};
-							settings._LFR_.oldText = newValue;
-
-							newValue = Liferay.Util.unescapeHTML(newValue);
-
-							return newValue;
-						},
-						onblur: 'submit',
-						type: 'textarea',
-						select: true,
-						submit: ''
+							}
+						);
 					}
 				);
 			}

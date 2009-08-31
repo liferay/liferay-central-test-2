@@ -362,52 +362,55 @@
 							new droppableCategory(listLinks[i], 'tags');
 						}
 
-						jQuery('li span a', list).editable(
-							function(value, settings) {
+						var editableConfig = {
+							eventType: 'dblclick',
+							on: {
+								contentTextChange: function(event) {
+									if (!event.initial) {
+										var vocabularyName = event.newVal;
+										var vocabularyId = instance._selectedVocabularyId;
 
-								var vocabularyName = value;
-								var vocabularyId = instance._selectedVocabularyId;
-								var li = jQuery(this).parents('li:first');
+										var li = this.get('node').ancestor('li');
 
-								li.attr('data-vocabulary', value);
+										li.setAttribute('data-vocabulary', event.newVal);
 
-								instance._updateVocabulary(
-									vocabularyId,
-									vocabularyName,
-									function(message) {
-										var exception = message.exception;
-										if (exception) {
-											if (exception.indexOf('auth.PrincipalException') > -1) {
-												instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
-											}
-										}
-										else {
-											instance._displayList(
-												function() {
-													var vocabulary = instance._selectVocabulary(message.vocabularyId);
-
-													instance._displayVocabularyCategories(instance._selectedVocabularyId);
+										instance._updateVocabulary(
+											vocabularyId,
+											vocabularyName,
+											function(message) {
+												var exception = message.exception;
+												if (exception) {
+													if (exception.indexOf('auth.PrincipalException') > -1) {
+														instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+													}
 												}
-											);
-										}
+												else {
+													instance._displayList(
+														function() {
+															var vocabulary = instance._selectVocabulary(message.vocabularyId);
+
+															instance._displayVocabularyCategories(instance._selectedVocabularyId);
+														}
+													);
+												}
+											}
+										);
 									}
-								);
+								}
+							}
+						};
 
-								return value;
-							},
-							{
-								cssclass: 'vocabulary-edit-vocabulary',
-								data: function(value, settings) {
-									return value;
-								},
+						AUI().ready(
+							'editable',
+							function(A) {
+								var listEls = A.all('.vocabulary-list li span a');
+								var listLength = listEls.size();
 
-								height: '15px',
-								width: '200px',
-								onblur: 'ignore',
-								submit: Liferay.Language.get('save'),
-								select: false,
-								type: 'text',
-								event: 'dblclick'
+								for (var i = 0; i < listLength; i++) {
+									editableConfig.node = listEls.item(i);
+
+									new A.Editable(editableConfig);
+								}
 							}
 						);
 
