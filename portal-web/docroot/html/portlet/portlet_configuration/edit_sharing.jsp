@@ -239,3 +239,7 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs2), currentURL);
+%>

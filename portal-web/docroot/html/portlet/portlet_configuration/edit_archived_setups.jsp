@@ -112,3 +112,7 @@ for (int i = 0; i < results.size(); i++) {
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 </form>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "archived"), currentURL);
+%>

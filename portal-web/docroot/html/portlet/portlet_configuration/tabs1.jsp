@@ -138,6 +138,12 @@ if (portlet.isScopeable()) {
 if (tabs1Names.startsWith(",")) {
 	tabs1Names = tabs1Names.substring(1);
 }
+
+String tabs1 = ParamUtil.getString(request, "tabs1");
+
+PortalUtil.addPortletBreadcrumbEntry(request, ((RenderResponseImpl)renderResponse).getTitle(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "configuration"), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
 %>
 
 <liferay-ui:tabs names="<%= tabs1Names %>" />
