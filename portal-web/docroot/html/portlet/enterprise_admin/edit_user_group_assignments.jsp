@@ -130,3 +130,8 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 </liferay-ui:search-container>
 
 </form>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
+%>

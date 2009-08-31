@@ -98,3 +98,14 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+if (userGroup != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-user-group"), currentURL);
+}
+%>
