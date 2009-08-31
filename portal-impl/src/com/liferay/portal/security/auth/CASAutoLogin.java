@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
@@ -39,6 +40,7 @@ import com.liferay.portal.util.PropsValues;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 
+import javax.naming.Binding;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
@@ -54,7 +56,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Wesley Gong
  */
 public class CASAutoLogin implements AutoLogin {
 
@@ -84,19 +85,18 @@ public class CASAutoLogin implements AutoLogin {
 
 			User user = null;
 
-			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsKeys.CAS_IMPORT_FROM_LDAP,
-					PropsValues.CAS_IMPORT_FROM_LDAP)) {
-
-				user = importLDAPUser(companyId, screenName);
+			try {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
 			}
+			catch (NoSuchUserException nsue) {
+				if (PrefsPropsUtil.getBoolean(
+						companyId, PropsKeys.CAS_IMPORT_FROM_LDAP,
+						PropsValues.CAS_IMPORT_FROM_LDAP)) {
 
-			if (Validator.isNull(user)) {
-				try {
-					user = UserLocalServiceUtil.getUserByScreenName(
-						companyId, screenName);
+					user = addUser(companyId, screenName);
 				}
-				catch (NoSuchUserException nsue) {
+				else {
 					throw nsue;
 				}
 			}
@@ -122,21 +122,38 @@ public class CASAutoLogin implements AutoLogin {
 		return credentials;
 	}
 
-	protected User importLDAPUser(long companyId, String screenName)
-		throws Exception {
-
-		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
-
-		if (ctx == null) {
-			throw new SystemException("Failed to bind to the LDAP server");
-		}
+	protected User addUser(long companyId, String screenName) throws Exception {
+		LdapContext ctx = null;
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN);
 
-			String filter = PortalLDAPUtil.getAuthSearchFilter(
-				companyId, StringPool.BLANK, screenName, StringPool.BLANK);
+			ctx = PortalLDAPUtil.getContext(companyId);
+
+			if (ctx == null) {
+				throw new SystemException("Failed to bind to the LDAP server");
+			}
+
+			String filter = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter before transformation " + filter);
+			}
+
+			filter = StringUtil.replace(
+				filter,
+				new String[] {
+					"@company_id@", "@email_address@", "@screen_name@"
+				},
+				new String[] {
+					String.valueOf(companyId), StringPool.BLANK, screenName
+				});
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter after transformation " + filter);
+			}
 
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
@@ -144,33 +161,24 @@ public class CASAutoLogin implements AutoLogin {
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
 
-			User user = null;
-
 			if (enu.hasMoreElements()) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Search filter returned at least one result");
+				if (_log.isDebugEnabled()) {
+					_log.debug("Search filter returned at least one result");
 				}
 
-				SearchResult result = enu.nextElement();
-
-				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
-					companyId, result);
+				Binding binding = enu.nextElement();
 
 				Attributes attrs = PortalLDAPUtil.getUserAttributes(
-					companyId, ctx, fullUserDN);
+					companyId, ctx,
+					PortalLDAPUtil.getNameInNamespace(companyId, binding));
 
-				user = PortalLDAPUtil.importLDAPUser(
-						companyId, ctx, attrs, StringPool.BLANK, true);
+				return PortalLDAPUtil.importLDAPUser(
+					companyId, ctx, attrs, StringPool.BLANK, true);
 			}
 			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Search filter did not return any results");
-				}
+				throw new NoSuchUserException(
+					"User " + screenName + " was not found in the LDAP server");
 			}
-
-			enu.close();
-
-			return user;
 		}
 		catch (Exception e) {
 			_log.error("Problem accessing LDAP server ", e);
