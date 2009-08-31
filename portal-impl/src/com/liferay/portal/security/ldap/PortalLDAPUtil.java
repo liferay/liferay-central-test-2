@@ -1001,10 +1001,11 @@ public class PortalLDAPUtil {
 
 			String fullGroupDN = (String)attr.get(i);
 
-			Attributes groupAttrs = null;
+			Attributes groupAttributes = null;
 
 			try {
-				groupAttrs = getGroupAttributes(companyId, ctx, fullGroupDN);
+				groupAttributes = getGroupAttributes(
+					companyId, ctx, fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -1016,7 +1017,7 @@ public class PortalLDAPUtil {
 			}
 
 			UserGroup userGroup = importLDAPGroup(
-				companyId, ctx, groupAttrs, false);
+				companyId, ctx, groupAttributes, false);
 
 			// Add user to user group
 
@@ -1309,10 +1310,10 @@ public class PortalLDAPUtil {
 
 			String fullUserDN = (String)attr.get(i);
 
-			Attributes userAttrs = null;
+			Attributes userAttributes = null;
 
 			try {
-				userAttrs = getUserAttributes(companyId, ctx, fullUserDN);
+				userAttributes = getUserAttributes(companyId, ctx, fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error("LDAP user not found with fullUserDN " + fullUserDN);
@@ -1323,7 +1324,7 @@ public class PortalLDAPUtil {
 			}
 
 			User user = importLDAPUser(
-				companyId, ctx, userAttrs, StringPool.BLANK, false);
+				companyId, ctx, userAttributes, StringPool.BLANK, false);
 
 			// Add user to user group
 

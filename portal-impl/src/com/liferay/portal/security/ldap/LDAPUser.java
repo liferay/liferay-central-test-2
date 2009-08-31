@@ -60,7 +60,7 @@ public class LDAPUser extends DummyDirContext {
 		Properties userMappings = PortalLDAPUtil.getUserMappings(
 			_user.getCompanyId());
 
-		_attrs = new BasicAttributes(true);
+		_attributes = new BasicAttributes(true);
 
 		// Required attributes
 
@@ -73,19 +73,21 @@ public class LDAPUser extends DummyDirContext {
 			objectClass.add(defaultObjectClasses[i]);
 		}
 
-		_attrs.put(objectClass);
+		_attributes.put(objectClass);
 
-		_attrs.put(userMappings.getProperty("firstName"), _user.getFirstName());
-		_attrs.put(userMappings.getProperty("lastName"), _user.getLastName());
+		_attributes.put(
+			userMappings.getProperty("firstName"), _user.getFirstName());
+		_attributes.put(
+			userMappings.getProperty("lastName"), _user.getLastName());
 
 		if (Validator.isNotNull(_user.getPasswordUnencrypted())) {
-			_attrs.put(
+			_attributes.put(
 				userMappings.getProperty("password"),
 				_user.getPasswordUnencrypted());
 		}
 
 		if (Validator.isNotNull(_user.getEmailAddress())) {
-			_attrs.put(
+			_attributes.put(
 				userMappings.getProperty("emailAddress"),
 				_user.getEmailAddress());
 		}
@@ -95,7 +97,7 @@ public class LDAPUser extends DummyDirContext {
 		String fullNameMapping = userMappings.getProperty("fullName");
 
 		if (Validator.isNotNull(fullNameMapping)) {
-			_attrs.put(fullNameMapping, _user.getFullName());
+			_attributes.put(fullNameMapping, _user.getFullName());
 		}
 
 		String jobTitleMapping = userMappings.getProperty("jobTitle");
@@ -103,12 +105,12 @@ public class LDAPUser extends DummyDirContext {
 		if (Validator.isNotNull(jobTitleMapping) &&
 			Validator.isNotNull(_user.getJobTitle())) {
 
-			_attrs.put(jobTitleMapping, _user.getJobTitle());
+			_attributes.put(jobTitleMapping, _user.getJobTitle());
 		}
 	}
 
 	public Attributes getAttributes() {
-		return _attrs;
+		return _attributes;
 	}
 
 	public Attributes getAttributes(String name) throws NamingException {
@@ -116,7 +118,7 @@ public class LDAPUser extends DummyDirContext {
 			throw new NameNotFoundException();
 		}
 
-		return (Attributes)_attrs.clone();
+		return (Attributes)_attributes.clone();
 	}
 
 	public Attributes getAttributes(Name name) throws NamingException {
@@ -130,17 +132,17 @@ public class LDAPUser extends DummyDirContext {
 			throw new NameNotFoundException();
 		}
 
-		Attributes attrs = new BasicAttributes(true);
+		Attributes attributes = new BasicAttributes(true);
 
 		for (int i = 0; i < ids.length; i++) {
-			Attribute attr = _attrs.get(ids[i]);
+			Attribute attr = _attributes.get(ids[i]);
 
 			if (attr != null) {
-				attrs.put(attr);
+				attributes.put(attr);
 			}
 		}
 
-		return attrs;
+		return attributes;
 	}
 
 	public Attributes getAttributes(Name name, String[] ids)
@@ -150,6 +152,6 @@ public class LDAPUser extends DummyDirContext {
 	}
 
 	private User _user;
-	private Attributes _attrs;
+	private Attributes _attributes;
 
 }
