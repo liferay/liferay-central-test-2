@@ -656,5 +656,7 @@ portletURL.setParameter("tabs1", tabs1);
 <%
 if (!tabs1.equals("products")) {
 	PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(tabs1, StringPool.UNDERLINE, StringPool.DASH)), request);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), portletURL.toString());
 }
 %>

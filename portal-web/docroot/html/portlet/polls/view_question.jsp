@@ -97,15 +97,26 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 		</div>
+
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), currentURL);
+		%>
+
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
+
+		<portlet:renderURL var="viewQuestionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+			<portlet:param name="struts_action" value="/polls/view_question" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
+		</portlet:renderURL>
 
 		<c:choose>
 			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="location.href = '<%= viewQuestionURL %>';" />
 			</c:when>
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
 				<br />
@@ -113,6 +124,12 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 			</c:when>
 		</c:choose>
+
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), viewQuestionURL.toString());
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "results"), currentURL);
+		%>
+
 	</c:otherwise>
 </c:choose>
 

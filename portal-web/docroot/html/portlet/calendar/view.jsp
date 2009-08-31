@@ -66,3 +66,9 @@ portletURL.setParameter("tabs1", tabs1);
 </c:choose>
 
 </form>
+
+<%
+if (!tabs1.equals("summary")) {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
+}
+%>

@@ -340,6 +340,16 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 PortalUtil.setPageSubtitle(productEntry.getName(), request);
 PortalUtil.setPageDescription(productEntry.getShortDescription(), request);
 PortalUtil.setPageKeywords(productEntry.getTags(), request);
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/software_catalog/view_product");
+portletURL.setParameter("redirect", currentURL);
+portletURL.setParameter("productEntryId", String.valueOf(productEntry.getProductEntryId()));
+
+PortalUtil.addPortletBreadcrumbEntry(request, productEntry.getName(), portletURL.toString());
 %>
 
 <%!

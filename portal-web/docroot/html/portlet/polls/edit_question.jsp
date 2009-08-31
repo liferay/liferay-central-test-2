@@ -214,3 +214,13 @@ if (choiceName > 0) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
 	</script>
 </c:if>
+
+<%
+if (question != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-question"), currentURL);
+}
+%>

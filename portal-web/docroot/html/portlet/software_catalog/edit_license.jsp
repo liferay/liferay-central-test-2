@@ -108,3 +108,22 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/software_catalog/view");
+portletURL.setParameter("tabs1", "licenses");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "licenses"), portletURL.toString());
+
+if (license != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, license.getName(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-license"), currentURL);
+}
+%>

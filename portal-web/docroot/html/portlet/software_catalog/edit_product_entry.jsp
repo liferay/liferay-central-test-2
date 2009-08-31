@@ -330,3 +330,21 @@ for (int i = 0; i < screenshotsCount; i++) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+if (productEntry != null) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setWindowState(WindowState.MAXIMIZED);
+
+	portletURL.setParameter("struts_action", "/software_catalog/view_product");
+	portletURL.setParameter("redirect", currentURL);
+	portletURL.setParameter("productEntryId", String.valueOf(productEntry.getProductEntryId()));
+
+	PortalUtil.addPortletBreadcrumbEntry(request, productEntry.getName(), portletURL.toString());
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-page"), currentURL);
+}
+%>

@@ -325,12 +325,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 <liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
-<div class="breadcrumbs">
-	<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="events" /></a></span> &raquo;
-
-	<span class="last"><liferay-ui:message key='<%= ((event == null) ? Constants.ADD : Constants.UPDATE) + "-event" %>' /></span>
-</div>
-
 <table class="lfr-table">
 <tr>
 	<td class="lfr-label">
@@ -749,6 +743,24 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	document.<portlet:namespace />fm.<portlet:namespace />endDateMinute.disabled = true;
 	document.<portlet:namespace />fm.<portlet:namespace />endDateAmPm.disabled = true;
 </script>
+
+<%
+if (event != null) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setWindowState(WindowState.MAXIMIZED);
+
+	portletURL.setParameter("struts_action", "/calendar/view_event");
+	portletURL.setParameter("redirect", currentURL);
+	portletURL.setParameter("eventId", String.valueOf(event.getEventId()));
+
+	PortalUtil.addPortletBreadcrumbEntry(request, event.getTitle(), portletURL.toString());
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-event"), currentURL);
+}
+%>
 
 <%!
 private boolean _getWeeklyDayPos(HttpServletRequest req, int day, CalEvent event, Recurrence recurrence) {

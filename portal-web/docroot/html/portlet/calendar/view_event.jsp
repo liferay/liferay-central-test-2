@@ -435,6 +435,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 <%
 PortalUtil.setPageSubtitle(event.getTitle(), request);
 PortalUtil.setPageDescription(event.getDescription(), request);
+
+PortalUtil.addPortletBreadcrumbEntry(request, event.getTitle(), currentURL);
 %>
 
 <%!

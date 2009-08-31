@@ -376,3 +376,13 @@ if (Validator.isNull(redirect)) {
 		}
 	</script>
 </c:if>
+
+<%
+if (wikiPage != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), viewPageURL.toString());
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-page"), currentURL);
+}
+%>

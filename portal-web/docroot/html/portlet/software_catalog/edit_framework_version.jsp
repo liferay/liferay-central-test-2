@@ -110,3 +110,22 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/software_catalog/view");
+portletURL.setParameter("tabs1", "framework_versions");
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "framework-versions"), portletURL.toString());
+
+if (frameworkVersion != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, frameworkVersion.getName(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-framework-version"), currentURL);
+}
+%>
