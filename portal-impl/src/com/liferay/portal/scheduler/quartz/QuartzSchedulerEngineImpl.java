@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.scheduler.job.MessageSenderJob;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.util.PropsUtil;
@@ -145,20 +147,40 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
+		try {
+			SimpleTrigger simpleTrigger = new SimpleTrigger(
+				groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
+				interval);
 
-		SimpleTrigger simpleTrigger = new SimpleTrigger(
-			groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY, interval);
+			if (startDate == null) {
+				if (ServerDetector.getServerId().equals(
+					ServerDetector.TOMCAT_ID)) {
+					simpleTrigger.setStartTime(
+						new Date(System.currentTimeMillis() + Time.MINUTE));
+				}
+				else {
+					simpleTrigger.setStartTime(
+						new Date(
+						System.currentTimeMillis() + Time.MINUTE * 3));
+				}
 
-		if (startDate != null) {
-			simpleTrigger.setStartTime(startDate);
+			}
+			else {
+				simpleTrigger.setStartTime(startDate);
+			}
+
+			if (endDate != null) {
+				simpleTrigger.setEndTime(endDate);
+			}
+
+			schedule(
+				groupName, simpleTrigger, description, destination,
+				messageBody);
 		}
-
-		if (endDate != null) {
-			simpleTrigger.setEndTime(endDate);
+		catch (RuntimeException re) {
+			// ServerDetector will throw an exception when JobSchedulerImpl is
+			// initialized in a test environment
 		}
-
-		schedule(
-			groupName, simpleTrigger, description, destination, messageBody);
 	}
 
 	public void schedule(
@@ -174,7 +196,19 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			CronTrigger cronTrigger = new CronTrigger(
 				groupName, groupName, cronText);
 
-			if (startDate != null) {
+			if (startDate == null) {
+				if (ServerDetector.getServerId().equals(
+					ServerDetector.TOMCAT_ID)) {
+					cronTrigger.setStartTime(
+						new Date(System.currentTimeMillis() + Time.MINUTE));
+				}
+				else {
+					cronTrigger.setStartTime(
+						new Date(System.currentTimeMillis() + Time.MINUTE * 3));
+				}
+
+			}
+			else {
 				cronTrigger.setStartTime(startDate);
 			}
 
@@ -187,6 +221,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 		catch(ParseException pe) {
 			throw new SchedulerException("Unable to parse cron text", pe);
+		}
+		catch (RuntimeException re) {
+			// ServerDetector will throw an exception when JobSchedulerImpl is
+			// initialized in a test environment
 		}
 	}
 
