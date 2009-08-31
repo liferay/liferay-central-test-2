@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -38,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="RequestHeaderAutoLogin.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class RequestHeaderAutoLogin extends CASAutoLogin {
 
@@ -59,11 +60,17 @@ public class RequestHeaderAutoLogin extends CASAutoLogin {
 			User user = null;
 
 			try {
+				user = addUser(companyId, screenName);
+			}
+			catch (SystemException se) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(se.getMessage());
+				}
+			}
+
+			if (Validator.isNull(user)) {
 				user = UserLocalServiceUtil.getUserByScreenName(
 					companyId, screenName);
-			}
-			catch (NoSuchUserException nsue) {
-				user = addUser(companyId, screenName);
 			}
 
 			credentials = new String[3];

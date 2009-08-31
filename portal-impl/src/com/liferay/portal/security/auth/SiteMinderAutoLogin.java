@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="SiteMinderAutoLogin.java.html"><b><i>View Source</i></b></a>
  *
  * @author Mika Koivisto
+ * @author Wesley Gong
  */
 public class SiteMinderAutoLogin extends CASAutoLogin {
 
@@ -67,20 +68,23 @@ public class SiteMinderAutoLogin extends CASAutoLogin {
 
 			User user = null;
 
-			try {
-				user = UserLocalServiceUtil.getUserByScreenName(
-					companyId, screenName);
-			}
-			catch (NoSuchUserException nsue) {
-				if (PrefsPropsUtil.getBoolean(
-						companyId, PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
-						PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsKeys.SITEMINDER_IMPORT_FROM_LDAP,
+					PropsValues.SITEMINDER_IMPORT_FROM_LDAP)) {
 
+				try {
 					user = addUser(companyId, screenName);
 				}
-				else {
-					throw nsue;
+				catch (SystemException se) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(se.getMessage());
+					}
 				}
+			}
+
+			if (Validator.isNull(user)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
 			}
 
 			credentials = new String[3];

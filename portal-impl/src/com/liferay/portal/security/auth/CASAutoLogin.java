@@ -56,6 +56,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Wesley Gong
  */
 public class CASAutoLogin implements AutoLogin {
 
@@ -85,20 +86,23 @@ public class CASAutoLogin implements AutoLogin {
 
 			User user = null;
 
-			try {
-				user = UserLocalServiceUtil.getUserByScreenName(
-					companyId, screenName);
-			}
-			catch (NoSuchUserException nsue) {
-				if (PrefsPropsUtil.getBoolean(
-						companyId, PropsKeys.CAS_IMPORT_FROM_LDAP,
-						PropsValues.CAS_IMPORT_FROM_LDAP)) {
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsKeys.CAS_IMPORT_FROM_LDAP,
+					PropsValues.CAS_IMPORT_FROM_LDAP)) {
 
+				try {
 					user = addUser(companyId, screenName);
 				}
-				else {
-					throw nsue;
+				catch (SystemException se) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(se.getMessage());
+					}
 				}
+			}
+
+			if (Validator.isNull(user)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
 			}
 
 			String redirect = ParamUtil.getString(request, "redirect");
@@ -181,7 +185,9 @@ public class CASAutoLogin implements AutoLogin {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Problem accessing LDAP server ", e);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Problem accessing LDAP server ", e);
+			}
 
 			throw new SystemException(
 				"Problem accessing LDAP server " + e.getMessage());
