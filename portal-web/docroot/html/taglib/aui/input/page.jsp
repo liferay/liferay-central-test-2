@@ -109,11 +109,18 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 			}
 
 			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+
+			String onClick = "jQuery(this).prev().val(this.checked);";
+			String onClickDynamicAttribute = _getAttributeIgnoreCase(dynamicAttributes, "onclick");
+
+			if (onClickDynamicAttribute != null) {
+				onClick += onClickDynamicAttribute;
+			}
 			%>
 
 			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="jQuery(this).prev().val(this.checked);" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</span>
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>

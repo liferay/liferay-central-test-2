@@ -62,4 +62,22 @@ private String _buildDynamicAttributes(Map<String, Object> dynamicAttributes) {
 
 	return sb.toString();
 }
+
+private String _getAttributeIgnoreCase(Map<String, Object> dynamicAttributes, String attribute) {
+	if (dynamicAttributes == null) {
+		return null;
+	}
+
+	attribute = attribute.toLowerCase();
+
+	for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
+		String key = entry.getKey().toLowerCase();
+
+		if (key.equals(attribute)) {
+			return String.valueOf(entry.getValue());
+		}
+	}
+
+	return null;
+}
 %>
