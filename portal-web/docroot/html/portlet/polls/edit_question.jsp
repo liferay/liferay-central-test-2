@@ -81,6 +81,12 @@ if (choiceName > 0) {
 		submitForm(document.<portlet:namespace />fm, '<%= addPollChoiceURL %>');
 	}
 
+	function <portlet:namespace />deletePollChoice(choiceName) {
+		document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>';
+		document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= choiceName %>';
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />disableInputDate(date, checked) {
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].disabled = checked;
 		document.<portlet:namespace />fm["<portlet:namespace />" + date + "Day"].disabled = checked;
@@ -98,116 +104,102 @@ if (choiceName > 0) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/edit_question" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveQuestion(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />questionId" type="hidden" value="<%= questionId %>" />
-<input name="<portlet:namespace />choicesCount" type="hidden" value="<%= choicesCount %>" />
-<input name="<portlet:namespace />choiceName" type="hidden" value="" />
+<portlet:actionURL var="editFileEntryURL">
+	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="question"
-	backURL="<%= redirect %>"
-/>
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editQuestionURL">
+	<portlet:param name="struts_action" value="/polls/edit_question" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
-<liferay-ui:error exception="<%= QuestionDescriptionException.class %>" message="please-enter-a-valid-description" />
-<liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
-<liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
+<aui:form action="<%= editQuestionURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveQuestion(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="questionId" type="hidden" value="<%= questionId %>" />
+	<aui:input name="choicesCount" type="hidden" value="<%= choicesCount %>" />
+	<aui:input name="choiceName" type="hidden" value="" />
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
+	<liferay-ui:tabs
+		names="question"
+		backURL="<%= redirect %>"
+	/>
 
-		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="title" />
-	</div>
+	<liferay-ui:error exception="<%= QuestionChoiceException.class %>" message="please-enter-valid-choices" />
+	<liferay-ui:error exception="<%= QuestionDescriptionException.class %>" message="please-enter-a-valid-description" />
+	<liferay-ui:error exception="<%= QuestionExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
+	<liferay-ui:error exception="<%= QuestionTitleException.class %>" message="please-enter-a-valid-title" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />description"><liferay-ui:message key="description" /></label>
+	<aui:model-context bean="<%= question %>" model="<%= PollsQuestion.class %>" />
 
-		<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="description" />
-	</div>
+	<aui:fieldset>
+		<aui:input name="title" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />expirationDate">
-			<liferay-ui:message key="expiration-date" />
+		<aui:input name="description" />
 
-			<liferay-ui:input-field model="<%= PollsQuestion.class %>" bean="<%= question %>" field="expirationDate" defaultValue="<%= expirationDate %>" disabled="<%= neverExpire %>" />
-		</label>
+		<aui:input name="expirationDate" value="<%= expirationDate %>" disabled="<%= String.valueOf(neverExpire) %>" />
 
 		<%
 		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
 		%>
 
-		<label class="inline-label" for="<portlet:namespace />neverExpire">
-			<liferay-ui:input-checkbox param="neverExpire" defaultValue="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" />
+		<aui:input name="neverExpire" inlineLabel="<%= true %>" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" value="<%= neverExpire %>" />
 
-			<liferay-ui:message key="never-expire" />
-		</label>
-	</div>
+		<aui:field-wrapper label="choices">
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />choices"><liferay-ui:message key="choices" /></label>
+			<%
+			for (int i = 1; i <= choicesCount; i++) {
+				char c = (char)(96 + i);
 
-		<%
-		for (int i = 1; i <= choicesCount; i++) {
-			char c = (char)(96 + i);
+				PollsChoice choice = null;
 
-			PollsChoice choice = null;
+				String paramName = null;
 
-			String paramName = null;
+				if (deleteChoice && (i >= choiceName)) {
+					paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1));
+				}
+				else {
+					paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c;
+				}
 
-			if (deleteChoice && (i >= choiceName)) {
-				paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + ((char)(96 + i + 1));
+				if (question != null && (i - 1 < choices.size())) {
+					choice = (PollsChoice)choices.get(i - 1);
+				}
+			%>
+
+				<div class="choice <%= (i == choicesCount) ? "last-choice" : StringPool.BLANK %>">
+					<aui:model-context bean="<%= choice %>" model="<%= PollsChoice.class %>" />
+
+					<aui:input name="<%= EditQuestionAction.CHOICE_NAME_PREFIX + c %>" type="hidden" value="<%= c %>" />
+
+					<aui:input fieldParam="<%= paramName %>" inlineLabel="<%= false %>" label="<%= c + StringPool.PERIOD %>" name="description" />
+
+					<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i >= oldChoicesCount)) %>">
+						<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deletePollChoice(" + i + ");" %>' />
+					</c:if>
+				</div>
+
+			<%
 			}
-			else {
-				paramName = EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + c;
-			}
+			%>
 
-			if (question != null && (i - 1 < choices.size())) {
-				choice = (PollsChoice)choices.get(i - 1);
-			}
-		%>
+			<aui:button cssClass="add-choice" value="add-choice" onClick='<%= renderResponse.getNamespace() + "addPollChoice();" %>' />
+		</aui:field-wrapper>
 
-			<div class="choice <%= (i == choicesCount) ? "last-choice" : StringPool.BLANK %>">
-				<span class="choice-name-prefix"><%= c %>.</span>
+		<c:if test="<%= question == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= PollsQuestion.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
 
-				<input name="<portlet:namespace /><%= EditQuestionAction.CHOICE_NAME_PREFIX %><%= c %>" type="hidden" value="<%= c %>" />
+		<aui:button-row>
+			<aui:button type="submit" value="save" />
 
-				<liferay-ui:input-field model="<%= PollsChoice.class %>" bean="<%= choice %>" field="description" fieldParam="<%= paramName %>" />
-
-				<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i >= oldChoicesCount)) %>">
-					<input type="button" value="<liferay-ui:message key="delete" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceName.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);" />
-				</c:if>
-			</div>
-
-		<%
-		}
-		%>
-
-		<div class="aui-button-holder">
-			<input type="button" value="<liferay-ui:message key="add-choice" />" onClick="<portlet:namespace />addPollChoice();" />
-		</div>
-	</div>
-
-	<c:if test="<%= question == null %>">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />permissions"><liferay-ui:message key="permissions" /></label>
-
-			<liferay-ui:input-permissions
-				modelName="<%= PollsQuestion.class.getName() %>"
-			/>
-		</div>
-	</c:if>
-
-	<div class="aui-button-holder">
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-	</div>
-</fieldset>
-
-</form>
+			<aui:button onClick="<%= redirect %>" value="cancel" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

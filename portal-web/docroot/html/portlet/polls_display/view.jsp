@@ -62,53 +62,46 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 }
 %>
 
-<form action="<portlet:renderURL><portlet:param name="struts_action" value="/polls_display/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />questionId" type="hidden" value="<%= question.getQuestionId() %>" />
+<portlet:renderURL var="viewPollURL">
+	<portlet:param name="struts_action" value="/polls_display/view" />
+</portlet:renderURL>
 
-<liferay-ui:success key="vote_added" message="thank-you-for-your-vote" />
+<aui:form action="<%= viewPollURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="questionId" type="hidden" value="<%= question.getQuestionId() %>" />
 
-<liferay-ui:error exception="<%= DuplicateVoteException.class %>" message="you-may-only-vote-once" />
-<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
+	<liferay-ui:success key="vote_added" message="thank-you-for-your-vote" />
 
-<%= question.getDescription(locale) %>
+	<liferay-ui:error exception="<%= DuplicateVoteException.class %>" message="you-may-only-vote-once" />
+	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
-<br /><br />
+	<%= question.getDescription(locale) %>
 
-<c:choose>
-	<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-		<table class="lfr-table">
+	<br /><br />
 
-		<%
-		for (PollsChoice choice : choices) {
-			choice = choice.toEscapedModel();
-		%>
+	<c:choose>
+		<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
+			<aui:fieldset>
+				<aui:field-wrapper>
 
-			<tr>
-				<td>
-					<input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
-				</td>
-				<td>
-					<b><%= choice.getName() %>.</b>
-				</td>
-				<td>
-					<%= choice.getDescription(locale) %>
-				</td>
-			</tr>
+					<%
+					for (PollsChoice choice : choices) {
+						choice = choice.toEscapedModel();
+					%>
 
-		<%
-		}
-		%>
+						<aui:input inlineLabel="<%= true %>" name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>'  />
 
-		</table>
+					<%
+					}
+					%>
 
-		<br />
+				</aui:field-wrapper>
 
-		<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
-	</c:otherwise>
-</c:choose>
-
-</form>
+				<aui:button value="vote" type="submit" />
+			</aui:fieldset>
+		</c:when>
+		<c:otherwise>
+			<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
+		</c:otherwise>
+	</c:choose>
+</aui:form>

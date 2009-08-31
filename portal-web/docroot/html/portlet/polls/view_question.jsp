@@ -42,95 +42,103 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 }
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" /></portlet:renderURL>" />
-<input name="<portlet:namespace />questionId" type="hidden" value="<%= question.getQuestionId() %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionActionURL">
+	<portlet:param name="struts_action" value="/polls/view_question" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= DuplicateVoteException.class %>" message="you-may-only-vote-once" />
-<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
+<aui:form action="<%= viewQuestionActionURL %>" method="post" name="fm">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionRenderURL">
+		<portlet:param name="struts_action" value="/polls/view_question" />
+		<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
+	</portlet:renderURL>
 
-<span style="font-size: small;"><b>
-<%= question.getTitle(locale) %>
-</b></span><br />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="redirect" type="hidden" value="<%= viewQuestionRenderURL %>" />
+	<aui:input name="questionId" type="hidden" value="<%= question.getQuestionId() %>" />
 
-<span style="font-size: x-small;">
-<%= question.getDescription(locale) %>
-</span>
+	<liferay-ui:error exception="<%= DuplicateVoteException.class %>" message="you-may-only-vote-once" />
+	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
-<br /><br />
+	<aui:fieldset>
+		<span style="font-size: small;"><b>
+		<%= question.getTitle(locale) %>
+		</b></span><br />
 
-<c:choose>
-	<c:when test='<%= !viewResults && !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
-		<div class="aui-ctrl-holder">
+		<span style="font-size: x-small;">
+		<%= question.getDescription(locale) %>
+		</span>
 
-			<%
-			Iterator itr = choices.iterator();
-
-			while (itr.hasNext()) {
-				PollsChoice choice = (PollsChoice)itr.next();
-
-				choice = choice.toEscapedModel();
-			%>
-
-				<label><input name="<portlet:namespace />choiceId" type="radio" value="<%= choice.getChoiceId() %>" /><strong><%= choice.getName() %>.</strong> <%= choice.getDescription(locale) %></label> <br />
-
-			<%
-			}
-			%>
-
-		</div>
-
-		<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
-				<portlet:param name="struts_action" value="/polls/view_question" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
-				<portlet:param name="viewResults" value="1" />
-			</portlet:renderURL>
-
-			<liferay-ui:icon image="view" message="view-results" url="<%= viewResultsURL %>" label="<%= true %>" />
-		</c:if>
-
-		<div class="aui-button-holder">
-			<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
-
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-		</div>
-
-		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), currentURL);
-		%>
-
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
-
-		<portlet:renderURL var="viewQuestionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
-			<portlet:param name="struts_action" value="/polls/view_question" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
-		</portlet:renderURL>
+		<br /><br />
 
 		<c:choose>
-			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-				<br />
+			<c:when test='<%= !viewResults && !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
+				<aui:field-wrapper>
 
-				<input type="button" value="<liferay-ui:message key="back-to-vote" />" onClick="location.href = '<%= viewQuestionURL %>';" />
-			</c:when>
-			<c:when test="<%= Validator.isNotNull(redirect) %>">
-				<br />
+					<%
+					Iterator itr = choices.iterator();
 
-				<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+					while (itr.hasNext()) {
+						PollsChoice choice = (PollsChoice)itr.next();
+
+						choice = choice.toEscapedModel();
+					%>
+
+						<aui:input inlineLabel="<%= true %>" name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>'  />
+
+					<%
+					}
+					%>
+
+				</aui:field-wrapper>
+
+				<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewResultsURL">
+						<portlet:param name="struts_action" value="/polls/view_question" />
+						<portlet:param name="redirect" value="<%= redirect %>" />
+						<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
+						<portlet:param name="viewResults" value="1" />
+					</portlet:renderURL>
+
+					<liferay-ui:icon image="view" message="view-results" url="<%= viewResultsURL %>" label="<%= true %>" />
+				</c:if>
+
+				<aui:button-row>
+					<aui:button type="submit" value="vote" />
+
+					<aui:button value="cancel" onClick="<%= redirect %>" />
+				</aui:button-row>
+
+				<%
+				PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), currentURL);
+				%>
+
 			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
+
+				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewQuestionURL">
+					<portlet:param name="struts_action" value="/polls/view_question" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+					<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
+				</portlet:renderURL>
+
+				<aui:button-row>
+					<c:choose>
+						<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
+							<aui:button value="back-to-vote" onClick="<%= viewQuestionURL %>" />
+						</c:when>
+						<c:when test="<%= Validator.isNotNull(redirect) %>">
+							<aui:button value="back" onClick="<%= redirect %>" />
+						</c:when>
+					</c:choose>
+				</aui:button-row>
+
+				<%
+				PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), viewQuestionURL.toString());
+				PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "results"), currentURL);
+				%>
+
+			</c:otherwise>
 		</c:choose>
-
-		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), viewQuestionURL.toString());
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "results"), currentURL);
-		%>
-
-	</c:otherwise>
-</c:choose>
-
-</form>
+	</aui:fieldset>
+</aui:form>
