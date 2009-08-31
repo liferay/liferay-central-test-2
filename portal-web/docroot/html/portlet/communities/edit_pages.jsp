@@ -281,6 +281,15 @@ request.setAttribute("edit_pages.jsp-workflowStages", new Integer(workflowStages
 request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
 
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
+
+if (organization != null) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+}
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
 %>
 
 <script type="text/javascript">
@@ -508,6 +517,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		url="<%= tabs1URL %>"
 		backURL="<%= backURL %>"
 	/>
+
+	<%
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
+	%>
 </c:if>
 
 <c:if test="<%= liveGroup.isUserGroup() %>">
@@ -586,6 +599,13 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
 			</c:when>
 		</c:choose>
+
+		<%
+		if (!tabs2.equals("pages")) {
+			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
+		}
+		%>
+
 	</c:otherwise>
 </c:choose>
 

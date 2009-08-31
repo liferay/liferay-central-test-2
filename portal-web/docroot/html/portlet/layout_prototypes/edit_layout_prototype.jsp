@@ -107,3 +107,13 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+if (!layoutPrototype.isNew()) {
+	PortalUtil.addPortletBreadcrumbEntry(request, layoutPrototype.getName(locale), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-page"), currentURL);
+}
+%>

@@ -74,6 +74,10 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 		tabs2 = tabs2Names.substring(0, pos);
 	}
 }
+
+if (!tabs2.equals("pages")) {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
+}
 %>
 
 <liferay-ui:tabs

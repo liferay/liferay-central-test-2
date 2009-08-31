@@ -280,14 +280,3 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 	</td>
 </tr>
 </table>
-
-<%
-if (organization != null) {
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
-}
-else {
-	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
-}
-
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
-%>
