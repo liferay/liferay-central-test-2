@@ -32,11 +32,32 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class TranslateGermanFrenchTest extends BaseTestCase {
 	public void testTranslateGermanFrench() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Translator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Translator Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=German to French"));
+		selenium.type("_26_text",
+			RuntimeVariables.replace(
+				"Mein Name ist ein Fl\u00fcssig\u00fcbersetzer Liferay unter mehr als 6 Millionen Kommunikationsformen. "));
 		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Mon nom est un traducteur coulant des Liferay, sous plus de 6 millions de formes de communication."));
+				"Mon nom est un traducteur liquide Liferay sous plus de 6 millions de formes de communication."));
 	}
 }

@@ -33,6 +33,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class TranslateEnglishChineseTTest extends BaseTestCase {
 	public void testTranslateEnglishChineseT() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Translator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Translator Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=English to Chinese (Taiwan)"));
 		selenium.type("_26_text",
@@ -40,6 +58,7 @@ public class TranslateEnglishChineseTTest extends BaseTestCase {
 				"My name is Liferay Translator, fluent in over 6 million forms of communication."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("?????Liferay??,??????6????????? "));
+		assertTrue(selenium.isTextPresent(
+				"\u6211\u7684\u540d\u5b57\u662fLiferay\u8b6f\u8005\uff0c\u6d41\u5229\u5b8c\u5168\u6210\u529f6\u901a\u4fe1\u7684\u767e\u842c\u500b\u5f62\u5f0f\u3002"));
 	}
 }

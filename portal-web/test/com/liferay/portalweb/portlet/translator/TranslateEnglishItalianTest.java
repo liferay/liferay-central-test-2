@@ -32,6 +32,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class TranslateEnglishItalianTest extends BaseTestCase {
 	public void testTranslateEnglishItalian() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Translator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Translator Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=English to Italian"));
 		selenium.type("_26_text",
@@ -40,6 +58,6 @@ public class TranslateEnglishItalianTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
-				"Il mio nome \u00e8 traduttore di Liferay, fluente dentro oltre 6 milione forme di comunicazione. "));
+				"Il mio nome \u00e8 traduttore di Liferay, fluente dentro oltre 6 milione forme di comunicazione."));
 	}
 }

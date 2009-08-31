@@ -32,6 +32,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class TranslateEnglishGermanTest extends BaseTestCase {
 	public void testTranslateEnglishGerman() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Translator Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Translator Test Page"));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=English to German"));
 		selenium.type("_26_text",
