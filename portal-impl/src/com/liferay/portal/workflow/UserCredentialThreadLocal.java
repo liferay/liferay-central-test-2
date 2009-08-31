@@ -32,16 +32,14 @@ import com.liferay.portal.kernel.workflow.UserCredential;
 public class UserCredentialThreadLocal {
 
 	public static UserCredential getUserCredential() {
-		return _userCredential.get();
+		return _threadLocal.get();
 	}
 
-	public static void setUserCredential(
-		UserCredential permissionChecker) {
-
-		_userCredential.set(permissionChecker);
+	public static void setUserCredential(UserCredential userCredential) {
+		_threadLocal.set(userCredential);
 	}
 
-	private static ThreadLocal<UserCredential> _userCredential =
+	private static ThreadLocal<UserCredential> _threadLocal =
 		new ThreadLocal<UserCredential>();
 
 }
