@@ -166,7 +166,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 if (folder != null) {
 	BookmarksUtil.addPortletBreadcrumbEntries(folderId, request, renderResponse);
 
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-folder"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	if (parentFolderId > 0) {

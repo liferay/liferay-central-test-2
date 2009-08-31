@@ -149,7 +149,14 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 </c:if>
 
 <%
-DLUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
+if (folder == null) {
+	DLUtil.addPortletBreadcrumbEntries(parentFolderId, request, renderResponse);
 
-PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, (folder == null ? Constants.ADD : Constants.UPDATE) + "-folder"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-folder"), currentURL);
+}
+else {
+	DLUtil.addPortletBreadcrumbEntries(folder.getFolderId(), request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
 %>
