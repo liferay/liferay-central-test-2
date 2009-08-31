@@ -49,11 +49,12 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Advanced \u00bb");
+		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,59 +73,71 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 		}
 
 		selenium.type("_11_name", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_name", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_name", RuntimeVariables.replace(""));
 		selenium.type("_11_street", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_street", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_street", RuntimeVariables.replace(""));
 		selenium.type("_11_city", RuntimeVariables.replace("Diamond"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_city", RuntimeVariables.replace("Diamond1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_city", RuntimeVariables.replace(""));
 		selenium.type("_11_zip", RuntimeVariables.replace("11111"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_zip", RuntimeVariables.replace("111111"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.type("_11_zip", RuntimeVariables.replace(""));
 		selenium.select("_11_type",
 			RuntimeVariables.replace("label=Regular Organization"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_type", RuntimeVariables.replace("label=Location"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_type", RuntimeVariables.replace("label=Any"));
 		selenium.select("_11_countryId",
 			RuntimeVariables.replace("label=United States"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_countryId",
 			RuntimeVariables.replace("label=United Kingdom"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_countryId",
@@ -132,14 +145,16 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.select("_11_regionId",
 			RuntimeVariables.replace("label=California"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_regionId", RuntimeVariables.replace("label=Hawaii"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Diamond Bar"));
 		selenium.select("_11_countryId", RuntimeVariables.replace("label="));
-		selenium.click("link=\u00ab Basic");
+		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
 	}
 }

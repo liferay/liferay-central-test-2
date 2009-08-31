@@ -48,9 +48,10 @@ public class AddImageNameTitleFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class AddImageNameTitleFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,8 +89,8 @@ public class AddImageNameTitleFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
+		selenium.clickAt("//input[@value='Add Subfolder']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,7 +112,7 @@ public class AddImageNameTitleFolderTest extends BaseTestCase {
 		selenium.type("_31_name", RuntimeVariables.replace("Test1 Image1.jpg"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("Image Name Title Folder Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

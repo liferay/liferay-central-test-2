@@ -49,9 +49,10 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Invalid Start Date Test Event"));
@@ -60,7 +61,7 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
 		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=31"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

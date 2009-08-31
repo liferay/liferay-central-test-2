@@ -48,17 +48,17 @@ public class AddInvalidFolderTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
+		selenium.clickAt("//input[@value='Add Subfolder']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
 		selenium.type("_20_name", RuntimeVariables.replace("!@#$%^&amp;*"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Invalid Title Folder"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

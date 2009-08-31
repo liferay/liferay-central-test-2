@@ -49,9 +49,10 @@ public class AssertCorrectUserInUserGroupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=User Groups"));
+		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +71,7 @@ public class AssertCorrectUserInUserGroupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View Users"));
+		selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=TestFirst1"));
 		assertTrue(selenium.isElementPresent("link=TestFirst2"));

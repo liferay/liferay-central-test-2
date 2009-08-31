@@ -48,9 +48,10 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
+		selenium.clickAt("//tr[4]/td[1]/a/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +88,7 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +107,8 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Select']");
+		selenium.clickAt("//input[@value='Select']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("folder");
 
@@ -126,25 +128,27 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Image Home"));
+		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test1 Folder1"));
+		selenium.clickAt("link=Test1 Folder1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Choose']");
+		selenium.clickAt("//input[@value='Choose']",
+			RuntimeVariables.replace(""));
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
 			selenium.getText("//div[1]/span/a"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"Test3 Subfolder3\nThis is Test3 Subfolder3."));
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -163,7 +167,7 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -185,7 +189,7 @@ public class MoveFolderTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test3 Subfolder3\nThis is Test3 Subfolder3."),
 			selenium.getText("//td[1]/a"));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -206,7 +210,7 @@ public class MoveFolderTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
-		selenium.click(RuntimeVariables.replace("link=Test1 Subfolder1"));
+		selenium.clickAt("link=Test1 Subfolder1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -225,7 +229,7 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -243,9 +247,10 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Select']");
+		selenium.clickAt("//input[@value='Select']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("folder");
 
@@ -265,23 +270,24 @@ public class MoveFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Image Home"));
+		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[4]/td[4]/input");
+		selenium.clickAt("//tr[4]/td[4]/input", RuntimeVariables.replace(""));
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("Test3 Folder3"),
 			selenium.getText("//div[1]/span/a"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"Test3 Subfolder3\nThis is Test3 Subfolder3."));
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
+		selenium.clickAt("//tr[4]/td[1]/a/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -303,7 +309,7 @@ public class MoveFolderTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test3 Subfolder3\nThis is Test3 Subfolder3."),
 			selenium.getText("//td[1]/a"));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -48,9 +48,10 @@ public class SearchUserGroupsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=User Groups"));
+		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,11 +72,13 @@ public class SearchUserGroupsTest extends BaseTestCase {
 
 		selenium.typeKeys("_11_name", RuntimeVariables.replace("Test"));
 		selenium.type("_11_name", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test User Group"));
 		selenium.type("_11_name", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Test User Group"));
 	}

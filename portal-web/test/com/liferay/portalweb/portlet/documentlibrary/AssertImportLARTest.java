@@ -48,20 +48,20 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Second Folder Test"));
 		assertTrue(selenium.isTextPresent("Test Folder"));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Second Test Subfolder"));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Test Document.txt"));
-		selenium.click(RuntimeVariables.replace("//div[1]/span[1]/a"));
+		selenium.clickAt("//div[1]/span[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[2]/b"));
+		selenium.clickAt("//tr[4]/td[1]/a[2]/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Subfolder"));
 	}

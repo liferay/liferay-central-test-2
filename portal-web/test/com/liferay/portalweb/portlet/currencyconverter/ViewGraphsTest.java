@@ -49,8 +49,8 @@ public class ViewGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Currency Converter Test Page"));
+		selenium.clickAt("link=Currency Converter Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,13 +69,14 @@ public class ViewGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
+		selenium.clickAt("//input[@value='Convert']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=1y"));
+		selenium.clickAt("link=1y", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=2y"));
+		selenium.clickAt("link=2y", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=3m"));
+		selenium.clickAt("link=3m", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -48,9 +48,11 @@ public class DeleteFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.clickAt("//td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +70,7 @@ public class DeleteFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
+		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -76,7 +78,8 @@ public class DeleteFoldersTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"Test1 Folder1\nThis is Test1 Folder1."));
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.clickAt("//td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,7 +97,7 @@ public class DeleteFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
+		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

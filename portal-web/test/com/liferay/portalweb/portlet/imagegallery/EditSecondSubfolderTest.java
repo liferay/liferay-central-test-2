@@ -48,9 +48,10 @@ public class EditSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
+		selenium.clickAt("//tr[4]/td[1]/a/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class EditSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +88,7 @@ public class EditSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -110,7 +111,7 @@ public class EditSecondSubfolderTest extends BaseTestCase {
 			RuntimeVariables.replace("Edited Test2 Subfolder2"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is Edited Test2 Subfolder2."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

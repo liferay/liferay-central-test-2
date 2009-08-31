@@ -55,10 +55,11 @@ public class EnableSearchPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Display Test Page"));
+				selenium.clickAt("link=Document Library Display Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.clickAt("link=Configuration",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean IsChecked = selenium.isChecked(
@@ -70,11 +71,12 @@ public class EnableSearchPortletTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_86_showFileEntriesSearchCheckbox");
+				selenium.clickAt("_86_showFileEntriesSearchCheckbox",
+					RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"You have successfully updated the setup."));

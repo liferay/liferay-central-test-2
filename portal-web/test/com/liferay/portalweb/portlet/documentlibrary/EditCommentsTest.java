@@ -48,14 +48,14 @@ public class EditCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,11 +73,11 @@ public class EditCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,7 +99,7 @@ public class EditCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace("Edited comments test!!!"));
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace("Edited comments test!!!"));
-		selenium.click(RuntimeVariables.replace("_20_editReplyButton1"));
+		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited comments test!!!"));
 		assertTrue(selenium.isTextPresent(

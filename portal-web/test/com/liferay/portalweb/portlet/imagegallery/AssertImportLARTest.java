@@ -48,11 +48,12 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a test folder!"));
 		assertTrue(selenium.isTextPresent("This is a test3 folder3."));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,9 +73,10 @@ public class AssertImportLARTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent("This is a test subfolder!"));
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,7 +96,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

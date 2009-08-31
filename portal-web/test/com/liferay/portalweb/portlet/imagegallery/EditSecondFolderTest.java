@@ -48,9 +48,11 @@ public class EditSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +70,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
+		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,7 +93,7 @@ public class EditSecondFolderTest extends BaseTestCase {
 			RuntimeVariables.replace("Edited Test2 Folder2"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a Edited Test2 Folder2."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

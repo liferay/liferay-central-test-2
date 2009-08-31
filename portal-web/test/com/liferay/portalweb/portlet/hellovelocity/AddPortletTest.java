@@ -48,7 +48,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Hello Velocity Test Page"));
+		selenium.clickAt("link=Hello Velocity Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Application");
 

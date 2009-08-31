@@ -49,10 +49,10 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +87,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +106,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -132,7 +132,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_125_firstName", RuntimeVariables.replace("TestFirst1"));
 		selenium.type("_125_middleName", RuntimeVariables.replace("TestMiddle1"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -151,7 +151,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("TestSN2"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("TestSN2"));
@@ -160,7 +160,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_125_firstName", RuntimeVariables.replace("TestFirst2"));
 		selenium.type("_125_middleName", RuntimeVariables.replace("TestMiddle2"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("TestLast2"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -179,7 +179,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -198,7 +198,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -218,7 +218,7 @@ public class SetupTest extends BaseTestCase {
 		}
 
 		selenium.type("_126_name", RuntimeVariables.replace("Test Organization"));
-		selenium.click("//input[@value='Save']");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -237,7 +237,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("addressesLink");
+		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -267,7 +267,7 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_126_addressZip0", RuntimeVariables.replace("11111"));
 		selenium.type("_126_addressCity0",
 			RuntimeVariables.replace("Diamond Bar"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -286,7 +286,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=User Groups"));
+		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -305,7 +305,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -329,9 +329,10 @@ public class SetupTest extends BaseTestCase {
 		selenium.type("_127_name", RuntimeVariables.replace("Test User Group"));
 		selenium.type("_127_description",
 			RuntimeVariables.replace("This is a test user group!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
+		selenium.clickAt("//tr[3]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -349,7 +350,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
+		selenium.clickAt("link=Assign Members", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -368,7 +369,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.clickAt("link=Available", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -390,11 +391,12 @@ public class SetupTest extends BaseTestCase {
 		selenium.typeKeys("_127_keywords",
 			RuntimeVariables.replace("TestFirst2"));
 		selenium.type("_127_keywords", RuntimeVariables.replace("TestFirst2"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_127_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_127_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -413,7 +415,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -434,9 +436,10 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("Test"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -454,7 +457,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add Regular Organization"));
+		selenium.clickAt("link=Add Regular Organization",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -475,7 +479,7 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.typeKeys("_126_name", RuntimeVariables.replace("Test Child"));
 		selenium.type("_126_name", RuntimeVariables.replace("Test Child"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -494,7 +498,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("addressesLink");
+		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.typeKeys("_126_addressStreet1_0",
 			RuntimeVariables.replace("11111 Main Street USA"));
 		selenium.type("_126_addressStreet1_0",
@@ -508,7 +512,7 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Billing"));
 		selenium.type("_126_addressZip0", RuntimeVariables.replace("90210"));
 		selenium.type("_126_addressCity0", RuntimeVariables.replace("Cerritos"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -527,14 +531,15 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords",
 			RuntimeVariables.replace("Diamond Bar"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("Diamond Bar"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -552,7 +557,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
+		selenium.clickAt("link=Assign Members", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -571,7 +576,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.clickAt("link=Available", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -593,13 +598,15 @@ public class SetupTest extends BaseTestCase {
 		selenium.typeKeys("_126_keywords",
 			RuntimeVariables.replace("Joe Bloggs"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("Joe Bloggs"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_126_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_126_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.clickAt("link=Back to My Community",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

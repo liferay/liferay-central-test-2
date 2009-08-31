@@ -48,9 +48,10 @@ public class BrowseImageTabsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class BrowseImageTabsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +91,7 @@ public class BrowseImageTabsTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
-		selenium.click(RuntimeVariables.replace("link=My Images"));
+		selenium.clickAt("link=My Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,11 +113,11 @@ public class BrowseImageTabsTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
-		selenium.click(RuntimeVariables.replace("link=Recent Images"));
+		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1. This is Test1 Image1.']"));
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

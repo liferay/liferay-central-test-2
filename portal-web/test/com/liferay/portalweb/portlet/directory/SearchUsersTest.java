@@ -48,9 +48,10 @@ public class SearchUsersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,12 +72,14 @@ public class SearchUsersTest extends BaseTestCase {
 
 		selenium.typeKeys("_11_keywords", RuntimeVariables.replace("TestFirst"));
 		selenium.type("_11_keywords", RuntimeVariables.replace("TestFirst"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("TestFirst1"));
 		assertTrue(selenium.isTextPresent("TestFirst2"));
 		selenium.type("_11_keywords", RuntimeVariables.replace("TestFirstA"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("TestFirst1"));
 		assertFalse(selenium.isTextPresent("TestFirst2"));

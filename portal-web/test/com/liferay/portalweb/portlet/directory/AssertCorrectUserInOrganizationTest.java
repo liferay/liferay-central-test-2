@@ -49,9 +49,10 @@ public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Directory Test Page"));
+		selenium.clickAt("link=Directory Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,9 +74,10 @@ public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
 		selenium.typeKeys("_11_keywords",
 			RuntimeVariables.replace("Diamond Bar"));
 		selenium.type("_11_keywords", RuntimeVariables.replace("Diamond Bar"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,7 +95,7 @@ public class AssertCorrectUserInOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View Users"));
+		selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=joebloggs"));
 	}

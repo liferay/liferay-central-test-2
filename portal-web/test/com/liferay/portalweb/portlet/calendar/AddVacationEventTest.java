@@ -48,18 +48,20 @@ public class AddVacationEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Off to Yosemite!"));
 		selenium.type("_8_title", RuntimeVariables.replace("Off to Yosemite!"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("Looking forward to camping!"));
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Vacation"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("Link=Off to Yosemite!"));
 	}

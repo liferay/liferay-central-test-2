@@ -54,10 +54,10 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Calendar Test Page"));
+				selenium.clickAt("link=Calendar Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Events"));
+				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean EventAPresent = selenium.isElementPresent(
@@ -69,7 +69,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -87,7 +87,8 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.clickAt("//div[5]/ul/li[4]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -105,7 +106,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -123,7 +124,8 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.clickAt("//div[5]/ul/li[4]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -141,7 +143,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -159,7 +161,8 @@ public class DeleteAllEventsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.clickAt("//div[5]/ul/li[4]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

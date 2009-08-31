@@ -48,9 +48,10 @@ public class AddSecondImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
+		selenium.clickAt("//tr[4]/td[1]/a/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class AddSecondImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,8 @@ public class AddSecondImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
+		selenium.clickAt("//input[@value='Add Image']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -108,14 +110,15 @@ public class AddSecondImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
+		selenium.clickAt("link=Use the classic uploader.",
+			RuntimeVariables.replace(""));
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\dependencies\\test_image_2.jpg"));
 		selenium.type("_31_name", RuntimeVariables.replace("Test2 Image2"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is Test2 Image2."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(

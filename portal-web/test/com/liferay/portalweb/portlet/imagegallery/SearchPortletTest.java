@@ -48,11 +48,12 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_keywords1", RuntimeVariables.replace("Test1 Image1"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Folders']"));
+		selenium.clickAt("//input[@value='Search Folders']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +74,8 @@ public class SearchPortletTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent("Test1 Image1"));
 		selenium.type("_31_keywords", RuntimeVariables.replace("liferay1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Test1 Image1"));
 	}

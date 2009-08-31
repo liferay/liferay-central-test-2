@@ -49,8 +49,8 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Display Test Page"));
+		selenium.clickAt("link=Document Library Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,8 +71,8 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.type("//form[2]/div[1]/input[1]",
 			RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search this Folder']"));
+		selenium.clickAt("//input[@value='Search this Folder']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=DLD Test Document"));
 
@@ -93,7 +93,8 @@ public class SearchPortletTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[11]", RuntimeVariables.replace("test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=DLD Test Document"));
 	}

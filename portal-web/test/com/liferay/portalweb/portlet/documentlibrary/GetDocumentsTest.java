@@ -48,14 +48,14 @@ public class GetDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Documents"));
+		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Test Document.txt\nThis is a test document!"));
-		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
+		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Test Document.txt\nThis is a test document!"));

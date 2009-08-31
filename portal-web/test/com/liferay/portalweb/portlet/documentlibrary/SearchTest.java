@@ -48,14 +48,14 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_20_keywords1",
 			RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Folders']"));
+		selenium.clickAt("//input[@value='Search Folders']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Document"));
 	}

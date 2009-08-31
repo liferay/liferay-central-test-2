@@ -48,15 +48,15 @@ public class AddNullDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Test Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Document']"));
+		selenium.clickAt("//input[@value='Add Document']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +75,8 @@ public class AddNullDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
+		selenium.clickAt("link=Use the classic uploader.",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,7 +100,7 @@ public class AddNullDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Document Test"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Null Document Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

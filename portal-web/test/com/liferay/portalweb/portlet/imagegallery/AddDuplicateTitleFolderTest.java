@@ -48,10 +48,11 @@ public class AddDuplicateTitleFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
+		selenium.clickAt("//input[@value='Add Subfolder']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +74,7 @@ public class AddDuplicateTitleFolderTest extends BaseTestCase {
 		selenium.type("_31_name", RuntimeVariables.replace("Test1 Folder1"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("Duplicate Title Folder Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

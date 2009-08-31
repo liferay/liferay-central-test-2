@@ -48,9 +48,10 @@ public class AddNullImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class AddNullImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,8 @@ public class AddNullImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
+		selenium.clickAt("//input[@value='Add Image']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -108,7 +110,8 @@ public class AddNullImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
+		selenium.clickAt("link=Use the classic uploader.",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -128,7 +131,7 @@ public class AddNullImageTest extends BaseTestCase {
 
 		selenium.type("_31_file", RuntimeVariables.replace(""));
 		selenium.type("_31_name", RuntimeVariables.replace("Null Image Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

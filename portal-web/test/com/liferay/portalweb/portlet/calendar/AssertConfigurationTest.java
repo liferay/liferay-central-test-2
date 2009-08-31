@@ -48,14 +48,15 @@ public class AssertConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.clickAt("//img[@alt='Configuration']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Joe Bloggs", selenium.getValue("_86_emailFromName"));
 		assertEquals("test@liferay.com",
 			selenium.getValue("_86_emailFromAddress"));
-		selenium.click(RuntimeVariables.replace("link=Archived"));
+		selenium.clickAt("link=Archived", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Test"));
 	}

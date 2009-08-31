@@ -55,14 +55,15 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Test Page"));
+				selenium.clickAt("link=Document Library Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.clickAt("//b", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.clickAt("//b", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[5]/ul/li/strong/span");
+				selenium.clickAt("//td[5]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -80,7 +81,7 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Edit"));
+				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean DocumentsPresentA = selenium.isElementPresent(
@@ -92,7 +93,7 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -126,7 +127,7 @@ public class DeleteCompareVersionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

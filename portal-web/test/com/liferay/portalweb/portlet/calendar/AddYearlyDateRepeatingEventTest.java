@@ -49,11 +49,11 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Events"));
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong");
+		selenium.clickAt("//strong", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,9 +71,10 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[1]/a"));
+		selenium.clickAt("//div[5]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@name='_8_recurrenceType' and @value='6']");
+		selenium.clickAt("//input[@name='_8_recurrenceType' and @value='6']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,21 +92,22 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_8_yearlyType");
+		selenium.clickAt("_8_yearlyType", RuntimeVariables.replace(""));
 		selenium.select("_8_yearlyMonth0",
 			RuntimeVariables.replace("label=January"));
 		selenium.type("_8_yearlyDay0", RuntimeVariables.replace("1"));
 		selenium.type("_8_yearlyInterval0", RuntimeVariables.replace("1"));
-		selenium.click("//td[2]/table/tbody/tr/td/input[2]");
+		selenium.clickAt("//td[2]/table/tbody/tr/td/input[2]",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=1"));
 		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2013"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2009"));
 
@@ -125,10 +127,10 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=1"));
+		selenium.clickAt("link=1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
 		selenium.waitForPageToLoad("30000");
@@ -149,10 +151,10 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=1"));
+		selenium.clickAt("link=1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2010"));
 
@@ -172,7 +174,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//tr[3]/td[2]/a/span"));
+		selenium.clickAt("//tr[3]/td[2]/a/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Repeating Test Event"));
 	}

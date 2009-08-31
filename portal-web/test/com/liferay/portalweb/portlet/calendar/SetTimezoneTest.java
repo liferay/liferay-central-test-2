@@ -48,9 +48,9 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Joe Bloggs"));
+		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,14 +69,15 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("displaySettingsLink");
+		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
 		selenium.select("_2_timeZoneId",
 			RuntimeVariables.replace("label=(UTC -08:00) Pacific Standard Time"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.clickAt("link=Back to My Community",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

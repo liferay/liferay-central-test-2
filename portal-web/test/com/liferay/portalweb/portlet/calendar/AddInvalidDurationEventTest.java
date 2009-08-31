@@ -48,9 +48,10 @@ public class AddInvalidDurationEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_8_durationHour", RuntimeVariables.replace("label=0"));
 		selenium.select("_8_durationMinute",
@@ -59,7 +60,7 @@ public class AddInvalidDurationEventTest extends BaseTestCase {
 			RuntimeVariables.replace("Invalid Duration Test Event"));
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Duration Test Event"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

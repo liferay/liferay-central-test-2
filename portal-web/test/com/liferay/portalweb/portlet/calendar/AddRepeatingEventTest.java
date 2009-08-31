@@ -48,27 +48,29 @@ public class AddRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar Test Page"));
+		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Repeating Test Event"));
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Repeating Test Event"));
-		selenium.click("_8_allDayCheckbox");
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.clickAt("_8_allDayCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=1"));
 		selenium.select("_8_startDateYear",
 			RuntimeVariables.replace("label=2009"));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Event"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Events"));
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
 	}

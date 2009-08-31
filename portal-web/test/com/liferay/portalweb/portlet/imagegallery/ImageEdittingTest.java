@@ -48,13 +48,15 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Image Gallery Test Page"));
+		selenium.clickAt("link=Image Gallery Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+		selenium.clickAt("//tr[4]/td[1]/a[1]/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Test Image. This is the Liferay logo!']");
+		selenium.clickAt("//img[@alt='Test Image. This is the Liferay logo!']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,7 +78,7 @@ public class ImageEdittingTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=Close");
+		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -96,7 +98,8 @@ public class ImageEdittingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Test Image. This is the Liferay logo!']");
+		selenium.clickAt("//img[@alt='Test Image. This is the Liferay logo!']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -118,7 +121,8 @@ public class ImageEdittingTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click("//div[4]/div[1]/div[1]/a");
+		selenium.clickAt("//div[4]/div[1]/div[1]/a",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 	}
 }

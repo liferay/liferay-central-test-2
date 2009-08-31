@@ -49,8 +49,8 @@ public class ReConfigurePreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Currency Converter Test Page"));
+		selenium.clickAt("link=Currency Converter Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class ReConfigurePreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +87,7 @@ public class ReConfigurePreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Preferences"));
+		selenium.clickAt("link=Preferences", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,7 +108,8 @@ public class ReConfigurePreferencesTest extends BaseTestCase {
 
 		selenium.addSelection("_16_current_actions",
 			RuntimeVariables.replace("label=Korean Won"));
-		selenium.click("//div/table/tbody/tr/td[2]/a[1]/img");
+		selenium.clickAt("//div/table/tbody/tr/td[2]/a[1]/img",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -126,7 +127,7 @@ public class ReConfigurePreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
