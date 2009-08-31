@@ -147,6 +147,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
+
 		try {
 			SimpleTrigger simpleTrigger = new SimpleTrigger(
 				groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
@@ -154,7 +155,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			if (startDate == null) {
 				if (ServerDetector.getServerId().equals(
-					ServerDetector.TOMCAT_ID)) {
+						ServerDetector.TOMCAT_ID)) {
+
 					simpleTrigger.setStartTime(
 						new Date(System.currentTimeMillis() + Time.MINUTE));
 				}
@@ -163,7 +165,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 						new Date(
 						System.currentTimeMillis() + Time.MINUTE * 3));
 				}
-
 			}
 			else {
 				simpleTrigger.setStartTime(startDate);
@@ -178,8 +179,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				messageBody);
 		}
 		catch (RuntimeException re) {
+
 			// ServerDetector will throw an exception when JobSchedulerImpl is
 			// initialized in a test environment
+
 		}
 	}
 
@@ -198,7 +201,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			if (startDate == null) {
 				if (ServerDetector.getServerId().equals(
-					ServerDetector.TOMCAT_ID)) {
+						ServerDetector.TOMCAT_ID)) {
+
 					cronTrigger.setStartTime(
 						new Date(System.currentTimeMillis() + Time.MINUTE));
 				}
@@ -206,7 +210,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					cronTrigger.setStartTime(
 						new Date(System.currentTimeMillis() + Time.MINUTE * 3));
 				}
-
 			}
 			else {
 				cronTrigger.setStartTime(startDate);
@@ -223,8 +226,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			throw new SchedulerException("Unable to parse cron text", pe);
 		}
 		catch (RuntimeException re) {
+
 			// ServerDetector will throw an exception when JobSchedulerImpl is
 			// initialized in a test environment
+
 		}
 	}
 
