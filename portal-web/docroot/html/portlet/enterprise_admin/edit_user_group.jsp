@@ -102,7 +102,6 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 <%
 if (userGroup != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
-
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {

@@ -122,7 +122,6 @@ public class EnterpriseAdminUtil {
 		Collections.reverse(ancestorOrganizations);
 
 		for (Organization ancestorOrganization : ancestorOrganizations) {
-
 			portletURL.setParameter(
 				"organizationId",
 				String.valueOf(ancestorOrganization.getOrganizationId()));

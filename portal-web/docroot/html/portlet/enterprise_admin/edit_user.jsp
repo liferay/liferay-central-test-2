@@ -298,7 +298,6 @@ if (selUser != null) {
 <%
 if (selUser != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, selUser.getFullName(), null);
-
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {

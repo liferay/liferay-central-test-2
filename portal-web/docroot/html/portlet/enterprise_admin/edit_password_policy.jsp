@@ -375,7 +375,6 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 <%
 if (passwordPolicy != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, passwordPolicy.getName(), null);
-
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {

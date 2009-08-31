@@ -39,9 +39,9 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/enterprise_admin/edit_password_policy_assignments");
+portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPasswordPolicyId()));
-portletURL.setParameter("tabs1", tabs1);
 
 PortalUtil.addPortletBreadcrumbEntry(request, passwordPolicy.getName(), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), portletURL.toString());

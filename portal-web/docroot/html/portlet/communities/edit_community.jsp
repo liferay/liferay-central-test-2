@@ -235,7 +235,6 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 <%
 if (group != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
-
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
