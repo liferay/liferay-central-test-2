@@ -34,7 +34,7 @@ import java.util.Map;
  * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class TemplateNode extends LinkedHashMap<String, Object> {
 
@@ -79,7 +79,20 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	}
 
 	public String getData() {
-		return (String)get("data");
+		if (getType().equals("link_to_layout")) {
+			String data = (String)get("data");
+
+			int pos = data.indexOf(StringPool.AT);
+
+			if (pos != -1) {
+				data = data.substring(0, pos);
+			}
+
+			return data;
+		}
+		else {
+			return (String)get("data");
+		}
 	}
 
 	public String getName() {
@@ -100,7 +113,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public String getUrl() {
 		if (getType().equals("link_to_layout")) {
-			String layoutLink = getData();
+			String layoutLink = (String)get("data");
 			String layoutId = layoutLink;
 
 			int pos = layoutId.indexOf(StringPool.AT);
