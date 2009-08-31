@@ -31,14 +31,15 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class UserListener extends BaseModelListener<User> {
 
 	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
 			if (!user.isDefaultUser() &&
-					!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
+				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+
 				PortalLDAPUtil.exportToLDAP(user);
 			}
 		}
@@ -50,7 +51,8 @@ public class UserListener extends BaseModelListener<User> {
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
 			if (!user.isDefaultUser() &&
-					!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
+				!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
+
 				PortalLDAPUtil.exportToLDAP(user);
 			}
 		}

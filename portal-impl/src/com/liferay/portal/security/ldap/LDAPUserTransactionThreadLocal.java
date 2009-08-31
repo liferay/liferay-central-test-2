@@ -23,12 +23,14 @@
 package com.liferay.portal.security.ldap;
 
 /**
- * <a href="LDAPUserImportThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPUserTransactionThreadLocal.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Edward Han
  */
 public class LDAPUserTransactionThreadLocal {
-	public static boolean getOriginatesFromLDAP() {
+
+	public static boolean isOriginatesFromLDAP() {
 		Boolean originatesFromLDAP = _threadLocal.get();
 
 		if (originatesFromLDAP != null) {
@@ -45,4 +47,5 @@ public class LDAPUserTransactionThreadLocal {
 
 	private static ThreadLocal<Boolean> _threadLocal =
 		new ThreadLocal<Boolean>();
+
 }

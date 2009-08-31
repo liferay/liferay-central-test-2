@@ -121,9 +121,9 @@ public class PortalLDAPUtil {
 
 			if (binding == null) {
 
-				_getDNName(companyId, user, userMappings, name);
-
 				// Create new user in LDAP
+
+				_getDNName(companyId, user, userMappings, name);
 
 				LDAPUser ldapUser = (LDAPUser)Class.forName(
 					PropsValues.LDAP_USER_IMPL).newInstance();
@@ -195,7 +195,8 @@ public class PortalLDAPUtil {
 
 			if (binding == null) {
 
-				//export user to LDAP
+				// Create new user in LDAP
+
 				_getDNName(companyId, user, userMappings, name);
 
 				LDAPUser ldapUser = (LDAPUser)Class.forName(
@@ -205,9 +206,7 @@ public class PortalLDAPUtil {
 
 				ctx.bind(name, ldapUser);
 
-				binding =
-					getUser(
-						user.getCompanyId(), user.getScreenName());
+				binding = getUser(user.getCompanyId(), user.getScreenName());
 
 				name = new CompositeName();
 			}
@@ -756,269 +755,14 @@ public class PortalLDAPUtil {
 			String password, boolean importGroupMembership)
 		throws Exception {
 
-		AttributesTransformer attributesTransformer =
-			AttributesTransformerFactory.getInstance();
-
-		attributes = attributesTransformer.transformUser(attributes);
-
-		Properties userMappings = getUserMappings(companyId);
-
-		LogUtil.debug(_log, userMappings);
-
-		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
-
-		boolean autoPassword = false;
-		boolean updatePassword = true;
-
-		if (password.equals(StringPool.BLANK)) {
-			autoPassword = true;
-			updatePassword = false;
-		}
-
-		long creatorUserId = 0;
-		boolean passwordReset = false;
-		boolean autoScreenName = false;
-		String screenName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("screenName")).toLowerCase();
-		String emailAddress = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("emailAddress"));
-		String openId = StringPool.BLANK;
-		Locale locale = defaultUser.getLocale();
-		String firstName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("firstName"));
-		String middleName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("middleName"));
-		String lastName = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("lastName"));
-
-		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
-			String fullName = LDAPUtil.getAttributeValue(
-				attributes, userMappings.getProperty("fullName"));
-
-			String[] names = LDAPUtil.splitFullName(fullName);
-
-			firstName = names[0];
-			middleName = names[1];
-			lastName = names[2];
-		}
-
-		int prefixId = 0;
-		int suffixId = 0;
-		boolean male = true;
-		int birthdayMonth = Calendar.JANUARY;
-		int birthdayDay = 1;
-		int birthdayYear = 1970;
-		String jobTitle = LDAPUtil.getAttributeValue(
-			attributes, userMappings.getProperty("jobTitle"));
-		long[] groupIds = null;
-		long[] organizationIds = null;
-		long[] roleIds = null;
-		List<UserGroupRole> userGroupRoles = null;
-		long[] userGroupIds = null;
-		boolean sendEmail = false;
-		ServiceContext serviceContext = new ServiceContext();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Screen name " + screenName + " and email address " +
-					emailAddress);
-		}
-
-		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Cannot add user because screen name and email address " +
-						"are required");
-			}
-
-			return null;
-		}
-
 		LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(true);
 
 		try {
-			//must use nested tries here (as ugly as it is...) to ensure
-			//LDAPUserTransactThreadLocal has the right values.
-			User user = null;
-
-			try {
-
-                // Find corresponding portal user
-
-				String authType = PrefsPropsUtil.getString(
-					companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
-					PropsValues.COMPANY_SECURITY_AUTH_TYPE);
-
-				if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-					user = UserLocalServiceUtil.getUserByScreenName(
-						companyId, screenName);
-				}
-				else {
-					user = UserLocalServiceUtil.getUserByEmailAddress(
-						companyId, emailAddress);
-				}
-
-				// Skip if is default user
-
-				if (user.isDefaultUser()) {
-					return user;
-				}
-
-				// User already exists in the Liferay database. Skip import if user
-				// fields have been already synced, if import is part of a scheduled
-				// import, or if the LDAP entry has never been modified.
-
-				Date ldapUserModifiedDate = null;
-
-				String modifiedDate = LDAPUtil.getAttributeValue(
-					attributes, "modifyTimestamp");
-
-				try {
-					if (Validator.isNull(modifiedDate)) {
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"LDAP entry never modified, skipping user " +
-									user.getEmailAddress());
-						}
-
-						return user;
-					}
-					else {
-						DateFormat dateFormat = new SimpleDateFormat(
-							"yyyyMMddHHmmss");
-
-						ldapUserModifiedDate = dateFormat.parse(modifiedDate);
-					}
-
-					if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
-						autoPassword) {
-
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"User is already syncronized, skipping user " +
-									user.getEmailAddress());
-						}
-
-						return user;
-					}
-				}
-				catch (ParseException pe) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Unable to parse LDAP modify timestamp " +
-								modifiedDate);
-					}
-
-					_log.debug(pe, pe);
-				}
-
-				// LPS-443
-
-				if (Validator.isNull(screenName)) {
-					autoScreenName = true;
-				}
-
-				if (autoScreenName) {
-					ScreenNameGenerator screenNameGenerator =
-						(ScreenNameGenerator)InstancePool.get(
-							PropsValues.USERS_SCREEN_NAME_GENERATOR);
-
-					screenName = screenNameGenerator.generate(
-						companyId, user.getUserId(), emailAddress);
-				}
-
-				Contact contact = user.getContact();
-
-				Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-
-				birthdayCal.setTime(contact.getBirthday());
-
-				birthdayMonth = birthdayCal.get(Calendar.MONTH);
-				birthdayDay = birthdayCal.get(Calendar.DATE);
-				birthdayYear = birthdayCal.get(Calendar.YEAR);
-
-				// User exists so update user information
-
-				if (updatePassword) {
-					user = UserLocalServiceUtil.updatePassword(
-						user.getUserId(), password, password, passwordReset, true);
-				}
-
-				user = UserLocalServiceUtil.updateUser(
-					user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
-					user.isPasswordReset(), user.getReminderQueryQuestion(),
-					user.getReminderQueryAnswer(), screenName, emailAddress, openId,
-					user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
-					user.getComments(), firstName, middleName, lastName,
-					contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
-					birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
-					contact.getAimSn(), contact.getFacebookSn(), contact.getIcqSn(),
-					contact.getJabberSn(), contact.getMsnSn(),
-					contact.getMySpaceSn(), contact.getSkypeSn(),
-					contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
-					organizationIds, roleIds, userGroupRoles, userGroupIds,
-					serviceContext);
-
-				if (ldapUserModifiedDate != null) {
-					UserLocalServiceUtil.updateModifiedDate(
-						user.getUserId(), ldapUserModifiedDate);
-				}
-			}
-			catch (NoSuchUserException nsue) {
-
-				// User does not exist so create
-
-			}
-			catch (Exception e) {
-				_log.error(
-					"Error updating user with screen name " + screenName +
-						" and email address " + emailAddress,
-					e);
-
-				return null;
-			}
-
-			if (user == null) {
-				try {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Adding user to portal " + emailAddress);
-					}
-
-					user = UserLocalServiceUtil.addUser(
-						creatorUserId, companyId, autoPassword, password, password,
-						autoScreenName, screenName, emailAddress, openId, locale,
-						firstName, middleName, lastName, prefixId, suffixId, male,
-						birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-						groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-						serviceContext);
-				}
-				catch (Exception e) {
-					_log.error(
-						"Problem adding user with screen name " + screenName +
-							" and email address " + emailAddress,
-						e);
-				}
-			}
-
-			// Import user groups and membership
-
-			if (importGroupMembership && (user != null)) {
-				String userMappingsGroup = userMappings.getProperty("group");
-
-				if (userMappingsGroup != null) {
-					Attribute attribute = attributes.get(userMappingsGroup);
-
-					if (attribute != null) {
-						_importGroupsAndMembershipFromLDAPUser(
-							companyId, ctx, user.getUserId(), attribute);
-					}
-				}
-			}
-
-			return user;
+			return _importLDAPUser(
+				companyId, ctx, attributes, password, importGroupMembership);
 		}
 		finally {
-			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(true);
+			LDAPUserTransactionThreadLocal.setOriginatesFromLDAP(false);
 		}
 	}
 
@@ -1193,7 +937,8 @@ public class PortalLDAPUtil {
 
 	private static void _getDNName(
 			long companyId, User user, Properties userMappings, Name name)
-			throws Exception {
+		throws Exception {
+
 		// Generate full DN based on user DN
 
 		StringBuilder sb = new StringBuilder();
@@ -1286,6 +1031,268 @@ public class PortalLDAPUtil {
 					userGroup.getUserGroupId(), new long[] {userId});
 			}
 		}
+	}
+
+	private static User _importLDAPUser(
+			long companyId, LdapContext ctx, Attributes attributes,
+			String password, boolean importGroupMembership)
+		throws Exception {
+
+		AttributesTransformer attributesTransformer =
+			AttributesTransformerFactory.getInstance();
+
+		attributes = attributesTransformer.transformUser(attributes);
+
+		Properties userMappings = getUserMappings(companyId);
+
+		LogUtil.debug(_log, userMappings);
+
+		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
+
+		boolean autoPassword = false;
+		boolean updatePassword = true;
+
+		if (password.equals(StringPool.BLANK)) {
+			autoPassword = true;
+			updatePassword = false;
+		}
+
+		long creatorUserId = 0;
+		boolean passwordReset = false;
+		boolean autoScreenName = false;
+		String screenName = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("screenName")).toLowerCase();
+		String emailAddress = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("emailAddress"));
+		String openId = StringPool.BLANK;
+		Locale locale = defaultUser.getLocale();
+		String firstName = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attributes, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attributes, userMappings.getProperty("jobTitle"));
+		long[] groupIds = null;
+		long[] organizationIds = null;
+		long[] roleIds = null;
+		List<UserGroupRole> userGroupRoles = null;
+		long[] userGroupIds = null;
+		boolean sendEmail = false;
+		ServiceContext serviceContext = new ServiceContext();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Screen name " + screenName + " and email address " +
+					emailAddress);
+		}
+
+		if (Validator.isNull(screenName) || Validator.isNull(emailAddress)) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Cannot add user because screen name and email address " +
+						"are required");
+			}
+
+			return null;
+		}
+
+		User user = null;
+
+		try {
+
+			// Find corresponding portal user
+
+			String authType = PrefsPropsUtil.getString(
+				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					companyId, screenName);
+			}
+			else {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+			}
+
+			// Skip if is default user
+
+			if (user.isDefaultUser()) {
+				return user;
+			}
+
+			// User already exists in the Liferay database. Skip import if user
+			// fields have been already synced, if import is part of a scheduled
+			// import, or if the LDAP entry has never been modified.
+
+			Date ldapUserModifiedDate = null;
+
+			String modifiedDate = LDAPUtil.getAttributeValue(
+				attributes, "modifyTimestamp");
+
+			try {
+				if (Validator.isNull(modifiedDate)) {
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"LDAP entry never modified, skipping user " +
+								user.getEmailAddress());
+					}
+
+					return user;
+				}
+				else {
+					DateFormat dateFormat = new SimpleDateFormat(
+						"yyyyMMddHHmmss");
+
+					ldapUserModifiedDate = dateFormat.parse(modifiedDate);
+				}
+
+				if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
+					autoPassword) {
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"User is already syncronized, skipping user " +
+								user.getEmailAddress());
+					}
+
+					return user;
+				}
+			}
+			catch (ParseException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Unable to parse LDAP modify timestamp " +
+							modifiedDate);
+				}
+
+				_log.debug(pe, pe);
+			}
+
+			// LPS-443
+
+			if (Validator.isNull(screenName)) {
+				autoScreenName = true;
+			}
+
+			if (autoScreenName) {
+				ScreenNameGenerator screenNameGenerator =
+					(ScreenNameGenerator)InstancePool.get(
+						PropsValues.USERS_SCREEN_NAME_GENERATOR);
+
+				screenName = screenNameGenerator.generate(
+					companyId, user.getUserId(), emailAddress);
+			}
+
+			Contact contact = user.getContact();
+
+			Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
+
+			birthdayCal.setTime(contact.getBirthday());
+
+			birthdayMonth = birthdayCal.get(Calendar.MONTH);
+			birthdayDay = birthdayCal.get(Calendar.DATE);
+			birthdayYear = birthdayCal.get(Calendar.YEAR);
+
+			// User exists so update user information
+
+			if (updatePassword) {
+				user = UserLocalServiceUtil.updatePassword(
+					user.getUserId(), password, password, passwordReset, true);
+			}
+
+			user = UserLocalServiceUtil.updateUser(
+				user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
+				user.isPasswordReset(), user.getReminderQueryQuestion(),
+				user.getReminderQueryAnswer(), screenName, emailAddress, openId,
+				user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
+				user.getComments(), firstName, middleName, lastName,
+				contact.getPrefixId(), contact.getSuffixId(), contact.getMale(),
+				birthdayMonth, birthdayDay, birthdayYear, contact.getSmsSn(),
+				contact.getAimSn(), contact.getFacebookSn(), contact.getIcqSn(),
+				contact.getJabberSn(), contact.getMsnSn(),
+				contact.getMySpaceSn(), contact.getSkypeSn(),
+				contact.getTwitterSn(), contact.getYmSn(), jobTitle, groupIds,
+				organizationIds, roleIds, userGroupRoles, userGroupIds,
+				serviceContext);
+
+			if (ldapUserModifiedDate != null) {
+				UserLocalServiceUtil.updateModifiedDate(
+					user.getUserId(), ldapUserModifiedDate);
+			}
+		}
+		catch (NoSuchUserException nsue) {
+
+			// User does not exist so create
+
+		}
+		catch (Exception e) {
+			_log.error(
+				"Error updating user with screen name " + screenName +
+					" and email address " + emailAddress,
+				e);
+
+			return null;
+		}
+
+		if (user == null) {
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding user to portal " + emailAddress);
+				}
+
+				user = UserLocalServiceUtil.addUser(
+					creatorUserId, companyId, autoPassword, password, password,
+					autoScreenName, screenName, emailAddress, openId, locale,
+					firstName, middleName, lastName, prefixId, suffixId, male,
+					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+					groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+					serviceContext);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Problem adding user with screen name " + screenName +
+						" and email address " + emailAddress,
+					e);
+			}
+		}
+
+		// Import user groups and membership
+
+		if (importGroupMembership && (user != null)) {
+			String userMappingsGroup = userMappings.getProperty("group");
+
+			if (userMappingsGroup != null) {
+				Attribute attribute = attributes.get(userMappingsGroup);
+
+				if (attribute != null) {
+					_importGroupsAndMembershipFromLDAPUser(
+						companyId, ctx, user.getUserId(), attribute);
+				}
+			}
+		}
+
+		return user;
 	}
 
 	private static void _importUsersAndMembershipFromLDAPGroup(

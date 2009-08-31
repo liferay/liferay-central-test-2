@@ -31,13 +31,13 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
  *
  * @author Scott Lee
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class ContactListener extends BaseModelListener<Contact> {
 
 	public void onAfterCreate(Contact contact) throws ModelListenerException {
 		try {
-			if (!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
+			if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
 				PortalLDAPUtil.exportToLDAP(contact);
 			}
 		}
@@ -48,7 +48,7 @@ public class ContactListener extends BaseModelListener<Contact> {
 
 	public void onAfterUpdate(Contact contact) throws ModelListenerException {
 		try {
-			if (!LDAPUserTransactionThreadLocal.getOriginatesFromLDAP()) {
+			if (!LDAPUserTransactionThreadLocal.isOriginatesFromLDAP()) {
 				PortalLDAPUtil.exportToLDAP(contact);
 			}
 		}
