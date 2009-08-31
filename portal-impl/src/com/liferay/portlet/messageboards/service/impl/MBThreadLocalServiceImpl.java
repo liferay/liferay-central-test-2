@@ -85,7 +85,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = thread.getAttachmentsDir();
 
-		dlService.deleteDirectory(companyId, portletId, repositoryId, dirName);
+		try {
+			dlService.deleteDirectory(
+				companyId, portletId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
 
 		// Messages
 
@@ -496,8 +501,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
 		}
 
-		dlService.deleteDirectory(
-			companyId, portletId, repositoryId, oldAttachmentsDir);
+		try {
+			dlService.deleteDirectory(
+				companyId, portletId, repositoryId, oldAttachmentsDir);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
 	}
 
 	protected int moveChildrenMessages(

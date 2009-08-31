@@ -389,7 +389,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = page.getAttachmentsDir();
 
-		dlService.deleteDirectory(companyId, portletId, repositoryId, dirName);
+		try {
+			dlService.deleteDirectory(
+				companyId, portletId, repositoryId, dirName);
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
 
 		// Subscriptions
 

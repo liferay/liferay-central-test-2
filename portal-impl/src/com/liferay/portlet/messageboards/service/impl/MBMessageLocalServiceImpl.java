@@ -351,8 +351,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
+				}
+			}
 
 			dlService.addDirectory(companyId, repositoryId, dirName);
 
@@ -599,8 +606,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
+				}
+			}
 		}
 
 		// Thread
@@ -623,8 +637,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getThreadAttachmentsDir();
 
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
+				}
+			}
 
 			// Subscriptions
 
@@ -1196,8 +1217,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 		else {
-			dlService.deleteDirectory(
-				companyId, portletId, repositoryId, dirName);
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+			}
 		}
 
 		mbMessagePersistence.update(message, false);
