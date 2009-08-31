@@ -71,7 +71,8 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_84_distributionScope", "label=Community Admin");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=Community Admin"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");

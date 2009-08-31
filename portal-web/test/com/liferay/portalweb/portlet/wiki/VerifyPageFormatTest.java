@@ -54,7 +54,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_36_format", "label=HTML");
+		selenium.select("_36_format", RuntimeVariables.replace("label=HTML"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

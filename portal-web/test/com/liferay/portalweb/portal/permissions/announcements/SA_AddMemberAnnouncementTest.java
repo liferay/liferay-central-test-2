@@ -72,7 +72,8 @@ public class SA_AddMemberAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_84_distributionScope", "label=Member");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=Member"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");

@@ -68,7 +68,8 @@ public class AddBookmarkTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Bookmarks Entry");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Bookmarks Entry"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

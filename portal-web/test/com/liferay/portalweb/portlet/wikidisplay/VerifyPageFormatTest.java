@@ -69,7 +69,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=HTML");
+		selenium.select("//select", RuntimeVariables.replace("label=HTML"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 

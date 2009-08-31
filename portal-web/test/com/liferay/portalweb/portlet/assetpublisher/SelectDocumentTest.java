@@ -87,7 +87,8 @@ public class SelectDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetEntryType", "label=Document Library Document");
+		selenium.select("_86_assetEntryType",
+			RuntimeVariables.replace("label=Document Library Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

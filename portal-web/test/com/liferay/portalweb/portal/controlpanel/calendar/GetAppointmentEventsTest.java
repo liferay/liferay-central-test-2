@@ -52,21 +52,24 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Day"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//select", "label=Appointment");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
 		assertFalse(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.click(RuntimeVariables.replace("link=Week"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//select", "label=Appointment");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
 		assertFalse(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.click(RuntimeVariables.replace("link=Month"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//select", "label=Appointment");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));

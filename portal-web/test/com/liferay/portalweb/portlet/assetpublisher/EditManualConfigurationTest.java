@@ -87,7 +87,8 @@ public class EditManualConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_selectionStyle", "label=Manual");
+		selenium.select("_86_selectionStyle",
+			RuntimeVariables.replace("label=Manual"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

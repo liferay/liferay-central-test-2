@@ -37,13 +37,15 @@ public class AssertSavedLocalizationTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Hello World Localized Article"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_15_languageId", "label=Chinese (China)");
+		selenium.select("_15_languageId",
+			RuntimeVariables.replace("label=Chinese (China)"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Name",
 			selenium.getValue("_15_structure_el0_content"));
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Description",
 			selenium.getValue("_15_structure_el1_content"));
-		selenium.select("_15_languageId", "label=English (United States)");
+		selenium.select("_15_languageId",
+			RuntimeVariables.replace("label=English (United States)"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Hello World Page Name",
 			selenium.getValue("_15_structure_el0_content"));

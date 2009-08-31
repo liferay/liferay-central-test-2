@@ -87,7 +87,8 @@ public class SelectWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetEntryType", "label=Web Content");
+		selenium.select("_86_assetEntryType",
+			RuntimeVariables.replace("label=Web Content"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

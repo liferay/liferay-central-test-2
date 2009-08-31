@@ -112,7 +112,8 @@ public class SA_AddPortalScopePermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions", "label=Blogs");
+		selenium.select("add-permissions",
+			RuntimeVariables.replace("label=Blogs"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

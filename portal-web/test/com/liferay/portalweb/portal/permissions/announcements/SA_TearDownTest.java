@@ -103,7 +103,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.select("_84_distributionScope", "label=Guest");
+				selenium.select("_84_distributionScope",
+					RuntimeVariables.replace("label=Guest"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean GuestAnnouncementPresent = selenium.isElementPresent(
@@ -139,7 +140,8 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
-				selenium.select("_84_distributionScope", "label=General");
+				selenium.select("_84_distributionScope",
+					RuntimeVariables.replace("label=General"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean GeneralAnnouncementPresent = selenium.isElementPresent(
@@ -175,7 +177,8 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
-				selenium.select("_84_distributionScope", "label=Community Admin");
+				selenium.select("_84_distributionScope",
+					RuntimeVariables.replace("label=Community Admin"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean CAAnnouncementPresent = selenium.isElementPresent(
@@ -211,7 +214,8 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 4:
-				selenium.select("_84_distributionScope", "label=Member");
+				selenium.select("_84_distributionScope",
+					RuntimeVariables.replace("label=Member"));
 				selenium.waitForPageToLoad("30000");
 
 				boolean MemberAnnouncementPresent = selenium.isElementPresent(

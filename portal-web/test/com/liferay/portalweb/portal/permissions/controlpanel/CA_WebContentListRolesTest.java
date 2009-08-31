@@ -34,7 +34,8 @@ public class CA_WebContentListRolesTest extends BaseTestCase {
 	public void testCA_WebContentListRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions", "label=Web Content List");
+		selenium.select("add-permissions",
+			RuntimeVariables.replace("label=Web Content List"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.check(

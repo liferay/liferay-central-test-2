@@ -74,10 +74,12 @@ public class CA_AssertViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_84_distributionScope", "label=Community Admin");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=Community Admin"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test CA Announcement"));
-		selenium.select("_84_distributionScope", "label=Member");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=Member"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Member Announcement"));
 	}

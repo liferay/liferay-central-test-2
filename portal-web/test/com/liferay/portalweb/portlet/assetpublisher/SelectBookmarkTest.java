@@ -87,7 +87,8 @@ public class SelectBookmarkTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetEntryType", "label=Bookmarks Entry");
+		selenium.select("_86_assetEntryType",
+			RuntimeVariables.replace("label=Bookmarks Entry"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

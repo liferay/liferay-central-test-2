@@ -87,7 +87,8 @@ public class SelectImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_assetEntryType", "label=Image Gallery Image");
+		selenium.select("_86_assetEntryType",
+			RuntimeVariables.replace("label=Image Gallery Image"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

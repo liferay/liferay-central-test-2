@@ -68,7 +68,8 @@ public class AddBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Blogs Entry");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Blogs Entry"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

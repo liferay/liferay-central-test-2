@@ -68,7 +68,8 @@ public class AddImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Image Gallery Image");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Image Gallery Image"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

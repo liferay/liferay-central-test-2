@@ -68,7 +68,8 @@ public class AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("//select", "label=Document Library Document");
+		selenium.select("//select",
+			RuntimeVariables.replace("label=Document Library Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

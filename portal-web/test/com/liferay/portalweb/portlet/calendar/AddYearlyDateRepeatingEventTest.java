@@ -130,7 +130,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
 		selenium.click(RuntimeVariables.replace("link=Year"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("//select", "label=2010");
+		selenium.select("//select", RuntimeVariables.replace("label=2010"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -71,7 +71,8 @@ public class AddImportantPriorityAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_84_distributionScope", "label=General");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=General"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

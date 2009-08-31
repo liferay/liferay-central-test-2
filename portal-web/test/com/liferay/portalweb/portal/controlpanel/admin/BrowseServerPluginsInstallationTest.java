@@ -70,7 +70,7 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Portlets']"));
-		selenium.select("//div[2]/select", "label=4");
+		selenium.select("//div[2]/select", RuntimeVariables.replace("label=4"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Wiki"));
 		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));

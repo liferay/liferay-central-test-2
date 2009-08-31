@@ -35,7 +35,8 @@ public class Writer_WebContentDisplayRolesTest extends BaseTestCase {
 	public void testWriter_WebContentDisplayRoles() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.select("add-permissions", "label=Web Content Display");
+		selenium.select("add-permissions",
+			RuntimeVariables.replace("label=Web Content Display"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
 		selenium.check("//input[@name='_128_rowIds' and @value='56VIEW']");

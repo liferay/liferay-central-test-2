@@ -71,7 +71,8 @@ public class SA_AddGuestAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_84_distributionScope", "label=Guest");
+		selenium.select("_84_distributionScope",
+			RuntimeVariables.replace("label=Guest"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
