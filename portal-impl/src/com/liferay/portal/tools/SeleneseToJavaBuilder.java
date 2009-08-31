@@ -464,6 +464,22 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
+			else if (param1.equals("clickAtAndWait") ||
+					 param1.equals("keyPressAndWait") ||
+					 param1.equals("selectAndWait")) {
+
+				sb.append("selenium.");
+
+				String text = param1.substring(0, param1.length() - 7);
+
+				sb.append(text);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", RuntimeVariables.replace(\"");
+				sb.append(param3);
+				sb.append("\"));");
+				sb.append("selenium.waitForPageToLoad(\"30000\");");
+			}
 			else if (param1.equals("close") || param1.equals("refresh")) {
 				sb.append("selenium.");
 				sb.append(param1);
@@ -495,14 +511,6 @@ public class SeleneseToJavaBuilder {
 				sb.append("continue;");
 				sb.append("}");
 			}
-			else if (param1.equals("keyPressAndWait")) {
-				sb.append("selenium.keyPress(\"");
-				sb.append(param2);
-				sb.append("\", RuntimeVariables.replace(\"");
-				sb.append(param3);
-				sb.append("\"));");
-				sb.append("selenium.waitForPageToLoad(\"30000\");");
-			}
 			else if (param1.equals("label")) {
 				String label = labels.get(param2);
 
@@ -517,14 +525,6 @@ public class SeleneseToJavaBuilder {
 			}
 			else if (param1.equals("refreshAndWait")) {
 				sb.append("selenium.refresh();");
-				sb.append("selenium.waitForPageToLoad(\"30000\");");
-			}
-			else if (param1.equals("selectAndWait")) {
-				sb.append("selenium.select(\"");
-				sb.append(param2);
-				sb.append("\", \"");
-				sb.append(param3);
-				sb.append("\");");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("store")) {
