@@ -44,7 +44,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= PollsQuestion.class.getName() %>"
-			modelResourceDescription="<%= question.getTitle() %>"
+			modelResourceDescription="<%= question.getTitle(locale) %>"
 			resourcePrimKey="<%= String.valueOf(question.getQuestionId()) %>"
 			var="permissionsURL"
 		/>

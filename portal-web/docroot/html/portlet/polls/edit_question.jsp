@@ -217,7 +217,7 @@ if (choiceName > 0) {
 
 <%
 if (question != null) {
-	PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, question.getTitle(locale), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
