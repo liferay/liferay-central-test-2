@@ -60,9 +60,9 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 	<aui:fieldset>
-		<span style="font-size: small;"><b>
+		<span style="font-size: small;"><strong>
 		<%= question.getTitle(locale) %>
-		</b></span><br />
+		</strong></span><br />
 
 		<span style="font-size: x-small;">
 		<%= question.getDescription(locale) %>

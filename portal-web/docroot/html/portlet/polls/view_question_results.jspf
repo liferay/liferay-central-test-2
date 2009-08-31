@@ -92,7 +92,7 @@ for (int i = 0; i < choices.size(); i++) {
 
 	<td></td>
 	<td>
-		<b><%= choice.getName() %>.</b>
+		<strong><%= choice.getName() %>.</strong>
 	</td>
 	<td width="99%">
 		<%= choice.getDescription(locale) %>
@@ -108,7 +108,7 @@ for (int i = 0; i < choices.size(); i++) {
 <br />
 
 <div>
-	<b><liferay-ui:message key="total-votes" />:</b> <%= numberFormat.format(totalVotes) %>
+	<strong><liferay-ui:message key="total-votes" />:</strong> <%= numberFormat.format(totalVotes) %>
 </div>
 
 <c:if test="<%= portletName.equals(PortletKeys.POLLS) %>">
@@ -118,7 +118,7 @@ for (int i = 0; i < choices.size(); i++) {
 	<br />
 
 	<div>
-		<b><liferay-ui:message key="charts" />:</b>
+		<strong><liferay-ui:message key="charts" />:</strong>
 
 		<%
 		String charts[] = {"area", "horizontal-bar", "line", "pie", "vertical-bar"};
