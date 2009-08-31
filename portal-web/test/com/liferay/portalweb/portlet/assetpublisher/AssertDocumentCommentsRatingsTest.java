@@ -49,10 +49,11 @@ public class AssertDocumentCommentsRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
+		selenium.clickAt("link=AP Setup Test Document",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[1]"));
 		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[2]"));
@@ -75,7 +76,7 @@ public class AssertDocumentCommentsRatingsTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText("//td[1]/ul/li[1]/span"));
-		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("+1"),
 			selenium.getText("//td[1]/ul/li[1]/span"));

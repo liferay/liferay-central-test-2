@@ -48,16 +48,18 @@ public class AssertBookmarkViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String ViewCount = selenium.getIncrementedText("//div[2]/span");
 		RuntimeVariables.setValue("ViewCount", ViewCount);
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Bookmark"));
+		selenium.clickAt("link=AP Setup Test Bookmark",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=exact:http://www.liferay.com");
-		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.clickAt("link=exact:http://www.liferay.com",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Back", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span",
 				RuntimeVariables.getValue("ViewCount")));

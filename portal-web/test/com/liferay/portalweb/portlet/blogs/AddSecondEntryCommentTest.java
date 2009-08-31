@@ -48,9 +48,9 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=0 Comments"));
+		selenium.clickAt("link=0 Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
@@ -72,7 +72,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a second entry comment."));
-		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
+		selenium.clickAt("_33_postReplyButton0", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isVisible("_33_postReplyBody0"));
 		assertTrue(selenium.isTextPresent(

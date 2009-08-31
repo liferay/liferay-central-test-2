@@ -48,8 +48,8 @@ public class AddBookmarkTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -96,7 +96,7 @@ public class AddBookmarkTest extends BaseTestCase {
 			RuntimeVariables.replace("http://www.wowhead.com"));
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.wowhead.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Bookmark 2"));
 	}

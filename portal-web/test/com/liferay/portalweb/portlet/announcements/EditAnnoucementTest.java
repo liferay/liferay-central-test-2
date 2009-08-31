@@ -48,9 +48,10 @@ public class EditAnnoucementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.clickAt("link=Announcements Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_84_title",
 			RuntimeVariables.replace(
@@ -61,7 +62,7 @@ public class EditAnnoucementTest extends BaseTestCase {
 		selenium.type("_84_content",
 			RuntimeVariables.replace(
 				"Hello Everyone! This is test has been edited."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=This Test General Annoucement has been edited."));

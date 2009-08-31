@@ -48,8 +48,8 @@ public class ViewBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Blogs Aggregator Test Page"));
+		selenium.clickAt("link=Blogs Aggregator Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=BA Setup Test Entry"));
 		assertTrue(selenium.isTextPresent("This is a BA setup test entry!"));

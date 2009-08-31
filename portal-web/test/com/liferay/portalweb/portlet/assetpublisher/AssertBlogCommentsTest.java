@@ -48,13 +48,14 @@ public class AssertBlogCommentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Entry"));
+		selenium.clickAt("link=AP Setup Test Entry",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Add Comment"));
-		selenium.click("link=Add Comment");
+		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,7 +77,7 @@ public class AssertBlogCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a comment for this Blogs asset."));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a comment for this Blogs asset."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -48,10 +48,11 @@ public class AssertBlogRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Entry"));
+		selenium.clickAt("link=AP Setup Test Entry",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String Votes = selenium.getIncrementedText("//td[3]/div[1]");
@@ -73,7 +74,7 @@ public class AssertBlogRatingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
+		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

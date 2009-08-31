@@ -48,23 +48,26 @@ public class AssertDocumentViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String ViewCount = selenium.getIncrementedText("//div[2]/span");
 		RuntimeVariables.setValue("ViewCount", ViewCount);
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Document"));
+		selenium.clickAt("link=AP Setup Test Document",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=AP Setup Test Document");
+		selenium.clickAt("link=AP Setup Test Document",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
-		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.clickAt("link=Back", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span",
 				RuntimeVariables.getValue("ViewCount")));
-		selenium.click(RuntimeVariables.replace("link=AP Setup DL Test Page"));
+		selenium.clickAt("link=AP Setup DL Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +85,7 @@ public class AssertDocumentViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//tr[4]/td[2]",
 				RuntimeVariables.getValue("ViewCount")));

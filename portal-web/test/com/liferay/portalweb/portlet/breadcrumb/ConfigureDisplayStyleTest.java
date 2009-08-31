@@ -48,9 +48,10 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
+		selenium.clickAt("link=Breadcrumb Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Child Test Page"));
+		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,8 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[2]/div/div[1]/div/ul/li/strong/span");
+		selenium.clickAt("//div[2]/div/div[1]/div/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +89,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
+		selenium.clickAt("//div[5]/ul/li[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -124,7 +126,7 @@ public class ConfigureDisplayStyleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));

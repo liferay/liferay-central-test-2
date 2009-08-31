@@ -49,7 +49,8 @@ public class AssertCorrectPriorityOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Announcements Test Page"));
+		selenium.clickAt("link=Announcements Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Important Priority Announcement"),
 			selenium.getText("//div[1]/h3/a"));

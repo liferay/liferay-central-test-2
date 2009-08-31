@@ -49,15 +49,16 @@ public class AssertMessageBoardViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String ViewCount = selenium.getIncrementedText("//div[2]/span");
 		RuntimeVariables.setValue("ViewCount", ViewCount);
-		selenium.click(RuntimeVariables.replace("link=AP Setup MB Test Thread"));
+		selenium.clickAt("link=AP Setup MB Test Thread",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.clickAt("link=Back", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span",
 				RuntimeVariables.getValue("ViewCount")));

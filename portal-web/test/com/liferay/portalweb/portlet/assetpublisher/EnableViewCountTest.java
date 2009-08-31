@@ -48,12 +48,12 @@ public class EnableViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Display Settings");
+		selenium.clickAt("link=Display Settings", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,9 +74,10 @@ public class EnableViewCountTest extends BaseTestCase {
 
 		selenium.addSelection("_86_availableMetadataFields",
 			RuntimeVariables.replace("label=View Count"));
-		selenium.click("//div/table/tbody/tr/td[2]/a[2]/img");
+		selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));

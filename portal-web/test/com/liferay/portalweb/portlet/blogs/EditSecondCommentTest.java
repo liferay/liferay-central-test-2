@@ -48,9 +48,9 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Test Entry"));
+		selenium.clickAt("link=Second Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
 
@@ -72,7 +72,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is an edited second entry comment."));
-		selenium.click(RuntimeVariables.replace("_33_editReplyButton1"));
+		selenium.clickAt("_33_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(

@@ -33,15 +33,16 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertBlogCommentsRatingsTest extends BaseTestCase {
 	public void testAssertBlogCommentsRatings() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Entry"));
+		selenium.clickAt("link=AP Setup Test Entry",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[1]"));
 		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[2]"));
 		assertTrue(selenium.isTextPresent("\u00b10"));
-		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("+1"),
 			selenium.getText("//td[1]/ul/li[1]/span"));

@@ -48,10 +48,11 @@ public class ViewWikiTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Wiki Page"));
+		selenium.clickAt("link=AP Setup Test Wiki Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("AP Setup Test Wiki Page"));
 		assertTrue(selenium.isTextPresent("AP Setup Test Wiki"));

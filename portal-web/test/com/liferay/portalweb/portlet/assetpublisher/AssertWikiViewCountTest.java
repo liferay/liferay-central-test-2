@@ -48,26 +48,29 @@ public class AssertWikiViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String ViewCount = selenium.getIncrementedText("//div[2]/span");
 		RuntimeVariables.setValue("ViewCount", ViewCount);
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Wiki Page"));
+		selenium.clickAt("link=AP Setup Test Wiki Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Back"));
+		selenium.clickAt("link=Back", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span",
 				RuntimeVariables.getValue("ViewCount")));
 
 		String ViewCount2 = selenium.getIncrementedText("//div[2]/span");
 		RuntimeVariables.setValue("ViewCount2", ViewCount2);
-		selenium.click(RuntimeVariables.replace("link=AP Setup Wiki Test Page"));
+		selenium.clickAt("link=AP Setup Wiki Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//a[3]/span"));
+		selenium.clickAt("//a[3]/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.clickAt("//td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,16 +88,17 @@ public class AssertWikiViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+		selenium.clickAt("//div[5]/ul/li[6]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=AP Setup Test Wiki Page"));
+		selenium.clickAt("link=AP Setup Test Wiki Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[3]/div[2]",
 				RuntimeVariables.getValue("ViewCount2")));
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/span",
 				RuntimeVariables.getValue("ViewCount2")));

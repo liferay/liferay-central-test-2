@@ -48,13 +48,13 @@ public class VerifySimplePaginationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Next"));
 		assertFalse(selenium.isElementPresent("link=First"));
 		assertFalse(selenium.isElementPresent("link=Last"));
-		selenium.click(RuntimeVariables.replace("link=Next"));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=First"));

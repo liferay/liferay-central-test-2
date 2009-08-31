@@ -48,8 +48,8 @@ public class AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Asset Publisher Test Page"));
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -95,7 +95,7 @@ public class AddDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace("AP Setup Test Document 2"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("AP Setup Test Document 2"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=AP Setup Test Document 2"));
