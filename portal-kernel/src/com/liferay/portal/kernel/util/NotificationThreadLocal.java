@@ -30,10 +30,10 @@ package com.liferay.portal.kernel.util;
 public class NotificationThreadLocal {
 
 	public static boolean isNotificationEnabled() {
-		Boolean enabledObj = _threadLocal.get();
+		Boolean enabled = _threadLocal.get();
 
-		if (enabledObj != null) {
-			return enabledObj.booleanValue();
+		if (enabled != null) {
+			return enabled.booleanValue();
 		}
 		else {
 			return true;

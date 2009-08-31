@@ -30,10 +30,10 @@ package com.liferay.portlet.wiki.util;
 public class WikiCacheThreadLocal {
 
 	public static boolean isClearCache() {
-		Boolean clearCacheObj = _threadLocal.get();
+		Boolean clearCache = _threadLocal.get();
 
-		if (clearCacheObj != null) {
-			return clearCacheObj.booleanValue();
+		if (clearCache != null) {
+			return clearCache.booleanValue();
 		}
 		else {
 			return true;

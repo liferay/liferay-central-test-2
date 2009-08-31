@@ -30,10 +30,10 @@ package com.liferay.portlet.messageboards.util;
 public class MailingListThreadLocal {
 
 	public static boolean isSourceMailingList() {
-		Boolean sourceMailingListObj = _threadLocal.get();
+		Boolean sourceMailingList = _threadLocal.get();
 
-		if (sourceMailingListObj != null) {
-			return sourceMailingListObj.booleanValue();
+		if (sourceMailingList != null) {
+			return sourceMailingList.booleanValue();
 		}
 		else {
 			return false;

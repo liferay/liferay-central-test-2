@@ -33,14 +33,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class CompanyThreadLocal {
 
 	public static long getCompanyId() {
-		Long companyIdObj = _threadLocal.get();
+		Long companyId = _threadLocal.get();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("getCompanyId " + companyIdObj);
+			_log.debug("getCompanyId " + companyId);
 		}
 
-		if (companyIdObj != null) {
-			return companyIdObj.longValue();
+		if (companyId != null) {
+			return companyId.longValue();
 		}
 		else {
 			return 0;
@@ -53,7 +53,7 @@ public class CompanyThreadLocal {
 		}
 
 		if (companyId > 0) {
-			_threadLocal.set(new Long(companyId));
+			_threadLocal.set(companyId);
 		}
 		else {
 			_threadLocal.set(null);

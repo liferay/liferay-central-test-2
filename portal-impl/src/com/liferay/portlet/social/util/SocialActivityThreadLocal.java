@@ -30,10 +30,10 @@ package com.liferay.portlet.social.util;
 public class SocialActivityThreadLocal {
 
 	public static boolean isEnabled() {
-		Boolean enabledObj = _threadLocal.get();
+		Boolean enabled = _threadLocal.get();
 
-		if (enabledObj != null) {
-			return enabledObj.booleanValue();
+		if (enabled != null) {
+			return enabled.booleanValue();
 		}
 		else {
 			return true;
