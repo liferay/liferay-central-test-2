@@ -118,7 +118,7 @@
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 					</portlet:renderURL>
 
-					<aui:button value="add-question" onClick="<%= editQuestionURL %>" />
+					<aui:button onClick="<%= editQuestionURL %>" value="add-question" />
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
@@ -129,7 +129,7 @@
 						var="permissionsURL"
 					/>
 
-					<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+					<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 				</c:if>
 			</aui:button-row>
 		</c:if>

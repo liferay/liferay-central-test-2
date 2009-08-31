@@ -104,10 +104,6 @@ if (choiceName > 0) {
 	}
 </script>
 
-<portlet:actionURL var="editFileEntryURL">
-	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-</portlet:actionURL>
-
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editQuestionURL">
 	<portlet:param name="struts_action" value="/polls/edit_question" />
 </portlet:actionURL>
@@ -136,13 +132,13 @@ if (choiceName > 0) {
 
 		<aui:input name="description" />
 
-		<aui:input name="expirationDate" value="<%= expirationDate %>" disabled="<%= String.valueOf(neverExpire) %>" />
+		<aui:input disabled="<%= String.valueOf(neverExpire) %>" name="expirationDate" value="<%= expirationDate %>" />
 
 		<%
 		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
 		%>
 
-		<aui:input name="neverExpire" inlineLabel="<%= true %>" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" value="<%= neverExpire %>" />
+		<aui:input inlineLabel="<%= true %>" name="neverExpire" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" value="<%= neverExpire %>" />
 
 		<aui:field-wrapper label="choices">
 
@@ -174,7 +170,7 @@ if (choiceName > 0) {
 					<aui:input fieldParam="<%= paramName %>" inlineLabel="<%= false %>" label="<%= c + StringPool.PERIOD %>" name="description" />
 
 					<c:if test="<%= ((question == null) && (i > 2)) || ((question != null) && (i >= oldChoicesCount)) %>">
-						<aui:button value="delete" onClick='<%= renderResponse.getNamespace() + "deletePollChoice(" + i + ");" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "deletePollChoice(" + i + ");" %>' value="delete" />
 					</c:if>
 				</div>
 
@@ -182,7 +178,7 @@ if (choiceName > 0) {
 			}
 			%>
 
-			<aui:button cssClass="add-choice" value="add-choice" onClick='<%= renderResponse.getNamespace() + "addPollChoice();" %>' />
+			<aui:button cssClass="add-choice" onClick='<%= renderResponse.getNamespace() + "addPollChoice();" %>' value="add-choice" />
 		</aui:field-wrapper>
 
 		<c:if test="<%= question == null %>">

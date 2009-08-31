@@ -89,7 +89,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 						choice = choice.toEscapedModel();
 					%>
 
-						<aui:input inlineLabel="<%= true %>" name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>'  />
+						<aui:input inlineLabel="<%= true %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>' name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 
 					<%
 					}
@@ -97,7 +97,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 				</aui:field-wrapper>
 
-				<aui:button value="vote" type="submit" />
+				<aui:button type="submit" value="vote" />
 			</aui:fieldset>
 		</c:when>
 		<c:otherwise>

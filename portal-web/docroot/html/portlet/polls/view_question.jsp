@@ -83,7 +83,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 						choice = choice.toEscapedModel();
 					%>
 
-						<aui:input inlineLabel="<%= true %>" name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>'  />
+						<aui:input inlineLabel="<%= true %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>' name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 
 					<%
 					}
@@ -105,7 +105,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<aui:button type="submit" value="vote" />
 
-					<aui:button value="cancel" onClick="<%= redirect %>" />
+					<aui:button onClick="<%= redirect %>" value="cancel" />
 				</aui:button-row>
 
 				<%
@@ -125,10 +125,10 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<c:choose>
 						<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-							<aui:button value="back-to-vote" onClick="<%= viewQuestionURL %>" />
+							<aui:button onClick="<%= viewQuestionURL %>" value="back-to-vote" />
 						</c:when>
 						<c:when test="<%= Validator.isNotNull(redirect) %>">
-							<aui:button value="back" onClick="<%= redirect %>" />
+							<aui:button onClick="<%= redirect %>" value="back" />
 						</c:when>
 					</c:choose>
 				</aui:button-row>
