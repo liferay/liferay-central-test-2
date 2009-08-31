@@ -31,8 +31,6 @@ Group group = (Group)request.getAttribute("edit_user_roles.jsp-group");
 int roleType = (Integer)request.getAttribute("edit_user_roles.jsp-roleType");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-portletURL");
-
-String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrumbs");
 %>
 
 <div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
@@ -42,10 +40,6 @@ String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrum
 </div>
 
 <br />
-
-<div class="breadcrumbs">
-	<%= breadcrumbs %>
-</div>
 
 <liferay-ui:tabs
 	names="roles"

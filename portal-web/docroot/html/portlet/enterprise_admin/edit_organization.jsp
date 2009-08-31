@@ -149,6 +149,17 @@ String curSection = mainSections[0];
 	</script>
 </c:if>
 
+<%
+if (organization != null) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-organization"), currentURL);
+}
+%>
+
 <%!
 private static String[] _CATEGORY_NAMES = {"organization-information", "identification", "miscellaneous"};
 %>

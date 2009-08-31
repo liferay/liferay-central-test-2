@@ -102,7 +102,8 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(organization.getName())) %></h3>
 
 		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, organization.getName(), null);
+		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
 		%>
 

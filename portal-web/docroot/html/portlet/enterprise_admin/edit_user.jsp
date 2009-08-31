@@ -295,6 +295,17 @@ if (selUser != null) {
 	</script>
 </c:if>
 
+<%
+if (selUser != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, selUser.getFullName(), null);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-user"), currentURL);
+}
+%>
+
 <%!
 private static String[] _CATEGORY_NAMES = {"user-information", "identification", "miscellaneous"};
 %>

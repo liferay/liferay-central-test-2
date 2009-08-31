@@ -59,25 +59,22 @@ portletURL.setParameter("struts_action", "/communities/edit_user_roles");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-portletURL.setParameter("roleId", String.valueOf(roleId));
 
 // Breadcrumbs
 
-PortletURL breadcrumbsURL = renderResponse.createRenderURL();
+if (organization != null) {
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+}
+else if (group != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+}
 
-breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_roles");
-breadcrumbsURL.setParameter("tabs1", tabs1);
-breadcrumbsURL.setParameter("redirect", redirect);
-breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-
-String breadcrumbs = "<a href=\"" + HtmlUtil.escape(redirect) + "\">" + LanguageUtil.get(pageContext, group.isOrganization() ? "organizations" : "communities") + "</a> &raquo; ";
-
-breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(groupName) + "</a>";
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-user-roles"), portletURL.toString());
 
 if (role != null) {
-	breadcrumbsURL.setParameter("roleId", String.valueOf(roleId));
+	portletURL.setParameter("roleId", String.valueOf(roleId));
 
-	breadcrumbs += " &raquo; <a href=\"" + breadcrumbsURL.toString() + "\">" + HtmlUtil.escape(role.getTitle(locale)) + "</a>";
+	PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.escape(role.getTitle(locale)), currentURL);
 }
 
 request.setAttribute("edit_user_roles.jsp-tabs1", tabs1);
@@ -94,8 +91,6 @@ request.setAttribute("edit_user_roles.jsp-roleType", roleType);
 request.setAttribute("edit_user_roles.jsp-organization", organization);
 
 request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
-
-request.setAttribute("edit_user_roles.jsp-breadcrumbs", breadcrumbs);
 %>
 
 <script type="text/javascript">

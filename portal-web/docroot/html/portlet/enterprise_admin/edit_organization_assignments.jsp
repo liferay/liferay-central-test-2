@@ -112,3 +112,9 @@ if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
 </c:choose>
 
 </form>
+
+<%
+EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
+%>

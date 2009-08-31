@@ -36,8 +36,6 @@ long roleId = (Long)request.getAttribute("edit_user_roles.jsp-roleId");
 Organization organization = (Organization)request.getAttribute("edit_user_roles.jsp-organization");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-portletURL");
-
-String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrumbs");
 %>
 
 <input name="<portlet:namespace />addUserIds" type="hidden" value="" />
@@ -52,10 +50,6 @@ String breadcrumbs = (String)request.getAttribute("edit_user_roles.jsp-breadcrum
 </div>
 
 <br />
-
-<div class="breadcrumbs">
-	<%= breadcrumbs %>
-</div>
 
 <liferay-ui:tabs
 	names="users"

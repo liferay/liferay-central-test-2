@@ -83,6 +83,7 @@ import com.liferay.portal.util.comparator.UserScreenNameComparator;
 import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -90,6 +91,10 @@ import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="EnterpriseAdminUtil.java.html"><b><i>View Source</i></b></a>
@@ -101,6 +106,37 @@ import javax.portlet.PortletRequest;
 public class EnterpriseAdminUtil {
 
 	public static final String CUSTOM_QUESTION = "write-my-own-question";
+
+	public static void addPortletBreadcrumbEntries(
+			Organization organization, HttpServletRequest request,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		PortletURL portletURL = renderResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/enterprise_admin/edit_organization");
+
+		List<Organization> ancestorOrganizations = organization.getAncestors();
+
+		Collections.reverse(ancestorOrganizations);
+
+		for (Organization ancestorOrganization : ancestorOrganizations) {
+
+			portletURL.setParameter(
+				"organizationId",
+				String.valueOf(ancestorOrganization.getOrganizationId()));
+
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, ancestorOrganization.getName(), portletURL.toString());
+		}
+
+		portletURL.setParameter(
+			"organizationId", String.valueOf(organization.getOrganizationId()));
+
+		PortalUtil.addPortletBreadcrumbEntry(
+			request, organization.getName(), portletURL.toString());
+	}
 
 	public static String getCssClassName(Role role) {
 		String cssClassName = StringPool.BLANK;

@@ -231,3 +231,14 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
 </c:if>
+
+<%
+if (group != null) {
+	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+}
+else {
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-community"), currentURL);
+}
+%>

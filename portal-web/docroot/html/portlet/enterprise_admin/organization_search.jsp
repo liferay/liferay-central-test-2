@@ -48,6 +48,13 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 	<h3><%= LanguageUtil.format(pageContext, "suborganizations-of-x", HtmlUtil.escape(organization.getName())) %></h3>
+
+	<%
+	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
+
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "suborganizations"), currentURL);
+	%>
+
 </c:if>
 
 <liferay-ui:search-toggle
