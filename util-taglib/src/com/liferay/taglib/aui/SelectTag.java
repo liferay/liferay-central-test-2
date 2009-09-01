@@ -79,7 +79,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_id = _name;
 			}
 
-			if (Validator.isNull(_label)) {
+			if (_label == null) {
 				_label = TextFormatter.format(_name, TextFormatter.K);
 			}
 

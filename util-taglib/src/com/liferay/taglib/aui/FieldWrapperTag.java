@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,8 +74,8 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			if (Validator.isNull(_label)) {
-				_label = _name;
+			if (_label != null) {
+				_label = TextFormatter.format(_name, TextFormatter.K);
 			}
 
 			request.setAttribute("aui:field-wrapper:cssClass", _cssClass);
