@@ -90,7 +90,7 @@ public class ImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_86_DELETE_PORTLET_DATA", RuntimeVariables.replace(""));
+		selenium.click("_86_DELETE_PORTLET_DATA");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\dependencies\\Image_Gallery-Selenium.portlet.lar"));

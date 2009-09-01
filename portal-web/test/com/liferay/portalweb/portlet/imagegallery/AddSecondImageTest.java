@@ -110,8 +110,7 @@ public class AddSecondImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Use the classic uploader.",
-			RuntimeVariables.replace(""));
+		selenium.click("link=Use the classic uploader.");
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\dependencies\\test_image_2.jpg"));

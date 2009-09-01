@@ -159,8 +159,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Use the classic uploader.",
-			RuntimeVariables.replace(""));
+		selenium.click("link=Use the classic uploader.");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
