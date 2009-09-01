@@ -292,7 +292,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			jobDataMap.put(DESTINATION, destination);
 			jobDataMap.put(MESSAGE_BODY, messageBody);
 
-			synchronized(this){
+			synchronized (this) {
 				_scheduler.unscheduleJob(groupName, groupName);
 				_scheduler.scheduleJob(jobDetail, trigger);
 			}
