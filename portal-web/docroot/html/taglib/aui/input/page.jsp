@@ -50,6 +50,15 @@ if ((type.equals("assetCategories")) || (type.equals("assetTags")) ||
 
 	showForLabel = false;
 }
+
+if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldParam") != null)) {
+	if (!ModelHintsUtil.isLocalized(model.toString(), field)) {
+		name = namespace + dynamicAttributes.get("fieldParam");
+	}
+	else {
+		name = (String)dynamicAttributes.get("fieldParam");
+	}
+}
 %>
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
