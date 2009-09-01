@@ -35,14 +35,16 @@ public class MethodWrapper implements Serializable {
 		this(className, methodName, new Object[0]);
 	}
 
-	public MethodWrapper(String className, String methodName, Object arg) {
-		this(className, methodName, new Object[] {arg});
+	public MethodWrapper(String className, String methodName, Object argument) {
+		this(className, methodName, new Object[] {argument});
 	}
 
-	public MethodWrapper(String className, String methodName, Object[] args) {
+	public MethodWrapper(
+		String className, String methodName, Object[] arguments) {
+
 		_className = className;
 		_methodName = methodName;
-		_args = args;
+		_arguments = arguments;
 	}
 
 	public String getClassName() {
@@ -53,16 +55,23 @@ public class MethodWrapper implements Serializable {
 		return _methodName;
 	}
 
+	/**
+	 * @deprecated Use <code>getArguments</code>.
+	 */
 	public Object[] getArgs() {
-		Object[] args = new Object[_args.length];
+		return getArguments();
+	}
 
-		System.arraycopy(_args, 0, args, 0, _args.length);
+	public Object[] getArguments() {
+		Object[] arguments = new Object[_arguments.length];
 
-		return args;
+		System.arraycopy(_arguments, 0, arguments, 0, _arguments.length);
+
+		return arguments;
 	}
 
 	private String _className;
 	private String _methodName;
-	private Object[] _args;
+	private Object[] _arguments;
 
 }

@@ -57,26 +57,29 @@ public class MethodInvoker {
 
 		Object targetObject = null;
 
-		if (newInstance){
+		if (newInstance) {
 			Thread currentThread = Thread.currentThread();
+
 			ClassLoader contextClassLoader =
 				currentThread.getContextClassLoader();
-			Class<?> classObj =
-				contextClassLoader.loadClass(methodWrapper.getClassName());
-			targetObject=classObj.newInstance();
+
+			targetObject = contextClassLoader.loadClass(
+				methodWrapper.getClassName()).newInstance();
 		}
 
-		Object[] methodAndArgs = lookupMethod(methodWrapper, targetObject);
+		Object[] methodAndArguments = _lookupMethodAndArguments(
+			methodWrapper, targetObject);
 
-		Object returnObj = null;
+		Object returnObject = null;
 
-		if (methodAndArgs[0] != null) {
-			Method method = (Method) methodAndArgs[0];
-			Object[] args = (Object[]) methodAndArgs[1];
-			returnObj = method.invoke(targetObject, args);
+		if (methodAndArguments[0] != null) {
+			Method method = (Method)methodAndArguments[0];
+			Object[] arguments = (Object[])methodAndArguments[1];
+
+			returnObject = method.invoke(targetObject, arguments);
 		}
 
-		return returnObj;
+		return returnObject;
 	}
 
 	public static Object invoke(
@@ -85,57 +88,61 @@ public class MethodInvoker {
 			   InstantiationException, InvocationTargetException,
 			   NoSuchFieldException, NoSuchMethodException {
 
-		Object[] methodAndArgs = lookupMethod(methodWrapper, targetObject);
+		Object[] methodAndArguments = _lookupMethodAndArguments(
+			methodWrapper, targetObject);
 
-		Object returnObj = null;
+		Object returnObject = null;
 
-		if (methodAndArgs[0] != null) {
-			Method method = (Method) methodAndArgs[0];
-			Object[] args = (Object[]) methodAndArgs[1];
-			returnObj = method.invoke(targetObject, args);
+		if (methodAndArguments[0] != null) {
+			Method method = (Method)methodAndArguments[0];
+			Object[] arguments = (Object[])methodAndArguments[1];
+
+			returnObject = method.invoke(targetObject, arguments);
 		}
 
-		return returnObj;
+		return returnObject;
 	}
 
-	private static Object[] lookupMethod(
+	private static Object[] _lookupMethodAndArguments(
 			MethodWrapper methodWrapper, Object targetObject)
 		throws ClassNotFoundException, IllegalAccessException,
 			   InstantiationException, InvocationTargetException,
 			   NoSuchFieldException, NoSuchMethodException {
 
-		Object[] methodAndArgs = new Object[2];
+		Object[] methodAndArguments = new Object[2];
+
 		Thread currentThread = Thread.currentThread();
+
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		String className = methodWrapper.getClassName();
 		String methodName = methodWrapper.getMethodName();
-		Object[] args = methodWrapper.getArgs();
+		Object[] arguments = methodWrapper.getArguments();
 
 		List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
-		for (int i = 0; i < args.length; i++) {
-			if (args[i] == null) {
+		for (int i = 0; i < arguments.length; i++) {
+			if (arguments[i] == null) {
 				_log.error(
 					"Cannot invoke " + className + " " + methodName +
 						" on position " + i + " because it is null");
 			}
 
-			Class<?> argClass = args[i].getClass();
+			Class<?> argClass = arguments[i].getClass();
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
 				parameterTypes.add(
-					(Class<?>)argClass.getField("TYPE").get(args[i]));
+					(Class<?>)argClass.getField("TYPE").get(arguments[i]));
 
 				MethodKey methodKey = new MethodKey(
 					argClass.getName(), "getValue", null);
 
 				Method method = MethodCache.get(methodKey);
 
-				args[i] = method.invoke(args[i], (Object[])null);
+				arguments[i] = method.invoke(arguments[i], (Object[])null);
 			}
-			else if (args[i] instanceof NullWrapper) {
-				NullWrapper nullWrapper = (NullWrapper)args[i];
+			else if (arguments[i] instanceof NullWrapper) {
+				NullWrapper nullWrapper = (NullWrapper)arguments[i];
 
 				String wrappedClassName = nullWrapper.getClassName();
 
@@ -158,7 +165,7 @@ public class MethodInvoker {
 					parameterTypes.add(wrappedClass);
 				}
 
-				args[i] = null;
+				arguments[i] = null;
 			}
 			else {
 				parameterTypes.add(argClass);
@@ -175,14 +182,16 @@ public class MethodInvoker {
 			method = MethodCache.get(methodKey);
 		}
 		catch (NoSuchMethodException nsme) {
+			Class<?> classObject = null;
 
-			Class<?> classObj = null;
 			if (targetObject == null) {
-				classObj = contextClassLoader.loadClass(className);
-			} else {
-				classObj = targetObject.getClass();
+				classObject = contextClassLoader.loadClass(className);
 			}
-			Method[] methods = classObj.getMethods();
+			else {
+				classObject = targetObject.getClass();
+			}
+
+			Method[] methods = classObject.getMethods();
 
 			for (int i = 0; i < methods.length; i++) {
 				Class<?>[] methodParameterTypes =
@@ -216,9 +225,11 @@ public class MethodInvoker {
 				throw nsme;
 			}
 		}
-		methodAndArgs[0] = method;
-		methodAndArgs[1] = args;
-		return methodAndArgs;
+
+		methodAndArguments[0] = method;
+		methodAndArguments[1] = arguments;
+
+		return methodAndArguments;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MethodInvoker.class);
