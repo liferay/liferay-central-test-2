@@ -47,8 +47,8 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
-					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
-					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
+					DestinationNames.SCHEDULER, schedulerRequest,
+					DestinationNames.SCHEDULER_RESPONSE);
 
 			return schedulerRequests;
 		}
@@ -67,7 +67,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 				destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+			DestinationNames.SCHEDULER, schedulerRequest);
 	}
 
 	public void schedule(
@@ -80,18 +80,18 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 				destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+			DestinationNames.SCHEDULER, schedulerRequest);
 	}
 
 	public void shutdown() {
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE,
+			DestinationNames.SCHEDULER,
 			SchedulerRequest.createShutdownRequest());
 	}
 
 	public void start() {
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE,
+			DestinationNames.SCHEDULER,
 			SchedulerRequest.createStartupRequest());
 	}
 
@@ -100,7 +100,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			SchedulerRequest.createUnregisterRequest(groupName);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+			DestinationNames.SCHEDULER, schedulerRequest);
 	}
 
 }

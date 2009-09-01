@@ -20,47 +20,57 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.messaging;
+package com.liferay.portlet.messageboards.job;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portlet.messageboards.job.MBScheduler;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
- * <a href="MBSchedulerMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpireBanJob.java.html"><b><i>View Source</i></b></a>
  *
- * @author Tina Tian
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  */
-public class MBSchedulerMessageListener implements MessageListener {
+public class ExpireBanJob implements IntervalJob {
 
-	public void receive(Message message) {
+	public ExpireBanJob() {
 		try {
-			doReceive(message);
+			long rawInterval = PrefsPropsUtil.getLong(
+				PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL,
+				PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Interval " + rawInterval + " minutes");
+			}
+
+			_interval = rawInterval * Time.MINUTE;
 		}
 		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
+			_log.error(e, e);
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
-		String payload = (String)message.getPayload();
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
-
-		String schedulerId = jsonObject.getString("schedulerId");
-
-		if (schedulerId.equals(MBScheduler.class.getName())) {
+	public void execute(JobExecutionContext context) {
+		try {
 			MBBanLocalServiceUtil.expireBans();
 		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBSchedulerMessageListener.class);
+	public long getInterval() {
+		return _interval;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ExpireBanJob.class);
+
+	private long _interval;
 
 }
