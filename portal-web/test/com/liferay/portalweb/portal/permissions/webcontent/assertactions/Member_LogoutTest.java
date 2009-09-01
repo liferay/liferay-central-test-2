@@ -47,7 +47,8 @@ public class Member_LogoutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.clickAt("link=Back to Guest",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
@@ -68,7 +69,7 @@ public class Member_LogoutTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Sign Out"));
+				selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {

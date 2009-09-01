@@ -49,16 +49,16 @@ public class CA_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("+1"));
-		selenium.click("//td[1]/ul/li[2]/a[2]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[2]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("-1"));
-		selenium.click("//td[1]/ul/li[2]/a[2]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[2]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("\u00b10"));
 	}

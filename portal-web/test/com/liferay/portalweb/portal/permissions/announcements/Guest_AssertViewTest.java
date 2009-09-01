@@ -49,8 +49,8 @@ public class Guest_AssertViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Announcements Permissions Page"));
+		selenium.clickAt("link=Announcements Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test General Announcement"));
 		assertTrue(selenium.isTextPresent(

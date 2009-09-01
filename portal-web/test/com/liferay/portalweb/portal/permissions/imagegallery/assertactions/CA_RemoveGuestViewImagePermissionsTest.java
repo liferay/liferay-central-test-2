@@ -57,10 +57,11 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Image Gallery Permissions Test Page"));
+				selenium.clickAt("link=Image Gallery Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+				selenium.clickAt("//tr[4]/td[1]/a[1]/b",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -79,7 +80,7 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.clickAt("//b", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -98,7 +99,8 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//img[@alt='Edited Permissions Image. ']");
+				selenium.clickAt("//img[@alt='Edited Permissions Image. ']",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -116,7 +118,8 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Permissions");
+				selenium.clickAt("link=Permissions",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -142,13 +145,13 @@ public class CA_RemoveGuestViewImagePermissionsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("15_ACTION_VIEW");
+				selenium.clickAt("15_ACTION_VIEW", RuntimeVariables.replace(""));
 
 			case 2:
 				assertTrue(selenium.isTextPresent(
 						"Edit Permissions for Image Gallery Image:"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Submit']"));
+				selenium.clickAt("//input[@value='Submit']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

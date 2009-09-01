@@ -50,18 +50,19 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.clickAt("//td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,14 +80,14 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
+		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Edited Test Folder"));
+		selenium.clickAt("link=Permissions Edited Test Folder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -105,8 +106,8 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Test Subfolder"));
+		selenium.clickAt("link=Permissions Test Subfolder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -125,7 +126,7 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -143,7 +144,7 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
 		assertTrue(selenium.isTextPresent(

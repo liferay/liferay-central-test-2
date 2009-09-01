@@ -49,7 +49,8 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +70,8 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
 			RuntimeVariables.replace(
@@ -132,7 +133,7 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a guest portal scope permissions blogs entry"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -51,20 +51,24 @@ public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='Select Web Content']"));
+		selenium.clickAt("//img[@alt='Select Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_86_showAvailableLocalesCheckbox");
+		selenium.clickAt("_86_showAvailableLocalesCheckbox",
+			RuntimeVariables.replace(""));
 		Thread.sleep(500);
-		selenium.click("_86_enablePrintCheckbox");
+		selenium.clickAt("_86_enablePrintCheckbox", RuntimeVariables.replace(""));
 		Thread.sleep(500);
-		selenium.click("_86_enableRatingsCheckbox");
+		selenium.clickAt("_86_enableRatingsCheckbox",
+			RuntimeVariables.replace(""));
 		Thread.sleep(500);
-		selenium.click("_86_enableCommentsCheckbox");
+		selenium.clickAt("_86_enableCommentsCheckbox",
+			RuntimeVariables.replace(""));
 		Thread.sleep(500);
-		selenium.click("_86_enableCommentRatingsCheckbox");
+		selenium.clickAt("_86_enableCommentRatingsCheckbox",
+			RuntimeVariables.replace(""));
 	}
 }

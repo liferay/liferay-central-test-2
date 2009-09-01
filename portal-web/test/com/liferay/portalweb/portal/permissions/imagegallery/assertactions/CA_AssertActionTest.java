@@ -49,19 +49,19 @@ public class CA_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Configuration"));
 		assertTrue(selenium.isElementPresent("link=Look and Feel"));
 		assertTrue(selenium.isElementPresent("link=Export / Import"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));
 		assertTrue(selenium.isElementPresent("//input[@value='Add Subfolder']"));
-		selenium.click("//td[4]/ul/li/strong");
+		selenium.clickAt("//td[4]/ul/li/strong", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent("//div[5]/ul/li[1]/a"));
 		assertTrue(selenium.isElementPresent("//div[5]/ul/li[2]/a"));
 		assertTrue(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 
@@ -82,19 +82,19 @@ public class CA_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Images"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Edited Permissions Image"));
-		selenium.click(RuntimeVariables.replace("link=Recent Images"));
+		selenium.clickAt("link=My Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Edited Permissions Image"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		assertTrue(selenium.isTextPresent("Edited Permissions Image"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,10 +112,10 @@ public class CA_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.clickAt("link=Export / Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Export']"));
-		selenium.click(RuntimeVariables.replace("link=Import"));
+		selenium.clickAt("link=Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Import']"));
 	}

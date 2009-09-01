@@ -49,11 +49,11 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions2 Test2 Subfolder2"));
+		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +72,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +90,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,7 +109,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -128,7 +128,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[4]/span/a[2]");
+		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -149,7 +149,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad.\nI'm now editing this comment."));
-		selenium.click(RuntimeVariables.replace("_20_editReplyButton1"));
+		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

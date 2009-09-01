@@ -50,10 +50,10 @@ public class CA_AssertEditWCSConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Search Permissions Test Page"));
+		selenium.clickAt("link=Web Content Search Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Setup"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));

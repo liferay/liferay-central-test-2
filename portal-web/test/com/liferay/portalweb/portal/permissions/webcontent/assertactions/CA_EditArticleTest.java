@@ -48,12 +48,12 @@ public class CA_EditArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=CA Permissions Web Content Test"));
+		selenium.clickAt("link=CA Permissions Web Content Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_15_title",
 			RuntimeVariables.replace("CA Permissions Web Content Test Edit"));
@@ -114,7 +114,7 @@ public class CA_EditArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a ca edited permissions web content article!"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

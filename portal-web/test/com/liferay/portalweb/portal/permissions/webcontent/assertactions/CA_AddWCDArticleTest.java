@@ -47,15 +47,16 @@ public class CA_AddWCDArticleTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.clickAt("link=Back to Guest",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"link=Web Content Display Permissions Test Page"));
+				selenium.clickAt("link=Web Content Display Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//img[@alt='Add Web Content']"));
+				selenium.clickAt("//img[@alt='Add Web Content']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_15_title",
 					RuntimeVariables.replace("CA Permissions WCD Article"));
@@ -116,8 +117,8 @@ public class CA_AddWCDArticleTest extends BaseTestCase {
 					RuntimeVariables.replace(
 						"This is a ca permissions wcd article!"));
 				selenium.selectFrame("relative=top");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save and Approve']"));
+				selenium.clickAt("//input[@value='Save and Approve']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"This is a ca permissions wcd article!"));

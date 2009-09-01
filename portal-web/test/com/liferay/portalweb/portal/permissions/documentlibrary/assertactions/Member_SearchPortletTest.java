@@ -32,8 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_SearchPortletTest extends BaseTestCase {
 	public void testMember_SearchPortlet() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -53,8 +53,8 @@ public class Member_SearchPortletTest extends BaseTestCase {
 		}
 
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search File Entries']"));
+		selenium.clickAt("//input[@value='Search File Entries']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Upload Edited"));

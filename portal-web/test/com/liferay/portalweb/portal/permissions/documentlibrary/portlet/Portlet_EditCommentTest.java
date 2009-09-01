@@ -49,11 +49,11 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=SA1 Portlet1 Permissions1 Folder1"));
+		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +72,7 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,9 +91,9 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -114,7 +114,7 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"This is a portlet permissions test comment. Edited."));
-		selenium.click(RuntimeVariables.replace("_20_editReplyButton1"));
+		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Your request processed successfully"));
 		assertEquals(RuntimeVariables.replace(

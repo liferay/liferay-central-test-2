@@ -51,12 +51,12 @@ public class Guest_AssertCannotSearchWCSPreApprovalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Search Permissions Test Page"));
+		selenium.clickAt("link=Web Content Search Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_77_keywords", RuntimeVariables.replace("test"));
 		selenium.type("_77_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
+		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"No pages were found that matched the keywords: test."));

@@ -32,15 +32,16 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_LoginTest extends BaseTestCase {
 	public void testMember_Login() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Message Boards Permissions Page"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Categories"));
 	}

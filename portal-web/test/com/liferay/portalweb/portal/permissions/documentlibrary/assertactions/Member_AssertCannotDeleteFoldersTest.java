@@ -51,14 +51,14 @@ public class Member_AssertCannotDeleteFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("//td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions2 Test2 Folder2"));
+		selenium.clickAt("link=Permissions2 Test2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -79,8 +79,8 @@ public class Member_AssertCannotDeleteFoldersTest extends BaseTestCase {
 
 		assertFalse(selenium.isElementPresent("//strong/span"));
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -99,8 +99,8 @@ public class Member_AssertCannotDeleteFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Edited Test Folder"));
+		selenium.clickAt("link=Permissions Edited Test Folder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

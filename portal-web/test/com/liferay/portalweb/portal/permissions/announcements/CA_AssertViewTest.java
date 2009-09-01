@@ -49,13 +49,13 @@ public class CA_AssertViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Announcements Permissions Page"));
+		selenium.clickAt("link=Announcements Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test General Announcement"));
 		assertTrue(selenium.isTextPresent(
 				"This is a test General Announcement."));
-		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

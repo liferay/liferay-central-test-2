@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_ImageGalleryRolesTest extends BaseTestCase {
 	public void testMember_ImageGalleryRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-permissions",
 			RuntimeVariables.replace("label=Image Gallery"));
@@ -59,7 +59,7 @@ public class Member_ImageGalleryRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImageUPDATE']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.imagegallery.model.IGImageVIEW']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}

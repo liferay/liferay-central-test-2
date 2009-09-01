@@ -49,7 +49,8 @@ public class Publisher_AssertCannotViewWCDPostExpireTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.clickAt("link=Back to Guest",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
@@ -71,8 +72,8 @@ public class Publisher_AssertCannotViewWCDPostExpireTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Web Content Display Permissions Test Page"));
+				selenium.clickAt("link=Web Content Display Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertFalse(selenium.isTextPresent(
 						"This is a writer permissions web content article!"));

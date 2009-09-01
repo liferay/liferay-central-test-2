@@ -49,19 +49,21 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Permissions']"));
+		selenium.clickAt("//input[@value='Permissions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("15_ACTION_VIEW");
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subfolder']"));
+		selenium.clickAt("//input[@value='Add Subfolder']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,9 +84,10 @@ public class SA_SetupTest extends BaseTestCase {
 
 		selenium.type("_20_name",
 			RuntimeVariables.replace("SA1 Portlet1 Permissions1 Folder1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.clickAt("//td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -102,10 +105,11 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("15_ACTION_VIEW");
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

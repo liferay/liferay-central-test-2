@@ -51,10 +51,10 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +73,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Edited Third Permissions Image. ']");
+		selenium.clickAt("//img[@alt='Edited Third Permissions Image. ']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,7 +92,7 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Permissions");
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));

@@ -49,11 +49,11 @@ public class Portlet_DeleteOwnImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet2 Temporary2 Folder2"));
+		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +72,8 @@ public class Portlet_DeleteOwnImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Portlet1 Permissions1 Image1. ']");
+		selenium.clickAt("//img[@alt='Portlet1 Permissions1 Image1. ']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class Portlet_DeleteOwnImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

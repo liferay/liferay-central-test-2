@@ -49,7 +49,7 @@ public class Member_EditThreadTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Edit"));
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +72,7 @@ public class Member_EditThreadTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Thread 2 Edited"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread 2 Edited"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
 	}

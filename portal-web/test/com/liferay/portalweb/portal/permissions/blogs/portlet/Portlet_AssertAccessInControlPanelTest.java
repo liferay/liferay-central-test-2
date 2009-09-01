@@ -50,10 +50,10 @@ public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Blogs"));
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 0 results."));
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));

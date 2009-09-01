@@ -55,11 +55,11 @@ public class SA_AddTemporaryImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Image Gallery Permissions Test Page"));
+				selenium.clickAt("link=Image Gallery Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"link=Portlet2 Temporary2 Folder2"));
+				selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -78,8 +78,8 @@ public class SA_AddTemporaryImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Image']"));
+				selenium.clickAt("//input[@value='Add Image']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 
@@ -115,8 +115,8 @@ public class SA_AddTemporaryImageTest extends BaseTestCase {
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\SA_TestImage.jpg"));
 				selenium.type("_31_name",
 					RuntimeVariables.replace("Portlet2 Temporary2 Image2"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 

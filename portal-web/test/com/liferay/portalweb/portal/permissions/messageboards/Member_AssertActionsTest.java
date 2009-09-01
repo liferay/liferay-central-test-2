@@ -58,7 +58,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Banned Users"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Permissions']"));
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -83,7 +83,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Post New Thread']"));
-		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
+		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +107,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Permissions"));
-		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -32,24 +32,25 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_SetupTest extends BaseTestCase {
 	public void testSA_Setup() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Guest"));
+		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace(
 				"Web Content Display Permissions Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +69,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentDisplay']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentDisplay']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,21 +88,22 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Web Content List Permissions Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Permissions Test Page"));
+		selenium.clickAt("link=Web Content List Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -119,7 +122,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentList']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentList']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -137,21 +141,22 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Web Content Search Permissions Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Search Permissions Test Page"));
+		selenium.clickAt("link=Web Content Search Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -170,7 +175,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentSearch']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentSearch']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

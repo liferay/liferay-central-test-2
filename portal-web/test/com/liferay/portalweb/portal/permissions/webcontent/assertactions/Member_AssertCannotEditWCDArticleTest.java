@@ -51,8 +51,8 @@ public class Member_AssertCannotEditWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//img[@alt='Edit Web Content']"));
 	}

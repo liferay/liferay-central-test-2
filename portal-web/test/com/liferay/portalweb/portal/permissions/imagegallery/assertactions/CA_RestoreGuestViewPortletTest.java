@@ -56,12 +56,14 @@ public class CA_RestoreGuestViewPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Image Gallery Permissions Test Page"));
+				selenium.clickAt("link=Image Gallery Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.clickAt("link=Configuration",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Permissions"));
+				selenium.clickAt("link=Permissions",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -88,11 +90,11 @@ public class CA_RestoreGuestViewPortletTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("15_ACTION_VIEW");
+				selenium.clickAt("15_ACTION_VIEW", RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Submit']"));
+				selenium.clickAt("//input[@value='Submit']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

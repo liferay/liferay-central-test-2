@@ -49,11 +49,11 @@ public class Member_AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions2 Test2 Folder2"));
+		selenium.clickAt("link=Permissions2 Test2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +72,8 @@ public class Member_AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Document']"));
+		selenium.clickAt("//input[@value='Add Document']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -118,7 +118,7 @@ public class Member_AddDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace("Member Permissions Test Document"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Member Permissions Test Document"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(

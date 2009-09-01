@@ -48,7 +48,8 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+				selenium.clickAt("link=Back to Guest",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
@@ -70,20 +71,20 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Web Content Display Permissions Test Page"));
+				selenium.clickAt("link=Web Content Display Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//img[@alt='Select Web Content']"));
+				selenium.clickAt("//img[@alt='Select Web Content']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_86_keywords",
 					RuntimeVariables.replace("test"));
 				selenium.type("_86_keywords", RuntimeVariables.replace("test"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"link=Writer Permissions Web Content Test"));
+				selenium.clickAt("link=Writer Permissions Web Content Test",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

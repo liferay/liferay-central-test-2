@@ -49,20 +49,21 @@ public class Publisher_ApproveArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Writer Permissions Web Content Test"));
+		selenium.clickAt("link=Writer Permissions Web Content Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.click(RuntimeVariables.replace("//input[@value='Approve']"));
+		selenium.clickAt("//input[@value='Approve']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Approved"));
-		selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

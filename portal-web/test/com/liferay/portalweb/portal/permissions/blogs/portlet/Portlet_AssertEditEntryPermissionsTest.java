@@ -50,10 +50,11 @@ public class Portlet_AssertEditEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet1 Temporary1 Entry1"));
+		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +73,7 @@ public class Portlet_AssertEditEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,7 +95,8 @@ public class Portlet_AssertEditEntryPermissionsTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//form/div[1]",
 				"Edit Permissions for Blogs Entry:"));
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

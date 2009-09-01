@@ -50,11 +50,11 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Test Subfolder"));
+		selenium.clickAt("link=Permissions Test Subfolder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,11 +73,11 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Comments"));
+		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Post Reply");
+		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,7 +101,7 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 		selenium.type("_20_postReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Member and I can write a comment on a different user's uploaded document!"));
-		selenium.click(RuntimeVariables.replace("_20_postReplyButton1"));
+		selenium.clickAt("_20_postReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

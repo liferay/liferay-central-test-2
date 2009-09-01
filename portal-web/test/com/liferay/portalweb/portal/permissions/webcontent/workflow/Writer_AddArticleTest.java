@@ -48,12 +48,12 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_15_title",
 			RuntimeVariables.replace("Writer Permissions Web Content Test"));
@@ -114,7 +114,7 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a writer permissions web content article!"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -49,8 +49,8 @@ public class Publisher_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String Count = selenium.getIncrementedText("//td[3]/div[1]");
@@ -72,7 +72,7 @@ public class Publisher_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[5]");
+		selenium.clickAt("//img[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

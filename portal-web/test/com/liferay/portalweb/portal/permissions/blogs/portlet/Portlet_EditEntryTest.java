@@ -48,10 +48,11 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet1 Temporary1 Entry1"));
+		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +76,7 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"This is a temporary portlet permissions entry!"),
 			selenium.getText("//p"));
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
 			RuntimeVariables.replace("Edited1 Portlet1 Temporary1 Entry1"));
@@ -136,7 +137,7 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is an edited temporary portlet permissions entry!"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

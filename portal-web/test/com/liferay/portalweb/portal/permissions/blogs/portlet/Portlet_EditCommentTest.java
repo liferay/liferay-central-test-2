@@ -48,10 +48,11 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet1 Temporary1 Entry1"));
+		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +71,7 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is a portlet comment! Edited!"));
-		selenium.click(RuntimeVariables.replace("_33_editReplyButton1"));
+		selenium.clickAt("_33_editReplyButton1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

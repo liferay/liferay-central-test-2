@@ -48,7 +48,7 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,7 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,7 +85,7 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[4]/a"));
+		selenium.clickAt("//div[4]/ul/li[4]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -104,45 +104,49 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.clickAt("link=Available", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("ca"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("ca"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_134_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_134_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("member"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("member"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_134_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_134_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("publisher"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("publisher"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_134_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_134_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("writer"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("writer"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_134_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_134_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

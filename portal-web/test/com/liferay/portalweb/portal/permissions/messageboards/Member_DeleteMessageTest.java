@@ -50,7 +50,7 @@ public class Member_DeleteMessageTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent("Test Thread 2 Edited"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

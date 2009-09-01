@@ -49,10 +49,11 @@ public class Portlet_AssertCannotAddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet1 Temporary1 Entry1"));
+		selenium.clickAt("link=Portlet1 Temporary1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Comments"),
 			selenium.getText("//div[2]/div/div/ul/li/span"));

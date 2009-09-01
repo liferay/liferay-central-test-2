@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Writer_WebContentListRolesTest extends BaseTestCase {
 	public void testWriter_WebContentListRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-permissions",
 			RuntimeVariables.replace("label=Web Content List"));
@@ -41,7 +41,7 @@ public class Writer_WebContentListRolesTest extends BaseTestCase {
 		selenium.check("_128_rowIds");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='62CONFIGURATION']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}

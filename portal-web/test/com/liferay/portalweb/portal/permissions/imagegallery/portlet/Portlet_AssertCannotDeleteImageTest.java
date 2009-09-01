@@ -50,11 +50,11 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet2 Temporary2 Folder2"));
+		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +75,7 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 
 		assertTrue(selenium.isPartialText("//form[2]/div[3]/div/div[1]",
 				"Portlet2 Temporary2 Image2"));
-		selenium.click("//div/a/img");
+		selenium.clickAt("//div/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,7 +94,7 @@ public class Portlet_AssertCannotDeleteImageTest extends BaseTestCase {
 		}
 
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.click("link=Close");
+		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

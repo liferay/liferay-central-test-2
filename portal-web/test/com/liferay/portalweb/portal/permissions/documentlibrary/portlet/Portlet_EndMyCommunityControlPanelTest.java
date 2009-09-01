@@ -49,14 +49,14 @@ public class Portlet_EndMyCommunityControlPanelTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Back to My Community"));
+				selenium.clickAt("link=Back to My Community",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"link=Welcome - Liferay"));
+				selenium.clickAt("link=Welcome - Liferay",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

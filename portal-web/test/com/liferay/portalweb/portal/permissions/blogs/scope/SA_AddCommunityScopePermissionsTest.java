@@ -49,13 +49,13 @@ public class SA_AddCommunityScopePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-permissions",
 			RuntimeVariables.replace("label=Blogs"));
 		selenium.waitForPageToLoad("30000");
 		selenium.check("_128_rowIds");
-		selenium.click("link=Limit Scope");
+		selenium.clickAt("link=Limit Scope", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.waitForPopUp("community", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=community");
@@ -76,9 +76,9 @@ public class SA_AddCommunityScopePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Scope Community");
+		selenium.clickAt("link=Scope Community", RuntimeVariables.replace(""));
 		selenium.selectWindow("null");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}

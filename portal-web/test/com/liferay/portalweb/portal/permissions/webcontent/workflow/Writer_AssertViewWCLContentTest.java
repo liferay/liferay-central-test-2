@@ -50,13 +50,13 @@ public class Writer_AssertViewWCLContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Permissions Test Page"));
+		selenium.clickAt("link=Web Content List Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Writer Permissions Web Content Test"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Writer Permissions Web Content Test"));
+		selenium.clickAt("link=Writer Permissions Web Content Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This is a writer permissions web content article!"));

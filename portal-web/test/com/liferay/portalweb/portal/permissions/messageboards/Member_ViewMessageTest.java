@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_ViewMessageTest extends BaseTestCase {
 	public void testMember_ViewMessage() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +51,7 @@ public class Member_ViewMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
+		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

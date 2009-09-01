@@ -32,8 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Member_AssertViewTest extends BaseTestCase {
 	public void testMember_AssertView() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Announcements Permissions Page"));
+		selenium.clickAt("link=Announcements Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test General Announcement"));
 		assertTrue(selenium.isTextPresent(

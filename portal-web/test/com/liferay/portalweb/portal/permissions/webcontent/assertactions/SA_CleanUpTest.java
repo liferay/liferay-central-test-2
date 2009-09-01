@@ -48,24 +48,25 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_15_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
-		selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Remove']");
+		selenium.clickAt("//img[@alt='Remove']", RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -84,7 +85,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentDisplay']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentDisplay']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -102,13 +104,13 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Permissions Test Page"));
+		selenium.clickAt("link=Web Content List Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Remove']");
+		selenium.clickAt("//img[@alt='Remove']", RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -127,7 +129,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentList']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentList']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -145,13 +148,13 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Search Permissions Test Page"));
+		selenium.clickAt("link=Web Content Search Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Remove']");
+		selenium.clickAt("//img[@alt='Remove']", RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -170,7 +173,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentSearch']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentSearch']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

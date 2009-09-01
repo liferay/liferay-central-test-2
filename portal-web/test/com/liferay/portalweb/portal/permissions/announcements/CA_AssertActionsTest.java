@@ -49,13 +49,13 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Announcements Permissions Page"));
+		selenium.clickAt("link=Announcements Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isElementPresent("link=Mark as Read"));
-		selenium.click("link=Mark as Read");
+		selenium.clickAt("link=Mark as Read", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +73,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Show");
+		selenium.clickAt("link=Show", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,7 +91,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Hide");
+		selenium.clickAt("link=Hide", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,7 +125,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Add Entry']"));
 	}

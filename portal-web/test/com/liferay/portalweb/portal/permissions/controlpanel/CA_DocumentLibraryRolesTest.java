@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 	public void testCA_DocumentLibraryRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-permissions",
 			RuntimeVariables.replace("label=Document Library"));
@@ -80,7 +80,7 @@ public class CA_DocumentLibraryRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutUPDATE_DISCUSSION']");
 		selenium.check(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.documentlibrary.model.DLFileShortcutVIEW']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}

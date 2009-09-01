@@ -49,10 +49,10 @@ public class CA_ConfigureWCLPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Permissions Test Page"));
+		selenium.clickAt("link=Web Content List Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
 		selenium.select("_86_type", RuntimeVariables.replace("label=General"));

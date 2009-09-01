@@ -50,10 +50,10 @@ public class Guest_AssertViewDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Documents"));
+		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -76,13 +76,13 @@ public class Guest_AssertViewDocumentsTest extends BaseTestCase {
 				"link=Member Permissions Edited Test Document.txt"));
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Edited Test Document.txt"));
-		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
+		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document.txt"));
 		assertTrue(selenium.isElementPresent(
 				"link=Admin Permissions Edited Test Document.txt"));
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document.txt"));

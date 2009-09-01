@@ -49,10 +49,10 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Announcements Permissions Page"));
+		selenium.clickAt("link=Announcements Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
+		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,8 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 		selenium.select("_84_distributionScope",
 			RuntimeVariables.replace("label=Community Admin"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.clickAt("//input[@value='Add Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_84_title",
 			RuntimeVariables.replace("Test CA Announcement"));
@@ -82,7 +83,7 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 			RuntimeVariables.replace("Test CA Announcement"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a test CA Announcement."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test CA Announcement"));
 	}

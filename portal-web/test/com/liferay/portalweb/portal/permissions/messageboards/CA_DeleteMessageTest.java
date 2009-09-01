@@ -48,7 +48,7 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -85,8 +85,9 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[7]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.clickAt("//td[7]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -124,7 +125,7 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

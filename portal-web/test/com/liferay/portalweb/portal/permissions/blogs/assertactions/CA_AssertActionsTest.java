@@ -32,7 +32,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertActionsTest extends BaseTestCase {
 	public void testCA_AssertActions() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Configuration"));
 		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
@@ -40,8 +41,8 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Blogs Test Entry"));
+		selenium.clickAt("link=Permissions Blogs Test Entry",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

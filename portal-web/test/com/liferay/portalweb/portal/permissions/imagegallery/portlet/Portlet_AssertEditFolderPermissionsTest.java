@@ -51,16 +51,17 @@ public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Permissions"));
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//form/div[1]",
 				"Edit Permissions for Image Gallery Folder:"));
 		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

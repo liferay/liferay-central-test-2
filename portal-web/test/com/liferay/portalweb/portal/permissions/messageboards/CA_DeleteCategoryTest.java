@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.permissions.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CA_DeleteCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -79,8 +80,9 @@ public class CA_DeleteCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[5]/ul/li/strong/span");
-		selenium.click("link=Delete");
+		selenium.clickAt("//td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

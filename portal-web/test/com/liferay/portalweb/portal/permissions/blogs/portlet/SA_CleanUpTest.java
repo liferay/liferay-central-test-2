@@ -55,8 +55,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Blogs Permissions Page"));
+				selenium.clickAt("link=Blogs Permissions Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 
@@ -77,18 +77,20 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
-				selenium.click("//img[@alt='Remove']");
+				selenium.clickAt("//img[@alt='Remove']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 3:
-				selenium.click("link=Application");
+				selenium.clickAt("link=Application",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -107,7 +109,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//div[@id='Collaboration-Blogs']/p/a");
+				selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

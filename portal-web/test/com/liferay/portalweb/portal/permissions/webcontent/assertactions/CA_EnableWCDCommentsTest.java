@@ -55,10 +55,11 @@ public class CA_EnableWCDCommentsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Web Content Display Permissions Test Page"));
+				selenium.clickAt("link=Web Content Display Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Configuration"));
+				selenium.clickAt("link=Configuration",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean Checked = selenium.isChecked(
@@ -70,7 +71,8 @@ public class CA_EnableWCDCommentsTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_86_enableCommentsCheckbox");
+				selenium.clickAt("_86_enableCommentsCheckbox",
+					RuntimeVariables.replace(""));
 
 			case 2:
 			case 100:

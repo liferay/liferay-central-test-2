@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPublisherTest extends BaseTestCase {
 	public void testAddPublisher() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +51,7 @@ public class AddPublisherTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,9 +88,9 @@ public class AddPublisherTest extends BaseTestCase {
 		selenium.select("_125_birthdayYear",
 			RuntimeVariables.replace("label=1984"));
 		selenium.select("_125_male", RuntimeVariables.replace("label=Female"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("passwordLink");
+		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -110,9 +110,9 @@ public class AddPublisherTest extends BaseTestCase {
 
 		selenium.type("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password2", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("rolesLink");
+		selenium.clickAt("rolesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -130,7 +130,8 @@ public class AddPublisherTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='roles']/span/a[2]");
+		selenium.clickAt("//div[@id='roles']/span/a[2]",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.waitForPopUp("role", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=role");
@@ -151,9 +152,9 @@ public class AddPublisherTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Publisher");
+		selenium.clickAt("link=Publisher", RuntimeVariables.replace(""));
 		selenium.selectWindow("null");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

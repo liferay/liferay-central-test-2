@@ -50,8 +50,8 @@ public class Member_AssertViewFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Permissions Edited Test Folder"));
@@ -59,8 +59,8 @@ public class Member_AssertViewFoldersTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions2 Test2 Folder2"));
 		assertTrue(selenium.isElementPresent(
 				"link=Permissions2 Test2 Subfolder2"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Edited Test Folder"));
+		selenium.clickAt("link=Permissions Edited Test Folder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -80,7 +80,7 @@ public class Member_AssertViewFoldersTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Permissions Test Subfolder"));
-		selenium.click(RuntimeVariables.replace("link=Folders"));
+		selenium.clickAt("link=Folders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -99,8 +99,8 @@ public class Member_AssertViewFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions2 Test2 Folder2"));
+		selenium.clickAt("link=Permissions2 Test2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

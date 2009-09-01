@@ -49,9 +49,11 @@ public class SA_RemoveAddEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Permissions']"));
+		selenium.clickAt("//input[@value='Permissions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +73,8 @@ public class SA_RemoveAddEntryPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("//tr[7]/td[2]/input");
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

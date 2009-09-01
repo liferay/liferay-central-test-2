@@ -50,11 +50,11 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Portlet2 Temporary2 Folder2"));
+		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +75,7 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 
 		assertTrue(selenium.isPartialText("//form[2]/div[3]/div/div[1]",
 				"Portlet2 Temporary2 Image2"));
-		selenium.click("//div/a/img");
+		selenium.clickAt("//div/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,10 +93,11 @@ public class SA_RemoveDeleteImagePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.uncheck("//tr[7]/td[2]/input");
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

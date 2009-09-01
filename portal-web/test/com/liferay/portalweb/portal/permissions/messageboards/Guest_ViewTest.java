@@ -50,17 +50,17 @@ public class Guest_ViewTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent("//input[@value='Sign In']"));
 		assertTrue(selenium.isElementPresent("link=Sign In"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Message Boards Permissions Page"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Thread 1"));
+		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
-		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

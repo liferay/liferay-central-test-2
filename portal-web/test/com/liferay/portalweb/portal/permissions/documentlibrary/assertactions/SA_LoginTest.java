@@ -48,12 +48,13 @@ public class SA_LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -50,7 +50,8 @@ public class CA_LoginTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("ca@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -32,12 +32,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssertDeleteActionsTest extends BaseTestCase {
 	public void testCA_AssertDeleteActions() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Test Subfolder"));
+		selenium.clickAt("link=Permissions Test Subfolder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +57,7 @@ public class CA_AssertDeleteActionsTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=My Documents"));
+		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -77,7 +77,7 @@ public class CA_AssertDeleteActionsTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Delete"));
-		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
+		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Delete"));
 	}

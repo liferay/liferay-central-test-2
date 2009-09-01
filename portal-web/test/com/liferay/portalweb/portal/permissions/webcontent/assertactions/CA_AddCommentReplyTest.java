@@ -49,10 +49,10 @@ public class CA_AddCommentReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Post Reply");
+		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,8 +75,8 @@ public class CA_AddCommentReplyTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a ca test comment repl."));
 		selenium.type("//table[2]/tbody/tr/td/div/textarea",
 			RuntimeVariables.replace("This is a ca test comment reply."));
-		selenium.click(RuntimeVariables.replace(
-				"//td[2]/table[2]/tbody/tr/td/input[1]"));
+		selenium.clickAt("//td[2]/table[2]/tbody/tr/td/input[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

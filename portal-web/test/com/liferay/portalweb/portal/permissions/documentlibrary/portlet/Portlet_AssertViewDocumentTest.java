@@ -50,11 +50,11 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=SA1 Portlet1 Permissions1 Folder1"));
+		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=View"));
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

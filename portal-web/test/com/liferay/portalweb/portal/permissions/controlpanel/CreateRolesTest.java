@@ -48,7 +48,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,10 +89,10 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Community Admin"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the CommunityAdmin Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Community Admin"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -114,10 +114,10 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Member"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Member Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Member"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -139,10 +139,10 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Portlet"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Portlet Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Portlet"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -164,10 +164,10 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Publisher Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Publisher"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -189,10 +189,10 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Scope"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Scope Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Scope"));
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -214,7 +214,7 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Writer"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Writer Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Writer"));
 	}

@@ -34,12 +34,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 	public void testMember_AssertCannotEditPermissions()
 		throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Permissions"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Edited Test Folder"));
+		selenium.clickAt("link=Permissions Edited Test Folder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,8 +59,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 		}
 
 		assertFalse(selenium.isElementPresent("link=Permissions"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Test Subfolder"));
+		selenium.clickAt("link=Permissions Test Subfolder",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -79,7 +79,7 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=View"));
+		selenium.clickAt("link=View", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -99,8 +99,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 		}
 
 		assertFalse(selenium.isElementPresent("link=Permissions"));
-		selenium.click(RuntimeVariables.replace(
-				"link=Document Library Permissions Test Page"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -119,8 +119,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions2 Test2 Subfolder2"));
+		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -139,8 +139,8 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the required permissions."));

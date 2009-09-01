@@ -47,11 +47,13 @@ public class SA_ControlPanelTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[4]/ul/li[1]/a[1]"));
+				selenium.clickAt("//li[4]/ul/li[1]/a[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

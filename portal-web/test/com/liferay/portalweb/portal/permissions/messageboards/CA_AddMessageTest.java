@@ -48,7 +48,7 @@ public class CA_AddMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +69,8 @@ public class CA_AddMessageTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Post New Thread']"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Post New Thread']"));
+		selenium.clickAt("//input[@value='Post New Thread']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -140,10 +140,10 @@ public class CA_AddMessageTest extends BaseTestCase {
 		selenium.type("_19_subject", RuntimeVariables.replace("Test Thread 1"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message 1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
-		selenium.click(RuntimeVariables.replace("link=Categories"));
+		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

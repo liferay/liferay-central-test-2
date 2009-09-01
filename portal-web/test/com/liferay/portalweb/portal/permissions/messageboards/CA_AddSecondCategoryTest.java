@@ -49,8 +49,8 @@ public class CA_AddSecondCategoryTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("//input[@value='Add Category']"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Category']"));
+		selenium.clickAt("//input[@value='Add Category']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +87,7 @@ public class CA_AddSecondCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -49,7 +49,7 @@ public class Member_ReplyMessageTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Reply"));
-		selenium.click(RuntimeVariables.replace("link=Reply"));
+		selenium.clickAt("link=Reply", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -102,13 +102,13 @@ public class Member_ReplyMessageTest extends BaseTestCase {
 
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message Reply 1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Edit"));
 		assertTrue(selenium.isElementPresent("link=Permissions"));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
-		selenium.click(RuntimeVariables.replace("link=Permissions Test 1"));
+		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

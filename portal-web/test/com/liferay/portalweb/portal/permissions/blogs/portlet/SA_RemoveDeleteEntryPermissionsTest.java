@@ -49,11 +49,13 @@ public class SA_RemoveDeleteEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/div[1]/div[1]/a",
 				"Portlet1 Temporary1 Entry1"));
-		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/div[1]/a"));
+		selenium.clickAt("//div[2]/div[1]/div[1]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +74,7 @@ public class SA_RemoveDeleteEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Permissions"));
+		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +94,8 @@ public class SA_RemoveDeleteEntryPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.uncheck("//tr[7]/td[3]/input");
-		selenium.click(RuntimeVariables.replace("//input[@value='Submit']"));
+		selenium.clickAt("//input[@value='Submit']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

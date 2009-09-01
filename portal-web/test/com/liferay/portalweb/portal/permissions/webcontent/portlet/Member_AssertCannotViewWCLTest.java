@@ -50,8 +50,8 @@ public class Member_AssertCannotViewWCLTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Permissions Test Page"));
+		selenium.clickAt("link=Web Content List Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You do not have the roles required to access this portlet."));

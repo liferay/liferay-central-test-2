@@ -48,9 +48,9 @@ public class SA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,8 +70,8 @@ public class SA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,9 +92,11 @@ public class SA_AddPageTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Permissions Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

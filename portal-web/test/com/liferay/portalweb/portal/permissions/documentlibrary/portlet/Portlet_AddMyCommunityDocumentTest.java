@@ -49,9 +49,10 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Document Library"));
+		selenium.clickAt("link=Document Library", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My1 Community1 Folder1"));
+		selenium.clickAt("link=My1 Community1 Folder1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,8 +71,8 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Document']"));
+		selenium.clickAt("//input[@value='Add Document']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		selenium.click("link=Use the classic uploader.");
@@ -97,7 +98,7 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\portlet\\dependencies\\Portlet_TestDocument.txt"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("My1 Community1 Document1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=My1 Community1 Document1.txt"));

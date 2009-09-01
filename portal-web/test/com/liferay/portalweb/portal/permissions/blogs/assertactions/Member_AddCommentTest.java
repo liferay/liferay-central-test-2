@@ -48,10 +48,11 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Permissions Page"));
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Permissions Blogs Test Entry"));
+		selenium.clickAt("link=Permissions Blogs Test Entry",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +71,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Comment");
+		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("Member Permissions Blogs Test Comment"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

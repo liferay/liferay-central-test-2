@@ -50,8 +50,8 @@ public class Guest_AssertCannotEditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Image Gallery Permissions Test Page"));
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span"));
 		assertFalse(selenium.isElementPresent("link=Edit"));

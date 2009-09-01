@@ -50,14 +50,14 @@ public class Writer_AssertSearchWCSPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Search Permissions Test Page"));
+		selenium.clickAt("link=Web Content Search Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_77_keywords", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
+		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Writer Permissions Web Content Test"));
-		selenium.click(RuntimeVariables.replace("//td[3]/span/a"));
+		selenium.clickAt("//td[3]/span/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This is a writer permissions web content article!"));

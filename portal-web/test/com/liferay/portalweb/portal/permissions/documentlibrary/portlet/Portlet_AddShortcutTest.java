@@ -55,11 +55,11 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Permissions Test Page"));
+				selenium.clickAt("link=Document Library Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"link=Portlet2 Temporary2 Folder2"));
+				selenium.clickAt("link=Portlet2 Temporary2 Folder2",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -78,8 +78,8 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Shortcut']"));
+				selenium.clickAt("//input[@value='Add Shortcut']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -98,7 +98,8 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Select']");
+				selenium.clickAt("//input[@value='Select']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("toGroup",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=toGroup");
@@ -127,19 +128,22 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("link=My Community");
+				selenium.clickAt("link=My Community",
+					RuntimeVariables.replace(""));
 				selenium.selectWindow("null");
 
 			case 3:
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("My Community"),
 					selenium.getText("_20_toGroupName"));
-				selenium.click("_20_selectToFileEntryButton");
+				selenium.clickAt("_20_selectToFileEntryButton",
+					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("toGroup",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=toGroup");
 				Thread.sleep(5000);
-				selenium.click(RuntimeVariables.replace("link=Document Home"));
+				selenium.clickAt("link=Document Home",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 
@@ -166,8 +170,8 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=My1 Community1 Folder1"));
+				selenium.clickAt("link=My1 Community1 Folder1",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean DocumentPresent1 = selenium.isElementPresent(
@@ -194,7 +198,8 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("link=My1 Community1 Document1.txt");
+				selenium.clickAt("link=My1 Community1 Document1.txt",
+					RuntimeVariables.replace(""));
 				selenium.selectWindow("null");
 
 			case 6:
@@ -203,8 +208,8 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"My1 Community1 Document1.txt"),
 					selenium.getText("_20_toFileEntryTitle"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

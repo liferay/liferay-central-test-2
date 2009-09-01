@@ -49,10 +49,10 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Blogs Scope Permissions Page"));
+		selenium.clickAt("link=Blogs Scope Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,7 +71,8 @@ public class SA_AddScopeBlogsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='Collaboration-Blogs']/p/a");
+		selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

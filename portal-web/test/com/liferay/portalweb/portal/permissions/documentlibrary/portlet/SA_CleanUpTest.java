@@ -55,8 +55,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Document Library Permissions Test Page"));
+				selenium.clickAt("link=Document Library Permissions Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean PortletPresent = selenium.isElementPresent(
@@ -77,7 +77,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[4]/ul/li/strong/span");
+				selenium.clickAt("//td[4]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -95,7 +96,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.clickAt("//div[5]/ul/li[4]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -111,7 +113,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[4]/ul/li/strong/span");
+				selenium.clickAt("//td[4]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -129,18 +132,21 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.clickAt("//div[5]/ul/li[4]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
-				selenium.click("//img[@alt='Remove']");
+				selenium.clickAt("//img[@alt='Remove']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 4:
-				selenium.click("link=Application");
+				selenium.clickAt("link=Application",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -159,8 +165,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='ContentManagement-DocumentLibrary']/p/a");
+				selenium.clickAt("//div[@id='ContentManagement-DocumentLibrary']/p/a",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

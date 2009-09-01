@@ -49,10 +49,10 @@ public class CA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span"));
+		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +72,8 @@ public class CA_AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,10 +94,11 @@ public class CA_AddPageTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Message Boards Permissions Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Message Boards Permissions Page"));
+		selenium.clickAt("link=Message Boards Permissions Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

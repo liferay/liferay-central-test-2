@@ -48,13 +48,15 @@ public class Portlet_LoginTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login",
 			RuntimeVariables.replace("portlet@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@type='checkbox']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("//input[@type='checkbox']",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

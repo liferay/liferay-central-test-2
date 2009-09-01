@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_PortalRolesTest extends BaseTestCase {
 	public void testCA_PortalRoles() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
+		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("add-permissions",
 			RuntimeVariables.replace("label=Communities"));
@@ -58,7 +58,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupPUBLISH_STAGING']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupUPDATE']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 		selenium.select("add-permissions",
@@ -91,7 +91,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationUPDATE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.OrganizationVIEW']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 		selenium.select("add-permissions",
@@ -110,7 +110,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleUPDATE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.RoleVIEW']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 		selenium.select("add-permissions",
@@ -129,7 +129,7 @@ public class CA_PortalRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupUPDATE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.UserGroupVIEW']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("The role permissions were updated."));
 	}

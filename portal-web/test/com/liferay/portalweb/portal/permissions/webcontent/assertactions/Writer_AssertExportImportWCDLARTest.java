@@ -50,10 +50,10 @@ public class Writer_AssertExportImportWCDLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Permissions Test Page"));
+		selenium.clickAt("link=Web Content Display Permissions Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,12 +71,12 @@ public class Writer_AssertExportImportWCDLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Export / Import"));
+		selenium.clickAt("link=Export / Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Export"));
 		assertTrue(selenium.isElementPresent("link=Import"));
 		assertTrue(selenium.isElementPresent("//input[@value='Export']"));
-		selenium.click(RuntimeVariables.replace("link=Import"));
+		selenium.clickAt("link=Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Import']"));
 	}
