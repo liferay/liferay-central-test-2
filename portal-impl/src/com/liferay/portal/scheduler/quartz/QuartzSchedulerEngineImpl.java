@@ -292,7 +292,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			jobDataMap.put(DESTINATION, destination);
 			jobDataMap.put(MESSAGE_BODY, messageBody);
 
-			_scheduler.scheduleJob(jobDetail, trigger);
+			synchronized(this){
+				_scheduler.unscheduleJob(groupName, groupName);
+				_scheduler.scheduleJob(jobDetail, trigger);
+			}
 		}
 		catch (ObjectAlreadyExistsException oare) {
 			if (_log.isInfoEnabled()) {
