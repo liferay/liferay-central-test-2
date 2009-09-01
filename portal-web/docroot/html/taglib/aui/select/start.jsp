@@ -30,6 +30,7 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
+String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
@@ -50,4 +51,4 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 	</c:if>
 
 	<span class="aui-form-field aui-form-select">
-		<select name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<select id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>

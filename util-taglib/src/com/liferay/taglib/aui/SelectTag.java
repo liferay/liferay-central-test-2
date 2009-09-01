@@ -60,6 +60,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_first = false;
 				_helpMessage = null;
 				_inlineLabel = false;
+				_id = null;
 				_label = null;
 				_last = false;
 				_name = null;
@@ -73,6 +74,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
+			if (Validator.isNull(_id)) {
+				_id = _name;
+			}
+
 			if (Validator.isNull(_label)) {
 				_label = _name;
 			}
@@ -84,6 +89,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:select:helpMessage", _helpMessage);
 			request.setAttribute(
 				"aui:select:inlineLabel", String.valueOf(_inlineLabel));
+			request.setAttribute("aui:select:id", _id);
 			request.setAttribute("aui:select:label", _label);
 			request.setAttribute("aui:select:last", String.valueOf(_last));
 			request.setAttribute("aui:select:name", _name);
@@ -137,6 +143,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_helpMessage = helpMessage;
 	}
 
+	public void setId(String id) {
+		_id = id;
+	}
+
 	public void setInlineLabel(boolean inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
@@ -168,6 +178,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;
+	private String _id;
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;
