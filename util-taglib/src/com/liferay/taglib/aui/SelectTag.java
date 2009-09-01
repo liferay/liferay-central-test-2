@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,7 +80,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			}
 
 			if (Validator.isNull(_label)) {
-				_label = _name;
+				_label = TextFormatter.format(_name, TextFormatter.K);
 			}
 
 			request.setAttribute("aui:select:cssClass", _cssClass);
