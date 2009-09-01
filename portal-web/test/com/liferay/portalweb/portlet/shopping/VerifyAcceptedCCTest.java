@@ -48,18 +48,20 @@ public class VerifyAcceptedCCTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
+		selenium.clickAt("//input[@value='Checkout']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//option[@value='visa']"));
 		assertTrue(selenium.isElementPresent("//option[@value='discover']"));
 		assertFalse(selenium.isElementPresent(
 				"//option[@value='americanexpress']"));
 		assertFalse(selenium.isElementPresent("//option[@value='mastercard']"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

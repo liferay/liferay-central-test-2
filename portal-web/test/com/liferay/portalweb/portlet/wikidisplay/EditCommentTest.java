@@ -48,7 +48,8 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +69,8 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]");
+		selenium.clickAt("//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a[2]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,8 +93,8 @@ public class EditCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a edited test comment."));
 		selenium.type("//tr[5]/td[2]/table[2]/tbody/tr[2]/td/div/textarea",
 			RuntimeVariables.replace("This is a edited test comment."));
-		selenium.click(RuntimeVariables.replace(
-				"//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]"));
+		selenium.clickAt("//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

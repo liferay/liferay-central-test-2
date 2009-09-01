@@ -48,10 +48,10 @@ public class VerifyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[2]/div/div/ul/li[3]/ul/li/a"));
+		selenium.clickAt("//div[2]/div/div/ul/li[3]/ul/li/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +73,7 @@ public class VerifyLinksTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"LiferayLiferay, Inc.Joe BloggsSite Map Test PageSite Map Child Page"),
 			selenium.getText("//td[1]/div/div/div/div[2]"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,8 @@ public class VerifyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/div/div/ul/li[1]/a"));
+		selenium.clickAt("//div[2]/div/div/ul/li[1]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,10 +113,10 @@ public class VerifyLinksTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent("Enterprise Admin"));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//a[contains(text(),'Plugins')]"));
+		selenium.clickAt("//a[contains(text(),'Plugins')]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

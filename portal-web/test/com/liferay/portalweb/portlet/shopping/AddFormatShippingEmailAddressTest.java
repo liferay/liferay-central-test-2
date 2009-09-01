@@ -49,11 +49,12 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
+		selenium.clickAt("//input[@value='Checkout']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_billingStreet",
 			RuntimeVariables.replace("1234 Sesame Street"));
@@ -104,7 +105,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -158,7 +160,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -212,7 +215,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -266,7 +270,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -320,7 +325,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -374,7 +380,8 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -428,12 +435,14 @@ public class AddFormatShippingEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid email address."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -48,18 +48,18 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Configuration"));
+		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_rootLayoutId",
 			RuntimeVariables.replace("label=regexp:-\\sSite Map Test Page"));
 		selenium.select("_86_displayDepth", RuntimeVariables.replace("label=1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
+		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Site Map Child Page"));
 		assertFalse(selenium.isElementPresent("//a[contains(text(),'Plugins')]"));

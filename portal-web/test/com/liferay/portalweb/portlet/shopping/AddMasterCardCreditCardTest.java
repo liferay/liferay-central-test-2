@@ -48,11 +48,12 @@ public class AddMasterCardCreditCardTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
+		selenium.clickAt("//input[@value='Checkout']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_billingStreet",
 			RuntimeVariables.replace("1234 Sesame Street"));
@@ -72,7 +73,8 @@ public class AddMasterCardCreditCardTest extends BaseTestCase {
 		selenium.type("_34_billingPhone",
 			RuntimeVariables.replace("626-589-1453"));
 		assertTrue(selenium.isElementPresent("_34_shipToBillingCheckbox"));
-		selenium.click("_34_shipToBillingCheckbox");
+		selenium.clickAt("_34_shipToBillingCheckbox",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_shipToBillingCheckbox"));
 		selenium.select("_34_ccType",
 			RuntimeVariables.replace("label=MasterCard"));
@@ -85,13 +87,15 @@ public class AddMasterCardCreditCardTest extends BaseTestCase {
 			RuntimeVariables.replace("Please take care of m order."));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again. "));
 		assertTrue(selenium.isTextPresent(
 				"Please enter a valid credit card number."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

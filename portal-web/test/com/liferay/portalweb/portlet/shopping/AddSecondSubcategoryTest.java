@@ -48,12 +48,12 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Subcategory']"));
+		selenium.clickAt("//input[@value='Add Subcategory']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_name",
 			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gor"));
@@ -63,14 +63,15 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gor!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("T\u00e9st Subcat\u00e9gory"));
 		assertTrue(selenium.isTextPresent(
 				"This is a t\u00e9st subcat\u00e9gory!"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -48,9 +48,10 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,8 +92,8 @@ public class VerifyPageFormatTest extends BaseTestCase {
 
 		selenium.type("//span/input",
 			RuntimeVariables.replace("This is Test Page Format"));
-		selenium.click(
-			"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/img");
+		selenium.clickAt("//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[1]/img",
+			RuntimeVariables.replace(""));
 		selenium.typeKeys("//td[@id='xEditingArea']/textarea",
 			RuntimeVariables.replace(
 				"<a href=http://www.lifera.com>Welcome to LIFERA</a>"));
@@ -100,7 +101,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -123,7 +124,8 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=This is Test Page Format"));
-		selenium.click(RuntimeVariables.replace("link=This is Test Page Format"));
+		selenium.clickAt("link=This is Test Page Format",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -143,7 +145,7 @@ public class VerifyPageFormatTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Welcome to LIFERAY"));
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

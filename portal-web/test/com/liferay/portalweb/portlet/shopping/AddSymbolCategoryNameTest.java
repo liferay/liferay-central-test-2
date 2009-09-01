@@ -48,10 +48,10 @@ public class AddSymbolCategoryNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Category']"));
+		selenium.clickAt("//input[@value='Add Category']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_name", RuntimeVariables.replace("Audio Center//"));
 		selenium.type("_34_name", RuntimeVariables.replace("Audio Center//"));
@@ -59,7 +59,7 @@ public class AddSymbolCategoryNameTest extends BaseTestCase {
 			RuntimeVariables.replace("CD's, MP3's, Vinl Records."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -67,12 +67,13 @@ public class AddSymbolCategoryNameTest extends BaseTestCase {
 		selenium.typeKeys("_34_name",
 			RuntimeVariables.replace("Audio Center////"));
 		selenium.type("_34_name", RuntimeVariables.replace("Audio Center////"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

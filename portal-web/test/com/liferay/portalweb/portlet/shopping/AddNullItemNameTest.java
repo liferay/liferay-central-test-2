@@ -48,11 +48,12 @@ public class AddNullItemNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
+		selenium.clickAt("//input[@value='Add Item']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_sku", RuntimeVariables.replace("2222"));
 		selenium.type("_34_sku", RuntimeVariables.replace("2222"));
@@ -72,12 +73,13 @@ public class AddNullItemNameTest extends BaseTestCase {
 		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
 		selenium.typeKeys("_34_minQuantity0", RuntimeVariables.replace("1"));
 		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid name."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

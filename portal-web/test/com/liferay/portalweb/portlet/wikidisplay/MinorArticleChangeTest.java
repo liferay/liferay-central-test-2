@@ -48,9 +48,10 @@ public class MinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +73,8 @@ public class MinorArticleChangeTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"==WD Setup Wiki Test Article==\n\n*This is a WD wiki test article!\n\nOh NOES! I've made a minor change. Please revert this!"));
-		selenium.click("//span/input[2]");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//span/input[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -48,9 +48,10 @@ public class RemoveRedirectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.clickAt("link=Second Edited Wiki Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class RemoveRedirectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//a[3]/span"));
+		selenium.clickAt("//a[3]/span", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class RemoveRedirectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=First"));
+		selenium.clickAt("link=First", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,12 +108,12 @@ public class RemoveRedirectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[2]/div/div/div[2]"));
+		selenium.clickAt("//div[2]/div/div/div[2]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This page is currently redirected to Rename to Second."));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Remove Redirect']"));
+		selenium.clickAt("//input[@value='Remove Redirect']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -133,12 +134,12 @@ public class RemoveRedirectTest extends BaseTestCase {
 
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is Remove Redirect First!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("(Redirected from FrontPage)"));
-		selenium.click(RuntimeVariables.replace("Link=FrontPage"));
+		selenium.clickAt("Link=FrontPage", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -157,7 +158,7 @@ public class RemoveRedirectTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("Link=First"));
+		selenium.clickAt("Link=First", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is Remove Redirect First!"));
 	}

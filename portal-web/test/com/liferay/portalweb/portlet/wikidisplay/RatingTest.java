@@ -48,7 +48,8 @@ public class RatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//td[1]/ul/li[2]/a[2]"));
 		assertEquals(RuntimeVariables.replace("(0 Votes)"),
@@ -60,7 +61,7 @@ public class RatingTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
-		selenium.click("//td[1]/ul/li[2]/a[2]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[2]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("(1 Vote)"),
 			selenium.getText("//td[1]/ul/li[3]"));
@@ -71,7 +72,7 @@ public class RatingTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
-		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("(1 Vote)"),
 			selenium.getText("//td[1]/ul/li[3]"));
@@ -82,6 +83,6 @@ public class RatingTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("\u00b10"),
 			selenium.getText(
 				"//tr[5]/td[2]/table[1]/tbody/tr/td[1]/ul/li[1]/span"));
-		selenium.click("//td[1]/ul/li[2]/a[1]");
+		selenium.clickAt("//td[1]/ul/li[2]/a[1]", RuntimeVariables.replace(""));
 	}
 }

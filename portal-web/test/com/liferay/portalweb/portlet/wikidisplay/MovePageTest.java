@@ -48,9 +48,10 @@ public class MovePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +76,7 @@ public class MovePageTest extends BaseTestCase {
 		selenium.type("//span/input", RuntimeVariables.replace("First"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is Move Rename Article!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -98,7 +99,7 @@ public class MovePageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=First"));
-		selenium.click(RuntimeVariables.replace("link=First"));
+		selenium.clickAt("link=First", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -117,7 +118,7 @@ public class MovePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -136,7 +137,7 @@ public class MovePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Move"));
+		selenium.clickAt("link=Move", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -155,7 +156,7 @@ public class MovePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Rename");
+		selenium.clickAt("link=Rename", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent(
 				"Use the form below to rename a page,"));
 
@@ -177,7 +178,8 @@ public class MovePageTest extends BaseTestCase {
 
 		selenium.type("//span/input",
 			RuntimeVariables.replace("Rename to Second"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Rename']"));
+		selenium.clickAt("//input[@value='Rename']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

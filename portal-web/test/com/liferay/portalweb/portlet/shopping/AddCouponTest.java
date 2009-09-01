@@ -48,14 +48,15 @@ public class AddCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Coupons"));
+		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Coupon']"));
+		selenium.clickAt("//input[@value='Add Coupon']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("_34_autoCodeCheckbox"));
-		selenium.click("_34_autoCodeCheckbox");
+		selenium.clickAt("_34_autoCodeCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_autoCodeCheckbox"));
 		selenium.typeKeys("_34_name",
 			RuntimeVariables.replace("Friends and Famil Discount"));
@@ -69,12 +70,13 @@ public class AddCouponTest extends BaseTestCase {
 				"This discount is for everyone who is considered a friend or part of the family."));
 		selenium.typeKeys("_34_discount", RuntimeVariables.replace("0.50"));
 		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Friends and Family Discount"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

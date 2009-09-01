@@ -54,12 +54,14 @@ public class DeleteWikiNodeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+				selenium.clickAt("link=Wiki Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//img[@alt='Manage Wikis']"));
+				selenium.clickAt("//img[@alt='Manage Wikis']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[4]/ul/li/strong/span");
+				selenium.clickAt("//td[4]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -77,7 +79,8 @@ public class DeleteWikiNodeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+				selenium.clickAt("//div[5]/ul/li[6]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -91,7 +94,8 @@ public class DeleteWikiNodeTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[4]/ul/li/strong/span");
+				selenium.clickAt("//td[4]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -109,7 +113,8 @@ public class DeleteWikiNodeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[6]/a"));
+				selenium.clickAt("//div[5]/ul/li[6]/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

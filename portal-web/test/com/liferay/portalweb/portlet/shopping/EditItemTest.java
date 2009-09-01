@@ -48,9 +48,9 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +69,8 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_stockQuantity", RuntimeVariables.replace("250"));
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("250"));
@@ -78,16 +78,17 @@ public class EditItemTest extends BaseTestCase {
 		selenium.type("_34_price0", RuntimeVariables.replace("$11.99"));
 		selenium.typeKeys("_34_shipping0", RuntimeVariables.replace("$2.50"));
 		selenium.type("_34_shipping0", RuntimeVariables.replace("$2.50"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("$11.99"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[2]/table/tbody/tr[3]/td[2]/a"));
+		selenium.clickAt("//div[2]/table/tbody/tr[3]/td[2]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("$11.99"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

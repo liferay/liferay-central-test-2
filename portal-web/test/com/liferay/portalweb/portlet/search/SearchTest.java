@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
 		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
+		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -52,7 +52,8 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

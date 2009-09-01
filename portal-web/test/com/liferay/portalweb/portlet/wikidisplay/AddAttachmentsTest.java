@@ -48,10 +48,11 @@ public class AddAttachmentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=0 Attachments"));
-		selenium.click(RuntimeVariables.replace("link=0 Attachments"));
+		selenium.clickAt("link=0 Attachments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,15 +73,16 @@ public class AddAttachmentsTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"This page does not have any file attachments."));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Attachments']"));
+		selenium.clickAt("//input[@value='Add Attachments']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.click("link=Use the classic uploader.");
+		selenium.clickAt("link=Use the classic uploader.",
+			RuntimeVariables.replace(""));
 		selenium.type("//fieldset/div[1]/input",
 			RuntimeVariables.replace(
 				"L:\\sf.net\\portal\\trunk\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wikidisplay\\dependencies\\Wiki-Selenium.portlet.lar"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -103,7 +105,8 @@ public class AddAttachmentsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Wiki-Selenium.portlet.lar"));
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

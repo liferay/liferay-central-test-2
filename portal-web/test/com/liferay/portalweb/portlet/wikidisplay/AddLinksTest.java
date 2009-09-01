@@ -48,9 +48,10 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +73,7 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"<<TableOfContents>>\n\n== WD Setup Edited Wiki Test Article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,7 +95,7 @@ public class AddLinksTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
+		selenium.clickAt("link=Link Me 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -113,7 +114,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -135,7 +136,7 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n[[FrontPage]]\n\n[[Link Me 2]]"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -157,9 +158,9 @@ public class AddLinksTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
+		selenium.clickAt("link=Link Me 2", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -181,7 +182,7 @@ public class AddLinksTest extends BaseTestCase {
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj\n\n[[FrontPage]]\n\n[[Link Me 1]]"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -49,9 +49,10 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +71,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=History"));
+		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +90,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Revert"));
+		selenium.clickAt("link=Revert", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -97,7 +98,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			selenium.getText("//tr[3]/td[6]"));
 		assertEquals(RuntimeVariables.replace("1.4"),
 			selenium.getText("//td[3]/a"));
-		selenium.click(RuntimeVariables.replace("link=1.4"));
+		selenium.clickAt("link=1.4", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

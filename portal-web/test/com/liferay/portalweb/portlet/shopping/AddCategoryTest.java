@@ -48,10 +48,10 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Category']"));
+		selenium.clickAt("//input[@value='Add Category']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_name", RuntimeVariables.replace("Audio Center"));
 		selenium.type("_34_name", RuntimeVariables.replace("Audio Center"));
@@ -59,7 +59,7 @@ public class AddCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("CD's, MP3's, Vinl Records."));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

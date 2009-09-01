@@ -35,7 +35,8 @@ public class ConvertUnitTest extends BaseTestCase {
 		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));
 		selenium.select("_27_fromId", RuntimeVariables.replace("label=Inch"));
 		selenium.select("_27_toId", RuntimeVariables.replace("label=Centimeter"));
-		selenium.click("//input[@value='Convert']");
+		selenium.clickAt("//input[@value='Convert']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

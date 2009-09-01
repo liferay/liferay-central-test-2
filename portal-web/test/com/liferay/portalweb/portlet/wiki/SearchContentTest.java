@@ -48,9 +48,9 @@ public class SearchContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=FrontPage"));
+		selenium.clickAt("link=FrontPage", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,11 +72,12 @@ public class SearchContentTest extends BaseTestCase {
 		selenium.type("_36_keywords",
 			RuntimeVariables.replace(
 				"\"This is Search Test Child Page Article Content\""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 result."));
 		assertTrue(selenium.isElementPresent("link=Test Child Page"));
-		selenium.click(RuntimeVariables.replace("link=Test Child Page"));
+		selenium.clickAt("link=Test Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

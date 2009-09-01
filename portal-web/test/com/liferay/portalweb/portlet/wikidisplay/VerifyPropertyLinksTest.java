@@ -48,9 +48,10 @@ public class VerifyPropertyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class VerifyPropertyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Outgoing Links"));
+		selenium.clickAt("link=Outgoing Links", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,9 +91,9 @@ public class VerifyPropertyLinksTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
-		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
+		selenium.clickAt("link=Link Me 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,7 +112,7 @@ public class VerifyPropertyLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Incoming Links"));
+		selenium.clickAt("link=Incoming Links", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=FrontPage"));
 	}

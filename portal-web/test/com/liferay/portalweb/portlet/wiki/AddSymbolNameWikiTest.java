@@ -48,11 +48,13 @@ public class AddSymbolNameWikiTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Manage Wikis']"));
+		selenium.clickAt("//img[@alt='Manage Wikis']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Wiki']"));
+		selenium.clickAt("//input[@value='Add Wiki']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +77,7 @@ public class AddSymbolNameWikiTest extends BaseTestCase {
 		selenium.type("_36_name", RuntimeVariables.replace("Test/"));
 		selenium.typeKeys("_36_description", RuntimeVariables.replace(""));
 		selenium.type("_36_description", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -101,7 +103,7 @@ public class AddSymbolNameWikiTest extends BaseTestCase {
 		selenium.type("_36_name", RuntimeVariables.replace("Test!"));
 		selenium.typeKeys("_36_description", RuntimeVariables.replace(""));
 		selenium.type("_36_description", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -127,7 +129,7 @@ public class AddSymbolNameWikiTest extends BaseTestCase {
 		selenium.type("_36_name", RuntimeVariables.replace("Test?"));
 		selenium.typeKeys("_36_description", RuntimeVariables.replace(""));
 		selenium.type("_36_description", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

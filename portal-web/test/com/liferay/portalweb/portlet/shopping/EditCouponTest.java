@@ -48,9 +48,9 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Coupons"));
+		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +69,8 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_name", RuntimeVariables.replace("Famil Discount"));
 		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
@@ -78,13 +78,14 @@ public class EditCouponTest extends BaseTestCase {
 			RuntimeVariables.replace("Discount for famil onl!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Discount for family only!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Family Discount"));
 		assertFalse(selenium.isTextPresent("Friends and Family Discount"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

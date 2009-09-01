@@ -48,11 +48,12 @@ public class VerifyStateTaxTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
+		selenium.clickAt("//input[@value='Checkout']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
 		selenium.typeKeys("_34_ccNumber",
@@ -62,10 +63,12 @@ public class VerifyStateTaxTest extends BaseTestCase {
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
 		selenium.typeKeys("_34_ccVerNumber", RuntimeVariables.replace("526"));
 		selenium.type("_34_ccVerNumber", RuntimeVariables.replace("526"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
+		selenium.clickAt("//input[@value='Continue']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("$12.92"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

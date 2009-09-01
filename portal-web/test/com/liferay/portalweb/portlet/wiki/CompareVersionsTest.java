@@ -48,9 +48,10 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.clickAt("link=Second Edited Wiki Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=History"));
+		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +108,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_36_rowIds");
+		selenium.clickAt("_36_rowIds", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_36_rowIds"));
 
 		for (int second = 0;; second++) {
@@ -127,11 +128,12 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@name='_36_rowIds' and @value='1.0']");
+		selenium.clickAt("//input[@name='_36_rowIds' and @value='1.0']",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked(
 				"//input[@name='_36_rowIds' and @value='1.0']"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Compare Versions']"));
+		selenium.clickAt("//input[@value='Compare Versions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

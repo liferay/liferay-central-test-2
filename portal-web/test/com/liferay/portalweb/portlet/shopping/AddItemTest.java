@@ -48,11 +48,12 @@ public class AddItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
+		selenium.clickAt("//input[@value='Add Item']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_sku", RuntimeVariables.replace("1111"));
 		selenium.type("_34_sku", RuntimeVariables.replace("1111"));
@@ -70,13 +71,14 @@ public class AddItemTest extends BaseTestCase {
 		selenium.type("_34_properties",
 			RuntimeVariables.replace("Limited Time Only"));
 		assertTrue(selenium.isElementPresent("_34_requiresShippingCheckbox"));
-		selenium.click("_34_requiresShippingCheckbox");
+		selenium.clickAt("_34_requiresShippingCheckbox",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_requiresShippingCheckbox"));
 		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$9.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
 		selenium.typeKeys("_34_minQuantity0", RuntimeVariables.replace("1"));
 		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

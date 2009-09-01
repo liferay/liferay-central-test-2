@@ -48,9 +48,9 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Coupons"));
+		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +69,10 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[4]/td[7]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//body/div[4]/ul/li[2]/a"));
+		selenium.clickAt("//tr[4]/td[7]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//body/div[4]/ul/li[2]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -78,7 +80,8 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("Temporary Coupon"));
 		assertTrue(selenium.isTextPresent("Family Discount"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

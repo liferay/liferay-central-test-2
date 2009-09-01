@@ -47,8 +47,8 @@ public class AddPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Back to My Community"));
+				selenium.clickAt("link=Back to My Community",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
@@ -70,10 +70,11 @@ public class AddPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+				selenium.clickAt("link=Manage Pages",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -93,8 +94,8 @@ public class AddPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -115,11 +116,11 @@ public class AddPageTest extends BaseTestCase {
 
 				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("Web Content List Test Page"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Page']"));
+				selenium.clickAt("//input[@value='Add Page']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"link=Web Content List Test Page"));
+				selenium.clickAt("link=Web Content List Test Page",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

@@ -48,9 +48,10 @@ public class AddSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.clickAt("link=Second Edited Wiki Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +73,8 @@ public class AddSecondArticleTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"This page is empty. Edit it to add some text."));
-		selenium.click(RuntimeVariables.replace(
-				"link=This page is empty. Edit it to add some text."));
+		selenium.clickAt("link=This page is empty. Edit it to add some text.",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -95,7 +96,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ===="));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

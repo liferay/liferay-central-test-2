@@ -48,9 +48,10 @@ public class AddSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Post Reply");
+		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,8 +73,8 @@ public class AddSecondCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a second test comment."));
 		selenium.type("//tr[1]/td/div/textarea",
 			RuntimeVariables.replace("This is a second test comment."));
-		selenium.click(RuntimeVariables.replace(
-				"//td[2]/table[2]/tbody/tr[1]/td/input[1]"));
+		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

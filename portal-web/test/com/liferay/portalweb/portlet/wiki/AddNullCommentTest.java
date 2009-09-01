@@ -48,7 +48,7 @@ public class AddNullCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,7 @@ public class AddNullCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Comment");
+		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +87,7 @@ public class AddNullCommentTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_postReplyBody0", RuntimeVariables.replace(""));
 		selenium.type("_36_postReplyBody0", RuntimeVariables.replace(""));
-		selenium.click("_36_postReplyButton0");
+		selenium.clickAt("_36_postReplyButton0", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -48,9 +48,10 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Second Child Page"));
+		selenium.clickAt("link=Test Second Child Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +93,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Change Parent Child Page"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a Test Change Parent Child Page!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -100,7 +101,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			selenium.getText("//h2"));
 		assertTrue(selenium.isElementPresent(
 				"link=Test Change Parent Child Page"));
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -119,7 +120,8 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Test Second Child Page"));
+		selenium.clickAt("link=Test Second Child Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -138,8 +140,8 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Test Change Parent Child Page"));
+		selenium.clickAt("link=Test Change Parent Child Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -158,7 +160,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -177,7 +179,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Move"));
+		selenium.clickAt("link=Move", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -196,7 +198,7 @@ public class MoveChangeParentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Change Parent");
+		selenium.clickAt("link=Change Parent", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -216,8 +218,8 @@ public class MoveChangeParentTest extends BaseTestCase {
 
 		selenium.select("_36_newParentTitle",
 			RuntimeVariables.replace("label=- - Test Child Page"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Change Parent']"));
+		selenium.clickAt("//input[@value='Change Parent']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -241,9 +243,10 @@ public class MoveChangeParentTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Child Page"));
 		assertTrue(selenium.isTextPresent("Test Change Parent Child Page"));
 		assertFalse(selenium.isTextPresent("Test Second Child Page"));
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Second Child Page"));
+		selenium.clickAt("link=Test Second Child Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

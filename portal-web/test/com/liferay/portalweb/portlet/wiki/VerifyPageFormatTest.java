@@ -48,11 +48,12 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.clickAt("link=Second Edited Wiki Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_36_format", RuntimeVariables.replace("label=HTML"));
 		selenium.waitForPageToLoad("30000");
@@ -94,8 +95,8 @@ public class VerifyPageFormatTest extends BaseTestCase {
 
 		selenium.selectFrame("_36_editor");
 		Thread.sleep(5000);
-		selenium.click(
-			"//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]");
+		selenium.clickAt("//td[@id='xToolbar']/table[8]/tbody/tr/td[2]/div/table/tbody/tr/td[2]",
+			RuntimeVariables.replace(""));
 		selenium.typeKeys("//td[@id='xEditingArea']/textarea",
 			RuntimeVariables.replace(
 				"<a herf=http://www.lifera.com>Welcome to LIFERA</a>"));
@@ -103,15 +104,16 @@ public class VerifyPageFormatTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"<a herf=http://www.liferay.com>Welcome to LIFERAY</a>"));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=This is Test Page Format"));
-		selenium.click(RuntimeVariables.replace("link=This is Test Page Format"));
+		selenium.clickAt("link=This is Test Page Format",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Welcome to LIFERAY"));
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("HTML"),
 			selenium.getText("//tr[2]/td"));

@@ -48,9 +48,10 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=History"));
+		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[1]/input");
+		selenium.clickAt("//td[1]/input", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("//td[1]/input"));
 
 		for (int second = 0;; second++) {
@@ -107,10 +108,10 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[6]/td[1]/input");
+		selenium.clickAt("//tr[6]/td[1]/input", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("//tr[6]/td[1]/input"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Compare Versions']"));
+		selenium.clickAt("//input[@value='Compare Versions']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

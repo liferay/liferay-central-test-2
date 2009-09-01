@@ -48,9 +48,10 @@ public class PreviewChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,13 +76,15 @@ public class PreviewChildPageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is Preview test"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This should be visible when I preview."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Preview']"));
+		selenium.clickAt("//input[@value='Preview']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is Preview test"));
 		assertEquals(RuntimeVariables.replace(
 				"This should be visible when I preview."),
 			selenium.getText("//div[2]/div/div/div/div"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent(
 				"This should be visible when I preview."));

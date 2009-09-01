@@ -48,8 +48,8 @@ public class AssertRecentBloggersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Recent Bloggers Test Page"));
+		selenium.clickAt("link=Recent Bloggers Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Joe Bloggs"));
 		assertTrue(selenium.isTextPresent("Posts: 1"));

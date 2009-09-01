@@ -49,8 +49,8 @@ public class AssertSelectedArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Test Page"));
+		selenium.clickAt("link=Web Content Display Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a WCD Setup Test Entry!"));
 	}

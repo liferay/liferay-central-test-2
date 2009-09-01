@@ -48,10 +48,11 @@ public class DisplayArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content List Test Page"));
+		selenium.clickAt("link=Web Content List Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.clickAt("//img[@alt='Configuration']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_groupId",
 			RuntimeVariables.replace("label=My Community"));
@@ -62,7 +63,8 @@ public class DisplayArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Display Date"));
 		selenium.select("_86_orderByType",
 			RuntimeVariables.replace("label=Ascending"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

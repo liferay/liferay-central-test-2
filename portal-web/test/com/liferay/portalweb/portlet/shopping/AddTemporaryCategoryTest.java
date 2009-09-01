@@ -48,10 +48,10 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Category']"));
+		selenium.clickAt("//input[@value='Add Category']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_name", RuntimeVariables.replace("Horses"));
 		selenium.type("_34_name", RuntimeVariables.replace("Horses"));
@@ -59,7 +59,7 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("Horses for sale here!"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Horses for sale here!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

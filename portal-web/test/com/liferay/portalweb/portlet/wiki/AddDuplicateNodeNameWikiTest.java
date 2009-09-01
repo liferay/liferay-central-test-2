@@ -49,11 +49,13 @@ public class AddDuplicateNodeNameWikiTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Manage Wikis']"));
+		selenium.clickAt("//img[@alt='Manage Wikis']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Wiki']"));
+		selenium.clickAt("//input[@value='Add Wiki']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -78,7 +80,7 @@ public class AddDuplicateNodeNameWikiTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a Wiki Test!"));
 		selenium.type("_36_description",
 			RuntimeVariables.replace("This is a Wiki Test!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

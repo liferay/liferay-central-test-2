@@ -48,9 +48,9 @@ public class SearchTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=FrontPage"));
+		selenium.clickAt("link=FrontPage", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +71,8 @@ public class SearchTitleTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("Test"));
 		selenium.type("_36_keywords", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 4 results."));
 		assertTrue(selenium.isElementPresent(
@@ -98,7 +99,8 @@ public class SearchTitleTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("Second"));
 		selenium.type("_36_keywords", RuntimeVariables.replace("Second"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 result."));
 		assertTrue(selenium.isElementPresent("Link=Test Second Child Page"));
@@ -121,7 +123,8 @@ public class SearchTitleTest extends BaseTestCase {
 
 		selenium.typeKeys("_36_keywords", RuntimeVariables.replace("Test1"));
 		selenium.type("_36_keywords", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"No pages were found that matched the keywords: Test1."));

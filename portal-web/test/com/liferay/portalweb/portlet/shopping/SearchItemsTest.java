@@ -48,17 +48,18 @@ public class SearchItemsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_keywords1", RuntimeVariables.replace("Jona"));
 		selenium.type("_34_keywords1", RuntimeVariables.replace("Jona"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Categories']"));
+		selenium.clickAt("//input[@value='Search Categories']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Jona Lyons - Wheel"));
 		assertFalse(selenium.isTextPresent(
 				"M. Saech - How to Play Guitar - for Dummies."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

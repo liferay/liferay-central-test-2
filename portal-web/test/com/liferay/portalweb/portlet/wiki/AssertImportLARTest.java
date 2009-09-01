@@ -48,7 +48,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Wiki Test Page"));
+		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Wiki Article"));
 		assertTrue(selenium.isTextPresent("this is italics"));
@@ -57,7 +57,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("this is a list item"));
 		assertTrue(selenium.isTextPresent("this is a sub list item"));
 		assertTrue(selenium.isElementPresent("link=Test"));
-		selenium.click(RuntimeVariables.replace("link=Test"));
+		selenium.clickAt("link=Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,7 +82,8 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertTrue(selenium.isTextPresent("this is a list item"));
 		assertTrue(selenium.isTextPresent("this is a sub list item"));
-		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
+		selenium.clickAt("link=Second Edited Wiki Test",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +107,7 @@ public class AssertImportLARTest extends BaseTestCase {
 				"I love Liferay! This Wiki has been EDITED!"));
 		assertTrue(selenium.isElementPresent("link=Link Me 1"));
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
-		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
+		selenium.clickAt("link=Link Me 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -127,7 +128,7 @@ public class AssertImportLARTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Hi Administrator! Hope you are well! Please link me to another page!"));
-		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
+		selenium.clickAt("link=Link Me 2", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Hi Administrator!"));
 		assertTrue(selenium.isTextPresent(

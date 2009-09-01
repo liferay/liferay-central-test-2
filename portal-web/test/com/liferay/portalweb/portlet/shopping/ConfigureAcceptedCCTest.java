@@ -48,9 +48,10 @@ public class ConfigureAcceptedCCTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.clickAt("//img[@alt='Configuration']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,15 +72,18 @@ public class ConfigureAcceptedCCTest extends BaseTestCase {
 
 		selenium.addSelection("_86_current_cc_types",
 			RuntimeVariables.replace("label=MasterCard"));
-		selenium.click("//img[@onclick='self.focus();']");
+		selenium.clickAt("//img[@onclick='self.focus();']",
+			RuntimeVariables.replace(""));
 		selenium.addSelection("_86_current_cc_types",
 			RuntimeVariables.replace("label=American Express"));
-		selenium.click("//img[@onclick='self.focus();']");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//img[@onclick='self.focus();']",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

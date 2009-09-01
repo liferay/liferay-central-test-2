@@ -48,29 +48,33 @@ public class UpdateCartQuantityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Cart"));
+		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=10"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Update Cart']"));
+		selenium.clickAt("//input[@value='Update Cart']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("$119.90"));
 		selenium.select("//select", RuntimeVariables.replace("label=5"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Update Cart']"));
+		selenium.clickAt("//input[@value='Update Cart']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("$59.95"));
 		selenium.select("//select", RuntimeVariables.replace("label=1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Update Cart']"));
+		selenium.clickAt("//input[@value='Update Cart']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("$11.99"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

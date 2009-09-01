@@ -48,11 +48,12 @@ public class AddTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Shopping Test Page"));
+		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//td[1]/a"));
+		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
+		selenium.clickAt("//input[@value='Add Item']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_34_sku", RuntimeVariables.replace("2222"));
 		selenium.type("_34_sku", RuntimeVariables.replace("2222"));
@@ -68,7 +69,7 @@ public class AddTemporaryItemTest extends BaseTestCase {
 				"For those on a journey, the end of which is faintly out of sight."));
 		selenium.typeKeys("_34_price0", RuntimeVariables.replace("$2.99"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$2.99"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
