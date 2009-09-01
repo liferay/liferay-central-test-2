@@ -37,6 +37,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Shuyang Zhou
  */
 public class MethodInvoker {
 
@@ -54,8 +55,57 @@ public class MethodInvoker {
 			   InstantiationException, InvocationTargetException,
 			   NoSuchFieldException, NoSuchMethodException {
 
-		Thread currentThread = Thread.currentThread();
+		Object targetObject = null;
 
+		if (newInstance){
+			Thread currentThread = Thread.currentThread();
+			ClassLoader contextClassLoader =
+				currentThread.getContextClassLoader();
+			Class<?> classObj =
+				contextClassLoader.loadClass(methodWrapper.getClassName());
+			targetObject=classObj.newInstance();
+		}
+
+		Object[] methodAndArgs = lookupMethod(methodWrapper, targetObject);
+
+		Object returnObj = null;
+
+		if (methodAndArgs[0] != null) {
+			Method method = (Method) methodAndArgs[0];
+			Object[] args = (Object[]) methodAndArgs[1];
+			returnObj = method.invoke(targetObject, args);
+		}
+
+		return returnObj;
+	}
+
+	public static Object invoke(
+			MethodWrapper methodWrapper, Object targetObject)
+		throws ClassNotFoundException, IllegalAccessException,
+			   InstantiationException, InvocationTargetException,
+			   NoSuchFieldException, NoSuchMethodException {
+
+		Object[] methodAndArgs = lookupMethod(methodWrapper, targetObject);
+
+		Object returnObj = null;
+
+		if (methodAndArgs[0] != null) {
+			Method method = (Method) methodAndArgs[0];
+			Object[] args = (Object[]) methodAndArgs[1];
+			returnObj = method.invoke(targetObject, args);
+		}
+
+		return returnObj;
+	}
+
+	private static Object[] lookupMethod(
+			MethodWrapper methodWrapper, Object targetObject)
+		throws ClassNotFoundException, IllegalAccessException,
+			   InstantiationException, InvocationTargetException,
+			   NoSuchFieldException, NoSuchMethodException {
+
+		Object[] methodAndArgs = new Object[2];
+		Thread currentThread = Thread.currentThread();
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		String className = methodWrapper.getClassName();
@@ -115,12 +165,6 @@ public class MethodInvoker {
 			}
 		}
 
-		Object classObj = contextClassLoader.loadClass(className);
-
-		if (newInstance) {
-			classObj = ((Class<?>)classObj).newInstance();
-		}
-
 		Method method = null;
 
 		try {
@@ -131,14 +175,14 @@ public class MethodInvoker {
 			method = MethodCache.get(methodKey);
 		}
 		catch (NoSuchMethodException nsme) {
-			Method[] methods = null;
 
-			if (newInstance) {
-				methods = classObj.getClass().getMethods();
+			Class<?> classObj = null;
+			if (targetObject == null) {
+				classObj = contextClassLoader.loadClass(className);
+			} else {
+				classObj = targetObject.getClass();
 			}
-			else {
-				methods = ((Class<?>)classObj).getMethods();
-			}
+			Method[] methods = classObj.getMethods();
 
 			for (int i = 0; i < methods.length; i++) {
 				Class<?>[] methodParameterTypes =
@@ -172,14 +216,9 @@ public class MethodInvoker {
 				throw nsme;
 			}
 		}
-
-		Object returnObj = null;
-
-		if (method != null) {
-			returnObj = method.invoke(classObj, args);
-		}
-
-		return returnObj;
+		methodAndArgs[0] = method;
+		methodAndArgs[1] = args;
+		return methodAndArgs;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MethodInvoker.class);
