@@ -49,24 +49,26 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins Installation"));
+		selenium.clickAt("link=Plugins Installation",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Install More Portlets']"));
+		selenium.clickAt("//input[@value='Install More Portlets']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Portlet Plugins"));
+		selenium.clickAt("link=Portlet Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Portlet Plugin"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.clickAt("link=Theme Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Theme Plugin"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.clickAt("link=Layout Template Plugins",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Layout Template Plugin"));
-		selenium.click(RuntimeVariables.replace("link=Hook Plugins"));
+		selenium.clickAt("link=Hook Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Hook Plugin"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Web Plugin"));
 	}

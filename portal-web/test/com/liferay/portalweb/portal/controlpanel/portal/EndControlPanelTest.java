@@ -48,7 +48,8 @@ public class EndControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.clickAt("link=Back to My Community",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

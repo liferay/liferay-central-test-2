@@ -48,13 +48,14 @@ public class AddNullTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
+		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
+		selenium.clickAt("//input[@value='Add Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -77,12 +78,13 @@ public class AddNullTitleTest extends BaseTestCase {
 			RuntimeVariables.replace("http://www.movies.com"));
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.movies.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=http://www.movies.com"));
 	}

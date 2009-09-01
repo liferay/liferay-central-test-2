@@ -48,11 +48,11 @@ public class SearchTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Advanced \u00bb");
+		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,35 +73,41 @@ public class SearchTemplateTest extends BaseTestCase {
 		selenium.typeKeys("_15_searchTemplateId",
 			RuntimeVariables.replace("Test"));
 		selenium.type("_15_searchTemplateId", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Template"));
 		selenium.type("_15_searchTemplateId", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No templates were found."));
 		selenium.type("_15_searchTemplateId", RuntimeVariables.replace(""));
 		selenium.type("_15_name", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Template"));
 		selenium.type("_15_name", RuntimeVariables.replace("Test1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No templates were found."));
 		selenium.type("_15_name", RuntimeVariables.replace(""));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content template!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Template"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content template!!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("No templates were found."));
 		selenium.type("_15_description", RuntimeVariables.replace(""));
-		selenium.click("link=\u00ab Basic");
+		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -48,9 +48,9 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Message Boards"));
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,8 +88,8 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,8 +109,8 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]"));
+		selenium.clickAt("//div[5]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/span/a[2]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -133,7 +133,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a second repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a second reply message."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("This is a second reply message."));
 	}

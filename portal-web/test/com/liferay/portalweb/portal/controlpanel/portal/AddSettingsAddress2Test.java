@@ -48,10 +48,10 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("addressesLink");
-		selenium.click("link=Add Row");
+		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Row", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +83,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			RuntimeVariables.replace("label=California"));
 		selenium.select("_130_addressTypeId2",
 			RuntimeVariables.replace("label=Other"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

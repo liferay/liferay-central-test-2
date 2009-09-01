@@ -47,23 +47,26 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("link=Organizations"));
+				selenium.clickAt("link=Organizations",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//td[8]/ul/li/strong/span");
+				selenium.clickAt("//td[8]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -81,11 +84,12 @@ public class RemoveApplyOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Assign Members"));
+				selenium.clickAt("link=Assign Members",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("_126_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Update Associations']"));
+				selenium.clickAt("_126_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Update Associations']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

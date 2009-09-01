@@ -48,7 +48,8 @@ public class AddServerCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Server Administration"));
+		selenium.clickAt("link=Server Administration",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,15 +68,15 @@ public class AddServerCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Log Levels"));
+		selenium.clickAt("link=Log Levels", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add Category"));
+		selenium.clickAt("link=Add Category", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_137_loggerName",
 			RuntimeVariables.replace("CategorTest!"));
 		selenium.type("_137_loggerName",
 			RuntimeVariables.replace("CategoryTest!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

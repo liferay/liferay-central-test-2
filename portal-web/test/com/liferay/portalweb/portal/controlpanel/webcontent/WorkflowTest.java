@@ -48,13 +48,13 @@ public class WorkflowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/a"));
+		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"Link=Test Web Content Article 2"));
+		selenium.clickAt("Link=Test Web Content Article 2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -74,8 +74,9 @@ public class WorkflowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_15_incrementVersionCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_15_incrementVersionCheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("Link=1.1"));
 		assertTrue(selenium.isTextPresent(

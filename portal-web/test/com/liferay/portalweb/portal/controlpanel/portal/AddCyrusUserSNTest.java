@@ -48,9 +48,9 @@ public class AddCyrusUserSNTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("crus"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("cyrus"));
@@ -58,7 +58,7 @@ public class AddCyrusUserSNTest extends BaseTestCase {
 			RuntimeVariables.replace("testA@selenium.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("testA"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

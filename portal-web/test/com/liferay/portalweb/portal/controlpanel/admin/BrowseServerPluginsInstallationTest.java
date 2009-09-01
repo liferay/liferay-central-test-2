@@ -49,7 +49,8 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins Installation"));
+		selenium.clickAt("link=Plugins Installation",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,15 +74,16 @@ public class BrowseServerPluginsInstallationTest extends BaseTestCase {
 		selenium.select("//div[2]/select", RuntimeVariables.replace("label=4"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Wiki"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.clickAt("link=Theme Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Themes']"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.clickAt("link=Layout Template Plugins",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"//input[@value='Install More Layout Templates']"));
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

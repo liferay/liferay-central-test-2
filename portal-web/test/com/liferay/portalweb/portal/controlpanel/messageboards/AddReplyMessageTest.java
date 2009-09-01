@@ -48,9 +48,9 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Message Boards"));
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,8 +88,8 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,7 +108,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//a[text()='Reply']"));
+		selenium.clickAt("//a[text()='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -133,7 +133,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));

@@ -48,9 +48,10 @@ public class AddSettingsEmailAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("additionalEmailAddressesLink");
+		selenium.clickAt("additionalEmailAddressesLink",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,8 +75,9 @@ public class AddSettingsEmailAddressTest extends BaseTestCase {
 			RuntimeVariables.replace("Admin@Liferay.com"));
 		selenium.select("_130_emailAddressTypeId0",
 			RuntimeVariables.replace("label=E-mail"));
-		selenium.click("_130_emailAddressPrimary0");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_130_emailAddressPrimary0",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

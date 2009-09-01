@@ -32,17 +32,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationServiceTest extends BaseTestCase {
 	public void testAddOrganizationService() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Selenium"));
+		selenium.clickAt("link=Selenium", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("servicesLink");
+		selenium.clickAt("servicesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +84,7 @@ public class AddOrganizationServiceTest extends BaseTestCase {
 		selenium.select("_126_satOpen0", RuntimeVariables.replace("label=09:00"));
 		selenium.select("_126_satClose0",
 			RuntimeVariables.replace("label=05:00"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

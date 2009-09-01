@@ -54,7 +54,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Blogs"));
+				selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean EntryPresent = selenium.isElementPresent("link=Delete");
@@ -65,7 +65,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -89,8 +89,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//img[@alt='Configuration']"));
+				selenium.clickAt("//img[@alt='Configuration']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -130,8 +130,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

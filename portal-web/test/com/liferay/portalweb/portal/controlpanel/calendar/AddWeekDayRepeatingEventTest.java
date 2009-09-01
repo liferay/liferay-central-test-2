@@ -49,11 +49,12 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar"));
+		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Events"));
+		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.clickAt("//td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,9 +72,10 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.clickAt("//body/div[2]/ul/li[1]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[1]/input[2]");
+		selenium.clickAt("//td[1]/input[2]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -92,17 +94,19 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[2]/table/tbody/tr/td/input[3]");
-		selenium.click("//td[2]/table/tbody/tr/td/input[2]");
+		selenium.clickAt("//div[2]/table/tbody/tr/td/input[3]",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table/tbody/tr/td/input[2]",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=1"));
 		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2010"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2009"));
 
@@ -122,10 +126,10 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//tr[3]/td[2]/a"));
+		selenium.clickAt("//tr[3]/td[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2009"));
 
@@ -146,11 +150,11 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//td[3]/div/table/tbody/tr[3]/td[6]/a/span"));
+		selenium.clickAt("//td[3]/div/table/tbody/tr[3]/td[6]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Repeating Test Event"));
-		selenium.click(RuntimeVariables.replace("link=Year"));
+		selenium.clickAt("link=Year", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//select", RuntimeVariables.replace("label=2009"));
 
@@ -171,8 +175,8 @@ public class AddWeekDayRepeatingEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//td[3]/div/table/tbody/tr[3]/td[7]/a/span"));
+		selenium.clickAt("//td[3]/div/table/tbody/tr[3]/td[7]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Repeating Test Event"));
 	}

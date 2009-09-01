@@ -48,15 +48,16 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selen01"));
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=selen01"));
+		selenium.clickAt("link=selen01", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("addressesLink");
+		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,7 +75,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Row");
+		selenium.clickAt("link=Add Row", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,8 +109,8 @@ public class AddUserAddress2Test extends BaseTestCase {
 		selenium.typeKeys("_125_addressCity2",
 			RuntimeVariables.replace("Cerritos"));
 		selenium.type("_125_addressCity2", RuntimeVariables.replace("Cerritos"));
-		selenium.click("_125_addressPrimary2");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_125_addressPrimary2", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

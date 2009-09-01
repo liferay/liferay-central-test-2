@@ -48,10 +48,10 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
+		selenium.clickAt("//input[@value='Add Question']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Delete Choice Title Test"));
@@ -61,15 +61,18 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Choice A"));
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Delete Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Delete Choice C"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("Delete Choice D"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_choiceDescriptione_en_US",
 			RuntimeVariables.replace("Delete Choice E"));
@@ -79,7 +82,8 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			selenium.getValue("_25_choiceDescriptiond_en_US"));
 		assertEquals("Delete Choice E",
 			selenium.getValue("_25_choiceDescriptione_en_US"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Delete Choice D",
 			selenium.getValue("_25_choiceDescriptiond_en_US"));

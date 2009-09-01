@@ -54,12 +54,13 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Web Content"));
+				selenium.clickAt("link=Web Content",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Templates"));
+				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Template']"));
+				selenium.clickAt("//input[@value='Add Template']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_15_newTemplateId",
 					RuntimeVariables.replace("testb"));
@@ -70,7 +71,8 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 				selenium.type("_15_description",
 					RuntimeVariables.replace(
 						"This is a test web content templateB!"));
-				selenium.click("//input[@value='Select']");
+				selenium.clickAt("//input[@value='Select']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("structure",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=structure");
@@ -115,7 +117,7 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=TEST");
+				selenium.clickAt("link=TEST", RuntimeVariables.replace(""));
 				selenium.selectWindow("null");
 
 			case 3:
@@ -140,8 +142,8 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 				selenium.type("_15_xsl",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\dependencies\\Template.htm"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

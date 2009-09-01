@@ -49,9 +49,9 @@ public class AssertEmailNotificationSenderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("emailNotificationsLink");
+		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +69,7 @@ public class AssertEmailNotificationSenderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sender");
+		selenium.clickAt("link=Sender", RuntimeVariables.replace(""));
 		assertEquals("Joe Bloggs",
 			selenium.getValue("_130_settings(admin.email.from.name)"));
 		assertEquals("test@liferay.com",

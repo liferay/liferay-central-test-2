@@ -48,7 +48,8 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Server Administration"));
+		selenium.clickAt("link=Server Administration",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,57 +68,58 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Execute']"));
+		selenium.clickAt("//input[@value='Execute']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Log Levels"));
+		selenium.clickAt("link=Log Levels", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Update Categories"));
 		assertTrue(selenium.isElementPresent("link=Add Category"));
-		selenium.click(RuntimeVariables.replace("link=Update Categories"));
+		selenium.clickAt("link=Update Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 - 20"));
 		assertTrue(selenium.isTextPresent("com.ecyrd.jspwiki"));
-		selenium.click(RuntimeVariables.replace("link=Next"));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 21 - 40"));
 		assertTrue(selenium.isTextPresent("com.liferay.portal.editor"));
-		selenium.click(RuntimeVariables.replace("link=Properties"));
+		selenium.clickAt("link=Properties", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=System Properties"));
 		assertTrue(selenium.isElementPresent("link=Portal Properties"));
-		selenium.click(RuntimeVariables.replace("link=System Properties"));
+		selenium.clickAt("link=System Properties", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 - 20"));
 		assertTrue(selenium.isTextPresent("catalina.home"));
-		selenium.click(RuntimeVariables.replace("link=Next"));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 21 - 40"));
 		assertTrue(selenium.isTextPresent("env.CLIENTNAME"));
-		selenium.click(RuntimeVariables.replace("link=Portal Properties"));
+		selenium.clickAt("link=Portal Properties", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 1 - 20"));
 		assertTrue(selenium.isTextPresent("admin.email.from.address"));
-		selenium.click(RuntimeVariables.replace("link=Next"));
+		selenium.clickAt("link=Next", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Showing 21 - 40"));
 		assertTrue(selenium.isTextPresent("auth.failure"));
-		selenium.click(RuntimeVariables.replace("link=Data Migration"));
+		selenium.clickAt("link=Data Migration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=File Uploads"));
+		selenium.clickAt("link=File Uploads", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Configure the file upload settings."));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
-		selenium.click(RuntimeVariables.replace("link=Mail"));
+		selenium.clickAt("link=Mail", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Configure the mail server settings."));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
-		selenium.click(RuntimeVariables.replace("link=OpenOffice"));
+		selenium.clickAt("link=OpenOffice", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Enabling OpenOffice integration provides document conversion functionality."));
 		assertTrue(selenium.isElementPresent("_137_enabledCheckbox"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
-		selenium.click(RuntimeVariables.replace("link=Shutdown"));
+		selenium.clickAt("link=Shutdown", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//input[@value='Shutdown']"));
 	}

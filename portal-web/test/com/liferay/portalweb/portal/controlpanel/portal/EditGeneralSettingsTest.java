@@ -48,7 +48,7 @@ public class EditGeneralSettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_130_legalId", RuntimeVariables.replace("LIFE"));
 		selenium.type("_130_legalId", RuntimeVariables.replace("LIFE"));
@@ -56,7 +56,7 @@ public class EditGeneralSettingsTest extends BaseTestCase {
 		selenium.type("_130_tickerSymbol", RuntimeVariables.replace("LFRY"));
 		selenium.type("_130_industry", RuntimeVariables.replace("Web Portal"));
 		selenium.type("_130_type", RuntimeVariables.replace("Open Source"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

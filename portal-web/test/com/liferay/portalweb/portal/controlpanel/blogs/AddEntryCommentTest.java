@@ -48,7 +48,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=0 Comments"));
+		selenium.clickAt("link=0 Comments", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +106,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a test entry comment."));
-		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
+		selenium.clickAt("_33_postReplyButton0", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isVisible("_33_postReplyBody0"));
 		assertTrue(selenium.isTextPresent(

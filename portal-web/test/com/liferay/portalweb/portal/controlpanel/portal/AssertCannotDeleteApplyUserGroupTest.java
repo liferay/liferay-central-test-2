@@ -56,15 +56,16 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=User Groups"));
+				selenium.clickAt("link=User Groups",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_127_name",
 					RuntimeVariables.replace("Selenium"));
 				selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -82,7 +83,7 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=View Users"));
+				selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean NoUsersAssigned = selenium.isTextPresent(
@@ -94,17 +95,17 @@ public class AssertCannotDeleteApplyUserGroupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=View All"));
+				selenium.clickAt("link=View All", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_127_name",
 					RuntimeVariables.replace("Selenium"));
 				selenium.type("_127_name", RuntimeVariables.replace("Selenium"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("_127_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				selenium.clickAt("_127_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

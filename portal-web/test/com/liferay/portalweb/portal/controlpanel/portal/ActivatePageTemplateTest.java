@@ -54,9 +54,10 @@ public class ActivatePageTemplateTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Page Templates"));
+				selenium.clickAt("link=Page Templates",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -74,7 +75,7 @@ public class ActivatePageTemplateTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Edit"));
+				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean Checked = selenium.isChecked("_146_activeCheckbox");
@@ -85,11 +86,12 @@ public class ActivatePageTemplateTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_146_activeCheckbox");
+				selenium.clickAt("_146_activeCheckbox",
+					RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

@@ -48,9 +48,9 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("authenticationLink");
+		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +68,7 @@ public class AssertAuthenticationCASTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=CAS");
+		selenium.clickAt("link=CAS", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(cas.auth.enabled)Checkbox"));
 		assertTrue(selenium.isElementPresent(

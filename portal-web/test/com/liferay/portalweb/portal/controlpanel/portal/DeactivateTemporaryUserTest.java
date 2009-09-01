@@ -48,14 +48,16 @@ public class DeactivateTemporaryUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("temporar"));
 		selenium.type("_125_keywords", RuntimeVariables.replace("temporary"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_125_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Deactivate']"));
+		selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Deactivate']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));

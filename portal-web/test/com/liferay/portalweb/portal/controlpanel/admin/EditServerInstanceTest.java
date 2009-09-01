@@ -48,7 +48,7 @@ public class EditServerInstanceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
+		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,12 +67,12 @@ public class EditServerInstanceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=test.com"));
+		selenium.clickAt("link=test.com", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_135_virtualHost", RuntimeVariables.replace("edited"));
 		selenium.type("_135_virtualHost", RuntimeVariables.replace("edited"));
 		selenium.type("_135_mx", RuntimeVariables.replace("Edited.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

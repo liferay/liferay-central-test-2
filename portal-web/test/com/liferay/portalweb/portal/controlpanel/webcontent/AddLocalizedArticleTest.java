@@ -32,12 +32,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddLocalizedArticleTest extends BaseTestCase {
 	public void testAddLocalizedArticle() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[2]/input[5]");
+		selenium.clickAt("//div[2]/input[5]", RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Selecting a template will change the structure, available input fields, and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
 		selenium.waitForPopUp("template", RuntimeVariables.replace("30000"));
@@ -60,18 +60,19 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=LOCALIZED");
+		selenium.clickAt("link=LOCALIZED", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Test Localized Structure"));
 		assertTrue(selenium.isElementPresent("link=Test Localized Template"));
 		selenium.type("_15_structure_el0_content",
 			RuntimeVariables.replace("Hello World Page Name"));
-		selenium.click("//input[@type='checkbox']");
+		selenium.clickAt("//input[@type='checkbox']",
+			RuntimeVariables.replace(""));
 		selenium.type("_15_structure_el1_content",
 			RuntimeVariables.replace("Hello World Page Description"));
-		selenium.click(
-			"//tr[2]/td/table/tbody/tr/td/fieldset/table[2]/tbody/tr/td[1]/input");
+		selenium.clickAt("//tr[2]/td/table/tbody/tr/td/fieldset/table[2]/tbody/tr/td[1]/input",
+			RuntimeVariables.replace(""));
 		selenium.type("_15_title",
 			RuntimeVariables.replace("Hello World Localized Article"));
 
@@ -91,7 +92,8 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value=\"Save and Continue\"]");
+		selenium.clickAt("//input[@value=\"Save and Continue\"]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -118,7 +120,8 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 		selenium.type("_15_structure_el1_content",
 			RuntimeVariables.replace(
 				"\u4e16\u754c\u60a8\u597d Page Description"));
-		selenium.click("//input[@value=\"Save and Approve\"]");
+		selenium.clickAt("//input[@value=\"Save and Approve\"]",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent(
 				"link=Hello World Localized Article"));

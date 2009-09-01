@@ -48,9 +48,9 @@ public class DeleteTemporaryUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Advanced \u00bb");
+		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,16 +69,18 @@ public class DeleteTemporaryUserTest extends BaseTestCase {
 		}
 
 		selenium.select("_125_active", RuntimeVariables.replace("label=No"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_125_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.select("_125_active", RuntimeVariables.replace("label=Yes"));
-		selenium.click("link=\u00ab Basic");
+		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
 	}
 }

@@ -48,7 +48,7 @@ public class BrowseServerInstanceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
+		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

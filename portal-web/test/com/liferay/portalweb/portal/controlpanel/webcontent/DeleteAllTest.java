@@ -48,31 +48,34 @@ public class DeleteAllTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/a"));
+		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_15_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Structures"));
+		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_15_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected structures[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_15_allRowIds");
-		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
+		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected templates[\\s\\S]$"));

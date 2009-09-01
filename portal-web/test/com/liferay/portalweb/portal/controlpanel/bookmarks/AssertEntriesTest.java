@@ -48,9 +48,9 @@ public class AssertEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
+		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=My Entries"));
+		selenium.clickAt("link=My Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +71,7 @@ public class AssertEntriesTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));
-		selenium.click(RuntimeVariables.replace("link=Recent Entries"));
+		selenium.clickAt("link=Recent Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isElementPresent("link=http://www.liferay.com"));

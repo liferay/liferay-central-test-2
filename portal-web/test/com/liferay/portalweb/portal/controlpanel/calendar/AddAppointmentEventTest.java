@@ -48,17 +48,19 @@ public class AddAppointmentEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar"));
+		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title", RuntimeVariables.replace("Test Event"));
 		selenium.type("_8_title", RuntimeVariables.replace("Test Event"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("This is a test event!"));
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -50,9 +50,9 @@ public class AssertEmailNotificationPasswordChangedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("emailNotificationsLink");
+		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -71,9 +71,10 @@ public class AssertEmailNotificationPasswordChangedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Password Changed Notification");
-		selenium.click(
-			"_130_settings(admin.email.password.sent.enabled)Checkbox");
+		selenium.clickAt("link=Password Changed Notification",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("_130_settings(admin.email.password.sent.enabled)Checkbox",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Subject"));
 		assertTrue(selenium.isTextPresent("Body"));
 	}

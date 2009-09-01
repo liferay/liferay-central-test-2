@@ -48,15 +48,16 @@ public class AddUserPasswordTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selen01"));
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=selen01"));
+		selenium.clickAt("link=selen01", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("passwordLink");
+		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +79,7 @@ public class AddUserPasswordTest extends BaseTestCase {
 		selenium.type("_125_password1", RuntimeVariables.replace("test"));
 		selenium.typeKeys("_125_password2", RuntimeVariables.replace("test"));
 		selenium.type("_125_password2", RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

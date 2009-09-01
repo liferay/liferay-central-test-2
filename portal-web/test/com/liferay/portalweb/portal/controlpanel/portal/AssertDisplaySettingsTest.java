@@ -48,9 +48,9 @@ public class AssertDisplaySettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("displaySettingsLink");
+		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Default Language"));
 		assertTrue(selenium.isTextPresent("Available Languages"));
 		assertTrue(selenium.isTextPresent("Time Zone"));

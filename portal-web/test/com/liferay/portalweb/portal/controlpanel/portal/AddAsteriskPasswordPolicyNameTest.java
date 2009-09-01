@@ -49,16 +49,16 @@ public class AddAsteriskPasswordPolicyNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Password Policies"));
+		selenium.clickAt("link=Password Policies", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_129_name", RuntimeVariables.replace("Test*test"));
 		selenium.type("_129_name", RuntimeVariables.replace("Test*test"));
 		selenium.type("_129_description",
 			RuntimeVariables.replace(
 				"This is an asterisk password policy test."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

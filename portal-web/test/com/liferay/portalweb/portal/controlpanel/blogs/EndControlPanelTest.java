@@ -47,13 +47,13 @@ public class EndControlPanelTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Back to My Community"));
+				selenium.clickAt("link=Back to My Community",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

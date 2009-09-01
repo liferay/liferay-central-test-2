@@ -34,14 +34,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 	public void testAssertWebContentDisplayLocalization()
 		throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Back to My Community"));
+		selenium.clickAt("link=Back to My Community",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Home"));
+		selenium.clickAt("link=Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_88_name_en_US",
 			RuntimeVariables.replace(
@@ -49,7 +50,8 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace(
 				"Web Content Display Localization Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,10 +71,10 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Localization Test Page"));
+		selenium.clickAt("link=Web Content Display Localization Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,7 +93,8 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='ContentManagement-WebContentDisplay']/p/a");
+		selenium.clickAt("//div[@id='ContentManagement-WebContentDisplay']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,7 +112,8 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='Tools-Language']/p/a");
+		selenium.clickAt("//div[@id='Tools-Language']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -127,14 +131,14 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='Select Web Content']"));
+		selenium.clickAt("//img[@alt='Select Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Hello World Localized Article"));
+		selenium.clickAt("link=Hello World Localized Article",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Web Content Display Localization Test Page"));
+		selenium.clickAt("link=Web Content Display Localization Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Hello World Page Name"),
 			selenium.getText("//div/div[1]/div/table/tbody/tr/td[1]"));
@@ -158,8 +162,8 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']"));
+		selenium.clickAt("//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace(
@@ -168,8 +172,8 @@ public class AssertWebContentDisplayLocalizationTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"\u4e16\u754c\u60a8\u597d Page Description"),
 			selenium.getText("//td[2]"));
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='English (United States)']"));
+		selenium.clickAt("//img[@alt='English (United States)']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Hello World Page Name"),
 			selenium.getText("//div/div[1]/div/table/tbody/tr/td[1]"));

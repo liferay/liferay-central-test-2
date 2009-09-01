@@ -32,17 +32,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationAddressTest extends BaseTestCase {
 	public void testAddOrganizationAddress() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Selenium"));
+		selenium.clickAt("link=Selenium", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("addressesLink");
+		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,9 +75,10 @@ public class AddOrganizationAddressTest extends BaseTestCase {
 		selenium.type("_126_addressZip0", RuntimeVariables.replace("41111"));
 		selenium.type("_126_addressCity0",
 			RuntimeVariables.replace("Diamond Bar"));
-		selenium.click("_126_addressPrimary0");
-		selenium.click("_126_addressMailing0Checkbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_126_addressPrimary0", RuntimeVariables.replace(""));
+		selenium.clickAt("_126_addressMailing0Checkbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

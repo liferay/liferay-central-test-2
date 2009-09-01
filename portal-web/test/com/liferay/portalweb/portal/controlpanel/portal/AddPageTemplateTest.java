@@ -48,9 +48,9 @@ public class AddPageTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Templates"));
+		selenium.clickAt("link=Page Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_146_name_en_US",
 			RuntimeVariables.replace("Test Page Template"));
@@ -58,7 +58,7 @@ public class AddPageTemplateTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Page Template"));
 		selenium.type("_146_description",
 			RuntimeVariables.replace("This is a test page template"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

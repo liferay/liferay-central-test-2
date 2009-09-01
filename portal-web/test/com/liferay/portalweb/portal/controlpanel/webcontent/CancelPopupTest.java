@@ -48,14 +48,14 @@ public class CancelPopupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Structures"));
+		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Structure']"));
+		selenium.clickAt("//input[@value='Add Structure']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_15_editorButton");
+		selenium.clickAt("_15_editorButton", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,7 +89,8 @@ public class CancelPopupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Cancel']");
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("_15_xsdContent"));
 	}

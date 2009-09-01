@@ -48,9 +48,9 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName",
 			RuntimeVariables.replace("anonmous-guest"));
@@ -60,14 +60,14 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 			RuntimeVariables.replace("testA@selenium.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("testA"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid screen name."));
 		selenium.typeKeys("_125_screenName", RuntimeVariables.replace("guest"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("guest"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -75,7 +75,7 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 		selenium.typeKeys("_125_screenName",
 			RuntimeVariables.replace("ANONMOUS"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("ANONYMOUS"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
@@ -83,7 +83,7 @@ public class AddAnonymousNameUserSNTest extends BaseTestCase {
 		selenium.typeKeys("_125_screenName",
 			RuntimeVariables.replace("<anonmous>"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("<anonmous>"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

@@ -54,7 +54,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Bookmarks"));
+				selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean FolderPresent = selenium.isElementPresent("//b");
@@ -65,7 +65,8 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[4]/ul/li/strong/span");
+				selenium.clickAt("//td[4]/ul/li/strong/span",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -83,7 +84,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

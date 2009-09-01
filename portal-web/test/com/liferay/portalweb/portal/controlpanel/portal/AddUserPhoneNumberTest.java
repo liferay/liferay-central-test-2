@@ -48,15 +48,16 @@ public class AddUserPhoneNumberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_keywords", RuntimeVariables.replace("selen01"));
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=selen01"));
+		selenium.clickAt("link=selen01", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("phoneNumbersLink");
+		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,8 +84,8 @@ public class AddUserPhoneNumberTest extends BaseTestCase {
 		selenium.type("_125_phoneExtension0", RuntimeVariables.replace("123"));
 		selenium.select("_125_phoneTypeId0",
 			RuntimeVariables.replace("label=Business"));
-		selenium.click("_125_phonePrimary0");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_125_phonePrimary0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

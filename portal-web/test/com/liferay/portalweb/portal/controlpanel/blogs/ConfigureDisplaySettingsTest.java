@@ -49,9 +49,10 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.clickAt("//img[@alt='Configuration']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,14 +74,15 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=5"));
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Title"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("This is a test entry."));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
+		selenium.clickAt("//img[@alt='Configuration']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -102,11 +104,11 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=5"));
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Full Content"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have successfully updated the setup."));
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("This is a test entry."),
 			selenium.getText("//p"));

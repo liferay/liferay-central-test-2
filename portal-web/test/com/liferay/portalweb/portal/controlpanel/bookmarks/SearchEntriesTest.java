@@ -48,7 +48,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Bookmarks"));
+		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,8 +68,8 @@ public class SearchEntriesTest extends BaseTestCase {
 		}
 
 		selenium.type("_28_keywords1", RuntimeVariables.replace("Test"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Folders']"));
+		selenium.clickAt("//input[@value='Search Folders']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

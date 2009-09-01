@@ -32,12 +32,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddLocalizedTemplateTest extends BaseTestCase {
 	public void testAddLocalizedTemplate() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Templates"));
+		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Template']"));
+		selenium.clickAt("//input[@value='Add Template']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_newTemplateId",
 			RuntimeVariables.replace("LOCALIZED"));
@@ -46,7 +46,8 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Localized Template"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test localized template."));
-		selenium.click("//input[@value='Select']");
+		selenium.clickAt("//input[@value='Select']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("structure", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("structure");
 		Thread.sleep(5000);
@@ -67,7 +68,7 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=LOCALIZED");
+		selenium.clickAt("link=LOCALIZED", RuntimeVariables.replace(""));
 		selenium.selectWindow("null");
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=Test Localized Structure"));
@@ -91,9 +92,10 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("save-and-continue"));
+		selenium.clickAt("save-and-continue", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value=\"Save\"]"));
+		selenium.clickAt("//input[@value=\"Save\"]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

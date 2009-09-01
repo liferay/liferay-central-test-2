@@ -48,11 +48,12 @@ public class AddInvalidRepeatEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar"));
+		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_8_allDayCheckbox");
+		selenium.clickAt("_8_allDayCheckbox", RuntimeVariables.replace(""));
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Invalid Repeat Test Event"));
 		selenium.type("_8_title",
@@ -62,7 +63,8 @@ public class AddInvalidRepeatEventTest extends BaseTestCase {
 		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=25"));
 		selenium.select("_8_startDateYear",
 			RuntimeVariables.replace("label=2009"));
-		selenium.click("//input[@name='_8_recurrenceType' and @value='3']");
+		selenium.clickAt("//input[@name='_8_recurrenceType' and @value='3']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,12 +83,13 @@ public class AddInvalidRepeatEventTest extends BaseTestCase {
 		}
 
 		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
-		selenium.click("//input[@name='_8_endDateType' and @value='2']");
+		selenium.clickAt("//input[@name='_8_endDateType' and @value='2']",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=February"));
 		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=24"));
 		selenium.select("_8_endDateYear", RuntimeVariables.replace("label=2009"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

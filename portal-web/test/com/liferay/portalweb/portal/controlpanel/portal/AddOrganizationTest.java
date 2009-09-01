@@ -47,10 +47,11 @@ public class AddOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
@@ -71,17 +72,18 @@ public class AddOrganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Organizations"));
+				selenium.clickAt("link=Organizations",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Add"));
+				selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_126_name",
 					RuntimeVariables.replace("Selenium"));
 				selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
 				selenium.select("_126_type",
 					RuntimeVariables.replace("label=Regular Organization"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));

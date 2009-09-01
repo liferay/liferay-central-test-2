@@ -48,9 +48,9 @@ public class AddUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mr."));
 		selenium.typeKeys("_125_screenName",
@@ -68,7 +68,7 @@ public class AddUserTest extends BaseTestCase {
 		selenium.select("_125_birthdayYear",
 			RuntimeVariables.replace("label=1986"));
 		selenium.select("_125_male", RuntimeVariables.replace("label=Male"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -48,15 +48,15 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Password Policies"));
+		selenium.clickAt("link=Password Policies", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_129_name", RuntimeVariables.replace("Test"));
 		selenium.type("_129_name", RuntimeVariables.replace("Test"));
 		selenium.type("_129_description",
 			RuntimeVariables.replace("This is a test password policy!"));
-		selenium.click("_129_changeableCheckbox");
+		selenium.clickAt("_129_changeableCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,9 +74,11 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_129_changeRequiredCheckbox");
+		selenium.clickAt("_129_changeRequiredCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.select("_129_minAge", RuntimeVariables.replace("label=1 Week"));
-		selenium.click("_129_checkSyntaxCheckbox");
+		selenium.clickAt("_129_checkSyntaxCheckbox",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,9 +97,10 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_129_allowDictionaryWordsCheckbox");
+		selenium.clickAt("_129_allowDictionaryWordsCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.type("_129_minLength", RuntimeVariables.replace("5"));
-		selenium.click("_129_historyCheckbox");
+		selenium.clickAt("_129_historyCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -116,7 +119,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		}
 
 		selenium.select("_129_historyCount", RuntimeVariables.replace("label=4"));
-		selenium.click("_129_expireableCheckbox");
+		selenium.clickAt("_129_expireableCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -138,7 +141,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.select("_129_warningTime",
 			RuntimeVariables.replace("label=2 Days"));
 		selenium.type("_129_graceLimit", RuntimeVariables.replace("1"));
-		selenium.click("_129_lockoutCheckbox");
+		selenium.clickAt("_129_lockoutCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -161,7 +164,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=10 Minutes"));
 		selenium.select("_129_lockoutDuration",
 			RuntimeVariables.replace("label=5 Minutes"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

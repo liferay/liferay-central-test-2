@@ -48,10 +48,10 @@ public class AddNullChoicePollTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
+		selenium.clickAt("//input[@value='Add Question']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Null Choice Poll Test Title"));
@@ -61,11 +61,12 @@ public class AddNullChoicePollTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Choice Poll Test Choice A"));
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Null Choice Poll Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again"));

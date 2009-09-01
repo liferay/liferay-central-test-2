@@ -48,9 +48,9 @@ public class AssertGoogleAppsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("googleAppsLink");
+		selenium.clickAt("googleAppsLink", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("User Name"));
 		assertTrue(selenium.isTextPresent("Password"));
 	}

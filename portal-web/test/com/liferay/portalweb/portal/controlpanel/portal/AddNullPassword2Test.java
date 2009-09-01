@@ -48,11 +48,11 @@ public class AddNullPassword2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=joebloggs"));
+		selenium.clickAt("link=joebloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("passwordLink");
+		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -73,7 +73,7 @@ public class AddNullPassword2Test extends BaseTestCase {
 		selenium.typeKeys("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password1", RuntimeVariables.replace("test"));
 		selenium.type("_125_password2", RuntimeVariables.replace(" "));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

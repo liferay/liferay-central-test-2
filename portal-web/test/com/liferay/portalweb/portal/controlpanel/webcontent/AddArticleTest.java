@@ -48,10 +48,10 @@ public class AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_title",
 			RuntimeVariables.replace("Test Web Content Article"));
@@ -127,7 +127,7 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_displayDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.click("_15_neverExpireCheckbox");
+		selenium.clickAt("_15_neverExpireCheckbox", RuntimeVariables.replace(""));
 		selenium.select("_15_expirationDateMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_15_expirationDateDay",
@@ -138,7 +138,7 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_expirationDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.click("_15_neverReviewCheckbox");
+		selenium.clickAt("_15_neverReviewCheckbox", RuntimeVariables.replace(""));
 		selenium.select("_15_reviewDateMonth",
 			RuntimeVariables.replace("label=September"));
 		selenium.select("_15_reviewDateDay",
@@ -151,8 +151,8 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=:00"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Test Description!"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Save and Approve']"));
+		selenium.clickAt("//input[@value='Save and Approve']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -174,8 +174,8 @@ public class AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/a"));
+		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content Article"));
 	}

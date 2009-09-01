@@ -48,26 +48,27 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=Back to My Community"));
+				selenium.clickAt("link=Back to My Community",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("link=Guest"));
+				selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Welcome"));
 				assertFalse(selenium.isElementPresent(
 						"link=Selenium Test Home Page"));
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[3]/a/span",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent(
 						"link=Selenium Test Home Page"));
 				assertFalse(selenium.isElementPresent("link=Welcome"));
-				selenium.click(RuntimeVariables.replace(
-						"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("link=Control Panel"));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

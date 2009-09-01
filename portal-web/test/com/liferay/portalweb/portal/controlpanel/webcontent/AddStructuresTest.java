@@ -48,12 +48,12 @@ public class AddStructuresTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Structures"));
+		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Structure']"));
+		selenium.clickAt("//input[@value='Add Structure']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_newStructureId", RuntimeVariables.replace("test"));
 		selenium.type("_15_newStructureId", RuntimeVariables.replace("test"));
@@ -61,14 +61,16 @@ public class AddStructuresTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Web Content Structure"));
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test web content structure!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
+		selenium.clickAt("//input[@value='Add Row']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_structure_el0_name",
 			RuntimeVariables.replace("Itp"));
 		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
 		selenium.select("_15_structure_el0_type",
 			RuntimeVariables.replace("label=Link to Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Row']"));
+		selenium.clickAt("//input[@value='Add Row']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_15_structure_el0_name",
 			RuntimeVariables.replace("title"));
@@ -76,7 +78,7 @@ public class AddStructuresTest extends BaseTestCase {
 			RuntimeVariables.replace("title"));
 		selenium.select("_15_structure_el0_type",
 			RuntimeVariables.replace("label=Text"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Test Web Content Structure"));
 		assertTrue(selenium.isTextPresent(

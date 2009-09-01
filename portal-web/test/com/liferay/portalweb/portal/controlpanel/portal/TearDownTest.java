@@ -54,14 +54,14 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Users"));
+				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_125_keywords",
 					RuntimeVariables.replace("selenium"));
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selenium"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean UserPresent = selenium.isElementPresent("_125_rowIds");
@@ -72,13 +72,14 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_125_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Deactivate']"));
+				selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Deactivate']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
-				selenium.click("link=Advanced \u00bb");
+				selenium.clickAt("link=Advanced \u00bb",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -98,26 +99,28 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.select("_125_active",
 					RuntimeVariables.replace("label=No"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("_125_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
-				selenium.click("link=\u00ab Basic");
+				selenium.clickAt("link=\u00ab Basic",
+					RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.click(RuntimeVariables.replace("link=Organizations"));
+				selenium.clickAt("link=Organizations",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_126_keywords",
 					RuntimeVariables.replace("selenium"));
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("selenium"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean OrganizationPresent = selenium.isElementPresent(
@@ -129,15 +132,16 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_126_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				selenium.clickAt("_126_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
-				selenium.click(RuntimeVariables.replace("link=User Groups"));
+				selenium.clickAt("link=User Groups",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean UserGroupPresent = selenium.isElementPresent(
@@ -149,21 +153,21 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("_127_allRowIds");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				selenium.clickAt("_127_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 4:
-				selenium.click(RuntimeVariables.replace(
-						"link=Password Policies"));
+				selenium.clickAt("link=Password Policies",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.typeKeys("_129_name", RuntimeVariables.replace("Test"));
 				selenium.type("_129_name", RuntimeVariables.replace("Test"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Search']"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				boolean PasswordPolicyPresent = selenium.isElementPresent(
@@ -175,7 +179,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//strong/span");
+				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -193,13 +197,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 5:
-				selenium.click(RuntimeVariables.replace("link=Settings"));
+				selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_130_legalId", RuntimeVariables.replace(""));
 				selenium.type("_130_sicCode", RuntimeVariables.replace(""));
@@ -209,10 +213,11 @@ public class TearDownTest extends BaseTestCase {
 				selenium.select("_130_timeZoneId",
 					RuntimeVariables.replace(
 						"label=(UTC ) Coordinated Universal Time"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("additionalEmailAddressesLink");
+				selenium.clickAt("additionalEmailAddressesLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -231,8 +236,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -250,7 +255,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("addressesLink");
+				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -269,8 +274,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='addresses']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='addresses']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -288,7 +293,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("websitesLink");
+				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -307,8 +312,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='websites']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='websites']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -326,7 +331,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("phoneNumbersLink");
+				selenium.clickAt("phoneNumbersLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -345,8 +351,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -364,10 +370,11 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("additionalEmailAddressesLink");
+				selenium.clickAt("additionalEmailAddressesLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -386,8 +393,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='additionalEmailAddresses']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -405,7 +412,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("addressesLink");
+				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -424,8 +431,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='addresses']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='addresses']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -443,7 +450,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("websitesLink");
+				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -462,8 +469,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='websites']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='websites']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -481,7 +488,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("phoneNumbersLink");
+				selenium.clickAt("phoneNumbersLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -500,8 +508,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(
-					"//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[2]");
+				selenium.clickAt("//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[2]",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -519,10 +527,10 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("usersLink");
+				selenium.clickAt("usersLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -541,7 +549,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Reserved Credentials");
+				selenium.clickAt("link=Reserved Credentials",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -581,7 +590,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("mailHostNamesLink");
+				selenium.clickAt("mailHostNamesLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -602,8 +612,8 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.type("_130_settings(admin.mail.host.names)",
 					RuntimeVariables.replace(""));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Save']"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 100:

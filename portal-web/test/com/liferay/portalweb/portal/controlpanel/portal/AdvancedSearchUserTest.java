@@ -48,9 +48,9 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Advanced \u00bb");
+		selenium.clickAt("link=Advanced \u00bb", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,62 +70,72 @@ public class AdvancedSearchUserTest extends BaseTestCase {
 
 		selenium.typeKeys("_125_firstName", RuntimeVariables.replace("Selen"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("Selen"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("Selen1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium01"));
 		assertFalse(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_firstName", RuntimeVariables.replace(""));
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium01"));
 		assertFalse(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_middleName", RuntimeVariables.replace(""));
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium01"));
 		assertFalse(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_lastName", RuntimeVariables.replace(""));
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium01"));
 		assertFalse(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_screenName", RuntimeVariables.replace(""));
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("selenium.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("selenium01"));
 		assertTrue(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("selenium.com1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium01"));
 		assertFalse(selenium.isTextPresent("selenium02"));
 		selenium.type("_125_emailAddress", RuntimeVariables.replace(""));
-		selenium.click("link=\u00ab Basic");
+		selenium.clickAt("link=\u00ab Basic", RuntimeVariables.replace(""));
 	}
 }

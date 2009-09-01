@@ -48,10 +48,10 @@ public class AddNullTitlePollTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
+		selenium.clickAt("//input[@value='Add Question']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace("Null Title Poll Test Description"));
@@ -60,7 +60,7 @@ public class AddNullTitlePollTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Title Poll Test Choice A"));
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Null Title Poll Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again"));

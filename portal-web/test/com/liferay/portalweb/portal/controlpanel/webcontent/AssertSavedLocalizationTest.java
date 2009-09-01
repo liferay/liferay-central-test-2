@@ -32,10 +32,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertSavedLocalizationTest extends BaseTestCase {
 	public void testAssertSavedLocalization() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=Hello World Localized Article"));
+		selenium.clickAt("link=Hello World Localized Article",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=Chinese (China)"));

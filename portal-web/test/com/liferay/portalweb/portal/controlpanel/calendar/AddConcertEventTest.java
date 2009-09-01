@@ -48,9 +48,10 @@ public class AddConcertEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar"));
+		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
+		selenium.clickAt("//input[@value='Add Event']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Caedmon's Call Concert!"));
@@ -59,9 +60,10 @@ public class AddConcertEventTest extends BaseTestCase {
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"I love this band guys! Everyone should see them! I've never seen them before. :("));
-		selenium.click("_8_timeZoneSensitiveCheckbox");
+		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

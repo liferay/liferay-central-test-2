@@ -48,9 +48,9 @@ public class AddQuestionThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Message Boards"));
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a/b"));
+		selenium.clickAt("//tr[4]/td[1]/a/b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +69,8 @@ public class AddQuestionThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Post New Thread']"));
+		selenium.clickAt("//input[@value='Post New Thread']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -105,17 +105,17 @@ public class AddQuestionThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_19_questionCheckbox");
+		selenium.clickAt("_19_questionCheckbox", RuntimeVariables.replace(""));
 		selenium.typeKeys("_19_subject",
 			RuntimeVariables.replace("Favorite Color Test Question"));
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("Favorite Color Test Question"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("What is your favorite color?"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st Cat\u00e9gory Edit\u00e9d"));
+		selenium.clickAt("link=T\u00e9st Cat\u00e9gory Edit\u00e9d",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

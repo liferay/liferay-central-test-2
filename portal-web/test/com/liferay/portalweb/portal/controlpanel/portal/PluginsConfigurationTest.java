@@ -48,18 +48,20 @@ public class PluginsConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Plugins Configuration"));
+		selenium.clickAt("link=Plugins Configuration",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Activities"));
-		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
+		selenium.clickAt("link=Theme Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Classic"));
-		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
+		selenium.clickAt("link=Layout Template Plugins",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Freeform"));
-		selenium.click(RuntimeVariables.replace("link=Hook Plugins"));
+		selenium.clickAt("link=Hook Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
+		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

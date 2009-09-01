@@ -48,9 +48,9 @@ public class AddTemporaryUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName",
 			RuntimeVariables.replace("temporar-.1"));
@@ -62,7 +62,7 @@ public class AddTemporaryUserTest extends BaseTestCase {
 			RuntimeVariables.replace("temporary1!@#$%"));
 		selenium.type("_125_lastName",
 			RuntimeVariables.replace("temporary1!@#$%"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -32,17 +32,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationCommentsTest extends BaseTestCase {
 	public void testAddOrganizationComments() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Selenium"));
+		selenium.clickAt("link=Selenium", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("commentsLink");
+		selenium.clickAt("commentsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +65,7 @@ public class AddOrganizationCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test comment!"));
 		selenium.type("_126_comments",
 			RuntimeVariables.replace("This is a test comment!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

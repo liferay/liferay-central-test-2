@@ -48,9 +48,10 @@ public class AssertExpiredQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.clickAt("link=Edited Test Question 2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//label[1]/input"));
 		assertFalse(selenium.isElementPresent("//label[2]/input"));

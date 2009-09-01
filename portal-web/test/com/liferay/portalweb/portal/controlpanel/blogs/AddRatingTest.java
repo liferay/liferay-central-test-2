@@ -48,7 +48,7 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		String votes = selenium.getIncrementedText("//td[3]/div[1]");

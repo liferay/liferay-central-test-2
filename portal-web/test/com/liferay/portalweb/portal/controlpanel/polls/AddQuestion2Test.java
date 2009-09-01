@@ -48,10 +48,10 @@ public class AddQuestion2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Question']"));
+		selenium.clickAt("//input[@value='Add Question']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Test Poll Question 2"));
@@ -61,7 +61,8 @@ public class AddQuestion2Test extends BaseTestCase {
 			RuntimeVariables.replace("Test Choice A"));
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Test Choice B"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -82,7 +83,7 @@ public class AddQuestion2Test extends BaseTestCase {
 
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Test Choice C"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -48,11 +48,11 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
+		selenium.clickAt("link=Test Poll Question", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Area");
+		selenium.clickAt("link=Area", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
 		selenium.close();
@@ -74,7 +74,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Horizontal Bar");
+		selenium.clickAt("link=Horizontal Bar", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
 		selenium.close();
@@ -96,7 +96,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Line");
+		selenium.clickAt("link=Line", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
 		selenium.close();
@@ -118,7 +118,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Pie");
+		selenium.clickAt("link=Pie", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
 		selenium.close();
@@ -140,7 +140,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Vertical Bar");
+		selenium.clickAt("link=Vertical Bar", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
 		selenium.close();

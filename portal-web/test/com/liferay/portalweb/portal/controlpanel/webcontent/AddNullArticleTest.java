@@ -48,26 +48,27 @@ public class AddNullArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		selenium.typeKeys("_15_title",
 			RuntimeVariables.replace("Null Content Test Article"));
 		selenium.type("_15_title",
 			RuntimeVariables.replace("Null Content Test Article"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Save and Approve']"));
+		selenium.clickAt("//input[@value='Save and Approve']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter valid content."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//li[@id='_15_tabs1web-contentTabsId']/a"));
+		selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Null Content Test Article"));
 	}

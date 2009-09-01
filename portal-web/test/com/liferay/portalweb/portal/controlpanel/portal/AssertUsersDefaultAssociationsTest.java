@@ -49,9 +49,9 @@ public class AssertUsersDefaultAssociationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("usersLink");
+		selenium.clickAt("usersLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +69,8 @@ public class AssertUsersDefaultAssociationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Default User Associations");
+		selenium.clickAt("link=Default User Associations",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Communities"));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(admin.default.group.names)"));

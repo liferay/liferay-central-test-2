@@ -54,9 +54,11 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Message Boards"));
+				selenium.clickAt("link=Message Boards",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace("//tr[4]/td[1]/a[1]/b"));
+				selenium.clickAt("//tr[4]/td[1]/a[1]/b",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -75,7 +77,7 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.clickAt("//b", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -94,7 +96,7 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//b"));
+				selenium.clickAt("//b", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -113,8 +115,8 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+				selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -135,7 +137,8 @@ public class MoveThreadTest extends BaseTestCase {
 
 				assertTrue(selenium.isTextPresent(
 						"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
-				selenium.click(RuntimeVariables.replace("link=Move Thread"));
+				selenium.clickAt("link=Move Thread",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -154,7 +157,8 @@ public class MoveThreadTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("_19_addExplanationPost");
+				selenium.clickAt("_19_addExplanationPost",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -179,7 +183,8 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.type("_19_textArea",
 					RuntimeVariables.replace(
 						"Trust and paths will be straightened."));
-				selenium.click("//input[@value='Select']");
+				selenium.clickAt("//input[@value='Select']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("category",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("category");
@@ -194,16 +199,17 @@ public class MoveThreadTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Categories"));
+				selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
 			case 2:
-				selenium.click("//input[@value='Choose']");
+				selenium.clickAt("//input[@value='Choose']",
+					RuntimeVariables.replace(""));
 				selenium.selectWindow("null");
 				Thread.sleep(5000);
 				assertTrue(selenium.isElementPresent("link=Sujr"));
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value=\"Move Thread\"]"));
+				selenium.clickAt("//input[@value=\"Move Thread\"]",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.isElementPresent("link=Sujr"));
 				assertTrue(selenium.isElementPresent(

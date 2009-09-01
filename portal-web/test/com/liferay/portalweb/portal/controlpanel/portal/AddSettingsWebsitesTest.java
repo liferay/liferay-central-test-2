@@ -48,9 +48,9 @@ public class AddSettingsWebsitesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("websitesLink");
+		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,8 +74,8 @@ public class AddSettingsWebsitesTest extends BaseTestCase {
 			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.select("_130_websiteTypeId0",
 			RuntimeVariables.replace("label=Public"));
-		selenium.click("_130_websitePrimary0");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("_130_websitePrimary0", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

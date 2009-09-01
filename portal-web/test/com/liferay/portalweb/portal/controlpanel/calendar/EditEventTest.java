@@ -48,9 +48,10 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Calendar"));
+		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[5]/td[4]/ul/li/strong/span");
+		selenium.clickAt("//tr[5]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +69,8 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[1]/a"));
+		selenium.clickAt("//body/div[2]/ul/li[1]/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_8_title",
 			RuntimeVariables.replace("Edited Test Event"));
@@ -78,7 +80,7 @@ public class EditEventTest extends BaseTestCase {
 				"This is a test event! This test event has been edited."));
 		selenium.select("_8_startDateHour", RuntimeVariables.replace("label=5"));
 		selenium.select("_8_startDateAmPm", RuntimeVariables.replace("label=AM"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

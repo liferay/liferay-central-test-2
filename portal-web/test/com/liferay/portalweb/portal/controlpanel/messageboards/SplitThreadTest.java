@@ -48,9 +48,9 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Message Boards"));
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,8 +88,8 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.clickAt("link=T\u00e9st M\u00e9ssag\u00e9",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,7 +108,7 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Split Thread"));
+		selenium.clickAt("link=Split Thread", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -129,7 +129,7 @@ public class SplitThreadTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Click OK to create a new thread with the following messages."));
-		selenium.click(RuntimeVariables.replace("//input[@value='OK']"));
+		selenium.clickAt("//input[@value='OK']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -154,8 +154,8 @@ public class SplitThreadTest extends BaseTestCase {
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
 		assertTrue(selenium.isTextPresent("This is a second reply message."));
 		assertTrue(selenium.isTextPresent("This is a third reply message."));
-		selenium.click(RuntimeVariables.replace(
-				"link=T\u00e9st Subcat\u00e9gory"));
+		selenium.clickAt("link=T\u00e9st Subcat\u00e9gory",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
 		assertTrue(selenium.isElementPresent(

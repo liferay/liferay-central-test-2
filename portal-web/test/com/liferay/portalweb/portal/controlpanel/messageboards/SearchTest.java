@@ -48,9 +48,9 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Message Boards"));
+		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,8 +71,8 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Search Categories']"));
+		selenium.clickAt("//input[@value='Search Categories']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -33,17 +33,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 	public void testAddOrganizationPhoneNumber2() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_126_keywords", RuntimeVariables.replace("selenium"));
 		selenium.type("_126_keywords", RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Selenium"));
+		selenium.clickAt("link=Selenium", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("phoneNumbersLink");
+		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,8 +63,8 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]");
+		selenium.clickAt("//div[@id='phoneNumbers']/fieldset/div[2]/div/span/a[1]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -88,7 +89,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 		selenium.type("_126_phoneExtension2", RuntimeVariables.replace("444"));
 		selenium.select("_126_phoneTypeId2",
 			RuntimeVariables.replace("label=Local"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

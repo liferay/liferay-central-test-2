@@ -56,13 +56,14 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Web Content"));
+				selenium.clickAt("link=Web Content",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//li[@id='_15_tabs1web-contentTabsId']/a"));
+				selenium.clickAt("//li[@id='_15_tabs1web-contentTabsId']/a",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Add Web Content']"));
+				selenium.clickAt("//input[@value='Add Web Content']",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
 
@@ -83,7 +84,8 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Select']");
+				selenium.clickAt("//input[@value='Select']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
 				selenium.waitForPopUp("structure",
@@ -130,7 +132,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=TEST");
+				selenium.clickAt("link=TEST", RuntimeVariables.replace(""));
 				selenium.selectWindow("null");
 
 			case 3:

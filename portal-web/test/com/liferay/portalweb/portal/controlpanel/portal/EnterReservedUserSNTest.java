@@ -48,9 +48,9 @@ public class EnterReservedUserSNTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("usersLink");
+		selenium.clickAt("usersLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +68,8 @@ public class EnterReservedUserSNTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Reserved Credentials");
+		selenium.clickAt("link=Reserved Credentials",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,7 +92,7 @@ public class EnterReservedUserSNTest extends BaseTestCase {
 			RuntimeVariables.replace("Lifera"));
 		selenium.type("_130_settings(admin.reserved.screen.names)",
 			RuntimeVariables.replace("Liferay"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

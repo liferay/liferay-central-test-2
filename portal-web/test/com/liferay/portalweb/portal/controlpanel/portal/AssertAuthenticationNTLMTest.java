@@ -49,9 +49,9 @@ public class AssertAuthenticationNTLMTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("authenticationLink");
+		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +69,7 @@ public class AssertAuthenticationNTLMTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=NTLM");
+		selenium.clickAt("link=NTLM", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(ntlm.auth.enabled)Checkbox"));
 		assertTrue(selenium.isTextPresent("Domain Controller"));

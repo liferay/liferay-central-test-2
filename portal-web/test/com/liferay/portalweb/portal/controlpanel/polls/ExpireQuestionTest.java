@@ -48,17 +48,20 @@ public class ExpireQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.clickAt("link=Edited Test Question 2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//label[1]/input"));
 		assertTrue(selenium.isElementPresent("//label[2]/input"));
 		assertTrue(selenium.isElementPresent("//label[3]/input"));
 		assertTrue(selenium.isElementPresent("//label[4]/input"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Cancel']"));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.clickAt("//td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,9 +79,9 @@ public class ExpireQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
+		selenium.clickAt("//div[4]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_25_neverExpireCheckbox");
+		selenium.clickAt("_25_neverExpireCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,7 +111,7 @@ public class ExpireQuestionTest extends BaseTestCase {
 			RuntimeVariables.replace("label=:00"));
 		selenium.select("_25_expirationDateAmPm",
 			RuntimeVariables.replace("label=AM"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

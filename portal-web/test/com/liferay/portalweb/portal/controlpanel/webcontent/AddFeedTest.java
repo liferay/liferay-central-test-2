@@ -32,9 +32,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFeedTest extends BaseTestCase {
 	public void testAddFeed() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Feeds"));
+		selenium.clickAt("link=Feeds", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Feed']"));
+		selenium.clickAt("//input[@value='Add Feed']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_15_newFeedId",
 			RuntimeVariables.replace("selenium-test-feed"));
@@ -46,7 +47,7 @@ public class AddFeedTest extends BaseTestCase {
 		selenium.type("_15_targetLayoutFriendlyUrl",
 			RuntimeVariables.replace("Test-URL"));
 		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -65,7 +66,8 @@ public class AddFeedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

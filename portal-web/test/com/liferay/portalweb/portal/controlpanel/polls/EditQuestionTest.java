@@ -48,9 +48,10 @@ public class EditQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Polls"));
+		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.clickAt("//td[5]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,14 +69,15 @@ public class EditQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[1]/a"));
+		selenium.clickAt("//div[4]/ul/li[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Edited Test Question 2"));
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace(
 				"This is an edited test poll 2 description."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
+		selenium.clickAt("//input[@value='Add Choice']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -96,11 +98,12 @@ public class EditQuestionTest extends BaseTestCase {
 
 		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("NEW Test Choice D"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Edited Test Question 2"));
+		selenium.clickAt("link=Edited Test Question 2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("d. NEW Test Choice D"),
 			selenium.getText("//label[4]"));

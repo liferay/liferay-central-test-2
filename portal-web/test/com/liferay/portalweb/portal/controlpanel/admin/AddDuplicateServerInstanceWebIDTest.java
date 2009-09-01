@@ -49,7 +49,7 @@ public class AddDuplicateServerInstanceWebIDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Portal Instances"));
+		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,12 +68,12 @@ public class AddDuplicateServerInstanceWebIDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
+		selenium.clickAt("//input[@value='Add']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_135_webId", RuntimeVariables.replace("liferay.com"));
 		selenium.type("_135_virtualHost", RuntimeVariables.replace("localhost1"));
 		selenium.type("_135_mx", RuntimeVariables.replace("liferay1.com"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

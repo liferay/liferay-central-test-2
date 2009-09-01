@@ -49,9 +49,9 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("authenticationLink");
+		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,18 +69,20 @@ public class AssertAuthenticationLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=LDAP");
+		selenium.clickAt("link=LDAP", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(ldap.auth.enabled)Checkbox"));
 		assertTrue(selenium.isElementPresent(
 				"_130_settings(ldap.auth.required)Checkbox"));
-		selenium.click("_130_defaultLdap");
-		selenium.click("//input[@value='Reset Values']");
+		selenium.clickAt("_130_defaultLdap", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reset Values']",
+			RuntimeVariables.replace(""));
 		assertEquals("ldap://localhost:10389",
 			selenium.getValue("_130_settings(ldap.base.provider.url)"));
-		selenium.click(
-			"//input[@name='_130_defaultLdap' and @value='microsoft']");
-		selenium.click("//input[@value='Reset Values']");
+		selenium.clickAt("//input[@name='_130_defaultLdap' and @value='microsoft']",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reset Values']",
+			RuntimeVariables.replace(""));
 		assertEquals("ldap://localhost:389",
 			selenium.getValue("_130_settings(ldap.base.provider.url)"));
 		assertTrue(selenium.isElementPresent(

@@ -48,9 +48,9 @@ public class AssertMailHostNamesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("mailHostNamesLink");
+		selenium.clickAt("mailHostNamesLink", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Mail Host Names"));
 		assertTrue(selenium.isTextPresent(
 				"Enter one mail host name per line for all additional mail host names besides liferay.com."));

@@ -48,7 +48,7 @@ public class AssertViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class AssertViewCountTest extends BaseTestCase {
 
 		String Count = selenium.getIncrementedText("//div[2]/span[1]");
 		RuntimeVariables.setValue("Count", Count);
-		selenium.click(RuntimeVariables.replace("link=Test Entry"));
+		selenium.clickAt("link=Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +88,7 @@ public class AssertViewCountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

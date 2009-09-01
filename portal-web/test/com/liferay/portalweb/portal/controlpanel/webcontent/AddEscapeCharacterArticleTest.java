@@ -49,10 +49,10 @@ public class AddEscapeCharacterArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Web Content']"));
+		selenium.clickAt("//input[@value='Add Web Content']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_15_title",
 			RuntimeVariables.replace("<!--Html Escape Character Test-->"));
@@ -113,8 +113,8 @@ public class AddEscapeCharacterArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is an escape character test article."));
 		selenium.selectFrame("relative=top");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Save and Approve']"));
+		selenium.clickAt("//input[@value='Save and Approve']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

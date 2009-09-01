@@ -48,9 +48,9 @@ public class EditPageTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Templates"));
+		selenium.clickAt("link=Page Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +68,7 @@ public class EditPageTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_146_name_en_US",
 			RuntimeVariables.replace("Edited Test Page Template"));
@@ -76,7 +76,7 @@ public class EditPageTemplateTest extends BaseTestCase {
 			RuntimeVariables.replace("Edited Test Page Template"));
 		selenium.type("_146_description",
 			RuntimeVariables.replace("This is an edited test page template"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

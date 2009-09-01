@@ -48,9 +48,9 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_125_screenName",
 			RuntimeVariables.replace("Communit"));
@@ -59,7 +59,7 @@ public class SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("community@community.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("commun"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("nity"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }
