@@ -41,21 +41,26 @@ public class ClusterLinkUtil {
 	}
 
 	public static List<Address> getAddresses() {
-		if (_clusterLink == null){
-			_log.warn(
-				"ClusterLinkUtil has not been initialized! Will return an " +
-				"empty Address List.");
+		if (_clusterLink == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
 			return new ArrayList<Address>();
 		}
+
 		return _clusterLink.getAddresses();
 	}
 
 	public static ClusterLink getClusterLink() {
-		if (_clusterLink == null){
-			_log.warn(
-				"ClusterLinkUtil has not been initialized! Will return null.");
+		if (_clusterLink == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
 			return null;
 		}
+
 		return _clusterLink;
 	}
 
@@ -66,10 +71,11 @@ public class ClusterLinkUtil {
 	public static void sendMulticastMessage(
 		Message message, Priority priority) {
 
-		if (_clusterLink == null){
-			_log.warn(
-				"ClusterLinkUtil has not been initialized! Will not send any " +
-				"multicast message.");
+		if (_clusterLink == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
 			return;
 		}
 
@@ -79,10 +85,11 @@ public class ClusterLinkUtil {
 	public static void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
 
-		if (_clusterLink == null){
-			_log.warn(
-				"ClusterLinkUtil has not been initialized! Will not send any " +
-				"unicast message.");
+		if (_clusterLink == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterLinkUtil has not been initialized");
+			}
+
 			return;
 		}
 
@@ -108,9 +115,9 @@ public class ClusterLinkUtil {
 	private static final String _CLUSTER_FORWARD_MESSAGE =
 		"CLUSTER_FORWARD_MESSAGE";
 
-	private static ClusterLink _clusterLink;
-
 	private static final Log _log =
 		LogFactoryUtil.getLog(ClusterLinkUtil.class);
+
+	private static ClusterLink _clusterLink;
 
 }
