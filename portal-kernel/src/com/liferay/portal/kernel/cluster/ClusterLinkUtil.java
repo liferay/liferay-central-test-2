@@ -22,8 +22,11 @@
 
 package com.liferay.portal.kernel.cluster;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,10 +41,21 @@ public class ClusterLinkUtil {
 	}
 
 	public static List<Address> getAddresses() {
+		if (_clusterLink == null){
+			_log.warn(
+				"ClusterLinkUtil has not been initialized! Will return an " +
+				"empty Address List.");
+			return new ArrayList<Address>();
+		}
 		return _clusterLink.getAddresses();
 	}
 
 	public static ClusterLink getClusterLink() {
+		if (_clusterLink == null){
+			_log.warn(
+				"ClusterLinkUtil has not been initialized! Will return null.");
+			return null;
+		}
 		return _clusterLink;
 	}
 
@@ -52,11 +66,25 @@ public class ClusterLinkUtil {
 	public static void sendMulticastMessage(
 		Message message, Priority priority) {
 
+		if (_clusterLink == null){
+			_log.warn(
+				"ClusterLinkUtil has not been initialized! Will not send any " +
+				"multicast message.");
+			return;
+		}
+
 		_clusterLink.sendMulticastMessage(message, priority);
 	}
 
 	public static void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
+
+		if (_clusterLink == null){
+			_log.warn(
+				"ClusterLinkUtil has not been initialized! Will not send any " +
+				"unicast message.");
+			return;
+		}
 
 		_clusterLink.sendUnicastMessage(address, message, priority);
 	}
@@ -81,5 +109,8 @@ public class ClusterLinkUtil {
 		"CLUSTER_FORWARD_MESSAGE";
 
 	private static ClusterLink _clusterLink;
+
+	private static final Log _log =
+		LogFactoryUtil.getLog(ClusterLinkUtil.class);
 
 }
