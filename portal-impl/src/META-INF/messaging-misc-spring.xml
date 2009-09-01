@@ -29,9 +29,6 @@
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/message_boards_mailing_list" />
 	</bean>
-	<bean id="destination.scheduler_common" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler_common" />
-	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/wiki" />
 	</bean>
@@ -59,7 +56,6 @@
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
-	<bean id="messageListener.message_boards_scheduler" class="com.liferay.portlet.messageboards.messaging.MBSchedulerMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
@@ -74,7 +70,6 @@
 				<ref bean="destination.live_users" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
-				<ref bean="destination.scheduler_common" />
 				<ref bean="destination.wiki" />
 				<ref bean="destination.workflow_definition" />
 				<ref bean="destination.workflow_instance" />
@@ -114,11 +109,6 @@
 				<entry key="liferay/message_boards_mailing_list">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.message_boards_mailing_list" />
-					</list>
-				</entry>
-				<entry key="liferay/scheduler_common">
-					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.message_boards_scheduler" />
 					</list>
 				</entry>
 				<entry key="liferay/wiki">

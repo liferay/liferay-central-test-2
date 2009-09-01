@@ -20,40 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.messaging;
+package com.liferay.portlet.messageboards.job;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portlet.messageboards.scheduler.MBScheduler;
-import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
+ * <a href="MBScheduler.java.html"><b><i>View Source</i></b></a>
  *
- * @author Tian Wei
+ * @author Michael Young
  */
-public class MBSchedulerMessageListener implements MessageListener {
+public class MBScheduler implements Scheduler {
 
-	public void receive(Message message) {
-		try {
-			String schedulerKey = MBScheduler.MBScheduler_Key;
-			String keyFromMessage;
-			String payload = (String) message.getPayload();
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(payload);
-			keyFromMessage = jsonObj.getString("Scheduler_Key");
-			if (schedulerKey.equalsIgnoreCase(keyFromMessage)) {
-				MBBanLocalServiceUtil.expireBans();
+	public void schedule() {
+		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Auto expire of banned message board users is disabled");
 			}
+
+			_expireBanJob = null;
 		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
+
+		JobSchedulerUtil.schedule(_expireBanJob);
 	}
 
-	private static Log _log =
-		LogFactoryUtil.getLog(MBSchedulerMessageListener.class);
+	public void unschedule() {
+		JobSchedulerUtil.unschedule(_expireBanJob);
+	}
+
+	private IntervalJob _expireBanJob = new ExpireBanJob();
+
+	private static Log _log = LogFactoryUtil.getLog(Scheduler.class);
 
 }

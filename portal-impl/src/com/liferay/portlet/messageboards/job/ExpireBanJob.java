@@ -20,28 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.scheduler;
+package com.liferay.portlet.messageboards.job;
 
-import com.liferay.portal.kernel.job.Scheduler;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
- * <a href="MBScheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpireBanJob.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  */
-public class MBScheduler implements Scheduler {
+public class ExpireBanJob implements IntervalJob {
 
-	public MBScheduler() {
+	public ExpireBanJob() {
 		try {
 			long rawInterval = PrefsPropsUtil.getLong(
 				PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL,
@@ -58,49 +56,20 @@ public class MBScheduler implements Scheduler {
 		}
 	}
 
-	public void schedule() {
-		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Auto expire of banned message board users is disabled");
-			}
-			return;
-		}
-		String description = "This is the scheduler of message boards";
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-		jsonObj.put("Scheduler_Key", MBScheduler_Key);
-		String messageBody = jsonObj.toString();
+	public void execute(JobExecutionContext context) {
 		try {
-			SchedulerEngineUtil.schedule(GroupName, _interval, null, null,
-				description, DestinationNames.SCHEDULER_COMMON, messageBody);
+			MBBanLocalServiceUtil.expireBans();
 		}
 		catch (Exception e) {
-			_log.error(e,e);
+			_log.error(e, e);
 		}
 	}
 
-	public void unschedule() {
-		try {
-			if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Auto expire of banned message board users is " +
-						"disabled");
-				}
-				return;
-			}
-			SchedulerEngineUtil.unschedule(GroupName, GroupName);
-		}
-		catch (Exception e) {
-			_log.error(e,e);
-		}
+	public long getInterval() {
+		return _interval;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(Scheduler.class);
-
-	public static final String MBScheduler_Key = "MBScheduler";
-
-	public static final String GroupName = "MBScheduler_Group";
+	private static Log _log = LogFactoryUtil.getLog(ExpireBanJob.class);
 
 	private long _interval;
 
