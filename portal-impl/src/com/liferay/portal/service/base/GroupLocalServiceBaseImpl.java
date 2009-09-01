@@ -165,6 +165,7 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
+import com.liferay.portal.service.persistence.UserGroupRoleFinder;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserIdMapperPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -1424,6 +1425,14 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		this.userGroupRolePersistence = userGroupRolePersistence;
 	}
 
+	public UserGroupRoleFinder getUserGroupRoleFinder() {
+		return userGroupRoleFinder;
+	}
+
+	public void setUserGroupRoleFinder(UserGroupRoleFinder userGroupRoleFinder) {
+		this.userGroupRoleFinder = userGroupRoleFinder;
+	}
+
 	public UserIdMapperLocalService getUserIdMapperLocalService() {
 		return userIdMapperLocalService;
 	}
@@ -2461,6 +2470,8 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	protected UserGroupRoleService userGroupRoleService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserGroupRoleFinder.impl")
+	protected UserGroupRoleFinder userGroupRoleFinder;
 	@BeanReference(name = "com.liferay.portal.service.UserIdMapperLocalService.impl")
 	protected UserIdMapperLocalService userIdMapperLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")

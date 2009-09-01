@@ -750,6 +750,10 @@
 	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" />
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupRoleFinder.impl" class="com.liferay.portal.service.persistence.UserGroupRoleFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupRoleFinderUtil" class="com.liferay.portal.service.persistence.UserGroupRoleFinderUtil">
+		<property name="finder" ref="com.liferay.portal.service.persistence.UserGroupRoleFinder.impl" />
+	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalService.impl" class="com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.UserIdMapperLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.UserIdMapperLocalService.impl" />

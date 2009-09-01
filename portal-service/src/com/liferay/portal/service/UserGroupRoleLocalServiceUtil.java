@@ -173,6 +173,12 @@ public class UserGroupRoleLocalServiceUtil {
 		return getService().getUserGroupRolesByGroupAndRole(groupId, roleId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserGroupRole> getUserGroupRolesByUserUserGroupAndGroup(
+		long userId, long groupId) throws com.liferay.portal.SystemException {
+		return getService()
+				   .getUserGroupRolesByUserUserGroupAndGroup(userId, groupId);
+	}
+
 	public static boolean hasUserGroupRole(long userId, long groupId,
 		long roleId) throws com.liferay.portal.SystemException {
 		return getService().hasUserGroupRole(userId, groupId, roleId);
