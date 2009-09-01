@@ -32,9 +32,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ConfirmEnglishTest extends BaseTestCase {
 	public void testConfirmEnglish() throws Exception {
-		selenium.click("//img[@alt='English (United States)']");
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='English (United States)']"));
+		selenium.clickAt("//img[@alt='English (United States)']",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//img[@alt='English (United States)']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

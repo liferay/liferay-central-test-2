@@ -48,9 +48,10 @@ public class AddCancelCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Add Comment");
+		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +71,8 @@ public class AddCancelCommentTest extends BaseTestCase {
 
 		selenium.type("_107_postReplyBody0",
 			RuntimeVariables.replace("This is a cancel test page comment."));
-		selenium.click("//input[@value='Cancel']");
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isVisible("_107_postReplyBody0"));

@@ -49,10 +49,10 @@ public class AddNullEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//b"));
+		selenium.clickAt("//b", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,8 +71,8 @@ public class AddNullEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Post New Thread']"));
+		selenium.clickAt("//input[@value='Post New Thread']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -95,7 +95,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("Null Test Entr"));
 		selenium.type("_19_subject", RuntimeVariables.replace("Null Test Entry"));
 		selenium.type("_19_textArea", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

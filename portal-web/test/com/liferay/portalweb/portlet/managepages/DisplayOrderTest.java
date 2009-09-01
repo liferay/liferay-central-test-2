@@ -32,7 +32,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayOrderTest extends BaseTestCase {
 	public void testDisplayOrder() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,19 +51,20 @@ public class DisplayOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Children"));
+		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Display Order"));
+		selenium.clickAt("link=Display Order", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Child Test Page 2"));
-		selenium.click("//td[2]/a[1]/img");
-		selenium.click("//a[3]/img");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Display Order']"));
+		selenium.clickAt("//td[2]/a[1]/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[3]/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Display Order']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Child Test Page 2"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

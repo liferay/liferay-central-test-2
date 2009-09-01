@@ -48,9 +48,10 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[1]/span");
+		selenium.clickAt("//div[1]/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +87,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[2]/ul/li[1]/a");
+		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -104,13 +105,15 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st Name"),
 			selenium.getText("//div[1]/span"));
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div[1]/span");
+		selenium.clickAt("//div[1]/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -146,7 +149,7 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[2]/ul/li[1]/a");
+		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -164,7 +167,8 @@ public class EditPortletNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Page Comments"),
 			selenium.getText("//div[1]/span"));

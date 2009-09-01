@@ -48,9 +48,10 @@ public class AddSpaceReplyCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Post Reply");
+		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,12 +70,13 @@ public class AddSpaceReplyCommentTest extends BaseTestCase {
 		}
 
 		selenium.type("_107_postReplyBody1", RuntimeVariables.replace(""));
-		selenium.click("_107_postReplyButton1");
+		selenium.clickAt("_107_postReplyButton1", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_postReplyBody1"));
-		selenium.click("//td[2]/table[2]/tbody/tr[1]/td/input[2]");
+		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[2]",
+			RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_postReplyBody1"));
 	}
 }

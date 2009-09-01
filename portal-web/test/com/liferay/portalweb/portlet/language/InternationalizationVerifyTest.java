@@ -33,8 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class InternationalizationVerifyTest extends BaseTestCase {
 	public void testInternationalizationVerify() throws Exception {
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='\u65e5\u672c\u8a9e (\u65e5\u672c)']"));
+		selenium.clickAt("//img[@alt='??? (??)']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -43,8 +42,7 @@ public class InternationalizationVerifyTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=\u8a00\u8a9e\u30c6\u30b9\u30c8\u30da\u30fc\u30b8")) {
+				if (selenium.isElementPresent("link=????????")) {
 					break;
 				}
 			}
@@ -54,8 +52,8 @@ public class InternationalizationVerifyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='espa\u00f1ol (Espa\u00f1a)']"));
+		selenium.clickAt("//img[@alt='espa\u00f1ol (Espa\u00f1a)']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,8 +73,8 @@ public class InternationalizationVerifyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='English (United States)']"));
+		selenium.clickAt("//img[@alt='English (United States)']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

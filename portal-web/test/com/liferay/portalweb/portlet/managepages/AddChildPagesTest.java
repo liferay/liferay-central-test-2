@@ -32,11 +32,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildPagesTest extends BaseTestCase {
 	public void testAddChildPages() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Manage Pages Test Page"));
+		selenium.clickAt("link=Manage Pages Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Children"));
+		selenium.clickAt("link=Children", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,9 +58,11 @@ public class AddChildPagesTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Child Test Page"));
-		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
-		selenium.click("_88_hiddenCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("_88_inheritFromParentLayoutIdCheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("_88_hiddenCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -80,17 +83,20 @@ public class AddChildPagesTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Child Test Page 2"));
-		selenium.click("_88_hiddenCheckbox");
-		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("_88_hiddenCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("_88_inheritFromParentLayoutIdCheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Display Order"));
+		selenium.clickAt("link=Display Order", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Child Test Page"));
 		assertTrue(selenium.isTextPresent("Child Test Page"));
 		assertTrue(selenium.isTextPresent("Child Test Page 2"));
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

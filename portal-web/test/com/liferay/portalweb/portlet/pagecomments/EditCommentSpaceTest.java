@@ -48,9 +48,10 @@ public class EditCommentSpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Page Comments Test Page"));
+		selenium.clickAt("link=Page Comments Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,12 +70,12 @@ public class EditCommentSpaceTest extends BaseTestCase {
 		}
 
 		selenium.type("_107_editReplyBody1", RuntimeVariables.replace(""));
-		selenium.click("_107_editReplyButton1");
+		selenium.clickAt("_107_editReplyButton1", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody1"));
-		selenium.click("//tr[2]/td/input[2]");
+		selenium.clickAt("//tr[2]/td/input[2]", RuntimeVariables.replace(""));
 		assertFalse(selenium.isVisible("_107_editReplyBody1"));
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
 			selenium.getText("//td[2]/div[1]"));

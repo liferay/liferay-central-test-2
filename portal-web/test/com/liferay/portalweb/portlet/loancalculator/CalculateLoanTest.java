@@ -35,7 +35,8 @@ public class CalculateLoanTest extends BaseTestCase {
 		selenium.type("_61_loanAmount", RuntimeVariables.replace("1,000"));
 		selenium.type("_61_interest", RuntimeVariables.replace("4.75"));
 		selenium.type("_61_years", RuntimeVariables.replace("20"));
-		selenium.click("//input[@value='Calculate']");
+		selenium.clickAt("//input[@value='Calculate']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
