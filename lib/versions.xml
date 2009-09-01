@@ -785,6 +785,18 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/spring-tomcat-weaver.jar</file-name>
+		<version>2.5.6</version>
+		<project-name>Spring</project-name>
+		<project-url>http://www.springframework.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2002-2007 the original author or authors.</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/annotations.jar</file-name>
 		<version>1.0</version>
 		<project-name>Common Annotations</project-name>
@@ -1363,6 +1375,17 @@
 		<version>20070801</version>
 		<project-name>Eclipse Core Runtime</project-name>
 		<project-url>http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.core.runtime/</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/eclipselink.jar</file-name>
+		<version>1.1.2</version>
+		<project-name>EclipseLink</project-name>
+		<project-url>http://www.eclipse.org/eclipselink</project-url>
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
