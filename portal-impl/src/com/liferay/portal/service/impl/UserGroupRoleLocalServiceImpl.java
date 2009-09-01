@@ -191,6 +191,14 @@ public class UserGroupRoleLocalServiceImpl
 		return userGroupRolePersistence.findByG_R(groupId, roleId);
 	}
 
+	public List<UserGroupRole> getUserGroupRolesByUserUserGroupAndGroup(
+			long userId, long groupId)
+		throws SystemException {
+
+		return userGroupRoleFinder.findByUserUserGroupGroupRole(
+			userId, groupId);
+	}
+
 	public boolean hasUserGroupRole(long userId, long groupId, long roleId)
 		throws SystemException {
 

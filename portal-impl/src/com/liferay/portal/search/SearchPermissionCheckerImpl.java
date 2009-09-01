@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchPermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
@@ -158,17 +159,28 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		List<Role> roles = ResourceActionsUtil.getRoles(group, className);
 
 		List<Long> roleIds = new ArrayList<Long>();
+		List<String> groupRoleIds = new ArrayList<String>();
 
 		for (Role role : roles) {
 			long roleId = role.getRoleId();
 
 			if (hasPermission(roleId, resource.getResourceId())) {
-				roleIds.add(roleId);
+				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+
+					groupRoleIds.add(groupId + StringPool.DASH + roleId);
+				}
+				else {
+					roleIds.add(roleId);
+				}
 			}
 		}
 
 		doc.addKeyword(
 			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
+		doc.addKeyword(
+			Field.GROUP_ROLE_ID,
+			groupRoleIds.toArray(new String[groupRoleIds.size()]));
 	}
 
 	protected void doAddPermissionFields_6(
@@ -181,6 +193,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		List<Role> roles = ResourceActionsUtil.getRoles(group, className);
 
 		List<Long> roleIds = new ArrayList<Long>();
+		List<String> groupRoleIds = new ArrayList<String>();
 
 		for (Role role : roles) {
 			long roleId = role.getRoleId();
@@ -189,12 +202,22 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 					companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
 					classPK, roleId, ActionKeys.VIEW)) {
 
-				roleIds.add(roleId);
+				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+
+					groupRoleIds.add(groupId + StringPool.DASH + roleId);
+				}
+				else {
+					roleIds.add(roleId);
+				}
 			}
 		}
 
 		doc.addKeyword(
 			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
+		doc.addKeyword(
+			Field.GROUP_ROLE_ID,
+			groupRoleIds.toArray(new String[groupRoleIds.size()]));
 	}
 
 	protected Query doGetPermissionQuery_5(
@@ -210,19 +233,21 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		roles = ListUtil.copy(roles);
 
-		if (groupId == 0) {
-			List<UserGroupRole> userGroupRoles =
-				UserGroupRoleLocalServiceUtil.getUserGroupRoles(userId);
+		List<UserGroupRole> userGroupRoles = null;
 
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				roles.add(userGroupRole.getRole());
-			}
+		if (groupId == 0) {
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+				userId);
 		}
 		else {
-			roles.addAll(
-				RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-			roles.addAll(
-				RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+				userId, groupId);
+
+			userGroupRoles = ListUtil.copy(userGroupRoles);
+
+			userGroupRoles.addAll(
+				UserGroupRoleLocalServiceUtil.
+					getUserGroupRolesByUserUserGroupAndGroup(userId, groupId));
 		}
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
@@ -272,6 +297,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			permissionQuery.addTerm(Field.ROLE_ID, role.getRoleId());
 		}
 
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			permissionQuery.addTerm(
+				Field.GROUP_ROLE_ID,
+				userGroupRole.getGroupId() + StringPool.DASH +
+					userGroupRole.getRoleId());
+		}
+
 		fullQuery.add(query, BooleanClauseOccur.MUST);
 		fullQuery.add(permissionQuery, BooleanClauseOccur.MUST);
 
@@ -291,19 +323,21 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		roles = ListUtil.copy(roles);
 
-		if (groupId == 0) {
-			List<UserGroupRole> userGroupRoles =
-				UserGroupRoleLocalServiceUtil.getUserGroupRoles(userId);
+		List<UserGroupRole> userGroupRoles = null;
 
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				roles.add(userGroupRole.getRole());
-			}
+		if (groupId == 0) {
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+				userId);
 		}
 		else {
-			roles.addAll(
-				RoleLocalServiceUtil.getUserGroupRoles(userId, groupId));
-			roles.addAll(
-				RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId));
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+				userId, groupId);
+
+			userGroupRoles = ListUtil.copy(userGroupRoles);
+
+			userGroupRoles.addAll(
+				UserGroupRoleLocalServiceUtil.
+					getUserGroupRolesByUserUserGroupAndGroup(userId, groupId));
 		}
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
@@ -331,6 +365,13 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			}
 
 			permissionQuery.addTerm(Field.ROLE_ID, roleId);
+		}
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			permissionQuery.addTerm(
+				Field.GROUP_ROLE_ID,
+				userGroupRole.getGroupId() + StringPool.DASH +
+					userGroupRole.getRoleId());
 		}
 
 		fullQuery.add(query, BooleanClauseOccur.MUST);

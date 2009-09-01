@@ -1422,4 +1422,24 @@
 				(Groups_Roles.roleId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserGroupRoleFinder.findByUserUserGroupGroupRole">
+		<![CDATA[
+			(
+				SELECT
+					{UserGroupRole.*}
+				FROM
+					UserGroupRole
+				INNER JOIN
+					UserGroupGroupRole ON
+						(UserGroupGroupRole.groupId = UserGroupRole.groupId) AND
+						(UserGroupGroupRole.roleId = UserGroupRole.roleId)
+				INNER JOIN
+					Users_UserGroups ON
+						(Users_UserGroups.userGroupId = UserGroupGroupRole.userGroupId)
+				WHERE
+					(Users_UserGroups.userId = ?) AND
+					(UserGroupGroupRole.groupId = ?)
+			)
+		]]>
+	</sql>
 </custom-sql>

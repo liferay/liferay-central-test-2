@@ -52,6 +52,8 @@ public class Field implements Serializable {
 
 	public static final String GROUP_ID = "groupId";
 
+	public static final String GROUP_ROLE_ID = "groupRoleId";
+
 	public static final String MODIFIED = "modified";
 
 	public static final String NAME = "name";
