@@ -69,6 +69,7 @@
 	<classpathentry kind="lib" path="lib/development/selenium-server.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
+	<classpathentry kind="lib" path="lib/development/spring-tomcat-weaver.jar"/>
 	<classpathentry kind="lib" path="lib/global/annotations.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-service.jar"/>
@@ -121,6 +122,7 @@
 	<classpathentry kind="lib" path="lib/portal/dom4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/easyconf.jar"/>
 	<classpathentry kind="lib" path="lib/portal/eclipse-core-runtime.jar"/>
+	<classpathentry kind="lib" path="lib/portal/eclipselink.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ecs.jar"/>
 	<classpathentry kind="lib" path="lib/portal/edoras.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache.jar"/>
