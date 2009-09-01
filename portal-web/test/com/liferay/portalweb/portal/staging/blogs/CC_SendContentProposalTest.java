@@ -48,9 +48,11 @@ public class CC_SendContentProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Propose Publication");
+		selenium.clickAt("link=Propose Publication",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,9 +74,10 @@ public class CC_SendContentProposalTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a content proposal test."));
 		selenium.type("_88_description",
 			RuntimeVariables.replace("This is a content proposal test."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Proceed']"));
+		selenium.clickAt("//input[@value='Proceed']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=View Proposals"));
+		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Blogs Staging Test Page"));
 		assertTrue(selenium.isTextPresent("This is a content proposal test."));

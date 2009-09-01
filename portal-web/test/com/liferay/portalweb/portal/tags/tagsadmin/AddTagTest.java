@@ -48,10 +48,10 @@ public class AddTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs"));
+		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
 			RuntimeVariables.replace("Temporary Tags Entry"));
@@ -113,9 +113,9 @@ public class AddTagTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.type("//div[8]/div/input[2]",
 			RuntimeVariables.replace("selenium"));
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -136,7 +136,7 @@ public class AddTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(500);
 		assertTrue(selenium.isElementPresent("link=selenium"));

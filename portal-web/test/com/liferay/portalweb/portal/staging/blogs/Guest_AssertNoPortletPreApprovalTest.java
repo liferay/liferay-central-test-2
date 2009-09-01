@@ -50,7 +50,8 @@ public class Guest_AssertNoPortletPreApprovalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Subscribe to this blog."));
 		assertFalse(selenium.isTextPresent("Showing 0 results."));

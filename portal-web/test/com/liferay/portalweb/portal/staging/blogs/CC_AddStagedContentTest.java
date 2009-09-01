@@ -48,12 +48,13 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
+		selenium.clickAt("link=View Staged Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_33_title",
 			RuntimeVariables.replace("Staging Blogs Test Entr"));
@@ -134,7 +135,7 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

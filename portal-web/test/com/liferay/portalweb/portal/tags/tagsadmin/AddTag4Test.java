@@ -48,9 +48,9 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("add-tag-button");
+		selenium.clickAt("add-tag-button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +70,7 @@ public class AddTag4Test extends BaseTestCase {
 
 		selenium.type("new-tag-name", RuntimeVariables.replace("Blue Car"));
 		Thread.sleep(500);
-		selenium.click("//input[@value='Save']");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		Thread.sleep(500);
 
 		for (int second = 0;; second++) {
@@ -89,7 +89,8 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[2]/div[2]/div[3]/input[2]");
+		selenium.clickAt("//td[2]/div[2]/div[3]/input[2]",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

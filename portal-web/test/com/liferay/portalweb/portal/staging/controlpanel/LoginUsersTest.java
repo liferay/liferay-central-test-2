@@ -48,53 +48,60 @@ public class LoginUsersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("CC@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
+		selenium.clickAt("//input[@value='I Agree']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//input[@id='reminderQueryAnswer']",
 			RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("CA@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
+		selenium.clickAt("//input[@value='I Agree']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//input[@id='reminderQueryAnswer']",
 			RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("CP@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
+		selenium.clickAt("//input[@value='I Agree']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//input[@id='reminderQueryAnswer']",
 			RuntimeVariables.replace("test"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

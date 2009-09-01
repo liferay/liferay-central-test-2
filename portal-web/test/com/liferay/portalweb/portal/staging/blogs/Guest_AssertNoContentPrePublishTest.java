@@ -49,7 +49,8 @@ public class Guest_AssertNoContentPrePublishTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Staging Blogs Test Entry"));
 		assertTrue(selenium.isTextPresent("Showing 0 results."));

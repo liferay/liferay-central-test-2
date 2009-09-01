@@ -48,9 +48,9 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +68,7 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
+		selenium.clickAt("link=Assign Members", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +87,7 @@ public class AssignMembersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.clickAt("link=Available", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,11 +108,12 @@ public class AssignMembersTest extends BaseTestCase {
 
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("content"));
 		selenium.type("_134_keywords", RuntimeVariables.replace("content"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_134_allRowIds");
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Update Associations']"));
+		selenium.clickAt("_134_allRowIds", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

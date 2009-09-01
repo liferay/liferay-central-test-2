@@ -48,7 +48,8 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,8 +68,8 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags1 Blogs1 Test1 Entry1"));
+		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +88,7 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -111,7 +112,7 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 			RuntimeVariables.replace("selenium2 lifera2"));
 		selenium.type("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium2 liferay2"));
-		selenium.click("//div[7]/div/input[3]");
+		selenium.clickAt("//div[7]/div/input[3]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -131,7 +132,7 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2x"),
 			selenium.getText("//span/span[2]"));
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

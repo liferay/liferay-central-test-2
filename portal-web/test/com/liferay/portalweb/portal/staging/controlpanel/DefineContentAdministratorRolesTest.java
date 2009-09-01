@@ -49,7 +49,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,8 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//tr[7]/td[4]/ul/li/strong/span");
+		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +87,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
+		selenium.clickAt("//div[4]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Content Administrator"));
 		assertTrue(selenium.isTextPresent("Add Permissions"));

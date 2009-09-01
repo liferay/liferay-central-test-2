@@ -48,7 +48,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -93,7 +93,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

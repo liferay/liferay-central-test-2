@@ -54,7 +54,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("link=Tags");
+				selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 				Thread.sleep(500);
 
 				boolean BluePresent = selenium.isElementPresent("link=blue");
@@ -85,7 +85,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -121,7 +122,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -157,7 +159,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -192,7 +195,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -228,7 +232,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -264,7 +269,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
@@ -301,7 +307,8 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 

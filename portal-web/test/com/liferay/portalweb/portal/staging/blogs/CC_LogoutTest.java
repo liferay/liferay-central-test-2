@@ -48,7 +48,7 @@ public class CC_LogoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Sign Out"));
+		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

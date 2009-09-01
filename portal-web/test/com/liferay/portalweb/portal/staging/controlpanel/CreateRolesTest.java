@@ -48,7 +48,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,11 +91,11 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Content Creator"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Creator Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -114,7 +114,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -139,11 +139,11 @@ public class CreateRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("Content Administrator"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Administrator Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -162,7 +162,7 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -186,7 +186,7 @@ public class CreateRolesTest extends BaseTestCase {
 		selenium.type("_128_name", RuntimeVariables.replace("Content Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Publisher Role."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

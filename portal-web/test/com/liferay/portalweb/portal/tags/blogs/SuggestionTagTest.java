@@ -48,7 +48,8 @@ public class SuggestionTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,8 +68,8 @@ public class SuggestionTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags3 Blogs3 Test3 Entry3"));
+		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,10 +88,10 @@ public class SuggestionTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.click("//div/input[5]");
+		selenium.clickAt("//div/input[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,8 +110,8 @@ public class SuggestionTagTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("//label[1]/input"));
-		selenium.click("link=Close");
-		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
+		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_cancelButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

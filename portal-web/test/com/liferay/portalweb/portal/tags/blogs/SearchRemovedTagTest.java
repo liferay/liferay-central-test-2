@@ -48,11 +48,13 @@ public class SearchRemovedTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_keywords",
 			RuntimeVariables.replace("selenium3 liferay3"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Tags3 Blogs3 Test3 Entry3"));
 	}

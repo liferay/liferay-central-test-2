@@ -48,7 +48,8 @@ public class AddUTFTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,8 +68,8 @@ public class AddUTFTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags3 Blogs3 Test3 Entry3"));
+		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,12 +88,12 @@ public class AddUTFTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		selenium.type("//div[7]/div/input[2]",
 			RuntimeVariables.replace("s\u00e9l\u00e9nium1 lif\u00e9ray1"));
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

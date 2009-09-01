@@ -49,10 +49,10 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]"));
+		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +72,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,11 +94,13 @@ public class SetupTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Tags Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Application");
+		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -117,7 +119,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
+		selenium.clickAt("//div[@id=\"Collaboration-Blogs\"]/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -136,8 +139,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -231,7 +234,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -251,8 +254,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -346,7 +349,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -366,8 +369,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Blog Entry']"));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -461,7 +464,7 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

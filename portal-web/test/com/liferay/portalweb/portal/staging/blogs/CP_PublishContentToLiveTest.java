@@ -48,9 +48,10 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=View Proposals"));
+		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,9 +88,10 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Publish to Live']");
+		selenium.clickAt("//input[@value='Publish to Live']",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -107,7 +109,7 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Options");
+		selenium.clickAt("link=Options", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,7 +127,7 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_88_PORTLET_DATA_33");
+		selenium.clickAt("_88_PORTLET_DATA_33", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -143,8 +145,8 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Pages");
-		selenium.click(RuntimeVariables.replace("publishBtn"));
+		selenium.clickAt("link=Pages", RuntimeVariables.replace(""));
+		selenium.clickAt("publishBtn", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));

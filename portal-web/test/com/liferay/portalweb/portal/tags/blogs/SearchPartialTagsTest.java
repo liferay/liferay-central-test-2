@@ -48,22 +48,26 @@ public class SearchPartialTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_keywords", RuntimeVariables.replace("selenium1"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Tags1 Blogs1 Test1 Entry1"));
 		assertFalse(selenium.isTextPresent("Tags2 Blogs2 Test2 Entry2"));
 		assertFalse(selenium.isTextPresent("Tags3 Blogs3 Test3 Entry3"));
 		selenium.type("_33_keywords", RuntimeVariables.replace("liferay3"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Tags1 Blogs1 Test1 Entry1"));
 		assertTrue(selenium.isTextPresent("Tags2 Blogs2 Test2 Entry2"));
 		assertTrue(selenium.isTextPresent("Tags3 Blogs3 Test3 Entry3"));
 		selenium.type("_33_keywords", RuntimeVariables.replace("selen"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Tags1 Blogs1 Test1 Entry1"));
 		assertTrue(selenium.isTextPresent("Tags2 Blogs2 Test2 Entry2"));

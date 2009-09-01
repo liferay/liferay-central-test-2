@@ -49,9 +49,10 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Roles"));
+		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//tr[9]/td[4]/ul/li/strong/span");
+		selenium.clickAt("//tr[9]/td[4]/ul/li/strong/span",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +70,7 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[3]/a"));
+		selenium.clickAt("//div[4]/ul/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Content Publisher"));
 		assertTrue(selenium.isTextPresent("Add Permissions"));

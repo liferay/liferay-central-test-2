@@ -48,7 +48,7 @@ public class DeleteTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Tags"));
+		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(500);
 		selenium.clickAt("link=selenium2 liferay2", RuntimeVariables.replace(""));
@@ -70,7 +70,8 @@ public class DeleteTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Delete']");
+		selenium.clickAt("//input[@value='Delete']",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 		Thread.sleep(500);

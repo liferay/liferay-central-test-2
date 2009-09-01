@@ -48,7 +48,8 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,10 +68,10 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags1 Blogs1 Test1 Entry1"));
+		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +90,7 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/input[4]");
+		selenium.clickAt("//div[6]/input[4]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -115,8 +116,8 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("selenium3 liferay3"));
 		assertTrue(selenium.isElementPresent("//label[4]/input"));
 		assertTrue(selenium.isTextPresent("selenium4 liferay4"));
-		selenium.click("link=Close");
-		selenium.click(RuntimeVariables.replace("_33_cancelButton"));
+		selenium.clickAt("link=Close", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_cancelButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

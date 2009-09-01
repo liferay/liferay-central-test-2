@@ -49,7 +49,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,8 +69,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags1 Blogs1 Test1 Entry1"));
+		selenium.clickAt("link=Tags1 Blogs1 Test1 Entry1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium2 liferay2"));
 
@@ -89,7 +90,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,8 +110,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags2 Blogs2 Test2 Entry2"));
+		selenium.clickAt("link=Tags2 Blogs2 Test2 Entry2",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium2 liferay2"));
 
@@ -129,7 +131,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -148,8 +151,8 @@ public class AssertDeletedTagDoesNotPersistTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags3 Blogs3 Test3 Entry3"));
+		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("selenium2 liferay2"));
 	}

@@ -49,9 +49,10 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=View Proposals"));
+		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +71,7 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -88,7 +89,7 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Publish To Live']"));

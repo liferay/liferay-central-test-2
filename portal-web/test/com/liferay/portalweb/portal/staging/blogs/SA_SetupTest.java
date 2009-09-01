@@ -48,11 +48,11 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Guest"));
+		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Welcome"));
+		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +72,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,11 +94,13 @@ public class SA_SetupTest extends BaseTestCase {
 
 		selenium.type("_88_name_en_US",
 			RuntimeVariables.replace("Blogs Staging Test Page"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Blogs Staging Test Page"));
+		selenium.clickAt("link=Blogs Staging Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -117,7 +119,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Communities"));
+		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -136,7 +138,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//strong/span");
+		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -154,7 +156,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
+		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -173,7 +175,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//form/ul[1]/li[3]/a"));
+		selenium.clickAt("//form/ul[1]/li[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -192,7 +194,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_134_stagingEnabled"));
+		selenium.clickAt("_134_stagingEnabled", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -213,7 +215,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("_134_workflowEnabled"));
+		selenium.clickAt("_134_workflowEnabled", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -221,11 +223,11 @@ public class SA_SetupTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Community Member"));
 		selenium.select("_134_workflowRoleName_2",
 			RuntimeVariables.replace("label=Community Member"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click(RuntimeVariables.replace("link=Back to Guest"));
+		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

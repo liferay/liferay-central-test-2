@@ -49,7 +49,8 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Blogs Tags Test Page"));
+		selenium.clickAt("link=Blogs Tags Test Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,8 +69,8 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"link=Tags3 Blogs3 Test3 Entry3"));
+		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,17 +89,18 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		selenium.type("//div[7]/div/input[2]", RuntimeVariables.replace(""));
 		selenium.typeKeys("//div[7]/div/input[2]",
 			RuntimeVariables.replace("selenium3 "));
 		Thread.sleep(5000);
-		selenium.click("//div[6]/div[1]/div[2]/ul/li[1]");
+		selenium.clickAt("//div[6]/div[1]/div[2]/ul/li[1]",
+			RuntimeVariables.replace(""));
 		assertEquals("selenium3 liferay3,",
 			selenium.getValue("//div[7]/div/input[2]"));
-		selenium.click(RuntimeVariables.replace("_33_saveButton"));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
