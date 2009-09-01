@@ -132,26 +132,6 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</span>
 	</c:when>
-	<c:when test='<%= type.equals("timeZone") %>'>
-		<span class="aui-form-field aui-form-time-zone">
-			<%
-			int displayStyle = TimeZone.LONG;
-
-			if (dynamicAttributes.get("displayStyle") != null) {
-				displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
-			}
-			%>
-
-			<liferay-ui:input-time-zone
-				daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
-				disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
-				displayStyle='<%= displayStyle %>'
-				name="<%= name %>"
-				nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
-				value="<%= value.toString() %>"
-			/>
-		</span>
-	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
 		<span class="aui-form-field aui-form-radio">
 			<label class="aui-form-label">
@@ -168,6 +148,27 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 				<liferay-ui:message key="<%= label %>" />
 			</label>
+		</span>
+	</c:when>
+	<c:when test='<%= type.equals("timeZone") %>'>
+		<span class="aui-form-field aui-form-time-zone">
+
+			<%
+			int displayStyle = TimeZone.LONG;
+
+			if (dynamicAttributes.get("displayStyle") != null) {
+				displayStyle = GetterUtil.getInteger((String)dynamicAttributes.get("displayStyle"));
+			}
+			%>
+
+			<liferay-ui:input-time-zone
+				daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
+				disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
+				displayStyle='<%= displayStyle %>'
+				name="<%= name %>"
+				nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
+				value="<%= value.toString() %>"
+			/>
 		</span>
 	</c:when>
 	<c:otherwise>
