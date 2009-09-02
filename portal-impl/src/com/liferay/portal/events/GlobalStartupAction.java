@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
@@ -175,10 +174,6 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
-
-		// JGroups
-
-		CommLink.getInstance();
 
 		// JNDI
 

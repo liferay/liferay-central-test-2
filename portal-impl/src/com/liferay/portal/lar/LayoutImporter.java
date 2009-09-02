@@ -29,9 +29,11 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.comm.CommLink;
+import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
+import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -115,7 +117,7 @@ import org.apache.commons.lang.time.StopWatch;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jorge Ferrer
  * @author Bruno Farache
  */
@@ -1489,12 +1491,13 @@ public class LayoutImporter {
 
 		themeLoader.loadThemes();
 
-		CommLink commLink = CommLink.getInstance();
-
 		MethodWrapper methodWrapper = new MethodWrapper(
 			ThemeLoaderFactory.class.getName(), "loadThemes");
 
-		commLink.send(methodWrapper);
+		Message message = new Message();
+		message.setPayload(methodWrapper);
+
+		ClusterLinkUtil.sendMulticastMessage(message, Priority.LEVEL5);
 
 		themeId +=
 			PortletConstants.WAR_SEPARATOR +
