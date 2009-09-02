@@ -74,7 +74,7 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			if (_label != null) {
+			if (_label == null) {
 				_label = TextFormatter.format(_name, TextFormatter.K);
 			}
 
