@@ -94,8 +94,6 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:select:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:select:dynamicAttributes", _dynamicAttributes);
-			request.setAttribute(
-				"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 			request.setAttribute("aui:select:first", String.valueOf(_first));
 			request.setAttribute("aui:select:helpMessage", _helpMessage);
 			request.setAttribute(
@@ -105,6 +103,8 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:select:last", String.valueOf(_last));
 			request.setAttribute("aui:select:listType", _listType);
 			request.setAttribute("aui:select:name", _name);
+			request.setAttribute(
+				"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -147,10 +147,6 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_dynamicAttributes.put(localName, value);
 	}
 
-	public void setShowEmptyOption(boolean showEmptyOption) {
-		_showEmptyOption = showEmptyOption;
-	}
-
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
 	}
@@ -181,6 +177,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setShowEmptyOption(boolean showEmptyOption) {
+		_showEmptyOption = showEmptyOption;
 	}
 
 	public void setStartPage(String startPage) {
