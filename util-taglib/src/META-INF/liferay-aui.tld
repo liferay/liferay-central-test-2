@@ -369,7 +369,17 @@
 		<tag-class>com.liferay.taglib.aui.SelectTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
+			<name>bean</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showEmptyOption</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -405,6 +415,11 @@
 		</attribute>
 		<attribute>
 			<name>last</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>listType</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

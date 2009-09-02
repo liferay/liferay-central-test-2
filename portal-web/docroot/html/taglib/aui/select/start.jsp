@@ -25,14 +25,17 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+Object bean = request.getAttribute("aui:select:bean");
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
+boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
+String listType = GetterUtil.getString((String)request.getAttribute("aui:select:listType"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
 %>
 
@@ -52,3 +55,30 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 
 	<span class="aui-form-field aui-form-select">
 		<select id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<c:if test="<%= showEmptyOption %>">
+					<aui:option />
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(listType) %>">
+
+				<%
+				int currentType = BeanParamUtil.getInteger(bean, request, "typeId");
+
+				String httpValue = request.getParameter(GetterUtil.getString((String)request.getAttribute("aui:select:name")));
+
+				if (httpValue != null) {
+					currentType = GetterUtil.getInteger(httpValue);
+				}
+
+				List<ListType> typesList = ListTypeServiceUtil.getListTypes(listType);
+
+				for (ListType type : typesList) {
+				%>
+
+					<aui:option selected="<%= (type.getListTypeId() == currentType) %>" value="<%= type.getListTypeId() %>"><liferay-ui:message key="<%= type.getName() %>" /></aui:option>
+
+				<%
+				}
+				%>
+
+			</c:if>

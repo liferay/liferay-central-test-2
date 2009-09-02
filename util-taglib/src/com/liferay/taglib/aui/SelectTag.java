@@ -55,8 +55,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		}
 		finally {
 			if (!ServerDetector.isResin()) {
+				_bean = null;
 				_cssClass = null;
 				_dynamicAttributes.clear();
+				_showEmptyOption = false;
 				_endPage = null;
 				_first = false;
 				_helpMessage = null;
@@ -64,6 +66,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_id = null;
 				_label = null;
 				_last = false;
+				_listType = null;
 				_name = null;
 				_startPage = null;
 			}
@@ -75,6 +78,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
+			if (_bean == null) {
+				_bean = pageContext.getAttribute("aui:model-context:bean");
+			}
+
 			if (Validator.isNull(_id)) {
 				_id = _name;
 			}
@@ -83,9 +90,12 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_label = TextFormatter.format(_name, TextFormatter.K);
 			}
 
+			request.setAttribute("aui:select:bean", _bean);
 			request.setAttribute("aui:select:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:select:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute(
+				"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 			request.setAttribute("aui:select:first", String.valueOf(_first));
 			request.setAttribute("aui:select:helpMessage", _helpMessage);
 			request.setAttribute(
@@ -93,6 +103,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:select:id", _id);
 			request.setAttribute("aui:select:label", _label);
 			request.setAttribute("aui:select:last", String.valueOf(_last));
+			request.setAttribute("aui:select:listType", _listType);
 			request.setAttribute("aui:select:name", _name);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
@@ -122,6 +133,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		}
 	}
 
+	public void setBean(Object bean) {
+		_bean = bean;
+	}
+
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -130,6 +145,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		String uri, String localName, Object value) {
 
 		_dynamicAttributes.put(localName, value);
+	}
+
+	public void setShowEmptyOption(boolean showEmptyOption) {
+		_showEmptyOption = showEmptyOption;
 	}
 
 	public void setEndPage(String endPage) {
@@ -168,14 +187,20 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_startPage = startPage;
 	}
 
+	public void setListType(String listType) {
+		_listType = listType;
+	}
+
 	private static final String _END_PAGE = "/html/taglib/aui/select/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/aui/select/start.jsp";
 
+	private Object _bean;
 	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
+	private boolean _showEmptyOption;
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;
@@ -183,6 +208,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;
+	private String _listType;
 	private String _name;
 	private String _startPage;
 
