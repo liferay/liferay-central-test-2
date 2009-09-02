@@ -105,7 +105,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 				privatePagesURL.setParameter("privateLayout", Boolean.TRUE.toString());
 				%>
 
-				<a href="<%= privatePagesURL %>"><liferay-ui:message key="private-pages" /></a>
+				<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="this-organization-does-not-have-any-private-pages" />
