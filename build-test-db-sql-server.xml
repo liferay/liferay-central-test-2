@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 
-<project name="portal-test-database-sql-server" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+<project name="portal-test-db-sql-server" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-database-sql-server-2005">
+	<target name="test-db-sql-server-2005">
 		<antcall target="prepare-tomcat-6.0-mysql-5.0" />
 
-		<antcall target="test-database-sql-server-2005-latest" />
-		<antcall target="test-database-sql-server-2005-5.1.0" />
-		<antcall target="test-database-sql-server-2005-5.1.1" />
-		<antcall target="test-database-sql-server-2005-5.1.2" />
+		<antcall target="test-db-sql-server-2005-latest" />
+		<antcall target="test-db-sql-server-2005-5.1.0" />
+		<antcall target="test-db-sql-server-2005-5.1.1" />
+		<antcall target="test-db-sql-server-2005-5.1.2" />
 	</target>
 
-	<target name="test-database-sql-server-2005-5.1.0">
-		<antcall target="test-database-sql-server-2005-common">
+	<target name="test-db-sql-server-2005-5.1.0">
+		<antcall target="test-db-sql-server-2005-common">
 			<param name="sql.version" value="5.1.0" />
 		</antcall>
 	</target>
 
-	<target name="test-database-sql-server-2005-5.1.1">
-		<antcall target="test-database-sql-server-2005-common">
+	<target name="test-db-sql-server-2005-5.1.1">
+		<antcall target="test-db-sql-server-2005-common">
 			<param name="sql.version" value="5.1.1" />
 		</antcall>
 	</target>
 
-	<target name="test-database-sql-server-2005-5.1.2">
-		<antcall target="test-database-sql-server-2005-common">
+	<target name="test-db-sql-server-2005-5.1.2">
+		<antcall target="test-db-sql-server-2005-common">
 			<param name="sql.version" value="5.1.2" />
 		</antcall>
 	</target>
 
-	<target name="test-database-sql-server-2005-common">
+	<target name="test-db-sql-server-2005-common">
 		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
@@ -64,11 +64,11 @@
 		<delete file="test.${user.name}.properties" />
 	</target>
 
-	<target name="test-database-sql-server-2005-latest">
+	<target name="test-db-sql-server-2005-latest">
 		<echo file="create-${db.sql-server-2005.schema}.sql"><![CDATA[drop database lportal;
 create database lportal;]]></echo>
 
-		<antcall target="test-database-sql-server-2005-common">
+		<antcall target="test-db-sql-server-2005-common">
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-${db.sql-server-2005.schema}.sql" />
 		</antcall>

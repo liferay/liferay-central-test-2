@@ -582,11 +582,11 @@ file.
 		<ant dir="util-java" target="test" inheritAll="false" />
 	</target>
 
-	<target name="test-database">
-		<ant antfile="build-test-database-mysql.xml" target="test-database-mysql-5.0" inheritAll="false" />
-		<ant antfile="build-test-database-oracle.xml" target="test-database-oracle-10" inheritAll="false" />
-		<ant antfile="build-test-database-postgresql.xml" target="test-database-postgresql-8.3" inheritAll="false" />
-		<ant antfile="build-test-database-sql-server.xml" target="test-database-sql-server-2005" inheritAll="false" />
+	<target name="test-db">
+		<ant antfile="build-test-db-mysql.xml" target="test-db-mysql-5.0" inheritAll="false" />
+		<ant antfile="build-test-db-oracle.xml" target="test-db-oracle-10" inheritAll="false" />
+		<ant antfile="build-test-db-postgresql.xml" target="test-db-postgresql-8.3" inheritAll="false" />
+		<ant antfile="build-test-db-sql-server.xml" target="test-db-sql-server-2005" inheritAll="false" />
 	</target>
 
 	<target name="test-tck">
