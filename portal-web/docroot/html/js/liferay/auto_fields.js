@@ -146,12 +146,9 @@ Liferay.AutoFields = Alloy.Observable.extend(
 
 						el.attr('checked', '');
 						el.attr('value', newSeed);
-						el.attr('name', newName);
 						el.attr('id', newName);
-
 					}
-
-					if (el.is(':button') || el.is('span')) {
+					else if (el.is(':button') || el.is('span')) {
 						if (oldName) {
 							el.attr('id', newName);
 						}
