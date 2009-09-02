@@ -171,7 +171,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Resources
 
-		addPageResources(page, true, true);
+		if (serviceContext.getAddCommunityPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
+
+			addPageResources(
+				page, serviceContext.getAddCommunityPermissions(),
+				serviceContext.getAddGuestPermissions());
+		}
+		else {
+			addPageResources(
+				page, serviceContext.getCommunityPermissions(),
+				serviceContext.getGuestPermissions());
+		}
 
 		// Node
 

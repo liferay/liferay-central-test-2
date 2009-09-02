@@ -168,6 +168,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			ServiceContext serviceContext = new ServiceContext();
 
+			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setAssetTagNames(
 				readAssetTagNames(userId, node, content));
 
@@ -255,6 +257,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 					ServiceContext serviceContext = new ServiceContext();
 
+					serviceContext.setAddCommunityPermissions(true);
+					serviceContext.setAddGuestPermissions(true);
+
 					WikiPageLocalServiceUtil.movePage(
 						userId, node.getNodeId(), frontPageTitle,
 						WikiPageImpl.FRONT_PAGE, false, serviceContext);
@@ -323,6 +328,9 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (NoSuchPageException nspe) {
 				ServiceContext serviceContext = new ServiceContext();
+
+				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGuestPermissions(true);
 
 				WikiPageLocalServiceUtil.addPage(
 					userId, node.getNodeId(), SHARED_IMAGES_TITLE,

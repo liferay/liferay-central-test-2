@@ -376,6 +376,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 

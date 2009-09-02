@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -75,11 +76,19 @@ public class ActionUtil {
 		if (nodesCount == 0) {
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
+			Layout layout = themeDisplay.getLayout();
+
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				WikiNode.class.getName(), renderRequest);
 
 			serviceContext.setAddCommunityPermissions(true);
-			serviceContext.setAddGuestPermissions(true);
+
+			if (layout.isPublicLayout()) {
+				serviceContext.setAddGuestPermissions(true);
+			}
+			else {
+				serviceContext.setAddGuestPermissions(false);
+			}
 
 			node = WikiNodeLocalServiceUtil.addNode(
 				themeDisplay.getUserId(), nodeName, StringPool.BLANK,
@@ -157,6 +166,9 @@ public class ActionUtil {
 	}
 
 	public static void getPage(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long nodeId = ParamUtil.getLong(request, "nodeId");
 		String title = ParamUtil.getString(request, "title");
 		double version = ParamUtil.getDouble(request, "version");
@@ -189,6 +201,17 @@ public class ActionUtil {
 				}
 
 				ServiceContext serviceContext = new ServiceContext();
+
+				Layout layout = themeDisplay.getLayout();
+
+				serviceContext.setAddCommunityPermissions(true);
+
+				if (layout.isPublicLayout()) {
+					serviceContext.setAddGuestPermissions(true);
+				}
+				else {
+					serviceContext.setAddGuestPermissions(false);
+				}
 
 				page = WikiPageLocalServiceUtil.addPage(
 					userId, nodeId, title, null, WikiPageImpl.NEW, true,

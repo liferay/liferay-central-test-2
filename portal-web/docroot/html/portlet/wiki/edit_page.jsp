@@ -356,6 +356,14 @@ if (Validator.isNull(redirect)) {
 
 			<aui:input inlineLabel="true" label="this-is-a-minor-edit" name="minorEdit" />
 
+			<c:if test="<%= newPage %>">
+				<aui:field-wrapper label="permissions">
+					<liferay-ui:input-permissions
+						modelName="<%= WikiPage.class.getName() %>"
+					/>
+				</aui:field-wrapper>
+			</c:if>
+
 			<aui:button-row>
 				<aui:button name="saveButton" type="submit" value="save" />
 
