@@ -200,7 +200,6 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
-	private boolean _showEmptyOption;
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;
@@ -210,6 +209,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private boolean _last;
 	private String _listType;
 	private String _name;
+	private boolean _showEmptyOption;
 	private String _startPage;
 
 }
