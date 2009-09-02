@@ -190,8 +190,11 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 		if (value != null) {
 			valueString = value.toString();
 
-			if (type.equals("hidden")){
+			if (type.equals("hidden") || type.equals("text")){
 				valueString = HtmlUtil.escapeAttribute(valueString);
+			}
+			else if (type.equals("textarea")){
+				valueString = HtmlUtil.escape(valueString);
 			}
 		}
 		%>
