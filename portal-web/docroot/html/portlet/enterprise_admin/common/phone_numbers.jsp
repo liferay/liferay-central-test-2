@@ -147,7 +147,7 @@ else {
 					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
 						<liferay-ui:message key="primary" />
 
-						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phoneNumberPrimary" type="radio" value="<%= phonesIndex %>" />
+						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phonePrimary" type="radio" value="<%= phonesIndex %>" />
 					</label>
 				</div>
 			</div>
