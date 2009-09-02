@@ -26,17 +26,12 @@
 
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"));
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:button:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:button:name"));
 String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:onClick"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
-
-Boolean disabled = (Boolean)dynamicAttributes.get("disabled");
-
-if (disabled == null) {
-	disabled = Boolean.FALSE;
-}
 
 if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
 	onClick = "location.href = '" +  HtmlUtil.escape(onClick) + "';";
@@ -44,5 +39,5 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 %>
 
 <span class="aui-form-button <%= !type.equals("button") ? "aui-form-" + type : StringPool.BLANK %> <%= cssClass %> <%= disabled ? "aui-input-disabled" : StringPool.BLANK %>">
-	<input id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+	<input <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= name %>" <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type="<%= type %>" value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 </span>

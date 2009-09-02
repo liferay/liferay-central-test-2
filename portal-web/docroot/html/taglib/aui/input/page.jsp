@@ -30,6 +30,7 @@
 BaseModel bean = (BaseModel)request.getAttribute("aui:input:bean");
 boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:input:cssClass"));
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:input:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:input:dynamicAttributes");
 String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
@@ -98,7 +99,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 			<liferay-ui:input-field
 				bean="<%= bean %>"
 				defaultValue='<%= value %>'
-				disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
+				disabled='<%= disabled %>'
 				field="<%= field %>"
 				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
 				format='<%= (Format)dynamicAttributes.get("format") %>'
@@ -129,7 +130,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 			<input id="<%= id %>" name="<%= name %>" type="hidden" value="<%= value %>" />
 
-			<input <%= booleanValue ? "checked" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+			<input <%= booleanValue ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>Checkbox" name="<%=name %>Checkbox" onclick="<%= onClick %>" type="checkbox" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 		</span>
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
@@ -144,7 +145,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 				}
 				%>
 
-				<input <%= checked ? "checked" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input <%= checked ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 
 				<liferay-ui:message key="<%= label %>" />
 			</label>
@@ -163,7 +164,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 			<liferay-ui:input-time-zone
 				daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
-				disabled='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("disabled")) %>'
+				disabled='<%= disabled %>'
 				displayStyle='<%= displayStyle %>'
 				name="<%= name %>"
 				nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
@@ -197,10 +198,10 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 		<c:choose>
 			<c:when test='<%= type.equals("textarea") %>'>
-				<textarea id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+				<textarea <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
 			</c:when>
 			<c:otherwise>
-				<input id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<input <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" type="<%= type %>" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 			</c:otherwise>
 		</c:choose>
 

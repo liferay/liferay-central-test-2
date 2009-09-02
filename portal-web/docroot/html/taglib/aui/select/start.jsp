@@ -27,6 +27,7 @@
 <%
 Object bean = request.getAttribute("aui:select:bean");
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:select:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
@@ -54,9 +55,9 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 	</c:if>
 
 	<span class="aui-form-field aui-form-select">
-		<select id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+		<select <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= name %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
 			<c:if test="<%= showEmptyOption %>">
-					<aui:option />
+				<aui:option />
 			</c:if>
 
 			<c:if test="<%= Validator.isNotNull(listType) %>">

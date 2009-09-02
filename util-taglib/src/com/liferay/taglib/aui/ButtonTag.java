@@ -44,6 +44,7 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute("aui:button:cssClass", _cssClass);
+		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:button:dynamicAttributes", _dynamicAttributes);
 		request.setAttribute("aui:button:name", _name);
@@ -56,6 +57,10 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
 	}
 
 	public void setDynamicAttribute(
@@ -87,6 +92,7 @@ public class ButtonTag extends IncludeTag implements DynamicAttributes {
 	private static final String _PAGE = "/html/taglib/aui/button/page.jsp";
 
 	private String _cssClass;
+	private boolean _disabled;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _name;

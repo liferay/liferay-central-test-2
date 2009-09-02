@@ -55,6 +55,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				_bean = null;
 				_checked = false;
 				_cssClass = null;
+				_disabled = false;
 				_dynamicAttributes.clear();
 				_field = null;
 				_first = false;
@@ -99,6 +100,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute("aui:input:bean", _bean);
 		request.setAttribute("aui:input:checked", String.valueOf(_checked));
 		request.setAttribute("aui:input:cssClass", _cssClass);
+		request.setAttribute("aui:input:disabled", String.valueOf(_disabled));
 		request.setAttribute("aui:input:field", _field);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
@@ -127,6 +129,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
 	}
 
 	public void setDynamicAttribute(
@@ -188,6 +194,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private Object _bean;
 	private boolean _checked;
 	private String _cssClass;
+	private boolean _disabled;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _field;
