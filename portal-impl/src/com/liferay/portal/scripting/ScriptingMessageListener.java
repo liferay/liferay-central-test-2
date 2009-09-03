@@ -31,8 +31,6 @@ import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.Formatter;
-
 /**
  * <a href="ScriptingMessageListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,71 +39,56 @@ import java.util.Formatter;
 public class ScriptingMessageListener implements MessageListener {
 
 	public ScriptingMessageListener(Scripting scripting) {
-		if (scripting == null) {
-			throw new IllegalArgumentException("Scripting is null!");
-		}
 		_scripting = scripting;
 	}
 
 	public void receive(Message message) {
-
-		Object payload = message.getPayload();
-		String responseDestination = message.getResponseDestinationName();
-		ScriptingResultContainer resultContainer =
+		ScriptingResultContainer scriptingResultContainer =
 			new ScriptingResultContainer();
-		ScriptingRequest scriptingRequest = null;
-		ScriptingException scriptingException = null;
-		try {
-			// there must always be a payload having the request
-			if (payload == null) {
-				scriptingException =
-					new ScriptingException(MISSING_REQUEST_ERROR);
-				_log.error(MISSING_REQUEST_ERROR);
-			}
-			// check for being the right request type
-			else if (!ScriptingRequest.class.isAssignableFrom(
-				payload.getClass())) {
-				String errorMessage =
-					new Formatter().format(
-						WRONG_REQUEST_ERROR, ScriptingRequest.class.getName(),
-						payload.getClass().getName()).
-					toString();
 
-				scriptingException = new ScriptingException(errorMessage);
-				_log.error(errorMessage);
+		try {
+			Object payload = message.getPayload();
+
+			if (payload == null) {
+				throw new ScriptingException("Payload is null");
+			}
+			else if (!ScriptingRequest.class.isAssignableFrom(
+						payload.getClass())) {
+
+				throw new ScriptingException(
+					"Payload " + payload.getClass() + " is not of type " +
+						ScriptingRequest.class.getName());
 			}
 			else {
+				ScriptingRequest scriptingRequest = (ScriptingRequest)payload;
 
-				scriptingRequest =ScriptingRequest.class.cast(payload);
-				resultContainer.setResult(scriptingRequest.execute(_scripting));
+				Object result = scriptingRequest.execute(_scripting);
+
+				scriptingResultContainer.setResult(result);
 			}
 		}
-		catch (ScriptingException ex) {
-			scriptingException = new ScriptingException(EXECUTE_ERROR);
-			_log.error(EXECUTE_ERROR, ex);
+		catch (ScriptingException se) {
+			_log.error(se, se);
 
+			scriptingResultContainer.setScriptingException(se);
 		}
 		finally {
-			if (Validator.isNotNull(responseDestination) &&
-				scriptingRequest != null && scriptingRequest.hasReturnValue()) {
+			String responseDestination = message.getResponseDestinationName();
 
-				Message responseMessage =
-					MessageBusUtil.createResponseMessage(message);
-				resultContainer.setException(scriptingException);
-				responseMessage.setPayload(resultContainer);
+			if (Validator.isNotNull(responseDestination)) {
+				Message responseMessage = MessageBusUtil.createResponseMessage(
+					message);
+
+				responseMessage.setPayload(scriptingResultContainer);
+
 				MessageBusUtil.sendMessage(
 					responseDestination, responseMessage);
 			}
-
 		}
 	}
 
 	private static Log _log =
 		LogFactoryUtil.getLog(ScriptingMessageListener.class);
-	private static String MISSING_REQUEST_ERROR = "Missing workflow request.";
-	private static String WRONG_REQUEST_ERROR =
-		"Payload type is not from expected type [%s], but was [%s]";
-	private static String EXECUTE_ERROR = "Unable to execute request.";
 
 	private Scripting _scripting;
 

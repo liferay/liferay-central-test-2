@@ -24,47 +24,54 @@ package com.liferay.portal.scripting;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.scripting.ScriptingException;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ScriptingProxyAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScriptingAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  */
-public class ScriptingProxyAdvice implements MethodInterceptor {
+public class ScriptingAdvice implements MethodInterceptor {
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
-
-		ScriptingRequest request = new ScriptingRequest(invocation);
-		Message message = new Message();
-		message.setPayload(request);
-		//Do not bridge scripting requests with return values
+	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
-			if (request.hasReturnValue()) {
-				ScriptingResultContainer response =
-					(ScriptingResultContainer)
-						MessageBusUtil.sendSynchronousMessage(
-							DestinationNames.SCRIPTING, message);
-				if (response.hasError()) {
-					throw response.getException();
-				}
-				else {
-					return response.getResult();
-				}
+			return doInvoke(methodInvocation);
+		}
+		catch (Exception e) {
+			throw new WorkflowException(e);
+		}
+	}
+
+	protected Object doInvoke(MethodInvocation methodInvocation)
+		throws Exception {
+
+		ScriptingRequest scriptingRequest = new ScriptingRequest(
+			methodInvocation);
+
+		Message message = new Message();
+
+		message.setPayload(scriptingRequest);
+
+		if (scriptingRequest.hasReturnValue()) {
+			ScriptingResultContainer scriptingResultContainer =
+				(ScriptingResultContainer)MessageBusUtil.sendSynchronousMessage(
+					DestinationNames.SCRIPTING, message);
+
+			if (scriptingResultContainer.hasError()) {
+				throw scriptingResultContainer.getScriptingException();
 			}
 			else {
-				MessageBusUtil.sendMessage(DestinationNames.SCRIPTING, message);
-				return null;
+				return scriptingResultContainer.getResult();
 			}
 		}
-		catch (MessageBusException ex) {
-			throw new ScriptingException(
-				"Unable to invoke scripting method", ex);
+		else {
+			MessageBusUtil.sendMessage(DestinationNames.SCRIPTING, message);
+
+			return null;
 		}
 	}
 

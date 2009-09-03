@@ -31,34 +31,32 @@ import com.liferay.portal.kernel.scripting.ScriptingException;
  */
 public class ScriptingResultContainer {
 
-	public ScriptingResultContainer() {
-	}
-
-	public ScriptingResultContainer(Object result) {
-		_result = result;
-	}
-
-	public ScriptingException getException() {
-		return _exception;
-	}
-
 	public Object getResult() {
 		return _result;
 	}
 
-	public boolean hasError() {
-		return _exception != null;
+	public ScriptingException getScriptingException() {
+		return _scriptingException;
 	}
 
-	public void setException(ScriptingException exception) {
-		_exception = exception;
+	public boolean hasError() {
+		if (_scriptingException != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void setResult(Object result) {
 		_result = result;
 	}
 
-	private ScriptingException _exception;
+	public void setScriptingException(ScriptingException scriptingException) {
+		_scriptingException = scriptingException;
+	}
+
 	private Object _result;
+	private ScriptingException _scriptingException;
 
 }

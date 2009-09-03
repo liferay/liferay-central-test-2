@@ -31,8 +31,6 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
-import java.util.Arrays;
-
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
@@ -42,43 +40,41 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class ScriptingRequest implements Serializable {
 
-	public ScriptingRequest(MethodInvocation invocation) {
-		Method method=invocation.getMethod();
-		_hasReturnValue=!void.class.equals(method.getReturnType());
-		Class<?>[] argTypes = invocation.getMethod().getParameterTypes();
-		Object[] args = invocation.getArguments();
-		for (int i = 0; i < args.length; i++) {
-			if (args[i] == null) {
-				args[i] = new NullWrapper(argTypes[i].getName());
+	public ScriptingRequest(MethodInvocation methodInvocation) {
+		Method method = methodInvocation.getMethod();
+
+		_hasReturnValue = true;
+
+		if (method.getReturnType().equals("void")) {
+			_hasReturnValue = false;
+		}
+
+		Class<?>[] parameterTypes = method.getParameterTypes();
+
+		Object[] arguments = methodInvocation.getArguments();
+
+		for (int i = 0; i < arguments.length; i++) {
+			if (arguments[i] == null) {
+				arguments[i] = new NullWrapper(parameterTypes[i].getName());
 			}
 		}
+
 		_methodWrapper = new MethodWrapper(
-			invocation.getThis().getClass().getName(), method.getName(), args);
+			methodInvocation.getThis().getClass().getName(), method.getName(),
+			arguments);
 	}
 
-	public Object execute(Object implObject)
-		throws ScriptingException {
+	public Object execute(Object object) throws ScriptingException {
 		try {
-			Object result = MethodInvoker.invoke(_methodWrapper,implObject);
-			return result;
+			return MethodInvoker.invoke(_methodWrapper, object);
 		}
-		catch (Exception ex) {
-			throw new ScriptingException(ex);
+		catch (Exception e) {
+			throw new ScriptingException(e);
 		}
 	}
 
 	public boolean hasReturnValue(){
 		return _hasReturnValue;
-	}
-
-	@Override
-	public String toString() {
-		return "ScriptingRequest[" +
-			"class:"+_methodWrapper.getClassName()+
-			", method:"+_methodWrapper.getMethodName()+
-			", args:"+Arrays.toString(_methodWrapper.getArgs())+
-			", hasReturnValue:"+_hasReturnValue+
-			"]";
 	}
 
 	private boolean _hasReturnValue;

@@ -7,11 +7,8 @@
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
 >
-	<!-- ScriptingProxyAdvice -->
-	<bean id="com.liferay.portal.scripting.ScriptingProxyAdvice" class="com.liferay.portal.scripting.ScriptingProxyAdvice" />
-	
+	<bean id="com.liferay.portal.scripting.ScriptingAdvice" class="com.liferay.portal.scripting.ScriptingAdvice" />
 	<bean id="com.liferay.portal.scripting.ScriptingImpl" class="com.liferay.portal.scripting.ScriptingImpl" />
-
 	<bean class="com.liferay.portal.kernel.scripting.ScriptingUtil">
 		<property name="scripting">
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -21,7 +18,7 @@
 				<property name="target" ref="com.liferay.portal.scripting.ScriptingImpl" />
 				<property name="interceptorNames">
 					<list>
-						<value>com.liferay.portal.scripting.ScriptingProxyAdvice</value>
+						<value>com.liferay.portal.scripting.ScriptingAdvice</value>
 					</list>
 				</property>
 			</bean>
@@ -29,6 +26,7 @@
 	</bean>
 
 	<!-- Messaging -->
+
 	<bean id="destination.scripting" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/scripting" />
 	</bean>
