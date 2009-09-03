@@ -46,7 +46,7 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="add-content-container menu-container" id="<portlet:namespace />addContentContainer">
+				<div class="add-content-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />addContentContainer">
 					<ul>
 						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
 							<li class="first add-page">
@@ -102,7 +102,7 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="manage-content-container menu-container" id="<portlet:namespace />manageContentContainer">
+				<div class="manage-content-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />manageContentContainer">
 					<ul>
 						<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
 							<li id="<portlet:namespace />controlPanel">
@@ -140,7 +140,7 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="staging-container menu-container" id="<portlet:namespace />stagingContainer">
+				<div class="staging-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />stagingContainer">
 					<liferay-ui:staging />
 				</div>
 			</li>
@@ -168,7 +168,7 @@ if (layout != null) {
 					</span>
 				</a>
 
-				<div class="my-places-container menu-container" id="<portlet:namespace />myPlacesContainer">
+				<div class="my-places-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />myPlacesContainer">
 					<liferay-ui:my-places />
 				</div>
 			</li>
@@ -188,7 +188,7 @@ if (layout != null) {
 			</span>
 
 			<c:if test="<%= themeDisplay.isImpersonated() %>">
-				<div class="menu-container" id="<portlet:namespace />userOptionsContainer">
+				<div class="menu-container aui-contextoverlay-hidden" id="<portlet:namespace />userOptionsContainer">
 					<div class="notice-message portlet-msg-info">
 						<c:choose>
 							<c:when test="<%= themeDisplay.isSignedIn() %>">

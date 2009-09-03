@@ -94,8 +94,11 @@ html > .lfr-dockbar-pinned {
 .dockbar .menu-container {
 	background: #fff;
 	position: absolute;
-	visibility: hidden;
 	width: auto;
+}
+
+.aui-dockbarmenu-hidden {
+	visibility: hidden;
 }
 
 .dockbar .aui-toolbar {
@@ -133,36 +136,29 @@ html > .lfr-dockbar-pinned {
 	width:4px;
 }
 
-.aui-underlay-container {
+.aui-underlay {
 	clear: both;
 	top: 100%;
 }
 
-.aui-underlay {
+.aui-underlay-hidden {
+	display: none;
+}
+
+.aui-underlay-content {
 	background: #eee url(../images/common/message_panel_shadow.png) repeat-x 0 0;
+	border: 1px solid #ccc;
 	border-width: 0 1px 1px;
-	margin-top: 1px;
-	padding-top: 20px;
-	position: static;
 }
 
-.aui-underlay .aui-header {
-	background: none;
-	color: #333;
-	cursor: default;
-	margin-bottom: 10px;
-	margin-right: 20px;
-	margin-top: -13px;
-	padding: 0;
+.aui-underlay .aui-widget-hd {
+	padding-bottom: 20px;
 }
 
-.aui-underlay .container-close {
+.aui-underlay-close {
+	position: absolute;
 	right: 5px;
 	top: 5px;
-}
-
-.aui-underlay .aui-body {
-	padding: 0;
 }
 
 .aui-underlay .portal-add-content {
@@ -174,12 +170,16 @@ html > .lfr-dockbar-pinned {
 	border-width: 0;
 }
 
-.add-application .aui-underlay {
+.add-application .aui-widget-bd {
 	padding: 10px;
 }
 
-.manage-layouts .aui-underlay {
-	margin-left: 50px;
+.add-application {
+	left: 5px;
+}
+
+.manage-layouts {
+	left: 50px;
 }
 
 .dockbar .menu-container {
@@ -324,7 +324,6 @@ html > .lfr-dockbar-pinned {
 }
 
 .dockbar-messages {
-	display: none;
 	width: 300px;
 }
 

@@ -40,7 +40,19 @@ html > .lfr-dockbar-pinned {
 .dockbar .user-avatar img {
 }
 
+.dockbar .impersonating-user {
+}
+
+.dockbar .impersonating-user .user-links a {
+}
+
+.dockbar .menu-container .notice-message {
+}
+
 .dockbar .menu-container {
+}
+
+.aui-dockbarmenu-hidden {
 }
 
 .dockbar .aui-toolbar {
@@ -61,19 +73,19 @@ html > .lfr-dockbar-pinned {
 .aui-toolbar-separator {
 }
 
-.aui-underlay-container {
-}
-
 .aui-underlay {
 }
 
-.aui-underlay .aui-header {
+.aui-underlay-hidden {
 }
 
-.aui-underlay .container-close {
+.aui-underlay-content {
 }
 
-.aui-underlay .aui-body {
+.aui-underlay .aui-widget-hd {
+}
+
+.aui-underlay-close {
 }
 
 .aui-underlay .portal-add-content {
@@ -82,10 +94,13 @@ html > .lfr-dockbar-pinned {
 .aui-underlay .lfr-portlet-item {
 }
 
-.add-application .aui-underlay {
+.add-application .aui-widget-bd {
 }
 
-.manage-layouts .aui-underlay {
+.add-application {
+}
+
+.manage-layouts {
 }
 
 .dockbar .menu-container {
@@ -151,10 +166,10 @@ html > .lfr-dockbar-pinned {
 .dockbar .control-panel {
 }
 
-.dockbar .has-submenu .menu-button {
+.dockbar .menu-button {
 }
 
-.dockbar .has-submenu .menu-button span {
+.dockbar .menu-button span {
 }
 
 .dockbar .add-content .menu-button span {
