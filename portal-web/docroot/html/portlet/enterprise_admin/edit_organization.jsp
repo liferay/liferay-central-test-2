@@ -142,6 +142,7 @@ String curSection = mainSections[0];
 	</tr>
 	</table>
 </div>
+
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
