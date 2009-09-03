@@ -98,7 +98,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 		<span class="aui-form-field aui-form-<%= ModelHintsUtil.getType(model.getName(), field).toLowerCase() %>">
 			<liferay-ui:input-field
 				bean="<%= bean %>"
-				defaultValue='<%= value %>'
+				defaultValue="<%= value %>"
 				disabled="<%= disabled %>"
 				field="<%= field %>"
 				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
