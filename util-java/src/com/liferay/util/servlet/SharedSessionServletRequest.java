@@ -40,7 +40,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 	public SharedSessionServletRequest(
 		HttpServletRequest request, Map<String, Object> sharedSessionAttributes,
-		boolean shared, boolean requireSerializable) {
+		boolean shared) {
 
 		super(request);
 
@@ -48,7 +48,6 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 		_session = getSharedSessionWrapper(request.getSession());
 		_shared = shared;
-		_requireSerializable = requireSerializable;
 	}
 
 	public HttpSession getSession() {
@@ -72,16 +71,15 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 	protected HttpSession getSharedSessionWrapper(HttpSession session) {
 		if (!ServerDetector.isJOnAS() && ServerDetector.isJetty()) {
 			return new JettySharedSessionWrapper(
-				session, _sharedSessionAttributes, _requireSerializable);
+				session, _sharedSessionAttributes);
 		}
 		else {
-			return new SharedSessionWrapper(
-				session, _sharedSessionAttributes, _requireSerializable);
+			return new SharedSessionWrapper(session, _sharedSessionAttributes);
 		}
 	}
 
 	private HttpSession _session;
 	private Map<String, Object> _sharedSessionAttributes;
-	private boolean _requireSerializable;
 	private boolean _shared;
+
 }
