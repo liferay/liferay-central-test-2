@@ -63,7 +63,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 					<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
 				</liferay-portlet:actionURL>
 
-				<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="this-organization-does-not-have-any-public-pages" />
@@ -105,7 +105,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 				privatePagesURL.setParameter("privateLayout", Boolean.TRUE.toString());
 				%>
 
-				<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="this-organization-does-not-have-any-private-pages" />
