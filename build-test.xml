@@ -44,6 +44,8 @@ plugins.includes=${plugins.includes}</echo>
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
+		<antcall target="revert-test-properties" />
+
 		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-web/docroot/WEB-INF/web.xml" />
 		</exec>
@@ -74,7 +76,7 @@ plugins.includes=${plugins.includes}</echo>
 		<exec executable="cmd.exe">
 			<arg line="/c svn revert portal-impl/src/portal.properties" />
 		</exec>
-		
+
 		<replace file="portal-impl/src/portal.properties">
 			<replacefilter
 				token="#upgrade.processes="
