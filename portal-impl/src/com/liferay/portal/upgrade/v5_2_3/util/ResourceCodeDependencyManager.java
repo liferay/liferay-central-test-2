@@ -46,7 +46,7 @@ public class ResourceCodeDependencyManager extends DependencyManager {
 
 		long resourceId = getResourceId(codeId);
 
-		deleteDuplicateData("ResourceCode", codeId);
+		deleteDuplicateData("Resource_", codeId);
 
 		if (resourceId > 0) {
 			DependencyManager resourceDependencyManager =
