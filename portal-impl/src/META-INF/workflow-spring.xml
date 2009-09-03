@@ -8,7 +8,7 @@
 
 	<!-- Workflow advice -->
 
-	<bean id="com.liferay.portal.workflow.ManagerProxyAdvice" class="com.liferay.portal.workflow.ManagerProxyAdvice" />
+	<bean id="com.liferay.portal.workflow.WorkflowAdvice" class="com.liferay.portal.workflow.WorkflowAdvice" />
 
 	<!-- Workflow base managers -->
 
@@ -44,7 +44,7 @@
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
 				<property name="interceptorNames">
 					<list>
-						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+						<value>com.liferay.portal.workflow.WorkflowAdvice</value>
 					</list>
 				</property>
 				<property name="proxyInterfaces">
@@ -59,7 +59,7 @@
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
 				<property name="interceptorNames">
 					<list>
-						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+						<value>com.liferay.portal.workflow.WorkflowAdvice</value>
 					</list>
 				</property>
 				<property name="proxyInterfaces">
@@ -74,7 +74,7 @@
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
 				<property name="interceptorNames">
 					<list>
-						<value>com.liferay.portal.workflow.ManagerProxyAdvice</value>
+						<value>com.liferay.portal.workflow.WorkflowAdvice</value>
 					</list>
 				</property>
 				<property name="proxyInterfaces">

@@ -29,11 +29,11 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ManagerProxyAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class ManagerProxyAdvice implements MethodInterceptor {
+public class WorkflowAdvice implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
