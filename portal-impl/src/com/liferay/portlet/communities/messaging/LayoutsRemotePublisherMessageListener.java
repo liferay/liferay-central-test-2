@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.communities.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageStatus;
@@ -60,8 +59,7 @@ public class LayoutsRemotePublisherMessageListener extends BaseMessageListener {
 		throws Exception {
 
 		LayoutsRemotePublisherRequest publisherRequest =
-			(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
-				(String)message.getPayload());
+			(LayoutsRemotePublisherRequest)message.getPayload();
 
 		messageStatus.setPayload(publisherRequest);
 

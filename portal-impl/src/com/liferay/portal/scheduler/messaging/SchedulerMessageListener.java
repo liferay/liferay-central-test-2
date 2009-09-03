@@ -75,7 +75,7 @@ public class SchedulerMessageListener implements MessageListener {
 					schedulerRequest.getEndDate(),
 					schedulerRequest.getDescription(),
 					schedulerRequest.getDestination(),
-					schedulerRequest.getMessageBody());
+					schedulerRequest.getMessage());
 			}
 			else if (triggerType.equals(TriggerType.SIMPLE)) {
 				_schedulerEngine.schedule(
@@ -85,7 +85,7 @@ public class SchedulerMessageListener implements MessageListener {
 					schedulerRequest.getEndDate(),
 					schedulerRequest.getDescription(),
 					schedulerRequest.getDestination(),
-					schedulerRequest.getMessageBody());
+					schedulerRequest.getMessage());
 			}
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {

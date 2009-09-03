@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.scheduler.messaging;
 
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 
 import java.io.Serializable;
@@ -56,20 +57,20 @@ public class SchedulerRequest implements Serializable {
 
 	public static SchedulerRequest createRegisterRequest(
 		String groupName, long interval, Date startDate, Date endDate,
-		String description, String destination, String messageBody) {
+		String description, String destination, Message message) {
 
 		return new SchedulerRequest(
 			COMMAND_REGISTER, null, groupName, interval, startDate, endDate,
-			description, destination, messageBody);
+			description, destination, message);
 	}
 
 	public static SchedulerRequest createRegisterRequest(
 		String groupName, String cronText, Date startDate, Date endDate,
-		String description, String destination, String messageBody) {
+		String description, String destination, Message message) {
 
 		return new SchedulerRequest(
 			COMMAND_REGISTER, null, groupName, cronText, startDate, endDate,
-			description, destination, messageBody);
+			description, destination, message);
 	}
 
 	public static SchedulerRequest createRetrieveRequest(String groupName) {
@@ -78,20 +79,20 @@ public class SchedulerRequest implements Serializable {
 
 	public static SchedulerRequest createRetrieveResponseRequest(
 		String jobName, String groupName, long interval, Date startDate,
-		Date endDate, String description, String messageBody) {
+		Date endDate, String description, Message message) {
 
 		return new SchedulerRequest(
 			null, jobName, groupName, interval, startDate, endDate, description,
-			null, messageBody);
+			null, message);
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
 		String jobName, String groupName, String cronText,
-		Date startDate, Date endDate, String description, String messageBody) {
+		Date startDate, Date endDate, String description, Message message) {
 
 		return new SchedulerRequest(
 			null, jobName, groupName, cronText, startDate, endDate, description,
-			null, messageBody);
+			null, message);
 	}
 
 	public static SchedulerRequest createShutdownRequest() {
@@ -136,7 +137,7 @@ public class SchedulerRequest implements Serializable {
 	public SchedulerRequest(
 		String command, String jobName, String groupName, long interval,
 		Date startDate, Date endDate, String description, String destination,
-		String messageBody) {
+		Message message) {
 
 		_command = command;
 		_jobName = jobName;
@@ -147,7 +148,7 @@ public class SchedulerRequest implements Serializable {
 		_endDate = endDate;
 		_description = description;
 		_destination = destination;
-		_messageBody = messageBody;
+		_message = message;
 	}
 
 	/**
@@ -156,7 +157,7 @@ public class SchedulerRequest implements Serializable {
 	public SchedulerRequest(
 		String command, String jobName, String groupName, String cronText,
 		Date startDate, Date endDate, String description, String destination,
-		String messageBody) {
+		Message message) {
 
 		_command = command;
 		_jobName = jobName;
@@ -167,7 +168,7 @@ public class SchedulerRequest implements Serializable {
 		_endDate = endDate;
 		_description = description;
 		_destination = destination;
-		_messageBody = messageBody;
+		_message = message;
 	}
 
 	public String getCommand() {
@@ -202,8 +203,8 @@ public class SchedulerRequest implements Serializable {
 		return _jobName;
 	}
 
-	public String getMessageBody() {
-		return _messageBody;
+	public Message getMessage() {
+		return _message;
 	}
 
 	public Date getStartDate() {
@@ -246,8 +247,8 @@ public class SchedulerRequest implements Serializable {
 		_jobName = jobName;
 	}
 
-	public void setMessageBody(String messageBody) {
-		_messageBody = messageBody;
+	public void setMessage(Message message) {
+		_message = message;
 	}
 
 	public void setStartDate(Date startDate) {
@@ -266,7 +267,7 @@ public class SchedulerRequest implements Serializable {
 	private String _groupName;
 	private long _interval;
 	private String _jobName;
-	private String _messageBody;
+	private Message _message;
 	private Date _startDate;
 	private TriggerType _triggerType;
 

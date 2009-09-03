@@ -23,6 +23,7 @@
 package com.liferay.portal.scheduler;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
@@ -59,12 +60,12 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 	public void schedule(
 		String groupName, long interval, Date startDate, Date endDate,
-		String description, String destinationName, String messageBody) {
+		String description, String destinationName, Message message) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
 				groupName, interval, startDate, endDate, description,
-				destinationName, messageBody);
+				destinationName, message);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);
@@ -72,12 +73,12 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 	public void schedule(
 		String groupName, String cronText, Date startDate, Date endDate,
-		String description, String destinationName, String messageBody) {
+		String description, String destinationName, Message message) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
 				groupName, cronText, startDate, endDate, description,
-				destinationName, messageBody);
+				destinationName, message);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);

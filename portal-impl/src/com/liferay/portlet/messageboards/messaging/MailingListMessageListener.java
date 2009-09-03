@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.messaging;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -63,8 +62,7 @@ public class MailingListMessageListener implements MessageListener {
 
 	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		MailingListRequest mailingListRequest =
-			(MailingListRequest)JSONFactoryUtil.deserialize(
-				(String)message.getPayload());
+			(MailingListRequest)message.getPayload();
 
 		Folder folder = null;
 

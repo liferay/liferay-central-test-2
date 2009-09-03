@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.Date;
@@ -41,19 +42,19 @@ public interface SchedulerEngine {
 
 	public static final String DESTINATION = "destination";
 
-	public static final String MESSAGE_BODY = "messageBody";
+	public static final String MESSAGE = "message";
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void schedule(
 			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException;
 
 	public void schedule(
 			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException;
 
 	public void shutdown() throws SchedulerException;

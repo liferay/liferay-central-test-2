@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.Date;
@@ -46,22 +47,46 @@ public class SchedulerEngineUtil {
 
 	public static void schedule(
 			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException {
 
 		_instance._schedule(
 			groupName, interval, startDate, endDate, description,
-			destinationName, messageBody);
+			destinationName, message);
+	}
+
+	public static void schedule(
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destinationName, Object payload)
+		throws SchedulerException {
+
+		Message message = new Message();
+		message.setPayload(payload);
+		_instance._schedule(
+			groupName, interval, startDate, endDate, description,
+			destinationName, message);
 	}
 
 	public static void schedule(
 			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException {
 
 		_instance._schedule(
 			groupName, cronText, startDate, endDate, description,
-			destinationName, messageBody);
+			destinationName, message);
+	}
+
+	public static void schedule(
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destinationName, Object payload)
+		throws SchedulerException {
+
+		Message message = new Message();
+		message.setPayload(payload);
+		_instance._schedule(
+			groupName, cronText, startDate, endDate, description,
+			destinationName, message);
 	}
 
 	public static void shutdown() throws SchedulerException {
@@ -90,22 +115,22 @@ public class SchedulerEngineUtil {
 
 	private void _schedule(
 			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException {
 
 		_schedulerEngine.schedule(
 			groupName, interval, startDate, endDate, description,
-			destinationName, messageBody);
+			destinationName, message);
 	}
 
 	private void _schedule(
 			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
+			String description, String destinationName, Message message)
 		throws SchedulerException {
 
 		_schedulerEngine.schedule(
 			groupName, cronText, startDate, endDate, description,
-			destinationName, messageBody);
+			destinationName, message);
 	}
 
 	private void _shutdown() throws SchedulerException {

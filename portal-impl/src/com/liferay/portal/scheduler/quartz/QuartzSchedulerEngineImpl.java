@@ -25,6 +25,7 @@ package com.liferay.portal.scheduler.quartz;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -97,7 +98,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
 				String description = jobDataMap.getString(DESCRIPTION);
-				String messageBody = jobDataMap.getString(MESSAGE_BODY);
+				Message message = (Message) jobDataMap.get(MESSAGE);
 
 				SchedulerRequest schedulerRequest = null;
 
@@ -110,7 +111,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 						SchedulerRequest.createRetrieveResponseRequest(
 							jobName, groupName, cronTrigger.getCronExpression(),
 							cronTrigger.getStartTime(),
-							cronTrigger.getEndTime(), description, messageBody);
+							cronTrigger.getEndTime(), description, message);
 				}
 				else if (SimpleTrigger.class.isAssignableFrom(
 							trigger.getClass())) {
@@ -123,8 +124,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 							jobName, groupName,
 							simpleTrigger.getRepeatInterval(),
 							simpleTrigger.getStartTime(),
-							simpleTrigger.getEndTime(), description,
-							messageBody);
+							simpleTrigger.getEndTime(), description, message);
 				}
 
 				if (schedulerRequest != null) {
@@ -141,7 +141,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void schedule(
 			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destination, String messageBody)
+			String description, String destination, Message message)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
@@ -175,8 +175,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 
 			schedule(
-				groupName, simpleTrigger, description, destination,
-				messageBody);
+				groupName, simpleTrigger, description, destination, message);
 		}
 		catch (RuntimeException re) {
 
@@ -188,7 +187,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void schedule(
 			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destination, String messageBody)
+			String description, String destination, Message message)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
@@ -220,7 +219,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 
 			schedule(
-				groupName, cronTrigger, description, destination, messageBody);
+				groupName, cronTrigger, description, destination, message);
 		}
 		catch(ParseException pe) {
 			throw new SchedulerException("Unable to parse cron text", pe);
@@ -279,7 +278,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	protected void schedule(
 			String groupName, Trigger trigger, String description,
-			String destination, String messageBody)
+			String destination, Message message)
 		throws SchedulerException {
 
 		try {
@@ -290,7 +289,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			jobDataMap.put(DESCRIPTION, description);
 			jobDataMap.put(DESTINATION, destination);
-			jobDataMap.put(MESSAGE_BODY, messageBody);
+			jobDataMap.put(MESSAGE, message);
 
 			synchronized (this) {
 				_scheduler.unscheduleJob(groupName, groupName);

@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.TriggerExpression;
@@ -242,8 +241,7 @@ public class MBMailingListLocalServiceImpl
 
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, startDate.getTime(), null, null,
-			DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
-			JSONFactoryUtil.serialize(mailingListRequest));
+			DestinationNames.MESSAGE_BOARDS_MAILING_LIST, mailingListRequest);
 	}
 
 	protected void unscheduleMailingList(MBMailingList mailingList)
