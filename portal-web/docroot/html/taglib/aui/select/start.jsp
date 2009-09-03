@@ -29,7 +29,6 @@ Object bean = request.getAttribute("aui:select:bean");
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:select:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
-boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
@@ -38,6 +37,7 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:select:lab
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
 String listType = GetterUtil.getString((String)request.getAttribute("aui:select:listType"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:name"));
+boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 %>
 
 <div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
@@ -63,20 +63,14 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 			<c:if test="<%= Validator.isNotNull(listType) %>">
 
 				<%
-				int currentType = BeanParamUtil.getInteger(bean, request, "typeId");
+				int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, "typeId"));
 
-				String httpValue = request.getParameter(GetterUtil.getString((String)request.getAttribute("aui:select:name")));
+				List<ListType> listTypeModels = ListTypeServiceUtil.getListTypes(listType);
 
-				if (httpValue != null) {
-					currentType = GetterUtil.getInteger(httpValue);
-				}
-
-				List<ListType> typesList = ListTypeServiceUtil.getListTypes(listType);
-
-				for (ListType type : typesList) {
+				for (ListType listTypeModel : listTypeModels) {
 				%>
 
-					<aui:option selected="<%= (type.getListTypeId() == currentType) %>" value="<%= type.getListTypeId() %>"><liferay-ui:message key="<%= type.getName() %>" /></aui:option>
+					<aui:option selected="<%= listTypeId == listTypeModel.getListTypeId() %>" value="<%= listTypeModel.getListTypeId() %>"><liferay-ui:message key="<%= listTypeModel.getName() %>" /></aui:option>
 
 				<%
 				}

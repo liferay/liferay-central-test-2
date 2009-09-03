@@ -58,7 +58,6 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_bean = null;
 				_cssClass = null;
 				_dynamicAttributes.clear();
-				_showEmptyOption = false;
 				_endPage = null;
 				_first = false;
 				_helpMessage = null;
@@ -68,6 +67,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_last = false;
 				_listType = null;
 				_name = null;
+				_showEmptyOption = false;
 				_startPage = null;
 			}
 		}
