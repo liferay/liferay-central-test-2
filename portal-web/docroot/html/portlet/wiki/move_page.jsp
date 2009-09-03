@@ -133,8 +133,8 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 					newParentAvailable = false;
 				%>
 
-					<aui:select disabled="<%= true %>" name="newParentTitle">
-						<aui:option><liferay-ui:message key="not-available" /></aui:option>
+					<aui:select disabled="<%= true %>" label="new-parent" name="newParentTitle">
+						<aui:option label="not-available" value="" />
 					</aui:select>
 
 				<%
@@ -142,8 +142,8 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				else {
 				%>
 
-					<aui:select name="newParentTitle">
-						<aui:option selected="<%= Validator.isNull(wikiPage.getParentTitle()) %>" value="">(<liferay-ui:message key="none" />)</aui:option>
+					<aui:select label="new-parent" name="newParentTitle">
+						<aui:option label="none" selected="<%= Validator.isNull(wikiPage.getParentTitle()) %>" value="" />
 
 						<%
 						for (WikiPage childPage : childPages) {
@@ -172,13 +172,13 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 					if (newParentAvailable) {
 					%>
 
-						<aui:button name="changeParentButton" onClick='<%= renderResponse.getNamespace() + "changeParent();" %>' type="button" value="change-parent" />
+						<aui:button name="changeParentButton" onClick='<%= renderResponse.getNamespace() + "changeParent();" %>' value="change-parent" />
 
 					<%
 					}
 					%>
 
-					<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
+					<aui:button name="cancelButton" onClick="<%= redirect %>" value="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>
