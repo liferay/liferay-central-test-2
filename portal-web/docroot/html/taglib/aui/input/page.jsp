@@ -99,7 +99,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 			<liferay-ui:input-field
 				bean="<%= bean %>"
 				defaultValue='<%= value %>'
-				disabled='<%= disabled %>'
+				disabled="<%= disabled %>"
 				field="<%= field %>"
 				fieldParam='<%= (String)dynamicAttributes.get("fieldParam") %>'
 				format='<%= (Format)dynamicAttributes.get("format") %>'
@@ -164,8 +164,8 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 			<liferay-ui:input-time-zone
 				daylight='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("daylight")) %>'
-				disabled='<%= disabled %>'
-				displayStyle='<%= displayStyle %>'
+				disabled="<%= disabled %>"
+				displayStyle="<%= displayStyle %>"
 				name="<%= name %>"
 				nullable='<%= GetterUtil.getBoolean((String)dynamicAttributes.get("nullable")) %>'
 				value="<%= value.toString() %>"
