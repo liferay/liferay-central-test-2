@@ -43,9 +43,10 @@ public class JettySharedSessionWrapper
 	}
 
 	public JettySharedSessionWrapper(
-		HttpSession session, Map<String, Object> sharedAttributes) {
+		HttpSession session, Map<String, Object> sharedAttributes,
+		boolean requireSerializable) {
 
-		super(session, sharedAttributes);
+		super(session, sharedAttributes, requireSerializable);
 
 		_session = session;
 	}

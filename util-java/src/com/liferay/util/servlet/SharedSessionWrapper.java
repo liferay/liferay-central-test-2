@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
@@ -43,11 +44,12 @@ import javax.servlet.http.HttpSession;
 public class SharedSessionWrapper implements HttpSession {
 
 	public SharedSessionWrapper(HttpSession session) {
-		this(session, new ConcurrentHashMap<String, Object>());
+		this(session, new ConcurrentHashMap<String, Object>(), true);
 	}
 
 	public SharedSessionWrapper(
-		HttpSession session, Map<String, Object> sharedAttributes) {
+		HttpSession session, Map<String, Object> sharedAttributes,
+		boolean requireSerializable) {
 
 		if (session == null) {
 			_session = new NullSession();
@@ -61,6 +63,7 @@ public class SharedSessionWrapper implements HttpSession {
 		}
 
 		_sharedAttributes = sharedAttributes;
+		_requireSerializable = requireSerializable;
 	}
 
 	public Object getAttribute(String name) {
@@ -154,7 +157,25 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void setAttribute(String name, Object value) {
-		_session.setAttribute(name, value);
+		if (_requireSerializable &&
+			(!value.getClass().isAssignableFrom(Serializable.class))) {
+
+			_log.error(
+				"Attempting to store non-serializable object: " + value +
+				" of type: " + value.getClass().getName());
+			return;
+		}
+
+		try {
+			_session.setAttribute(name, value);
+		}
+		catch (IllegalArgumentException e) {
+			if (_log.isErrorEnabled()) {
+			    _log.error(
+					"Attempting to store non-serializable object: " + value +
+					" of type: " + value.getClass().getName());
+			}
+		}
 	}
 
 	public void setMaxInactiveInterval(int maxInactiveInterval) {
@@ -165,5 +186,6 @@ public class SharedSessionWrapper implements HttpSession {
 
 	private HttpSession _session;
 	private Map<String, Object> _sharedAttributes;
+	private boolean _requireSerializable;
 
 }

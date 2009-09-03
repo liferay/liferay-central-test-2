@@ -1374,6 +1374,10 @@ public class PropsValues {
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsKeys.SESSION_SHARED_ATTRIBUTES);
 
+	public static final boolean SESSION_SHARED_ATTRIBUTES_REQUIRE_SERIALIZABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SESSION_SHARED_ATTRIBUTES_REQUIRE_SERIALIZABLE), false);
+
 	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));

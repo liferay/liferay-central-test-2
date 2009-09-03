@@ -50,6 +50,7 @@ import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
@@ -519,7 +520,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 
 		request = new SharedSessionServletRequest(
-			request, sharedSessionAttributes, portalSessionShared);
+			request, sharedSessionAttributes, portalSessionShared,
+			PropsValues.SESSION_SHARED_ATTRIBUTES_REQUIRE_SERIALIZABLE);
 
 		DynamicServletRequest dynamicRequest = null;
 
