@@ -621,6 +621,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
+	public static final String JPA_CONFIGS = "jpa.configs";
+
 	public static final String JPA_DATABASE_PLATFORM = "jpa.database.platform";
 
 	public static final String JPA_DATABASE_TYPE = "jpa.database.type";
@@ -628,6 +630,8 @@ public interface PropsKeys {
 	public static final String JPA_LOAD_TIME_WEAVER = "jpa.load.time.weaver";
 
 	public static final String JPA_PROVIDER = "jpa.provider";
+
+	public static final String JPA_PROVIDER_PROPERTY_PREFIX = "jpa.provider.property.";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 

@@ -49,6 +49,7 @@ import com.liferay.portal.util.PropsValues;
 import javax.sql.DataSource;
 
 import org.springframework.instrument.classloading.LoadTimeWeaver;
+import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
@@ -85,6 +86,11 @@ public class LocalContainerEntityManagerFactoryBean extends
 		}
 
 		setPersistenceXmlLocation("classpath*:META-INF/persistence-custom.xml");
+
+		PersistenceUnitPostProcessor[] postProcessors =
+			{new LiferayPersistenceUnitPostProcessor()};
+
+		setPersistenceUnitPostProcessors(postProcessors);
 	}
 
 	public void setDataSource(DataSource dataSource) {
