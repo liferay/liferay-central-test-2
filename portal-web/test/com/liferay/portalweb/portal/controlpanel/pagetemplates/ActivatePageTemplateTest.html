@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ActivatePageTemplateTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ActivatePageTemplateTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Page Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Page Templates</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//strong/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_146_activeCheckbox'))</td>
+	<td>Checked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${Checked}</td>
+	<td>BoxChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>_146_activeCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>BoxChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Yes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=No</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
