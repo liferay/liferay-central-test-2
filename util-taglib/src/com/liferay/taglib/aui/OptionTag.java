@@ -55,7 +55,9 @@ public class OptionTag extends IncludeTag implements DynamicAttributes {
 			if (!ServerDetector.isResin()) {
 				_cssClass = null;
 				_dynamicAttributes.clear();
+				_label = null;
 				_selected = false;
+				_value = null;
 			}
 		}
 	}
@@ -65,11 +67,17 @@ public class OptionTag extends IncludeTag implements DynamicAttributes {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
+			if (_value == null) {
+				_value = _label;
+			}
+
 			request.setAttribute("aui:option:cssClass", _cssClass);
 			request.setAttribute(
 				"aui:option:dynamicAttributes", _dynamicAttributes);
+			request.setAttribute("aui:option:label", _label);
 			request.setAttribute(
 				"aui:option:selected", String.valueOf(_selected));
+			request.setAttribute("aui:option:value", _value);
 
 			PortalIncludeUtil.include(pageContext, _START_PAGE);
 
@@ -90,8 +98,16 @@ public class OptionTag extends IncludeTag implements DynamicAttributes {
 		_dynamicAttributes.put(localName, value);
 	}
 
+	public void setLabel(String label) {
+		_label = label;
+	}
+
 	public void setSelected(boolean selected) {
 		_selected = selected;
+	}
+
+	public void setValue(Object value) {
+		_value = String.valueOf(value);
 	}
 
 	private static final String _END_PAGE = "/html/taglib/aui/option/end.jsp";
@@ -102,6 +118,8 @@ public class OptionTag extends IncludeTag implements DynamicAttributes {
 	private String _cssClass;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
+	private String _label;
 	private boolean _selected;
+	private String _value;
 
 }

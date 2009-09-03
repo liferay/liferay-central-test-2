@@ -27,7 +27,13 @@
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:option:cssClass"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:option:dynamicAttributes");
+String label = GetterUtil.getString((String)request.getAttribute("aui:option:label"));
 boolean selected = GetterUtil.getBoolean((String)request.getAttribute("aui:option:selected"));
+String value = GetterUtil.getString((String)request.getAttribute("aui:option:value"));
 %>
 
-<option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> value="<%= value %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+
+<c:if test="<%= Validator.isNotNull(label) %>">
+	<liferay-ui:message key="<%= label %>" />
+</c:if>
