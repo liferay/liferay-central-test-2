@@ -806,6 +806,13 @@ public class BaseDeployer {
 		sb.append(displayName);
 		sb.append("</display-name>");
 
+		sb.append("<listener>");
+		sb.append("<listener-class>");
+		sb.append("com.liferay.portal.kernel.servlet.");
+		sb.append("SerializableSessionAttributeListener");
+		sb.append("</listener-class>");
+		sb.append("</listener>");
+
 		File serviceXml = new File(srcFile + "/WEB-INF/service.xml");
 
 		if (serviceXml.exists()) {
