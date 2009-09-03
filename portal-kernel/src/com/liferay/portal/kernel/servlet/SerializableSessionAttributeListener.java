@@ -24,9 +24,12 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
@@ -40,13 +43,31 @@ public class SerializableSessionAttributeListener
 	implements HttpSessionAttributeListener {
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		Object obj = event.getValue();
+		String name = event.getName();
+		Object value = event.getValue();
 
-		if (!(obj instanceof Serializable)) {
+		if (!(value instanceof Serializable)) {
 			_log.error(
-				obj.getClass().getName() +
+				value.getClass().getName() +
 					" is not serializable and will prevent this session from " +
 						"being replicated");
+
+			if (_requiresSerializable == null) {
+				HttpSession session = event.getSession();
+
+				ServletContext servletContext = session.getServletContext();
+
+				_requiresSerializable = Boolean.valueOf(
+					GetterUtil.getBoolean(
+						servletContext.getInitParameter(
+							"session-attributes-requires-serializable")));
+			}
+
+			if (_requiresSerializable) {
+				HttpSession session = event.getSession();
+
+				session.removeAttribute(name);
+			}
 		}
 	}
 
@@ -59,5 +80,7 @@ public class SerializableSessionAttributeListener
 
 	private static Log _log =
 		LogFactoryUtil.getLog(SerializableSessionAttributeListener.class);
+
+	private Boolean _requiresSerializable;
 
 }
