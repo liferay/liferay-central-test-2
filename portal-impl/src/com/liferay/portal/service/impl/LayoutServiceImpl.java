@@ -343,7 +343,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				remoteGroupId, remotePrivateLayout, startDate, endDate);
 
 		Message message = new Message();
+
 		message.setPayload(publisherRequest);
+
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, schedulerStartDate, schedulerEndDate,
 			description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER, message);

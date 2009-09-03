@@ -61,7 +61,9 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		Message message = new Message();
+
 		message.setPayload(payload);
+
 		_instance._schedule(
 			groupName, interval, startDate, endDate, description,
 			destinationName, message);
@@ -83,7 +85,9 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		Message message = new Message();
+
 		message.setPayload(payload);
+
 		_instance._schedule(
 			groupName, cronText, startDate, endDate, description,
 			destinationName, message);

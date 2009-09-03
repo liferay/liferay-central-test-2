@@ -98,7 +98,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
 				String description = jobDataMap.getString(DESCRIPTION);
-				Message message = (Message) jobDataMap.get(MESSAGE);
+				Message message = (Message)jobDataMap.get(MESSAGE);
 
 				SchedulerRequest schedulerRequest = null;
 
@@ -218,8 +218,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				cronTrigger.setEndTime(endDate);
 			}
 
-			schedule(
-				groupName, cronTrigger, description, destination, message);
+			schedule(groupName, cronTrigger, description, destination, message);
 		}
 		catch(ParseException pe) {
 			throw new SchedulerException("Unable to parse cron text", pe);

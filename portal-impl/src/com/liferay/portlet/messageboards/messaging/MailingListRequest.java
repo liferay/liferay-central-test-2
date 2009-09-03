@@ -29,7 +29,7 @@ import java.io.Serializable;
  *
  * @author Thiago Moreira
  */
-public class MailingListRequest implements Serializable{
+public class MailingListRequest implements Serializable {
 
 	public long getCategoryId() {
 		return _categoryId;

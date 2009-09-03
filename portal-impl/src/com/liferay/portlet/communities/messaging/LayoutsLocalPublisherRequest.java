@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.messaging;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ import java.util.Map;
  *
  * @author Bruno Farache
  */
-public class LayoutsLocalPublisherRequest implements Serializable{
+public class LayoutsLocalPublisherRequest implements Serializable {
 
 	public static final String COMMAND_ALL_PAGES = "ALL_PAGES";
 

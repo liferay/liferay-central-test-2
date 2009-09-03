@@ -51,11 +51,12 @@ public class MessageSenderJob implements Job {
 
 			String destination = jobDataMap.getString(
 				SchedulerEngine.DESTINATION);
-			Message message = (Message) jobDataMap.get(SchedulerEngine.MESSAGE);
+			Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
 
 			if (message == null) {
 				message = new Message();
 			}
+
 			Date scheduledFireTime = jobExecutionContext.getScheduledFireTime();
 
 			message.put("scheduledFireTime", scheduledFireTime);

@@ -59,7 +59,7 @@ public class LayoutsLocalPublisherMessageListener extends BaseMessageListener {
 		throws Exception {
 
 		LayoutsLocalPublisherRequest publisherRequest =
-			(LayoutsLocalPublisherRequest) message.getPayload();
+			(LayoutsLocalPublisherRequest)message.getPayload();
 
 		messageStatus.setPayload(publisherRequest);
 
