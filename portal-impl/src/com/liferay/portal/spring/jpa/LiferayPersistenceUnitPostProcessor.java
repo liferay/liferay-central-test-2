@@ -43,6 +43,9 @@ package com.liferay.portal.spring.jpa;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Properties;
@@ -63,17 +66,18 @@ public class LiferayPersistenceUnitPostProcessor
 	public void postProcessPersistenceUnitInfo(
 		MutablePersistenceUnitInfo mutablePersistenceUnitInfo) {
 
-		for (String mappingFile : PropsValues.JPA_CONFIGS) {
-			mutablePersistenceUnitInfo.addMappingFileName(mappingFile);
+		for (String mappingFileName : PropsValues.JPA_CONFIGS) {
+			mutablePersistenceUnitInfo.addMappingFileName(mappingFileName);
 		}
 
-		Properties providerProperties = PropsValues.JPA_PROVIDER_PROPERTIES;
+		Properties properties = PropsUtil.getProperties(
+			PropsKeys.JPA_PROVIDER_PROPERTY_PREFIX, true);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Provider properties = " + providerProperties);
+			_log.info(PropertiesUtil.list(properties));
 		}
 
-		mutablePersistenceUnitInfo.setProperties(providerProperties);
+		mutablePersistenceUnitInfo.setProperties(properties);
 	}
 
 	private static Log _log =

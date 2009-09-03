@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.util.Properties;
-
 /**
  * <a href="PropsValues.java.html"><b><i>View Source</i></b></a>
  *
@@ -711,9 +709,6 @@ public class PropsValues {
 
 	public static final String JPA_PROVIDER =
 		PropsUtil.get(PropsKeys.JPA_PROVIDER);
-
-	public static final Properties JPA_PROVIDER_PROPERTIES =
-		PropsUtil.getProperties(PropsKeys.JPA_PROVIDER_PROPERTY_PREFIX, true);
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsKeys.LAYOUT_CLONE_IMPL);

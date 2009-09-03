@@ -87,10 +87,10 @@ public class LocalContainerEntityManagerFactoryBean extends
 
 		setPersistenceXmlLocation("classpath*:META-INF/persistence-custom.xml");
 
-		PersistenceUnitPostProcessor[] postProcessors =
+		PersistenceUnitPostProcessor[] persistenceUnitPostProcessors =
 			{new LiferayPersistenceUnitPostProcessor()};
 
-		setPersistenceUnitPostProcessors(postProcessors);
+		setPersistenceUnitPostProcessors(persistenceUnitPostProcessors);
 	}
 
 	public void setDataSource(DataSource dataSource) {
