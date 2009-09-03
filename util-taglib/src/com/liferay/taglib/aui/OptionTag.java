@@ -98,8 +98,8 @@ public class OptionTag extends IncludeTag implements DynamicAttributes {
 		_dynamicAttributes.put(localName, value);
 	}
 
-	public void setLabel(String label) {
-		_label = label;
+	public void setLabel(Object label) {
+		_label = String.valueOf(label);
 	}
 
 	public void setSelected(boolean selected) {

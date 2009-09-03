@@ -279,7 +279,7 @@ if (Validator.isNull(redirect)) {
 						for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %>" selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>" />
+							<aui:option label='<%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %>' selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>" />
 
 						<%
 						}
