@@ -132,7 +132,7 @@ if (choiceName > 0) {
 
 		<aui:input name="description" />
 
-		<aui:input disabled="<%= String.valueOf(neverExpire) %>" name="expirationDate" value="<%= expirationDate %>" />
+		<aui:input disabled="<%= neverExpire %>" name="expirationDate" value="<%= expirationDate %>" />
 
 		<%
 		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
