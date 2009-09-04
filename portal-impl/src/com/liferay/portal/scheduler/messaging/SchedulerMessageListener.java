@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
-import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.List;
@@ -39,6 +38,7 @@ import java.util.List;
  *
  * @author Michael C. Han
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class SchedulerMessageListener implements MessageListener {
 
@@ -65,28 +65,11 @@ public class SchedulerMessageListener implements MessageListener {
 		String command = schedulerRequest.getCommand();
 
 		if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
-			TriggerType triggerType = schedulerRequest.getTriggerType();
-
-			if (triggerType.equals(TriggerType.CRON)) {
-				_schedulerEngine.schedule(
-					schedulerRequest.getGroupName(),
-					schedulerRequest.getCronText(),
-					schedulerRequest.getStartDate(),
-					schedulerRequest.getEndDate(),
-					schedulerRequest.getDescription(),
-					schedulerRequest.getDestination(),
-					schedulerRequest.getMessage());
-			}
-			else if (triggerType.equals(TriggerType.SIMPLE)) {
-				_schedulerEngine.schedule(
-					schedulerRequest.getGroupName(),
-					schedulerRequest.getInterval(),
-					schedulerRequest.getStartDate(),
-					schedulerRequest.getEndDate(),
-					schedulerRequest.getDescription(),
-					schedulerRequest.getDestination(),
-					schedulerRequest.getMessage());
-			}
+			_schedulerEngine.schedule(
+				schedulerRequest.getTrigger(),
+				schedulerRequest.getDescription(),
+				schedulerRequest.getDestination(),
+				schedulerRequest.getMessage());
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {
 			doCommandRetrieve(message, schedulerRequest);
@@ -98,8 +81,7 @@ public class SchedulerMessageListener implements MessageListener {
 			_schedulerEngine.start();
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
-			_schedulerEngine.unschedule(
-				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+			_schedulerEngine.unschedule(schedulerRequest.getTrigger());
 		}
 	}
 
@@ -108,7 +90,8 @@ public class SchedulerMessageListener implements MessageListener {
 		throws Exception {
 
 		List<SchedulerRequest> schedulerRequests =
-			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
+			_schedulerEngine.getScheduledJobs(
+				schedulerRequest.getTrigger().getGroupName());
 
 		Message responseMessage = MessageBusUtil.createResponseMessage(
 			message, schedulerRequests);

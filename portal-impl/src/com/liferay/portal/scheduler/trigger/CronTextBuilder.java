@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portal.scheduler.trigger;
 
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
 
 /**
- * <a href="TriggerExpression.java.html"><b><i>View Source</i></b></a>
+ * <a href="CronTextBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  */
-public class TriggerExpression {
+public class CronTextBuilder {
 
 	public final static int DAILY_FREQUENCY = 3;
 
@@ -45,11 +45,11 @@ public class TriggerExpression {
 
 	public final static int YEARLY_FREQUENCY = 6;
 
-	public TriggerExpression(Calendar startDate) {
-		this(startDate, TriggerExpression.NO_FREQUENCY, 0);
+	public CronTextBuilder(Calendar startDate) {
+		this(startDate, CronTextBuilder.NO_FREQUENCY, 0);
 	}
 
-	public TriggerExpression(Calendar startDate, int frequency, int interval) {
+	public CronTextBuilder(Calendar startDate, int frequency, int interval) {
 		_startDate = startDate;
 		setFrequency(frequency);
 		_interval = interval;
@@ -68,12 +68,12 @@ public class TriggerExpression {
 	}
 
 	public void setFrequency(int frequency) {
-		if ((frequency != TriggerExpression.DAILY_FREQUENCY) &&
-			(frequency != TriggerExpression.MINUTELY_FREQUENCY) &&
-			(frequency != TriggerExpression.MONTHLY_FREQUENCY) &&
-			(frequency != TriggerExpression.NO_FREQUENCY) &&
-			(frequency != TriggerExpression.WEEKLY_FREQUENCY) &&
-			(frequency != TriggerExpression.YEARLY_FREQUENCY)) {
+		if ((frequency != CronTextBuilder.DAILY_FREQUENCY) &&
+			(frequency != CronTextBuilder.MINUTELY_FREQUENCY) &&
+			(frequency != CronTextBuilder.MONTHLY_FREQUENCY) &&
+			(frequency != CronTextBuilder.NO_FREQUENCY) &&
+			(frequency != CronTextBuilder.WEEKLY_FREQUENCY) &&
+			(frequency != CronTextBuilder.YEARLY_FREQUENCY)) {
 
 			throw new IllegalArgumentException(String.valueOf(frequency));
 		}
@@ -99,10 +99,10 @@ public class TriggerExpression {
 		String dayOfWeek = String.valueOf(_startDate.get(Calendar.DAY_OF_WEEK));
 		String year = String.valueOf(_startDate.get(Calendar.YEAR));
 
-		if (_frequency == TriggerExpression.NO_FREQUENCY) {
+		if (_frequency == CronTextBuilder.NO_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 		}
-		else if (_frequency == TriggerExpression.MINUTELY_FREQUENCY) {
+		else if (_frequency == CronTextBuilder.MINUTELY_FREQUENCY) {
 			minute += StringPool.FORWARD_SLASH + _interval;
 			hour = StringPool.STAR;
 			dayOfMonth = StringPool.STAR;
@@ -110,24 +110,24 @@ public class TriggerExpression {
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.DAILY_FREQUENCY) {
+		else if (_frequency == CronTextBuilder.DAILY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + _interval;
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.WEEKLY_FREQUENCY) {
+		else if (_frequency == CronTextBuilder.WEEKLY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + (_interval * 7);
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.MONTHLY_FREQUENCY) {
+		else if (_frequency == CronTextBuilder.MONTHLY_FREQUENCY) {
 			month += StringPool.FORWARD_SLASH + _interval;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.YEARLY_FREQUENCY) {
+		else if (_frequency == CronTextBuilder.YEARLY_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 			year += StringPool.FORWARD_SLASH + _interval;
 		}
