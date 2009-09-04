@@ -157,8 +157,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -255,8 +254,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -390,8 +388,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -487,8 +484,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -616,8 +612,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -755,8 +750,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -906,8 +900,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
