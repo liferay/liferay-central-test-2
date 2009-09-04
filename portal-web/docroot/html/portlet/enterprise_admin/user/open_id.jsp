@@ -28,10 +28,10 @@
 User selUser = (User)request.getAttribute("user.selUser");
 %>
 
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
 <h3><liferay-ui:message key="open-id" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="openId" />
-	</div>
-</fieldset>
+<aui:fieldset class="aui-block-labels">
+	<aui:input label="" name="openId" />
+</aui:fieldset>

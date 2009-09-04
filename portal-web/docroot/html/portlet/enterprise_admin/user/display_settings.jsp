@@ -31,45 +31,35 @@ String languageId = BeanParamUtil.getString(selUser, request, "languageId", user
 String timeZoneId = BeanParamUtil.getString(selUser, request, "timeZoneId", user.getTimeZoneId());
 %>
 
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
 <h3><liferay-ui:message key="display-settings" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />languageId"><liferay-ui:message key="language" /></label>
+<aui:fieldset>
+	<aui:select label="language" name="languageId">
 
-		<select name="<portlet:namespace />languageId">
+		<%
+		Locale selLocale = LocaleUtil.fromLanguageId(languageId);
 
-			<%
-			Locale selLocale = LocaleUtil.fromLanguageId(languageId);
+		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-			Locale[] locales = LanguageUtil.getAvailableLocales();
+		Locale languageLocale = locale;
 
-			Locale languageLocale = locale;
-
-			for (Locale curLocale : locales) {
-				if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
-					languageLocale = curLocale;
-				}
-			%>
-
-				<option <%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) ? "selected" : "" %> value="<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>"><%= curLocale.getDisplayName(languageLocale) %></option>
-
-			<%
+		for (Locale curLocale : locales) {
+			if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
+				languageLocale = curLocale;
 			}
-			%>
+		%>
 
-		</select>
-	</div>
+			<aui:option label="<%= curLocale.getDisplayName(languageLocale) %>" selected="<%= (selLocale.getLanguage().equals(curLocale.getLanguage()) && selLocale.getCountry().equals(curLocale.getCountry())) %>" value='<%= curLocale.getLanguage() + "_" + curLocale.getCountry() %>' />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
+		<%
+		}
+		%>
 
-		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
-	</div>
+	</aui:select>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />greeting"><liferay-ui:message key="greeting" /></label>
+	<aui:input label="time-zone" name="timeZoneId" type="timeZone" value="<%= timeZoneId %>" />
 
-		<liferay-ui:input-field  model="<%= User.class %>" bean="<%= selUser %>" field="greeting" />
-	</div>
-</fieldset>
+	<aui:input name="greeting" />
+</aui:fieldset>

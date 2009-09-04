@@ -34,6 +34,8 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 
 <liferay-ui:error-marker key="errorSection" value="password" />
 
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
 <h3><liferay-ui:message key="password" /></h3>
 
 <liferay-ui:error exception="<%= UserPasswordException.class %>">
@@ -75,83 +77,65 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	</c:if>
 </liferay-ui:error>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />password1"><liferay-ui:message key="password" /></label>
+<aui:fieldset>
+	<aui:input label="password" name="password1" size="30" type="password" />
 
-		<input name="<portlet:namespace />password1" size="30" type="password" value="" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />password2"><liferay-ui:message key="enter-again" /></label>
-
-		<input name="<portlet:namespace />password2" size="30" type="password" value="" />
-	</div>
+	<aui:input label="enter-again" name="password2" size="30" type="password" />
 
 	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
-		<div class="aui-ctrl-holder">
-			<liferay-ui:input-checkbox param="passwordReset" defaultValue="<%= passwordReset %>" />
-
-			<label class="inline-label" for="<portlet:namespace />passwordReset"><liferay-ui:message key="password-reset-required" /></label>
-		</div>
+		<aui:input inlineLabel="<%= true %>" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
 	</c:if>
-</fieldset>
+</aui:fieldset>
 
 <c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED && portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<h3><liferay-ui:message key="reminder" /></h3>
 
-	<fieldset class="aui-block-labels">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />reminderQueryQuestion"><liferay-ui:message key="question" /></label>
+	<%
+	boolean hasCustomQuestion = true;
+	%>
 
-			<select id="<portlet:namespace />reminderQueryQuestion" name="<portlet:namespace />reminderQueryQuestion">
+	<aui:fieldset>
+		<aui:select label="question" name="reminderQueryQuestion">
 
-				<%
-				boolean hasCustomQuestion = true;
+			<%
+			Set<String> questions = selUser.getReminderQueryQuestions();
 
-				Set<String> questions = selUser.getReminderQueryQuestions();
-
-				for (String question : questions) {
-					if (selUser.getReminderQueryQuestion().equals(question)) {
-						hasCustomQuestion = false;
-				%>
-
-						<option selected value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
-
-				<%
-					}
-					else {
-				%>
-
-						<option value="<%= question %>"><liferay-ui:message key="<%= question %>" /></option>
-
-				<%
-					}
-				}
-
-				if (hasCustomQuestion && Validator.isNull(selUser.getReminderQueryQuestion())) {
+			for (String question : questions) {
+				if (selUser.getReminderQueryQuestion().equals(question)) {
 					hasCustomQuestion = false;
-				}
-				%>
+			%>
 
-				<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-					<option <%= hasCustomQuestion ? "selected" : "" %> value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>"><liferay-ui:message key="write-my-own-question" /></option>
-				</c:if>
-			</select>
+					<aui:option label="<%= question %>" selected="<%= true %>" value="<%= question %>" />
+
+			<%
+				}
+				else {
+			%>
+
+					<aui:option label="<%= question %>" />
+
+			<%
+				}
+			}
+
+			if (hasCustomQuestion && Validator.isNull(selUser.getReminderQueryQuestion())) {
+				hasCustomQuestion = false;
+			}
+			%>
 
 			<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
-				<div id="<portlet:namespace />customQuestionDiv">
-					<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="reminderQueryQuestion" fieldParam="reminderQueryCustomQuestion" />
-				</div>
+				<aui:option label="write-my-own-question" selected="<%= hasCustomQuestion %>" value="<%= EnterpriseAdminUtil.CUSTOM_QUESTION %>" />
 			</c:if>
-		</div>
+		</aui:select>
 
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />reminderQueryAnswer"><liferay-ui:message key="answer" /></label>
+		<c:if test="<%= PropsValues.USERS_REMINDER_QUERIES_CUSTOM_QUESTION_ENABLED %>">
+			<div id="<portlet:namespace />customQuestionDiv">
+				<aui:input fieldParam="reminderQueryCustomQuestion" label="custom-question" name="reminderQueryQuestion" />
+			</div>
+		</c:if>
 
-			<input id="<portlet:namespace />reminderQueryAnswer" name="<portlet:namespace />reminderQueryAnswer" size="50" type="text" value="<%= selUser.getReminderQueryAnswer() %>" />
-		</div>
-	</fieldset>
+		<aui:input label="answer" name="reminderQueryAnswer" size="50" value="<%= selUser.getReminderQueryAnswer() %>" />
+	</aui:fieldset>
 
 	<script type="text/javascript">
 		AUI().ready(

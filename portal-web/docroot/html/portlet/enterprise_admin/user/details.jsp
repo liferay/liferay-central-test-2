@@ -86,114 +86,65 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 <liferay-ui:error-marker key="errorSection" value="details" />
 
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="title"><liferay-ui:message key="title" /></label>
-
-		<select name="<portlet:namespace />prefixId">
-			<option value=""></option>
-
-			<%
-			List<ListType> prefixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_PREFIX);
-
-			for (ListType prefix : prefixes) {
-			%>
-
-				<option <%= (prefix.getListTypeId() == prefixId) ? "selected" : "" %> value="<%= prefix.getListTypeId() %>"><liferay-ui:message key="<%= prefix.getName() %>" /></option>
-
-			<%
-			}
-			%>
-
-		</select>
-	</div>
+<aui:fieldset column="<%= true %>">
+	<aui:select label="title" name="prefixId" listType="<%= ListTypeImpl.CONTACT_PREFIX %>" showEmptyOption="<%= true %>" />
 
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (selUser != null) %>">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />screenName"><liferay-ui:message key="screen-name" /></label>
-
-			<c:choose>
-				<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+		<c:choose>
+			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) || (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_SCREENNAME_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+				<aui:field-wrapper name="screenName">
 					<%= selUser.getScreenName() %>
 
-					<input name="<portlet:namespace />screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="screenName" />
-				</c:otherwise>
-			</c:choose>
-		</div>
+					<aui:input name="screenName" type="hidden" value="<%= selUser.getScreenName() %>" />
+				</aui:field-wrapper>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="screenName" />
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 
 	<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
 	<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />emailAddress"><liferay-ui:message key="email-address" /></label>
-
-		<c:choose>
-			<c:when test="<%= (selUser != null) && (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+	<c:choose>
+		<c:when test="<%= (selUser != null) && (PropsValues.FIELD_EDITABLE_COM_LIFERAY_PORTAL_MODEL_USER_EMAILADDRESS_ADMIN && !permissionChecker.isCompanyAdmin()) %>">
+			<aui:field-wrapper name="emailAddress">
 				<%= displayEmailAddress %>
 
-				<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= selUser.getEmailAddress() %>" />
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:input-field model="<%= User.class %>" field="emailAddress" defaultValue="<%= displayEmailAddress %>" />
-			</c:otherwise>
-		</c:choose>
-	</div>
+				<aui:input name="emailAddress" type="hidden" value="<%= selUser.getEmailAddress() %>" />
+			</aui:field-wrapper>
+		</c:when>
+		<c:otherwise>
+			<aui:input name="emailAddress" />
+		</c:otherwise>
+	</c:choose>
 
 	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
+	<aui:model-context bean="<%= selContact %>" model="<%= Contact.class %>" />
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="firstName" />
-	</div>
+	<aui:input name="firstName" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
-
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="middleName" />
-	</div>
+	<aui:input name="middleName" />
 
 	<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
+	<aui:input name="lastName" />
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="lastName" />
-	</div>
+	<aui:select label="suffix" name="suffixId" listType="<%= ListTypeImpl.CONTACT_SUFFIX %>" showEmptyOption="<%= true %>" />
+</aui:fieldset>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />suffixId"><liferay-ui:message key="suffix" /></label>
-
-		<select name="<portlet:namespace />suffixId">
-			<option value=""></option>
-
-			<%
-			List<ListType> suffixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_SUFFIX);
-
-			for (ListType suffix : suffixes) {
-			%>
-
-				<option <%= (suffix.getListTypeId() == suffixId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-			<%
-			}
-			%>
-
-		</select>
-	</div>
-</fieldset>
-
-<fieldset class="aui-block-labels aui-form-column">
+<aui:fieldset column="<%= true %>">
 	<div>
 		<c:if test="<%= selUser != null %>">
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editUserPortraitURL">
@@ -203,14 +154,13 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript:<portlet:namespace />openEditUserPortraitWindow('<%= editUserPortraitURL %>');"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= deletePortrait ? 0 : selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></a>
+			<%
+			String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL + "');";
+			%>
+
+			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= deletePortrait ? 0 : selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></aui:a>
 
 			<div class="portrait-icons">
-
-				<%
-				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL + "');";
-				%>
-
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
 
 				<c:if test="<%= selUser.getPortraitId() > 0 %>">
@@ -221,7 +171,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
 
-					<input id="<portlet:namespace />deletePortrait" name="<portlet:namespace />deletePortrait" type="hidden" value="<%= deletePortrait %>" />
+					<aui:input name="deletePortrait" type="hidden" value="<%= deletePortrait %>" />
 				</c:if>
 			</div>
 		</c:if>
@@ -232,44 +182,30 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
 		<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />userId"><liferay-ui:message key="user-id" /></label>
-
+		<aui:field-wrapper name="userId">
 			<%= selUser.getUserId() %>
 
-			<input name="<portlet:namespace />userId" type="hidden" value="<%= selUser.getUserId() %>" />
-		</div>
+			<aui:input name="userId" type="hidden" value="<%= selUser.getUserId() %>" />
+		</aui:field-wrapper>
 	</c:if>
 
-	<div class="aui-ctrl-holder">
-		<c:choose>
-			<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
-				<label for="<portlet:namespace />birthday"><liferay-ui:message key="birthday" /></label>
-
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="birthday" defaultValue="<%= birthday %>" />
-			</c:when>
-			<c:otherwise>
-				<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
-				<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
-				<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
-			</c:otherwise>
-		</c:choose>
-	</div>
+	<c:choose>
+		<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
+			<aui:input name="birthday" value="<%= birthday %>" />
+		</c:when>
+		<c:otherwise>
+			<aui:input name="birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
+			<aui:input name="birthdayDay" type="hidden" value="1" />
+			<aui:input name="birthdayYear" type="hidden" value="1970" />
+		</c:otherwise>
+	</c:choose>
 
 	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
-
-			<select name="<portlet:namespace />male">
-				<option value="1"><liferay-ui:message key="male" /></option>
-				<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
-			</select>
-		</div>
+		<aui:select label="gender" name="male">
+			<aui:option label="male" value="1" />
+			<aui:option label="female" selected="<%= !male %>" value="0" />
+		</aui:select>
 	</c:if>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />jobTitle"><liferay-ui:message key="job-title" /></label>
-
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="jobTitle" />
-	</div>
-</fieldset>
+	<aui:input name="jobTitle" />
+</aui:fieldset>

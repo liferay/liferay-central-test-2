@@ -30,17 +30,17 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <liferay-ui:error-marker key="errorSection" value="sms" />
 
+<aui:model-context bean="<%= selContact %>" model="<%= Contact.class %>" />
+
 <h3><liferay-ui:message key="sms" /></h3>
 
 <c:choose>
 	<c:when test="<%= selContact != null %>">
 		<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
 
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="smsSn" />
-			</div>
-		</fieldset>
+		<aui:fieldset>
+			<aui:input label="" name="smsSn" />
+		</aui:fieldset>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">

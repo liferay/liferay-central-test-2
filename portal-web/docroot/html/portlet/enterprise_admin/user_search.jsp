@@ -35,72 +35,31 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="first-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="middle-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="last-name" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFirstName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getMiddleName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getLastName()) %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="screen-name" />
-		</td>
-		<td>
-			<liferay-ui:message key="email-address" />
-		</td>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input name="<%= displayTerms.FIRST_NAME %>" size="20" value="<%= displayTerms.getFirstName() %>" />
 
-		<c:choose>
-			<c:when test="<%= showActiveUserSelect %>">
-				<td>
-					<liferay-ui:message key="active" />
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
-	</tr>
-	<tr>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getScreenName()) %>" />
-		</td>
-		<td>
-			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
-		</td>
+			<aui:input name="<%= displayTerms.SCREEN_NAME %>" size="20" value="<%= displayTerms.getScreenName() %>" />
+		</aui:column>
 
-		<c:choose>
-			<c:when test="<%= showActiveUserSelect %>">
-				<td>
-					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-						<option <%= (!displayTerms.hasActive()) ? "selected" : "" %> value=""></option>
-						<option <%= (displayTerms.hasActive()) && displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-						<option <%= (displayTerms.hasActive()) && !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-					</select>
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
-	</tr>
-	</table>
+		<aui:column>
+			<aui:input name="<%= displayTerms.MIDDLE_NAME %>" size="20" value="<%= displayTerms.getMiddleName() %>" />
+
+			<aui:input name="<%= displayTerms.EMAIL_ADDRESS %>" size="20" value="<%= displayTerms.getLastName() %>" />
+		</aui:column>
+
+		<aui:column>
+			<aui:input name="<%= displayTerms.LAST_NAME %>" size="20" value="<%= displayTerms.getLastName() %>" />
+
+			<c:if test="<%= showActiveUserSelect %>">
+				<aui:select name="<%= displayTerms.ACTIVE %>">
+					<aui:option selected="<%= (!displayTerms.hasActive()) %>" value="" />
+					<aui:option label="yes" selected="<%= (displayTerms.hasActive()) && displayTerms.isActive() %>" value="1" />
+					<aui:option label="no" selected="<%= (displayTerms.hasActive()) && !displayTerms.isActive() %>" value="0" />
+				</aui:select>
+			</c:if>
+		</aui:column>
+	</aui:fieldset>
 </liferay-ui:search-toggle>
 
 <script type="text/javascript">

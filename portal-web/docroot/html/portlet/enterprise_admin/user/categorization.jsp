@@ -26,32 +26,18 @@
 
 <%
 User selUser = (User)request.getAttribute("user.selUser");
-
-long classPK = 0;
-
-if (selUser != null) {
-	classPK = selUser.getUserId();
-}
 %>
+
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
 
 <h3><liferay-ui:message key="categories" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:asset-categories-selector
-			className="<%= User.class.getName() %>"
-			classPK="<%= classPK %>"
-		/>
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input name="categories" type="assetCategories" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="tags" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:asset-tags-selector
-			className="<%= User.class.getName() %>"
-			classPK="<%= classPK %>"
-		/>
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input name="tags" type="assetTags" />
+</aui:fieldset>

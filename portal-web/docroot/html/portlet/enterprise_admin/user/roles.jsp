@@ -112,8 +112,8 @@ userGroupRoles.addAll(organizationRoles);
 	}
 </script>
 
-<input name="<portlet:namespace />groupRolesRoleIds" type="hidden" value="<%= ListUtil.toString(userGroupRoles, "roleId") %>" />
-<input name="<portlet:namespace />groupRolesGroupIds" type="hidden" value="<%= ListUtil.toString(userGroupRoles, "groupId") %>" />
+<aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "roleId") %>' />
+<aui:input name="groupRolesGroupIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, "groupId") %>' />
 
 <h3><liferay-ui:message key="regular-roles" /></h3>
 

@@ -51,4 +51,4 @@ else if (index == 3) {
 }
 %>
 
-<liferay-ui:input-checkbox param="<%= param %>" defaultValue="<%= defaultValue %>" disabled="<%= disabled %>" />
+<aui:input disabled="<%= disabled %>" label="" name="<%= param %>" type="checkbox" value="<%= defaultValue %>" />

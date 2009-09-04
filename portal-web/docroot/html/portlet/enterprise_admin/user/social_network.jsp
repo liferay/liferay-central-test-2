@@ -32,31 +32,29 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 <c:choose>
 	<c:when test="<%= selContact != null %>">
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />facebookSn"><liferay-ui:message key="facebook" /></label>
+		<aui:model-context bean="<%= selContact %>" model="<%= Contact.class %>" />
 
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="facebookSn" />
+		<aui:fieldset>
 
-				<img alt="<liferay-ui:message key="facebook" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/facebook.jpg" />
+			<div class="social-network">
+				<aui:input label="facebook" name="facebookSn" />
+
+				<img alt="<liferay-ui:message key="facebook" />" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/facebook.jpg" />
 			</div>
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />mySpaceSn"><liferay-ui:message key="myspace" /></label>
+			<div class="social-network">
+				<aui:input label="myspace" name="mySpaceSn" />
 
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="mySpaceSn" />
+				<img alt="<liferay-ui:message key="myspace" />" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/myspace.jpg" />
 
-				<img alt="<liferay-ui:message key="myspace" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/myspace.jpg" />
 			</div>
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />twitterSn"><liferay-ui:message key="twitter" /></label>
-
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= selContact %>" field="twitterSn" />
+			<div class="social-network">
+				<aui:input label="twitter" name="twitterSn" />
 
 				<img alt="<liferay-ui:message key="twitter" />" class="social-network-logo" src="<%= themeDisplay.getPathThemeImages() %>/enterprise_admin/twitter.jpg" />
 			</div>
-		</fieldset>
+		</aui:fieldset>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">

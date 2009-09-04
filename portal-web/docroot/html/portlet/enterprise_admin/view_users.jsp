@@ -42,15 +42,15 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewUsersRedirect) %>">
-	<input name="<portlet:namespace />viewUsersRedirect" type="hidden" value="<%= HtmlUtil.escape(viewUsersRedirect) %>" />
+	<aui:input name="viewUsersRedirect" type="hidden" value="<%= viewUsersRedirect %>" />
 </c:if>
 
 <liferay-ui:search-container
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />deleteUserIds" type="hidden" value="" />
-	<input name="<portlet:namespace />usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteUserIds" type="hidden" />
+	<aui:input name="usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<%
 	UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
@@ -97,7 +97,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	%>
 
 	<c:if test="<%= organization != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
 		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(organization.getName())) %></h3>
 
@@ -110,7 +110,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	</c:if>
 
 	<c:if test="<%= role != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
+		<aui:input name="<%= UserDisplayTerms.ROLE_ID %>" type="hidden" value="<%= role.getRoleId() %>" />
 
 		<h3><%= LanguageUtil.format(pageContext, "users-with-role-x", HtmlUtil.escape(role.getTitle(locale))) %></h3>
 
@@ -122,7 +122,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	</c:if>
 
 	<c:if test="<%= userGroup != null %>">
-		<input name="<portlet:namespace /><%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
 		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(userGroup.getName())) %></h3>
 
@@ -203,18 +203,22 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 			<%
 			hasButtons = true;
+
+			String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE) + "');";
 			%>
 
-			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
+			<aui:button onClick="<%= taglibOnClick %>" value='<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>' />
 		</c:if>
 
 		<c:if test="<%= searchTerms.hasActive() && !searchTerms.isActive() %>">
 
 			<%
 			hasButtons = true;
+
+			String taglibOnClick = renderResponse.getNamespace() + "deleteUsers('" + Constants.RESTORE + "');";
 			%>
 
-			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
+			<aui:button onClick="<%= taglibOnClick %>" value="restore" />
 		</c:if>
 
 		<c:if test="<%= hasButtons %>">

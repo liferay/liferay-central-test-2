@@ -30,11 +30,11 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 <h3><liferay-ui:message key="custom-attributes" /></h3>
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 	<liferay-ui:custom-attribute-list
 		className="com.liferay.portal.model.User"
 		classPK="<%= (selUser != null) ? selUser.getUserId() : 0 %>"
 		editable="<%= true %>"
 		label="<%= true %>"
 	/>
-</fieldset>
+</aui:fieldset>

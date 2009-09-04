@@ -28,15 +28,15 @@
 User selUser = (User)request.getAttribute("user.selUser");
 %>
 
+<aui:model-context bean="<%= selUser %>" model="<%= User.class %>" />
+
 <h3><liferay-ui:message key="comments" /></h3>
 
 <c:choose>
 	<c:when test="<%= selUser != null %>">
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= selUser %>" field="comments" />
-			</div>
-		</fieldset>
+		<aui:fieldset>
+			<aui:input label="" name="comments" />
+		</aui:fieldset>
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">
