@@ -107,7 +107,6 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error-marker key="errorSection" value="services" />
 
-<aui:model-context bean="<%= orgLabor %>" model="<%= OrgLabor.class %>" />
 
 <h3><liferay-ui:message key="services" /></h3>
 
@@ -137,6 +136,8 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 			closeArray[j] = ParamUtil.getInteger(request, paramPrefixes[j] + "Close" + orgLaborsIndex, BeanPropertiesUtil.getInteger(orgLabor, paramPrefixes[j] + "Close", -1));
 		}
 	%>
+
+		<aui:model-context bean="<%= orgLabor %>" model="<%= OrgLabor.class %>" />
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
