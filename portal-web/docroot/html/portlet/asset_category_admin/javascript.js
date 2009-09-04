@@ -505,7 +505,7 @@
 									var category = instance._selectCategory(message.categoryId);
 
 									if (category.length) {
-										jQuery(instance._categoryContainerSelector).scrollTo(category);
+										jQuery(instance._categoryContainerSelector).scrollTop(category.offset().top);
 									}
 
 									instance._showSection('.vocabulary-edit');
@@ -591,7 +591,7 @@
 									instance._displayVocabularyCategories(instance._selectedVocabularyId);
 
 									if (vocabulary.length) {
-										jQuery(instance._vocabularyContainerSelector).scrollTo(vocabulary);
+										jQuery(instance._vocabularyContainerSelector).scrollTop(vocabulary.offset().top);
 									}
 								}
 							);

@@ -182,7 +182,7 @@
 									var tag = instance._selectTag(message.tagId);
 
 									if (tag.length) {
-										jQuery(instance._tagsContainerSelector).scrollTo(tag);
+										jQuery(instance._tagsContainerSelector).scrollTop(tag.offset().top);
 									}
 
 									instance._showSection('.tag-edit');
