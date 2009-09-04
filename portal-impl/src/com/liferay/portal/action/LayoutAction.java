@@ -416,12 +416,21 @@ public class LayoutAction extends Action {
 		try {
 			Layout layout = themeDisplay.getLayout();
 
+			HttpSession session = request.getSession();
+
 			boolean resetLayout = ParamUtil.getBoolean(
 				request, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
 
-			if (!PropsValues.TCK_URL && resetLayout) {
+			Layout lastLayout =
+				(Layout)session.getAttribute(WebKeys.LAST_LAYOUT);
+
+			if (!PropsValues.TCK_URL && resetLayout &&
+				isChangedLayout(layout, lastLayout)) {
+
 				RenderParametersPool.clear(request, plid);
 			}
+
+			session.setAttribute(WebKeys.LAST_LAYOUT, layout);
 
 			if (themeDisplay.isLifecycleAction()) {
 				Portlet portlet = processPortletRequest(
@@ -744,6 +753,11 @@ public class LayoutAction extends Action {
 		}
 
 		renderRequestImpl.cleanUp();
+	}
+
+	protected boolean isChangedLayout(Layout layout, Layout lastLayout) {
+		return (lastLayout == null) ||
+			(layout.getLayoutId() != lastLayout.getLayoutId());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutAction.class);
