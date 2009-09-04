@@ -1139,7 +1139,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				SchedulerEngineUtil.getScheduledJobs(groupName);
 
 			for (SchedulerRequest schedulerRequest : schedulerRequests) {
-				SchedulerEngineUtil.unschedule(schedulerRequest.getTrigger());
+				SchedulerEngineUtil.unschedule(
+					schedulerRequest.getJobName(), groupName);
 			}
 
 			long liveGroupId = 0;
@@ -1168,7 +1169,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 				for (SchedulerRequest schedulerRequest : schedulerRequests) {
 					SchedulerEngineUtil.unschedule(
-						schedulerRequest.getTrigger());
+						schedulerRequest.getJobName(), groupName);
 				}
 
 				// Copy from live
@@ -1181,7 +1182,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 				for (SchedulerRequest schedulerRequest : schedulerRequests) {
 					SchedulerEngineUtil.unschedule(
-						schedulerRequest.getTrigger());
+						schedulerRequest.getJobName(), groupName);
 				}
 			}
 		}

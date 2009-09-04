@@ -28,16 +28,14 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.scheduler.trigger.Trigger;
-import com.liferay.portal.scheduler.trigger.CronTrigger;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * <a href="SchedulerEngineProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Shuyang Zhou
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
@@ -46,8 +44,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 		try {
 			SchedulerRequest schedulerRequest =
-				SchedulerRequest.createRetrieveRequest(
-					new CronTrigger(groupName, groupName, null));
+				SchedulerRequest.createRetrieveRequest(groupName);
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
@@ -62,12 +59,26 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void schedule(
-		Trigger trigger, String description, String destinationName,
-		Message message) {
+		String groupName, long interval, Date startDate, Date endDate,
+		String description, String destinationName, Message message) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
-				trigger, description, destinationName, message);
+				groupName, interval, startDate, endDate, description,
+				destinationName, message);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER, schedulerRequest);
+	}
+
+	public void schedule(
+		String groupName, String cronText, Date startDate, Date endDate,
+		String description, String destinationName, Message message) {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createRegisterRequest(
+				groupName, cronText, startDate, endDate, description,
+				destinationName, message);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);
@@ -85,9 +96,9 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			SchedulerRequest.createStartupRequest());
 	}
 
-	public void unschedule(Trigger trigger) {
+	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(trigger);
+			SchedulerRequest.createUnregisterRequest(groupName);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER, schedulerRequest);

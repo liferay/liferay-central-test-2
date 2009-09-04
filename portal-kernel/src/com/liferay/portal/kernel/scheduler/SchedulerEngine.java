@@ -24,8 +24,8 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.scheduler.trigger.Trigger;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,9 +33,10 @@ import java.util.List;
  *
  * @author Michael C. Han
  * @author Bruno Farache
- * @author Shuyang Zhou
  */
 public interface SchedulerEngine {
+
+	public static final String CRON_TEXT = "cronText";
 
 	public static final String DESCRIPTION = "description";
 
@@ -43,21 +44,24 @@ public interface SchedulerEngine {
 
 	public static final String MESSAGE = "message";
 
-	public static final String RECEIVER_KEY = "receiver_key";
-
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
+			String groupName, long interval, Date startDate, Date endDate,
+			String description, String destinationName, Message message)
+		throws SchedulerException;
+
+	public void schedule(
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destinationName, Message message)
 		throws SchedulerException;
 
 	public void shutdown() throws SchedulerException;
 
 	public void start() throws SchedulerException;
 
-	public void unschedule(Trigger trigger)
+	public void unschedule(String jobName, String groupName)
 		throws SchedulerException;
 
 }
