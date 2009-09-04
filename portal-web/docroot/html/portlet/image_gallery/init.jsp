@@ -39,7 +39,6 @@
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolderConstants" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %>
