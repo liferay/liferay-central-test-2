@@ -469,11 +469,6 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_org_labor" type="com.liferay.portlet.enterpriseadmin.action.EditOrgLaborAction">
-			<forward name="portlet.enterprise_admin.edit_org_labor" path="portlet.enterprise_admin.edit_org_labor" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
 		<action path="/enterprise_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -546,11 +541,6 @@
 
 		<action path="/enterprise_admin/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin/edit_user_regular_role_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserRegularRoleAssignmentsAction">
-			<forward name="portlet.enterprise_admin.edit_user_regular_role_assignments" path="portlet.enterprise_admin.edit_user_regular_role_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
@@ -668,11 +658,6 @@
 
 		<!-- Enterprise Admin Organizations -->
 
-		<action path="/enterprise_admin_organizations/edit_org_labor" type="com.liferay.portlet.enterpriseadmin.action.EditOrgLaborAction">
-			<forward name="portlet.enterprise_admin.edit_org_labor" path="portlet.enterprise_admin.edit_org_labor" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
 		<action path="/enterprise_admin_organizations/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -700,11 +685,6 @@
 
 		<action path="/enterprise_admin_organizations/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_organizations/edit_user_regular_role_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserRegularRoleAssignmentsAction">
-			<forward name="portlet.enterprise_admin.edit_user_regular_role_assignments" path="portlet.enterprise_admin.edit_user_regular_role_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
@@ -841,11 +821,6 @@
 
 		<!-- Enterprise Admin Users -->
 
-		<action path="/enterprise_admin_users/edit_org_labor" type="com.liferay.portlet.enterpriseadmin.action.EditOrgLaborAction">
-			<forward name="portlet.enterprise_admin.edit_org_labor" path="portlet.enterprise_admin.edit_org_labor" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
 		<action path="/enterprise_admin_users/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -858,11 +833,6 @@
 
 		<action path="/enterprise_admin_users/edit_user_portrait" type="com.liferay.portlet.enterpriseadmin.action.EditUserPortraitAction">
 			<forward name="portlet.enterprise_admin.edit_user_portrait" path="portlet.enterprise_admin.edit_user_portrait" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_users/edit_user_regular_role_assignments" type="com.liferay.portlet.enterpriseadmin.action.EditUserRegularRoleAssignmentsAction">
-			<forward name="portlet.enterprise_admin.edit_user_regular_role_assignments" path="portlet.enterprise_admin.edit_user_regular_role_assignments" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
