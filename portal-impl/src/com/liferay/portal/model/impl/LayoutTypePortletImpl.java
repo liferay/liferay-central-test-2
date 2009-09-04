@@ -348,8 +348,7 @@ public class LayoutTypePortletImpl
 		}
 
 		if ((portlet.isInstanceable()) &&
-			(PortletConstants.getInstanceId(
-				portlet.getPortletId()) == null)) {
+			(PortletConstants.getInstanceId(portlet.getPortletId()) == null)) {
 
 			portletId = portletId + getFullInstanceSeparator();
 		}
@@ -369,8 +368,8 @@ public class LayoutTypePortletImpl
 		}
 
 		if (columnId != null) {
-			String columnValue =
-				getTypeSettingsProperties().getProperty(columnId);
+			String columnValue = getTypeSettingsProperties().getProperty(
+				columnId);
 
 			if ((columnValue == null) &&
 				(columnId.startsWith(PortletKeys.NESTED_PORTLETS))) {
@@ -379,8 +378,8 @@ public class LayoutTypePortletImpl
 			}
 
 			if (columnPos >= 0) {
-				List<String> portletIds =
-					ListUtil.fromArray(StringUtil.split(columnValue));
+				List<String> portletIds = ListUtil.fromArray(
+					StringUtil.split(columnValue));
 
 				if (columnPos <= portletIds.size()) {
 					portletIds.add(columnPos, portletId);
