@@ -47,7 +47,7 @@ portletURL.setParameter("struts_action", "/layout_set_prototypes/view");
 		searchContainer='<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.get(pageContext, "no-site-templates-were-found")) %>'
 		headerNames="name"
 	>
-		<input name="<portlet:namespace />deleteLayoutSetPrototypesIds" type="hidden" value="" />
+		<aui:input name="deleteLayoutSetPrototypesIds" type="hidden" />
 
 		<liferay-ui:search-container-results
 			results="<%= LayoutSetPrototypeLocalServiceUtil.search(company.getCompanyId(), null, searchContainer.getStart(), searchContainer.getEnd(), null) %>"

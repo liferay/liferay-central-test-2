@@ -55,52 +55,39 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	<liferay-util:param name="toolbarItem" value='<%= layoutSetPrototype.isNew() ? "add" : "view-all" %>' />
 </liferay-util:include>
 
-<form class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveLayoutSetPrototype(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />layoutSetPrototypeId" type="hidden" value="<%= layoutSetPrototypeId %>" />
+<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveLayoutSetPrototype(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="layoutSetPrototypeId" type="hidden" value="<%= layoutSetPrototypeId %>" />
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="name" /></label>
+	<aui:model-context bean="<%= layoutSetPrototype %>" model="<%= LayoutSetPrototype.class %>" />
 
-		<liferay-ui:input-field model="<%= LayoutSetPrototype.class %>" bean="<%= layoutSetPrototype %>" field="name" />
-	</div>
+	<aui:fieldset>
+		<aui:input name="name" />
 
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="description" /></label>
+		<aui:input name="description" />
 
-		<liferay-ui:input-field model="<%= LayoutSetPrototype.class %>" bean="<%= layoutSetPrototype %>" field="description" />
-	</div>
+		<aui:input inlineLabel="<%= true %>" name="active" />
 
-	<div class="aui-ctrl-holder">
-		<label><%= LanguageUtil.get(pageContext, "active") %></label>
+		<c:if test="<%= !layoutSetPrototype.isNew() %>">
+			<aui:field-wrapper label="configuration">
+				<liferay-portlet:actionURL var="viewURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+					<portlet:param name="struts_action" value="/my_places/view" />
+					<portlet:param name="groupId" value="<%= String.valueOf(layoutSetPrototype.getGroup().getGroupId()) %>" />
+					<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
+				</liferay-portlet:actionURL>
 
-		<liferay-ui:input-field model="<%= LayoutSetPrototype.class %>" bean="<%= layoutSetPrototype %>" field="active" />
-	</div>
+				<liferay-ui:icon image="view" message="open-site-template" url="<%= viewURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+			</aui:field-wrapper>
+		</c:if>
 
-	<c:if test="<%= !layoutSetPrototype.isNew() %>">
-		<div class="aui-ctrl-holder">
-			<label><liferay-ui:message key="configuration" /></label>
+		<aui:button-row>
+			<aui:button type="submit" value="save" />
 
-			<liferay-portlet:actionURL var="viewURL"  portletName="<%= PortletKeys.MY_PLACES %>">
-				<portlet:param name="struts_action" value="/my_places/view" />
-				<portlet:param name="groupId" value="<%= String.valueOf(layoutSetPrototype.getGroup().getGroupId()) %>" />
-				<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
-			</liferay-portlet:actionURL>
-
-			<liferay-ui:icon image="view" message="open-site-template" url="<%= viewURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
-		</div>
-	</c:if>
-
-	<div class="aui-button-holder">
-		<input type="submit" value="<liferay-ui:message key="save" />" />
-
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-	</div>
-</fieldset>
-
-</form>
+			<aui:button value="cancel" onClick="<%= redirect %>" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
