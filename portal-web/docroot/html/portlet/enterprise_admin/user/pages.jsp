@@ -63,7 +63,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 					<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
 				</liferay-portlet:actionURL>
 
-				<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+				<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="this-user-does-not-have-any-public-pages" />
@@ -105,7 +105,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 				privatePagesURL.setParameter("privateLayout", Boolean.TRUE.toString());
 				%>
 
-				<a href="<%= privatePagesURL %>"><liferay-ui:message key="private-pages" /></a>
+				<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:message key="this-user-does-not-have-any-private-pages" />
