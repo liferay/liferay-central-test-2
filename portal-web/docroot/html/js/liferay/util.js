@@ -222,55 +222,70 @@ Liferay.Util = {
 	createFlyouts: function(options) {
 		var instance = this;
 
-		options = options || {};
+		AUI().use(
+			'delayed-task',
+			function(A) {
+				options = options || {};
 
-		var flyout, containers;
+				var flyout, containers;
 
-		var containerFilter = function() {
-			return (jQuery('ul', this).length != 0);
-		};
+				var containerFilter = function() {
+					return (jQuery('ul', this).length != 0);
+				};
 
-		if (!options.container) {
-			flyout = jQuery('.lfr-flyout');
-			containers = flyout.find('li').filter(containerFilter);
-		}
-		else {
-			flyout = jQuery('li', options.container);
-			containers = flyout.filter(containerFilter);
-		}
+				if (!options.container) {
+					flyout = jQuery('.lfr-flyout');
+					containers = flyout.find('li').filter(containerFilter);
+				}
+				else {
+					flyout = jQuery('li', options.container);
+					containers = flyout.filter(containerFilter);
+				}
 
-		containers.addClass('lfr-flyout');
-		containers.addClass('has-children lfr-flyout-has-children');
+				containers.addClass('lfr-flyout');
+				containers.addClass('has-children lfr-flyout-has-children');
 
-		if (!options.container) {
-			containers = containers.add(flyout);
-		}
+				if (!options.container) {
+					containers = containers.add(flyout);
+				}
 
-		var over = function(event) {
-			jQuery('> ul', this).show();
+				var hideTask = new A.DelayedTask(
+					function() {
+						showTask.cancel();
 
-			if (options.mouseOver) {
-				options.mouseOver.apply(this, [event]);
+						containers.find('> ul').hide();
+
+						if (options.mouseOut) {
+							options.mouseOut.apply(event.target, [event]);
+						}
+					}
+				);
+
+				var showTask = new A.DelayedTask(
+					function() {
+						hideTask.cancel();
+
+						containers.find('> ul').show();
+
+						if (options.mouseOver) {
+							options.mouseOver.apply(event.target, [event]);
+						}
+					}
+				);
+
+				containers.mouseover(
+					function(event) {
+						showTask.delay(0, null, null, event);
+					}
+				);
+
+				containers.mouseout(
+					function(event) {
+						hideTask.delay(300, null, null, event);
+					}
+				);
 			}
-		};
-
-		var out = function(event) {
-			jQuery('> ul', this).hide();
-
-			if (options.mouseOut) {
-				options.mouseOut.apply(this, [event]);
-			}
-		};
-
-		containers.hoverIntent(
-			{
-				interval: 0,
-				out: out,
-				over: over,
-				sensitivity: 2,
-				timeout: 300
-			}
-		);
+		)
 	},
 
 	defaultValue: function(obj, defaultValue) {
