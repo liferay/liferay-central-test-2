@@ -44,6 +44,11 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 				instance._inContainer = true;
 			}
 
+			instance._positionHelper = jQuery('<div class="lfr-position-helper"></div>');
+			instance._positionHelper.append(instance._container);
+			instance._positionHelper.appendTo(document.body);
+			instance._positionHelper.hide();
+
 			instance.paginate(instance._container.find('.lfr-panel-content'));
 
 			instance._trigger.addClass('lfr-floating-trigger');
@@ -75,7 +80,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 		hide: function() {
 			var instance = this;
 
-			instance._container.detachPositionHelper();
+			instance._positionHelper.hide();
 
 			instance._trigger.removeClass('lfr-trigger-selected');
 
@@ -108,7 +113,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 		onTriggerClick: function(trigger) {
 			var instance = this;
 
-			var panelHidden = instance._container.is(':hidden');
+			var panelHidden = instance._positionHelper.is(':hidden');
 
 			if (panelHidden) {
 				instance.show(trigger);
@@ -252,14 +257,42 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 		position: function(trigger) {
 			var instance = this;
 
-			instance._container.alignTo(trigger);
+			trigger = jQuery(trigger);
+
+			var container = instance._container;
+			var positionHelper = instance._positionHelper;
+
+			var triggerHeight = trigger.outerHeight();
+			var triggerWidth = trigger.outerWidth();
+
+			var triggerOffset = trigger.offset();
+
+			if (!container.data('position-helper')) {
+				positionHelper.css(
+					{
+						height: triggerHeight,
+						width: triggerWidth
+					}
+				);
+
+				container.data('position-helper', positionHelper);
+			}
+
+			positionHelper.show();
+			container.show();
+
+			positionHelper.css(
+				{
+					left: triggerOffset.left,
+					top: triggerOffset.top + triggerHeight,
+				}
+			);
 		},
 
 		show: function(trigger) {
 			var instance = this;
 
 			instance._container.width(instance._containerWidth);
-			instance._container.show();
 
 			instance.position(trigger);
 
