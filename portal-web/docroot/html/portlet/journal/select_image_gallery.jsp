@@ -27,7 +27,7 @@
 <%
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 long groupId = ParamUtil.getLong(request, "groupId");
 

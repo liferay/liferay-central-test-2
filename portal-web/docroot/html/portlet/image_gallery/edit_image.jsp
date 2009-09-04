@@ -125,7 +125,7 @@ if (image != null) {
 					sb.insert(0, WebDAVUtil.encodeURL(folder.getName()));
 					sb.insert(0, StringPool.SLASH);
 
-					if (folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					if (folder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 						break;
 					}
 					else {

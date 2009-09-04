@@ -31,7 +31,7 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 
 import java.io.File;
 
@@ -56,7 +56,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		try {
 			_folder = IGFolderServiceUtil.getFolder(
-				layout.getGroupId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID,
+				layout.getGroupId(), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				name);
 
 			IGFolderServiceUtil.deleteFolder(_folder.getFolderId());
@@ -74,7 +74,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		serviceContext.setPlid(layout.getPlid());
 
 		_folder = IGFolderServiceUtil.addFolder(
-			IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name, description,
+			IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, name, description,
 			serviceContext);
 	}
 

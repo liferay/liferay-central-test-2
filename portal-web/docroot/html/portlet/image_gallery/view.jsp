@@ -29,16 +29,16 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", defaultFolderId);
 
-if ((folder == null) && (defaultFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+if ((folder == null) && (defaultFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = IGFolderLocalServiceUtil.getFolder(folderId);
 	}
 	catch (NoSuchFolderException nsfe) {
-		folderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		folderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 	}
 }
 
@@ -346,7 +346,7 @@ tabs1Names += ",recent-images";
 				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
 				sb.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				if (curFolder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 					break;
 				}
 				else {
@@ -354,7 +354,7 @@ tabs1Names += ",recent-images";
 				}
 			}
 
-			if (folder.getParentFolderId() != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (folder.getParentFolderId() != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 
 				if (portletName.equals(PortletKeys.IMAGE_GALLERY)) {

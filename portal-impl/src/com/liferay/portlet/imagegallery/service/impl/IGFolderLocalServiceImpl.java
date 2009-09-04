@@ -45,8 +45,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
 
@@ -209,7 +209,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<IGFolder> folders = igFolderPersistence.findByG_P(
-			groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+			groupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		for (IGFolder folder : folders) {
 			deleteFolder(folder);
@@ -384,7 +384,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		// Merge folders
 
 		if (mergeWithParentFolder && (folderId != parentFolderId) &&
-			(parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			(parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -395,14 +395,14 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			IGFolder parentFolder = igFolderPersistence.fetchByPrimaryKey(
 				parentFolderId);
 
 			if ((parentFolder == null) ||
 				(groupId != parentFolder.getGroupId())) {
 
-				parentFolderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -412,7 +412,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	protected long getParentFolderId(IGFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 

@@ -33,6 +33,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
@@ -186,7 +187,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		IGFolder folder = new IGFolderImpl();
 
-		folder.setFolderId(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+		folder.setFolderId(IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		if (folderName.equals(StringPool.SLASH)) {
 			return folder;

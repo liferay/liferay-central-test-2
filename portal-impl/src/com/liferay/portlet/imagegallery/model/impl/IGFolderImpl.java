@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -36,8 +37,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
-
-	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
 	public IGFolderImpl() {
 	}
@@ -66,7 +65,7 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 	public IGFolder getParentFolder()
 		throws PortalException, SystemException {
 
-		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+		if (getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return null;
 		}
 
@@ -74,7 +73,7 @@ public class IGFolderImpl extends IGFolderModelImpl implements IGFolder {
 	}
 
 	public boolean isRoot() {
-		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+		if (getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return true;
 		}
 		else {

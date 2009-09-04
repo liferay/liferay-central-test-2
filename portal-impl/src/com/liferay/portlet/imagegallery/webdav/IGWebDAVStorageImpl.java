@@ -46,8 +46,8 @@ import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
@@ -76,7 +76,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			long parentFolderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+			long parentFolderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 			try {
 				parentFolderId = getParentFolderId(destinationArray);
@@ -141,7 +141,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			long parentFolderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+			long parentFolderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 			try {
 				parentFolderId = getParentFolderId(destinationArray);
@@ -583,7 +583,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected long getFolderId(String[] pathArray, boolean parent)
 		throws Exception {
 
-		long folderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		long folderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		if (pathArray.length <= 2) {
 			return folderId;

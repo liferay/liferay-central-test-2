@@ -45,8 +45,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
@@ -64,7 +64,7 @@ import javax.portlet.PortletPreferences;
  * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -120,7 +120,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		if ((parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
 			String path = getImportFolderPath(context, parentFolderId);
@@ -137,7 +137,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		IGFolder existingFolder = null;
 
 		try {
-			if (parentFolderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				IGFolderUtil.findByPrimaryKey(parentFolderId);
 			}
 
@@ -222,7 +222,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 
-		if ((folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {
 
 			String path = getImportFolderPath(context, folderId);
@@ -411,7 +411,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 

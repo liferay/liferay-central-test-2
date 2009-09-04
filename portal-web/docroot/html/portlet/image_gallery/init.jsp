@@ -37,6 +37,7 @@
 <%@ page import="com.liferay.portlet.imagegallery.NoSuchFolderException" %>
 <%@ page import="com.liferay.portlet.imagegallery.NoSuchImageException" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.IGFolderConstants" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" %>
@@ -58,22 +59,22 @@ else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.IMAGE_GALLERY, null);
 }
 
-long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+if (rootFolderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	IGFolder dynamicRootFolder = null;
 
-	int count = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+	int count = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 	if (count > 1) {
-		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(IGFolder.class.getName(), renderRequest);
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
+		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
 
 		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
 
@@ -82,7 +83,7 @@ if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		}
 	}
 	else if (count == 1) {
-		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, 0, 1);
+		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, 0, 1);
 
 		dynamicRootFolder = folders.get(0);
 	}
@@ -92,7 +93,7 @@ if (rootFolderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
+		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
 	}
 
 	rootFolderId = dynamicRootFolder.getFolderId();

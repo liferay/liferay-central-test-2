@@ -29,7 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
 /**
@@ -73,7 +73,7 @@ public class IGFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return IGPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
@@ -102,7 +102,7 @@ public class IGFolderPermission {
 		long folderId = folder.getFolderId();
 
 		if (actionId.equals(ActionKeys.VIEW)) {
-			while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			while (folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				folder = IGFolderLocalServiceUtil.getFolder(folderId);
 
 				folderId = folder.getParentFolderId();
@@ -125,7 +125,7 @@ public class IGFolderPermission {
 			return true;
 		}
 		else {
-			while (folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			while (folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				if (permissionChecker.hasOwnerPermission(
 						folder.getCompanyId(), IGFolder.class.getName(),
 						folder.getFolderId(), folder.getUserId(), actionId)) {

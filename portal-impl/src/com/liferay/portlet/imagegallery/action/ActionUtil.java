@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
@@ -63,7 +63,7 @@ public class ActionUtil {
 		IGFolder folder = null;
 
 		if ((folderId > 0) &&
-			(folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			(folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = IGFolderServiceUtil.getFolder(folderId);
 		}
