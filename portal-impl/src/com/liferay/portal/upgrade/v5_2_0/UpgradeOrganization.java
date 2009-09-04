@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.v5_2_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -52,9 +53,17 @@ public class UpgradeOrganization extends UpgradeProcess {
 		UpgradeColumn typeColumn = new OrganizationTypeUpgradeColumnImpl(
 			locationColumn);
 
+		Object[][] organizationColumns1 =
+			{{"location", new Integer(Types.BOOLEAN)}};
+		Object[][] organizationColumns2 =
+			OrganizationTable.TABLE_COLUMNS.clone();
+
+		Object[][] organizationColumns = ArrayUtil.append(
+			organizationColumns1, organizationColumns2);
+
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			OrganizationTable.TABLE_NAME, OrganizationTable.TABLE_COLUMNS,
-			locationColumn, typeColumn);
+			OrganizationTable.TABLE_NAME, organizationColumns, locationColumn,
+			typeColumn);
 
 		upgradeTable.updateTable();
 
