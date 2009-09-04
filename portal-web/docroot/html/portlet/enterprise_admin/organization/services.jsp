@@ -107,7 +107,6 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error-marker key="errorSection" value="services" />
 
-
 <h3><liferay-ui:message key="services" /></h3>
 
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
@@ -141,7 +140,6 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
-
 				<aui:input name='<%= "orgLaborId" + orgLaborsIndex %>' type="hidden" />
 
 				<aui:select label="type" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' listType="<%= ListTypeImpl.ORGANIZATION_SERVICE %>" />

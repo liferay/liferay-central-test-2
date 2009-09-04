@@ -101,9 +101,9 @@ else {
 
 					<aui:input fieldParam='<%= "addressStreet3_" + addressesIndex %>' name="street3" />
 
-					<aui:select label="country" name='<%= "addressCountryId" + addressesIndex %>'> </aui:select>
+					<aui:select label="country" name='<%= "addressCountryId" + addressesIndex %>' />
 
-					<aui:select label="region" name='<%= "addressRegionId" + addressesIndex %>'> </aui:select>
+					<aui:select label="region" name='<%= "addressRegionId" + addressesIndex %>' />
 				</aui:column>
 
 				<aui:column>

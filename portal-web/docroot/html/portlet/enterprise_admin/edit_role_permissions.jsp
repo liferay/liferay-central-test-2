@@ -256,7 +256,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 			</c:choose>
 
 			<aui:button-row>
-				<aui:button onclick='<%= renderResponse.getNamespace() + "updateActions();" %>' value="save" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "updateActions();" %>' value="save" />
 
 				<aui:button onClick="<%= redirect %>" value="cancel" />
 			</aui:button-row>

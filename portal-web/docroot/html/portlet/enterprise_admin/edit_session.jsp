@@ -35,8 +35,6 @@ List<UserTrackerPath> paths = userTracker.getPaths();
 int numHits = userTracker.getHits();
 
 userTracker = userTracker.toEscapedModel();
-
-boolean userSessionAlive = false;
 %>
 
 <portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editSessionURL">
@@ -70,6 +68,8 @@ boolean userSessionAlive = false;
 			}
 			catch (NoSuchUserException nsue) {
 			}
+
+			boolean userSessionAlive = false;
 			%>
 
 			<aui:fieldset>

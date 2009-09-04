@@ -40,9 +40,6 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 String defaultRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
 String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_WAP_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
 String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
-
-List<Theme> themes = null;
-boolean deployed = false;
 %>
 
 <script type="text/javascript">
@@ -138,6 +135,11 @@ boolean deployed = false;
 
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
+<%
+List<Theme> themes = null;
+boolean deployed = false;
+%>
+
 <aui:fieldset>
 	<aui:select label="default-regular-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
 
@@ -155,16 +157,11 @@ boolean deployed = false;
 
 		<%
 		}
-
-		if (!deployed) {
 		%>
 
+		<c:if test="<%= !deployed %>">
 			<aui:option label='<%= defaultRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultRegularThemeId %>" />
-
-		<%
-		}
-		%>
-
+		</c:if>
 	</aui:select>
 
 	<aui:select label="default-mobile-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
@@ -184,16 +181,11 @@ boolean deployed = false;
 
 		<%
 		}
-
-		if (!deployed) {
 		%>
 
+		<c:if test="<%= !deployed %>">
 			<aui:option label='<%= defaultWapThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultWapThemeId %>" />
-
-		<%
-		}
-		%>
-
+		</c:if>
 	</aui:select>
 
 	<aui:select label="default-control-panel-theme" name='<%= "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")" %>'>
@@ -218,15 +210,10 @@ boolean deployed = false;
 
 		<%
 		}
-
-		if (!deployed) {
 		%>
 
+		<c:if test="<%= !deployed %>">
 			<aui:option label='<%= defaultControlPanelThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultControlPanelThemeId %>" />
-
-		<%
-		}
-		%>
-
+		</c:if>
 	</aui:select>
 </aui:fieldset>

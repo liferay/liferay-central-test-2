@@ -48,10 +48,10 @@ List groupNames = (List)objArray[8];
 			for (int i = 0; i < groups.size(); i++) {
 				Group group = (Group)groups.get(i);
 
-				String taglibHref = "javascript:" + renderResponse.getNamespace() + "removeGroup(" + i + ", '" + target + "');";
+				String taglibHREF = "javascript:" + renderResponse.getNamespace() + "removeGroup(" + i + ", '" + target + "');";
 		%>
 
-				<span class="permission-scope"><%= group.getName() %><aui:a cssClass="permission-scope-delete" href="<%= taglibHref %>"><span>x</span></aui:a></span>
+				<span class="permission-scope"><%= group.getName() %><aui:a cssClass="permission-scope-delete" href="<%= taglibHREF %>"><span>x</span></aui:a></span>
 
 		<%
 			}

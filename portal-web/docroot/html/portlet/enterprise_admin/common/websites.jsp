@@ -84,7 +84,7 @@ else {
 		Website website = websites.get(i);
 	%>
 
-	<aui:model-context bean="<%= website %>" model="<%= Website.class %>" />
+		<aui:model-context bean="<%= website %>" model="<%= Website.class %>" />
 
 		<div class="lfr-form-row">
 			<div class="row-fields">
