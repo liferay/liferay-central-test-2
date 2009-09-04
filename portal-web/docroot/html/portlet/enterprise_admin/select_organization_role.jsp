@@ -53,216 +53,214 @@ if (step == 1) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<c:choose>
+		<c:when test="<%= step == 1 %>">
+			<script type="text/javascript">
+				function <portlet:namespace />selectOrganization(organizationId) {
+					document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
 
-<c:choose>
-	<c:when test="<%= step == 1 %>">
-		<script type="text/javascript">
-			function <portlet:namespace />selectOrganization(organizationId) {
-				document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
+					submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
+				}
+			</script>
 
-				submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
-			}
-		</script>
+			<aui:input name="step" type="hidden" value="2" />
+			<aui:input name="organizationId" type="hidden" />
 
-		<input name="<portlet:namespace />step" type="hidden" value="2">
-		<input name="<portlet:namespace />organizationId" type="hidden" value="">
+			<liferay-ui:tabs names="organization-roles" />
 
-		<liferay-ui:tabs names="organization-roles" />
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="please-select-an-organization-to-which-you-will-assign-an-organization-role" />
+			</div>
 
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="please-select-an-organization-to-which-you-will-assign-an-organization-role" />
-		</div>
-
-		<liferay-ui:search-container
-			searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-container-results>
-
-				<%
-				total = organizations.size();
-				results = ListUtil.subList(organizations, searchContainer.getStart(), searchContainer.getEnd());
-
-				pageContext.setAttribute("results", results);
-				pageContext.setAttribute("total", total);
-				%>
-
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Organization"
-				escapedModel="<%= true %>"
-				keyProperty="organizationId"
-				modelVar="organization"
+			<liferay-ui:search-container
+				searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 			>
+				<liferay-ui:search-container-results>
 
-				<%
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("javascript:");
-				sb.append(renderResponse.getNamespace());
-				sb.append("selectOrganization('");
-				sb.append(organization.getOrganizationId());
-				sb.append("');");
-
-				String rowHREF = sb.toString();
-				%>
-
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="name"
-					orderable="<%= true %>"
-					property="name"
-				/>
-
-				<liferay-ui:search-container-column-text
-					buffer="buffer"
-					href="<%= rowHREF %>"
-					name="parent-organization"
-				>
 					<%
-					String parentOrganizationName = StringPool.BLANK;
+					total = organizations.size();
+					results = ListUtil.subList(organizations, searchContainer.getStart(), searchContainer.getEnd());
 
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-							parentOrganizationName = parentOrganization.getName();
-						}
-						catch (Exception e) {
-						}
-					}
-
-					buffer.append(HtmlUtil.escape(parentOrganizationName));
+					pageContext.setAttribute("results", results);
+					pageContext.setAttribute("total", total);
 					%>
-				</liferay-ui:search-container-column-text>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="type"
-					orderable="<%= true %>"
-					value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
-				/>
+				</liferay-ui:search-container-results>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="city"
-					property="address.city"
-				/>
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.Organization"
+					escapedModel="<%= true %>"
+					keyProperty="organizationId"
+					modelVar="organization"
+				>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="region"
-					property="address.region.name"
-				/>
+					<%
+					StringBuilder sb = new StringBuilder();
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="country"
-					property="address.country.name"
-				/>
-			</liferay-ui:search-container-row>
+					sb.append("javascript:");
+					sb.append(renderResponse.getNamespace());
+					sb.append("selectOrganization('");
+					sb.append(organization.getOrganizationId());
+					sb.append("');");
 
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
-	</c:when>
+					String rowHREF = sb.toString();
+					%>
 
-	<c:when test="<%= step == 2 %>">
-		<liferay-ui:tabs names="organization-roles" />
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="name"
+						orderable="<%= true %>"
+						property="name"
+					/>
 
-		<%
-		long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
+					<liferay-ui:search-container-column-text
+						buffer="buffer"
+						href="<%= rowHREF %>"
+						name="parent-organization"
+					>
+						<%
+						String parentOrganizationName = StringPool.BLANK;
 
-		Organization organization = OrganizationServiceUtil.getOrganization(organizationId);
+						if (organization.getParentOrganizationId() > 0) {
+							try {
+								Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 
-		portletURL.setParameter("step", "1");
+								parentOrganizationName = parentOrganization.getName();
+							}
+							catch (Exception e) {
+							}
+						}
 
-		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "organizations") + "</a> &raquo; " + HtmlUtil.escape(organization.getName());
-		%>
+						buffer.append(HtmlUtil.escape(parentOrganizationName));
+						%>
+					</liferay-ui:search-container-column-text>
 
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="type"
+						orderable="<%= true %>"
+						value="<%= LanguageUtil.get(pageContext, organization.getType()) %>"
+					/>
 
-		<liferay-ui:search-container
-			headerNames="name"
-			searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/role_search.jsp"
-			/>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="city"
+						property="address.city"
+					/>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="region"
+						property="address.region.name"
+					/>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="country"
+						property="address.country.name"
+					/>
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator />
+			</liferay-ui:search-container>
+		</c:when>
+
+		<c:when test="<%= step == 2 %>">
+			<liferay-ui:tabs names="organization-roles" />
 
 			<%
-			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+			long organizationId = ParamUtil.getLong(request, "organizationId", uniqueOrganizationId);
+
+			Organization organization = OrganizationServiceUtil.getOrganization(organizationId);
+
+			portletURL.setParameter("step", "1");
+
+			String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "organizations") + "</a> &raquo; " + HtmlUtil.escape(organization.getName());
 			%>
 
-			<liferay-ui:search-container-results>
+			<div class="breadcrumbs">
+				<%= breadcrumbs %>
+			</div>
 
-				<%
-				if (filterManageableRoles) {
-
-					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-					roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
-
-					total = roles.size();
-					results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
-				}
-				else {
-					results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-					total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION);
-				}
-
-				pageContext.setAttribute("results", results);
-				pageContext.setAttribute("total", total);
-				%>
-
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Role"
-				escapedModel="<%= false %>"
-				keyProperty="roleId"
-				modelVar="role"
+			<liferay-ui:search-container
+				headerNames="name"
+				searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 			>
-				<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-				<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+				<liferay-ui:search-form
+					page="/html/portlet/enterprise_admin/role_search.jsp"
+				/>
 
 				<%
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("javascript:opener.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("selectRole('");
-				sb.append(role.getRoleId());
-				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
-				sb.append("', '");
-				sb.append("organizationRoles");
-				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(organization.getGroup().getDescriptiveName()));
-				sb.append("', '");
-				sb.append(organization.getGroup().getGroupId());
-				sb.append("');");
-				sb.append("window.close();");
-
-				String rowHREF = sb.toString();
+				RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 				%>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="title"
-					value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
-				/>
-			</liferay-ui:search-container-row>
+				<liferay-ui:search-container-results>
 
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+					<%
+					if (filterManageableRoles) {
 
-		<script type="text/javascript">
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-		</script>
-	</c:when>
-</c:choose>
+						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-</form>
+						roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
+
+						total = roles.size();
+						results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+					}
+					else {
+						results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+						total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_ORGANIZATION);
+					}
+
+					pageContext.setAttribute("results", results);
+					pageContext.setAttribute("total", total);
+					%>
+
+				</liferay-ui:search-container-results>
+
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.Role"
+					escapedModel="<%= false %>"
+					keyProperty="roleId"
+					modelVar="role"
+				>
+					<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+					<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+
+					<%
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("javascript:opener.");
+					sb.append(renderResponse.getNamespace());
+					sb.append("selectRole('");
+					sb.append(role.getRoleId());
+					sb.append("', '");
+					sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
+					sb.append("', '");
+					sb.append("organizationRoles");
+					sb.append("', '");
+					sb.append(UnicodeFormatter.toString(organization.getGroup().getDescriptiveName()));
+					sb.append("', '");
+					sb.append(organization.getGroup().getGroupId());
+					sb.append("');");
+					sb.append("window.close();");
+
+					String rowHREF = sb.toString();
+					%>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="title"
+						value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
+					/>
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator />
+			</liferay-ui:search-container>
+
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+			</script>
+		</c:when>
+	</c:choose>
+</aui:form>

@@ -79,7 +79,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.ADDRESS %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 
 	<%
 	for (int i = 0; i < addressesIndexes.length; i++) {
@@ -88,137 +88,37 @@ else {
 		Address address = addresses.get(i);
 	%>
 
+		<aui:model-context bean="<%= address %>" model="<%= Address.class %>" />
+
 		<div class="lfr-form-row">
 			<div class="row-fields">
-				<div class="aui-form-column">
+				<aui:column>
+					<aui:input name='<%= "addressId" + addressesIndex %>' type="hidden" value="<%= address.getAddressId() %>" />
 
-					<%
-					String fieldParam = "addressId" + addressesIndex;
-					%>
+					<aui:input fieldParam='<%= "addressStreet1_" + addressesIndex %>' name="street1" />
 
-					<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="<%= address.getAddressId() %>" />
+					<aui:input fieldParam='<%= "addressStreet2_" + addressesIndex %>' name="street2" />
 
-					<%
-					fieldParam = "addressStreet1_" + addressesIndex;
-					%>
+					<aui:input fieldParam='<%= "addressStreet3_" + addressesIndex %>' name="street3" />
 
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street1" /></label>
+					<aui:select label="country" name='<%= "addressCountryId" + addressesIndex %>'> </aui:select>
 
-						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street1" fieldParam="<%= fieldParam %>" />
-					</div>
+					<aui:select label="region" name='<%= "addressRegionId" + addressesIndex %>'> </aui:select>
+				</aui:column>
 
-					<%
-					fieldParam = "addressStreet2_" + addressesIndex;
-					%>
+				<aui:column>
+					<aui:select label="type" name='<%= "addressTypeId" + addressesIndex %>' listType="<%= className + ListTypeImpl.ADDRESS %>" />
 
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street2" /></label>
+					<aui:input name="zip" fieldParam='<%= "addressZip" + addressesIndex %>' />
 
-						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street2" fieldParam="<%= fieldParam %>" />
-					</div>
+					<aui:input name="city" fieldParam='<%= "addressCity" + addressesIndex %>' />
 
-					<%
-					fieldParam = "addressStreet3_" + addressesIndex;
-					%>
+					<aui:field-wrapper cssClass="primary-ctrl">
+						<aui:input checked="<%= address.isPrimary() %>" id='<%= "addressPrimary" + addressesIndex %>' inlineLabel="<%= true %>" label="primary" name="addressPrimary" type="radio" value="<%= addressesIndex %>" />
+					</aui:field-wrapper>
 
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="street3" /></label>
-
-						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="street3" fieldParam="<%= fieldParam %>" />
-					</div>
-
-					<%
-					fieldParam = "addressCountryId" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="country" /></label>
-
-						<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>"></select>
-					</div>
-
-					<%
-					fieldParam = "addressRegionId" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="region" /></label>
-
-						<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>"></select>
-					</div>
-				</div>
-
-				<div class="aui-form-column">
-
-					<%
-					fieldParam = "addressTypeId" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-
-						<select name="<portlet:namespace /><%= fieldParam %>">
-
-						<%
-						List<ListType> addressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.ADDRESS);
-
-						for (ListType suffix : addressTypes) {
-						%>
-
-							<option <%= (suffix.getListTypeId() == address.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-
-						<%
-						}
-						%>
-
-						</select>
-					</div>
-
-					<%
-					fieldParam = "addressZip" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="zip" /></label>
-
-						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="zip" fieldParam="<%= fieldParam %>" />
-					</div>
-
-					<%
-					fieldParam = "addressCity" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder">
-						<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="city" /></label>
-
-						<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="city" fieldParam="<%= fieldParam %>" />
-					</div>
-
-					<%
-					fieldParam = "addressPrimary" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder primary-ctrl">
-						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
-							<liferay-ui:message key="primary" />
-
-							<input <%= address.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />addressPrimary" type="radio" value="<%= addressesIndex %>" />
-						</label>
-					</div>
-
-					<%
-					fieldParam = "addressMailing" + addressesIndex;
-					%>
-
-					<div class="aui-ctrl-holder mailing-ctrl">
-						<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
-							<liferay-ui:message key="mailing" />
-
-							<liferay-ui:input-field model="<%= Address.class %>" bean="<%= address %>" field="mailing" fieldParam="<%= fieldParam %>" />
-						</label>
-					</div>
-				</div>
+					<aui:input cssClass="mailing-ctrl" fieldParam='<%= "addressMailing" + addressesIndex %>' inlineLabel="<%= true %>" name="mailing" />
+				</aui:column>
 			</div>
 		</div>
 
@@ -251,7 +151,7 @@ else {
 	}
 	%>
 
-</fieldset>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(

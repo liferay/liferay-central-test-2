@@ -24,94 +24,92 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
-
-<liferay-ui:tabs names="user-groups" />
-
-<%
-String target = ParamUtil.getString(request, "target");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
-%>
-
-<liferay-ui:search-container
-	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
->
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_group_search.jsp"
-	/>
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs names="user-groups" />
 
 	<%
-	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+	String target = ParamUtil.getString(request, "target");
 
-	LinkedHashMap userGroupParams = new LinkedHashMap();
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/enterprise_admin/select_user_group");
 	%>
 
-	<liferay-ui:search-container-results>
-
-		<%
-		if (filterManageableUserGroups) {
-			List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(company.getCompanyId());
-
-			userGroups = EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
-
-			total = userGroups.size();
-			results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
-		}
-		else {
-			results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
-		}
-
-		pageContext.setAttribute("results", results);
-		pageContext.setAttribute("total", total);
-		%>
-
-	</liferay-ui:search-container-results>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.UserGroup"
-		escapedModel="<%= true %>"
-		keyProperty="userGroupId"
-		modelVar="userGroup"
+	<liferay-ui:search-container
+		searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 	>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_group_search.jsp"
+		/>
 
 		<%
-		StringBuilder sb = new StringBuilder();
+		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-		sb.append("javascript:opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectUserGroup('");
-		sb.append(userGroup.getUserGroupId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(userGroup.getName()));
-		sb.append("', '");
-		sb.append(target);
-		sb.append("');");
-		sb.append("window.close();");
-
-		String rowHREF = sb.toString();
+		LinkedHashMap userGroupParams = new LinkedHashMap();
 		%>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowHREF %>"
-			name="name"
-			property="name"
-		/>
+		<liferay-ui:search-container-results>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowHREF %>"
-			name="description"
-			value="<%= LanguageUtil.get(pageContext, userGroup.getDescription()) %>"
-		/>
-	</liferay-ui:search-container-row>
+			<%
+			if (filterManageableUserGroups) {
+				List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(company.getCompanyId());
 
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+				userGroups = EnterpriseAdminUtil.filterUserGroups(permissionChecker, userGroups);
 
-</form>
+				total = userGroups.size();
+				results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
+			}
+			else {
+				results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+			}
+
+			pageContext.setAttribute("results", results);
+			pageContext.setAttribute("total", total);
+			%>
+
+		</liferay-ui:search-container-results>
+
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.UserGroup"
+			escapedModel="<%= true %>"
+			keyProperty="userGroupId"
+			modelVar="userGroup"
+		>
+
+			<%
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("javascript:opener.");
+			sb.append(renderResponse.getNamespace());
+			sb.append("selectUserGroup('");
+			sb.append(userGroup.getUserGroupId());
+			sb.append("', '");
+			sb.append(UnicodeFormatter.toString(userGroup.getName()));
+			sb.append("', '");
+			sb.append(target);
+			sb.append("');");
+			sb.append("window.close();");
+
+			String rowHREF = sb.toString();
+			%>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="name"
+				property="name"
+			/>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="description"
+				value="<%= LanguageUtil.get(pageContext, userGroup.getDescription()) %>"
+			/>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+</aui:form>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);

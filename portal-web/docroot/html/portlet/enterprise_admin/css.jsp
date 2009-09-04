@@ -79,9 +79,10 @@
 }
 
 .portlet-enterprise-admin .company-logo {
-	border:none;
+	border: none;
 	width: 100px;
 }
+
 .portlet-enterprise-admin .aui-ctrl-holder.action-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.mailing-ctrl, .portlet-enterprise-admin .aui-ctrl-holder.primary-ctrl {
 	margin: 1.8em 0;
 }
@@ -166,7 +167,7 @@
 }
 
 .portlet-enterprise-admin .form-navigation .selected.section-modified .modified-notice {
-	color: #9f3;
+	color: #9F3;
 	display: inline;
 }
 
@@ -174,14 +175,14 @@
 	background-image: url(<%= themeImagesPath %>/messages/alert.png);
 	background-position: 5px 50%;
 	background-repeat: no-repeat;
-	color: #f00;
+	color: #F00;
 	font-weight: bold;
 	padding-left: 25px;
 }
 
 .portlet-enterprise-admin .form-navigation li.selected.section-error a {
 	background-position: 15px 50%;
-	color: #f99;
+	color: #F99;
 	margin-left: 11px;
 	padding-left: 35px;
 }
@@ -234,6 +235,20 @@
 	margin: 10px 0;
 }
 
+.portlet-enterprise-admin .instant-messenger, .portlet-enterprise-admin .social-network {
+	clear: both;
+	overflow: auto;
+}
+
+.portlet-enterprise-admin .instant-messenger img, .portlet-enterprise-admin .social-network img {
+	margin-left: 1em;
+	margin-top: 1.8em;
+}
+
+.portlet-enterprise-admin .instant-messenger .aui-ctrl-holder, .portlet-enterprise-admin .social-network .aui-ctrl-holder {
+	float: left;
+}
+
 .portlet-enterprise-admin .portrait-icons {
 	margin-bottom: 20px;
 	text-align: center;
@@ -244,8 +259,9 @@
 	margin-bottom: 30px;
 }
 
-.portlet-enterprise-admin table.org-labor-table td {
-	padding: 2px;
+.portlet-enterprise-admin .aui-form .aui-block-labels table.org-labor-table td .aui-ctrl-holder {
+	margin-bottom: 0;
+	padding: 3px 1px;
 }
 
 .portlet-enterprise-admin .aui-form .aui-block-labels label, .portlet-enterprise-admin .aui-form .aui-block-labels .label {
@@ -264,6 +280,19 @@
 	clear: both;
 }
 
+.portlet-enterprise-admin .aui-form .aui-ctrl-holder.input-text-search {
+	float: left;
+}
+
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl span {
+	float: left;
+	margin-right: 0.5em;
+}
+
+.portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.localized-language-selector {
+	margin-bottom: 0;
+}
+
 .portlet-enterprise-admin .aui-form fieldset {
 	border: none;
 	padding: 0;
@@ -280,12 +309,6 @@
 
 .portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
 	border-collapse: collapse;
-}
-
-.portlet-enterprise-admin .instant-messenger-logo, .portlet-enterprise-admin .social-network-logo {
-	margin-left: 10px;
-	position: relative;
-	top: 9px;
 }
 
 .portlet-enterprise-admin .permission-scopes {
@@ -372,8 +395,8 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button a:hover {
-	border: 1px solid #A7CEDF;
 	background-color: #DFF4FF;
+	border: 1px solid #A7CEDF;
 	color: #346799;
 	padding: 4px 14px 4px 29px;
 }
@@ -388,7 +411,7 @@
 }
 
 .lfr-portlet-toolbar .lfr-toolbar-button.current a:hover {
-	background-color: #d6dcdd;
+	background-color: #D6DCDD;
 	border-color: #B7C0C2;
 }
 

@@ -77,7 +77,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.PHONE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 
    <%
 	for (int i = 0; i < phonesIndexes.length; i++) {
@@ -86,70 +86,21 @@ else {
 		Phone phone = phones.get(i);
 	%>
 
+		<aui:model-context bean="<%= phone %>" model="<%= Phone.class %>" />
+
 		<div class="lfr-form-row">
 			<div class="row-fields">
+				<aui:input name='<%= "phoneId" + phonesIndex %>' type="hidden" value="" />
 
-				<%
-				String fieldParam = "phoneId" + phonesIndex;
-				%>
+				<aui:input fieldParam='<%= "phoneNumber" + phonesIndex %>' name="number" />
 
-				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
+				<aui:input fieldParam='<%= "phoneExtension" + phonesIndex %>' name="extension" />
 
-				<%
-				fieldParam = "phoneNumber" + phonesIndex;
-				%>
+				<aui:select label="type" name='<%= "phoneTypeId" + phonesIndex %>' listType="<%= className + ListTypeImpl.PHONE %>" />
 
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="number" /></label>
-
-					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="number" fieldParam="<%= fieldParam %>" />
-				</div>
-
-				<%
-				fieldParam = "phoneExtension" + phonesIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="extension" /></label>
-
-					<liferay-ui:input-field model="<%= Phone.class %>" bean="<%= phone %>" field="extension" fieldParam="<%= fieldParam %>" />
-				</div>
-
-				<%
-				fieldParam = "phoneTypeId" + phonesIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-
-					<select name="<portlet:namespace /><%= fieldParam %>">
-
-						<%
-						List<ListType> phoneTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.PHONE);
-
-						for (ListType suffix : phoneTypes) {
-						%>
-
-							<option <%= (suffix.getListTypeId() == phone.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-
-						<%
-						}
-						%>
-
-					</select>
-				</div>
-
-				<%
-				fieldParam = "phonePrimary" + phonesIndex;
-				%>
-
-				<div class="aui-ctrl-holder primary-ctrl">
-					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
-						<liferay-ui:message key="primary" />
-
-						<input <%= phone.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />phonePrimary" type="radio" value="<%= phonesIndex %>" />
-					</label>
-				</div>
+				<aui:field-wrapper cssClass="primary-ctrl">
+					<aui:input checked="<%= phone.isPrimary() %>" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="<%= true %>" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />
+				</aui:field-wrapper>
 			</div>
 		</div>
 
@@ -157,7 +108,7 @@ else {
 	}
 	%>
 
-</fieldset>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(

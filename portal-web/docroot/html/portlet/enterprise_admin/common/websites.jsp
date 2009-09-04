@@ -75,7 +75,7 @@ else {
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 
 	<%
 	for (int i = 0; i < websitesIndexes.length; i++) {
@@ -84,60 +84,20 @@ else {
 		Website website = websites.get(i);
 	%>
 
+	<aui:model-context bean="<%= website %>" model="<%= Website.class %>" />
+
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
-				<%
-				String fieldParam = "websiteId" + websitesIndex;
-				%>
+				<aui:input name='<%= "websiteId" + websitesIndex %>' type="hidden" value="" />
 
-				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
+				<aui:input fieldParam='<%= "websiteUrl" + websitesIndex %>' name="url" />
 
-				<%
-				fieldParam = "websiteUrl" + websitesIndex;
-				%>
+				<aui:select label="type" name='<%= "websiteTypeId" + websitesIndex %>' listType="<%= className + ListTypeImpl.WEBSITE %>" />
 
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="url" /></label>
-
-					<liferay-ui:input-field model="<%= Website.class %>" bean="<%= website %>" field="url" fieldParam="<%= fieldParam %>" />
-				</div>
-
-				<%
-				fieldParam = "websiteTypeId" + websitesIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-
-					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
-
-						<%
-						List<ListType> websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
-
-						for (ListType suffix : websiteTypes) {
-						%>
-
-							<option <%= (suffix.getListTypeId() == website.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-
-						<%
-						}
-						%>
-
-					</select>
-				</div>
-
-				<%
-				fieldParam = "websitePrimary" + websitesIndex;
-				%>
-
-				<div class="aui-ctrl-holder primary-ctrl">
-					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
-						<liferay-ui:message key="primary" />
-
-						<input <%= website.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />websitePrimary" type="radio" value="<%= websitesIndex %>" />
-					</label>
-				</div>
+				<aui:field-wrapper cssClass="primary-ctrl">
+					<aui:input checked="<%= website.isPrimary() %>" id='<%= "websitePrimary" + websitesIndex %>' inlineLabel="<%= true %>" label="primary" name="websitePrimary" type="radio" value="<%= websitesIndex %>" />
+				</aui:field-wrapper>
 			</div>
 		</div>
 
@@ -145,7 +105,7 @@ else {
 	}
 	%>
 
-</fieldset>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(

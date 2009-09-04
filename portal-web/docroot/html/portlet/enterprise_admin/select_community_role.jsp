@@ -55,173 +55,171 @@ if (step == 1) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<c:choose>
+		<c:when test="<%= step == 1 %>">
+			<script type="text/javascript">
+				function <portlet:namespace />selectGroup(groupId) {
+					document.<portlet:namespace />fm.<portlet:namespace />groupId.value = groupId;
 
-<c:choose>
-	<c:when test="<%= step == 1 %>">
-		<script type="text/javascript">
-			function <portlet:namespace />selectGroup(groupId) {
-				document.<portlet:namespace />fm.<portlet:namespace />groupId.value = groupId;
+					submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
+				}
+			</script>
 
-				submitForm(document.<portlet:namespace />fm, "<%= portletURL.toString() %>");
-			}
-		</script>
+			<aui:input name="step" type="hidden" value="2" />
+			<aui:input name="groupId" type="hidden" />
 
-		<input name="<portlet:namespace />step" type="hidden" value="2">
-		<input name="<portlet:namespace />groupId" type="hidden" value="">
+			<liferay-ui:tabs names="community-roles" />
 
-		<liferay-ui:tabs names="community-roles" />
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="please-select-a-community-to-which-you-will-assign-a-community-role" />
+			</div>
 
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="please-select-a-community-to-which-you-will-assign-a-community-role" />
-		</div>
-
-		<liferay-ui:search-container
-			searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-container-results>
-
-				<%
-				total = groups.size();
-				results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
-
-				pageContext.setAttribute("results", results);
-				pageContext.setAttribute("total", total);
-				%>
-
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Group"
-				escapedModel="<%= true %>"
-				keyProperty="groupId"
-				modelVar="group"
+			<liferay-ui:search-container
+				searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 			>
+				<liferay-ui:search-container-results>
 
-				<%
-				StringBuilder sb = new StringBuilder();
+					<%
+					total = groups.size();
+					results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
 
-				sb.append("javascript:");
-				sb.append(renderResponse.getNamespace());
-				sb.append("selectGroup('");
-				sb.append(group.getGroupId());
-				sb.append("');");
+					pageContext.setAttribute("results", results);
+					pageContext.setAttribute("total", total);
+					%>
 
-				String rowHREF = sb.toString();
-				%>
+				</liferay-ui:search-container-results>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="name"
-					property="name"
-				/>
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.Group"
+					escapedModel="<%= true %>"
+					keyProperty="groupId"
+					modelVar="group"
+				>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="type"
-					value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
-				/>
-			</liferay-ui:search-container-row>
+					<%
+					StringBuilder sb = new StringBuilder();
 
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
-	</c:when>
+					sb.append("javascript:");
+					sb.append(renderResponse.getNamespace());
+					sb.append("selectGroup('");
+					sb.append(group.getGroupId());
+					sb.append("');");
 
-	<c:when test="<%= step == 2 %>">
-		<liferay-ui:tabs names="community-roles" />
+					String rowHREF = sb.toString();
+					%>
 
-		<%
-		long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="name"
+						property="name"
+					/>
 
-		Group group = GroupServiceUtil.getGroup(groupId);
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="type"
+						value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
+					/>
+				</liferay-ui:search-container-row>
 
-		portletURL.setParameter("step", "1");
+				<liferay-ui:search-iterator />
+			</liferay-ui:search-container>
+		</c:when>
 
-		String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + HtmlUtil.escape(group.getDescriptiveName());
-		%>
-
-		<div class="breadcrumbs">
-			<%= breadcrumbs %>
-		</div>
-
-		<liferay-ui:search-container
-			headerNames="name"
-			searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
-		>
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/role_search.jsp"
-			/>
+		<c:when test="<%= step == 2 %>">
+			<liferay-ui:tabs names="community-roles" />
 
 			<%
-			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+			long groupId = ParamUtil.getLong(request, "groupId", uniqueGroupId);
+
+			Group group = GroupServiceUtil.getGroup(groupId);
+
+			portletURL.setParameter("step", "1");
+
+			String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + HtmlUtil.escape(group.getDescriptiveName());
 			%>
 
-			<liferay-ui:search-container-results>
+			<div class="breadcrumbs">
+				<%= breadcrumbs %>
+			</div>
 
-				<%
-				if (filterManageableRoles) {
-					List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_COMMUNITY, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
-					roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
-
-					total = roles.size();
-					results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
-				}
-				else {
-					results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_COMMUNITY, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-					total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_COMMUNITY);
-				}
-
-				pageContext.setAttribute("results", results);
-				pageContext.setAttribute("total", total);
-				%>
-
-			</liferay-ui:search-container-results>
-
-			<liferay-ui:search-container-row
-				className="com.liferay.portal.model.Role"
-				escapedModel="<%= false %>"
-				keyProperty="roleId"
-				modelVar="role"
+			<liferay-ui:search-container
+				headerNames="name"
+				searchContainer="<%= new RoleSearch(renderRequest, portletURL) %>"
 			>
-				<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
-				<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+				<liferay-ui:search-form
+					page="/html/portlet/enterprise_admin/role_search.jsp"
+				/>
 
 				<%
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("javascript:opener.");
-				sb.append(renderResponse.getNamespace());
-				sb.append("selectRole('");
-				sb.append(role.getRoleId());
-				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
-				sb.append("', '");
-				sb.append("communityRoles");
-				sb.append("', '");
-				sb.append(UnicodeFormatter.toString(group.getDescriptiveName()));
-				sb.append("', '");
-				sb.append(group.getGroupId());
-				sb.append("');");
-				sb.append("window.close();");
-
-				String rowHREF = sb.toString();
+				RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 				%>
 
-				<liferay-ui:search-container-column-text
-					href="<%= rowHREF %>"
-					name="title"
-					value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
-				/>
-			</liferay-ui:search-container-row>
+				<liferay-ui:search-container-results>
 
-			<liferay-ui:search-iterator />
-		</liferay-ui:search-container>
+					<%
+					if (filterManageableRoles) {
+						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(),  RoleConstants.TYPE_COMMUNITY, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-		<script type="text/javascript">
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-		</script>
-	</c:when>
-</c:choose>
+						roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
-</form>
+						total = roles.size();
+						results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
+					}
+					else {
+						results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_COMMUNITY, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+						total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), RoleConstants.TYPE_COMMUNITY);
+					}
+
+					pageContext.setAttribute("results", results);
+					pageContext.setAttribute("total", total);
+					%>
+
+				</liferay-ui:search-container-results>
+
+				<liferay-ui:search-container-row
+					className="com.liferay.portal.model.Role"
+					escapedModel="<%= false %>"
+					keyProperty="roleId"
+					modelVar="role"
+				>
+					<liferay-util:param name="className" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+					<liferay-util:param name="classHoverName" value="<%= EnterpriseAdminUtil.getCssClassName(role) %>" />
+
+					<%
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("javascript:opener.");
+					sb.append(renderResponse.getNamespace());
+					sb.append("selectRole('");
+					sb.append(role.getRoleId());
+					sb.append("', '");
+					sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
+					sb.append("', '");
+					sb.append("communityRoles");
+					sb.append("', '");
+					sb.append(UnicodeFormatter.toString(group.getDescriptiveName()));
+					sb.append("', '");
+					sb.append(group.getGroupId());
+					sb.append("');");
+					sb.append("window.close();");
+
+					String rowHREF = sb.toString();
+					%>
+
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="title"
+						value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
+					/>
+				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator />
+			</liferay-ui:search-container>
+
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+			</script>
+		</c:when>
+	</c:choose>
+</aui:form>

@@ -24,94 +24,92 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
-
-<liferay-ui:tabs names="communities" />
-
-<%
-String target = ParamUtil.getString(request, "target");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
-%>
-
-<liferay-ui:search-container
-	searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
->
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/group_search.jsp"
-	/>
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs names="communities" />
 
 	<%
-	GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
+	String target = ParamUtil.getString(request, "target");
 
-	LinkedHashMap groupParams = new LinkedHashMap();
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 	%>
 
-	<liferay-ui:search-container-results>
-
-		<%
-		if (filterManageableGroups) {
-			List<Group> groups = user.getGroups();
-
-			groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
-
-			total = groups.size();
-			results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
-		}
-		else {
-			results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
-		}
-
-		pageContext.setAttribute("results", results);
-		pageContext.setAttribute("total", total);
-		%>
-
-	</liferay-ui:search-container-results>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.Group"
-		escapedModel="<%= true %>"
-		keyProperty="groupId"
-		modelVar="group"
+	<liferay-ui:search-container
+		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 	>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/group_search.jsp"
+		/>
 
 		<%
-		StringBuilder sb = new StringBuilder();
+		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-		sb.append("javascript:opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectGroup('");
-		sb.append(group.getGroupId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(group.getName()));
-		sb.append("', '");
-		sb.append(target);
-		sb.append("');");
-		sb.append("window.close();");
-
-		String rowHREF = sb.toString();
+		LinkedHashMap groupParams = new LinkedHashMap();
 		%>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowHREF %>"
-			name="name"
-			property="name"
-		/>
+		<liferay-ui:search-container-results>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowHREF %>"
-			name="type"
-			value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
-		/>
-	</liferay-ui:search-container-row>
+			<%
+			if (filterManageableGroups) {
+				List<Group> groups = user.getGroups();
 
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+				groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
 
-</form>
+				total = groups.size();
+				results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
+			}
+			else {
+				results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+			}
+
+			pageContext.setAttribute("results", results);
+			pageContext.setAttribute("total", total);
+			%>
+
+		</liferay-ui:search-container-results>
+
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.Group"
+			escapedModel="<%= true %>"
+			keyProperty="groupId"
+			modelVar="group"
+		>
+
+			<%
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("javascript:opener.");
+			sb.append(renderResponse.getNamespace());
+			sb.append("selectGroup('");
+			sb.append(group.getGroupId());
+			sb.append("', '");
+			sb.append(UnicodeFormatter.toString(group.getName()));
+			sb.append("', '");
+			sb.append(target);
+			sb.append("');");
+			sb.append("window.close();");
+
+			String rowHREF = sb.toString();
+			%>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="name"
+				property="name"
+			/>
+
+			<liferay-ui:search-container-column-text
+				href="<%= rowHREF %>"
+				name="type"
+				value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
+			/>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+</aui:form>
 
 <script type="text/javascript">
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);

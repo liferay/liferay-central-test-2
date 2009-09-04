@@ -75,7 +75,7 @@ else {
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.EMAIL_ADDRESS %>" message="please-select-a-type" />
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 
 	<%
 	for (int i = 0; i < emailAddressesIndexes.length; i++) {
@@ -84,60 +84,19 @@ else {
 		EmailAddress emailAddress = emailAddresses.get(i);
 	%>
 
+		<aui:model-context bean="<%= emailAddress %>" model="<%= EmailAddress.class %>" />
+
 		<div class="lfr-form-row">
 			<div class="row-fields">
+				<aui:input name='<%= "emailAddressId" + emailAddressesIndex %>' type="hidden" value="" />
 
-				<%
-				String fieldParam = "emailAddressId" + emailAddressesIndex;
-				%>
+				<aui:input fieldParam='<%= "emailAddressAddress" + emailAddressesIndex %>' label="email-address" name="address" />
 
-				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
+				<aui:select label="type" name='<%= "emailAddressTypeId" + emailAddressesIndex %>' listType="<%= className + ListTypeImpl.EMAIL_ADDRESS %>" />
 
-				<%
-				fieldParam = "emailAddressAddress" + emailAddressesIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="email-address" /></label>
-
-					<liferay-ui:input-field model="<%= EmailAddress.class %>" bean="<%= emailAddress %>" field="address" fieldParam="<%= fieldParam %>" />
-				</div>
-
-				<%
-				fieldParam = "emailAddressTypeId" + emailAddressesIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-
-					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
-
-						<%
-						List<ListType> emailAddressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.EMAIL_ADDRESS);
-
-						for (ListType suffix : emailAddressTypes) {
-						%>
-
-							<option <%= (suffix.getListTypeId() == emailAddress.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-
-						<%
-						}
-						%>
-
-					</select>
-				</div>
-
-				<%
-				fieldParam = "emailAddressPrimary" + emailAddressesIndex;
-				%>
-
-				<div class="aui-ctrl-holder primary-ctrl">
-					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>">
-						<liferay-ui:message key="primary" />
-
-						<input <%= emailAddress.isPrimary() ? "checked" : "" %> id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace />emailAddressPrimary" type="radio" value="<%= emailAddressesIndex %>" />
-					</label>
-				</div>
+				<aui:field-wrapper cssClass="primary-ctrl">
+					<aui:input checked="<%= emailAddress.isPrimary() %>" id='<%= "emailAddressPrimary" + emailAddressesIndex %>' inlineLabel="<%= true %>" label="primary" name="emailAddressPrimary" type="radio" value="<%= emailAddressesIndex %>" />
+				</aui:field-wrapper>
 			</div>
 		</div>
 
@@ -145,7 +104,7 @@ else {
 	}
 	%>
 
-</fieldset>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(
