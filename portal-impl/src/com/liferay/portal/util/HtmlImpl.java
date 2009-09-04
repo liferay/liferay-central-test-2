@@ -101,7 +101,7 @@ public class HtmlImpl implements Html {
 	}
 
 	public String escape(String text, int type) {
-		if (text == null){
+		if (text == null) {
 			return null;
 		}
 

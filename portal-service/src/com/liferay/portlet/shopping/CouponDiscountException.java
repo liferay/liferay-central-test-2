@@ -31,19 +31,19 @@ import com.liferay.portal.PortalException;
  */
 public class CouponDiscountException extends PortalException {
 
-	public CouponDiscountException(){
+	public CouponDiscountException() {
 		super();
 	}
 
-	public CouponDiscountException(String msg){
+	public CouponDiscountException(String msg) {
 		super(msg);
 	}
 
-	public CouponDiscountException(String msg, Throwable cause){
+	public CouponDiscountException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CouponDiscountException(Throwable cause){
+	public CouponDiscountException(Throwable cause) {
 		super(cause);
 	}
 

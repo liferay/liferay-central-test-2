@@ -110,7 +110,7 @@ if (Validator.isNotNull(ppid)) {
 		Layout scopeLayout = null;
 		Group curGroup = themeDisplay.getScopeGroup();
 
-		if (curGroup.isLayout()){
+		if (curGroup.isLayout()) {
 			scopeLayout = LayoutLocalServiceUtil.getLayout(curGroup.getClassPK());
 			curGroup = scopeLayout.getGroup();
 		}

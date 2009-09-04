@@ -85,7 +85,7 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 					"/asset_publisher/" + instanceId + StringPool.SLASH + type +
 						StringPool.SLASH;
 
-				if (Validator.isNotNull(urlTitle)){
+				if (Validator.isNotNull(urlTitle)) {
 					friendlyURLPath += urlTitle;
 
 					portletURL.addParameterIncludedInPath("urlTitle");

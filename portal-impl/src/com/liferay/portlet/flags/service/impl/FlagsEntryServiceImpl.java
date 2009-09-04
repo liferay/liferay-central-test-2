@@ -106,7 +106,7 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 
 		User reportedUser = userPersistence.findByPrimaryKey(reportedUserId);
 
-		if (reportedUser.isDefaultUser()){
+		if (reportedUser.isDefaultUser()) {
 			reportedUserName = group.getDescriptiveName();
 		}
 		else {
@@ -174,7 +174,7 @@ public class FlagsEntryServiceImpl extends FlagsEntryServiceBaseImpl {
 		else if (group.isCompany()) {
 			roleNames.add(RoleConstants.ADMINISTRATOR);
 		}
-		else if (group.isOrganization()){
+		else if (group.isOrganization()) {
 			roleNames.add(RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			roleNames.add(RoleConstants.ORGANIZATION_OWNER);
 		}

@@ -84,7 +84,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 
 		<script type="text/javascript">
 			jQuery('.<%= randomNamespace %>').click(
-				function(){
+				function() {
 					var popup = new Alloy.Popup(
 						{
 							body: jQuery('#<portlet:namespace />signIn').html(),

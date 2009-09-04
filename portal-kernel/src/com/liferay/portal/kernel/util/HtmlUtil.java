@@ -44,7 +44,7 @@ public class HtmlUtil {
 		return getHtml().escapeAttribute(attribute);
 	}
 
-	public static String escapeCSS(String css){
+	public static String escapeCSS(String css) {
 		return getHtml().escapeCSS(css);
 	}
 

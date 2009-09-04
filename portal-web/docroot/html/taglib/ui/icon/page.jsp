@@ -37,7 +37,7 @@ String idHtml = StringPool.BLANK;
 
 boolean srcHoverIsNotNull = Validator.isNotNull(srcHover);
 
-if (srcHoverIsNotNull){
+if (srcHoverIsNotNull) {
 	randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 	idHtml = " id=\"" + randomId + "\" ";

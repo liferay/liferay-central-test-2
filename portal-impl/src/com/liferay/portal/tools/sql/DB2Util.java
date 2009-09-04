@@ -77,7 +77,7 @@ public class DB2Util extends DBUtil {
 			String[] alterSqls = StringUtil.split(sql, StringPool.SEMICOLON);
 
 			for (String alterSql : alterSqls) {
-				if (!alterSql.startsWith("-- ")){
+				if (!alterSql.startsWith("-- ")) {
 					runSQL(alterSql);
 				}
 			}

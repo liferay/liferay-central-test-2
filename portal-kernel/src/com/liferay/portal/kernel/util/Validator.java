@@ -278,7 +278,7 @@ public class Validator {
 		return false;
 	}
 
-	public static boolean isIPAddress(String ipAddress){
+	public static boolean isIPAddress(String ipAddress) {
 		Matcher matcher = _ipAddressPattern.matcher(ipAddress);
 
 		return matcher.matches();

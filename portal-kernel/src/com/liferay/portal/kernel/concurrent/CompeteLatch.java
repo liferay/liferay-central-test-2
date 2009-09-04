@@ -92,7 +92,7 @@ public class CompeteLatch {
 	 * safe. The only purpose for this method is to give external systems a way
 	 * to monitor the latch which is usually be used for deadlock detection.
 	 */
-	public boolean isLocked(){
+	public boolean isLocked() {
 		return _sync._isLocked();
 	}
 
@@ -118,7 +118,7 @@ public class CompeteLatch {
 			}
 		}
 
-		private final boolean _isLocked(){
+		private final boolean _isLocked() {
 			if (getState() == 1) {
 				return true;
 			}

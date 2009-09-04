@@ -440,7 +440,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 								int[] queryLogicIndexes = null;
 
-								if (Validator.isNotNull(queryLogicIndexesParam)){
+								if (Validator.isNotNull(queryLogicIndexesParam)) {
 									queryLogicIndexes = StringUtil.split(queryLogicIndexesParam, 0);
 								}
 								else {

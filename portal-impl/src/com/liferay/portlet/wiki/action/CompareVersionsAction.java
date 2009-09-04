@@ -106,7 +106,7 @@ public class CompareVersionsAction extends PortletAction {
 		WikiPage targetPage = WikiPageServiceUtil.getPage(
 			nodeId, title, targetVersion);
 
-		if (type.equals("html")){
+		if (type.equals("html")) {
 			WikiNode sourceNode = sourcePage.getNode();
 
 			PortletURL viewPageURL = renderResponse.createRenderURL();

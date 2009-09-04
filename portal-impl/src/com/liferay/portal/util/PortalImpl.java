@@ -2436,7 +2436,7 @@ public class PortalImpl implements Portal {
 					minifierType = "css";
 				}
 			}
-			else if (themeDisplay.isThemeJsFastLoad()){
+			else if (themeDisplay.isThemeJsFastLoad()) {
 				minifierType = "js";
 			}
 

@@ -73,7 +73,7 @@ public class ScriptingRequest implements Serializable {
 		}
 	}
 
-	public boolean hasReturnValue(){
+	public boolean hasReturnValue() {
 		return _hasReturnValue;
 	}
 

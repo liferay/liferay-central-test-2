@@ -231,7 +231,7 @@ public class ClusterLinkImpl implements ClusterLink {
 
 		List<String> keys = new ArrayList<String>(_channelCount);
 
-		for (Object key : properties.keySet()){
+		for (Object key : properties.keySet()) {
 			keys.add((String)key);
 		}
 

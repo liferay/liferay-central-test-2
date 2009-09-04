@@ -62,7 +62,7 @@ else {
 		emailAddressesIndexes = new int[] {0};
 	}
 
-	if (emailAddressesIndexes == null){
+	if (emailAddressesIndexes == null) {
 		emailAddressesIndexes = new int[0];
 	}
 }

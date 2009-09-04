@@ -51,7 +51,7 @@ for (WikiPage wikiPage : allPages) {
 	}
 
 	if ((wikiPage.getVersion() > sourceVersion) &&
-		(wikiPage.getVersion() <= targetVersion)){
+		(wikiPage.getVersion() <= targetVersion)) {
 
 		intermediatePages.add(wikiPage);
 	}

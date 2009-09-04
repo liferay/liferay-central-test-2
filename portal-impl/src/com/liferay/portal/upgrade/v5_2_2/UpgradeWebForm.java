@@ -69,7 +69,7 @@ public class UpgradeWebForm extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			if (!rs.next()){
+			if (!rs.next()) {
 				ps = con.prepareStatement(
 					"update ClassName_ set value = ? where value = ?");
 

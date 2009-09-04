@@ -31,19 +31,19 @@ import com.liferay.portal.PortalException;
  */
 public class CouponMinimumOrderException extends PortalException {
 
-	public CouponMinimumOrderException(){
+	public CouponMinimumOrderException() {
 		super();
 	}
 
-	public CouponMinimumOrderException(String msg){
+	public CouponMinimumOrderException(String msg) {
 		super(msg);
 	}
 
-	public CouponMinimumOrderException(String msg, Throwable cause){
+	public CouponMinimumOrderException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CouponMinimumOrderException(Throwable cause){
+	public CouponMinimumOrderException(Throwable cause) {
 		super(cause);
 	}
 

@@ -66,7 +66,7 @@ Enumeration<String> enu = request.getParameterNames();
 while (enu.hasMoreElements()) {
 	String name = enu.nextElement();
 
-	if (name.startsWith(_IFRAME_PREFIX)){
+	if (name.startsWith(_IFRAME_PREFIX)) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(name.substring(_IFRAME_PREFIX.length()));
