@@ -709,6 +709,73 @@ ${exception.message}
 		<ant dir="../portal-web" target="build-themes" />
 	</target>
 
+	<target name="build-upgrade-tables">
+		<if>
+			<not>
+				<equals arg1="${upgrade.table.path}" arg2="$${upgrade.table.path}" />
+			</not>
+			<then>
+				<for param="zip.file">
+					<path>
+						<fileset
+							dir="${upgrade.table.path}"
+							includes="*.zip"
+						/>
+					</path>
+					<sequential>
+						<antelope:stringutil string="@{zip.file}" property="zip.version.beginindex">
+							<indexof string="src-" fromindex="0" />
+						</antelope:stringutil>
+
+						<math
+							datatype="int"
+							operand1="${zip.version.beginindex}"
+							operand2="4"
+							operation="+"
+							result="zip.version.beginindex"
+						/>
+
+						<antelope:stringutil string="@{zip.file}" property="zip.version.endindex">
+							<indexof string=".zip" fromindex="0" />
+						</antelope:stringutil>
+
+						<antelope:stringutil string="@{zip.file}" property="zip.version">
+							<substring beginindex="${zip.version.beginindex}" endindex="${zip.version.endindex}" />
+						</antelope:stringutil>
+
+						<if>
+							<not>
+								<uptodate
+									srcfile="@{zip.file}"
+									targetfile="${upgrade.table.path}/${zip.version}"
+								/>
+							</not>
+							<then>
+								<mkdir dir="${upgrade.table.path}/${zip.version}" />
+
+								<unzip src="@{zip.file}" dest="${upgrade.table.path}/${zip.version}">
+									<patternset>
+										<include name="**/*ModelImpl.java" />
+									</patternset>
+									<mapper type="flatten" />
+								</unzip>
+							</then>
+						</if>
+					</sequential>
+				</for>
+
+				<java
+					classname="com.liferay.portal.tools.UpgradeTableBuilder"
+					classpathref="project.classpath"
+					fork="true"
+					newenvironment="true"
+				>
+					<arg value="${upgrade.table.path}" />
+				</java>
+			</then>
+		</if>
+	</target>
+
 	<target name="build-wsdd" depends="compile">
 		<java
 			classname="com.liferay.portal.tools.WSDDBuilder"
