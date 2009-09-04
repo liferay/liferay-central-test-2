@@ -1257,7 +1257,7 @@ li.toggle-expand a {
 	cursor: auto;
 }
 
-.lfr-input-text, .lfr-input-text-container input {
+.lfr-input-text, .aui-form .aui-block-labels .aui-ctrl-holder.lfr-input-text-container input {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 
@@ -1265,7 +1265,7 @@ li.toggle-expand a {
 	width: auto;
 }
 
-.lfr-textarea {
+.lfr-textarea, .aui-form .aui-block-labels .aui-ctrl-holder.lfr-textarea-container textarea {
 	height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px;
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
