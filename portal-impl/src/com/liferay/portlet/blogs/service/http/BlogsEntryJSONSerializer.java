@@ -91,9 +91,21 @@ public class BlogsEntryJSONSerializer {
 		}
 
 		jsonObj.put("displayDate", displayDateJSON);
-		jsonObj.put("draft", model.getDraft());
 		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
 		jsonObj.put("trackbacks", model.getTrackbacks());
+		jsonObj.put("status", model.getStatus());
+		jsonObj.put("statusByUserId", model.getStatusByUserId());
+		jsonObj.put("statusByUserName", model.getStatusByUserName());
+
+		Date statusDate = model.getStatusDate();
+
+		String statusDateJSON = StringPool.BLANK;
+
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
+		}
+
+		jsonObj.put("statusDate", statusDateJSON);
 
 		return jsonObj;
 	}

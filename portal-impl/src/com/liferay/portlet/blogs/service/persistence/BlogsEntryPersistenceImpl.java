@@ -127,23 +127,170 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_C_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_U",
+			"findByC_D",
+			new String[] { Long.class.getName(), Date.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_D",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_D",
+			new String[] { Long.class.getName(), Date.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_C_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_U",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_U",
+			"findByC_U",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_U = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_U",
+			"countByC_U",
 			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_C_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByC_S",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_D",
+			new String[] { Long.class.getName(), Date.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_D",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_D",
+			new String[] { Long.class.getName(), Date.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_D_S",
+			new String[] {
+				Long.class.getName(), Date.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_G_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_U_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_UT = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByG_UT",
@@ -152,78 +299,82 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_UT",
 			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_G_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_D_D",
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_UT_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_UT_S",
 			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_UT_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_D_D",
+			"countByG_UT_S",
 			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName(),
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_G_U_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U_D",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Date.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_U_D",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_D_D",
+			"countByG_U_D",
 			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
+				Long.class.getName(), Long.class.getName(), Date.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_C_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_U_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_D_D",
+			"findByG_U_D_S",
 			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
+				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_C_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_D_D",
+			"findByG_U_D_S",
 			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName(),
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
+				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_U_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_D_D",
-			new String[] {
-				Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_U_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_U_D_D",
+			"countByG_U_D_S",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
+				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_U_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_U_D_D",
+			"findByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_S",
 			new String[] {
-				Long.class.getName(), Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_U_D_D = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_U_D_D",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Date.class.getName(),
-				Boolean.class.getName()
-			});
+			"countByG_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -244,6 +395,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(blogsEntry.getGroupId()),
 				
 			blogsEntry.getUrlTitle()
+			}, blogsEntry);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
+			new Object[] {
+				new Long(blogsEntry.getGroupId()),
+				
+			blogsEntry.getUrlTitle(), new Integer(blogsEntry.getStatus())
 			}, blogsEntry);
 	}
 
@@ -366,6 +524,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(blogsEntryModelImpl.getOriginalGroupId()),
 				
 			blogsEntryModelImpl.getOriginalUrlTitle()
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT_S,
+			new Object[] {
+				new Long(blogsEntryModelImpl.getOriginalGroupId()),
+				
+			blogsEntryModelImpl.getOriginalUrlTitle(),
+				new Integer(blogsEntryModelImpl.getOriginalStatus())
 			});
 
 		EntityCacheUtil.removeResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -501,6 +667,33 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					new Long(blogsEntry.getGroupId()),
 					
 				blogsEntry.getUrlTitle()
+				}, blogsEntry);
+		}
+
+		if (!isNew &&
+				((blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(blogsEntry.getUrlTitle(),
+					blogsEntryModelImpl.getOriginalUrlTitle()) ||
+				(blogsEntry.getStatus() != blogsEntryModelImpl.getOriginalStatus()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT_S,
+				new Object[] {
+					new Long(blogsEntryModelImpl.getOriginalGroupId()),
+					
+				blogsEntryModelImpl.getOriginalUrlTitle(),
+					new Integer(blogsEntryModelImpl.getOriginalStatus())
+				});
+		}
+
+		if (isNew ||
+				((blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(blogsEntry.getUrlTitle(),
+					blogsEntryModelImpl.getOriginalUrlTitle()) ||
+				(blogsEntry.getStatus() != blogsEntryModelImpl.getOriginalStatus()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
+				new Object[] {
+					new Long(blogsEntry.getGroupId()),
+					
+				blogsEntry.getUrlTitle(), new Integer(blogsEntry.getStatus())
 				}, blogsEntry);
 		}
 
@@ -1468,11 +1661,653 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<BlogsEntry> findByG_U(long groupId, long userId)
+	public List<BlogsEntry> findByC_D(long companyId, Date displayDate)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(companyId), displayDate };
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_D,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_D, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByC_D(long companyId, Date displayDate,
+		int start, int end) throws SystemException {
+		return findByC_D(companyId, displayDate, start, end, null);
+	}
+
+	public List<BlogsEntry> findByC_D(long companyId, Date displayDate,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				displayDate,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_D,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_D,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByC_D_First(long companyId, Date displayDate,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByC_D(companyId, displayDate, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByC_D_Last(long companyId, Date displayDate,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByC_D(companyId, displayDate);
+
+		List<BlogsEntry> list = findByC_D(companyId, displayDate, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByC_D_PrevAndNext(long entryId, long companyId,
+		Date displayDate, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_D(companyId, displayDate);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.companyId = ?");
+
+			query.append(" AND ");
+
+			if (displayDate == null) {
+				query.append("blogsEntry.displayDate < null");
+			}
+			else {
+				query.append("blogsEntry.displayDate < ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByC_D_S(long companyId, Date displayDate,
+		int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				displayDate, new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByC_D_S(long companyId, Date displayDate,
+		int status, int start, int end) throws SystemException {
+		return findByC_D_S(companyId, displayDate, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByC_D_S(long companyId, Date displayDate,
+		int status, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				displayDate, new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByC_D_S_First(long companyId, Date displayDate,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByC_D_S(companyId, displayDate, status, 0,
+				1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByC_D_S_Last(long companyId, Date displayDate,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByC_D_S(companyId, displayDate, status);
+
+		List<BlogsEntry> list = findByC_D_S(companyId, displayDate, status,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByC_D_S_PrevAndNext(long entryId, long companyId,
+		Date displayDate, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_D_S(companyId, displayDate, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.companyId = ?");
+
+			query.append(" AND ");
+
+			if (displayDate == null) {
+				query.append("blogsEntry.displayDate < null");
+			}
+			else {
+				query.append("blogsEntry.displayDate < ?");
+			}
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByC_U(long groupId, long userId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U,
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_U,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1518,7 +2353,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_U, finderArgs,
 					list);
 
 				closeSession(session);
@@ -1528,12 +2363,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<BlogsEntry> findByG_U(long groupId, long userId, int start,
+	public List<BlogsEntry> findByC_U(long groupId, long userId, int start,
 		int end) throws SystemException {
-		return findByG_U(groupId, userId, start, end, null);
+		return findByC_U(groupId, userId, start, end, null);
 	}
 
-	public List<BlogsEntry> findByG_U(long groupId, long userId, int start,
+	public List<BlogsEntry> findByC_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
@@ -1541,7 +2376,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U,
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_U,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1612,7 +2447,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_U,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1622,9 +2457,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public BlogsEntry findByG_U_First(long groupId, long userId,
+	public BlogsEntry findByC_U_First(long groupId, long userId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List<BlogsEntry> list = findByG_U(groupId, userId, 0, 1, obc);
+		List<BlogsEntry> list = findByC_U(groupId, userId, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -1645,11 +2480,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public BlogsEntry findByG_U_Last(long groupId, long userId,
+	public BlogsEntry findByC_U_Last(long groupId, long userId,
 		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		int count = countByG_U(groupId, userId);
+		int count = countByC_U(groupId, userId);
 
-		List<BlogsEntry> list = findByG_U(groupId, userId, count - 1, count, obc);
+		List<BlogsEntry> list = findByC_U(groupId, userId, count - 1, count, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -1670,12 +2505,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public BlogsEntry[] findByG_U_PrevAndNext(long entryId, long groupId,
+	public BlogsEntry[] findByC_U_PrevAndNext(long entryId, long groupId,
 		long userId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 
-		int count = countByG_U(groupId, userId);
+		int count = countByC_U(groupId, userId);
 
 		Session session = null;
 
@@ -1729,6 +2564,1548 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			qPos.add(groupId);
 
 			qPos.add(userId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByC_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_U_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_U_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByC_U_S(long groupId, long userId, int status,
+		int start, int end) throws SystemException {
+		return findByC_U_S(groupId, userId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByC_U_S(long groupId, long userId, int status,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_U_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_U_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByC_U_S_First(long groupId, long userId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByC_U_S(groupId, userId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByC_U_S_Last(long groupId, long userId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByC_U_S(groupId, userId, status);
+
+		List<BlogsEntry> list = findByC_U_S(groupId, userId, status, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByC_U_S_PrevAndNext(long entryId, long groupId,
+		long userId, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_U_S(groupId, userId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.userId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByC_S(long companyId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_S, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByC_S(long companyId, int status, int start,
+		int end) throws SystemException {
+		return findByC_S(companyId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByC_S(long companyId, int status, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByC_S_First(long companyId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByC_S(companyId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByC_S_Last(long companyId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByC_S(companyId, status);
+
+		List<BlogsEntry> list = findByC_S(companyId, status, count - 1, count,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByC_S_PrevAndNext(long entryId, long companyId,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_S(companyId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.companyId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByG_D(long groupId, Date displayDate)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), displayDate };
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_D,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_D, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_D(long groupId, Date displayDate,
+		int start, int end) throws SystemException {
+		return findByG_D(groupId, displayDate, start, end, null);
+	}
+
+	public List<BlogsEntry> findByG_D(long groupId, Date displayDate,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				displayDate,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_D,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_D,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByG_D_First(long groupId, Date displayDate,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_D(groupId, displayDate, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_D_Last(long groupId, Date displayDate,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByG_D(groupId, displayDate);
+
+		List<BlogsEntry> list = findByG_D(groupId, displayDate, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_D_PrevAndNext(long entryId, long groupId,
+		Date displayDate, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_D(groupId, displayDate);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			if (displayDate == null) {
+				query.append("blogsEntry.displayDate < null");
+			}
+			else {
+				query.append("blogsEntry.displayDate < ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByG_D_S(long groupId, Date displayDate,
+		int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				displayDate, new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_D_S(long groupId, Date displayDate,
+		int status, int start, int end) throws SystemException {
+		return findByG_D_S(groupId, displayDate, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByG_D_S(long groupId, Date displayDate,
+		int status, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				displayDate, new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByG_D_S_First(long groupId, Date displayDate,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_D_S(groupId, displayDate, status, 0, 1,
+				obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_D_S_Last(long groupId, Date displayDate,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByG_D_S(groupId, displayDate, status);
+
+		List<BlogsEntry> list = findByG_D_S(groupId, displayDate, status,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_D_S_PrevAndNext(long entryId, long groupId,
+		Date displayDate, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_D_S(groupId, displayDate, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			if (displayDate == null) {
+				query.append("blogsEntry.displayDate < null");
+			}
+			else {
+				query.append("blogsEntry.displayDate < ?");
+			}
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_U_S(long groupId, long userId, int status,
+		int start, int end) throws SystemException {
+		return findByG_U_S(groupId, userId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByG_U_S(long groupId, long userId, int status,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByG_U_S_First(long groupId, long userId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_U_S(groupId, userId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_U_S_Last(long groupId, long userId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByG_U_S(groupId, userId, status);
+
+		List<BlogsEntry> list = findByG_U_S(groupId, userId, status, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_U_S_PrevAndNext(long entryId, long groupId,
+		long userId, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_U_S(groupId, userId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.userId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			qPos.add(status);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -1876,18 +4253,56 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<BlogsEntry> findByG_D_D(long groupId, Date displayDate,
-		boolean draft) throws SystemException {
+	public BlogsEntry findByG_UT_S(long groupId, String urlTitle, int status)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = fetchByG_UT_S(groupId, urlTitle, status);
+
+		if (blogsEntry == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("urlTitle=" + urlTitle);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return blogsEntry;
+	}
+
+	public BlogsEntry fetchByG_UT_S(long groupId, String urlTitle, int status)
+		throws SystemException {
+		return fetchByG_UT_S(groupId, urlTitle, status, true);
+	}
+
+	public BlogsEntry fetchByG_UT_S(long groupId, String urlTitle, int status,
+		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				displayDate, Boolean.valueOf(draft)
+				urlTitle, new Integer(status)
 			};
 
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_D_D,
-				finderArgs, this);
+		Object result = null;
 
-		if (list == null) {
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_UT_S,
+					finderArgs, this);
+		}
+
+		if (result == null) {
 			Session session = null;
 
 			try {
@@ -1902,16 +4317,16 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
+				if (urlTitle == null) {
+					query.append("blogsEntry.urlTitle IS NULL");
 				}
 				else {
-					query.append("blogsEntry.displayDate < ?");
+					query.append("blogsEntry.urlTitle = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("blogsEntry.draft = ?");
+				query.append("blogsEntry.status = ?");
 
 				query.append(" ");
 
@@ -1925,51 +4340,69 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				if (urlTitle != null) {
+					qPos.add(urlTitle);
 				}
 
-				qPos.add(draft);
+				qPos.add(status);
 
-				list = q.list();
+				List<BlogsEntry> list = q.list();
+
+				result = list;
+
+				BlogsEntry blogsEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
+						finderArgs, list);
+				}
+				else {
+					blogsEntry = list.get(0);
+
+					cacheResult(blogsEntry);
+
+					if ((blogsEntry.getGroupId() != groupId) ||
+							(blogsEntry.getUrlTitle() == null) ||
+							!blogsEntry.getUrlTitle().equals(urlTitle) ||
+							(blogsEntry.getStatus() != status)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
+							finderArgs, blogsEntry);
+					}
+				}
+
+				return blogsEntry;
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (list == null) {
-					list = new ArrayList<BlogsEntry>();
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
+						finderArgs, new ArrayList<BlogsEntry>());
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_D_D,
-					finderArgs, list);
 
 				closeSession(session);
 			}
 		}
-
-		return list;
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (BlogsEntry)result;
+			}
+		}
 	}
 
-	public List<BlogsEntry> findByG_D_D(long groupId, Date displayDate,
-		boolean draft, int start, int end) throws SystemException {
-		return findByG_D_D(groupId, displayDate, draft, start, end, null);
-	}
-
-	public List<BlogsEntry> findByG_D_D(long groupId, Date displayDate,
-		boolean draft, int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId,
+		Date displayDate) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(groupId),
+				new Long(groupId), new Long(userId),
 				
-				displayDate, Boolean.valueOf(draft),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+				displayDate
 			};
 
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_D_D,
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_D,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1987,6 +4420,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
 				if (displayDate == null) {
 					query.append("blogsEntry.displayDate < null");
 				}
@@ -1994,9 +4431,90 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					query.append("blogsEntry.displayDate < ?");
 				}
 
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_D,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId,
+		Date displayDate, int start, int end) throws SystemException {
+		return findByG_U_D(groupId, userId, displayDate, start, end, null);
+	}
+
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId,
+		Date displayDate, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId),
+				
+				displayDate,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_D,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
 				query.append(" AND ");
 
-				query.append("blogsEntry.draft = ?");
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
 
 				query.append(" ");
 
@@ -2034,11 +4552,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
+				qPos.add(userId);
+
 				if (displayDate != null) {
 					qPos.add(CalendarUtil.getTimestamp(displayDate));
 				}
-
-				qPos.add(draft);
 
 				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -2053,7 +4571,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_D_D,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U_D,
 					finderArgs, list);
 
 				closeSession(session);
@@ -2063,10 +4581,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public BlogsEntry findByG_D_D_First(long groupId, Date displayDate,
-		boolean draft, OrderByComparator obc)
+	public BlogsEntry findByG_U_D_First(long groupId, long userId,
+		Date displayDate, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
-		List<BlogsEntry> list = findByG_D_D(groupId, displayDate, draft, 0, 1,
+		List<BlogsEntry> list = findByG_U_D(groupId, userId, displayDate, 0, 1,
 				obc);
 
 		if (list.isEmpty()) {
@@ -2077,10 +4595,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
-			msg.append("displayDate=" + displayDate);
+			msg.append("userId=" + userId);
 
 			msg.append(", ");
-			msg.append("draft=" + draft);
+			msg.append("displayDate=" + displayDate);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2091,671 +4609,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public BlogsEntry findByG_D_D_Last(long groupId, Date displayDate,
-		boolean draft, OrderByComparator obc)
+	public BlogsEntry findByG_U_D_Last(long groupId, long userId,
+		Date displayDate, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
-		int count = countByG_D_D(groupId, displayDate, draft);
+		int count = countByG_U_D(groupId, userId, displayDate);
 
-		List<BlogsEntry> list = findByG_D_D(groupId, displayDate, draft,
+		List<BlogsEntry> list = findByG_U_D(groupId, userId, displayDate,
 				count - 1, count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No BlogsEntry exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("displayDate=" + displayDate);
-
-			msg.append(", ");
-			msg.append("draft=" + draft);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public BlogsEntry[] findByG_D_D_PrevAndNext(long entryId, long groupId,
-		Date displayDate, boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
-
-		int count = countByG_D_D(groupId, displayDate, draft);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-			query.append("blogsEntry.groupId = ?");
-
-			query.append(" AND ");
-
-			if (displayDate == null) {
-				query.append("blogsEntry.displayDate < null");
-			}
-			else {
-				query.append("blogsEntry.displayDate < ?");
-			}
-
-			query.append(" AND ");
-
-			query.append("blogsEntry.draft = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("blogsEntry.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("blogsEntry.displayDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			if (displayDate != null) {
-				qPos.add(CalendarUtil.getTimestamp(displayDate));
-			}
-
-			qPos.add(draft);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					blogsEntry);
-
-			BlogsEntry[] array = new BlogsEntryImpl[3];
-
-			array[0] = (BlogsEntry)objArray[0];
-			array[1] = (BlogsEntry)objArray[1];
-			array[2] = (BlogsEntry)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<BlogsEntry> findByC_D_D(long companyId, Date displayDate,
-		boolean draft) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				displayDate, Boolean.valueOf(draft)
-			};
-
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_D_D,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.companyId = ?");
-
-				query.append(" AND ");
-
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
-				}
-				else {
-					query.append("blogsEntry.displayDate < ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.draft = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("blogsEntry.displayDate DESC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
-				}
-
-				qPos.add(draft);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<BlogsEntry>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_D_D,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<BlogsEntry> findByC_D_D(long companyId, Date displayDate,
-		boolean draft, int start, int end) throws SystemException {
-		return findByC_D_D(companyId, displayDate, draft, start, end, null);
-	}
-
-	public List<BlogsEntry> findByC_D_D(long companyId, Date displayDate,
-		boolean draft, int start, int end, OrderByComparator obc)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				displayDate, Boolean.valueOf(draft),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_C_D_D,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.companyId = ?");
-
-				query.append(" AND ");
-
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
-				}
-				else {
-					query.append("blogsEntry.displayDate < ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.draft = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("blogsEntry.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("blogsEntry.displayDate DESC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
-				}
-
-				qPos.add(draft);
-
-				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
-						end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<BlogsEntry>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_C_D_D,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public BlogsEntry findByC_D_D_First(long companyId, Date displayDate,
-		boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		List<BlogsEntry> list = findByC_D_D(companyId, displayDate, draft, 0,
-				1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No BlogsEntry exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("displayDate=" + displayDate);
-
-			msg.append(", ");
-			msg.append("draft=" + draft);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public BlogsEntry findByC_D_D_Last(long companyId, Date displayDate,
-		boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		int count = countByC_D_D(companyId, displayDate, draft);
-
-		List<BlogsEntry> list = findByC_D_D(companyId, displayDate, draft,
-				count - 1, count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No BlogsEntry exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("displayDate=" + displayDate);
-
-			msg.append(", ");
-			msg.append("draft=" + draft);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public BlogsEntry[] findByC_D_D_PrevAndNext(long entryId, long companyId,
-		Date displayDate, boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
-
-		int count = countByC_D_D(companyId, displayDate, draft);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-			query.append("blogsEntry.companyId = ?");
-
-			query.append(" AND ");
-
-			if (displayDate == null) {
-				query.append("blogsEntry.displayDate < null");
-			}
-			else {
-				query.append("blogsEntry.displayDate < ?");
-			}
-
-			query.append(" AND ");
-
-			query.append("blogsEntry.draft = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("blogsEntry.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("blogsEntry.displayDate DESC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			if (displayDate != null) {
-				qPos.add(CalendarUtil.getTimestamp(displayDate));
-			}
-
-			qPos.add(draft);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					blogsEntry);
-
-			BlogsEntry[] array = new BlogsEntryImpl[3];
-
-			array[0] = (BlogsEntry)objArray[0];
-			array[1] = (BlogsEntry)objArray[1];
-			array[2] = (BlogsEntry)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<BlogsEntry> findByG_U_D_D(long groupId, long userId,
-		Date displayDate, boolean draft) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate, Boolean.valueOf(draft)
-			};
-
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_D_D,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.userId = ?");
-
-				query.append(" AND ");
-
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
-				}
-				else {
-					query.append("blogsEntry.displayDate < ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.draft = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("blogsEntry.displayDate DESC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(userId);
-
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
-				}
-
-				qPos.add(draft);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<BlogsEntry>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_D_D,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<BlogsEntry> findByG_U_D_D(long groupId, long userId,
-		Date displayDate, boolean draft, int start, int end)
-		throws SystemException {
-		return findByG_U_D_D(groupId, userId, displayDate, draft, start, end,
-			null);
-	}
-
-	public List<BlogsEntry> findByG_U_D_D(long groupId, long userId,
-		Date displayDate, boolean draft, int start, int end,
-		OrderByComparator obc) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId),
-				
-				displayDate, Boolean.valueOf(draft),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_D_D,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.userId = ?");
-
-				query.append(" AND ");
-
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
-				}
-				else {
-					query.append("blogsEntry.displayDate < ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.draft = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("blogsEntry.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("blogsEntry.displayDate DESC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(userId);
-
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
-				}
-
-				qPos.add(draft);
-
-				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
-						end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<BlogsEntry>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U_D_D,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public BlogsEntry findByG_U_D_D_First(long groupId, long userId,
-		Date displayDate, boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		List<BlogsEntry> list = findByG_U_D_D(groupId, userId, displayDate,
-				draft, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -2770,9 +4630,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			msg.append(", ");
 			msg.append("displayDate=" + displayDate);
 
-			msg.append(", ");
-			msg.append("draft=" + draft);
-
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchEntryException(msg.toString());
@@ -2782,45 +4639,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public BlogsEntry findByG_U_D_D_Last(long groupId, long userId,
-		Date displayDate, boolean draft, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
-		int count = countByG_U_D_D(groupId, userId, displayDate, draft);
-
-		List<BlogsEntry> list = findByG_U_D_D(groupId, userId, displayDate,
-				draft, count - 1, count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No BlogsEntry exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("userId=" + userId);
-
-			msg.append(", ");
-			msg.append("displayDate=" + displayDate);
-
-			msg.append(", ");
-			msg.append("draft=" + draft);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public BlogsEntry[] findByG_U_D_D_PrevAndNext(long entryId, long groupId,
-		long userId, Date displayDate, boolean draft, OrderByComparator obc)
+	public BlogsEntry[] findByG_U_D_PrevAndNext(long entryId, long groupId,
+		long userId, Date displayDate, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 
-		int count = countByG_U_D_D(groupId, userId, displayDate, draft);
+		int count = countByG_U_D(groupId, userId, displayDate);
 
 		Session session = null;
 
@@ -2845,10 +4669,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 			else {
 				query.append("blogsEntry.displayDate < ?");
 			}
-
-			query.append(" AND ");
-
-			query.append("blogsEntry.draft = ?");
 
 			query.append(" ");
 
@@ -2892,7 +4712,651 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				qPos.add(CalendarUtil.getTimestamp(displayDate));
 			}
 
-			qPos.add(draft);
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId),
+				
+				displayDate, new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_U_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status, int start, int end)
+		throws SystemException {
+		return findByG_U_D_S(groupId, userId, displayDate, status, start, end,
+			null);
+	}
+
+	public List<BlogsEntry> findByG_U_D_S(long groupId, long userId,
+		Date displayDate, int status, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId),
+				
+				displayDate, new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_U_D_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_U_D_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByG_U_D_S_First(long groupId, long userId,
+		Date displayDate, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_U_D_S(groupId, userId, displayDate,
+				status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_U_D_S_Last(long groupId, long userId,
+		Date displayDate, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByG_U_D_S(groupId, userId, displayDate, status);
+
+		List<BlogsEntry> list = findByG_U_D_S(groupId, userId, displayDate,
+				status, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("displayDate=" + displayDate);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_U_D_S_PrevAndNext(long entryId, long groupId,
+		long userId, Date displayDate, int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_U_D_S(groupId, userId, displayDate, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.userId = ?");
+
+			query.append(" AND ");
+
+			if (displayDate == null) {
+				query.append("blogsEntry.displayDate < null");
+			}
+			else {
+				query.append("blogsEntry.displayDate < ?");
+			}
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(userId);
+
+			if (displayDate != null) {
+				qPos.add(CalendarUtil.getTimestamp(displayDate));
+			}
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByG_S(long groupId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Integer(status)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<BlogsEntry> findByG_S(long groupId, int status, int start,
+		int end) throws SystemException {
+		return findByG_S(groupId, status, start, end, null);
+	}
+
+	public List<BlogsEntry> findByG_S(long groupId, int status, int start,
+		int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<BlogsEntry> list = (List<BlogsEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("blogsEntry.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("blogsEntry.displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(status);
+
+				list = (List<BlogsEntry>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<BlogsEntry>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public BlogsEntry findByG_S_First(long groupId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_S(groupId, status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_S_Last(long groupId, int status,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByG_S(groupId, status);
+
+		List<BlogsEntry> list = findByG_S(groupId, status, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_S_PrevAndNext(long entryId, long groupId,
+		int status, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_S(groupId, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
+
+			query.append("blogsEntry.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("blogsEntry.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("blogsEntry.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("blogsEntry.displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(status);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -3066,9 +5530,58 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByG_U(long groupId, long userId)
+	public void removeByC_D(long companyId, Date displayDate)
 		throws SystemException {
-		for (BlogsEntry blogsEntry : findByG_U(groupId, userId)) {
+		for (BlogsEntry blogsEntry : findByC_D(companyId, displayDate)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByC_D_S(long companyId, Date displayDate, int status)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByC_D_S(companyId, displayDate, status)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByC_U(long groupId, long userId)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByC_U(groupId, userId)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByC_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByC_U_S(groupId, userId, status)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByC_S(long companyId, int status)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByC_S(companyId, status)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByG_D(long groupId, Date displayDate)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_D(groupId, displayDate)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByG_D_S(long groupId, Date displayDate, int status)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_D_S(groupId, displayDate, status)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_U_S(groupId, userId, status)) {
 			remove(blogsEntry);
 		}
 	}
@@ -3080,24 +5593,30 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		remove(blogsEntry);
 	}
 
-	public void removeByG_D_D(long groupId, Date displayDate, boolean draft)
+	public void removeByG_UT_S(long groupId, String urlTitle, int status)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByG_UT_S(groupId, urlTitle, status);
+
+		remove(blogsEntry);
+	}
+
+	public void removeByG_U_D(long groupId, long userId, Date displayDate)
 		throws SystemException {
-		for (BlogsEntry blogsEntry : findByG_D_D(groupId, displayDate, draft)) {
+		for (BlogsEntry blogsEntry : findByG_U_D(groupId, userId, displayDate)) {
 			remove(blogsEntry);
 		}
 	}
 
-	public void removeByC_D_D(long companyId, Date displayDate, boolean draft)
-		throws SystemException {
-		for (BlogsEntry blogsEntry : findByC_D_D(companyId, displayDate, draft)) {
+	public void removeByG_U_D_S(long groupId, long userId, Date displayDate,
+		int status) throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_U_D_S(groupId, userId,
+				displayDate, status)) {
 			remove(blogsEntry);
 		}
 	}
 
-	public void removeByG_U_D_D(long groupId, long userId, Date displayDate,
-		boolean draft) throws SystemException {
-		for (BlogsEntry blogsEntry : findByG_U_D_D(groupId, userId,
-				displayDate, draft)) {
+	public void removeByG_S(long groupId, int status) throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_S(groupId, status)) {
 			remove(blogsEntry);
 		}
 	}
@@ -3317,10 +5836,142 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_U(long groupId, long userId) throws SystemException {
+	public int countByC_D(long companyId, Date displayDate)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(companyId), displayDate };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_D,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_D, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_D_S(long companyId, Date displayDate, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId),
+				
+				displayDate, new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_D_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_D_S,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_U(long groupId, long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U,
 				finderArgs, this);
 
 		if (count == null) {
@@ -3360,8 +6011,319 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U_S,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByC_S(long companyId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_S, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_D(long groupId, Date displayDate)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(groupId), displayDate };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_D,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_D, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_D_S(long groupId, Date displayDate, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				displayDate, new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_D_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				if (displayDate == null) {
+					query.append("blogsEntry.displayDate < null");
+				}
+				else {
+					query.append("blogsEntry.displayDate < ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (displayDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				}
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_D_S,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(userId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_S,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -3431,15 +6393,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_D_D(long groupId, Date displayDate, boolean draft)
+	public int countByG_UT_S(long groupId, String urlTitle, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				displayDate, Boolean.valueOf(draft)
+				urlTitle, new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_D_D,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -3457,16 +6419,16 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				if (displayDate == null) {
-					query.append("blogsEntry.displayDate < null");
+				if (urlTitle == null) {
+					query.append("blogsEntry.urlTitle IS NULL");
 				}
 				else {
-					query.append("blogsEntry.displayDate < ?");
+					query.append("blogsEntry.urlTitle = ?");
 				}
 
 				query.append(" AND ");
 
-				query.append("blogsEntry.draft = ?");
+				query.append("blogsEntry.status = ?");
 
 				query.append(" ");
 
@@ -3476,11 +6438,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				if (displayDate != null) {
-					qPos.add(CalendarUtil.getTimestamp(displayDate));
+				if (urlTitle != null) {
+					qPos.add(urlTitle);
 				}
 
-				qPos.add(draft);
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3492,7 +6454,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_D_D,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_UT_S,
 					finderArgs, count);
 
 				closeSession(session);
@@ -3502,15 +6464,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByC_D_D(long companyId, Date displayDate, boolean draft)
+	public int countByG_U_D(long groupId, long userId, Date displayDate)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				new Long(groupId), new Long(userId),
 				
-				displayDate, Boolean.valueOf(draft)
+				displayDate
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_D_D,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_D,
 				finderArgs, this);
 
 		if (count == null) {
@@ -3524,7 +6486,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				query.append("SELECT COUNT(blogsEntry) ");
 				query.append("FROM BlogsEntry blogsEntry WHERE ");
 
-				query.append("blogsEntry.companyId = ?");
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.userId = ?");
 
 				query.append(" AND ");
 
@@ -3535,23 +6501,19 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					query.append("blogsEntry.displayDate < ?");
 				}
 
-				query.append(" AND ");
-
-				query.append("blogsEntry.draft = ?");
-
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
+
+				qPos.add(userId);
 
 				if (displayDate != null) {
 					qPos.add(CalendarUtil.getTimestamp(displayDate));
 				}
-
-				qPos.add(draft);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3563,7 +6525,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_D_D,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_D,
 					finderArgs, count);
 
 				closeSession(session);
@@ -3573,15 +6535,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_U_D_D(long groupId, long userId, Date displayDate,
-		boolean draft) throws SystemException {
+	public int countByG_U_D_S(long groupId, long userId, Date displayDate,
+		int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
-				displayDate, Boolean.valueOf(draft)
+				displayDate, new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_D_D,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_U_D_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -3612,7 +6574,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("blogsEntry.draft = ?");
+				query.append("blogsEntry.status = ?");
 
 				query.append(" ");
 
@@ -3628,7 +6590,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					qPos.add(CalendarUtil.getTimestamp(displayDate));
 				}
 
-				qPos.add(draft);
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3640,8 +6602,63 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_D_D,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_D_S,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_S(long groupId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(blogsEntry) ");
+				query.append("FROM BlogsEntry blogsEntry WHERE ");
+
+				query.append("blogsEntry.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("blogsEntry.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
+					count);
 
 				closeSession(session);
 			}

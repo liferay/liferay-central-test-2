@@ -79,11 +79,14 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 			{ "urlTitle", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			{ "draft", new Integer(Types.BOOLEAN) },
 			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
-			{ "trackbacks", new Integer(Types.CLOB) }
+			{ "trackbacks", new Integer(Types.CLOB) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,draft BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,allowTrackbacks BOOLEAN,trackbacks TEXT null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -110,9 +113,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		model.setUrlTitle(soapModel.getUrlTitle());
 		model.setContent(soapModel.getContent());
 		model.setDisplayDate(soapModel.getDisplayDate());
-		model.setDraft(soapModel.getDraft());
 		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
 		model.setTrackbacks(soapModel.getTrackbacks());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -275,18 +281,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		_displayDate = displayDate;
 	}
 
-	public boolean getDraft() {
-		return _draft;
-	}
-
-	public boolean isDraft() {
-		return _draft;
-	}
-
-	public void setDraft(boolean draft) {
-		_draft = draft;
-	}
-
 	public boolean getAllowTrackbacks() {
 		return _allowTrackbacks;
 	}
@@ -305,6 +299,57 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 
 	public void setTrackbacks(String trackbacks) {
 		_trackbacks = trackbacks;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = status;
+		}
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	public String getStatusByUserName() {
+		return GetterUtil.getString(_statusByUserName);
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
 	}
 
 	public BlogsEntry toEscapedModel() {
@@ -329,9 +374,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 			model.setUrlTitle(HtmlUtil.escape(getUrlTitle()));
 			model.setContent(HtmlUtil.escape(getContent()));
 			model.setDisplayDate(getDisplayDate());
-			model.setDraft(getDraft());
 			model.setAllowTrackbacks(getAllowTrackbacks());
 			model.setTrackbacks(HtmlUtil.escape(getTrackbacks()));
+			model.setStatus(getStatus());
+			model.setStatusByUserId(getStatusByUserId());
+			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
+			model.setStatusDate(getStatusDate());
 
 			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
 					new Class[] { BlogsEntry.class },
@@ -365,9 +413,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		clone.setUrlTitle(getUrlTitle());
 		clone.setContent(getContent());
 		clone.setDisplayDate(getDisplayDate());
-		clone.setDraft(getDraft());
 		clone.setAllowTrackbacks(getAllowTrackbacks());
 		clone.setTrackbacks(getTrackbacks());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -441,12 +492,18 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		sb.append(getContent());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
-		sb.append(", draft=");
-		sb.append(getDraft());
 		sb.append(", allowTrackbacks=");
 		sb.append(getAllowTrackbacks());
 		sb.append(", trackbacks=");
 		sb.append(getTrackbacks());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -508,16 +565,28 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>draft</column-name><column-value><![CDATA[");
-		sb.append(getDraft());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>allowTrackbacks</column-name><column-value><![CDATA[");
 		sb.append(getAllowTrackbacks());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>trackbacks</column-name><column-value><![CDATA[");
 		sb.append(getTrackbacks());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -542,8 +611,14 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	private String _originalUrlTitle;
 	private String _content;
 	private Date _displayDate;
-	private boolean _draft;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
+	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -29,33 +29,33 @@ package com.liferay.portlet.blogs.service.persistence;
  */
 public class BlogsEntryFinderUtil {
 	public static int countByOrganizationId(long organizationId,
-		java.util.Date displayDate, boolean draft)
+		java.util.Date displayDate, int status)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .countByOrganizationId(organizationId, displayDate, draft);
+				   .countByOrganizationId(organizationId, displayDate, status);
 	}
 
 	public static int countByOrganizationIds(
 		java.util.List<Long> organizationIds, java.util.Date displayDate,
-		boolean draft) throws com.liferay.portal.SystemException {
+		int status) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .countByOrganizationIds(organizationIds, displayDate, draft);
+				   .countByOrganizationIds(organizationIds, displayDate, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, java.util.Date displayDate, boolean draft,
-		int start, int end) throws com.liferay.portal.SystemException {
+		long organizationId, java.util.Date displayDate, int status, int start,
+		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationId(organizationId, displayDate, draft,
+				   .findByOrganizationId(organizationId, displayDate, status,
 			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
 		java.util.List<Long> organizationIds, java.util.Date displayDate,
-		boolean draft, int start, int end)
+		int status, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationIds(organizationIds, displayDate, draft,
+				   .findByOrganizationIds(organizationIds, displayDate, status,
 			start, end);
 	}
 

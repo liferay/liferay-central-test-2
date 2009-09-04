@@ -77,7 +77,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		int status, boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -104,7 +104,7 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj6 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj7 = new BooleanWrapper(draft);
+			Object paramObj7 = new IntegerWrapper(status);
 
 			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
 
@@ -617,7 +617,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		int status, boolean allowTrackbacks, java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -646,7 +646,7 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj7 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj8 = new BooleanWrapper(draft);
+			Object paramObj8 = new IntegerWrapper(status);
 
 			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
 

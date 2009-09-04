@@ -61,9 +61,12 @@ public class BlogsEntrySoap implements Serializable {
 		soapModel.setUrlTitle(model.getUrlTitle());
 		soapModel.setContent(model.getContent());
 		soapModel.setDisplayDate(model.getDisplayDate());
-		soapModel.setDraft(model.getDraft());
 		soapModel.setAllowTrackbacks(model.getAllowTrackbacks());
 		soapModel.setTrackbacks(model.getTrackbacks());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -212,18 +215,6 @@ public class BlogsEntrySoap implements Serializable {
 		_displayDate = displayDate;
 	}
 
-	public boolean getDraft() {
-		return _draft;
-	}
-
-	public boolean isDraft() {
-		return _draft;
-	}
-
-	public void setDraft(boolean draft) {
-		_draft = draft;
-	}
-
 	public boolean getAllowTrackbacks() {
 		return _allowTrackbacks;
 	}
@@ -244,6 +235,38 @@ public class BlogsEntrySoap implements Serializable {
 		_trackbacks = trackbacks;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private String _uuid;
 	private long _entryId;
 	private long _groupId;
@@ -256,7 +279,10 @@ public class BlogsEntrySoap implements Serializable {
 	private String _urlTitle;
 	private String _content;
 	private Date _displayDate;
-	private boolean _draft;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

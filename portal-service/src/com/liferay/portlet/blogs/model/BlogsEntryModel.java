@@ -103,12 +103,6 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 
 	public void setDisplayDate(Date displayDate);
 
-	public boolean getDraft();
-
-	public boolean isDraft();
-
-	public void setDraft(boolean draft);
-
 	public boolean getAllowTrackbacks();
 
 	public boolean isAllowTrackbacks();
@@ -118,6 +112,26 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public String getTrackbacks();
 
 	public void setTrackbacks(String trackbacks);
+
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
 
 	public BlogsEntry toEscapedModel();
 }

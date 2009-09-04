@@ -82,9 +82,12 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setUrlTitle(randomString());
 		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
-		newBlogsEntry.setDraft(randomBoolean());
 		newBlogsEntry.setAllowTrackbacks(randomBoolean());
 		newBlogsEntry.setTrackbacks(randomString());
+		newBlogsEntry.setStatus(nextInt());
+		newBlogsEntry.setStatusByUserId(nextLong());
+		newBlogsEntry.setStatusByUserName(randomString());
+		newBlogsEntry.setStatusDate(nextDate());
 
 		_persistence.update(newBlogsEntry, false);
 
@@ -109,11 +112,17 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
 		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getDisplayDate()),
 			Time.getShortTimestamp(newBlogsEntry.getDisplayDate()));
-		assertEquals(existingBlogsEntry.getDraft(), newBlogsEntry.getDraft());
 		assertEquals(existingBlogsEntry.getAllowTrackbacks(),
 			newBlogsEntry.getAllowTrackbacks());
 		assertEquals(existingBlogsEntry.getTrackbacks(),
 			newBlogsEntry.getTrackbacks());
+		assertEquals(existingBlogsEntry.getStatus(), newBlogsEntry.getStatus());
+		assertEquals(existingBlogsEntry.getStatusByUserId(),
+			newBlogsEntry.getStatusByUserId());
+		assertEquals(existingBlogsEntry.getStatusByUserName(),
+			newBlogsEntry.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getStatusDate()),
+			Time.getShortTimestamp(newBlogsEntry.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -168,9 +177,12 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setUrlTitle(randomString());
 		blogsEntry.setContent(randomString());
 		blogsEntry.setDisplayDate(nextDate());
-		blogsEntry.setDraft(randomBoolean());
 		blogsEntry.setAllowTrackbacks(randomBoolean());
 		blogsEntry.setTrackbacks(randomString());
+		blogsEntry.setStatus(nextInt());
+		blogsEntry.setStatusByUserId(nextLong());
+		blogsEntry.setStatusByUserName(randomString());
+		blogsEntry.setStatusDate(nextDate());
 
 		_persistence.update(blogsEntry, false);
 
