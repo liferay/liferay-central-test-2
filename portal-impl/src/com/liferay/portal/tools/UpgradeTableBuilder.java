@@ -55,7 +55,7 @@ public class UpgradeTableBuilder {
 
 		for (String fileName : fileNames) {
 			fileName = StringUtil.replace(fileName, "\\", "/");
-System.out.println(fileName);
+
 			int x = fileName.indexOf("upgrade/v");
 			int y = fileName.indexOf("/util", x);
 
