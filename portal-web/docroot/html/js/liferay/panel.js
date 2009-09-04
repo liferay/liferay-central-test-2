@@ -55,7 +55,8 @@ Liferay.Panel = Alloy.Observable.extend(
 			if (instance._collapsible) {
 				instance.makeCollapsible();
 
-				instance._panelTitles.disableSelection();
+				Liferay.Util.disableSelection(instance._panelTitles);
+
 				instance._panelTitles.css(
 					{
 						cursor: 'pointer'

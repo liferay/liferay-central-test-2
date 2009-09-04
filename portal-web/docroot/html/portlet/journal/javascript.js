@@ -57,7 +57,7 @@
 
 						instance._getTextAreaFields().css('visibility', 'hidden');
 
-						jQuery.ui.disableSelection(document.body);
+						Liferay.Util.disableSelection(document.body);
 					},
 
 					endDragEvent: function() {
@@ -65,7 +65,7 @@
 
 						instance._getTextAreaFields().css('visibility', 'visible');
 
-						jQuery.ui.enableSelection(document.body);
+						Liferay.Util.enableSelection(document.body);
 					},
 
 					dragOutEvent: function(event, id) {
@@ -126,7 +126,7 @@
 
 						instance._getTextAreaFields().css('visibility', 'hidden');
 
-						jQuery.ui.disableSelection(document.body);
+						Liferay.Util.disableSelection(document.body);
 
 						instance.clonedSource = source.clone();
 
@@ -188,7 +188,7 @@
 
 							instance._repositionEditFieldOptions();
 
-							jQuery.ui.enableSelection(document.body);
+							Liferay.Util.enableSelection(document.body);
 						}
 
 						instance._getTextAreaFields().css('visibility', 'visible');
@@ -1444,7 +1444,7 @@
 				var instance = this;
 
 				instance._repositionEditFieldOptions();
-				jQuery.ui.enableSelection(document.body);
+				Liferay.Util.enableSelection(document.body);
 			},
 
 			_disableEditMode: function() {

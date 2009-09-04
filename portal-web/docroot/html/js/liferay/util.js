@@ -399,6 +399,10 @@ Liferay.Util = {
 		input.bind('keypress.disableMatchedKeys', blockChars);
 	},
 
+	disableSelection: function(el) {
+		jQuery(el).attr('unselectable', 'on').css('MozUserSelect', 'none');
+	},
+
 	disableTextareaTabs: function(textarea) {
 		var instance = this;
 
@@ -410,6 +414,10 @@ Liferay.Util = {
 			textarea.attr('textareatabs', 'disabled');
 			textarea.unbind('keydown.liferay', Liferay.Util.textareaTabs);
 		}
+	},
+
+	enableSelection: function(el) {
+		jQuery(el).attr('unselectable', 'off').css('MozUserSelect', '');
 	},
 
 	enableTextareaTabs: function(textarea) {

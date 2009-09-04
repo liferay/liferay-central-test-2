@@ -84,7 +84,7 @@ if (hidePortletWhenEmpty) {
 					}
 				);
 
-				jQuery.ui.disableSelection(treeview);
+				Liferay.Util.disableSelection(treeview);
 			}
 		}
 	);
