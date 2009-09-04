@@ -31,7 +31,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 %>
 
 <c:choose>
-	<c:when test="<%= PropsValues.SESSION_TRACKER_MEMORY_ENABLED %>">
+	<c:when test="<%= PropsValues.LIVE_USERS_ENABLED && PropsValues.SESSION_TRACKER_MEMORY_ENABLED %>">
 		<liferay-ui:tabs
 			names="live-sessions"
 			param="tabs2"
@@ -130,6 +130,9 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test="<%= !PropsValues.LIVE_USERS_ENABLED %>">
+		<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsKeys.LIVE_USERS_ENABLED) %>
 	</c:when>
 	<c:otherwise>
 		<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsKeys.SESSION_TRACKER_MEMORY_ENABLED) %>
