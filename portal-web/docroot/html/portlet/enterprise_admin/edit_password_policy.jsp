@@ -47,318 +47,173 @@ long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDu
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
-<form method="post" name="<portlet:namespace />fm" action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" /></portlet:actionURL>">
-<input name="<portlet:namespace /><%= Constants.CMD %>" value="<%= passwordPolicy == null ? Constants.ADD : Constants.UPDATE %>" type="hidden" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />passwordPolicyId" type="hidden" value="<%= passwordPolicyId %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPasswordPolicyURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_password_policy" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= DuplicatePasswordPolicyException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= PasswordPolicyNameException.class %>" message="please-enter-a-valid-name" />
+<aui:form action="<%= editPasswordPolicyURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= passwordPolicy == null ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="passwordPolicyId" type="hidden" value="<%= passwordPolicyId %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field disabled="<%= defaultPolicy %>" model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="changeable" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeable" />
+	<liferay-ui:error exception="<%= DuplicatePasswordPolicyException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= PasswordPolicyNameException.class %>" message="please-enter-a-valid-name" />
 
-		<liferay-ui:icon-help message="changeable-help" />
-	</td>
-</tr>
-<tbody id="<portlet:namespace />changeableSettings">
-	<tr>
-		<td>
-			<liferay-ui:message key="change-required" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="changeRequired" />
+	<aui:model-context bean="<%= passwordPolicy %>" model="<%= PasswordPolicy.class %>" />
 
-			<liferay-ui:icon-help message="change-required-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="minimum-age" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />minAge">
-				<option value="0" <%= (minAge == 0) ? "selected" : "" %>><liferay-ui:message key="none" /></option>
+	<liferay-ui:panel-container id="editPasswordPolicy" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+		<liferay-ui:panel id="passwordPolicyGeneral" title='<%= LanguageUtil.get(pageContext, "general") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
-				<%
-				for (int i = 0; i < 15; i++) {
-				%>
+			<aui:fieldset>
+				<aui:input disabled="<%= defaultPolicy %>" name="name" />
 
-					<option value="<%= _DURATIONS[i] %>" <%= (minAge == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+				<aui:input name="description" />
 
-				<%
-				}
-				%>
+				<aui:input helpMessage="changeable-help" inlineLabel="<%= true %>" name="changeable" />
 
-			</select>
+				<div id="<portlet:namespace />changeableSettings">
+					<aui:input helpMessage="change-required-help" inlineLabel="<%= true %>" name="changeRequired" />
 
-			<liferay-ui:icon-help message="minimum-age-help" />
-		</td>
-	</tr>
-</tbody>
-</table>
+					<aui:select helpMessage="minimum-age-help" label="minimum-age" name="minAge">
+						<aui:option label="none" selected="<%= (minAge == 0) %>" value="0" />
 
-<br />
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (minAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+						<%
+						}
+						%>
 
-<br /><br />
+					</aui:select>
+				</div>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-<liferay-ui:tabs names="password-syntax-checking" />
+		<liferay-ui:panel id="passwordSyntaxChecking" title='<%= LanguageUtil.get(pageContext, "password-syntax-checking") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<aui:fieldset>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="syntax-checking-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="checkSyntax" />
+				<aui:input helpMessage="syntax-checking-enabled-help" inlineLabel="<%= true %>" label="syntax-checking-enabled" name="checkSyntax" />
 
-		<liferay-ui:icon-help message="syntax-checking-enabled-help" />
-	</td>
-</tr>
-<tbody id="<portlet:namespace />syntaxSettings">
-	<tr>
-		<td>
-			<liferay-ui:message key="allow-dictionary-words" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="allowDictionaryWords" />
+				<div id="<portlet:namespace />syntaxSettings">
+					<aui:input helpMessage="allow-dictionary-words-help" inlineLabel="<%= true %>" name="allowDictionaryWords" />
 
-			<liferay-ui:icon-help message="allow-dictionary-words-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="minimum-length" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="minLength" />
+					<aui:input helpMessage="minimum-length-help" label="minimum-length" name="minLength" />
+				</div>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-			<liferay-ui:icon-help message="minimum-length-help" />
-		</td>
-	</tr>
-</tbody>
-</table>
+		<liferay-ui:panel id="passwordHistory" title='<%= LanguageUtil.get(pageContext, "password-history") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<aui:fieldset>
 
-<br />
+				<aui:input helpMessage="history-enabled-help" inlineLabel="<%= true %>" label="history-enabled" name="history" />
 
-<liferay-ui:tabs names="password-history" />
+				<div id="<portlet:namespace />historySettings">
+					<aui:select helpMessage="history-count-help" name="historyCount">
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="history-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="history" />
+						<%
+						for (int i = 2; i < 25; i++) {
+						%>
 
-		<liferay-ui:icon-help message="history-enabled-help" />
-	</td>
-</tr>
-<tr id="<portlet:namespace />historySettings">
-	<td>
-		<liferay-ui:message key="history-count" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />historyCount">
+							<aui:option label="<%= i %>" selected="<%= (historyCount == i) %>" />
 
-			<%
-			for (int i = 2; i < 25; i++) {
-			%>
+						<%
+						}
+						%>
 
-				<option value="<%= i %>" <%= (historyCount == i) ? "selected" : "" %>><%= i %></option>
+					</aui:select>
+				</div>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-			<%
-			}
-			%>
+		<liferay-ui:panel id="passwordExpiration" title='<%= LanguageUtil.get(pageContext, "password-expiration") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<aui:fieldset>
 
-		</select>
+				<aui:input helpMessage="expiration-enabled-help" inlineLabel="<%= true %>" label="expiration-enabled" name="expireable" />
 
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="" />
+				<div id="<portlet:namespace />expirationSettings">
+					<aui:select helpMessage="maximum-age-help" label="maximum-age" name="maxAge">
 
-		<liferay-ui:icon-help message="history-count-help" />
-	</td>
-</tr>
-</table>
+						<%
+						for (int i = 15; i < _DURATIONS.length; i++) {
+						%>
 
-<br />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (maxAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
 
-<liferay-ui:tabs names="password-expiration" />
+						<%
+						}
+						%>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="expiration-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="expireable" />
+					</aui:select>
 
-		<liferay-ui:icon-help message="expiration-enabled-help" />
-	</td>
-</tr>
-<tbody id="<portlet:namespace />expirationSettings">
-	<tr>
-		<td>
-			<liferay-ui:message key="maximum-age" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />maxAge">
+					<aui:select helpMessage="warning-time-help" name="warningTime">
 
-				<%
-				for (int i = 15; i < _DURATIONS.length; i++) {
-				%>
+						<%
+						for (int i = 7; i < 16; i++) {
+						%>
 
-					<option value="<%= _DURATIONS[i] %>" <%= (maxAge == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" selected="<%= (warningTime == _DURATIONS[i]) %>" />
 
-				<%
-				}
-				%>
+						<%
+						}
+						%>
 
-			</select>
+					</aui:select>
 
-			<liferay-ui:icon-help message="maximum-age-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="warning-time" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />warningTime">
+					<aui:input helpMessage="grace-limit-help" name="graceLimit" />
+				</div>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-				<%
-				for (int i = 7; i < 16; i++) {
-				%>
+		<liferay-ui:panel id="passwordLockout" title='<%= LanguageUtil.get(pageContext, "lockout") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<aui:fieldset>
+				<aui:input helpMessage="lockout-enabled-help" inlineLabel="<%= true %>" label="lockout-enabled" name="lockout" />
 
-					<option value="<%= _DURATIONS[i] %>" <%= (warningTime == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+				<div id="<portlet:namespace />lockoutSettings">
+					<aui:input helpMessage="maximum-failure-help" label="maximum-failure" name="maxFailure" />
 
-				<%
-				}
-				%>
+					<aui:select helpMessage="reset-failure-count-help" name="resetFailureCount">
 
-			</select>
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
 
-			<liferay-ui:icon-help message="warning-time-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="grace-limit" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="graceLimit" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (resetFailureCount == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
 
-			<liferay-ui:icon-help message="grace-limit-help" />
-		</td>
-	</tr>
-</tbody>
-</table>
+						<%
+						}
+						%>
 
-<br />
+					</aui:select>
 
-<liferay-ui:tabs names="lockout" />
+					<aui:select helpMessage="lockout-duration-help" name="lockoutDuration">
+						<aui:option label="until-unlocked-by-an-administrator" selected="<%= (requireUnlock) %>" value="0" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="lockout-enabled" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="lockout" />
+						<%
+						for (int i = 0; i < 15; i++) {
+						%>
 
-		<liferay-ui:icon-help message="lockout-enabled-help" />
-	</td>
-</tr>
-<tbody id="<portlet:namespace />lockoutSettings">
-	<tr>
-		<td>
-			<liferay-ui:message key="maximum-failure" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= PasswordPolicy.class %>" bean="<%= passwordPolicy %>" field="maxFailure" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (!requireUnlock && (lockoutDuration == _DURATIONS[i])) %>" value="<%= _DURATIONS[i] %>" />
 
-			<liferay-ui:icon-help message="maximum-failure-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="reset-failure-count" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />resetFailureCount">
+						<%
+						}
+						%>
 
-				<%
-				for (int i = 0; i < 15; i++) {
-				%>
+					</aui:select>
+				</div>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-					<option value="<%= _DURATIONS[i] %>" <%= (resetFailureCount == _DURATIONS[i]) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
+	</liferay-ui:panel-container>
 
-				<%
-				}
-				%>
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-			</select>
-
-			<liferay-ui:icon-help message="reset-failure-count-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="lockout-duration" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />lockoutDuration">
-
-				<option value="0" <%= (requireUnlock) ? "selected" : "" %>><liferay-ui:message key="until-unlocked-by-an-administrator" /></option>
-
-				<%
-				for (int i = 0; i < 15; i++) {
-				%>
-
-					<option value="<%= _DURATIONS[i] %>" <%= (!requireUnlock && (lockoutDuration == _DURATIONS[i])) ? "selected" : "" %>><%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-
-			<liferay-ui:icon-help message="lockout-duration-help" />
-		</td>
-	</tr>
-</tbody>
-</table>
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

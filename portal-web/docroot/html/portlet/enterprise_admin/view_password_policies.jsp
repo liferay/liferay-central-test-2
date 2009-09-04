@@ -73,7 +73,7 @@ headerNames.add(StringPool.BLANK);
 	passwordPoliciesRedirect.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 	%>
 
-	<input name="<portlet:namespace />passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirect.toString() %>" />
+	<aui:input name="passwordPoliciesRedirect" type="hidden" value="<%= passwordPoliciesRedirect.toString() %>" />
 
 	<div class="separator"><!-- --></div>
 
