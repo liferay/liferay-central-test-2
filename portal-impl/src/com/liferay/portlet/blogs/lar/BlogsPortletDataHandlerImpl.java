@@ -50,7 +50,7 @@ import javax.portlet.PortletPreferences;
  * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -214,7 +214,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			displayDateHour += 12;
 		}
 
-		boolean draft = entry.isDraft();
+		int status = entry.getStatus();
 		boolean allowTrackbacks = entry.isAllowTrackbacks();
 		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
 
@@ -245,21 +245,21 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					draft, allowTrackbacks, trackbacks, serviceContext);
+					status, allowTrackbacks, trackbacks, serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					draft, allowTrackbacks, trackbacks, serviceContext);
+					status, allowTrackbacks, trackbacks, serviceContext);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, entry.getTitle(), entry.getContent(), displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, draft, allowTrackbacks, trackbacks,
+				displayDateMinute, status, allowTrackbacks, trackbacks,
 				serviceContext);
 		}
 

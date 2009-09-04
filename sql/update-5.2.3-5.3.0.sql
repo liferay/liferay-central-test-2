@@ -106,6 +106,11 @@ create table AssetVocabulary (
 	description VARCHAR(75) null
 );
 
+alter table BlogsEntry add status INTEGER;
+
+update BlogsEntry set status = 0 where draft = FALSE;
+update BlogsEntry set status = 2 where draft = TRUE;
+
 alter table Layout add layoutPrototypeId LONG;
 
 create table LayoutPrototype (

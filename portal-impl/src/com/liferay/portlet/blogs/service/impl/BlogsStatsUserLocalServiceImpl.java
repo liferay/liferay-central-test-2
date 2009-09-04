@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StatusConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
@@ -149,15 +150,17 @@ public class BlogsStatsUserLocalServiceImpl
 	public void updateStatsUser(long groupId, long userId, Date displayDate)
 		throws PortalException, SystemException {
 
-		int entryCount = blogsEntryPersistence.countByG_U(groupId, userId);
+		int entryCount = blogsEntryPersistence.countByG_U_S(
+			groupId, userId, StatusConstants.APPROVED);
 
 		BlogsStatsUser statsUser = getStatsUser(groupId, userId);
 
 		statsUser.setEntryCount(entryCount);
 
 		if (displayDate != null) {
-			BlogsEntry blogsEntry = blogsEntryPersistence.findByG_U_First(
-				groupId, userId, new EntryDisplayDateComparator());
+			BlogsEntry blogsEntry = blogsEntryPersistence.findByG_U_S_First(
+				groupId, userId, StatusConstants.APPROVED,
+				new EntryDisplayDateComparator());
 
 			Date lastDisplayDate = blogsEntry.getDisplayDate();
 

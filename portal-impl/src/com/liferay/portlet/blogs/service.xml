@@ -27,9 +27,12 @@
 		<column name="urlTitle" type="String" />
 		<column name="content" type="String" />
 		<column name="displayDate" type="Date" />
-		<column name="draft" type="boolean" />
 		<column name="allowTrackbacks" type="boolean" />
 		<column name="trackbacks" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 
@@ -45,29 +48,65 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_U" return-type="Collection">
+		<finder name="C_D" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+		</finder>
+		<finder name="C_D_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="C_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+		</finder>
+		<finder name="C_U_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+		</finder>
+		<finder name="G_D_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_U_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="G_UT" return-type="BlogsEntry" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="urlTitle" />
 		</finder>
-		<finder name="G_D_D" return-type="Collection">
+		<finder name="G_UT_S" return-type="BlogsEntry" unique="true">
 			<finder-column name="groupId" />
-			<finder-column name="displayDate" comparator="&lt;" />
-			<finder-column name="draft" />
+			<finder-column name="urlTitle" />
+			<finder-column name="status" />
 		</finder>
-		<finder name="C_D_D" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="displayDate" comparator="&lt;" />
-			<finder-column name="draft" />
-		</finder>
-		<finder name="G_U_D_D" return-type="Collection">
+		<finder name="G_U_D" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 			<finder-column name="displayDate" comparator="&lt;" />
-			<finder-column name="draft" />
+		</finder>
+		<finder name="G_U_D_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="displayDate" comparator="&lt;" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->

@@ -23,14 +23,14 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<div class="entry <%= entry.isDraft() ? "draft" : "" %>">
+	<div class="entry <%= (entry.getStatus() == StatusConstants.APPROVED) ? "" : "draft" %>">
 		<div class="entry-content">
 
 			<%
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 			%>
 
-			<c:if test="<%= entry.isDraft() %>">
+			<c:if test="<%= (entry.getStatus() == StatusConstants.DRAFT) %>">
 				<h3>
 					<liferay-ui:message key="draft" />
 				</h3>

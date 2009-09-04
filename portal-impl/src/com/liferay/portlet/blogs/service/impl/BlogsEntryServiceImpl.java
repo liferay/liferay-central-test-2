@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StatusConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -67,7 +68,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry addEntry(
 			String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
+			int displayDateMinute, int status, boolean allowTrackbacks,
 			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -77,7 +78,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return blogsEntryLocalService.addEntry(
 			getUserId(), title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
+			displayDateYear, displayDateHour, displayDateMinute, status,
 			allowTrackbacks, trackbacks, serviceContext);
 	}
 
@@ -101,8 +102,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList =
 				blogsEntryLocalService.getCompanyEntries(
-					companyId, false, lastIntervalStart,
-					lastIntervalStart + max, new EntryDisplayDateComparator());
+					companyId, lastIntervalStart, lastIntervalStart + max,
+					new EntryDisplayDateComparator());
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -170,8 +171,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList = blogsEntryLocalService.getGroupEntries(
-				groupId, false, lastIntervalStart,
-				lastIntervalStart + max);
+				groupId, lastIntervalStart, lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -215,13 +215,13 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Date displayDate = new Date();
-		boolean draft = false;
+		int status = StatusConstants.APPROVED;
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList = blogsEntryFinder.findByOrganizationId(
-				organizationId, displayDate, draft, lastIntervalStart,
+				organizationId, displayDate, status, lastIntervalStart,
 				lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
@@ -265,7 +265,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			long entryId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
+			int displayDateMinute, int status, boolean allowTrackbacks,
 			String[] trackbacks, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -275,7 +275,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbacks, serviceContext);
+			status, allowTrackbacks, trackbacks, serviceContext);
 	}
 
 	protected String exportToRSS(

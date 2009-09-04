@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StatusConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -134,7 +135,9 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			if ((entry != null) && entry.isDraft()) {
+			if ((entry != null) &&
+				(entry.getStatus() == StatusConstants.DRAFT)) {
+
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 				jsonObj.put("entryId", entry.getEntryId());
@@ -249,7 +252,7 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
-		boolean draft = ParamUtil.getBoolean(actionRequest, "draft");
+		int status = ParamUtil.getInteger(actionRequest, "status");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
 			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
@@ -267,10 +270,10 @@ public class EditEntryAction extends PortletAction {
 
 			entry = BlogsEntryServiceUtil.addEntry(
 				title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, draft,
+				displayDateYear, displayDateHour, displayDateMinute, status,
 				allowTrackbacks, trackbacks, serviceContext);
 
-			if (!draft) {
+			if (status == StatusConstants.APPROVED) {
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),
 					entry.getEntryId(), -1);
@@ -283,18 +286,20 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
 			String tempOldUrlTitle = entry.getUrlTitle();
-			boolean oldDraft = entry.isDraft();
+			int oldStatus = entry.getStatus();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, draft,
+				displayDateYear, displayDateHour, displayDateMinute, status,
 				allowTrackbacks, trackbacks, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
 			}
 
-			if (oldDraft && !draft) {
+			if ((oldStatus == StatusConstants.DRAFT) &&
+				(status == StatusConstants.APPROVED)) {
+
 				AssetPublisherUtil.addAndStoreSelection(
 					actionRequest, BlogsEntry.class.getName(),
 					entry.getEntryId(), -1);

@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.StatusConstants;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -60,18 +62,18 @@ public class BlogsEntryFinderImpl
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
 
 	public int countByOrganizationId(
-			long organizationId, Date displayDate, boolean draft)
+			long organizationId, Date displayDate, int status)
 		throws SystemException {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(organizationId);
 
-		return countByOrganizationIds(organizationIds, displayDate, draft);
+		return countByOrganizationIds(organizationIds, displayDate, status);
 	}
 
 	public int countByOrganizationIds(
-			List<Long> organizationIds, Date displayDate, boolean draft)
+			List<Long> organizationIds, Date displayDate, int status)
 		throws SystemException {
 
 		Timestamp displayDate_TS = CalendarUtil.getTimestamp(displayDate);
@@ -82,6 +84,15 @@ public class BlogsEntryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
@@ -100,7 +111,10 @@ public class BlogsEntryFinderImpl
 			}
 
 			qPos.add(displayDate_TS);
-			qPos.add(draft);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -123,7 +137,7 @@ public class BlogsEntryFinderImpl
 	}
 
 	public List<BlogsEntry> findByOrganizationId(
-			long organizationId, Date displayDate, boolean draft, int start,
+			long organizationId, Date displayDate, int status, int start,
 			int end)
 		throws SystemException {
 
@@ -132,11 +146,11 @@ public class BlogsEntryFinderImpl
 		organizationIds.add(organizationId);
 
 		return findByOrganizationIds(
-			organizationIds, displayDate, draft, start, end);
+			organizationIds, displayDate, status, start, end);
 	}
 
 	public List<BlogsEntry> findByOrganizationIds(
-			List<Long> organizationIds, Date displayDate, boolean draft,
+			List<Long> organizationIds, Date displayDate, int status,
 			int start, int end)
 		throws SystemException {
 
@@ -148,6 +162,14 @@ public class BlogsEntryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
+
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
+			}
+			else {
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
+			}
 
 			sql = StringUtil.replace(
 				sql, "[$ORGANIZATION_ID$]",
@@ -166,7 +188,10 @@ public class BlogsEntryFinderImpl
 			}
 
 			qPos.add(displayDate_TS);
-			qPos.add(draft);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			return (List<BlogsEntry>)QueryUtil.list(
 				q, getDialect(), start, end);

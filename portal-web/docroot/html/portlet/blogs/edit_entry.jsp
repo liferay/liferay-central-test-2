@@ -112,7 +112,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
 						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
 						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
-						<portlet:namespace />draft: 1,
+						<portlet:namespace />status: <%= StatusConstants.DRAFT %>,
 						<portlet:namespace />assetTagNames: document.<portlet:namespace />fm.<portlet:namespace />assetTagNames.value
 					},
 					dataType: 'json',
@@ -146,6 +146,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 						saveStatus.attr('class', 'save-status portlet-msg-success');
 						saveStatus.html(now);
 					},
+					type: "POST",
 					error: function() {
 						saveStatus.attr('class', 'save-status portlet-msg-error');
 						saveStatus.html('<%= UnicodeLanguageUtil.get(pageContext, "could-not-save-draft-to-the-server") %>');
@@ -158,7 +159,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
-			document.<portlet:namespace />fm.<portlet:namespace />draft.value = 0;
+			document.<portlet:namespace />fm.<portlet:namespace />status.value = <%= StatusConstants.APPROVED %>;
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
@@ -173,7 +174,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				}
 			);
 
-			<c:if test="<%= (entry == null) || entry.isDraft() %>">
+			<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
 				<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
 				<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 				<portlet:namespace />oldContent = <portlet:namespace />initEditor();
@@ -191,7 +192,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
-	<aui:input name="draft" type="hidden" value="0" />
+	<aui:input name="status" type="hidden" value="<%= StatusConstants.APPROVED %>" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
@@ -199,7 +200,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
 
 	<aui:fieldset>
-		<c:if test="<%= (entry == null) || entry.isDraft() %>">
+		<c:if test="<%= (entry == null) || (entry.getStatus() == StatusConstants.DRAFT) %>">
 			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
 		</c:if>
 
@@ -257,7 +258,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		</c:if>
 
 		<aui:button-row>
-			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || entry.isDraft()) ? "publish" : "save" %>' />
+			<aui:button name="saveButton" type="submit" value='<%= ((entry == null) || (entry.getStatus() == StatusConstants.DRAFT)) ? "publish" : "save" %>' />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="button" value="cancel" />
 		</aui:button-row>

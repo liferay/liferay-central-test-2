@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StatusConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -61,7 +62,7 @@ import java.util.TimeZone;
 /**
  * <a href="WordPressImporter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class WordPressImporter {
 
@@ -271,7 +272,11 @@ public class WordPressImporter {
 		String statusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("status", _NS_WP));
 
-		boolean draft = statusText.equalsIgnoreCase("draft");
+		int status = StatusConstants.APPROVED;
+
+		if (statusText.equalsIgnoreCase("draft")) {
+			status = StatusConstants.DRAFT;
+		}
 
 		String pingStatusText = entryEl.elementTextTrim(
 			SAXReaderUtil.createQName("ping_status", _NS_WP));
@@ -298,7 +303,7 @@ public class WordPressImporter {
 		try {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, draft,
+				displayDateYear, displayDateHour, displayDateMinute, status,
 				allowTrackbacks, null, serviceContext);
 		}
 		catch (Exception e) {
