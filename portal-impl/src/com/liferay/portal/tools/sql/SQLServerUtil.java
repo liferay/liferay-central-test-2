@@ -56,16 +56,6 @@ public class SQLServerUtil extends DBUtil {
 		return template;
 	}
 
-	public boolean isSupportsAlterColumnName() {
-
-		// We actually have a way of getting SQL Server to alter column names.
-		// The problem is that it will break in scenarios where the column has
-		// an index. To make things simpler, we disallow altering of column
-		// names for SQL Server.
-
-		return _SUPPORTS_ALTER_COLUMN_NAME;
-	}
-
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
@@ -148,8 +138,6 @@ public class SQLServerUtil extends DBUtil {
 		" varchar(2000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};
-
-	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
 

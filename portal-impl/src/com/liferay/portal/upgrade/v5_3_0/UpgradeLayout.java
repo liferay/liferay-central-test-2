@@ -35,10 +35,10 @@ import com.liferay.portal.upgrade.v5_3_0.util.LayoutTable;
 public class UpgradeLayout extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type Layout friendlyURL VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// Layout
 

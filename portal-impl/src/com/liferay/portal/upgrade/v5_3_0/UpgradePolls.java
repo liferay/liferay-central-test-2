@@ -36,11 +36,10 @@ import com.liferay.portal.upgrade.v5_3_0.util.PollsQuestionTable;
 public class UpgradePolls extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type PollsChoice description STRING null");
-			runSQL("alter_column_type PollsQuestion title STRING null");
 		}
-		else {
+		catch (Exception e) {
 
 			// PollsChoice
 
@@ -50,10 +49,16 @@ public class UpgradePolls extends UpgradeProcess {
 			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL("alter_column_type PollsQuestion title STRING null");
+		}
+		catch (Exception e) {
 
 			// PollsQuestion
 
-			upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				PollsQuestionTable.TABLE_NAME,
 				PollsQuestionTable.TABLE_COLUMNS);
 

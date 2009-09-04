@@ -35,10 +35,10 @@ import com.liferay.portal.upgrade.v5_2_3.util.ResourceTable;
 public class UpgradeResource extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type Resource_ primKey VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// Resource
 

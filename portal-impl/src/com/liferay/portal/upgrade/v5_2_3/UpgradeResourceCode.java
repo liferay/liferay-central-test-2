@@ -35,10 +35,10 @@ import com.liferay.portal.upgrade.v5_2_3.util.ResourceCodeTable;
 public class UpgradeResourceCode extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type ResourceCode name VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// ResourceCode
 

@@ -41,10 +41,10 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 public class UpgradeTags extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type TagsAsset title VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// TagsAsset
 

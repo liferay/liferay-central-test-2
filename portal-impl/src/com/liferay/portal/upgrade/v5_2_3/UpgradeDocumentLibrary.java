@@ -60,14 +60,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type DLFileEntry name VARCHAR(255) null");
-			runSQL("alter_column_type DLFileEntry title VARCHAR(255) null");
-			runSQL("alter_column_type DLFileRank name VARCHAR(255) null");
-			runSQL("alter_column_type DLFileShortcut toName VARCHAR(255) null");
-			runSQL("alter_column_type DLFileVersion name VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// DLFileEntry
 
@@ -77,29 +73,47 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL("alter_column_type DLFileRank name VARCHAR(255) null");
+		}
+		catch (Exception e) {
 
 			// DLFileRank
 
-			upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL("alter_column_type DLFileShortcut toName VARCHAR(255) null");
+		}
+		catch (Exception e) {
 
 			// DLFileShortcut
 
-			upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				DLFileShortcutTable.TABLE_NAME,
 				DLFileShortcutTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 
 			upgradeTable.updateTable();
+		}
+
+		try {
+			runSQL("alter_column_type DLFileVersion name VARCHAR(255) null");
+		}
+		catch (Exception e) {
 
 			// DLFileVersion
 
-			upgradeTable = new DefaultUpgradeTableImpl(
+			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				DLFileVersionTable.TABLE_NAME,
 				DLFileVersionTable.TABLE_COLUMNS);
 

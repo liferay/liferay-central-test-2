@@ -35,10 +35,10 @@ import com.liferay.portal.upgrade.v5_2_3.util.CalEventTable;
 public class UpgradeCalendar extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type CalEvent remindBy INTEGER");
 		}
-		else {
+		catch (Exception e) {
 
 			// CalEvent
 

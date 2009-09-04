@@ -40,10 +40,10 @@ import java.sql.ResultSet;
 public class UpgradeUser extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type User_ greeting VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// User_
 

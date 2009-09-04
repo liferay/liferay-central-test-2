@@ -40,10 +40,10 @@ import java.sql.ResultSet;
 public class UpgradeBookmarks extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		if (isSupportsAlterColumnType()) {
+		try {
 			runSQL("alter_column_type BookmarksEntry name VARCHAR(255) null");
 		}
-		else {
+		catch (Exception e) {
 
 			// BookmarksEntry
 
