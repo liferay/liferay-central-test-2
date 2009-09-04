@@ -38,7 +38,7 @@ subfolderIds.add(new Long(folder.getFolderId()));
 DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, folder.getFolderId());
 
 int foldersCount = subfolderIds.size() - 1;
-int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
+int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, subfolderIds);
 
 request.setAttribute("view_folder.jsp-folder", folder);
 %>
