@@ -92,9 +92,6 @@ Liferay.Session = {
 	},
 
 	getCookie: function() {
-		var instance = this;
-
-		return jQuery.cookie(instance._cookieKey) || 0;
 	},
 
 	expire: function() {
@@ -157,15 +154,6 @@ Liferay.Session = {
 	},
 
 	setCookie: function(status) {
-		var instance = this;
-
-		var currentTime = new Date().getTime();
-
-		var options = {
-			secure : (window.location.protocol.indexOf('https') > -1)
-		};
-
-		jQuery.cookie(instance._cookieKey, status || currentTime, options);
 	},
 
 	warn: function() {
@@ -275,3 +263,26 @@ Liferay.Session = {
 	_timeoutDiff: 0,
 	_warning: 0
 };
+
+AUI().use(
+	'cookie',
+	function(A) {
+		Liferay.Session.setCookie = function(status) {
+			var instance = this;
+
+			var currentTime = new Date().getTime();
+
+			var options = {
+				secure: A.UA.secure
+			};
+
+			A.Cookie.set(instance._cookieKey, status || currentTime, options);
+		};
+
+		Liferay.Session.getCookie = function(status) {
+			var instance = this;
+
+			return A.Cookie.get(instance._cookieKey) || 0;
+		};
+	}
+);
