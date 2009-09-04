@@ -55,12 +55,32 @@ catch (Exception e) {
 
 <script type="text/javascript">
 	AUI().ready(
-		function() {
-			var form = jQuery('#<portlet:namespace />fm');
+		'io',
+		function(A) {
+			var form = A.get('#<portlet:namespace />fm');
 
-			form.ajaxForm(
-				{
-					target: form.parent()[0]
+			form.on(
+				'submit',
+				function(event) {
+					var uri = form.getAttribute('action');
+
+					A.io(
+						uri,
+						{
+							form: {
+								id: form
+							},
+							on: {
+								success: function(id, response) {
+									var instance = this;
+
+									form.get('parentNode').html(response.responseText);
+								}
+							}
+						}
+					);
+
+					event.halt();
 				}
 			);
 		}
