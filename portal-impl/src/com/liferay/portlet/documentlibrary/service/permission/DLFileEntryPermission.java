@@ -79,7 +79,9 @@ public class DLFileEntryPermission {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (fileEntry.getFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			if (fileEntry.getFolderId() ==
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 				long groupId = fileEntry.getGroupId();
 
 				if (!DLPermission.contains(

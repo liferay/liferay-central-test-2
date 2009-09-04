@@ -34,8 +34,8 @@
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
-			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_DOCUMENT</action-key>
+			<action-key>ADD_FOLDER</action-key>
 			<action-key>ADD_SHORTCUT</action-key>
 		</guest-unsupported>
 	</model-resource>

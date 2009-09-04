@@ -120,7 +120,7 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 				long entryFolderId = GetterUtil.getLong(doc.get("repositoryId"));
 				String fileName = doc.get("path");
 
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, entryFolderId, fileName);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(groupId, entryFolderId, fileName);
 
 				fileEntry = fileEntry.toEscapedModel();
 

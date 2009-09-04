@@ -1084,7 +1084,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Folder
 
-		if (fileEntry.getFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+		if (fileEntry.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			DLFolder folder = dlFolderPersistence.findByPrimaryKey(
 				fileEntry.getFolderId());
 

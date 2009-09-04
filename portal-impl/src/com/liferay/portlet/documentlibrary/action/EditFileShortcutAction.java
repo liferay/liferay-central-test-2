@@ -82,7 +82,7 @@ public class EditFileShortcutAction extends PortletAction {
 				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof FileShortcutPermissionException ||
-					e instanceof NoSuchFileEntryException) {
+					 e instanceof NoSuchFileEntryException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

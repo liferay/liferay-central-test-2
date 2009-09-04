@@ -250,6 +250,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				showAddFileEntryButton = showAddFileEntryButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
 				showAddFileShortcutButton = showAddFileShortcutButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
 			}
+
 			showAddFolderButton = mergedView && showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 			boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
 			%>

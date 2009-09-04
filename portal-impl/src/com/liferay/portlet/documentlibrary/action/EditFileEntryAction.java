@@ -115,11 +115,11 @@ public class EditFileEntryAction extends PortletAction {
 				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
-					e instanceof DuplicateFolderNameException ||
-					e instanceof FileNameException ||
-					e instanceof FileSizeException ||
-					e instanceof NoSuchFolderException ||
-					e instanceof SourceFileNameException) {
+					 e instanceof DuplicateFolderNameException ||
+					 e instanceof FileNameException ||
+					 e instanceof FileSizeException ||
+					 e instanceof NoSuchFolderException ||
+					 e instanceof SourceFileNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

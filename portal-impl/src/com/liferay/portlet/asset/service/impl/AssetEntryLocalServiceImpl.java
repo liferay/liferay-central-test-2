@@ -572,8 +572,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				groupId = repositoryId;
 			}
 			catch (NoSuchGroupException nsge) {
-				DLFolder folder =
-					dlFolderPersistence.findByPrimaryKey(repositoryId);
+				DLFolder folder = dlFolderPersistence.findByPrimaryKey(
+					repositoryId);
 
 				groupId = folder.getGroupId();
 				folderId = folder.getFolderId();

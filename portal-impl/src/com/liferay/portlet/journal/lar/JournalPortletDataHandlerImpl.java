@@ -325,9 +325,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					long folderId = GetterUtil.getLong(map.get("folderId"));
 					String name = map.get("name");
 
-//TODO
-//					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-//						folderId, name);
+					//TODO
+					//fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					//	folderId, name);
 				}
 
 				if (fileEntry == null) {

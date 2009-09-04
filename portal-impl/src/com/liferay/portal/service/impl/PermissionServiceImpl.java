@@ -362,7 +362,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
-				(primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
+				 (primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
 
 			int pos = primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
@@ -377,7 +377,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.PERMISSIONS) &&
-				!permissionChecker.hasPermission(
+				 !permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.DEFINE_PERMISSIONS)) {
 
 			throw new PrincipalException();

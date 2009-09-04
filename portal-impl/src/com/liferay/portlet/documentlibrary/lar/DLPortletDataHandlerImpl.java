@@ -176,9 +176,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
-			List<DLFileShortcut> fileShortcuts =
-				DLFileShortcutUtil.findByG_F(
-					folder.getGroupId(), folder.getFolderId());
+			List<DLFileShortcut> fileShortcuts = DLFileShortcutUtil.findByG_F(
+				folder.getGroupId(), folder.getFolderId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				exportFileShortcut(
