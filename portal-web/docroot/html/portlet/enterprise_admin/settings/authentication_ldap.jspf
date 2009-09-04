@@ -330,250 +330,144 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+<aui:fieldset>
+	<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ldapAuthEnabled %>" />
 
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' defaultValue="<%= ldapAuthEnabled %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_REQUIRED %>)"><liferay-ui:message key="required" /></label>
-
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' defaultValue="<%= ldapAuthRequired %>" />
-	</div>
-</fieldset>
+	<aui:input inlineLabel="<%= true %>" label="required" name='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' type="checkbox" value="<%= ldapAuthRequired %>" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="default-values" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="apache"> Apache Directory Server <br />
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="fedora"> Fedora Directory Server <br />
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="microsoft"> Microsoft Active Directory Server <br />
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="novell"> Novell eDirectory <br />
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="open"> OpenLDAP <br />
-		<input name="<portlet:namespace />defaultLdap" type="radio" value="other"> <liferay-ui:message key="other-directory-server" />
-	</div>
+<aui:fieldset>
+	<aui:field-wrapper>
+		<aui:input label="Apache Directory Server" name="defaultLdap" type="radio" value="apache" />
+		<aui:input label="Fedora Directory Server" name="defaultLdap" type="radio" value="fedora" />
+		<aui:input label="Microsoft Active Directory Server" name="defaultLdap" type="radio" value="microsoft" />
+		<aui:input label="Novell eDirectory" name="defaultLdap" type="radio" value="novell" />
+		<aui:input label="OpenLDAP" name="defaultLdap" type="radio" value="open" />
+		<aui:input label="other-directory-server" name="defaultLdap" type="radio" value="other" />
+	</aui:field-wrapper>
 
-	<div class="aui-button-holder">
-		<input type="button" value="<liferay-ui:message key="reset-values" />" onClick="<portlet:namespace />updateDefaultLdap();" />
-	</div>
-</fieldset>
+	<aui:button-row>
+		<aui:button value="reset-values" onClick='<%= renderResponse.getNamespace() + "updateDefaultLdap();" %>' />
+	</aui:button-row>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="connection" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)"><liferay-ui:message key="base-provider-url" /></label>
+<aui:fieldset>
+	<aui:input cssClass="lfr-input-text-container" helpMessage="the-ldap-url-format-is" label="base-provider-url" name='<%= "settings(" + PropsKeys.LDAP_BASE_PROVIDER_URL + ")" %>' type="text" value="<%= ldapBaseProviderUrl %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_PROVIDER_URL %>)" type="text" value="<%= HtmlUtil.escape(ldapBaseProviderUrl) %>" />
+	<aui:input cssClass="lfr-input-text-container" helpMessage="the-ldap-url-format-is" label="base-dn" name='<%= "settings(" + PropsKeys.LDAP_BASE_DN + ")" %>' type="text" value="<%= ldapBaseDN %>" />
 
-		<liferay-ui:icon-help message="the-ldap-url-format-is" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="principal" name='<%= "settings(" + PropsKeys.LDAP_SECURITY_PRINCIPAL + ")" %>' type="text" value="<%= ldapSecurityPrincipal %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)"><liferay-ui:message key="base-dn" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="credentials" name='<%= "settings(" + PropsKeys.LDAP_SECURITY_CREDENTIALS + ")" %>' type="password" value="<%= ldapSecurityCredentials %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_BASE_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapBaseDN) %>" />
+	<aui:button-row>
+		<%
+		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapConnection');";
+		%>
 
-		<liferay-ui:icon-help message="the-ldap-url-format-is" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)"><liferay-ui:message key="principal" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)" type="text" value="<%= HtmlUtil.escape(ldapSecurityPrincipal) %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)"><liferay-ui:message key="credentials" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)" type="password" value="<%= HtmlUtil.escape(ldapSecurityCredentials) %>" />
-	</div>
-
-	<div class="aui-button-holder">
-		<input type="button" value="<liferay-ui:message key="test-ldap-connection" />" onClick="<portlet:namespace/>testSettings('ldapConnection');" />
-	</div>
-</fieldset>
+		<aui:button value="test-ldap-connection" onClick='<%= taglibOnClick %>' />
+	</aui:button-row>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="users" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)"><liferay-ui:message key="authentication-search-filter" /></label>
+<aui:fieldset>
+	<aui:input cssClass="lfr-input-text-container" helpMessage="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" label="authentication-search-filter" name='<%= "settings(" + PropsKeys.LDAP_AUTH_SEARCH_FILTER + ")" %>' type="text" value="<%= ldapAuthSearchFilter %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_AUTH_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapAuthSearchFilter) %>" />
-
-		<liferay-ui:icon-help message="enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapImportUserSearchFilter) %>" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="import-search-filter" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + ")" %>' type="text" value="<%= ldapImportUserSearchFilter %>" />
 
 	<h4><liferay-ui:message key="user-mapping" /></h4>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingScreenName"><liferay-ui:message key="screen-name" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="screen-name" name="userMappingScreenName" type="text" value="<%= userMappingScreenName %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingScreenName" type="text" value="<%= userMappingScreenName %>" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="password" name="userMappingPassword" type="text" value="<%= userMappingPassword %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingPassword"><liferay-ui:message key="password" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="email-address" name="userMappingEmailAddress" type="text" value="<%= userMappingEmailAddress %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingPassword" type="text" value="<%= userMappingPassword %>" />
-	</div>
+   	<aui:input cssClass="lfr-input-text-container" label="full-name" name="userMappingFullName" type="text" value="<%= userMappingFullName %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingEmailAddress"><liferay-ui:message key="email-address" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="first-name" name="userMappingFirstName" type="text" value="<%= userMappingFirstName %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingEmailAddress" type="text" value="<%= userMappingEmailAddress %>" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="last-name" name="userMappingLastName" type="text" value="<%= userMappingLastName %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingFullName"><liferay-ui:message key="full-name" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="job-title" name="userMappingJobTitle" type="text" value="<%= userMappingJobTitle %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingFullName" type="text" value="<%= userMappingFullName %>" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="group" name="userMappingGroup" type="text" value="<%= userMappingGroup %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingFirstName"><liferay-ui:message key="first-name" /></label>
+	<aui:input name='<%= "settings(" + PropsKeys.LDAP_USER_MAPPINGS + ")" %>' type="hidden" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingFirstName" type="text" value="<%= userMappingFirstName %>" />
-	</div>
+	<aui:button-row>
+		<%
+		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapUsers');";
+		%>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingLastName"><liferay-ui:message key="last-name" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingLastName" type="text" value="<%= userMappingLastName %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingJobTitle"><liferay-ui:message key="job-title" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingJobTitle" type="text" value="<%= userMappingJobTitle %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />userMappingGroup"><liferay-ui:message key="group" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />userMappingGroup" type="text" value="<%= userMappingGroup %>" />
-	</div>
-
-	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_MAPPINGS %>)" type="hidden" value="" />
-
-	<div class="aui-button-holder">
-		<input type="button" value="<liferay-ui:message key="test-ldap-users" />" onClick="<portlet:namespace />testSettings('ldapUsers');" />
-	</div>
-</fieldset>
+		<aui:button value="test-ldap-users" onClick="<%= taglibOnClick %>" />
+	</aui:button-row>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="groups" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)"><liferay-ui:message key="import-search-filter" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER %>)" type="text" value="<%= HtmlUtil.escape(ldapImportGroupSearchFilter) %>" />
-	</div>
+<aui:fieldset>
+	<aui:input cssClass="lfr-input-text-container" label="import-search-filter" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + ")" %>' type="text" value="<%= ldapImportGroupSearchFilter %>" />
 
 	<h4><liferay-ui:message key="group-mapping" /></h4>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />groupMappingGroupName"><liferay-ui:message key="group-name" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="group-name" name="groupMappingGroupName" type="text" value="<%= groupMappingGroupName %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />groupMappingGroupName" type="text" value="<%= groupMappingGroupName %>" />
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="description" name="groupMappingDescription" type="text" value="<%= groupMappingDescription %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />groupMappingDescription"><liferay-ui:message key="description" /></label>
+	<aui:input cssClass="lfr-input-text-container" label="user" name="groupMappingUser" type="text" value="<%= groupMappingUser %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />groupMappingDescription" type="text" value="<%= groupMappingDescription %>" />
-	</div>
+	<aui:input name='<%= "settings(" + PropsKeys.LDAP_GROUP_MAPPINGS + ")" %>' type="hidden" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />groupMappingUser"><liferay-ui:message key="user" /></label>
+	<aui:button-row>
+		<%
+		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapGroups');";
+		%>
 
-		<input class="lfr-input-text" name="<portlet:namespace />groupMappingUser" type="text" value="<%= groupMappingUser %>" />
-	</div>
-
-	<input name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUP_MAPPINGS %>)" type="hidden" value="" />
-
-	<div class="aui-button-holder">
-		<input type="button" value="<liferay-ui:message key="test-ldap-groups" />" onClick="<portlet:namespace />testSettings('ldapGroups');" />
-	</div>
-</fieldset>
+		<aui:button value="test-ldap-groups" onClick="<%= taglibOnClick %>" />
+	</aui:button-row>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="import-export" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ENABLED %>)"><liferay-ui:message key="import-enabled" /></label>
-
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' id='<%= renderResponse.getNamespace() + "ldapImportEnabled" %>' defaultValue="<%= ldapImportEnabled %>" />
-	</div>
+<aui:fieldset>
+	<aui:input id="ldapImportEnabled" inlineLabel="<%= true %>" label="import-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapImportEnabled %>" />
 
 	<div id="<portlet:namespace />importEnabledSettings">
-		<div class="aui-ctrl-holder">
-			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_ON_STARTUP %>)"><liferay-ui:message key="import-on-startup-enabled" /></label>
+		<aui:input inlineLabel="<%= true %>" label="import-on-startup-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' type="checkbox" value="<%= ldapImportOnStartup %>" />
 
-			<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' defaultValue="<%= ldapImportOnStartup %>" />
-		</div>
-
-		<div class="aui-ctrl-holder">
-			<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)"><liferay-ui:message key="import-interval" /></label>
-
-			<select name="<portlet:namespace />settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
-				<option value="0" <%= (ldapImportInterval == 0) ? " selected " : "" %>><liferay-ui:message key="disabled" /></option>
-				<option value="5" <%= (ldapImportInterval == 5) ? " selected " : "" %>>5 <liferay-ui:message key="minutes" /></option>
-				<option value="10" <%= (ldapImportInterval == 10) ? " selected " : "" %>>10 <liferay-ui:message key="minutes" /></option>
-				<option value="30" <%= (ldapImportInterval == 30) ? " selected " : "" %>>30 <liferay-ui:message key="minutes" /></option>
-				<option value="60" <%= (ldapImportInterval == 60) ? " selected " : "" %>>1 <liferay-ui:message key="hour" /></option>
-				<option value="120" <%= (ldapImportInterval == 120) ? " selected " : "" %>>2 <liferay-ui:message key="hours" /></option>
-				<option value="180" <%= (ldapImportInterval == 180) ? " selected " : "" %>>3 <liferay-ui:message key="hours" /></option>
-			</select>
-		</div>
+		<aui:select inlineLabel="<%= true %>" label="import-interval" name="settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
+			<aui:option value="0" selected="<%= (ldapImportInterval == 0) %>"><liferay-ui:message key="disabled" /></aui:option>
+			<aui:option value="5" selected="<%= (ldapImportInterval == 5) %>">5 <liferay-ui:message key="minutes" /></aui:option>
+			<aui:option value="10" selected="<%= (ldapImportInterval == 10) %>">10 <liferay-ui:message key="minutes" /></aui:option>
+			<aui:option value="30" selected="<%= (ldapImportInterval == 30) %>">30 <liferay-ui:message key="minutes" /></aui:option>
+			<aui:option value="60" selected="<%= (ldapImportInterval == 60) %>">1 <liferay-ui:message key="hour" /></aui:option>
+			<aui:option value="120" selected="<%= (ldapImportInterval == 120) %>">2 <liferay-ui:message key="hours" /></aui:option>
+			<aui:option value="180" selected="<%= (ldapImportInterval == 180) %>">3 <liferay-ui:message key="hours" /></aui:option>
+		</aui:select>
 	</div>
 
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_EXPORT_ENABLED %>)"><liferay-ui:message key="export-enabled" /></label>
-
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' id='<%= renderResponse.getNamespace() + "ldapExportEnabled" %>' defaultValue="<%= ldapExportEnabled %>" />
-	</div>
+	<aui:input id="ldapExportEnabled" inlineLabel="<%= true %>" label="export-enabled" name='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapExportEnabled %>" />
 
 	<div id="<portlet:namespace />exportEnabledSettings">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)"><liferay-ui:message key="users-dn" /></label>
+		<aui:input cssClass="lfr-input-text-container" label="users-dn" name='<%= "settings(" + PropsKeys.LDAP_USERS_DN + ")" %>' type="text" value="<%= ldapUsersDN %>" />
 
-			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USERS_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapUsersDN) %>" />
-		</div>
+		<aui:input cssClass="lfr-input-text-container" label="user-default-object-classes" name='<%= "settings(" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + ")" %>' type="text" value="<%= ldapUserDefaultObjectClasses %>" />
 
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)"><liferay-ui:message key="user-default-object-classes" /></label>
-
-			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES %>)" type="text" value="<%= HtmlUtil.escape(ldapUserDefaultObjectClasses) %>" />
-		</div>
-
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)"><liferay-ui:message key="groups-dn" /></label>
-
-			<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)" type="text" value="<%= HtmlUtil.escape(ldapGroupsDN) %>" />
-		</div>
+		<aui:input cssClass="lfr-input-text-container" label="groups-dn" name='<%= "settings(" + PropsKeys.LDAP_GROUPS_DN + ")" %>' type="text" value="<%= ldapGroupsDN %>" />
 	</div>
-</fieldset>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="password-policy" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.LDAP_PASSWORD_POLICY_ENABLED %>)"><liferay-ui:message key="use-ldap-password-policy" /></label>
-
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' defaultValue="<%= ldapPasswordPolicyEnabled %>" />
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input inlineLabel="<%= true %>" label="use-ldap-password-policy" name='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' type="checkbox" value="<%= ldapPasswordPolicyEnabled %>" />
+</aui:fieldset>
 
 <script type="text/javascript">
 	function <portlet:namespace />saveLdap() {

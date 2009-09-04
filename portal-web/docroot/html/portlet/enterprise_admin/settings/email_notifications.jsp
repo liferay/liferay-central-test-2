@@ -65,87 +65,59 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels">
+		<aui:fieldset>
 			<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_FROM_NAME %>)"><liferay-ui:message key="name" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_FROM_NAME %>)" type="text" value="<%= adminEmailFromName %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="name" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_FROM_NAME + ")" %>' type="text" value="<%= adminEmailFromName %>" />
 
 			<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_FROM_ADDRESS %>)"><liferay-ui:message key="address" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_FROM_ADDRESS %>)" type="text" value="<%= adminEmailFromAddress %>" />
-			</div>
-		</fieldset>
+			<aui:input cssClass="lfr-input-text-container" label="address" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + ")" %>' type="text" value="<%= adminEmailFromAddress %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' defaultValue="<%= adminEmailUserAddedEnable %>" />
-			</div>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
 
 			<liferay-ui:error key="emailUserAddedSubject" message="please-enter-a-valid-subject" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT %>)"><liferay-ui:message key="subject" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT %>)" type="text" value="<%= adminEmailUserAddedSubject %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT + ")" %>' type="text" value="<%= adminEmailUserAddedSubject %>" />
 
 			<liferay-ui:error key="emailUserAddedBody" message="please-enter-a-valid-body" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)"><liferay-ui:message key="body" /></label>
+			<aui:field-wrapper label="body">
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedBodyEditor" %>' name="emailUserAddedBody" toolbarSet="email" width="470" />
 
-				<liferay-ui:input-editor name="emailUserAddedBody" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedBodyEditor" %>' width="470" />
-
-				<input id="adminEmailUserAddedBody" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>)" type="hidden" value="<%= HtmlUtil.escape(adminEmailUserAddedBody) %>" />
-			</div>
+				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + ")" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
+			</aui:field-wrapper>
 
 			<div class="terms email-user-add">
 				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
 			</div>
-		</fieldset>
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED + ")" %>' defaultValue="<%= adminEmailPasswordSentEnable %>" />
-			</div>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailPasswordSentEnable %>" />
 
 			<liferay-ui:error key="emailPasswordSentSubject" message="please-enter-a-valid-subject" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT %>)"><liferay-ui:message key="subject" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT %>)" type="text" value="<%= adminEmailPasswordSentSubject %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT + ")" %>' type="text" value="<%= adminEmailPasswordSentSubject %>" />
 
 			<liferay-ui:error key="emailPasswordSentBody" message="please-enter-a-valid-body" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)"><liferay-ui:message key="body" /></label>
+			<aui:field-wrapper label="body">
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordSentBodyEditor" %>' name="emailPasswordSentBody" toolbarSet="email" width="470" />
 
-				<liferay-ui:input-editor name="emailPasswordSentBody" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"  toolbarSet="email" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordSentBodyEditor" %>' width="470" />
-
-				<input id="adminEmailPasswordSentBody" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>)" type="hidden" value="<%= HtmlUtil.escape(adminEmailPasswordSentBody) %>" />
-			</div>
+				<aui:input name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + ")" %>' type="hidden" value="<%= adminEmailPasswordSentBody %>" />
+			</aui:field-wrapper>
 
 			<div class="terms email-password-sent">
 				<%@ include file="/html/portlet/enterprise_admin/settings/definition_of_terms.jspf" %>
 			</div>
-		</fieldset>
+		</aui:fieldset>
 	</liferay-ui:section>
 </liferay-ui:tabs>
 

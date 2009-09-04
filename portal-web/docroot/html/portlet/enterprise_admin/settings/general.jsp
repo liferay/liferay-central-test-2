@@ -33,102 +33,52 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings(" + PropsK
 
 <h3><liferay-ui:message key="main-configuration" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
+<aui:model-context bean="<%= account %>" model="<%= Account.class %>" />
+
+<aui:fieldset column="<%= true %>">
 	<liferay-ui:error exception="<%= AccountNameException.class %>" message="please-enter-a-valid-name" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />name"><liferay-ui:message key="name" /></label>
-
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="name" />
-	</div>
+	<aui:input name="name" />
 
 	<liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />mailDomain"><liferay-ui:message key="mail-domain" /></label>
+	<aui:input bean="<%= company %>" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" label="mail-domain" name="mx" model="<%= Company.class %>" />
+</aui:fieldset>
 
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="mx" disabled="<%= !PropsValues.MAIL_MX_UPDATE %>" />
-	</div>
-</fieldset>
-
-<fieldset class="aui-block-labels aui-form-column">
+<aui:fieldset column="<%= true %>">
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />virtualHost"><liferay-ui:message key="virtual-host" /></label>
-
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="virtualHost" />
-	</div>
-</fieldset>
+	<aui:input bean="<%= company %>" name="virtualHost" model="<%= Company.class %>" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="navigation" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />homeURL"><liferay-ui:message key="home-url" /><liferay-ui:icon-help message="home-url-help" /></label>
+<aui:fieldset column="<%= true %>">
+	<aui:input bean="<%= company %>" helpMessage="home-url-help" label="home-url" name="homeURL" model="<%= Company.class %>" />
+</aui:fieldset>
 
-		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company %>" field="homeURL" />
-	</div>
-</fieldset>
+<aui:fieldset column="<%= true %>">
+	<aui:input helpMessage="default-landing-page-help" label="default-landing-page" name='<%= "settings(" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + ")" %>' type="text" value="<%= defaultLandingPagePath %>" />
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)"><liferay-ui:message key="default-landing-page" /><liferay-ui:icon-help message="default-landing-page-help" /></label>
-
-		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LANDING_PAGE_PATH %>)" type="text" value="<%= defaultLandingPagePath %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)"><liferay-ui:message key="default-logout-page" /><liferay-ui:icon-help message="default-logout-page-help" /></label>
-
-		<input name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_LOGOUT_PAGE_PATH %>)" type="text" value="<%= defaultLogoutPagePath %>" />
-	</div>
-</fieldset>
+	<aui:input helpMessage="default-logout-page-help" label="default-logout-page" name='<%= "settings(" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + ")" %>' type="text" value="<%= defaultLogoutPagePath %>" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="additional-information" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />legalName"><liferay-ui:message key="legal-name" /></label>
+<aui:fieldset column="<%= true %>">
+	<aui:input name="legalName" />
 
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalName" />
-	</div>
+	<aui:input name="legalId" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />legalId"><liferay-ui:message key="legal-id" /></label>
+	<aui:input name="legalType" />
+</aui:fieldset>
 
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalId" />
-	</div>
+<aui:fieldset column="<%= true %>">
+	<aui:input name="sicCode" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />legalType"><liferay-ui:message key="legal-type" /></label>
+	<aui:input name="tickerSymbol" />
 
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="legalType" />
-	</div>
-</fieldset>
+	<aui:input name="industry" />
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />sicCode"><liferay-ui:message key="sic-code" /></label>
-
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="sicCode" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />tickerSymbol"><liferay-ui:message key="ticker-symbol" /></label>
-
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="tickerSymbol" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />indsutry"><liferay-ui:message key="industry" /></label>
-
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="industry" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
-
-		<liferay-ui:input-field model="<%= Account.class %>" bean="<%= account %>" field="type" />
-	</div>
-</fieldset>
+	<aui:input name="type" />
+</aui:fieldset>

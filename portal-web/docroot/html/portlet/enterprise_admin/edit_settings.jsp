@@ -83,7 +83,7 @@ String curSection = configurationSections[0];
 				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
 
 				<div class="aui-button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveCompany();" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "saveCompany();" %>' value="save" />
 
 					<%
 					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_SETTINGS, plid, PortletRequest.RENDER_PHASE);
@@ -91,7 +91,7 @@ String curSection = configurationSections[0];
 					portletURL.setWindowState(WindowState.MAXIMIZED);
 					%>
 
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(portletURL.toString()) %>';"  />
+					<aui:button onClick="<%= portletURL.toString() %>" value="cancel" />
 				</div>
 			</div>
 		</td>

@@ -31,16 +31,8 @@ String googleAppsPassword = ParamUtil.getString(request, "settings(" + PropsKeys
 
 <h3><liferay-ui:message key="google-apps" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_USERNAME%>)"><liferay-ui:message key="user-name" /></label>
+<aui:fieldset>
+	<aui:input cssClass="lfr-input-text-container" label="user-name" name='<%= "settings(" + PropsKeys.GOOGLE_APPS_USERNAME + ")" %>' type="text" value="<%= googleAppsUsername %>" />
 
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_USERNAME %>)" type="text" value="<%= HtmlUtil.escape(googleAppsUsername) %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_PASSWORD %>)"><liferay-ui:message key="password" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.GOOGLE_APPS_PASSWORD %>)" type="password" value="<%= HtmlUtil.escape(googleAppsPassword) %>" />
-	</div>
-</fieldset>
+	<aui:input cssClass="lfr-input-text-container" label="password" name='<%= "settings(" + PropsKeys.GOOGLE_APPS_PASSWORD + ")" %>' type="password" value="<%= googleAppsPassword %>" />
+</aui:fieldset>

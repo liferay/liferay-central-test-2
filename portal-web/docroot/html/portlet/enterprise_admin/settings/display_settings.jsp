@@ -40,6 +40,9 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 String defaultRegularThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
 String defaultWapThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.DEFAULT_WAP_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
 String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
+
+List<Theme> themes = null;
+boolean deployed = false;
 %>
 
 <script type="text/javascript">
@@ -77,64 +80,47 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />languageId"><liferay-ui:message key="default-language" /></label>
+<aui:fieldset>
+	<aui:select label="default-language" name="languageId">
 
-		<select name="<portlet:namespace />languageId">
+		<%
+		Locale locale2 = LocaleUtil.fromLanguageId(languageId);
 
-			<%
-			Locale locale2 = LocaleUtil.fromLanguageId(languageId);
+		for (int i = 0; i < locales.length; i++) {
+		%>
 
-			for (int i = 0; i < locales.length; i++) {
-			%>
+			<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= (locale2.getLanguage().equals(locales[i].getLanguage()) && locale2.getCountry().equals(locales[i].getCountry())) %>" value='<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>' />
 
-				<option <%= (locale2.getLanguage().equals(locales[i].getLanguage()) && locale2.getCountry().equals(locales[i].getCountry())) ? "selected" : "" %> value="<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>"><%= locales[i].getDisplayName(locale) %></option>
+		<%
+		}
+		%>
 
-			<%
-			}
-			%>
+	</aui:select>
 
-		</select>
-	</div>
+	<aui:input cssClass="lfr-input-text-container" label="available-languages" name='<%= "settings(" + PropsKeys.LOCALES + ")" %>' type="text" value="<%= availableLocales %>" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)"><liferay-ui:message key="available-languages" /></label>
-
-		<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.LOCALES %>)" type="text" value="<%= availableLocales %>" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />timeZoneId"><liferay-ui:message key="time-zone" /></label>
-
-		<liferay-ui:input-time-zone name="timeZoneId" value="<%= timeZoneId %>" />
-	</div>
-</fieldset>
+	<aui:input label="time-zone" name="timeZoneId" type="timeZone" value="<%= timeZoneId %>" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="logo" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO %>)"><liferay-ui:message key="allow-community-administrators-to-use-their-own-logo" /></label>
-
-		<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")" %>' defaultValue="<%= companySecurityCommunityLogo %>" />
-	</div>
+<aui:fieldset>
+	<aui:input inlineLabel="<%= true %>" label="allow-community-administrators-to-use-their-own-logo" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + ")" %>' type="checkbox" value="<%= companySecurityCommunityLogo %>" />
 
 	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editCompanyLogoURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:renderURL>
 
-	<a class="change-company-logo" href="javascript:<portlet:namespace />openEditCompanyLogoWindow('<%= editCompanyLogoURL %>');">
+	<%
+	String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL + "');";
+	%>
+
+	<aui:a cssClass="change-company-logo" href="<%= taglibEditURL %>">
 		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" />
-	</a>
+	</aui:a>
 
 	<div class="portrait-icons">
-
-		<%
-		String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL + "');";
-		%>
-
 		<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
 
 		<c:if test="<%= company.getLogoId() != 0 %>">
@@ -145,116 +131,102 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings(" + P
 
 			<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
 
-			<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="<%= deleteLogo %>" />
+			<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 		</c:if>
 	</div>
-</fieldset>
+</aui:fieldset>
 
 <h3><liferay-ui:message key="look-and-feel" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-regular-theme" /></label>
+<aui:fieldset>
+	<aui:select label="default-regular-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
 
-		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
+		<%
+		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
+		deployed = false;
 
-			<%
-			List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), false);
+		for (Theme curTheme: themes) {
+			if (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) {
+				deployed = true;
+			}
+		%>
 
-			boolean deployed = false;
+			<aui:option label="<%= curTheme.getName() %>" selected="<%= (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) %>" value="<%= curTheme.getThemeId() %>" />
 
-			for (Theme curTheme: themes) {
-				if (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) {
-					deployed = true;
-				}
-			%>
+		<%
+		}
 
-				<option <%= (Validator.equals(defaultRegularThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+		if (!deployed) {
+		%>
 
-			<%
+			<aui:option label='<%= defaultRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultRegularThemeId %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+
+	<aui:select label="default-mobile-theme" name='<%= "settings(" + PropsKeys.DEFAULT_REGULAR_THEME_ID + ")" %>'>
+
+		<%
+		themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), true);
+		deployed = false;
+
+		for (Theme curTheme: themes) {
+			if (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) {
+				deployed = true;
 			}
 
-			if (!deployed) {
-			%>
+		%>
 
-				<option selected value="<%= defaultRegularThemeId %>"><%= defaultRegularThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
+			<aui:option label="<%= curTheme.getName() %>" selected="<%= (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) %>" value="<%= curTheme.getThemeId() %>" />
 
-			<%
-			}
-			%>
+		<%
+		}
 
-		</select>
-	</div>
+		if (!deployed) {
+		%>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-mobile-theme" /></label>
+			<aui:option label='<%= defaultWapThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultWapThemeId %>" />
 
-		<select name="<portlet:namespace />settings(<%= PropsKeys.DEFAULT_REGULAR_THEME_ID %>)">
+		<%
+		}
+		%>
 
-			<%
-			themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), 0, user.getUserId(), true);
-			deployed = false;
+	</aui:select>
 
-			for (Theme curTheme: themes) {
-				if (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) {
-					deployed = true;
-				}
+	<aui:select label="default-control-panel-theme" name='<%= "settings(" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + ")" %>'>
 
-			%>
+		<%
+		Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
 
-				<option <%= (Validator.equals(defaultWapThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+		if (controlPanelTheme != null) {
+			themes.add(controlPanelTheme);
+		}
 
-			<%
-			}
+		deployed = false;
 
-			if (!deployed) {
-			%>
-
-				<option selected value="<%= defaultWapThemeId %>"><%= defaultWapThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)"><liferay-ui:message key="default-control-panel-theme" /></label>
-
-		<select name="<portlet:namespace />settings(<%= PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID %>)">
-
-			<%
-
-			Theme controlPanelTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), "controlpanel", false);
-
-			if (controlPanelTheme != null) {
-				themes.add(controlPanelTheme);
+		for (Theme curTheme: themes) {
+			if (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) {
+				deployed = true;
 			}
 
-			deployed = false;
+		%>
 
-			for (Theme curTheme: themes) {
-				if (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) {
-					deployed = true;
-				}
+			<aui:option label="<%= curTheme.getName() %>" selected="<%= (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) %>" value="<%= curTheme.getThemeId() %>" />
 
-			%>
+		<%
+		}
 
-				<option <%= (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) ? "selected" : "" %> value="<%= curTheme.getThemeId() %>"><%= curTheme.getName() %></option>
+		if (!deployed) {
+		%>
 
-			<%
-			}
+			<aui:option label='<%= defaultControlPanelThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %>' selected="<%= true %>" value="<%= defaultControlPanelThemeId %>" />
 
-			if (!deployed) {
-			%>
+		<%
+		}
+		%>
 
-				<option selected value="<%= defaultControlPanelThemeId %>"><%= defaultControlPanelThemeId + "(" + LanguageUtil.get(pageContext, "undeployed") + ")" %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-	</div>
-</fieldset>
+	</aui:select>
+</aui:fieldset>

@@ -36,23 +36,23 @@
 		</script>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" class="aui-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editCompanyLogoURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" />
+		</portlet:actionURL>
 
-		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+		<aui:form action="<%= editCompanyLogoURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit="submitForm(this); return false;">
+			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-		<div class="aui-ctrl-holder">
-			<input name="<portlet:namespace />fileName" size="50" type="file" />
-		</div>
+			<aui:fieldset>
+				<aui:input label="" name="fileName" size="50" type="file" />
 
-		<br />
+				<aui:button-row>
+					<aui:button type="submit" value="save" />
 
-		<div class="aui-button-holder">
-			<input type="submit" value="<liferay-ui:message key="save" />" />
-
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="window.close();" />
-		</div>
-
-		</form>
+					<aui:button value="close" onClick="window.close();" />
+				</aui:button-row>
+			</aui:fieldset>
+		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">

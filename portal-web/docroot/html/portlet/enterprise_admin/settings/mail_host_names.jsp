@@ -30,10 +30,6 @@ String adminMailHostNames = ParamUtil.getString(request, "settings(" + PropsKeys
 
 <h3><liferay-ui:message key="mail-host-names" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />settings(<%= PropsKeys.ADMIN_MAIL_HOST_NAMES %>)"><%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %></label>
-
-		<textarea class="lfr-textarea" name="<portlet:namespace />settings(<%= PropsKeys.ADMIN_MAIL_HOST_NAMES %>)"><%= HtmlUtil.escape(adminMailHostNames) %></textarea>
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input label='<%= LanguageUtil.format(pageContext, "enter-one-mail-host-name-per-line-for-all-additional-mail-host-names-besides-x", company.getMx(), false) %>' name='<%= "settings(" + PropsKeys.ADMIN_MAIL_HOST_NAMES + ")" %>' type="textarea" value="<%= adminMailHostNames %>" />
+</aui:fieldset>

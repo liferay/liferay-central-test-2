@@ -67,47 +67,23 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_AUTH_TYPE %>)"><liferay-ui:message key="how-do-users-authenticate" /></label>
+		<aui:fieldset>
+			<aui:select label="how-do-users-authenticate" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTH_TYPE + ")" %>'>
+				<aui:option label="by-email-address" selected="<%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_EA) %>" value="<%= CompanyConstants.AUTH_TYPE_EA %>" />
+				<aui:option label="by-screen-name" selected="<%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_SN) %>" value="<%= CompanyConstants.AUTH_TYPE_SN %>" />
+				<aui:option label="by-user-id" selected="<%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_ID) %>" value="<%= CompanyConstants.AUTH_TYPE_ID %>" />
+			</aui:select>
 
-				<select name="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_AUTH_TYPE %>)">
-					<option <%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_EA %>"><liferay-ui:message key="by-email-address" /></option>
-					<option <%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_SN %>"><liferay-ui:message key="by-screen-name" /></option>
-					<option <%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_ID %>"><liferay-ui:message key="by-user-id" /></option>
-				</select>
-			</div>
+			<aui:input inlineLabel="<%= true %>" label="allow-users-to-automatically-login" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' type="checkbox" value="<%= companySecurityAutoLogin %>" />
 
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_AUTO_LOGIN %>)"><liferay-ui:message key="allow-users-to-automatically-login" /></label>
+			<aui:input inlineLabel="<%= true %>" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' defaultValue="<%= companySecurityAutoLogin %>" />
-			</div>
+			<aui:input inlineLabel="<%= true %>" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_SEND_PASSWORD %>)"><liferay-ui:message key="allow-users-to-request-forgotten-passwords" /></label>
+			<aui:input inlineLabel="<%= true %>" label="allow-strangers-to-create-accounts-with-a-company-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' defaultValue="<%= companySecuritySendPassword %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_STRANGERS %>)"><liferay-ui:message key="allow-strangers-to-create-accounts" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' defaultValue="<%= companySecurityStrangers %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX %>)"><liferay-ui:message key="allow-strangers-to-create-accounts-with-a-company-email-address" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' defaultValue="<%= companySecurityStrangersWithMx %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY %>)"><liferay-ui:message key="require-strangers-to-verify-their-email-address" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' defaultValue="<%= companySecurityStrangersVerify %>" />
-			</div>
-		</fieldset>
+			<aui:input inlineLabel="<%= true %>" label="require-strangers-to-verify-their-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' type="checkbox" value="<%= companySecurityStrangersVerify %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
@@ -115,158 +91,66 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.CAS_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= casAuthEnabled %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' defaultValue="<%= casAuthEnabled %>" />
-			</div>
+			<aui:input inlineLabel="<%= true %>" helpMessage="import-cas-users-from-ldap-help" label="import-cas-users-from-ldap" name='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= casImportFromLdap %>" />
 
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.CAS_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-cas-users-from-ldap" /></label>
+			<aui:input cssClass="lfr-input-text-container" label="login-url" name='<%= "settings(" + PropsKeys.CAS_LOGIN_URL + ")" %>' type="text" value="<%= casLoginUrl %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= casImportFromLdap %>" />
+			<aui:input cssClass="lfr-input-text-container" label="logout-url" name='<%= "settings(" + PropsKeys.CAS_LOGOUT_URL + ")" %>' type="text" value="<%= casLogoutUrl %>" />
 
-				<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="server-name" name='<%= "settings(" + PropsKeys.CAS_SERVER_NAME + ")" %>' type="text" value="<%= casServerName %>" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.CAS_LOGIN_URL %>)"><liferay-ui:message key="login-url" /></label>
+			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings(" + PropsKeys.CAS_SERVICE_URL + ")" %>' type="text" value="<%= casServiceUrl %>" />
 
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.CAS_LOGIN_URL %>)" type="text" value="<%= casLoginUrl %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.CAS_LOGOUT_URL %>)"><liferay-ui:message key="logout-url" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.CAS_LOGOUT_URL %>)" type="text" value="<%= casLogoutUrl %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.CAS_SERVER_NAME %>)"><liferay-ui:message key="server-name" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.CAS_SERVER_NAME %>)" type="text" value="<%= casServerName %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.CAS_SERVICE_URL %>)"><liferay-ui:message key="service-url" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.CAS_SERVICE_URL %>)" type="text" value="<%= casServiceUrl %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.CAS_VALIDATE_URL %>)"><liferay-ui:message key="validate-url" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.CAS_VALIDATE_URL %>)" type="text" value="<%= casValidateUrl %>" />
-			</div>
-		</fieldset>
+			<aui:input cssClass="lfr-input-text-container" label="validate-url" name='<%= "settings(" + PropsKeys.CAS_VALIDATE_URL + ")" %>' type="text" value="<%= casValidateUrl %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.NTLM_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ntlmAuthEnabled %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' defaultValue="<%= ntlmAuthEnabled %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="domain-controller" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN_CONTROLLER + ")" %>' type="text" value="<%= ntlmDomainController %>" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.NTLM_DOMAIN_CONTROLLER %>)"><liferay-ui:message key="domain-controller" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.NTLM_DOMAIN_CONTROLLER %>)" type="text" value="<%= ntlmDomainController %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.NTLM_DOMAIN %>)"><liferay-ui:message key="domain" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.NTLM_DOMAIN %>)" type="text" value="<%= ntlmDomain %>" />
-			</div>
-		</fieldset>
+			<aui:input cssClass="lfr-input-text-container" label="domain" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN + ")" %>' type="text" value="<%= casLoginUrl %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.OPEN_ID_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
-
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' defaultValue="<%= openIdAuthEnabled %>" />
-			</div>
-		</fieldset>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openIdAuthEnabled %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-			<div class="aui-ctrl-holder">
-				<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openSsoAuthEnabled %>" />
 
-				<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' defaultValue="<%= openSsoAuthEnabled %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="login-url" name='<%= "settings(" + PropsKeys.OPEN_SSO_LOGIN_URL + ")" %>' type="text" value="<%= openSsoLoginUrl %>" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LOGIN_URL %>)"><liferay-ui:message key="login-url" /></label>
+			<aui:input cssClass="lfr-input-text-container" label="logout-url" name='<%= "settings(" + PropsKeys.OPEN_SSO_LOGOUT_URL + ")" %>' type="text" value="<%= openSsoLogoutUrl %>" />
 
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LOGIN_URL %>)" type="text" value="<%= openSsoLoginUrl %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings(" + PropsKeys.OPEN_SSO_SERVICE_URL + ")" %>' type="text" value="<%= openSsoServiceUrl %>" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LOGOUT_URL %>)"><liferay-ui:message key="logout-url" /></label>
+			<aui:input cssClass="lfr-input-text-container" label="screen-name-attribute" name='<%= "settings(" + PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR + ")" %>' type="text" value="<%= openSsoScreenNameAttr %>" />
 
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LOGOUT_URL %>)" type="text" value="<%= openSsoLogoutUrl %>" />
-			</div>
+			<aui:input cssClass="lfr-input-text-container" label="email-address-attribute" name='<%= "settings(" + PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR + ")" %>' type="text" value="<%= openSsoEmailAddressAttr %>" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_SERVICE_URL %>)"><liferay-ui:message key="service-url" /></label>
+			<aui:input cssClass="lfr-input-text-container" label="first-name-attribute" name='<%= "settings(" + PropsKeys.OPEN_SSO_FIRST_NAME_ATTR + ")" %>' type="text" value="<%= openSsoFirstNameAttr %>" />
 
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_SERVICE_URL %>)" type="text" value="<%= openSsoServiceUrl %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR %>)"><liferay-ui:message key="screen-name-attribute" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR %>)" type="text" value="<%= openSsoScreenNameAttr %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR %>)"><liferay-ui:message key="email-address-attribute" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR %>)" type="text" value="<%= openSsoEmailAddressAttr %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_FIRST_NAME_ATTR %>)"><liferay-ui:message key="first-name-attribute" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_FIRST_NAME_ATTR %>)" type="text" value="<%= openSsoFirstNameAttr %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LAST_NAME_ATTR %>)"><liferay-ui:message key="last-name-attribute" /></label>
-
-				<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.OPEN_SSO_LAST_NAME_ATTR %>)" type="text" value="<%= openSsoLastNameAttr %>" />
-			</div>
-		</fieldset>
+			<aui:input cssClass="lfr-input-text-container" label="last-name-attribute" name='<%= "settings(" + PropsKeys.OPEN_SSO_LAST_NAME_ATTR + ")" %>' type="text" value="<%= openSsoLastNameAttr %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
-		<fieldset class="aui-block-labels aui-form-column">
-				<div class="aui-ctrl-holder">
-					<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_AUTH_ENABLED %>)"><liferay-ui:message key="enabled" /></label>
+		<aui:fieldset>
+			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= siteminderAuthEnabled %>" />
 
-					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' defaultValue="<%= siteminderAuthEnabled %>" />
-				</div>
+			<aui:input inlineLabel="<%= true %>" helpMessage="import-siteminder-users-from-ldap-help" label="import-siteminder-users-from-ldap" name='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= siteminderImportFromLdap %>" />
 
-				<div class="aui-ctrl-holder">
-					<label class="inline-label" for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_IMPORT_FROM_LDAP %>)"><liferay-ui:message key="import-siteminder-users-from-ldap" /></label>
-
-					<liferay-ui:input-checkbox param='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' defaultValue="<%= siteminderImportFromLdap %>" />
-
-					<liferay-ui:icon-help message="import-siteminder-users-from-ldap-help" />
-				</div>
-
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_USER_HEADER %>)"><liferay-ui:message key="user-header" /></label>
-
-					<input class="lfr-input-text" name="<portlet:namespace />settings(<%= PropsKeys.SITEMINDER_USER_HEADER %>)" type="text" value="<%= siteminderUserHeader %>" />
-				</div>
-		</fieldset>
+			<aui:input cssClass="lfr-input-text-container" label="user-header" name='<%= "settings(" + PropsKeys.SITEMINDER_USER_HEADER + ")" %>' type="text" value="<%= siteminderUserHeader %>" />
+		</aui:fieldset>
 	</liferay-ui:section>
 </liferay-ui:tabs>
