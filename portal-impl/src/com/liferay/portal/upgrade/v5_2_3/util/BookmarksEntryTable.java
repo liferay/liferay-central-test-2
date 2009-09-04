@@ -36,6 +36,7 @@ public class BookmarksEntryTable {
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", new Integer(Types.VARCHAR)},
 		{"entryId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"createDate", new Integer(Types.TIMESTAMP)},
@@ -48,7 +49,7 @@ public class BookmarksEntryTable {
 		{"priority", new Integer(Types.INTEGER)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
 

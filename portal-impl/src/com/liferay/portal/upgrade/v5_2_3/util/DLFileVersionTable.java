@@ -35,6 +35,7 @@ public class DLFileVersionTable {
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"fileVersionId", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
@@ -45,7 +46,7 @@ public class DLFileVersionTable {
 		{"size_", new Integer(Types.INTEGER)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 

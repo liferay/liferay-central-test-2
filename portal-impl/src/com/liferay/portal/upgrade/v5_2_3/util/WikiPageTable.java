@@ -37,6 +37,7 @@ public class WikiPageTable {
 		{"uuid_", new Integer(Types.VARCHAR)},
 		{"pageId", new Integer(Types.BIGINT)},
 		{"resourcePrimKey", new Integer(Types.BIGINT)},
+		{"groupId", new Integer(Types.BIGINT)},
 		{"companyId", new Integer(Types.BIGINT)},
 		{"userId", new Integer(Types.BIGINT)},
 		{"userName", new Integer(Types.VARCHAR)},
@@ -54,7 +55,7 @@ public class WikiPageTable {
 		{"redirectTitle", new Integer(Types.VARCHAR)}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(255) null,version DOUBLE,minorEdit BOOLEAN,content TEXT null,summary STRING null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(255) null,version DOUBLE,minorEdit BOOLEAN,content TEXT null,summary STRING null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table WikiPage";
 
