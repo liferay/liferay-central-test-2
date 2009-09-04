@@ -225,10 +225,10 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static void unlockFolder(long folderId, java.lang.String lockUuid)
-		throws RemoteException {
+	public static void unlockFolder(long groupId, long folderId,
+		java.lang.String lockUuid) throws RemoteException {
 		try {
-			DLFolderServiceUtil.unlockFolder(folderId, lockUuid);
+			DLFolderServiceUtil.unlockFolder(groupId, folderId, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

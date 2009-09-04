@@ -87,13 +87,13 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		DLFileEntryServiceUtil.addFileEntry(
-			_folder.getFolderId(), fileName, fileName, description,
-			extraSettings, bytes, serviceContext);
+			_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
+			description, extraSettings, bytes, serviceContext);
 
 		try {
 			DLFileEntryServiceUtil.addFileEntry(
-				_folder.getFolderId(), fileName, fileName, description,
-				extraSettings, bytes, serviceContext);
+				_folder.getGroupId(), _folder.getFolderId(), fileName, fileName,
+				description, extraSettings, bytes, serviceContext);
 
 			fail("Able to add two files of the name " + fileName);
 		}

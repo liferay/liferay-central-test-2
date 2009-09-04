@@ -111,7 +111,7 @@ else {
 		<c:otherwise>
 
 			<%
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 			%>
 
 			<liferay-ui:icon

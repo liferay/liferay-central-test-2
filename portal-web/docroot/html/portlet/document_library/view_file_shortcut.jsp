@@ -45,7 +45,7 @@ DLFileEntry toFileEntry = null;
 
 if ((toFolderId > 0) && Validator.isNotNull(toName)) {
 	try {
-		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(toFolderId, toName);
+		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, toFolderId, toName);
 		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}
@@ -84,7 +84,7 @@ Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(toFileEntry.getFolderId(), toFileEntry.getName()));
+	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(toFileEntry.getGroupId(), toFileEntry.getFolderId(), toFileEntry.getName()));
 
 	isLocked = Boolean.TRUE;
 

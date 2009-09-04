@@ -33,6 +33,7 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
@@ -52,101 +53,106 @@ import java.util.List;
 public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			long folderId, String name, String title, String description,
-			String extraSettings, File file, ServiceContext serviceContext)
+			long groupId, long folderId, String name, String title,
+			String description, String extraSettings, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, extraSettings,
-			file, serviceContext);
+			getUserId(), groupId, folderId, name, title, description,
+			extraSettings, file, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
-			long folderId, String name, String title, String description,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			long groupId, long folderId, String name, String title,
+			String description, String extraSettings, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), folderId, name, title, description, extraSettings,
-			bytes, serviceContext);
+			getUserId(), groupId, folderId, name, title, description,
+			extraSettings, bytes, serviceContext);
 	}
 
-	public void deleteFileEntry(long folderId, String name)
+	public void deleteFileEntry(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.DELETE);
 
-		boolean hasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
 		if (!hasLock) {
 
 			// Lock
 
-			lockFileEntry(folderId, name);
+			lockFileEntry(groupId, folderId, name);
 		}
 
 		try {
-			dlFileEntryLocalService.deleteFileEntry(folderId, name);
+			dlFileEntryLocalService.deleteFileEntry(groupId, folderId, name);
 		}
 		finally {
 			if (!hasLock) {
 
 				// Unlock
 
-				unlockFileEntry(folderId, name);
+				unlockFileEntry(groupId, folderId, name);
 			}
 		}
 	}
 
-	public void deleteFileEntry(long folderId, String name, double version)
+	public void deleteFileEntry(
+			long groupId, long folderId, String name, double version)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), folderId, name, ActionKeys.DELETE);
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.DELETE);
 
-		boolean hasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
 		if (!hasLock) {
 
 			// Lock
 
-			lockFileEntry(folderId, name);
+			lockFileEntry(groupId, folderId, name);
 		}
 
 		try {
-			dlFileEntryLocalService.deleteFileEntry(folderId, name, version);
+			dlFileEntryLocalService.deleteFileEntry(
+				groupId, folderId, name, version);
 		}
 		finally {
 			if (!hasLock) {
 
 				// Unlock
 
-				unlockFileEntry(folderId, name);
+				unlockFileEntry(groupId, folderId, name);
 			}
 		}
 	}
 
-	public void deleteFileEntryByTitle(long folderId, String titleWithExtension)
+	public void deleteFileEntryByTitle(
+			long groupId, long folderId, String titleWithExtension)
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = getFileEntryByTitle(
-			folderId, titleWithExtension);
+			groupId, folderId, titleWithExtension);
 
-		deleteFileEntry(folderId, fileEntry.getName());
+		deleteFileEntry(groupId, folderId, fileEntry.getName());
 	}
 
-	public List<DLFileEntry> getFileEntries(long folderId)
+	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
 		List<DLFileEntry> fileEntries = dlFileEntryLocalService.getFileEntries(
-			folderId);
+			groupId, folderId);
 
 		fileEntries = ListUtil.copy(fileEntries);
 
@@ -165,21 +171,21 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return fileEntries;
 	}
 
-	public DLFileEntry getFileEntry(long folderId, String name)
+	public DLFileEntry getFileEntry(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), folderId, name, ActionKeys.VIEW);
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.VIEW);
 
-		return dlFileEntryLocalService.getFileEntry(folderId, name);
+		return dlFileEntryLocalService.getFileEntry(groupId, folderId, name);
 	}
 
 	public DLFileEntry getFileEntryByTitle(
-			long folderId, String titleWithExtension)
+			long groupId, long folderId, String titleWithExtension)
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntryByTitle(
-			folderId, titleWithExtension);
+			groupId, folderId, titleWithExtension);
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntry, ActionKeys.VIEW);
@@ -187,30 +193,32 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return fileEntry;
 	}
 
-	public boolean hasFileEntryLock(long folderId, String name)
+	public boolean hasFileEntryLock(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		String lockId = DLUtil.getLockId(folderId, name);
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFileEntry.class.getName(), lockId);
 
-		if (!hasLock) {
+		if (!hasLock && folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			hasLock = dlFolderService.hasInheritableLock(folderId);
 		}
 
 		return hasLock;
 	}
 
-	public Lock lockFileEntry(long folderId, String name)
+	public Lock lockFileEntry(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
 		return lockFileEntry(
-			folderId, name, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+			groupId, folderId, name, null,
+			DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
 
 	public Lock lockFileEntry(
-			long folderId, String name, String owner, long expirationTime)
+			long groupId, long folderId, String name, String owner,
+			long expirationTime)
 		throws PortalException, SystemException {
 
 		if ((expirationTime <= 0) ||
@@ -219,7 +227,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
 		}
 
-		String lockId = DLUtil.getLockId(folderId, name);
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
 
 		return lockLocalService.lock(
 			getUser().getUserId(), DLFileEntry.class.getName(), lockId, owner,
@@ -232,18 +240,19 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
-	public void unlockFileEntry(long folderId, String name)
+	public void unlockFileEntry(long groupId, long folderId, String name)
 		throws SystemException {
 
-		String lockId = DLUtil.getLockId(folderId, name);
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
-	public void unlockFileEntry(long folderId, String name, String lockUuid)
+	public void unlockFileEntry(
+			long groupId, long folderId, String name, String lockUuid)
 		throws PortalException, SystemException {
 
-		String lockId = DLUtil.getLockId(folderId, name);
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
@@ -268,36 +277,37 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public DLFileEntry updateFileEntry(
-			long folderId, long newFolderId, String name, String sourceFileName,
-			String title, String description, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			long groupId, long folderId, long newFolderId, String name,
+			String sourceFileName, String title, String description,
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), folderId, name, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
 
-		boolean hasLock = hasFileEntryLock(folderId, name);
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
 
 		if (!hasLock) {
 
 			// Lock
 
-			lockFileEntry(folderId, name);
+			lockFileEntry(groupId, folderId, name);
 		}
 
 		DLFileEntry fileEntry = null;
 
 		try {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
-				getUserId(), folderId, newFolderId, name, sourceFileName, title,
-				description, extraSettings, bytes, serviceContext);
+				getUserId(), groupId, folderId, newFolderId, name,
+				sourceFileName, title, description, extraSettings, bytes,
+				serviceContext);
 		}
 		finally {
 			if (!hasLock) {
 
 				// Unlock
 
-				unlockFileEntry(folderId, name);
+				unlockFileEntry(groupId, folderId, name);
 			}
 		}
 
@@ -305,13 +315,13 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public boolean verifyFileEntryLock(
-			long folderId, String name, String lockUuid)
+			long groupId, long folderId, String name, String lockUuid)
 		throws PortalException, SystemException {
 
 		boolean verified = false;
 
 		try {
-			String lockId = DLUtil.getLockId(folderId, name);
+			String lockId = DLUtil.getLockId(groupId, folderId, name);
 
 			Lock lock = lockLocalService.getLock(
 				DLFileEntry.class.getName(), lockId);

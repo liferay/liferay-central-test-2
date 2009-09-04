@@ -100,8 +100,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddGuestPermissions(true);
 
 			DLFileEntryServiceUtil.addFileEntry(
-				folderId, name, title, description, extraSettings, file,
-				serviceContext);
+				group.getGroupId(), folderId, name, title, description,
+				extraSettings, file, serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -148,7 +148,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			group.getGroupId(), arg.getCurrentFolder());
 
 		List<DLFileEntry> fileEntries = DLFileEntryServiceUtil.getFileEntries(
-			folder.getFolderId());
+			folder.getGroupId(), folder.getFolderId());
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			Element fileEl = doc.createElement("File");

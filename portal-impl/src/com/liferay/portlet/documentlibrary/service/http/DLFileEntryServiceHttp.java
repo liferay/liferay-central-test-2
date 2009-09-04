@@ -72,49 +72,52 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
  */
 public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, java.io.File file,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = title;
-
-			if (title == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj3 = title;
 
-			if (description == null) {
+			if (title == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = extraSettings;
+			Object paramObj4 = description;
 
-			if (extraSettings == null) {
+			if (description == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = file;
+			Object paramObj5 = extraSettings;
 
-			if (file == null) {
-				paramObj5 = new NullWrapper("java.io.File");
+			if (extraSettings == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = serviceContext;
+			Object paramObj6 = file;
+
+			if (file == null) {
+				paramObj6 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -122,7 +125,7 @@ public class DLFileEntryServiceHttp {
 					"addFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -152,49 +155,51 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, byte[] bytes,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = title;
-
-			if (title == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj3 = title;
 
-			if (description == null) {
+			if (title == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = extraSettings;
+			Object paramObj4 = description;
 
-			if (extraSettings == null) {
+			if (description == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = bytes;
+			Object paramObj5 = extraSettings;
 
-			if (bytes == null) {
-				paramObj5 = new NullWrapper("[B");
+			if (extraSettings == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = serviceContext;
+			Object paramObj6 = bytes;
+
+			if (bytes == null) {
+				paramObj6 = new NullWrapper("[B");
+			}
+
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -202,7 +207,7 @@ public class DLFileEntryServiceHttp {
 					"addFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -232,57 +237,19 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
 
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"deleteFileEntry", new Object[] { paramObj0, paramObj1 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(folderId);
-
-			Object paramObj1 = name;
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
-
-			Object paramObj2 = new DoubleWrapper(version);
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntry",
@@ -310,22 +277,67 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
-	public static void deleteFileEntryByTitle(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String titleWithExtension)
+	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
+		long groupId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = titleWithExtension;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new DoubleWrapper(version);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
+					"deleteFileEntry",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteFileEntryByTitle(HttpPrincipal httpPrincipal,
+		long groupId, long folderId, java.lang.String titleWithExtension)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = titleWithExtension;
 
 			if (titleWithExtension == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntryByTitle",
-					new Object[] { paramObj0, paramObj1 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -350,14 +362,16 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		HttpPrincipal httpPrincipal, long folderId)
+		HttpPrincipal httpPrincipal, long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"getFileEntries", new Object[] { paramObj0 });
+					"getFileEntries", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -386,20 +400,24 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"getFileEntry", new Object[] { paramObj0, paramObj1 });
+					"getFileEntry",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -428,21 +446,24 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		HttpPrincipal httpPrincipal, long folderId,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = titleWithExtension;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = titleWithExtension;
 
 			if (titleWithExtension == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"getFileEntryByTitle", new Object[] { paramObj0, paramObj1 });
+					"getFileEntryByTitle",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -471,20 +492,23 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static boolean hasFileEntryLock(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"hasFileEntryLock", new Object[] { paramObj0, paramObj1 });
+					"hasFileEntryLock",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -513,20 +537,24 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Lock lockFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"lockFileEntry", new Object[] { paramObj0, paramObj1 });
+					"lockFileEntry",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -555,30 +583,34 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Lock lockFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
-		java.lang.String owner, long expirationTime)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = owner;
-
-			if (owner == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(expirationTime);
+			Object paramObj3 = owner;
+
+			if (owner == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(expirationTime);
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"lockFileEntry",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -651,19 +683,22 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
-					"unlockFileEntry", new Object[] { paramObj0, paramObj1 });
+					"unlockFileEntry",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -684,27 +719,30 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name, java.lang.String lockUuid)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = lockUuid;
+			Object paramObj3 = lockUuid;
 
 			if (lockUuid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"unlockFileEntry",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -729,58 +767,60 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		HttpPrincipal httpPrincipal, long folderId, long newFolderId,
-		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String extraSettings, byte[] bytes,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		long newFolderId, java.lang.String name,
+		java.lang.String sourceFileName, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(newFolderId);
+			Object paramObj1 = new LongWrapper(folderId);
 
-			Object paramObj2 = name;
+			Object paramObj2 = new LongWrapper(newFolderId);
+
+			Object paramObj3 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = sourceFileName;
-
-			if (sourceFileName == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = title;
+			Object paramObj4 = sourceFileName;
 
-			if (title == null) {
+			if (sourceFileName == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = description;
+			Object paramObj5 = title;
 
-			if (description == null) {
+			if (title == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = extraSettings;
+			Object paramObj6 = description;
 
-			if (extraSettings == null) {
+			if (description == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = bytes;
+			Object paramObj7 = extraSettings;
 
-			if (bytes == null) {
-				paramObj7 = new NullWrapper("[B");
+			if (extraSettings == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = serviceContext;
+			Object paramObj8 = bytes;
+
+			if (bytes == null) {
+				paramObj8 = new NullWrapper("[B");
+			}
+
+			Object paramObj9 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj8 = new NullWrapper(
+				paramObj9 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -788,7 +828,7 @@ public class DLFileEntryServiceHttp {
 					"updateFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -818,27 +858,30 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static boolean verifyFileEntryLock(HttpPrincipal httpPrincipal,
-		long folderId, java.lang.String name, java.lang.String lockUuid)
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = lockUuid;
+			Object paramObj3 = lockUuid;
 
 			if (lockUuid == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"verifyFileEntryLock",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 

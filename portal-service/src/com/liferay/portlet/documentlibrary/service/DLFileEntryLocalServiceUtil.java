@@ -109,43 +109,43 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFileEntry(userId, folderId, name, title, description,
-			extraSettings, bytes, serviceContext);
+				   .addFileEntry(userId, groupId, folderId, name, title,
+			description, extraSettings, bytes, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFileEntry(userId, folderId, name, title, description,
-			extraSettings, file, serviceContext);
+				   .addFileEntry(userId, groupId, folderId, name, title,
+			description, extraSettings, file, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFileEntry(uuid, userId, folderId, name, title,
+				   .addFileEntry(uuid, userId, groupId, folderId, name, title,
 			description, extraSettings, bytes, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
@@ -153,7 +153,7 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFileEntry(uuid, userId, folderId, name, title,
+				   .addFileEntry(uuid, userId, groupId, folderId, name, title,
 			description, extraSettings, is, size, serviceContext);
 	}
 
@@ -198,7 +198,7 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceName, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		java.io.File file,
@@ -206,27 +206,28 @@ public class DLFileEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addOrOverwriteFileEntry(userId, folderId, name, sourceName,
-			title, description, extraSettings, file, serviceContext);
+				   .addOrOverwriteFileEntry(userId, groupId, folderId, name,
+			sourceName, title, description, extraSettings, file, serviceContext);
 	}
 
-	public static void deleteFileEntries(long folderId)
+	public static void deleteFileEntries(long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteFileEntries(folderId);
+		getService().deleteFileEntries(groupId, folderId);
 	}
 
-	public static void deleteFileEntry(long folderId, java.lang.String name)
+	public static void deleteFileEntry(long groupId, long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteFileEntry(folderId, name);
+		getService().deleteFileEntry(groupId, folderId, name);
 	}
 
-	public static void deleteFileEntry(long folderId, java.lang.String name,
-		double version)
+	public static void deleteFileEntry(long groupId, long folderId,
+		java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteFileEntry(folderId, name, version);
+		getService().deleteFileEntry(groupId, folderId, name, version);
 	}
 
 	public static void deleteFileEntry(
@@ -255,41 +256,44 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.io.InputStream getFileAsStream(long companyId,
-		long userId, long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getFileAsStream(companyId, userId, folderId, name);
-	}
-
-	public static java.io.InputStream getFileAsStream(long companyId,
-		long userId, long folderId, java.lang.String name, double version)
+		long userId, long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getFileAsStream(companyId, userId, folderId, name, version);
+				   .getFileAsStream(companyId, userId, groupId, folderId, name);
+	}
+
+	public static java.io.InputStream getFileAsStream(long companyId,
+		long userId, long groupId, long folderId, java.lang.String name,
+		double version)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getFileAsStream(companyId, userId, groupId, folderId, name,
+			version);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId) throws com.liferay.portal.SystemException {
-		return getService().getFileEntries(folderId);
+		long groupId, long folderId) throws com.liferay.portal.SystemException {
+		return getService().getFileEntries(groupId, folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int start, int end)
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getFileEntries(folderId, start, end);
+		return getService().getFileEntries(groupId, folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int start, int end,
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getService().getFileEntries(folderId, start, end, obc);
+		return getService().getFileEntries(groupId, folderId, start, end, obc);
 	}
 
-	public static int getFileEntriesCount(long folderId)
+	public static int getFileEntriesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException {
-		return getService().getFileEntriesCount(folderId);
+		return getService().getFileEntriesCount(groupId, folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
@@ -300,10 +304,10 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getFileEntry(folderId, name);
+		return getService().getFileEntry(groupId, folderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
@@ -314,15 +318,17 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		long folderId, java.lang.String titleWithExtension)
+		long groupId, long folderId, java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getFileEntryByTitle(folderId, titleWithExtension);
+		return getService()
+				   .getFileEntryByTitle(groupId, folderId, titleWithExtension);
 	}
 
-	public static int getFoldersFileEntriesCount(java.util.List<Long> folderIds)
+	public static int getFoldersFileEntriesCount(long groupId,
+		java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
-		return getService().getFoldersFileEntriesCount(folderIds);
+		return getService().getFoldersFileEntriesCount(groupId, folderIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
@@ -381,43 +387,44 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.File file,
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateFileEntry(userId, folderId, newFolderId, name,
-			sourceFileName, title, description, extraSettings, file,
+				   .updateFileEntry(userId, groupId, folderId, newFolderId,
+			name, sourceFileName, title, description, extraSettings, file,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateFileEntry(userId, folderId, newFolderId, name,
-			sourceFileName, title, description, extraSettings, bytes,
-			serviceContext);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.InputStream is, long size,
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateFileEntry(userId, folderId, newFolderId, name,
-			sourceFileName, title, description, extraSettings, is, size,
+				   .updateFileEntry(userId, groupId, folderId, newFolderId,
+			name, sourceFileName, title, description, extraSettings, bytes,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateFileEntry(userId, groupId, folderId, newFolderId,
+			name, sourceFileName, title, description, extraSettings, is, size,
 			serviceContext);
 	}
 

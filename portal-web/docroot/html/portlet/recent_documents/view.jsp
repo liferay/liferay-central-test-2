@@ -40,7 +40,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(scopeGroupId, user.getU
 			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileRank.getFolderId(), fileRank.getName());
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, fileRank.getFolderId(), fileRank.getName());
 
 				fileEntry = fileEntry.toEscapedModel();
 

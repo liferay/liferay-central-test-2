@@ -70,7 +70,7 @@ import javax.portlet.PortletPreferences;
  * <a href="DLPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -120,7 +120,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
 				fileEntry.getCompanyId(), fileEntry.getUserId(),
-				fileEntry.getFolderId(), fileEntry.getName());
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
 
 			try {
 				context.addZipEntry(
@@ -166,8 +167,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<DLFileEntry> fileEntries = DLFileEntryUtil.findByFolderId(
-		folder.getFolderId());
+		List<DLFileEntry> fileEntries = DLFileEntryUtil.findByG_F(
+			folder.getGroupId(), folder.getFolderId());
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			exportFileEntry(
@@ -176,7 +177,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
 			List<DLFileShortcut> fileShortcuts =
-				DLFileShortcutUtil.findByFolderId(folder.getFolderId());
+				DLFileShortcutUtil.findByG_F(
+					folder.getGroupId(), folder.getFolderId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				exportFileShortcut(
@@ -245,7 +247,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 					existingFileEntry =
 						DLFileEntryLocalServiceUtil.updateFileEntry(
-							userId, existingFileEntry.getFolderId(), folderId,
+							userId, existingFileEntry.getGroupId(),
+							existingFileEntry.getFolderId(), folderId,
 							existingFileEntry.getName(), fileEntry.getName(),
 							fileEntry.getTitle(), fileEntry.getDescription(),
 							fileEntry.getExtraSettings(), bytes,
@@ -254,8 +257,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				catch (NoSuchFileEntryException nsfee) {
 					existingFileEntry =
 						DLFileEntryLocalServiceUtil.addFileEntry(
-							fileEntry.getUuid(), userId, folderId,
-							fileEntry.getName(), fileEntry.getTitle(),
+							fileEntry.getUuid(), userId, fileEntry.getGroupId(),
+							folderId, fileEntry.getName(), fileEntry.getTitle(),
 							fileEntry.getDescription(),
 							fileEntry.getExtraSettings(), bytes,
 							serviceContext);
@@ -263,7 +266,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				existingFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-					userId, folderId, fileEntry.getName(), fileEntry.getTitle(),
+					userId, fileEntry.getGroupId(), folderId,
+					fileEntry.getName(), fileEntry.getTitle(),
 					fileEntry.getDescription(), fileEntry.getExtraSettings(),
 					bytes, serviceContext);
 			}
@@ -765,11 +769,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			fileEntryNames, fileShortcut.getToName(), fileShortcut.getToName());
 
 		try {
-			DLFolderUtil.findByPrimaryKey(folderId);
+			DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 			DLFolderUtil.findByPrimaryKey(toFolderId);
 
+			long groupId = folder.getGroupId();
+
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				toFolderId, toName);
+				groupId, toFolderId, toName);
 
 			long[] assetCategoryIds = null;
 			String[] assetTagNames = null;
@@ -806,13 +812,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 				catch (NoSuchFileShortcutException nsfse) {
 					DLFileShortcutLocalServiceUtil.addFileShortcut(
-						fileShortcut.getUuid(), userId, folderId, toFolderId,
-						toName, serviceContext);
+						fileShortcut.getUuid(), userId, groupId, folderId,
+						toFolderId, toName, serviceContext);
 				}
 			}
 			else {
 				DLFileShortcutLocalServiceUtil.addFileShortcut(
-					userId, folderId, toFolderId, toName,
+					userId, groupId, folderId, toFolderId, toName,
 					serviceContext);
 			}
 		}

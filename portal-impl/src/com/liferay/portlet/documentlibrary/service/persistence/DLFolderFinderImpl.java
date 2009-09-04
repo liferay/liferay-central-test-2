@@ -44,19 +44,19 @@ import java.util.List;
 public class DLFolderFinderImpl
 	extends BasePersistenceImpl implements DLFolderFinder {
 
-	public static String COUNT_FE_FS_BY_FOLDER_IDS =
-		DLFolderFinder.class.getName() + ".countFE_FS_ByFolderIds";
+	public static String COUNT_FE_FS_BY_G_F =
+		DLFolderFinder.class.getName() + ".countFE_FS_ByG_F";
 
-	public static String COUNT_F_FE_FS_BY_FOLDER_IDS =
-		DLFolderFinder.class.getName() + ".countF_FE_FS_ByFolderIds";
+	public static String COUNT_F_FE_FS_BY_G_F =
+		DLFolderFinder.class.getName() + ".countF_FE_FS_ByG_F";
 
-	public static String FIND_FE_FS_BY_FOLDER_IDS =
-		DLFolderFinder.class.getName() + ".findFE_FS_ByFolderIds";
+	public static String FIND_FE_FS_BY_G_F =
+		DLFolderFinder.class.getName() + ".findFE_FS_ByG_F";
 
-	public static String FIND_F_FE_FS_BY_FOLDER_IDS =
-		DLFolderFinder.class.getName() + ".findF_FE_FS_ByFolderIds";
+	public static String FIND_F_FE_FS_BY_G_F =
+		DLFolderFinder.class.getName() + ".findF_FE_FS_ByG_F";
 
-	public int countFE_FS_ByFolderIds(List<Long> folderIds)
+	public int countFE_FS_ByG_F(long groupId, List<Long> folderIds)
 		throws SystemException {
 
 		Session session = null;
@@ -64,7 +64,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_FE_FS_BY_FOLDER_IDS);
+			String sql = CustomSQLUtil.get(COUNT_FE_FS_BY_G_F);
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -79,9 +79,13 @@ public class DLFolderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
+
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -109,7 +113,7 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public int countF_FE_FS_ByFolderIds(List<Long> folderIds)
+	public int countF_FE_FS_ByG_F(long groupId, List<Long> folderIds)
 		throws SystemException {
 
 		Session session = null;
@@ -117,7 +121,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_F_FE_FS_BY_FOLDER_IDS);
+			String sql = CustomSQLUtil.get(COUNT_F_FE_FS_BY_G_F);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -135,13 +139,19 @@ public class DLFolderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
+
+			qPos.add(groupId);
+
+			for (Long folderId : folderIds) {
+				qPos.add(folderId);
+			}
+
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -169,8 +179,8 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public List<Object> findFE_FS_ByFolderIds(
-			List<Long> folderIds, int start, int end)
+	public List<Object> findFE_FS_ByG_F(
+			long groupId, List<Long> folderIds, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -178,7 +188,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_FE_FS_BY_FOLDER_IDS);
+			String sql = CustomSQLUtil.get(FIND_FE_FS_BY_G_F);
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -196,9 +206,13 @@ public class DLFolderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
+
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -223,7 +237,7 @@ public class DLFolderFinderImpl
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByF_N(folderId, name);
+					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId, name);
 				}
 
 				models.add(obj);
@@ -239,8 +253,8 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public List<Object> findF_FE_FS_ByFolderIds(
-			List<Long> folderIds, int start, int end)
+	public List<Object> findF_FE_FS_ByG_F(
+			long groupId, List<Long> folderIds, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -248,7 +262,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_F_FE_FS_BY_FOLDER_IDS);
+			String sql = CustomSQLUtil.get(FIND_F_FE_FS_BY_G_F);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -270,13 +284,19 @@ public class DLFolderFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
 			}
+
+			qPos.add(groupId);
+
+			for (Long folderId : folderIds) {
+				qPos.add(folderId);
+			}
+
+			qPos.add(groupId);
 
 			for (Long folderId : folderIds) {
 				qPos.add(folderId);
@@ -305,7 +325,7 @@ public class DLFolderFinderImpl
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByF_N(folderId, name);
+					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId, name);
 				}
 
 				models.add(obj);

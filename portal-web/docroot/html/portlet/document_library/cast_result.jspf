@@ -42,7 +42,7 @@ else {
 
 	fileShortcut = fileShortcut.toEscapedModel();
 
-	fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+	fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 	fileEntry = fileEntry.toEscapedModel();
 }

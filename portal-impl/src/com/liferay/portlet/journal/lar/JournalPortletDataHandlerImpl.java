@@ -108,7 +108,7 @@ import javax.portlet.PortletPreferences;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -325,8 +325,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					long folderId = GetterUtil.getLong(map.get("folderId"));
 					String name = map.get("name");
 
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-						folderId, name);
+//TODO
+//					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+//						folderId, name);
 				}
 
 				if (fileEntry == null) {

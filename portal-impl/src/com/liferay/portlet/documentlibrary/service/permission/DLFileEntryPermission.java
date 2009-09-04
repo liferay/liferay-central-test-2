@@ -30,6 +30,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
@@ -42,11 +43,11 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 public class DLFileEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long folderId, String name,
-			String actionId)
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String name, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, folderId, name, actionId)) {
+		if (!contains(permissionChecker, groupId, folderId, name, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -62,12 +63,12 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long folderId, String name,
-			String actionId)
+			PermissionChecker permissionChecker, long groupId, long folderId,
+			String name, String actionId)
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			folderId, name);
+			groupId, folderId, name);
 
 		return contains(permissionChecker, fileEntry, actionId);
 	}
@@ -77,16 +78,29 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(
-			fileEntry.getFolderId());
-
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (!DLFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.ACCESS) &&
-				!DLFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW)) {
+			if (fileEntry.getFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				long groupId = fileEntry.getGroupId();
 
-				return false;
+				if (!DLPermission.contains(
+						permissionChecker, groupId, ActionKeys.ACCESS) &&
+					!DLPermission.contains(
+						permissionChecker, groupId, ActionKeys.VIEW)) {
+
+					return false;
+				}
+			}
+			else {
+				DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+					fileEntry.getFolderId());
+
+				if (!DLFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.ACCESS) &&
+					!DLFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.VIEW)) {
+
+					return false;
+				}
 			}
 		}
 

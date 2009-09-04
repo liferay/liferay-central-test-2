@@ -99,11 +99,12 @@ public class CompareVersionsAction extends PortletAction {
 
 		long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
 
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(renderRequest, "folderId");
 		String name = ParamUtil.getString(renderRequest, "name");
 
 		DLFileEntryPermission.check(
-			themeDisplay.getPermissionChecker(), folderId, name,
+			themeDisplay.getPermissionChecker(), groupId, folderId, name,
 			ActionKeys.VIEW);
 
 		String extension = FileUtil.getExtension(name);
@@ -117,9 +118,9 @@ public class CompareVersionsAction extends PortletAction {
 			renderRequest, "targetVersion");
 
 		InputStream sourceIs = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, folderId, name, sourceVersion);
+			companyId, userId, groupId, folderId, name, sourceVersion);
 		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, folderId, name, targetVersion);
+			companyId, userId, groupId, folderId, name, targetVersion);
 
 		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {

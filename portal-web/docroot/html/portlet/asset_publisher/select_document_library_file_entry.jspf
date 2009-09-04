@@ -120,7 +120,7 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 				long entryFolderId = GetterUtil.getLong(doc.get("repositoryId"));
 				String fileName = doc.get("path");
 
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryFolderId, fileName);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, entryFolderId, fileName);
 
 				fileEntry = fileEntry.toEscapedModel();
 
@@ -231,7 +231,7 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
-			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
+			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds);
 
 			row.addText(String.valueOf(foldersCount), rowURL);
 			row.addText(String.valueOf(fileEntriesCount), rowURL);
@@ -259,11 +259,11 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 
 			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-documents");
 
-			total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getFolderId());
+			total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getGroupId(), folder.getFolderId());
 
 			searchContainer.setTotal(total);
 
-			results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getGroupId(), folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
@@ -319,7 +319,7 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 
 				// Locked
 
-				boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+				boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
 
 				row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

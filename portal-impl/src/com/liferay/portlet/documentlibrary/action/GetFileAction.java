@@ -79,13 +79,15 @@ public class GetFileAction extends PortletAction {
 			long fileShortcutId = ParamUtil.getLong(request, "fileShortcutId");
 
 			String uuid = ParamUtil.getString(request, "uuid");
-			long groupId = ParamUtil.getLong(request, "groupId");
 
 			String targetExtension = ParamUtil.getString(
 				request, "targetExtension");
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+			long groupId = ParamUtil.getLong(
+				request, "groupId", themeDisplay.getScopeGroupId());
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,
@@ -168,8 +170,8 @@ public class GetFileAction extends PortletAction {
 
 			if (fileShortcutId <= 0) {
 				DLFileEntryPermission.check(
-					themeDisplay.getPermissionChecker(), folderId, name,
-					ActionKeys.VIEW);
+					themeDisplay.getPermissionChecker(), groupId, folderId,
+					name, ActionKeys.VIEW);
 			}
 			else {
 				DLFileShortcut fileShortcut =
@@ -181,7 +183,7 @@ public class GetFileAction extends PortletAction {
 
 			if (fileEntry == null) {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					folderId, name);
+					groupId, folderId, name);
 			}
 
 			if (version == 0) {
@@ -189,7 +191,7 @@ public class GetFileAction extends PortletAction {
 			}
 
 			is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				companyId, userId, folderId, name, version);
+				companyId, userId, groupId, folderId, name, version);
 
 			boolean converted = false;
 

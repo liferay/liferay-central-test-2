@@ -45,12 +45,13 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFileShortcutServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long folderId, long toFolderId, java.lang.String toName,
+		long groupId, long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFileShortcut(folderId, toFolderId, toName, serviceContext);
+				   .addFileShortcut(groupId, folderId, toFolderId, toName,
+			serviceContext);
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)

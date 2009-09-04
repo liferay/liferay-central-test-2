@@ -650,21 +650,24 @@ public class DLFolderServiceHttp {
 		}
 	}
 
-	public static void unlockFolder(HttpPrincipal httpPrincipal, long folderId,
-		java.lang.String lockUuid)
+	public static void unlockFolder(HttpPrincipal httpPrincipal, long groupId,
+		long folderId, java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = lockUuid;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = lockUuid;
 
 			if (lockUuid == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
-					"unlockFolder", new Object[] { paramObj0, paramObj1 });
+					"unlockFolder",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

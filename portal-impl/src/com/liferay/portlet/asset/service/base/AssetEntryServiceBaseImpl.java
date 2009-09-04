@@ -77,8 +77,12 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
@@ -505,6 +509,39 @@ public abstract class AssetEntryServiceBaseImpl extends PrincipalBean
 		this.bookmarksEntryFinder = bookmarksEntryFinder;
 	}
 
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
+	}
+
+	public DLFolderPersistence getDLFolderPersistence() {
+		return dlFolderPersistence;
+	}
+
+	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
+		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	public DLFolderFinder getDLFolderFinder() {
+		return dlFolderFinder;
+	}
+
+	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
+		this.dlFolderFinder = dlFolderFinder;
+	}
+
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -781,6 +818,14 @@ public abstract class AssetEntryServiceBaseImpl extends PrincipalBean
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	@BeanReference(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl")
 	protected BookmarksEntryFinder bookmarksEntryFinder;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
+	protected DLFolderLocalService dlFolderLocalService;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
+	protected DLFolderService dlFolderService;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
+	protected DLFolderPersistence dlFolderPersistence;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.impl")
+	protected DLFolderFinder dlFolderFinder;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")

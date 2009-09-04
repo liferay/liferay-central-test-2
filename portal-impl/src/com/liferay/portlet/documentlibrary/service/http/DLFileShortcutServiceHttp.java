@@ -71,32 +71,36 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
  */
 public class DLFileShortcutServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		HttpPrincipal httpPrincipal, long folderId, long toFolderId,
-		java.lang.String toName,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(toFolderId);
+			Object paramObj1 = new LongWrapper(folderId);
 
-			Object paramObj2 = toName;
+			Object paramObj2 = new LongWrapper(toFolderId);
+
+			Object paramObj3 = toName;
 
 			if (toName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = serviceContext;
+			Object paramObj4 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
+				paramObj4 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileShortcutServiceUtil.class.getName(),
 					"addFileShortcut",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

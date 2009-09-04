@@ -45,7 +45,7 @@ DLFileEntry toFileEntry = null;
 
 if ((toFolderId > 0) && Validator.isNotNull(toName)) {
 	try {
-		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(toFolderId, toName);
+		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
 		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}

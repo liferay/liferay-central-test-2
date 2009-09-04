@@ -100,7 +100,7 @@ for (int i = 0; i < results.size(); i++) {
 	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
+	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(fileEntriesCount), rowURL);
@@ -117,82 +117,80 @@ for (int i = 0; i < results.size(); i++) {
 	<br />
 </c:if>
 
-<c:if test="<%= folder != null %>">
-	<liferay-ui:tabs names="documents" />
+<liferay-ui:tabs names="documents" />
 
-	<%
-	headerNames.clear();
+<%
+headerNames.clear();
 
-	headerNames.add("document");
-	headerNames.add("size");
-	headerNames.add("downloads");
-	headerNames.add("locked");
+headerNames.add("document");
+headerNames.add("size");
+headerNames.add("downloads");
+headerNames.add("locked");
 
-	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getFolderId());
+total = DLFileEntryLocalServiceUtil.getFileEntriesCount(groupId, folderId);
 
-	searchContainer.setTotal(total);
+searchContainer.setTotal(total);
 
-	results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+results = DLFileEntryLocalServiceUtil.getFileEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setResults(results);
+searchContainer.setResults(results);
 
-	resultRows = searchContainer.getResultRows();
+resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+for (int i = 0; i < results.size(); i++) {
+	DLFileEntry fileEntry = (DLFileEntry)results.get(i);
 
-		fileEntry = fileEntry.toEscapedModel();
+	fileEntry = fileEntry.toEscapedModel();
 
-		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
+	ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript:opener.");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectFileEntry('");
-		sb.append(fileEntry.getFolderId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
-		sb.append("'); window.close();");
+	sb.append("javascript:opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectFileEntry('");
+	sb.append(fileEntry.getFolderId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(fileEntry.getName()));
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
+	sb.append("'); window.close();");
 
-		String rowHREF = sb.toString();
+	String rowHREF = sb.toString();
 
-		// Title and description
+	// Title and description
 
-		sb = new StringBuilder();
+	sb = new StringBuilder();
 
-		sb.append(_getFileEntryImage(fileEntry, themeDisplay));
-		sb.append(fileEntry.getTitleWithExtension());
+	sb.append(_getFileEntryImage(fileEntry, themeDisplay));
+	sb.append(fileEntry.getTitleWithExtension());
 
-		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sb.append("<br />");
-			sb.append(fileEntry.getDescription());
-		}
-
-		row.addText(sb.toString(), rowHREF);
-
-		// Statistics
-
-		row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
-
-		// Locked
-
-		boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
-
-		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
-
-		// Add result row
-
-		resultRows.add(row);
+	if (Validator.isNotNull(fileEntry.getDescription())) {
+		sb.append("<br />");
+		sb.append(fileEntry.getDescription());
 	}
-	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-</c:if>
+	row.addText(sb.toString(), rowHREF);
+
+	// Statistics
+
+	row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
+	row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
+
+	// Locked
+
+	boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
+
+	row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+
+	// Add result row
+
+	resultRows.add(row);
+}
+%>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 </form>

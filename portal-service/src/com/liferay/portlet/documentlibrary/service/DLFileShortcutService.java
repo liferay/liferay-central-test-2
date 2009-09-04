@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface DLFileShortcutService {
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long folderId, long toFolderId, java.lang.String toName,
+		long groupId, long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

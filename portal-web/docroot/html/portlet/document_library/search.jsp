@@ -112,7 +112,7 @@ try {
 		DLFileEntry fileEntry = null;
 
 		try {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByFolderIds">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_F">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			WHERE
+				(DLFileEntry.groupId = ?) AND
 				[$FOLDER_ID$]
 		]]>
 	</sql>
@@ -28,7 +29,7 @@
 				))
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countFE_FS_ByFolderIds">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countFE_FS_ByG_F">
 		<![CDATA[
 			(
 				SELECT
@@ -36,6 +37,7 @@
 				FROM
 					DLFileEntry
 				WHERE
+					(DLFileEntry.groupId = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
@@ -45,11 +47,12 @@
 				FROM
 					DLFileShortcut
 				WHERE
+					(DLFileShortcut.groupId = ?) AND
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_FE_FS_ByFolderIds">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_FE_FS_ByG_F">
 		<![CDATA[
 			(
 				SELECT
@@ -57,6 +60,7 @@
 				FROM
 					DLFolder
 				WHERE
+					(DLFolder.groupId = ?) AND
 					[$FOLDER_PARENT_FOLDER_ID$]
 			)
 			UNION ALL
@@ -66,6 +70,7 @@
 				FROM
 					DLFileEntry
 				WHERE
+					(DLFileEntry.groupId = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
@@ -75,11 +80,12 @@
 				FROM
 					DLFileShortcut
 				WHERE
+					(DLFileShortcut.groupId = ?) AND
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findFE_FS_ByFolderIds">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findFE_FS_ByG_F">
 		<![CDATA[
 			(
 				SELECT
@@ -87,6 +93,7 @@
 				FROM
 					DLFileEntry
 				WHERE
+					(DLFileEntry.groupId = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
@@ -100,13 +107,14 @@
 						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
 						(DLFileEntry.name = DLFileShortcut.toName)
 				WHERE
+					(DLFileShortcut.groupId = ?) AND
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
 				modelFolder DESC, title ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_FE_FS_ByFolderIds">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findF_FE_FS_ByG_F">
 		<![CDATA[
 			(
 				SELECT
@@ -114,6 +122,7 @@
 				FROM
 					DLFolder
 				WHERE
+					(DLFolder.groupId = ?) AND
 					[$FOLDER_PARENT_FOLDER_ID$]
 			)
 			UNION ALL
@@ -123,6 +132,7 @@
 				FROM
 					DLFileEntry
 				WHERE
+					(DLFileEntry.groupId = ?) AND
 					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
@@ -136,6 +146,7 @@
 						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
 						(DLFileEntry.name = DLFileShortcut.toName)
 				WHERE
+					(DLFileShortcut.groupId = ?) AND
 					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY

@@ -30,6 +30,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -80,7 +82,7 @@ public class EditFileShortcutAction extends PortletAction {
 				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof FileShortcutPermissionException ||
-					 e instanceof NoSuchFileEntryException) {
+					e instanceof NoSuchFileEntryException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -127,9 +129,13 @@ public class EditFileShortcutAction extends PortletAction {
 	protected void updateFileShortcut(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long fileShortcutId = ParamUtil.getLong(
 			actionRequest, "fileShortcutId");
 
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		long toFolderId = ParamUtil.getLong(actionRequest, "toFolderId");
 		String toName = HtmlUtil.unescape(
@@ -144,7 +150,7 @@ public class EditFileShortcutAction extends PortletAction {
 
 			DLFileShortcut fileShortcut =
 				DLFileShortcutServiceUtil.addFileShortcut(
-					folderId, toFolderId, toName, serviceContext);
+					groupId, folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),

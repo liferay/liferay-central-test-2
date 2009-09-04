@@ -68,7 +68,7 @@ if (fileEntry != null) {
 	folder = fileEntry.getFolder();
 
 	try {
-		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
 
 		isLocked = Boolean.TRUE;
 

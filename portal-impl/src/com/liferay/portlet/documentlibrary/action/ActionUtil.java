@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -68,6 +69,10 @@ public class ActionUtil {
 	public static void getFileEntry(HttpServletRequest request)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(request, "folderId");
 		long newFolderId = ParamUtil.getLong(request, "newFolderId");
 		String name = ParamUtil.getString(request, "name");
@@ -76,7 +81,8 @@ public class ActionUtil {
 
 		if ((folderId > 0) && Validator.isNotNull(name)) {
 			try {
-				fileEntry = DLFileEntryServiceUtil.getFileEntry(folderId, name);
+				fileEntry = DLFileEntryServiceUtil.getFileEntry(
+					groupId, folderId, name);
 			}
 			catch (NoSuchFileEntryException nsfe) {
 
@@ -84,7 +90,7 @@ public class ActionUtil {
 				// folder
 
 				fileEntry = DLFileEntryServiceUtil.getFileEntry(
-					newFolderId, name);
+					groupId, newFolderId, name);
 			}
 		}
 

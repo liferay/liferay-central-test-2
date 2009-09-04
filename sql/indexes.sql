@@ -113,6 +113,9 @@ create index IX_24A846D1 on DLFileEntry (folderId);
 create unique index IX_8F6C75D0 on DLFileEntry (folderId, name);
 create index IX_A9951F17 on DLFileEntry (folderId, title);
 create index IX_F4AF5636 on DLFileEntry (groupId);
+create index IX_93CF8193 on DLFileEntry (groupId, folderId);
+create unique index IX_5391712 on DLFileEntry (groupId, folderId, name);
+create index IX_ED5CA615 on DLFileEntry (groupId, folderId, title);
 create index IX_43261870 on DLFileEntry (groupId, userId);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
 create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId);
@@ -123,6 +126,8 @@ create index IX_BAFB116E on DLFileRank (groupId, userId);
 create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_E56EC6AD on DLFileShortcut (folderId);
+create index IX_B0051937 on DLFileShortcut (groupId, folderId);
+create index IX_55C736AC on DLFileShortcut (groupId, toFolderId, toName);
 create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
 create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);

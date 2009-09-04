@@ -91,8 +91,10 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public void deleteFolder(long folderId)
 		throws PortalException, RemoteException, SystemException {
 
+		DLFolder folder = dlFolderLocalService.getFolder(folderId);
+
 		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.DELETE);
+			getPermissionChecker(), folder, ActionKeys.DELETE);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
@@ -114,7 +116,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(folderId, lock.getUuid());
+				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}
@@ -130,10 +132,12 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.VIEW);
+		DLFolder folder = dlFolderLocalService.getFolder(folderId);
 
-		return dlFolderLocalService.getFolder(folderId);
+		DLFolderPermission.check(
+			getPermissionChecker(), folder, ActionKeys.VIEW);
+
+		return folder;
 	}
 
 	public DLFolder getFolder(long groupId, long parentFolderId, String name)
@@ -170,7 +174,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			DLFolder folder = itr.next();
 
 			if (!DLFolderPermission.contains(
-					getPermissionChecker(), folder.getFolderId(),
+					getPermissionChecker(), groupId, folder.getFolderId(),
 					ActionKeys.VIEW)) {
 
 				itr.remove();
@@ -223,23 +227,29 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		Set<String> fileNames = new HashSet<String>();
 
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		long groupId = folder.getGroupId();
+
 		try {
+
 			List<DLFileEntry> fileEntries = dlFileEntryService.getFileEntries(
-				folderId);
+				groupId, folderId);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				dlFileEntryService.lockFileEntry(
-					folderId, fileEntry.getName(), owner, expirationTime);
+					groupId, folderId, fileEntry.getName(), owner,
+					expirationTime);
 
 				fileNames.add(fileEntry.getName());
 			}
 		}
 		catch (Exception e) {
 			for (String fileName : fileNames) {
-				dlFileEntryService.unlockFileEntry(folderId, fileName);
+				dlFileEntryService.unlockFileEntry(groupId, folderId, fileName);
 			}
 
-			unlockFolder(folderId, lock.getUuid());
+			unlockFolder(groupId, folderId, lock.getUuid());
 
 			if (e instanceof PortalException) {
 				throw (PortalException)e;
@@ -276,7 +286,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		dlFolderLocalService.reIndex(ids);
 	}
 
-	public void unlockFolder(long folderId, String lockUuid)
+	public void unlockFolder(long groupId, long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(lockUuid)) {
@@ -302,11 +312,11 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		try {
 			List<DLFileEntry> fileEntries = dlFileEntryService.getFileEntries(
-				folderId);
+				groupId, folderId);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				dlFileEntryService.unlockFileEntry(
-					folderId, fileEntry.getName());
+					groupId, folderId, fileEntry.getName());
 			}
 		}
 		catch (Exception e) {
@@ -320,7 +330,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		long folderId = getFolderId(groupId, parentFolderId, name);
 
-		unlockFolder(folderId, lockUuid);
+		unlockFolder(groupId, folderId, lockUuid);
 	}
 
 	public DLFolder updateFolder(
@@ -328,8 +338,10 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, RemoteException, SystemException {
 
+		DLFolder folder = dlFolderLocalService.getFolder(folderId);
+
 		DLFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.UPDATE);
+			getPermissionChecker(), folder, ActionKeys.UPDATE);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
@@ -352,7 +364,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(folderId, lock.getUuid());
+				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}
@@ -387,7 +399,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		throws PortalException, RemoteException, SystemException {
 
 		List<DLFileEntry> srcFileEntries = dlFileEntryService.getFileEntries(
-			srcFolder.getFolderId());
+			srcFolder.getGroupId(), srcFolder.getFolderId());
 
 		for (DLFileEntry srcFileEntry : srcFileEntries) {
 			String name = srcFileEntry.getName();
@@ -412,8 +424,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			}
 
 			dlFileEntryService.addFileEntry(
-				destFolder.getFolderId(), name, title, description,
-				extraSettings, file, serviceContext);
+				destFolder.getGroupId(), destFolder.getFolderId(), name, title,
+				description, extraSettings, file, serviceContext);
 
 			file.delete();
 		}

@@ -98,7 +98,7 @@ for (int i = 0; i < results.size(); i++) {
 	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
+	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(fileEntriesCount), rowURL);
@@ -127,11 +127,11 @@ for (int i = 0; i < results.size(); i++) {
 
 	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getFolderId());
+	total = DLFileEntryLocalServiceUtil.getFileEntriesCount(groupId, folder.getFolderId());
 
 	searchContainer.setTotal(total);
 
-	results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+	results = DLFileEntryLocalServiceUtil.getFileEntries(groupId, folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -174,7 +174,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Locked
 
-		boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+		boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

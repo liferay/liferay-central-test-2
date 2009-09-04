@@ -81,13 +81,13 @@ import java.rmi.RemoteException;
  */
 public class DLFileShortcutServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		long folderId, long toFolderId, java.lang.String toName,
+		long groupId, long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
-				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
-					toName, serviceContext);
+				DLFileShortcutServiceUtil.addFileShortcut(groupId, folderId,
+					toFolderId, toName, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}

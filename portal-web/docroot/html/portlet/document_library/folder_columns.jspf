@@ -30,7 +30,7 @@ subfolderIds.add(new Long(curFolder.getFolderId()));
 DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 int foldersCount = subfolderIds.size() - 1;
-int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(subfolderIds);
+int fileEntriesCount = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, subfolderIds);
 
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
@@ -129,7 +129,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 		<c:when test='<%= folderColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = LockLocalServiceUtil.isLocked(DLFolder.class.getName(), DLUtil.getLockId(curFolder.getFolderId(), HtmlUtil.unescape(curFolder.getName())));
+			boolean isLocked = LockLocalServiceUtil.isLocked(DLFolder.class.getName(), DLUtil.getLockId(curFolder.getGroupId(), curFolder.getFolderId(), HtmlUtil.unescape(curFolder.getName())));
 			%>
 
 			<liferay-ui:search-container-column-text

@@ -78,7 +78,7 @@ import java.util.List;
  * <a href="PermissionServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
@@ -275,7 +275,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(DLFolder.class.getName())) {
 			DLFolderPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
+				permissionChecker, groupId, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Group.class.getName())) {
@@ -362,7 +362,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
-				 (primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
+				(primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
 
 			int pos = primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
@@ -377,7 +377,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.PERMISSIONS) &&
-				 !permissionChecker.hasPermission(
+				!permissionChecker.hasPermission(
 					groupId, name, primKey, ActionKeys.DEFINE_PERMISSIONS)) {
 
 			throw new PrincipalException();

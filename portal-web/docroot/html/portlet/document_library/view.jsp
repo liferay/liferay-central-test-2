@@ -159,135 +159,139 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<c:if test="<%= folder != null %>">
-			<c:if test="<%= showSubfolders %>">
+		<c:if test="<%= showSubfolders %>">
+			<br />
+		</c:if>
+
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
+
+		<c:if test="<%= showTabs && showSubfolders %>">
+			<liferay-ui:tabs names="documents" />
+		</c:if>
+
+		<liferay-ui:search-container
+			curParam="cur2"
+			delta="<%= fileEntriesPerPage %>"
+			headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
+			iteratorURL="<%= portletURL %>"
+		>
+			<liferay-ui:search-container-results>
+
+				<%
+				if (mergedView) {
+					results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+				}
+				else {
+					results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+				}
+
+				if (mergedView) {
+					total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId);
+				}
+				else {
+					total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId);
+				}
+
+				pageContext.setAttribute("results", results);
+				pageContext.setAttribute("total", total);
+				%>
+
+			</liferay-ui:search-container-results>
+
+			<liferay-ui:search-container-row
+				className="com.liferay.portal.model.BaseModel"
+				keyProperty="primaryKeyObj"
+				modelVar="result"
+			>
+				<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
+
+				<%
+				if (curFolder != null) {
+				%>
+
+					<liferay-portlet:renderURL varImpl="rowURL">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+					</liferay-portlet:renderURL>
+
+					<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
+
+				<%
+				}
+				else {
+					String rowHREF = null;
+
+					if (fileShortcut == null) {
+						rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
+					}
+					else {
+						rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcut.getFileShortcutId();
+					}
+				%>
+
+					<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
+
+				<%
+				}
+				%>
+
+			</liferay-ui:search-container-row>
+
+			<%
+			if (folder == null) {
+				showAddFileEntryButton = showAddFileEntryButton && DLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_DOCUMENT);
+				showAddFileShortcutButton = showAddFileShortcutButton && DLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_SHORTCUT);
+			}
+			else {
+				showAddFileEntryButton = showAddFileEntryButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
+				showAddFileShortcutButton = showAddFileShortcutButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
+			}
+			showAddFolderButton = mergedView && showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+			boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
+			%>
+
+			<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton || showCurDocumentSearch %>">
+				<div>
+					<c:if test="<%= showCurDocumentSearch %>">
+						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+						<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
+					</c:if>
+
+					<c:if test="<%= showAddFolderButton %>">
+						<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="<portlet:namespace />addFolder();" />
+					</c:if>
+
+					<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
+						<c:if test="<%= showAddFileEntryButton %>">
+							<input type="button" value="<liferay-ui:message key="add-document" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+						</c:if>
+
+						<c:if test="<%= showAddFileShortcutButton %>">
+							<input type="button" value="<liferay-ui:message key="add-shortcut" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+						</c:if>
+					</c:if>
+				</div>
+
 				<br />
 			</c:if>
 
-			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
 
-			<c:if test="<%= showTabs && showSubfolders %>">
-				<liferay-ui:tabs names="documents" />
-			</c:if>
+		</form>
 
-			<liferay-ui:search-container
-				curParam="cur2"
-				delta="<%= fileEntriesPerPage %>"
-				headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
-				iteratorURL="<%= portletURL %>"
-			>
-				<liferay-ui:search-container-results>
-
-					<%
-					if (mergedView) {
-						results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
-					}
-					else {
-						results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
-					}
-
-					if (mergedView) {
-						total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(folder.getFolderId());
-					}
-					else {
-						total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(folder.getFolderId());
-					}
-
-					pageContext.setAttribute("results", results);
-					pageContext.setAttribute("total", total);
-					%>
-
-				</liferay-ui:search-container-results>
-
-				<liferay-ui:search-container-row
-					className="com.liferay.portal.model.BaseModel"
-					keyProperty="primaryKeyObj"
-					modelVar="result"
-				>
-					<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
-
-					<%
-					if (curFolder != null) {
-					%>
-
-						<liferay-portlet:renderURL varImpl="rowURL">
-							<portlet:param name="struts_action" value="/document_library/view" />
-							<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-						</liferay-portlet:renderURL>
-
-						<%@ include file="/html/portlet/document_library/folder_columns.jspf" %>
-
-					<%
-					}
-					else {
-						String rowHREF = null;
-
-						if (fileShortcut == null) {
-							rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
-						}
-						else {
-							rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcut.getFileShortcutId();
-						}
-					%>
-
-						<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>
-
-					<%
-					}
-					%>
-
-				</liferay-ui:search-container-row>
-
-				<%
-				showAddFileEntryButton = showAddFileEntryButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
-				showAddFileShortcutButton = showAddFileShortcutButton && DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
-				showAddFolderButton = mergedView && showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-				boolean showCurDocumentSearch = showFileEntriesSearch && (results.size() > 0);
-				%>
-
-				<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton || showCurDocumentSearch %>">
-					<div>
-						<c:if test="<%= showCurDocumentSearch %>">
-							<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
-
-							<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
-
-							<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
-						</c:if>
-
-						<c:if test="<%= showAddFolderButton %>">
-							<input type="button" value="<liferay-ui:message key="add-folder" />" onClick="<portlet:namespace />addFolder();" />
-						</c:if>
-
-						<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
-							<c:if test="<%= showAddFileEntryButton %>">
-								<input type="button" value="<liferay-ui:message key="add-document" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
-							</c:if>
-
-							<c:if test="<%= showAddFileShortcutButton %>">
-								<input type="button" value="<liferay-ui:message key="add-shortcut" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
-							</c:if>
-						</c:if>
-					</div>
-
-					<br />
-				</c:if>
-
-				<liferay-ui:search-iterator />
-			</liferay-ui:search-container>
-
-			</form>
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				<script type="text/javascript">
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</script>
-			</c:if>
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+			</script>
 		</c:if>
 
 		<br />
@@ -310,13 +314,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				}
 			}
 
-			if (folder.getParentFolderId() != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+			DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 
-				if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-					PortalUtil.setPageSubtitle(folder.getName(), request);
-					PortalUtil.setPageDescription(folder.getDescription(), request);
-				}
+			if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				PortalUtil.setPageSubtitle(folder.getName(), request);
+				PortalUtil.setPageDescription(folder.getDescription(), request);
 			}
 		}
 		%>

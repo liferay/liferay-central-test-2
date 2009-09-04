@@ -115,11 +115,11 @@ public class EditFileEntryAction extends PortletAction {
 				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
-					 e instanceof DuplicateFolderNameException ||
-					 e instanceof FileNameException ||
-					 e instanceof FileSizeException ||
-					 e instanceof NoSuchFolderException ||
-					 e instanceof SourceFileNameException) {
+					e instanceof DuplicateFolderNameException ||
+					e instanceof FileNameException ||
+					e instanceof FileSizeException ||
+					e instanceof NoSuchFolderException ||
+					e instanceof SourceFileNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -161,27 +161,40 @@ public class EditFileEntryAction extends PortletAction {
 	protected void deleteFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
+		DLFileEntryServiceUtil.deleteFileEntry(
+			groupId, folderId, name, version);
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		DLFileEntryServiceUtil.lockFileEntry(folderId, name);
+		DLFileEntryServiceUtil.lockFileEntry(groupId, folderId, name);
 	}
 
 	protected void unlockFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
+		DLFileEntryServiceUtil.unlockFileEntry(groupId, folderId, name);
 	}
 
 	protected void updateFileEntry(
@@ -197,6 +210,7 @@ public class EditFileEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
 		long newFolderId = ParamUtil.getLong(uploadRequest, "newFolderId");
 		String name = ParamUtil.getString(uploadRequest, "name");
@@ -218,12 +232,12 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			DLFolderPermission.check(
-				themeDisplay.getPermissionChecker(), folderId,
+				themeDisplay.getPermissionChecker(), groupId, folderId,
 				ActionKeys.ADD_DOCUMENT);
 
 			DLFileEntry entry = DLFileEntryLocalServiceUtil.addFileEntry(
-				themeDisplay.getUserId(), folderId, sourceFileName, title,
-				description, extraSettings, file, serviceContext);
+				themeDisplay.getUserId(), groupId, folderId, sourceFileName,
+				title, description, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -234,11 +248,11 @@ public class EditFileEntryAction extends PortletAction {
 			// Update file entry
 
 			DLFileEntryPermission.check(
-				themeDisplay.getPermissionChecker(), folderId, name,
+				themeDisplay.getPermissionChecker(), groupId, folderId, name,
 				ActionKeys.UPDATE);
 
 			DLFileEntryLocalServiceUtil.updateFileEntry(
-				themeDisplay.getUserId(), folderId, newFolderId, name,
+				themeDisplay.getUserId(), groupId, folderId, newFolderId, name,
 				sourceFileName, title, description, extraSettings, file,
 				serviceContext);
 		}

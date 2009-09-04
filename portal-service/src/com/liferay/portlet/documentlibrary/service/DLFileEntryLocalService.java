@@ -101,7 +101,7 @@ public interface DLFileEntryLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -109,7 +109,7 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -117,7 +117,7 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
@@ -125,7 +125,7 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		java.io.InputStream is, long size,
@@ -158,7 +158,7 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceName, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
 		java.io.File file,
@@ -166,16 +166,17 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteFileEntries(long folderId)
+	public void deleteFileEntries(long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteFileEntry(long folderId, java.lang.String name)
+	public void deleteFileEntry(long groupId, long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteFileEntry(long folderId, java.lang.String name,
-		double version)
+	public void deleteFileEntry(long groupId, long folderId,
+		java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -200,32 +201,32 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.io.InputStream getFileAsStream(long companyId, long userId,
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public java.io.InputStream getFileAsStream(long companyId, long userId,
-		long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId) throws com.liferay.portal.SystemException;
+		long groupId, long folderId) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int start, int end)
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int start, int end,
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileEntriesCount(long folderId)
+	public int getFileEntriesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -236,7 +237,7 @@ public interface DLFileEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -248,12 +249,13 @@ public interface DLFileEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		long folderId, java.lang.String titleWithExtension)
+		long groupId, long folderId, java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersFileEntriesCount(java.util.List<Long> folderIds)
+	public int getFoldersFileEntriesCount(long groupId,
+		java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -301,27 +303,28 @@ public interface DLFileEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.File file,
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long userId, long folderId, long newFolderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String extraSettings,
-		java.io.InputStream is, long size,
+		long userId, long groupId, long folderId, long newFolderId,
+		java.lang.String name, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

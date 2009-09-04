@@ -36,6 +36,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import java.util.Collections;
@@ -104,9 +105,11 @@ public class DLUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-		addPortletBreadcrumbEntries(folder, request, renderResponse);
+			addPortletBreadcrumbEntries(folder, request, renderResponse);
+		}
 	}
 
 	public static void addPortletBreadcrumbEntries(
@@ -146,7 +149,6 @@ public class DLUtil {
 		Collections.reverse(ancestorFolders);
 
 		for (DLFolder ancestorFolder : ancestorFolders) {
-
 			portletURL.setParameter(
 				"folderId", String.valueOf(ancestorFolder.getFolderId()));
 
@@ -169,9 +171,11 @@ public class DLUtil {
 		return _instance._getGenericName(extension);
 	}
 
-	public static String getLockId(long folderId, String name) {
+	public static String getLockId(long groupId, long folderId, String name) {
 		StringBuilder sb = new StringBuilder();
 
+		sb.append(groupId);
+		sb.append(StringPool.POUND);
 		sb.append(folderId);
 		sb.append(StringPool.POUND);
 		sb.append(name);

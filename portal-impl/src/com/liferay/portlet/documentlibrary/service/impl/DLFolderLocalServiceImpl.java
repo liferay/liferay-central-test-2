@@ -244,7 +244,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// File entries
 
-		dlFileEntryLocalService.deleteFileEntries(folder.getFolderId());
+		dlFileEntryLocalService.deleteFileEntries(
+			folder.getGroupId(), folder.getFolderId());
 
 		// WebDAVProps
 
@@ -279,37 +280,38 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			long folderId, int start, int end)
+			long groupId, long folderId, int start, int end)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.findFE_FS_ByFolderIds(folderIds, start, end);
+		return dlFolderFinder.findFE_FS_ByG_F(groupId, folderIds, start, end);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int start, int end)
+			long groupId, List<Long> folderIds, int start, int end)
 		throws SystemException {
 
-		return dlFolderFinder.findFE_FS_ByFolderIds(folderIds, start, end);
+		return dlFolderFinder.findFE_FS_ByG_F(groupId, folderIds, start, end);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(long folderId)
+	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.countFE_FS_ByFolderIds(folderIds);
+		return dlFolderFinder.countFE_FS_ByG_F(groupId, folderIds);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(List<Long> folderIds)
+	public int getFileEntriesAndFileShortcutsCount(
+			long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return dlFolderFinder.countFE_FS_ByFolderIds(folderIds);
+		return dlFolderFinder.countFE_FS_ByG_F(groupId, folderIds);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -325,38 +327,41 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int start, int end)
+			long groupId, long folderId, int start, int end)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.findF_FE_FS_ByFolderIds(folderIds, start, end);
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			groupId, folderIds, start, end);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int start, int end)
+			long groupId, List<Long> folderIds, int start, int end)
 		throws SystemException {
 
-		return dlFolderFinder.findF_FE_FS_ByFolderIds(folderIds, start, end);
+		return dlFolderFinder.findF_FE_FS_ByG_F(groupId, folderIds, start, end);
 	}
 
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(long folderId)
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long groupId, long folderId)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.countF_FE_FS_ByFolderIds(folderIds);
+		return getFoldersAndFileEntriesAndFileShortcutsCount(
+			groupId, folderIds);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds)
+			long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return dlFolderFinder.countF_FE_FS_ByFolderIds(folderIds);
+		return dlFolderFinder.countF_FE_FS_ByG_F(groupId, folderIds);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {
@@ -491,7 +496,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected long getParentFolderId(long groupId, long parentFolderId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
@@ -557,7 +562,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		try {
-			dlFileEntryLocalService.getFileEntryByTitle(parentFolderId, name);
+			dlFileEntryLocalService.getFileEntryByTitle(
+				groupId, parentFolderId, name);
 
 			throw new DuplicateFileException();
 		}

@@ -172,6 +172,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksEntry" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticleResource" />
@@ -250,7 +251,7 @@
 			<order-column name="key" />
 		</order>
 
-		 <!--Finder methods -->
+		<!--Finder methods -->
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />

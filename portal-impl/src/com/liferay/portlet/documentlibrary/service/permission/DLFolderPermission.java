@@ -50,15 +50,6 @@ public class DLFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long folderId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, DLFolder folder,
 			String actionId)
 		throws PortalException, SystemException {
@@ -77,17 +68,10 @@ public class DLFolderPermission {
 			return DLPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
-			return contains(permissionChecker, folderId, actionId);
+			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long folderId, String actionId)
-		throws PortalException, SystemException {
-
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
-
-		return contains(permissionChecker, folder, actionId);
 	}
 
 	public static boolean contains(

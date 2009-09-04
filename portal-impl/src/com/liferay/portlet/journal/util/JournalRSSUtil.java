@@ -55,7 +55,7 @@ import java.util.Map;
 /**
  * <a href="JournalRSSUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class JournalRSSUtil {
 
@@ -152,9 +152,9 @@ public class JournalRSSUtil {
 				long folderId = GetterUtil.getLong(
 					parameters.get("folderId")[0]);
 				String name = parameters.get("name")[0];
-
-				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					folderId, name);
+//TODO
+//				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+//					folderId, name);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -163,7 +163,7 @@ public class JournalRSSUtil {
 			}
 		}
 		else if (parameters.containsKey("uuid") &&
-				 parameters.containsKey("groupId")) {
+				parameters.containsKey("groupId")) {
 
 			try {
 				String uuid = parameters.get("uuid")[0];
@@ -287,7 +287,7 @@ public class JournalRSSUtil {
 			}
 		}
 		else if (parameters.containsKey("uuid") &&
-				 parameters.containsKey("groupId")) {
+				parameters.containsKey("groupId")) {
 
 			try {
 				String uuid = parameters.get("uuid")[0];

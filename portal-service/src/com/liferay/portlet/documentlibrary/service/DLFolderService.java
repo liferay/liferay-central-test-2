@@ -126,7 +126,8 @@ public interface DLFolderService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unlockFolder(long folderId, java.lang.String lockUuid)
+	public void unlockFolder(long groupId, long folderId,
+		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

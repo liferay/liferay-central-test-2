@@ -57,6 +57,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl" %>
@@ -80,52 +81,7 @@ DLFolder rootFolder = null;
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 String rootFolderName = StringPool.BLANK;
 
-if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-	DLFolder dynamicRootFolder = null;
-
-	int count = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-	if (count > 1) {
-		List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), StringPool.BLANK, serviceContext);
-
-		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
-
-		for (DLFolder folder : folders) {
-			DLFolderLocalServiceUtil.updateFolder(folder.getFolderId(), dynamicRootFolderId, folder.getName(), folder.getDescription(), serviceContext);
-		}
-	}
-	else if (count == 1) {
-		List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, 0, 1);
-
-		dynamicRootFolder = folders.get(0);
-	}
-	else {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = DLFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "document-home"), StringPool.BLANK, serviceContext);
-	}
-
-	rootFolderId = dynamicRootFolder.getFolderId();
-
-	rootFolder = DLFolderLocalServiceUtil.getFolder(rootFolderId);
-
-	rootFolderName = rootFolder.getName();
-
-	preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
-
-	preferences.store();
-}
-else {
+if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	try {
 		rootFolder = DLFolderLocalServiceUtil.getFolder(rootFolderId);
 

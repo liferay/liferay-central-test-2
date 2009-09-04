@@ -62,7 +62,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
@@ -113,7 +113,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			try {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					repositoryId, fileName);
+					groupId, repositoryId, fileName);
 			}
 			catch (NoSuchFileEntryException nsfe) {
 				if (_log.isWarnEnabled()) {
