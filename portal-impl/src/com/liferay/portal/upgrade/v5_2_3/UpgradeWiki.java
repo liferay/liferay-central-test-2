@@ -22,15 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_3.util.WikiPageTable;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeWiki.java.html"><b><i>View Source</i></b></a>
@@ -61,29 +56,12 @@ public class UpgradeWiki extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			con = DataAccess.getConnection();
+		sb.append("update WikiPage set groupId = (select groupId from ");
+		sb.append("WikiNode where WikiNode.nodeId = WikiPage.nodeId)");
 
-			ps = con.prepareStatement("select nodeId, groupId from WikiNode");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long nodeId = rs.getLong("nodeId");
-				long groupId = rs.getLong("groupId");
-
-				runSQL(
-					"update WikiPage set groupId = " + groupId +
-						" where nodeId = " + nodeId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(sb.toString());
 	}
 
 }

@@ -132,38 +132,34 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			con = DataAccess.getConnection();
+		sb.append("update DLFileEntry set groupId = (select groupId from ");
+		sb.append("DLFolder where DLFolder.folderId = DLFileEntry.folderId)");
 
-			ps = con.prepareStatement("select folderId, groupId from DLFolder");
+		runSQL(sb.toString());
 
-			rs = ps.executeQuery();
+		sb = new StringBuilder();
 
-			while (rs.next()) {
-				long folderId = rs.getLong("folderId");
-				long groupId = rs.getLong("groupId");
+		sb.append("update DLFileRank set groupId = (select groupId from ");
+		sb.append("DLFolder where DLFolder.folderId = DLFileRank.folderId)");
 
-				runSQL(
-					"update DLFileEntry set groupId = " + groupId +
-						" where folderId = " + folderId);
-				runSQL(
-					"update DLFileRank set groupId = " + groupId +
-						" where folderId = " + folderId);
-				runSQL(
-					"update DLFileShortcut set groupId = " + groupId +
-						" where folderId = " + folderId);
-				runSQL(
-					"update DLFileVersion set groupId = " + groupId +
-						" where folderId = " + folderId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(sb.toString());
+
+		sb = new StringBuilder();
+
+		sb.append("update DLFileShortcut set groupId = (select groupId from ");
+		sb.append("DLFolder where DLFolder.folderId = ");
+		sb.append("DLFileShortcut.folderId)");
+
+		runSQL(sb.toString());
+
+		sb = new StringBuilder();
+
+		sb.append("update DLFileVersion set groupId = (select groupId from ");
+		sb.append("DLFolder where DLFolder.folderId = DLFileVersion.folderId)");
+
+		runSQL(sb.toString());
 	}
 
 	protected void updatePortletPreferences() throws Exception {

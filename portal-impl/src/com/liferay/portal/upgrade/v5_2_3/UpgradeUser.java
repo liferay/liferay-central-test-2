@@ -22,15 +22,10 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_2_3.util.UserTable;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeUser.java.html"><b><i>View Source</i></b></a>
@@ -55,58 +50,19 @@ public class UpgradeUser extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		if (isSupportsUpdateWithInnerJoin()) {
-			StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-			sb.append("update User_ inner join Contact_ on ");
-			sb.append("Contact_.contactId = User_.contactId set ");
-			sb.append("User_.firstName = Contact_.firstName, ");
-			sb.append("User_.middleName = Contact_.middleName, ");
-			sb.append("User_.lastName = Contact_.lastName, ");
-			sb.append("User_.jobTitle = Contact_.jobTitle");
+		sb.append("update User_ set firstName = (select Contact_.firstName ");
+		sb.append("from Contact_ where Contact_.contactId = ");
+		sb.append("User_.contactId), middleName = (select ");
+		sb.append("Contact_.middleName from Contact_ where ");
+		sb.append("Contact_.contactId = User_.contactId), lastName = ");
+		sb.append("(select Contact_.lastName from Contact_ where ");
+		sb.append("Contact_.contactId = User_.contactId), jobTitle = (select ");
+		sb.append("Contact_.jobTitle from Contact_ where ");
+		sb.append("Contact_.contactId = User_.contactId)");
 
-			runSQL(sb.toString());
-		}
-		else {
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-
-			try {
-				con = DataAccess.getConnection();
-
-				ps = con.prepareStatement(
-					"select contactId, firstName, middleName, lastName, " +
-						"jobTitle from Contact_");
-
-				rs = ps.executeQuery();
-
-				while (rs.next()) {
-					long contactId = rs.getLong("contactId");
-					String firstName = rs.getString("firstName");
-					String middleName = rs.getString("middleName");
-					String lastName = rs.getString("lastName");
-					String jobTitle = rs.getString("jobTitle");
-
-					ps = con.prepareStatement(
-						"update User_ set firstName = ?, middleName = ?, " +
-							"lastName = ?, jobTitle = ? where contactId = ?");
-
-					ps.setString(1, firstName);
-					ps.setString(2, middleName);
-					ps.setString(3, lastName);
-					ps.setString(4, jobTitle);
-					ps.setLong(5, contactId);
-
-					ps.executeUpdate();
-
-					ps.close();
-				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps, rs);
-			}
-		}
+		runSQL(sb.toString());
 	}
 
 }

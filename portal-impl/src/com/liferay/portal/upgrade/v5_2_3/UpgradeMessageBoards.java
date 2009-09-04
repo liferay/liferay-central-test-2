@@ -22,14 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeMessageBoards.java.html"><b><i>View Source</i></b></a>
@@ -46,149 +39,68 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateGroupId() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			con = DataAccess.getConnection();
+		sb.append("update MBCategory set threadCount = (select count(*) from ");
+		sb.append("MBThread where MBThread.categoryId = ");
+		sb.append("MBCategory.categoryId)");
 
-			ps = con.prepareStatement(
-				"select categoryId, groupId from MBCategory");
+		runSQL(sb.toString());
 
-			rs = ps.executeQuery();
+		sb = new StringBuilder();
 
-			while (rs.next()) {
-				long categoryId = rs.getLong("categoryId");
-				long groupId = rs.getLong("groupId");
+		sb.append("update MBCategory set messageCount = (select count(*) ");
+		sb.append("from MBMessage where MBMessage.categoryId = ");
+		sb.append("MBCategory.categoryId)");
 
-				int threadCount =
-					MBThreadLocalServiceUtil.getCategoryThreadsCount(
-						categoryId);
-				int messageCount =
-					MBMessageLocalServiceUtil.getCategoryMessagesCount(
-						categoryId);
+		runSQL(sb.toString());
 
-				runSQL(
-					"update MBCategory set threadCount = " + threadCount +
-						", messageCount = " + messageCount +
-							" where categoryId = " + categoryId);
-				runSQL(
-					"update MBMessage set groupId = " + groupId +
-						" where categoryId = " + categoryId);
-				runSQL(
-					"update MBThread set groupId = " + groupId +
-						" where categoryId = " + categoryId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		sb = new StringBuilder();
+
+		sb.append("update MBMessage set groupId = (select groupId from ");
+		sb.append("MBCategory where MBCategory.categoryId = ");
+		sb.append("MBMessage.categoryId)");
+
+		runSQL(sb.toString());
+
+		sb = new StringBuilder();
+
+		sb.append("update MBThread set groupId = (select groupId from ");
+		sb.append("MBCategory where MBCategory.categoryId = ");
+		sb.append("MBThread.categoryId)");
+
+		runSQL(sb.toString());
 	}
 
 	protected void updateMessageClassNameId() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			con = DataAccess.getConnection();
+		sb.append("update MBMessage set classNameId = (select classNameId ");
+		sb.append("from MBDiscussion where MBDiscussion.threadId = ");
+		sb.append("MBMessage.threadId), classPK = (select classPK from ");
+		sb.append("MBDiscussion where MBDiscussion.threadId = ");
+		sb.append("MBMessage.threadId)");
 
-			ps = con.prepareStatement(
-				"select classNameId, classPK, threadId from MBDiscussion");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long classNameId = rs.getLong("classNameId");
-				long classPK = rs.getLong("classPK");
-				long threadId = rs.getLong("threadId");
-
-				runSQL(
-					"update MBMessage set classNameId = " + classNameId +
-						", classPK = " + classPK + " where threadId = " +
-							threadId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(sb.toString());
 	}
 
 	protected void updateMessageFlagThreadId() throws Exception {
-		if (isSupportsUpdateWithInnerJoin()) {
-			StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-			sb.append("update MBMessageFlag inner join MBMessage on ");
-			sb.append("MBMessage.messageId = MBMessageFlag.messageId set ");
-			sb.append("MBMessageFlag.threadId = MBMessage.threadId");
+		sb.append("update MBMessageFlag set threadId = (select threadId from ");
+		sb.append("MBMessage where MBMessage.messageId = ");
+		sb.append("MBMessageFlag.messageId)");
 
-			runSQL(sb.toString());
-		}
-		else {
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-
-			try {
-				con = DataAccess.getConnection();
-
-				ps = con.prepareStatement(
-					"select messageId, threadId from MBMessage");
-
-				rs = ps.executeQuery();
-
-				while (rs.next()) {
-					long messageId = rs.getLong("messageId");
-					long threadId = rs.getLong("threadId");
-
-					runSQL(
-						"update MBMessageFlag set threadId = " + threadId +
-							" where messageId = " + messageId);
-				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps, rs);
-			}
-		}
+		runSQL(sb.toString());
 	}
 
 	protected void updateMessagePriority() throws Exception {
-		if (isSupportsUpdateWithInnerJoin()) {
-			StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-			sb.append("update MBMessage inner join MBThread on ");
-			sb.append("MBThread.threadId = MBMessage.threadId set ");
-			sb.append("MBMessage.priority = MBThread.priority");
+		sb.append("update MBMessage set priority = (select priority from ");
+		sb.append("MBThread where MBThread.threadId = MBMessage.threadId)");
 
-			runSQL(sb.toString());
-		}
-		else {
-			Connection con = null;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-
-			try {
-				con = DataAccess.getConnection();
-
-				ps = con.prepareStatement(
-					"select threadId, priority from MBThread");
-
-				rs = ps.executeQuery();
-
-				while (rs.next()) {
-					long threadId = rs.getLong("threadId");
-					double priority = rs.getDouble("priority");
-
-					runSQL(
-						"update MBMessage set priority = " + priority +
-							" where threadId = " + threadId);
-				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps, rs);
-			}
-		}
+		runSQL(sb.toString());
 	}
 
 }

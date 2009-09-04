@@ -22,12 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_2_3;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.upgrade.UpgradeProcess;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeImageGallery.java.html"><b><i>View Source</i></b></a>
@@ -37,29 +32,12 @@ import java.sql.ResultSet;
 public class UpgradeImageGallery extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 
-		try {
-			con = DataAccess.getConnection();
+		sb.append("update IGImage set groupId = (select groupId from ");
+		sb.append("IGFolder where IGFolder.folderId = IGImage.folderId)");
 
-			ps = con.prepareStatement("select folderId, groupId from IGFolder");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long folderId = rs.getLong("folderId");
-				long groupId = rs.getLong("groupId");
-
-				runSQL(
-					"update IGImage set groupId = " + groupId +
-						" where folderId = " + folderId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(sb.toString());
 	}
 
 }
