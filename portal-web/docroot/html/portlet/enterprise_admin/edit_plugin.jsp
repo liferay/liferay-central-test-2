@@ -52,60 +52,37 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePlugin(); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />pluginId" type="hidden" value="<%= HtmlUtil.escapeAttribute(pluginId) %>" />
-<input name="<portlet:namespace />pluginType" type="hidden" value="<%= HtmlUtil.escapeAttribute(pluginType) %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editPluginURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_plugin" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="plugin"
-	backURL="<%= redirect %>"
-/>
+<aui:form action="<%= editPluginURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "savePlugin(); return false;" %>'>
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="pluginId" type="hidden" value="<%= pluginId %>" />
+	<aui:input name="pluginType" type="hidden" value="<%= pluginType %>" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="module-id" />
-	</td>
-	<td>
-		<%= moduleId %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="plugin-id" />
-	</td>
-	<td>
-		<%= HtmlUtil.escape(pluginId) %>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="active" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" />
-	</td>
-</tr>
-</table>
+	<liferay-ui:tabs
+		names="plugin"
+		backURL="<%= redirect %>"
+	/>
 
-<br />
+	<aui:fieldset>
+		<aui:field-wrapper label="module-id">
+			<%= moduleId %>
+		</aui:field-wrapper>
 
-<liferay-ui:message key="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" />
+		<aui:field-wrapper label="plugin-id">
+			<%= HtmlUtil.escape(pluginId) %>
+		</aui:field-wrapper>
 
-<br /><br />
+		<aui:input disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" inlineLabel="<%= true %>" name="active" type="checkbox" value="<%= active %>"  />
 
-<textarea class="lfr-textarea" name="<portlet:namespace />roles"><%= StringUtil.merge(rolesArray, "\n") %></textarea>
+		<aui:input cssClass="lfr-textarea-container" helpMessage="enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-to-add-this-plugin-to-a-page" name="roles" type="textarea" value="<%= StringUtil.merge(rolesArray, "\n") %>" />
+	</aui:fieldset>
 
-<br /><br />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>

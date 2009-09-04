@@ -23,7 +23,12 @@
 %>
 
 <c:if test="<%= installPluginsURL != null %>">
-	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value="<liferay-ui:message key="install-more-layout-templates" />" />
+
+	<%
+	String taglibOnClick = "submitForm(document." + renderResponse.getNamespace() + "fm , '" + installPluginsURL.toString() +"');";
+	%>
+
+	<aui:button onClick="<%= taglibOnClick %>" value="install-more-layout-templates" />
 
 	<br /><br />
 </c:if>

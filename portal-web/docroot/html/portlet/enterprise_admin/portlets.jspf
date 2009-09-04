@@ -32,7 +32,12 @@
 </c:if>
 
 <c:if test="<%= installPluginsURL != null %>">
-	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value="<liferay-ui:message key="install-more-portlets" />" />
+
+	<%
+	String taglibOnClick = "submitForm(document." + renderResponse.getNamespace() + "fm , '" + installPluginsURL.toString() +"');";
+	%>
+
+	<aui:button onClick="<%= taglibOnClick %>" value="install-more-portlets" />
 
 	<br /><br />
 </c:if>
