@@ -70,8 +70,8 @@ public class UpgradeUUID extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"SELECT " + pkColName + " FROM " + tableName +
-					" WHERE uuid_ IS NULL or uuid_ = ''");
+				"select " + pkColName + " from " + tableName +
+					" where uuid_ IS NULL or uuid_ = ''");
 
 			rs = ps.executeQuery();
 
@@ -81,8 +81,8 @@ public class UpgradeUUID extends UpgradeProcess {
 				String uuid = PortalUUIDUtil.generate();
 
 				ps = con.prepareStatement(
-					"UPDATE " + tableName + " SET uuid_ = '" + uuid +
-						"' WHERE " + pkColName + " = " + pkColValue);
+					"update " + tableName + " set uuid_ = '" + uuid +
+						"' where " + pkColName + " = " + pkColValue);
 
 				ps.executeUpdate();
 
