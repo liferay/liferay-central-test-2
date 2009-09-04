@@ -982,9 +982,12 @@
 		<property name="urlTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
-		<property name="draft" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="allowTrackbacks" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="trackbacks" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" table="BlogsStatsUser">
 		<cache usage="read-write" />

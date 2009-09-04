@@ -1113,10 +1113,16 @@
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="draft" />
 			<basic name="allowTrackbacks" />
 			<basic name="trackbacks" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

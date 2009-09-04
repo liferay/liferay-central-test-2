@@ -25,7 +25,7 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StatusConstants;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;

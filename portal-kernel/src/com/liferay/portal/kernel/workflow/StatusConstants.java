@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.workflow;
 
 /**
  * <a href="StatusConstants.java.html"><b><i>View Source</i></b></a>
@@ -33,8 +33,8 @@ public interface StatusConstants {
 
 	public static final int APPROVED = 0;
 
-	public static final int PENDING = 1;
-
 	public static final int DRAFT = 2;
+
+	public static final int PENDING = 1;
 
 }

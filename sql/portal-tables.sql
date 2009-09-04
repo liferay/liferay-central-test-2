@@ -197,9 +197,12 @@ create table BlogsEntry (
 	urlTitle VARCHAR(150) null,
 	content TEXT null,
 	displayDate DATE null,
-	draft BOOLEAN,
 	allowTrackbacks BOOLEAN,
-	trackbacks TEXT null
+	trackbacks TEXT null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table BlogsStatsUser (

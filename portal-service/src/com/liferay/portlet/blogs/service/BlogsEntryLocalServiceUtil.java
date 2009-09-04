@@ -414,13 +414,13 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateStatus(
 		long userId, com.liferay.portlet.blogs.model.BlogsEntry entry,
-		int status, boolean reindex, boolean pingOldTrackbaks,
+		int status, boolean reIndex, boolean pingOldTrackbaks,
 		java.lang.String[] trackbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateStatus(userId, entry, status, reindex,
+				   .updateStatus(userId, entry, status, reIndex,
 			pingOldTrackbaks, trackbacks, serviceContext);
 	}
 

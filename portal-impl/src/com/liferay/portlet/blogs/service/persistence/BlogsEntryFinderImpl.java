@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.kernel.util.StatusConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
@@ -90,8 +90,7 @@ public class BlogsEntryFinderImpl
 					sql, "[$STATUS$]", "AND (BlogsEntry.status = ?)");
 			}
 			else {
-				sql = StringUtil.replace(
-					sql, "[$STATUS$]", StringPool.BLANK);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(

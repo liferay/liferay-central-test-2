@@ -108,6 +108,8 @@ create table AssetVocabulary (
 
 alter table BlogsEntry add status INTEGER;
 
+COMMIT_TRANSACTION;
+
 update BlogsEntry set status = 0 where draft = FALSE;
 update BlogsEntry set status = 2 where draft = TRUE;
 
