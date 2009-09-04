@@ -196,6 +196,10 @@ if (Validator.isNotNull(content)) {
 
 		availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
 
+		if (!ArrayUtil.contains(availableLocales, defaultLanguageId)) {
+			availableLocales = ArrayUtil.append(availableLocales, defaultLanguageId);
+		}
+
 		if (structure == null) {
 			content = contentDoc.getRootElement().element("static-content").getTextTrim();
 		}

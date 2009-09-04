@@ -42,6 +42,7 @@ import com.liferay.util.LocalizationUtil;
  * <a href="JournalArticleImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class JournalArticleImpl
 	extends JournalArticleModelImpl implements JournalArticle {
@@ -89,15 +90,14 @@ public class JournalArticleImpl
 			return StringPool.BLANK;
 		}
 
-		if (isTemplateDriven()) {
-			String defaultLanguageId = LocaleUtil.toLanguageId(
-				LocaleUtil.getDefault());
+		String defaultLanguageId = LocalizationUtil.getDefaultLocale(xml);
 
-			return defaultLanguageId;
+		if (isTemplateDriven() && Validator.isNull(defaultLanguageId)) {
+			defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
 		}
-		else {
-			return LocalizationUtil.getDefaultLocale(xml);
-		}
+
+		return defaultLanguageId;
 	}
 
 	public ExpandoBridge getExpandoBridge() {
