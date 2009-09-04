@@ -40,58 +40,40 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 	}
 </script>
 
-<form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveUserGroup(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>" />
+<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveUserGroup(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="userGroupId" type="hidden" value="<%= userGroupId %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
-	<liferay-util:param name="backURL" value="<%= backURL %>" />
-</liferay-util:include>
+	<liferay-util:include page="/html/portlet/enterprise_admin/user_group/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value='<%= (userGroup == null) ? "add" : "view-all" %>' />
+		<liferay-util:param name="backURL" value="<%= backURL %>" />
+	</liferay-util:include>
 
-<liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
-<liferay-ui:error exception="<%= UserGroupNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= DuplicateUserGroupException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= RequiredUserGroupException.class %>" message="this-is-a-required-user-group" />
+	<liferay-ui:error exception="<%= UserGroupNameException.class %>" message="please-enter-a-valid-name" />
 
-<table class="lfr-table">
+	<aui:model-context bean="<%= userGroup %>" model="<%= UserGroup.class %>" />
 
-<c:if test="<%= userGroup != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="old-name" />
-		</td>
-		<td>
-			<%= userGroup.getName() %>
-		</td>
-	</tr>
-</c:if>
+	<aui:fieldset>
+		<c:if test="<%= userGroup != null %>">
+			<aui:field-wrapper label="old-name">
+				<%= userGroup.getName() %>
+			</aui:field-wrapper>
+		</c:if>
 
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, ((userGroup != null) ? "new-name" : "name")) %>
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= UserGroup.class %>" bean="<%= userGroup %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= UserGroup.class %>" bean="<%= userGroup %>" field="description" />
-	</td>
-</tr>
-</table>
+		<aui:input label="<%= (userGroup != null) ? "new-name" : "name" %>" name="name" />
 
-<br />
+		<aui:input name="description" />
+	</aui:fieldset>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

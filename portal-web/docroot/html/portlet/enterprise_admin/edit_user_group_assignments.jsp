@@ -54,82 +54,89 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
-<input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
+</portlet:actionURL>
 
-<liferay-ui:message key="edit-assignments-for-user-group" />: <%= userGroup.getName() %>
+<aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="assignmentsRedirect" type="hidden" />
+	<aui:input name="userGroupId" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-<br /><br />
-
-<liferay-ui:tabs
-	names="current,available"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-	backURL="<%= redirect %>"
-/>
-
-<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
-
-<liferay-ui:search-container
-	rowChecker="<%= new UserUserGroupChecker(renderResponse, userGroup) %>"
-	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
->
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_search.jsp"
-	/>
-
-	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-	LinkedHashMap userParams = new LinkedHashMap();
-
-	if (filterManageableOrganizations) {
-		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
-
-		userParams.put("usersOrgsTree", leftAndRightOrganizationIds);
-	}
-
-	if (tabs2.equals("current")) {
-		userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
-	}
-	%>
-
-	<liferay-ui:search-container-results>
-		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-	</liferay-ui:search-container-results>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.User"
-		escapedModel="<%= true %>"
-		keyProperty="userId"
-		modelVar="user2"
-	>
-		<liferay-ui:search-container-column-text
-			name="name"
-			property="fullName"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="screen-name"
-			property="screenName"
-		/>
-	</liferay-ui:search-container-row>
-
-	<div class="separator"><!-- --></div>
-
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<liferay-ui:message key="edit-assignments-for-user-group" />: <%= userGroup.getName() %>
 
 	<br /><br />
 
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+	<liferay-ui:tabs
+		names="current,available"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+		backURL="<%= redirect %>"
+	/>
 
-</form>
+	<aui:input name="addUserIds" type="hidden" />
+	<aui:input name="removeUserIds" type="hidden" />
+
+	<liferay-ui:search-container
+		rowChecker="<%= new UserUserGroupChecker(renderResponse, userGroup) %>"
+		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+	>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+		/>
+
+		<%
+		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+		LinkedHashMap userParams = new LinkedHashMap();
+
+		if (filterManageableOrganizations) {
+			Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
+
+			userParams.put("usersOrgsTree", leftAndRightOrganizationIds);
+		}
+
+		if (tabs2.equals("current")) {
+			userParams.put("usersUserGroups", new Long(userGroup.getUserGroupId()));
+		}
+		%>
+
+		<liferay-ui:search-container-results>
+			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+		</liferay-ui:search-container-results>
+
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.User"
+			escapedModel="<%= true %>"
+			keyProperty="userId"
+			modelVar="user2"
+		>
+			<liferay-ui:search-container-column-text
+				name="name"
+				property="fullName"
+			/>
+
+			<liferay-ui:search-container-column-text
+				name="screen-name"
+				property="screenName"
+			/>
+		</liferay-ui:search-container-row>
+
+		<div class="separator"><!-- --></div>
+
+		<%
+		String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+		%>
+
+		<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
+	
+		<br /><br />
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+</aui:form>
 
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);

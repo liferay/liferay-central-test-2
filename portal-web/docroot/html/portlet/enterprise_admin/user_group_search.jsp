@@ -31,7 +31,7 @@ UserGroupDisplayTerms displayTerms = (UserGroupDisplayTerms)searchContainer.getD
 %>
 
 <div>
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
+	<aui:input cssClass="input-text-search" label="" name="<%= displayTerms.NAME %>" size="30" type="text" value="<%= displayTerms.getName() %>" />
 
-	<input type="submit" value="<liferay-ui:message key="search" />" />
+	<aui:button type="submit" value="search" />
 </div>

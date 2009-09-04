@@ -46,8 +46,8 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 	rowChecker="<%= rowChecker %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />deleteUserGroupIds" type="hidden" value="" />
-	<input name="<portlet:namespace />userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteUserGroupIds" type="hidden" />
+	<aui:input name="userGroupsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/user_group_search.jsp"
@@ -99,7 +99,7 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP))
 		<div class="separator"><!-- --></div>
 
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
-			<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
+			<aui:button value="update-associations" onClick='<%= renderResponse.getNamespace() + "deleteUserGroups();" %>' />
 
 			<br /><br />
 		</c:if>
