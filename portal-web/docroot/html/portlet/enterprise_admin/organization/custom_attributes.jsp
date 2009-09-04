@@ -30,11 +30,11 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 <h3><liferay-ui:message key="custom-attributes" /></h3>
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 	<liferay-ui:custom-attribute-list
 		className="<%= Organization.class.getName() %>"
 		classPK="<%= (organization != null) ? organization.getOrganizationId() : 0 %>"
 		editable="<%= true %>"
 		label="<%= true %>"
 	/>
-</fieldset>
+</aui:fieldset>

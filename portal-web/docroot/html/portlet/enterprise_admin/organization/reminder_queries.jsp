@@ -48,45 +48,11 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 	<liferay-ui:message key="specify-custom-reminder-queries-for-the-users-of-this-organization" />
 </span>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />reminderQueries"><liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %></label>
+<aui:fieldset>
+	<aui:input label='<%= LanguageUtil.get(pageContext, "default-language") + StringPool.COLON + StringPool.SPACE + defaultLocale.getDisplayName(defaultLocale) %>' name="reminderQueries" type="textarea" />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />reminderQueries"><%= reminderQueries %></textarea>
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />reminderQueryLanguageId"><liferay-ui:message key="localized-language" />:</label>
-
-		<select id="<portlet:namespace />reminderQueryLanguageId" name="<portlet:namespace />reminderQueryLanguageId" onChange="<portlet:namespace />updateReminderQueriesLanguage();">
-			<option value="" />
-
-			<%
-			for (int i = 0; i < locales.length; i++) {
-				if (locales[i].equals(defaultLocale)) {
-					continue;
-				}
-
-				String optionStyle = StringPool.BLANK;
-
-				String curReminderQueries = reminderQueriesMap.get(locales[i]);
-
-				if ((organization != null) && Validator.isNull(curReminderQueries)) {
-					curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
-				}
-
-				if (Validator.isNotNull(curReminderQueries)) {
-					optionStyle = "style=\"font-weight: bold;\"";
-				}
-			%>
-
-				<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locale) %></option>
-
-			<%
-			}
-			%>
-
-		</select>
+	<aui:select cssClass="localized-language-selector" inlineLabel="<%= true %>" label='<%= LanguageUtil.get(pageContext, "localized-language") + StringPool.COLON %>' name="reminderQueryLanguageId" onChange='<%= renderResponse.getNamespace() + "updateReminderQueriesLanguage();" %>'>
+		<aui:option value="" />
 
 		<%
 		for (int i = 0; i < locales.length; i++) {
@@ -94,22 +60,48 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 				continue;
 			}
 
+			String style = StringPool.BLANK;
+
 			String curReminderQueries = reminderQueriesMap.get(locales[i]);
 
 			if ((organization != null) && Validator.isNull(curReminderQueries)) {
 				curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
 			}
+
+			if (Validator.isNotNull(curReminderQueries)) {
+				style = "font-weight: bold;";
+			}
 		%>
 
-			<input type="hidden" id="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />reminderQueries_<%= LocaleUtil.toLanguageId(locales[i]) %>" value="<%= curReminderQueries %>" />
+			<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) %>" style="<%= style %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 		<%
 		}
 		%>
 
-		<textarea  class="lfr-textarea" id="<portlet:namespace />reminderQueries_temp" name="<portlet:namespace />reminderQueries_temp" onChange="<portlet:namespace />onReminderQueriesChanged();"></textarea>
-	</div>
-</fieldset>
+	</aui:select>
+
+	<%
+	for (int i = 0; i < locales.length; i++) {
+		if (locales[i].equals(defaultLocale)) {
+			continue;
+		}
+
+		String curReminderQueries = reminderQueriesMap.get(locales[i]);
+
+		if ((organization != null) && Validator.isNull(curReminderQueries)) {
+			curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
+		}
+	%>
+
+		<aui:input name='<%= "reminderQueries_" + LocaleUtil.toLanguageId(locales[i]) %>' type="hidden" value="<%= curReminderQueries %>" />
+
+	<%
+	}
+	%>
+
+	<aui:input label="" name="reminderQueries_temp" onChange='<%= renderResponse.getNamespace() + "onReminderQueriesChanged();" %>' type="textarea" />
+</aui:fieldset>
 
 <script type="text/javascript">
 	var reminderQueriesChanged = false;

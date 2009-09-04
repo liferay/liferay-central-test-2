@@ -127,101 +127,68 @@ if (organization != null) {
 
 <liferay-ui:error-marker key="errorSection" value="details" />
 
+<aui:model-context bean="<%= organization %>" model="<%= Organization.class %>" />
+
 <h3><liferay-ui:message key="details" /></h3>
 
-<fieldset class="aui-block-labels aui-form-column">
+<aui:fieldset column="<%= true %>">
 	<liferay-ui:error exception="<%= DuplicateOrganizationException.class %>" message="the-organization-name-is-already-taken" />
 	<liferay-ui:error exception="<%= OrganizationNameException.class %>" message="please-enter-a-valid-name" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />name"><liferay-ui:message key="name" /></label>
-
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
-	</div>
+	<aui:input name="name" />
 
 	<c:choose>
 		<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
 			<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_STATUS %>" message="please-select-a-type" />
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />statusId"><liferay-ui:message key="status" /></label>
-
-				<select name="<portlet:namespace />statusId">
-					<option value=""></option>
-
-					<%
-					List<ListType> statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
-
-					for (ListType status : statuses) {
-					%>
-
-						<option <%= (status.getListTypeId() == statusId) ? "selected" : "" %> value="<%= status.getListTypeId() %>"><liferay-ui:message key="<%= status.getName() %>" /></option>
-
-					<%
-					}
-					%>
-
-				</select>
-			</div>
+			<aui:select label="status" name="statusId" listType="<%= ListTypeImpl.ORGANIZATION_STATUS %>" showEmptyOption="<%= true %>" />
 		</c:when>
 		<c:otherwise>
-			<input name="<portlet:namespace />statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
+			<aui:input name="statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
 		</c:otherwise>
 	</c:choose>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />type"><liferay-ui:message key="type" /></label>
+	<c:choose>
+		<c:when test="<%= organization == null %>">
+			<aui:select name="type">
 
-		<c:choose>
-			<c:when test="<%= organization == null %>">
-				<select id="<portlet:namespace />type" name="<portlet:namespace />type">
+				<%
+				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+				%>
 
-					<%
-					for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-					%>
+					<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
 
-						<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
+				<%
+				}
+				%>
 
-					<%
-					}
-					%>
-
-				</select>
-			</c:when>
-			<c:otherwise>
+			</aui:select>
+		</c:when>
+		<c:otherwise>
+			<aui:field-wrapper label="type">
 				<liferay-ui:message key="<%= organization.getType() %>" />
+			</aui:field-wrapper>
 
-				<input name="<portlet:namespace />type" type="hidden" value="<%= organization.getType() %>" />
-			</c:otherwise>
-		</c:choose>
-	</div>
+			<aui:input name="type" type="hidden" value="<%= organization.getType() %>" />
+		</c:otherwise>
+	</c:choose>
 
 	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 
 	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />countryId"><liferay-ui:message key="country" /> </label>
+		<aui:select name="countryId" />
 
-			<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
-		</div>
-
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />regionId"><liferay-ui:message key="region" /></label>
-
-			<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
-		</div>
+		<aui:select name="regionId" />
 	</div>
 
 	<c:if test="<%= organization != null %>">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />groupId"><liferay-ui:message key="group-id" /></label>
-
+		<aui:field-wrapper label="group-id">
 			<%= groupId %>
-		</div>
+		</aui:field-wrapper>
 	</c:if>
-</fieldset>
+</aui:fieldset>
 
-<fieldset class="aui-block-labels aui-form-column">
+<aui:fieldset column="<%= true %>">
 	<div>
 		<c:if test="<%= organization != null %>">
 
@@ -237,20 +204,17 @@ if (organization != null) {
 				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
 			</portlet:renderURL>
 
-			<a class="change-avatar" href="javascript:<portlet:namespace />openEditOrganizationLogoWindow('<%= editOrganizationLogoURL %>');">
+			<%
+			String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL + "');";
 
-				<%
-				long logoId = organization.getLogoId();
-				%>
+			long logoId = organization.getLogoId();
+			%>
 
+			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>">
 				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= deleteLogo ? 0 : logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
-			</a>
+			</aui:a>
 
 			<div class="portrait-icons">
-
-				<%
-				String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL + "');";
-				%>
 
 				<liferay-ui:icon image="edit" message="change" url="<%= taglibEditURL %>" label="<%= true %>" />
 
@@ -262,12 +226,12 @@ if (organization != null) {
 
 					<liferay-ui:icon image="delete" url="<%= taglibDeleteURL %>" label="<%= true %>" cssClass="modify-link" />
 
-					<input id="<portlet:namespace />deleteLogo" name="<portlet:namespace />deleteLogo" type="hidden" value="<%= deleteLogo %>" />
+					<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
 				</c:if>
 			</div>
 		</c:if>
 	</div>
-</fieldset>
+</aui:fieldset>
 
 <%
 Organization parentOrganization = null;

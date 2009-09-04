@@ -42,15 +42,15 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 </liferay-util:include>
 
 <c:if test="<%= Validator.isNotNull(viewOrganizationsRedirect) %>">
-	<input name="<portlet:namespace />viewOrganizationsRedirect" type="hidden" value="<%= HtmlUtil.escape(viewOrganizationsRedirect) %>" />
+	<aui:input name="viewOrganizationsRedirect" type="hidden" value="<%= viewOrganizationsRedirect %>" />
 </c:if>
 
 <liferay-ui:search-container
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 >
-	<input name="<portlet:namespace />deleteOrganizationIds" type="hidden" value="" />
-	<input name="<portlet:namespace />organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteOrganizationIds" type="hidden" />
+	<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/organization_search.jsp"
@@ -109,9 +109,7 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 		<c:if test="<%= !results.isEmpty() %>">
 			<div class="separator"><!-- --></div>
 
-			<div>
-				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
-			</div>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrganizations();" %>' value="delete" />
 		</c:if>
 
 		<br />

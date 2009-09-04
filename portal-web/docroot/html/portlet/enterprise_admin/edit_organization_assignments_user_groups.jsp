@@ -36,8 +36,8 @@ Group group = organization.getGroup();
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assignments.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />addUserGroupIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserGroupIds" type="hidden" value="" />
+<aui:input name="addUserGroupIds" type="hidden" />
+<aui:input name="removeUserGroupIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
@@ -89,7 +89,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assi
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateOrganizationUserGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateOrganizationUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
 
 	<br /><br />
 

@@ -107,11 +107,13 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <liferay-ui:error-marker key="errorSection" value="services" />
 
+<aui:model-context bean="<%= orgLabor %>" model="<%= OrgLabor.class %>" />
+
 <h3><liferay-ui:message key="services" /></h3>
 
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
 
-<fieldset class="aui-block-labels">
+<aui:fieldset>
 
 	<%
 	Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -139,36 +141,9 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
-				<%
-				String fieldParam = "orgLaborId" + orgLaborsIndex;
-				%>
+				<aui:input name='<%= "orgLaborId" + orgLaborsIndex %>' type="hidden" value="" />
 
-				<input id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>" type="hidden" value="" />
-
-
-				<%
-				fieldParam = "orgLaborTypeId" + orgLaborsIndex;
-				%>
-
-				<div class="aui-ctrl-holder">
-					<label class="inline-label" for="<portlet:namespace /><%= fieldParam %>"><liferay-ui:message key="type" /></label>
-
-					<select id="<portlet:namespace /><%= fieldParam %>" name="<portlet:namespace /><%= fieldParam %>">
-
-					<%
-					List<ListType> orgLaborTypes = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_SERVICE);
-
-					for (ListType suffix : orgLaborTypes) {
-					%>
-
-						<option <%= (suffix.getListTypeId() == orgLabor.getTypeId()) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><liferay-ui:message key="<%= suffix.getName() %>" /></option>
-
-					<%
-					}
-					%>
-
-					</select>
-				</div>
+				<aui:select label="type" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' listType="<%= ListTypeImpl.ORGANIZATION_SERVICE %>" />
 
 				<table class="org-labor-table">
 				<tr>
@@ -199,8 +174,8 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 					%>
 
 						<td>
-							<select name="<portlet:namespace /><%= curParam %>Open<%= orgLaborsIndex %>">
-								<option value="-1"></option>
+							<aui:select label="" name='<%= curParam + "Open" + orgLaborsIndex %>'>
+								<aui:option value="-1" />
 
 								<%
 								cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -217,13 +192,13 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 									cal.add(Calendar.MINUTE, 30);
 								%>
 
-									<option <%= (curOpen == timeOfDayValue) ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
+									<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (curOpen == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
 
 								<%
 								}
 								%>
 
-							</select>
+							</aui:select>
 						</td>
 
 					<%
@@ -243,8 +218,8 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 					%>
 
 						<td>
-							<select name="<portlet:namespace /><%= curParam %>Close<%= orgLaborsIndex %>">
-								<option value="-1"></option>
+							<aui:select label="" name='<%= curParam + "Close" + orgLaborsIndex %>'>
+								<aui:option value="-1" />
 
 								<%
 								cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -261,13 +236,13 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 									cal.add(Calendar.MINUTE, 30);
 								%>
 
-									<option <%= (curClose == timeOfDayValue) ? "selected" : "" %> value="<%= timeOfDayValue %>"><%= timeOfDayDisplay %></option>
+									<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (curClose == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
 
 								<%
 								}
 								%>
 
-							</select>
+							</aui:select>
 						</td>
 
 					<%
@@ -283,7 +258,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 	}
 	%>
 
-</fieldset>
+</aui:fieldset>
 
 <script type="text/javascript">
 	AUI().ready(

@@ -76,74 +76,77 @@ String curSection = mainSections[0];
 	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="" />
-<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(backURL) %>" />
-<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+</portlet:actionURL>
 
-<div id="<portlet:namespace />sectionsContainer">
-	<table class="organization-table" width="100%">
-	<tr>
-		<td>
+<aui:form action="<%= editOrganizationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveOrganization(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
+	<aui:input name="redirect" type="hidden" value="" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
+	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
-			<%
-			request.setAttribute("addresses.className", Organization.class.getName());
-			request.setAttribute("addresses.classPK", organizationId);
-			request.setAttribute("emailAddresses.className", Organization.class.getName());
-			request.setAttribute("emailAddresses.classPK", organizationId);
-			request.setAttribute("phones.className", Organization.class.getName());
-			request.setAttribute("phones.classPK", organizationId);
-			request.setAttribute("websites.className", Organization.class.getName());
-			request.setAttribute("websites.classPK", organizationId);
-
-			for (String section : allSections) {
-				String sectionId = _getSectionId(section);
-				String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getSectionJsp(section) + ".jsp";
-			%>
-
-				<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
-					<liferay-util:include page="<%= sectionJsp %>" />
-				</div>
-
-			<%
-			}
-			%>
-
-			<div class="lfr-component form-navigation">
-				<div class="organization-info">
-					<p class="float-container">
-						<c:if test="<%= organization != null %>">
-
-							<%
-							long logoId = organization.getLogoId();
-							%>
-
-							<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
-
-							<span><%= HtmlUtil.escape(organization.getName()) %></span>
-						</c:if>
-					</p>
-				</div>
+	<div id="<portlet:namespace />sectionsContainer">
+		<table class="organization-table" width="100%">
+		<tr>
+			<td>
 
 				<%
-				String[] categoryNames = _CATEGORY_NAMES;
+				request.setAttribute("addresses.className", Organization.class.getName());
+				request.setAttribute("addresses.classPK", organizationId);
+				request.setAttribute("emailAddresses.className", Organization.class.getName());
+				request.setAttribute("emailAddresses.classPK", organizationId);
+				request.setAttribute("phones.className", Organization.class.getName());
+				request.setAttribute("phones.classPK", organizationId);
+				request.setAttribute("websites.className", Organization.class.getName());
+				request.setAttribute("websites.classPK", organizationId);
+
+				for (String section : allSections) {
+					String sectionId = _getSectionId(section);
+					String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getSectionJsp(section) + ".jsp";
 				%>
 
-				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
+					<div class="form-section <%= curSection.equals(section)? "selected" : StringPool.BLANK %>" id="<%= sectionId %>">
+						<liferay-util:include page="<%= sectionJsp %>" />
+					</div>
 
-				<div class="aui-button-holder">
-					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveOrganization();" />
+				<%
+				}
+				%>
 
-					<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(backURL) %>';" />
+				<div class="lfr-component form-navigation">
+					<div class="organization-info">
+						<p class="float-container">
+							<c:if test="<%= organization != null %>">
+
+								<%
+								long logoId = organization.getLogoId();
+								%>
+
+								<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
+
+								<span><%= HtmlUtil.escape(organization.getName()) %></span>
+							</c:if>
+						</p>
+					</div>
+
+					<%
+					String[] categoryNames = _CATEGORY_NAMES;
+					%>
+
+					<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
+
+					<aui:button-row>
+						<aui:button onClick='<%= renderResponse.getNamespace() + "saveOrganization();" %>' value="save" />
+
+						<aui:button onClick="<%= backURL %>" value="cancel" />
+					</aui:button-row>
 				</div>
-			</div>
-		</td>
-	</tr>
-	</table>
-</div>
-
-</form>
+			</td>
+		</tr>
+		</table>
+	</div>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

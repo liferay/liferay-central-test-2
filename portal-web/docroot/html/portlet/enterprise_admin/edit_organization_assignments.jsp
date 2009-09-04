@@ -75,43 +75,47 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" /><portlet:param name="redirect" value="<%= redirect %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
-<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
-<input name="<portlet:namespace />organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_assignments" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+</portlet:actionURL>
 
-<liferay-ui:message key="edit-assignments-for-organization" />: <%= HtmlUtil.escape(organization.getName()) %>
+<aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="assignmentsRedirect" type="hidden" />
+	<aui:input name="organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
-<br /><br />
+	<liferay-ui:message key="edit-assignments-for-organization" />: <%= HtmlUtil.escape(organization.getName()) %>
 
-<%
-String tabs2Names = "users";
+	<br /><br />
 
-if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
-	tabs2Names += ",user-groups";
-}
-%>
+	<%
+	String tabs2Names = "users";
 
-<liferay-ui:tabs
-	names="<%= tabs2Names %>"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-	backURL="<%= redirect %>"
-/>
+	if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
+		tabs2Names += ",user-groups";
+	}
+	%>
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("users") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_users.jsp" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("user-groups") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_user_groups.jsp" />
-	</c:when>
-</c:choose>
+	<liferay-ui:tabs
+		names="<%= tabs2Names %>"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+		backURL="<%= redirect %>"
+	/>
 
-</form>
+	<c:choose>
+		<c:when test='<%= tabs2.equals("users") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_users.jsp" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_organization_assignments_user_groups.jsp" />
+		</c:when>
+	</c:choose>
+</aui:form>
 
 <%
 EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);

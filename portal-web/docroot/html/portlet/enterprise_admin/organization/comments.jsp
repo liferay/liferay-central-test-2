@@ -28,10 +28,10 @@
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 %>
 
+<aui:model-context bean="<%= organization %>" model="<%= Organization.class %>" />
+
 <h3><liferay-ui:message key="comments" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="comments" />
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input label="" name="comments" />
+</aui:fieldset>

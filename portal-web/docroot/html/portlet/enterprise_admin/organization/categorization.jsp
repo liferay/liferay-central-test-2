@@ -26,32 +26,18 @@
 
 <%
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
-
-long classPK = 0;
-
-if (organization != null) {
-	classPK = organization.getOrganizationId();
-}
 %>
+
+<aui:model-context bean="<%= organization %>" model="<%= Organization.class %>" />
 
 <h3><liferay-ui:message key="categories" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:asset-categories-selector
-			className="<%= Organization.class.getName() %>"
-			classPK="<%= classPK %>"
-		/>
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input name="categories" type="assetCategories" />
+</aui:fieldset>
 
 <h3><liferay-ui:message key="tags" /></h3>
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<liferay-ui:asset-tags-selector
-			className="<%= Organization.class.getName() %>"
-			classPK="<%= classPK %>"
-		/>
-	</div>
-</fieldset>
+<aui:fieldset>
+	<aui:input name="tags" type="assetTags" />
+</aui:fieldset>

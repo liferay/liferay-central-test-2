@@ -52,26 +52,26 @@ long publicLayoutSetId = ParamUtil.getLong(request, "publicLayoutSetId");
 		</script>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" /></portlet:actionURL>" class="aui-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-		<input name="<portlet:namespace />publicLayoutSetId" type="hidden" value="<%= publicLayoutSetId %>" />
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationLogoURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization_logo" />
+		</portlet:actionURL>
 
-		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+		<aui:form action="<%= editOrganizationLogoURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit="submitForm(this); return false;">
+			<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+			<aui:input name="publicLayoutSetId" type="hidden" value="<%= publicLayoutSetId %>" />
 
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />fileName"><liferay-ui:message key="upload-a-logo-for-the-organization-pages-that-will-be-used-instead-of-the-default-enterprise-logo-in-both-public-and-private-pages" /></label><br />
-				<input name="<portlet:namespace />fileName" size="50" type="file" />
-		</div>
+			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
-		<br />
+			<aui:fieldset>
+				<aui:input label="upload-a-logo-for-the-organization-pages-that-will-be-used-instead-of-the-default-enterprise-logo-in-both-public-and-private-pages" name="fileName" size="50" type="file" />
 
-		<div class="aui-button-holder">
-			<input type="submit" value="<liferay-ui:message key="save" />" />
+				<aui:button-row>
+					<aui:button type="submit" value="save" />
 
-			<input type="button" value="<liferay-ui:message key="close" />" onClick="window.close();" />
-		</div>
-
-		</form>
+					<aui:button onClick="window.close();" value="close" />
+				</aui:button-row>
+			</aui:fieldset>
+		</aui:form>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 			<script type="text/javascript">

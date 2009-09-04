@@ -40,8 +40,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assi
 	url="<%= portletURL.toString() %>"
 />
 
-<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
+<aui:input name="addUserIds" type="hidden" />
+<aui:input name="removeUserIds" type="hidden" />
 
 <liferay-ui:search-container
 	rowChecker="<%= new UserOrganizationChecker(renderResponse, organization) %>"
@@ -89,7 +89,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assi
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateOrganizationUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateOrganizationUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
 
 	<br /><br />
 
