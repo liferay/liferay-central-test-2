@@ -331,6 +331,8 @@ public class LayoutTypePortletImpl
 				_log.error(
 					"Portlet " + portletId +
 						" cannot be added because it is not registered");
+
+				return null;
 			}
 
 			if (checkPermission && !portlet.hasAddPortletPermission(userId)) {
@@ -341,82 +343,77 @@ public class LayoutTypePortletImpl
 			_log.error(e, e);
 		}
 
-		if (portlet != null) {
-			if (portlet.isSystem()) {
-				return null;
-			}
-
-			if ((portlet.isInstanceable()) &&
-				(PortletConstants.getInstanceId(
-					portlet.getPortletId()) == null)) {
-
-				portletId = portletId + getFullInstanceSeparator();
-			}
-
-			if (hasPortletId(portletId)) {
-				return null;
-			}
-
-			if (columnId == null) {
-				LayoutTemplate layoutTemplate = getLayoutTemplate();
-
-				List<String> columns = layoutTemplate.getColumns();
-
-				if (columns.size() > 0) {
-					columnId = columns.get(0);
-				}
-			}
-
-			if (columnId != null) {
-				String columnValue =
-					getTypeSettingsProperties().getProperty(columnId);
-
-				if ((columnValue == null) &&
-					(columnId.startsWith(PortletKeys.NESTED_PORTLETS))) {
-
-					addNestedColumn(columnId);
-				}
-
-				if (columnPos >= 0) {
-					List<String> portletIds =
-						ListUtil.fromArray(StringUtil.split(columnValue));
-
-					if (columnPos <= portletIds.size()) {
-						portletIds.add(columnPos, portletId);
-					}
-					else {
-						portletIds.add(portletId);
-					}
-
-					columnValue = StringUtil.merge(portletIds);
-				}
-				else {
-					columnValue = StringUtil.add(columnValue, portletId);
-				}
-
-				getTypeSettingsProperties().setProperty(columnId, columnValue);
-			}
-
-			try {
-				PortletLayoutListener portletLayoutListener =
-					portlet.getPortletLayoutListenerInstance();
-
-				if (_enablePortletLayoutListener &&
-					(portletLayoutListener != null)) {
-
-					portletLayoutListener.onAddToLayout(
-						portletId, layout.getPlid());
-				}
-			}
-			catch (Exception e) {
-				_log.error("Unable to fire portlet layout listener event", e);
-			}
-
-			return portletId;
-		}
-		else {
+		if (portlet.isSystem()) {
 			return null;
 		}
+
+		if ((portlet.isInstanceable()) &&
+			(PortletConstants.getInstanceId(
+				portlet.getPortletId()) == null)) {
+
+			portletId = portletId + getFullInstanceSeparator();
+		}
+
+		if (hasPortletId(portletId)) {
+			return null;
+		}
+
+		if (columnId == null) {
+			LayoutTemplate layoutTemplate = getLayoutTemplate();
+
+			List<String> columns = layoutTemplate.getColumns();
+
+			if (columns.size() > 0) {
+				columnId = columns.get(0);
+			}
+		}
+
+		if (columnId != null) {
+			String columnValue =
+				getTypeSettingsProperties().getProperty(columnId);
+
+			if ((columnValue == null) &&
+				(columnId.startsWith(PortletKeys.NESTED_PORTLETS))) {
+
+				addNestedColumn(columnId);
+			}
+
+			if (columnPos >= 0) {
+				List<String> portletIds =
+					ListUtil.fromArray(StringUtil.split(columnValue));
+
+				if (columnPos <= portletIds.size()) {
+					portletIds.add(columnPos, portletId);
+				}
+				else {
+					portletIds.add(portletId);
+				}
+
+				columnValue = StringUtil.merge(portletIds);
+			}
+			else {
+				columnValue = StringUtil.add(columnValue, portletId);
+			}
+
+			getTypeSettingsProperties().setProperty(columnId, columnValue);
+		}
+
+		try {
+			PortletLayoutListener portletLayoutListener =
+				portlet.getPortletLayoutListenerInstance();
+
+			if (_enablePortletLayoutListener &&
+				(portletLayoutListener != null)) {
+
+				portletLayoutListener.onAddToLayout(
+					portletId, layout.getPlid());
+			}
+		}
+		catch (Exception e) {
+			_log.error("Unable to fire portlet layout listener event", e);
+		}
+
+		return portletId;
 	}
 
 	public void addPortletIds(
@@ -547,6 +544,8 @@ public class LayoutTypePortletImpl
 				_log.error(
 					"Portlet " + portletId +
 						" cannot be removed because it is not registered");
+
+				return;
 			}
 
 			if (!portlet.hasAddPortletPermission(userId)) {
