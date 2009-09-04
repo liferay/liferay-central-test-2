@@ -201,7 +201,7 @@ boolean userSessionAlive = false;
 					<aui:button type="submit" value="kill-session" />
 				</c:if>
 
-				<aui:button value="cancel" onClick="<%= redirect %>" />
+				<aui:button onClick="<%= redirect %>" value="cancel" />
 			</aui:button-row>
 		</c:otherwise>
 	</c:choose>

@@ -142,7 +142,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
-				<aui:input name='<%= "orgLaborId" + orgLaborsIndex %>' type="hidden" value="" />
+				<aui:input name='<%= "orgLaborId" + orgLaborsIndex %>' type="hidden" />
 
 				<aui:select label="type" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' listType="<%= ListTypeImpl.ORGANIZATION_SERVICE %>" />
 

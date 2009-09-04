@@ -63,7 +63,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 			</aui:field-wrapper>
 		</c:if>
 
-		<aui:input label="<%= (userGroup != null) ? "new-name" : "name" %>" name="name" />
+		<aui:input label='<%= (userGroup != null) ? "new-name" : "name" %>' name="name" />
 
 		<aui:input name="description" />
 	</aui:fieldset>

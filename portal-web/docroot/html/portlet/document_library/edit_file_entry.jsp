@@ -296,15 +296,15 @@ portletURL.setParameter("name", name);
 			<c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 				<c:choose>
 					<c:when test="<%= !hasLock.booleanValue() %>">
-						<aui:button value="lock" onClick='<%= renderResponse.getNamespace() + "lock();" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "lock();" %>' value="lock" />
 					</c:when>
 					<c:otherwise>
-						<aui:button value="unlock" onClick='<%= renderResponse.getNamespace() + "unlock();" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "unlock();" %>' value="unlock" />
 					</c:otherwise>
 				</c:choose>
 			</c:if>
 
-			<aui:button value="cancel" onClick="<%= redirect %>" />
+			<aui:button onClick="<%= redirect %>" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

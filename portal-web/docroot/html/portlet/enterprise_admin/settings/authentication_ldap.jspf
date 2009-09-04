@@ -349,7 +349,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	</aui:field-wrapper>
 
 	<aui:button-row>
-		<aui:button value="reset-values" onClick='<%= renderResponse.getNamespace() + "updateDefaultLdap();" %>' />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateDefaultLdap();" %>' value="reset-values" />
 	</aui:button-row>
 </aui:fieldset>
 
@@ -369,7 +369,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapConnection');";
 		%>
 
-		<aui:button value="test-ldap-connection" onClick='<%= taglibOnClick %>' />
+		<aui:button onClick='<%= taglibOnClick %>' value="test-ldap-connection" />
 	</aui:button-row>
 </aui:fieldset>
 
@@ -405,7 +405,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapUsers');";
 		%>
 
-		<aui:button value="test-ldap-users" onClick="<%= taglibOnClick %>" />
+		<aui:button onClick="<%= taglibOnClick %>" value="test-ldap-users" />
 	</aui:button-row>
 </aui:fieldset>
 
@@ -429,7 +429,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapGroups');";
 		%>
 
-		<aui:button value="test-ldap-groups" onClick="<%= taglibOnClick %>" />
+		<aui:button onClick="<%= taglibOnClick %>" value="test-ldap-groups" />
 	</aui:button-row>
 </aui:fieldset>
 

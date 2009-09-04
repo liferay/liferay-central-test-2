@@ -49,7 +49,7 @@
 				<aui:button-row>
 					<aui:button type="submit" value="save" />
 
-					<aui:button value="close" onClick="window.close();" />
+					<aui:button onClick="window.close();" value="close" />
 				</aui:button-row>
 			</aui:fieldset>
 		</aui:form>

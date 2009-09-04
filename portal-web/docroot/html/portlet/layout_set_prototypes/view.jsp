@@ -38,56 +38,55 @@ portletURL.setParameter("struts_action", "/layout_set_prototypes/view");
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
-<form class="aui-form" action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="portletURL" />
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletURL.toString()) %>" />
+<aui:form action="<%= portletURL.toString() %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="portletURL" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<liferay-ui:search-container
-	searchContainer='<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.get(pageContext, "no-site-templates-were-found")) %>'
-	headerNames="name"
->
-	<input name="<portlet:namespace />deleteLayoutSetPrototypesIds" type="hidden" value="" />
-
-	<liferay-ui:search-container-results
-		results="<%= LayoutSetPrototypeLocalServiceUtil.search(company.getCompanyId(), null, searchContainer.getStart(), searchContainer.getEnd(), null) %>"
-		total="<%= LayoutSetPrototypeLocalServiceUtil.searchCount(company.getCompanyId(), null) %>"
-	/>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.LayoutSetPrototype"
-		escapedModel="<%= true %>"
-		keyProperty="layoutSetPrototypeId"
-		modelVar="layoutSetPrototype"
+	<liferay-ui:search-container
+		searchContainer='<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.get(pageContext, "no-site-templates-were-found")) %>'
+		headerNames="name"
 	>
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
-			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
-			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-			<portlet:param name="backURL" value="<%= searchContainer.getIteratorURL().toString() %>" />
-			<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()) %>" />
-		</liferay-portlet:renderURL>
+		<input name="<portlet:namespace />deleteLayoutSetPrototypesIds" type="hidden" value="" />
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="name"
-			orderable="<%= true %>"
-			value="<%= layoutSetPrototype.getName(locale) %>"
+		<liferay-ui:search-container-results
+			results="<%= LayoutSetPrototypeLocalServiceUtil.search(company.getCompanyId(), null, searchContainer.getStart(), searchContainer.getEnd(), null) %>"
+			total="<%= LayoutSetPrototypeLocalServiceUtil.searchCount(company.getCompanyId(), null) %>"
 		/>
 
-		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
-			name="active"
+		<liferay-ui:search-container-row
+			className="com.liferay.portal.model.LayoutSetPrototype"
+			escapedModel="<%= true %>"
+			keyProperty="layoutSetPrototypeId"
+			modelVar="layoutSetPrototype"
 		>
-			<%= LanguageUtil.get(pageContext, layoutSetPrototype.isActive()? "yes" : "no") %>
-		</liferay-ui:search-container-column-text>
+			<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+				<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
+				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="backURL" value="<%= searchContainer.getIteratorURL().toString() %>" />
+				<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()) %>" />
+			</liferay-portlet:renderURL>
 
-		<liferay-ui:search-container-column-jsp
-			align="right"
-			path="/html/portlet/layout_set_prototypes/layout_set_prototype_action.jsp"
-		/>
-	</liferay-ui:search-container-row>
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="name"
+				orderable="<%= true %>"
+				value="<%= layoutSetPrototype.getName(locale) %>"
+			/>
 
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+			<liferay-ui:search-container-column-text
+				href="<%= rowURL %>"
+				name="active"
+			>
+				<%= LanguageUtil.get(pageContext, layoutSetPrototype.isActive()? "yes" : "no") %>
+			</liferay-ui:search-container-column-text>
 
-</form>
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/layout_set_prototypes/layout_set_prototype_action.jsp"
+			/>
+		</liferay-ui:search-container-row>
+
+		<liferay-ui:search-iterator />
+	</liferay-ui:search-container>
+</aui:form>

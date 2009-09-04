@@ -152,7 +152,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<aui:button value="cancel" onClick="<%= redirect %>" />
+		<aui:button onClick="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

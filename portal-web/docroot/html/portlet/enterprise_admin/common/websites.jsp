@@ -89,7 +89,7 @@ else {
 		<div class="lfr-form-row">
 			<div class="row-fields">
 
-				<aui:input name='<%= "websiteId" + websitesIndex %>' type="hidden" value="" />
+				<aui:input name='<%= "websiteId" + websitesIndex %>' type="hidden" />
 
 				<aui:input fieldParam='<%= "websiteUrl" + websitesIndex %>' name="url" />
 

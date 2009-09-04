@@ -151,7 +151,7 @@ portletURL.setParameter("tabs3", tabs3);
 				%>
 
 				<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
-				
+
 				<br /><br />
 
 				<liferay-ui:search-iterator />
@@ -252,7 +252,7 @@ portletURL.setParameter("tabs3", tabs3);
 				String taglibOnClick = renderResponse.getNamespace() + "updatePasswordPolicyOrganizations('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 				%>
 
-				<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
+				<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
 				<br /><br />
 

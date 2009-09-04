@@ -130,8 +130,8 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 		String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 		%>
 
-		<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
-	
+		<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+
 		<br /><br />
 
 		<liferay-ui:search-iterator />

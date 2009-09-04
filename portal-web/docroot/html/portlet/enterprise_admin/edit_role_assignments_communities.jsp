@@ -78,7 +78,7 @@ searchContainer.setResults(results);
 String taglibOnClick = renderResponse.getNamespace() + "updateRoleGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 %>
 
-<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
+<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
 <br /><br />
 

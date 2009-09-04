@@ -81,8 +81,8 @@ String curSection = mainSections[0];
 </portlet:actionURL>
 
 <aui:form action="<%= editOrganizationURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveOrganization(); return false;" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value="" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
