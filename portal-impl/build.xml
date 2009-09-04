@@ -709,7 +709,7 @@ ${exception.message}
 		<ant dir="../portal-web" target="build-themes" />
 	</target>
 
-	<target name="build-upgrade-tables">
+	<target name="build-upgrade-table">
 		<if>
 			<not>
 				<equals arg1="${upgrade.table.path}" arg2="$${upgrade.table.path}" />
