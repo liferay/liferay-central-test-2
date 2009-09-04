@@ -169,7 +169,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			groupName = groupName.substring(0, QUARTZ_MAX_GROUP_NAME_LENGTH);
 		}
 
-		if (description.length() > QUARTZ_MAX_DESCRIPTION_LENGTH) {
+		if (description != null &&
+			description.length() > QUARTZ_MAX_DESCRIPTION_LENGTH) {
 			description =
 				description.substring(0,QUARTZ_MAX_DESCRIPTION_LENGTH);
 		}
