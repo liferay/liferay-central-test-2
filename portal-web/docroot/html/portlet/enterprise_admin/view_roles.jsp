@@ -63,7 +63,7 @@ headerNames.add(StringPool.BLANK);
 	portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCur()));
 	%>
 
-	<input name="<portlet:namespace />rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="rolesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<div class="separator"><!-- --></div>
 

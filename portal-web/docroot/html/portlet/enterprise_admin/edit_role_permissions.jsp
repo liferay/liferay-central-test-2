@@ -199,65 +199,68 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<c:if test="<%= portletName.equals(PortletKeys.ADMIN_SERVER) %>">
 			<br />
 
-			<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			<aui:button onClick="<%= redirect %>" value="cancel" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
-		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="" />
-		<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
-		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(portletResource) %>" />
-		<input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : HtmlUtil.escapeAttribute(StringUtil.merge(modelResources)) %>' />
-		<input name="<portlet:namespace />showModelResources" type="hidden" value='<%= String.valueOf(showModelResources) %>' />
-		<input name="<portlet:namespace />selectedTargets" type="hidden" value="" />
+		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
+		</portlet:actionURL>
 
-		<c:choose>
-			<c:when test="<%= !showModelResources %>">
-				<h3><%= portletResourceLabel %></h3>
+		<aui:form action="<%= editRolePermissionsURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" />
+			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+			<aui:input name="redirect" type="hidden" />
+			<aui:input name="roleId" type="hidden" value="<%= role.getRoleId() %>" />
+			<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
+			<aui:input name="modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
+			<aui:input name="showModelResources" type="hidden" value='<%= String.valueOf(showModelResources) %>' />
+			<aui:input name="selectedTargets" type="hidden" />
 
-				<%
-				request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
-				%>
-
-				<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
-			</c:when>
-			<c:when test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
-
-				<%
-				modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
-
-				for (int i = 0; i < modelResources.size(); i++) {
-					String curModelResource = (String)modelResources.get(i);
-
-					String curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
-					%>
-
-					<h3><%= curModelResourceName %></h3>
+			<c:choose>
+				<c:when test="<%= !showModelResources %>">
+					<h3><%= portletResourceLabel %></h3>
 
 					<%
-					request.removeAttribute("edit_role_permissions.jsp-curPortletResource");
-					request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
-					request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
+					request.setAttribute("edit_role_permissions.jsp-curPortletResource", portletResource);
 					%>
 
 					<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+				</c:when>
+				<c:when test="<%= (modelResources != null) && (modelResources.size() > 0) %>">
 
-				<%
-				}
-				%>
+					<%
+					modelResources = ListUtil.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
 
-			</c:when>
-		</c:choose>
+					for (int i = 0; i < modelResources.size(); i++) {
+						String curModelResource = (String)modelResources.get(i);
 
-		<br />
+						String curModelResourceName = ResourceActionsUtil.getModelResource(pageContext, curModelResource);
+						%>
 
-		<input type="button" value="<liferay-ui:message key="save" />" onclick="<portlet:namespace />updateActions();" />
+						<h3><%= curModelResourceName %></h3>
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+						<%
+						request.removeAttribute("edit_role_permissions.jsp-curPortletResource");
+						request.setAttribute("edit_role_permissions.jsp-curModelResource", curModelResource);
+						request.setAttribute("edit_role_permissions.jsp-curModelResourceName", curModelResourceName);
+						%>
 
-		</form>
+						<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_permissions_resource.jsp" />
+
+					<%
+					}
+					%>
+
+				</c:when>
+			</c:choose>
+
+			<aui:button-row>
+				<aui:button onclick='<%= renderResponse.getNamespace() + "updateActions();" %>' value="save" />
+
+				<aui:button onClick="<%= redirect %>" value="cancel" />
+			</aui:button-row>
+		</aui:form>
 
 		<script type="text/javascript">
 			AUI().ready(

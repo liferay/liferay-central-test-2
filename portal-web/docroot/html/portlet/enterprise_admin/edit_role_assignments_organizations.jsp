@@ -34,8 +34,8 @@ Role role = (Role)request.getAttribute("edit_role_assignments.jsp-role");
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />addGroupIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeGroupIds" type="hidden" value="" />
+<aui:input name="addGroupIds" type="hidden" />
+<aui:input name="removeGroupIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
@@ -124,7 +124,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateRoleGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button value="update-associations" onClick="<%= taglibOnClick %>" />
 
 	<br /><br />
 

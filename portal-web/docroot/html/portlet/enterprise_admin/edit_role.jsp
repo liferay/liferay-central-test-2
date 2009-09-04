@@ -61,112 +61,97 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 	}
 </script>
 
-<form class="aui-form" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
+<aui:form method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveRole(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="roleId" type="hidden" value="<%= roleId %>" />
 
-<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
-<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
+	<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-<fieldset class="aui-block-labels">
-	<c:choose>
-		<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-			<input type="hidden" name="name" value="<%= HtmlUtil.escape(role.getName()) %>" />
-		</c:when>
-		<c:otherwise>
-			<div class="aui-ctrl-holder">
-				<label><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></label>
+	<aui:model-context bean="<%= role %>" model="<%= Role.class %>" />
 
-				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
-			</div>
-		</c:otherwise>
-	</c:choose>
+	<aui:fieldset>
+		<c:choose>
+			<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
+				<aui:input type="hidden" name="name" value="<%= role.getName() %>" />
+			</c:when>
+			<c:otherwise>
+				<aui:input label='<%= (role != null) ? "new-name" : "name" %>' name="name" />
+			</c:otherwise>
+		</c:choose>
 
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="title" /></label>
+		<aui:input name="title" />
 
-		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="title" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="description" /></label>
-
-		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="description" />
-	</div>
-
-	<div class="aui-ctrl-holder">
-		<label><liferay-ui:message key="type" /></label>
+		<aui:input name="description" />
 
 		<c:choose>
 			<c:when test="<%= ((role == null) && (type == 0)) %>">
-				<select name="<portlet:namespace/>type">
-					<option value="<%= RoleConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-					<option value="<%= RoleConstants.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
-					<option value="<%= RoleConstants.TYPE_ORGANIZATION %>"><liferay-ui:message key="organization" /></option>
-				</select>
+				<aui:select name="type">
+					<aui:option label="regular" value="<%= RoleConstants.TYPE_REGULAR %>" />
+					<aui:option label="community" value="<%= RoleConstants.TYPE_COMMUNITY %>" />
+					<aui:option label="organization" value="<%= RoleConstants.TYPE_ORGANIZATION %>" />
+				</aui:select>
 			</c:when>
 			<c:when test="<%= (role == null) %>">
-				<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(type) %>" />
+				<aui:field-wrapper label="type">
+					<%= LanguageUtil.get(pageContext, RoleConstants.getTypeLabel(type)) %>
+				</aui:field-wrapper>
 
-				<%= LanguageUtil.get(pageContext, RoleConstants.getTypeLabel(type)) %>
+				<aui:input name="type" type="hidden" value="<%= String.valueOf(type) %>" />
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
+				<aui:field-wrapper label="type">
+					<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
+				</aui:field-wrapper>
 			</c:otherwise>
 		</c:choose>
-	</div>
 
-	<c:if test="<%= role != null %>">
+		<c:if test="<%= role != null %>">
 
-		<%
-		String[] subtypes = null;
+			<%
+			String[] subtypes = null;
 
-		if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
-			subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
-		}
-		else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-			subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
-		}
-		else if (role.getType() == RoleConstants.TYPE_REGULAR) {
-			subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
-		}
-		else {
-			subtypes = new String[0];
-		}
-		%>
+			if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
+				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
+			}
+			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+				subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
+			}
+			else if (role.getType() == RoleConstants.TYPE_REGULAR) {
+				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
+			}
+			else {
+				subtypes = new String[0];
+			}
+			%>
 
-		<c:if test="<%= subtypes.length > 0 %>">
-			<div class="aui-ctrl-holder">
-				<label><liferay-ui:message key="subtype" /></label>
-
-				<select name="<portlet:namespace/>subtype">
-					<option value=""></option>
+			<c:if test="<%= subtypes.length > 0 %>">
+				<aui:select name="subtype">
+					<aui:option value="" />
 
 					<%
 					for (String curSubtype : subtypes) {
 					%>
 
-						<option <%= subtype.equals(curSubtype) ? "selected" : "" %> value="<%= curSubtype %>"><liferay-ui:message key="<%= curSubtype %>" /></option>
+						<aui:option label="<%= curSubtype %>" selected="<%= subtype.equals(curSubtype) %>" />
 
 					<%
 					}
 					%>
 
-				</select>
-			</div>
+				</aui:select>
+			</c:if>
 		</c:if>
-	</c:if>
 
-	<div class="aui-button-holder">
-		<input type="submit" value="<liferay-ui:message key="save" />" />
+		<aui:button-row>
+			<aui:button type="submit" value="save" />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-	</div>
-</fieldset>
-
-</form>
+			<aui:button onClick="<%= redirect %>" value="cancel" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

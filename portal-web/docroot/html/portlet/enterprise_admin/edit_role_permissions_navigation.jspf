@@ -28,14 +28,10 @@ List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyI
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 %>
 
-<form action="#" class="aui-form" name="<portlet:namespace />resourceSelection">
-
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="add-permissions"><liferay-ui:message key="add-permissions" /></label>
-
-		<select id="add-permissions" onchange="<portlet:namespace />addPermissions(this);">
-			<option value=""></option>
+<aui:form action="#" name="resourceSelection">
+	<aui:fieldset>
+		<aui:select name="add-permissions" onchange='<%= renderResponse.getNamespace() + "addPermissions(this);" %>'>
+			<aui:option label="" />
 
 			<c:choose>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_COMMUNITY %>">
@@ -46,7 +42,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
-						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="community-administration" /></option>
+						<aui:option label="community-administration" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 					</optgroup>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">
@@ -57,7 +53,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
-						<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="organization-administration" /></option>
+						<aui:option label="organization-administration" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 					</optgroup>
 				</c:when>
 				<c:otherwise>
@@ -69,7 +65,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 							editPermissionsURL.setParameter("showModelResources", "0");
 						%>
 
-							<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><liferay-ui:message key="general" /></option>
+							<aui:option label="general" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 
 						<%
 						}
@@ -97,7 +93,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 							editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
-							<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+							<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 
 						<%
 						}
@@ -125,7 +121,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					editPermissionsURL.setParameter("showModelResources", "1");
 				%>
 
-					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+					<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 
 				<%
 				}
@@ -151,18 +147,16 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 					editPermissionsURL.setParameter("showModelResources", "0");
 				%>
 
-					<option <%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources)? "selected" : "" %> value="<%= editPermissionsURL.toString() %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></option>
+					<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 
 				<%
 				}
 				%>
 
 			</optgroup>
-		</select>
-	</div>
-</fieldset>
-
-</form>
+		</aui:select>
+	</aui:fieldset>
+</aui:form>
 
 <%!
 private static final String[] _COMMUNITY_PORTLETS = {

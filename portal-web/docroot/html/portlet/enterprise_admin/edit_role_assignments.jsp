@@ -81,36 +81,39 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 	<liferay-util:param name="tabs1" value="assign-members" />
 </liferay-util:include>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs3) %>" />
-<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editAssignmentsURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="users,communities,organizations,user-groups"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
+<aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
+	<aui:input name="assignmentsRedirect" type="hidden" />
+	<aui:input name="roleId" type="hidden" value="<%= role.getRoleId() %>" />
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("users") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_users.jsp" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("communities") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_communities.jsp" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("organizations") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_organizations.jsp" />
-	</c:when>
-	<c:when test='<%= tabs2.equals("user-groups") %>'>
-		<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_user_groups.jsp" />
-	</c:when>
-</c:choose>
+	<liferay-ui:tabs
+		names="users,communities,organizations,user-groups"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
 
-</form>
+	<c:choose>
+		<c:when test='<%= tabs2.equals("users") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_users.jsp" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("communities") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_communities.jsp" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("organizations") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_organizations.jsp" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_user_groups.jsp" />
+		</c:when>
+	</c:choose>
+</aui:form>
 
 <%
 PortletURL assignMembersURL = renderResponse.createRenderURL();

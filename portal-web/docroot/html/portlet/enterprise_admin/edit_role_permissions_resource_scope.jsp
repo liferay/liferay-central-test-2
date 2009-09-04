@@ -37,8 +37,8 @@ long[] groupIdsArray = (long[])objArray[7];
 List groupNames = (List)objArray[8];
 %>
 
-<input name="<portlet:namespace />groupIds<%= target %>" type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
-<input name="<portlet:namespace />groupNames<%= target %>" type="hidden" value="<%= StringUtil.merge(groupNames, "@@") %>" />
+<aui:input name='<%= "groupIds" + target %>' type="hidden" value="<%= StringUtil.merge(groupIdsArray) %>" />
+<aui:input name='<%= "groupNames" + target %>' type="hidden" value='<%= StringUtil.merge(groupNames, "@@") %>' />
 
 <div id="<portlet:namespace />groupDiv<%= target %>">
 	<span class="permission-scopes" id="<portlet:namespace />groupHTML<%= target %>">
@@ -47,9 +47,11 @@ List groupNames = (List)objArray[8];
 		if (supportsFilterByGroup && (groups.size() > 0)) {
 			for (int i = 0; i < groups.size(); i++) {
 				Group group = (Group)groups.get(i);
+
+				String taglibHref = "javascript:" + renderResponse.getNamespace() + "removeGroup(" + i + ", '" + target + "');";
 		%>
 
-				<span class="permission-scope"><%= group.getName() %><a class="permission-scope-delete" href="javascript:<portlet:namespace />removeGroup(<%= i %>, '<%= target %>');"><span>x</span></a></span>
+				<span class="permission-scope"><%= group.getName() %><aui:a cssClass="permission-scope-delete" href="<%= taglibHref %>"><span>x</span></aui:a></span>
 
 		<%
 			}
