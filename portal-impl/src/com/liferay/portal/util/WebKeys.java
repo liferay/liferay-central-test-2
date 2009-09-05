@@ -168,8 +168,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LANGUAGE_RESOURCES = "LANGUAGE_RESOURCES";
 
-	public static final String LAST_LAYOUT = "LAST_LAYOUT";
-
 	public static final String LAST_PATH = "LAST_PATH";
 
 	public static final String LAYOUT_CONTENT = "LAYOUT_CONTENT";
@@ -293,6 +291,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String PORTLET_STRUTS_FORWARD = "PORTLET_STRUTS_FORWARD";
 
 	public static final String PORTLET_STRUTS_PROCESSOR = "PORTLET_STRUTS_PROCESSOR";
+
+	public static final String PREVIOUS_LAYOUT = "PREVIOUS_LAYOUT";
 
 	public static final String PUBLIC_RENDER_PARAMETER_CONFIGURATIONS = "PUBLIC_RENDER_PARAMETER_CONFIGURATIONS";
 

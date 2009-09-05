@@ -410,27 +410,32 @@ public class LayoutAction extends Action {
 			HttpServletResponse response, long plid)
 		throws Exception {
 
+		HttpSession session = request.getSession();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		try {
 			Layout layout = themeDisplay.getLayout();
 
-			HttpSession session = request.getSession();
-
 			boolean resetLayout = ParamUtil.getBoolean(
 				request, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
 
-			Layout lastLayout =
-				(Layout)session.getAttribute(WebKeys.LAST_LAYOUT);
+			Layout previousLayout = (Layout)session.getAttribute(
+				WebKeys.PREVIOUS_LAYOUT);
+
+			if ((previousLayout == null) ||
+				(layout.getPlid() != previousLayout.getPlid())) {
+
+				session.setAttribute(WebKeys.PREVIOUS_LAYOUT, layout);
+			}
 
 			if (!PropsValues.TCK_URL && resetLayout &&
-				isChangedLayout(layout, lastLayout)) {
+				((previousLayout != null) &&
+				 (layout.getPlid() != previousLayout.getPlid()))) {
 
 				RenderParametersPool.clear(request, plid);
 			}
-
-			session.setAttribute(WebKeys.LAST_LAYOUT, layout);
 
 			if (themeDisplay.isLifecycleAction()) {
 				Portlet portlet = processPortletRequest(
@@ -753,11 +758,6 @@ public class LayoutAction extends Action {
 		}
 
 		renderRequestImpl.cleanUp();
-	}
-
-	protected boolean isChangedLayout(Layout layout, Layout lastLayout) {
-		return (lastLayout == null) ||
-			(layout.getLayoutId() != lastLayout.getLayoutId());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutAction.class);
