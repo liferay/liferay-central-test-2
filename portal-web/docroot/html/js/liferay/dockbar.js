@@ -90,7 +90,7 @@
 						instance.addMenu(
 							{
 								boundingBox: '#' + instance._namespace + 'manageContentContainer',
-							contentBox: '#' + instance._namespace + 'manageContentContainer > ul',
+								contentBox: '#' + instance._namespace + 'manageContentContainer > ul',
 								trigger: '#' + instance._namespace + 'manageContent',
 								name: 'manageContent'
 							}
@@ -260,7 +260,7 @@
 				addMenu: function(options) {
 					var instance = this;
 
-					if (options.name) {
+					if (options.name && A.get(options.trigger)) {
 						var name = options.name;
 
 						delete options.name;
