@@ -740,11 +740,9 @@
 .lfr-emoticon-container {
 	background: #e5e4e8;
 	border: 1px solid #ccc;
-	display: none;
 	padding-top: 5px;
-	position: absolute;
+	overflow: hidden;
 	width: 180px;
-	z-index: 99999;
 }
 
 .lfr-emoticon-container .lfr-button {

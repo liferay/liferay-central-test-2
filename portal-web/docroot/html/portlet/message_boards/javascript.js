@@ -98,7 +98,7 @@ if (!Liferay.Editor.bbCode) {
 
 				var response = xHR.responseText;
 
-				var emoticonsContainer = jQuery('<div class="lfr-emoticon-container"></div>').appendTo('body');
+				var emoticonsContainer = jQuery('<div class="lfr-emoticon-container"></div>');
 
 				instance._emoticons = emoticonsContainer.append(response);
 
@@ -324,79 +324,23 @@ if (!Liferay.Editor.bbCode) {
 				var offsetWidth = 0;
 				var boxWidth = 0;
 
-				emoticonButton.hoverIntent(
-					{
-						interval: 0,
-						timeout: 250,
-						over: function(event) {
-							var offset = emoticonButton.offset({lite: true});
-
-							if (offsetHeight == 0) {
-								offsetHeight = this.offsetHeight;
-							}
-
-							if (offsetWidth == 0) {
-								offsetWidth = this.offsetWidth;
-							}
-
-							instance._emoticons.show();
-
-							if (boxWidth == 0) {
-								boxWidth = instance._emoticons.width();
-							}
-
-							var left = offset.left - (boxWidth - offsetWidth);
-							var top = offset.top + offsetHeight;
-
-							instance._emoticons.css(
-								{
-									left: left,
-									top: top
+				AUI().use(
+					'context-overlay',
+					function(A) {
+						var emoticonOverlay = new A.ContextOverlay(
+							{
+								trigger: emoticonButton[0],
+								contentBox: instance._emoticons[0],
+								hideDelay: 500,
+								align: {
+									 points: ['tr', 'br']
 								}
-							);
-						},
-						out: function(event) {
-							if (!hoveringOver) {
-								instance._emoticons.hide();
 							}
-						}
-					}
-				);
-
-				instance._emoticons.hoverIntent(
-					{
-						interval: 0,
-						timeout: 250,
-						over: function(event) {
-							hoveringOver = true;
-							instance._emoticons.show();
-						},
-						out: function(event) {
-							instance._emoticons.hide();
-							hoveringOver = false;
-						}
-					}
-				);
-
-				if (Liferay.Browser.isFirefox()) {
-					var emoticonDiv = instance._emoticons[0];
-					var intent;
-
-					emoticonDiv.onmouseover = function(event) {
-						if (intent) {
-							clearTimeout(intent);
-						}
-					};
-
-					emoticonDiv.onmouseout = function(event) {
-						intent = setTimeout(
-							function() {
-								instance._emoticons.hide();
-							},
-							250
 						);
-					};
-				}
+
+						emoticonOverlay.render();
+					}
+				);
 
 				instance._location.click(
 					function(event) {
