@@ -6,6 +6,7 @@
 		'context-overlay',
 		'overlay-manager',
 		'io-stdmod',
+		'tool-item',
 		function(A) {
 			Liferay.Dockbar = {
 				init: function() {
@@ -456,19 +457,21 @@
 					renderUI: function() {
 						var instance = this;
 
-						instance.closeTool = A.Node.create('<span class="aui-tool aui-state-default aui-underlay-close"><span class="aui-icon aui-icon-close"></span></div>');
+						var closeTool = new A.ToolItem('close');
 
-						instance.set('headerContent', instance.closeTool);
+						closeTool.render(instance.get('boundingBox'));
+
+						closeTool.get('node').addClass('aui-underlay-close');
+
+						instance.set('headerContent', closeTool.get('boundingBox'));
+
+						instance.closeTool = closeTool;
 					},
 
 					bindUI: function() {
 						var instance = this;
 
-						var closeTool = instance.closeTool;
-
-						closeTool.on('click', instance.hide, instance);
-						closeTool.on('mouseenter', A.bind(closeTool.addClass, closeTool, 'aui-state-hover'));
-						closeTool.on('mouseleave', A.bind(closeTool.removeClass, closeTool, 'aui-state-hover'));
+						instance.closeTool.on('click', instance.hide, instance);
 					},
 
 					_setIO: function(value) {
