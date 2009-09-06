@@ -805,9 +805,13 @@
 				var permissionsActions = jQuery('.'+vocabularyType+'-permissions-actions');
 				var permissions = permissionsActions.find('[name$='+type+'Permissions]:checked');
 
-				buffer = permissions.fieldValue().join(',');
+				permissions.each(
+					function(i, n) {
+						buffer.push(this.value);
+					}
+				);
 
-				return buffer;
+				return buffer.join(',');
 			},
 
 			_getCategoryProperties: function(categoryId, callback) {

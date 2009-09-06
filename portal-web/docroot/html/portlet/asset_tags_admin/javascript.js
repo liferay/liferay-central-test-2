@@ -437,9 +437,13 @@
 				var permissionsActions = jQuery('.tag-permissions-actions');
 				var permissions = permissionsActions.find('[name$=tagPermissions]:checked');
 
-				buffer = permissions.fieldValue().join(',');
+				permissions.each(
+					function(i, n) {
+						buffer.push(this.value);
+					}
+				);
 
-				return buffer;
+				return buffer.join(',');
 			},
 
 			_getProperties: function(tagId, callback) {

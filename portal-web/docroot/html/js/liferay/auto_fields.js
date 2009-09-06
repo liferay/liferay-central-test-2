@@ -90,7 +90,7 @@ Liferay.AutoFields = Alloy.Observable.extend(
 
 					if (i == 0) {
 						instance._rowTemplate = formRow.clone();
-						instance._rowTemplate.clearForm();
+						instance._clearForm(instance._rowTemplate);
 					}
 				}
 			);
@@ -162,7 +162,7 @@ Liferay.AutoFields = Alloy.Observable.extend(
 				}
 			);
 
-			clone.clearForm();
+			instance._clearForm(clone);
 
 			clone.find("input[type=hidden]").each(
 				function() {
@@ -235,6 +235,27 @@ Liferay.AutoFields = Alloy.Observable.extend(
 			}
 
 			return serializedData.join(',');
+		},
+
+		_clearForm: function(obj) {
+			var instance = this;
+
+			obj.find('input, select, textarea').each(
+				function(i, n) {
+					var type = this.type;
+					var tag = this.tagName.toLowerCase();
+
+					if (type == 'text' || type == 'password' || tag == 'textarea') {
+						this.value = '';
+					}
+					else if (type == 'checkbox' || type == 'radio') {
+						this.checked = false;
+					}
+					else if (tag == 'select') {
+						this.selectedIndex = -1;
+					}
+				}
+			);
 		},
 
 		_moveDown: function(target) {
