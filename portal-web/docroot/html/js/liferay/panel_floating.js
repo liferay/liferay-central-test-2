@@ -284,7 +284,7 @@ Liferay.PanelFloating = Liferay.Panel.extend(
 			positionHelper.css(
 				{
 					left: triggerOffset.left,
-					top: triggerOffset.top + triggerHeight,
+					top: triggerOffset.top + triggerHeight
 				}
 			);
 		},
