@@ -29,6 +29,11 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:a:cssCl
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:a:dynamicAttributes");
 String href = GetterUtil.getString((String)request.getAttribute("aui:a:href"));
 String id = GetterUtil.getString((String)request.getAttribute("aui:a:id"));
+String label = GetterUtil.getString((String)request.getAttribute("aui:a:label"));
 %>
 
 <a <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> href="<%= HtmlUtil.escape(href) %>" <%= Validator.isNotNull(id) ? "id=\"" + namespace + id + "\"" : StringPool.BLANK %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+
+<c:if test="<%= Validator.isNotNull(label) %>">
+	<liferay-ui:message key="<%= label %>" />
+</c:if>

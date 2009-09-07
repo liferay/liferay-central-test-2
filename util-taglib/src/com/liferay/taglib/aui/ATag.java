@@ -59,6 +59,7 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 				_endPage = null;
 				_href = null;
 				_id = null;
+				_label = null;
 				_startPage = null;
 			}
 		}
@@ -73,6 +74,7 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 			request.setAttribute("aui:a:dynamicAttributes", _dynamicAttributes);
 			request.setAttribute("aui:a:href", _href);
 			request.setAttribute("aui:a:id", _id);
+			request.setAttribute("aui:a:label", _label);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -123,6 +125,10 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 		_id = id;
 	}
 
+	public void setLabel(String label) {
+		_label = label;
+	}
+
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
 	}
@@ -139,6 +145,7 @@ public class ATag extends IncludeTag implements DynamicAttributes {
 	private String _endPage;
 	private String _href;
 	private String _id;
+	private String _label;
 	private String _startPage;
 
 }
