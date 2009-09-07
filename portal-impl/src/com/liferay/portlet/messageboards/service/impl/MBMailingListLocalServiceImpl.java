@@ -26,12 +26,14 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.scheduler.TriggerExpression;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.scheduler.trigger.Trigger;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.scheduler.trigger.CronTextBuilder;
+import com.liferay.portal.scheduler.trigger.CronTrigger;
 import com.liferay.portlet.messageboards.MailingListEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListInServerNameException;
 import com.liferay.portlet.messageboards.MailingListInUserNameException;
@@ -214,18 +216,17 @@ public class MBMailingListLocalServiceImpl
 
 	protected void scheduleMailingList(MBMailingList mailingList)
 		throws PortalException {
-
 		unscheduleMailingList(mailingList);
 
 		String groupName = getSchedulerGroupName(mailingList);
 
 		Calendar startDate = CalendarFactoryUtil.getCalendar();
 
-		TriggerExpression triggerExpression = new TriggerExpression(
-			startDate, TriggerExpression.MINUTELY_FREQUENCY,
+		CronTextBuilder cronTextBuilder = new CronTextBuilder(
+			startDate, CronTextBuilder.MINUTELY_FREQUENCY,
 			mailingList.getInReadInterval());
 
-		String cronText = triggerExpression.toCronText();
+		String cronText = cronTextBuilder.toCronText();
 
 		MailingListRequest mailingListRequest = new MailingListRequest();
 
@@ -239,9 +240,12 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInUserName(mailingList.getInUserName());
 		mailingListRequest.setInPassword(mailingList.getInPassword());
 
+		Trigger trigger =
+			new CronTrigger(
+				groupName, groupName, startDate.getTime(), null, cronText);
 		SchedulerEngineUtil.schedule(
-			groupName, cronText, startDate.getTime(), null, null,
-			DestinationNames.MESSAGE_BOARDS_MAILING_LIST, mailingListRequest);
+			trigger, null, DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
+			mailingListRequest);
 	}
 
 	protected void unscheduleMailingList(MBMailingList mailingList)
@@ -253,8 +257,7 @@ public class MBMailingListLocalServiceImpl
 			SchedulerEngineUtil.getScheduledJobs(groupName);
 
 		for (SchedulerRequest schedulerRequest : schedulerRequests) {
-			SchedulerEngineUtil.unschedule(
-				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+			SchedulerEngineUtil.unschedule(schedulerRequest.getTrigger());
 		}
 	}
 

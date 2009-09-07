@@ -20,44 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portal.scheduler.trigger;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.scheduler.trigger.Trigger;
+import com.liferay.portal.kernel.scheduler.trigger.TriggerType;
 
-import java.util.List;
+import java.util.Date;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="IntervalTrigger.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public class IntervalTrigger extends BaseTrigger {
 
-	public static final String DESCRIPTION = "description";
+	public IntervalTrigger(String jobName, String groupName, Long interval) {
+		this(jobName, groupName, new Date(), null, interval);
+	}
 
-	public static final String DESTINATION = "destination";
+	public IntervalTrigger(
+		String jobName, String groupName, Date startDate, Long interval) {
+		this(jobName, groupName, startDate, null, interval);
+	}
 
-	public static final String MESSAGE = "message";
+	public IntervalTrigger(
+		String jobName, String groupName, Date startDate, Date endDate,
+		Long interval) {
 
-	public static final String RECEIVER_KEY = "receiver_key";
+		super(jobName, groupName, TriggerType.SIMPLE, startDate, endDate);
+		_interval = interval;
+	}
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
+	public Long getTriggerContent() {
+		return _interval;
+	}
 
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
+	@Override
+	public String toString() {
+		return "IntervalTrigger[" +
+			"jobName:" + jobName +
+			", groupName:" + groupName +
+			", triggerType:" + triggerType +
+			", startDate:" + startDate +
+			", endDate:" + endDate +
+			", interval:" + _interval +
+			"]";
+	}
 
-	public void shutdown() throws SchedulerException;
-
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger)
-		throws SchedulerException;
+	private final Long _interval;
 
 }

@@ -47,6 +47,7 @@
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest" %>
+<%@ page import="com.liferay.portal.kernel.scheduler.trigger.Trigger" %>
 <%@ page import="com.liferay.portal.lar.LayoutExporter" %>
 <%@ page import="com.liferay.portal.lar.PortletDataException" %>
 <%@ page import="com.liferay.portal.lar.PortletDataHandler" %>
