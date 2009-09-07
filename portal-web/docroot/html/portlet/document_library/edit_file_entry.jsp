@@ -96,6 +96,15 @@ portletURL.setParameter("name", name);
 		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
 	}
 
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveFileEntry() {
 		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
 
@@ -104,10 +113,6 @@ portletURL.setParameter("name", name);
 	}
 
 	function <portlet:namespace />selectFolder(folderId, folderName) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />folderId.value <= 0) {
-			document.<portlet:namespace />fm.<portlet:namespace />folderId.value = folderId;
-		}
-
 		document.<portlet:namespace />fm.<portlet:namespace />newFolderId.value = folderId;
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
@@ -244,6 +249,8 @@ portletURL.setParameter("name", name);
 				%>
 
 				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
+
+				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 			</aui:field-wrapper>
 		</c:if>
 
