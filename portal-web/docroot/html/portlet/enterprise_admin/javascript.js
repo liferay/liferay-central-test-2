@@ -42,7 +42,7 @@ Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
 						var currentSection = this.href.split('#');
 
 						if (currentSection[1]) {
-							location.hash = currentSection[1];
+							location.hash = instance._hashKey + currentSection[1];
 						}
 					}
 
@@ -90,6 +90,8 @@ Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
 		_revealSection: function(id, currentNavItem) {
 			var instance = this;
 
+			id = id.replace(instance._hashKey, '');
+
 			var li = currentNavItem || instance._navigation.find('[href$=' + id + ']').parent();
 
 			id = id.split('#');
@@ -126,6 +128,8 @@ Liferay.EnterpriseAdmin.FormNavigator = new Alloy.Class(
 			if (jQuery.inArray(section, instance._modifiedSectionsArray) == -1) {
 				instance._modifiedSectionsArray.push(section);
 			}
-		}
+		},
+
+		_hashKey: '_LFR_FN_'
 	}
 );
