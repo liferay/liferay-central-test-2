@@ -71,13 +71,18 @@ public class DLFileEntryImpl
 	public DLFolder getFolder() {
 		DLFolder folder = null;
 
-		try {
-			folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
-		}
-		catch (Exception e) {
-			folder = new DLFolderImpl();
+		if (getFolderId() > 0) {
+			try {
+				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
+			}
+			catch (Exception e) {
+				folder = new DLFolderImpl();
 
-			_log.error(e);
+				_log.error(e);
+			}
+		}
+		else {
+			folder = new DLFolderImpl();
 		}
 
 		return folder;

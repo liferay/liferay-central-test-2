@@ -79,7 +79,7 @@ public class ActionUtil {
 
 		DLFileEntry fileEntry = null;
 
-		if ((folderId > 0) && Validator.isNotNull(name)) {
+		if (Validator.isNotNull(name)) {
 			try {
 				fileEntry = DLFileEntryServiceUtil.getFileEntry(
 					groupId, folderId, name);

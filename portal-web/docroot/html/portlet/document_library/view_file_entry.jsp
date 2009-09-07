@@ -222,7 +222,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<label><liferay-ui:message key="url" /></label>
 
 		<liferay-ui:input-resource
-			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + fileEntry.getGroupId() %>'
 		/>
 	</div>
 
@@ -233,17 +233,19 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<%
 			StringBuffer sbf = new StringBuffer();
 
-			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-			while (true) {
-				sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-				sbf.insert(0, StringPool.SLASH);
+				while (true) {
+					sbf.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+					sbf.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+						break;
+					}
+					else {
+						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					}
 				}
 			}
 

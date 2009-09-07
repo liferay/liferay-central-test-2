@@ -52,6 +52,13 @@ else {
 
 	view = true;
 }
+
+PortletURL viewFolderURL = renderResponse.createRenderURL();
+
+viewFolderURL.setWindowState(WindowState.MAXIMIZED);
+
+viewFolderURL.setParameter("struts_action", "/document_library/view");
+viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
@@ -100,7 +107,7 @@ else {
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:actionURL>

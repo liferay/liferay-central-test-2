@@ -43,16 +43,19 @@ Group toGroup = null;
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
-if ((toFolderId > 0) && Validator.isNotNull(toName)) {
+if (Validator.isNotNull(toName)) {
 	try {
 		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, toFolderId, toName);
-		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
-		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
+		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
+
+		if (toFolderId > 0) {
+			toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
+		}
 	}
 	catch (Exception e) {
 	}
 }
-else if ((toFolderId > 0)) {
+else if (toFolderId > 0) {
 	try {
 		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
