@@ -81,8 +81,10 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
+		IGFolder folder = igFolderLocalService.getFolder(folderId);
+
 		IGFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.DELETE);
+			getPermissionChecker(), folder, ActionKeys.DELETE);
 
 		igFolderLocalService.deleteFolder(folderId);
 	}
@@ -90,10 +92,12 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	public IGFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		IGFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.VIEW);
+		IGFolder folder = igFolderLocalService.getFolder(folderId);
 
-		return igFolderLocalService.getFolder(folderId);
+		IGFolderPermission.check(
+			getPermissionChecker(), folder, ActionKeys.VIEW);
+
+		return folder;
 	}
 
 	public IGFolder getFolder(long groupId, long parentFolderId, String name)
@@ -103,7 +107,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			groupId, parentFolderId, name);
 
 		IGFolderPermission.check(
-			getPermissionChecker(), folder.getFolderId(), ActionKeys.VIEW);
+			getPermissionChecker(), folder, ActionKeys.VIEW);
 
 		return folder;
 	}
@@ -122,8 +126,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			IGFolder folder = itr.next();
 
 			if (!IGFolderPermission.contains(
-					getPermissionChecker(), folder.getFolderId(),
-					ActionKeys.VIEW)) {
+					getPermissionChecker(), folder, ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
@@ -137,8 +140,10 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			boolean mergeWithParentFolder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		IGFolder folder = igFolderLocalService.getFolder(folderId);
+
 		IGFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.UPDATE);
+			getPermissionChecker(), folder, ActionKeys.UPDATE);
 
 		return igFolderLocalService.updateFolder(
 			folderId, parentFolderId, name, description, mergeWithParentFolder,
@@ -151,7 +156,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<IGImage> srcImages = igImageService.getImages(
-			srcFolder.getFolderId());
+			srcFolder.getGroupId(), srcFolder.getFolderId());
 
 		for (IGImage srcImage : srcImages) {
 			String name = srcImage.getName();
@@ -179,8 +184,8 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 				srcImage.getImageType());
 
 			igImageService.addImage(
-				destFolder.getFolderId(), name, description, file, contentType,
-				serviceContext);
+				destFolder.getGroupId(), destFolder.getFolderId(), name,
+				description, file, contentType, serviceContext);
 
 			file.delete();
 		}

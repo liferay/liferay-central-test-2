@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);
+	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(imagesCount), rowURL);

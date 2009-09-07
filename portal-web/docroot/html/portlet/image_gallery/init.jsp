@@ -59,46 +59,4 @@ else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 }
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-if (rootFolderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-	IGFolder dynamicRootFolder = null;
-
-	int count = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-	if (count > 1) {
-		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(IGFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
-
-		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
-
-		for (IGFolder folder : folders) {
-			IGFolderLocalServiceUtil.updateFolder(folder.getFolderId(), dynamicRootFolderId, folder.getName(), folder.getDescription(), false, serviceContext);
-		}
-	}
-	else if (count == 1) {
-		List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, 0, 1);
-
-		dynamicRootFolder = folders.get(0);
-	}
-	else {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(IGFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = IGFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), IGFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "image-home"), StringPool.BLANK, serviceContext);
-	}
-
-	rootFolderId = dynamicRootFolder.getFolderId();
-
-	preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
-
-	preferences.store();
-}
 %>

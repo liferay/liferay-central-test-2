@@ -187,7 +187,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Images
 
-		igImageLocalService.deleteImages(folder.getFolderId());
+		igImageLocalService.deleteImages(
+			folder.getGroupId(), folder.getFolderId());
 
 		// Expando
 
@@ -452,8 +453,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			mergeFolders(folder, toFolderId);
 		}
 
-		List<IGImage> images = igImagePersistence.findByFolderId(
-			fromFolder.getFolderId());
+		List<IGImage> images = igImagePersistence.findByG_F(
+			fromFolder.getGroupId(), fromFolder.getFolderId());
 
 		for (IGImage image : images) {
 			image.setFolderId(toFolderId);
@@ -488,8 +489,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		for (IGFolder folder : folders) {
 			long folderId = folder.getFolderId();
+			long groupId = folder.getGroupId();
 
-			int entryCount = igImagePersistence.countByFolderId(folderId);
+			int entryCount =
+				igImagePersistence.countByG_F(groupId, folderId);
 
 			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
 
@@ -497,16 +500,17 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexImages(folderId, entryStart, entryEnd);
+				reIndexImages(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
 
-	protected void reIndexImages(long folderId, int entryStart, int entryEnd)
+	protected void reIndexImages(
+			long groupId, long folderId, int entryStart, int entryEnd)
 		throws SystemException {
 
-		List<IGImage> images = igImagePersistence.findByFolderId(
-			folderId, entryStart, entryEnd);
+		List<IGImage> images = igImagePersistence.findByG_F(
+			groupId, folderId, entryStart, entryEnd);
 
 		for (IGImage image : images) {
 			igImageLocalService.reIndex(image);
@@ -541,8 +545,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 			name = FileUtil.stripExtension(nameWithExtension);
 
-			List<IGImage> images = igImagePersistence.findByF_N(
-				parentFolderId, name);
+			List<IGImage> images = igImagePersistence.findByG_F_N(
+				groupId, parentFolderId, name);
 
 			for (IGImage image : images) {
 				if (nameWithExtension.equals(image.getNameWithExtension())) {

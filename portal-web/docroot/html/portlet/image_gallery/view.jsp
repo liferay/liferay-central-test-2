@@ -186,7 +186,7 @@ tabs1Names += ",recent-images";
 			IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
-			int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);
+			int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
 
 			row.addText(String.valueOf(foldersCount), rowURL);
 			row.addText(String.valueOf(imagesCount), rowURL);
@@ -267,71 +267,70 @@ tabs1Names += ",recent-images";
 			</c:if>
 		</script>
 
-		<c:if test="<%= folder != null %>">
-			<script type="text/javascript">
-				function <portlet:namespace />viewSlideShow() {
-					var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
-					slideShowWindow.focus();
-				}
-			</script>
+		<script type="text/javascript">
+			function <portlet:namespace />viewSlideShow() {
+				var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+				slideShowWindow.focus();
+			}
+		</script>
+
+		<br />
+
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
+
+		<liferay-ui:tabs names="images" />
+
+		<%
+		searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
+
+		total = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+
+		searchContainer.setTotal(total);
+
+		results = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+
+		searchContainer.setResults(results);
+
+		boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_IMAGE);
+
+		showSearch = (results.size() > 0);
+		%>
+
+		<c:if test="<%= showAddImageButton || showSearch %>">
+			<div>
+				<c:if test="<%= showSearch %>">
+					<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+					<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+					<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
+				</c:if>
+
+				<c:if test="<%= showAddImageButton %>">
+					<input type="button" value="<liferay-ui:message key="add-image" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+				</c:if>
+
+				<c:if test="<%= showSearch %>">
+					<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="<portlet:namespace />viewSlideShow();" />
+				</c:if>
+			</div>
 
 			<br />
+		</c:if>
 
-			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
-			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
+		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
-			<liferay-ui:tabs names="images" />
+		</form>
 
-			<%
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
-
-			total = IGImageLocalServiceUtil.getImagesCount(folder.getFolderId());
-
-			searchContainer.setTotal(total);
-
-			results = IGImageLocalServiceUtil.getImages(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
-
-			searchContainer.setResults(results);
-
-			boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_IMAGE);
-			showSearch = (results.size() > 0);
-			%>
-
-			<c:if test="<%= showAddImageButton || showSearch %>">
-				<div>
-					<c:if test="<%= showSearch %>">
-						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
-
-						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
-
-						<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
-					</c:if>
-
-					<c:if test="<%= showAddImageButton %>">
-						<input type="button" value="<liferay-ui:message key="add-image" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
-					</c:if>
-
-					<c:if test="<%= showSearch %>">
-						<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="<portlet:namespace />viewSlideShow();" />
-					</c:if>
-				</div>
-
-				<br />
-			</c:if>
-
-			<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
-
-			</form>
-
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				<script type="text/javascript">
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</script>
-			</c:if>
+		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<script type="text/javascript">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+			</script>
 		</c:if>
 
 		<br />
@@ -339,28 +338,30 @@ tabs1Names += ",recent-images";
 		<%
 		StringBuffer sb = new StringBuffer();
 
-		if (folder != null) {
-			IGFolder curFolder = folder;
+		IGFolder curFolder = folder;
 
-			while (true) {
-				sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
-				sb.insert(0, StringPool.SLASH);
-
-				if (curFolder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
-				}
+		while (true) {
+			if (curFolder == null) {
+				break;
 			}
 
-			if (folder.getParentFolderId() != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+			sb.insert(0, WebDAVUtil.encodeURL(curFolder.getName()));
+			sb.insert(0, StringPool.SLASH);
 
-				if (portletName.equals(PortletKeys.IMAGE_GALLERY)) {
-					PortalUtil.setPageSubtitle(folder.getName(), request);
-					PortalUtil.setPageDescription(folder.getDescription(), request);
-				}
+			if (curFolder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				break;
+			}
+			else {
+				curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+			}
+		}
+
+		if (folder != null) {
+			IGUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
+			if (portletName.equals(PortletKeys.IMAGE_GALLERY)) {
+				PortalUtil.setPageSubtitle(folder.getName(), request);
+				PortalUtil.setPageDescription(folder.getDescription(), request);
 			}
 		}
 		%>

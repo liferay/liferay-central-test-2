@@ -50,6 +50,7 @@ import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
@@ -75,44 +76,45 @@ import javax.imageio.ImageIO;
  * <a href="IGImageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public IGImage addImage(
-			long userId, long folderId, String name, String description,
-			File file, String contentType, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addImage(
-			null, userId, folderId, name, description, file, contentType,
-			serviceContext);
-	}
-
-	public IGImage addImage(
-			long userId, long folderId, String name, String description,
-			String fileName, byte[] bytes, String contentType,
+			long userId, long groupId, long folderId, String name,
+			String description, File file, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addImage(
-			null, userId, folderId, name, description, fileName, bytes,
+			null, userId, groupId, folderId, name, description, file,
 			contentType, serviceContext);
 	}
 
 	public IGImage addImage(
-			long userId, long folderId, String name, String description,
-			String fileName, InputStream is, String contentType,
-			ServiceContext serviceContext)
+			long userId, long groupId, long folderId, String name,
+			String description, String fileName, byte[] bytes,
+			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addImage(
-			null, userId, folderId, name, description, fileName, is,
+			null, userId, groupId, folderId, name, description, fileName, bytes,
 			contentType, serviceContext);
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long folderId, String name,
+			long userId, long groupId, long folderId, String name,
+			String description, String fileName, InputStream is,
+			String contentType, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addImage(
+			null, userId, groupId, folderId, name, description, fileName, is,
+			contentType, serviceContext);
+	}
+
+	public IGImage addImage(
+			String uuid, long userId, long groupId, long folderId, String name,
 			String description, File file, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -122,8 +124,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			byte[] bytes = FileUtil.getBytes(file);
 
 			return addImage(
-				uuid, userId, folderId, name, description, fileName, bytes,
-				contentType, serviceContext);
+				uuid, userId, groupId, folderId, name, description, fileName,
+				bytes, contentType, serviceContext);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -131,7 +133,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long folderId, String name,
+			String uuid, long userId, long groupId, long folderId, String name,
 			String description, String fileName, byte[] bytes,
 			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -150,10 +152,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			String nameWithExtension = name + StringPool.PERIOD + extension;
 
-			validate(folderId, nameWithExtension, fileName, bytes);
+			validate(groupId, folderId, nameWithExtension, fileName, bytes);
 
 			User user = userPersistence.findByPrimaryKey(userId);
-			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
 			RenderedImage renderedImage = ImageProcessorUtil.read(
 				bytes).getRenderedImage();
 			Date now = new Date();
@@ -167,7 +168,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			IGImage image = igImagePersistence.create(imageId);
 
 			image.setUuid(uuid);
-			image.setGroupId(folder.getGroupId());
+			image.setGroupId(groupId);
 			image.setCompanyId(user.getCompanyId());
 			image.setUserId(user.getUserId());
 			image.setCreateDate(now);
@@ -240,7 +241,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage addImage(
-			String uuid, long userId, long folderId, String name,
+			String uuid, long userId, long groupId, long folderId, String name,
 			String description, String fileName, InputStream is,
 			String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -249,8 +250,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			byte[] bytes = FileUtil.getBytes(is);
 
 			return addImage(
-				uuid, userId, folderId, name, description, fileName, bytes,
-				contentType, serviceContext);
+				uuid, userId, groupId, folderId, name, description, fileName,
+				bytes, contentType, serviceContext);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -350,20 +351,20 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		igImagePersistence.remove(image);
 	}
 
-	public void deleteImages(long folderId)
+	public void deleteImages(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		List<IGImage> images = igImagePersistence.findByFolderId(folderId);
+		List<IGImage> images = igImagePersistence.findByG_F(groupId, folderId);
 
 		for (IGImage image : images) {
 			deleteImage(image);
 		}
 	}
 
-	public int getFoldersImagesCount(List<Long> folderIds)
+	public int getFoldersImagesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return igImageFinder.countByFolderIds(folderIds);
+		return igImageFinder.countByG_F(groupId, folderIds);
 	}
 
 	public List<IGImage> getGroupImages(long groupId, int start, int end)
@@ -423,12 +424,13 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage getImageByFolderIdAndNameWithExtension(
-			long folderId, String nameWithExtension)
+			long groupId, long folderId, String nameWithExtension)
 		throws PortalException, SystemException {
 
 		String name = FileUtil.stripExtension(nameWithExtension);
 
-		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
+		List<IGImage> images =
+			igImagePersistence.findByG_F_N(groupId, folderId, name);
 
 		if ((images.size() <= 0) && Validator.isNumber(name)) {
 			long imageId = GetterUtil.getLong(name);
@@ -467,25 +469,31 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByUUID_G(uuid, groupId);
 	}
 
-	public List<IGImage> getImages(long folderId) throws SystemException {
-		return igImagePersistence.findByFolderId(folderId);
-	}
-
-	public List<IGImage> getImages(long folderId, int start, int end)
+	public List<IGImage> getImages(long groupId, long folderId)
 		throws SystemException {
 
-		return igImagePersistence.findByFolderId(folderId, start, end);
+		return igImagePersistence.findByG_F(groupId, folderId);
 	}
 
 	public List<IGImage> getImages(
-			long folderId, int start, int end, OrderByComparator obc)
+			long groupId, long folderId, int start, int end)
 		throws SystemException {
 
-		return igImagePersistence.findByFolderId(folderId, start, end, obc);
+		return igImagePersistence.findByG_F(groupId, folderId, start, end);
 	}
 
-	public int getImagesCount(long folderId) throws SystemException {
-		return igImagePersistence.countByFolderId(folderId);
+	public List<IGImage> getImages(
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return igImagePersistence.findByG_F(groupId, folderId, start, end, obc);
+	}
+
+	public int getImagesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return igImagePersistence.countByG_F(groupId, folderId);
 	}
 
 	public List<IGImage> getNoAssetImages() throws SystemException {
@@ -552,7 +560,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long userId, long imageId, long folderId, String name,
+			long userId, long imageId, long groupId, long folderId, String name,
 			String description, byte[] bytes, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -563,7 +571,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-			IGFolder folder = getFolder(image, folderId);
+			folderId = getFolder(image, folderId);
 
 			RenderedImage renderedImage = null;
 
@@ -578,14 +586,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				String nameWithExtension = IGImageImpl.getNameWithExtension(
 					name, image.getImageType());
 
-				validate(folderId, nameWithExtension);
+				validate(groupId, folderId, nameWithExtension);
 			}
 			else {
 				name = image.getName();
 			}
 
 			image.setModifiedDate(new Date());
-			image.setFolderId(folder.getFolderId());
+			image.setFolderId(folderId);
 			image.setName(name);
 			image.setDescription(description);
 
@@ -631,7 +639,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long userId, long imageId, long folderId, String name,
+			long userId, long imageId, long groupId, long folderId, String name,
 			String description, File file, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -644,7 +652,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 
 			return updateImage(
-				userId, imageId, folderId, name, description, bytes,
+				userId, imageId, groupId, folderId, name, description, bytes,
 				contentType, serviceContext);
 		}
 		catch (IOException ioe) {
@@ -653,7 +661,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long userId, long imageId, long folderId, String name,
+			long userId, long imageId, long groupId, long folderId, String name,
 			String description, InputStream is, String contentType,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -666,7 +674,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 
 			return updateImage(
-				userId, imageId, folderId, name, description, bytes,
+				userId, imageId, groupId, folderId, name, description, bytes,
 				contentType, serviceContext);
 		}
 		catch (IOException ioe) {
@@ -674,24 +682,23 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	protected IGFolder getFolder(IGImage image, long folderId)
+	protected long getFolder(IGImage image, long folderId)
 		throws PortalException, SystemException {
 
-		if (image.getFolderId() != folderId) {
-			IGFolder oldFolder = igFolderPersistence.findByPrimaryKey(
-				image.getFolderId());
+		if ((image.getFolderId() != folderId) &&
+			(folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			IGFolder newFolder = igFolderPersistence.fetchByPrimaryKey(
 				folderId);
 
 			if ((newFolder == null) ||
-				(oldFolder.getGroupId() != newFolder.getGroupId())) {
+				(image.getGroupId() != newFolder.getGroupId())) {
 
 				folderId = image.getFolderId();
 			}
 		}
 
-		return igFolderPersistence.findByPrimaryKey(folderId);
+		return folderId;
 	}
 
 	protected void saveImages(
@@ -779,7 +786,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(long folderId, String nameWithExtension)
+	protected void validate(
+			long groupId, long folderId, String nameWithExtension)
 		throws PortalException, SystemException {
 
 		if ((nameWithExtension.indexOf("\\\\") != -1) ||
@@ -821,7 +829,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String name = FileUtil.stripExtension(nameWithExtension);
 		String imageType = FileUtil.getExtension(nameWithExtension);
 
-		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
+		List<IGImage> images =
+			igImagePersistence.findByG_F_N(groupId, folderId, name);
 
 		if (imageType.equals("jpeg")) {
 			imageType = ImageProcessor.TYPE_JPEG;
@@ -838,8 +847,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long folderId, String nameWithExtension, String fileName,
-			byte[] bytes)
+			long groupId, long folderId, String nameWithExtension,
+			String fileName, byte[] bytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(fileName)) {
@@ -853,7 +862,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 		}
 
-		validate(folderId, nameWithExtension);
+		validate(groupId, folderId, nameWithExtension);
 		validate(bytes);
 	}
 

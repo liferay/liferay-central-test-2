@@ -71,43 +71,45 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  */
 public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
-		java.lang.String description, java.io.File file,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name, java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = file;
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = file;
 
 			if (file == null) {
-				paramObj3 = new NullWrapper("java.io.File");
+				paramObj4 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj4 = contentType;
+			Object paramObj5 = contentType;
 
 			if (contentType == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = serviceContext;
+			Object paramObj6 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
+				paramObj6 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -115,7 +117,7 @@ public class IGImageServiceHttp {
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -176,22 +178,24 @@ public class IGImageServiceHttp {
 	}
 
 	public static void deleteImageByFolderIdAndNameWithExtension(
-		HttpPrincipal httpPrincipal, long folderId,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = nameWithExtension;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = nameWithExtension;
 
 			if (nameWithExtension == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"deleteImageByFolderIdAndNameWithExtension",
-					new Object[] { paramObj0, paramObj1 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -252,22 +256,24 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
-		HttpPrincipal httpPrincipal, long folderId,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = nameWithExtension;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = nameWithExtension;
 
 			if (nameWithExtension == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"getImageByFolderIdAndNameWithExtension",
-					new Object[] { paramObj0, paramObj1 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -368,14 +374,16 @@ public class IGImageServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		HttpPrincipal httpPrincipal, long folderId)
+		HttpPrincipal httpPrincipal, long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImages", new Object[] { paramObj0 });
+					"getImages", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -404,7 +412,7 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		HttpPrincipal httpPrincipal, long imageId, long folderId,
+		HttpPrincipal httpPrincipal, long imageId, long groupId, long folderId,
 		java.lang.String name, java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -413,36 +421,38 @@ public class IGImageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(imageId);
 
-			Object paramObj1 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(groupId);
 
-			Object paramObj2 = name;
+			Object paramObj2 = new LongWrapper(folderId);
+
+			Object paramObj3 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = file;
+			Object paramObj4 = description;
+
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = file;
 
 			if (file == null) {
-				paramObj4 = new NullWrapper("java.io.File");
+				paramObj5 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj5 = contentType;
+			Object paramObj6 = contentType;
 
 			if (contentType == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = serviceContext;
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -450,7 +460,7 @@ public class IGImageServiceHttp {
 					"updateImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;

@@ -285,7 +285,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(IGFolder.class.getName())) {
 			IGFolderPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
+				permissionChecker, groupId, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(JournalArticle.class.getName())) {

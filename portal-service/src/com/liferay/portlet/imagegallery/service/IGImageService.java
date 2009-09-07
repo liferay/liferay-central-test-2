@@ -56,8 +56,9 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String name, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -66,8 +67,8 @@ public interface IGImageService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteImageByFolderIdAndNameWithExtension(long folderId,
-		java.lang.String nameWithExtension)
+	public void deleteImageByFolderIdAndNameWithExtension(long groupId,
+		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -78,7 +79,7 @@ public interface IGImageService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
-		long folderId, java.lang.String nameWithExtension)
+		long groupId, long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -96,12 +97,12 @@ public interface IGImageService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		long folderId)
+		long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long imageId, long folderId, java.lang.String name,
+		long imageId, long groupId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)

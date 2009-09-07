@@ -91,12 +91,12 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	public static void deleteImageByFolderIdAndNameWithExtension(
+	public static void deleteImageByFolderIdAndNameWithExtension(long groupId,
 		long folderId, java.lang.String nameWithExtension)
 		throws RemoteException {
 		try {
-			IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(folderId,
-				nameWithExtension);
+			IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(groupId,
+				folderId, nameWithExtension);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -120,11 +120,11 @@ public class IGImageServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImageByFolderIdAndNameWithExtension(
-		long folderId, java.lang.String nameWithExtension)
+		long groupId, long folderId, java.lang.String nameWithExtension)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(folderId,
-					nameWithExtension);
+			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(groupId,
+					folderId, nameWithExtension);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
 		}
@@ -164,10 +164,10 @@ public class IGImageServiceSoap {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getImages(
-		long folderId) throws RemoteException {
+		long groupId, long folderId) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
-				IGImageServiceUtil.getImages(folderId);
+				IGImageServiceUtil.getImages(groupId, folderId);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
 		}

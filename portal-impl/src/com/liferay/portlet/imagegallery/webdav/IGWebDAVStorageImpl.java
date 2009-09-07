@@ -178,7 +178,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			IGImageServiceUtil.addImage(
-				parentFolderId, name, description, file, contentType,
+				groupId, parentFolderId, name, description, file, contentType,
 				serviceContext);
 
 			return status;
@@ -264,10 +264,12 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			catch (NoSuchFolderException nsfe) {
 				try {
+					long groupId = webDavRequest.getGroupId();
+
 					IGImage image =
 						IGImageServiceUtil.
 							getImageByFolderIdAndNameWithExtension(
-								parentFolderId, name);
+								groupId, parentFolderId, name);
 
 					return toResource(webDavRequest, image, false);
 				}
@@ -421,8 +423,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			IGImageServiceUtil.updateImage(
-				image.getImageId(), parentFolderId, name, description, file,
-				contentType, serviceContext);
+				image.getImageId(), groupId, parentFolderId, name, description,
+				file, contentType, serviceContext);
 
 			return status;
 		}
@@ -448,6 +450,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String[] pathArray = webDavRequest.getPathArray();
 
+			long groupId = webDavRequest.getGroupId();
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
@@ -466,7 +469,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			try {
 				IGImage image =
 					IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(
-						parentFolderId, name);
+						groupId, parentFolderId, name);
 
 				long imageId = image.getImageId();
 
@@ -478,13 +481,13 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				serviceContext.setAssetTagNames(assetTagNames);
 
 				IGImageServiceUtil.updateImage(
-					imageId, parentFolderId, name, description, file,
+					imageId, groupId, parentFolderId, name, description, file,
 					contentType, serviceContext);
 			}
 			catch (NoSuchImageException nsie) {
 				IGImageServiceUtil.addImage(
-					parentFolderId, name, description, file, contentType,
-					serviceContext);
+					groupId, parentFolderId, name, description, file,
+					contentType, serviceContext);
 			}
 
 			return HttpServletResponse.SC_CREATED;
@@ -528,7 +531,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			try {
 				IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(
-					parentFolderId, name);
+					groupId, parentFolderId, name);
 
 				return true;
 			}
@@ -563,9 +566,12 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			WebDAVRequest webDavRequest, long parentFolderId)
 		throws Exception {
 
+		long groupId = webDavRequest.getGroupId();
+
 		List<Resource> resources = new ArrayList<Resource>();
 
-		List<IGImage> images = IGImageServiceUtil.getImages(parentFolderId);
+		List<IGImage> images =
+			IGImageServiceUtil.getImages(groupId, parentFolderId);
 
 		for (IGImage image : images) {
 			Resource resource = toResource(webDavRequest, image, true);

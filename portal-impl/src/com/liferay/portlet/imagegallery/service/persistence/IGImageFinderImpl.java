@@ -44,19 +44,21 @@ import java.util.List;
 public class IGImageFinderImpl
 	extends BasePersistenceImpl implements IGImageFinder {
 
-	public static String COUNT_BY_FOLDER_IDS =
-		IGImageFinder.class.getName() + ".countByFolderIds";
+	public static String COUNT_BY_G_F =
+		IGImageFinder.class.getName() + ".countByG_F";
 
 	public static String FIND_BY_NO_ASSETS =
 		IGImageFinder.class.getName() + ".findByNoAssets";
 
-	public int countByFolderIds(List<Long> folderIds) throws SystemException {
+	public int countByG_F(long groupId, List<Long> folderIds)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_F);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
@@ -66,6 +68,8 @@ public class IGImageFinderImpl
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
 
 			for (int i = 0; i < folderIds.size(); i++) {
 				Long folderId = folderIds.get(i);

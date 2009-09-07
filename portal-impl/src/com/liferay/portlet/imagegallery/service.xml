@@ -99,9 +99,6 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="FolderId" return-type="Collection">
-			<finder-column name="folderId" />
-		</finder>
 		<finder name="SmallImageId" return-type="IGImage">
 			<finder-column name="smallImageId" />
 		</finder>
@@ -118,7 +115,12 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="F_N" return-type="Collection">
+		<finder name="G_F" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="folderId" />
+		</finder>
+		<finder name="G_F_N" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>

@@ -33,8 +33,10 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -161,6 +163,10 @@ public class EditImageAction extends PortletAction {
 
 		long imageId = ParamUtil.getLong(uploadRequest, "imageId");
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
 		String name = ParamUtil.getString(uploadRequest, "name");
 		String fileName = uploadRequest.getFileName("file");
@@ -191,7 +197,8 @@ public class EditImageAction extends PortletAction {
 			}
 
 			IGImage image = IGImageServiceUtil.addImage(
-				folderId, name, description, file, contentType, serviceContext);
+				groupId, folderId, name, description, file, contentType,
+				serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, IGImage.class.getName(), image.getImageId(), -1);
@@ -205,8 +212,8 @@ public class EditImageAction extends PortletAction {
 			}
 
 			IGImageServiceUtil.updateImage(
-				imageId, folderId, name, description, file, contentType,
-				serviceContext);
+				imageId, groupId, folderId, name, description, file,
+				contentType, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

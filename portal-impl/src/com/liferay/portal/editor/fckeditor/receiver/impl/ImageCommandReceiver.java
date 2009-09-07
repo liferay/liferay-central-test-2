@@ -89,8 +89,9 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = arg.getCurrentGroup();
 
-			IGFolder folder = _getFolder(
-				group.getGroupId(), arg.getCurrentFolder());
+			long groupId = group.getGroupId();
+
+			IGFolder folder = _getFolder(groupId, arg.getCurrentFolder());
 
 			long folderId = folder.getFolderId();
 			String name = fileName;
@@ -103,7 +104,8 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddGuestPermissions(true);
 
 			IGImageServiceUtil.addImage(
-				folderId, name, description, file, contentType, serviceContext);
+				groupId, folderId, name, description, file, contentType,
+				serviceContext);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -150,7 +152,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			group.getGroupId(), arg.getCurrentFolder());
 
 		List<IGImage> images = IGImageServiceUtil.getImages(
-			folder.getFolderId());
+			folder.getGroupId(), folder.getFolderId());
 
 		for (IGImage image : images) {
 			long largeImageId = image.getLargeImageId();

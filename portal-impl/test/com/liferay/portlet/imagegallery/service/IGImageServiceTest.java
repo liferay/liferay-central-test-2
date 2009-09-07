@@ -99,13 +99,13 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		IGImageServiceUtil.addImage(
-			_folder.getFolderId(), name, description, image, contentType,
-			serviceContext);
+			_folder.getGroupId(), _folder.getFolderId(), name, description,
+			image, contentType, serviceContext);
 
 		try {
 			IGImageServiceUtil.addImage(
-				_folder.getFolderId(), name, description, image, contentType,
-				serviceContext);
+				_folder.getGroupId(), _folder.getFolderId(), name, description,
+				image, contentType, serviceContext);
 
 			fail("Able to add two images of the name " + name);
 		}

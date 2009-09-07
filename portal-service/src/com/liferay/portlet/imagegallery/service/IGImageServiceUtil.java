@@ -45,14 +45,15 @@ package com.liferay.portlet.imagegallery.service;
  */
 public class IGImageServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String name, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addImage(folderId, name, description, file, contentType,
-			serviceContext);
+				   .addImage(groupId, folderId, name, description, file,
+			contentType, serviceContext);
 	}
 
 	public static void deleteImage(long imageId)
@@ -61,12 +62,12 @@ public class IGImageServiceUtil {
 		getService().deleteImage(imageId);
 	}
 
-	public static void deleteImageByFolderIdAndNameWithExtension(
+	public static void deleteImageByFolderIdAndNameWithExtension(long groupId,
 		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService()
-			.deleteImageByFolderIdAndNameWithExtension(folderId,
+			.deleteImageByFolderIdAndNameWithExtension(groupId, folderId,
 			nameWithExtension);
 	}
 
@@ -78,11 +79,11 @@ public class IGImageServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
-		long folderId, java.lang.String nameWithExtension)
+		long groupId, long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getImageByFolderIdAndNameWithExtension(folderId,
+				   .getImageByFolderIdAndNameWithExtension(groupId, folderId,
 			nameWithExtension);
 	}
 
@@ -101,22 +102,22 @@ public class IGImageServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		long folderId)
+		long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getImages(folderId);
+		return getService().getImages(groupId, folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long imageId, long folderId, java.lang.String name,
+		long imageId, long groupId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateImage(imageId, folderId, name, description, file,
-			contentType, serviceContext);
+				   .updateImage(imageId, groupId, folderId, name, description,
+			file, contentType, serviceContext);
 	}
 
 	public static IGImageService getService() {

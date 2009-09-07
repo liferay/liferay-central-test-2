@@ -28,6 +28,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
@@ -69,6 +70,10 @@ public class IGUtil {
 			long folderId, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
+
+		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return;
+		}
 
 		IGFolder folder = IGFolderLocalServiceUtil.getFolder(
 			folderId);

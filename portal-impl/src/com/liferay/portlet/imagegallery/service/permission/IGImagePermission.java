@@ -29,6 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 
@@ -70,15 +71,30 @@ public class IGImagePermission {
 			PermissionChecker permissionChecker, IGImage image, String actionId)
 		throws PortalException, SystemException {
 
-		IGFolder folder = image.getFolder();
-
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (!IGFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.ACCESS) &&
-				!IGFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW)) {
+			if (image.getFolderId() ==
+					IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				return false;
+				long groupId = image.getGroupId();
+
+				if (!IGPermission.contains(
+						permissionChecker, groupId, ActionKeys.ACCESS) &&
+					!IGPermission.contains(
+						permissionChecker, groupId, ActionKeys.VIEW)) {
+
+					return false;
+				}
+			}
+			else {
+				IGFolder folder = image.getFolder();
+
+				if (!IGFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.ACCESS) &&
+					!IGFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.VIEW)) {
+
+					return false;
+				}
 			}
 		}
 
@@ -90,7 +106,7 @@ public class IGImagePermission {
 		}
 
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), IGImage.class.getName(), image.getImageId(),
+			image.getGroupId(), IGImage.class.getName(), image.getImageId(),
 			actionId);
 	}
 

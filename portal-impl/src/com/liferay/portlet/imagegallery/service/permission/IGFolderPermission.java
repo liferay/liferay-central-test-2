@@ -50,15 +50,6 @@ public class IGFolderPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long folderId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, IGFolder folder,
 			String actionId)
 		throws PortalException, SystemException {
@@ -77,17 +68,10 @@ public class IGFolderPermission {
 			return IGPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
-			return contains(permissionChecker, folderId, actionId);
+			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long folderId, String actionId)
-		throws PortalException, SystemException {
-
-		IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
-
-		return contains(permissionChecker, folder, actionId);
 	}
 
 	public static boolean contains(

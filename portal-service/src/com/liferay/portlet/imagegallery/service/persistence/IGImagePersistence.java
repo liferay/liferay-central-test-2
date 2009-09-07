@@ -162,34 +162,6 @@ public interface IGImagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
-		long folderId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
-		long folderId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByFolderId(
-		long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
-		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
-		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
-		long imageId, long folderId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException;
-
 	public com.liferay.portlet.imagegallery.model.IGImage findBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.SystemException,
@@ -268,33 +240,63 @@ public interface IGImagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
-		long folderId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long folderId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
-		long folderId, java.lang.String name, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
-		long folderId, java.lang.String name, int start, int end,
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F(
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_First(
-		long folderId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.imagegallery.NoSuchImageException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_Last(
-		long folderId, java.lang.String name,
+	public com.liferay.portlet.imagegallery.model.IGImage findByG_F_First(
+		long groupId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
-	public com.liferay.portlet.imagegallery.model.IGImage[] findByF_N_PrevAndNext(
-		long imageId, long folderId, java.lang.String name,
+	public com.liferay.portlet.imagegallery.model.IGImage findByG_F_Last(
+		long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage[] findByG_F_PrevAndNext(
+		long imageId, long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F_N(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByG_F_N_First(
+		long groupId, long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByG_F_N_Last(
+		long groupId, long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage[] findByG_F_N_PrevAndNext(
+		long imageId, long groupId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -327,9 +329,6 @@ public interface IGImagePersistence extends BasePersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByFolderId(long folderId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -349,7 +348,10 @@ public interface IGImagePersistence extends BasePersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByF_N(long folderId, java.lang.String name)
+	public void removeByG_F(long groupId, long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByG_F_N(long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -361,9 +363,6 @@ public interface IGImagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByFolderId(long folderId)
 		throws com.liferay.portal.SystemException;
 
 	public int countBySmallImageId(long smallImageId)
@@ -381,7 +380,10 @@ public interface IGImagePersistence extends BasePersistence {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByF_N(long folderId, java.lang.String name)
+	public int countByG_F(long groupId, long folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_F_N(long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

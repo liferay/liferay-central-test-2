@@ -53,13 +53,18 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	public IGFolder getFolder() {
 		IGFolder folder = null;
 
-		try {
-			folder = IGFolderLocalServiceUtil.getFolder(getFolderId());
-		}
-		catch (Exception e) {
-			folder = new IGFolderImpl();
+		if (getFolderId() > 0) {
+			try {
+				folder = IGFolderLocalServiceUtil.getFolder(getFolderId());
+			}
+			catch (Exception e) {
+				folder = new IGFolderImpl();
 
-			_log.error(e);
+				_log.error(e);
+			}
+		}
+		else {
+			folder = new IGFolderImpl();
 		}
 
 		return folder;

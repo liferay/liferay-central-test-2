@@ -45,16 +45,16 @@ import java.util.List;
 public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage addImage(
-			long folderId, String name, String description, File file,
-			String contentType, ServiceContext serviceContext)
+			long groupId, long folderId, String name, String description,
+			File file, String contentType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_IMAGE);
 
 		return igImageLocalService.addImage(
-			getUserId(), folderId, name, description, file, contentType,
-			serviceContext);
+			getUserId(), groupId, folderId, name, description, file,
+			contentType, serviceContext);
 	}
 
 	public void deleteImage(long imageId)
@@ -67,12 +67,12 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	}
 
 	public void deleteImageByFolderIdAndNameWithExtension(
-			long folderId, String nameWithExtension)
+			long groupId, long folderId, String nameWithExtension)
 		throws PortalException, SystemException {
 
 		IGImage image =
 			igImageLocalService.getImageByFolderIdAndNameWithExtension(
-				folderId, nameWithExtension);
+				groupId, folderId, nameWithExtension);
 
 		deleteImage(image.getImageId());
 	}
@@ -87,12 +87,12 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	}
 
 	public IGImage getImageByFolderIdAndNameWithExtension(
-			long folderId, String nameWithExtension)
+			long groupId, long folderId, String nameWithExtension)
 		throws PortalException, SystemException {
 
 		IGImage image =
 			igImageLocalService.getImageByFolderIdAndNameWithExtension(
-				folderId, nameWithExtension);
+				groupId, folderId, nameWithExtension);
 
 		IGImagePermission.check(
 			getPermissionChecker(), image, ActionKeys.VIEW);
@@ -124,10 +124,10 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		return image;
 	}
 
-	public List<IGImage> getImages(long folderId)
+	public List<IGImage> getImages(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		List<IGImage> images = igImageLocalService.getImages(folderId);
+		List<IGImage> images = igImageLocalService.getImages(groupId, folderId);
 
 		images = ListUtil.copy(images);
 
@@ -147,15 +147,16 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long imageId, long folderId, String name, String description,
-			File file, String contentType, ServiceContext serviceContext)
+			long imageId, long groupId, long folderId, String name,
+			String description, File file, String contentType,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
 		return igImageLocalService.updateImage(
-			getUserId(), imageId, folderId, name, description, file,
+			getUserId(), imageId, groupId, folderId, name, description, file,
 			contentType, serviceContext);
 	}
 

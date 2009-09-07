@@ -107,7 +107,7 @@ if (image != null) {
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= (Validator.isNull(themeDisplay.getCDNHost()) ? themeDisplay.getPortalURL() : "") + themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() + "&groupId=" + folder.getGroupId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
+				url='<%= (Validator.isNull(themeDisplay.getCDNHost()) ? themeDisplay.getPortalURL() : "") + themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() + "&groupId=" + image.getGroupId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
 			/>
 		</td>
 	</tr>
@@ -177,6 +177,15 @@ if (image != null) {
 </c:if>
 
 <script type="text/javascript">
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveImage() {
 		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
 
@@ -263,6 +272,8 @@ if (image != null) {
 					%>
 
 					<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
+
+					<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
 			</aui:field-wrapper>
 		</c:if>
 

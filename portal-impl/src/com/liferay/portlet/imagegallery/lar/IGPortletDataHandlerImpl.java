@@ -240,6 +240,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			IGFolderUtil.findByPrimaryKey(folderId);
 
+			long groupId = image.getGroupId();
+
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
@@ -248,21 +250,22 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 						image.getUuid(), context.getGroupId());
 
 					IGImageLocalServiceUtil.updateImage(
-						userId, existingImage.getImageId(), folderId,
+						userId, existingImage.getImageId(), groupId, folderId,
 						image.getName(), image.getDescription(), imageFile,
 						image.getImageType(), serviceContext);
 				}
 				catch (NoSuchImageException nsie) {
 					IGImageLocalServiceUtil.addImage(
-						image.getUuid(), userId, folderId, image.getName(),
-						image.getDescription(), imageFile, image.getImageType(),
-						serviceContext);
+						image.getUuid(), userId, groupId, folderId,
+						image.getName(), image.getDescription(), imageFile,
+						image.getImageType(), serviceContext);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					userId, folderId, image.getName(), image.getDescription(),
-					imageFile, image.getImageType(), serviceContext);
+					userId, groupId, folderId, image.getName(),
+					image.getDescription(), imageFile, image.getImageType(),
+					serviceContext);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
@@ -400,7 +403,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<IGImage> images = IGImageUtil.findByFolderId(folder.getFolderId());
+		List<IGImage> images =
+			IGImageUtil.findByG_F(folder.getGroupId(), folder.getFolderId());
 
 		for (IGImage image : images) {
 			exportImage(context, foldersEl, imagesEl, image);
