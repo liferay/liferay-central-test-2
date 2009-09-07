@@ -53,20 +53,28 @@
 
 			var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
 
-			new Alloy.Popup(
-				{
-					body: {
-						url: url,
-						data: {
-							p_l_id: themeDisplay.getPlid(),
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							redirect: Liferay.currentURL
+			AUI().use(
+				'dialog',
+				function(A) {
+					var dialog = new A.Dialog(
+						{
+							title: Liferay.Language.get('layout'),
+							modal: true,
+							width: 700,
+							centered: true,
+							io: {
+								url: url,
+								cfg: {
+									data: {
+										p_l_id: themeDisplay.getPlid(),
+										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+										redirect: Liferay.currentURL
+									}
+								}
+							}
 						}
-					},
-					header: Liferay.Language.get('layout'),
-					modal: true,
-					width: 700,
-					xy: ['center', 100]
+					)
+					.render();
 				}
 			);
 		},

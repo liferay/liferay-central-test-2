@@ -80,7 +80,10 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 												curTags.push(n);
 
 												if (instance._popupVisible) {
-													jQuery('input[type=checkbox][value$=' + n + ']', instance.selectTagPopup.body).attr('checked', true);
+													var contentBox = instance.selectTagPopup.get('contentBox');
+													var contextNode = contentBox._node;
+
+													jQuery('input[type=checkbox][value$=' + n + ']', contextNode).attr('checked', true);
 												}
 											}
 										}
@@ -166,7 +169,10 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var value = curTags.splice(id, 1);
 
 			if (instance._popupVisible) {
-				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectTagPopup.body).attr('checked', false);
+				var contentBox = instance.selectTagPopup.get('contentBox');
+				var contextNode = contentBox._node;
+
+				jQuery('input[type=checkbox][value$=' + value + ']', contextNode).attr('checked', false);
 			}
 
 			instance._update();
@@ -179,73 +185,89 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 			var mainContainer = instance._mainContainer;
 			var searchContainer = instance._searchContainer;
 
-			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + instance._namespace('saveButton') + '" type="submit" value="' + Liferay.Language.get('save') + '" />');
-
-			saveBtn.click(
-				function() {
-					instance._curTags = instance._curTags.length ? instance._curTags : [];
-
-					container.find('input[type=checkbox]').each(
-						function() {
-							var currentIndex = instance._curTags.indexOf(this.value);
-							if (this.checked) {
-								if (currentIndex == -1) {
-									instance._curTags.push(this.value);
-								}
-							}
-							else {
-								if (currentIndex > -1) {
-									instance._curTags.splice(currentIndex, 1);
-								}
-							}
-						}
-					);
-
-					instance._update();
-					instance.selectTagPopup.closePopup();
-				}
-			);
-
-			mainContainer.append(searchContainer).append(container).append(saveBtn);
+			mainContainer.append(searchContainer).append(container);
 
 			if (!instance.selectTagPopup) {
-				var popup = new Alloy.Popup(
-					{
-						body: mainContainer[0],
-						className: 'lfr-tag-selector',
-						fixedcenter: true,
-						modal: false,
-						header: Liferay.Language.get('tags'),
-						on: {
-							render: function() {
-		 						var inputSearch = jQuery('.lfr-tag-search-input');
+				AUI().use(
+					'dialog',
+					function(A) {
+						var titleLabel = Liferay.Language.get('tags');
+						var saveLabel = Liferay.Language.get('save');
+						var bodyContent = new A.Node(mainContainer[0]);
 
-								Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
-							},
-							close: function() {
-								instance._popupVisible = false;
-								instance.selectTagPopup = null;
+						var saveFn = function() {
+							instance._curTags = instance._curTags.length ? instance._curTags : [];
+
+							container.find('input[type=checkbox]').each(
+								function() {
+									var currentIndex = instance._curTags.indexOf(this.value);
+									if (this.checked) {
+										if (currentIndex == -1) {
+											instance._curTags.push(this.value);
+										}
+									}
+									else {
+										if (currentIndex > -1) {
+											instance._curTags.splice(currentIndex, 1);
+										}
+									}
+								}
+							);
+
+							instance._update();
+							instance.selectTagPopup.hide();
+						};
+
+						var popup = new A.Dialog(
+							{
+								bodyContent: bodyContent,
+								centered: true,
+								draggable: true,
+								height: 400,
+								stack: true,
+								title: titleLabel,
+								width: 320,
+								zIndex: 1000,
+								after: {
+									render: function() {
+										var inputSearch = jQuery('.lfr-tag-search-input');
+
+										instance._initializeSearch(instance._container);
+									},
+									close: function() {
+										instance._popupVisible = false;
+									}
+								},
+								buttons: [
+									{
+										text: saveLabel,
+										handler: saveFn
+									}
+								]
 							}
-						},
-						resizable: false,
-						width: 400
-					}
-				);
+						)
+						.render();
 
-				instance.selectTagPopup = popup;
+						popup.get('boundingBox').addClass('lfr-tag-selector');
+
+						instance.selectTagPopup = popup;
+
+						if (Liferay.Browser.isIe()) {
+							jQuery('.lfr-label-text', popup).click(
+								function() {
+									var input = jQuery(this.previousSibling);
+									var checkedState = !input.is(':checked');
+									input.attr('checked', checkedState);
+								}
+							);
+						}
+				});
+			}
+			else {
+				instance.selectTagPopup.show();
 			}
 
 			instance._popupVisible = true;
-
-			if (Liferay.Browser.isIe()) {
-				jQuery('.lfr-label-text', popup).click(
-					function() {
-						var input = jQuery(this.previousSibling);
-						var checkedState = !input.is(':checked');
-						input.attr('checked', checkedState);
-					}
-				);
-			}
 		},
 
 		_getTags: function(callback) {
@@ -266,7 +288,9 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 				return value.toLowerCase();
 			};
 
-			var inputSearch = jQuery('.lfr-tag-search-input');
+			var inputSearch = jQuery('.lfr-tag-search-input').val('');
+
+			Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
 
 			var options = {
 				data: data,
@@ -359,6 +383,8 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 
 			container.empty().html('<div class="loading-animation" />');
 
+			instance._createPopup();
+
 			instance._getTags(
 				function(tags) {
 					var buffer = [];
@@ -401,8 +427,6 @@ Liferay.AssetTagsSelector = new Alloy.Class(
 					instance._initializeSearch(container);
 				}
 			);
-
-			instance._createPopup();
 		},
 
 		_showSuggestionsPopup: function() {

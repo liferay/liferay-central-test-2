@@ -575,54 +575,35 @@ Liferay.Util = {
 			var clicked = false;
 
 			var editorButton = jQuery(button);
+			var popup = null;
 
 			editorButton.click(
 				function(event) {
 					if (!clicked) {
 						var form = jQuery([]);
 
-						var popup = new Alloy.Popup(
-							{
-								body: {
-									url: url + '&rt=' + Liferay.Util.randomInt(),
-									success: function(message) {
-										var body = jQuery(popup.body);
-
-										body.html(message);
-
-										form = body.find('form');
-
-										if (textarea) {
-											var usingPlainEditor = body.find('.lfr-textarea').length;
-
-											Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
+						AUI().use(
+							'dialog',
+							function(A) {
+								popup = new A.Dialog(
+									{
+										title: Liferay.Language.get('editor'),
+										height: 640,
+										width: 680,
+										io: {
+											url: url + '&rt=' + Liferay.Util.randomInt()
 										}
 									}
-								},
-								height: 640,
-								width: 680,
-								on: {
-									close: function() {
-										Alloy.getDocument().unbind('popupResize.liferay');
-										clicked = false;
-									},
-									resize: function(options) {
-										var panelBody = this.body;
-
-										var dimensions = {
-											height: panelBody.offsetHeight,
-											width: panelBody.offsetWidth - 20
-										};
-
-										form.css(dimensions);
-
-										Alloy.getDocument().trigger('popupResize');
-									}
-								}
+								)
+								.render();
 							}
 						);
 
 						clicked = true;
+					}
+					else {
+						popup.show();
+						popup.io.refresh();
 					}
 				}
 			);
@@ -1080,12 +1061,6 @@ Liferay.Util = {
 				  	success: function(message) {
 						popupMessage.empty();
 						popupMessage.append(message);
-
-						if (textarea) {
-							var usingPlainEditor = popup.find('.lfr-textarea').length;
-
-							Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
-						}
 				 	}
 				}
 			);

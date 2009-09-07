@@ -161,15 +161,26 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			data.<portlet:namespace />principal = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_PRINCIPAL %>)'].value;
 			data.<portlet:namespace />credentials = document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_SECURITY_CREDENTIALS %>)'].value;
 
-			var popup = new Alloy.Popup(
-				{
-					body: {
-						url: url,
-						data: data
-					},
-					fixedcenter: true,
-					modal: true,
-					width: 600
+
+			AUI().use(
+				'dialog',
+				function(A) {
+					var dialog = new A.Dialog(
+						{
+							centered: true,
+							destroyOnClose: true,
+							modal: true,
+							title: Liferay.Language.get('LDAP'),
+							width: 600,
+							io: {
+								url: url,
+								cfg: {
+									data: data
+								}
+							}
+						}
+					)
+					.render();
 				}
 			);
 		}

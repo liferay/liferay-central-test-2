@@ -69,30 +69,28 @@
 		html += "<div class='image-categorization'>" + categorization.html() + "</div>";
 		html += "</div>"
 
-		var popup = new Alloy.Popup(
-			{
-				body: html,
-				draggable: false,
-				header: false,
-				messageId: messageId,
-				modal: true,
-				on: {
-					close: function() {
-						var buttons = jQuery("#<portlet:namespace />buttons_" + id);
+		AUI().use(
+			'dialog',
+			function(A) {
+				var buttons = A.get("#" + buttonsId).cloneNode(true);
 
-						jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
+				var popup = new A.Dialog(
+					{
+						bodyContent: html,
+						draggable: false,
+						destroyOnClose: true,
+						footerContent: buttons,
+						centered: true,
+						title: false,
+						modal: true,
+						width: winWidth
 					}
-				},
-				width: winWidth,
-				xy: ['center', 20]
+				)
+				.render();
+
+				popup.get('contentBox').addClass('image-popup');
 			}
 		);
-
-		jQuery(popup.body).addClass('image-popup');
-
-		var buttons = jQuery("#" + buttonsId);
-
-		jQuery("#" + messageId).append(buttons);
 	}
 </script>
 

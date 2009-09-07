@@ -77,7 +77,7 @@ else {
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xslContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-body:first')
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-widget-bd:first')
 			}
 		);
 	}
@@ -97,7 +97,7 @@ else {
 
 		xslContent.attr('value', content);
 
-		Alloy.Popup.close(document.<portlet:namespace />editorForm);
+		AUI().DialogManager.closeByChild(document.<portlet:namespace />editorForm);
 	}
 </script>
 
@@ -136,7 +136,7 @@ else {
 	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent);" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Alloy.Popup.close(this);" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
 
 </form>
 

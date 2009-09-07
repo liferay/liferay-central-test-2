@@ -49,30 +49,36 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
 		<script type="text/javascript">
-			jQuery('.<%= randomNamespace %>').click(
-				function() {
-					var popup = new Alloy.Popup(
-						{
-							body: {
-								url:  '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL> ',
-								data: {
-									className: '<%= className %>',
-									classPK: '<%= classPK %>',
-									contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
-									contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
-									reportedUserId: '<%= reportedUserId %>'
-								}
-							},
-							constraintoviewport: true,
-							header: '<liferay-ui:message key="report-inappropriate-content" />',
-							modal: true,
-							position: [150, 150],
-							width: 500,
-							xy: ['center', 100]
-						}
-					);
+			AUI().use(
+				'dialog',
+				function(A) {
+					var params = A.toQueryString({
+						className: '<%= className %>',
+						classPK: '<%= classPK %>',
+						contentTitle: '<%= HtmlUtil.escape(contentTitle) %>',
+						contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
+						reportedUserId: '<%= reportedUserId %>'
+					});
 
-					return false;
+					A.on('click', function() {
+						var popup = new A.Dialog({
+							centered: true,
+							destroyOnClose: true,
+							draggable: true,
+							title: '<liferay-ui:message key="report-inappropriate-content" />',
+							modal: true,
+							width: 435,
+							stack: true,
+							io:	{
+								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>',
+								cfg: {
+									data: params
+								}
+							}
+						})
+						.render();
+					},
+					'.<%= randomNamespace %>');
 				}
 			);
 		</script>
@@ -83,23 +89,24 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		</div>
 
 		<script type="text/javascript">
-			jQuery('.<%= randomNamespace %>').click(
-				function() {
-					var popup = new Alloy.Popup(
-						{
-							body: jQuery('#<portlet:namespace />signIn').html(),
-							constraintoviewport: true,
-							header: '<liferay-ui:message key="report-inappropriate-content" />',
-							modal: true,
-							position: [150, 150],
-							width: 500,
-							xy: ['center', 100]
-						}
-					);
+				AUI().use('dialog', function(A) {
+					A.on('click', function(event) {
+						var popup = new A.Dialog(
+							{
+								bodyContent: A.get('#<portlet:namespace />signIn').html(),
+								centered: true,
+								destroyOnClose: true,
+								title: '<liferay-ui:message key="report-inappropriate-content" />',
+								modal: true,
+								width: 500
+							}
+						)
+						.render();
 
-					return false;
-				}
-			);
+						event.preventDefault();
+					},
+					'.<%= randomNamespace %>');
+				});
 		</script>
 	</c:otherwise>
 </c:choose>

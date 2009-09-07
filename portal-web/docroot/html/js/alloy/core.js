@@ -152,7 +152,7 @@
 	Alloy.zIndex = {
 		COLOR_PICKER: 5000,
 		CONTAINER: 500,
-		DATE_PICKER: 550,
+		DATE_PICKER: 1500,
 		TOOLTIP: 25000
 	};
 })();

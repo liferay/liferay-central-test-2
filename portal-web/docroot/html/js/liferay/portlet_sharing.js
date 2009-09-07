@@ -6,15 +6,22 @@ Liferay.PortletSharing = {
 
 		portletURL.setParameter("netvibesURL", netvibesURL);
 
-		new Alloy.Popup(
-			{
-				body: {
-					url: portletURL.toString()
-				},
-				fixedcenter: true,
-				header: Liferay.Language.get('add-to-netvibes'),
-				modal: true,
-				width: 550
+		AUI().use(
+			'dialog',
+			function(A) {
+				var dialog = new A.Dialog(
+					{
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: Liferay.Language.get('add-to-netvibes'),
+						width: 550,
+						io: {
+							url: portletURL.toString()
+						}
+					}
+				)
+				.render();
 			}
 		);
 	},
@@ -25,15 +32,22 @@ Liferay.PortletSharing = {
 
 		portletURL.setParameter("widgetURL", widgetURL);
 
-		new Alloy.Popup(
-			{
-				body: {
-					url: portletURL.toString()
-				},
-				fixedcenter: true,
-				header: Liferay.Language.get('add-to-any-website'),
-				modal: true,
-				width: 550
+		AUI().use(
+			'dialog',
+			function(A) {
+				var dialog = new A.Dialog(
+					{
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: Liferay.Language.get('add-to-any-website'),
+						width: 550,
+						io: {
+							url: portletURL.toString()
+						}
+					}
+				)
+				.render();
 			}
 		);
 	}

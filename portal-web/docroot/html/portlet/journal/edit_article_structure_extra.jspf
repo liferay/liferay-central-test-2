@@ -53,14 +53,6 @@
 
 			<input checked="checked" id="<portlet:namespace />saveStructureAutogenerateId" title="<liferay-ui:message key="autogenerate-id" />" type="checkbox" value="" />
 		</div>
-
-		<br /><br />
-
-		<div>
-			<input class="save-structure-btn" name="saveStructureBtn" type="button" value="<liferay-ui:message key="save" />" />
-
-			<input class="cancel-structure-btn" name="cancelStructureBtn" type="button" value="<liferay-ui:message key="cancel" />" />
-		</div>
 	</div>
 </div>
 

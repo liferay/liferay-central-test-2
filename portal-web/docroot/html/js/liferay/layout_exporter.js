@@ -74,42 +74,70 @@ Liferay.LayoutExporter = {
 		}
 
 		contents +=
-					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Alloy.Popup.close(this);' />" +
 				"</form>" +
 			"</div>";
 
-		new Alloy.Popup(
-			{
-				body: contents,
-				fixedcenter: true,
-				header: title,
-				modal: true,
-				width: 300
+		AUI().use(
+			'dialog',
+			function(A) {
+				new A.Dialog(
+					{
+						bodyContent: contents,
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: title,
+						width: 300,
+						buttons: [
+							{
+								text: Liferay.Language.get('close'),
+								handler: function() {
+									this.close();
+								}
+							}
+						]
+					}
+				)
+				.render();
 			}
 		);
 	},
 
 	publishToLive: function(options) {
-		options = options || {};
+		AUI().use(
+			'dialog',
+			function(A) {
+				options = options || {};
 
-		var messageId = options.messageId;
-		var url = options.url;
-		var title = options.title;
+				var messageId = options.messageId;
+				var url = options.url;
+				var title = options.title;
 
-		if (!title) {
-			title = Liferay.Language.get(messageId);
-		}
+				if (!title) {
+					title = Liferay.Language.get(messageId);
+				}
 
-		var exportLayoutsPopup = new Alloy.Popup(
-			{
-				body: {
-					url: url
-				},
-				fixedcenter: true,
-				header: title,
-				modal: true,
-				messageId: messageId,
-				width: 600
+				new A.Dialog(
+					{
+						centered: true,
+						destroyOnClose: true,
+						modal: true,
+						title: title,
+						width: 600,
+						io: {
+							url: url
+						},
+						buttons: [
+							{
+								text: Liferay.Language.get('close'),
+								handler: function() {
+									this.close();
+								}
+							}
+						]
+					}
+				)
+				.render();
 			}
 		);
 	},

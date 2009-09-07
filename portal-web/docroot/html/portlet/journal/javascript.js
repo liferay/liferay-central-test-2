@@ -766,21 +766,24 @@
 				var structureId = structureIdInput.val();
 				var structureName = structureNameInput.val();
 
-				var dialog = instance._getSaveDialog();
-				var dialogFields = dialog.fields;
+				instance._getSaveDialog(
+					function(dialog) {
+						var dialogFields = dialog.fields;
 
-				dialogFields.contentXSD = instance._getStructureXSD();
+						dialogFields.contentXSD = instance._getStructureXSD();
 
-				dialogFields.dialogStructureName.val(structureNameInput.val());
-				dialogFields.dialogDescription.val(structureDescriptionInput.val());
-				dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
+						dialogFields.dialogStructureName.val(structureNameInput.val());
+						dialogFields.dialogDescription.val(structureDescriptionInput.val());
+						dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
 
-				if (structureId) {
-					dialogFields.saveStructureAutogenerateId.hide();
-					dialogFields.dialogStructureId.val(structureIdInput.val());
-				}
+						if (structureId) {
+							dialogFields.saveStructureAutogenerateId.hide();
+							dialogFields.dialogStructureId.val(structureIdInput.val());
+						}
 
-				dialog.show();
+						dialog.show();
+					}
+				);
 			},
 
 			_openPopupWindow: function(url, title) {
@@ -1242,161 +1245,175 @@
 				};
 			},
 
-			_getSaveDialog: function(openCallback, closeCallback) {
+			_getSaveDialog: function(openCallback) {
 				var instance = this;
 
-				if (!instance._saveDialog) {
-					var saveStructureTemplateDialog = instance._getById('saveStructureTemplateDialog');
-					var htmlTemplate = saveStructureTemplateDialog.html();
-					var title = Liferay.Language.get('editing-structure-details');
-
-					var form = instance._getPrincipalForm();
-
-					var structureIdInput = instance._getInputByName(form, 'structureId');
-					var structureNameInput = instance._getInputByName(form, 'structureName');
-					var structureDescriptionInput = instance._getInputByName(form, 'structureDescription');
-					var storedStructureXSD = instance._getInputByName(form, 'structureXSD');
-
-					instance._saveDialog = new Alloy.Popup(
-						{
-							body: htmlTemplate,
-							center: true,
-							destroyOnClose: false,
-							header: title,
-							modal: true,
-							resizable: false,
-							width: '500px'
-						}
-					);
-
-					var dialog = jQuery(instance._saveDialog.body);
-
-					instance._saveDialog.fields = {
-						autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),
-						cancelButton: dialog.find('input.cancel-structure-btn'),
-						contentXSD: '',
-						dialogDescription: instance._getById('saveStructureStructureDescription', dialog),
-						dialogStructureId: instance._getById('saveStructureStructureId', dialog),
-						dialogStructureName: instance._getById('saveStructureStructureName', dialog),
-						idInput: instance._getById('saveStructureStructureId', dialog),
-						loadDefaultStructure: instance._getById('loadDefaultStructure'),
-						messageElement: instance._getById('saveStructureMessage', dialog),
-						saveButton: dialog.find('input.save-structure-btn'),
-						saveStructureAutogenerateId: instance._getById('saveStructureAutogenerateId', dialog),
-						showStructureIdContainer: instance._getById('showStructureIdContainer', dialog),
-						structureIdContainer: instance._getById('structureIdContainer', dialog),
-						structureNameLabel: instance._getById('structureNameLabel')
-					};
-
-					var dialogFields = instance._saveDialog.fields;
-
-					dialogFields.cancelButton.click(
-						function() {
-							instance._saveDialog.closePopup();
-						}
-					);
-
-					var serviceCallback = function(message) {
-						var exception = message.exception;
-
-						if (!exception) {
-							structureDescriptionInput.val(message.description);
-							structureIdInput.val(message.structureId);
-							structureNameInput.val(message.name);
-							storedStructureXSD.val(encodeURIComponent(dialogFields.contentXSD));
-
-							dialogFields.dialogStructureId.val(message.structureId);
-							dialogFields.dialogStructureName.val(message.name);
-							dialogFields.dialogDescription.val(message.description);
-							dialogFields.structureNameLabel.html(message.name);
-
-							dialogFields.saveStructureAutogenerateId.hide();
-							dialogFields.loadDefaultStructure.show();
-							dialogFields.dialogStructureId.attr('disabled', 'disabled');
-
-							instance._showMessage(dialogFields.messageElement, 'success', 'your-request-processed-successfully');
-
-							var structureMessage = instance._getById('structureMessage');
-
-							structureMessage.hide();
-						}
-						else {
-							var errorMessage = instance._translateErrorMessage(exception);
-
-							instance._showMessage(dialogFields.messageElement, 'error', errorMessage);
-						}
-					};
-
-					dialogFields.saveButton.click(
-						function() {
-							instance._showMessage(dialogFields.messageElement, 'info', 'waiting-for-an-answer');
+				AUI().use(
+					'dialog',
+					function(A) {
+						if (!instance._saveDialog) {
+							var saveStructureTemplateDialog = instance._getById('saveStructureTemplateDialog');
+							var htmlTemplate = saveStructureTemplateDialog.html();
+							var title = Liferay.Language.get('editing-structure-details');
 
 							var form = instance._getPrincipalForm();
+
 							var structureIdInput = instance._getInputByName(form, 'structureId');
-							var structureId = structureIdInput.val();
+							var structureNameInput = instance._getInputByName(form, 'structureName');
+							var structureDescriptionInput = instance._getInputByName(form, 'structureDescription');
+							var storedStructureXSD = instance._getInputByName(form, 'structureXSD');
 
-							if (!structureId) {
-								var autoGenerateId = dialogFields.saveStructureAutogenerateId.is(':checked');
+							var saveCallback = function() {
+								var dialogFields = instance._saveDialog.fields;
 
-								instance._addStructure(
-									dialogFields.dialogStructureId.val(),
-									autoGenerateId,
-									dialogFields.dialogStructureName.val(),
-									dialogFields.dialogDescription.val(),
-									dialogFields.contentXSD,
-									serviceCallback
-								);
-							}
-							else {
-								instance._updateStructure(
-									instance._getParentStructureId(),
-									dialogFields.dialogStructureId.val(),
-									dialogFields.dialogStructureName.val(),
-									dialogFields.dialogDescription.val(),
-									dialogFields.contentXSD,
-									serviceCallback
-								);
-							}
+								instance._showMessage(dialogFields.messageElement, 'info', 'waiting-for-an-answer');
+
+								var form = instance._getPrincipalForm();
+								var structureIdInput = instance._getInputByName(form, 'structureId');
+								var structureId = structureIdInput.val();
+
+								if (!structureId) {
+									var autoGenerateId = dialogFields.saveStructureAutogenerateId.is(':checked');
+
+									instance._addStructure(
+										dialogFields.dialogStructureId.val(),
+										autoGenerateId,
+										dialogFields.dialogStructureName.val(),
+										dialogFields.dialogDescription.val(),
+										dialogFields.contentXSD,
+										serviceCallback
+									);
+								}
+								else {
+									instance._updateStructure(
+										instance._getParentStructureId(),
+										dialogFields.dialogStructureId.val(),
+										dialogFields.dialogStructureName.val(),
+										dialogFields.dialogDescription.val(),
+										dialogFields.contentXSD,
+										serviceCallback
+									);
+								}
+							};
+
+							instance._saveDialog = new A.Dialog(
+								{
+									bodyContent: htmlTemplate,
+									centered: true,
+									modal: true,
+									title: title,
+									width: 550,
+									buttons: [
+										{
+											text: Liferay.Language.get('save'),
+											handler: saveCallback
+										},
+										{
+											text: Liferay.Language.get('cancel'),
+											handler: function() {
+												this.close();
+											}
+										}
+									]
+								}
+							)
+							.render();
+
+							var dialogBody = A.Node.getDOMNode(instance._saveDialog.get('contentBox'));
+							var dialog = jQuery(dialogBody);
+
+							instance._saveDialog.fields = {
+								autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),
+								contentXSD: '',
+								dialogDescription: instance._getById('saveStructureStructureDescription', dialog),
+								dialogStructureId: instance._getById('saveStructureStructureId', dialog),
+								dialogStructureName: instance._getById('saveStructureStructureName', dialog),
+								idInput: instance._getById('saveStructureStructureId', dialog),
+								loadDefaultStructure: instance._getById('loadDefaultStructure'),
+								messageElement: instance._getById('saveStructureMessage', dialog),
+								saveStructureAutogenerateId: instance._getById('saveStructureAutogenerateId', dialog),
+								showStructureIdContainer: instance._getById('showStructureIdContainer', dialog),
+								structureIdContainer: instance._getById('structureIdContainer', dialog),
+								structureNameLabel: instance._getById('structureNameLabel')
+							};
+
+							var dialogFields = instance._saveDialog.fields;
+
+							var serviceCallback = function(message) {
+								var exception = message.exception;
+
+								if (!exception) {
+									structureDescriptionInput.val(message.description);
+									structureIdInput.val(message.structureId);
+									structureNameInput.val(message.name);
+									storedStructureXSD.val(encodeURIComponent(dialogFields.contentXSD));
+
+									dialogFields.dialogStructureId.val(message.structureId);
+									dialogFields.dialogStructureName.val(message.name);
+									dialogFields.dialogDescription.val(message.description);
+									dialogFields.structureNameLabel.html(message.name);
+
+									dialogFields.saveStructureAutogenerateId.hide();
+									dialogFields.loadDefaultStructure.show();
+									dialogFields.dialogStructureId.attr('disabled', 'disabled');
+
+									instance._showMessage(dialogFields.messageElement, 'success', 'your-request-processed-successfully');
+
+									var structureMessage = instance._getById('structureMessage');
+
+									structureMessage.hide();
+								}
+								else {
+									var errorMessage = instance._translateErrorMessage(exception);
+
+									instance._showMessage(dialogFields.messageElement, 'error', errorMessage);
+								}
+							};
+
+							dialogFields.saveStructureAutogenerateId.click(
+								function() {
+									var checkbox = jQuery(this);
+									var isChecked = checkbox.is(':checked');
+
+									if (isChecked) {
+										dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
+									}
+									else {
+										dialogFields.dialogStructureId.attr('disabled', '').val('');
+									}
+								}
+							);
+
+							dialogFields.showStructureIdContainer.toggle(
+								function() {
+									var newLabel = dialogFields.showStructureIdContainer.html().replace('&raquo;', '&laquo;');
+
+									dialogFields.showStructureIdContainer.html(newLabel);
+									dialogFields.structureIdContainer.show();
+
+									return false;
+								},
+								function() {
+									var newLabel = dialogFields.showStructureIdContainer.html().replace('&laquo;', '&raquo;');
+
+									dialogFields.showStructureIdContainer.html(newLabel);
+									dialogFields.structureIdContainer.hide();
+
+									return false;
+								}
+							);
+
+							dialogFields.dialogStructureName.focus();
 						}
-					);
-
-					dialogFields.saveStructureAutogenerateId.click(
-						function() {
-							var checkbox = jQuery(this);
-							var isChecked = checkbox.is(':checked');
-
-							if (isChecked) {
-								dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
-							}
-							else {
-								dialogFields.dialogStructureId.attr('disabled', '').val('');
-							}
+						else {
+							instance._saveDialog.show();
 						}
-					);
 
-					dialogFields.showStructureIdContainer.toggle(
-						function() {
-							var newLabel = dialogFields.showStructureIdContainer.html().replace('&raquo;', '&laquo;');
-
-							dialogFields.showStructureIdContainer.html(newLabel);
-							dialogFields.structureIdContainer.show();
-
-							return false;
-						},
-						function() {
-							var newLabel = dialogFields.showStructureIdContainer.html().replace('&laquo;', '&raquo;');
-
-							dialogFields.showStructureIdContainer.html(newLabel);
-							dialogFields.structureIdContainer.hide();
-
-							return false;
+						if (openCallback) {
+							openCallback.apply(instance, [ instance._saveDialog ]);
 						}
-					);
-
-					dialogFields.dialogStructureName.focus();
-				}
-
-				return instance._saveDialog;
+					}
+				);
 			},
 
 			_changeLanguageView: function() {

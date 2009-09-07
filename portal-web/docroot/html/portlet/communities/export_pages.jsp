@@ -261,20 +261,19 @@ if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
 
 		<c:choose>
 			<c:when test="<%= !publish %>">
-				<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Alloy.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+				<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="AUI().DialogManager.refreshByChild('#<%= popupId %>', { url: '<%= selectURL %>&<portlet:namespace />publish=true' });" />
 
 				<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 			</c:when>
 			<c:otherwise>
 				<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
-					<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Alloy.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
+					<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="AUI().DialogManager.refreshByChild('#<%= popupId %>', { url: '<%= selectURL %>&<portlet:namespace />publish=false' });" />
 				</c:if>
 
 				<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 			</c:otherwise>
 		</c:choose>
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Alloy.Popup.close(this);" />
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>

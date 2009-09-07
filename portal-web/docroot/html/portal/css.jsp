@@ -594,10 +594,6 @@
 
 /* ---------- Portlet css editor ---------- */
 
-#portlet-set-properties {
-	display: none;
-}
-
 #portlet-set-properties .aui-form {
 	clear: both;
 }
@@ -1039,9 +1035,9 @@ li.toggle-expand a {
 }
 
 .lfr-tag-container {
-	height: 260px;
 	margin-bottom: 0.5em;
 	overflow: auto;
+	height: 265px;
 }
 
 .lfr-tag-container fieldset {
@@ -1091,7 +1087,7 @@ li.toggle-expand a {
 	padding-left: 0;
 }
 
-.lfr-tag-container.no-matches .lfr-tag-message {
+.lfr-tag-container .no-matches .lfr-tag-message {
 	display: block;
 }
 

@@ -56,7 +56,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xsdContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-body:first')
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.aui-widget-bd:first')
 			}
 		);
 	}
@@ -78,7 +78,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		xsdContent.attr('value', content);
 
-		Alloy.Popup.close(document.<portlet:namespace />editorForm);
+		AUI().DialogManager.closeByChild(document.<portlet:namespace />editorForm);
 
 		submitForm(document.<portlet:namespace />fm1);
 	}
@@ -119,7 +119,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	<input type="button" value="<liferay-ui:message key="select-and-copy" />" onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent);" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Alloy.Popup.close(this);" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
 
 </form>
 

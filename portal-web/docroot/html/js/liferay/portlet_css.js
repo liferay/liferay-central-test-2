@@ -24,53 +24,62 @@ Liferay.PortletCSS = {
 				content = jQuery('<div class="loading-animation" />')
 			}
 
-			if (!instance._currentPopup) {
-				instance._currentPopup = new Alloy.Popup(
-					{
-						body: content[0],
-						height: 'auto',
-						on: {
-							close: function() {
-								instance._newPanel.removeClass('instantiated');
-								instance._newPanel.appendTo('body');
-								instance._newPanel.hide();
+			AUI().use(
+				'dialog',
+				function(A) {
+					if (!instance._currentPopup) {
+						instance._currentPopup = new A.Dialog(
+							{
+								title: Liferay.Language.get('look-and-feel'),
+								width: 820,
+								xy: [100, 100],
+								on: {
+									close: function() {
+										instance._newPanel.removeClass('instantiated');
+										instance._newPanel.appendTo('body');
+										instance._newPanel.hide();
 
-								instance._currentPopup = null;
+										instance._currentPopup = null;
 
-								if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
-									window.location.reload(true);
+										if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
+											window.location.reload(true);
+										}
+									}
+								},
+								io: {
+									autoRefresh: false,
+									url: themeDisplay.getPathMain() + '/portal/render_portlet',
+									cfg: {
+										data: {
+											p_l_id: themeDisplay.getPlid(),
+											p_p_id: 113,
+											p_p_state: 'exclusive',
+											doAsUserId: themeDisplay.getDoAsUserIdEncoded()
+										},
+										on: {
+											success: function() {
+												var host = this.get('host');
+												var boundingBox = host.get('boundingBox');
+
+												this._defSuccessHandler.apply(this, arguments);
+
+												var properties = boundingBox.query('#portlet-set-properties');
+
+												instance._newPanel = jQuery( A.Node.getDOMNode(properties) );
+												instance._loadContent();
+											}
+										}
+									}
 								}
 							}
-						},
-						width: 820,
-						xy: [20, 20]
+						)
+						.render();
 					}
-				);
 
-				instance._currentPopupBody = jQuery(instance._currentPopup.body);
-			}
-
-			if (!instance._newPanel.length) {
-				jQuery.ajax(
-					{
-						url: themeDisplay.getPathMain() + '/portal/render_portlet',
-						data: {
-							p_l_id: themeDisplay.getPlid(),
-							p_p_id: 113,
-							p_p_state: 'exclusive',
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded()
-						},
-						success: function(message) {
-							instance._currentPopupBody.html(message);
-							instance._newPanel = instance._currentPopupBody.find('#portlet-set-properties');
-							instance._loadContent();
-						}
-					}
-				);
-			}
-			else {
-				instance._loadContent(true);
-			}
+					instance._currentPopup.show();
+					instance._currentPopup.io.refresh();
+				}
+			);
 		}
 	},
 

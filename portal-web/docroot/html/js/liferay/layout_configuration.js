@@ -76,52 +76,6 @@
 			}
 		},
 
-		toggle: function(ppid) {
-			var instance = this;
-
-			var plid = themeDisplay.getPlid();
-			var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
-
-			if (!instance.menu) {
-				var url = themeDisplay.getPathMain() + '/portal/render_portlet';
-
-				var popupWidth = 250;
-				var body = jQuery('body');
-
-				body.addClass('lfr-has-sidebar');
-
-				instance._dialog = new Alloy.Popup(
-					{
-						body: {
-							url: url,
-							data: {
-								p_l_id: plid,
-								p_p_id: ppid,
-								p_p_state: 'exclusive',
-								doAsUserId: doAsUserId
-							},
-							success: function(message) {
-								instance._dialog.setBody(message);
-								instance._loadContent();
-							}
-						},
-						header: Liferay.Language.get('add-application'),
-						on: {
-							close: function() {
-								instance.menu = null;
-								body.removeClass('lfr-has-sidebar');
-							}
-						},
-						resizable: false,
-						xy: [5,5],
-						width: popupWidth
-					}
-				);
-
-				instance._dialogBody = jQuery(instance._dialog.body);
-			}
-		},
-
 		_addPortlet: function(portlet, options) {
 			var instance = this;
 

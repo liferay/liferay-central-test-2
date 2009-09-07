@@ -79,7 +79,10 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			curCategoryNames.splice(id, 1);
 
 			if (instance._popupVisible) {
-				jQuery('input[type=checkbox][value$=' + value + ']', instance.selectCategoryPopup.body).attr('checked', false);
+				var contentBox = instance.selectCategoryPopup.get('contentBox');
+				var contextNode = contentBox._node;
+
+				jQuery('input[type=checkbox][value$=' + value + ']', contextNode).attr('checked', false);
 			}
 
 			instance._update();
@@ -137,75 +140,91 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 			var mainContainer = instance._mainContainer;
 			var searchContainer = instance._searchContainer;
 
-			var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + instance._namespace('saveButton') + '" type="submit" value="' + Liferay.Language.get('save') + '" />');
-
-			saveBtn.click(
-				function() {
-					instance._curCategoryIds = instance._curCategoryIds.length ? instance._curCategoryIds : [];
-
-					container.find('input[type=checkbox]').each(
-						function() {
-							var currentIndex = instance._curCategoryIds.indexOf(this.value);
-							if (this.checked) {
-								if (currentIndex == -1) {
-									instance._curCategoryIds.push(this.value);
-									instance._curCategoryNames.push(jQuery(this).attr('data-title'));
-								}
-							}
-							else {
-								if (currentIndex > -1) {
-									instance._curCategoryIds.splice(currentIndex, 1);
-									instance._curCategoryNames.splice(currentIndex, 1);
-								}
-							}
-						}
-					);
-
-					instance._update();
-					instance.selectCategoryPopup.closePopup();
-				}
-			);
-
-			mainContainer.append(searchContainer).append(container).append(saveBtn);
+			mainContainer.append(searchContainer).append(container);
 
 			if (!instance.selectCategoryPopup) {
-				var popup = new Alloy.Popup(
-					{
-						body: mainContainer[0],
-						className: 'lfr-asset-category-selector',
-						fixedcenter: true,
-						header: Liferay.Language.get('categories'),
-						modal: false,
-						on: {
-							render: function() {
-		 						var inputSearch = jQuery('.lfr-asset-category-search-input');
+				AUI().use(
+					'dialog',
+					function(A) {
+						var titleLabel = Liferay.Language.get('categories');
+						var saveLabel = Liferay.Language.get('save');
+						var bodyContent = new A.Node(mainContainer[0]);
 
-								Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
-							},
-							close: function() {
-								instance._popupVisible = false;
-								instance.selectCategoryPopup = null;
+						var saveFn = function() {
+							instance._curCategoryIds = instance._curCategoryIds.length ? instance._curCategoryIds : [];
+
+							container.find('input[type=checkbox]').each(
+								function() {
+									var currentIndex = instance._curCategoryIds.indexOf(this.value);
+									if (this.checked) {
+										if (currentIndex == -1) {
+											instance._curCategoryIds.push(this.value);
+											instance._curCategoryNames.push(jQuery(this).attr('data-title'));
+										}
+									}
+									else {
+										if (currentIndex > -1) {
+											instance._curCategoryIds.splice(currentIndex, 1);
+											instance._curCategoryNames.splice(currentIndex, 1);
+										}
+									}
+								}
+							);
+
+							instance._update();
+							instance.selectCategoryPopup.hide();
+						};
+
+						var popup = new A.Dialog(
+							{
+								bodyContent: bodyContent,
+								centered: true,
+								draggable: true,
+								height: 400,
+								stack: true,
+								title: titleLabel,
+								width: 320,
+								zIndex: 1000,
+								after: {
+									render: function() {
+										var inputSearch = jQuery('.lfr-asset-category-search-input');
+
+										instance._initializeSearch(instance._container);
+									},
+									close: function() {
+										instance._popupVisible = false;
+									}
+								},
+								buttons: [
+									{
+										text: saveLabel,
+										handler: saveFn
+									}
+								]
 							}
-						},
-						resizable: false,
-						width: 400
-					}
-				);
+						)
+						.render();
 
-				instance.selectCategoryPopup = popup;
+						popup.get('boundingBox').addClass('lfr-asset-category-selector');
+
+						instance.selectCategoryPopup = popup;
+
+						if (Liferay.Browser.isIe()) {
+							jQuery('.lfr-label-text', popup).click(
+								function() {
+									var input = jQuery(this.previousSibling);
+									var checkedState = !input.is(':checked');
+									input.attr('checked', checkedState);
+								}
+							);
+						}
+				});
+			}
+			else {
+				instance.selectCategoryPopup.show();
 			}
 
 			instance._popupVisible = true;
-
-			if (Liferay.Browser.isIe()) {
-				jQuery('.lfr-label-text', popup).click(
-					function() {
-						var input = jQuery(this.previousSibling);
-						var checkedState = !input.is(':checked');
-						input.attr('checked', checkedState);
-					}
-				);
-			}
 		},
 
 		_initializeSearch: function(container) {
@@ -215,7 +234,9 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 				return value.toLowerCase();
 			};
 
-			var inputSearch = jQuery('.lfr-asset-category-search-input');
+			var inputSearch = jQuery('.lfr-asset-category-search-input').val('');
+
+			Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
 
 			var options = {
 				data: data,
@@ -276,6 +297,8 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 
 			container.empty().html('<div class="loading-animation" />');
 
+			instance._createPopup();
+
 			Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 				{
 					groupIds: [themeDisplay.getScopeGroupId(), themeDisplay.getCompanyGroupId()]
@@ -328,8 +351,6 @@ Liferay.AssetCategoriesSelector = new Alloy.Class(
 					);
 				}
 			);
-
-			instance._createPopup();
 		},
 
 		_update: function() {
