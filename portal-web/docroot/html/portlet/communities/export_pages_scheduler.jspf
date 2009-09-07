@@ -64,11 +64,27 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 		addButton.attr("disabled", true);
 
-		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
-			{
-				success: function() {
-					<portlet:namespace />updateScheduledPublishEventsDiv();
-				}
+		AUI().use(
+			'io',
+			function(A) {
+				var form = A.get(document.<portlet:namespace />exportPagesFm);
+
+				var uri = form.getAttribute('action');
+
+				A.io(
+					uri,
+					{
+						form: {
+							id: form
+						},
+						method: 'POST',
+						on: {
+							success: function() {
+								<portlet:namespace />updateScheduledPublishEventsDiv();
+							}
+						}
+					}
+				);
 			}
 		);
 
@@ -82,11 +98,27 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= unscheduleCMD %>';
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
-			jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
-				{
-					success: function() {
-						<portlet:namespace />updateScheduledPublishEventsDiv();
-					}
+			AUI().use(
+				'io',
+				function(A) {
+					var form = A.get(document.<portlet:namespace />exportPagesFm);
+
+					var uri = form.getAttribute('action');
+
+					A.io(
+						uri,
+						{
+							form: {
+								id: form
+							},
+							method: 'POST',
+							on: {
+								success: function() {
+									<portlet:namespace />updateScheduledPublishEventsDiv();
+								}
+							}
+						}
+					);
 				}
 			);
 
