@@ -149,13 +149,14 @@ public class JournalRSSUtil {
 			parameters.containsKey("name")) {
 
 			try {
+				long groupId = GetterUtil.getLong(
+					parameters.get("groupId")[0]);
 				long folderId = GetterUtil.getLong(
 					parameters.get("folderId")[0]);
 				String name = parameters.get("name")[0];
 
-				//TODO
-				//fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				//	folderId, name);
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+					groupId, folderId, name);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
