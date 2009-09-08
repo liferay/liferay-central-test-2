@@ -22,40 +22,70 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+import java.util.Date;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTrigger.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public abstract class BaseTrigger implements Trigger {
 
-	public static final String DESCRIPTION = "description";
+	public BaseTrigger(
+		String jobName, String groupName, TriggerType triggerType,
+		Date startDate, Date endDate) {
 
-	public static final String DESTINATION = "destination";
+		_jobName = jobName;
+		_groupName = groupName;
+		_triggerType = triggerType;
+		_startDate = startDate;
+		_endDate = endDate;
+	}
 
-	public static final String MESSAGE = "message";
+	public Date getEndDate() {
+		return _endDate;
+	}
 
-	public static final String RECEIVER_KEY = "receiver_key";
+	public String getGroupName() {
+		return _groupName;
+	}
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
+	public String getJobName() {
+		return _jobName;
+	}
 
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
+	public Date getStartDate() {
+		return _startDate;
+	}
 
-	public void shutdown() throws SchedulerException;
+	public TriggerType getTriggerType() {
+		return _triggerType;
+	}
 
-	public void start() throws SchedulerException;
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
 
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
+	}
+
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	public void setTriggerType(TriggerType triggerType) {
+		_triggerType = triggerType;
+	}
+
+	private Date _endDate;
+	private String _groupName;
+	private String _jobName;
+	private Date _startDate;
+	private TriggerType _triggerType;
 
 }

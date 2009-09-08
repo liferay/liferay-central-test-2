@@ -25,13 +25,13 @@ package com.liferay.portal.kernel.scheduler;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * <a href="SchedulerEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class SchedulerEngineUtil {
 
@@ -46,51 +46,23 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void schedule(
-			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, Message message)
+			Trigger trigger, String description, String destinationName,
+			Message message)
 		throws SchedulerException {
 
-		_instance._schedule(
-			groupName, interval, startDate, endDate, description,
-			destinationName, message);
+		_instance._schedule(trigger, description, destinationName, message);
 	}
 
 	public static void schedule(
-			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, Object payload)
+			Trigger trigger, String description, String destinationName,
+			Object payload)
 		throws SchedulerException {
 
 		Message message = new Message();
 
 		message.setPayload(payload);
 
-		_instance._schedule(
-			groupName, interval, startDate, endDate, description,
-			destinationName, message);
-	}
-
-	public static void schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, Message message)
-		throws SchedulerException {
-
-		_instance._schedule(
-			groupName, cronText, startDate, endDate, description,
-			destinationName, message);
-	}
-
-	public static void schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, Object payload)
-		throws SchedulerException {
-
-		Message message = new Message();
-
-		message.setPayload(payload);
-
-		_instance._schedule(
-			groupName, cronText, startDate, endDate, description,
-			destinationName, message);
+		_instance._schedule(trigger, description, destinationName, message);
 	}
 
 	public static void shutdown() throws SchedulerException {
@@ -101,10 +73,8 @@ public class SchedulerEngineUtil {
 		_instance._start();
 	}
 
-	public static void unschedule(String jobName, String groupName)
-		throws SchedulerException {
-
-		_instance._unschedule(jobName, groupName);
+	public static void unschedule(Trigger trigger) throws SchedulerException {
+		_instance._unschedule(trigger);
 	}
 
 	private List<SchedulerRequest> _getScheduledJobs(String groupName)
@@ -118,23 +88,12 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _schedule(
-			String groupName, long interval, Date startDate, Date endDate,
-			String description, String destinationName, Message message)
+			Trigger trigger, String description, String destinationName,
+			Message message)
 		throws SchedulerException {
 
 		_schedulerEngine.schedule(
-			groupName, interval, startDate, endDate, description,
-			destinationName, message);
-	}
-
-	private void _schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, Message message)
-		throws SchedulerException {
-
-		_schedulerEngine.schedule(
-			groupName, cronText, startDate, endDate, description,
-			destinationName, message);
+			trigger, description, destinationName, message);
 	}
 
 	private void _shutdown() throws SchedulerException {
@@ -145,10 +104,8 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.start();
 	}
 
-	private void _unschedule(String jobName, String groupName)
-		throws SchedulerException {
-
-		_schedulerEngine.unschedule(jobName, groupName);
+	private void _unschedule(Trigger trigger) throws SchedulerException {
+		_schedulerEngine.unschedule(trigger);
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();

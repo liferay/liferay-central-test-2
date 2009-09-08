@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.Calendar;
 
 /**
- * <a href="TriggerExpression.java.html"><b><i>View Source</i></b></a>
+ * <a href="CronText.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  */
-public class TriggerExpression {
+public class CronText {
 
 	public final static int DAILY_FREQUENCY = 3;
 
@@ -45,11 +45,11 @@ public class TriggerExpression {
 
 	public final static int YEARLY_FREQUENCY = 6;
 
-	public TriggerExpression(Calendar startDate) {
-		this(startDate, TriggerExpression.NO_FREQUENCY, 0);
+	public CronText(Calendar startDate) {
+		this(startDate, CronText.NO_FREQUENCY, 0);
 	}
 
-	public TriggerExpression(Calendar startDate, int frequency, int interval) {
+	public CronText(Calendar startDate, int frequency, int interval) {
 		_startDate = startDate;
 		setFrequency(frequency);
 		_interval = interval;
@@ -68,12 +68,12 @@ public class TriggerExpression {
 	}
 
 	public void setFrequency(int frequency) {
-		if ((frequency != TriggerExpression.DAILY_FREQUENCY) &&
-			(frequency != TriggerExpression.MINUTELY_FREQUENCY) &&
-			(frequency != TriggerExpression.MONTHLY_FREQUENCY) &&
-			(frequency != TriggerExpression.NO_FREQUENCY) &&
-			(frequency != TriggerExpression.WEEKLY_FREQUENCY) &&
-			(frequency != TriggerExpression.YEARLY_FREQUENCY)) {
+		if ((frequency != CronText.DAILY_FREQUENCY) &&
+			(frequency != CronText.MINUTELY_FREQUENCY) &&
+			(frequency != CronText.MONTHLY_FREQUENCY) &&
+			(frequency != CronText.NO_FREQUENCY) &&
+			(frequency != CronText.WEEKLY_FREQUENCY) &&
+			(frequency != CronText.YEARLY_FREQUENCY)) {
 
 			throw new IllegalArgumentException(String.valueOf(frequency));
 		}
@@ -84,25 +84,23 @@ public class TriggerExpression {
 	public void setInterval(int interval) {
 		_interval = interval;
 	}
-
 	public void setStartDate(Calendar startDate) {
 		_startDate = startDate;
 	}
-
-	public String toCronText() {
+	public String toString() {
 		String second = String.valueOf(_startDate.get(Calendar.SECOND));
 		String minute = String.valueOf(_startDate.get(Calendar.MINUTE));
 		String hour = String.valueOf(_startDate.get(Calendar.HOUR_OF_DAY));
-		String dayOfMonth =
-			String.valueOf(_startDate.get(Calendar.DAY_OF_MONTH));
+		String dayOfMonth = String.valueOf(
+			_startDate.get(Calendar.DAY_OF_MONTH));
 		String month = String.valueOf(_startDate.get(Calendar.MONTH) + 1);
 		String dayOfWeek = String.valueOf(_startDate.get(Calendar.DAY_OF_WEEK));
 		String year = String.valueOf(_startDate.get(Calendar.YEAR));
 
-		if (_frequency == TriggerExpression.NO_FREQUENCY) {
+		if (_frequency == CronText.NO_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 		}
-		else if (_frequency == TriggerExpression.MINUTELY_FREQUENCY) {
+		else if (_frequency == CronText.MINUTELY_FREQUENCY) {
 			minute += StringPool.FORWARD_SLASH + _interval;
 			hour = StringPool.STAR;
 			dayOfMonth = StringPool.STAR;
@@ -110,24 +108,24 @@ public class TriggerExpression {
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.DAILY_FREQUENCY) {
+		else if (_frequency == CronText.DAILY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + _interval;
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.WEEKLY_FREQUENCY) {
+		else if (_frequency == CronText.WEEKLY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + (_interval * 7);
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.MONTHLY_FREQUENCY) {
+		else if (_frequency == CronText.MONTHLY_FREQUENCY) {
 			month += StringPool.FORWARD_SLASH + _interval;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == TriggerExpression.YEARLY_FREQUENCY) {
+		else if (_frequency == CronText.YEARLY_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 			year += StringPool.FORWARD_SLASH + _interval;
 		}
@@ -151,8 +149,8 @@ public class TriggerExpression {
 		return sb.toString();
 	}
 
-	private Calendar _startDate;
 	private int _frequency;
 	private int _interval;
+	private Calendar _startDate;
 
 }

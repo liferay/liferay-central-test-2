@@ -25,17 +25,19 @@ package com.liferay.portal.scheduler;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
+import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * <a href="SchedulerEngineProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
@@ -44,12 +46,13 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 		try {
 			SchedulerRequest schedulerRequest =
-				SchedulerRequest.createRetrieveRequest(groupName);
+				SchedulerRequest.createRetrieveRequest(
+					new CronTrigger(groupName, groupName, null));
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
-					DestinationNames.SCHEDULER, schedulerRequest,
-					DestinationNames.SCHEDULER_RESPONSE);
+					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
+					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
 
 			return schedulerRequests;
 		}
@@ -59,49 +62,35 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void schedule(
-		String groupName, long interval, Date startDate, Date endDate,
-		String description, String destinationName, Message message) {
+		Trigger trigger, String description, String destinationName,
+		Message message) {
 
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createRegisterRequest(
-				groupName, interval, startDate, endDate, description,
-				destinationName, message);
+				trigger, description, destinationName, message);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER, schedulerRequest);
-	}
-
-	public void schedule(
-		String groupName, String cronText, Date startDate, Date endDate,
-		String description, String destinationName, Message message) {
-
-		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createRegisterRequest(
-				groupName, cronText, startDate, endDate, description,
-				destinationName, message);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER, schedulerRequest);
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
 	public void shutdown() {
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER,
+			DestinationNames.SCHEDULER_ENGINE,
 			SchedulerRequest.createShutdownRequest());
 	}
 
 	public void start() {
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER,
+			DestinationNames.SCHEDULER_ENGINE,
 			SchedulerRequest.createStartupRequest());
 	}
 
-	public void unschedule(String jobName, String groupName) {
+	public void unschedule(Trigger trigger) {
 		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(groupName);
+			SchedulerRequest.createUnregisterRequest(trigger);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER, schedulerRequest);
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
 }

@@ -22,40 +22,38 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+import java.util.Date;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="IntervalTrigger.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public class IntervalTrigger extends BaseTrigger {
 
-	public static final String DESCRIPTION = "description";
+	public IntervalTrigger(
+		String jobName, String groupName, Date startDate, Date endDate,
+		long interval) {
 
-	public static final String DESTINATION = "destination";
+		super(jobName, groupName, TriggerType.SIMPLE, startDate, endDate);
 
-	public static final String MESSAGE = "message";
+		_interval = interval;
+	}
 
-	public static final String RECEIVER_KEY = "receiver_key";
+	public IntervalTrigger(
+		String jobName, String groupName, Date startDate, long interval) {
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
+		this(jobName, groupName, startDate, null, interval);
+	}
 
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
+	public IntervalTrigger(String jobName, String groupName, long interval) {
+		this(jobName, groupName, new Date(), null, interval);
+	}
 
-	public void shutdown() throws SchedulerException;
+	public Long getTriggerContent() {
+		return _interval;
+	}
 
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	private Long _interval;
 
 }

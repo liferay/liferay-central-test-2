@@ -25,8 +25,10 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.scheduler.CronText;
+import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.scheduler.TriggerExpression;
+import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -221,11 +223,13 @@ public class MBMailingListLocalServiceImpl
 
 		Calendar startDate = CalendarFactoryUtil.getCalendar();
 
-		TriggerExpression triggerExpression = new TriggerExpression(
-			startDate, TriggerExpression.MINUTELY_FREQUENCY,
+		CronText cronText = new CronText(
+			startDate, CronText.MINUTELY_FREQUENCY,
 			mailingList.getInReadInterval());
 
-		String cronText = triggerExpression.toCronText();
+		Trigger trigger = new CronTrigger(
+			groupName, groupName, startDate.getTime(), null,
+			cronText.toString());
 
 		MailingListRequest mailingListRequest = new MailingListRequest();
 
@@ -240,8 +244,8 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInPassword(mailingList.getInPassword());
 
 		SchedulerEngineUtil.schedule(
-			groupName, cronText, startDate.getTime(), null, null,
-			DestinationNames.MESSAGE_BOARDS_MAILING_LIST, mailingListRequest);
+			trigger, null, DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
+			mailingListRequest);
 	}
 
 	protected void unscheduleMailingList(MBMailingList mailingList)
@@ -253,8 +257,7 @@ public class MBMailingListLocalServiceImpl
 			SchedulerEngineUtil.getScheduledJobs(groupName);
 
 		for (SchedulerRequest schedulerRequest : schedulerRequests) {
-			SchedulerEngineUtil.unschedule(
-				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+			SchedulerEngineUtil.unschedule(schedulerRequest.getTrigger());
 		}
 	}
 

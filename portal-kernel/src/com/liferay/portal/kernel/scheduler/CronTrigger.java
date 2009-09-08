@@ -22,40 +22,38 @@
 
 package com.liferay.portal.kernel.scheduler;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-
-import java.util.List;
+import java.util.Date;
 
 /**
- * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="CronTrigger.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
- * @author Bruno Farache
  * @author Shuyang Zhou
  */
-public interface SchedulerEngine {
+public class CronTrigger extends BaseTrigger {
 
-	public static final String DESCRIPTION = "description";
+	public CronTrigger(String jobName, String groupName, String cronText) {
+		this(jobName, groupName, new Date(), null, cronText);
+	}
 
-	public static final String DESTINATION = "destination";
+	public CronTrigger(
+		String jobName, String groupName, Date startDate, String cronText) {
 
-	public static final String MESSAGE = "message";
+		this(jobName, groupName, startDate, null, cronText);
+	}
 
-	public static final String RECEIVER_KEY = "receiver_key";
+	public CronTrigger(
+		String jobName, String groupName, Date startDate, Date endDate,
+		String cronText) {
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
-		throws SchedulerException;
+		super(jobName, groupName, TriggerType.CRON, startDate, endDate);
 
-	public void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException;
+		_cronText = cronText;
+	}
 
-	public void shutdown() throws SchedulerException;
+	public String getTriggerContent() {
+		return _cronText;
+	}
 
-	public void start() throws SchedulerException;
-
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	private String _cronText;
 
 }
