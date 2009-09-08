@@ -189,7 +189,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 			else {
 				throw new SchedulerException(
-					"Unsupport trigger type " + trigger.getTriggerType());
+					"Unknown trigger type " + trigger.getTriggerType());
 			}
 
 			Date startDate = trigger.getStartDate();
