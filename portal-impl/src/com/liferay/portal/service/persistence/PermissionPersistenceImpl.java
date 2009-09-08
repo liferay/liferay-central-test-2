@@ -1722,7 +1722,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionModelImpl.FINDER_CACHE_ENABLED_USERS_PERMISSIONS,
-			"Users_Permissions", "_getUsers",
+			"Users_Permissions", "getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
