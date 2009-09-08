@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -75,7 +76,8 @@ public class ActionUtil {
 		else if (Validator.isNotNull(urlTitle)) {
 			try {
 				entry = BlogsEntryServiceUtil.getEntry(
-					themeDisplay.getScopeGroupId(), urlTitle);
+					themeDisplay.getScopeGroupId(), urlTitle,
+					StatusConstants.APPROVED);
 			}
 			catch (NoSuchEntryException nsee) {
 				if (urlTitle.indexOf(StringPool.UNDERLINE) != -1) {
@@ -87,7 +89,8 @@ public class ActionUtil {
 						urlTitle, StringPool.UNDERLINE, StringPool.DASH);
 
 					entry = BlogsEntryServiceUtil.getEntry(
-						themeDisplay.getScopeGroupId(), urlTitle);
+						themeDisplay.getScopeGroupId(), urlTitle,
+						StatusConstants.APPROVED);
 				}
 				else {
 					throw nsee;

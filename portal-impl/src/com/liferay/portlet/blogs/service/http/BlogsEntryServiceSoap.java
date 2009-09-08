@@ -114,10 +114,10 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getCompanyEntries(
-		long companyId, int max) throws RemoteException {
+		long companyId, int status, int max) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
-				BlogsEntryServiceUtil.getCompanyEntries(companyId, max);
+				BlogsEntryServiceUtil.getCompanyEntries(companyId, status, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}
@@ -143,10 +143,11 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap getEntry(
-		long groupId, java.lang.String urlTitle) throws RemoteException {
+		long groupId, java.lang.String urlTitle, int status)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(groupId,
-					urlTitle);
+					urlTitle, status);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
@@ -158,10 +159,10 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getGroupEntries(
-		long groupId, int max) throws RemoteException {
+		long groupId, int status, int max) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
-				BlogsEntryServiceUtil.getGroupEntries(groupId, max);
+				BlogsEntryServiceUtil.getGroupEntries(groupId, status, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}
@@ -173,10 +174,11 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap[] getOrganizationEntries(
-		long organizationId, int max) throws RemoteException {
+		long organizationId, int status, int max) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue =
-				BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+				BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
+					status, max);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModels(returnValue);
 		}

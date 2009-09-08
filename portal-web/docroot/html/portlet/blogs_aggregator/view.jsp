@@ -37,14 +37,14 @@ List entries = null;
 
 if (selectionMethod.equals("users")) {
 	if (organizationId > 0) {
-		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+		entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, StatusConstants.APPROVED, max);
 	}
 	else {
-		entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+		entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), StatusConstants.APPROVED, max);
 	}
 }
 else {
-	entries = BlogsEntryServiceUtil.getGroupEntries(themeDisplay.getScopeGroupId(), max);
+	entries = BlogsEntryServiceUtil.getGroupEntries(themeDisplay.getScopeGroupId(), StatusConstants.APPROVED, max);
 }
 
 int total = entries.size();

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -91,7 +90,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		blogsEntryLocalService.deleteEntry(entryId);
 	}
 
-	public List<BlogsEntry> getCompanyEntries(long companyId, int max)
+	public List<BlogsEntry> getCompanyEntries(
+			long companyId, int status, int max)
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
@@ -102,8 +102,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList =
 				blogsEntryLocalService.getCompanyEntries(
-					companyId, lastIntervalStart, lastIntervalStart + max,
-					new EntryDisplayDateComparator());
+					companyId, status, lastIntervalStart,
+					lastIntervalStart + max, new EntryDisplayDateComparator());
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -125,7 +125,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public String getCompanyEntriesRSS(
-			long companyId, int max, String type, double version,
+			long companyId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -134,7 +134,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		String name = company.getName();
 		String description = name;
-		List<BlogsEntry> blogsEntries = getCompanyEntries(companyId, max);
+		List<BlogsEntry> blogsEntries = getCompanyEntries(
+			companyId, status, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
@@ -150,10 +151,11 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.getEntry(entryId);
 	}
 
-	public BlogsEntry getEntry(long groupId, String urlTitle)
+	public BlogsEntry getEntry(long groupId, String urlTitle, int status)
 		throws PortalException, SystemException {
 
-		BlogsEntry entry = blogsEntryLocalService.getEntry(groupId, urlTitle);
+		BlogsEntry entry = blogsEntryLocalService.getEntry(
+			groupId, urlTitle, status);
 
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entry.getEntryId(), ActionKeys.VIEW);
@@ -161,7 +163,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entry;
 	}
 
-	public List<BlogsEntry> getGroupEntries(long groupId, int max)
+	public List<BlogsEntry> getGroupEntries(long groupId, int status, int max)
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
@@ -170,8 +172,10 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		boolean listNotExhausted = true;
 
 		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList = blogsEntryLocalService.getGroupEntries(
-				groupId, lastIntervalStart, lastIntervalStart + max);
+			List<BlogsEntry> entryList =
+				blogsEntryLocalService.getGroupEntries(
+					groupId, status, lastIntervalStart,
+					lastIntervalStart + max);
 
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
@@ -193,7 +197,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public String getGroupEntriesRSS(
-			long groupId, int max, String type, double version,
+			long groupId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -202,20 +206,20 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		String name = group.getDescriptiveName();
 		String description = name;
-		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, max);
+		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, status, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries, themeDisplay);
 	}
 
-	public List<BlogsEntry> getOrganizationEntries(long organizationId, int max)
+	public List<BlogsEntry> getOrganizationEntries(
+			long organizationId, int status, int max)
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Date displayDate = new Date();
-		int status = StatusConstants.APPROVED;
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
@@ -244,9 +248,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public String getOrganizationEntriesRSS(
-			long organizationId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay)
+			long organizationId, int status, int max, String type,
+			double version, String displayStyle, String feedURL,
+			String entryURL, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Organization organization = organizationPersistence.findByPrimaryKey(
@@ -255,7 +259,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		String name = organization.getName();
 		String description = name;
 		List<BlogsEntry> blogsEntries = getOrganizationEntries(
-			organizationId, max);
+			organizationId, status, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,

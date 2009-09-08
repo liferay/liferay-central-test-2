@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -104,6 +105,7 @@ public class RSSAction extends PortletAction {
 		long companyId = ParamUtil.getLong(request, "companyId");
 		long groupId = ParamUtil.getLong(request, "groupId");
 		long organizationId = ParamUtil.getLong(request, "organizationId");
+		int status = StatusConstants.APPROVED;
 		int max = ParamUtil.getInteger(
 			request, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(
@@ -125,8 +127,8 @@ public class RSSAction extends PortletAction {
 			feedURL = StringPool.BLANK;
 
 			rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
-				companyId, max, type, version, displayStyle, feedURL, entryURL,
-				themeDisplay);
+				companyId, status, max, type, version, displayStyle, feedURL,
+				entryURL, themeDisplay);
 		}
 		else if (groupId > 0) {
 			feedURL += "p_l_id=" + plid;
@@ -134,15 +136,15 @@ public class RSSAction extends PortletAction {
 			entryURL = feedURL;
 
 			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-				groupId, max, type, version, displayStyle, feedURL, entryURL,
-				themeDisplay);
+				groupId, status, max, type, version, displayStyle, feedURL,
+				entryURL, themeDisplay);
 		}
 		else if (organizationId > 0) {
 			feedURL = StringPool.BLANK;
 
 			rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
-				organizationId, max, type, version, displayStyle, feedURL,
-				entryURL, themeDisplay);
+				organizationId, status, max, type, version, displayStyle,
+				feedURL, entryURL, themeDisplay);
 		}
 		else if (layout != null) {
 			if (layout.hasScopeGroup()) {
@@ -159,8 +161,8 @@ public class RSSAction extends PortletAction {
 			entryURL = feedURL;
 
 			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-				groupId, max, type, version, displayStyle, feedURL, entryURL,
-				themeDisplay);
+				groupId, status, max, type, version, displayStyle, feedURL,
+				entryURL, themeDisplay);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

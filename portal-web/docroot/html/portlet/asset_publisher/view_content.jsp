@@ -46,7 +46,7 @@ long classPK = 0;
 try {
 	if (Validator.isNotNull(urlTitle)) {
 		if (type.equals (AssetPublisherUtil.TYPE_BLOG)) {
-			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle);
+			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle, StatusConstants.APPROVED);
 
 			className = BlogsEntry.class.getName();
 			classPK = entry.getPrimaryKey();
