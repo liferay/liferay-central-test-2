@@ -29,16 +29,16 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", defaultFolderId);
 
-if ((folder == null) && (defaultFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+if ((folder == null) && (defaultFolderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
 	}
 	catch (NoSuchFolderException nsfe) {
-		folderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		folderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 	}
 }
 
@@ -408,7 +408,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</script>
 
 			<%
-			if (folder.getParentFolderId() != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			if (folder.getParentFolderId() != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 
 				if (portletName.equals(PortletKeys.BOOKMARKS)) {

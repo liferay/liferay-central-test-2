@@ -41,7 +41,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -213,7 +213,7 @@ public class BookmarksFolderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
-			groupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+			groupId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		for (BookmarksFolder folder : folders) {
 			deleteFolder(folder);
@@ -386,7 +386,8 @@ public class BookmarksFolderLocalServiceImpl
 		// Merge folders
 
 		if (mergeWithParentFolder && (folderId != parentFolderId) &&
-			(parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			(parentFolderId !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -397,14 +398,17 @@ public class BookmarksFolderLocalServiceImpl
 	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			BookmarksFolder parentFolder =
 				bookmarksFolderPersistence.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
 				(groupId != parentFolder.getGroupId())) {
 
-				parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId =
+					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -415,7 +419,9 @@ public class BookmarksFolderLocalServiceImpl
 			BookmarksFolder folder, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (parentFolderId ==
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			return parentFolderId;
 		}
 

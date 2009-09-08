@@ -29,7 +29,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 
 /**
  * <a href="BaseBookmarksServiceTestCase.java.html"><b><i>View Source</i></b>
@@ -56,7 +56,7 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 	}
 
 	protected BookmarksFolder addFolder() throws Exception {
-		long parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		long parentFolderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		return addFolder(parentFolderId);
 	}

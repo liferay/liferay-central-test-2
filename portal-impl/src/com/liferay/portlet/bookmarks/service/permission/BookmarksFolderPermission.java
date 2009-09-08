@@ -29,7 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 
 /**
@@ -75,7 +75,7 @@ public class BookmarksFolderPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return BookmarksPermission.contains(
 				permissionChecker, groupId, actionId);
 		}
@@ -107,7 +107,9 @@ public class BookmarksFolderPermission {
 		long folderId = folder.getFolderId();
 
 		if (actionId.equals(ActionKeys.VIEW)) {
-			while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			while (folderId !=
+					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 				folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
 
 				folderId = folder.getParentFolderId();
@@ -130,7 +132,9 @@ public class BookmarksFolderPermission {
 			return true;
 		}
 		else {
-			while (folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			while (folderId !=
+					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 				if (permissionChecker.hasOwnerPermission(
 						folder.getCompanyId(), BookmarksFolder.class.getName(),
 						folder.getFolderId(), folder.getUserId(), actionId)) {

@@ -42,7 +42,7 @@ import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
@@ -59,7 +59,7 @@ import javax.portlet.PortletPreferences;
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -233,7 +233,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if (folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 
@@ -315,7 +315,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 
-		if ((folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
 
 			String path = getImportFolderPath(context, folderId);
@@ -380,7 +380,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
-		if ((parentFolderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) &&
+		if ((parentFolderId !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
 			String path = getImportFolderPath(context, parentFolderId);
@@ -399,7 +400,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			if (parentFolderId !=
-					BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 				BookmarksFolderUtil.findByPrimaryKey(parentFolderId);
 			}

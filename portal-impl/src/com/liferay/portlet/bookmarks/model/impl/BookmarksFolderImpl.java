@@ -25,6 +25,7 @@ package com.liferay.portlet.bookmarks.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -37,8 +38,6 @@ import java.util.List;
  */
 public class BookmarksFolderImpl
 	extends BookmarksFolderModelImpl implements BookmarksFolder {
-
-	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
 	public BookmarksFolderImpl() {
 	}
@@ -67,7 +66,8 @@ public class BookmarksFolderImpl
 	public BookmarksFolder getParentFolder()
 		throws PortalException, SystemException {
 
-		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+		if (getParentFolderId() ==
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
 			return null;
 		}
@@ -76,7 +76,9 @@ public class BookmarksFolderImpl
 	}
 
 	public boolean isRoot() {
-		if (getParentFolderId() == DEFAULT_PARENT_FOLDER_ID) {
+		if (getParentFolderId() ==
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
 			return true;
 		}
 		else {

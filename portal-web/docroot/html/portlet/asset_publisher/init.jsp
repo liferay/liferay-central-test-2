@@ -54,6 +54,7 @@
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
+<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolderConstants" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" %>
