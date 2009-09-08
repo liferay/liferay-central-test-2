@@ -725,6 +725,10 @@ public interface PropsKeys {
 
 	public static final String LDAP_BASE_PROVIDER_URL = "ldap.base.provider.url";
 
+	public static final String LDAP_CONTACT_MAPPINGS = "ldap.contact.mappings";
+
+	public static final String LDAP_CONVERTER_IMPL = "ldap.converter.impl";
+
 	public static final String LDAP_ERROR_PASSWORD_AGE = "ldap.error.password.age";
 
 	public static final String LDAP_ERROR_PASSWORD_EXPIRED = "ldap.error.password.expired";
@@ -776,6 +780,8 @@ public interface PropsKeys {
 	public static final String LDAP_USER_IMPL = "ldap.user.impl";
 
 	public static final String LDAP_USER_MAPPINGS = "ldap.user.mappings";
+
+	public static final String LDAP_USER_CUSTOM_MAPPINGS = "ldap.user.custom.mappings";
 
 	public static final String LDAP_USERS_DN = "ldap.users.dn";
 

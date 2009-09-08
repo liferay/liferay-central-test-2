@@ -2705,7 +2705,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 
 	public static final FinderPath FINDER_PATH_GET_USERS = new FinderPath(com.liferay.portal.model.impl.UserModelImpl.ENTITY_CACHE_ENABLED,
 			RoleModelImpl.FINDER_CACHE_ENABLED_USERS_ROLES, "Users_Roles",
-			"getUsers",
+			"_getUsers",
 			new String[] {
 				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"

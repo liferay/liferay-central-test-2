@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -124,7 +125,7 @@ public class LDAPAuth implements Authenticator {
 			String password)
 		throws Exception {
 
-		if (!PortalLDAPUtil.isAuthEnabled(companyId)) {
+		if (!LDAPSettingsUtil.isAuthEnabled(companyId)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Authenticator is not enabled");
 			}
@@ -149,7 +150,7 @@ public class LDAPAuth implements Authenticator {
 
 			//  Process LDAP auth search filter
 
-			String filter = PortalLDAPUtil.getAuthSearchFilter(
+			String filter = LDAPSettingsUtil.getAuthSearchFilter(
 				companyId, emailAddress, screenName, String.valueOf(userId));
 
 			SearchControls cons = new SearchControls(

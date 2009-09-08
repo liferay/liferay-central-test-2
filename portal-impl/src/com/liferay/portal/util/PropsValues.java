@@ -807,6 +807,9 @@ public class PropsValues {
 	public static final boolean LDAP_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LDAP_AUTH_ENABLED));
 
+	public static final String LDAP_CONVERTER_IMPL = GetterUtil.getString(
+		PropsUtil.get(PropsKeys.LDAP_CONVERTER_IMPL));
+
 	public static final boolean LDAP_EXPORT_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LDAP_EXPORT_ENABLED));
 
