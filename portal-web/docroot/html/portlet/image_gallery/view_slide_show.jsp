@@ -30,7 +30,7 @@
 	<%
 	IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-	List images = IGImageLocalServiceUtil.getImages(folder.getFolderId());
+	List images = IGImageLocalServiceUtil.getImages(folder.getGroupId(), folder.getFolderId());
 
 	for	(int i = 0; i < images.size(); i++) {
 		IGImage image = (IGImage)images.get(i);
