@@ -26,7 +26,7 @@
 
 <div id="lfr-look-and-feel">
 	<div class="aui-tabview" id="portlet-set-properties">
-		<ul class="ui-tabs aui-tabs">
+		<ul class="aui-tabview-list">
 			<li>
 				<a href="#portlet-config"><liferay-ui:message key="portlet-configuration" /></a>
 			</li>
@@ -54,7 +54,7 @@
 		<input type="hidden" name="portlet-area" id="portlet-area" />
 		<input type="hidden" name="portlet-boundary-id" id="portlet-boundary-id" />
 
-		<div class="aui-tab-content">
+		<div class="aui-tabview-content">
 			<fieldset class="aui-block-labels" id="portlet-config">
 				<legend><liferay-ui:message key="portlet-configuration" /></legend>
 

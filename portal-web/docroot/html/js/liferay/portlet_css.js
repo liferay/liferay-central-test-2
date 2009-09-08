@@ -26,6 +26,7 @@ Liferay.PortletCSS = {
 
 			AUI().use(
 				'dialog',
+				'tabs',
 				function(A) {
 					if (!instance._currentPopup) {
 						instance._currentPopup = new A.Dialog(
@@ -35,12 +36,6 @@ Liferay.PortletCSS = {
 								xy: [100, 100],
 								on: {
 									close: function() {
-										instance._newPanel.removeClass('instantiated');
-										instance._newPanel.appendTo('body');
-										instance._newPanel.hide();
-
-										instance._currentPopup = null;
-
 										if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
 											window.location.reload(true);
 										}
@@ -81,21 +76,6 @@ Liferay.PortletCSS = {
 				}
 			);
 		}
-	},
-
-	_assignColorPickers: function() {
-		var instance = this;
-
-		instance._newPanel.find('.use-colorpicker').each(
-			function() {
-				new Alloy.ColorPickerPanel(
-					{
-						buttonbuttonContext: jQuery('#portlet-set-properties')[0],
-						item: this
-					}
-				);
-			}
-		);
 	},
 
 	_backgroundStyles: function() {
@@ -637,9 +617,6 @@ Liferay.PortletCSS = {
 		var instance = this;
 
 		var newPanel = instance._newPanel;
-		var newPanelTabs = newPanel.find('> ul.ui-tabs');
-
-		var tabTrigger = 0;
 
 		if (!instantiated) {
 			newPanel.addClass('instantiated');
@@ -744,11 +721,18 @@ Liferay.PortletCSS = {
 
 		}
 
+		var A = AUI();
+
+		instance._tabs = new A.TabView(
+			{
+				listNode: newPanel.find('.aui-tabview-list')[0],
+				contentNode: newPanel.find('.aui-tabview-content')[0]
+			}
+		);
+
+		instance._tabs.render(newPanel.find('form')[0]);
+
 		newPanel.show();
-
-		var tabs = new Alloy.TabView(newPanel[0]);
-
-		tabs.selectTab(tabTrigger);
 
 		newPanel.find('.lfr-colorpicker-img').remove();
 
@@ -907,8 +891,6 @@ Liferay.PortletCSS = {
 		else {
 			instance._objData = defaultData;
 		}
-
-		instance._assignColorPickers();
 
 		instance._portletBoundaryIdVar.val(instance._curPortletWrapperId);
 

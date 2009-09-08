@@ -391,16 +391,6 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 			);
 		</c:if>
 
-		if (jQuery.ui && jQuery.ui.tabs) {
-			jQuery.extend(
-				jQuery.ui.tabs.defaults,
-				{
-					navClass: 'ui-tabs tabs',
-					selectedClass: 'current'
-				}
-			);
-		}
-
 		AUI().ready(
 			function() {
 				if (Liferay.Dock) {

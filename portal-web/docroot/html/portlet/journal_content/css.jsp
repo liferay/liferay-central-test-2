@@ -53,7 +53,7 @@
 	margin-top: 1em;
 }
 
-.portlet-journal-content .ui-tabs {
+.portlet-journal-content .aui-tabview-list {
 	margin: 18px 0;
 }
 

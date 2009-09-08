@@ -273,68 +273,6 @@
 .ie .ui-slider-range {
 }
 
-/* ---------- Tabs ---------- */
-
-.aui-tabs {
-}
-
-.aui-tabs:after {
-}
-
-.ie .aui-tabs {
-}
-
-.ie6 .aui-tabs {
-}
-
-.aui-tabs li {
-}
-
-.aui-tabs li.last {
-}
-
-.aui-tabs li a, .aui-tabs li span {
-}
-
-.ie6 .aui-tabs li a, .ie6 .aui-tabs li span {
-}
-
-.aui-tabs li a:hover {
-}
-
-.aui-tabs li a:hover, .aui-tabs li span:hover {
-}
-
-.aui-tabs li.aui-selected {
-}
-
-.aui-tabs li.aui-selected a, .aui-tabs li.aui-selected span {
-}
-
-.ie6 .aui-tabs li.aui-selected a, .ie6 .aui-tabs li.aui-selected span {
-}
-
-.aui-tabs li.aui-selected:hover, .aui-tabs li.aui-selected a:hover {
-}
-
-.aui-tabs .aui-disabled a {
-}
-
-.aui-tabs .aui-disabled {
-}
-
-.ie .aui-tabs .aui-disabled {
-}
-
-.aui-tabs .aui-disabled a:link, .aui-tabs .aui-disabled a:visited {
-}
-
-.aui-hidden {
-}
-
-.aui-tabs .last.toggle {
-}
-
 /* ---------- Container ---------- */
 
 .aui-panel-container {

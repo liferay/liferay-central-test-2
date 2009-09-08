@@ -165,35 +165,6 @@ Liferay.ColorPicker = Alloy.ColorPickerPanel.extend({
 	}
 });
 
-// LPS-2296
-
-Alloy.Tab.prototype.DISABLED_CLASSNAME += ' ui-tabs-disabled';
-
-Alloy.TabView = Alloy.TabView.extend(
-	{
-		initialize: function() {
-			var instance = this;
-
-			instance._super.apply(instance, arguments);
-
-			instance.subscribe('activeTabChange', instance._activeClassChange);
-		},
-
-		_activeClassChange: function(event) {
-			var instance = this;
-
-			var previousTab = event.prevValue;
-			var currentTab = event.newValue;
-
-			if (previousTab) {
-				previousTab.removeClass('current');
-			}
-
-			currentTab.addClass('current');
-		}
-	}
-);
-
 (function() {
 	var tabShow = Liferay.Portal.Tabs.show;
 
