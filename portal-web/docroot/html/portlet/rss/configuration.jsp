@@ -31,6 +31,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 
+int selectedAssetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
+
 PortletURL configurationActionURL = renderResponse.createActionURL();
 
 configurationActionURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
@@ -104,7 +106,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 <input name="<portlet:namespace />typeSelection" type="hidden" value="" />
 <input name="<portlet:namespace />resourcePrimKey" type="hidden" value="" />
 <input name="<portlet:namespace />resourceTitle" type="hidden" value="" />
-<input name="<portlet:namespace />assetOrder" type="hidden" value="-1" />
+<input name="<portlet:namespace />assetOrder" type="hidden" value="<%= selectedAssetOrder %>" />
 
 <c:choose>
 	<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
