@@ -509,7 +509,7 @@
 
 				<!-- CSS -->
 
-				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,widget.css,extras.css" />
+				<property name="alloy.core.css" value="reset.css,base.css,layout.css,forms.css,icons.css,tool-item.css,widget.css,extras.css" />
 
 				<concat destfile="docroot/html/ALLOY_ZIP/themes/base/css/tmp/alloy.css">
 					<filelist
