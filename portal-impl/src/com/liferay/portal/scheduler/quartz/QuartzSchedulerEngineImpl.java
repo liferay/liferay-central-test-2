@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.scheduler.job.MessageSenderJob;
-import com.liferay.portal.scheduler.trigger.IntervalTrigger;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -57,7 +56,6 @@ import org.quartz.impl.StdSchedulerFactory;
  *
  * @author Michael C. Han
  * @author Bruno Farache
- * @author Shuyang Zhou
  */
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
@@ -111,12 +109,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 					schedulerRequest =
 						SchedulerRequest.createRetrieveResponseRequest(
-							new com.liferay.portal.scheduler.trigger.CronTrigger(
-								jobName, groupName, cronTrigger.getStartTime(),
-								cronTrigger.getEndTime(),
-								cronTrigger.getCronExpression()),
-							description,
-							message);
+							jobName, groupName, cronTrigger.getCronExpression(),
+							cronTrigger.getStartTime(),
+							cronTrigger.getEndTime(), description, message);
 				}
 				else if (SimpleTrigger.class.isAssignableFrom(
 							trigger.getClass())) {
@@ -126,12 +121,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 					schedulerRequest =
 						SchedulerRequest.createRetrieveResponseRequest(
-						new IntervalTrigger(
 							jobName, groupName,
+							simpleTrigger.getRepeatInterval(),
 							simpleTrigger.getStartTime(),
-							simpleTrigger.getEndTime(),
-							simpleTrigger.getRepeatInterval()), description,
-							message);
+							simpleTrigger.getEndTime(), description, message);
 				}
 
 				if (schedulerRequest != null) {
@@ -147,84 +140,88 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void schedule(
-			com.liferay.portal.kernel.scheduler.trigger.Trigger trigger,
+			String groupName, long interval, Date startDate, Date endDate,
 			String description, String destination, Message message)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
-		String jobName=trigger.getJobName();
-		String groupName=trigger.getGroupName();
-		if (message == null){
-			message = new Message();
-		}
-		message.put(RECEIVER_KEY, jobName + ":" + groupName);
-
-		if (jobName.length() > QUARTZ_MAX_JOB_NAME_LENGTH) {
-			jobName = jobName.substring(0, QUARTZ_MAX_JOB_NAME_LENGTH);
-		}
-
-		if (groupName.length() > QUARTZ_MAX_GROUP_NAME_LENGTH) {
-			groupName = groupName.substring(0, QUARTZ_MAX_GROUP_NAME_LENGTH);
-		}
-
-		if (description != null &&
-			description.length() > QUARTZ_MAX_DESCRIPTION_LENGTH) {
-			description =
-				description.substring(0,QUARTZ_MAX_DESCRIPTION_LENGTH);
-		}
-
-		Date startDate = trigger.getStartDate();
-		Date endDate = trigger.getEndDate();
 
 		try {
-			Trigger quartzTrigger = null;
-			switch (trigger.getTriggerType()) {
-				case CRON:
-					try {
-						quartzTrigger = new CronTrigger(
-							jobName, groupName,
-							(String) trigger.getTriggerContent());
-					}
-					catch (ParseException ex) {
-						throw new SchedulerException(
-							"Failed to parse cron text:" +
-							trigger.getTriggerContent());
-					}
-					break;
-				case SIMPLE:
-					quartzTrigger = new SimpleTrigger(
-						jobName, groupName,
-						SimpleTrigger.REPEAT_INDEFINITELY,
-						(Long) trigger.getTriggerContent());
-					break;
-				default:
-					throw new SchedulerException(
-						"Unsupport TriggerType:" + trigger.getTriggerType());
-			}
+			SimpleTrigger simpleTrigger = new SimpleTrigger(
+				groupName, groupName, SimpleTrigger.REPEAT_INDEFINITELY,
+				interval);
+
 			if (startDate == null) {
 				if (ServerDetector.getServerId().equals(
 						ServerDetector.TOMCAT_ID)) {
 
-					quartzTrigger.setStartTime(
+					simpleTrigger.setStartTime(
 						new Date(System.currentTimeMillis() + Time.MINUTE));
 				}
 				else {
-					quartzTrigger.setStartTime(
+					simpleTrigger.setStartTime(
 						new Date(
 						System.currentTimeMillis() + Time.MINUTE * 3));
 				}
 			}
 			else {
-				quartzTrigger.setStartTime(startDate);
+				simpleTrigger.setStartTime(startDate);
 			}
 
 			if (endDate != null) {
-				quartzTrigger.setEndTime(endDate);
+				simpleTrigger.setEndTime(endDate);
 			}
 
-			schedule(quartzTrigger, description, destination, message);
+			schedule(
+				groupName, simpleTrigger, description, destination, message);
+		}
+		catch (RuntimeException re) {
+
+			// ServerDetector will throw an exception when JobSchedulerImpl is
+			// initialized in a test environment
+
+		}
+	}
+
+	public void schedule(
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destination, Message message)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			CronTrigger cronTrigger = new CronTrigger(
+				groupName, groupName, cronText);
+
+			if (startDate == null) {
+				if (ServerDetector.getServerId().equals(
+						ServerDetector.TOMCAT_ID)) {
+
+					cronTrigger.setStartTime(
+						new Date(System.currentTimeMillis() + Time.MINUTE));
+				}
+				else {
+					cronTrigger.setStartTime(
+						new Date(System.currentTimeMillis() + Time.MINUTE * 3));
+				}
+			}
+			else {
+				cronTrigger.setStartTime(startDate);
+			}
+
+			if (endDate != null) {
+				cronTrigger.setEndTime(endDate);
+			}
+
+			schedule(groupName, cronTrigger, description, destination, message);
+		}
+		catch(ParseException pe) {
+			throw new SchedulerException("Unable to parse cron text", pe);
 		}
 		catch (RuntimeException re) {
 
@@ -260,12 +257,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public void unschedule(
-			com.liferay.portal.kernel.scheduler.trigger.Trigger trigger)
+	public void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
-		String jobName = trigger.getJobName();
-		String groupName = trigger.getGroupName();
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
@@ -282,17 +276,13 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	protected void schedule(
-			Trigger trigger, String description,
+			String groupName, Trigger trigger, String description,
 			String destination, Message message)
 		throws SchedulerException {
 
 		try {
-
-			String jobName = trigger.getName();
-			String groupName = trigger.getGroup();
-
 			JobDetail jobDetail = new JobDetail(
-				jobName, groupName, MessageSenderJob.class);
+				groupName, groupName, MessageSenderJob.class);
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
@@ -301,7 +291,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			jobDataMap.put(MESSAGE, message);
 
 			synchronized (this) {
-				_scheduler.unscheduleJob(jobName, groupName);
+				_scheduler.unscheduleJob(groupName, groupName);
 				_scheduler.scheduleJob(jobDetail, trigger);
 			}
 		}
@@ -314,10 +304,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			throw new SchedulerException("Unable to scheduled job", se);
 		}
 	}
-
-	private static final int QUARTZ_MAX_JOB_NAME_LENGTH = 80;
-	private static final int QUARTZ_MAX_GROUP_NAME_LENGTH=80;
-	private static final int QUARTZ_MAX_DESCRIPTION_LENGTH=120;
 
 	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService.impl")
 	protected QuartzLocalService quartzLocalService;

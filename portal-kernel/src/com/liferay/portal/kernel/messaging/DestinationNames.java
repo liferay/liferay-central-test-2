@@ -73,8 +73,6 @@ public interface DestinationNames {
 
 	public static final String SCHEDULER = "liferay/scheduler";
 
-	public static final String SCHEDULER_COMMON = "liferay/scheduler_common";
-
 	public static final String SCHEDULER_RESPONSE =
 		"liferay/scheduler/response";
 
