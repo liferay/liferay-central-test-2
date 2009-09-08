@@ -47,6 +47,7 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Alexander Chow
  */
 public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 

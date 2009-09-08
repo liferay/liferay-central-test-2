@@ -77,6 +77,7 @@ import javax.imageio.ImageIO;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Aug�
+ * @author Alexander Chow
  */
 public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
@@ -259,16 +260,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	public void addImageResources(
-			long imageId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
-
-		addImageResources(image, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addImageResources(
 			IGImage image, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -277,16 +268,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.getCompanyId(), image.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getImageId(), false,
 			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addImageResources(
-			long imageId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
-
-		addImageResources(image, communityPermissions, guestPermissions);
 	}
 
 	public void addImageResources(
@@ -300,12 +281,24 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
-	public void deleteImage(long imageId)
+	public void addImageResources(
+			long imageId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
 
-		deleteImage(image);
+		addImageResources(image, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addImageResources(
+			long imageId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
+
+		addImageResources(image, communityPermissions, guestPermissions);
 	}
 
 	public void deleteImage(IGImage image)
@@ -349,6 +342,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		// Image
 
 		igImagePersistence.remove(image);
+	}
+
+	public void deleteImage(long imageId)
+		throws PortalException, SystemException {
+
+		IGImage image = igImagePersistence.findByPrimaryKey(imageId);
+
+		deleteImage(image);
 	}
 
 	public void deleteImages(long groupId, long folderId)
@@ -429,8 +430,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		String name = FileUtil.stripExtension(nameWithExtension);
 
-		List<IGImage> images =
-			igImagePersistence.findByG_F_N(groupId, folderId, name);
+		List<IGImage> images = igImagePersistence.findByG_F_N(
+			groupId, folderId, name);
 
 		if ((images.size() <= 0) && Validator.isNumber(name)) {
 			long imageId = GetterUtil.getLong(name);
@@ -500,20 +501,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.findByNoAssets();
 	}
 
-	public void reIndex(long imageId) throws SystemException {
-		if (SearchEngineUtil.isIndexReadOnly()) {
-			return;
-		}
-
-		IGImage image = igImagePersistence.fetchByPrimaryKey(imageId);
-
-		if (image == null) {
-			return;
-		}
-
-		reIndex(image);
-	}
-
 	public void reIndex(IGImage image) throws SystemException {
 		long companyId = image.getCompanyId();
 		long groupId = image.getGroupId();
@@ -538,6 +525,20 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		catch (SearchException se) {
 			_log.error("Reindexing " + imageId, se);
 		}
+	}
+
+	public void reIndex(long imageId) throws SystemException {
+		if (SearchEngineUtil.isIndexReadOnly()) {
+			return;
+		}
+
+		IGImage image = igImagePersistence.fetchByPrimaryKey(imageId);
+
+		if (image == null) {
+			return;
+		}
+
+		reIndex(image);
 	}
 
 	public void updateAsset(
@@ -683,7 +684,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	}
 
 	protected long getFolder(IGImage image, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if ((image.getFolderId() != folderId) &&
 			(folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
@@ -829,8 +830,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String name = FileUtil.stripExtension(nameWithExtension);
 		String imageType = FileUtil.getExtension(nameWithExtension);
 
-		List<IGImage> images =
-			igImagePersistence.findByG_F_N(groupId, folderId, name);
+		List<IGImage> images = igImagePersistence.findByG_F_N(
+			groupId, folderId, name);
 
 		if (imageType.equals("jpeg")) {
 			imageType = ImageProcessor.TYPE_JPEG;

@@ -119,7 +119,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 				<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
 
-				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
+				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 
 				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= folder.getParentFolderId() == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
 					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />

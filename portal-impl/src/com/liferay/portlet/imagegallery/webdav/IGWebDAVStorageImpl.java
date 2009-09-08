@@ -570,8 +570,8 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
-		List<IGImage> images =
-			IGImageServiceUtil.getImages(groupId, parentFolderId);
+		List<IGImage> images = IGImageServiceUtil.getImages(
+			groupId, parentFolderId);
 
 		for (IGImage image : images) {
 			Resource resource = toResource(webDavRequest, image, true);

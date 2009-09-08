@@ -403,8 +403,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<IGImage> images =
-			IGImageUtil.findByG_F(folder.getGroupId(), folder.getFolderId());
+		List<IGImage> images = IGImageUtil.findByG_F(
+			folder.getGroupId(), folder.getFolderId());
 
 		for (IGImage image : images) {
 			exportImage(context, foldersEl, imagesEl, image);

@@ -496,7 +496,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	protected long getParentFolderId(long groupId, long parentFolderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(

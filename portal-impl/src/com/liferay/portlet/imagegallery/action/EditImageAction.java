@@ -161,10 +161,10 @@ public class EditImageAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		long imageId = ParamUtil.getLong(uploadRequest, "imageId");
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		long imageId = ParamUtil.getLong(uploadRequest, "imageId");
 
 		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");

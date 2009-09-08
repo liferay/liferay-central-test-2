@@ -250,7 +250,7 @@ portletURL.setParameter("name", name);
 
 				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
 
-				<aui:button name="removeFolderButton" value="remove" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' />
+				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 			</aui:field-wrapper>
 		</c:if>
 
