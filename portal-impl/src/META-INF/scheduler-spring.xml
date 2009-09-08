@@ -22,11 +22,18 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
-
+	<bean id="com.liferay.portal.kernel.scheduler.trigger.TriggerFactoryUtil" class="com.liferay.portal.kernel.scheduler.trigger.TriggerFactoryUtil">
+		<constructor-arg>
+			<bean class="com.liferay.portal.scheduler.trigger.TriggerFactoryImpl" />
+		</constructor-arg>
+	</bean>
 	<!-- Messaging -->
 
 	<bean id="destination.scheduler" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler" />
+	</bean>
+	<bean id="destination.scheduler_common" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler_common" />
 	</bean>
 	<bean id="destination.scheduler.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/scheduler/response" />
@@ -39,6 +46,7 @@
 		<property name="destinations">
 			<list>
 				<ref bean="destination.scheduler" />
+				<ref bean="destination.scheduler_common" />
 				<ref bean="destination.scheduler.response" />
 			</list>
 		</property>
