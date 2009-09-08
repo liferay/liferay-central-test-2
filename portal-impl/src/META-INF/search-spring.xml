@@ -2,8 +2,8 @@
 
 <beans
 	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
 >
 
@@ -56,16 +56,16 @@
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/search_writer" />
 	</bean>
-	<bean id="messageListener.cluster_bridge" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
-		<constructor-arg index="0">
-			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
-		</constructor-arg>
-	</bean>
 	<bean id="messageListener.search_reader" class="com.liferay.portal.kernel.search.messaging.SearchReaderMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
 	</bean>
 	<bean id="messageListener.search_writer" class="com.liferay.portal.kernel.search.messaging.SearchWriterMessageListener">
 		<property name="searchEngine" ref="searchEngine.lucene" />
+	</bean>
+	<bean id="messageListener.search_writer_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
+		<constructor-arg index="0">
+			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
+		</constructor-arg>
 	</bean>
 	<bean id="messagingConfigurator.search" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="specificDestinationEventListener">
@@ -99,8 +99,8 @@
 				</entry>
 				<entry key="liferay/search_writer">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<!--<ref bean="messageListener.cluster_bridge" /> -->
 						<ref bean="messageListener.search_writer" />
+						<ref bean="messageListener.search_writer_cluster" />
 					</list>
 				</entry>
 			</map>
