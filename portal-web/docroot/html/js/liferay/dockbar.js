@@ -4,8 +4,8 @@
 
 	AUI().use(
 		'context-overlay',
-		'overlay-manager',
 		'io-stdmod',
+		'overlay-manager',
 		'tool-item',
 		function(A) {
 			Liferay.Dockbar = {
