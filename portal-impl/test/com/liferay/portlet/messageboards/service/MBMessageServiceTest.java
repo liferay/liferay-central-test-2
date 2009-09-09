@@ -32,7 +32,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +76,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		serviceContext.setScopeGroupId(group.getGroupId());
 
 		_category = MBCategoryServiceUtil.addCategory(
-			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,
+			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,

@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 
 import java.util.Map;
 
@@ -137,7 +137,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "struts_action", "/message_boards/view");
 			addParam(
 				params, "mbCategoryId",
-				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 			return;
 		}

@@ -31,7 +31,7 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId");
 
-long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 MBMailingList mailingList = null;
 
@@ -48,7 +48,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 <script type="text/javascript">
 	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
 
@@ -72,7 +72,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 
-		if (parentCategoryId != <%= MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
+		if (parentCategoryId != <%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>) {
 			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
 		}
 	}
@@ -135,7 +135,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 
-				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
 					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-category" name="mergeWithParentFolder" type="checkbox" />
 				</div>
 			</aui:field-wrapper>

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -37,8 +38,6 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
-
-	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 	public MBCategoryImpl() {
 	}
@@ -88,7 +87,9 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	}
 
 	public boolean isRoot() {
-		if (getParentCategoryId() == DEFAULT_PARENT_CATEGORY_ID) {
+		if (getParentCategoryId() ==
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			return true;
 		}
 		else {

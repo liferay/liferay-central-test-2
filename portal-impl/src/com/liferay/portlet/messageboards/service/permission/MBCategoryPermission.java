@@ -29,7 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
@@ -75,7 +75,7 @@ public class MBCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (categoryId == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
@@ -112,7 +112,9 @@ public class MBCategoryPermission {
 		long categoryId = category.getCategoryId();
 
 		if (actionId.equals(ActionKeys.VIEW)) {
-			while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+			while (categoryId !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
 				categoryId = category.getParentCategoryId();
@@ -136,7 +138,9 @@ public class MBCategoryPermission {
 			return true;
 		}
 		else {
-			while (categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+			while (categoryId !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 				if (permissionChecker.hasOwnerPermission(
 						category.getCompanyId(), MBCategory.class.getName(),
 						category.getCategoryId(), category.getUserId(),

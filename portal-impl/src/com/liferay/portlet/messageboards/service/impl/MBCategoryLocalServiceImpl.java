@@ -46,10 +46,10 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
 
@@ -202,7 +202,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
-			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 		for (MBCategory category : categories) {
 			deleteCategory(category);
@@ -464,7 +464,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		if (mergeWithParentCategory &&
 			(categoryId != parentCategoryId) &&
-			(parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+			(parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
 		}
@@ -503,14 +504,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected long getParentCategoryId(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		if (parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+		if (parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			MBCategory parentCategory = mbCategoryPersistence.fetchByPrimaryKey(
 				parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(groupId != parentCategory.getGroupId())) {
 
-				parentCategoryId = MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
+				parentCategoryId =
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
@@ -521,7 +525,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			MBCategory category, long parentCategoryId)
 		throws SystemException {
 
-		if (parentCategoryId == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+		if (parentCategoryId ==
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			return parentCategoryId;
 		}
 

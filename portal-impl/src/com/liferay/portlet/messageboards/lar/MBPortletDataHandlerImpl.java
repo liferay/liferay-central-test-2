@@ -49,10 +49,10 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -75,7 +75,7 @@ import javax.portlet.PortletPreferences;
  * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
@@ -374,7 +374,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws PortalException, SystemException {
 
 		if ((!context.hasDateRange()) ||
-			(categoryId == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+			(categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			return;
 		}
@@ -479,7 +479,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		if ((parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+		if ((parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(parentCategoryId == category.getParentCategoryId())) {
 
 			String path = getImportCategoryPath(context, parentCategoryId);
@@ -497,7 +498,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		MBCategory existingCategory = null;
 
 		try {
-			if (parentCategoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+			if (parentCategoryId !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 				MBCategoryUtil.findByPrimaryKey(parentCategoryId);
 			}
 
@@ -628,7 +631,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());
 
-		if ((categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) &&
+		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {
 
 			String path = getImportCategoryPath(context, categoryId);
