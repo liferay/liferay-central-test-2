@@ -38,12 +38,14 @@
 	overflow: hidden;
 	clear: both;
 	margin: 0;
-	padding: 0;
+	padding: 3px;
 }
 
 .aui-form .aui-button-holder {
 	clear: both;
+	margin-top: 15px;
 	overflow: hidden;
+	text-align: left;
 }
 
 .aui-form .reset-button {
@@ -63,6 +65,7 @@
 }
 
 .aui-form .focused {
+	background: #FFFCDF;
 }
 
 .aui-form .aui-inline-labels .aui-ctrl-holder {
@@ -85,14 +88,19 @@
 
 .aui-form .aui-inline-labels .select-input {
 	float: left;
+	width: 45%;
 }
 
 .aui-form .aui-inline-labels textarea {
 	float: left;
+	height: 12em;
+	width: 45%;
 }
 
 .aui-form .aui-inline-labels .form-hint {
 	clear: both;
+	margin-left: 47%;
+	margin-top: 0;
 }
 
 .aui-form .aui-inline-labels .form-hint strong {
@@ -139,20 +147,21 @@
 
 .aui-form .aui-block-labels .select-input {
 	display: block;
+	width: 53.5%;
 }
 
 .aui-form .aui-block-labels textarea {
 	display: block;
 	float: left;
+	height: 12em;
+	width: 53%;
 }
 
 .aui-form .aui-block-labels .form-hint {
 	clear: none;
 	float: right;
 	margin: 0;
-}
-
-.aui-form .aui-block-labels .aui-ctrl-holder {
+	width: 45%;
 }
 
 .aui-form .aui-block-labels .focused {
@@ -187,15 +196,28 @@
 }
 
 .aui-form #error-msg dd {
+	margin: 0;
+	padding: 0;
 }
 
 .aui-form #error-msg ol {
+	margin: 0;
+	padding: 0;
 }
 
 .aui-form #error-msg ol li {
+	border-bottom: 1px dotted #DF7D7D;
+	list-style-position: inside;
+	margin: 0;
+	padding: 2px;
+	position: relative;
 }
 
 .aui-form .error-field {
+	background: #FFBFBF;
+	color: #AF4C4C;
+	margin: 0 0 6px 0;
+	padding: 4px;
 }
 
 .ie6 .aui-form, .ie6 .aui-form fieldset, .ie6 .aui-ctrl-holder, .ie6 .aui-ctrl-holder span, .ie6 .form-hint {
@@ -212,27 +234,18 @@
 }
 
 .aui-form fieldset legend {
-	font-weight: bold;
 	color: #000;
 	font-size: 120%;
+	font-weight: bold;
 	margin-bottom: 1.5em;
 	padding: 0;
 }
 
-.aui-form fieldset legend .aui-legen{
-	position: absolute;
-	border-bottom: 1px solid #ccc;
+.aui-form fieldset legend .aui-legend {
+	border-bottom: 1px solid #CCC;
 	display: block;
+	position: absolute;
 	width: 90%;
-}
-
-.aui-form .aui-ctrl-holder {
-	padding: 3px;
-}
-
-.aui-form .aui-button-holder {
-	text-align: left;
-	margin-top: 15px;
 }
 
 .aui-form .aui-ctrl-holder .aui-button-holder {
@@ -242,53 +255,20 @@
 	margin-top: 0;
 }
 
-.aui-form .focused {
-	background: #FFFCDF;
-}
-
 .aui-form .aui-ctrl-holder.inline-label label {
 	display: inline;
 }
 
-
-.aui-form .aui-inline-labels label,  .aui-form .aui-inline-labels .label {
+.aui-form .aui-inline-labels label,.aui-form .aui-inline-labels .label {
 	width: 45%;
 }
 
-.aui-form .aui-inline-labels .text-input,  .aui-form .aui-inline-labels .file-upload {
+.aui-form .aui-inline-labels .text-input,.aui-form .aui-inline-labels .file-upload {
 	width: 45%;
 }
 
-.aui-form .aui-inline-labels .select-input {
-	width: 45%;
-}
-
-.aui-form .aui-inline-labels textarea {
-	height: 12em;
-	width: 45%;
-}
-
-.aui-form .aui-inline-labels .form-hint {
-	margin-left: 47%;
-	margin-top: 0;
-}
-
-.aui-form .aui-block-labels .text-input,  .aui-form .aui-block-labels .file-upload {
+.aui-form .aui-block-labels .text-input,.aui-form .aui-block-labels .file-upload {
 	width: 53%;
-}
-
-.aui-form .aui-block-labels .select-input {
-	display: block;
-	width: 53.5%;
-}
-
-.aui-form .aui-block-labels textarea {
-	height: 12em;
-	width: 53%;
-}
-
-.aui-form .aui-block-labels .form-hint {
-	width: 45%;
 }
 
 .aui-form .aui-form-column {
@@ -321,40 +301,15 @@
 	border-width: 1px 0;
 }
 
-.aui-form #error-msg dt,  .aui-form #error-msg h3 {
+.aui-form #error-msg dt, .aui-form #error-msg h3 {
 	font-size: 110%;
 	font-weight: bold;
 	line-height: 100%;
 	margin: 0 0 .5em 0;
 }
 
-.aui-form #error-msg dd {
-	margin: 0;
-	padding: 0;
-}
-
-.aui-form #error-msg ol {
-	margin: 0;
-	padding: 0;
-}
-
-.aui-form #error-msg ol li {
-	border-bottom: 1px dotted #DF7D7D;
-	list-style-position: inside;
-	margin: 0;
-	padding: 2px;
-	position: relative;
-}
-
-.aui-form .error-field {
-	background: #FFBFBF;
-	color: #AF4C4C;
-	margin: 0 0 6px 0;
-	padding: 4px;
-}
-
 .aui-button-row {
+	background: #EEE;
+	border: 1px solid #CCC;
 	padding: 5px;
-	border: 1px solid #ccc;
-	background: #eee;
 }
