@@ -410,6 +410,8 @@ public class LayoutAction extends Action {
 			HttpServletResponse response, long plid)
 		throws Exception {
 
+		HttpSession session = request.getSession();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -419,7 +421,25 @@ public class LayoutAction extends Action {
 			boolean resetLayout = ParamUtil.getBoolean(
 				request, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
 
-			if (!PropsValues.TCK_URL && resetLayout) {
+			String portletId = ParamUtil.getString(request, "p_p_id");
+
+			Layout previousLayout = (Layout)session.getAttribute(
+				WebKeys.PREVIOUS_LAYOUT);
+
+			if ((previousLayout == null) ||
+				(layout.getPlid() != previousLayout.getPlid())) {
+
+				session.setAttribute(WebKeys.PREVIOUS_LAYOUT, layout);
+			}
+
+			if (!PropsValues.TCK_URL && resetLayout &&
+				(((previousLayout != null) &&
+				 (layout.getPlid() != previousLayout.getPlid()))) ||
+				 Validator.isNull(portletId)) {
+
+				// Always clear render parameters on a layout url, but do not
+				// clear on portlet urls invoked on the same layout
+
 				RenderParametersPool.clear(request, plid);
 			}
 
