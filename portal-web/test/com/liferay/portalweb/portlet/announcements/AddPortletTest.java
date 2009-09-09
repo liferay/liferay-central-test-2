@@ -51,23 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(500);
 		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

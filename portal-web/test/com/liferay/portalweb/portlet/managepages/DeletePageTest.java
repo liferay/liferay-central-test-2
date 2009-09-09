@@ -40,8 +40,7 @@ public class DeletePageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));

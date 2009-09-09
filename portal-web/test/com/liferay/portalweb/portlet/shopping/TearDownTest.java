@@ -70,8 +70,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("_34_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected coupons.$"));
@@ -95,8 +94,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("_34_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected orders[\\s\\S]$"));
@@ -126,7 +124,7 @@ public class TearDownTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-		selenium.clickAt("//img[@alt='Delete']", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -152,7 +150,7 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.clickAt("//td[4]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//div[5]/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -175,7 +173,7 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.clickAt("//td[4]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

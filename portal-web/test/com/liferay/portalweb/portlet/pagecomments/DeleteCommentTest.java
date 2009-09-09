@@ -51,14 +51,14 @@ public class DeleteCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("This is a test page comment."));
-		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

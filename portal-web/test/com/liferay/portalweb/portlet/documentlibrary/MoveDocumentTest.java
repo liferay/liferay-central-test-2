@@ -103,8 +103,7 @@ public class MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Second Test Folder", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Second Test Subfolder"));
 

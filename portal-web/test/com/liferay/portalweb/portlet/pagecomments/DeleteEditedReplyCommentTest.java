@@ -52,8 +52,8 @@ public class DeleteEditedReplyCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[8]/td[2]/table[1]/tbody/tr/td[5]/span/a[2]",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//tr[8]/td[2]/table[1]/tbody/tr/td[5]/span/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

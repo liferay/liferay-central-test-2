@@ -87,8 +87,7 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[5]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -125,8 +124,7 @@ public class DeleteAllTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[5]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

@@ -167,8 +167,7 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.type("_19_textArea",
 					RuntimeVariables.replace(
 						"Trust and paths will be straightened."));
-				selenium.clickAt("//input[@value='Select']",
-					RuntimeVariables.replace(""));
+				selenium.click("//input[@value='Select']");
 				selenium.waitForPopUp("category",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("category");
@@ -185,8 +184,7 @@ public class MoveThreadTest extends BaseTestCase {
 
 				selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//input[@value='Choose']",
-					RuntimeVariables.replace(""));
+				selenium.click("//input[@value='Choose']");
 
 			case 2:
 

@@ -130,7 +130,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[4]/td[4]/input", RuntimeVariables.replace(""));
+		selenium.click("//tr[4]/td[4]/input");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Video"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -223,8 +223,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Music"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

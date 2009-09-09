@@ -154,8 +154,7 @@ public class MoveImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Test3 Folder3", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("Test3 Subfolder3"),
 			selenium.getText("//div[1]/span/a"));

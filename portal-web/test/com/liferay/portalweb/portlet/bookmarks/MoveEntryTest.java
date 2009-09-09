@@ -152,8 +152,7 @@ public class MoveEntryTest extends BaseTestCase {
 
 		selenium.clickAt("link=Bookmarks Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {

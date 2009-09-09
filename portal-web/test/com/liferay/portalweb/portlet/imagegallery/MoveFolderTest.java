@@ -134,8 +134,7 @@ public class MoveFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Test1 Folder1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
 			selenium.getText("//div[1]/span/a"));
@@ -274,7 +273,7 @@ public class MoveFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[4]/td[4]/input", RuntimeVariables.replace(""));
+		selenium.click("//tr[4]/td[4]/input");
 		selenium.selectWindow("null");
 		assertEquals(RuntimeVariables.replace("Test3 Folder3"),
 			selenium.getText("//div[1]/span/a"));

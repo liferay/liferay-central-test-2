@@ -50,11 +50,11 @@ public class TearDownTest extends BaseTestCase {
 
 		selenium.clickAt("link=BA Setup Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		selenium.clickAt("//img[@alt='Remove']", RuntimeVariables.replace(""));
+		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -87,7 +87,7 @@ public class TearDownTest extends BaseTestCase {
 		selenium.clickAt("link=Return to Full Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//img[@alt='Remove']", RuntimeVariables.replace(""));
+		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
@@ -136,8 +136,7 @@ public class TearDownTest extends BaseTestCase {
 		selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
@@ -165,8 +164,7 @@ public class TearDownTest extends BaseTestCase {
 		selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));

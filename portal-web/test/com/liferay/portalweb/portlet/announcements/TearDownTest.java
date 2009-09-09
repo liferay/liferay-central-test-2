@@ -81,6 +81,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.select("_84_distributionScope",
 					RuntimeVariables.replace("label=General"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(500);
 
 				boolean NormalPriorityAvailable = selenium.isElementPresent(
 						"//strong/span");
@@ -109,13 +110,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[2]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
+				Thread.sleep(500);
 
 				boolean ImportantPriorityAvailable = selenium.isElementPresent(
 						"//strong/span");
@@ -144,8 +145,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[2]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -172,8 +172,8 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("link=Announcements Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				Thread.sleep(500);
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 				selenium.clickAt("//div[2]/ul/li[1]/a/span",
@@ -203,11 +203,46 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[3]/a/span",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//li[@id='_88_tabs3pageTabsId']/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//input[@value='Delete']",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Delete']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
