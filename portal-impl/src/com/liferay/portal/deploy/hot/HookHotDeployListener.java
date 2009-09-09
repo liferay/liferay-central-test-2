@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -41,7 +42,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,9 +52,10 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AuthFailure;
+import com.liferay.portal.security.auth.AuthPipeline;
+import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.portal.security.auth.InvokerAuthFailure;
 import com.liferay.portal.security.auth.InvokerAutoLogin;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
@@ -74,6 +75,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 
 import java.net.URL;
 
@@ -348,11 +350,11 @@ public class HookHotDeployListener
 
 		for (Element modelListenerEl : modelListenerEls) {
 			String modelName = modelListenerEl.elementText("model-name");
-			String modelListenerClass = modelListenerEl.elementText(
+			String modelListenerClassName = modelListenerEl.elementText(
 				"model-listener-class");
 
 			ModelListener<BaseModel<?>> modelListener = initModelListener(
-				modelName, modelListenerClass, portletClassLoader);
+				modelName, modelListenerClassName, portletClassLoader);
 
 			if (modelListener != null) {
 				modelListenersContainer.registerModelListener(
@@ -373,9 +375,10 @@ public class HookHotDeployListener
 
 		for (Element eventEl : eventEls) {
 			String eventName = eventEl.elementText("event-type");
-			String eventClass = eventEl.elementText("event-class");
+			String eventClassName = eventEl.elementText("event-class");
 
-			Object obj = initEvent(eventName, eventClass, portletClassLoader);
+			Object obj = initEvent(
+				eventName, eventClassName, portletClassLoader);
 
 			if (obj != null) {
 				eventsContainer.registerEvent(eventName, obj);
@@ -404,10 +407,17 @@ public class HookHotDeployListener
 		if (!_servletContextNames.remove(servletContextName)) {
 			return;
 		}
-		
-		AuthFailuresContainer authFailuresContainer = 
+
+		AuthenticatorsContainer authenticatorsContainer =
+			_authenticatorsContainerMap.remove(servletContextName);
+
+		if (authenticatorsContainer != null) {
+			authenticatorsContainer.unregisterAuthenticators();
+		}
+
+		AuthFailuresContainer authFailuresContainer =
 			_authFailuresContainerMap.remove(servletContextName);
-		
+
 		if (authFailuresContainer != null) {
 			authFailuresContainer.unregisterAuthFailures();
 		}
@@ -525,30 +535,91 @@ public class HookHotDeployListener
 
 		return new File(fileName);
 	}
-	
+
+	protected void initAuthenticators(
+			ClassLoader portletClassLoader, Properties portalProperties,
+			String key, AuthenticatorsContainer authenticatorsContainer)
+		throws Exception {
+
+		String[] authenticatorClassNames = StringUtil.split(
+			portalProperties.getProperty(key));
+
+		for (String authenticatorClassName : authenticatorClassNames) {
+			Authenticator authenticator =
+				(Authenticator)portletClassLoader.loadClass(
+					authenticatorClassName).newInstance();
+
+			authenticator = (Authenticator)Proxy.newProxyInstance(
+				portletClassLoader,
+				new Class[] {Authenticator.class},
+				new ContextClassLoaderBeanHandler(
+					authenticator, portletClassLoader));
+
+			authenticatorsContainer.registerAuthenticator(
+				key, authenticator);
+		}
+	}
+
+	protected void initAuthenticators(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		AuthenticatorsContainer authenticatorsContainer =
+			new AuthenticatorsContainer();
+
+		_authenticatorsContainerMap.put(
+			servletContextName, authenticatorsContainer);
+
+		initAuthenticators(
+			portletClassLoader, portalProperties, AUTH_PIPELINE_PRE,
+			authenticatorsContainer);
+		initAuthenticators(
+			portletClassLoader, portalProperties, AUTH_PIPELINE_POST,
+			authenticatorsContainer);
+	}
+
+	protected void initAuthFailures(
+			ClassLoader portletClassLoader, Properties portalProperties,
+			String key, AuthFailuresContainer authFailuresContainer)
+		throws Exception {
+
+		String[] authFailureClassNames = StringUtil.split(
+			portalProperties.getProperty(key));
+
+		for (String authFailureClassName : authFailureClassNames) {
+			AuthFailure authFailure = (AuthFailure)portletClassLoader.loadClass(
+				authFailureClassName).newInstance();
+
+			authFailure = (AuthFailure)Proxy.newProxyInstance(
+				portletClassLoader,
+				new Class[] {AuthFailure.class},
+				new ContextClassLoaderBeanHandler(
+					authFailure, portletClassLoader));
+
+			authFailuresContainer.registerAuthFailure(
+				key, authFailure);
+		}
+	}
+
 	protected void initAuthFailures(
 			String servletContextName, ClassLoader portletClassLoader,
 			Properties portalProperties)
 		throws Exception {
 
-		AuthFailuresContainer authFailuresContainer = new AuthFailuresContainer();
+		AuthFailuresContainer authFailuresContainer =
+			new AuthFailuresContainer();
 
-		_authFailuresContainerMap.put(servletContextName, authFailuresContainer);
+		_authFailuresContainerMap.put(
+			servletContextName, authFailuresContainer);
 
-		String[] authFailureClasses = StringUtil.split(
-			portalProperties.getProperty(AUTH_FAILURE));
-
-		for (String authFailureClass : authFailureClasses) {
-			AuthFailure authFailure = (AuthFailure)portletClassLoader.loadClass(
-					authFailureClass).newInstance();
-
-			if (authFailure != null) {
-				authFailure = new InvokerAuthFailure(authFailure, portletClassLoader);
-
-				authFailuresContainer.registerAuthFailure(authFailureClass, authFailure);
-			}
-		}
-	}	
+		initAuthFailures(
+			portletClassLoader, portalProperties, AUTH_FAILURE,
+			authFailuresContainer);
+		initAuthFailures(
+			portletClassLoader, portalProperties, AUTH_MAX_FAILURES,
+			authFailuresContainer);
+	}
 
 	protected void initAutoLogins(
 			String servletContextName, ClassLoader portletClassLoader,
@@ -559,18 +630,16 @@ public class HookHotDeployListener
 
 		_autoLoginsContainerMap.put(servletContextName, autoLoginsContainer);
 
-		String[] autoLoginClasses = StringUtil.split(
+		String[] autoLoginClassNames = StringUtil.split(
 			portalProperties.getProperty(AUTO_LOGIN_HOOKS));
 
-		for (String autoLoginClass : autoLoginClasses) {
+		for (String autoLoginClassName : autoLoginClassNames) {
 			AutoLogin autoLogin = (AutoLogin)portletClassLoader.loadClass(
-				autoLoginClass).newInstance();
+				autoLoginClassName).newInstance();
 
-			if (autoLogin != null) {
-				autoLogin = new InvokerAutoLogin(autoLogin, portletClassLoader);
+			autoLogin = new InvokerAutoLogin(autoLogin, portletClassLoader);
 
-				autoLoginsContainer.registerAutoLogin(autoLogin);
-			}
+			autoLoginsContainer.registerAutoLogin(autoLogin);
 		}
 	}
 
@@ -603,13 +672,14 @@ public class HookHotDeployListener
 	}
 
 	protected Object initEvent(
-			String eventName, String eventClass, ClassLoader portletClassLoader)
+			String eventName, String eventClassName,
+			ClassLoader portletClassLoader)
 		throws Exception {
 
 		if (eventName.equals(APPLICATION_STARTUP_EVENTS)) {
 			SimpleAction simpleAction =
 				(SimpleAction)portletClassLoader.loadClass(
-					eventClass).newInstance();
+					eventClassName).newInstance();
 
 			simpleAction = new InvokerSimpleAction(
 				simpleAction, portletClassLoader);
@@ -631,7 +701,7 @@ public class HookHotDeployListener
 
 		if (ArrayUtil.contains(_PROPS_KEYS_EVENTS, eventName)) {
 			Action action = (Action)portletClassLoader.loadClass(
-				eventClass).newInstance();
+				eventClassName).newInstance();
 
 			action = new InvokerAction(action, portletClassLoader);
 
@@ -643,7 +713,7 @@ public class HookHotDeployListener
 		if (ArrayUtil.contains(_PROPS_KEYS_SESSION_EVENTS, eventName)) {
 			SessionAction sessionAction =
 				(SessionAction)portletClassLoader.loadClass(
-					eventClass).newInstance();
+					eventClassName).newInstance();
 
 			sessionAction = new InvokerSessionAction(
 				sessionAction, portletClassLoader);
@@ -678,12 +748,12 @@ public class HookHotDeployListener
 			}
 
 			String eventName = key;
-			String[] eventClasses = StringUtil.split(
+			String[] eventClassNames = StringUtil.split(
 				portalProperties.getProperty(key));
 
-			for (String eventClass : eventClasses) {
+			for (String eventClassName : eventClassNames) {
 				Object obj = initEvent(
-					eventName, eventClass, portletClassLoader);
+					eventName, eventClassName, portletClassLoader);
 
 				if (obj == null) {
 					continue;
@@ -695,13 +765,13 @@ public class HookHotDeployListener
 	}
 
 	protected ModelListener<BaseModel<?>> initModelListener(
-			String modelName, String modelListenerClass,
+			String modelName, String modelListenerClassName,
 			ClassLoader portletClassLoader)
 		throws Exception {
 
 		ModelListener<BaseModel<?>> modelListener =
 			(ModelListener<BaseModel<?>>)portletClassLoader.loadClass(
-				modelListenerClass).newInstance();
+				modelListenerClassName).newInstance();
 
 		modelListener = new InvokerModelListener<BaseModel<?>>(
 			modelListener, portletClassLoader);
@@ -734,10 +804,10 @@ public class HookHotDeployListener
 			}
 
 			String modelName = key.substring(VALUE_OBJECT_LISTENER.length());
-			String modelListenerClass = portalProperties.getProperty(key);
+			String modelListenerClassName = portalProperties.getProperty(key);
 
 			ModelListener<BaseModel<?>> modelListener = initModelListener(
-				modelName, modelListenerClass, portletClassLoader);
+				modelName, modelListenerClassName, portletClassLoader);
 
 			if (modelListener != null) {
 				modelListenersContainer.registerModelListener(
@@ -764,12 +834,13 @@ public class HookHotDeployListener
 		resetPortalProperties(portalProperties);
 
 		if (portalProperties.contains(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL)) {
-			String attributesTransformerClass = portalProperties.getProperty(
-				PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
+			String attributesTransformerClassName =
+				portalProperties.getProperty(
+					PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
 
 			AttributesTransformer attributesTransformer =
 				(AttributesTransformer)portletClassLoader.loadClass(
-					attributesTransformerClass).newInstance();
+					attributesTransformerClassName).newInstance();
 
 			attributesTransformer = new InvokerAttributesTransformer(
 				attributesTransformer, portletClassLoader);
@@ -958,6 +1029,8 @@ public class HookHotDeployListener
 	private static Log _log =
 		LogFactoryUtil.getLog(HookHotDeployListener.class);
 
+	private Map<String, AuthenticatorsContainer> _authenticatorsContainerMap =
+		new HashMap<String, AuthenticatorsContainer>();
 	private Map<String, AuthFailuresContainer> _authFailuresContainerMap =
 		new HashMap<String, AuthFailuresContainer>();
 	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
@@ -974,24 +1047,76 @@ public class HookHotDeployListener
 		new HashMap<String, Properties>();
 	private Set<String> _servletContextNames = new HashSet<String>();
 
-	private class AuthFailuresContainer {
+	private class AuthenticatorsContainer {
 
-		public void registerAuthFailure(String className, AuthFailure authFailure) {
-			InstancePool.put(className, authFailure);
+		public void registerAuthenticator(
+			String key, Authenticator authenticator) {
 
-			_authFailures.put(className, authFailure);
+			List<Authenticator> authenticators = _authenticators.get(key);
+
+			if (authenticators == null) {
+				authenticators = new ArrayList<Authenticator>();
+
+				_authenticators.put(key, authenticators);
+			}
+
+			AuthPipeline.registerAuthenticator(key, authenticator);
+
+			authenticators.add(authenticator);
 		}
 
-		public void unregisterAuthFailures() {
-			for (String className : _authFailures.keySet()) {
-				InstancePool.put(className, null);
+		public void unregisterAuthenticators() {
+			for (Map.Entry<String, List<Authenticator>> entry :
+					_authenticators.entrySet()) {
+
+				String key = entry.getKey();
+				List<Authenticator> authenticators = entry.getValue();
+
+				for (Authenticator authenticator : authenticators) {
+					AuthPipeline.unregisterAuthenticator(key, authenticator);
+				}
 			}
 		}
 
-		Map<String, AuthFailure> _authFailures = new HashMap<String, AuthFailure>();
+		Map<String, List<Authenticator>> _authenticators =
+			new HashMap<String, List<Authenticator>>();
 
-	}	
-	
+	}
+
+	private class AuthFailuresContainer {
+
+		public void registerAuthFailure(String key, AuthFailure authFailure) {
+			List<AuthFailure> authFailures = _authFailures.get(key);
+
+			if (authFailures == null) {
+				authFailures = new ArrayList<AuthFailure>();
+
+				_authFailures.put(key, authFailures);
+			}
+
+			AuthPipeline.registerAuthFailure(key, authFailure);
+
+			authFailures.add(authFailure);
+		}
+
+		public void unregisterAuthFailures() {
+			for (Map.Entry<String, List<AuthFailure>> entry :
+					_authFailures.entrySet()) {
+
+				String key = entry.getKey();
+				List<AuthFailure> authFailures = entry.getValue();
+
+				for (AuthFailure authFailure : authFailures) {
+					AuthPipeline.unregisterAuthFailure(key, authFailure);
+				}
+			}
+		}
+
+		Map<String, List<AuthFailure>> _authFailures =
+			new HashMap<String, List<AuthFailure>>();
+
+	}
+
 	private class AutoLoginsContainer {
 
 		public void registerAutoLogin(AutoLogin autoLogin) {
@@ -1081,10 +1206,10 @@ public class HookHotDeployListener
 			}
 		}
 
-		private MultiMessageResources _multiMessageResources =
-			MultiMessageResourcesFactory.getInstance();
 		private Map<String, Properties> _languagesMap =
 			new HashMap<String, Properties>();
+		private MultiMessageResources _multiMessageResources =
+			MultiMessageResourcesFactory.getInstance();
 
 	}
 

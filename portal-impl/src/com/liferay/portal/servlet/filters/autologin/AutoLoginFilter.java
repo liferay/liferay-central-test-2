@@ -53,7 +53,7 @@ import javax.servlet.http.HttpSession;
  * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class AutoLoginFilter extends BasePortalFilter {
 
@@ -88,9 +88,9 @@ public class AutoLoginFilter extends BasePortalFilter {
 	public AutoLoginFilter() {
 		List<AutoLogin> autoLogins = new ArrayList<AutoLogin>();
 
-		for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
+		for (String autoLoginClassName : PropsValues.AUTO_LOGIN_HOOKS) {
 			AutoLogin autoLogin = (AutoLogin)InstancePool.get(
-				autoLoginHook);
+				autoLoginClassName);
 
 			autoLogins.add(autoLogin);
 		}
