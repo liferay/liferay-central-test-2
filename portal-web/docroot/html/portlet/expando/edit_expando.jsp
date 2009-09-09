@@ -66,101 +66,82 @@ portletURL.setParameter("modelResource", modelResource);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/expando/edit_expando" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveExpando(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />columnId" type="hidden" value="<%= columnId %>" />
-<input name="<portlet:namespace />modelResource" type="hidden" value="<%= HtmlUtil.escapeAttribute(modelResource) %>" />
+<portlet:actionURL var="editExpandoURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/expando/edit_expando" />
+</portlet:actionURL>
 
-<div>
-	<liferay-ui:message key="edit-custom-attributes-for" />: <a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></a>
-</div>
+<aui:form action="<%= editExpandoURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveExpando(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="columnId" type="hidden" value="<%= columnId %>" />
+	<aui:input name="modelResource" type="hidden" value="<%= modelResource %>" />
 
-<br />
+	<div>
+		<liferay-ui:message key="edit-custom-attributes-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
+	</div>
 
-<liferay-ui:tabs
-	names="custom-attribute"
-	backURL="<%= redirect %>"
-/>
+	<br />
 
-<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= ColumnTypeException.class %>" message="please-select-a-valid-type" />
-<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= ValueDataException.class %>" message="please-enter-a-valid-value" />
+	<liferay-ui:tabs
+		names="custom-attribute"
+		backURL="<%= redirect %>"
+	/>
 
-<table class="lfr-table">
+	<liferay-ui:error exception="<%= ColumnNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= ColumnTypeException.class %>" message="please-select-a-valid-type" />
+	<liferay-ui:error exception="<%= DuplicateColumnNameException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= ValueDataException.class %>" message="please-enter-a-valid-value" />
 
-<c:if test="<%= column != null %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="name" />
-		</td>
-		<td>
+	<aui:model-context bean="<%= column %>" model="<%= ExpandoColumn.class %>" />
 
-			<%
-			String name = column.getName();
-			String localizedName = LanguageUtil.get(pageContext, name);
+	<aui:fieldset>
+		<c:if test="<%= column != null %>">
+			<aui:field-wrapper label="name">
 
-			if (name.equals(localizedName)) {
-				localizedName = TextFormatter.format(name, TextFormatter.J);
-			}
-			%>
+				<%
+				String name = column.getName();
+				String localizedName = LanguageUtil.get(pageContext, name);
 
-			<%= HtmlUtil.escape(localizedName) %>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+				if (name.equals(localizedName)) {
+					localizedName = TextFormatter.format(name, TextFormatter.J);
+				}
+				%>
 
-<tr>
-	<td>
-		<liferay-ui:message key="key" />
-	</td>
-	<td>
+				<%= HtmlUtil.escape(localizedName) %>
+			</aui:field-wrapper>
+		</c:if>
+
 		<c:choose>
 			<c:when test="<%= column != null %>">
-				<input name="<portlet:namespace />name" type="hidden" value="<%= HtmlUtil.escape(column.getName()) %>" />
+				<aui:field-wrapper helpMessage="custom-attribute-key-help" label="key">
+					<aui:input name="name" type="hidden" value="<%= column.getName() %>" />
 
-				<%= HtmlUtil.escape(column.getName()) %>
+					<%= HtmlUtil.escape(column.getName()) %>
+				</aui:field-wrapper>
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:input-field model="<%= ExpandoColumn.class %>" bean="<%= column %>" field="name" />
+				<aui:input helpMessage="custom-attribute-key-help" label="key" name="name" />
 			</c:otherwise>
 		</c:choose>
 
-		<liferay-ui:icon-help message="custom-attribute-key-help" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
 		<c:choose>
 			<c:when test="<%= column != null %>">
-				<input name="<portlet:namespace />type" type="hidden" value="<%= type %>" />
+				<aui:field-wrapper label="type">
+					<aui:input name="ype" type="hidden" value="<%= type %>" />
 
-				<liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(type) %>" />
+					<liferay-ui:message key="<%= ExpandoColumnConstants.getTypeLabel(type) %>" />
+				</aui:field-wrapper>
 			</c:when>
 			<c:otherwise>
-				<select name="<portlet:namespace />type">
+				<aui:select helpMessage="custom-attribute-type-help" name="type">
 					<optgroup label="<liferay-ui:message key="presets" />">
-						<option value="PresetSelectionIntegerArray()"><liferay-ui:message key="selection-of-integer-values" /></option>
-						<option value="PresetSelectionDoubleArray()"><liferay-ui:message key="selection-of-decimal-values" /></option>
-						<option value="PresetSelectionStringArray()"><liferay-ui:message key="selection-of-text-values" /></option>
-						<option value="PresetTextBox()"><liferay-ui:message key="text-box" /></option>
-						<option value="PresetTextBoxIndexed()"><liferay-ui:message key="text-box-indexed" /></option>
-						<option value="PresetTextFieldSecret()"><liferay-ui:message key="text-field-secret" /></option>
-						<option selected value="PresetTextFieldIndexed()"><liferay-ui:message key="text-field-indexed" /></option>
+						<aui:option label="selection-of-integer-values" value="PresetSelectionIntegerArray()" />
+						<aui:option label="selection-of-decimal-values" value="PresetSelectionDoubleArray()" />
+						<aui:option label="selection-of-text-values" value="PresetSelectionStringArray()" />
+						<aui:option label="text-box" value="PresetTextBox()" />
+						<aui:option label="text-box-indexed" value="PresetTextBoxIndexed()" />
+						<aui:option label="text-field-secret" value="PresetTextFieldSecret()" />
+						<aui:option label="text-field-indexed" selected="<%= true %>" value="PresetTextFieldIndexed()" />
 					</optgroup>
 					<optgroup label="<liferay-ui:message key="primitives" />">
 
@@ -171,32 +152,18 @@ portletURL.setParameter("modelResource", modelResource);
 							}
 						%>
 
-							<option value="<%= curType %>"><%= ExpandoColumnConstants.getTypeLabel(curType) %></option>
+							<aui:option label="<%= ExpandoColumnConstants.getTypeLabel(curType) %>" value="<%= curType %>" />
 
 						<%
 						}
 						%>
 
 					</optgroup>
-				</select>
-
-				<liferay-ui:icon-help message="custom-attribute-type-help" />
+				</aui:select>
 			</c:otherwise>
 		</c:choose>
-	</td>
-</tr>
 
-<c:if test="<%= column != null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="default-value" />
-		</td>
-		<td>
+		<c:if test="<%= column != null %>">
 			<c:choose>
 				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN %>">
 
@@ -204,10 +171,10 @@ portletURL.setParameter("modelResource", modelResource);
 					boolean curValue = ((Boolean)defaultValue).booleanValue();
 					%>
 
-					<select name="<portlet:namespace />defaultValue">
-						<option <%= curValue ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
-						<option <%= !curValue ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
-					</select>
+					<aui:select name="defaultValue">
+						<aui:option label="true" selected="<%= curValue %>" value="1" />
+						<aui:option label="false" selected="<%= !curValue %>" value="0" />
+					</aui:select>
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
 				</c:when>
@@ -221,166 +188,112 @@ portletURL.setParameter("modelResource", modelResource);
 					}
 					%>
 
-					<liferay-ui:input-date
-						monthParam="defaultValueMonth"
-						monthValue="<%= defaultValueDate.get(Calendar.MONTH) %>"
-						dayParam="defaultValueDay"
-						dayValue="<%= defaultValueDate.get(Calendar.DATE) %>"
-						yearParam="defaultValueYear"
-						yearValue="<%= defaultValueDate.get(Calendar.YEAR) %>"
-						yearRangeStart="<%= defaultValueDate.get(Calendar.YEAR) - 100 %>"
-						yearRangeEnd="<%= defaultValueDate.get(Calendar.YEAR) + 100 %>"
-						firstDayOfWeek="<%= defaultValueDate.getFirstDayOfWeek() - 1 %>"
-						disabled="<%= false %>"
-					/>
+					<aui:field-wrapper label="default-value">
+						<liferay-ui:input-date
+							monthParam="defaultValueMonth"
+							monthValue="<%= defaultValueDate.get(Calendar.MONTH) %>"
+							dayParam="defaultValueDay"
+							dayValue="<%= defaultValueDate.get(Calendar.DATE) %>"
+							yearParam="defaultValueYear"
+							yearValue="<%= defaultValueDate.get(Calendar.YEAR) %>"
+							yearRangeStart="<%= defaultValueDate.get(Calendar.YEAR) - 100 %>"
+							yearRangeEnd="<%= defaultValueDate.get(Calendar.YEAR) + 100 %>"
+							firstDayOfWeek="<%= defaultValueDate.getFirstDayOfWeek() - 1 %>"
+							disabled="<%= false %>"
+						/>
 
-					&nbsp;
+						&nbsp;
 
-					<liferay-ui:input-time
-						hourParam="defaultValueHour"
-						hourValue="<%= defaultValueDate.get(Calendar.HOUR) %>"
-						minuteParam="defaultValueMinute"
-						minuteValue="<%= defaultValueDate.get(Calendar.MINUTE) %>"
-						minuteInterval="<%= 1 %>"
-						amPmParam="defaultValueAmPm"
-						amPmValue="<%= defaultValueDate.get(Calendar.AM_PM) %>"
-						disabled="<%= false %>"
-					/>
+						<liferay-ui:input-time
+							hourParam="defaultValueHour"
+							hourValue="<%= defaultValueDate.get(Calendar.HOUR) %>"
+							minuteParam="defaultValueMinute"
+							minuteValue="<%= defaultValueDate.get(Calendar.MINUTE) %>"
+							minuteInterval="<%= 1 %>"
+							amPmParam="defaultValueAmPm"
+							amPmValue="<%= defaultValueDate.get(Calendar.AM_PM) %>"
+							disabled="<%= false %>"
+						/>
+					</aui:field-wrapper>
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.DATE_ARRAY %>">
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.DOUBLE_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((double[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((double[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.FLOAT_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((float[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((float[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.INTEGER_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((int[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((int[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.LONG_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((long[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((long[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.SHORT_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= StringUtil.merge((short[])defaultValue, StringPool.NEW_LINE) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((short[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.STRING_ARRAY %>">
-					<textarea class="lfr-textarea" name="<portlet:namespace />defaultValue"><%= HtmlUtil.escape(StringUtil.merge((String[])defaultValue, StringPool.NEW_LINE)) %></textarea>
+					<aui:input cssClass="lfr-textarea-container" name="defaultValue" type="textarea" value="<%= StringUtil.merge((String[])defaultValue, StringPool.NEW_LINE) %>" />
 				</c:when>
 				<c:otherwise>
-					<input class="lfr-input-text" name="<portlet:namespace />defaultValue" type="text" value="<%= HtmlUtil.escape(String.valueOf(defaultValue)) %>" />
+					<aui:input cssClass="lfr-input-text-container" name="defaultValue" type="text" value="<%= String.valueOf(defaultValue) %>" />
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-	</table>
+		</c:if>
+	</aui:fieldset>
 
-	<br />
+	<c:if test="<%= column != null %>">
+		<aui:fieldset>
+			<aui:legend label="properties" />
+			<aui:input type="hidden" name="PropertyName(hidden)" value="hidden" />
 
-	<liferay-ui:tabs names="properties" />
+			<aui:select helpMessage="custom-attribute-hidden-help" label="hidden" name="Property(hidden)">
+				<aui:option label="true" selected="<%= propertyHidden %>" value="1" />
+				<aui:option label="false" selected="<%= !propertyHidden %>" value="0" />
+			</aui:select>
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="hidden" />
-		</td>
-		<td>
-			<input type="hidden" name="<portlet:namespace />PropertyName(hidden)" value="hidden" />
+			<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
+				<aui:input type="hidden" name="PropertyName(selection)" value="selection" />
 
-			<select name="<portlet:namespace />Property(hidden)">
-				<option <%= propertyHidden ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
-				<option <%= !propertyHidden ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
-			</select>
+				<aui:select helpMessage="custom-attribute-selection-help" label="selection" name="Property(selection)">
+					<aui:option label="true" selected="<%= propertySelection %>" value="1" />
+					<aui:option label="false" selected="<%= !propertySelection %>" value="0" />
+				</aui:select>
+			</c:if>
 
-			<liferay-ui:icon-help message="custom-attribute-hidden-help" />
-		</td>
-	</tr>
+			<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
+				<aui:input type="hidden" name="PropertyName(indexable)" value="indexable" />
 
-	<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="selection" />
-			</td>
-			<td>
-				<input type="hidden" name="<portlet:namespace />PropertyName(selection)" value="selection" />
+				<aui:select helpMessage="custom-attribute-indexable-help" label="searchable" name="<portlet:namespace />Property(indexable)">
+					<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
+					<aui:option label="false" selected="<%= !propertyIndexable %>" value="0" />
+				</aui:select>
 
-				<select name="<portlet:namespace />Property(selection)">
-					<option <%= propertySelection ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertySelection ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
-				</select>
+				<aui:input type="hidden" name="PropertyName(secret)" value="secret" />
 
-				<liferay-ui:icon-help message="custom-attribute-selection-help" />
-			</td>
-		</tr>
+				<aui:select helpMessage="custom-attribute-secret-help" label="secret" name="<portlet:namespace />Property(secret)">
+					<aui:option label="true" selected="<%= propertySecret %>" value="1" />
+					<aui:option label="false" selected="<%= !propertySecret %>" value="0" />
+				</aui:select>
+
+				<aui:input type="hidden" name="PropertyName(height)" value="height" />
+
+				<aui:input cssClass="lfr-input-text short-input-text" helpMessage="custom-attribute-height-help" label="height" name="Property(height)" type="text" value="<%= propertyHeight %>" />
+
+				<aui:input type="hidden" name="PropertyName(width)" value="width" />
+
+				<aui:input cssClass="lfr-input-text short-input-text" helpMessage="custom-attribute-height-help" label="width" name="Property(width)" type="text" value="<%= propertyWidth %>" />
+			</c:if>
+		</aui:fieldset>
 	</c:if>
 
-	<c:if test="<%= type == ExpandoColumnConstants.STRING %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="searchable" />
-			</td>
-			<td>
-				<input type="hidden" name="<portlet:namespace />PropertyName(indexable)" value="indexable" />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-				<select name="<portlet:namespace />Property(indexable)">
-					<option <%= propertyIndexable ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertyIndexable ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
-				</select>
-
-				<liferay-ui:icon-help message="custom-attribute-indexable-help" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="secret" />
-			</td>
-			<td>
-				<input type="hidden" name="<portlet:namespace />PropertyName(secret)" value="secret" />
-
-				<select name="<portlet:namespace />Property(secret)">
-					<option <%= propertySecret ? "selected" : "" %> value="1"><liferay-ui:message key="true" /></option>
-					<option <%= !propertySecret ? "selected" : "" %> value="0"><liferay-ui:message key="false" /></option>
-				</select>
-
-				<liferay-ui:icon-help message="custom-attribute-secret-help" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="height" />
-			</td>
-			<td>
-				<input type="hidden" name="<portlet:namespace />PropertyName(height)" value="height" />
-
-				<input class="lfr-input-text" name="<portlet:namespace />Property(height)" style="width: 25;" type="text" value="<%= propertyHeight %>" />
-
-				<liferay-ui:icon-help message="custom-attribute-height-help" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="width" />
-			</td>
-			<td>
-				<input type="hidden" name="<portlet:namespace />PropertyName(width)" value="width" />
-
-				<input class="lfr-input-text" name="<portlet:namespace />Property(width)" style="width: 25;" type="text" value="<%= propertyWidth %>" />
-
-				<liferay-ui:icon-help message="custom-attribute-height-help" />
-			</td>
-		</tr>
-	</c:if>
-</c:if>
-
-</table>
-
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && (column == null) %>">
 	<script type="text/javascript">

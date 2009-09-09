@@ -44,7 +44,7 @@ portletURL.setParameter("modelResource", modelResource);
 </script>
 
 <div>
-	<liferay-ui:message key="edit-custom-attributes-for" />: <a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></a>
+	<liferay-ui:message key="edit-custom-attributes-for" />: <aui:a href="<%= HtmlUtil.escape(redirect) %>"><%= modelResourceName %></aui:a>
 </div>
 
 <br />
@@ -202,9 +202,9 @@ List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames()
 	</liferay-ui:search-container-row>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_EXPANDO) %>">
-		<div>
-			<input type="button" value="<liferay-ui:message key="add-custom-attribute" />" onClick="<portlet:namespace />addExpando();" />
-		</div>
+		<aui:button-row>
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addExpando();" %>' value="add-custom-attribute" />
+		</aui:button-row>
 
 		<br />
 	</c:if>
