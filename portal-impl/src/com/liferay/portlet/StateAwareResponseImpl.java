@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PublicRenderParameter;
@@ -287,9 +288,15 @@ public abstract class StateAwareResponseImpl
 		PublicRenderParameter publicRenderParameter =
 			getPortlet().getPublicRenderParameter(name);
 
-		if (publicRenderParameter == null) {
+		if (publicRenderParameter != null) {
 			com.liferay.portal.kernel.xml.QName qName =
 				publicRenderParameter.getQName();
+
+			if (_publicRenderParameters.containsKey(name)) {
+				String[] oldValues = _publicRenderParameters.get(name);
+
+				values = ArrayUtil.append(oldValues, values);
+			}
 
 			_publicRenderParameters.put(
 				PortletQNameUtil.getKey(qName), values);
