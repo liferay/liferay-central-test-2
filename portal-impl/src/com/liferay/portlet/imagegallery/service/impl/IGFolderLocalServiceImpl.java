@@ -385,9 +385,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Merge folders
 
-		if (mergeWithParentFolder && (folderId != parentFolderId) &&
-			(parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (mergeWithParentFolder && (folderId != parentFolderId)) {
 			mergeFolders(folder, parentFolderId);
 		}
 

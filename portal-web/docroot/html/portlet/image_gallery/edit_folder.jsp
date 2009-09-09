@@ -42,9 +42,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 		nameEl.href = "";
 		nameEl.innerHTML = "";
-
-		jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").hide();
-		jQuery("#<portlet:namespace />mergeWithParentFolderCheckbox").attr("checked", false);
 	}
 
 	function <portlet:namespace />saveFolder() {
@@ -59,10 +56,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
-
-		if (parentFolderId != <%= IGFolderConstants.DEFAULT_PARENT_FOLDER_ID %>) {
-			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
-		}
 	}
 </script>
 
@@ -119,9 +112,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", I
 
 				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 
-				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= folder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
-					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
-				</div>
+				<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
 			</aui:field-wrapper>
 		</c:if>
 
