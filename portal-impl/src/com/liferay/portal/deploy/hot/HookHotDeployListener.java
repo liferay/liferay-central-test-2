@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -50,8 +51,10 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.auth.InvokerAuthFailure;
 import com.liferay.portal.security.auth.InvokerAutoLogin;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
@@ -233,6 +236,9 @@ public class HookHotDeployListener
 					// been registered.
 
 					initPortalProperties(portletClassLoader, portalProperties);
+					initAuthFailures(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -398,6 +404,13 @@ public class HookHotDeployListener
 		if (!_servletContextNames.remove(servletContextName)) {
 			return;
 		}
+		
+		AuthFailuresContainer authFailuresContainer = 
+			_authFailuresContainerMap.remove(servletContextName);
+		
+		if (authFailuresContainer != null) {
+			authFailuresContainer.unregisterAuthFailures();
+		}
 
 		AutoLoginsContainer autoLoginsContainer =
 			_autoLoginsContainerMap.remove(servletContextName);
@@ -512,6 +525,30 @@ public class HookHotDeployListener
 
 		return new File(fileName);
 	}
+	
+	protected void initAuthFailures(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		AuthFailuresContainer authFailuresContainer = new AuthFailuresContainer();
+
+		_authFailuresContainerMap.put(servletContextName, authFailuresContainer);
+
+		String[] authFailureClasses = StringUtil.split(
+			portalProperties.getProperty(AUTH_FAILURE));
+
+		for (String authFailureClass : authFailureClasses) {
+			AuthFailure authFailure = (AuthFailure)portletClassLoader.loadClass(
+					authFailureClass).newInstance();
+
+			if (authFailure != null) {
+				authFailure = new InvokerAuthFailure(authFailure, portletClassLoader);
+
+				authFailuresContainer.registerAuthFailure(authFailureClass, authFailure);
+			}
+		}
+	}	
 
 	protected void initAutoLogins(
 			String servletContextName, ClassLoader portletClassLoader,
@@ -921,6 +958,8 @@ public class HookHotDeployListener
 	private static Log _log =
 		LogFactoryUtil.getLog(HookHotDeployListener.class);
 
+	private Map<String, AuthFailuresContainer> _authFailuresContainerMap =
+		new HashMap<String, AuthFailuresContainer>();
 	private Map<String, AutoLoginsContainer> _autoLoginsContainerMap =
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
@@ -935,6 +974,24 @@ public class HookHotDeployListener
 		new HashMap<String, Properties>();
 	private Set<String> _servletContextNames = new HashSet<String>();
 
+	private class AuthFailuresContainer {
+
+		public void registerAuthFailure(String className, AuthFailure authFailure) {
+			InstancePool.put(className, authFailure);
+
+			_authFailures.put(className, authFailure);
+		}
+
+		public void unregisterAuthFailures() {
+			for (String className : _authFailures.keySet()) {
+				InstancePool.put(className, null);
+			}
+		}
+
+		Map<String, AuthFailure> _authFailures = new HashMap<String, AuthFailure>();
+
+	}	
+	
 	private class AutoLoginsContainer {
 
 		public void registerAutoLogin(AutoLogin autoLogin) {
