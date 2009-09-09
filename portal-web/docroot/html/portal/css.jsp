@@ -1911,7 +1911,7 @@ fieldset:last-child, .aui-form fieldset:last-child {
 
 /* ----------- OpenID ---------- */
 
-input[type="text"].openid-login {
+.openid-login input[type="text"] {
 	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;
@@ -1919,7 +1919,7 @@ input[type="text"].openid-login {
 	padding-left: 18px;
 }
 
-.ie6 input.text.openid-login {
+.ie6 .openid-login input.text {
 	background: url(<%= themeImagesPath %>/common/openid.gif) no-repeat;
 	background-color: #fff;
 	background-position: 0 50%;

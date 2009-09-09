@@ -28,27 +28,26 @@
 String openId = ParamUtil.getString(request, "openId");
 %>
 
-<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/open_id" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
+<portlet:actionURL var="openIdURL">
+	<portlet:param name="saveLastPath" value="0" />
+	<portlet:param name="struts_action" value="/login/open_id" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= AssociationException.class %>" message="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
-<liferay-ui:error exception="<%= ConsumerException.class %>" message="an-error-occurred-while-initializing-the-open-id-consumer" />
-<liferay-ui:error exception="<%= DiscoveryException.class %>" message="an-error-occurred-while-discovering-the-open-id-provider" />
-<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-associated-with-your-open-id-account-is-already-being-used" />
-<liferay-ui:error exception="<%= MessageException.class %>" message="an-error-occurred-while-communicating-with-the-open-id-provider" />
+<aui:form action="<%= openIdURL %>" method="post" name="fm">
+	<liferay-ui:error exception="<%= AssociationException.class %>" message="an-error-occurred-while-establishing-an-association-with-the-open-id-provider" />
+	<liferay-ui:error exception="<%= ConsumerException.class %>" message="an-error-occurred-while-initializing-the-open-id-consumer" />
+	<liferay-ui:error exception="<%= DiscoveryException.class %>" message="an-error-occurred-while-discovering-the-open-id-provider" />
+	<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-associated-with-your-open-id-account-is-already-being-used" />
+	<liferay-ui:error exception="<%= MessageException.class %>" message="an-error-occurred-while-communicating-with-the-open-id-provider" />
 
-<fieldset class="aui-block-labels">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />openId"><liferay-ui:message key="open-id" /></label>
+	<aui:fieldset>
+		<aui:input cssClass="openid-login" name="openId" type="text" value="<%= openId %>" />
 
-		<input class="openid-login" name="<portlet:namespace />openId" type="text" value="<%= HtmlUtil.escape(openId) %>" />
-	</div>
-
-	<div class="aui-button-holder">
-		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-	</div>
-</fieldset>
-
-</form>
+		<aui:button-row>
+			<aui:button type="submit" value="sign-in" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
 
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 

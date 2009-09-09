@@ -41,142 +41,114 @@ birthday.set(Calendar.YEAR, 1970);
 boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/create_account" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escapeAttribute(openId) %>" />
+<portlet:actionURL var="createAccoutURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="saveLastPath" value="0" />
+	<portlet:param name="struts_action" value="/login/create_account" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
-<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
-<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
+<aui:form action="<%= createAccoutURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+	<aui:input name="openId" type="hidden" value="<%= openId %>" />
 
-<liferay-ui:error exception="<%= UserPasswordException.class %>">
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
+	<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
+	<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
+	<liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
+	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
+	<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
+	<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
+	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
+	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 
-	<%
-	UserPasswordException upe = (UserPasswordException)errorException;
-	%>
+	<liferay-ui:error exception="<%= UserPasswordException.class %>">
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
-		<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
+		<%
+		UserPasswordException upe = (UserPasswordException)errorException;
+		%>
+
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
+			<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
+		</c:if>
+
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
+			<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
+		</c:if>
+
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
+			<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
+		</c:if>
+
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
+			<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
+		</c:if>
+	</liferay-ui:error>
+
+	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+
+	<c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
+		<span class="portlet-msg-info">
+			<liferay-ui:message key="you-have-successfully-authenticated-please-provide-the-following-required-information-to-access-the-portal" />
+		</span>
 	</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-		<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
-	</c:if>
+	<aui:model-context bean="<%= contact2 %>" model="<%= Contact.class %>" />
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
-		<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
-	</c:if>
+	<aui:fieldset>
+		<aui:column>
+			<aui:input name="firstName" />
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-		<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-	</c:if>
-</liferay-ui:error>
+			<aui:input name="middleName" />
 
-<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+			<aui:input name="lastName" />
 
-<c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
-	<span class="portlet-msg-info">
-		<liferay-ui:message key="you-have-successfully-authenticated-please-provide-the-following-required-information-to-access-the-portal" />
-	</span>
-</c:if>
+			<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
+				<aui:input bean="<%= user2 %>" model="<%= User.class %>" name="screenName" />
+			</c:if>
 
-<fieldset class="aui-block-labels aui-form-column">
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />firstName"><liferay-ui:message key="first-name" /></label>
+			<aui:input bean="<%= user2 %>" model="<%= User.class %>" name="emailAddress" />
+		</aui:column>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="firstName" />
-	</div>
+		<aui:column>
+			<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
+				<aui:input label="password" name="password1" size="30" type="password" value="" />
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />middleName"><liferay-ui:message key="middle-name" /></label>
+				<aui:input label="enter-again" name="password2" size="30" type="password" value="" />
+			</c:if>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="middleName" />
-	</div>
+			<c:choose>
+				<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
+					<aui:input name="birthday" value="<%= birthday %>" />
+				</c:when>
+				<c:otherwise>
+					<aui:input name="birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
+					<aui:input name="birthdayDay" type="hidden" value="1" />
+					<aui:input name="birthdayYear" type="hidden" value="1970" />
+				</c:otherwise>
+			</c:choose>
 
-	<div class="aui-ctrl-holder">
-		<label for="<portlet:namespace />lastName"><liferay-ui:message key="last-name" /></label>
+			<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
+				<aui:select label="gender" name="male">
+					<aui:option label="male" value="1" />
+					<aui:option label="female" selected="<%= !male %>" value="0" />
+				</aui:select>
+			</c:if>
 
-		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="lastName" />
-	</div>
+			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT %>">
+				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+					<portlet:param name="struts_action" value="/login/captcha" />
+				</portlet:actionURL>
 
-	<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
-		<div class="aui-ctrl-holder">
-			<label for=""><liferay-ui:message key="screen-name" /></label>
+				<liferay-ui:captcha url="<%= captchaURL %>" />
+			</c:if>
+		</aui:column>
+	</aui:fieldset>
 
-			<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
-		</div>
-	</c:if>
-
-	<div class="aui-ctrl-holder">
-		<label for=""><liferay-ui:message key="email-address" /></label>
-
-		<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
-	</div>
-</fieldset>
-
-<fieldset class="aui-block-labels aui-form-column">
-	<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
-		<div class="aui-ctrl-holder">
-			<label for=""><liferay-ui:message key="password" /></label>
-
-			<input name="<portlet:namespace />password1" size="30" type="password" value="" />
-		</div>
-
-		<div class="aui-ctrl-holder">
-			<label for=""><liferay-ui:message key="enter-again" /></label>
-
-			<input name="<portlet:namespace />password2" size="30" type="password" value="" />
-		</div>
-	</c:if>
-
-	<c:choose>
-		<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
-			<div class="aui-ctrl-holder">
-				<label for=""><liferay-ui:message key="birthday" /></label>
-
-				<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="birthday" defaultValue="<%= birthday %>" />
-			</div>
-		</c:when>
-		<c:otherwise>
-			<input name="<portlet:namespace />birthdayMonth" type="hidden" value="<%= Calendar.JANUARY %>" />
-			<input name="<portlet:namespace />birthdayDay" type="hidden" value="1" />
-			<input name="<portlet:namespace />birthdayYear" type="hidden" value="1970" />
-		</c:otherwise>
-	</c:choose>
-
-	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
-		<div class="aui-ctrl-holder">
-			<label for="<portlet:namespace />male"><liferay-ui:message key="gender" /></label>
-
-			<select name="<portlet:namespace />male">
-				<option value="1"><liferay-ui:message key="male" /></option>
-				<option <%= !male? "selected" : "" %> value="0"><liferay-ui:message key="female" /></option>
-			</select>
-		</div>
-	</c:if>
-
-	<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT %>">
-		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-			<portlet:param name="struts_action" value="/login/captcha" />
-		</portlet:actionURL>
-
-		<liferay-ui:captcha url="<%= captchaURL %>" />
-	</c:if>
-</fieldset>
-
-<div class="aui-button-holder">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
-</div>
-
-</form>
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
+	</aui:button-row>
+</aui:form>
 
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 

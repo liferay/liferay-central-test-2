@@ -51,40 +51,44 @@
 		}
 		%>
 
-		<form action="<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/login" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-		<input id="<portlet:namespace />rememberMe" name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
+		<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>" var="loginURL">
+			<portlet:param name="saveLastPath" value="0" />
+			<portlet:param name="struts_action" value="/login/login" />
+		</portlet:actionURL>
 
-		<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
+		<aui:form action="<%= loginURL %>" method="post" name="fm">
+			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+			<aui:input name="rememberMe" type="hidden" value="<%= rememberMe %>" />
 
-			<%
-			String userEmailAddress = (String)SessionMessages.get(request, "user_added");
-			String userPassword = (String)SessionMessages.get(request, "user_added_password");
-			%>
+			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
 
-			<span class="portlet-msg-success">
-				<c:choose>
-					<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
-					</c:otherwise>
-				</c:choose>
-			</span>
-		</c:if>
+				<%
+				String userEmailAddress = (String)SessionMessages.get(request, "user_added");
+				String userPassword = (String)SessionMessages.get(request, "user_added_password");
+				%>
 
-		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
-		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="authentication-failed" />
-		<liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
-		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="authentication-failed" />
-		<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
-		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="authentication-failed" />
-		<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="authentication-failed" />
+				<span class="portlet-msg-success">
+					<c:choose>
+						<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
+							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
+						</c:otherwise>
+					</c:choose>
+				</span>
+			</c:if>
 
-		<fieldset class="aui-block-labels">
-			<div class="aui-ctrl-holder">
+			<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
+			<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
+			<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="authentication-failed" />
+			<liferay-ui:error exception="<%= PasswordExpiredException.class %>" message="your-password-has-expired" />
+			<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="authentication-failed" />
+			<liferay-ui:error exception="<%= UserLockoutException.class %>" message="this-account-has-been-locked" />
+			<liferay-ui:error exception="<%= UserPasswordException.class %>" message="authentication-failed" />
+			<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="authentication-failed" />
+
+			<aui:fieldset>
 
 				<%
 				String loginLabel = null;
@@ -100,33 +104,21 @@
 				}
 				%>
 
-				<label for="<portlet:namespace />login"><liferay-ui:message key="<%= loginLabel %>" /></label>
+				<aui:input label="<%= loginLabel %>" name="login" type="text" value="<%= login %>" />
 
-				<input name="<portlet:namespace />login" type="text" value="<%= HtmlUtil.escape(login) %>" />
-			</div>
-
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace />password"><liferay-ui:message key="password" /></label>
-
-				<input id="<portlet:namespace />password" name="<portlet:namespace />password" type="password" value="<%= password %>" />
+				<aui:input name="password" type="password" value="<%= password %>" />
 
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
-			</div>
 
-			<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
-				<div class="aui-ctrl-holder inline-label">
-					<label for="<portlet:namespace />rememberMeCheckbox"><liferay-ui:message key="remember-me" /></label>
+				<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
+					<aui:input checked="<%= rememberMe %>" inlineLabel="<%= true %>" label="remember-me" name="rememberMeCheckbox" type="checkbox" />
+				</c:if>
+			</aui:fieldset>
 
-					<input <%= rememberMe ? "checked" : "" %> id="<portlet:namespace />rememberMeCheckbox" type="checkbox" />
-				</div>
-			</c:if>
-
-			<div class="aui-button-holder">
-				<input type="submit" value="<liferay-ui:message key="sign-in" />" />
-			</div>
-		</fieldset>
-
-		</form>
+			<aui:button-row>
+				<aui:button type="submit" value="sign-in" />
+			</aui:button-row>
+		</aui:form>
 
 		<%@ include file="/html/portlet/login/navigation.jspf" %>
 

@@ -32,108 +32,106 @@ if (Validator.isNull(authType)) {
 }
 %>
 
-<form action="<portlet:actionURL><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/forgot_password" /></portlet:actionURL>" class="aui-form" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL />" />
+<portlet:actionURL var="forgotPasswordURL">
+	<portlet:param name="saveLastPath" value="0" />
+	<portlet:param name="struts_action" value="/login/forgot_password" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+<aui:form action="<%= forgotPasswordURL %>" method="post" name="fm">
+	<portlet:renderURL var="renderURL" />
 
-<liferay-ui:error exception="<%= NoSuchUserException.class %>" message='<%= "the-" + TextFormatter.format(authType, TextFormatter.K) + "-you-requested-is-not-registered-in-our-database" %>' />
-<liferay-ui:error exception="<%= RequiredReminderQueryException.class %>" message="you-have-not-configured-a-reminder-query" />
-<liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
-<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="your-answer-does-not-match-what-is-in-our-database" />
+	<aui:input name="redirect" type="hidden" value="<%= renderURL %>" />
 
-<fieldset class="aui-block-labels">
-	<c:choose>
-		<c:when test="<%= user2 == null %>">
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 
-			<%
-			String loginParameter = null;
-			String loginLabel = null;
+	<liferay-ui:error exception="<%= NoSuchUserException.class %>" message='<%= "the-" + TextFormatter.format(authType, TextFormatter.K) + "-you-requested-is-not-registered-in-our-database" %>' />
+	<liferay-ui:error exception="<%= RequiredReminderQueryException.class %>" message="you-have-not-configured-a-reminder-query" />
+	<liferay-ui:error exception="<%= SendPasswordException.class %>" message="your-password-can-only-be-sent-to-an-external-email-address" />
+	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error exception="<%= UserReminderQueryException.class %>" message="your-answer-does-not-match-what-is-in-our-database" />
 
-			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-				loginParameter = "emailAddress";
-				loginLabel = "email-address";
-			}
-			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-				loginParameter = "screenName";
-				loginLabel = "screen-name";
-			}
-			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-				loginParameter = "userId";
-				loginLabel = "id";
-			}
+	<aui:fieldset>
+		<c:choose>
+			<c:when test="<%= user2 == null %>">
 
-			String loginValue = ParamUtil.getString(request, loginParameter);
-			%>
+				<%
+				String loginParameter = null;
+				String loginLabel = null;
 
-			<input name="<portlet:namespace />step" type="hidden" value="1" />
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+					loginParameter = "emailAddress";
+					loginLabel = "email-address";
+				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+					loginParameter = "screenName";
+					loginLabel = "screen-name";
+				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+					loginParameter = "userId";
+					loginLabel = "id";
+				}
 
-			<div class="aui-ctrl-holder">
-				<label for="<portlet:namespace /><%= loginParameter %>"><liferay-ui:message key="<%= loginLabel %>" /></label>
+				String loginValue = ParamUtil.getString(request, loginParameter);
+				%>
 
-				<input name="<portlet:namespace /><%= loginParameter %>" size="30" type="text" value="<%= HtmlUtil.escape(loginValue) %>" />
-			</div>
+				<aui:input name="step" type="hidden" value="1" />
 
-			<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD && !PropsValues.USERS_REMINDER_QUERIES_ENABLED %>">
-				<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-					<portlet:param name="struts_action" value="/login/captcha" />
-				</portlet:actionURL>
+				<aui:input label="<%= loginLabel %>" name="<%= loginParameter %>" size="30" type="text" value="<%= loginValue %>" />
 
-				<liferay-ui:captcha url="<%= captchaURL %>" />
-			</c:if>
+				<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD && !PropsValues.USERS_REMINDER_QUERIES_ENABLED %>">
+					<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+						<portlet:param name="struts_action" value="/login/captcha" />
+					</portlet:actionURL>
 
-			<div class="aui-button-holder">
-				<input type="submit" value="<liferay-ui:message key='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />" />
-			</div>
+					<liferay-ui:captcha url="<%= captchaURL %>" />
+				</c:if>
 
-		</c:when>
-		<c:when test="<%= (user2 != null) && Validator.isNotNull(user2.getEmailAddress()) %>">
-			<input name="<portlet:namespace />step" type="hidden" value="2" />
-			<input name="<portlet:namespace />emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
+				<aui:button-row>
+					<aui:button type="submit" value='<%= PropsValues.USERS_REMINDER_QUERIES_ENABLED ? "next" : "send-new-password" %>' />
+				</aui:button-row>
 
-			<c:if test="<%= Validator.isNotNull(user2.getReminderQueryQuestion()) && Validator.isNotNull(user2.getReminderQueryAnswer()) %>">
-				<div class="portlet-msg-info">
-					<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
-				</div>
+			</c:when>
+			<c:when test="<%= (user2 != null) && Validator.isNotNull(user2.getEmailAddress()) %>">
+				<aui:input name="step" type="hidden" value="2" />
+				<aui:input name="emailAddress" type="hidden" value="<%= user2.getEmailAddress() %>" />
 
-				<div class="aui-ctrl-holder">
-					<label for="<portlet:namespace />answer"><liferay-ui:message key="<%= user2.getReminderQueryQuestion() %>" /></label>
-
-					<input name="<portlet:namespace />answer" type="text" />
-				</div>
-			</c:if>
-
-			<c:choose>
-				<c:when test="<%= PropsValues.USERS_REMINDER_QUERIES_REQUIRED && !user2.hasReminderQuery() %>">
+				<c:if test="<%= Validator.isNotNull(user2.getReminderQueryQuestion()) && Validator.isNotNull(user2.getReminderQueryAnswer()) %>">
 					<div class="portlet-msg-info">
-						<liferay-ui:message key="the-password-cannot-be-reset-because-you-have-not-configured-a-reminder-query" />
+						<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", user2.getEmailAddress()) %>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
-						<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-							<portlet:param name="struts_action" value="/login/captcha" />
-						</portlet:actionURL>
 
-						<liferay-ui:captcha url="<%= captchaURL %>" />
-					</c:if>
+					<aui:input label="<%= user2.getReminderQueryQuestion() %>" name="answer" type="text" />
+				</c:if>
 
-					<div class="aui-button-holder">
-						<input type="submit" value="<liferay-ui:message key="send-new-password" />" />
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</c:when>
-		<c:otherwise>
-			<div class="portlet-msg-alert">
-				<liferay-ui:message key="the-system-cannot-send-you-a-new-password-because-you-have-not-provided-an-email-address" />
-			</div>
-		</c:otherwise>
-	</c:choose>
-</fieldset>
+				<c:choose>
+					<c:when test="<%= PropsValues.USERS_REMINDER_QUERIES_REQUIRED && !user2.hasReminderQuery() %>">
+						<div class="portlet-msg-info">
+							<liferay-ui:message key="the-password-cannot-be-reset-because-you-have-not-configured-a-reminder-query" />
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:if test="<%= PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD %>">
+							<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+								<portlet:param name="struts_action" value="/login/captcha" />
+							</portlet:actionURL>
 
-</form>
+							<liferay-ui:captcha url="<%= captchaURL %>" />
+						</c:if>
+
+						<aui:button-row>
+							<aui:button type="submit" value="send-new-password" />
+						</aui:button-row>
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<div class="portlet-msg-alert">
+					<liferay-ui:message key="the-system-cannot-send-you-a-new-password-because-you-have-not-provided-an-email-address" />
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</aui:fieldset>
+</aui:form>
 
 <%@ include file="/html/portlet/login/navigation.jspf" %>
 
