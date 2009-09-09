@@ -52,127 +52,127 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/bookmarks/search" /></liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
-<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= searchFolderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
+	<aui:input name="searchFolderId" type="hidden" value="<%= searchFolderId %>" />
+	<aui:input name="searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+	portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/bookmarks/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
-portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
-portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/bookmarks/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
+	portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
+	portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
+	portletURL.setParameter("keywords", keywords);
 
-List<String> headerNames = new ArrayList<String>();
+	List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("#");
-headerNames.add("folder");
-headerNames.add("entry");
-headerNames.add("score");
-headerNames.add(StringPool.BLANK);
+	headerNames.add("#");
+	headerNames.add("folder");
+	headerNames.add("entry");
+	headerNames.add("score");
+	headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-try {
-	Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	try {
+		Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = results.getLength();
+		int total = results.getLength();
 
-	searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-	List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getDocs().length; i++) {
-		Document doc = results.doc(i);
+		for (int i = 0; i < results.getDocs().length; i++) {
+			Document doc = results.doc(i);
 
-		ResultRow row = new ResultRow(doc, i, i);
+			ResultRow row = new ResultRow(doc, i, i);
 
-		// Position
+			// Position
 
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Folder and document
+			// Folder and document
 
-		long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
-		BookmarksEntry entry = null;
+			BookmarksEntry entry = null;
 
-		try {
-			entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Bookmarks search index is stale and contains entry " + entryId);
+			try {
+				entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Bookmarks search index is stale and contains entry " + entryId);
+				}
+
+				continue;
 			}
 
-			continue;
+			row.setObject(entry);
+
+			BookmarksFolder folder = entry.getFolder();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/bookmarks/open_entry?entryId=");
+			sb.append(entry.getEntryId());
+
+			String rowHREF = sb.toString();
+
+			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", entry.getComments());
+
+			row.addText(rowTextEntry);
+
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+			rowTextEntry.setName(entry.getName());
+
+			row.addText(rowTextEntry);
+
+			// Score
+
+			row.addScore(results.score(i));
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
 		}
+	%>
 
-		row.setObject(entry);
+		<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
-		BookmarksFolder folder = entry.getFolder();
+		<aui:button type="submit" value="search" />
 
-		StringBuilder sb = new StringBuilder();
+		<br /><br />
 
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/bookmarks/open_entry?entryId=");
-		sb.append(entry.getEntryId());
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		String rowHREF = sb.toString();
-
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", entry.getComments());
-
-		row.addText(rowTextEntry);
-
-		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-		rowTextEntry.setName(entry.getName());
-
-		row.addText(rowTextEntry);
-
-		// Score
-
-		row.addScore(results.score(i));
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	<%
 	}
-%>
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+	%>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<br /><br />
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-</form>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

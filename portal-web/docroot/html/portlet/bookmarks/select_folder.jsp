@@ -34,97 +34,101 @@ if (folder != null) {
 }
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs names="folders" />
 
-<liferay-ui:tabs names="folders" />
+	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
-<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	portletURL.setParameter("struts_action", "/bookmarks/select_folder");
+	portletURL.setParameter("folderId", String.valueOf(folderId));
 
-portletURL.setParameter("struts_action", "/bookmarks/select_folder");
-portletURL.setParameter("folderId", String.valueOf(folderId));
+	List<String> headerNames = new ArrayList<String>();
 
-List<String> headerNames = new ArrayList<String>();
+	headerNames.add("folder");
+	headerNames.add("num-of-folders");
+	headerNames.add("num-of-entries");
+	headerNames.add(StringPool.BLANK);
 
-headerNames.add("folder");
-headerNames.add("num-of-folders");
-headerNames.add("num-of-entries");
-headerNames.add(StringPool.BLANK);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	int total = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
-int total = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
+	searchContainer.setTotal(total);
 
-searchContainer.setTotal(total);
+	List results = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-List results = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	searchContainer.setResults(results);
 
-searchContainer.setResults(results);
+	List resultRows = searchContainer.getResultRows();
 
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < results.size(); i++) {
+		BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
-for (int i = 0; i < results.size(); i++) {
-	BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
+		ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
-	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		rowURL.setParameter("struts_action", "/bookmarks/select_folder");
+		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-	rowURL.setParameter("struts_action", "/bookmarks/select_folder");
-	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+		// Name
 
-	// Name
+		row.addText(curFolder.getName(), rowURL);
 
-	row.addText(curFolder.getName(), rowURL);
+		// Statistics
 
-	// Statistics
+		List subfolderIds = new ArrayList();
 
-	List subfolderIds = new ArrayList();
+		subfolderIds.add(new Long(curFolder.getFolderId()));
 
-	subfolderIds.add(new Long(curFolder.getFolderId()));
+		BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
-	BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+		int foldersCount = subfolderIds.size() - 1;
+		int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 
-	int foldersCount = subfolderIds.size() - 1;
-	int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
+		row.addText(String.valueOf(foldersCount), rowURL);
+		row.addText(String.valueOf(entriesCount), rowURL);
 
-	row.addText(String.valueOf(foldersCount), rowURL);
-	row.addText(String.valueOf(entriesCount), rowURL);
+		// Action
 
-	// Action
+		StringBuilder sb = new StringBuilder();
 
-	StringBuilder sb = new StringBuilder();
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectFolder('");
+		sb.append(curFolder.getFolderId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(curFolder.getName()));
+		sb.append("'); window.close();");
 
-	sb.append("opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectFolder('");
-	sb.append(curFolder.getFolderId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(curFolder.getName()));
-	sb.append("'); window.close();");
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+		// Add result row
 
-	// Add result row
+		resultRows.add(row);
+	}
 
-	resultRows.add(row);
-}
+	boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+	%>
 
-boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
-%>
+	<c:if test="<%= showAddFolderButton %>">
+		<portlet:renderURL var="editFolderURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
+		</portlet:renderURL>
 
-<c:if test="<%= showAddFolderButton %>">
-	<div>
-		<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
-	</div>
+		<aui:button-row>
+			<aui:button onClick="<%= editFolderURL %>" value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
+		</aui:button-row>
 
-	<c:if test="<%= results.size() > 0 %>">
-		<br />
+		<c:if test="<%= results.size() > 0 %>">
+			<br />
+		</c:if>
 	</c:if>
-</c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
