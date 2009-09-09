@@ -433,9 +433,9 @@ public class LayoutAction extends Action {
 			}
 
 			if (!PropsValues.TCK_URL && resetLayout &&
-				(((previousLayout != null) &&
-				 (layout.getPlid() != previousLayout.getPlid()))) ||
-				 Validator.isNull(portletId)) {
+				(Validator.isNull(portletId) ||
+				 ((previousLayout != null) &&
+				  (layout.getPlid() != previousLayout.getPlid())))) {
 
 				// Always clear render parameters on a layout url, but do not
 				// clear on portlet urls invoked on the same layout
