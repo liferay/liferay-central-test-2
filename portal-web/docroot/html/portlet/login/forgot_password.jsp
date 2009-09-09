@@ -38,9 +38,9 @@ if (Validator.isNull(authType)) {
 </portlet:actionURL>
 
 <aui:form action="<%= forgotPasswordURL %>" method="post" name="fm">
-	<portlet:renderURL var="renderURL" />
+	<portlet:renderURL var="redirectURL" />
 
-	<aui:input name="redirect" type="hidden" value="<%= renderURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 
