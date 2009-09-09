@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -4240,8 +4241,16 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public void setRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
-			clearRoles.clear(pk);
+			clearRoles.clear(pk, rolePKs);
 
+			List<com.liferay.portal.model.Role> roles = getRoles(pk);
+			
+			for (com.liferay.portal.model.Role role : roles) {
+				if (ArrayUtil.contains(rolePKs, role.getPrimaryKey())) {
+					rolePKs = ArrayUtil.remove(rolePKs, role.getPrimaryKey());
+				}
+			}
+			
 			for (long rolePK : rolePKs) {
 				addRole.add(pk, rolePK);
 			}
@@ -4256,19 +4265,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 	public void setRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
-		try {
-			clearRoles.clear(pk);
-
-			for (com.liferay.portal.model.Role role : roles) {
-				addRole.add(pk, role.getPrimaryKey());
-			}
+		
+		long[] rolePKs = new long[roles.size()];
+		
+		for (com.liferay.portal.model.Role role : roles) {
+			ArrayUtil.append(rolePKs, role.getPrimaryKey());
 		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache("Users_Roles");
-		}
+		
+		setRoles(pk, rolePKs);
 	}
 
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
@@ -5379,6 +5383,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 					"DELETE FROM Users_Roles WHERE userId = ?",
 					new int[] { Types.BIGINT });
+			_sqlUpdateRole = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_Roles WHERE userId = ? AND roleId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });			
 		}
 
 		protected void clear(long userId) throws SystemException {
@@ -5420,8 +5427,59 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 				}
 			}
 		}
+		
+		protected void clear(long userId, long[] rolePKs) throws SystemException {
+			ModelListener<com.liferay.portal.model.Role>[] roleListeners = rolePersistence.getListeners();
+
+			List<com.liferay.portal.model.Role> oldRoles = null;
+			List<com.liferay.portal.model.Role> roles = null;
+
+			if ((listeners.length > 0) || (roleListeners.length > 0)) {
+				oldRoles = getRoles(userId);
+				roles = new ArrayList<com.liferay.portal.model.Role>();
+				
+				for (com.liferay.portal.model.Role role : oldRoles) {
+					if (!ArrayUtil.contains(rolePKs, role.getPrimaryKey())) {
+						roles.add(role);
+					}
+				}
+
+				for (com.liferay.portal.model.Role role : roles) {
+					for (ModelListener<User> listener : listeners) {
+						listener.onBeforeRemoveAssociation(userId,
+							com.liferay.portal.model.Role.class.getName(),
+							role.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Role> listener : roleListeners) {
+						listener.onBeforeRemoveAssociation(role.getPrimaryKey(),
+							User.class.getName(), userId);
+					}
+				}
+			}
+
+			for (com.liferay.portal.model.Role role : roles) {
+				_sqlUpdateRole.update(new Object[] { new Long(userId), new Long(role.getPrimaryKey()) });
+			}
+			
+			if ((listeners.length > 0) || (roleListeners.length > 0)) {
+				for (com.liferay.portal.model.Role role : roles) {
+					for (ModelListener<User> listener : listeners) {
+						listener.onAfterRemoveAssociation(userId,
+							com.liferay.portal.model.Role.class.getName(),
+							role.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.Role> listener : roleListeners) {
+						listener.onAfterRemoveAssociation(role.getPrimaryKey(),
+							User.class.getName(), userId);
+					}
+				}
+			}
+		}		
 
 		private SqlUpdate _sqlUpdate;
+		private SqlUpdate _sqlUpdateRole;
 	}
 
 	protected class RemoveRole {
