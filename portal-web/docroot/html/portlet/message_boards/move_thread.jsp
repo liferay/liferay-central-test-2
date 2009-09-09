@@ -112,7 +112,7 @@ boolean quote = false;
 			String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
 			%>
 
-			<aui:button value="select" onClick="<%= taglibOpenCategoryWindow %>" />
+			<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 		</aui:field-wrapper>
 
 		<aui:input inlineLabel="<%= true %>" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />

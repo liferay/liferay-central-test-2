@@ -84,7 +84,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		<aui:button-row>
 			<aui:button type="submit" value="save" />
 
-			<aui:button value="cancel" onClick="<%= redirect %>" />
+			<aui:button onClick="<%= redirect %>" value="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

@@ -131,7 +131,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
 				%>
 
-				<aui:button value="select" onClick="<%= taglibOpenCategoryWindow %>" />
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 
 				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 

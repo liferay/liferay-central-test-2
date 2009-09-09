@@ -222,7 +222,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 					</c:if>
 
 					<c:if test="<%= showAddCategoryButton %>">
-						<aui:button value='<%= (category == null) ? "add-category" : "add-subcategory" %>' onClick='<%= renderResponse.getNamespace() + "addCategory();" %>' />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "addCategory();" %>' value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
 					</c:if>
 
 					<c:if test="<%= showPermissionsButton %>">
@@ -246,7 +246,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 							var="permissionsURL"
 						/>
 
-						<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+						<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 					</c:if>
 				</div>
 
@@ -427,7 +427,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 						</c:if>
 
 						<c:if test="<%= showAddMessageButton %>">
-							<aui:button value="post-new-thread" onClick='<%= renderResponse.getNamespace() + "addMessage();" %>' />
+							<aui:button onClick='<%= renderResponse.getNamespace() + "addMessage();" %>' value="post-new-thread" />
 						</c:if>
 					</div>
 
