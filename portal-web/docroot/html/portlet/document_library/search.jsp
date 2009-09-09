@@ -52,132 +52,132 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/document_library/search" /></liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
-<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= searchFolderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
+	<aui:input name="searchFolderId" type="hidden" value="<%= searchFolderId %>" />
+	<aui:input name="searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+	portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/document_library/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
-portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
-portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/document_library/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
+	portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
+	portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
+	portletURL.setParameter("keywords", keywords);
 
-List<String> headerNames = new ArrayList<String>();
+	List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("#");
-headerNames.add("folder");
-headerNames.add("document");
-headerNames.add("score");
-headerNames.add(StringPool.BLANK);
+	headerNames.add("#");
+	headerNames.add("folder");
+	headerNames.add("document");
+	headerNames.add("score");
+	headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-try {
-	Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	try {
+		Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = results.getLength();
+		int total = results.getLength();
 
-	searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-	List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getDocs().length; i++) {
-		Document doc = results.doc(i);
+		for (int i = 0; i < results.getDocs().length; i++) {
+			Document doc = results.doc(i);
 
-		ResultRow row = new ResultRow(doc, i, i);
+			ResultRow row = new ResultRow(doc, i, i);
 
-		// Position
+			// Position
 
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Folder and document
+			// Folder and document
 
-		long folderId = GetterUtil.getLong(doc.get("repositoryId"));
-		String fileName = doc.get("path");
+			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
+			String fileName = doc.get("path");
 
-		DLFileEntry fileEntry = null;
+			DLFileEntry fileEntry = null;
 
-		try {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Document library search index is stale and contains file entry {" + folderId + ", " + fileName + "}");
+			try {
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Document library search index is stale and contains file entry {" + folderId + ", " + fileName + "}");
+				}
+
+				continue;
 			}
 
-			continue;
-		}
+			row.setObject(fileEntry);
 
-		row.setObject(fileEntry);
+			DLFolder folder = null;
 
-		DLFolder folder = null;
+			try {
+				folder = DLFolderLocalServiceUtil.getFolder(folderId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Document library search index is stale and contains folder " + folderId);
+				}
 
-		try {
-			folder = DLFolderLocalServiceUtil.getFolder(folderId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Document library search index is stale and contains folder " + folderId);
+				continue;
 			}
 
-			continue;
+			PortletURL rowURL = renderResponse.createActionURL();
+
+			rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+			rowURL.setParameter("struts_action", "/document_library/get_file");
+			rowURL.setParameter("folderId", String.valueOf(folderId));
+			rowURL.setParameter("name", fileName);
+
+			row.addText(folder.getName(), rowURL);
+			row.addText(fileEntry.getTitle(), rowURL);
+
+			// Score
+
+			row.addScore(results.score(i));
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
 		}
+	%>
 
-		PortletURL rowURL = renderResponse.createActionURL();
+		<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
-		rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+		<aui:button type="submit" value="search" />
 
-		rowURL.setParameter("struts_action", "/document_library/get_file");
-		rowURL.setParameter("folderId", String.valueOf(folderId));
-		rowURL.setParameter("name", fileName);
+		<br /><br />
 
-		row.addText(folder.getName(), rowURL);
-		row.addText(fileEntry.getTitle(), rowURL);
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		// Score
-
-		row.addScore(results.score(i));
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	<%
 	}
-%>
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+	%>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<br /><br />
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-</form>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

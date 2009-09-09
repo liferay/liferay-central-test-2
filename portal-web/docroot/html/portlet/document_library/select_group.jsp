@@ -24,79 +24,77 @@
 
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs names="communities" />
 
-<liferay-ui:tabs names="communities" />
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	portletURL.setParameter("struts_action", "/document_library/select_group");
 
-portletURL.setParameter("struts_action", "/document_library/select_group");
+	GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
+	%>
 
-GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
-%>
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/group_search.jsp"
+		searchContainer="<%= searchContainer %>"
+	/>
 
-<liferay-ui:search-form
-	page="/html/portlet/enterprise_admin/group_search.jsp"
-	searchContainer="<%= searchContainer %>"
-/>
+	<div class="separator"><!-- --></div>
 
-<div class="separator"><!-- --></div>
+	<%
+	GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-<%
-GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
+	List<Group> myPlaces = user.getMyPlaces();
 
-List<Group> myPlaces = user.getMyPlaces();
+	int total = myPlaces.size();
 
-int total = myPlaces.size();
+	searchContainer.setTotal(total);
 
-searchContainer.setTotal(total);
+	List<Group> results = myPlaces;
 
-List<Group> results = myPlaces;
+	searchContainer.setResults(results);
 
-searchContainer.setResults(results);
+	List resultRows = searchContainer.getResultRows();
 
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < results.size(); i++) {
+		Group group = results.get(i);
 
-for (int i = 0; i < results.size(); i++) {
-	Group group = results.get(i);
+		group = group.toEscapedModel();
 
-	group = group.toEscapedModel();
+		ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
-	ResultRow row = new ResultRow(group, group.getGroupId(), i);
+		String groupName = group.getDescriptiveName();
 
-	String groupName = group.getDescriptiveName();
+		if (group.isUser()) {
+			groupName = LanguageUtil.get(pageContext, "my-community");
+		}
 
-	if (group.isUser()) {
-		groupName = LanguageUtil.get(pageContext, "my-community");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("javascript:opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectGroup('");
+		sb.append(group.getGroupId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(groupName));
+		sb.append("'); window.close();");
+
+		String rowHREF = sb.toString();
+
+		// Name
+
+		row.addText(groupName, rowHREF);
+
+		// Type
+
+		row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowHREF);
+
+		// Add result row
+
+		resultRows.add(row);
 	}
+	%>
 
-	StringBuilder sb = new StringBuilder();
-
-	sb.append("javascript:opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectGroup('");
-	sb.append(group.getGroupId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(groupName));
-	sb.append("'); window.close();");
-
-	String rowHREF = sb.toString();
-
-	// Name
-
-	row.addText(groupName, rowHREF);
-
-	// Type
-
-	row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowHREF);
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>
