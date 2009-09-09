@@ -61,7 +61,6 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %>
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBCategoryDisplayImpl" %>
-<%@ page import="com.liferay.portlet.messageboards.model.impl.MBCategoryImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.model.impl.MBThreadImpl" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" %>
