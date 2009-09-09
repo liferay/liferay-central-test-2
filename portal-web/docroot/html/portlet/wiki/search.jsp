@@ -63,7 +63,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	addPageURL.setParameter("editTitle", "1");
 	%>
 
-	<b><aui:a cssClass="new-page" href="<%= addPageURL %>" label="create-a-new-page-on-this-topic" /></b>
+	<b><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></b>
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
