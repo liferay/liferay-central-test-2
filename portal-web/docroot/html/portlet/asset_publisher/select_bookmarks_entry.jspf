@@ -153,7 +153,7 @@ total = BookmarksEntryLocalServiceUtil.getEntriesCount(groupId, folderId);
 
 searchContainer.setTotal(total);
 
-results = BookmarksEntryLocalServiceUtil.getEntries(folderId, searchContainer.getStart(), searchContainer.getEnd(), null);
+results = BookmarksEntryLocalServiceUtil.getEntries(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd(), null);
 
 searchContainer.setResults(results);
 
