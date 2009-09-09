@@ -69,8 +69,6 @@ public interface DestinationNames {
 
 	public static final String MONITORING = "liferay/monitoring";
 
-	public static final String SAW = "liferay/saw";
-
 	public static final String SCHEDULER_ENGINE = "liferay/scheduler_engine";
 
 	public static final String SCHEDULER_ENGINE_RESPONSE =
