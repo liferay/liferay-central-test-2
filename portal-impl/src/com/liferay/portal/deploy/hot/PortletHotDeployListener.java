@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
@@ -31,7 +32,6 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.poller.InvokerPollerProcessor;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.InvokerIndexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
@@ -54,7 +53,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.lar.InvokerPortletDataHandler;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -94,6 +92,8 @@ import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 
+import java.lang.reflect.Proxy;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -120,7 +120,7 @@ import org.apache.portals.bridges.struts.StrutsPortlet;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Ivica Cardic
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class PortletHotDeployListener extends BaseHotDeployListener {
 
@@ -477,8 +477,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			indexerInstance = (Indexer)portletClassLoader.loadClass(
 				portlet.getIndexerClass()).newInstance();
 
-			indexerInstance = new InvokerIndexer(
-				indexerInstance, portletClassLoader);
+			indexerInstance = (Indexer)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {Indexer.class},
+				new ContextClassLoaderBeanHandler(
+					indexerInstance, portletClassLoader));
 
 			for (String className : indexerInstance.getClassNames()) {
 				IndexerRegistryUtil.register(className, indexerInstance);
@@ -525,8 +527,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				(PortletDataHandler)portletClassLoader.loadClass(
 					portlet.getPortletDataHandlerClass()).newInstance();
 
-			portletDataHandlerInstance = new InvokerPortletDataHandler(
-				portletDataHandlerInstance, portletClassLoader);
+			portletDataHandlerInstance =
+				(PortletDataHandler)Proxy.newProxyInstance(
+					portletClassLoader, new Class[] {PortletDataHandler.class},
+					new ContextClassLoaderBeanHandler(
+						portletDataHandlerInstance, portletClassLoader));
 		}
 
 		PortletLayoutListener portletLayoutListenerInstance = null;
@@ -544,8 +549,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				(PollerProcessor)portletClassLoader.loadClass(
 					portlet.getPollerProcessorClass()).newInstance();
 
-			pollerProcessorInstance = new InvokerPollerProcessor(
-				pollerProcessorInstance, portletClassLoader);
+			pollerProcessorInstance = (PollerProcessor)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {PollerProcessor.class},
+				new ContextClassLoaderBeanHandler(
+					pollerProcessorInstance, portletClassLoader));
 
 			PollerProcessorUtil.addPollerProcessor(
 				portlet.getPortletId(), pollerProcessorInstance);

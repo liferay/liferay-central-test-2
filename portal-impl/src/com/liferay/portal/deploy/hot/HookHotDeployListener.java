@@ -30,9 +30,6 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.InvokerAction;
-import com.liferay.portal.kernel.events.InvokerSessionAction;
-import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -49,17 +46,14 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.portal.security.auth.InvokerAutoLogin;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
-import com.liferay.portal.security.ldap.InvokerAttributesTransformer;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -550,8 +544,7 @@ public class HookHotDeployListener
 					authenticatorClassName).newInstance();
 
 			authenticator = (Authenticator)Proxy.newProxyInstance(
-				portletClassLoader,
-				new Class[] {Authenticator.class},
+				portletClassLoader, new Class[] {Authenticator.class},
 				new ContextClassLoaderBeanHandler(
 					authenticator, portletClassLoader));
 
@@ -592,8 +585,7 @@ public class HookHotDeployListener
 				authFailureClassName).newInstance();
 
 			authFailure = (AuthFailure)Proxy.newProxyInstance(
-				portletClassLoader,
-				new Class[] {AuthFailure.class},
+				portletClassLoader, new Class[] {AuthFailure.class},
 				new ContextClassLoaderBeanHandler(
 					authFailure, portletClassLoader));
 
@@ -637,7 +629,10 @@ public class HookHotDeployListener
 			AutoLogin autoLogin = (AutoLogin)portletClassLoader.loadClass(
 				autoLoginClassName).newInstance();
 
-			autoLogin = new InvokerAutoLogin(autoLogin, portletClassLoader);
+			autoLogin = (AutoLogin)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {AutoLogin.class},
+				new ContextClassLoaderBeanHandler(
+					autoLogin, portletClassLoader));
 
 			autoLoginsContainer.registerAutoLogin(autoLogin);
 		}
@@ -681,8 +676,10 @@ public class HookHotDeployListener
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClassName).newInstance();
 
-			simpleAction = new InvokerSimpleAction(
-				simpleAction, portletClassLoader);
+			simpleAction = (SimpleAction)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {SimpleAction.class},
+				new ContextClassLoaderBeanHandler(
+					simpleAction, portletClassLoader));
 
 			long companyId = CompanyThreadLocal.getCompanyId();
 
@@ -703,7 +700,9 @@ public class HookHotDeployListener
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClassName).newInstance();
 
-			action = new InvokerAction(action, portletClassLoader);
+			action = (Action)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {Action.class},
+				new ContextClassLoaderBeanHandler(action, portletClassLoader));
 
 			EventsProcessorUtil.registerEvent(eventName, action);
 
@@ -715,8 +714,10 @@ public class HookHotDeployListener
 				(SessionAction)portletClassLoader.loadClass(
 					eventClassName).newInstance();
 
-			sessionAction = new InvokerSessionAction(
-				sessionAction, portletClassLoader);
+			sessionAction = (SessionAction)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {SessionAction.class},
+				new ContextClassLoaderBeanHandler(
+					sessionAction, portletClassLoader));
 
 			EventsProcessorUtil.registerEvent(eventName, sessionAction);
 
@@ -773,8 +774,10 @@ public class HookHotDeployListener
 			(ModelListener<BaseModel<?>>)portletClassLoader.loadClass(
 				modelListenerClassName).newInstance();
 
-		modelListener = new InvokerModelListener<BaseModel<?>>(
-			modelListener, portletClassLoader);
+		modelListener = (ModelListener<BaseModel<?>>)Proxy.newProxyInstance(
+			portletClassLoader, new Class[] {ModelListener.class},
+			new ContextClassLoaderBeanHandler(
+				modelListener, portletClassLoader));
 
 		BasePersistence persistence = getPersistence(modelName);
 
@@ -842,8 +845,12 @@ public class HookHotDeployListener
 				(AttributesTransformer)portletClassLoader.loadClass(
 					attributesTransformerClassName).newInstance();
 
-			attributesTransformer = new InvokerAttributesTransformer(
-				attributesTransformer, portletClassLoader);
+			attributesTransformer =
+				(AttributesTransformer)Proxy.newProxyInstance(
+					portletClassLoader,
+					new Class[] {AttributesTransformer.class},
+					new ContextClassLoaderBeanHandler(
+						attributesTransformer, portletClassLoader));
 
 			AttributesTransformerFactory.setInstance(attributesTransformer);
 		}
