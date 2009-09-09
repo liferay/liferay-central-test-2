@@ -215,6 +215,15 @@
 	font-weight: bold;
 	color: #000;
 	font-size: 120%;
+	margin-bottom: 1.5em;
+	padding: 0;
+}
+
+.aui-form fieldset legend .aui-legen{
+	position: absolute;
+	border-bottom: 1px solid #ccc;
+	display: block;
+	width: 90%;
 }
 
 .aui-form .aui-ctrl-holder {
