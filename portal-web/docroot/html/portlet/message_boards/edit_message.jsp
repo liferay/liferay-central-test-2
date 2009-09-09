@@ -151,199 +151,131 @@ if ((message != null) && message.isAttachments()) {
 	<br />
 </c:if>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/edit_message" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveMessage(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
-<input name="<portlet:namespace />mbCategoryId" type="hidden" value="<%= categoryId %>" />
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
-<input name="<portlet:namespace />parentMessageId" type="hidden" value="<%= parentMessageId %>" />
-<input name="<portlet:namespace />attachments" type="hidden" value="<%= attachments %>" />
-<input name="<portlet:namespace />preview" type="hidden" value="" />
+<portlet:actionURL var="editMessageURL">
+	<portlet:param name="struts_action" value="/message_boards/edit_message" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
-<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
+<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveMessage(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
+	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
+	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
+	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
+	<aui:input name="attachments" type="hidden" value="<%= attachments %>" />
+	<aui:input name="preview" type="hidden" />
 
-<liferay-ui:error exception="<%= FileNameException.class %>">
-	<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
-</liferay-ui:error>
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
+	<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 
-<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= FileNameException.class %>">
+		<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /><%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
+	</liferay-ui:error>
 
-<liferay-ui:asset-tags-error />
+	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="subject" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= subject %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="body" />
-	</td>
-	<td class="message-edit-body">
-		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
+	<liferay-ui:asset-tags-error />
 
-		<input name="<portlet:namespace />body" type="hidden" value="" />
-	</td>
-</tr>
+	<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
-<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+	<aui:fieldset>
+		<aui:input name="subject" value="<%= subject %>" />
+
+		<aui:field-wrapper label="body">
+			<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
+
+			<aui:input name="body" type="hidden" />
+		</aui:field-wrapper>
+
+		<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= MBMessage.class.getName() %>"
 				classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<c:if test="<%= attachments %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
+		<c:if test="<%= attachments %>">
+			<aui:field-wrapper label="attachments">
+				<table class="lfr-table">
 
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="attachments" />
-		</td>
-		<td>
-			<table class="lfr-table">
+				<%
+				for (int i = 0; i < existingAttachments.length; i++) {
+					String existingPath = existingAttachments[i];
+
+					String existingName = StringUtil.extractLast(existingPath, StringPool.SLASH);
+				%>
+
+					<tr>
+						<td>
+							<span id="<portlet:namespace />existingFile<%= i + 1 %>">
+								<aui:input name='<%= "existingPath" + (i + 1) %>' type="hidden" value="<%= existingPath %>" />
+
+								<%= existingName %>
+							</span>
+
+							<aui:input label="" name='<%= "msgFile" + (i + 1) %>' size="70" style="display: none;" type="file" />
+						</td>
+						<td>
+							<img id="<portlet:namespace />removeExisting<%= i + 1 %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
+						</td>
+					</tr>
+
+				<%
+				}
+				%>
+
+				<%
+				for (int i = existingAttachments.length + 1; i <= 5; i++) {
+				%>
+
+					<tr>
+						<td>
+							<aui:input label="" name='<%= "msgFile" + i %>' size="70" type="file" />
+						</td>
+						<td></td>
+					</tr>
+
+				<%
+				}
+				%>
+
+				</table>
+			</aui:field-wrapper>
+		</c:if>
+
+		<c:if test="<%= curParentMessage == null %>">
 
 			<%
-			for (int i = 0; i < existingAttachments.length; i++) {
-				String existingPath = existingAttachments[i];
+			boolean question = false;
 
-				String existingName = StringUtil.extractLast(existingPath, StringPool.SLASH);
-			%>
+			if (message != null) {
+				boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
+				boolean answerFlag = MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId);
 
-				<tr>
-					<td>
-						<span id="<portlet:namespace />existingFile<%= i + 1 %>">
-							<input name="<portlet:namespace />existingPath<%= i + 1 %>" type="hidden" value="<%= existingPath %>" />
-
-							<%= existingName %>
-						</span>
-
-						<input id="<portlet:namespace />msgFile<%= i + 1 %>" name="<portlet:namespace />msgFile<%= i + 1 %>" size="70" style="display: none;" type="file" />
-					</td>
-					<td>
-						<img id="<portlet:namespace />removeExisting<%= i + 1 %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
-					</td>
-				</tr>
-
-			<%
+				if (questionFlag || answerFlag) {
+					question = true;
+				}
 			}
 			%>
 
-			<%
-			for (int i = existingAttachments.length + 1; i <= 5; i++) {
-			%>
+			<aui:input helpMessage="message-boards-message-question-help" inlineLabel="<%= true %>" label="mark-as-a-question" name="question" type="checkbox" value="<%= question %>" />
+		</c:if>
 
-				<tr>
-					<td>
-						<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file" />
-					</td>
-					<td></td>
-				</tr>
+		<c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
+			<aui:input helpMessage="message-boards-message-anonymous-help" inlineLabel="<%= true %>" name="anonymous" type="checkbox" />
+		</c:if>
 
-			<%
-			}
-			%>
-
-			</table>
-		</td>
-	</tr>
-</c:if>
-
-<c:if test="<%= curParentMessage == null %>">
-
-	<%
-	boolean question = false;
-
-	if (message != null) {
-		boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
-		boolean answerFlag = MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId);
-
-		if (questionFlag || answerFlag) {
-			question = true;
-		}
-	}
-	%>
-
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="mark-as-a-question" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="question" defaultValue="<%= question %>" />
-
-			<liferay-ui:icon-help message="message-boards-message-question-help" />
-		</td>
-	</tr>
-</c:if>
-
-<c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="anonymous" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="anonymous" />
-
-			<liferay-ui:icon-help message="message-boards-message-anonymous-help" />
-		</td>
-	</tr>
-</c:if>
-
-<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="priority" />
-		</td>
-		<td>
+		<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
 
 			<%
 			double threadPriority = BeanParamUtil.getDouble(message, request, "priority");
 			%>
 
-			<select name="<portlet:namespace />priority">
-				<option value=""></option>
+			<aui:select name="priority">
+				<aui:option value="" />
 
 				<%
 				for (int i = 0; i < priorities.length; i++) {
@@ -357,7 +289,7 @@ if ((message != null) && message.isAttachments()) {
 						if (priorityValue > 0) {
 				%>
 
-							<option <%= (threadPriority == priorityValue) ? "selected" : "" %> value="<%= priorityValue %>"><%= priorityName %></option>
+							<aui:option label="<%= priorityName %>" selected="<%= (threadPriority == priorityValue) %>" value="<%= priorityValue %>" />
 
 				<%
 						}
@@ -367,101 +299,71 @@ if ((message != null) && message.isAttachments()) {
 				}
 				%>
 
-			</select>
-		</td>
-	</tr>
-</c:if>
+			</aui:select>
+		</c:if>
 
-<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="tags" />
-		</td>
-		<td>
+		<c:if test="<%= (curParentMessage == null) || childrenMessagesTaggable %>">
+			<aui:input name="tags" type="assetTags" />
+		</c:if>
+
+		<c:if test="<%= message == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= MBMessage.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
+
+	<c:if test="<%= (message == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE %>">
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+			<portlet:param name="struts_action" value="/message_boards/captcha" />
+		</portlet:actionURL>
+
+		<liferay-ui:captcha url="<%= captchaURL %>" />
+	</c:if>
+
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
+
+		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
 
 			<%
-			long classPK = 0;
-
-			if (message != null) {
-				classPK = message.getMessageId();
-			}
+			String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "attachments.value = '" + !attachments + "'; submitForm(document." + renderResponse.getNamespace() + "fm);";
 			%>
 
-			<liferay-ui:asset-tags-selector
-				className="<%= MBMessage.class.getName() %>"
-				classPK="<%= classPK %>"
-				contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
-			/>
-		</td>
-	</tr>
-</c:if>
+			<aui:button onClick="<%= taglibOnClick %>" value='<%= ((attachments) ? "remove" : "attach") + "-files" %>' />
+		</c:if>
 
-<c:if test="<%= message == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= MBMessage.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<%
+		String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; submitForm(document." + renderResponse.getNamespace() + "fm);";
+		%>
 
-</table>
+		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
 
-<br />
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
 
-<c:if test="<%= (message == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-		<portlet:param name="struts_action" value="/message_boards/captcha" />
-	</portlet:actionURL>
+	<c:if test="<%= curParentMessage != null %>">
+		<br /><br />
 
-	<liferay-ui:captcha url="<%= captchaURL %>" />
-</c:if>
+		<liferay-ui:message key="replying-to" />:
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+		<%
+		boolean editable = false;
 
-<c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
-	<input type="button" value='<%= LanguageUtil.get(pageContext, ((attachments) ? "remove" : "attach") + "-files") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />attachments.value = '<%= !attachments %>'; submitForm(document.<portlet:namespace />fm);" />
-</c:if>
+		message = curParentMessage;
+		MBCategory category = null;
 
-<input type="button" value="<liferay-ui:message key="preview" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML(); document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true'; submitForm(document.<portlet:namespace />fm);" />
+		int depth = 0;
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+		String className = "portlet-section-body results-row";
+		String classHoverName = "portlet-section-body-hover results-row hover";
+		%>
 
-<c:if test="<%= curParentMessage != null %>">
-	<br /><br />
-
-	<liferay-ui:message key="replying-to" />:
-
-	<%
-	boolean editable = false;
-
-	message = curParentMessage;
-	MBCategory category = null;
-
-	int depth = 0;
-
-	String className = "portlet-section-body results-row";
-	String classHoverName = "portlet-section-body-hover results-row hover";
-	%>
-
-	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
-</c:if>
-
-</form>
+		<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
+	</c:if>
+</aui:form>
 
 <script type="text/javascript">
 	AUI().ready(

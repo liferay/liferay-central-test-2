@@ -32,93 +32,91 @@ long categoryId = BeanParamUtil.getLong(category, request, "mbCategoryId", MBCat
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<liferay-ui:tabs names="categories" />
 
-<liferay-ui:tabs names="categories" />
+	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
 
-<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	portletURL.setParameter("struts_action", "/message_boards/select_category");
+	portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
-portletURL.setParameter("struts_action", "/message_boards/select_category");
-portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
+	List<String> headerNames = new ArrayList<String>();
 
-List<String> headerNames = new ArrayList<String>();
+	headerNames.add("category");
+	headerNames.add("num-of-categories");
+	headerNames.add("num-of-threads");
+	headerNames.add("num-of-posts");
+	headerNames.add(StringPool.BLANK);
 
-headerNames.add("category");
-headerNames.add("num-of-categories");
-headerNames.add("num-of-threads");
-headerNames.add("num-of-posts");
-headerNames.add(StringPool.BLANK);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
-int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	searchContainer.setTotal(total);
 
-searchContainer.setTotal(total);
+	List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
-List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+	searchContainer.setResults(results);
 
-searchContainer.setResults(results);
+	List resultRows = searchContainer.getResultRows();
 
-List resultRows = searchContainer.getResultRows();
+	for (int i = 0; i < results.size(); i++) {
+		MBCategory curCategory = (MBCategory)results.get(i);
 
-for (int i = 0; i < results.size(); i++) {
-	MBCategory curCategory = (MBCategory)results.get(i);
+		curCategory = curCategory.toEscapedModel();
 
-	curCategory = curCategory.toEscapedModel();
+		ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
-	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-	PortletURL rowURL = renderResponse.createRenderURL();
+		rowURL.setParameter("struts_action", "/message_boards/select_category");
+		rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
-	rowURL.setParameter("struts_action", "/message_boards/select_category");
-	rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+		// Name and description
 
-	// Name and description
+		StringBuilder sb = new StringBuilder();
 
-	StringBuilder sb = new StringBuilder();
+		sb.append(curCategory.getName());
 
-	sb.append(curCategory.getName());
+		if (Validator.isNotNull(curCategory.getDescription())) {
+			sb.append("<br />");
+			sb.append(curCategory.getDescription());
+		}
 
-	if (Validator.isNotNull(curCategory.getDescription())) {
-		sb.append("<br />");
-		sb.append(curCategory.getDescription());
+		row.addText(sb.toString(), rowURL);
+
+		// Statistics
+
+		int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+		int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+		int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
+
+		row.addText(String.valueOf(categoriesCount), rowURL);
+		row.addText(String.valueOf(threadsCount), rowURL);
+		row.addText(String.valueOf(messagesCount), rowURL);
+
+		// Action
+
+		sb = new StringBuilder();
+
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectCategory('");
+		sb.append(curCategory.getCategoryId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(curCategory.getName()));
+		sb.append("'); window.close();");
+
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
+
+		// Add result row
+
+		resultRows.add(row);
 	}
+	%>
 
-	row.addText(sb.toString(), rowURL);
-
-	// Statistics
-
-	int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
-	int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
-	int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
-
-	row.addText(String.valueOf(categoriesCount), rowURL);
-	row.addText(String.valueOf(threadsCount), rowURL);
-	row.addText(String.valueOf(messagesCount), rowURL);
-
-	// Action
-
-	sb = new StringBuilder();
-
-	sb.append("opener.");
-	sb.append(renderResponse.getNamespace());
-	sb.append("selectCategory('");
-	sb.append(curCategory.getCategoryId());
-	sb.append("', '");
-	sb.append(UnicodeFormatter.toString(curCategory.getName()));
-	sb.append("'); window.close();");
-
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
-
-	// Add result row
-
-	resultRows.add(row);
-}
-%>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-</form>
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</aui:form>

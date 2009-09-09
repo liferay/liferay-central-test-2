@@ -57,7 +57,7 @@ boolean quote = false;
 	}
 
 	function <portlet:namespace />toggleExplanationPost() {
-		if (document.getElementById("<portlet:namespace />addExplanationPost").checked) {
+		if (document.getElementById("<portlet:namespace />addExplanationPostCheckbox").checked) {
 			document.getElementById("<portlet:namespace />explanationPost").style.display = "";
 		}
 		else {
@@ -66,95 +66,78 @@ boolean quote = false;
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/move_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />moveThread(); return false;">
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
-<input name="<portlet:namespace />mbCategoryId" type="hidden" value="<%= categoryId %>" />
+<portlet:actionURL var="moveThreadURL">
+	<portlet:param name="struts_action" value="/message_boards/move_thread" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="message"
-	backURL="<%= redirect %>"
-/>
+<aui:form action="<%= moveThreadURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "moveThread(); return false;" %>'>
+	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
+	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 
-<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
-<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
-<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
+	<liferay-ui:tabs
+		names="message"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-long breadcrumbsMessageId = message.getMessageId();
-%>
+	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
+	<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
+	<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="category" />:
-	</td>
-	<td>
+	<%
+	long breadcrumbsMessageId = message.getMessageId();
+	%>
 
-		<%
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+	<aui:fieldset>
+		<aui:field-wrapper label="category">
 
-		category = category.toEscapedModel();
-		%>
+			<%
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-		<%= category.getName() %></a>
+			category = category.toEscapedModel();
+			%>
 
-		<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
-	</td>
-</tr>
-</table>
+			<portlet:renderURL var="viewCategoryURL">
+				<portlet:param name="struts_action" value="/message_boards/view" />
+				<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
+			</portlet:renderURL>
 
-<br />
+			<aui:a href="<%= viewCategoryURL %>" id="categoryName"><%= category.getName() %></aui:a>
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="add-explanation-post" />
-	</td>
-	<td>
-		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" type="checkbox" onClick="<portlet:namespace/>toggleExplanationPost();" />
-	</td>
-</tr>
-</table>
+			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
+				<portlet:param name="struts_action" value="/message_boards/select_category" />
+				<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" />
+			</portlet:renderURL>
 
-<br />
+			<%
+			String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
+			%>
 
-<table class="lfr-table" id="<portlet:namespace/>explanationPost" style="display: none;">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="subject" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="body" />
-	</td>
-	<td>
-		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
+			<aui:button value="select" onClick="<%= taglibOpenCategoryWindow %>" />
+		</aui:field-wrapper>
 
-		<input name="<portlet:namespace />body" type="hidden" value="" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-</table>
+		<aui:input inlineLabel="<%= true %>" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
-<input type="submit" value='<%= LanguageUtil.get(pageContext, "move-thread") %>' />
+		<div id="<portlet:namespace/>explanationPost" style="display: none;">
+			<aui:input model="<%= MBMessage.class %>" name="subject" value="" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+			<aui:field-wrapper label="body">
+				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
-</form>
+				<aui:input name="body" type="hidden" />
+
+				<script type="text/javascript">
+					<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
+				</script>
+			</aui:field-wrapper>
+		</div>
+	</aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" value="move-thread" />
+
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%
 MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);

@@ -78,316 +78,169 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/edit_category" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCategory(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />mbCategoryId" type="hidden" value="<%= categoryId %>" />
-<input name="<portlet:namespace />parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
+<portlet:actionURL var="editCategoryURL">
+	<portlet:param name="struts_action" value="/message_boards/edit_category" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
-<liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= MailingListEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= MailingListInServerNameException.class %>" message="please-enter-a-valid-incoming-server-name" />
-<liferay-ui:error exception="<%= MailingListInUserNameException.class %>" message="please-enter-a-valid-incoming-user-name" />
-<liferay-ui:error exception="<%= MailingListOutEmailAddressException.class %>" message="please-enter-a-valid-outgoing-email-address" />
-<liferay-ui:error exception="<%= MailingListOutServerNameException.class %>" message="please-enter-a-valid-outgoing-server-name" />
-<liferay-ui:error exception="<%= MailingListOutUserNameException.class %>" message="please-enter-a-valid-outgoing-user-name" />
+<aui:form action="<%= editCategoryURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveCategory(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
+	<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-<table class="lfr-table">
+	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= MailingListEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
+	<liferay-ui:error exception="<%= MailingListInServerNameException.class %>" message="please-enter-a-valid-incoming-server-name" />
+	<liferay-ui:error exception="<%= MailingListInUserNameException.class %>" message="please-enter-a-valid-incoming-user-name" />
+	<liferay-ui:error exception="<%= MailingListOutEmailAddressException.class %>" message="please-enter-a-valid-outgoing-email-address" />
+	<liferay-ui:error exception="<%= MailingListOutServerNameException.class %>" message="please-enter-a-valid-outgoing-server-name" />
+	<liferay-ui:error exception="<%= MailingListOutUserNameException.class %>" message="please-enter-a-valid-outgoing-user-name" />
 
-<c:if test="<%= category != null %>">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="parent-category" />
-		</td>
-		<td>
-			<table class="lfr-table">
-			<tr>
-				<td>
+	<aui:model-context bean="<%= category %>" model="<%= MBCategory.class %>" />
 
-					<%
-					String parentCategoryName = StringPool.BLANK;
+	<aui:fieldset>
+		<c:if test="<%= category != null %>">
+			<aui:field-wrapper label="parent-category">
 
-					try {
-						MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+				<%
+				String parentCategoryName = StringPool.BLANK;
 
-						parentCategoryName = parentCategory.getName();
-					}
-					catch (NoSuchCategoryException nscce) {
-					}
-					%>
+				try {
+					MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
 
-					<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentCategoryName">
-					<%= parentCategoryName %></a>
+					parentCategoryName = parentCategory.getName();
+				}
+				catch (NoSuchCategoryException nscce) {
+				}
+				%>
 
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/message_boards/select_category" /><portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
+				<portlet:renderURL var="viewCategoryURL">
+					<portlet:param name="struts_action" value="/message_boards/view" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
+				</portlet:renderURL>
 
-					<input id="<portlet:namespace />removeCategoryButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeCategory();" />
-				</td>
-				<td>
-					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
-						<c:if test="<%= category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
-							style="display: none;"
-						</c:if>
-					>
-						<liferay-ui:input-checkbox param="mergeWithParentCategory" />
+				<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName"><%= parentCategoryName %></aui:a>
 
-						<liferay-ui:message key="merge-with-parent-category" />
-					</div>
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-</c:if>
+				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
+					<portlet:param name="struts_action" value="/message_boards/select_category" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" />
+				</portlet:renderURL>
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MBCategory.class %>" bean="<%= category %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MBCategory.class %>" bean="<%= category %>" field="description" />
-	</td>
-</tr>
+				<%
+				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
+				%>
 
-<liferay-ui:custom-attributes-available className="<%= MBCategory.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+				<aui:button value="select" onClick="<%= taglibOpenCategoryWindow %>" />
+
+				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
+
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
+					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-category" name="mergeWithParentFolder" type="checkbox" />
+				</div>
+			</aui:field-wrapper>
+		</c:if>
+
+		<aui:input name="name" />
+
+		<aui:input name="description" />
+
+		<liferay-ui:custom-attributes-available className="<%= MBCategory.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= MBCategory.class.getName() %>"
 				classPK="<%= (category != null) ? category.getCategoryId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<c:if test="<%= category == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= MBCategory.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<c:if test="<%= category == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= MBCategory.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
 
-</table>
+		<br />
 
-<br />
+		<liferay-ui:panel-container id="mailingList" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+			<liferay-ui:panel id="mailingListPanel" title='<%= LanguageUtil.get(pageContext, "mailing-list") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 
-<liferay-ui:tabs names="mailing-list" />
+				<aui:model-context bean="<%= mailingList %>" model="<%= MBMailingList.class %>" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="active" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="mailingListActive" defaultValue="<%= mailingListActive %>" />
-	</td>
-</tr>
-<tbody id="<portlet:namespace />mailingListSettings">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="email-address" />
-		</td>
-		<td>
-			<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="emailAddress" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<br />
+				<aui:input inlineLabel="<%= true %>" label="active" name="mailingListActive" type="checkbox" value="<%= mailingListActive %>" />
 
-			<liferay-ui:tabs
-				names="incoming,outgoing"
-				refresh="<%= false %>"
-			>
-				<liferay-ui:section>
-					<table class="lfr-table">
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="protocol" />
-						</td>
-						<td>
-							<table class="lfr-table">
-							<tr>
+				<div id="<portlet:namespace />mailingListSettings">
+					<aui:input name="emailAddress" />
 
-								<%
-								String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
-								%>
+					<br />
 
-								<td>
-									<input <%= protocol.startsWith("pop3") ? "checked" : "" %> name="<portlet:namespace />inProtocol" type="radio" value="pop3"> <liferay-ui:message key="pop" />
-								</td>
-								<td>
-									<input <%= protocol.startsWith("imap") ? "checked" : "" %> name="<portlet:namespace />inProtocol" type="radio" value="imap"> <liferay-ui:message key="imap" />
-								</td>
-							</tr>
-							</table>
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="server-name" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerName" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="server-port" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerPort" defaultValue="110" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="use-a-secure-network-connection" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUseSSL" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="user-name" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUserName" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="password" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inPassword" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="read-interval-minutes" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inReadInterval" defaultValue="5" />
-						</td>
-					</tr>
-					</table>
-				</liferay-ui:section>
-				<liferay-ui:section>
-					<table class="lfr-table">
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="email-address" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outEmailAddress" />
-						</td>
-					</tr>
-					<tr>
-						<td class="lfr-label">
-							<liferay-ui:message key="use-custom-outgoing-server" />
-						</td>
-						<td>
-							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outCustom" />
-						</td>
-					</tr>
-					<tbody id="<portlet:namespace />outCustomSettings">
-						<tr>
-							<td>
-								<liferay-ui:message key="server-name" />
-							</td>
-							<td>
-								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerName" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lfr-label">
-								<liferay-ui:message key="server-port" />
-							</td>
-							<td>
-								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerPort" defaultValue="25" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lfr-label">
-								<liferay-ui:message key="use-a-secure-network-connection" />
-							</td>
-							<td>
-								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUseSSL" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lfr-label">
-								<liferay-ui:message key="user-name" />
-							</td>
-							<td>
-								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUserName" />
-							</td>
-						</tr>
-						<tr>
-							<td class="lfr-label">
-								<liferay-ui:message key="password" />
-							</td>
-							<td>
-								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outPassword" />
-							</td>
-						</tr>
-					</tbody>
-					</table>
-				</liferay-ui:section>
-			</liferay-ui:tabs>
-		</td>
-	</tr>
-</tbody>
-</table>
+					<aui:fieldset>
+						<aui:legend label="incoming" />
 
-<br />
+						<%
+						String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
+						%>
 
-<c:if test="<%= (category == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
-		<portlet:param name="struts_action" value="/message_boards/captcha" />
-	</portlet:actionURL>
+						<aui:field-wrapper label="protocol">
+							<aui:input checked='<%= protocol.startsWith("pop3") %>' inlineLabel="<%= true %>" label="pop" name="inProtocol" type="radio" value="pop3" />
+							<aui:input checked='<%= protocol.startsWith("imap") %>' inlineLabel="<%= true %>" label="imap" name="inProtocol" type="radio" value="imap" />
+						</aui:field-wrapper>
 
-	<liferay-ui:captcha url="<%= captchaURL %>" />
-</c:if>
+						<aui:input label="server-name" name="inServerName" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+						<aui:input label="server-port" name="inServerPort" value="110" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+						<aui:input inlineLabel="<%= true %>" label="use-a-secure-network-connection" name="inUseSSL" />
 
-</form>
+						<aui:input label="user-name" name="inUserName" />
+
+						<aui:input label="password" name="inPassword" />
+
+						<aui:input label="read-interval-minutes" name="inReadInterval" value="5" />
+					</aui:fieldset>
+
+					<aui:fieldset>
+						<aui:legend label="outgoing" />
+
+						<aui:input label="email-address" name="outEmailAddress" />
+
+						<aui:input inlineLabel="<%= true %>" label="use-custom-outgoing-server" name="outCustom" />
+
+						<div id="<portlet:namespace />outCustomSettings">
+							<aui:input label="server-name" name="outServerName" />
+
+							<aui:input label="server-port" name="outServerPort" value="25" />
+
+							<aui:input inlineLabel="<%= true %>" label="use-a-secure-network-connection" name="outUseSSL" />
+
+							<aui:input label="user-name" name="outUserName" />
+
+							<aui:input label="password" name="outPassword" />
+						</div>
+					</aui:fieldset>
+				</div>
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
+	</aui:fieldset>
+
+	<br />
+
+	<c:if test="<%= (category == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY %>">
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+			<portlet:param name="struts_action" value="/message_boards/captcha" />
+		</portlet:actionURL>
+
+		<liferay-ui:captcha url="<%= captchaURL %>" />
+	</c:if>
+
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
+
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

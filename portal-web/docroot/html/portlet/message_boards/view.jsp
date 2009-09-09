@@ -73,191 +73,188 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
-		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-		<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
+		<aui:form action="<%= searchURL %>" method="get" name="fm1" onSubmit="submitForm(this); return false;">
+			<liferay-portlet:renderURLParams varImpl="searchURL" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+			<aui:input name="searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 
-		<%
-		List<String> headerNames = new ArrayList<String>();
+			<%
+			List<String> headerNames = new ArrayList<String>();
 
-		headerNames.add("category");
-		headerNames.add("categories");
-		headerNames.add("threads");
-		headerNames.add("posts");
-		headerNames.add(StringPool.BLANK);
+			headerNames.add("category");
+			headerNames.add("categories");
+			headerNames.add("threads");
+			headerNames.add("posts");
+			headerNames.add(StringPool.BLANK);
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		List results = categoryDisplay.getCategories();
+			List results = categoryDisplay.getCategories();
 
-		int total = results.size();
+			int total = results.size();
 
-		searchContainer.setTotal(total);
+			searchContainer.setTotal(total);
 
-		results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+			results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
 
-		searchContainer.setResults(results);
+			searchContainer.setResults(results);
 
-		List resultRows = searchContainer.getResultRows();
+			List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			MBCategory curCategory = (MBCategory)results.get(i);
+			for (int i = 0; i < results.size(); i++) {
+				MBCategory curCategory = (MBCategory)results.get(i);
 
-			curCategory = curCategory.toEscapedModel();
+				curCategory = curCategory.toEscapedModel();
 
-			ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
+				ResultRow row = new ResultRow(new Object[] {curCategory, categorySubscriptionClassPKs}, curCategory.getCategoryId(), i);
 
-			boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
+				boolean restricted = !MBCategoryPermission.contains(permissionChecker, curCategory, ActionKeys.VIEW);
 
-			row.setRestricted(restricted);
+				row.setRestricted(restricted);
 
-			PortletURL rowURL = renderResponse.createRenderURL();
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("struts_action", "/message_boards/view");
-			rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+				rowURL.setParameter("struts_action", "/message_boards/view");
+				rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
-			// Name and description
+				// Name and description
 
-			StringBuilder sb = new StringBuilder();
+				StringBuilder sb = new StringBuilder();
 
-			if (!restricted) {
-				sb.append("<a href=\"");
-				sb.append(rowURL);
-				sb.append("\">");
-			}
-
-			sb.append("<b>");
-			sb.append(curCategory.getName());
-			sb.append("</b>");
-
-			if (Validator.isNotNull(curCategory.getDescription())) {
-				sb.append("<br />");
-				sb.append(curCategory.getDescription());
-			}
-
-			if (!restricted) {
-				sb.append("</a>");
-
-				List subcategories = categoryDisplay.getCategories(curCategory);
-
-				int subcategoriesCount = subcategories.size();
-
-				subcategories = ListUtil.subList(subcategories, 0, 5);
-
-				if (subcategoriesCount > 0) {
-					sb.append("<br /><span class=\"subcategories\">");
-					sb.append(LanguageUtil.get(pageContext, "subcategories"));
-					sb.append("</span>: ");
-
-					for (int j = 0; j < subcategories.size(); j++) {
-						MBCategory subcategory = (MBCategory)subcategories.get(j);
-
-						rowURL.setParameter("mbCategoryId", String.valueOf(subcategory.getCategoryId()));
-
-						sb.append("<a href=\"");
-						sb.append(rowURL);
-						sb.append("\">");
-						sb.append(subcategory.getName());
-						sb.append("</a>");
-
-						if ((j + 1) < subcategories.size()) {
-							sb.append(", ");
-						}
-					}
-
-					if (subcategoriesCount > subcategories.size()) {
-						rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
-
-						sb.append(", <a href=\"");
-						sb.append(rowURL);
-						sb.append("\">");
-						sb.append(LanguageUtil.get(pageContext, "more"));
-						sb.append(" &raquo;");
-						sb.append("</a>");
-					}
-
-					rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
+				if (!restricted) {
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
 				}
-			}
 
-			row.addText(sb.toString());
+				sb.append("<b>");
+				sb.append(curCategory.getName());
+				sb.append("</b>");
 
-			// Statistics
+				if (Validator.isNotNull(curCategory.getDescription())) {
+					sb.append("<br />");
+					sb.append(curCategory.getDescription());
+				}
 
-			int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
-			int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
-			int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
+				if (!restricted) {
+					sb.append("</a>");
 
-			row.addText(String.valueOf(categoriesCount), rowURL);
-			row.addText(String.valueOf(threadsCount), rowURL);
-			row.addText(String.valueOf(messagesCount), rowURL);
+					List subcategories = categoryDisplay.getCategories(curCategory);
 
-			// Action
+					int subcategoriesCount = subcategories.size();
 
-			if (restricted) {
-				row.addText(StringPool.BLANK);
-			}
-			else {
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
-			}
+					subcategories = ListUtil.subList(subcategories, 0, 5);
 
-			// Add result row
+					if (subcategoriesCount > 0) {
+						sb.append("<br /><span class=\"subcategories\">");
+						sb.append(LanguageUtil.get(pageContext, "subcategories"));
+						sb.append("</span>: ");
 
-			resultRows.add(row);
-		}
+						for (int j = 0; j < subcategories.size(); j++) {
+							MBCategory subcategory = (MBCategory)subcategories.get(j);
 
-		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
-		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
-		showSearchCategory = showSearchCategory && (results.size() > 0);
-		%>
+							rowURL.setParameter("mbCategoryId", String.valueOf(subcategory.getCategoryId()));
 
-		<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearchCategory %>">
-			<div>
-				<c:if test="<%= showSearchCategory %>">
-					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
+							sb.append("<a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(subcategory.getName());
+							sb.append("</a>");
 
-					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
+							if ((j + 1) < subcategories.size()) {
+								sb.append(", ");
+							}
+						}
 
-					<input type="submit" value="<liferay-ui:message key="search-categories" />" />
-				</c:if>
+						if (subcategoriesCount > subcategories.size()) {
+							rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 
-				<c:if test="<%= showAddCategoryButton %>">
-					<input type="button" value="<liferay-ui:message key='<%= (category == null) ? "add-category" : "add-subcategory" %>' />" onClick="<portlet:namespace />addCategory();" />
-				</c:if>
+							sb.append(", <a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(LanguageUtil.get(pageContext, "more"));
+							sb.append(" &raquo;");
+							sb.append("</a>");
+						}
 
-				<c:if test="<%= showPermissionsButton %>">
-
-					<%
-					String modelResource = "com.liferay.portlet.messageboards";
-					String modelResourceDescription = themeDisplay.getScopeGroupName();
-					String resourcePrimKey = String.valueOf(scopeGroupId);
-
-					if (category != null) {
-						modelResource = MBCategory.class.getName();
-						modelResourceDescription = category.getName();
-						resourcePrimKey = String.valueOf(category.getCategoryId());
+						rowURL.setParameter("mbCategoryId", String.valueOf(curCategory.getCategoryId()));
 					}
-					%>
+				}
 
-					<liferay-security:permissionsURL
-						modelResource="<%= modelResource %>"
-						modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-						resourcePrimKey="<%= resourcePrimKey %>"
-						var="permissionsURL"
-					/>
+				row.addText(sb.toString());
 
-					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
-				</c:if>
-			</div>
+				// Statistics
 
-			<br />
-		</c:if>
+				int categoriesCount = categoryDisplay.getSubcategoriesCount(curCategory);
+				int threadsCount = categoryDisplay.getSubcategoriesThreadsCount(curCategory);
+				int messagesCount = categoryDisplay.getSubcategoriesMessagesCount(curCategory);
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				row.addText(String.valueOf(categoriesCount), rowURL);
+				row.addText(String.valueOf(threadsCount), rowURL);
+				row.addText(String.valueOf(messagesCount), rowURL);
 
-		</form>
+				// Action
+
+				if (restricted) {
+					row.addText(StringPool.BLANK);
+				}
+				else {
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/category_action.jsp");
+				}
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+
+			boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
+			boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+			showSearchCategory = showSearchCategory && (results.size() > 0);
+			%>
+
+			<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearchCategory %>">
+				<div>
+					<c:if test="<%= showSearchCategory %>">
+						<aui:input cssClass="input-text-search" id="keywords1" label="" name="keywords" size="30" type="text" />
+
+						<aui:button type="submit" value="search-categories" />
+					</c:if>
+
+					<c:if test="<%= showAddCategoryButton %>">
+						<aui:button value='<%= (category == null) ? "add-category" : "add-subcategory" %>' onClick='<%= renderResponse.getNamespace() + "addCategory();" %>' />
+					</c:if>
+
+					<c:if test="<%= showPermissionsButton %>">
+
+						<%
+						String modelResource = "com.liferay.portlet.messageboards";
+						String modelResourceDescription = themeDisplay.getScopeGroupName();
+						String resourcePrimKey = String.valueOf(scopeGroupId);
+
+						if (category != null) {
+							modelResource = MBCategory.class.getName();
+							modelResourceDescription = category.getName();
+							resourcePrimKey = String.valueOf(category.getCategoryId());
+						}
+						%>
+
+						<liferay-security:permissionsURL
+							modelResource="<%= modelResource %>"
+							modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
+							resourcePrimKey="<%= resourcePrimKey %>"
+							var="permissionsURL"
+						/>
+
+						<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+					</c:if>
+				</div>
+
+				<br />
+			</c:if>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</aui:form>
 
 		<script type="text/javascript">
 			function <portlet:namespace />addCategory() {
@@ -278,170 +275,168 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		<c:if test="<%= category != null %>">
 			<br />
 
-			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
-			<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-			<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= categoryId %>" />
+			<aui:form action="<%= searchURL %>" method="get" name="fm2" onSubmit="submitForm(this); return false;">
+				<liferay-portlet:renderURLParams varImpl="searchURL" />
+				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+				<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+				<aui:input name="searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
-			<liferay-ui:tabs names="threads" />
+				<liferay-ui:tabs names="threads" />
 
-			<%
-			headerNames.clear();
+				<%
+				List<String> headerNames = new ArrayList<String>();
 
-			headerNames.add("thread");
-			headerNames.add("status");
-			headerNames.add("started-by");
-			headerNames.add("posts");
-			headerNames.add("views");
-			headerNames.add("last-post");
-			headerNames.add(StringPool.BLANK);
+				headerNames.add("thread");
+				headerNames.add("status");
+				headerNames.add("started-by");
+				headerNames.add("posts");
+				headerNames.add("views");
+				headerNames.add("last-post");
+				headerNames.add(StringPool.BLANK);
 
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			total = MBThreadLocalServiceUtil.getThreadsCount(categoryId);
+				int total = MBThreadLocalServiceUtil.getThreadsCount(categoryId);
 
-			searchContainer.setTotal(total);
+				searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getThreads(categoryId, searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBThreadLocalServiceUtil.getThreads(categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+				searchContainer.setResults(results);
 
-			resultRows = searchContainer.getResultRows();
+				List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				MBThread thread = (MBThread)results.get(i);
+				for (int i = 0; i < results.size(); i++) {
+					MBThread thread = (MBThread)results.get(i);
 
-				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+					MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 
-				message = message.toEscapedModel();
+					message = message.toEscapedModel();
 
-				boolean readThread = MBMessageFlagLocalServiceUtil.hasReadFlag(themeDisplay.getUserId(), thread);
+					boolean readThread = MBMessageFlagLocalServiceUtil.hasReadFlag(themeDisplay.getUserId(), thread);
 
-				ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
+					ResultRow row = new ResultRow(new Object[] {message, threadSubscriptionClassPKs}, thread.getThreadId(), i, !readThread);
 
-				row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
+					row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
 
-				PortletURL rowURL = renderResponse.createRenderURL();
+					PortletURL rowURL = renderResponse.createRenderURL();
 
-				rowURL.setParameter("struts_action", "/message_boards/view_message");
-				rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));
+					rowURL.setParameter("struts_action", "/message_boards/view_message");
+					rowURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 
-				// Thread
+					// Thread
 
-				StringBuilder sb = new StringBuilder();
+					StringBuilder sb = new StringBuilder();
 
-				String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
+					String[] threadPriority = MBUtil.getThreadPriority(preferences, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
-				if ((threadPriority != null) && (thread.getPriority() > 0)) {
-					sb.append("<img align=\"left\" alt=\"");
-					sb.append(threadPriority[0]);
-					sb.append("\" border=\"0\" src=\"");
-					sb.append(threadPriority[1]);
-					sb.append("\" title=\"");
-					sb.append(threadPriority[0]);
-					sb.append("\" />");
-				}
+					if ((threadPriority != null) && (thread.getPriority() > 0)) {
+						sb.append("<img align=\"left\" alt=\"");
+						sb.append(threadPriority[0]);
+						sb.append("\" border=\"0\" src=\"");
+						sb.append(threadPriority[1]);
+						sb.append("\" title=\"");
+						sb.append(threadPriority[0]);
+						sb.append("\" />");
+					}
 
-				sb.append(message.getSubject());
+					sb.append(message.getSubject());
 
-				row.addText(sb.toString(), rowURL);
+					row.addText(sb.toString(), rowURL);
 
-				// Status
+					// Status
 
-				sb = new StringBuilder();
-
-				if (MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId())) {
-					sb.append(LanguageUtil.get(pageContext, "waiting-for-an-answer"));
-				}
-				if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
-					sb.append(LanguageUtil.get(pageContext, "resolved"));
-				}
-
-				row.addText(sb.toString(), rowURL);
-
-				// Started by
-
-				if (message.isAnonymous()) {
-					row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
-				}
-				else {
-					row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
-				}
-
-				// Number of posts
-
-				row.addText(String.valueOf(thread.getMessageCount()), rowURL);
-
-				// Number of views
-
-				row.addText(String.valueOf(thread.getViewCount()), rowURL);
-
-				// Last post
-
-				if (thread.getLastPostDate() == null) {
-					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
-				}
-				else {
 					sb = new StringBuilder();
 
-					sb.append(LanguageUtil.get(pageContext, "date"));
-					sb.append(": ");
-					sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
-
-					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
-
-					if (Validator.isNotNull(lastPostByUserName)) {
-						sb.append("<br />");
-						sb.append(LanguageUtil.get(pageContext, "by"));
-						sb.append(": ");
-						sb.append(lastPostByUserName);
+					if (MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId())) {
+						sb.append(LanguageUtil.get(pageContext, "waiting-for-an-answer"));
+					}
+					if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
+						sb.append(LanguageUtil.get(pageContext, "resolved"));
 					}
 
 					row.addText(sb.toString(), rowURL);
+
+					// Started by
+
+					if (message.isAnonymous()) {
+						row.addText(LanguageUtil.get(pageContext, "anonymous"), rowURL);
+					}
+					else {
+						row.addText(PortalUtil.getUserName(message.getUserId(), message.getUserName()), rowURL);
+					}
+
+					// Number of posts
+
+					row.addText(String.valueOf(thread.getMessageCount()), rowURL);
+
+					// Number of views
+
+					row.addText(String.valueOf(thread.getViewCount()), rowURL);
+
+					// Last post
+
+					if (thread.getLastPostDate() == null) {
+						row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
+					}
+					else {
+						sb = new StringBuilder();
+
+						sb.append(LanguageUtil.get(pageContext, "date"));
+						sb.append(": ");
+						sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
+
+						String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
+
+						if (Validator.isNotNull(lastPostByUserName)) {
+							sb.append("<br />");
+							sb.append(LanguageUtil.get(pageContext, "by"));
+							sb.append(": ");
+							sb.append(lastPostByUserName);
+						}
+
+						row.addText(sb.toString(), rowURL);
+					}
+
+					// Action
+
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/message_action.jsp");
+
+					// Add result row
+
+					resultRows.add(row);
 				}
 
-				// Action
+				boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE);
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/message_boards/message_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-
-			boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE);
-
-			if (showAddMessageButton && !themeDisplay.isSignedIn()) {
-				if (!allowAnonymousPosting) {
-					showAddMessageButton = false;
+				if (showAddMessageButton && !themeDisplay.isSignedIn()) {
+					if (!allowAnonymousPosting) {
+						showAddMessageButton = false;
+					}
 				}
-			}
 
-			showSearchThread = showSearchThread && (results.size() > 0);
-			%>
+				showSearchThread = showSearchThread && (results.size() > 0);
+				%>
 
-			<c:if test="<%= showAddMessageButton || showSearchThread %>">
-				<div>
-					<c:if test="<%= showSearchThread %>">
-						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+				<c:if test="<%= showAddMessageButton || showSearchThread %>">
+					<div>
+						<c:if test="<%= showSearchThread %>">
+							<aui:input cssClass="input-text-search" id="keywords2" label="" name="keywords" size="30" type="text" />
 
-						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+							<aui:button type="submit" value="search-this-category" />
+						</c:if>
 
-						<input type="submit" value="<liferay-ui:message key="search-this-category" />" />
-					</c:if>
+						<c:if test="<%= showAddMessageButton %>">
+							<aui:button value="post-new-thread" onClick='<%= renderResponse.getNamespace() + "addMessage();" %>' />
+						</c:if>
+					</div>
 
-					<c:if test="<%= showAddMessageButton %>">
-						<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="<portlet:namespace />addMessage();" />
-					</c:if>
-				</div>
+					<br />
+				</c:if>
 
-				<br />
-			</c:if>
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-			</form>
+			</aui:form>
 
 			<script type="text/javascript">
 				function <portlet:namespace />addMessage() {

@@ -52,165 +52,167 @@ long threadId = ParamUtil.getLong(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/message_boards/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="struts_action" value="/message_boards/search" />
+</liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
-<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
-<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
-<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
-<input name="<portlet:namespace />threadId" type="hidden" value="<%= threadId %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
+	<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
+	<aui:input name="searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
+	<aui:input name="searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
+	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/message_boards/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
-portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
-portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
-portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
-portletURL.setParameter("threadId", String.valueOf(threadId));
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/message_boards/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
+	portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
+	portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
+	portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
+	portletURL.setParameter("threadId", String.valueOf(threadId));
+	portletURL.setParameter("keywords", keywords);
 
-List<String> headerNames = new ArrayList<String>();
+	List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("#");
-headerNames.add("category");
-headerNames.add("message");
-headerNames.add("thread-posts");
-headerNames.add("thread-views");
-headerNames.add("score");
+	headerNames.add("#");
+	headerNames.add("category");
+	headerNames.add("message");
+	headerNames.add("thread-posts");
+	headerNames.add("thread-views");
+	headerNames.add("score");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-try {
+	try {
 
-	// We must use QueryUtil.ALL_POS or else pagination will break. We need to
-	// filter the results with ThreadHits first and then make a subset of the
-	// filtered results.
+		// We must use QueryUtil.ALL_POS or else pagination will break. We need to
+		// filter the results with ThreadHits first and then make a subset of the
+		// filtered results.
 
-	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-	ThreadHits threadHits = new ThreadHits();
+		ThreadHits threadHits = new ThreadHits();
 
-	threadHits.recordHits(results, searchContainer.getStart(), searchContainer.getEnd());
+		threadHits.recordHits(results, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = results.getLength();
+		int total = results.getLength();
 
-	searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-	List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getDocs().length; i++) {
-		Document doc = results.doc(i);
+		for (int i = 0; i < results.getDocs().length; i++) {
+			Document doc = results.doc(i);
 
-		ResultRow row = new ResultRow(doc, i, i);
+			ResultRow row = new ResultRow(doc, i, i);
 
-		// Position
+			// Position
 
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Category
+			// Category
 
-		long categoryId = GetterUtil.getLong(doc.get("categoryId"));
+			long categoryId = GetterUtil.getLong(doc.get("categoryId"));
 
-		MBCategory category = null;
+			MBCategory category = null;
 
-		try {
-			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Message boards search index is stale and contains category " + categoryId);
+			try {
+				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Message boards search index is stale and contains category " + categoryId);
+				}
+
+				continue;
 			}
 
-			continue;
-		}
+			PortletURL categoryUrl = renderResponse.createRenderURL();
 
-		PortletURL categoryUrl = renderResponse.createRenderURL();
+			categoryUrl.setParameter("struts_action", "/message_boards/view");
+			categoryUrl.setParameter("redirect", currentURL);
+			categoryUrl.setParameter("mbCategoryId", String.valueOf(categoryId));
 
-		categoryUrl.setParameter("struts_action", "/message_boards/view");
-		categoryUrl.setParameter("redirect", currentURL);
-		categoryUrl.setParameter("mbCategoryId", String.valueOf(categoryId));
+			row.addText(category.getName(), categoryUrl);
 
-		row.addText(category.getName(), categoryUrl);
+			// Thread and message
 
-		// Thread and message
+			long curThreadId = GetterUtil.getLong(doc.get("threadId"));
+			long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
-		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
-		long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			MBThread thread = null;
 
-		MBThread thread = null;
+			try {
+				thread = MBThreadLocalServiceUtil.getThread(curThreadId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Message boards search index is stale and contains thread " + curThreadId);
+				}
 
-		try {
-			thread = MBThreadLocalServiceUtil.getThread(curThreadId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Message boards search index is stale and contains thread " + curThreadId);
+				continue;
 			}
 
-			continue;
-		}
+			MBMessage message = null;
 
-		MBMessage message = null;
+			try {
+				message = MBMessageLocalServiceUtil.getMessage(messageId);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Message boards search index is stale and contains message " + messageId);
+				}
 
-		try {
-			message = MBMessageLocalServiceUtil.getMessage(messageId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Message boards search index is stale and contains message " + messageId);
+				continue;
 			}
 
-			continue;
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setParameter("struts_action", "/message_boards/view_message");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("messageId", String.valueOf(messageId));
+
+			row.addText(message.getSubject(), rowURL);
+			row.addText(String.valueOf(thread.getMessageCount()), rowURL);
+			row.addText(String.valueOf(thread.getViewCount()), rowURL);
+
+			// Score
+
+			row.addScore(results.score(i));
+
+			// Add result row
+
+			resultRows.add(row);
 		}
+	%>
 
-		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/message_boards/view_message");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("messageId", String.valueOf(messageId));
+		<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
-		row.addText(message.getSubject(), rowURL);
-		row.addText(String.valueOf(thread.getMessageCount()), rowURL);
-		row.addText(String.valueOf(thread.getViewCount()), rowURL);
+		<aui:button type="submit" value="search" />
 
-		// Score
+		<br /><br />
 
-		row.addScore(results.score(i));
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		// Add result row
-
-		resultRows.add(row);
+	<%
 	}
-%>
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+	%>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<br /><br />
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-
-</form>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 	<script type="text/javascript">

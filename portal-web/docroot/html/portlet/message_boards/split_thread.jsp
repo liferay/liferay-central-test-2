@@ -61,7 +61,7 @@ boolean quote = false;
 	}
 
 	function <portlet:namespace />toggleExplanationPost() {
-		if (document.getElementById("<portlet:namespace />addExplanationPost").checked) {
+		if (document.getElementById("<portlet:namespace />addExplanationPostCheckbox").checked) {
 			document.getElementById("<portlet:namespace />explanationPost").style.display = "";
 		}
 		else {
@@ -70,120 +70,90 @@ boolean quote = false;
 	}
 </script>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/message_boards/split_thread" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />splitThread(); return false;">
-<input name="<portlet:namespace />messageId" type="hidden" value="<%= messageId %>" />
-<input name="<portlet:namespace />mbCategoryId" type="hidden" value="<%= categoryId %>" />
+<portlet:actionURL var="splitThreadURL">
+	<portlet:param name="struts_action" value="/message_boards/split_thread" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="message"
-	backURL="<%= redirect %>"
-/>
+<aui:form action="<%= splitThreadURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "splitThread(); return false;" %>'>
+	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
+	<aui:input name="mbCategoryId" type="hidden" value="<%= categoryId %>" />
 
-<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
-<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
-<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
+	<liferay-ui:tabs
+		names="message"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-long breadcrumbsMessageId = message.getMessageId();
-%>
+	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
+	<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
+	<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
 
-<div class="portlet-msg-info">
-	<liferay-ui:message key="click-ok-to-create-a-new-thread-with-the-following-messages" />
-</div>
+	<%
+	long breadcrumbsMessageId = message.getMessageId();
+	%>
 
-<%
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId, MBThreadImpl.THREAD_VIEW_TREE);
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="click-ok-to-create-a-new-thread-with-the-following-messages" />
+	</div>
 
-MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
+	<%
+	MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId, MBThreadImpl.THREAD_VIEW_TREE);
 
-List messages = new ArrayList();
+	MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 
-messages.addAll(treeWalker.getMessages());
+	List messages = new ArrayList();
 
-messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
-%>
+	messages.addAll(treeWalker.getMessages());
 
-<table class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;" width="100%">
+	messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
+	%>
 
-<%
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
-request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-%>
+	<table class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;" width="100%">
 
-<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
+	<%
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
+	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+	%>
 
-</table>
+	<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
 
-<br />
+	</table>
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="add-explanation-post-to-the-source-thread" />
-	</td>
-	<td>
-		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" type="checkbox" onClick="<portlet:namespace/>toggleExplanationPost();" />
-	</td>
-</tr>
-</table>
+	<br />
 
-<br />
+	<aui:fieldset>
+		<aui:input inlineLabel="<%= true %>" label="add-explanation-post-to-the-source-thread" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
-<table class="lfr-table" id="<portlet:namespace/>explanationPost" style="display: none;">
-<tr>
-	<td colspan="2">
-		<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="subject" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue='<%= LanguageUtil.get(pageContext, "thread-splitted") %>' />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="body" />
-	</td>
-	<td>
-		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
+		<div id="<portlet:namespace/>explanationPost" style="display: none;">
 
-		<input name="<portlet:namespace />body" type="hidden" value="" />
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message" />
+			</div>
 
-		<script type="text/javascript">
-			<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
-		</script>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-</table>
+			<aui:input model="<%= MBMessage.class %>" name="subject" value='<%= LanguageUtil.get(pageContext, "thread-splitted") %>' />
 
-<input type="submit" value="<liferay-ui:message key="ok" />" />
+			<aui:field-wrapper label="body">
+				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+				<aui:input name="body" type="hidden" />
 
-</form>
+				<script type="text/javascript">
+					<portlet:namespace />setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=[$NEW_THREAD_URL$]][$NEW_THREAD_URL$][/url]") %>');
+				</script>
+			</aui:field-wrapper>
+		</div>
+   </aui:fieldset>
+
+	<aui:button-row>
+		<aui:button type="submit" value="ok" />
+
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%
 MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);

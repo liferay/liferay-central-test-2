@@ -100,7 +100,11 @@ String threadView = messageDisplay.getThreadView();
 		label="<%= true %>"
 	/>
 
-	(<a href="javascript:<portlet:namespace />deleteAnswerFlag('@MESSAGE_ID@');"><liferay-ui:message key="unmark" /></a>)
+	<%
+	String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
+	%>
+
+	(<aui:a href="<%= taglibHREF %>"><liferay-ui:message key="unmark" /></aui:a>)
 </div>
 
 <div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
@@ -117,232 +121,20 @@ String threadView = messageDisplay.getThreadView();
 	/>
 </div>
 
-<c:if test="<%= includeFormTag %>">
-	<form>
-	<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
-	<input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
-	<input name="<portlet:namespace />threadId" type="hidden" value="<%= message.getThreadId() %>" />
-</c:if>
+<c:choose>
+	<c:when test="<%= includeFormTag %>">
+		<aui:form>
+			<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />
+			<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>" />
+			<aui:input name="threadId" type="hidden" value="<%= message.getThreadId() %>" />
 
-<liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
-
-<table cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td class="stretch"></td>
-
-	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_VIEWS.length > 1 %>">
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
-			<td class="thread-icon">
-
-				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_COMBINATION);
-				%>
-
-				<liferay-ui:icon
-					image="../message_boards/thread_view_combination"
-					message="combination-view"
-					url="<%= currentURLObj.toString() %>"
-					method="get"
-				/>
-			</td>
-		</c:if>
-
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_FLAT) %>">
-			<td class="thread-icon">
-
-				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_FLAT);
-				%>
-
-				<liferay-ui:icon
-					image="../message_boards/thread_view_flat"
-					message="flat-view"
-					url="<%= currentURLObj.toString() %>"
-					method="get"
-				/>
-			</td>
-		</c:if>
-
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_TREE) %>">
-			<td class="thread-icon">
-
-				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_TREE);
-				%>
-
-				<liferay-ui:icon
-					image="../message_boards/thread_view_tree"
-					message="tree-view"
-					url="<%= currentURLObj.toString() %>"
-					method="get"
-				/>
-			</td>
-		</c:if>
-	</c:if>
-</tr>
-</table>
-
-<div class="thread-controls">
-	<div class="thread-navigation">
-		<liferay-ui:message key="threads" />
-
-		[
-
-		<c:if test="<%= previousThread != null %>">
-			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(previousThread.getRootMessageId()) %>" /></portlet:renderURL>">
-		</c:if>
-
-		<liferay-ui:message key="previous" />
-
-		<c:if test="<%= previousThread != null %>">
-			</a>
-		</c:if>
-
-		|
-
-		<c:if test="<%= nextThread != null %>">
-			<a href="<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view_message" /><portlet:param name="messageId" value="<%= String.valueOf(nextThread.getRootMessageId()) %>" /></portlet:renderURL>">
-		</c:if>
-
-		<liferay-ui:message key="next" />
-
-		<c:if test="<%= nextThread != null %>">
-			</a>
-		</c:if>
-
-		]
-	</div>
-
-	<div class="thread-actions">
-		<table class="lfr-table">
-		<tr>
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
-				<td>
-					<portlet:renderURL var="addMessageURL">
-						<portlet:param name="struts_action" value="/message_boards/edit_message" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" label="<%= true %>" />
-				</td>
-			</c:if>
-
-			<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
-				<td>
-					<c:choose>
-						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
-							<portlet:actionURL var="unsubscribeURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<portlet:actionURL var="subscribeURL">
-								<portlet:param name="struts_action" value="/message_boards/edit_message" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
-						</c:otherwise>
-					</c:choose>
-				</td>
-			</c:if>
-
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.MOVE_THREAD) %>">
-				<td>
-					<portlet:renderURL var="editThreadURL">
-						<portlet:param name="struts_action" value="/message_boards/move_thread" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getCategoryId()) %>" />
-						<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-					</portlet:renderURL>
-
-					<liferay-ui:icon image="forward" message="move-thread" url="<%= editThreadURL %>" label="<%= true %>" />
-				</td>
-			</c:if>
-		</tr>
-		</table>
-	</div>
-
-	<div class="clear"></div>
-</div>
-
-<div class="portlet-section-header results-header title">
-	<%= HtmlUtil.escape(message.getSubject()) %>
-</div>
-
-<div>
-
-	<%
-	MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
-
-	List<MBMessage> messages = null;
-
-	if (treeWalker != null) {
-		messages = new ArrayList<MBMessage>();
-
-		messages.addAll(treeWalker.getMessages());
-
-		messages = ListUtil.sort(messages, new MessageCreateDateComparator(true));
-	}
-
-	AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(MBMessage.class.getName(), thread.getRootMessageId()));
-	%>
-
-	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
-
-	<c:if test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_COMBINATION) && (messages.size() > 1) %>'>
-		<liferay-ui:toggle-area id="toggle_id_message_boards_view_message_thread">
-			<table class="toggle_id_message_boards_view_message_thread">
-
-			<%
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_MESSAGE_FLAG, messageFlag);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-			%>
-
-			<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
-
-			</table>
-		</liferay-ui:toggle-area>
-	</c:if>
-
-	<c:choose>
-		<c:when test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_TREE) %>'>
-
-			<%
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
-			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-			%>
-
-			<liferay-util:include page="/html/portlet/message_boards/view_thread_tree.jsp" />
-		</c:when>
-		<c:otherwise>
-			<%@ include file="/html/portlet/message_boards/view_thread_flat.jspf" %>
-		</c:otherwise>
-	</c:choose>
-</div>
-
-<c:if test="<%= includeFormTag %>">
-	</form>
-</c:if>
+			<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+		</aui:form>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="/html/portlet/message_boards/view_message_content.jspf" %>
+	</c:otherwise>
+</c:choose>
 
 <%
 MBMessageFlagLocalServiceUtil.addReadFlags(themeDisplay.getUserId(), thread);

@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-message-boards .aui-form .aui-ctrl-holder.input-text-search {
+	float: left;
+}
+
 .portlet-message-boards .code {
 	background: #fff;
 	border: 1px solid #777;
@@ -178,13 +182,13 @@ td.user-info {
 }
 
 .portlet-message-boards .lfr-textarea.message-edit {
-	height: 378px;
-	min-height: 100%;
+	height: 100%;
 	width: 100%;
 }
-
-.portlet-message-boards .message-edit-body {
-	width: 750px;
+.portlet-message-boards .lfr-textarea.message-edit textarea {
+	height: 378px;
+	min-height: 100%;
+	width: 99.5%;
 }
 
 .portlet-message-boards .subcategories {
