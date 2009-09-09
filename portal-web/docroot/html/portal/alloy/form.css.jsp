@@ -35,9 +35,9 @@
 }
 
 .aui-form .aui-ctrl-holder {
-	overflow: hidden;
 	clear: both;
 	margin: 0;
+	overflow: hidden;
 	padding: 3px;
 }
 
@@ -184,6 +184,10 @@
 	position: absolute;
 }
 
+.aui-form .aui-ctrl-holder.input-text-search {
+	float: left;
+}
+
 .aui-form .aui-block-labels label em, .aui-form .aui-block-labels .label em {
 	display: inline;
 	position: static;
@@ -193,6 +197,10 @@
 }
 
 .aui-form #error-msg dt, .aui-form #error-msg h3 {
+	font-size: 110%;
+	font-weight: bold;
+	line-height: 100%;
+	margin: 0 0 .5em 0;
 }
 
 .aui-form #error-msg dd {
@@ -298,13 +306,6 @@
 	background: #FFDFDF;
 	border: 1px solid #DF7D7D;
 	border-width: 1px 0;
-}
-
-.aui-form #error-msg dt, .aui-form #error-msg h3 {
-	font-size: 110%;
-	font-weight: bold;
-	line-height: 100%;
-	margin: 0 0 .5em 0;
 }
 
 .aui-button-row {

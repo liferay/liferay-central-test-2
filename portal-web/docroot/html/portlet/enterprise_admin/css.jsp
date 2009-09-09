@@ -280,10 +280,6 @@
 	clear: both;
 }
 
-.portlet-enterprise-admin .aui-form .aui-ctrl-holder.input-text-search {
-	float: left;
-}
-
 .portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl span {
 	float: left;
 	margin-right: 0.5em;

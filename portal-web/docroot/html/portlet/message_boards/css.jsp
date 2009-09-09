@@ -24,10 +24,6 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-message-boards .aui-form .aui-ctrl-holder.input-text-search {
-	float: left;
-}
-
 .portlet-message-boards .code {
 	background: #fff;
 	border: 1px solid #777;
