@@ -56,8 +56,8 @@ import com.liferay.portal.kernel.annotation.Transactional;
 	PortalException.class, SystemException.class})
 public interface BookmarksEntryService {
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long folderId, java.lang.String name, java.lang.String url,
-		java.lang.String comments,
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -78,7 +78,7 @@ public interface BookmarksEntryService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		long entryId, long folderId, java.lang.String name,
+		long entryId, long groupId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,

@@ -191,7 +191,8 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Entries
 
-		bookmarksEntryLocalService.deleteEntries(folder.getFolderId());
+		bookmarksEntryLocalService.deleteEntries(
+			folder.getGroupId(), folder.getFolderId());
 
 		// Expando
 
@@ -385,10 +386,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Merge folders
 
-		if (mergeWithParentFolder && (folderId != parentFolderId) &&
-			(parentFolderId !=
-				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (mergeWithParentFolder && (folderId != parentFolderId)) {
 			mergeFolders(folder, parentFolderId);
 		}
 
@@ -461,8 +459,8 @@ public class BookmarksFolderLocalServiceImpl
 			mergeFolders(folder, toFolderId);
 		}
 
-		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByFolderId(
-			fromFolder.getFolderId());
+		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByG_F(
+			fromFolder.getGroupId(), fromFolder.getFolderId());
 
 		for (BookmarksEntry entry : entries) {
 			entry.setFolderId(toFolderId);
@@ -498,10 +496,11 @@ public class BookmarksFolderLocalServiceImpl
 				companyId, folderStart, folderEnd);
 
 		for (BookmarksFolder folder : folders) {
+			long groupId = folder.getGroupId();
 			long folderId = folder.getFolderId();
 
-			int entryCount = bookmarksEntryPersistence.countByFolderId(
-				folderId);
+			int entryCount = bookmarksEntryPersistence.countByG_F(
+				groupId, folderId);
 
 			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
 
@@ -509,16 +508,17 @@ public class BookmarksFolderLocalServiceImpl
 				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
 				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexEntries(folderId, entryStart, entryEnd);
+				reIndexEntries(groupId, folderId, entryStart, entryEnd);
 			}
 		}
 	}
 
-	protected void reIndexEntries(long folderId, int entryStart, int entryEnd)
+	protected void reIndexEntries(
+			long groupId, long folderId, int entryStart, int entryEnd)
 		throws SystemException {
 
-		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByFolderId(
-			folderId, entryStart, entryEnd);
+		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByG_F(
+			groupId, folderId, entryStart, entryEnd);
 
 		for (BookmarksEntry entry : entries) {
 			bookmarksEntryLocalService.reIndex(entry);

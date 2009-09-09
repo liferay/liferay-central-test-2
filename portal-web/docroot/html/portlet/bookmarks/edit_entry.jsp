@@ -37,6 +37,15 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />removeFolder() {
+		document.<portlet:namespace />fm.<portlet:namespace />folderId.value = "<%= rootFolderId %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />folderName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveEntry() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -107,6 +116,8 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 					%>
 
 					<aui:button onClick="<%= taglibOpenFolderWindow %>" value="select" />
+
+					<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 			</aui:field-wrapper>
 		</c:if>
 

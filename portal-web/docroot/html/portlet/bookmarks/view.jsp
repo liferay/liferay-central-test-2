@@ -164,7 +164,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 				int foldersCount = subfolderIds.size() - 1;
-				int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
+				int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 				%>
 
 				<liferay-ui:search-container-column-text
@@ -254,171 +254,169 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<c:if test="<%= folder != null %>">
-			<br />
+		<br />
 
-			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-			<liferay-portlet:renderURLParams varImpl="searchURL" />
-			<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-			<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-			<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= folderId %>" />
 
-			<liferay-ui:tabs names="entries" />
+		<liferay-ui:tabs names="entries" />
 
-			<%
-			String orderByCol = ParamUtil.getString(request, "orderByCol");
-			String orderByType = ParamUtil.getString(request, "orderByType");
+		<%
+		String orderByCol = ParamUtil.getString(request, "orderByCol");
+		String orderByType = ParamUtil.getString(request, "orderByType");
 
-			if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-				portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-col", orderByCol);
-				portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-type", orderByType);
-			}
-			else {
-				orderByCol = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-col", "name");
-				orderByType = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-type", "asc");
-			}
+		if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+			portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-col", orderByCol);
+			portalPrefs.setValue(PortletKeys.BOOKMARKS, "entries-order-by-type", orderByType);
+		}
+		else {
+			orderByCol = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-col", "name");
+			orderByType = portalPrefs.getValue(PortletKeys.BOOKMARKS, "entries-order-by-type", "asc");
+		}
 
-			OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(orderByCol, orderByType);
-			%>
+		OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(orderByCol, orderByType);
+		%>
 
-			<liferay-ui:search-container
-				curParam="cur2"
-				headerNames="name,url,visits,priority,modified-date"
-				iteratorURL="<%= portletURL %>"
-				orderByCol="<%= orderByCol %>"
-				orderByType="<%= orderByType %>"
+		<liferay-ui:search-container
+			curParam="cur2"
+			headerNames="name,url,visits,priority,modified-date"
+			iteratorURL="<%= portletURL %>"
+			orderByCol="<%= orderByCol %>"
+			orderByType="<%= orderByType %>"
+		>
+			<liferay-ui:search-container-results
+				results="<%= BookmarksEntryLocalServiceUtil.getEntries(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
+				total="<%= BookmarksEntryLocalServiceUtil.getEntriesCount(scopeGroupId, folderId) %>"
+			/>
+
+			<liferay-ui:search-container-row
+				className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
+				escapedModel="<%= true %>"
+				keyProperty="entryId"
+				modelVar="entry"
 			>
-				<liferay-ui:search-container-results
-					results="<%= BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
-					total="<%= BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId()) %>"
-				/>
-
-				<liferay-ui:search-container-row
-					className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
-					escapedModel="<%= true %>"
-					keyProperty="entryId"
-					modelVar="entry"
-				>
-
-					<%
-					StringBuilder sb = new StringBuilder();
-
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/bookmarks/open_entry?entryId=");
-					sb.append(entry.getEntryId());
-
-					String rowHREF = sb.toString();
-					%>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						name="entry"
-						orderable="<%= true %>"
-						orderableProperty="name"
-						property="name"
-						target="_blank"
-						title="<%= entry.getComments() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						name="url"
-						orderable="<%= true %>"
-						property="url"
-						target="_blank"
-						title="<%= entry.getComments() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						name="visits"
-						orderable="<%= true %>"
-						property="visits"
-						target="_blank"
-						title="<%= entry.getComments() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						name="priority"
-						orderable="<%= true %>"
-						property="priority"
-						target="_blank"
-						title="<%= entry.getComments() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						name="modified-date"
-						orderable="<%= true %>"
-						target="_blank"
-						title="<%= entry.getComments() %>"
-						value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"
-					/>
-
-					<liferay-ui:search-container-column-jsp
-						align="right"
-						path="/html/portlet/bookmarks/entry_action.jsp"
-					/>
-				</liferay-ui:search-container-row>
 
 				<%
-				boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
-				boolean showSearch = (results.size() > 0);
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/bookmarks/open_entry?entryId=");
+				sb.append(entry.getEntryId());
+
+				String rowHREF = sb.toString();
 				%>
 
-				<c:if test="<%= showAddEntryButton || showSearch %>">
-					<div>
-						<c:if test="<%= showSearch %>">
-							<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="entry"
+					orderable="<%= true %>"
+					orderableProperty="name"
+					property="name"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
 
-							<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="url"
+					orderable="<%= true %>"
+					property="url"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
 
-							<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
-						</c:if>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="visits"
+					orderable="<%= true %>"
+					property="visits"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
 
-						<c:if test="<%= showAddEntryButton %>">
-							<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="<portlet:namespace />addEntry();" />
-						</c:if>
-					</div>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="priority"
+					orderable="<%= true %>"
+					property="priority"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
 
-					<br />
-				</c:if>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="modified-date"
+					orderable="<%= true %>"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+					value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"
+				/>
 
-				<liferay-ui:search-iterator />
-			</liferay-ui:search-container>
-
-			</form>
-
-			<script type="text/javascript">
-				function <portlet:namespace />addEntry() {
-					var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';
-
-					if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
-						url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
-					}
-
-					submitForm(document.hrefFm, url);
-				}
-
-				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</c:if>
-			</script>
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/bookmarks/entry_action.jsp"
+				/>
+			</liferay-ui:search-container-row>
 
 			<%
-			if (folder.getParentFolderId() != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-
-				if (portletName.equals(PortletKeys.BOOKMARKS)) {
-					PortalUtil.setPageSubtitle(folder.getName(), request);
-					PortalUtil.setPageDescription(folder.getDescription(), request);
-				}
-			}
+			boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ENTRY);
+			boolean showSearch = (results.size() > 0);
 			%>
 
-		</c:if>
+			<c:if test="<%= showAddEntryButton || showSearch %>">
+				<div>
+					<c:if test="<%= showSearch %>">
+						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+						<input type="submit" value="<liferay-ui:message key="search-this-folder" />" />
+					</c:if>
+
+					<c:if test="<%= showAddEntryButton %>">
+						<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="<portlet:namespace />addEntry();" />
+					</c:if>
+				</div>
+
+				<br />
+			</c:if>
+
+			<liferay-ui:search-iterator />
+		</liferay-ui:search-container>
+
+		</form>
+
+		<script type="text/javascript">
+			function <portlet:namespace />addEntry() {
+				var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';
+
+				if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
+				}
+
+				submitForm(document.hrefFm, url);
+			}
+
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+			</c:if>
+		</script>
+
+		<%
+		if (folder != null) {
+			BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+
+			if (portletName.equals(PortletKeys.BOOKMARKS)) {
+				PortalUtil.setPageSubtitle(folder.getName(), request);
+				PortalUtil.setPageDescription(folder.getDescription(), request);
+			}
+		}
+		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>
 		<liferay-ui:search-container

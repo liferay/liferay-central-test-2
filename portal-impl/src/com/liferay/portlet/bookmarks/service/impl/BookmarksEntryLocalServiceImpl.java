@@ -37,6 +37,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
@@ -54,30 +55,29 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
-			long userId, long folderId, String name, String url,
+			long userId, long groupId, long folderId, String name, String url,
 			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, folderId, name, url, comments, serviceContext);
+			null, userId, groupId, folderId, name, url, comments,
+			serviceContext);
 	}
 
 	public BookmarksEntry addEntry(
-			String uuid, long userId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
+			String uuid, long userId, long groupId, long folderId, String name,
+			String url, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
 
 		if (Validator.isNull(name)) {
 			name = url;
@@ -92,7 +92,7 @@ public class BookmarksEntryLocalServiceImpl
 		BookmarksEntry entry = bookmarksEntryPersistence.create(entryId);
 
 		entry.setUuid(uuid);
-		entry.setGroupId(folder.getGroupId());
+		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
 		entry.setCreateDate(now);
@@ -182,11 +182,11 @@ public class BookmarksEntryLocalServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteEntries(long folderId)
+	public void deleteEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		Iterator<BookmarksEntry> itr = bookmarksEntryPersistence.findByFolderId(
-			folderId).iterator();
+		Iterator<BookmarksEntry> itr = bookmarksEntryPersistence.findByG_F(
+			groupId, folderId).iterator();
 
 		while (itr.hasNext()) {
 			BookmarksEntry entry = itr.next();
@@ -237,23 +237,28 @@ public class BookmarksEntryLocalServiceImpl
 		bookmarksEntryPersistence.remove(entry);
 	}
 
-	public List<BookmarksEntry> getEntries(long folderId, int start, int end)
+	public List<BookmarksEntry> getEntries(
+			long groupId, long folderId, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryPersistence.findByFolderId(folderId, start, end);
+		return bookmarksEntryPersistence.findByG_F(
+			groupId, folderId, start, end);
 	}
 
 	public List<BookmarksEntry> getEntries(
-			long folderId, int start, int end,
+			long groupId, long folderId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return bookmarksEntryPersistence.findByFolderId(
-			folderId, start, end, orderByComparator);
+		return bookmarksEntryPersistence.findByG_F(
+			groupId, folderId, start, end, orderByComparator);
 	}
 
-	public int getEntriesCount(long folderId) throws SystemException {
-		return bookmarksEntryPersistence.countByFolderId(folderId);
+	public int getEntriesCount(
+			long groupId, long folderId)
+		throws SystemException {
+
+		return bookmarksEntryPersistence.countByG_F(groupId, folderId);
 	}
 
 	public BookmarksEntry getEntry(long entryId)
@@ -262,10 +267,10 @@ public class BookmarksEntryLocalServiceImpl
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
-	public int getFoldersEntriesCount(List<Long> folderIds)
+	public int getFoldersEntriesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
-		return bookmarksEntryFinder.countByFolderIds(folderIds);
+		return bookmarksEntryFinder.countByG_F(groupId, folderIds);
 	}
 
 	public List<BookmarksEntry> getGroupEntries(
@@ -380,16 +385,14 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public BookmarksEntry updateEntry(
-			long userId, long entryId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
+			long userId, long entryId, long groupId, long folderId, String name,
+			String url, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		BookmarksEntry entry =
 			bookmarksEntryPersistence.findByPrimaryKey(entryId);
-
-		BookmarksFolder folder = getFolder(entry, folderId);
 
 		if (Validator.isNull(name)) {
 			name = url;
@@ -398,7 +401,7 @@ public class BookmarksEntryLocalServiceImpl
 		validate(url);
 
 		entry.setModifiedDate(new Date());
-		entry.setFolderId(folder.getFolderId());
+		entry.setFolderId(folderId);
 		entry.setName(name);
 		entry.setUrl(url);
 		entry.setComments(comments);
@@ -424,25 +427,23 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
-	protected BookmarksFolder getFolder(BookmarksEntry entry, long folderId)
+	protected long getFolder(BookmarksEntry entry, long folderId)
 		throws PortalException, SystemException {
 
-		if (entry.getFolderId() != folderId) {
-			BookmarksFolder oldFolder =
-				bookmarksFolderPersistence.findByPrimaryKey(
-					entry.getFolderId());
+		if ((entry.getFolderId() != folderId) &&
+			(folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			BookmarksFolder newFolder =
 				bookmarksFolderPersistence.fetchByPrimaryKey(folderId);
 
 			if ((newFolder == null) ||
-				(oldFolder.getGroupId() != newFolder.getGroupId())) {
+				(entry.getGroupId() != newFolder.getGroupId())) {
 
 				folderId = entry.getFolderId();
 			}
 		}
 
-		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
+		return folderId;
 	}
 
 	protected void validate(String url) throws PortalException {

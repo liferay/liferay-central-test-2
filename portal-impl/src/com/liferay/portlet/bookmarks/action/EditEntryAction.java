@@ -144,8 +144,12 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void updateEntry(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
+		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String url = ParamUtil.getString(actionRequest, "url");
@@ -159,7 +163,7 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			BookmarksEntry entry = BookmarksEntryServiceUtil.addEntry(
-				folderId, name, url, comments, serviceContext);
+				groupId, folderId, name, url, comments, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, BookmarksEntry.class.getName(),
@@ -170,7 +174,8 @@ public class EditEntryAction extends PortletAction {
 			// Update entry
 
 			BookmarksEntryServiceUtil.updateEntry(
-				entryId, folderId, name, url, comments, serviceContext);
+				entryId, groupId, folderId, name, url, comments,
+				serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

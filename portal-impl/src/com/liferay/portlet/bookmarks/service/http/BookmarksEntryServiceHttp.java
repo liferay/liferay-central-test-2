@@ -71,43 +71,46 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
  */
 public class BookmarksEntryServiceHttp {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(folderId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = url;
-
-			if (url == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = comments;
+			Object paramObj3 = url;
 
-			if (comments == null) {
+			if (url == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = serviceContext;
+			Object paramObj4 = comments;
+
+			if (comments == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj4 = new NullWrapper(
+				paramObj5 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;
@@ -240,7 +243,7 @@ public class BookmarksEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		HttpPrincipal httpPrincipal, long entryId, long folderId,
+		HttpPrincipal httpPrincipal, long entryId, long groupId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -248,30 +251,32 @@ public class BookmarksEntryServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
-			Object paramObj1 = new LongWrapper(folderId);
+			Object paramObj1 = new LongWrapper(groupId);
 
-			Object paramObj2 = name;
+			Object paramObj2 = new LongWrapper(folderId);
+
+			Object paramObj3 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = url;
-
-			if (url == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = comments;
+			Object paramObj4 = url;
 
-			if (comments == null) {
+			if (url == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = serviceContext;
+			Object paramObj5 = comments;
+
+			if (comments == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
+				paramObj6 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -279,7 +284,7 @@ public class BookmarksEntryServiceHttp {
 					"updateEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

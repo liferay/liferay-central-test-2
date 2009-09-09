@@ -101,14 +101,14 @@ public interface BookmarksEntryLocalService {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -138,7 +138,7 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteEntries(long folderId)
+	public void deleteEntries(long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -153,17 +153,17 @@ public interface BookmarksEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
-		long folderId, int start, int end)
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
-		long folderId, int start, int end,
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getEntriesCount(long folderId)
+	public int getEntriesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -173,7 +173,8 @@ public interface BookmarksEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersEntriesCount(java.util.List<Long> folderIds)
+	public int getFoldersEntriesCount(long groupId,
+		java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -218,8 +219,8 @@ public interface BookmarksEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		long userId, long entryId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		long userId, long entryId, long groupId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

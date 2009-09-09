@@ -193,8 +193,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		List<BookmarksEntry> entries = BookmarksEntryUtil.findByFolderId(
-			folder.getFolderId());
+		List<BookmarksEntry> entries = BookmarksEntryUtil.findByG_F(
+			folder.getGroupId(), folder.getFolderId());
 
 		for (BookmarksEntry entry : entries) {
 			exportEntry(context, foldersEl, entriesEl, entry);
@@ -332,7 +332,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		BookmarksEntry existingEntry = null;
 
 		try {
-			BookmarksFolderUtil.findByPrimaryKey(folderId);
+			BookmarksFolder folder =
+				BookmarksFolderUtil.findByPrimaryKey(folderId);
+
+			long groupId = folder.getGroupId();
 
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
@@ -342,19 +345,20 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 						entry.getUuid(), context.getGroupId());
 
 					BookmarksEntryLocalServiceUtil.updateEntry(
-						userId, existingEntry.getEntryId(), folderId,
+						userId, existingEntry.getEntryId(), groupId, folderId,
 						entry.getName(), entry.getUrl(), entry.getComments(),
 						serviceContext);
 				}
 				catch (NoSuchEntryException nsee) {
 					BookmarksEntryLocalServiceUtil.addEntry(
-						entry.getUuid(), userId, folderId, entry.getName(),
-						entry.getUrl(), entry.getComments(), serviceContext);
+						entry.getUuid(), userId, groupId, folderId,
+						entry.getName(), entry.getUrl(), entry.getComments(),
+						serviceContext);
 				}
 			}
 			else {
 				BookmarksEntryLocalServiceUtil.addEntry(
-					userId, folderId, entry.getName(), entry.getUrl(),
+					userId, groupId, folderId, entry.getName(), entry.getUrl(),
 					entry.getComments(), serviceContext);
 			}
 		}

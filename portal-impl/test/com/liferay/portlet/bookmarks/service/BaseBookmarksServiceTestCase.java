@@ -52,7 +52,8 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		return BookmarksEntryServiceUtil.addEntry(
-			folder.getFolderId(), name, url, comments, serviceContext);
+			folder.getGroupId(), folder.getFolderId(), name, url, comments,
+			serviceContext);
 	}
 
 	protected BookmarksFolder addFolder() throws Exception {

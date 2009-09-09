@@ -57,46 +57,4 @@ else if (layout.getGroup().getName().equals(GroupConstants.CONTROL_PANEL)) {
 }
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-if (rootFolderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-	BookmarksFolder dynamicRootFolder = null;
-
-	int count = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-	if (count > 1) {
-		List<BookmarksFolder> folders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(BookmarksFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmarks-home"), StringPool.BLANK, serviceContext);
-
-		long dynamicRootFolderId = dynamicRootFolder.getFolderId();
-
-		for (BookmarksFolder folder : folders) {
-			BookmarksFolderLocalServiceUtil.updateFolder(folder.getFolderId(), dynamicRootFolderId, folder.getName(), folder.getDescription(), false, serviceContext);
-		}
-	}
-	else if (count == 1) {
-		List<BookmarksFolder> folders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID, 0, 1);
-
-		dynamicRootFolder = folders.get(0);
-	}
-	else {
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(BookmarksFolder.class.getName(), renderRequest);
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		dynamicRootFolder = BookmarksFolderLocalServiceUtil.addFolder(themeDisplay.getUserId(), BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID, LanguageUtil.get(pageContext, "bookmarks-home"), StringPool.BLANK, serviceContext);
-	}
-
-	rootFolderId = dynamicRootFolder.getFolderId();
-
-	preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
-
-	preferences.store();
-}
 %>

@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.util.comparator.EntryCreateDateComparator;
 import com.liferay.portlet.bookmarks.util.comparator.EntryModifiedDateComparator;
@@ -76,6 +77,11 @@ public class BookmarksUtil {
 			long folderId, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
+
+		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			return;
+		}
 
 		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(
 			folderId);

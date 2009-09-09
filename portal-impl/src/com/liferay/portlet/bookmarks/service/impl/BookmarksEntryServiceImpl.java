@@ -39,15 +39,16 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermissio
 public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
-			long folderId, String name, String url, String comments,
-			ServiceContext serviceContext)
+			long groupId, long folderId, String name, String url,
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
-			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_ENTRY);
 
 		return bookmarksEntryLocalService.addEntry(
-			getUserId(), folderId, name, url, comments, serviceContext);
+			getUserId(), groupId, folderId, name, url, comments,
+			serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -78,7 +79,7 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 	}
 
 	public BookmarksEntry updateEntry(
-			long entryId, long folderId, String name, String url,
+			long entryId, long groupId, long folderId, String name, String url,
 			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -86,7 +87,7 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return bookmarksEntryLocalService.updateEntry(
-			getUserId(), entryId, folderId, name, url, comments,
+			getUserId(), entryId, groupId, folderId, name, url, comments,
 			serviceContext);
 	}
 

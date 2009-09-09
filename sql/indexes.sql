@@ -79,8 +79,8 @@ create index IX_28C78D5C on BlogsStatsUser (groupId, entryCount);
 create unique index IX_82254C25 on BlogsStatsUser (groupId, userId);
 create index IX_BB51F1D9 on BlogsStatsUser (userId);
 
-create index IX_443BDC38 on BookmarksEntry (folderId);
 create index IX_E52FF7EF on BookmarksEntry (groupId);
+create index IX_5200100C on BookmarksEntry (groupId, folderId);
 create index IX_E2E9F129 on BookmarksEntry (groupId, userId);
 create index IX_B670BA39 on BookmarksEntry (uuid_);
 create unique index IX_EAA02A91 on BookmarksEntry (uuid_, groupId);

@@ -36,7 +36,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
  * <a href="BookmarksFolderPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class BookmarksFolderPermission {
 
@@ -46,16 +46,6 @@ public class BookmarksFolderPermission {
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, groupId, folderId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, long folderId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, folderId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -80,19 +70,11 @@ public class BookmarksFolderPermission {
 				permissionChecker, groupId, actionId);
 		}
 		else {
-			return contains(permissionChecker, folderId, actionId);
+			BookmarksFolder folder =
+				BookmarksFolderLocalServiceUtil.getBookmarksFolder(folderId);
+
+			return contains(permissionChecker, folder, actionId);
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long folderId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		BookmarksFolder folder =
-			BookmarksFolderLocalServiceUtil.getFolder(folderId);
-
-		return contains(permissionChecker, folder, actionId);
 	}
 
 	public static boolean contains(

@@ -109,25 +109,25 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		long userId, long folderId, java.lang.String name,
+		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(userId, folderId, name, url, comments,
+				   .addEntry(userId, groupId, folderId, name, url, comments,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
-		java.lang.String uuid, long userId, long folderId,
+		java.lang.String uuid, long userId, long groupId, long folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(uuid, userId, folderId, name, url, comments,
-			serviceContext);
+				   .addEntry(uuid, userId, groupId, folderId, name, url,
+			comments, serviceContext);
 	}
 
 	public static void addEntryResources(long entryId,
@@ -168,10 +168,10 @@ public class BookmarksEntryLocalServiceUtil {
 			.addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteEntries(long folderId)
+	public static void deleteEntries(long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteEntries(folderId);
+		getService().deleteEntries(groupId, folderId);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -188,21 +188,22 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
-		long folderId, int start, int end)
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getEntries(folderId, start, end);
+		return getService().getEntries(groupId, folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
-		long folderId, int start, int end,
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.SystemException {
-		return getService().getEntries(folderId, start, end, orderByComparator);
+		return getService()
+				   .getEntries(groupId, folderId, start, end, orderByComparator);
 	}
 
-	public static int getEntriesCount(long folderId)
+	public static int getEntriesCount(long groupId, long folderId)
 		throws com.liferay.portal.SystemException {
-		return getService().getEntriesCount(folderId);
+		return getService().getEntriesCount(groupId, folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
@@ -212,9 +213,10 @@ public class BookmarksEntryLocalServiceUtil {
 		return getService().getEntry(entryId);
 	}
 
-	public static int getFoldersEntriesCount(java.util.List<Long> folderIds)
+	public static int getFoldersEntriesCount(long groupId,
+		java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
-		return getService().getFoldersEntriesCount(folderIds);
+		return getService().getFoldersEntriesCount(groupId, folderIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getGroupEntries(
@@ -271,14 +273,14 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
-		long userId, long entryId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		long userId, long entryId, long groupId, long folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateEntry(userId, entryId, folderId, name, url, comments,
-			serviceContext);
+				   .updateEntry(userId, entryId, groupId, folderId, name, url,
+			comments, serviceContext);
 	}
 
 	public static BookmarksEntryLocalService getService() {

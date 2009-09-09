@@ -30,6 +30,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 
 /**
@@ -74,15 +75,30 @@ public class BookmarksEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder = entry.getFolder();
-
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (!BookmarksFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.ACCESS) &&
-				!BookmarksFolderPermission.contains(
-					permissionChecker, folder, ActionKeys.VIEW)) {
+			if (entry.getFolderId() ==
+					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				return false;
+				long groupId = entry.getGroupId();
+
+				if (!BookmarksPermission.contains(
+						permissionChecker, groupId, ActionKeys.ACCESS) &&
+					!BookmarksPermission.contains(
+						permissionChecker, groupId, ActionKeys.VIEW)) {
+
+					return false;
+				}
+			}
+			else {
+				BookmarksFolder folder = entry.getFolder();
+
+				if (!BookmarksFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.ACCESS) &&
+					!BookmarksFolderPermission.contains(
+						permissionChecker, folder, ActionKeys.VIEW)) {
+
+					return false;
+				}
 			}
 		}
 

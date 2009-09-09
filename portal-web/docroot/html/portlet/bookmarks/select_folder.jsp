@@ -88,7 +88,7 @@ for (int i = 0; i < results.size(); i++) {
 	BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
+	int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(entriesCount), rowURL);

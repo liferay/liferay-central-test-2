@@ -122,7 +122,7 @@ for (int i = 0; i < results.size(); i++) {
 	BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
+	int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(groupId, subfolderIds);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(entriesCount), rowURL);
@@ -137,94 +137,92 @@ for (int i = 0; i < results.size(); i++) {
 
 <br />
 
-<c:if test="<%= folder != null %>">
-	<liferay-ui:tabs names="entries" />
+<liferay-ui:tabs names="entries" />
 
-	<%
-	headerNames.clear();
+<%
+headerNames.clear();
 
-	headerNames.add("entry");
-	headerNames.add("url");
-	headerNames.add("visits");
-	headerNames.add("modified-date");
+headerNames.add("entry");
+headerNames.add("url");
+headerNames.add("visits");
+headerNames.add("modified-date");
 
-	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
+searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
 
-	total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
+total = BookmarksEntryLocalServiceUtil.getEntriesCount(groupId, folderId);
 
-	searchContainer.setTotal(total);
+searchContainer.setTotal(total);
 
-	results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), null);
+results = BookmarksEntryLocalServiceUtil.getEntries(folderId, searchContainer.getStart(), searchContainer.getEnd(), null);
 
-	searchContainer.setResults(results);
+searchContainer.setResults(results);
 
-	resultRows = searchContainer.getResultRows();
+resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		BookmarksEntry entry = (BookmarksEntry)results.get(i);
+for (int i = 0; i < results.size(); i++) {
+	BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
-		entry = entry.toEscapedModel();
+	entry = entry.toEscapedModel();
 
-		ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
+	ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BookmarksEntry.class.getName(), entry.getEntryId());
+	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(BookmarksEntry.class.getName(), entry.getEntryId());
 
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
-		sb.append("javascript:");
-		sb.append(renderResponse.getNamespace());
-		sb.append("selectAsset('");
-		sb.append(assetEntry.getEntryId());
-		sb.append("', '");
-		sb.append(assetEntry.getEntryId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
-		sb.append("', '");
-		sb.append(assetEntryOrder);
-		sb.append("');");
+	sb.append("javascript:");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectAsset('");
+	sb.append(assetEntry.getEntryId());
+	sb.append("', '");
+	sb.append(assetEntry.getEntryId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(assetEntry.getTitle()));
+	sb.append("', '");
+	sb.append(assetEntryOrder);
+	sb.append("');");
 
-		String rowHREF = sb.toString();
+	String rowHREF = sb.toString();
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF);
+	TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF);
 
-		// Name
+	// Name
 
-		row.addText(rowTextEntry);
+	row.addText(rowTextEntry);
 
-		// URL
+	// URL
 
-		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+	rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		rowTextEntry.setName(entry.getUrl());
+	rowTextEntry.setName(entry.getUrl());
 
-		row.addText(rowTextEntry);
+	row.addText(rowTextEntry);
 
-		// Visits
+	// Visits
 
-		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+	rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		rowTextEntry.setName(String.valueOf(entry.getVisits()));
+	rowTextEntry.setName(String.valueOf(entry.getVisits()));
 
-		row.addText(rowTextEntry);
+	row.addText(rowTextEntry);
 
-		// ModifiedDate
+	// ModifiedDate
 
-		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+	rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		rowTextEntry.setName(dateFormatDate.format(entry.getModifiedDate()));
+	rowTextEntry.setName(dateFormatDate.format(entry.getModifiedDate()));
 
-		row.addText(rowTextEntry);
+	row.addText(rowTextEntry);
 
-		// Add result row
+	// Add result row
 
-		resultRows.add(row);
-	}
-	%>
+	resultRows.add(row);
+}
+%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-	<br />
-</c:if>
+<br />
 
 <%!
 public static String getBreadcrumbs(BookmarksFolder folder, BookmarksEntry entry, PageContext pageContext, RenderRequest req, RenderResponse res, String portletResource, String redirect) throws Exception {

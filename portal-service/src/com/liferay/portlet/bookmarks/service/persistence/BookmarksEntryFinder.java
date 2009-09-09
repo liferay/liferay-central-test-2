@@ -28,7 +28,7 @@ package com.liferay.portlet.bookmarks.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface BookmarksEntryFinder {
-	public int countByFolderIds(java.util.List<Long> folderIds)
+	public int countByG_F(long groupId, java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByNoAssets()

@@ -164,30 +164,32 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
-	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_F(
+		long groupId, long folderId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int start, int end)
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_F(
+		long groupId, long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int start, int end,
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_F(
+		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_First(
-		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_F_First(
+		long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_Last(
-		long folderId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry findByG_F_Last(
+		long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByFolderId_PrevAndNext(
-		long entryId, long folderId,
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] findByG_F_PrevAndNext(
+		long entryId, long groupId, long folderId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
@@ -250,7 +252,7 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByFolderId(long folderId)
+	public void removeByG_F(long groupId, long folderId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_U(long groupId, long userId)
@@ -267,7 +269,7 @@ public interface BookmarksEntryPersistence extends BasePersistence {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByFolderId(long folderId)
+	public int countByG_F(long groupId, long folderId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_U(long groupId, long userId)
