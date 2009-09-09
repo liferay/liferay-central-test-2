@@ -136,7 +136,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 
 				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
-					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-category" name="mergeWithParentFolder" type="checkbox" />
+					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-category" name="mergeWithParentCategory" type="checkbox" />
 				</div>
 			</aui:field-wrapper>
 		</c:if>
