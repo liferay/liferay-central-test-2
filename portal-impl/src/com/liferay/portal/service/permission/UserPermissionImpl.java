@@ -25,7 +25,6 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -110,7 +109,7 @@ public class UserPermissionImpl implements UserPermission {
 
 			return true;
 		}
-		else if (userId != UserConstants.USER_ID_PORTAL_SCOPE) {
+		else {
 			try {
 				if (organizationIds == null) {
 					User user = UserLocalServiceUtil.getUserById(userId);
