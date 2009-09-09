@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
@@ -101,6 +102,11 @@ public abstract class StateAwareResponseImpl
 		if (name == null) {
 			throw new IllegalArgumentException();
 		}
+
+		com.liferay.portal.kernel.xml.QName qName =
+			PortletQNameUtil.getQName(name);
+
+		_publicRenderParameters.remove(PortletQNameUtil.getKey(qName));
 	}
 
 	public void setEvent(QName name, Serializable value) {
@@ -175,11 +181,15 @@ public abstract class StateAwareResponseImpl
 			}
 		}
 
-		_params.put(
-			PortalUtil.getPortletNamespace(_portletName) + name,
-			values);
+		boolean isSetPublicRenderParameter =
+			setPublicRenderParameter(name, values);
+
+		if (!isSetPublicRenderParameter) {
+			_params.put(name, values);
+		}
 
 		_calledSetRenderParameter = true;
+
 	}
 
 	public void setRenderParameters(Map<String, String[]> params) {
@@ -205,9 +215,14 @@ public abstract class StateAwareResponseImpl
 					throw new IllegalArgumentException();
 				}
 
-				newParams.put(
-					PortalUtil.getPortletNamespace(_portletName) + key,
-					value);
+				boolean isSetPublicRenderParameter =
+					setPublicRenderParameter(key, value);
+
+				if (isSetPublicRenderParameter) {
+					continue;
+				}
+
+				newParams.put(key, value);
 			}
 
 			_params = newParams;
@@ -255,6 +270,10 @@ public abstract class StateAwareResponseImpl
 		_portletName = portletName;
 		_user = user;
 		_layout = layout;
+		_publicRenderParameters = RenderParametersPool.get(
+			getHttpServletRequest(), layout.getPlid(),
+			RenderParametersPool.PUBLIC_RENDER_PARAMETERS);
+
 		setWindowState(windowState);
 		setPortletMode(portletMode);
 
@@ -262,6 +281,23 @@ public abstract class StateAwareResponseImpl
 		// setPortletMode sets it to true
 
 		_calledSetRenderParameter = false;
+	}
+
+	protected boolean setPublicRenderParameter(String name, String[] values) {
+		PublicRenderParameter publicRenderParameter =
+			getPortlet().getPublicRenderParameter(name);
+
+		if (publicRenderParameter == null) {
+			com.liferay.portal.kernel.xml.QName qName =
+				publicRenderParameter.getQName();
+
+			_publicRenderParameters.put(
+				PortletQNameUtil.getKey(qName), values);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private PortletRequestImpl _portletRequestImpl;
@@ -275,5 +311,6 @@ public abstract class StateAwareResponseImpl
 	private List<Event> _events = new ArrayList<Event>();
 	private String _redirectLocation;
 	private boolean _calledSetRenderParameter;
+	private Map<String, String[]> _publicRenderParameters;
 
 }
