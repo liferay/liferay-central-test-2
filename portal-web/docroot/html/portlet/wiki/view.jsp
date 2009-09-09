@@ -163,7 +163,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 <c:if test="<%= !wikiPage.isHead() %>">
 	<div class="page-old-version">
-		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <a href="<%= viewPageURL %>"><liferay-ui:message key="go-to-the-latest-version" /></a>)
+		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <aui:a href="<%= viewPageURL %>" label="go-to-the-latest-version" />)
 	</div>
 </c:if>
 
@@ -217,7 +217,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 
 					<c:if test="<%= Validator.isNull(curPage.getRedirectTitle()) %>">
 						<li>
-							<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
+							<aui:a href="<%= curPageURL %>"><%= curPage.getTitle() %></aui:a>
 						</li>
 					</c:if>
 

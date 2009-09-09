@@ -54,7 +54,9 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	<aui:model-context bean="<%= node %>" model="<%= WikiNode.class %>" />
 
 	<div class="breadcrumbs">
-		<span class="first"><a href="<portlet:renderURL />"><liferay-ui:message key="nodes" /></a></span> &raquo;
+		<portlet:renderURL var="renderURL" />
+
+		<span class="first"><aui:a href="<%= renderURL %>" label="nodes" /></span> &raquo;
 
 		<span class="last"><liferay-ui:message key='<%= ((node == null) ? Constants.ADD : Constants.UPDATE) + "-wiki" %>' /></span>
 	</div>

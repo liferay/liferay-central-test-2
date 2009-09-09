@@ -99,21 +99,10 @@ if (type.equals("html")) {
 <div class="history-navigation">
 	<c:choose>
 		<c:when test="<%= previousVersion != 0 %>">
-			<a class="previous" href="<%= previousChange %>">
+			<aui:a cssClass="previous" href="<%= previousChange %>" label="previous-change" />
 		</c:when>
 		<c:otherwise>
-			<span class="previous">
-		</c:otherwise>
-	</c:choose>
-
-	<liferay-ui:message key="previous-change" />
-
-	<c:choose>
-		<c:when test="<%= previousVersion != 0 %>">
-			</a>
-		</c:when>
-		<c:otherwise>
-			</span>
+			<span class="previous"><liferay-ui:message key="previous-change" /></span>
 		</c:otherwise>
 	</c:choose>
 
@@ -127,21 +116,10 @@ if (type.equals("html")) {
 
 		<c:choose>
 			<c:when test="<%= !htmlMode %>">
-				<a class="change-mode" href="<%= changeMode %>">
+				<aui:a cssClass="change-mode" href="<%= changeMode %>" label="html-mode" />
 			</c:when>
 			<c:otherwise>
-				<span class="change-mode">
-			</c:otherwise>
-		</c:choose>
-
-		<liferay-ui:message key="html-mode" />
-
-		<c:choose>
-			<c:when test="<%= !htmlMode %>">
-				</a>
-			</c:when>
-			<c:otherwise>
-				</span>
+				<span class="change-mode"><liferay-ui:message key="html-mode" /></span>
 			</c:otherwise>
 		</c:choose>
 
@@ -149,21 +127,10 @@ if (type.equals("html")) {
 
 		<c:choose>
 			<c:when test="<%= htmlMode %>">
-				<a class="change-mode" href="<%= changeMode %>">
+				<aui:a cssClass="change-mode" href="<%= changeMode %>" label="text-mode" />
 			</c:when>
 			<c:otherwise>
-				<span class="change-mode">
-			</c:otherwise>
-		</c:choose>
-
-		<liferay-ui:message key="text-mode" />
-
-		<c:choose>
-			<c:when test="<%= htmlMode %>">
-				</a>
-			</c:when>
-			<c:otherwise>
-				</span>
+				<span class="change-mode"><liferay-ui:message key="text-mode" /></span>
 			</c:otherwise>
 		</c:choose>
 
@@ -222,21 +189,10 @@ if (type.equals("html")) {
 
 	<c:choose>
 		<c:when test="<%= nextVersion != 0 %>">
-			<a class="next" href="<%= nextChange %>">
+			<aui:a cssClass="next" href="<%= nextChange %>" label="next-change" />
 		</c:when>
 		<c:otherwise>
-			<span class="next">
-		</c:otherwise>
-	</c:choose>
-
-	<liferay-ui:message key="next-change" />
-
-	<c:choose>
-		<c:when test="<%= nextVersion != 0 %>">
-			</a>
-		</c:when>
-		<c:otherwise>
-			</span>
+			<span class="next"><liferay-ui:message key="next-change" /></span>
 		</c:otherwise>
 	</c:choose>
 </div>

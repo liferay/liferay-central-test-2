@@ -61,7 +61,7 @@ try {
 			</c:when>
 			<c:when test="<%= Validator.isNull(formattedContent) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<div class="portlet-msg-info">
-					<a href="<%= editPageURL %>"><liferay-ui:message key="this-page-is-empty-edit-it-to-add-some-text" /></a>
+					<aui:a href="<%= editPageURL %>" label="this-page-is-empty-edit-it-to-add-some-text" />
 				</div>
 			</c:when>
 			<c:otherwise>

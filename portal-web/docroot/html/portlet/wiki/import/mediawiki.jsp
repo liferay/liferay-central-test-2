@@ -24,53 +24,16 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<input name="<portlet:namespace />filesCount" type="hidden" value="3" />
+<aui:input name="filesCount" type="hidden" value="3" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="pages-file" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />file0" type="file" />
+<aui:fieldset>
+	<aui:input helpMessage="import-wiki-pages-help" label="pages-file" name="file0" type="file" />
 
-		<liferay-ui:icon-help message="import-wiki-pages-help" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="users-file" /> (<liferay-ui:message key="optional" />)
-	</td>
-	<td>
-		<input name="<portlet:namespace />file1" type="file" />
+	<aui:input helpMessage="import-wiki-users-help" label='<%= LanguageUtil.get(pageContext, "users-file") + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="file1" type="file" />
 
-		<liferay-ui:icon-help message="import-wiki-users-help" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="images-file" /> (<liferay-ui:message key="optional" />)
-	</td>
-	<td>
-		<input name="<portlet:namespace />file2" type="file" />
+	<aui:input helpMessage="import-wiki-images-help" label='<%= LanguageUtil.get(pageContext, "images-file") + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="file2" type="file" />
 
-		<liferay-ui:icon-help message="import-wiki-images-help" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= WikiPageImpl.FRONT_PAGE %> (<liferay-ui:message key="optional" />)
-	</td>
-	<td>
-		<input name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_FRONT_PAGE %>" type="text" size="40" value="Main Page" />
-	</td>
-</tr>
-</table>
+	<aui:input label='<%= WikiPageImpl.FRONT_PAGE + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="<%= WikiImporterKeys.OPTIONS_FRONT_PAGE %>" type="text" size="40" value="Main Page" />
 
-<br />
-
-<div>
-	<input checked="checked" name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
-
-	<liferay-ui:message key="import-only-the-latest-version-and-not-the-full-history" />
-</div>
+	<aui:input checked="<%= true %>" inlineLabel="<%= true %>" label="import-only-the-latest-version-and-not-the-full-history" name="<%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
+</aui:fieldset>

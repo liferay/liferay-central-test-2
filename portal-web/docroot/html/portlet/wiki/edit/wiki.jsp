@@ -49,7 +49,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImp
 
 		<liferay-util:include page="<%= WikiUtil.getHelpPage(format) %>" />
 
-		<a href="<%= WikiUtil.getHelpURL(format) %>" target="_blank"><liferay-ui:message key="learn-more" /> &raquo;</a>
+		<aui:a href="<%= WikiUtil.getHelpURL(format) %>" target="_blank"><liferay-ui:message key="learn-more" /> &raquo;</aui:a>
 	</td>
 </tr>
 </table>

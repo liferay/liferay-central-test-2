@@ -63,9 +63,20 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					<%
 					for (int i = 0; i < nodes.size(); i++) {
 						WikiNode curNode = (WikiNode)nodes.get(i);
+
+						String cssClass = StringPool.BLANK;
+						if (curNode.getNodeId() == node.getNodeId()) {
+							cssClass = "node-current";
+						}
 					%>
 
-						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= curNode.getName() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>"><span class="nobr"><%= curNode.getName() %></span></a>
+						<portlet:renderURL var="viewPageURL">
+							<portlet:param name="struts_action" value="/wiki/view" />
+							<portlet:param name="nodeName" value="<%= curNode.getName() %>" />
+							<portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" />
+						</portlet:renderURL>
+
+						<%= (i == 0) ? "" : "|" %> <aui:a cssClass="<%= cssClass %>" href="<%= viewPageURL %>"><span class="nobr"><%= curNode.getName() %></span></aui:a>
 
 					<%
 					}
@@ -74,49 +85,52 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				</c:if>
 			</td>
 			<td align="right" valign="top">
-				<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
+				<liferay-portlet:renderURL varImpl="searchURL">
+					<portlet:param name="struts_action" value="/wiki/search" />
+				</liferay-portlet:renderURL>
 
-				<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fmSearch" onSubmit="submitForm(this); return false;">
-				<liferay-portlet:renderURLParams varImpl="searchURL" />
-				<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-				<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+				<aui:form action="<%= searchURL %>" method="get" name="fmSearch" onSubmit="submitForm(this); return false;">
+					<liferay-portlet:renderURLParams varImpl="searchURL" />
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
-				<%
-				PortletURL frontPageURL = PortletURLUtil.clone(portletURL, renderResponse);
+					<%
+					PortletURL frontPageURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-				frontPageURL.setParameter("struts_action", "/wiki/view");
-				frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
-				%>
+					frontPageURL.setParameter("struts_action", "/wiki/view");
+					frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+					%>
 
-				<a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></a>
+					<aui:fieldset>
+						<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></aui:a>
 
-				<%
-				portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
-				%>
+						<%
+						portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
+						%>
 
-				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="recent-changes" /></span></a>
+						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="recent-changes" /></span></aui:a>
 
-				<%
-				portletURL.setParameter("struts_action", "/wiki/view_all_pages");
-				%>
+						<%
+						portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+						%>
 
-				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="all-pages" /></span></a>
+						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="all-pages" /></span></aui:a>
 
-				<%
-				portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
-				%>
+						<%
+						portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
+						%>
 
-				| <a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></a>
+						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></aiu:a>
 
-				&nbsp;
+						&nbsp;
 
-				<span class="nobr">
-					<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
+						<span class="nobr">
+							<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
-					<input type="submit" value="<liferay-ui:message key="search" />" />
-				</span>
-
-				</form>
+							<aui:button type="submit" value="search" />
+						</span>
+					</aui:fieldset>
+				</aui:form>
 			</td>
 		</tr>
 		</table>

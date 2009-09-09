@@ -326,7 +326,14 @@ if (Validator.isNull(redirect)) {
 						long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachments[i]);
 					%>
 
-						<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/wiki/get_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="fileName" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)<%= (i < (attachments.length - 1)) ? ", " : "" %>
+						<portlet:actionURL var="getPageAttachmentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+							<portlet:param name="struts_action" value="/wiki/get_page_attachment" />
+							<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+							<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+							<portlet:param name="fileName" value="<%= fileName %>" />
+						</portlet:actionURL>
+
+						<aui:a href="<%= getPageAttachmentURL %>"><%= fileName %></aui:a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)<%= (i < (attachments.length - 1)) ? ", " : "" %>
 
 					<%
 					}
