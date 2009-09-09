@@ -24,6 +24,7 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -109,7 +110,7 @@ public class UserPermissionImpl implements UserPermission {
 
 			return true;
 		}
-		else {
+		else if (userId != ResourceConstants.PRIMKEY_DNE) {
 			try {
 				if (organizationIds == null) {
 					User user = UserLocalServiceUtil.getUserById(userId);

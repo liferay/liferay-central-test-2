@@ -146,7 +146,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			userParams.put("usersOrgs", new Long(organizationId));
 		}
 		else {
-			if (filterManageableOrganizations) {
+			if (filterManageableOrganizations && !UserPermissionUtil.contains(permissionChecker, ResourceConstants.PRIMKEY_DNE, ActionKeys.VIEW)) {
 				Long[] organizationIds = EnterpriseAdminUtil.getOrganizationIds(user.getOrganizations());
 
 				userParams.put("usersOrgs", organizationIds);
