@@ -43,20 +43,23 @@ IGImage image = (IGImage)row.getObject();
 	<tr>
 		<td>
 			<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>' target="_blank">
-			<liferay-ui:message key="original" /></aui:a>
+				<liferay-ui:message key="original" />
+			</aui:a>
 
 			<c:if test="<%= image.getCustom1ImageId() > 0 %>">
 				|
 
 				<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getCustom1ImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getCustom1ImageId()) %>' target="_blank">
-				<liferay-ui:message key="size" /> 1</aui:a>
+					<liferay-ui:message key="size" /> 1
+				</aui:a>
 			</c:if>
 
 			<c:if test="<%= image.getCustom2ImageId() > 0 %>">
 				|
 
 				<aui:a href='<%= themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getCustom2ImageId() + "&t=" + ImageServletTokenUtil.getToken(image.getCustom2ImageId()) %>' target="_blank">
-				<liferay-ui:message key="size" /> 2</aui:a>
+					<liferay-ui:message key="size" /> 2
+				</aui:a>
 			</c:if>
 		</td>
 	</tr>

@@ -51,9 +51,7 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List scores = null;
-%>
 
-<%
 String tabs1Names = "folders";
 
 if (themeDisplay.isSignedIn()) {

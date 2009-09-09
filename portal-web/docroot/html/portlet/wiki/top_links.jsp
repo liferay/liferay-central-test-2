@@ -65,6 +65,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 						WikiNode curNode = (WikiNode)nodes.get(i);
 
 						String cssClass = StringPool.BLANK;
+
 						if (curNode.getNodeId() == node.getNodeId()) {
 							cssClass = "node-current";
 						}
