@@ -39,6 +39,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PreferencesValidator;
@@ -54,7 +55,7 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, 0, 0, 0, null, new HashMap<String, Preference>());
+		this(0, 0, 0, 0, null, new ConcurrentHashMap<String, Preference>());
 	}
 
 	public PortletPreferencesImpl(
@@ -255,7 +256,7 @@ public class PortletPreferencesImpl
 
 	public Object clone() {
 		Map<String, Preference> preferencesClone =
-			new HashMap<String, Preference>();
+			new ConcurrentHashMap<String, Preference>();
 
 		for (Map.Entry<String, Preference> entry : _preferences.entrySet()) {
 			String key = entry.getKey();
