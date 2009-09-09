@@ -279,6 +279,22 @@
 
 						var menu = new A.ContextOverlay(options);
 
+						var boundingBox = menu.get('boundingBox');
+
+						boundingBox.on(
+							'mouseenter',
+							function() {
+								menu.clearIntervals();
+							}
+						);
+
+						boundingBox.on(
+							'mouseleave',
+							function() {
+								menu._hideTask.delay(500);
+							}
+						);
+
 						Liferay.Dockbar.MenuManager.register(menu);
 
 						menu.on(
