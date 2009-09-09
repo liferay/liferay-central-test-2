@@ -237,8 +237,7 @@
 	color: #000;
 	font-size: 120%;
 	font-weight: bold;
-	margin-bottom: 1.5em;
-	padding: 0;
+	padding: 0 0 1.5em;
 }
 
 .aui-form fieldset legend .aui-legend {
