@@ -121,7 +121,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 						portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
 						%>
 
-						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></aiu:a>
+						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></aui:a>
 
 						&nbsp;
 

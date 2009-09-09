@@ -61,7 +61,7 @@ try {
 			</c:when>
 			<c:when test="<%= Validator.isNull(formattedContent) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<div class="portlet-msg-info">
-					<aui:a href="<%= editPageURL %>" label="this-page-is-empty-edit-it-to-add-some-text" />
+					<aui:a href="<%= editPageURL.toString() %>" label="this-page-is-empty-edit-it-to-add-some-text" />
 				</div>
 			</c:when>
 			<c:otherwise>
