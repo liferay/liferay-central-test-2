@@ -54,7 +54,7 @@
 						<%= HtmlUtil.escape(entry.getTitle()) %>
 					</c:when>
 					<c:otherwise>
-						<a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></a>
+						<aui:a href="<%= viewEntryURL %>"><%= HtmlUtil.escape(entry.getTitle()) %></aui:a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -117,7 +117,7 @@
 
 					<br />
 
-					 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
+					 <aui:a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</aui:a>
 				</c:when>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
 					<%= entry.getContent() %>
@@ -134,7 +134,7 @@
 					</liferay-ui:custom-attributes-available>
 				</c:when>
 				<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
-					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
+					<aui:a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</aui:a>
 				</c:when>
 			</c:choose>
 		</div>
@@ -175,7 +175,7 @@
 								<%= messagesCount %> <liferay-ui:message key="comments" />
 							</c:when>
 							<c:otherwise>
-								<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+								<aui:a href='<%= viewEntryURL + StringPool.POUND + renderResponse.getNamespace() + "messageScroll0" %>'><%= messagesCount %> <liferay-ui:message key="comments" /></aui:a>
 							</c:otherwise>
 						</c:choose>
 					</span>

@@ -32,101 +32,102 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/blogs/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/blogs/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("keywords", keywords);
 
-List<String> headerNames = new ArrayList<String>();
+	List<String> headerNames = new ArrayList<String>();
 
-headerNames.add("#");
-headerNames.add("entry");
-headerNames.add("score");
+	headerNames.add("#");
+	headerNames.add("entry");
+	headerNames.add("score");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-try {
-	Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), 0, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	try {
+		Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), 0, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = results.getLength();
+		int total = results.getLength();
 
-	searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-	List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getDocs().length; i++) {
-		Document doc = results.doc(i);
+		for (int i = 0; i < results.getDocs().length; i++) {
+			Document doc = results.doc(i);
 
-		ResultRow row = new ResultRow(doc, i, i);
+			ResultRow row = new ResultRow(doc, i, i);
 
-		// Position
+			// Position
 
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+			row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		// Entry
+			// Entry
 
-		long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
-		BlogsEntry entry = null;
+			BlogsEntry entry = null;
 
-		try {
-			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+			try {
+				entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
-			entry = entry.toEscapedModel();
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Blogs search index is stale and contains entry " + entryId);
+				entry = entry.toEscapedModel();
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Blogs search index is stale and contains entry " + entryId);
+				}
+
+				continue;
 			}
 
-			continue;
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setParameter("struts_action", "/blogs/view_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("urlTitle", entry.getUrlTitle());
+
+			row.addText(entry.getTitle(), rowURL);
+
+			// Score
+
+			row.addScore(results.score(i));
+
+			// Add result row
+
+			resultRows.add(row);
 		}
+	%>
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+		<aui:fieldset>
+			<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
-		rowURL.setParameter("struts_action", "/blogs/view_entry");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("urlTitle", entry.getUrlTitle());
+			<aui:button type="submit" value="search" />
+		</aui:fieldset>
 
-		row.addText(entry.getTitle(), rowURL);
+		<br /><br />
 
-		// Score
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		row.addScore(results.score(i));
-
-		// Add result row
-
-		resultRows.add(row);
+	<%
 	}
-%>
-
-	<input id="<portlet:namespace />keywords" name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<br /><br />
-
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-</form>
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+	%>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

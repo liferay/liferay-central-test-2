@@ -51,37 +51,36 @@ portletURL.setParameter("struts_action", "/blogs/view");
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(scopeGroupId) %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm1" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(scopeGroupId) %>" />
 
-<%
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
+	<%
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
-AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
+	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
 
-assetEntryQuery.setExcludeZeroViewCount(false);
+	assetEntryQuery.setExcludeZeroViewCount(false);
 
-if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
-	assetEntryQuery.setVisible(null);
-}
-else {
-	assetEntryQuery.setVisible(true);
-}
+	if (BlogsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ENTRY)) {
+		assetEntryQuery.setVisible(null);
+	}
+	else {
+		assetEntryQuery.setVisible(true);
+	}
 
-int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+	int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
-searchContainer.setTotal(total);
+	searchContainer.setTotal(total);
 
-List<AssetEntry> results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+	List<AssetEntry> results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
 
-searchContainer.setResults(results);
-%>
+	searchContainer.setResults(results);
+	%>
 
-<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
-
-</form>
+	<%@ include file="/html/portlet/blogs/view_entries.jspf" %>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
