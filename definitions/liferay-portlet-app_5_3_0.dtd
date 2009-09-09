@@ -18,7 +18,7 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, icon?, virtual-path?, struts-path?,
 configuration-path?, configuration-action-class?, indexer-class?,
-open-search-class?, scheduler-class?, portlet-url-class?,
+open-search-class?, scheduler-class?, scheduler*, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
@@ -124,6 +124,55 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-kernel/com/liferay/portal/ker
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
+
+<!--
+The scheduler element contains the declarative data of a portlet scheduler.
+-->
+<!ELEMENT scheduler (scheduler-description?, scheduler-listener-class, trigger)>
+
+<!--
+The scheduler-description value is a description String data for this scheduler.
+-->
+<!ELEMENT scheduler-description (#PCDATA)>
+
+<!--
+The scheduler-listener-class value must be a class that extends
+com.liferay.portal.kernel.scheduler.messaging.FilterSchedulerMessageListener.
+or implements MessageListener directly which needs to privide its own filter and
+unregister strategy.
+-->
+<!ELEMENT scheduler-listener-class (#PCDATA)>
+
+<!--
+The trigger element contains configuration data to direct SchedulerEngine when
+to trigger the scheduler-listener-class defined above
+-->
+<!ELEMENT trigger (cron|simple)>
+
+<!--
+The cron element defines a cron style trigger for the scheduler.
+-->
+<!ELEMENT cron (property-key|trigger-value)>
+
+<!--
+The simple element defines a interval repeated style trigger for the scheduler.
+-->
+<!ELEMENT simple (property-key|trigger-value)>
+
+<!--
+The property-key value is the key name in the properties file whose value will
+use to create the trigger. For cron trigger, the value should be a cron text,
+for simple trigger, the value should be a long number, represent interval time
+in second.
+-->
+<!ELEMENT property-key (#PCDATA)>
+
+<!--
+The trigger-value value is used to create the trigger. For cron trigger,
+the value should be a cron text, for simple trigger, the value should be a long
+number, represent interval time in second.
+-->
+<!ELEMENT trigger-value (#PCDATA)>
 
 <!--
 The portlet-url-class value must be a class that extends
