@@ -80,35 +80,32 @@
 	}
 </script>
 
-<form>
+<aui:form>
+	<aui:fieldset>
+		 <aui:column>
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "showPrevious();" %>' value="previous" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "play();" %>' value="play" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "pause();" %>' value="pause" />
+			 <aui:button onClick='<%= renderResponse.getNamespace() + "showNext();" %>' value="next" />
+		 </aui:column>
+		<aui:column>
+			<aui:select inlineLabel="<%= true %>" name="speed" onChange='<%= renderResponse.getNamespace() + "pause();" + renderResponse.getNamespace() + "speed = this[this.selectedIndex].value * 1000;" + renderResponse.getNamespace() + "play();" %>'>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<input type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />showPrevious();" /> <input type="button" value="<liferay-ui:message key="play" />" onClick="<portlet:namespace />play();" /> <input type="button" value="<liferay-ui:message key="pause" />" onClick="<portlet:namespace />pause();" /> <input type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />showNext();" />
-	</td>
-	<td>
-		<liferay-ui:message key="speed" />
-	</td>
-	<td>
-		<select onChange="<portlet:namespace />pause(); <portlet:namespace />speed = this[this.selectedIndex].value * 1000; <portlet:namespace />play();">
+				<%
+				for (int i = 1; i <= 10; i++) {
+				%>
 
-			<%
-			for (int i = 1; i <= 10; i++) {
-			%>
+					<aui:option label="<%= i %>" selected="<%= (defaultSpeed / 1000) == i %>" />
 
-				<option <%= (defaultSpeed / 1000) == i ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+				<%
+				}
+				%>
 
-			<%
-			}
-			%>
+			</aui:select>
 
-		</select>
-	</td>
-</tr>
-</table>
-
-</form>
+		</aui:column>
+	</aui:fieldset>
+</aui:form>
 
 <script type="text/javascript">
 	<portlet:namespace />play();

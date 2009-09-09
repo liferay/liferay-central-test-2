@@ -52,77 +52,77 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/image_gallery/search" /></liferay-portlet:renderURL>
 
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
-<input name="<portlet:namespace />searchFolderId" type="hidden" value="<%= searchFolderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit="submitForm(this); return false;">
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>" />
+	<aui:input name="searchFolderId" type="hidden" value="<%= searchFolderId %>" />
+	<aui:input name="searchFolderIds" type="hidden" value="<%= searchFolderIds %>" />
 
-<liferay-ui:tabs
-	names="search"
-	backURL="<%= redirect %>"
-/>
+	<liferay-ui:tabs
+		names="search"
+		backURL="<%= redirect %>"
+	/>
 
-<%
-PortletURL portletURL = renderResponse.createRenderURL();
+	<%
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+	portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/image_gallery/search");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
-portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
-portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
-portletURL.setParameter("keywords", keywords);
+	portletURL.setParameter("struts_action", "/image_gallery/search");
+	portletURL.setParameter("redirect", redirect);
+	portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
+	portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
+	portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
+	portletURL.setParameter("keywords", keywords);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-try {
-	Hits hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	try {
+		Hits hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = hits.getLength();
+		int total = hits.getLength();
 
-	searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-	List results = new ArrayList(hits.getDocs().length);
-	List scores = new ArrayList(hits.getDocs().length);
+		List results = new ArrayList(hits.getDocs().length);
+		List scores = new ArrayList(hits.getDocs().length);
 
-	for (int i = 0; i < hits.getDocs().length; i++) {
-		Document doc = hits.doc(i);
+		for (int i = 0; i < hits.getDocs().length; i++) {
+			Document doc = hits.doc(i);
 
-		long imageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long imageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
-		try {
-			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
+			try {
+				IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
-			results.add(image);
-			scores.add(new Double(hits.score(i)));
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Image gallery search index is stale and contains image " + imageId);
+				results.add(image);
+				scores.add(new Double(hits.score(i)));
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Image gallery search index is stale and contains image " + imageId);
+				}
 			}
 		}
+	%>
+
+		<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+
+		<aui:button type="submit" value="search" />
+
+		<br /><br />
+
+		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
+
+	<%
 	}
-%>
+	catch (Exception e) {
+		_log.error(e.getMessage());
+	}
+	%>
 
-	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
-
-	<input type="submit" value="<liferay-ui:message key="search" />" />
-
-	<br /><br />
-
-	<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
-
-<%
-}
-catch (Exception e) {
-	_log.error(e.getMessage());
-}
-%>
-
-</form>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
