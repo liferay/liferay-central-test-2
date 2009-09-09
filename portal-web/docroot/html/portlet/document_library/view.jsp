@@ -51,18 +51,20 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/document_library/search" /></liferay-portlet:renderURL>
-
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
-
 <liferay-util:include page="/html/portlet/document_library/tabs1.jsp" />
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+			<portlet:param name="struts_action" value="/document_library/search" />
+		</liferay-portlet:renderURL>
+
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
+
 		<c:if test="<%= showSubfolders %>">
 			<liferay-ui:search-container
 				curParam="cur1"
@@ -363,8 +365,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
-
-		</form>
 
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);

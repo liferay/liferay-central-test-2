@@ -53,14 +53,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 List scores = null;
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/image_gallery/search" /></liferay-portlet:renderURL>
-
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
-
 <%
 String tabs1Names = "folders";
 
@@ -78,6 +70,15 @@ tabs1Names += ",recent-images";
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+			<portlet:param name="struts_action" value="/image_gallery/search" />
+		</liferay-portlet:renderURL>
+
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
 
 		<%
 		List<String> headerNames = new ArrayList<String>();
@@ -391,8 +392,6 @@ tabs1Names += ",recent-images";
 		%>
 
 		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
-
-		</form>
 
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);

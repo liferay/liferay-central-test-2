@@ -51,14 +51,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
-<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/bookmarks/search" /></liferay-portlet:renderURL>
-
-<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-<liferay-portlet:renderURLParams varImpl="searchURL" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
-<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
-
 <liferay-ui:tabs
 	names="folders,my-entries,recent-entries"
 	url="<%= portletURL.toString() %>"
@@ -66,6 +58,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL">
+			<portlet:param name="struts_action" value="/bookmarks/search" />
+		</liferay-portlet:renderURL>
+
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<liferay-portlet:renderURLParams varImpl="searchURL" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+		<input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= folderId %>" />
+		<input name="<portlet:namespace />searchFolderIds" type="hidden" value="<%= folderId %>" />
+
 		<liferay-ui:search-container
 			curParam="cur1"
 			headerNames="folder,num-of-folders,num-of-entries"
@@ -486,8 +488,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
-
-		</form>
 
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs1), currentURL);
