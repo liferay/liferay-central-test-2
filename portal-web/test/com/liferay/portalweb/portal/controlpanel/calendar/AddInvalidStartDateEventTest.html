@@ -19,14 +19,19 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Add Event']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Add Event']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>waitForVisible</td>
 	<td>_8_title</td>
-	<td>Invalid Start Date Test Event</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -39,24 +44,14 @@
 	<td>label=February</td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotPartialText</td>
 	<td>_8_startDateDay</td>
-	<td>label=31</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>You have entered invalid data. Please try again.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Please enter a valid start date.</td>
-	<td></td>
+	<td>30</td>
 </tr>
 
 </tbody></table>

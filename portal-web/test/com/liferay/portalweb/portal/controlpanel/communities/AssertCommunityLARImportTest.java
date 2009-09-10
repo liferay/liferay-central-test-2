@@ -52,6 +52,24 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 		selenium.clickAt("link=Back to My Community",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='_145_myPlacesContainer']/ul/li[8]/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[8]/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -60,6 +78,23 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 		selenium.clickAt("link=Community LAR Import Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Message Boards")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent("Message Boards"));
 		assertTrue(selenium.isElementPresent("link=LAR Import Test Category"));
 		selenium.clickAt("link=LAR Import Test Category",

@@ -51,20 +51,48 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Event']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_8_title",
-			RuntimeVariables.replace("Invalid Start Date Test Event"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_8_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Start Date Test Event"));
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
-		selenium.select("_8_startDateDay", RuntimeVariables.replace("label=31"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid start date."));
+		Thread.sleep(5000);
+		assertFalse(selenium.isPartialText("_8_startDateDay", "30"));
 	}
 }

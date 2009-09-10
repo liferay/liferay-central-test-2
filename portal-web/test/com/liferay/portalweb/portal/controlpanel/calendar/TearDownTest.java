@@ -56,8 +56,26 @@ public class TearDownTest extends BaseTestCase {
 
 				selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Events")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				boolean EventAPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
@@ -77,8 +95,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -88,13 +105,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
+				Thread.sleep(5000);
 
 				boolean EventBPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
@@ -114,8 +131,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -125,13 +141,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
+				Thread.sleep(5000);
 
 				boolean EventCPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
@@ -151,8 +167,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -162,13 +177,13 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 4:
+				Thread.sleep(5000);
 
 				boolean EventDPresent = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/span");
@@ -188,8 +203,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//body/div[2]/ul/li[4]/a")) {
+						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
 							break;
 						}
 					}
@@ -199,8 +213,7 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace(
-						"//body/div[2]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

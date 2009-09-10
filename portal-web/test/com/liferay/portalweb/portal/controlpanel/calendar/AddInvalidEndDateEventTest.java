@@ -50,11 +50,43 @@ public class AddInvalidEndDateEventTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Event']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_8_title",
-			RuntimeVariables.replace("Invalid End Date Test Event"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_8_title")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid End Date Test Event"));
 		selenium.clickAt("//input[@name='_8_recurrenceType' and @value='3']",
@@ -79,13 +111,7 @@ public class AddInvalidEndDateEventTest extends BaseTestCase {
 		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=February"));
-		selenium.select("_8_endDateDay", RuntimeVariables.replace("label=31"));
-		selenium.clickAt("//input[@name='_8_endDateType' and @value='2']",
-			RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid end date."));
+		Thread.sleep(5000);
+		assertFalse(selenium.isPartialText("_8_endDateDay", "30"));
 	}
 }

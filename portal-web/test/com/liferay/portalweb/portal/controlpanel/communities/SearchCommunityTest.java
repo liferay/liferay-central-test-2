@@ -50,7 +50,23 @@ public class SearchCommunityTest extends BaseTestCase {
 
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_134_name", RuntimeVariables.replace("Test Communit"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_134_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_134_name", RuntimeVariables.replace("Test Community"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));

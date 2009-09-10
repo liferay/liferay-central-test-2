@@ -57,7 +57,7 @@ public class SetTimezoneTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("displaySettingsLink")) {
+				if (selenium.isVisible("displaySettingsLink")) {
 					break;
 				}
 			}
@@ -68,7 +68,24 @@ public class SetTimezoneTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
-		selenium.select("_2_timeZoneId",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_2__2_timeZoneId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_2__2_timeZoneId",
 			RuntimeVariables.replace("label=(UTC -08:00) Pacific Standard Time"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

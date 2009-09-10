@@ -50,14 +50,46 @@ public class AddInvalidDurationEventTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Add Event']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_8_durationHour")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_8_durationHour", RuntimeVariables.replace("label=0"));
 		selenium.select("_8_durationMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.typeKeys("_8_title",
-			RuntimeVariables.replace("Invalid Duration Test Event"));
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Duration Test Event"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
