@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -57,6 +58,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="${entity.name}PersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -2245,9 +2247,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				public void set${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
-						clear${tempEntity.names}.clear(pk);
+						Set<${serviceBuilder.getPrimitiveObj("${tempEntity.PKClassName}")}> ${tempEntity.varName}PKSet = SetUtil.fromArray(${tempEntity.varName}PKs);
 
-						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
+						List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames} = get${tempEntity.names}(pk);
+
+						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
+							if (!${tempEntity.varName}PKSet.contains(${tempEntity.varName}.getPrimaryKey())) {
+								remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
+							}
+							else {
+								${tempEntity.varName}PKSet.remove(${tempEntity.varName}.getPrimaryKey());
+							}
+						}
+
+						for (${serviceBuilder.getPrimitiveObj("${tempEntity.PKClassName}")} ${tempEntity.varName}PK : ${tempEntity.varName}PKSet) {
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 						}
 					}
@@ -2261,11 +2274,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 				public void set${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
-						clear${tempEntity.names}.clear(pk);
+						${tempEntity.PKClassName}[] ${tempEntity.varName}PKs = new ${tempEntity.PKClassName}[${tempEntity.varNames}.size()];
 
-						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
-							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
+						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
+							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
+
+							${tempEntity.varName}PKs[i] = ${tempEntity.varName}.getPrimaryKey();
 						}
+
+						set${tempEntity.names}(pk, ${tempEntity.varName}PKs);
 					}
 					catch (Exception e) {
 						throw processException(e);
