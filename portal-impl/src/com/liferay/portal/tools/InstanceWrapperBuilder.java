@@ -31,6 +31,7 @@ import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.InitUtil;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaParameter;
@@ -39,8 +40,10 @@ import com.thoughtworks.qdox.model.Type;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -114,79 +117,89 @@ public class InstanceWrapperBuilder {
 
 		sb.append("public static " + javaClass.getName() + "_IW getInstance() {");
 		sb.append("return _instance;");
-		sb.append("}");
+		sb.append("}\n");
 
 		for (int i = 0; i < methods.length; i++) {
 			JavaMethod javaMethod = methods[i];
 
 			String methodName = javaMethod.getName();
 
-			if (javaMethod.isPublic() && javaMethod.isStatic()) {
-				if (methodName.equals("getInstance")) {
-					methodName = "getWrappedInstance";
-				}
-
-				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
-
-				JavaParameter[] parameters = javaMethod.getParameters();
-
-				for (int j = 0; j < parameters.length; j++) {
-					JavaParameter javaParameter = parameters[j];
-
-					sb.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
-
-					if ((j + 1) != parameters.length) {
-						sb.append(", ");
-					}
-				}
-
-				sb.append(")");
-
-				Type[] thrownExceptions = javaMethod.getExceptions();
-
-				Set<String> newExceptions = new LinkedHashSet<String>();
-
-				for (int j = 0; j < thrownExceptions.length; j++) {
-					Type thrownException = thrownExceptions[j];
-
-					newExceptions.add(thrownException.getValue());
-				}
-
-				if (newExceptions.size() > 0) {
-					sb.append(" throws ");
-
-					Iterator<String> itr = newExceptions.iterator();
-
-					while (itr.hasNext()) {
-						sb.append(itr.next());
-
-						if (itr.hasNext()) {
-							sb.append(", ");
-						}
-					}
-				}
-
-				sb.append("{");
-
-				if (!javaMethod.getReturns().getValue().equals("void")) {
-					sb.append("return ");
-				}
-
-				sb.append(javaClass.getName() + "." + javaMethod.getName() + "(");
-
-				for (int j = 0; j < parameters.length; j++) {
-					JavaParameter javaParameter = parameters[j];
-
-					sb.append(javaParameter.getName());
-
-					if ((j + 1) != parameters.length) {
-						sb.append(", ");
-					}
-				}
-
-				sb.append(");");
-				sb.append("}");
+			if (!javaMethod.isPublic() || !javaMethod.isStatic()) {
+				continue;
 			}
+
+			if (methodName.equals("getInstance")) {
+				methodName = "getWrappedInstance";
+			}
+
+			DocletTag[] docletTags = javaMethod.getTagsByName("deprecated");
+
+			if ((docletTags != null) && (docletTags.length > 0)) {
+				sb.append("\t/**\n");
+				sb.append("\t * @deprecated\n");
+				sb.append("\t */\n");
+			}
+
+			sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+
+			JavaParameter[] parameters = javaMethod.getParameters();
+
+			for (int j = 0; j < parameters.length; j++) {
+				JavaParameter javaParameter = parameters[j];
+
+				sb.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+
+				if ((j + 1) != parameters.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append(")");
+
+			Type[] thrownExceptions = javaMethod.getExceptions();
+
+			Set<String> newExceptions = new LinkedHashSet<String>();
+
+			for (int j = 0; j < thrownExceptions.length; j++) {
+				Type thrownException = thrownExceptions[j];
+
+				newExceptions.add(thrownException.getValue());
+			}
+
+			if (newExceptions.size() > 0) {
+				sb.append(" throws ");
+
+				Iterator<String> itr = newExceptions.iterator();
+
+				while (itr.hasNext()) {
+					sb.append(itr.next());
+
+					if (itr.hasNext()) {
+						sb.append(", ");
+					}
+				}
+			}
+
+			sb.append("{\n");
+
+			if (!javaMethod.getReturns().getValue().equals("void")) {
+				sb.append("return ");
+			}
+
+			sb.append(javaClass.getName() + "." + javaMethod.getName() + "(");
+
+			for (int j = 0; j < parameters.length; j++) {
+				JavaParameter javaParameter = parameters[j];
+
+				sb.append(javaParameter.getName());
+
+				if ((j + 1) != parameters.length) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append(");");
+			sb.append("}\n");
 		}
 
 		// Private constructor

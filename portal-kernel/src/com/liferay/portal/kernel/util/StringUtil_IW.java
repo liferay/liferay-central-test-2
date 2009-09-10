@@ -89,11 +89,17 @@ public class StringUtil_IW {
 		return StringUtil.extractLast(s, delimiter);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords) {
 		return StringUtil.highlight(s, keywords);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords, java.lang.String highlight1,
 		java.lang.String highlight2) {

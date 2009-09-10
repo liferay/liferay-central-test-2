@@ -85,8 +85,8 @@ public class MethodInvoker {
 	public static Object invoke(
 			MethodWrapper methodWrapper, Object targetObject)
 		throws ClassNotFoundException, IllegalAccessException,
-			   InstantiationException, InvocationTargetException,
-			   NoSuchFieldException, NoSuchMethodException {
+			   InvocationTargetException, NoSuchFieldException,
+			   NoSuchMethodException {
 
 		Object[] methodAndArguments = _lookupMethodAndArguments(
 			methodWrapper, targetObject);
@@ -106,8 +106,8 @@ public class MethodInvoker {
 	private static Object[] _lookupMethodAndArguments(
 			MethodWrapper methodWrapper, Object targetObject)
 		throws ClassNotFoundException, IllegalAccessException,
-			   InstantiationException, InvocationTargetException,
-			   NoSuchFieldException, NoSuchMethodException {
+			   InvocationTargetException, NoSuchFieldException,
+			   NoSuchMethodException {
 
 		Object[] methodAndArguments = new Object[2];
 
