@@ -141,7 +141,7 @@ public class JournalArticleImpl
 			return true;
 		}
 	}
-	
+
 	public void setSmallImageType(String smallImageType) {
 		_smallImageType = smallImageType;
 	}
