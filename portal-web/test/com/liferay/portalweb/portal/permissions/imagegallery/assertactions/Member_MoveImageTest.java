@@ -152,8 +152,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		Thread.sleep(5000);
 

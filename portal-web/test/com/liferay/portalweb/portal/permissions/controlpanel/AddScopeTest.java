@@ -150,7 +150,7 @@ public class AddScopeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Scope", RuntimeVariables.replace(""));
+		selenium.click("link=Scope");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

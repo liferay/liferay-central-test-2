@@ -128,8 +128,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("link=My Community",
-					RuntimeVariables.replace(""));
+				selenium.click("link=My Community");
 				selenium.selectWindow("null");
 
 			case 3:
@@ -198,8 +197,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("link=My1 Community1 Document1.txt",
-					RuntimeVariables.replace(""));
+				selenium.click("link=My1 Community1 Document1.txt");
 				selenium.selectWindow("null");
 
 			case 6:

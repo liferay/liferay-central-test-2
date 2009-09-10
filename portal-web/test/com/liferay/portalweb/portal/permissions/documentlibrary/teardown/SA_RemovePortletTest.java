@@ -68,8 +68,7 @@ public class SA_RemovePortletTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 

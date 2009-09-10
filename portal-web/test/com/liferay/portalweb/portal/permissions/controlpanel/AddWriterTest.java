@@ -150,7 +150,7 @@ public class AddWriterTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Writer", RuntimeVariables.replace(""));
+		selenium.click("link=Writer");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

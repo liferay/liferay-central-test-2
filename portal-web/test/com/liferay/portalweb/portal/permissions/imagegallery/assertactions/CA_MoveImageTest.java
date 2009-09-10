@@ -154,8 +154,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 		selenium.clickAt("link=Image Permissions Test Folder 2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Choose']",
-			RuntimeVariables.replace(""));
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent(

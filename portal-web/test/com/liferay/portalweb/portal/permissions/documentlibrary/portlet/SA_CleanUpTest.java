@@ -96,8 +96,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[4]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -132,15 +131,13 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/ul/li[4]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
-				selenium.clickAt("//img[@alt='Remove']",
-					RuntimeVariables.replace(""));
+				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 

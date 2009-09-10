@@ -150,7 +150,7 @@ public class AddCATest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Community Admin", RuntimeVariables.replace(""));
+		selenium.click("link=Community Admin");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

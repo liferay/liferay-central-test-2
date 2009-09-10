@@ -82,7 +82,8 @@ public class CA_DeleteCategoryTest extends BaseTestCase {
 
 		selenium.clickAt("//td[5]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("link=Delete", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

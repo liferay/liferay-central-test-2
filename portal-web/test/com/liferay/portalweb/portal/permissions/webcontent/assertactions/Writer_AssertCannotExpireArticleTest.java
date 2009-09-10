@@ -55,8 +55,7 @@ public class Writer_AssertCannotExpireArticleTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Expire']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Expire']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to expire the selected web content[\\s\\S]$"));

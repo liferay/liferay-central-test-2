@@ -76,7 +76,7 @@ public class SA_AddCommunityScopePermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Scope Community", RuntimeVariables.replace(""));
+		selenium.click("link=Scope Community");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

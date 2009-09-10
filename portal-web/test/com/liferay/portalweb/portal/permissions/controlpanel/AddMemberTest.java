@@ -150,7 +150,7 @@ public class AddMemberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Member", RuntimeVariables.replace(""));
+		selenium.click("link=Member");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
