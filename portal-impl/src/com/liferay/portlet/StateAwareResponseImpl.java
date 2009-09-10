@@ -107,7 +107,11 @@ public abstract class StateAwareResponseImpl
 		com.liferay.portal.kernel.xml.QName qName = PortletQNameUtil.getQName(
 			name);
 
-		_publicRenderParameters.remove(PortletQNameUtil.getKey(qName));
+		String key = PortletQNameUtil.getKey(qName);
+
+		if (_publicRenderParameters.containsKey(key)) {
+			_publicRenderParameters.remove(key);
+		}
 	}
 
 	public void setEvent(QName name, Serializable value) {
