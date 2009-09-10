@@ -601,19 +601,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		return (Scheduler)InstancePool.get(getSchedulerClass());
 	}
 
-	public List<com.liferay.portal.kernel.scheduler.Scheduler> getSchedulers() {
-		return _schedulerList;
-	}
-
-	public void addScheduler(
-		com.liferay.portal.kernel.scheduler.Scheduler scheduler) {
-		if (_schedulerList == null){
-			_schedulerList =
-				new ArrayList<com.liferay.portal.kernel.scheduler.Scheduler>();
-		}
-		_schedulerList.add(scheduler);
-	}
-
 	/**
 	 * Gets the name of the portlet URL class of the portlet.
 	 *
@@ -2941,11 +2928,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the scheduler class of the portlet.
 	 */
 	private String _schedulerClass;
-
-	/**
-	 * A list of scheduler belong to this portlet.
-	 */
-	private List<com.liferay.portal.kernel.scheduler.Scheduler> _schedulerList;
 
 	/**
 	 * The name of the portlet URL class of the portlet.
