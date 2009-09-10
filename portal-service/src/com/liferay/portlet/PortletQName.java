@@ -34,9 +34,6 @@ public interface PortletQName {
 
 	public static final String PUBLIC_RENDER_PARAMETER_NAMESPACE = "p_r_p_";
 
-	public static final String REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE =
-		"r_p_r_p";
-
 	public String getKey(QName qName);
 
 	public String getKey(String uri, String localPart);
@@ -50,8 +47,6 @@ public interface PortletQName {
 
 	public QName getQName(
 		Element qNameEl, Element nameEl, String defaultNamespace);
-
-	public String getRemovePublicRenderParameterName(QName qName);
 
 	public void setPublicRenderParameterIdentifier(
 		String publicRenderParameterName, String identifier);

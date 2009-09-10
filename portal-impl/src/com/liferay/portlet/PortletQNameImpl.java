@@ -63,9 +63,7 @@ public class PortletQNameImpl implements PortletQName {
 		String publicRenderParameterName) {
 
 		if (!publicRenderParameterName.startsWith(
-				PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
-			!publicRenderParameterName.startsWith(
-				REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+				PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 			return null;
 		}
@@ -92,9 +90,7 @@ public class PortletQNameImpl implements PortletQName {
 
 	public QName getQName(String publicRenderParameterName) {
 		if (!publicRenderParameterName.startsWith(
-				PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
-			!publicRenderParameterName.startsWith(
-				REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+				PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 			return null;
 		}
@@ -145,23 +141,6 @@ public class PortletQNameImpl implements PortletQName {
 		localPart = localPart.substring(prefix.length() + 1);
 
 		return SAXReaderUtil.createQName(localPart, namespace);
-	}
-
-	public String getRemovePublicRenderParameterName(QName qName) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(REMOVE_PUBLIC_RENDER_PARAMETER_NAMESPACE);
-		sb.append(qName.getNamespaceURI().hashCode());
-		sb.append(StringPool.UNDERLINE);
-		sb.append(qName.getLocalPart());
-
-		String removePublicRenderParameterName = sb.toString();
-
-		if (!_qNames.containsKey(removePublicRenderParameterName)) {
-			_qNames.put(removePublicRenderParameterName, qName);
-		}
-
-		return removePublicRenderParameterName;
 	}
 
 	public void setPublicRenderParameterIdentifier(

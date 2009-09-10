@@ -38,9 +38,6 @@ import javax.servlet.http.HttpSession;
  */
 public class RenderParametersPool {
 
-	public static final String PUBLIC_RENDER_PARAMETERS =
-		"PUBLIC_RENDER_PARAMETERS";
-
 	public static void clear(HttpServletRequest request, long plid) {
 		Map<String, Map<String, String[]>> plidPool = get(request, plid);
 

@@ -65,10 +65,6 @@ public class PortletQNameUtil {
 		return getPortletQName().getQName(qNameEl, nameEl, defaultNamespace);
 	}
 
-	public static String getRemovePublicRenderParameterName(QName qName) {
-		return getPortletQName().getRemovePublicRenderParameterName(qName);
-	}
-
 	public static void setPublicRenderParameterIdentifier(
 		String publicRenderParameterName, String identifier) {
 

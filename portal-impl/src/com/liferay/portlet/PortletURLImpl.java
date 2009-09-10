@@ -100,7 +100,6 @@ public class PortletURLImpl
 		_lifecycle = lifecycle;
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
-		_removePublicRenderParameters = new LinkedHashMap<String, String[]>();
 		_secure = request.isSecure();
 		_wsrp = ParamUtil.getBoolean(request, "wsrp");
 
@@ -294,18 +293,7 @@ public class PortletURLImpl
 			throw new IllegalArgumentException();
 		}
 
-		PublicRenderParameter publicRenderParameter =
-			_portlet.getPublicRenderParameter(name);
-
-		if (publicRenderParameter == null) {
-			throw new IllegalArgumentException();
-		}
-
-		QName qName = publicRenderParameter.getQName();
-
-		_removePublicRenderParameters.put(
-			PortletQNameUtil.getRemovePublicRenderParameterName(qName),
-			new String[] {"1"});
+		_params.remove(name);
 	}
 
 	public void setAnchor(boolean anchor) {
@@ -880,24 +868,6 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
-		Iterator<Map.Entry<String, String[]>> itr =
-			_removePublicRenderParameters.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			if (sb.lastIndexOf(StringPool.AMPERSAND) != (sb.length() - 1)) {
-				sb.append(StringPool.AMPERSAND);
-			}
-
-			Map.Entry<String, String[]> entry = itr.next();
-
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-
-			sb.append(processValue(key, entry.getValue()[0]));
-
-			sb.append(StringPool.AMPERSAND);
-		}
-
 		if (_copyCurrentRenderParameters) {
 			Enumeration<String> enu = _request.getParameterNames();
 
@@ -921,7 +891,8 @@ public class PortletURLImpl
 			}
 		}
 
-		itr = _params.entrySet().iterator();
+		Iterator<Map.Entry<String, String[]>> itr =
+			_params.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<String, String[]> entry = itr.next();
@@ -1288,7 +1259,6 @@ public class PortletURLImpl
 	private PortletMode _portletMode;
 	private PortletRequest _portletRequest;
 	private long _refererPlid;
-	private Map<String, String[]> _removePublicRenderParameters;
 	private HttpServletRequest _request;
 	private String _resourceID;
 	private boolean _secure;
