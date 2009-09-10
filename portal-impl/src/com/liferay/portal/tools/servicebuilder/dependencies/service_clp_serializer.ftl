@@ -142,7 +142,7 @@ public class ClpSerializer {
 								</#if>
 
 								value${column_index} =
-								
+
 								(
 
 								<#if column.isPrimitiveType()>
@@ -152,11 +152,11 @@ public class ClpSerializer {
 								</#if>
 
 								)
-								
+
 								method${column_index}.invoke(oldModel, (Object[])null);
 
 								newModel.set${column.methodName}(value${column_index}
-								
+
 								<#if column.isPrimitiveType()>
 									.${column.type}Value()
 								</#if>
