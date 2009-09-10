@@ -245,21 +245,21 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					entry.getUuid(), userId, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					status, allowTrackbacks, trackbacks, serviceContext);
+					allowTrackbacks, trackbacks, status, serviceContext);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					status, allowTrackbacks, trackbacks, serviceContext);
+					allowTrackbacks, trackbacks, status, serviceContext);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, entry.getTitle(), entry.getContent(), displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, status, allowTrackbacks, trackbacks,
+				displayDateMinute, allowTrackbacks, trackbacks, status,
 				serviceContext);
 		}
 

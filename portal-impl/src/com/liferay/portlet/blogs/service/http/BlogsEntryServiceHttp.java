@@ -77,7 +77,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int status, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -104,15 +104,15 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj6 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj7 = new IntegerWrapper(status);
+			Object paramObj7 = new BooleanWrapper(allowTrackbacks);
 
-			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
-
-			Object paramObj9 = trackbacks;
+			Object paramObj8 = trackbacks;
 
 			if (trackbacks == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
+
+			Object paramObj9 = new IntegerWrapper(status);
 
 			Object paramObj10 = serviceContext;
 
@@ -634,7 +634,7 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int status, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean allowTrackbacks, java.lang.String[] trackbacks, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -663,15 +663,15 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj7 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj8 = new IntegerWrapper(status);
+			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
 
-			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
-
-			Object paramObj10 = trackbacks;
+			Object paramObj9 = trackbacks;
 
 			if (trackbacks == null) {
-				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
+
+			Object paramObj10 = new IntegerWrapper(status);
 
 			Object paramObj11 = serviceContext;
 

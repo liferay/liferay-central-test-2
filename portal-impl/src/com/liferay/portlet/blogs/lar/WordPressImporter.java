@@ -303,8 +303,8 @@ public class WordPressImporter {
 		try {
 			entry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, status,
-				allowTrackbacks, null, serviceContext);
+				displayDateYear, displayDateHour, displayDateMinute,
+				allowTrackbacks, null, status, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Add entry " + title, e);

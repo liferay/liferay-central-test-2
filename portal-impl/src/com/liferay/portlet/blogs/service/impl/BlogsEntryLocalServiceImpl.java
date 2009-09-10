@@ -87,22 +87,21 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry addEntry(
 			long userId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int status, boolean allowTrackbacks,
-			String[] trackbacks, ServiceContext serviceContext)
+			int displayDateMinute, boolean allowTrackbacks, String[] trackbacks,
+			int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, status,
-			allowTrackbacks, trackbacks, serviceContext);
+			displayDateYear, displayDateHour, displayDateMinute,
+			allowTrackbacks, trackbacks, status, serviceContext);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int status,
-			boolean allowTrackbacks, String[] trackbacks,
-			ServiceContext serviceContext)
+			int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
+			String[] trackbacks, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -632,9 +631,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int status,
-			boolean allowTrackbacks, String[] trackbacks,
-			ServiceContext serviceContext)
+			int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
+			String[] trackbacks, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -703,8 +701,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 
 			updateStatus(
-				userId, entry, status, false, pingOldTrackbacks, trackbacks,
-				serviceContext);
+				userId, entry, pingOldTrackbacks, trackbacks, status,
+				serviceContext, false);
 		}
 
 		// Indexer
@@ -726,9 +724,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateStatus(
-			long userId, BlogsEntry entry, int status, boolean reIndex,
-			boolean pingOldTrackbaks, String[] trackbacks,
-			ServiceContext serviceContext)
+			long userId, BlogsEntry entry, boolean pingOldTrackbaks,
+			String[] trackbacks, int status, ServiceContext serviceContext,
+			boolean reIndex)
 		throws PortalException, SystemException {
 
 		int oldStatus = entry.getStatus();
@@ -796,7 +794,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = getEntry(entryId);
 
 		return updateStatus(
-			userId, entry, status, true, false, null, serviceContext);
+			userId, entry, false, null, status, serviceContext, true);
 	}
 
 	protected String getUniqueUrlTitle(

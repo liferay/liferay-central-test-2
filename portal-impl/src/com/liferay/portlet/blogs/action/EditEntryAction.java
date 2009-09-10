@@ -252,11 +252,11 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
-		int status = ParamUtil.getInteger(actionRequest, "status");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
 			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
 			ParamUtil.getString(actionRequest, "trackbacks"));
+		int status = ParamUtil.getInteger(actionRequest, "status");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
@@ -270,8 +270,8 @@ public class EditEntryAction extends PortletAction {
 
 			entry = BlogsEntryServiceUtil.addEntry(
 				title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, status,
-				allowTrackbacks, trackbacks, serviceContext);
+				displayDateYear, displayDateHour, displayDateMinute,
+				allowTrackbacks, trackbacks, status, serviceContext);
 
 			if (status == StatusConstants.APPROVED) {
 				AssetPublisherUtil.addAndStoreSelection(
@@ -290,8 +290,8 @@ public class EditEntryAction extends PortletAction {
 
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute, status,
-				allowTrackbacks, trackbacks, serviceContext);
+				displayDateYear, displayDateHour, displayDateMinute,
+				allowTrackbacks, trackbacks, status, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

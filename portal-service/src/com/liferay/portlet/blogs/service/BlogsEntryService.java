@@ -58,8 +58,8 @@ public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int status, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		int displayDateMinute, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -127,8 +127,8 @@ public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int status,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		int displayDateHour, int displayDateMinute, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
