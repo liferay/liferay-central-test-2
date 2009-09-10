@@ -37,7 +37,7 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/input[5]", RuntimeVariables.replace(""));
+		selenium.click("//div[2]/input[5]");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Selecting a template will change the structure, available input fields, and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
 		selenium.waitForPopUp("template", RuntimeVariables.replace("30000"));
@@ -60,7 +60,7 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=LOCALIZED", RuntimeVariables.replace(""));
+		selenium.click("link=LOCALIZED");
 		Thread.sleep(5000);
 		selenium.selectWindow("null");
 		assertTrue(selenium.isElementPresent("link=Test Localized Structure"));
@@ -116,10 +116,9 @@ public class AddLocalizedArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Chinese (China)"));
 		Thread.sleep(5000);
 		selenium.type("_15_structure_el0_content",
-			RuntimeVariables.replace("\u4e16\u754c\u60a8\u597d Page Name"));
+			RuntimeVariables.replace("???? Page Name"));
 		selenium.type("_15_structure_el1_content",
-			RuntimeVariables.replace(
-				"\u4e16\u754c\u60a8\u597d Page Description"));
+			RuntimeVariables.replace("???? Page Description"));
 		selenium.clickAt("//input[@value=\"Save and Approve\"]",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);

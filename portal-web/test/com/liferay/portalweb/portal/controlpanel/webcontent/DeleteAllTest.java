@@ -54,8 +54,7 @@ public class DeleteAllTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
@@ -64,8 +63,7 @@ public class DeleteAllTest extends BaseTestCase {
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected structures[\\s\\S]$"));
@@ -74,8 +72,7 @@ public class DeleteAllTest extends BaseTestCase {
 		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("_15_allRowIds", RuntimeVariables.replace(""));
-		selenium.clickAt("//input[@value='Delete']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete the selected templates[\\s\\S]$"));

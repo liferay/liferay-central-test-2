@@ -117,7 +117,7 @@ public class AddAssociatedTemplateTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=TEST", RuntimeVariables.replace(""));
+				selenium.click("link=TEST");
 				selenium.selectWindow("null");
 
 			case 3:

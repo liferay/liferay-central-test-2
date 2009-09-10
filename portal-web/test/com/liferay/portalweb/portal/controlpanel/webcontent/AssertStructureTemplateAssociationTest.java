@@ -84,8 +84,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//input[@value='Select']",
-					RuntimeVariables.replace(""));
+				selenium.click("//input[@value='Select']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
 				selenium.waitForPopUp("structure",
@@ -132,7 +131,7 @@ public class AssertStructureTemplateAssociationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("link=TEST", RuntimeVariables.replace(""));
+				selenium.click("link=TEST");
 				selenium.selectWindow("null");
 
 			case 3:

@@ -68,7 +68,7 @@ public class AddLocalizedTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=LOCALIZED", RuntimeVariables.replace(""));
+		selenium.click("link=LOCALIZED");
 		selenium.selectWindow("null");
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("link=Test Localized Structure"));
