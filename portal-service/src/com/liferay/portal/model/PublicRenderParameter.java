@@ -35,14 +35,14 @@ public interface PublicRenderParameter extends Serializable {
 
 	public String getIdentifier();
 
-	public void setIdentifier(String identifier);
+	public PortletApp getPortletApp();
 
 	public QName getQName();
 
-	public void setQName(QName qName);
-
-	public PortletApp getPortletApp();
+	public void setIdentifier(String identifier);
 
 	public void setPortletApp(PortletApp portletApp);
+
+	public void setQName(QName qName);
 
 }
