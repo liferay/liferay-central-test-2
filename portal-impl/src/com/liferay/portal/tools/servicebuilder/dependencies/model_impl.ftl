@@ -36,7 +36,7 @@ import java.util.List;
 
 <#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 	import com.liferay.portlet.expando.model.ExpandoBridge;
-	import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+	import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 </#if>
 
 <#if entity.hasLocalizedColumn()>
@@ -429,7 +429,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 		public ExpandoBridge getExpandoBridge() {
 			if (_expandoBridge == null) {
-				_expandoBridge = new ExpandoBridgeImpl(${entity.name}.class.getName(),
+				_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(${entity.name}.class.getName(),
 
 				<#if entity.hasColumn("resourcePrimKey")>
 					getResourcePrimKey()

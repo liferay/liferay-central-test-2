@@ -42,8 +42,8 @@ import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
@@ -67,7 +67,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="EditExpandoAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class EditExpandoAction extends PortletAction {
 
@@ -239,7 +239,7 @@ public class EditExpandoAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String preset = ParamUtil.getString(actionRequest, "type");
 
-		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			modelResource, resourcePrimKey);
 
 		if (preset.startsWith("Preset")) {
@@ -332,7 +332,7 @@ public class EditExpandoAction extends PortletAction {
 		Serializable defaultValue = getValue(
 			actionRequest, "defaultValue", type);
 
-		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			modelResource, resourcePrimKey);
 
 		expandoBridge.setAttributeDefault(name, defaultValue);

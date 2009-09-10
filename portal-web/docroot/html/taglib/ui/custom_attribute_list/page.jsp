@@ -29,9 +29,9 @@
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
-<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
+<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:custom-attribute-list:className");
@@ -39,7 +39,7 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:custo
 boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute-list:editable"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute-list:label"));
 
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(className, classPK);
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, className);
 

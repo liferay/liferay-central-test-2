@@ -31,7 +31,7 @@ import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -77,7 +77,8 @@ public class ServiceContextFactory {
 
 		Map<String, Serializable> attributes =
 			PortalUtil.getExpandoBridgeAttributes(
-				new ExpandoBridgeImpl(className, 0), portletRequest);
+				ExpandoBridgeFactoryUtil.getExpandoBridge(className),
+				portletRequest);
 
 		serviceContext.setExpandoBridgeAttributes(attributes);
 

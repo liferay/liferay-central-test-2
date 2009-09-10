@@ -287,7 +287,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
 		<property name="expandoBridgeIndexer">
-			<bean class="com.liferay.portlet.expando.model.impl.ExpandoBridgeIndexerImpl" />
+			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil">
+		<property name="expandoBridgeFactory">
+			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContent" class="com.liferay.portlet.journalcontent.util.JournalContentImpl" />

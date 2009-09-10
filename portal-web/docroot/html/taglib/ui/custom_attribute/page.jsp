@@ -27,9 +27,9 @@
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
-<%@ page import="com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl" %>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
+<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
 
 <%
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
@@ -40,7 +40,7 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:label"));
 String name = (String)request.getAttribute("liferay-ui:custom-attribute:name");
 
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(className, classPK);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(className, classPK);
 %>
 
 <c:if test="<%= expandoBridge.hasAttribute(name) %>">

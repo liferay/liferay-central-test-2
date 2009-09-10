@@ -20,43 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
+package com.liferay.portlet.expando.util;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
- * <a href="CustomAttributesAvailableTag.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ExpandoBridgeFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class CustomAttributesAvailableTag
-	extends ParamAndPropertyAncestorTagImpl {
+public class ExpandoBridgeFactoryUtil {
 
-	public int doStartTag() {
-		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			_className);
-
-		List<String> attributeNames = Collections.list(
-			expandoBridge.getAttributeNames());
-
-		if (attributeNames.isEmpty()) {
-			return EVAL_PAGE;
-		}
-		else {
-			return EVAL_BODY_INCLUDE;
-		}
+	public static ExpandoBridge getExpandoBridge(String className) {
+		return getExpandoBridgeFactory().getExpandoBridge(className);
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public static ExpandoBridge getExpandoBridge(
+		String className, long classPK) {
+
+		return getExpandoBridgeFactory().getExpandoBridge(className, classPK);
 	}
 
-	private String _className;
+	public static ExpandoBridgeFactory getExpandoBridgeFactory() {
+		return _expandoBridgeFactory;
+	}
+
+	public void setExpandoBridgeFactory(
+		ExpandoBridgeFactory expandoBridgeFactory) {
+
+		_expandoBridgeFactory = expandoBridgeFactory;
+	}
+
+	private static ExpandoBridgeFactory _expandoBridgeFactory;
 
 }
