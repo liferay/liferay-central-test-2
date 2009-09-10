@@ -99,17 +99,6 @@ public class JournalArticleServiceUtil {
 			serviceContext);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		long groupId, java.lang.String articleId, double version,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .approveArticle(groupId, articleId, version, articleURL,
-			serviceContext);
-	}
-
 	public static com.liferay.portlet.journal.model.JournalArticle copyArticle(
 		long groupId, java.lang.String oldArticleId,
 		java.lang.String newArticleId, boolean autoArticleId, double version)
@@ -169,16 +158,6 @@ public class JournalArticleServiceUtil {
 			com.liferay.portal.SystemException {
 		getService()
 			.deleteArticle(groupId, articleId, version, articleURL,
-			serviceContext);
-	}
-
-	public static void expireArticle(long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.expireArticle(groupId, articleId, version, articleURL,
 			serviceContext);
 	}
 
@@ -243,6 +222,17 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().updateContent(groupId, articleId, version, content);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateStatus(
+		long groupId, java.lang.String articleId, double version, int status,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateStatus(groupId, articleId, version, status,
+			articleURL, serviceContext);
 	}
 
 	public static JournalArticleService getService() {

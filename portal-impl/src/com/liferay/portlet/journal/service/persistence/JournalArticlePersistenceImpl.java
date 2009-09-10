@@ -148,23 +148,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countBySmallImageId",
 			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_R_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_R_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByR_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_R_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByR_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_R_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByR_A",
+			FINDER_CLASS_NAME_LIST, "findByR_S",
 			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_R_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_R_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByR_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+			FINDER_CLASS_NAME_LIST, "countByR_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_A",
@@ -247,29 +247,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 				Long.class.getName(), String.class.getName(),
 				Double.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_A_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_A_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_A_A",
+			FINDER_CLASS_NAME_LIST, "findByG_A_S",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName()
+				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_A_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_A_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_A_A",
+			FINDER_CLASS_NAME_LIST, "findByG_A_S",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName(),
+				Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_A = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_A_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_A_A",
+			FINDER_CLASS_NAME_LIST, "countByG_A_S",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName()
+				Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
@@ -1805,13 +1805,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<JournalArticle> findByR_A(long resourcePrimKey, boolean approved)
+	public List<JournalArticle> findByR_S(long resourcePrimKey, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), Boolean.valueOf(approved)
+				new Long(resourcePrimKey), new Integer(status)
 			};
 
-		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_A,
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_R_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1829,7 +1829,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -1844,7 +1844,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(resourcePrimKey);
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				list = q.list();
 			}
@@ -1858,7 +1858,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_A, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
 					list);
 
 				closeSession(session);
@@ -1868,21 +1868,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<JournalArticle> findByR_A(long resourcePrimKey,
-		boolean approved, int start, int end) throws SystemException {
-		return findByR_A(resourcePrimKey, approved, start, end, null);
+	public List<JournalArticle> findByR_S(long resourcePrimKey, int status,
+		int start, int end) throws SystemException {
+		return findByR_S(resourcePrimKey, status, start, end, null);
 	}
 
-	public List<JournalArticle> findByR_A(long resourcePrimKey,
-		boolean approved, int start, int end, OrderByComparator obc)
-		throws SystemException {
+	public List<JournalArticle> findByR_S(long resourcePrimKey, int status,
+		int start, int end, OrderByComparator obc) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), Boolean.valueOf(approved),
+				new Long(resourcePrimKey), new Integer(status),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_A,
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_R_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1900,7 +1899,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -1939,7 +1938,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(resourcePrimKey);
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -1954,7 +1953,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_R_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_R_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1964,11 +1963,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public JournalArticle findByR_A_First(long resourcePrimKey,
-		boolean approved, OrderByComparator obc)
-		throws NoSuchArticleException, SystemException {
-		List<JournalArticle> list = findByR_A(resourcePrimKey, approved, 0, 1,
-				obc);
+	public JournalArticle findByR_S_First(long resourcePrimKey, int status,
+		OrderByComparator obc) throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByR_S(resourcePrimKey, status, 0, 1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -1978,7 +1975,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			msg.append("resourcePrimKey=" + resourcePrimKey);
 
 			msg.append(", ");
-			msg.append("approved=" + approved);
+			msg.append("status=" + status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1989,12 +1986,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalArticle findByR_A_Last(long resourcePrimKey,
-		boolean approved, OrderByComparator obc)
-		throws NoSuchArticleException, SystemException {
-		int count = countByR_A(resourcePrimKey, approved);
+	public JournalArticle findByR_S_Last(long resourcePrimKey, int status,
+		OrderByComparator obc) throws NoSuchArticleException, SystemException {
+		int count = countByR_S(resourcePrimKey, status);
 
-		List<JournalArticle> list = findByR_A(resourcePrimKey, approved,
+		List<JournalArticle> list = findByR_S(resourcePrimKey, status,
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
@@ -2005,7 +2001,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			msg.append("resourcePrimKey=" + resourcePrimKey);
 
 			msg.append(", ");
-			msg.append("approved=" + approved);
+			msg.append("status=" + status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2016,12 +2012,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalArticle[] findByR_A_PrevAndNext(long id,
-		long resourcePrimKey, boolean approved, OrderByComparator obc)
+	public JournalArticle[] findByR_S_PrevAndNext(long id,
+		long resourcePrimKey, int status, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByR_A(resourcePrimKey, approved);
+		int count = countByR_S(resourcePrimKey, status);
 
 		Session session = null;
 
@@ -2037,7 +2033,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 			query.append(" AND ");
 
-			query.append("journalArticle.approved = ?");
+			query.append("journalArticle.status = ?");
 
 			query.append(" ");
 
@@ -2076,7 +2072,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 			qPos.add(resourcePrimKey);
 
-			qPos.add(approved);
+			qPos.add(status);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
@@ -3475,15 +3471,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<JournalArticle> findByG_A_A(long groupId, String articleId,
-		boolean approved) throws SystemException {
+	public List<JournalArticle> findByG_A_S(long groupId, String articleId,
+		int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				articleId, Boolean.valueOf(approved)
+				articleId, new Integer(status)
 			};
 
-		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_A_A,
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_A_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -3510,7 +3506,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -3529,7 +3525,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 					qPos.add(articleId);
 				}
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				list = q.list();
 			}
@@ -3543,7 +3539,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_A_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_A_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -3553,23 +3549,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<JournalArticle> findByG_A_A(long groupId, String articleId,
-		boolean approved, int start, int end) throws SystemException {
-		return findByG_A_A(groupId, articleId, approved, start, end, null);
+	public List<JournalArticle> findByG_A_S(long groupId, String articleId,
+		int status, int start, int end) throws SystemException {
+		return findByG_A_S(groupId, articleId, status, start, end, null);
 	}
 
-	public List<JournalArticle> findByG_A_A(long groupId, String articleId,
-		boolean approved, int start, int end, OrderByComparator obc)
+	public List<JournalArticle> findByG_A_S(long groupId, String articleId,
+		int status, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				articleId, Boolean.valueOf(approved),
+				articleId, new Integer(status),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_A_A,
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_A_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -3596,7 +3592,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -3639,7 +3635,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 					qPos.add(articleId);
 				}
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -3654,7 +3650,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_A_A,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_A_S,
 					finderArgs, list);
 
 				closeSession(session);
@@ -3664,11 +3660,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public JournalArticle findByG_A_A_First(long groupId, String articleId,
-		boolean approved, OrderByComparator obc)
+	public JournalArticle findByG_A_S_First(long groupId, String articleId,
+		int status, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
-		List<JournalArticle> list = findByG_A_A(groupId, articleId, approved,
-				0, 1, obc);
+		List<JournalArticle> list = findByG_A_S(groupId, articleId, status, 0,
+				1, obc);
 
 		if (list.isEmpty()) {
 			StringBuilder msg = new StringBuilder();
@@ -3681,7 +3677,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			msg.append("articleId=" + articleId);
 
 			msg.append(", ");
-			msg.append("approved=" + approved);
+			msg.append("status=" + status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3692,12 +3688,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalArticle findByG_A_A_Last(long groupId, String articleId,
-		boolean approved, OrderByComparator obc)
+	public JournalArticle findByG_A_S_Last(long groupId, String articleId,
+		int status, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
-		int count = countByG_A_A(groupId, articleId, approved);
+		int count = countByG_A_S(groupId, articleId, status);
 
-		List<JournalArticle> list = findByG_A_A(groupId, articleId, approved,
+		List<JournalArticle> list = findByG_A_S(groupId, articleId, status,
 				count - 1, count, obc);
 
 		if (list.isEmpty()) {
@@ -3711,7 +3707,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 			msg.append("articleId=" + articleId);
 
 			msg.append(", ");
-			msg.append("approved=" + approved);
+			msg.append("status=" + status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3722,12 +3718,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public JournalArticle[] findByG_A_A_PrevAndNext(long id, long groupId,
-		String articleId, boolean approved, OrderByComparator obc)
+	public JournalArticle[] findByG_A_S_PrevAndNext(long id, long groupId,
+		String articleId, int status, OrderByComparator obc)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByPrimaryKey(id);
 
-		int count = countByG_A_A(groupId, articleId, approved);
+		int count = countByG_A_S(groupId, articleId, status);
 
 		Session session = null;
 
@@ -3752,7 +3748,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 			query.append(" AND ");
 
-			query.append("journalArticle.approved = ?");
+			query.append("journalArticle.status = ?");
 
 			query.append(" ");
 
@@ -3795,7 +3791,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 				qPos.add(articleId);
 			}
 
-			qPos.add(approved);
+			qPos.add(status);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
@@ -3978,9 +3974,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByR_A(long resourcePrimKey, boolean approved)
+	public void removeByR_S(long resourcePrimKey, int status)
 		throws SystemException {
-		for (JournalArticle journalArticle : findByR_A(resourcePrimKey, approved)) {
+		for (JournalArticle journalArticle : findByR_S(resourcePrimKey, status)) {
 			remove(journalArticle);
 		}
 	}
@@ -4020,10 +4016,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		remove(journalArticle);
 	}
 
-	public void removeByG_A_A(long groupId, String articleId, boolean approved)
+	public void removeByG_A_S(long groupId, String articleId, int status)
 		throws SystemException {
-		for (JournalArticle journalArticle : findByG_A_A(groupId, articleId,
-				approved)) {
+		for (JournalArticle journalArticle : findByG_A_S(groupId, articleId,
+				status)) {
 			remove(journalArticle);
 		}
 	}
@@ -4290,13 +4286,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByR_A(long resourcePrimKey, boolean approved)
+	public int countByR_S(long resourcePrimKey, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(resourcePrimKey), Boolean.valueOf(approved)
+				new Long(resourcePrimKey), new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_R_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4314,7 +4310,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -4324,7 +4320,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(resourcePrimKey);
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4336,7 +4332,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_A, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_S, finderArgs,
 					count);
 
 				closeSession(session);
@@ -4661,15 +4657,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByG_A_A(long groupId, String articleId, boolean approved)
+	public int countByG_A_S(long groupId, String articleId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				articleId, Boolean.valueOf(approved)
+				articleId, new Integer(status)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_A_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4696,7 +4692,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("journalArticle.approved = ?");
+				query.append("journalArticle.status = ?");
 
 				query.append(" ");
 
@@ -4710,7 +4706,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 					qPos.add(articleId);
 				}
 
-				qPos.add(approved);
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4722,7 +4718,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_A,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_S,
 					finderArgs, count);
 
 				closeSession(session);

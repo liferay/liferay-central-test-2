@@ -131,33 +131,25 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 
 	public void setDisplayDate(Date displayDate);
 
-	public boolean getApproved();
+	public int getStatus();
 
-	public boolean isApproved();
+	public void setStatus(int status);
 
-	public void setApproved(boolean approved);
+	public long getStatusByUserId();
 
-	public long getApprovedByUserId();
+	public void setStatusByUserId(long statusByUserId);
 
-	public void setApprovedByUserId(long approvedByUserId);
+	public String getStatusByUserUuid() throws SystemException;
 
-	public String getApprovedByUserUuid() throws SystemException;
+	public void setStatusByUserUuid(String statusByUserUuid);
 
-	public void setApprovedByUserUuid(String approvedByUserUuid);
+	public String getStatusByUserName();
 
-	public String getApprovedByUserName();
+	public void setStatusByUserName(String statusByUserName);
 
-	public void setApprovedByUserName(String approvedByUserName);
+	public Date getStatusDate();
 
-	public Date getApprovedDate();
-
-	public void setApprovedDate(Date approvedDate);
-
-	public boolean getExpired();
-
-	public boolean isExpired();
-
-	public void setExpired(boolean expired);
+	public void setStatusDate(Date statusDate);
 
 	public Date getExpirationDate();
 

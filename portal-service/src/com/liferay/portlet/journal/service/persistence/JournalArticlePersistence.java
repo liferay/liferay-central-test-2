@@ -218,33 +218,33 @@ public interface JournalArticlePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
-		long resourcePrimKey, boolean approved)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_S(
+		long resourcePrimKey, int status)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
-		long resourcePrimKey, boolean approved, int start, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_S(
+		long resourcePrimKey, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_A(
-		long resourcePrimKey, boolean approved, int start, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByR_S(
+		long resourcePrimKey, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalArticle findByR_A_First(
-		long resourcePrimKey, boolean approved,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.journal.NoSuchArticleException;
-
-	public com.liferay.portlet.journal.model.JournalArticle findByR_A_Last(
-		long resourcePrimKey, boolean approved,
+	public com.liferay.portlet.journal.model.JournalArticle findByR_S_First(
+		long resourcePrimKey, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public com.liferay.portlet.journal.model.JournalArticle[] findByR_A_PrevAndNext(
-		long id, long resourcePrimKey, boolean approved,
+	public com.liferay.portlet.journal.model.JournalArticle findByR_S_Last(
+		long resourcePrimKey, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	public com.liferay.portlet.journal.model.JournalArticle[] findByR_S_PrevAndNext(
+		long id, long resourcePrimKey, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
@@ -386,33 +386,33 @@ public interface JournalArticlePersistence extends BasePersistence {
 		long groupId, java.lang.String articleId, double version,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
-		long groupId, java.lang.String articleId, boolean approved)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_S(
+		long groupId, java.lang.String articleId, int status)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
-		long groupId, java.lang.String articleId, boolean approved, int start,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_S(
+		long groupId, java.lang.String articleId, int status, int start, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_A(
-		long groupId, java.lang.String articleId, boolean approved, int start,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_A_S(
+		long groupId, java.lang.String articleId, int status, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalArticle findByG_A_A_First(
-		long groupId, java.lang.String articleId, boolean approved,
+	public com.liferay.portlet.journal.model.JournalArticle findByG_A_S_First(
+		long groupId, java.lang.String articleId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public com.liferay.portlet.journal.model.JournalArticle findByG_A_A_Last(
-		long groupId, java.lang.String articleId, boolean approved,
+	public com.liferay.portlet.journal.model.JournalArticle findByG_A_S_Last(
+		long groupId, java.lang.String articleId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public com.liferay.portlet.journal.model.JournalArticle[] findByG_A_A_PrevAndNext(
-		long id, long groupId, java.lang.String articleId, boolean approved,
+	public com.liferay.portlet.journal.model.JournalArticle[] findByG_A_S_PrevAndNext(
+		long id, long groupId, java.lang.String articleId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
@@ -451,7 +451,7 @@ public interface JournalArticlePersistence extends BasePersistence {
 	public void removeBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByR_A(long resourcePrimKey, boolean approved)
+	public void removeByR_S(long resourcePrimKey, int status)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_A(long groupId, java.lang.String articleId)
@@ -471,8 +471,8 @@ public interface JournalArticlePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public void removeByG_A_A(long groupId, java.lang.String articleId,
-		boolean approved) throws com.liferay.portal.SystemException;
+	public void removeByG_A_S(long groupId, java.lang.String articleId,
+		int status) throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
@@ -491,7 +491,7 @@ public interface JournalArticlePersistence extends BasePersistence {
 	public int countBySmallImageId(long smallImageId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByR_A(long resourcePrimKey, boolean approved)
+	public int countByR_S(long resourcePrimKey, int status)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_A(long groupId, java.lang.String articleId)
@@ -509,8 +509,8 @@ public interface JournalArticlePersistence extends BasePersistence {
 	public int countByG_A_V(long groupId, java.lang.String articleId,
 		double version) throws com.liferay.portal.SystemException;
 
-	public int countByG_A_A(long groupId, java.lang.String articleId,
-		boolean approved) throws com.liferay.portal.SystemException;
+	public int countByG_A_S(long groupId, java.lang.String articleId, int status)
+		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

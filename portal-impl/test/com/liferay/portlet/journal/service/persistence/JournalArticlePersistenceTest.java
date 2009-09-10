@@ -90,11 +90,10 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setStructureId(randomString());
 		newJournalArticle.setTemplateId(randomString());
 		newJournalArticle.setDisplayDate(nextDate());
-		newJournalArticle.setApproved(randomBoolean());
-		newJournalArticle.setApprovedByUserId(nextLong());
-		newJournalArticle.setApprovedByUserName(randomString());
-		newJournalArticle.setApprovedDate(nextDate());
-		newJournalArticle.setExpired(randomBoolean());
+		newJournalArticle.setStatus(nextInt());
+		newJournalArticle.setStatusByUserId(nextLong());
+		newJournalArticle.setStatusByUserName(randomString());
+		newJournalArticle.setStatusDate(nextDate());
 		newJournalArticle.setExpirationDate(nextDate());
 		newJournalArticle.setReviewDate(nextDate());
 		newJournalArticle.setIndexable(randomBoolean());
@@ -146,17 +145,15 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getDisplayDate()),
 			Time.getShortTimestamp(newJournalArticle.getDisplayDate()));
-		assertEquals(existingJournalArticle.getApproved(),
-			newJournalArticle.getApproved());
-		assertEquals(existingJournalArticle.getApprovedByUserId(),
-			newJournalArticle.getApprovedByUserId());
-		assertEquals(existingJournalArticle.getApprovedByUserName(),
-			newJournalArticle.getApprovedByUserName());
+		assertEquals(existingJournalArticle.getStatus(),
+			newJournalArticle.getStatus());
+		assertEquals(existingJournalArticle.getStatusByUserId(),
+			newJournalArticle.getStatusByUserId());
+		assertEquals(existingJournalArticle.getStatusByUserName(),
+			newJournalArticle.getStatusByUserName());
 		assertEquals(Time.getShortTimestamp(
-				existingJournalArticle.getApprovedDate()),
-			Time.getShortTimestamp(newJournalArticle.getApprovedDate()));
-		assertEquals(existingJournalArticle.getExpired(),
-			newJournalArticle.getExpired());
+				existingJournalArticle.getStatusDate()),
+			Time.getShortTimestamp(newJournalArticle.getStatusDate()));
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getExpirationDate()),
 			Time.getShortTimestamp(newJournalArticle.getExpirationDate()));
@@ -232,11 +229,10 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setStructureId(randomString());
 		journalArticle.setTemplateId(randomString());
 		journalArticle.setDisplayDate(nextDate());
-		journalArticle.setApproved(randomBoolean());
-		journalArticle.setApprovedByUserId(nextLong());
-		journalArticle.setApprovedByUserName(randomString());
-		journalArticle.setApprovedDate(nextDate());
-		journalArticle.setExpired(randomBoolean());
+		journalArticle.setStatus(nextInt());
+		journalArticle.setStatusByUserId(nextLong());
+		journalArticle.setStatusByUserName(randomString());
+		journalArticle.setStatusDate(nextDate());
 		journalArticle.setExpirationDate(nextDate());
 		journalArticle.setReviewDate(nextDate());
 		journalArticle.setIndexable(randomBoolean());

@@ -85,11 +85,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 			{ "structureId", new Integer(Types.VARCHAR) },
 			{ "templateId", new Integer(Types.VARCHAR) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			{ "approved", new Integer(Types.BOOLEAN) },
-			{ "approvedByUserId", new Integer(Types.BIGINT) },
-			{ "approvedByUserName", new Integer(Types.VARCHAR) },
-			{ "approvedDate", new Integer(Types.TIMESTAMP) },
-			{ "expired", new Integer(Types.BOOLEAN) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) },
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
 			{ "reviewDate", new Integer(Types.TIMESTAMP) },
 			{ "indexable", new Integer(Types.BOOLEAN) },
@@ -97,7 +96,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 			{ "smallImageId", new Integer(Types.BIGINT) },
 			{ "smallImageURL", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,approved BOOLEAN,approvedByUserId LONG,approvedByUserName VARCHAR(75) null,approvedDate DATE null,expired BOOLEAN,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title VARCHAR(100) null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -131,11 +130,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		model.setStructureId(soapModel.getStructureId());
 		model.setTemplateId(soapModel.getTemplateId());
 		model.setDisplayDate(soapModel.getDisplayDate());
-		model.setApproved(soapModel.getApproved());
-		model.setApprovedByUserId(soapModel.getApprovedByUserId());
-		model.setApprovedByUserName(soapModel.getApprovedByUserName());
-		model.setApprovedDate(soapModel.getApprovedDate());
-		model.setExpired(soapModel.getExpired());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setReviewDate(soapModel.getReviewDate());
 		model.setIndexable(soapModel.getIndexable());
@@ -370,61 +368,45 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		_displayDate = displayDate;
 	}
 
-	public boolean getApproved() {
-		return _approved;
+	public int getStatus() {
+		return _status;
 	}
 
-	public boolean isApproved() {
-		return _approved;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
-	public void setApproved(boolean approved) {
-		_approved = approved;
+	public long getStatusByUserId() {
+		return _statusByUserId;
 	}
 
-	public long getApprovedByUserId() {
-		return _approvedByUserId;
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
 	}
 
-	public void setApprovedByUserId(long approvedByUserId) {
-		_approvedByUserId = approvedByUserId;
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
 	}
 
-	public String getApprovedByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getApprovedByUserId(), "uuid",
-			_approvedByUserUuid);
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
 	}
 
-	public void setApprovedByUserUuid(String approvedByUserUuid) {
-		_approvedByUserUuid = approvedByUserUuid;
+	public String getStatusByUserName() {
+		return GetterUtil.getString(_statusByUserName);
 	}
 
-	public String getApprovedByUserName() {
-		return GetterUtil.getString(_approvedByUserName);
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
 	}
 
-	public void setApprovedByUserName(String approvedByUserName) {
-		_approvedByUserName = approvedByUserName;
+	public Date getStatusDate() {
+		return _statusDate;
 	}
 
-	public Date getApprovedDate() {
-		return _approvedDate;
-	}
-
-	public void setApprovedDate(Date approvedDate) {
-		_approvedDate = approvedDate;
-	}
-
-	public boolean getExpired() {
-		return _expired;
-	}
-
-	public boolean isExpired() {
-		return _expired;
-	}
-
-	public void setExpired(boolean expired) {
-		_expired = expired;
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
 	}
 
 	public Date getExpirationDate() {
@@ -512,11 +494,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 			model.setStructureId(getStructureId());
 			model.setTemplateId(getTemplateId());
 			model.setDisplayDate(getDisplayDate());
-			model.setApproved(getApproved());
-			model.setApprovedByUserId(getApprovedByUserId());
-			model.setApprovedByUserName(HtmlUtil.escape(getApprovedByUserName()));
-			model.setApprovedDate(getApprovedDate());
-			model.setExpired(getExpired());
+			model.setStatus(getStatus());
+			model.setStatusByUserId(getStatusByUserId());
+			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
+			model.setStatusDate(getStatusDate());
 			model.setExpirationDate(getExpirationDate());
 			model.setReviewDate(getReviewDate());
 			model.setIndexable(getIndexable());
@@ -563,11 +544,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		clone.setStructureId(getStructureId());
 		clone.setTemplateId(getTemplateId());
 		clone.setDisplayDate(getDisplayDate());
-		clone.setApproved(getApproved());
-		clone.setApprovedByUserId(getApprovedByUserId());
-		clone.setApprovedByUserName(getApprovedByUserName());
-		clone.setApprovedDate(getApprovedDate());
-		clone.setExpired(getExpired());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 		clone.setExpirationDate(getExpirationDate());
 		clone.setReviewDate(getReviewDate());
 		clone.setIndexable(getIndexable());
@@ -675,16 +655,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(getTemplateId());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
-		sb.append(", approved=");
-		sb.append(getApproved());
-		sb.append(", approvedByUserId=");
-		sb.append(getApprovedByUserId());
-		sb.append(", approvedByUserName=");
-		sb.append(getApprovedByUserName());
-		sb.append(", approvedDate=");
-		sb.append(getApprovedDate());
-		sb.append(", expired=");
-		sb.append(getExpired());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append(", expirationDate=");
 		sb.append(getExpirationDate());
 		sb.append(", reviewDate=");
@@ -786,24 +764,20 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>approved</column-name><column-value><![CDATA[");
-		sb.append(getApproved());
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>approvedByUserId</column-name><column-value><![CDATA[");
-		sb.append(getApprovedByUserId());
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>approvedByUserName</column-name><column-value><![CDATA[");
-		sb.append(getApprovedByUserName());
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>approvedDate</column-name><column-value><![CDATA[");
-		sb.append(getApprovedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>expired</column-name><column-value><![CDATA[");
-		sb.append(getExpired());
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
@@ -861,12 +835,11 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle> {
 	private String _structureId;
 	private String _templateId;
 	private Date _displayDate;
-	private boolean _approved;
-	private long _approvedByUserId;
-	private String _approvedByUserUuid;
-	private String _approvedByUserName;
-	private Date _approvedDate;
-	private boolean _expired;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private Date _expirationDate;
 	private Date _reviewDate;
 	private boolean _indexable;

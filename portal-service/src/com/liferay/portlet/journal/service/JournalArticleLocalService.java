@@ -179,13 +179,6 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		long userId, long groupId, java.lang.String articleId, double version,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.journal.model.JournalArticle checkArticleResourcePrimKey(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,
@@ -225,19 +218,6 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteArticles(long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void expireArticle(long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void expireArticle(
-		com.liferay.portlet.journal.model.JournalArticle article,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -409,7 +389,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long resourcePrimKey, java.lang.Boolean approved)
+		long resourcePrimKey, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -421,7 +401,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		long groupId, java.lang.String articleId, java.lang.Boolean approved)
+		long groupId, java.lang.String articleId, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -432,7 +412,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public double getLatestVersion(long groupId, java.lang.String articleId,
-		java.lang.Boolean approved)
+		int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -478,7 +458,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isLatestVersion(long groupId, java.lang.String articleId,
-		double version, java.lang.Boolean active)
+		double version, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -529,8 +509,7 @@ public interface JournalArticleLocalService {
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.Double version, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -542,8 +521,7 @@ public interface JournalArticleLocalService {
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -555,8 +533,7 @@ public interface JournalArticleLocalService {
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String[] structureIds,
 		java.lang.String[] templateIds, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
@@ -566,8 +543,7 @@ public interface JournalArticleLocalService {
 		java.lang.String keywords, java.lang.Double version,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate)
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -576,8 +552,7 @@ public interface JournalArticleLocalService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
@@ -587,8 +562,7 @@ public interface JournalArticleLocalService {
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
@@ -625,6 +599,20 @@ public interface JournalArticleLocalService {
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
+		long userId, long groupId, java.lang.String articleId, double version,
+		int status, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateStatus(
+		long userId, com.liferay.portlet.journal.model.JournalArticle article,
+		int status, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

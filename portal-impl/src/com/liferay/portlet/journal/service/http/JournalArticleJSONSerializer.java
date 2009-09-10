@@ -98,20 +98,19 @@ public class JournalArticleJSONSerializer {
 		}
 
 		jsonObj.put("displayDate", displayDateJSON);
-		jsonObj.put("approved", model.getApproved());
-		jsonObj.put("approvedByUserId", model.getApprovedByUserId());
-		jsonObj.put("approvedByUserName", model.getApprovedByUserName());
+		jsonObj.put("status", model.getStatus());
+		jsonObj.put("statusByUserId", model.getStatusByUserId());
+		jsonObj.put("statusByUserName", model.getStatusByUserName());
 
-		Date approvedDate = model.getApprovedDate();
+		Date statusDate = model.getStatusDate();
 
-		String approvedDateJSON = StringPool.BLANK;
+		String statusDateJSON = StringPool.BLANK;
 
-		if (approvedDate != null) {
-			approvedDateJSON = String.valueOf(approvedDate.getTime());
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("approvedDate", approvedDateJSON);
-		jsonObj.put("expired", model.getExpired());
+		jsonObj.put("statusDate", statusDateJSON);
 
 		Date expirationDate = model.getExpirationDate();
 

@@ -68,11 +68,10 @@ public class JournalArticleSoap implements Serializable {
 		soapModel.setStructureId(model.getStructureId());
 		soapModel.setTemplateId(model.getTemplateId());
 		soapModel.setDisplayDate(model.getDisplayDate());
-		soapModel.setApproved(model.getApproved());
-		soapModel.setApprovedByUserId(model.getApprovedByUserId());
-		soapModel.setApprovedByUserName(model.getApprovedByUserName());
-		soapModel.setApprovedDate(model.getApprovedDate());
-		soapModel.setExpired(model.getExpired());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setReviewDate(model.getReviewDate());
 		soapModel.setIndexable(model.getIndexable());
@@ -283,52 +282,36 @@ public class JournalArticleSoap implements Serializable {
 		_displayDate = displayDate;
 	}
 
-	public boolean getApproved() {
-		return _approved;
+	public int getStatus() {
+		return _status;
 	}
 
-	public boolean isApproved() {
-		return _approved;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
-	public void setApproved(boolean approved) {
-		_approved = approved;
+	public long getStatusByUserId() {
+		return _statusByUserId;
 	}
 
-	public long getApprovedByUserId() {
-		return _approvedByUserId;
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
 	}
 
-	public void setApprovedByUserId(long approvedByUserId) {
-		_approvedByUserId = approvedByUserId;
+	public String getStatusByUserName() {
+		return _statusByUserName;
 	}
 
-	public String getApprovedByUserName() {
-		return _approvedByUserName;
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
 	}
 
-	public void setApprovedByUserName(String approvedByUserName) {
-		_approvedByUserName = approvedByUserName;
+	public Date getStatusDate() {
+		return _statusDate;
 	}
 
-	public Date getApprovedDate() {
-		return _approvedDate;
-	}
-
-	public void setApprovedDate(Date approvedDate) {
-		_approvedDate = approvedDate;
-	}
-
-	public boolean getExpired() {
-		return _expired;
-	}
-
-	public boolean isExpired() {
-		return _expired;
-	}
-
-	public void setExpired(boolean expired) {
-		_expired = expired;
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
 	}
 
 	public Date getExpirationDate() {
@@ -406,11 +389,10 @@ public class JournalArticleSoap implements Serializable {
 	private String _structureId;
 	private String _templateId;
 	private Date _displayDate;
-	private boolean _approved;
-	private long _approvedByUserId;
-	private String _approvedByUserName;
-	private Date _approvedDate;
-	private boolean _expired;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private Date _expirationDate;
 	private Date _reviewDate;
 	private boolean _indexable;
