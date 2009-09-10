@@ -30,6 +30,9 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.kernel.events.InvokerAction;
+import com.liferay.portal.kernel.events.InvokerSessionAction;
+import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -676,10 +679,8 @@ public class HookHotDeployListener
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClassName).newInstance();
 
-			simpleAction = (SimpleAction)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {SimpleAction.class},
-				new ContextClassLoaderBeanHandler(
-					simpleAction, portletClassLoader));
+			simpleAction = new InvokerSimpleAction(
+				simpleAction, portletClassLoader);
 
 			long companyId = CompanyThreadLocal.getCompanyId();
 
@@ -700,9 +701,7 @@ public class HookHotDeployListener
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClassName).newInstance();
 
-			action = (Action)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {Action.class},
-				new ContextClassLoaderBeanHandler(action, portletClassLoader));
+			action = new InvokerAction(action, portletClassLoader);
 
 			EventsProcessorUtil.registerEvent(eventName, action);
 
@@ -714,10 +713,8 @@ public class HookHotDeployListener
 				(SessionAction)portletClassLoader.loadClass(
 					eventClassName).newInstance();
 
-			sessionAction = (SessionAction)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {SessionAction.class},
-				new ContextClassLoaderBeanHandler(
-					sessionAction, portletClassLoader));
+			sessionAction = new InvokerSessionAction(
+				sessionAction, portletClassLoader);
 
 			EventsProcessorUtil.registerEvent(eventName, sessionAction);
 
