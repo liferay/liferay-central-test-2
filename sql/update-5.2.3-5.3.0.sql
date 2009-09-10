@@ -113,6 +113,20 @@ COMMIT_TRANSACTION;
 update BlogsEntry set status = 0 where draft = FALSE;
 update BlogsEntry set status = 2 where draft = TRUE;
 
+alter table JournalArticle add status INTEGER;
+alter table JournalArticle add statusByUserId LONG;
+alter table JournalArticle add statusByUserName VARCHAR(75);
+alter table JournalArticle add statusDate DATE;
+
+COMMIT_TRANSACTION;
+
+update JournalArticle set status = 0 where approved = TRUE;
+update JournalArticle set status = 1 where approved = FALSE;
+update JournalArticle set statusByUserId = approvedByUserId;
+update JournalArticle set statusByUserName = approvedByUserName;
+update JournalArticle set statusDate = approvedDate where expired = FALSE;
+update JournalArticle set statusDate = expiredDate where expired = TRUE;
+
 alter table Layout add layoutPrototypeId LONG;
 
 create table LayoutPrototype (

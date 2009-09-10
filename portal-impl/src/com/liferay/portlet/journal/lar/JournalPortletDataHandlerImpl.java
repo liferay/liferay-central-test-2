@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -219,7 +220,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		article.setUserUuid(article.getUserUuid());
-		article.setApprovedByUserUuid(article.getApprovedByUserUuid());
+		article.setStatusByUserUuid(article.getStatusByUserUuid());
 
 		context.addZipEntry(path, article);
 	}
@@ -879,12 +880,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (approvedByUserId == 0) {
 				approvedByUserId = context.getUserId(
-					article.getApprovedByUserUuid());
+					article.getStatusByUserUuid());
 			}
 
-			JournalArticleLocalServiceUtil.approveArticle(
+			JournalArticleLocalServiceUtil.updateStatus(
 				approvedByUserId, groupId, existingArticle.getArticleId(),
-				existingArticle.getVersion(), articleURL, serviceContext);
+				existingArticle.getVersion(), StatusConstants.APPROVED,
+				articleURL, serviceContext);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

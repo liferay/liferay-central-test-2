@@ -1132,11 +1132,10 @@
 			<hint name="auto-escape">false</hint>
 		</field>
 		<field name="displayDate" type="Date" />
-		<field name="approved" type="boolean" />
-		<field name="approvedByUserId" type="long" />
-		<field name="approvedByUserName" type="String" />
-		<field name="approvedDate" type="Date" />
-		<field name="expired" type="boolean" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 		<field name="expirationDate" type="Date" />
 		<field name="reviewDate" type="Date" />
 		<field name="indexable" type="boolean">

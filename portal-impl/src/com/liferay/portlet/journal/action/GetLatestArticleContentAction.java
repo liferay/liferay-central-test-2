@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -42,7 +43,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetLatestArticleContentAction.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  */
 public class GetLatestArticleContentAction extends Action {
@@ -60,7 +61,7 @@ public class GetLatestArticleContentAction extends Action {
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, Boolean.TRUE);
+					groupId, articleId, StatusConstants.APPROVED);
 
 			String fileName = "content.xml";
 			byte[] bytes = article.getContentByLocale(languageId).getBytes();

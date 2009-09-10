@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -49,14 +50,14 @@ import java.util.List;
  * <a href="JournalArticleFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class JournalArticleFinderImpl
 	extends BasePersistenceImpl implements JournalArticleFinder {
 
-	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
+	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R =
 		JournalArticleFinder.class.getName() +
-			".countByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
+			".countByC_G_A_V_T_D_C_T_S_T_D_S_R";
 
 	public static String FIND_BY_EXPIRATION_DATE =
 		JournalArticleFinder.class.getName() + ".findByExpirationDate";
@@ -67,15 +68,14 @@ public class JournalArticleFinderImpl
 	public static String FIND_BY_R_D =
 		JournalArticleFinder.class.getName() + ".findByR_D";
 
-	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
+	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R =
 		JournalArticleFinder.class.getName() +
-			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
+			".findByC_G_A_V_T_D_C_T_S_T_D_S_R";
 
 	public int countByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate)
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate)
 		throws SystemException {
 
 		String[] articleIds = null;
@@ -94,50 +94,49 @@ public class JournalArticleFinderImpl
 			andOperator = true;
 		}
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator);
+			new String[] {templateId}, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator)
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator)
 		throws SystemException {
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator);
+			new String[] {templateId}, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator)
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator)
 		throws SystemException {
 
-		return countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, new String[] {articleId}, version,
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
-			displayDateGT, displayDateLT, approved, expired, reviewDate,
-			andOperator);
+			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, boolean andOperator)
+			Date displayDateGT, Date displayDateLT, int status,
+			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);
@@ -155,8 +154,7 @@ public class JournalArticleFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(
-				COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
@@ -181,12 +179,8 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
-			if (approved == null) {
-				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
-			}
-
-			if (expired == null) {
-				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			if (status == StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -221,12 +215,8 @@ public class JournalArticleFinderImpl
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
 
-			if (approved != null) {
-				qPos.add(approved);
-			}
-
-			if (expired != null) {
-				qPos.add(expired);
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
 			}
 
 			qPos.add(reviewDate_TS);
@@ -253,7 +243,7 @@ public class JournalArticleFinderImpl
 	}
 
 	public List<JournalArticle> findByExpirationDate(
-			Boolean expired, Date expirationDateLT, Date expirationDateGT)
+			int status, Date expirationDateLT, Date expirationDateGT)
 		throws SystemException {
 
 		Timestamp expirationDateLT_TS = CalendarUtil.getTimestamp(
@@ -262,13 +252,14 @@ public class JournalArticleFinderImpl
 			expirationDateGT);
 
 		Session session = null;
+
 		try {
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_EXPIRATION_DATE);
 
-			if (expired == null) {
-				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			if (status == StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -277,8 +268,8 @@ public class JournalArticleFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (expired != null) {
-				qPos.add(expired);
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
 			}
 
 			qPos.add(expirationDateGT_TS);
@@ -297,9 +288,8 @@ public class JournalArticleFinderImpl
 	public List<JournalArticle> findByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, int start, int end,
-			OrderByComparator obc)
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		String[] articleIds = null;
@@ -318,11 +308,11 @@ public class JournalArticleFinderImpl
 			andOperator = true;
 		}
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, start, end, obc);
+			new String[] {templateId}, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> findByReviewDate(
@@ -407,46 +397,44 @@ public class JournalArticleFinderImpl
 		}
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int start, int end,
-			OrderByComparator obc)
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, start, end, obc);
+			new String[] {templateId}, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator, start, end, obc);
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int start, int end,
-			OrderByComparator obc)
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, new String[] {articleId}, version,
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
-			displayDateGT, displayDateLT, approved, expired, reviewDate,
-			andOperator, start, end, obc);
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, obc);
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, boolean andOperator, int start,
-			int end, OrderByComparator obc)
+			Date displayDateGT, Date displayDateLT, int status,
+			Date reviewDate, boolean andOperator, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);
@@ -464,7 +452,7 @@ public class JournalArticleFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
@@ -489,12 +477,8 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.EQUAL, false, templateIds);
 
-			if (approved == null) {
-				sql = StringUtil.replace(sql, "(approved = ?) AND", "");
-			}
-
-			if (expired == null) {
-				sql = StringUtil.replace(sql, "(expired = ?) AND", "");
+			if (status == StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "(status = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -530,12 +514,8 @@ public class JournalArticleFinderImpl
 			qPos.add(displayDateLT_TS);
 			qPos.add(displayDateLT_TS);
 
-			if (approved != null) {
-				qPos.add(approved);
-			}
-
-			if (expired != null) {
-				qPos.add(expired);
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
 			}
 
 			qPos.add(reviewDate_TS);

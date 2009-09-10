@@ -33,7 +33,11 @@ public interface StatusConstants {
 
 	public static final int APPROVED = 0;
 
+	public static final int DENIED = 4;
+
 	public static final int DRAFT = 2;
+
+	public static final int EXPIRED = 3;
 
 	public static final int PENDING = 1;
 

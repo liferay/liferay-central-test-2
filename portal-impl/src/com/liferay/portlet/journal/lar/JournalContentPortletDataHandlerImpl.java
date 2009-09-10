@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -83,7 +84,7 @@ import javax.portlet.PortletPreferences;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Bruno Farache
  * @see	   com.liferay.portal.lar.PortletDataHandler
  * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
@@ -143,7 +144,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			try {
 				article = JournalArticleLocalServiceUtil.getLatestArticle(
-					articleGroupId, articleId, true);
+					articleGroupId, articleId, StatusConstants.APPROVED);
 			}
 			catch (NoSuchArticleException nsae) {
 				if (_log.isWarnEnabled()) {

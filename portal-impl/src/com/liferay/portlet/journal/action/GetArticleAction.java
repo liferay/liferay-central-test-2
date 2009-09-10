@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
@@ -57,7 +58,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="GetArticleAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class GetArticleAction extends Action {
 
@@ -74,7 +75,7 @@ public class GetArticleAction extends Action {
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, Boolean.TRUE);
+					groupId, articleId, StatusConstants.APPROVED);
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);

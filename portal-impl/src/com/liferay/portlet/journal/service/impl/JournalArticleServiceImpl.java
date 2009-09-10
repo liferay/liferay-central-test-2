@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -40,7 +41,7 @@ import java.util.Map;
  * <a href="JournalArticleServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
@@ -98,19 +99,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
 			smallFile, images, articleURL, serviceContext);
-	}
-
-	public JournalArticle approveArticle(
-			long groupId, String articleId, double version, String articleURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
-
-		return journalArticleLocalService.approveArticle(
-			getUserId(), groupId, articleId, version, articleURL,
-			serviceContext);
 	}
 
 	public JournalArticle copyArticle(
@@ -194,18 +182,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, version, articleURL, serviceContext);
 	}
 
-	public void expireArticle(
-			long groupId, String articleId, double version, String articleURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, articleId, ActionKeys.EXPIRE);
-
-		journalArticleLocalService.expireArticle(
-			groupId, articleId, version, articleURL, serviceContext);
-	}
-
 	public void removeArticleLocale(long companyId, String languageId)
 		throws PortalException, SystemException {
 
@@ -281,6 +257,25 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleLocalService.updateContent(
 			groupId, articleId, version, content);
+	}
+
+	public JournalArticle updateStatus(
+			long groupId, String articleId, double version, int status,
+			String articleURL, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (status == StatusConstants.APPROVED) {
+			JournalPermission.check(
+				getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
+		}
+		else if (status == StatusConstants.EXPIRED) {
+			JournalPermission.check(
+				getPermissionChecker(), groupId, ActionKeys.EXPIRE);
+		}
+
+		return journalArticleLocalService.updateStatus(
+			getUserId(), groupId, articleId, version, status, articleURL,
+			serviceContext);
 	}
 
 }

@@ -37,11 +37,10 @@
 		<column name="structureId" type="String" />
 		<column name="templateId" type="String" />
 		<column name="displayDate" type="Date" />
-		<column name="approved" type="boolean" />
-		<column name="approvedByUserId" type="long" />
-		<column name="approvedByUserName" type="String" />
-		<column name="approvedDate" type="Date" />
-		<column name="expired" type="boolean" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="reviewDate" type="Date" />
 		<column name="indexable" type="boolean" />
@@ -67,9 +66,9 @@
 		<finder name="SmallImageId" return-type="Collection">
 			<finder-column name="smallImageId" />
 		</finder>
-		<finder name="R_A" return-type="Collection">
+		<finder name="R_S" return-type="Collection">
 			<finder-column name="resourcePrimKey" />
-			<finder-column name="approved" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
@@ -92,10 +91,10 @@
 			<finder-column name="articleId" />
 			<finder-column name="version" />
 		</finder>
-		<finder name="G_A_A" return-type="Collection">
+		<finder name="G_A_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
-			<finder-column name="approved" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -88,7 +89,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditArticleAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class EditArticleAction extends PortletAction {
 
@@ -215,8 +216,9 @@ public class EditArticleAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
 
-		JournalArticleServiceUtil.approveArticle(
-			groupId, articleId, version, articleURL, serviceContext);
+		JournalArticleServiceUtil.updateStatus(
+			groupId, articleId, version, StatusConstants.APPROVED, articleURL,
+			serviceContext);
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
@@ -270,8 +272,9 @@ public class EditArticleAction extends PortletAction {
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
-			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+			JournalArticleServiceUtil.updateStatus(
+				groupId, articleId, version, StatusConstants.EXPIRED,
+				articleURL, serviceContext);
 		}
 	}
 
@@ -524,9 +527,10 @@ public class EditArticleAction extends PortletAction {
 		boolean approve = ParamUtil.getBoolean(uploadRequest, "approve");
 
 		if (approve) {
-			article = JournalArticleServiceUtil.approveArticle(
+			JournalArticleServiceUtil.updateStatus(
 				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), articleURL, serviceContext);
+				article.getVersion(), StatusConstants.APPROVED, articleURL,
+				serviceContext);
 		}
 
 		// Recent articles

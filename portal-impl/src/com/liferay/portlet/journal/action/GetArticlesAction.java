@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -64,7 +65,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="GetArticlesAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  */
 public class GetArticlesAction extends Action {
@@ -146,8 +147,7 @@ public class GetArticlesAction extends Action {
 			_log.debug("displayDateLT is " + displayDateLT);
 		}
 
-		Boolean approved = Boolean.TRUE;
-		Boolean expired = Boolean.FALSE;
+		int status = StatusConstants.APPROVED;
 		Date reviewDate = null;
 		boolean andOperator = true;
 		int start = 0;
@@ -166,7 +166,7 @@ public class GetArticlesAction extends Action {
 		return JournalArticleLocalServiceUtil.search(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, start, end, obc);
+			status, reviewDate, andOperator, start, end, obc);
 	}
 
 	protected byte[] getContent(

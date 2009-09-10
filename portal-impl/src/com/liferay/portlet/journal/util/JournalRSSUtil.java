@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -90,8 +91,7 @@ public class JournalRSSUtil {
 
 		Date displayDateGT = null;
 		Date displayDateLT = new Date();
-		Boolean approved = Boolean.TRUE;
-		Boolean expired = Boolean.FALSE;
+		int status = StatusConstants.APPROVED;
 		Date reviewDate = null;
 		boolean andOperator = true;
 		int start = 0;
@@ -110,7 +110,7 @@ public class JournalRSSUtil {
 		return JournalArticleLocalServiceUtil.search(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, start, end, obc);
+			status, reviewDate, andOperator, start, end, obc);
 	}
 
 	public static List<SyndEnclosure> getDLEnclosures(

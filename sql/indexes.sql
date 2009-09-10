@@ -131,12 +131,16 @@ create index IX_BAFB116E on DLFileRank (groupId, userId);
 create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_B0051937 on DLFileShortcut (groupId, folderId);
+create index IX_ECCE311D on DLFileShortcut (groupId, folderId, status);
 create index IX_55C736AC on DLFileShortcut (groupId, toFolderId, toName);
+create index IX_346A0992 on DLFileShortcut (groupId, toFolderId, toName, status);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
 create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);
 
 create index IX_9CD91DB6 on DLFileVersion (folderId, name);
+create index IX_6551469C on DLFileVersion (folderId, name, status);
 create unique index IX_6C5E6512 on DLFileVersion (folderId, name, version);
+create unique index IX_233771F8 on DLFileVersion (folderId, name, version, status);
 
 create index IX_A74DB14C on DLFolder (companyId);
 create index IX_F2EA1ACE on DLFolder (groupId);
@@ -214,12 +218,12 @@ create index IX_6A925A4D on Image (size_);
 create index IX_DFF98523 on JournalArticle (companyId);
 create index IX_9356F865 on JournalArticle (groupId);
 create index IX_68C0F69C on JournalArticle (groupId, articleId);
-create index IX_8DBF1387 on JournalArticle (groupId, articleId, approved);
+create index IX_4D5CD982 on JournalArticle (groupId, articleId, status);
 create unique index IX_85C52EEC on JournalArticle (groupId, articleId, version);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
 create index IX_22882D02 on JournalArticle (groupId, urlTitle);
-create index IX_76186981 on JournalArticle (resourcePrimKey, approved);
+create index IX_3E2765FC on JournalArticle (resourcePrimKey, status);
 create index IX_EF9B7028 on JournalArticle (smallImageId);
 create index IX_F029602F on JournalArticle (uuid_);
 create unique index IX_3463D95B on JournalArticle (uuid_, groupId);

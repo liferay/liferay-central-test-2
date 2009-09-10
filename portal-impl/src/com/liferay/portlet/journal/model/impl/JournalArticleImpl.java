@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -70,9 +71,9 @@ public class JournalArticleImpl
 	public JournalArticleImpl() {
 	}
 
-	public String getApprovedByUserUuid() throws SystemException {
+	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(
-			getApprovedByUserId(), "uuid", _approvedByUserUuid);
+			getStatusByUserId(), "uuid", _statusByUserUuid);
 	}
 
 	public String[] getAvailableLocales() {
@@ -120,6 +121,24 @@ public class JournalArticleImpl
 		return _smallImageType;
 	}
 
+	public boolean isApproved() {
+		if (getStatus() == StatusConstants.APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isExpired() {
+		if (getStatus() == StatusConstants.EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isTemplateDriven() {
 		if (Validator.isNull(getStructureId())) {
 			return false;
@@ -129,15 +148,15 @@ public class JournalArticleImpl
 		}
 	}
 
-	public void setApprovedByUserUuid(String approvedByUserUuid) {
-		_approvedByUserUuid = approvedByUserUuid;
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
 	}
 
 	public void setSmallImageType(String smallImageType) {
 		_smallImageType = smallImageType;
 	}
 
-	private String _approvedByUserUuid;
+	private String _statusByUserUuid;
 	private ExpandoBridge _expandoBridge;
 	private String _smallImageType;
 

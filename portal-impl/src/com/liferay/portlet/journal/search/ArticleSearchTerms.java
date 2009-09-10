@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -82,39 +83,21 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		this.status = status;
 	}
 
-	public Boolean getApprovedObj() {
+	public int getStatusCode() {
 		if (status.equals("approved")) {
-			return Boolean.TRUE;
+			return StatusConstants.APPROVED;
 		}
 		else if (status.equals("not-approved")) {
-			return Boolean.FALSE;
+			return StatusConstants.PENDING;
 		}
 		else if (status.equals("expired")) {
-			return Boolean.FALSE;
+			return StatusConstants.EXPIRED;
 		}
 		else if (status.equals("review")) {
-			return null;
+			return StatusConstants.ANY;
 		}
 		else {
-			return null;
-		}
-	}
-
-	public Boolean getExpiredObj() {
-		if (status.equals("approved")) {
-			return Boolean.FALSE;
-		}
-		else if (status.equals("not-approved")) {
-			return Boolean.FALSE;
-		}
-		else if (status.equals("expired")) {
-			return Boolean.TRUE;
-		}
-		else if (status.equals("review")) {
-			return Boolean.FALSE;
-		}
-		else {
-			return null;
+			return StatusConstants.ANY;
 		}
 	}
 

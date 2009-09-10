@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R">
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -22,8 +22,7 @@
 					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
-						(approved = ?) AND
-						(expired = ?) AND
+						(status = ?) AND
 						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
 					)
 				)
@@ -36,7 +35,7 @@
 			FROM
 				JournalArticle
 			WHERE
-				(expired = ?) AND
+				(status = ?) AND
 				(expirationDate >= ?) AND
 				(expirationDate <= ?)
 		]]>
@@ -61,14 +60,13 @@
 			WHERE
 				(resourcePrimKey = ?) AND
 				(displayDate <= ?) AND
-				(approved = [$TRUE$]) AND
-				(expired = [$FALSE$]) AND
+				(status = 0) AND
 				(indexable = [$TRUE$])
 			ORDER BY
 				version DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R">
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R">
 		<![CDATA[
 			SELECT
 				{JournalArticle.*}
@@ -89,8 +87,7 @@
 					(displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(
-						(approved = ?) AND
-						(expired = ?) AND
+						(status = ?) AND
 						(reviewDate <= ? [$AND_OR_NULL_CHECK$])
 					)
 				)
