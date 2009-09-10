@@ -429,7 +429,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> {
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 		public ExpandoBridge getExpandoBridge() {
 			if (_expandoBridge == null) {
-				_expandoBridge = new ExpandoBridgeImpl(${entity.name}.class.getName(), getPrimaryKey());
+				_expandoBridge = new ExpandoBridgeImpl(${entity.name}.class.getName(),
+
+				<#if entity.hasColumn("resourcePrimKey")>
+					getResourcePrimKey()
+				<#else>
+					getPrimaryKey()
+				</#if>
+
+				);
 			}
 
 			return _expandoBridge;

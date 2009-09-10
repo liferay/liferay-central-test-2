@@ -32,8 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -109,15 +107,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return pages;
 	}
 
-	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(
-				WikiPage.class.getName(), getResourcePrimKey());
-		}
-
-		return _expandoBridge;
-	}
-
 	public WikiNode getNode() {
 		WikiNode node = null;
 
@@ -189,6 +178,5 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	private static Log _log = LogFactoryUtil.getLog(WikiPageImpl.class);
 
 	private String _attachmentDirs;
-	private ExpandoBridge _expandoBridge;
 
 }

@@ -54,8 +54,6 @@ public interface JournalArticle extends JournalArticleModel {
 
 	public java.lang.String getDefaultLocale();
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
-
 	public java.lang.String getSmallImageType()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

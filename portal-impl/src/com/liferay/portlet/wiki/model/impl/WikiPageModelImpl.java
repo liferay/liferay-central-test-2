@@ -407,7 +407,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage> {
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(WikiPage.class.getName(),
-					getPrimaryKey());
+					getResourcePrimKey());
 		}
 
 		return _expandoBridge;

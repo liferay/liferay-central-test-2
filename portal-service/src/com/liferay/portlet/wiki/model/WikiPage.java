@@ -56,8 +56,6 @@ public interface WikiPage extends WikiPageModel {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildPages();
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
-
 	public com.liferay.portlet.wiki.model.WikiNode getNode();
 
 	public com.liferay.portlet.wiki.model.WikiPage getParentPage();

@@ -186,7 +186,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = new ExpandoBridgeImpl(JournalArticleResource.class.getName(),
-					getPrimaryKey());
+					getResourcePrimKey());
 		}
 
 		return _expandoBridge;
