@@ -301,17 +301,17 @@ public abstract class StateAwareResponseImpl
 		return true;
 	}
 
-	private PortletRequestImpl _portletRequestImpl;
-	private String _portletName;
-	private User _user;
+	private boolean _calledSetRenderParameter;
+	private List<Event> _events = new ArrayList<Event>();
 	private Layout _layout;
-	private WindowState _windowState;
-	private PortletMode _portletMode;
 	private Map<String, String[]> _params =
 		new LinkedHashMap<String, String[]>();
-	private List<Event> _events = new ArrayList<Event>();
-	private String _redirectLocation;
-	private boolean _calledSetRenderParameter;
+	private PortletMode _portletMode;
+	private String _portletName;
+	private PortletRequestImpl _portletRequestImpl;
 	private Map<String, String[]> _publicRenderParameters;
+	private String _redirectLocation;
+	private User _user;
+	private WindowState _windowState;
 
 }
