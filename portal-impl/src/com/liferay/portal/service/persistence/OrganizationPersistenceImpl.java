@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -59,6 +60,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="OrganizationPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -2097,9 +2099,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
-			clearGroups.clear(pk);
+			Set<Long> groupPKSet = SetUtil.fromArray(groupPKs);
 
-			for (long groupPK : groupPKs) {
+			List<com.liferay.portal.model.Group> groups = getGroups(pk);
+
+			for (com.liferay.portal.model.Group group : groups) {
+				if (!groupPKSet.contains(group.getPrimaryKey())) {
+					removeGroup.remove(pk, group.getPrimaryKey());
+				}
+				else {
+					groupPKSet.remove(group.getPrimaryKey());
+				}
+			}
+
+			for (Long groupPK : groupPKSet) {
 				addGroup.add(pk, groupPK);
 			}
 		}
@@ -2114,11 +2127,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
-			clearGroups.clear(pk);
+			long[] groupPKs = new long[groups.size()];
 
-			for (com.liferay.portal.model.Group group : groups) {
-				addGroup.add(pk, group.getPrimaryKey());
+			for (int i = 0; i < groups.size(); i++) {
+				com.liferay.portal.model.Group group = groups.get(i);
+
+				groupPKs[i] = group.getPrimaryKey();
 			}
+
+			setGroups(pk, groupPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -2411,9 +2428,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
-			clearUsers.clear(pk);
+			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
 
-			for (long userPK : userPKs) {
+			List<com.liferay.portal.model.User> users = getUsers(pk);
+
+			for (com.liferay.portal.model.User user : users) {
+				if (!userPKSet.contains(user.getPrimaryKey())) {
+					removeUser.remove(pk, user.getPrimaryKey());
+				}
+				else {
+					userPKSet.remove(user.getPrimaryKey());
+				}
+			}
+
+			for (Long userPK : userPKSet) {
 				addUser.add(pk, userPK);
 			}
 		}
@@ -2428,11 +2456,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
-			clearUsers.clear(pk);
+			long[] userPKs = new long[users.size()];
 
-			for (com.liferay.portal.model.User user : users) {
-				addUser.add(pk, user.getPrimaryKey());
+			for (int i = 0; i < users.size(); i++) {
+				com.liferay.portal.model.User user = users.get(i);
+
+				userPKs[i] = user.getPrimaryKey();
 			}
+
+			setUsers(pk, userPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

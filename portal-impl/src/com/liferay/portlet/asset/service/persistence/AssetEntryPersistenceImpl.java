@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -60,6 +61,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="AssetEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1346,9 +1348,20 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 	public void setAssetCategories(long pk, long[] assetCategoryPKs)
 		throws SystemException {
 		try {
-			clearAssetCategories.clear(pk);
+			Set<Long> assetCategoryPKSet = SetUtil.fromArray(assetCategoryPKs);
 
-			for (long assetCategoryPK : assetCategoryPKs) {
+			List<com.liferay.portlet.asset.model.AssetCategory> assetCategories = getAssetCategories(pk);
+
+			for (com.liferay.portlet.asset.model.AssetCategory assetCategory : assetCategories) {
+				if (!assetCategoryPKSet.contains(assetCategory.getPrimaryKey())) {
+					removeAssetCategory.remove(pk, assetCategory.getPrimaryKey());
+				}
+				else {
+					assetCategoryPKSet.remove(assetCategory.getPrimaryKey());
+				}
+			}
+
+			for (Long assetCategoryPK : assetCategoryPKSet) {
 				addAssetCategory.add(pk, assetCategoryPK);
 			}
 		}
@@ -1364,11 +1377,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
 		throws SystemException {
 		try {
-			clearAssetCategories.clear(pk);
+			long[] assetCategoryPKs = new long[assetCategories.size()];
 
-			for (com.liferay.portlet.asset.model.AssetCategory assetCategory : assetCategories) {
-				addAssetCategory.add(pk, assetCategory.getPrimaryKey());
+			for (int i = 0; i < assetCategories.size(); i++) {
+				com.liferay.portlet.asset.model.AssetCategory assetCategory = assetCategories.get(i);
+
+				assetCategoryPKs[i] = assetCategory.getPrimaryKey();
 			}
+
+			setAssetCategories(pk, assetCategoryPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1678,9 +1695,20 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 	public void setAssetTags(long pk, long[] assetTagPKs)
 		throws SystemException {
 		try {
-			clearAssetTags.clear(pk);
+			Set<Long> assetTagPKSet = SetUtil.fromArray(assetTagPKs);
 
-			for (long assetTagPK : assetTagPKs) {
+			List<com.liferay.portlet.asset.model.AssetTag> assetTags = getAssetTags(pk);
+
+			for (com.liferay.portlet.asset.model.AssetTag assetTag : assetTags) {
+				if (!assetTagPKSet.contains(assetTag.getPrimaryKey())) {
+					removeAssetTag.remove(pk, assetTag.getPrimaryKey());
+				}
+				else {
+					assetTagPKSet.remove(assetTag.getPrimaryKey());
+				}
+			}
+
+			for (Long assetTagPK : assetTagPKSet) {
 				addAssetTag.add(pk, assetTagPK);
 			}
 		}
@@ -1696,11 +1724,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.asset.model.AssetTag> assetTags)
 		throws SystemException {
 		try {
-			clearAssetTags.clear(pk);
+			long[] assetTagPKs = new long[assetTags.size()];
 
-			for (com.liferay.portlet.asset.model.AssetTag assetTag : assetTags) {
-				addAssetTag.add(pk, assetTag.getPrimaryKey());
+			for (int i = 0; i < assetTags.size(); i++) {
+				com.liferay.portlet.asset.model.AssetTag assetTag = assetTags.get(i);
+
+				assetTagPKs[i] = assetTag.getPrimaryKey();
 			}
+
+			setAssetTags(pk, assetTagPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

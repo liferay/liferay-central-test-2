@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -60,6 +61,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="SCFrameworkVersionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1851,9 +1853,23 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	public void setSCProductVersions(long pk, long[] scProductVersionPKs)
 		throws SystemException {
 		try {
-			clearSCProductVersions.clear(pk);
+			Set<Long> scProductVersionPKSet = SetUtil.fromArray(scProductVersionPKs);
 
-			for (long scProductVersionPK : scProductVersionPKs) {
+			List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions =
+				getSCProductVersions(pk);
+
+			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
+				if (!scProductVersionPKSet.contains(
+							scProductVersion.getPrimaryKey())) {
+					removeSCProductVersion.remove(pk,
+						scProductVersion.getPrimaryKey());
+				}
+				else {
+					scProductVersionPKSet.remove(scProductVersion.getPrimaryKey());
+				}
+			}
+
+			for (Long scProductVersionPK : scProductVersionPKSet) {
 				addSCProductVersion.add(pk, scProductVersionPK);
 			}
 		}
@@ -1869,11 +1885,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws SystemException {
 		try {
-			clearSCProductVersions.clear(pk);
+			long[] scProductVersionPKs = new long[scProductVersions.size()];
 
-			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
-				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
+			for (int i = 0; i < scProductVersions.size(); i++) {
+				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
+					scProductVersions.get(i);
+
+				scProductVersionPKs[i] = scProductVersion.getPrimaryKey();
 			}
+
+			setSCProductVersions(pk, scProductVersionPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -60,6 +61,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="AssetTagPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1114,9 +1116,20 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 	public void setAssetEntries(long pk, long[] assetEntryPKs)
 		throws SystemException {
 		try {
-			clearAssetEntries.clear(pk);
+			Set<Long> assetEntryPKSet = SetUtil.fromArray(assetEntryPKs);
 
-			for (long assetEntryPK : assetEntryPKs) {
+			List<com.liferay.portlet.asset.model.AssetEntry> assetEntries = getAssetEntries(pk);
+
+			for (com.liferay.portlet.asset.model.AssetEntry assetEntry : assetEntries) {
+				if (!assetEntryPKSet.contains(assetEntry.getPrimaryKey())) {
+					removeAssetEntry.remove(pk, assetEntry.getPrimaryKey());
+				}
+				else {
+					assetEntryPKSet.remove(assetEntry.getPrimaryKey());
+				}
+			}
+
+			for (Long assetEntryPK : assetEntryPKSet) {
 				addAssetEntry.add(pk, assetEntryPK);
 			}
 		}
@@ -1132,11 +1145,15 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
 		throws SystemException {
 		try {
-			clearAssetEntries.clear(pk);
+			long[] assetEntryPKs = new long[assetEntries.size()];
 
-			for (com.liferay.portlet.asset.model.AssetEntry assetEntry : assetEntries) {
-				addAssetEntry.add(pk, assetEntry.getPrimaryKey());
+			for (int i = 0; i < assetEntries.size(); i++) {
+				com.liferay.portlet.asset.model.AssetEntry assetEntry = assetEntries.get(i);
+
+				assetEntryPKs[i] = assetEntry.getPrimaryKey();
 			}
+
+			setAssetEntries(pk, assetEntryPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,6 +62,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="SCProductEntryPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -2112,9 +2114,21 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	public void setSCLicenses(long pk, long[] scLicensePKs)
 		throws SystemException {
 		try {
-			clearSCLicenses.clear(pk);
+			Set<Long> scLicensePKSet = SetUtil.fromArray(scLicensePKs);
 
-			for (long scLicensePK : scLicensePKs) {
+			List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses =
+				getSCLicenses(pk);
+
+			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
+				if (!scLicensePKSet.contains(scLicense.getPrimaryKey())) {
+					removeSCLicense.remove(pk, scLicense.getPrimaryKey());
+				}
+				else {
+					scLicensePKSet.remove(scLicense.getPrimaryKey());
+				}
+			}
+
+			for (Long scLicensePK : scLicensePKSet) {
 				addSCLicense.add(pk, scLicensePK);
 			}
 		}
@@ -2130,11 +2144,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws SystemException {
 		try {
-			clearSCLicenses.clear(pk);
+			long[] scLicensePKs = new long[scLicenses.size()];
 
-			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
-				addSCLicense.add(pk, scLicense.getPrimaryKey());
+			for (int i = 0; i < scLicenses.size(); i++) {
+				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
+
+				scLicensePKs[i] = scLicense.getPrimaryKey();
 			}
+
+			setSCLicenses(pk, scLicensePKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

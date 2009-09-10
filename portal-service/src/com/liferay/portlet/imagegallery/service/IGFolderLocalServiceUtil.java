@@ -130,15 +130,6 @@ public class IGFolderLocalServiceUtil {
 			serviceContext);
 	}
 
-	public static void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addFolderResources(folderId, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public static void addFolderResources(
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -147,15 +138,6 @@ public class IGFolderLocalServiceUtil {
 		getService()
 			.addFolderResources(folder, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public static void addFolderResources(long folderId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addFolderResources(folderId, communityPermissions, guestPermissions);
 	}
 
 	public static void addFolderResources(
@@ -168,10 +150,22 @@ public class IGFolderLocalServiceUtil {
 			.addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteFolder(long folderId)
+	public static void addFolderResources(long folderId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteFolder(folderId);
+		getService()
+			.addFolderResources(folderId, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static void addFolderResources(long folderId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addFolderResources(folderId, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFolder(
@@ -179,6 +173,12 @@ public class IGFolderLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteFolder(folder);
+	}
+
+	public static void deleteFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteFolder(folderId);
 	}
 
 	public static void deleteFolders(long groupId)

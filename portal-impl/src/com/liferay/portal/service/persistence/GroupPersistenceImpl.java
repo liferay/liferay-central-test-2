@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -59,6 +60,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="GroupPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -2681,9 +2683,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public void setOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
-			clearOrganizations.clear(pk);
+			Set<Long> organizationPKSet = SetUtil.fromArray(organizationPKs);
 
-			for (long organizationPK : organizationPKs) {
+			List<com.liferay.portal.model.Organization> organizations = getOrganizations(pk);
+
+			for (com.liferay.portal.model.Organization organization : organizations) {
+				if (!organizationPKSet.contains(organization.getPrimaryKey())) {
+					removeOrganization.remove(pk, organization.getPrimaryKey());
+				}
+				else {
+					organizationPKSet.remove(organization.getPrimaryKey());
+				}
+			}
+
+			for (Long organizationPK : organizationPKSet) {
 				addOrganization.add(pk, organizationPK);
 			}
 		}
@@ -2699,11 +2712,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
 		try {
-			clearOrganizations.clear(pk);
+			long[] organizationPKs = new long[organizations.size()];
 
-			for (com.liferay.portal.model.Organization organization : organizations) {
-				addOrganization.add(pk, organization.getPrimaryKey());
+			for (int i = 0; i < organizations.size(); i++) {
+				com.liferay.portal.model.Organization organization = organizations.get(i);
+
+				organizationPKs[i] = organization.getPrimaryKey();
 			}
+
+			setOrganizations(pk, organizationPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -3008,9 +3025,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public void setPermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
-			clearPermissions.clear(pk);
+			Set<Long> permissionPKSet = SetUtil.fromArray(permissionPKs);
 
-			for (long permissionPK : permissionPKs) {
+			List<com.liferay.portal.model.Permission> permissions = getPermissions(pk);
+
+			for (com.liferay.portal.model.Permission permission : permissions) {
+				if (!permissionPKSet.contains(permission.getPrimaryKey())) {
+					removePermission.remove(pk, permission.getPrimaryKey());
+				}
+				else {
+					permissionPKSet.remove(permission.getPrimaryKey());
+				}
+			}
+
+			for (Long permissionPK : permissionPKSet) {
 				addPermission.add(pk, permissionPK);
 			}
 		}
@@ -3026,11 +3054,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
 		try {
-			clearPermissions.clear(pk);
+			long[] permissionPKs = new long[permissions.size()];
 
-			for (com.liferay.portal.model.Permission permission : permissions) {
-				addPermission.add(pk, permission.getPrimaryKey());
+			for (int i = 0; i < permissions.size(); i++) {
+				com.liferay.portal.model.Permission permission = permissions.get(i);
+
+				permissionPKs[i] = permission.getPrimaryKey();
 			}
+
+			setPermissions(pk, permissionPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -3329,9 +3361,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public void setRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
-			clearRoles.clear(pk);
+			Set<Long> rolePKSet = SetUtil.fromArray(rolePKs);
 
-			for (long rolePK : rolePKs) {
+			List<com.liferay.portal.model.Role> roles = getRoles(pk);
+
+			for (com.liferay.portal.model.Role role : roles) {
+				if (!rolePKSet.contains(role.getPrimaryKey())) {
+					removeRole.remove(pk, role.getPrimaryKey());
+				}
+				else {
+					rolePKSet.remove(role.getPrimaryKey());
+				}
+			}
+
+			for (Long rolePK : rolePKSet) {
 				addRole.add(pk, rolePK);
 			}
 		}
@@ -3346,11 +3389,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public void setRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
-			clearRoles.clear(pk);
+			long[] rolePKs = new long[roles.size()];
 
-			for (com.liferay.portal.model.Role role : roles) {
-				addRole.add(pk, role.getPrimaryKey());
+			for (int i = 0; i < roles.size(); i++) {
+				com.liferay.portal.model.Role role = roles.get(i);
+
+				rolePKs[i] = role.getPrimaryKey();
 			}
+
+			setRoles(pk, rolePKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -3659,9 +3706,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
-			clearUserGroups.clear(pk);
+			Set<Long> userGroupPKSet = SetUtil.fromArray(userGroupPKs);
 
-			for (long userGroupPK : userGroupPKs) {
+			List<com.liferay.portal.model.UserGroup> userGroups = getUserGroups(pk);
+
+			for (com.liferay.portal.model.UserGroup userGroup : userGroups) {
+				if (!userGroupPKSet.contains(userGroup.getPrimaryKey())) {
+					removeUserGroup.remove(pk, userGroup.getPrimaryKey());
+				}
+				else {
+					userGroupPKSet.remove(userGroup.getPrimaryKey());
+				}
+			}
+
+			for (Long userGroupPK : userGroupPKSet) {
 				addUserGroup.add(pk, userGroupPK);
 			}
 		}
@@ -3677,11 +3735,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
 		try {
-			clearUserGroups.clear(pk);
+			long[] userGroupPKs = new long[userGroups.size()];
 
-			for (com.liferay.portal.model.UserGroup userGroup : userGroups) {
-				addUserGroup.add(pk, userGroup.getPrimaryKey());
+			for (int i = 0; i < userGroups.size(); i++) {
+				com.liferay.portal.model.UserGroup userGroup = userGroups.get(i);
+
+				userGroupPKs[i] = userGroup.getPrimaryKey();
 			}
+
+			setUserGroups(pk, userGroupPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -3974,9 +4036,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
-			clearUsers.clear(pk);
+			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
 
-			for (long userPK : userPKs) {
+			List<com.liferay.portal.model.User> users = getUsers(pk);
+
+			for (com.liferay.portal.model.User user : users) {
+				if (!userPKSet.contains(user.getPrimaryKey())) {
+					removeUser.remove(pk, user.getPrimaryKey());
+				}
+				else {
+					userPKSet.remove(user.getPrimaryKey());
+				}
+			}
+
+			for (Long userPK : userPKSet) {
 				addUser.add(pk, userPK);
 			}
 		}
@@ -3991,11 +4064,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
-			clearUsers.clear(pk);
+			long[] userPKs = new long[users.size()];
 
-			for (com.liferay.portal.model.User user : users) {
-				addUser.add(pk, user.getPrimaryKey());
+			for (int i = 0; i < users.size(); i++) {
+				com.liferay.portal.model.User user = users.get(i);
+
+				userPKs[i] = user.getPrimaryKey();
 			}
+
+			setUsers(pk, userPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

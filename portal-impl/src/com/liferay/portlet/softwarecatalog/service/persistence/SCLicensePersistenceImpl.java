@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -60,6 +61,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="SCLicensePersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1493,9 +1495,23 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 	public void setSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
-			clearSCProductEntries.clear(pk);
+			Set<Long> scProductEntryPKSet = SetUtil.fromArray(scProductEntryPKs);
 
-			for (long scProductEntryPK : scProductEntryPKs) {
+			List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries =
+				getSCProductEntries(pk);
+
+			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
+				if (!scProductEntryPKSet.contains(
+							scProductEntry.getPrimaryKey())) {
+					removeSCProductEntry.remove(pk,
+						scProductEntry.getPrimaryKey());
+				}
+				else {
+					scProductEntryPKSet.remove(scProductEntry.getPrimaryKey());
+				}
+			}
+
+			for (Long scProductEntryPK : scProductEntryPKSet) {
 				addSCProductEntry.add(pk, scProductEntryPK);
 			}
 		}
@@ -1511,11 +1527,16 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
 		try {
-			clearSCProductEntries.clear(pk);
+			long[] scProductEntryPKs = new long[scProductEntries.size()];
 
-			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
-				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
+			for (int i = 0; i < scProductEntries.size(); i++) {
+				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
+					scProductEntries.get(i);
+
+				scProductEntryPKs[i] = scProductEntry.getPrimaryKey();
 			}
+
+			setSCProductEntries(pk, scProductEntryPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);

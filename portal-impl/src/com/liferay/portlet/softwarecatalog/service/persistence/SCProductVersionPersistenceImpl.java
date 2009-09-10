@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,6 +62,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a href="SCProductVersionPersistenceImpl.java.html"><b><i>View Source</i></b></a>
@@ -1379,9 +1381,23 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 	public void setSCFrameworkVersions(long pk, long[] scFrameworkVersionPKs)
 		throws SystemException {
 		try {
-			clearSCFrameworkVersions.clear(pk);
+			Set<Long> scFrameworkVersionPKSet = SetUtil.fromArray(scFrameworkVersionPKs);
 
-			for (long scFrameworkVersionPK : scFrameworkVersionPKs) {
+			List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions =
+				getSCFrameworkVersions(pk);
+
+			for (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion : scFrameworkVersions) {
+				if (!scFrameworkVersionPKSet.contains(
+							scFrameworkVersion.getPrimaryKey())) {
+					removeSCFrameworkVersion.remove(pk,
+						scFrameworkVersion.getPrimaryKey());
+				}
+				else {
+					scFrameworkVersionPKSet.remove(scFrameworkVersion.getPrimaryKey());
+				}
+			}
+
+			for (Long scFrameworkVersionPK : scFrameworkVersionPKSet) {
 				addSCFrameworkVersion.add(pk, scFrameworkVersionPK);
 			}
 		}
@@ -1397,11 +1413,16 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions)
 		throws SystemException {
 		try {
-			clearSCFrameworkVersions.clear(pk);
+			long[] scFrameworkVersionPKs = new long[scFrameworkVersions.size()];
 
-			for (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion : scFrameworkVersions) {
-				addSCFrameworkVersion.add(pk, scFrameworkVersion.getPrimaryKey());
+			for (int i = 0; i < scFrameworkVersions.size(); i++) {
+				com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion =
+					scFrameworkVersions.get(i);
+
+				scFrameworkVersionPKs[i] = scFrameworkVersion.getPrimaryKey();
 			}
+
+			setSCFrameworkVersions(pk, scFrameworkVersionPKs);
 		}
 		catch (Exception e) {
 			throw processException(e);
