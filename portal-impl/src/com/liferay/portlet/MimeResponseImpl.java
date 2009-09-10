@@ -78,7 +78,8 @@ public abstract class MimeResponseImpl
 
 	public OutputStream getPortletOutputStream() throws IOException {
 		if (_calledGetWriter) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(
+				"Cannot obtain OutputStream, Writer already in use.");
 		}
 
 		if (_contentType == null) {
@@ -92,7 +93,8 @@ public abstract class MimeResponseImpl
 
 	public PrintWriter getWriter() throws IOException {
 		if (_calledGetPortletOutputStream) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(
+				"Cannot obtain Writer, OutputStream already in use.");
 		}
 
 		if (_contentType == null) {
@@ -118,13 +120,15 @@ public abstract class MimeResponseImpl
 
 	public void reset() {
 		if (_calledFlushBuffer) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(
+				"Cannot reset a buffer that has been flushed");
 		}
 	}
 
 	public void resetBuffer() {
 		if (_calledFlushBuffer) {
-			throw new IllegalStateException();
+			throw new IllegalStateException(
+				"Cannot reset a buffer that has been flushed");
 		}
 
 		_response.resetBuffer();
@@ -136,7 +140,7 @@ public abstract class MimeResponseImpl
 
 	public void setContentType(String contentType) {
 		if (Validator.isNull(contentType)) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Content type is null.");
 		}
 
 		Enumeration<String> enu = _portletRequestImpl.getResponseContentTypes();
@@ -162,7 +166,8 @@ public abstract class MimeResponseImpl
 		}
 
 		if (!valid) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(
+				contentType + " is not a supported mime type.");
 		}
 
 		_contentType = contentType;
