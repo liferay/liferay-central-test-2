@@ -29,7 +29,7 @@ import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.PluginSettingSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -227,7 +227,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(PluginSetting.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PluginSetting.class.getName(),
 					getPrimaryKey());
 		}
 

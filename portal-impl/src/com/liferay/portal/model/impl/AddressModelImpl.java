@@ -33,7 +33,7 @@ import com.liferay.portal.model.AddressSoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -358,7 +358,7 @@ public class AddressModelImpl extends BaseModelImpl<Address> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Address.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Address.class.getName(),
 					getPrimaryKey());
 		}
 

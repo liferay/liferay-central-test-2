@@ -29,7 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagSoap;
 
@@ -238,7 +238,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(MBMessageFlag.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBMessageFlag.class.getName(),
 					getPrimaryKey());
 		}
 

@@ -31,7 +31,7 @@ import com.liferay.portal.model.ShardSoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -212,7 +212,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Shard.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Shard.class.getName(),
 					getPrimaryKey());
 		}
 

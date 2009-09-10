@@ -29,7 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.model.PollsVoteSoap;
 
@@ -217,7 +217,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(PollsVote.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PollsVote.class.getName(),
 					getPrimaryKey());
 		}
 

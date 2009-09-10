@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
@@ -214,7 +214,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(SCLicense.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCLicense.class.getName(),
 					getPrimaryKey());
 		}
 

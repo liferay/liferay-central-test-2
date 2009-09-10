@@ -30,7 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategorySoap;
 
@@ -315,7 +315,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(MBCategory.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(MBCategory.class.getName(),
 					getPrimaryKey());
 		}
 

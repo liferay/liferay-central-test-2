@@ -29,7 +29,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -208,7 +208,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Portlet.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Portlet.class.getName(),
 					getPrimaryKey());
 		}
 

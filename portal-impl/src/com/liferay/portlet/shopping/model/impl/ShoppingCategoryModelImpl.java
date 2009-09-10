@@ -30,7 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCategorySoap;
 
@@ -254,7 +254,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(ShoppingCategory.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ShoppingCategory.class.getName(),
 					getPrimaryKey());
 		}
 

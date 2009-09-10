@@ -29,7 +29,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -321,7 +321,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(LayoutSet.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(LayoutSet.class.getName(),
 					getPrimaryKey());
 		}
 

@@ -32,7 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -272,7 +272,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(BookmarksFolder.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(BookmarksFolder.class.getName(),
 					getPrimaryKey());
 		}
 

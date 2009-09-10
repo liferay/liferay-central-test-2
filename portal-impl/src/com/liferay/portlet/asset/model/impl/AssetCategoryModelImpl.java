@@ -32,7 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategorySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -284,7 +284,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(AssetCategory.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetCategory.class.getName(),
 					getPrimaryKey());
 		}
 

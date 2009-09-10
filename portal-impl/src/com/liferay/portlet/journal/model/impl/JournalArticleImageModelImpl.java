@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalArticleImageSoap;
 
@@ -277,7 +277,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(JournalArticleImage.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalArticleImage.class.getName(),
 					getPrimaryKey());
 		}
 

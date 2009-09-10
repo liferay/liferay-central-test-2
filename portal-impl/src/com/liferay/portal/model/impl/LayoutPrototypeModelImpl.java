@@ -33,7 +33,7 @@ import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutPrototypeSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import com.liferay.util.LocalizationUtil;
 
@@ -293,7 +293,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(LayoutPrototype.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(LayoutPrototype.class.getName(),
 					getPrimaryKey());
 		}
 

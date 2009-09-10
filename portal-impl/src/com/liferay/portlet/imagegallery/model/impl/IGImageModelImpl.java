@@ -30,7 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.IGImageSoap;
 
@@ -355,7 +355,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(IGImage.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(IGImage.class.getName(),
 					getPrimaryKey());
 		}
 

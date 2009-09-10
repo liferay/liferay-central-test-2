@@ -30,7 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureSoap;
 
@@ -313,7 +313,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(JournalStructure.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(JournalStructure.class.getName(),
 					getPrimaryKey());
 		}
 

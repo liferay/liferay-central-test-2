@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotSoap;
 
@@ -249,7 +249,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(SCProductScreenshot.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(SCProductScreenshot.class.getName(),
 					getPrimaryKey());
 		}
 

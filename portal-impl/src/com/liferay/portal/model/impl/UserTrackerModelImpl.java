@@ -31,7 +31,7 @@ import com.liferay.portal.model.UserTrackerSoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -230,7 +230,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(UserTracker.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(UserTracker.class.getName(),
 					getPrimaryKey());
 		}
 

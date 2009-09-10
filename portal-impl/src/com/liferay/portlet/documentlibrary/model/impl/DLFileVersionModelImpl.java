@@ -32,7 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFileVersionSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -281,7 +281,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(DLFileVersion.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFileVersion.class.getName(),
 					getPrimaryKey());
 		}
 

@@ -29,7 +29,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanySoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -268,7 +268,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Company.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Company.class.getName(),
 					getPrimaryKey());
 		}
 

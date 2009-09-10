@@ -31,7 +31,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.model.AssetTagStatsSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -205,7 +205,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(AssetTagStats.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(AssetTagStats.class.getName(),
 					getPrimaryKey());
 		}
 

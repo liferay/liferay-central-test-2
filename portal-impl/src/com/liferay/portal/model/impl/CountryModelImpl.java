@@ -29,7 +29,7 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.CountrySoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -236,7 +236,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Country.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Country.class.getName(),
 					getPrimaryKey());
 		}
 

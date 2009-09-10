@@ -29,7 +29,7 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceCodeSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -203,7 +203,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(ResourceCode.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ResourceCode.class.getName(),
 					getPrimaryKey());
 		}
 

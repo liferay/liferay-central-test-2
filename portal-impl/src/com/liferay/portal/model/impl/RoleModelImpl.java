@@ -35,7 +35,7 @@ import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import com.liferay.util.LocalizationUtil;
 
@@ -372,7 +372,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Role.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Role.class.getName(),
 					getPrimaryKey());
 		}
 

@@ -29,7 +29,7 @@ import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.ServiceComponentSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -205,7 +205,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(ServiceComponent.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(ServiceComponent.class.getName(),
 					getPrimaryKey());
 		}
 

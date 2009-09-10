@@ -29,7 +29,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -182,7 +182,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(Resource.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(Resource.class.getName(),
 					getPrimaryKey());
 		}
 

@@ -32,7 +32,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -282,7 +282,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(DLFileShortcut.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(DLFileShortcut.class.getName(),
 					getPrimaryKey());
 		}
 

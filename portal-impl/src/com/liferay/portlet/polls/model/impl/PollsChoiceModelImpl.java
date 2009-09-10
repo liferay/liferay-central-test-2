@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsChoiceSoap;
 
@@ -297,7 +297,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(PollsChoice.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PollsChoice.class.getName(),
 					getPrimaryKey());
 		}
 

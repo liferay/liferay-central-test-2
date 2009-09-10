@@ -29,7 +29,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesSoap;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -236,7 +236,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(PortletPreferences.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PortletPreferences.class.getName(),
 					getPrimaryKey());
 		}
 

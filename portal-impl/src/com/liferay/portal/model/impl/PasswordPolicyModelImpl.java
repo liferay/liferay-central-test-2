@@ -31,7 +31,7 @@ import com.liferay.portal.model.PasswordPolicySoap;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -492,7 +492,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy> {
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = new ExpandoBridgeImpl(PasswordPolicy.class.getName(),
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(PasswordPolicy.class.getName(),
 					getPrimaryKey());
 		}
 
