@@ -134,7 +134,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 		</span>
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
-		<span class="aui-form-field aui-form-radio">
+		<span class="aui-form-field aui-form-radio <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 			<label class="aui-form-label">
 
 				<%
