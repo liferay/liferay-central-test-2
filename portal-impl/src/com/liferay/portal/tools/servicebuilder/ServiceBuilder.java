@@ -1775,11 +1775,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		writeFile(modelFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2109,11 +2105,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		writeFile(modelFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2218,11 +2210,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		writeFile(modelFile, content, _author);
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
@@ -2239,11 +2227,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(modelFile, content, _author, jalopySettings);
+		writeFile(modelFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			modelFile = new File(
@@ -2650,11 +2634,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "Service.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		writeFile(ejbFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2815,11 +2795,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceHttp.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createServiceImpl(Entity entity, int sessionType)
@@ -2872,11 +2848,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"JSONSerializer.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createServiceSoap(Entity entity) throws Exception {
@@ -2899,11 +2871,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceSoap.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType)
@@ -2929,11 +2897,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceUtil.java");
 
-		Map<String, Object> jalopySettings = new HashMap<String, Object>();
-
-		jalopySettings.put("keepJavadoc", Boolean.TRUE);
-
-		writeFile(ejbFile, content, _author, jalopySettings);
+		writeFile(ejbFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
