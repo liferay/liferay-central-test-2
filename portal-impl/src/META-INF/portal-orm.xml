@@ -1480,13 +1480,12 @@
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="approved" />
-			<basic name="approvedByUserId" />
-			<basic name="approvedByUserName" />
-			<basic name="approvedDate">
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="expired" />
 			<basic name="expirationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -1497,8 +1496,8 @@
 			<basic name="smallImage" />
 			<basic name="smallImageId" />
 			<basic name="smallImageURL" />
-			<transient name="approvedByUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2824,7 +2823,6 @@
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImpl" name="JournalArticle">
 		<table name="JournalArticle" />
 		<attributes>
-			<transient name="approvedByUserUuid" />
 			<transient name="smallImageType" />
 		</attributes>
 	</entity>

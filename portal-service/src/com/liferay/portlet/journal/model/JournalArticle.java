@@ -48,9 +48,6 @@ package com.liferay.portlet.journal.model;
  * @generated
  */
 public interface JournalArticle extends JournalArticleModel {
-	public java.lang.String getStatusByUserUuid()
-		throws com.liferay.portal.SystemException;
-
 	public java.lang.String[] getAvailableLocales();
 
 	public java.lang.String getContentByLocale(java.lang.String languageId);
@@ -68,8 +65,6 @@ public interface JournalArticle extends JournalArticleModel {
 	public boolean isExpired();
 
 	public boolean isTemplateDriven();
-
-	public void setStatusByUserUuid(java.lang.String statusByUserUuid);
 
 	public void setSmallImageType(java.lang.String smallImageType);
 }

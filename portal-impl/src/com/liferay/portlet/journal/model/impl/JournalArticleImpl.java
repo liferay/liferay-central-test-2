@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -69,11 +68,6 @@ public class JournalArticleImpl
 	}
 
 	public JournalArticleImpl() {
-	}
-
-	public String getStatusByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(
-			getStatusByUserId(), "uuid", _statusByUserUuid);
 	}
 
 	public String[] getAvailableLocales() {
@@ -147,16 +141,11 @@ public class JournalArticleImpl
 			return true;
 		}
 	}
-
-	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
-	}
-
+	
 	public void setSmallImageType(String smallImageType) {
 		_smallImageType = smallImageType;
 	}
 
-	private String _statusByUserUuid;
 	private ExpandoBridge _expandoBridge;
 	private String _smallImageType;
 

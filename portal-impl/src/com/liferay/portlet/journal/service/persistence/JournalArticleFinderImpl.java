@@ -135,8 +135,8 @@ public class JournalArticleFinderImpl
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
-			Date displayDateGT, Date displayDateLT, int status,
-			Date reviewDate, boolean andOperator)
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator)
 		throws SystemException {
 
 		articleIds = CustomSQLUtil.keywords(articleIds, false);

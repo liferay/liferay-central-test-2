@@ -66,6 +66,8 @@ public interface JournalArticleService {
 		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -82,8 +84,6 @@ public interface JournalArticleService {
 		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
@@ -92,6 +92,12 @@ public interface JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
 		long groupId, java.lang.String oldArticleId,
 		java.lang.String newArticleId, boolean autoArticleId, double version)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteArticle(long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -115,22 +121,16 @@ public interface JournalArticleService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getArticleContent(long groupId,
-		java.lang.String articleId, java.lang.String languageId,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getArticleContent(long groupId,
 		java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void deleteArticle(long groupId, java.lang.String articleId,
-		double version, java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.String getArticleContent(long groupId,
+		java.lang.String articleId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

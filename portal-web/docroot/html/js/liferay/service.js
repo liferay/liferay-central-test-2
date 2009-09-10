@@ -658,15 +658,14 @@ Liferay.Service.registerClass(
 	Liferay.Service.Journal, "JournalArticle",
 	{
 		addArticle: true,
-		approveArticle: true,
 		copyArticle: true,
+		deleteArticle: true,
 		getArticle: true,
 		getArticleByUrlTitle: true,
-		deleteArticle: true,
-		expireArticle: true,
 		removeArticleLocale: true,
 		updateArticle: true,
-		updateContent: true
+		updateContent: true,
+		updateStatus: true
 	}
 );
 

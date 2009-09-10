@@ -1246,11 +1246,10 @@
 		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="templateId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
-		<property name="approved" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="approvedByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="approvedByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="approvedDate" type="org.hibernate.type.TimestampType" />
-		<property name="expired" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 		<property name="reviewDate" type="org.hibernate.type.TimestampType" />
 		<property name="indexable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
