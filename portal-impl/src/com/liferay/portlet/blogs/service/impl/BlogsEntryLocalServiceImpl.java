@@ -660,6 +660,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowTrackbacks(allowTrackbacks);
+		entry.setStatus(status);
 
 		blogsEntryPersistence.update(entry, false);
 
