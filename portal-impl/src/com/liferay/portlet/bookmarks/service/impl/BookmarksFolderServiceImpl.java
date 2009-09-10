@@ -53,8 +53,8 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderLocalService.getFolder(folderId);
+		BookmarksFolder folder = bookmarksFolderLocalService.getFolder(
+			folderId);
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folder, ActionKeys.DELETE);
@@ -65,8 +65,8 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 	public BookmarksFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderLocalService.getFolder(folderId);
+		BookmarksFolder folder = bookmarksFolderLocalService.getFolder(
+			folderId);
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folder, ActionKeys.VIEW);
@@ -80,8 +80,8 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		BookmarksFolder folder =
-			bookmarksFolderLocalService.getFolder(folderId);
+		BookmarksFolder folder = bookmarksFolderLocalService.getFolder(
+			folderId);
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), folder, ActionKeys.UPDATE);

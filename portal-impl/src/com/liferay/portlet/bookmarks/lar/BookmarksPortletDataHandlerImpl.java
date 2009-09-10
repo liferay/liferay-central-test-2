@@ -332,8 +332,8 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		BookmarksEntry existingEntry = null;
 
 		try {
-			BookmarksFolder folder =
-				BookmarksFolderUtil.findByPrimaryKey(folderId);
+			BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(
+				folderId);
 
 			long groupId = folder.getGroupId();
 

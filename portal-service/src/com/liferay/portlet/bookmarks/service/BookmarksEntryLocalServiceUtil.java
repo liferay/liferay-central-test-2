@@ -130,15 +130,6 @@ public class BookmarksEntryLocalServiceUtil {
 			comments, serviceContext);
 	}
 
-	public static void addEntryResources(long entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addEntryResources(entryId, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public static void addEntryResources(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -147,15 +138,6 @@ public class BookmarksEntryLocalServiceUtil {
 		getService()
 			.addEntryResources(entry, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public static void addEntryResources(long entryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addEntryResources(entryId, communityPermissions, guestPermissions);
 	}
 
 	public static void addEntryResources(
@@ -168,16 +150,28 @@ public class BookmarksEntryLocalServiceUtil {
 			.addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
+	public static void addEntryResources(long entryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addEntryResources(entryId, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static void addEntryResources(long entryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addEntryResources(entryId, communityPermissions, guestPermissions);
+	}
+
 	public static void deleteEntries(long groupId, long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteEntries(groupId, folderId);
-	}
-
-	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().deleteEntry(entryId);
 	}
 
 	public static void deleteEntry(
@@ -185,6 +179,12 @@ public class BookmarksEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteEntry(entry);
+	}
+
+	public static void deleteEntry(long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> getEntries(
@@ -253,15 +253,15 @@ public class BookmarksEntryLocalServiceUtil {
 		return getService().openEntry(entryId);
 	}
 
-	public static void reIndex(long entryId)
-		throws com.liferay.portal.SystemException {
-		getService().reIndex(entryId);
-	}
-
 	public static void reIndex(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry)
 		throws com.liferay.portal.SystemException {
 		getService().reIndex(entry);
+	}
+
+	public static void reIndex(long entryId)
+		throws com.liferay.portal.SystemException {
+		getService().reIndex(entryId);
 	}
 
 	public static void updateAsset(long userId,

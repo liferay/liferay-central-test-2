@@ -124,18 +124,6 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void addFolderResources(
-			long folderId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
 			BookmarksFolder folder, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -144,17 +132,6 @@ public class BookmarksFolderLocalServiceImpl
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			BookmarksFolder.class.getName(), folder.getFolderId(), false,
 			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		BookmarksFolder folder =
-			bookmarksFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
 	public void addFolderResources(
@@ -168,13 +145,27 @@ public class BookmarksFolderLocalServiceImpl
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(long folderId)
+	public void addFolderResources(
+			long folderId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		BookmarksFolder folder =
 			bookmarksFolderPersistence.findByPrimaryKey(folderId);
 
-		deleteFolder(folder);
+		addFolderResources(
+			folder, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFolderResources(
+			long folderId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BookmarksFolder folder =
+			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+
+		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(BookmarksFolder folder)
@@ -208,6 +199,15 @@ public class BookmarksFolderLocalServiceImpl
 		// Folder
 
 		bookmarksFolderPersistence.remove(folder);
+	}
+
+	public void deleteFolder(long folderId)
+		throws PortalException, SystemException {
+
+		BookmarksFolder folder =
+			bookmarksFolderPersistence.findByPrimaryKey(folderId);
+
+		deleteFolder(folder);
 	}
 
 	public void deleteFolders(long groupId)
@@ -393,26 +393,6 @@ public class BookmarksFolderLocalServiceImpl
 		return folder;
 	}
 
-	protected long getParentFolderId(long groupId, long parentFolderId)
-		throws SystemException {
-
-		if (parentFolderId !=
-				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-
-			BookmarksFolder parentFolder =
-				bookmarksFolderPersistence.fetchByPrimaryKey(parentFolderId);
-
-			if ((parentFolder == null) ||
-				(groupId != parentFolder.getGroupId())) {
-
-				parentFolderId =
-					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-			}
-		}
-
-		return parentFolderId;
-	}
-
 	protected long getParentFolderId(
 			BookmarksFolder folder, long parentFolderId)
 		throws SystemException {
@@ -449,6 +429,26 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
+	protected long getParentFolderId(long groupId, long parentFolderId)
+		throws SystemException {
+
+		if (parentFolderId !=
+				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+			BookmarksFolder parentFolder =
+				bookmarksFolderPersistence.fetchByPrimaryKey(parentFolderId);
+
+			if ((parentFolder == null) ||
+				(groupId != parentFolder.getGroupId())) {
+
+				parentFolderId =
+					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+			}
+		}
+
+		return parentFolderId;
+	}
+
 	protected void mergeFolders(BookmarksFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
@@ -471,6 +471,18 @@ public class BookmarksFolderLocalServiceImpl
 		}
 
 		deleteFolder(fromFolder);
+	}
+
+	protected void reIndexEntries(
+			long groupId, long folderId, int entryStart, int entryEnd)
+		throws SystemException {
+
+		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByG_F(
+			groupId, folderId, entryStart, entryEnd);
+
+		for (BookmarksEntry entry : entries) {
+			bookmarksEntryLocalService.reIndex(entry);
+		}
 	}
 
 	protected void reIndexFolders(long companyId) throws SystemException {
@@ -510,18 +522,6 @@ public class BookmarksFolderLocalServiceImpl
 
 				reIndexEntries(groupId, folderId, entryStart, entryEnd);
 			}
-		}
-	}
-
-	protected void reIndexEntries(
-			long groupId, long folderId, int entryStart, int entryEnd)
-		throws SystemException {
-
-		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByG_F(
-			groupId, folderId, entryStart, entryEnd);
-
-		for (BookmarksEntry entry : entries) {
-			bookmarksEntryLocalService.reIndex(entry);
 		}
 	}
 
