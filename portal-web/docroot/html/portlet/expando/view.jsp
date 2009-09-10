@@ -86,7 +86,7 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 		>
 
 			<%
-			ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
+			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
 
 			List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 

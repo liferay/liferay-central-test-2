@@ -55,7 +55,7 @@ portletURL.setParameter("modelResource", modelResource);
 />
 
 <%
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(modelResource);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(modelResource);
 
 List<String> attributeNames = Collections.list(expandoBridge.getAttributeNames());
 %>

@@ -32,7 +32,7 @@
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
 
 <%
-ExpandoBridge expandoBridge = new ExpandoBridgeImpl(User.class.getName(), 0);
+ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(User.class.getName());
 
 Enumeration<String> enu = expandoBridge.getAttributeNames();
 

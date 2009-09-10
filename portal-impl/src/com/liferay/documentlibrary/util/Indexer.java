@@ -43,7 +43,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.model.impl.ExpandoBridgeImpl;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.io.IOException;
@@ -272,7 +272,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, fileEntryId);
 
-		ExpandoBridge expandoBridge = new ExpandoBridgeImpl(
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
