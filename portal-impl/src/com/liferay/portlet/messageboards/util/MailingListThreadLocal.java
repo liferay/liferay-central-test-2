@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.ThreadLocalManager;
+
 /**
  * <a href="MailingListThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,6 +47,6 @@ public class MailingListThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+		ThreadLocalManager.newThreadLocal();
 
 }

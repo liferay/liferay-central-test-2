@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.ThreadLocalManager;
+
 import java.util.Map;
 
 /**
@@ -41,6 +43,6 @@ public class FriendlyURLMapperThreadLocal {
 	}
 
 	private static ThreadLocal<Map<String, String>> _threadLocal =
-		new ThreadLocal<Map<String, String>>();
+		ThreadLocalManager.newThreadLocal();
 
 }

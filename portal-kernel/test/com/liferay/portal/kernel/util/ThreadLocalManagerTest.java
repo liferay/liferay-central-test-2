@@ -20,26 +20,65 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
+import com.liferay.portal.kernel.test.TestCase;
 
 /**
- * <a href="PortletClassLoaderUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadLocalManagerTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PortletClassLoaderUtil {
+public class ThreadLocalManagerTest extends TestCase {
 
-	public static ClassLoader getClassLoader() {
-		return _threadLocal.get();
+	public void testNewThreadLocal() throws Exception {
+		Thread thread1 = new Thread1();
+
+		thread1.start();
+
+		Thread thread2 = new Thread2();
+
+		thread2.start();
+
+		Thread.sleep(100);
+
+		assertEquals(1, _threadLocalsSize1);
+		assertEquals(1, _threadLocalsSize2);
+
+		assertEquals("1", _value1);
+		assertEquals("2", _value2);
 	}
 
-	public static void setClassLoader(ClassLoader classLoader) {
-		_threadLocal.set(classLoader);
+	private class Thread1 extends Thread {
+
+		public void run() {
+			_threadLocalsSize1 = ThreadLocalManager.getThreadLocals().size();
+
+			_threadLocal.set("1");
+
+			_value1 = _threadLocal.get();
+		}
+
 	}
 
-	private static ThreadLocal<ClassLoader> _threadLocal =
+	private class Thread2 extends Thread {
+
+		public void run() {
+			_threadLocalsSize2 = ThreadLocalManager.getThreadLocals().size();
+
+			_threadLocal.set("2");
+
+			_value2 = _threadLocal.get();
+		}
+
+	}
+
+	private static ThreadLocal<String> _threadLocal =
 		ThreadLocalManager.newThreadLocal();
+
+	private int _threadLocalsSize1;
+	private int _threadLocalsSize2;
+	private String _value1;
+	private String _value2;
 
 }

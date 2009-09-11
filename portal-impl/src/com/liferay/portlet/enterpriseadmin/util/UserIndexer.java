@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -50,7 +50,7 @@ import javax.portlet.PortletURL;
 /**
  * <a href="UserIndexer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class UserIndexer implements Indexer {
 
@@ -247,6 +247,6 @@ public class UserIndexer implements Indexer {
 	private static Log _log = LogFactoryUtil.getLog(UserIndexer.class);
 
 	private static ThreadLocal<Boolean> _enabled =
-		new InitialThreadLocal<Boolean>(Boolean.TRUE);
+		ThreadLocalManager.newThreadLocal(Boolean.TRUE);
 
 }

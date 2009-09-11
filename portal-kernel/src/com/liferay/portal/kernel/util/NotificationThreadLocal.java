@@ -45,6 +45,6 @@ public class NotificationThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =
-		new ThreadLocal<Boolean>();
+		ThreadLocalManager.newThreadLocal();
 
 }

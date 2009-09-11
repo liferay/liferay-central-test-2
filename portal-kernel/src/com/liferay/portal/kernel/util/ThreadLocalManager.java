@@ -20,26 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="PortletClassLoaderUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadLocalManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class PortletClassLoaderUtil {
+public class ThreadLocalManager {
 
-	public static ClassLoader getClassLoader() {
-		return _threadLocal.get();
+	public static <T> ThreadLocal<T> newThreadLocal() {
+		return newThreadLocal(null);
 	}
 
-	public static void setClassLoader(ClassLoader classLoader) {
-		_threadLocal.set(classLoader);
+	public static <T> ThreadLocal<T> newThreadLocal(T initialValue) {
+		ThreadLocal<T> threadLocal = null;
+
+		if (initialValue == null) {
+			threadLocal = new ThreadLocal<T>();
+		}
+		else {
+			threadLocal = new InitialThreadLocal<T>(initialValue);
+		}
+
+		_threadLocals.add(threadLocal);
+
+		return threadLocal;
 	}
 
-	private static ThreadLocal<ClassLoader> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+	public static void registerThreadLocal(ThreadLocal<?> threadLocal) {
+		_threadLocals.add(threadLocal);
+	}
+
+	public static void removeThreadLocals() {
+		for (ThreadLocal<?> threadLocal : _threadLocals) {
+			threadLocal.remove();
+		}
+	}
+
+	protected static List<ThreadLocal<?>> getThreadLocals() {
+		return _threadLocals;
+	}
+
+	private static List<ThreadLocal<?>> _threadLocals =
+		new ArrayList<ThreadLocal<?>>();
 
 }

@@ -28,9 +28,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -358,11 +358,11 @@ public class ShardAdvice {
 	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
 
 	private static ThreadLocal<Stack<String>> _companyServiceStack =
-		new ThreadLocal<Stack<String>>();
+		ThreadLocalManager.newThreadLocal();
 	private static ThreadLocal<Object> _globalCallThreadLocal =
-		new ThreadLocal<Object>();
+		ThreadLocalManager.newThreadLocal();
 	private static ThreadLocal<String> _shardNameThreadLocal =
-		new InitialThreadLocal<String>(PropsValues.SHARD_DEFAULT_NAME);
+		ThreadLocalManager.newThreadLocal(PropsValues.SHARD_DEFAULT_NAME);
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;
 	private ShardSessionFactoryTargetSource _shardSessionFactoryTargetSource;
