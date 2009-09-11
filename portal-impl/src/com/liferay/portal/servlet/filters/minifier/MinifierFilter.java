@@ -251,8 +251,16 @@ public class MinifierFilter extends BasePortalFilter {
 
 		String requestURI = request.getRequestURI();
 
+		String requestPath = requestURI;
+
+		String contextPath = request.getContextPath();
+
+		if (!contextPath.equals(StringPool.SLASH)) {
+			requestPath = requestPath.substring(contextPath.length());
+		}
+
 		String realPath = ServletContextUtil.getRealPath(
-			_servletContext, requestURI);
+			_servletContext, requestPath);
 
 		if (realPath == null) {
 			return null;
@@ -262,27 +270,6 @@ public class MinifierFilter extends BasePortalFilter {
 			realPath, StringPool.BACK_SLASH, StringPool.SLASH);
 
 		File file = new File(realPath);
-
-		if (!file.exists()) {
-			if (Validator.isNotNull(_servletContextName)) {
-
-				// Tomcat incorrectly returns the a real path to a resource that
-				// exists in another web application. For example, it returns
-				// ".../webapps/abc-theme/abc-theme/css/main.css" instead of
-				// ".../webapps/abc-theme/css/main.css".
-
-				int lastIndex = realPath.lastIndexOf(
-					StringPool.SLASH + _servletContextName);
-
-				if (lastIndex > -1) {
-					realPath = StringUtil.replace(
-						realPath, StringPool.SLASH + _servletContextName,
-						StringPool.BLANK, lastIndex);
-				}
-
-				file = new File(realPath);
-			}
-		}
 
 		if (!file.exists()) {
 			return null;
