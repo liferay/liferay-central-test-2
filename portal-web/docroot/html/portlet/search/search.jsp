@@ -162,6 +162,8 @@ for (int i = 0; i < portlets.size(); i++) {
 	try {
 		String xml = openSearch.search(request, groupId, themeDisplay.getUserId(), keywords, searchContainer.getCur(), searchContainer.getDelta(), format);
 
+		xml = XMLFormatter.stripInvalidChars(xml);
+
 		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
