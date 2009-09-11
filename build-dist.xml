@@ -596,15 +596,15 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		</exec>
 
 		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn --username ${svn.username} --password ${svn.password} copy -r ${svn.revision} -m ' ' svn://svn.liferay.com/repos/public/portal/branches/${shelf.branch} ${shelf.path}" />
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} copy -r ${svn.revision} -m ' ' ${shelf.path}/${shelf.branch} ${shelf.path}/${shelf.version}" />
 		</exec>
 
 		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn switch ${shelf.path}" />
+			<arg line="/c svn switch ${shelf.path}/${shelf.version}" />
 		</exec>
 
 		<exec dir="${shelf.drive}\vanilla\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn switch ${shelf.path}" />
+			<arg line="/c svn switch ${shelf.path}/${shelf.version}" />
 		</exec>
 	</target>
 
