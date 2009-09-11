@@ -33,9 +33,11 @@ import java.util.Date;
  */
 public class ReleaseInfo {
 
-	static String name = "Liferay Portal Standard Edition";
+	static String name = "Liferay Portal Community Edition";
 
 	static String version = "5.3.0";
+
+	static String versionDisplayName = "5.3.0 CE";
 
 	static String codeName = "Bunyan";
 
@@ -50,7 +52,7 @@ public class ReleaseInfo {
 		"liferay.release.info.suffix" , StringPool.BLANK);
 
 	static String releaseInfo =
-		releaseInfoPrefix + name + " " + version + " (" + codeName +
+		releaseInfoPrefix + name + " " + versionDisplayName + " (" + codeName +
 			" / Build " + build + " / " + date + ")" + releaseInfoSuffix;
 
 	static String serverInfo = name + " / " + version;
