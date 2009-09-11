@@ -54,6 +54,8 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AddNullTitleTest.class);
 		testSuite.addTestSuite(AddEscapeCharacterEntryTest.class);
 		testSuite.addTestSuite(DeleteEscapeCharacterEntryTest.class);
+		testSuite.addTestSuite(AddMaxCharacterTitleEntryTest.class);
+		testSuite.addTestSuite(AssertLimitMaxCharacterTitleEntryTest.class);
 		testSuite.addTestSuite(ConfigureDisplaySettingsTest.class);
 		testSuite.addTestSuite(DeleteEntryTest.class);
 		testSuite.addTestSuite(AddDraftEntryTest.class);

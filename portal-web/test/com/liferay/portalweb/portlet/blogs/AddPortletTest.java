@@ -50,23 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Application")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -95,7 +79,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isVisible("//td[1]/div/div[1]/div")) {
 					break;
 				}
 			}
