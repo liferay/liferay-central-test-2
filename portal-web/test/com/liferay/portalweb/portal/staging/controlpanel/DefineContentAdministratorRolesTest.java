@@ -51,6 +51,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

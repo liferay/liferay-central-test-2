@@ -91,8 +91,7 @@ public class CA_ApprovePortletProposalTest extends BaseTestCase {
 
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Approve']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("//input[@value='Approve']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to approve this proposal[\\s\\S]$"));

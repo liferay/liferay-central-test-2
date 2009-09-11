@@ -167,8 +167,7 @@ public class AddContentAdministratorTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Content Administrator",
-			RuntimeVariables.replace(""));
+		selenium.click("link=Content Administrator");
 		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

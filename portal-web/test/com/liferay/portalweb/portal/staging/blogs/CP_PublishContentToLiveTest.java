@@ -146,7 +146,7 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("link=Pages", RuntimeVariables.replace(""));
-		selenium.clickAt("publishBtn", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("publishBtn"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));

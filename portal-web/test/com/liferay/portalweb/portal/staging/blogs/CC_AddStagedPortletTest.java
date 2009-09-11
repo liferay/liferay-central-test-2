@@ -70,6 +70,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		Thread.sleep(5000);
 		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

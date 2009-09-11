@@ -51,6 +51,24 @@ public class DefineContentPublisherRolesTest extends BaseTestCase {
 
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//tr[9]/td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//tr[9]/td[4]/ul/li/strong/span",
 			RuntimeVariables.replace(""));
 

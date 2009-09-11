@@ -62,7 +62,7 @@ public class SA_SetupTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span")) {
+							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
 					break;
 				}
 			}
@@ -72,7 +72,7 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span",
+		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -165,7 +165,8 @@ public class SA_SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//form/ul[1]/li[3]/a")) {
+				if (selenium.isVisible(
+							"//li[@id='_134_tabs1settingsTabsId']/span/a")) {
 					break;
 				}
 			}
@@ -175,7 +176,8 @@ public class SA_SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//form/ul[1]/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//li[@id='_134_tabs1settingsTabsId']/span/a",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
