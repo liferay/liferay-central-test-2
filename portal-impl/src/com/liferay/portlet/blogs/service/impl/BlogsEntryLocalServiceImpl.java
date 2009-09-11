@@ -658,7 +658,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setStatus(status);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -670,6 +669,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			updateEntryResources(
 				entry, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
+		}
+
+		// Status
+
+		if (oldStatus != status) {
+			boolean pingOldTrackbacks = false;
+
+			if (oldUrlTitle != entry.getUrlTitle()) {
+				pingOldTrackbacks = true;
+			}
+
+			entry = updateStatus(
+				userId, entry, pingOldTrackbacks, trackbacks, status,
+				serviceContext, false);
 		}
 
 		// Statistics
@@ -690,20 +703,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		ExpandoBridge expandoBridge = entry.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
-
-		// Status
-
-		if (oldStatus != status) {
-			boolean pingOldTrackbacks = false;
-
-			if (oldUrlTitle != entry.getUrlTitle()) {
-				pingOldTrackbacks = true;
-			}
-
-			updateStatus(
-				userId, entry, pingOldTrackbacks, trackbacks, status,
-				serviceContext, false);
-		}
 
 		// Indexer
 
