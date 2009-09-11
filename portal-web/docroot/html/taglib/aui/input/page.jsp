@@ -147,6 +147,10 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 
 				<input <%= checked ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
 
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
+
 				<liferay-ui:message key="<%= label %>" />
 			</label>
 		</span>
