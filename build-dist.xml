@@ -568,8 +568,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		<if>
 			<or>
 				<equals arg1="${shelf.drive}" arg2="$${shelf.drive}" />
-				<equals arg1="${shelf.branch}" arg2="$${shelf.branch}" />
 				<equals arg1="${shelf.path}" arg2="$${shelf.path}" />
+				<equals arg1="${shelf.branch}" arg2="$${shelf.branch}" />
+				<equals arg1="${shelf.version}" arg2="$${shelf.version}" />
 			</or>
 			<then>
 				<fail>
@@ -580,7 +581,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		</if>
 
 		<exec executable="cmd">
-			<arg line="/c format /v:${shelf.branch}-shelf /q /y ${shelf.drive}" />
+			<arg line="/c format /v:${shelf.version} /q /y ${shelf.drive}" />
 		</exec>
 
 		<exec executable="xcopy">
