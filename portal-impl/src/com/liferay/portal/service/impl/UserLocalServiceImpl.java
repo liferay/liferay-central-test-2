@@ -518,13 +518,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Expando
 
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		UserIndexer.setEnabled(true);
+		user.setExpandoBridgeAttributes(serviceContext);
 
 		// Email
 
@@ -2523,13 +2517,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Expando
 
-		UserIndexer.setEnabled(false);
-
-		ExpandoBridge expandoBridge = user.getExpandoBridge();
-
-		expandoBridge.setAttributes(serviceContext);
-
-		UserIndexer.setEnabled(true);
+		user.setExpandoBridgeAttributes(serviceContext);
 
 		// Indexer
 

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.NoSuchTableException;
@@ -40,7 +39,6 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
 
@@ -54,7 +52,7 @@ import java.util.Map;
 /**
  * <a href="ExpandoBridgeImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class ExpandoBridgeImpl implements ExpandoBridge {
 
@@ -251,6 +249,23 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		}
 	}
 
+	public void reIndex() {
+		if (!isIndexEnabled()) {
+			return;
+		}
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(_className);
+
+		if (indexer != null) {
+			try {
+				indexer.reIndex(_className, _classPK);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
 	public void setAttribute(String name, Serializable value) {
 		if (_classPK <= 0) {
 			throw new UnsupportedOperationException();
@@ -260,8 +275,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			ExpandoValueServiceUtil.addValue(
 				_className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name,
 				_classPK, value);
-
-			checkIndex(name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -304,17 +317,9 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 			return;
 		}
 
-		boolean indexEnabled = isIndexEnabled();
-
-		setIndexEnabled(false);
-
 		for (Map.Entry<String, Serializable> entry : attributes.entrySet()) {
 			setAttribute(entry.getKey(), entry.getValue());
 		}
-
-		setIndexEnabled(indexEnabled);
-
-		reIndex();
 	}
 
 	public void setAttributes(ServiceContext serviceContext) {
@@ -335,38 +340,6 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	public void setIndexEnabled(boolean indexEnabled) {
 		_indexEnabled = indexEnabled;
-	}
-
-	protected void checkIndex(String name) {
-		if (!isIndexEnabled()) {
-			return;
-		}
-
-		UnicodeProperties properties = getAttributeProperties(name);
-
-		if ((getAttributeType(name) == ExpandoColumnConstants.STRING) &&
-			GetterUtil.getBoolean(
-				properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
-
-			reIndex();
-		}
-	}
-
-	protected void reIndex() {
-		if (!isIndexEnabled()) {
-			return;
-		}
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(_className);
-
-		if (indexer != null) {
-			try {
-				indexer.reIndex(_className, _classPK);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExpandoBridgeImpl.class);

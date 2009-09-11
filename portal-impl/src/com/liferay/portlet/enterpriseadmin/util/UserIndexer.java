@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -109,15 +108,7 @@ public class UserIndexer implements Indexer {
 		return doc.get(Field.UID);
 	}
 
-	public static void setEnabled(boolean enabled) {
-		_enabled.set(enabled);
-	}
-
 	public static void updateUser(User user) throws SearchException {
-		if (!_enabled.get()) {
-			return;
-		}
-
 		try {
 			if (user.isDefaultUser()) {
 				return;
@@ -245,8 +236,5 @@ public class UserIndexer implements Indexer {
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(UserIndexer.class);
-
-	private static ThreadLocal<Boolean> _enabled =
-		ThreadLocalManager.newThreadLocal(Boolean.TRUE);
 
 }
