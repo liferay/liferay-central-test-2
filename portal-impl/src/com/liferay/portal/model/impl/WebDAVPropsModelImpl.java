@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.model.WebDAVPropsSoap;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -244,6 +245,10 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps> {
 		}
 
 		return _expandoBridge;
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
 	}
 
 	public Object clone() {

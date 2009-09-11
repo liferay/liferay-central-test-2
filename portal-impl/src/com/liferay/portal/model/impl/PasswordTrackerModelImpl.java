@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.PasswordTrackerSoap;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -193,6 +194,10 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker> {
 		}
 
 		return _expandoBridge;
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
 	}
 
 	public Object clone() {

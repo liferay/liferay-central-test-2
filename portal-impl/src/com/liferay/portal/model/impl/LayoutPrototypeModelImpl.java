@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutPrototypeSoap;
+import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -298,6 +299,10 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype> {
 		}
 
 		return _expandoBridge;
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
 	}
 
 	public Object clone() {

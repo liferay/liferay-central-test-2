@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.PhoneSoap;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -292,6 +293,10 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> {
 		}
 
 		return _expandoBridge;
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
 	}
 
 	public Object clone() {

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceSoap;
+import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -187,6 +188,10 @@ public class ResourceModelImpl extends BaseModelImpl<Resource> {
 		}
 
 		return _expandoBridge;
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
 	}
 
 	public Object clone() {
