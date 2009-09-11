@@ -595,20 +595,16 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 			<arg line="/e /i /q /h /y \vanilla ${shelf.drive}\vanilla" />
 		</exec>
 
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmm" />
-		</tstamp>
-
 		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn --username ${svn.username} --password ${svn.password} copy -r ${svn.revision} -m ' ' svn://svn.liferay.com/repos/public/portal/branches/${shelf.branch} ${shelf.path}/${tstamp.value}" />
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} copy -r ${svn.revision} -m ' ' svn://svn.liferay.com/repos/public/portal/branches/${shelf.branch} ${shelf.path}" />
 		</exec>
 
 		<exec dir="${shelf.drive}\projects\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn switch ${shelf.path}/${tstamp.value}" />
+			<arg line="/c svn switch ${shelf.path}" />
 		</exec>
 
 		<exec dir="${shelf.drive}\vanilla\liferay.public\portal\${shelf.branch}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn switch ${shelf.path}/${tstamp.value}" />
+			<arg line="/c svn switch ${shelf.path}" />
 		</exec>
 	</target>
 
