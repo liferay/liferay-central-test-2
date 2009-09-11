@@ -70,6 +70,31 @@ public class XMLFormatter {
 		return StringUtil.replace(xml, "[$NEW_LINE$]", StringPool.NEW_LINE);
 	}
 
+	public static String stripInvalidChars(String xml) {
+		if (Validator.isNull(xml)) {
+			return xml;
+		}
+
+		// Strip characters that are not valid in the 1.0 XML spec
+		// http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < xml.length(); i++) {
+			char c = xml.charAt(i);
+
+			if ((c == 0x9) || (c == 0xA) || (c == 0xD) ||
+				((c >= 0x20) && (c <= 0xD7FF)) ||
+				((c >= 0xE000) && (c <= 0xFFFD)) ||
+				((c >= 0x10000) && (c <= 0x10FFFF))) {
+
+				sb.append(c);
+			}
+		}
+
+		return sb.toString();
+	}
+
 	public static String toCompactSafe(String xml) {
 		return StringUtil.replace(
 			xml,
@@ -83,22 +108,6 @@ public class XMLFormatter {
 				"[$NEW_LINE$]",
 				"[$NEW_LINE$]"
 			});
-	}
-
-	public static String toString(String xml)
-		throws DocumentException, IOException {
-
-		return toString(xml, StringPool.TAB);
-	}
-
-	public static String toString(String xml, String indent)
-		throws DocumentException, IOException {
-
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
-
-		return toString(doc, indent);
 	}
 
 	public static String toString(Branch branch) throws IOException {
@@ -148,29 +157,20 @@ public class XMLFormatter {
 		return content;
 	}
 
-	public static String stripInvalidChars(String xml) {
-		if (Validator.isNull(xml)) {
-			return xml;
-		}
+	public static String toString(String xml)
+		throws DocumentException, IOException {
 
-		// Strip characters that are not valid in the 1.0 XML spec
-		// http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char
+		return toString(xml, StringPool.TAB);
+	}
 
-		StringBuilder sb = new StringBuilder();
+	public static String toString(String xml, String indent)
+		throws DocumentException, IOException {
 
-		for (int i = 0; i < xml.length(); i++) {
-			char c = xml.charAt(i);
+		SAXReader reader = new SAXReader();
 
-			if ((c == 0x9) || (c == 0xA) || (c == 0xD) ||
-				((c >= 0x20) && (c <= 0xD7FF)) ||
-				((c >= 0xE000) && (c <= 0xFFFD)) ||
-				((c >= 0x10000) && (c <= 0x10FFFF))) {
+		Document doc = reader.read(new StringReader(xml));
 
-				sb.append(c);
-			}
-		}
-
-		return sb.toString();
+		return toString(doc, indent);
 	}
 
 }
