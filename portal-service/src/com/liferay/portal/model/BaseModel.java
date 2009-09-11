@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
@@ -48,6 +49,8 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	public Serializable getPrimaryKeyObj();
 
 	public ExpandoBridge getExpandoBridge();
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	public Object clone();
 

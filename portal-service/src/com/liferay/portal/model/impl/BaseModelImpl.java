@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
@@ -60,6 +61,10 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	}
 
 	public ExpandoBridge getExpandoBridge() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		throw new UnsupportedOperationException();
 	}
 
