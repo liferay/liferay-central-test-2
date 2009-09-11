@@ -88,21 +88,14 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 			</aui:select>
 		</c:when>
 		<c:otherwise>
-			<aui:field-wrapper label="public-pages">
+			<aui:field-wrapper label="private-pages">
 				<c:choose>
 					<c:when test="<%= (selUser != null) && (selUser.getPrivateLayoutsPageCount() > 0) %>">
-
-						<%
-						PortletURL privatePagesURL = renderResponse.createActionURL();
-
-						privatePagesURL.setWindowState(WindowState.NORMAL);
-
-						privatePagesURL.setParameter("struts_action", "/communities/page");
-						privatePagesURL.setParameter("redirect", currentURL);
-
-						privatePagesURL.setParameter("groupId", String.valueOf(selUser.getGroup().getGroupId()));
-						privatePagesURL.setParameter("privateLayout", Boolean.TRUE.toString());
-						%>
+						<liferay-portlet:actionURL var="privatePagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+							<portlet:param name="struts_action" value="/my_places/view" />
+							<portlet:param name="groupId" value="<%= String.valueOf(selUser.getGroup().getGroupId()) %>" />
+							<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
+						</liferay-portlet:actionURL>
 
 						<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
 					</c:when>
