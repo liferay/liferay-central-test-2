@@ -99,7 +99,7 @@ import org.dom4j.DocumentException;
  * @author Harry Mark
  * @author Tariq Dweik
  * @author Glenn Powell
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Prashant Dighe
  */
 public class ServiceBuilder {
@@ -914,15 +914,33 @@ public class ServiceBuilder {
 
 					itr2 = references.iterator();
 
+					Set<String> referenceSet = new TreeSet<String>();
+
 					while (itr2.hasNext()) {
 						Element reference = itr2.next();
 
-						String refPackage =
-							reference.attributeValue("package-path");
-						String refEntity = reference.attributeValue("entity");
+						String referencePackage = reference.attributeValue(
+							"package-path");
+						String referenceEntity = reference.attributeValue(
+							"entity");
 
-						referenceList.add(
-							getEntity(refPackage + "." + refEntity));
+						referenceSet.add(
+							referencePackage + "." + referenceEntity);
+					}
+
+					if (Validator.isNull(_pluginName)) {
+						if (!_packagePath.equals("com.liferay.counter")) {
+							referenceSet.add("com.liferay.counter.Counter");
+						}
+
+						if (!_packagePath.equals("com.liferay.portal")) {
+							referenceSet.add("com.liferay.portal.Resource");
+							referenceSet.add("com.liferay.portal.User");
+						}
+					}
+
+					for (String referenceName : referenceSet) {
+						referenceList.add(getEntity(referenceName));
 					}
 				}
 

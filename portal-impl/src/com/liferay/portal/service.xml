@@ -94,10 +94,6 @@
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="BrowserTracker" local-service="true" remote-service="false">
 
@@ -118,10 +114,6 @@
 		<finder name="UserId" return-type="BrowserTracker" unique="true">
 			<finder-column name="userId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ClassName" local-service="true" remote-service="true">
 
@@ -138,10 +130,6 @@
 		<finder name="Value" return-type="ClassName" unique="true">
 			<finder-column name="value" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Company" local-service="true" remote-service="true">
 
@@ -177,10 +165,6 @@
 		<finder name="System" return-type="Collection">
 			<finder-column name="system" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Contact" local-service="true" remote-service="true">
 
@@ -264,10 +248,6 @@
 		<finder name="Active" return-type="Collection">
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="EmailAddress" local-service="true" remote-service="true">
 
@@ -320,10 +300,6 @@
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Group" local-service="true" remote-service="true">
 
@@ -399,7 +375,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
@@ -538,7 +513,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />
@@ -572,10 +546,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="LayoutSet" local-service="true" remote-service="true">
 
@@ -617,10 +587,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="LayoutSetPrototype" local-service="true" remote-service="true">
 
@@ -648,10 +614,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="LayoutTemplate" local-service="true" remote-service="false" tx-manager="none" />
 	<entity name="ListType" local-service="false" remote-service="true">
@@ -707,10 +669,6 @@
 			<finder-column name="className" />
 			<finder-column name="key" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="MembershipRequest" local-service="true" remote-service="true">
 
@@ -754,7 +712,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 	</entity>
 	<entity name="Organization" local-service="true" remote-service="true">
@@ -810,7 +767,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
@@ -885,10 +841,6 @@
 		<finder name="OrganizationId" return-type="Collection">
 			<finder-column name="organizationId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PasswordPolicy" local-service="true" remote-service="true">
 
@@ -937,10 +889,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PasswordPolicyRel" local-service="true" remote-service="false">
 
@@ -965,10 +913,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PasswordTracker" local-service="true" remote-service="false">
 
@@ -997,10 +941,6 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Permission" local-service="true" remote-service="true">
 
@@ -1032,10 +972,6 @@
 			<finder-column name="actionId" />
 			<finder-column name="resourceId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PermissionUser" local-service="false" remote-service="false" />
 	<entity name="Phone" local-service="true" remote-service="true">
@@ -1090,10 +1026,6 @@
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PluginSetting" local-service="true" remote-service="true">
 
@@ -1122,16 +1054,8 @@
 			<finder-column name="pluginId" />
 			<finder-column name="pluginType" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Portal" local-service="true" remote-service="true">
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Portlet" local-service="true" remote-service="true">
 
@@ -1158,10 +1082,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="portletId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PortletItem" local-service="true" remote-service="false">
 
@@ -1204,10 +1124,6 @@
 			<finder-column name="portletId" />
 			<finder-column name="classNameId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PortletPreferences" local-service="true" remote-service="true">
 
@@ -1243,10 +1159,6 @@
 			<finder-column name="plid" />
 			<finder-column name="portletId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Quartz" local-service="true" remote-service="false" />
 	<entity name="Region" local-service="false" remote-service="true">
@@ -1280,10 +1192,6 @@
 			<finder-column name="countryId" />
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Release" local-service="true" remote-service="false">
 
@@ -1323,10 +1231,6 @@
 			<finder-column name="codeId" />
 			<finder-column name="primKey" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ResourceAction" local-service="true" remote-service="false">
 
@@ -1356,10 +1260,6 @@
 			<finder-column name="name" />
 			<finder-column name="actionId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ResourceCode" local-service="true" remote-service="false">
 
@@ -1389,10 +1289,6 @@
 			<finder-column name="name" />
 			<finder-column name="scope" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ResourcePermission" local-service="true" remote-service="true">
 
@@ -1435,10 +1331,6 @@
 			<finder-column name="primKey" />
 			<finder-column name="roleId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 
@@ -1493,10 +1385,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ServiceComponent" local-service="true" remote-service="false">
 
@@ -1527,10 +1415,6 @@
 			<finder-column name="buildNamespace" />
 			<finder-column name="buildNumber" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Shard" local-service="true" remote-service="false">
 
@@ -1553,10 +1437,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Subscription" local-service="true" remote-service="false">
 
@@ -1598,10 +1478,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Theme" local-service="true" remote-service="true" tx-manager="none" />
 	<entity name="User" uuid="true" local-service="true" remote-service="true">
@@ -1694,7 +1570,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portlet.announcements" entity="AnnouncementsDelivery" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
@@ -1747,10 +1622,6 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="UserGroupGroupRole" local-service="true" remote-service="true">
 
@@ -1837,10 +1708,6 @@
 			<finder-column name="type" />
 			<finder-column name="externalUserId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="UserTracker" local-service="true" remote-service="false">
 
@@ -1872,10 +1739,6 @@
 		<finder name="SessionId" return-type="Collection">
 			<finder-column name="sessionId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="UserTrackerPath" local-service="true" remote-service="false">
 
@@ -1894,10 +1757,6 @@
 		<finder name="UserTrackerId" return-type="Collection">
 			<finder-column name="userTrackerId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="WebDAVProps" local-service="true" remote-service="false">
 
@@ -1923,10 +1782,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="Website" local-service="true" remote-service="true">
 
@@ -1979,10 +1834,6 @@
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
 		<exception>AccountName</exception>

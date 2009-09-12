@@ -53,9 +53,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
@@ -122,8 +119,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
 	<exceptions>

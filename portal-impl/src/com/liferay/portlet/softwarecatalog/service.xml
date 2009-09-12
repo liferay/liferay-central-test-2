@@ -36,10 +36,6 @@
 			<finder-column name="active" />
 			<finder-column name="recommended" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="SCFrameworkVersion" local-service="true" remote-service="true">
 
@@ -90,12 +86,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="active" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SCProductEntry" local-service="true" remote-service="true">
 
@@ -159,11 +149,8 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Image" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 	</entity>
@@ -256,11 +243,6 @@
 		<finder name="DirectDownloadURL" return-type="SCProductVersion">
 			<finder-column name="directDownloadURL" case-sensitive="false" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>
 		<exception>DuplicateProductEntryModuleId</exception>

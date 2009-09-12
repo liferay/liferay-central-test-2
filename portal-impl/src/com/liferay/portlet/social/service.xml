@@ -75,10 +75,8 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Layout" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
 	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="false">
@@ -129,11 +127,6 @@
 			<finder-column name="userId2" />
 			<finder-column name="type" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialRequest" uuid="true" local-service="true" remote-service="false">
 
@@ -207,11 +200,6 @@
 			<finder-column name="receiverUserId" />
 			<finder-column name="status" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialRequestInterpreter" local-service="true" remote-service="false" tx-manager="none" />
 	<exceptions>

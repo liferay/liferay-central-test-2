@@ -30,11 +30,6 @@
 			<finder-column name="userId" />
 			<finder-column name="type" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="AnnouncementsEntry" uuid="true" local-service="true" remote-service="true">
 
@@ -87,14 +82,11 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Organization" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="Role" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portal" entity="UserGroup" />
 	</entity>
 	<entity name="AnnouncementsFlag" local-service="true" remote-service="true">
@@ -130,10 +122,6 @@
 			<finder-column name="entryId" />
 			<finder-column name="value" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
 		<exception>EntryContent</exception>

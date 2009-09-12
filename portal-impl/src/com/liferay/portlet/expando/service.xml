@@ -36,11 +36,6 @@
 			<finder-column name="tableId" />
 			<finder-column name="name" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="ExpandoRow" local-service="true" remote-service="false">
 
@@ -66,10 +61,6 @@
 			<finder-column name="tableId" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ExpandoTable" local-service="true" remote-service="false">
 
@@ -97,10 +88,6 @@
 			<finder-column name="classNameId" />
 			<finder-column name="name" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="ExpandoValue" local-service="true" remote-service="true">
 
@@ -170,10 +157,6 @@
 			<finder-column name="columnId" />
 			<finder-column name="data" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
 		<exception>ColumnName</exception>

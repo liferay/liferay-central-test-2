@@ -40,11 +40,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="ShoppingCategory" local-service="true" remote-service="true">
 
@@ -86,12 +81,6 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentCategoryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="ShoppingCoupon" local-service="true" remote-service="true">
 
@@ -139,11 +128,6 @@
 		<finder name="Code" return-type="ShoppingCoupon" unique="true">
 			<finder-column name="code" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="ShoppingItem" local-service="true" remote-service="true">
 
@@ -220,10 +204,7 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.portal" entity="Image" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="ShoppingItemField" local-service="true" remote-service="false">
 
@@ -372,10 +353,8 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 	</entity>
 	<entity name="ShoppingOrderItem" local-service="true" remote-service="false">
