@@ -200,7 +200,7 @@ else if (permissionChecker.isCompanyAdmin()) {
 	filterManageableUserGroups = false;
 }
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/enterprise_admin/init-ext.jsp" %>

@@ -51,13 +51,8 @@ if (activities == null) {
 	activities = SocialActivityLocalServiceUtil.getActivities(0, className, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 }
 
-DateFormat dateFormatDate = new SimpleDateFormat("MMMM d", locale);
-
-if (timeZone != null) {
-	dateFormatDate.setTimeZone(timeZone);
-}
-
-DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMM d", locale, timeZone);
+Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 %>
 
 <c:choose>

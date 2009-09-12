@@ -43,7 +43,7 @@
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
 
 PortletPreferences preferences = renderRequest.getPreferences();
 

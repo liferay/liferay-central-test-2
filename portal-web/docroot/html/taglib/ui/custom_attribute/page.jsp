@@ -64,7 +64,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(classNam
 		localizedName = TextFormatter.format(name, TextFormatter.J);
 	}
 
-	DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+	DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 	%>
 
 	<c:if test="<%= !propertyHidden && ExpandoColumnPermission.contains(permissionChecker, className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.VIEW) %>">

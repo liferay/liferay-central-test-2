@@ -40,5 +40,5 @@
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

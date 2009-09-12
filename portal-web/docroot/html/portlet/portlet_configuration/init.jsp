@@ -63,5 +63,5 @@
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

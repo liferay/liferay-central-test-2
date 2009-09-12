@@ -43,5 +43,5 @@
 <%@ page import="com.liferay.portlet.polls.util.PollsUtil" %>
 
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

@@ -131,5 +131,5 @@ rssURLRSS20Params.append("&type=");
 rssURLRSS20Params.append(RSSUtil.RSS);
 rssURLRSS20Params.append("&version=2.0");
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

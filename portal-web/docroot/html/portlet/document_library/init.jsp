@@ -149,7 +149,7 @@ if (portletConfig.getPortletName().equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showTabs = true;
 }
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/document_library/init-ext.jsp" %>

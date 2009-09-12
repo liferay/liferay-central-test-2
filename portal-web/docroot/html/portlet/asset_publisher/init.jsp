@@ -298,7 +298,7 @@ boolean showPortletWithNoResults = false;
 boolean groupByClass = (assetVocabularyId == -1);
 boolean allowEmptyResults = false;
 
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/asset_publisher/init-ext.jsp" %>

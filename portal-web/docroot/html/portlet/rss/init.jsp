@@ -67,6 +67,6 @@ String[] footerArticleResouceValues = preferences.getValues("footer-article-reso
 long footerArticleResourcePrimKey = GetterUtil.getLong(footerArticleResouceValues[0]);
 String footerArticleResouceTitle = footerArticleResouceValues[1];
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
+DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
 %>
