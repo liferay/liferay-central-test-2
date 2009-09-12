@@ -259,6 +259,38 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
 	public AssetEntryLocalService getAssetEntryLocalService() {
 		return assetEntryLocalService;
 	}
@@ -379,38 +411,6 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public UserLocalService getUserLocalService() {
-		return userLocalService;
-	}
-
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public UserPersistence getUserPersistence() {
-		return userPersistence;
-	}
-
-	public void setUserPersistence(UserPersistence userPersistence) {
-		this.userPersistence = userPersistence;
-	}
-
-	public UserFinder getUserFinder() {
-		return userFinder;
-	}
-
-	public void setUserFinder(UserFinder userFinder) {
-		this.userFinder = userFinder;
-	}
-
 	protected void runSQL(String sql) throws SystemException {
 		try {
 			PortalUtil.runSQL(sql);
@@ -464,6 +464,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	protected UserLocalService userLocalService;
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	protected UserService userService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	protected UserFinder userFinder;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryLocalService.impl")
 	protected AssetEntryLocalService assetEntryLocalService;
 	@BeanReference(name = "com.liferay.portlet.asset.service.AssetEntryService.impl")
@@ -492,12 +500,4 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(name = "com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl")
 	protected SocialActivityFinder socialActivityFinder;
-	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
-	protected UserLocalService userLocalService;
-	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
-	protected UserService userService;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
-	protected UserPersistence userPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
-	protected UserFinder userFinder;
 }

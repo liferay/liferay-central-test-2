@@ -2794,10 +2794,10 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence dlFileVersionPersistence;
 	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence;
-	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
-	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.LockPersistence.impl")
+	protected com.liferay.portal.service.persistence.LockPersistence lockPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")

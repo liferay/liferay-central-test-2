@@ -31,10 +31,14 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
@@ -327,6 +331,39 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 		this.companyPersistence = companyPersistence;
 	}
 
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -460,6 +497,14 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 	protected CompanyService companyService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	protected ResourceLocalService resourceLocalService;
+	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	protected ResourceService resourceService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	protected ResourceFinder resourceFinder;
 	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserService.impl")

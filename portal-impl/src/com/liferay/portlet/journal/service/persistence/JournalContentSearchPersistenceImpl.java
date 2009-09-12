@@ -3267,5 +3267,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
 	private static Log _log = LogFactoryUtil.getLog(JournalContentSearchPersistenceImpl.class);
 }

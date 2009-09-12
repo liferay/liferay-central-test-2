@@ -1596,6 +1596,24 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
+	public DLFileRankLocalService getDLFileRankLocalService() {
+		return dlFileRankLocalService;
+	}
+
+	public void setDLFileRankLocalService(
+		DLFileRankLocalService dlFileRankLocalService) {
+		this.dlFileRankLocalService = dlFileRankLocalService;
+	}
+
+	public DLFileRankPersistence getDLFileRankPersistence() {
+		return dlFileRankPersistence;
+	}
+
+	public void setDLFileRankPersistence(
+		DLFileRankPersistence dlFileRankPersistence) {
+		this.dlFileRankPersistence = dlFileRankPersistence;
+	}
+
 	public ExpandoValueLocalService getExpandoValueLocalService() {
 		return expandoValueLocalService;
 	}
@@ -1620,24 +1638,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	public void setExpandoValuePersistence(
 		ExpandoValuePersistence expandoValuePersistence) {
 		this.expandoValuePersistence = expandoValuePersistence;
-	}
-
-	public DLFileRankLocalService getDLFileRankLocalService() {
-		return dlFileRankLocalService;
-	}
-
-	public void setDLFileRankLocalService(
-		DLFileRankLocalService dlFileRankLocalService) {
-		this.dlFileRankLocalService = dlFileRankLocalService;
-	}
-
-	public DLFileRankPersistence getDLFileRankPersistence() {
-		return dlFileRankPersistence;
-	}
-
-	public void setDLFileRankPersistence(
-		DLFileRankPersistence dlFileRankPersistence) {
-		this.dlFileRankPersistence = dlFileRankPersistence;
 	}
 
 	public MBBanLocalService getMBBanLocalService() {
@@ -2093,16 +2093,16 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	@BeanReference(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl")
+	protected DLFileRankLocalService dlFileRankLocalService;
+	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
+	protected DLFileRankPersistence dlFileRankPersistence;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.ExpandoValueService.impl")
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl")
-	protected DLFileRankLocalService dlFileRankLocalService;
-	@BeanReference(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
-	protected DLFileRankPersistence dlFileRankPersistence;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
 	@BeanReference(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")

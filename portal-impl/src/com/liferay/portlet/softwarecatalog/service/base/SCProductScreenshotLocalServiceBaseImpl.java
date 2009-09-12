@@ -22,12 +22,23 @@
 
 package com.liferay.portlet.softwarecatalog.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterService;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
@@ -243,6 +254,22 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.scProductVersionPersistence = scProductVersionPersistence;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
 	public ImageLocalService getImageLocalService() {
 		return imageLocalService;
 	}
@@ -257,6 +284,71 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 
 	public void setImagePersistence(ImagePersistence imagePersistence) {
 		this.imagePersistence = imagePersistence;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
 	}
 
 	protected void runSQL(String sql) throws SystemException {
@@ -296,8 +388,28 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	protected SCProductVersionService scProductVersionService;
 	@BeanReference(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	@BeanReference(name = "com.liferay.counter.service.CounterLocalService.impl")
+	protected CounterLocalService counterLocalService;
+	@BeanReference(name = "com.liferay.counter.service.CounterService.impl")
+	protected CounterService counterService;
 	@BeanReference(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected ImagePersistence imagePersistence;
+	@BeanReference(name = "com.liferay.portal.service.ResourceLocalService.impl")
+	protected ResourceLocalService resourceLocalService;
+	@BeanReference(name = "com.liferay.portal.service.ResourceService.impl")
+	protected ResourceService resourceService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
+	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
+	protected UserLocalService userLocalService;
+	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
+	protected UserService userService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
+	protected UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.UserFinder.impl")
+	protected UserFinder userFinder;
 }
