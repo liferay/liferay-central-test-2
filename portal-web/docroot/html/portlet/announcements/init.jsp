@@ -44,7 +44,7 @@
 <%
 int delta = 3;
 
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/announcements/init-ext.jsp" %>

@@ -119,7 +119,7 @@ NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
 
 currencyFormat.setCurrency(currency);
 
-DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 
 NumberFormat doubleFormat = NumberFormat.getNumberInstance(locale);
 

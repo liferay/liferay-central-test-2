@@ -68,7 +68,7 @@ else {
 	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId());
 }
 
-DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, className, classPK, userId, ActionKeys.ADD_DISCUSSION) %>">

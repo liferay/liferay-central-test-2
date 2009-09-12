@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import java.text.DateFormat;
+import java.text.Format;
 
 import java.util.Set;
 
@@ -72,7 +72,7 @@ public class CalendarTag extends IncludeTag {
 		_headerPattern = headerPattern;
 	}
 
-	public void setHeaderFormat(DateFormat headerFormat) {
+	public void setHeaderFormat(Format headerFormat) {
 		_headerFormat = headerFormat;
 	}
 
@@ -94,7 +94,7 @@ public class CalendarTag extends IncludeTag {
 	private int _day;
 	private int _year;
 	private String _headerPattern;
-	private DateFormat _headerFormat;
+	private Format _headerFormat;
 	private Set<Integer> _data;
 	private boolean _showAllPotentialWeeks;
 

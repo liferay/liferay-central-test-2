@@ -112,9 +112,9 @@ String[] months = CalendarUtil.getMonths(locale);
 
 String[] days = CalendarUtil.getDays(locale);
 
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale);
-DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale);
-DateFormat dateFormatTime = DateFormatFactoryUtil.getTime(locale);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale);
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale);
+Format dateFormatTime = FastDateFormatFactoryUtil.getTime(locale);
 DateFormat dateFormatISO8601 = DateUtil.getISO8601Format();
 %>
 

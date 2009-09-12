@@ -62,7 +62,7 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 					month="<%= selMonth %>"
 					day="<%= selDay %>"
 					year="<%= selYear %>"
-					headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+					headerFormat="<%= dateFormatDate %>"
 					data="<%= data %>"
 				/>
 			</div>

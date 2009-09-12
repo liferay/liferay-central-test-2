@@ -42,5 +42,5 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
 boolean filterManageableOrganizations = false;
 
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>

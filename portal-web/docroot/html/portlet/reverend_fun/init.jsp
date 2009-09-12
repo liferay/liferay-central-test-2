@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.portlet.reverendfun.util.ReverendFunUtil" %>
 
 <%
-DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("yyyyMMdd");
 
 DecimalFormat decimalFormat = new DecimalFormat("##");
 

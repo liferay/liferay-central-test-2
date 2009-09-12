@@ -29,7 +29,7 @@ int month = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:calen
 int day = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:calendar:day"));
 int year = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:calendar:year"));
 String headerPattern = (String)request.getAttribute("liferay-ui:calendar:headerPattern");
-DateFormat headerFormat = (DateFormat)request.getAttribute("liferay-ui:calendar:headerFormat");
+Format headerFormat = (DateFormat)request.getAttribute("liferay-ui:calendar:headerFormat");
 Set data = (Set)request.getAttribute("liferay-ui:calendar:data");
 boolean showAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:calendar:showAllPotentialWeeks"));
 
@@ -69,10 +69,10 @@ int weekNumber = 1;
 	<c:if test="<%= Validator.isNotNull(headerPattern) || (headerFormat != null) %>">
 
 		<%
-		DateFormat dateFormat = headerFormat;
+		Format dateFormat = headerFormat;
 
 		if (Validator.isNotNull(headerPattern)) {
-			dateFormat = new SimpleDateFormat(headerPattern, locale);
+			dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(headerPattern, locale);
 		}
 		%>
 

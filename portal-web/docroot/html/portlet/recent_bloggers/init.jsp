@@ -52,5 +52,5 @@ if (organizationId == 0) {
 	}
 }
 
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>

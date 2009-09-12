@@ -71,5 +71,5 @@ String[] conversions = DocumentConversionUtil.getConversions("html");
 boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
 boolean enableConversions = openOfficeServerEnabled && (extensions != null) && (extensions.length > 0);
 
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>

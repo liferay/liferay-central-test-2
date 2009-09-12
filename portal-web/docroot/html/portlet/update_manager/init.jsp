@@ -30,5 +30,5 @@
 <%@ page import="com.liferay.util.Version" %>
 
 <%
-DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

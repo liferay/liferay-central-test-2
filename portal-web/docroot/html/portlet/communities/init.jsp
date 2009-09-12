@@ -95,6 +95,6 @@
 <%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
 <%
-DateFormat dateFormatDate = DateFormatFactoryUtil.getDate(locale, timeZone);
-DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(locale, timeZone);
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
