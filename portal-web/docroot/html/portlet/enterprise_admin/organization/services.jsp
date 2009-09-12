@@ -102,7 +102,7 @@ else {
 	}
 }
 
-DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
+Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", locale);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="services" />

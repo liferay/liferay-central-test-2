@@ -25,7 +25,7 @@
 <%
 Calendar cal = (Calendar)selCal.clone();
 
-dateFormatDate = new SimpleDateFormat("MMMMM d, yyyy", locale);
+dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", locale);
 %>
 
 <div>

@@ -31,7 +31,7 @@ long organizationId = (organization != null) ? organization.getOrganizationId() 
 
 List<OrgLabor> orgLabors = OrgLaborServiceUtil.getOrgLabors(organizationId);
 
-DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
+Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", locale);
 %>
 
 <c:if test="<%= !orgLabors.isEmpty() %>">

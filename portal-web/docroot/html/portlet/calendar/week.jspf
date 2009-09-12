@@ -33,8 +33,8 @@ if (cal.getFirstDayOfWeek() == Calendar.MONDAY) {
 
 cal.add(Calendar.DATE, 1 - dayOfWeek);
 
-DateFormat dateFormatDayOfWeek = new SimpleDateFormat("EEE", locale);
-DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
+Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE", locale);
+Format dateFormatMonthAndDay = FastDateFormatFactoryUtil.getSimpleDateFormat("M/d", locale);
 %>
 
 <div>
