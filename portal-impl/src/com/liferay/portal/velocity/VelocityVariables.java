@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
-import com.liferay.portal.kernel.util.DateFormats_IW;
 import com.liferay.portal.kernel.util.DateUtil_IW;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GetterUtil_IW;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -100,7 +100,7 @@ import org.apache.velocity.tools.generic.SortTool;
  * <a href="VelocityVariables.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  */
 public class VelocityVariables {
 
@@ -116,9 +116,11 @@ public class VelocityVariables {
 		velocityContext.put(
 			"browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
 
-		// Date formats
+		// Date format
 
-		velocityContext.put("dateFormats", DateFormats_IW.getInstance());
+		velocityContext.put(
+			"dateFormatFactory",
+			FastDateFormatFactoryUtil.getFastDateFormatFactory());
 
 		// Date tool
 
@@ -331,6 +333,9 @@ public class VelocityVariables {
 
 		// Deprecated
 
+		velocityContext.put(
+			"dateFormats",
+			FastDateFormatFactoryUtil.getFastDateFormatFactory());
 		velocityContext.put(
 			"locationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());

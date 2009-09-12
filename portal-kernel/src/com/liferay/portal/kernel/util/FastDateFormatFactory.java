@@ -22,45 +22,43 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.text.Format;
+
+import java.util.Locale;
+import java.util.TimeZone;
+
 /**
- * <a href="DateFormats_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="FastDateFormatFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class DateFormats_IW {
-	public static DateFormats_IW getInstance() {
-		return _instance;
-	}
+public interface FastDateFormatFactory {
 
-	public java.text.DateFormat getDate(java.util.Locale locale) {
-		return DateFormats.getDate(locale);
-	}
+	public Format getDate(Locale locale);
 
-	public java.text.DateFormat getDate(java.util.Locale locale,
-		java.util.TimeZone timeZone) {
-		return DateFormats.getDate(locale, timeZone);
-	}
+	public Format getDate(Locale locale, TimeZone timeZone);
 
-	public java.text.DateFormat getDateTime(java.util.Locale locale) {
-		return DateFormats.getDateTime(locale);
-	}
+	public Format getDate(TimeZone timeZone);
 
-	public java.text.DateFormat getDateTime(java.util.Locale locale,
-		java.util.TimeZone timeZone) {
-		return DateFormats.getDateTime(locale, timeZone);
-	}
+	public Format getDateTime(Locale locale);
 
-	public java.text.DateFormat getTime(java.util.Locale locale) {
-		return DateFormats.getTime(locale);
-	}
+	public Format getDateTime(Locale locale, TimeZone timeZone);
 
-	public java.text.DateFormat getTime(java.util.Locale locale,
-		java.util.TimeZone timeZone) {
-		return DateFormats.getTime(locale, timeZone);
-	}
+	public Format getDateTime(TimeZone timeZone);
 
-	private DateFormats_IW() {
-	}
+	public Format getSimpleDateFormat(String pattern);
 
-	private static DateFormats_IW _instance = new DateFormats_IW();
+	public Format getSimpleDateFormat(String pattern, Locale locale);
+
+	public Format getSimpleDateFormat(
+		String pattern, Locale locale, TimeZone timeZone);
+
+	public Format getSimpleDateFormat(String pattern, TimeZone timeZone);
+
+	public Format getTime(Locale locale);
+
+	public Format getTime(Locale locale, TimeZone timeZone);
+
+	public Format getTime(TimeZone timeZone);
+
 }

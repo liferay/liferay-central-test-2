@@ -28,36 +28,37 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * <a href="DateFormats.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateFormatFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author	   Brian Wing Shun Chan
- * @deprecated Use {@link DateFormatFactoryUtil} or {@link
- *			   FastDateFormatFactoryUtil}
+ * @author Brian Wing Shun Chan
  */
-public class DateFormats {
+public interface DateFormatFactory {
 
-	public static DateFormat getDate(Locale locale) {
-		return DateFormatFactoryUtil.getDate(locale);
-	}
+	public DateFormat getDate(Locale locale);
 
-	public static DateFormat getDate(Locale locale, TimeZone timeZone) {
-		return DateFormatFactoryUtil.getDate(locale, timeZone);
-	}
+	public DateFormat getDate(Locale locale, TimeZone timeZone);
 
-	public static DateFormat getDateTime(Locale locale) {
-		return DateFormatFactoryUtil.getDateTime(locale);
-	}
+	public DateFormat getDate(TimeZone timeZone);
 
-	public static DateFormat getDateTime(Locale locale, TimeZone timeZone) {
-		return DateFormatFactoryUtil.getDateTime(locale, timeZone);
-	}
+	public DateFormat getDateTime(Locale locale);
 
-	public static DateFormat getTime(Locale locale) {
-		return DateFormatFactoryUtil.getTime(locale);
-	}
+	public DateFormat getDateTime(Locale locale, TimeZone timeZone);
 
-	public static DateFormat getTime(Locale locale, TimeZone timeZone) {
-		return DateFormatFactoryUtil.getTime(locale, timeZone);
-	}
+	public DateFormat getDateTime(TimeZone timeZone);
+
+	public DateFormat getSimpleDateFormat(String pattern);
+
+	public DateFormat getSimpleDateFormat(String pattern, Locale locale);
+
+	public DateFormat getSimpleDateFormat(
+		String pattern, Locale locale, TimeZone timeZone);
+
+	public DateFormat getSimpleDateFormat(String pattern, TimeZone timeZone);
+
+	public DateFormat getTime(Locale locale);
+
+	public DateFormat getTime(Locale locale, TimeZone timeZone);
+
+	public DateFormat getTime(TimeZone timeZone);
 
 }
