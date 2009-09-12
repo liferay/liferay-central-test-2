@@ -29,12 +29,16 @@ import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.RoleLocalService;
+import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupRoleService;
@@ -42,12 +46,15 @@ import com.liferay.portal.service.UserGroupService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.RoleFinder;
+import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
@@ -99,6 +106,30 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
+	}
+
+	public CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	public CompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
 	}
 
 	public GroupLocalService getGroupLocalService() {
@@ -196,6 +227,38 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setResourceFinder(ResourceFinder resourceFinder) {
 		this.resourceFinder = resourceFinder;
+	}
+
+	public RoleLocalService getRoleLocalService() {
+		return roleLocalService;
+	}
+
+	public void setRoleLocalService(RoleLocalService roleLocalService) {
+		this.roleLocalService = roleLocalService;
+	}
+
+	public RoleService getRoleService() {
+		return roleService;
+	}
+
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
+	public RolePersistence getRolePersistence() {
+		return rolePersistence;
+	}
+
+	public void setRolePersistence(RolePersistence rolePersistence) {
+		this.rolePersistence = rolePersistence;
+	}
+
+	public RoleFinder getRoleFinder() {
+		return roleFinder;
+	}
+
+	public void setRoleFinder(RoleFinder roleFinder) {
+		this.roleFinder = roleFinder;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -350,6 +413,12 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected CounterService counterService;
 	@BeanReference(name = "com.liferay.mail.service.MailService.impl")
 	protected MailService mailService;
+	@BeanReference(name = "com.liferay.portal.service.CompanyLocalService.impl")
+	protected CompanyLocalService companyLocalService;
+	@BeanReference(name = "com.liferay.portal.service.CompanyService.impl")
+	protected CompanyService companyService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
+	protected CompanyPersistence companyPersistence;
 	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
 	protected GroupLocalService groupLocalService;
 	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
@@ -374,6 +443,14 @@ public abstract class FlagsEntryServiceBaseImpl extends PrincipalBean
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@BeanReference(name = "com.liferay.portal.service.RoleLocalService.impl")
+	protected RoleLocalService roleLocalService;
+	@BeanReference(name = "com.liferay.portal.service.RoleService.impl")
+	protected RoleService roleService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
+	protected RolePersistence rolePersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.RoleFinder.impl")
+	protected RoleFinder roleFinder;
 	@BeanReference(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
 	@BeanReference(name = "com.liferay.portal.service.UserService.impl")
