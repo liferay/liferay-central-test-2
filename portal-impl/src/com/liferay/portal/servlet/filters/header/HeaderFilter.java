@@ -58,7 +58,8 @@ public class HeaderFilter extends BasePortalFilter {
 		super.init(filterConfig);
 
 		_filterConfig = filterConfig;
-		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
+		_dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+			_DATE_FORMAT, Locale.US, TimeZone.getTimeZone(_TIME_ZONE));
 	}
 
 	protected long getLastModified(HttpServletRequest request) {
@@ -95,11 +96,7 @@ public class HeaderFilter extends BasePortalFilter {
 
 				cal.add(Calendar.SECOND, seconds);
 
-				Format dateFormat =
-					FastDateFormatFactoryUtil.getSimpleDateFormat(
-						_DATE_FORMAT, Locale.US, _timeZone);
-
-				value = dateFormat.format(cal.getTime());
+				value = _dateFormat.format(cal.getTime());
 			}
 
 			// LEP-5895
@@ -144,7 +141,7 @@ public class HeaderFilter extends BasePortalFilter {
 
 	private static final String _TIME_ZONE = StringPool.UTC;
 
+	private Format _dateFormat;
 	private FilterConfig _filterConfig;
-	private TimeZone _timeZone;
 
 }
