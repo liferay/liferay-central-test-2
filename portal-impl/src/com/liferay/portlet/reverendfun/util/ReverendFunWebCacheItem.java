@@ -23,6 +23,7 @@
 package com.liferay.portlet.reverendfun.util;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.Time;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Set;
@@ -52,8 +52,10 @@ public class ReverendFunWebCacheItem implements WebCacheItem {
 			new StringComparator(false, true));
 
 		try {
-			DateFormat dateFormatYMD = new SimpleDateFormat("yyyyMMdd");
-			DateFormat dateFormatYM = new SimpleDateFormat("yyyyMM");
+			DateFormat dateFormatYMD =
+				DateFormatFactoryUtil.getSimpleDateFormat("yyyyMMdd");
+			DateFormat dateFormatYM =
+				DateFormatFactoryUtil.getSimpleDateFormat("yyyyMM");
 
 			Calendar cal = CalendarFactoryUtil.getCalendar();
 

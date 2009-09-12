@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -54,7 +55,6 @@ import com.liferay.util.ldap.Modifications;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -88,7 +88,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Brian Wing Shun Chan
  * @author Jerry Niu
  * @author Scott Lee
- * @author Hervé Ménage
+ * @author Hervï¿½ Mï¿½nage
  * @author Samuel Kong
  */
 public class PortalLDAPUtil {
@@ -1162,8 +1162,9 @@ public class PortalLDAPUtil {
 					return user;
 				}
 				else {
-					DateFormat dateFormat = new SimpleDateFormat(
-						"yyyyMMddHHmmss");
+					DateFormat dateFormat =
+						DateFormatFactoryUtil.getSimpleDateFormat(
+							"yyyyMMddHHmmss");
 
 					ldapUserModifiedDate = dateFormat.parse(modifiedDate);
 				}

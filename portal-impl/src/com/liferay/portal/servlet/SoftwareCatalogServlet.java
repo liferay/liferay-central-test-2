@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -44,8 +45,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUti
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
-
-import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -164,7 +163,8 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		Date oldestDate = null;
 
 		oldestDate = ParamUtil.getDate(
-			request, "oldestDate", new SimpleDateFormat("yyyy.MM.dd"), null);
+			request, "oldestDate",
+			DateFormatFactoryUtil.getSimpleDateFormat("yyyy.MM.dd"), null);
 
 		if (oldestDate == null) {
 			int daysOld = ParamUtil.getInteger(request, "maxAge", -1);

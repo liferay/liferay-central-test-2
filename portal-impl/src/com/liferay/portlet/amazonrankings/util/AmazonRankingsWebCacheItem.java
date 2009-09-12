@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.amazonrankings.util;
 
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,7 +34,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -216,13 +217,15 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 			return null;
 		}
 
-		SimpleDateFormat dateFormat = null;
+		DateFormat dateFormat = null;
 
 		if (releaseDateAsString.length() > 7) {
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+			dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+				"yyyy-MM-dd", Locale.US);
 		}
 		else {
-			dateFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
+			dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+				"yyyy-MM", Locale.US);
 		}
 
 		return GetterUtil.getDate(releaseDateAsString, dateFormat);

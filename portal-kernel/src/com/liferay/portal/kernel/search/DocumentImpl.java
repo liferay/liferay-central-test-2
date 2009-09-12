@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,8 +35,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		addKeyword(name, _sdf.format(value));
+		addKeyword(name, _dateFormat.format(value));
 	}
 
 	public void addFile(String name, byte[] bytes, String fileExt) {
@@ -302,7 +303,7 @@ public class DocumentImpl implements Document {
 	}
 
 	public Date getDate(String name) throws ParseException {
-		return _sdf.parse(get(name));
+		return _dateFormat.parse(get(name));
 	}
 
 	public Map<String, Field> getFields() {
@@ -353,6 +354,7 @@ public class DocumentImpl implements Document {
 	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
-	private SimpleDateFormat _sdf = new SimpleDateFormat(_DATE_FORMAT_PATTERN);
+	private DateFormat _dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+		_DATE_FORMAT_PATTERN);
 
 }

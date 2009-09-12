@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -50,7 +51,6 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -97,7 +97,8 @@ public class WordPressImporter {
 
 		List<Element> entryEls = root.element("channel").elements("item");
 
-		DateFormat dateFormat = new SimpleDateFormat(_DATE_FORMAT);
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+			_DATE_FORMAT);
 
 		dateFormat.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
 

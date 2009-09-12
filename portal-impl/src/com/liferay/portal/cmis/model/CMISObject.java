@@ -22,12 +22,12 @@
 
 package com.liferay.portal.cmis.model;
 
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.Serializable;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -263,8 +263,8 @@ public class CMISObject extends ExtensibleElementWrapper {
 		return propertyValue;
 	}
 
-	private static DateFormat _dateFormat = new SimpleDateFormat(
-		"yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+	private static DateFormat _dateFormat =
+		DateFormatFactoryUtil.getSimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
 	private CMISConstants _cmisConstants;
 

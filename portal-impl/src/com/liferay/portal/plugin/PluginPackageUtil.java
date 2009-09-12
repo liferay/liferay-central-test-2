@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -65,7 +66,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -790,7 +790,7 @@ public class PluginPackageUtil {
 
 	private Date _readDate(String text) {
 		if (Validator.isNotNull(text)) {
-			DateFormat dateFormat = new SimpleDateFormat(
+			DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
 				Time.RFC822_FORMAT, Locale.US);
 
 			try {
