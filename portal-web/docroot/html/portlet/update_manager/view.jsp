@@ -185,7 +185,7 @@ List updatablePackageIds = new ArrayList();
 							sb.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
 							sb.append(themeDisplay.getPathThemeImages());
 							sb.append("/document_library/page.png");
-							sb.append("' onmouseover=\"Liferay.Portal.ToolTip.show(event, this, '");
+							sb.append("' onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
 							sb.append(availablePluginPackage.getChangeLog());
 							sb.append("')\" />");
 

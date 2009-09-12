@@ -744,7 +744,7 @@
 						if (fieldInstance) {
 							var instructions = fieldInstance.get('instructions');
 
-							Liferay.Portal.ToolTip.show(event, this, instructions);
+							Liferay.Portal.ToolTip.show(this, instructions);
 						}
 					}
 				);

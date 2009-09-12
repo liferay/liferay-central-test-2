@@ -26,43 +26,35 @@ Liferay.Portal.Tabs = {
 
 	var elementsCache = {};
 
-	Liferay.Portal.ToolTip = {
-		show: function(event, obj, text) {
-			var instance = this;
+	AUI().use(
+		'tooltip',
+		'simulate',
+		function(A) {
 
-			var itemId = Dom.generateId(obj);
+			Liferay.Portal.ToolTip = {
+				show: function(obj, text) {
+					var cachedTooltip = Liferay.Portal.ToolTip.cached;
 
-			var container = instance._container;
+					if (cachedTooltip) {
+						var trigger = cachedTooltip.get('trigger');
+						var newElement = trigger.indexOf(obj) == -1;
 
-			if (!elementsCache[itemId]) {
-				if (!container) {
-					container = new Alloy.Tooltip(
-						{
-							autodismissdelay: 10000,
-							context: obj,
-							hidedelay: 0,
-							showdelay: 0
+						if (newElement) {
+							cachedTooltip.set('trigger', obj);
+							cachedTooltip.set('bodyContent', text);
+							cachedTooltip.show();
 						}
-					);
 
-					container.render(document.body);
-
-					Dom.addClass(container.element, 'portal-tool-tip');
-
-					instance._container = container;
+						cachedTooltip.refreshAlign();
+					}
 				}
+			};
 
-				var context = container.cfg.getProperty('context') || [];
-
-				context.push(obj);
-
-				container.cfg.setProperty('context', context);
-				container.doShow(event, obj);
-
-				elementsCache[itemId] = obj;
-			}
-
-			container.cfg.setProperty('text', text, true);
+			Liferay.Portal.ToolTip.cached = new A.Tooltip({
+				trigger: '.liferay-tooltip',
+				zIndex: 10000
+			})
+			.render();
 		}
-	};
+	);
 })();

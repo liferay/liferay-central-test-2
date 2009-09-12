@@ -61,7 +61,7 @@ String scoreString = numberFormat.format(score);
 						function(event) {
 							var el = A.Node.getDOMNode(event.currentTarget);
 
-							Liferay.Portal.ToolTip.show(event, el, '<%= scoreString %> Stars');
+							Liferay.Portal.ToolTip.show(el, '<%= scoreString %> Stars');
 						}
 					);
 				}

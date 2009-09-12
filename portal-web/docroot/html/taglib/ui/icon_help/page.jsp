@@ -28,4 +28,4 @@
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 %>
 
-<img align="top" onmouseover="Liferay.Portal.ToolTip.show(event, this, '<%= UnicodeLanguageUtil.get(pageContext, message) %>')" src="<%= themeDisplay.getPathThemeImages() %>/portlet/help.png" />
+<img align="top" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, message) %>')" src="<%= themeDisplay.getPathThemeImages() %>/portlet/help.png" />

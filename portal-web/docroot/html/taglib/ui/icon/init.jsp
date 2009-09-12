@@ -92,7 +92,7 @@ String details = " alt=\"" + LanguageUtil.get(pageContext, message) + "\"";
 
 if (!label) {
 	if (toolTip) {
-		details += " onmouseover=\"Liferay.Portal.ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
+		details += " onmouseover=\"Liferay.Portal.ToolTip.show(this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
 	}
 	else {
 		details += " title=\"" + LanguageUtil.get(pageContext, message) + "\"";

@@ -135,7 +135,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 					var el = A.Node.getDOMNode(event.currentTarget);
 
-					Liferay.Portal.ToolTip.show(event, el, stars + message);
+					Liferay.Portal.ToolTip.show(el, stars + message);
 				};
 
 				var fixScore = function(score) {
