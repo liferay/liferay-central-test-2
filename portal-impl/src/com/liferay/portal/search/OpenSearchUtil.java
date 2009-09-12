@@ -22,13 +22,14 @@
 
 package com.liferay.portal.search;
 
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Date;
 
@@ -57,10 +58,10 @@ public class OpenSearchUtil {
 	public static Element addElement(
 		Element el, String name, int namespaceType, Date value) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat(
+		Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
 			"yyyy-MM-dd'T'HH:mm:sszzz");
 
-		return addElement(el, name, namespaceType, sdf.format(value));
+		return addElement(el, name, namespaceType, dateFormat.format(value));
 	}
 
 	public static Element addElement(

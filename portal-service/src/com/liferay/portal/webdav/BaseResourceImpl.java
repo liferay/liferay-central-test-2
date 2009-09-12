@@ -23,6 +23,7 @@
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,8 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.InputStream;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Date;
 import java.util.Locale;
@@ -165,11 +165,13 @@ public class BaseResourceImpl implements Resource {
 
 	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
 
-	private static DateFormat _createDateFormatter =
-		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+	private static Format _createDateFormatter =
+		FastDateFormatFactoryUtil.getSimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 
-	private static DateFormat _modifiedDateFormatter =
-		new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+	private static Format _modifiedDateFormatter =
+		FastDateFormatFactoryUtil.getSimpleDateFormat(
+			"EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 	private String _href;
 	private String _displayName;

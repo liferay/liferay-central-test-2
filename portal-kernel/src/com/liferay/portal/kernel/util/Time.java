@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -137,9 +137,10 @@ public class Time {
 		String s = StringPool.BLANK;
 
 		if (date != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat(format);
+			Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+				format);
 
-			s = sdf.format(date);
+			s = dateFormat.format(date);
 		}
 
 		return s;

@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -117,7 +117,8 @@ public class DateUtil {
 	}
 
 	public static String getDate(Date date, String pattern, Locale locale) {
-		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
+		Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+			pattern, locale);
 
 		return dateFormat.format(date);
 	}
@@ -125,9 +126,8 @@ public class DateUtil {
 	public static String getDate(
 		Date date, String pattern, Locale locale, TimeZone timeZone) {
 
-		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
-
-		dateFormat.setTimeZone(timeZone);
+		Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+			pattern, locale, timeZone);
 
 		return dateFormat.format(date);
 	}
@@ -187,11 +187,11 @@ public class DateUtil {
 			pattern = "yyyyMMddHHmmssz";
 		}
 
-		return new SimpleDateFormat(pattern);
+		return DateFormatFactoryUtil.getSimpleDateFormat(pattern);
 	}
 
 	public static DateFormat getISO8601Format() {
-		return new SimpleDateFormat(ISO_8601_PATTERN);
+		return DateFormatFactoryUtil.getSimpleDateFormat(ISO_8601_PATTERN);
 	}
 
 	public static DateFormat getUTCFormat() {
@@ -220,11 +220,8 @@ public class DateUtil {
 			pattern = "yyyyMMdd'T'HHmmssz";
 		}
 
-		DateFormat dateFormat = new SimpleDateFormat(pattern);
-
-		dateFormat.setTimeZone(TimeZone.getTimeZone(StringPool.UTC));
-
-		return dateFormat;
+		return DateFormatFactoryUtil.getSimpleDateFormat(
+			pattern, TimeZone.getTimeZone(StringPool.UTC));
 	}
 
 	public static Date newDate() {

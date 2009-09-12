@@ -23,14 +23,14 @@
 package com.liferay.portal.servlet.filters.header;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Calendar;
 import java.util.Enumeration;
@@ -49,7 +49,7 @@ import javax.servlet.http.HttpSession;
  * <a href="HeaderFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Eduardo Lundgren
  */
 public class HeaderFilter extends BasePortalFilter {
@@ -95,10 +95,9 @@ public class HeaderFilter extends BasePortalFilter {
 
 				cal.add(Calendar.SECOND, seconds);
 
-				DateFormat dateFormat = new SimpleDateFormat(
-					_DATE_FORMAT, Locale.US);
-
-				dateFormat.setTimeZone(_timeZone);
+				Format dateFormat =
+					FastDateFormatFactoryUtil.getSimpleDateFormat(
+						_DATE_FORMAT, Locale.US, _timeZone);
 
 				value = dateFormat.format(cal.getTime());
 			}

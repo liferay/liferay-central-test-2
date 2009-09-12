@@ -44,7 +44,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.kernel.util.DateFormats;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -86,7 +86,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import java.text.DateFormat;
+import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1223,7 +1223,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String subject = CalUtil.getEmailEventReminderSubject(preferences);
 			String body = CalUtil.getEmailEventReminderBody(preferences);
 
-			DateFormat dateFormatDateTime = DateFormats.getDateTime(
+			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
 				user.getLocale(), user.getTimeZone());
 
 			subject = StringUtil.replace(

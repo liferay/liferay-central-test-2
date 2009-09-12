@@ -24,8 +24,7 @@ package com.liferay.portal.kernel.util;
 
 import java.sql.Timestamp;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -138,7 +137,8 @@ public class CalendarUtil {
 		if (days == null) {
 			days = new String[7];
 
-			DateFormat dayFormat = new SimpleDateFormat(pattern, locale);
+			Format dayFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+				pattern, locale);
 
 			Calendar cal = CalendarFactoryUtil.getCalendar();
 
@@ -279,7 +279,8 @@ public class CalendarUtil {
 		if (months == null) {
 			months = new String[12];
 
-			DateFormat monthFormat = new SimpleDateFormat(pattern, locale);
+			Format monthFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+				pattern, locale);
 
 			Calendar cal = CalendarFactoryUtil.getCalendar();
 

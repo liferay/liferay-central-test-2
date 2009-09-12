@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 
 import java.text.DateFormat;
 import java.text.FieldPosition;
+import java.text.Format;
 import java.text.ParsePosition;
 
 import java.util.Calendar;
@@ -61,10 +62,12 @@ public class PrettyDateFormat extends DateFormat {
 
 			Date yesterday = cal.getTime();
 
-			DateFormat dateFormatDate = DateFormats.getDate(_locale, _timeZone);
-			DateFormat dateFormatDateTime = DateFormats.getDateTime(
+			Format dateFormatDate = FastDateFormatFactoryUtil.getDate(
 				_locale, _timeZone);
-			DateFormat dateFormatTime = DateFormats.getTime(_locale, _timeZone);
+			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
+				_locale, _timeZone);
+			Format dateFormatTime = FastDateFormatFactoryUtil.getTime(
+				_locale, _timeZone);
 
 			dateString = dateFormatDate.format(date);
 
@@ -87,10 +90,10 @@ public class PrettyDateFormat extends DateFormat {
 	}
 
 	public Date parse(String source, ParsePosition pos) {
-		DateFormat dateFormatDate = DateFormats.getDate(_locale, _timeZone);
-
-		DateFormat dateFormatDateTime =
-			DateFormats.getDateTime(_locale, _timeZone);
+		Format dateFormatDate = FastDateFormatFactoryUtil.getDate(
+			_locale, _timeZone);
+		DateFormat dateFormatDateTime = DateFormatFactoryUtil.getDateTime(
+			_locale, _timeZone);
 
 		Date today = new Date();
 
