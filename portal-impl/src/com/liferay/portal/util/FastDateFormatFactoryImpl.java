@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.FastDateFormatFactory;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.Format;
@@ -61,7 +62,7 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getDate(TimeZone timeZone) {
-		return getDate(null, timeZone);
+		return getDate(LocaleUtil.getDefault(), timeZone);
 	}
 
 	public Format getDateTime(Locale locale) {
@@ -84,11 +85,11 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getDateTime(TimeZone timeZone) {
-		return getDateTime(null, timeZone);
+		return getDateTime(LocaleUtil.getDefault(), timeZone);
 	}
 
 	public Format getSimpleDateFormat(String pattern) {
-		return getSimpleDateFormat(pattern, null, null);
+		return getSimpleDateFormat(pattern, LocaleUtil.getDefault(), null);
 	}
 
 	public Format getSimpleDateFormat(String pattern, Locale locale) {
@@ -112,7 +113,7 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getSimpleDateFormat(String pattern, TimeZone timeZone) {
-		return getSimpleDateFormat(pattern, null, timeZone);
+		return getSimpleDateFormat(pattern, LocaleUtil.getDefault(), timeZone);
 	}
 
 	public Format getTime(Locale locale) {
@@ -135,7 +136,7 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getTime(TimeZone timeZone) {
-		return getTime(null, timeZone);
+		return getTime(LocaleUtil.getDefault(), timeZone);
 	}
 
 	protected String getKey(Locale locale, TimeZone timeZone) {

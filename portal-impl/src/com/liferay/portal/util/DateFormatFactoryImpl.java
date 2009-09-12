@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.DateFormatFactory;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,7 +54,7 @@ public class DateFormatFactoryImpl implements DateFormatFactory {
 	}
 
 	public DateFormat getDate(TimeZone timeZone) {
-		return getDate(null, timeZone);
+		return getDate(LocaleUtil.getDefault(), timeZone);
 	}
 
 	public DateFormat getDateTime(Locale locale) {
@@ -72,11 +73,11 @@ public class DateFormatFactoryImpl implements DateFormatFactory {
 	}
 
 	public DateFormat getDateTime(TimeZone timeZone) {
-		return getDateTime(null, timeZone);
+		return getDateTime(LocaleUtil.getDefault(), timeZone);
 	}
 
 	public DateFormat getSimpleDateFormat(String pattern) {
-		return getSimpleDateFormat(pattern, null, null);
+		return getSimpleDateFormat(pattern, LocaleUtil.getDefault(), null);
 	}
 
 	public DateFormat getSimpleDateFormat(String pattern, Locale locale) {
@@ -96,7 +97,7 @@ public class DateFormatFactoryImpl implements DateFormatFactory {
 	}
 
 	public DateFormat getSimpleDateFormat(String pattern, TimeZone timeZone) {
-		return getSimpleDateFormat(pattern, null, timeZone);
+		return getSimpleDateFormat(pattern, LocaleUtil.getDefault(), timeZone);
 	}
 
 	public DateFormat getTime(Locale locale) {
@@ -115,7 +116,7 @@ public class DateFormatFactoryImpl implements DateFormatFactory {
 	}
 
 	public DateFormat getTime(TimeZone timeZone) {
-		return getTime(null, timeZone);
+		return getTime(LocaleUtil.getDefault(), timeZone);
 	}
 
 }
