@@ -23,9 +23,14 @@
 %>
 
 <c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
-	Liferay.Portlet.refreshLayout = function(portletBound) {
-		if (!portletBound.isStatic) {
-			Liferay.Layout.refresh(portletBound);
+	AUI().use(
+		'liferay-layout',
+		function(A) {
+			Liferay.Portlet.refreshLayout = function(portletBound) {
+				if (!portletBound.isStatic) {
+					Liferay.Layout.refresh(portletBound);
+				}
+			};
 		}
-	};
+	);
 </c:if>

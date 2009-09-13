@@ -1547,11 +1547,11 @@ public class ServicePreAction extends Action {
 					themeDisplay.setShowLayoutTemplatesIcon(true);
 
 					themeDisplay.setURLAddContent(
-						"LayoutConfiguration.toggle('" +
+						"Liferay.LayoutConfiguration.toggle('" +
 							PortletKeys.LAYOUT_CONFIGURATION + "');");
 
 					themeDisplay.setURLLayoutTemplates(
-						"Liferay.Layout.showTemplates();");
+						"Liferay.LayoutConfiguration.showTemplates();");
 				}
 			}
 

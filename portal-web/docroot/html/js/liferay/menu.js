@@ -13,8 +13,8 @@ Liferay.Menu = new Alloy.Class(
 				};
 
 				if (Liferay.Layout) {
-					Liferay.Layout.bind(
-						'b4StartDrag',
+					Liferay.Layout.on(
+						'drag:start',
 						function(event) {
 							instance._closeActiveMenu();
 						}

@@ -313,31 +313,29 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 		%>
 
 		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-			jQuery(
-				function() {
-					if (Liferay.Layout) {
-						var layoutOptions = {};
+			AUI().ready(
+				'liferay-layout',
+				function(A) {
+					var layoutOptions = {};
 
-						if (!themeDisplay.isFreeformLayout()) {
-							layoutOptions = {
-								boxSelector: '.portlet-boundary:not([isStatic])',
-								columnSelector: 'div.lfr-portlet-column',
-								clonePortlet: false,
-								grid: '#layout-grid, .lfr-grid',
-								handleSelector: '.portlet-title, .portlet-title-default',
-								placeHolderClass: 'portlet-sort-helper'
-							};
-						}
-						else {
-							layoutOptions = {
-								boxSelector: '.portlet-boundary',
-								columnSelector: 'div[id^=layout-column_]',
-								freeForm: true
-							};
-						}
-
-						Liferay.Layout.init(layoutOptions);
+					if (!themeDisplay.isFreeformLayout()) {
+						layoutOptions = {
+							boxSelector: '.portlet-boundary',
+							columnSelector: '.lfr-portlet-column',
+							grid: '#layout-grid, .lfr-grid',
+							handleSelector: '.portlet-title, .portlet-title-default'
+						};
 					}
+					else {
+						layoutOptions = {
+							boxSelector: '.portlet-boundary',
+							columnSelector: '.lfr-portlet-column',
+							handleSelector: '.portlet-header-bar, .portlet-title-default, .portlet-topper',
+							freeForm: true
+						};
+					}
+
+					Liferay.Layout.init(layoutOptions);
 
 					if (Liferay.Navigation) {
 						new Liferay.Navigation(

@@ -1,560 +1,453 @@
-(function() {
-	var Dom = Alloy.Dom;
-	var Event = Alloy.Event;
-	var DDM = Alloy.DragDrop;
+AUI().add(
+	'liferay-layout',
+	function(A) {
+		var DOM = A.DOM;
+		var DDM = A.DD.DDM;
 
-	var Layout = {
-		init: function(options) {
-			var instance = this;
+		var Layout = {
+			init: function(options) {
+				var instance = this;
 
-			instance.isFreeForm = options.freeForm;
-			instance._draggables = {};
+				instance.isFreeForm = options.freeForm;
 
-			var layoutHandler;
+				var handler = ColumnLayout;
 
-			if (!options.freeForm) {
-				layoutHandler = instance.Columns;
+				if (options.freeForm) {
+					handler = FreeFormLayout;
+				}
+
+				instance.layoutHandler = new handler(options);
+			},
+
+			fire: function() {
+				var instance = this;
+
+				var layoutHandler = instance.layoutHandler;
+
+				return layoutHandler.fire.apply(layoutHandler, arguments);
+			},
+
+			on: function() {
+				var instance = this;
+
+				var layoutHandler = instance.layoutHandler;
+
+				return layoutHandler.on.apply(layoutHandler, arguments);
+			},
+
+			refresh: function() {
+				var instance = this;
+
+				var layoutHandler = instance.layoutHandler;
+
+				return layoutHandler.refresh.apply(layoutHandler, arguments);
 			}
-			else {
-				layoutHandler = instance.FreeForm;
-			}
+		};
 
-			instance._useCloneProxy = options.clonePortlet;
+		var PortalLayout = function() {
+			PortalLayout.superclass.constructor.apply(this, arguments);
+		};
 
-			layoutHandler.init(options);
+		PortalLayout.NAME = 'portallayout';
 
-			instance.layoutHandler = layoutHandler;
-		},
+		A.extend(
+			PortalLayout,
+			A.Base,
+			{
+				initializer: function(options) {
+					var instance = this;
 
-		bind: function(event, fn) {
-			var instance = this;
+					instance._boxSelector = options.boxSelector;
+					instance._columnSelector = options.columnSelector;
+					instance._handleSelector = options.handleSelector;
+				},
 
-			var draggables = instance._draggables;
+				add: function() {},
 
-			if (event.indexOf('Event') < 0) {
-				event += 'Event';
-			}
+				findIndex: function(node) {
+					var instance = this;
 
-			for (var i in draggables) {
-				draggables[i].on(event, fn);
-			}
+					var parentNode = node.get('parentNode');
 
-			return instance;
-		},
+					return parentNode.queryAll('> .portlet-boundary').indexOf(node);
+				},
 
-		refresh: function(portletBound) {
-			var instance = this;
+				initializeColumns: function() {},
 
-			instance.layoutHandler.refresh(portletBound);
-		},
+				refresh: function(portlet) {
+					var instance = this;
 
-		showTemplates: function() {
-			var instance = this;
+					portlet = A.get(portlet);
 
-			var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
+					if (portlet) {
+						instance.add(portlet);
+					}
+				},
 
-			AUI().use(
-				'dialog',
-				function(A) {
-					var dialog = new A.Dialog(
+				saveLayout: function(options) {
+					var instance = this;
+
+					var data = {
+						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+						p_l_id: themeDisplay.getPlid()
+					};
+
+					A.mix(data, options);
+
+					A.io(
+						themeDisplay.getPathMain() + '/portal/update_layout',
 						{
-							title: Liferay.Language.get('layout'),
-							modal: true,
-							width: 700,
-							centered: true,
-							io: {
-								url: url,
-								cfg: {
-									data: {
-										p_l_id: themeDisplay.getPlid(),
-										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-										redirect: Liferay.currentURL
-									}
+							data: A.toQueryString(data),
+							method: 'POST'
+						}
+					);
+				}
+			}
+		);
+
+		var ColumnLayout = function() {
+			ColumnLayout.superclass.constructor.apply(this, arguments);
+		};
+
+		ColumnLayout.NAME = 'columns';
+
+		A.extend(
+			ColumnLayout,
+			PortalLayout,
+			{
+				initializer: function(options) {
+					var instance = this;
+
+					instance._syncShims = A.bind(DDM.syncActiveShims, DDM, true);
+
+					instance.after('drag:end', instance._onDragEnd);
+					instance.after('drag:exit', instance._onDragExit);
+					instance.after('drag:over', instance._onDragOver);
+					instance.after('drag:start', instance._onDragStart);
+
+					instance.after('drop:enter', instance._onDropEnter);
+					instance.after('drop:exit', instance._onDropExit);
+					instance.after('drop:hit', instance._onDropHit);
+
+					instance._grid = A.all(options.grid);
+
+					instance._gridColumns = '.lfr-column';
+
+					instance.dropZones = [];
+
+					var columns = A.all(instance._gridColumns);
+
+					columns.each(instance.initializeColumns, instance);
+
+					instance._columns = columns;
+				},
+
+				add: function(portlet) {
+					var instance = this;
+
+					portlet = A.get(portlet);
+
+					if (!portlet._registeredDraggable) {
+						var draggablePortlet = new DraggablePortlet(
+							{
+								bubbles: instance,
+								groups: 'portlets',
+								handles: [instance._handleSelector],
+								node: portlet,
+								target: true
+							}
+						)
+						.plug(
+							A.Plugin.DDProxy,
+							{
+								borderStyle: '0',
+								moveOnEnd: false
+							}
+						)
+						.plug(A.Plugin.DDWinScroll);
+
+						var handle = portlet.one(instance._handleSelector);
+
+						handle.setStyle('cursor', 'move');
+
+						portlet._registeredDraggable = true;
+					}
+				},
+
+				getCurrentSection: function(event) {
+					var instance = this;
+
+					var drag = event.drag;
+					var drop = event.drop;
+
+					var y = drag.mouseXY[1];
+
+					var region = drop.region;
+
+					var bottomEnd = region.bottom;
+					var topStart = region.top;
+
+					var height = (bottomEnd - topStart);
+
+					var middle = topStart + (height / 2);
+
+					var topEnd = middle;
+					var bottomStart = middle;
+
+					if (drop.get('node').get('id').indexOf('118_INSTANCE') > -1) {
+						var range = 40;
+
+						topEnd = topStart + Math.min(middle, range);
+						bottomStart = bottomEnd - Math.min(middle, range);
+					}
+
+					var section = 0;
+
+					if (y > topStart && y < topEnd) {
+						section = 1;
+					}
+					else if (y > bottomStart && y < bottomEnd) {
+						section = 2;
+					}
+
+					return section;
+				},
+
+				hasMoved: function(node) {
+					var instance = this;
+
+					var columnOrderChanged = (node.get('previousSibling') != instance._originalPreviousSibling);
+					var columnContainerChanged = (node.get('parentNode') != instance._originalParent);
+
+					return columnOrderChanged || columnContainerChanged;
+				},
+
+				initializeColumns: function(node, i, nodeList) {
+					var instance = this;
+
+					new A.DD.Drop(
+						{
+							node: node,
+							bubbles: instance,
+							groups: 'portlets'
+						}
+					);
+
+					var portlets = node.queryAll('.portlet-boundary');
+
+					portlets.each(instance.add, instance);
+
+					instance.dropZones.push(node._node);
+				},
+
+				isValidDropZone: function(node) {
+					var instance = this;
+
+					return node && node.hasClass('lfr-column');
+				},
+
+				refresh: function(portlet) {
+					var instance = this;
+
+					portlet = A.get(portlet);
+
+					if (portlet.get('id').indexOf('p_p_id_118_') === 0) {
+						var columns = portlet.queryAll(instance._gridColumns);
+
+						columns.each(instance.initializeColumns, instance);
+					}
+
+					ColumnLayout.superclass.refresh.apply(instance, arguments);
+				},
+
+				setInsideNested: function(node) {
+					var instance = this;
+
+					instance._insideNested = (node.get('id').indexOf('118_INSTANCE') > -1 &&
+											!node.hasClass('portlet-boundary'));
+				},
+
+				startDragging: function() {
+					var instance = this;
+
+					instance._grid.addClass('dragging');
+				},
+
+				stopDragging: function() {
+					var instance = this;
+
+					instance._grid.removeClass('dragging');
+
+					var dropZones = instance.dropZones;
+
+					for (var i = dropZones.length - 1; i >= 0; i--) {
+						DOM.removeClass(dropZones[i], 'drop-area');
+						DOM.removeClass(dropZones[i], 'active-area');
+					}
+				},
+
+				_onDragEnd: function(event) {
+					var instance = this;
+
+					var drag = event.target;
+
+					var original = drag.get('placeholder');
+
+					original.setStyle('visibility', '');
+
+					instance.stopDragging();
+				},
+
+				_onDragExit: function(event) {
+					var instance = this;
+
+					var drag = event.target;
+					var drop = event.drop;
+
+					var previousDropNode = drop.get('node');
+					var currentDropNode = A.DD.DDM.activeDrop.get('node');
+
+					if (instance.isValidDropZone(previousDropNode)) {
+						previousDropNode.removeClass('active-area');
+					}
+
+					var invalidDrop = (!currentDropNode.hasClass('portlet-boundary') &&
+					 					!instance.isValidDropZone(currentDropNode));
+
+					var sameNode = (previousDropNode.compareTo(currentDropNode));
+
+					var proxy = drag._getProxy();
+					var action = 'removeClass';
+
+					if (invalidDrop || sameNode) {
+						action = 'addClass';
+					}
+
+					instance.setInsideNested(currentDropNode);
+
+					proxy[action]('not-intersecting');
+				},
+
+				_onDragOver: function(event) {
+					var instance = this;
+
+					var drag = event.drag;
+					var drop = event.drop;
+
+					var dragNode = drag.get('placeholder');
+					var dropNode = drop.get('node');
+
+					if (dropNode.get('className').indexOf('portlet-boundary') > -1 && !instance._insideNested) {
+						try {
+							var currentSection = instance.getCurrentSection(event);
+
+							if (currentSection == 1) {
+								dropNode.before(dragNode);
+							} else if (currentSection == 2) {
+								dropNode.after(dragNode);
+							}
+
+							DDM.syncActiveShims();
+						}
+						catch (e) {}
+					}
+				},
+
+				_onDragStart: function(event) {
+					var instance = this;
+
+					var drag = event.target;
+
+					var proxy = drag.get('dragNode');
+					var original = drag.get('placeholder');
+
+					drag._updateProxy();
+
+					instance.startDragging();
+
+					instance._originalPreviousSibling = original.get('previousSibling');
+					instance._originalParent = original.get('parentNode');
+
+					var dropZones = instance.dropZones;
+
+					for (var i = dropZones.length - 1; i >= 0; i--) {
+						DOM.addClass(dropZones[i], 'drop-area');
+					}
+				},
+
+				_onDropEnter: function(event) {
+					var instance = this;
+
+					var drag = event.drag;
+					var drop = event.drop;
+
+					var dragNode = drag.get('placeholder');
+					var dropNode = drop.get('node');
+
+					instance.setInsideNested(dropNode);
+
+					if (instance.isValidDropZone(dropNode)) {
+						dropNode.addClass('active-area');
+
+						drag._getProxy().removeClass('not-intersecting');
+
+						if (!dropNode.contains(dragNode)) {
+							try {
+								var portletColumn = dropNode.one(instance._columnSelector);
+
+								if (portletColumn) {
+									portletColumn.appendChild(dragNode);
 								}
 							}
+							catch (e) {}
 						}
-					)
-					.render();
-				}
-			);
-		},
-
-		trigger: function(event) {
-			var instance = this;
-
-			var draggables = instance._draggables;
-
-			if (event.indexOf('Event') < 0) {
-				event += 'Event';
-			}
-
-			for (var i in draggables) {
-				draggables[i].fireEvent(event);
-			}
-		},
-
-		_findIndex: function(portlet, parentNode) {
-			var instance = this;
-
-			parentNode = parentNode || portlet.parentNode;
-
-			return jQuery('> .portlet-boundary', parentNode).index(portlet);
-		},
-
-		_saveLayout: function(options) {
-			var instance = this;
-
-			var data = {
-				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-				p_l_id: themeDisplay.getPlid()
-			};
-
-			jQuery.extend(data, options);
-
-			jQuery.ajax(
-				{
-					url: themeDisplay.getPathMain() + '/portal/update_layout',
-					data: data
-				}
-			);
-		}
-	};
-
-	var Columns = {
-		init: function(options) {
-			var instance = this;
-
-			instance._columns = options.columnSelector;
-			instance._portlets = options.boxSelector;
-
-			instance._grid = jQuery(options.grid);
-
-			instance._handleSelector = options.handleSelector;
-			instance._boxSelector = options.boxSelector;
-			instance._onCompleteCallback = options.onComplete;
-
-			instance._gridColumns = '.lfr-column';
-
-			var columns = jQuery(instance._gridColumns);
-
-			instance.dropZones = [];
-
-			for (var i = columns.length - 1; i >= 0; i--) {
-				new Alloy.Droppable(columns[i], 'portlets');
-
-				instance.dropZones[i] = columns[i];
-			}
-
-			var portlets = columns.find(instance._boxSelector);
-
-			for (var i = portlets.length - 1; i >= 0; i--) {
-				instance.add(portlets[i]);
-			}
-		},
-
-		add: function(portlet) {
-			var instance = this;
-
-			var draggable = new columnPortlet(portlet, 'portlets');
-			var handle = jQuery(instance._handleSelector, portlet);
-
-			var id = Alloy.generateId(handle[0]);
-
-			draggable.setHandleElId(id);
-
-			Layout._draggables[portlet.id] = draggable;
-
-			if (Liferay.Portlet.isStatic(portlet)) {
-				draggable.lock();
-			}
-			else {
-				handle.css('cursor', 'move');
-			}
-		},
-
-		getGrid: function() {
-			var instance = this;
-
-			return instance._grid || jQuery([]);
-		},
-
-		refresh: function(portlet) {
-			var instance = this;
-
-			if (portlet.id.indexOf('p_p_id_118_') === 0) {
-				var jPortlet = jQuery(portlet);
-
-				var columns = jPortlet.find(instance._gridColumns);
-
-				for (var i = columns.length - 1; i >= 0; i--){
-					new Alloy.Droppable(columns[i], 'portlets');
-
-					instance.dropZones.push(columns[i]);
-				}
-			}
-
-			instance.add(portlet);
-		},
-
-		startDragging: function() {
-			var instance = this;
-
-			instance._grid.addClass('dragging');
-		},
-
-		stopDragging: function() {
-			var instance = this;
-
-			instance._grid.removeClass('dragging');
-
-			Dom.removeClass(instance.dropZones, 'drop-area');
-			Dom.removeClass(instance.dropZones, 'active-area');
-		}
-	};
-
-	var FreeForm = {
-		init: function(options) {
-			var instance = this;
-
-			instance._columns = jQuery(options.columnSelector);
-
-			var portlets = instance._columns.find(options.boxSelector);
-
-			for (var i = portlets.length - 1; i >= 0; i--) {
-				instance.add(portlets[i]);
-			}
-
-			instance._portlets = portlets;
-		},
-
-		add: function(portlet) {
-			var instance = this;
-
-			var handle = jQuery('.portlet-header-bar, .portlet-title-default, .portlet-topper', portlet);
-
-			handle.css('cursor', 'move');
-
-			var jPortlet = jQuery(portlet);
-
-			jPortlet.css('position', 'absolute');
-
-			var helperZIndex = instance._maxZIndex + 10;
-
-			var draggable = new freeFormPortlet(portlet, 'portlets');
-
-			var id = handle.generateId();
-
-			draggable.setHandleElId(id);
-
-			Layout._draggables[portlet.id] = draggable;
-
-			jPortlet.mousedown(
-				function(event) {
-					if (instance._current != this) {
-						instance._moveToTop(this);
-						instance._savePosition(this, true);
-						instance._current = this;
-						this.style.zIndex = instance._maxZIndex;
 					}
-				}
-			);
 
-			var resize = new Alloy.Resize(portlet, {
-					proxy: true,
-					setSize: false
-				}
-			);
+					A.Lang.later(50, A, instance._syncShims);
+				},
 
-			var resizeBox = jQuery('.portlet-content-container, .portlet-borderless-container', portlet);
+				_onDropExit: function(event) {
+					var instance = this;
 
-			var delta = (jPortlet.height() || 0) - (resizeBox.height() || 0);
+					var drop = event.target;
+					var dropNode = drop.get('node');
 
-			resize.on(
-				'resize',
-				function(data) {
-					var rBoxHeight = parseInt(resizeBox[0].style.height, 10);
+					instance.setInsideNested(dropNode);
+				},
 
-					var portletHeight = data.height;
+				_onDropHit: function(event) {
+					var instance = this;
 
-					var newHeight = data.height - delta;
-					var newWidth = data.width;
+					var drag = event.drag;
+					var dragNode = drag.get('placeholder');
+					var drop = event.drop;
+					var dropNode = drop.get('node');
 
-					resizeBox.css('height', newHeight);
+					var portletColumn;
 
-					jPortlet.css(
-						{
-							height: 'auto',
-							width: newWidth
+					 if (dropNode.hasClass('portlet-boundary')) {
+						portletColumn = dropNode.get('parentNode');
+						dropNode = portletColumn.get('parentNode');
+					} else if (instance.isValidDropZone(dropNode)) {
+						portletColumn = dropNode.one(instance._columnSelector);
+
+						if (portletColumn != instance._originalParent) {
+							if (!instance._originalParent.one('.portlet-boundary')) {
+								instance._originalParent.addClass('empty');
+							}
 						}
-					);
-
-					instance._savePosition(portlet);
-				}
-			);
-
-			if ((parseInt(portlet.style.top, 10) + parseInt(portlet.style.left, 10)) == 0) {
-				portlet.style.top = (20 * portlet.columnPos || instance._portletCounter) + 'px';
-				portlet.style.left = (20 * portlet.columnPos || instance._portletCounter) + 'px';
-
-				instance._portletCounter++;
-			}
-
-			instance._current = portlet;
-		},
-
-		refresh: function(portletBound) {
-			var instance = this;
-
-			if (portletBound) {
-				instance.add(portletBound);
-			}
-		},
-
-		_moveToTop: function(portlet, temporary) {
-			var instance = this;
-
-			var container = portlet.parentNode;
-			portlet.oldPosition = Layout._findIndex(portlet);
-
-			if (!temporary) {
-				container.appendChild(portlet);
-			}
-			else {
-				portlet.style.zIndex = instance._maxZIndex + 5;
-
-				jQuery(portlet).one(
-					'click',
-					function(event) {
-						instance._moveToTop(this);
 					}
-				);
-			}
-		},
 
-		_savePosition: function(portlet, wasClicked) {
-			var instance = this;
-
-			var resizeBox = jQuery(portlet).find('.portlet-content-container, .portlet-borderless-container')[0];
-			var position = Layout._findIndex(portlet);
-			var portletId = Liferay.Util.getPortletId(portlet.id);
-			var changedIndex = (position != portlet.oldPosition);
-			var changedPosition = (resizeBox && !wasClicked);
-
-			if (changedIndex || changedPosition) {
-				if (changedIndex) {
-					var currentColumnId = Liferay.Util.getColumnId(portlet.parentNode.id);
-
-					Layout._saveLayout(
-						{
-							cmd: 'move',
-							p_p_col_id: currentColumnId,
-							p_p_col_pos: position,
-							p_p_id: portletId
-						}
-					);
-				}
-
-				if (changedPosition) {
-					Layout._saveLayout(
-						{
-							cmd: 'drag',
-							height: resizeBox.style.height,
-							left: portlet.style.left,
-							p_p_id: portletId,
-							top: portlet.style.top,
-							width: portlet.style.width
-						}
-					);
-				}
-			}
-		},
-
-		_portletCounter: 1,
-
-		_maxZIndex: 99
-	};
-
-	var draggablePortlet = Alloy.DragProxy.extend(
-		{
-			initialize: function() {
-				var instance = this;
-
-				instance._super.apply(instance, arguments);
-
-				var el = instance.getDragEl();
-
-				Dom.setStyle(el, 'opacity', 0.67);
-
-				instance.invalidHandleTypes = {
-					A: 'A',
-					INPUT: 'INPUT',
-					BUTTON: 'BUTTON',
-					TEXTAREA: 'TEXTAREA'
-				};
-			},
-
-			startDrag: function(x, y) {
-				var instance = this;
-
-				instance._super.apply(instance, arguments);
-
-				var proxy = instance.getDragEl();
-				var original = instance.getEl();
-
-				instance._updateProxy();
-
-				Dom.setStyle(original, 'visibility', 'hidden');
-			},
-
-			_createProxy: function() {
-				var instance = this;
-
-				var proxy = jQuery(Liferay.Template.PORTLET);
-
-				proxy.addClass('aui-proxy');
-
-				return proxy;
-			},
-
-			_getPlaceholder: function() {
-				var instance = this;
-
-				return instance.getEl();
-			},
-
-			_getProxy: function() {
-				var instance = this;
-
-				if (!instance._proxy) {
-					var proxy = instance.getDragEl();
-
-					var proxyDisplay = jQuery('.aui-proxy', proxy);
-
-					instance._proxy = proxyDisplay;
-				}
-
-				return instance._proxy;
-			},
-
-			_updateProxy: function() {
-				var instance = this;
-
-				var original = instance.getEl();
-				var proxy = instance.getDragEl();
-
-				var obj = jQuery(original);
-
-				var width = original.offsetWidth;
-				var height = original.offsetHeight;
-				var div = [];
-
-				proxy = jQuery(proxy);
-
-				var proxyDisplay = proxy.find('.aui-proxy');
-
-				if (!proxyDisplay.length) {
-					proxyDisplay = instance._createProxy();
-
-					proxy.prepend(proxyDisplay);
-				}
-
-				proxy.css('border-width', 0);
-
-				var titleHtml = obj.find('.portlet-title, .portlet-title-default').html();
-
-				proxyDisplay.find('.portlet-title').html(titleHtml);
-
-				proxyDisplay.css(
-					{
-						height: height,
-						width: width,
-						zIndex: Liferay.zIndex.DRAG_ITEM
+					if (portletColumn) {
+						portletColumn.removeClass('empty');
 					}
-				);
 
-				proxy.css(
-					{
-						height: 'auto',
-						width: 'auto'
-					}
-				);
+					if (instance.hasMoved(dragNode)) {
+						var position = instance.findIndex(dragNode);
+						var currentColumnId = Liferay.Util.getColumnId(dragNode.get('parentNode').get('id'));
+						var portletId = Liferay.Util.getPortletId(dragNode.get('id'));
 
-				return proxy;
-			}
-		}
-	);
-
-	var columnPortlet = draggablePortlet.extend(
-		{
-			initialize: function() {
-				var instance = this;
-
-				instance._super.apply(this, arguments);
-
-				instance.goingUp = false;
-
-				instance.lastY = 0;
-			},
-
-			endDrag: function(event) {
-				var instance = this;
-
-				var portlet = instance.getEl();
-				var proxy = instance.getDragEl();
-
-				Dom.setStyle(proxy, 'visibility', 'hidden');
-				Dom.setStyle(portlet, 'visibility', '');
-
-				if (portlet.parentNode != instance._originalParent) {
-					if (!Dom.getElementsByClassName('portlet', 'div', instance._originalParent).length) {
-						Dom.addClass(instance._originalParent, 'empty');
-					}
-				}
-
-				Columns.stopDragging();
-
-				Dom.removeClass(Columns.dropZones, 'drop-area');
-				Dom.removeClass(Columns.dropZones, 'active-area');
-
-				Dom.setStyle(proxy, 'top', 0);
-				Dom.setStyle(proxy, 'left', 0);
-			},
-
-		    onDrag: function(event) {
-				var instance = this;
-
-				var y = Event.getPageY(event);
-
-				var tolerance = 5;
-
-		        if (y < instance.lastY && (instance.lastY - y) >= tolerance) {
-					instance.goingUp = true;
-				} else if (y > instance.lastY && (y - instance.lastY) >= tolerance) {
-					instance.goingUp = false;
-		        }
-
-				instance.lastY = y;
-		    },
-
-			onDragDrop: function(event, id) {
-				var instance = this;
-
-				var target = Dom.get(id);
-				var portlet = instance.getEl();
-
-				if (instance._isValidDropZone(target)) {
-					jQuery('> .empty', target).removeClass('empty');
-				}
-
-				if (DDM.interactionInfo.validDrop) {
-					var inNested = (id.indexOf('118_INSTANCE') === 0);
-
-					if ((inNested || !instance._eventProcessed(event)) && instance._hasMoved(portlet) && !event.stopProcessing) {
-						var position = Layout._findIndex(portlet, instance._getPortletColumn(target));
-						var currentColumnId = Liferay.Util.getColumnId(portlet.parentNode.id);
-						var portletId = Liferay.Util.getPortletId(portlet.id);
-
-						Layout._saveLayout(
+						instance.saveLayout(
 							{
 								cmd: 'move',
 								p_p_col_id: currentColumnId,
@@ -562,199 +455,322 @@
 								p_p_id: portletId
 							}
 						);
-
-						event.eventProcessed = true;
-						event.stopProcessing = true;
 					}
 				}
-			},
-
-			onDragEnter: function(event, id) {
-				var instance = this;
-
-				var target = Dom.get(id);
-
-				if (instance._isValidDropZone(target)) {
-					Dom.addClass(target, 'active-area');
-
-					var divColumn = instance._getPortletColumn(target);
-					var portlet = instance.getEl();
-
-					if (divColumn != instance._originalParent || (portlet.parentNode == divColumn)) {
-
-						try {
-							var placeHolder = instance._getPlaceholder();
-
-							divColumn.appendChild(placeHolder);
-
-							while (placeHolder.previousSibling && Liferay.Portlet.isStatic(placeHolder.previousSibling.id)) {
-								divColumn.insertBefore(placeHolder, placeHolder.previousSibling);
-							}
-						}
-						catch (e) {}
-					}
-
-					instance._getProxy().removeClass('not-intersecting');
-				}
-			},
-
-			onDragOut: function(event, id) {
-				var instance = this;
-
-				var portlet = instance._getPlaceholder();
-		        var target = Dom.get(id);
-
-				if (instance._isValidDropZone(target)) {
-
-					Dom.removeClass(target, 'active-area');
-
-					instance._getProxy().addClass('not-intersecting');
-				}
-				else if (id.indexOf('p_p_id_118_') === 0) {
-					instance.insideNested = false;
-				}
-
-				DDM.refreshCache();
-			},
-
-		    onDragOver: function(event, id) {
-				var instance = this;
-
-				var portlet = instance._getPlaceholder();
-				var target = Dom.get(id);
-				var destClass = (target.className || '').toLowerCase();
-
-				if (Dom.hasClass(target, 'portlet-boundary')) {
-					var parent = target.parentNode;
-
-					instance.insideNested = (id.indexOf('p_p_id_118_') === 0);
-
-					if (!instance.insideNested) {
-						try {
-							if (!Liferay.Portlet.isStatic(target.id)) {
-								if (instance.goingUp) {
-									parent.insertBefore(portlet, target)
-								} else {
-									parent.insertBefore(portlet, target.nextSibling);
-					            }
-							}
-						}
-						catch (e) {}
-					}
-
-		            DDM.refreshCache();
-		        }
-				else if (instance._isValidDropZone(target)) {
-					var column = target;
-
-					var divColumn = instance._getPortletColumn(target);
-
-					instance._getProxy().removeClass('not-intersecting');
-
-					if (Dom.hasClass(column, 'active-area')) {
-						if (Dom.hasClass(divColumn, 'empty')) {
-							try {
-								divColumn.appendChild(portlet);
-							}
-							catch (e) {}
-						}
-					}
-				}
-		    },
-
-			startDrag: function(x, y) {
-				var instance = this;
-
-				instance._super.apply(instance, arguments);
-
-				var proxy = instance.getDragEl();
-				var original = instance.getEl();
-
-				Columns.startDragging();
-
-				Dom.addClass(Columns.dropZones, 'drop-area');
-
-				instance._originalParent = original.parentNode;
-				instance._originalPreviousSibling = Dom.getPreviousSibling(original);
-			},
-
-			_eventProcessed: function(event) {
-				var instance = this;
-
-				var alreadyProcessed = true;
-
-				if (!event.eventProcessed) {
-					alreadyProcessed = false;
-
-					event.eventProcessed = true;
-				}
-
-				return alreadyProcessed;
-			},
-
-			_getPortletColumn: function(target) {
-				var instance = this;
-
-				return jQuery('.lfr-portlet-column:first', target)[0];
-			},
-
-			_hasMoved: function(portlet) {
-				var instance = this;
-
-				var columnOrderChanged = (Dom.getPreviousSibling(portlet) != instance._originalPreviousSibling);
-				var columnContainerChanged = (portlet.parentNode != instance._originalParent);
-
-				return columnOrderChanged || columnContainerChanged;
-			},
-
-			_isValidDropZone: function(target) {
-				var instance = this;
-
-				return target.className.indexOf('lfr-column') > -1;
 			}
-		}
-	);
+		);
 
-	var freeFormPortlet = draggablePortlet.extend(
-		{
-			endDrag: function(event) {
-				var instance = this;
+		var FreeFormLayout = function() {
+			FreeFormLayout.superclass.constructor.apply(this, arguments);
+		};
 
-				instance._super.apply(instance, arguments);
+		FreeFormLayout.NAME = 'freeform';
 
-				var portlet = instance.getEl();
-				var proxy = instance.getDragEl();
+		A.extend(
+			FreeFormLayout,
+			PortalLayout,
+			{
+				initializer: function(options) {
+					var instance = this;
 
-				var left = parseInt(portlet.style.left, 10);
-				var top = parseInt(portlet.style.top, 10);
+					var columns = A.all(instance._columnSelector);
 
-				FreeForm._savePosition(portlet);
+					instance.after('drag:end', instance._onDragEnd);
+					instance.after('drag:start', instance._onDragStart);
 
-				Dom.setStyle(proxy, 'visibility', 'hidden');
-				Dom.setStyle(portlet, 'visibility', '');
+					columns.each(instance.initializeColumns, instance);
+				},
 
-				Dom.setStyle(proxy, 'top', 0);
-				Dom.setStyle(proxy, 'left', 0);
-			},
+				add: function(portlet) {
+					var instance = this;
 
-			startDrag: function(x, y) {
-				var instance = this;
+					portlet = A.get(portlet);
 
-				instance._super.apply(instance, arguments);
+					if (!portlet._registeredDraggable) {
+						var handle = portlet.one(instance._handleSelector);
 
-				var original = instance.getEl();
+						handle.setStyle('cursor', 'move');
 
-				FreeForm._moveToTop(original);
+						portlet.setStyle('position', 'absolute');
+
+						var helperZIndex = instance._maxZIndex + 10;
+
+						var draggablePortlet = new DraggablePortlet(
+							{
+								bubbles: instance,
+								groups: 'portlets',
+								handles: [instance._handleSelector],
+								node: portlet
+							}
+						)
+						.plug(
+							A.Plugin.DDProxy,
+							{
+								borderStyle: '0'
+							}
+						)
+						.plug(A.Plugin.DDWinScroll);
+
+						portlet.on('mousedown', instance._onMouseDown, instance);
+
+						var resize = new A.Resize(
+							{
+								node: portlet,
+								proxy: true,
+								setSize: false
+							}
+						);
+
+						var resizeBox = portlet.one('.portlet-content-container, .portlet-borderless-container');
+
+						var delta = (portlet.get('offsetHeight') || 0) - (resizeBox.get('offsetHeight') || 0);
+
+						resize.on(
+							'resize',
+							function(event) {
+								var rBoxHeight = parseInt(resizeBox.getStyle('height'), 10);
+
+								var portletHeight = event.height;
+
+								var newHeight = event.height - delta;
+								var newWidth = event.width;
+
+								resizeBox.setStyle('height', newHeight + 'px');
+
+								portlet.setStyles(
+									{
+										height: 'auto',
+										width: newWidth + 'px'
+									}
+								);
+
+								instance._savePosition(portlet);
+							}
+						);
+
+						if ((parseInt(portlet.getStyle('top'), 10) + parseInt(portlet.getStyle('left'), 10)) == 0) {
+							portlet.setStyles(
+								{
+									left: (20 * portlet.columnPos || instance._portletCounter) + 'px',
+									top: (20 * portlet.columnPos || instance._portletCounter) + 'px'
+								}
+							);
+
+							instance._portletCounter++;
+						}
+
+						portlet._registeredDraggable = true;
+
+						instance._current = portlet;
+					}
+				},
+
+				initializeColumns: function(node, i, nodeList) {
+					var instance = this;
+
+					var portlets = node.queryAll('.portlet-boundary');
+
+					portlets.each(instance.add, instance);
+				},
+
+				refresh: function(portlet) {
+					var instance = this;
+
+					if (portlet) {
+						instance.add(portlet);
+					}
+				},
+
+				_moveToTop: function(portlet) {
+					var instance = this;
+
+					var container = portlet.get('parentNode');
+
+					portlet.oldPosition = instance.findIndex(portlet);
+
+					container.appendChild(portlet);
+				},
+
+				_onDragEnd: function(event) {
+					var instance = this;
+
+					var drag = event.target;
+
+					var portlet = drag.get('placeholder');
+					var proxy = drag.get('dragNode');
+
+					var left = parseInt(portlet.getStyle('left'), 10);
+					var top = parseInt(portlet.getStyle('top'), 10);
+
+					instance._savePosition(portlet);
+				},
+
+				_onDragStart: function(event) {
+					var instance = this;
+
+					var drag = event.target;
+
+					var original = drag.get('placeholder');
+
+					drag._updateProxy();
+
+					instance._moveToTop(original);
+				},
+
+				_onMouseDown: function(event) {
+					var instance = this;
+
+					var portlet = event.currentTarget;
+
+					if (instance._current != portlet) {
+						instance._moveToTop(portlet);
+						instance._savePosition(portlet, true);
+						instance._current = portlet;
+
+						portlet.setStyle('zIndex', instance._maxZIndex);
+
+						event.halt();
+					}
+				},
+
+				_savePosition: function(portlet, wasClicked) {
+					var instance = this;
+
+					var portletColumn = portlet.get('parentNode');
+
+					var resizeBox = portlet.one('.portlet-content-container, .portlet-borderless-container');
+					var position = instance.findIndex(portlet);
+					var portletId = Liferay.Util.getPortletId(portlet.get('id'));
+					var changedIndex = (position != portlet.oldPosition);
+					var changedPosition = (resizeBox && !wasClicked);
+
+					if (changedIndex || changedPosition) {
+						if (changedIndex) {
+							var currentColumnId = Liferay.Util.getColumnId(portletColumn.get('id'));
+
+							instance.saveLayout(
+								{
+									cmd: 'move',
+									p_p_col_id: currentColumnId,
+									p_p_col_pos: position,
+									p_p_id: portletId
+								}
+							);
+						}
+
+						if (changedPosition) {
+							instance.saveLayout(
+								{
+									cmd: 'drag',
+									height: resizeBox.getStyle('height'),
+									left: portlet.getStyle('left'),
+									p_p_id: portletId,
+									top: portlet.getStyle('top'),
+									width: portlet.getStyle('width')
+								}
+							);
+						}
+					}
+				},
+
+				_portletCounter: 1,
+
+				_maxZIndex: 99
 			}
-		}
-	);
+		);
 
-	Layout.Columns = Columns;
-	Layout.FreeForm = FreeForm;
+		var DraggablePortlet = function() {
+			DraggablePortlet.superclass.constructor.apply(this, arguments);
+		};
 
-	Layout.Portlet = draggablePortlet;
-	Layout.columnPortlet = columnPortlet;
-	Layout.freeFormPortlet = freeFormPortlet;
+		DraggablePortlet.ATTRS = {
+			placeholder: {
+				getter: function() {
+					var instance = this;
 
-	Liferay.Layout = Layout;
-})();
+					return instance.get('node');
+				}
+			}
+		};
+
+		A.extend(
+			DraggablePortlet,
+			A.DD.Drag,
+			{
+				_createProxy: function() {
+					var instance = this;
+
+					var proxy = A.Node.create(Liferay.Template.PORTLET);
+
+					proxy.addClass('aui-proxy');
+
+					return proxy;
+				},
+
+				_getProxy: function() {
+					var instance = this;
+
+					if (!instance._proxy) {
+						var proxy = instance.get('dragNode');
+
+						var proxyDisplay = proxy.one('.aui-proxy');
+
+						if (!proxyDisplay) {
+							proxyDisplay = instance._createProxy();
+
+							proxy.append(proxyDisplay);
+						}
+
+						instance._proxy = proxyDisplay;
+					}
+
+					return instance._proxy;
+				},
+
+				_updateProxy: function() {
+					var instance = this;
+
+					var original = instance.get('placeholder');
+					var proxy = instance.get('dragNode');
+
+					var width = original.get('offsetWidth');
+					var height = original.get('offsetHeight');
+
+					var proxyDisplay = instance._getProxy();
+
+					var titleHtml = original.one('.portlet-title, .portlet-title-default').html();
+
+					proxyDisplay.one('.portlet-title').html(titleHtml);
+
+					proxyDisplay.setStyles(
+						{
+							height: height + 'px',
+							width: width + 'px',
+							zIndex: Liferay.zIndex.DRAG_ITEM
+						}
+					);
+
+					proxy.setStyles(
+						{
+							height: 'auto',
+							width: 'auto'
+						}
+					);
+				}
+			}
+		);
+
+		Layout.PortalLayout = PortalLayout;
+		Layout.ColumnLayout = ColumnLayout;
+		Layout.FreeFormLayout = FreeFormLayout;
+
+		Layout.DraggablePortlet = DraggablePortlet;
+
+		Liferay.Layout = Layout;
+	},
+	'',
+	{
+		requires: ['dd', 'io', 'resize'],
+		use: []
+	}
+);

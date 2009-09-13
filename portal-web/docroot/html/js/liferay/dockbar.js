@@ -5,6 +5,7 @@
 	AUI().use(
 		'context-overlay',
 		'io-stdmod',
+		'liferay-layout-configuration',
 		'overlay-manager',
 		'tool-item',
 		function(A) {
