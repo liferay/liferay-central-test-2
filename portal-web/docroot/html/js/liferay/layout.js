@@ -24,7 +24,9 @@ AUI().add(
 
 				var layoutHandler = instance.layoutHandler;
 
-				return layoutHandler.fire.apply(layoutHandler, arguments);
+				if (layoutHandler) {
+					return layoutHandler.fire.apply(layoutHandler, arguments);
+				}
 			},
 
 			on: function() {
@@ -32,7 +34,9 @@ AUI().add(
 
 				var layoutHandler = instance.layoutHandler;
 
-				return layoutHandler.on.apply(layoutHandler, arguments);
+				if (layoutHandler) {
+					return layoutHandler.on.apply(layoutHandler, arguments);
+				}
 			},
 
 			refresh: function() {
@@ -40,7 +44,9 @@ AUI().add(
 
 				var layoutHandler = instance.layoutHandler;
 
-				return layoutHandler.refresh.apply(layoutHandler, arguments);
+				if (layoutHandler) {
+					return layoutHandler.refresh.apply(layoutHandler, arguments);
+				}
 			}
 		};
 
@@ -305,7 +311,7 @@ AUI().add(
 					var drop = event.drop;
 
 					var previousDropNode = drop.get('node');
-					var currentDropNode = A.DD.DDM.activeDrop.get('node');
+					var currentDropNode = DDM.activeDrop.get('node');
 
 					if (instance.isValidDropZone(previousDropNode)) {
 						previousDropNode.removeClass('active-area');
