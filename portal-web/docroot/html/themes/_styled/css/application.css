@@ -206,6 +206,11 @@
 	background: #FFC;
 }
 
+.yui-dd-dragging {
+	background: #000;
+	visibility: hidden;
+}
+
 .aui-proxy {
 	cursor: move;
 	opacity: 0.65;
