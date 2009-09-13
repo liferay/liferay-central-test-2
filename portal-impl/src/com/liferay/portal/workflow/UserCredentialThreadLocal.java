@@ -22,7 +22,6 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
 
 /**
@@ -41,6 +40,6 @@ public class UserCredentialThreadLocal {
 	}
 
 	private static ThreadLocal<UserCredential> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<UserCredential>();
 
 }

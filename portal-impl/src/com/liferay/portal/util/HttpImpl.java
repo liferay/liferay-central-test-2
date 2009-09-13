@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.SystemProperties;
 
@@ -1070,8 +1069,7 @@ public class HttpImpl implements Http {
 
 	private static Log _log = LogFactoryUtil.getLog(HttpImpl.class);
 
-	private static ThreadLocal<Cookie[]> _cookies =
-		ThreadLocalManager.newThreadLocal();
+	private static ThreadLocal<Cookie[]> _cookies = new ThreadLocal<Cookie[]>();
 
 	private HttpClient _client = new HttpClient();
 	private Pattern _nonProxyHostsPattern;

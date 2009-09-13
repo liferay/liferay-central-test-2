@@ -22,7 +22,6 @@
 
 package com.liferay.portal.dao.shard;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
@@ -75,9 +74,5 @@ public class ShardDataSourceTargetSource implements TargetSource {
 		}
 
 	};
-
-	static {
-		ThreadLocalManager.registerThreadLocal(_dataSourceThreadLocal);
-	}
 
 }

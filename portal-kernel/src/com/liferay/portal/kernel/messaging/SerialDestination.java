@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
-
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -51,13 +49,8 @@ public class SerialDestination extends BaseDestination {
 		Runnable runnable = new Runnable() {
 
 			public void run() {
-				try {
-					for (MessageListener messageListener : messageListeners) {
-						messageListener.receive(message);
-					}
-				}
-				finally {
-					ThreadLocalManager.removeThreadLocals();
+				for (MessageListener messageListener : messageListeners) {
+					messageListener.receive(message);
 				}
 			}
 

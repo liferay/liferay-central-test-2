@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
-
 /**
  * <a href="PortletClassLoaderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,6 +38,6 @@ public class PortletClassLoaderUtil {
 	}
 
 	private static ThreadLocal<ClassLoader> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<ClassLoader>();
 
 }

@@ -25,8 +25,8 @@ package com.liferay.util.axis;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.util.SystemProperties;
 
 import java.io.BufferedInputStream;
@@ -165,7 +165,7 @@ public class SimpleHTTPSender extends HTTPSender {
 	private static Log _log = LogFactoryUtil.getLog(SimpleHTTPSender.class);
 
 	private static ThreadLocal<String> _currentCookie =
-		ThreadLocalManager.newThreadLocal(StringPool.BLANK);
+		new InitialThreadLocal<String>(StringPool.BLANK);
 	private static Pattern _pattern = Pattern.compile(
 		SystemProperties.get(
 			SimpleHTTPSender.class.getName() + ".regexp.pattern"));

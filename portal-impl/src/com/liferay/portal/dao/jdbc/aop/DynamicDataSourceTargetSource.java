@@ -24,7 +24,6 @@ package com.liferay.portal.dao.jdbc.aop;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 
 import java.util.Stack;
 
@@ -138,9 +137,9 @@ public class DynamicDataSourceTargetSource implements TargetSource {
 		LogFactoryUtil.getLog(DynamicDataSourceTargetSource.class);
 
 	private static ThreadLocal<Stack<String>> _methodStackThreadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<Stack<String>>();
 	private static ThreadLocal<Operation> _operationTypeThreadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<Operation>();
 
 	private DataSource _readDataSource;
 	private DataSource _writeDataSource;

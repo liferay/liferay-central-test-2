@@ -38,6 +38,6 @@ public class ProgressTrackerThreadLocal {
 	}
 
 	private static ThreadLocal<ProgressTracker> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<ProgressTracker>();
 
 }

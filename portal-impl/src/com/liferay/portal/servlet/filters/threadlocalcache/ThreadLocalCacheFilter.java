@@ -24,7 +24,6 @@ package com.liferay.portal.servlet.filters.threadlocalcache;
 
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
@@ -56,8 +55,6 @@ public class ThreadLocalCacheFilter extends BasePortalFilter {
 			EntityCacheUtil.clearLocalCache();
 			FinderCacheUtil.clearLocalCache();
 			PermissionCacheUtil.clearLocalCache();
-
-			ThreadLocalManager.removeThreadLocals();
 		}
 	}
 

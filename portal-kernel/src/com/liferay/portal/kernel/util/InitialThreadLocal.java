@@ -39,10 +39,6 @@ public class InitialThreadLocal<T> extends ThreadLocal<T> {
 		_initialValue = initialValue;
 	}
 
-	public void remove() {
-		set(_initialValue);
-	}
-
 	protected T initialValue() {
 		if (_initialValue instanceof Cloneable) {
 			try {

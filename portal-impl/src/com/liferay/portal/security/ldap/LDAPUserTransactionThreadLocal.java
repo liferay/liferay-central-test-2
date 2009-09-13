@@ -22,8 +22,6 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
-
 /**
  * <a href="LDAPUserTransactionThreadLocal.java.html"><b><i>View Source</i></b>
  * </a>
@@ -48,6 +46,6 @@ public class LDAPUserTransactionThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<Boolean>();
 
 }

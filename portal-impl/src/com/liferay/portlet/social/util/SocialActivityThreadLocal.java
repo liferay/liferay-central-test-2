@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.social.util;
 
-import com.liferay.portal.kernel.util.ThreadLocalManager;
-
 /**
  * <a href="SocialActivityThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,6 +45,6 @@ public class SocialActivityThreadLocal {
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+		new ThreadLocal<Boolean>();
 
 }

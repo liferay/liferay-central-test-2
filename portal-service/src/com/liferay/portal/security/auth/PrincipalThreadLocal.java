@@ -24,7 +24,6 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ThreadLocalManager;
 
 /**
  * <a href="PrincipalThreadLocal.java.html"><b><i>View Source</i></b></a>
@@ -57,7 +56,6 @@ public class PrincipalThreadLocal {
 
 	private static Log _log = LogFactoryUtil.getLog(PrincipalThreadLocal.class);
 
-	private static ThreadLocal<String> _threadLocal =
-		ThreadLocalManager.newThreadLocal();
+	private static ThreadLocal<String> _threadLocal = new ThreadLocal<String>();
 
 }
