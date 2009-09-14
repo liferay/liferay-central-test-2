@@ -72,6 +72,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		</c:if>
 
 		<aui:input name="name" />
+
 		<aui:input name="description" />
 
 		<aui:select name="type">
