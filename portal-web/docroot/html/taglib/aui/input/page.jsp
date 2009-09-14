@@ -37,7 +37,7 @@ boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:fi
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineField"));
-boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineLabel"));
+String inlineLabel =  GetterUtil.getString((String)request.getAttribute("aui:input:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
@@ -66,15 +66,17 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
 	<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 		<c:if test="<%= Validator.isNotNull(label) %>">
-			<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+			<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
-			<liferay-ui:message key="<%= label %>" />
+			<c:if test='<%= !inlineLabel.equals("right") %>'>
+				<liferay-ui:message key="<%= label %>" />
 
-			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-				<liferay-ui:icon-help message="<%= helpMessage %>" />
+				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+					<liferay-ui:icon-help message="<%= helpMessage %>" />
+				</c:if>
 			</c:if>
 
-			<c:if test="<%= !inlineLabel %>">
+			<c:if test="<%= Validator.isNull(inlineLabel) %>">
 				</label>
 			</c:if>
 		</c:if>
@@ -146,13 +148,24 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 				}
 				%>
 
-				<input <%= checked ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+				<c:if test='<%= inlineLabel.equals("left") %>'>
+					<liferay-ui:message key="<%= label %>" />
 
-				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
-					<liferay-ui:icon-help message="<%= helpMessage %>" />
+					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
 				</c:if>
 
-				<liferay-ui:message key="<%= label %>" />
+				<input <%= checked ? "checked" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= !id.equals(name) ? "id=\"" + id + "\"" : StringPool.BLANK %> name="<%= name %>" type="radio" value="<%= valueString %>" <%= _buildDynamicAttributes(dynamicAttributes) %> />
+
+
+				<c:if test='<%= !inlineLabel.equals("left") %>'>
+					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+						<liferay-ui:icon-help message="<%= helpMessage %>" />
+					</c:if>
+				</c:if>
 			</label>
 		</span>
 	</c:when>
@@ -219,7 +232,15 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= Validator.isNotNull(label) && inlineLabel %>">
+<c:if test='<%= Validator.isNotNull(label) && !type.equals("radio") && Validator.isNotNull(inlineLabel) %>'>
+	<c:if test='<%= inlineLabel.equals("right") %>'>
+		<liferay-ui:message key="<%= label %>" />
+
+		<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+			<liferay-ui:icon-help message="<%= helpMessage %>" />
+		</c:if>
+	</c:if>
+
 	</label>
 </c:if>
 

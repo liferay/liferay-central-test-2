@@ -29,7 +29,7 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("aui:field-w
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:inlineField"));
-boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
+String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:name"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wrapper:last"));
@@ -37,16 +37,19 @@ boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:field-wra
 
 <div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %> ">
 	<c:if test="<%= Validator.isNotNull(label) %>">
-		<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+		<label class="aui-form-label <%= Validator.isNotNull(inlineLabel) ? "inline-label" : StringPool.BLANK  %>" <%= !Validator.equals(name, namespace) ? "for=\"" + name + "\"" : StringPool.BLANK %>>
+
+		<c:if test='<%= !inlineLabel.equals("right") %>'>
 			<liferay-ui:message key="<%= label %>" />
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 				<liferay-ui:icon-help message="<%= helpMessage %>" />
 			</c:if>
+		</c:if>
 
-			<c:if test="<%= !inlineLabel %>">
-				</label>
-			</c:if>
+		<c:if test="<%= Validator.isNull(inlineLabel) %>">
+			</label>
+		</c:if>
 	</c:if>
 
 	<span class="aui-form-field">

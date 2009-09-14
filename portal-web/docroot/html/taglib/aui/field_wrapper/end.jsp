@@ -25,13 +25,23 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
+String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:helpMessage"));
+String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:inlineLabel"));
+String label = GetterUtil.getString((String)request.getAttribute("aui:field-wrapper:label"));
 %>
 
 		</select>
 	</span>
 
-	<c:if test="<%= inlineLabel %>">
+	<c:if test="<%= Validator.isNotNull(inlineLabel) %>">
+		<c:if test='<%= inlineLabel.equals("right") %>'>
+			<liferay-ui:message key="<%= label %>" />
+
+			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+				<liferay-ui:icon-help message="<%= helpMessage %>" />
+			</c:if>
+		</c:if>
+
 		</label>
 	</c:if>
 </div>
