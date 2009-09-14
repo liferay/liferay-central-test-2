@@ -269,12 +269,15 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 
 		<div id="<portlet:namespace />dailyTable" style="display: none;">
 			<aui:input checked="<%= dailyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="recur-every" name="dailyType" type="radio" value="0" />
+
 			<aui:input inlineField="<%= true %>" label="" maxlength="3" name="dailyInterval" size="3" type="text" value="<%= dailyInterval %>" /> <span class="after-field-text"><liferay-ui:message key="day-s" /></span><br />
+
 			<aui:input checked="<%= (dailyType == 1) %>" label="every-weekday" name="dailyType" type="radio" value="1" />
 		</div>
 
 		<div id="<portlet:namespace />weeklyTable" style="display: none;">
 			<aui:input inlineField="<%= true %>" inlineLabel="left" label="recur-every" maxlength="2" name="weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" />
+
 			<span class="after-field-text"><liferay-ui:message key="weeks-on" /></span>
 
 			<%
@@ -284,16 +287,19 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 			<aui:layout cssClass="weekdays">
 				<aui:column>
 					<aui:input inlineLabel="right" label="<%= days[0] %>" name='<%= "weeklyDayPos" + Calendar.SUNDAY %>' type="checkbox" value="<%= weeklyPosSu %>" />
+
 					<aui:input inlineLabel="right" label="<%= days[4] %>" name='<%= "weeklyDayPos" + Calendar.THURSDAY %>' type="checkbox" value="<%= weeklyPosTh %>" />
 				</aui:column>
 
 				<aui:column>
 					<aui:input inlineLabel="right" label="<%= days[1] %>" name='<%= "weeklyDayPos" + Calendar.MONDAY %>' type="checkbox" value="<%= weeklyPosMo %>" />
+					
 					<aui:input inlineLabel="right" label="<%= days[5] %>" name='<%= "weeklyDayPos" + Calendar.FRIDAY %>' type="checkbox" value="<%= weeklyPosFr %>" />
 				</aui:column>
 
 				<aui:column>
 					<aui:input inlineLabel="right" label="<%= days[2] %>" name='<%= "weeklyDayPos" + Calendar.TUESDAY %>' type="checkbox" value="<%= weeklyPosTu %>" />
+					
 					<aui:input inlineLabel="right" label="<%= days[6] %>" name='<%= "weeklyDayPos" + Calendar.SATURDAY %>' type="checkbox" value="<%= weeklyPosSa %>" />
 				</aui:column>
 

@@ -1608,7 +1608,7 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding: 5px;
 }
 
-/* ---------- Taglib Input Repeat ---------- */
+/* ---------- Taglib input repeat ---------- */
 
 .taglib-input-repeat .after-field-text {
 	float: left;
