@@ -225,6 +225,15 @@ public class DLFileShortcutLocalServiceUtil {
 			newToFolderId, newToName);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateStatus(
+		long userId, long fileShortcutId, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateStatus(userId, fileShortcutId, status, serviceContext);
+	}
+
 	public static DLFileShortcutLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("DLFileShortcutLocalService is not set");

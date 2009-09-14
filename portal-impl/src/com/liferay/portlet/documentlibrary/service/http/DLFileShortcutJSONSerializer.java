@@ -78,6 +78,19 @@ public class DLFileShortcutJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
+		jsonObj.put("status", model.getStatus());
+		jsonObj.put("statusByUserId", model.getStatusByUserId());
+		jsonObj.put("statusByUserName", model.getStatusByUserName());
+
+		Date statusDate = model.getStatusDate();
+
+		String statusDateJSON = StringPool.BLANK;
+
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
+		}
+
+		jsonObj.put("statusDate", statusDateJSON);
 		jsonObj.put("folderId", model.getFolderId());
 		jsonObj.put("toFolderId", model.getToFolderId());
 		jsonObj.put("toName", model.getToName());

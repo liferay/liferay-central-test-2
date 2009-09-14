@@ -64,6 +64,7 @@ public class DLFileEntrySoap implements Serializable {
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setVersion(model.getVersion());
+		soapModel.setPendingVersion(model.getPendingVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setReadCount(model.getReadCount());
 		soapModel.setExtraSettings(model.getExtraSettings());
@@ -239,6 +240,14 @@ public class DLFileEntrySoap implements Serializable {
 		_version = version;
 	}
 
+	public double getPendingVersion() {
+		return _pendingVersion;
+	}
+
+	public void setPendingVersion(double pendingVersion) {
+		_pendingVersion = pendingVersion;
+	}
+
 	public int getSize() {
 		return _size;
 	}
@@ -278,6 +287,7 @@ public class DLFileEntrySoap implements Serializable {
 	private String _title;
 	private String _description;
 	private double _version;
+	private double _pendingVersion;
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;

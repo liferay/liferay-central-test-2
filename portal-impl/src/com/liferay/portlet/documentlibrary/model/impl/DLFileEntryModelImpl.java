@@ -82,11 +82,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
+			{ "pendingVersion", new Integer(Types.DOUBLE) },
 			{ "size_", new Integer(Types.INTEGER) },
 			{ "readCount", new Integer(Types.INTEGER) },
 			{ "extraSettings", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,title VARCHAR(255) null,description STRING null,version DOUBLE,pendingVersion DOUBLE,size_ INTEGER,readCount INTEGER,extraSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -116,6 +117,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setVersion(soapModel.getVersion());
+		model.setPendingVersion(soapModel.getPendingVersion());
 		model.setSize(soapModel.getSize());
 		model.setReadCount(soapModel.getReadCount());
 		model.setExtraSettings(soapModel.getExtraSettings());
@@ -324,6 +326,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		_version = version;
 	}
 
+	public double getPendingVersion() {
+		return _pendingVersion;
+	}
+
+	public void setPendingVersion(double pendingVersion) {
+		_pendingVersion = pendingVersion;
+	}
+
 	public int getSize() {
 		return _size;
 	}
@@ -373,6 +383,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setVersion(getVersion());
+			model.setPendingVersion(getPendingVersion());
 			model.setSize(getSize());
 			model.setReadCount(getReadCount());
 			model.setExtraSettings(HtmlUtil.escape(getExtraSettings()));
@@ -416,6 +427,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
 		clone.setVersion(getVersion());
+		clone.setPendingVersion(getPendingVersion());
 		clone.setSize(getSize());
 		clone.setReadCount(getReadCount());
 		clone.setExtraSettings(getExtraSettings());
@@ -510,6 +522,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getDescription());
 		sb.append(", version=");
 		sb.append(getVersion());
+		sb.append(", pendingVersion=");
+		sb.append(getPendingVersion());
 		sb.append(", size=");
 		sb.append(getSize());
 		sb.append(", readCount=");
@@ -589,6 +603,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 		sb.append(getVersion());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>pendingVersion</column-name><column-value><![CDATA[");
+		sb.append(getPendingVersion());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>size</column-name><column-value><![CDATA[");
 		sb.append(getSize());
 		sb.append("]]></column-value></column>");
@@ -629,6 +647,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry> {
 	private String _title;
 	private String _description;
 	private double _version;
+	private double _pendingVersion;
 	private int _size;
 	private int _readCount;
 	private String _extraSettings;

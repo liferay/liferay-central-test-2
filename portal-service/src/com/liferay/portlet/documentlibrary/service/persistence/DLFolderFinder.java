@@ -28,17 +28,18 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLFolderFinder {
-	public int countFE_FS_ByG_F(long groupId, java.util.List<Long> folderIds)
+	public int countFE_FS_ByG_F_S(long groupId, java.util.List<Long> folderIds,
+		int status) throws com.liferay.portal.SystemException;
+
+	public int countF_FE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException;
 
-	public int countF_FE_FS_ByG_F(long groupId, java.util.List<Long> folderIds)
+	public java.util.List<Object> findFE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<Object> findFE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<Object> findF_FE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds, int start, int end)
+	public java.util.List<Object> findF_FE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

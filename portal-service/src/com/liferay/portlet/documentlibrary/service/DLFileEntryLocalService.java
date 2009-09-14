@@ -255,7 +255,7 @@ public interface DLFileEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFoldersFileEntriesCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -325,6 +325,21 @@ public interface DLFileEntryLocalService {
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, java.io.InputStream is, long size,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
+		long userId, long groupId, long folderId, java.lang.String name,
+		double version, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
+		long userId,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		int status, boolean reIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -75,11 +75,15 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "toFolderId", new Integer(Types.BIGINT) },
 			{ "toName", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -102,6 +106,10 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 		model.setFolderId(soapModel.getFolderId());
 		model.setToFolderId(soapModel.getToFolderId());
 		model.setToName(soapModel.getToName());
@@ -227,6 +235,47 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		_modifiedDate = modifiedDate;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	public String getStatusByUserName() {
+		return GetterUtil.getString(_statusByUserName);
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -269,6 +318,10 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
+			model.setStatus(getStatus());
+			model.setStatusByUserId(getStatusByUserId());
+			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
+			model.setStatusDate(getStatusDate());
 			model.setFolderId(getFolderId());
 			model.setToFolderId(getToFolderId());
 			model.setToName(HtmlUtil.escape(getToName()));
@@ -305,6 +358,10 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 		clone.setFolderId(getFolderId());
 		clone.setToFolderId(getToFolderId());
 		clone.setToName(getToName());
@@ -373,6 +430,14 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append(", folderId=");
 		sb.append(getFolderId());
 		sb.append(", toFolderId=");
@@ -424,6 +489,22 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>folderId</column-name><column-value><![CDATA[");
 		sb.append(getFolderId());
 		sb.append("]]></column-value></column>");
@@ -453,6 +534,11 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut> {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _folderId;
 	private long _toFolderId;
 	private String _toName;

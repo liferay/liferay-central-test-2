@@ -119,6 +119,10 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 
 	public void setVersion(double version);
 
+	public double getPendingVersion();
+
+	public void setPendingVersion(double pendingVersion);
+
 	public int getSize();
 
 	public void setSize(int size);

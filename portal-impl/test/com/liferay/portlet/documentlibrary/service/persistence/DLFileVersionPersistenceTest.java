@@ -81,6 +81,10 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setName(randomString());
 		newDLFileVersion.setVersion(nextDouble());
 		newDLFileVersion.setSize(nextInt());
+		newDLFileVersion.setStatus(nextInt());
+		newDLFileVersion.setStatusByUserId(nextLong());
+		newDLFileVersion.setStatusByUserName(randomString());
+		newDLFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(newDLFileVersion, false);
 
@@ -105,6 +109,15 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileVersion.getVersion(),
 			newDLFileVersion.getVersion());
 		assertEquals(existingDLFileVersion.getSize(), newDLFileVersion.getSize());
+		assertEquals(existingDLFileVersion.getStatus(),
+			newDLFileVersion.getStatus());
+		assertEquals(existingDLFileVersion.getStatusByUserId(),
+			newDLFileVersion.getStatusByUserId());
+		assertEquals(existingDLFileVersion.getStatusByUserName(),
+			newDLFileVersion.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(
+				existingDLFileVersion.getStatusDate()),
+			Time.getShortTimestamp(newDLFileVersion.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -157,6 +170,10 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setName(randomString());
 		dlFileVersion.setVersion(nextDouble());
 		dlFileVersion.setSize(nextInt());
+		dlFileVersion.setStatus(nextInt());
+		dlFileVersion.setStatusByUserId(nextLong());
+		dlFileVersion.setStatusByUserName(randomString());
+		dlFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(dlFileVersion, false);
 

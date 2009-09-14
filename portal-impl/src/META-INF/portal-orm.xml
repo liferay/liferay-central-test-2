@@ -1254,6 +1254,7 @@
 			<basic name="title" />
 			<basic name="description" />
 			<basic name="version" />
+			<basic name="pendingVersion" />
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>
@@ -1295,10 +1296,17 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="folderId" />
 			<basic name="toFolderId" />
 			<basic name="toName" />
 			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1318,7 +1326,14 @@
 			<basic name="size">
 				<column name="SIZE_" />
 			</basic>
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2523,6 +2538,7 @@
 			<transient name="actionURLRedirect" />
 			<transient name="addDefaultResource" />
 			<transient name="ajaxable" />
+			<transient name="assetRendererFactoryClass" />
 			<transient name="configurationActionClass" />
 			<transient name="controlPanelEntryCategory" />
 			<transient name="controlPanelEntryClass" />
@@ -2824,6 +2840,7 @@
 		<table name="JournalArticle" />
 		<attributes>
 			<transient name="smallImageType" />
+			<transient name="statusByUserUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" name="JournalArticleImage">

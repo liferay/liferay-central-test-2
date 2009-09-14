@@ -326,9 +326,10 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static int getFoldersFileEntriesCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getFoldersFileEntriesCount(groupId, folderIds);
+		return getService()
+				   .getFoldersFileEntriesCount(groupId, folderIds, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
@@ -425,6 +426,29 @@ public class DLFileEntryLocalServiceUtil {
 		return getService()
 				   .updateFileEntry(userId, groupId, folderId, newFolderId,
 			name, sourceFileName, title, description, extraSettings, is, size,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
+		long userId, long groupId, long folderId, java.lang.String name,
+		double version, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateStatus(userId, groupId, folderId, name, version,
+			status, serviceContext);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
+		long userId,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		int status, boolean reIndex,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateStatus(userId, fileVersion, status, reIndex,
 			serviceContext);
 	}
 

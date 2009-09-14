@@ -368,6 +368,7 @@ create table DLFileEntry (
 	title VARCHAR(255) null,
 	description STRING null,
 	version DOUBLE,
+	pendingVersion DOUBLE,
 	size_ INTEGER,
 	readCount INTEGER,
 	extraSettings TEXT null
@@ -392,6 +393,10 @@ create table DLFileShortcut (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
 	folderId LONG,
 	toFolderId LONG,
 	toName VARCHAR(255) null
@@ -407,7 +412,11 @@ create table DLFileVersion (
 	folderId LONG,
 	name VARCHAR(255) null,
 	version DOUBLE,
-	size_ INTEGER
+	size_ INTEGER,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table DLFolder (

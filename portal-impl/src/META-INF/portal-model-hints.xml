@@ -963,6 +963,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="version" type="double" />
+		<field name="pendingVersion" type="double" />
 		<field name="size" type="int" />
 		<field name="readCount" type="int" />
 		<field name="extraSettings" type="String">
@@ -989,6 +990,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="toFolderId" type="long" />
 		<field name="toName" type="String">
@@ -1008,6 +1013,10 @@
 		</field>
 		<field name="version" type="double" />
 		<field name="size" type="int" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFolder">
 		<field name="uuid" type="String" />

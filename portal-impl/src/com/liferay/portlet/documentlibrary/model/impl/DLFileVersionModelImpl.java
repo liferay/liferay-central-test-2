@@ -76,9 +76,13 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
-			{ "size_", new Integer(Types.INTEGER) }
+			{ "size_", new Integer(Types.INTEGER) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -103,6 +107,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		model.setName(soapModel.getName());
 		model.setVersion(soapModel.getVersion());
 		model.setSize(soapModel.getSize());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -149,6 +157,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = groupId;
+		}
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -251,6 +269,47 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		_size = size;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	public String getStatusByUserName() {
+		return GetterUtil.getString(_statusByUserName);
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public DLFileVersion toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLFileVersion)this;
@@ -271,6 +330,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			model.setName(HtmlUtil.escape(getName()));
 			model.setVersion(getVersion());
 			model.setSize(getSize());
+			model.setStatus(getStatus());
+			model.setStatusByUserId(getStatusByUserId());
+			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
+			model.setStatusDate(getStatusDate());
 
 			model = (DLFileVersion)Proxy.newProxyInstance(DLFileVersion.class.getClassLoader(),
 					new Class[] { DLFileVersion.class },
@@ -306,6 +369,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		clone.setName(getName());
 		clone.setVersion(getVersion());
 		clone.setSize(getSize());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -407,6 +474,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 		sb.append(getVersion());
 		sb.append(", size=");
 		sb.append(getSize());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -459,6 +534,22 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 			"<column><column-name>size</column-name><column-value><![CDATA[");
 		sb.append(getSize());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -467,6 +558,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 
 	private long _fileVersionId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -481,5 +574,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion> {
 	private double _originalVersion;
 	private boolean _setOriginalVersion;
 	private int _size;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private transient ExpandoBridge _expandoBridge;
 }

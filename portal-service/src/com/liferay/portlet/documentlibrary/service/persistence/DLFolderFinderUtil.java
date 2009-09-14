@@ -28,28 +28,30 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public class DLFolderFinderUtil {
-	public static int countFE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds)
+	public static int countFE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countFE_FS_ByG_F(groupId, folderIds);
+		return getFinder().countFE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
-	public static int countF_FE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds)
+	public static int countF_FE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countF_FE_FS_ByG_F(groupId, folderIds);
+		return getFinder().countF_FE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
-	public static java.util.List<Object> findFE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds, int start, int end)
+	public static java.util.List<Object> findFE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findFE_FS_ByG_F(groupId, folderIds, start, end);
+		return getFinder()
+				   .findFE_FS_ByG_F_S(groupId, folderIds, status, start, end);
 	}
 
-	public static java.util.List<Object> findF_FE_FS_ByG_F(long groupId,
-		java.util.List<Long> folderIds, int start, int end)
+	public static java.util.List<Object> findF_FE_FS_ByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findF_FE_FS_ByG_F(groupId, folderIds, start, end);
+		return getFinder()
+				   .findF_FE_FS_ByG_F_S(groupId, folderIds, status, start, end);
 	}
 
 	public static DLFolderFinder getFinder() {

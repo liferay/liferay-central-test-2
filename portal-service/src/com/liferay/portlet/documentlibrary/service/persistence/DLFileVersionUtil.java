@@ -114,68 +114,121 @@ public class DLFileVersionUtil {
 		return getPersistence().fetchByPrimaryKey(fileVersionId);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
-		long folderId, java.lang.String name)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N(
+		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByF_N(folderId, name);
+		return getPersistence().findByG_F_N(groupId, folderId, name);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
-		long folderId, java.lang.String name, int start, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByF_N(folderId, name, start, end);
+		return getPersistence().findByG_F_N(groupId, folderId, name, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
-		long folderId, java.lang.String name, int start, int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N(
+		long groupId, long folderId, java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByF_N(folderId, name, start, end, obc);
+		return getPersistence()
+				   .findByG_F_N(groupId, folderId, name, start, end, obc);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
-		long folderId, java.lang.String name,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
-		return getPersistence().findByF_N_First(folderId, name, obc);
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_Last(
-		long folderId, java.lang.String name,
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_First(
+		long groupId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
-		return getPersistence().findByF_N_Last(folderId, name, obc);
+		return getPersistence().findByG_F_N_First(groupId, folderId, name, obc);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByF_N_PrevAndNext(
-		long fileVersionId, long folderId, java.lang.String name,
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_Last(
+		long groupId, long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
+		return getPersistence().findByG_F_N_Last(groupId, folderId, name, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByG_F_N_PrevAndNext(
+		long fileVersionId, long groupId, long folderId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
 		return getPersistence()
-				   .findByF_N_PrevAndNext(fileVersionId, folderId, name, obc);
+				   .findByG_F_N_PrevAndNext(fileVersionId, groupId, folderId,
+			name, obc);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_V(
-		long folderId, java.lang.String name, double version)
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_V(
+		long groupId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
-		return getPersistence().findByF_N_V(folderId, name, version);
+		return getPersistence().findByG_F_N_V(groupId, folderId, name, version);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
-		long folderId, java.lang.String name, double version)
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
+		long groupId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByF_N_V(folderId, name, version);
+		return getPersistence().fetchByG_F_N_V(groupId, folderId, name, version);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByF_N_V(
-		long folderId, java.lang.String name, double version,
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchByG_F_N_V(
+		long groupId, long folderId, java.lang.String name, double version,
 		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .fetchByF_N_V(folderId, name, version, retrieveFromCache);
+				   .fetchByG_F_N_V(groupId, folderId, name, version,
+			retrieveFromCache);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N_S(
+		long groupId, long folderId, java.lang.String name, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_F_N_S(groupId, folderId, name, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N_S(
+		long groupId, long folderId, java.lang.String name, int status,
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByG_F_N_S(groupId, folderId, name, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByG_F_N_S(
+		long groupId, long folderId, java.lang.String name, int status,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByG_F_N_S(groupId, folderId, name, status, start, end,
+			obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_S_First(
+		long groupId, long folderId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
+		return getPersistence()
+				   .findByG_F_N_S_First(groupId, folderId, name, status, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByG_F_N_S_Last(
+		long groupId, long folderId, java.lang.String name, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
+		return getPersistence()
+				   .findByG_F_N_S_Last(groupId, folderId, name, status, obc);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByG_F_N_S_PrevAndNext(
+		long fileVersionId, long groupId, long folderId, java.lang.String name,
+		int status, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
+		return getPersistence()
+				   .findByG_F_N_S_PrevAndNext(fileVersionId, groupId, folderId,
+			name, status, obc);
 	}
 
 	public static java.util.List<Object> findWithDynamicQuery(
@@ -206,30 +259,43 @@ public class DLFileVersionUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
-	public static void removeByF_N(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByF_N(folderId, name);
+	public static void removeByG_F_N(long groupId, long folderId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_F_N(groupId, folderId, name);
 	}
 
-	public static void removeByF_N_V(long folderId, java.lang.String name,
-		double version)
+	public static void removeByG_F_N_V(long groupId, long folderId,
+		java.lang.String name, double version)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileVersionException {
-		getPersistence().removeByF_N_V(folderId, name, version);
+		getPersistence().removeByG_F_N_V(groupId, folderId, name, version);
+	}
+
+	public static void removeByG_F_N_S(long groupId, long folderId,
+		java.lang.String name, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_F_N_S(groupId, folderId, name, status);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
 
-	public static int countByF_N(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByF_N(folderId, name);
+	public static int countByG_F_N(long groupId, long folderId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_F_N(groupId, folderId, name);
 	}
 
-	public static int countByF_N_V(long folderId, java.lang.String name,
-		double version) throws com.liferay.portal.SystemException {
-		return getPersistence().countByF_N_V(folderId, name, version);
+	public static int countByG_F_N_V(long groupId, long folderId,
+		java.lang.String name, double version)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_F_N_V(groupId, folderId, name, version);
+	}
+
+	public static int countByG_F_N_S(long groupId, long folderId,
+		java.lang.String name, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_F_N_S(groupId, folderId, name, status);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

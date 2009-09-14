@@ -109,16 +109,16 @@ public class DLFileVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
-		long folderId, java.lang.String name, double version)
+		long groupId, long folderId, java.lang.String name, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getFileVersion(folderId, name, version);
+		return getService().getFileVersion(groupId, folderId, name, version);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long folderId, java.lang.String name)
+		long groupId, long folderId, java.lang.String name, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getFileVersions(folderId, name);
+		return getService().getFileVersions(groupId, folderId, name, status);
 	}
 
 	public static DLFileVersionLocalService getService() {

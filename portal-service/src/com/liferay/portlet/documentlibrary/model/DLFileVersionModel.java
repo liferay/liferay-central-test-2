@@ -95,5 +95,25 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 
 	public void setSize(int size);
 
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
+
 	public DLFileVersion toEscapedModel();
 }

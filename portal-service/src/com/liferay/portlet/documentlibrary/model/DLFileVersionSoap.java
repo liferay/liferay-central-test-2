@@ -59,6 +59,10 @@ public class DLFileVersionSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -191,6 +195,38 @@ public class DLFileVersionSoap implements Serializable {
 		_size = size;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private long _fileVersionId;
 	private long _groupId;
 	private long _companyId;
@@ -201,4 +237,8 @@ public class DLFileVersionSoap implements Serializable {
 	private String _name;
 	private double _version;
 	private int _size;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

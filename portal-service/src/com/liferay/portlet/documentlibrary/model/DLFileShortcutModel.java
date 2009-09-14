@@ -87,6 +87,26 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public int getStatus();
+
+	public void setStatus(int status);
+
+	public long getStatusByUserId();
+
+	public void setStatusByUserId(long statusByUserId);
+
+	public String getStatusByUserUuid() throws SystemException;
+
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	public String getStatusByUserName();
+
+	public void setStatusByUserName(String statusByUserName);
+
+	public Date getStatusDate();
+
+	public void setStatusDate(Date statusDate);
+
 	public long getFolderId();
 
 	public void setFolderId(long folderId);

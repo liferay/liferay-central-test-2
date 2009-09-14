@@ -152,21 +152,21 @@ public interface DLFolderLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> getFileEntriesAndFileShortcuts(long groupId,
-		long folderId, int start, int end)
+		long folderId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> getFileEntriesAndFileShortcuts(long groupId,
-		java.util.List<Long> folderIds, int start, int end)
+		java.util.List<Long> folderIds, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId)
-		throws com.liferay.portal.SystemException;
+	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId,
+		int status) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -183,21 +183,21 @@ public interface DLFolderLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<Long> folderIds, int start, int end)
-		throws com.liferay.portal.SystemException;
+		long groupId, java.util.List<Long> folderIds, int status, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		long folderId) throws com.liferay.portal.SystemException;
+		long folderId, int status) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<Long> folderIds)
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

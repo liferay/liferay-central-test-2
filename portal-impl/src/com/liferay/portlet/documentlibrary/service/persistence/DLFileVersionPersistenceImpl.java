@@ -71,36 +71,67 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_G_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByF_N",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByF_N",
+			FINDER_CLASS_NAME_LIST, "findByG_F_N",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_F_N",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByF_N",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByF_N_V",
+			FINDER_CLASS_NAME_LIST, "countByG_F_N",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Double.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByF_N_V",
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_F_N_V",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Double.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), Double.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_F_N_V",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), Double.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_G_F_N_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_F_N_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_F_N_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_F_N_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_F_N_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
@@ -114,8 +145,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
 			dlFileVersion);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 			new Object[] {
+				new Long(dlFileVersion.getGroupId()),
 				new Long(dlFileVersion.getFolderId()),
 				
 			dlFileVersion.getName(), new Double(dlFileVersion.getVersion())
@@ -229,8 +261,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_N_V,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 			new Object[] {
+				new Long(dlFileVersionModelImpl.getOriginalGroupId()),
 				new Long(dlFileVersionModelImpl.getOriginalFolderId()),
 				
 			dlFileVersionModelImpl.getOriginalName(),
@@ -325,12 +358,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			dlFileVersion);
 
 		if (!isNew &&
-				((dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
+				((dlFileVersion.getGroupId() != dlFileVersionModelImpl.getOriginalGroupId()) ||
+				(dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
 				!Validator.equals(dlFileVersion.getName(),
 					dlFileVersionModelImpl.getOriginalName()) ||
 				(dlFileVersion.getVersion() != dlFileVersionModelImpl.getOriginalVersion()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_N_V,
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 				new Object[] {
+					new Long(dlFileVersionModelImpl.getOriginalGroupId()),
 					new Long(dlFileVersionModelImpl.getOriginalFolderId()),
 					
 				dlFileVersionModelImpl.getOriginalName(),
@@ -339,12 +374,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (isNew ||
-				((dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
+				((dlFileVersion.getGroupId() != dlFileVersionModelImpl.getOriginalGroupId()) ||
+				(dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
 				!Validator.equals(dlFileVersion.getName(),
 					dlFileVersionModelImpl.getOriginalName()) ||
 				(dlFileVersion.getVersion() != dlFileVersionModelImpl.getOriginalVersion()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 				new Object[] {
+					new Long(dlFileVersion.getGroupId()),
 					new Long(dlFileVersion.getFolderId()),
 					
 				dlFileVersion.getName(), new Double(dlFileVersion.getVersion())
@@ -401,11 +438,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersion;
 	}
 
-	public List<DLFileVersion> findByF_N(long folderId, String name)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(folderId), name };
+	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
+		String name) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(folderId),
+				
+				name
+			};
 
-		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N,
 				finderArgs, this);
 
 		if (list == null) {
@@ -418,6 +459,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
 
 				query.append("dlFileVersion.folderId = ?");
 
@@ -442,6 +487,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(folderId);
 
 				if (name != null) {
@@ -460,8 +507,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -470,22 +517,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
-		int end) throws SystemException {
-		return findByF_N(folderId, name, start, end, null);
+	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
+		String name, int start, int end) throws SystemException {
+		return findByG_F_N(groupId, folderId, name, start, end, null);
 	}
 
-	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
+		String name, int start, int end, OrderByComparator obc)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(folderId),
+				new Long(groupId), new Long(folderId),
 				
 				name,
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
-		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_F_N,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F_N,
 				finderArgs, this);
 
 		if (list == null) {
@@ -498,6 +546,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
 
 				query.append("dlFileVersion.folderId = ?");
 
@@ -546,6 +598,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(folderId);
 
 				if (name != null) {
@@ -565,7 +619,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_F_N,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F_N,
 					finderArgs, list);
 
 				closeSession(session);
@@ -575,36 +629,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public DLFileVersion findByF_N_First(long folderId, String name,
-		OrderByComparator obc)
+	public DLFileVersion findByG_F_N_First(long groupId, long folderId,
+		String name, OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
-		List<DLFileVersion> list = findByF_N(folderId, name, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No DLFileVersion exists with the key {");
-
-			msg.append("folderId=" + folderId);
-
-			msg.append(", ");
-			msg.append("name=" + name);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchFileVersionException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public DLFileVersion findByF_N_Last(long folderId, String name,
-		OrderByComparator obc)
-		throws NoSuchFileVersionException, SystemException {
-		int count = countByF_N(folderId, name);
-
-		List<DLFileVersion> list = findByF_N(folderId, name, count - 1, count,
+		List<DLFileVersion> list = findByG_F_N(groupId, folderId, name, 0, 1,
 				obc);
 
 		if (list.isEmpty()) {
@@ -612,6 +640,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 			msg.append("No DLFileVersion exists with the key {");
 
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
 			msg.append("folderId=" + folderId);
 
 			msg.append(", ");
@@ -626,12 +657,42 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public DLFileVersion[] findByF_N_PrevAndNext(long fileVersionId,
-		long folderId, String name, OrderByComparator obc)
+	public DLFileVersion findByG_F_N_Last(long groupId, long folderId,
+		String name, OrderByComparator obc)
+		throws NoSuchFileVersionException, SystemException {
+		int count = countByG_F_N(groupId, folderId, name);
+
+		List<DLFileVersion> list = findByG_F_N(groupId, folderId, name,
+				count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileVersionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileVersion[] findByG_F_N_PrevAndNext(long fileVersionId,
+		long groupId, long folderId, String name, OrderByComparator obc)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
 
-		int count = countByF_N(folderId, name);
+		int count = countByG_F_N(groupId, folderId, name);
 
 		Session session = null;
 
@@ -642,6 +703,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 			query.append(
 				"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+			query.append("dlFileVersion.groupId = ?");
+
+			query.append(" AND ");
 
 			query.append("dlFileVersion.folderId = ?");
 
@@ -690,6 +755,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
 			qPos.add(folderId);
 
 			if (name != null) {
@@ -715,15 +782,20 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public DLFileVersion findByF_N_V(long folderId, String name, double version)
+	public DLFileVersion findByG_F_N_V(long groupId, long folderId,
+		String name, double version)
 		throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = fetchByF_N_V(folderId, name, version);
+		DLFileVersion dlFileVersion = fetchByG_F_N_V(groupId, folderId, name,
+				version);
 
 		if (dlFileVersion == null) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileVersion exists with the key {");
 
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
 			msg.append("folderId=" + folderId);
 
 			msg.append(", ");
@@ -744,15 +816,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return dlFileVersion;
 	}
 
-	public DLFileVersion fetchByF_N_V(long folderId, String name, double version)
-		throws SystemException {
-		return fetchByF_N_V(folderId, name, version, true);
+	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
+		String name, double version) throws SystemException {
+		return fetchByG_F_N_V(groupId, folderId, name, version, true);
 	}
 
-	public DLFileVersion fetchByF_N_V(long folderId, String name,
-		double version, boolean retrieveFromCache) throws SystemException {
+	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
+		String name, double version, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(folderId),
+				new Long(groupId), new Long(folderId),
 				
 				name, new Double(version)
 			};
@@ -760,7 +833,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_N_V,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 					finderArgs, this);
 		}
 
@@ -774,6 +847,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append(
 					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
 
 				query.append("dlFileVersion.folderId = ?");
 
@@ -802,6 +879,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(folderId);
 
 				if (name != null) {
@@ -817,7 +896,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 				DLFileVersion dlFileVersion = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 						finderArgs, list);
 				}
 				else {
@@ -825,11 +904,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 					cacheResult(dlFileVersion);
 
-					if ((dlFileVersion.getFolderId() != folderId) ||
+					if ((dlFileVersion.getGroupId() != groupId) ||
+							(dlFileVersion.getFolderId() != folderId) ||
 							(dlFileVersion.getName() == null) ||
 							!dlFileVersion.getName().equals(name) ||
 							(dlFileVersion.getVersion() != version)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 							finderArgs, dlFileVersion);
 					}
 				}
@@ -841,7 +921,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_N_V,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
 						finderArgs, new ArrayList<DLFileVersion>());
 				}
 
@@ -855,6 +935,375 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 			else {
 				return (DLFileVersion)result;
 			}
+		}
+	}
+
+	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
+		String name, int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(folderId),
+				
+				name, new Integer(status)
+			};
+
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("dlFileVersion.name IS NULL");
+				}
+				else {
+					query.append("dlFileVersion.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.status = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("dlFileVersion.folderId DESC, ");
+				query.append("dlFileVersion.name DESC, ");
+				query.append("dlFileVersion.version DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(status);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileVersion>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
+		String name, int status, int start, int end) throws SystemException {
+		return findByG_F_N_S(groupId, folderId, name, status, start, end, null);
+	}
+
+	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
+		String name, int status, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(folderId),
+				
+				name, new Integer(status),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_F_N_S,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("dlFileVersion.name IS NULL");
+				}
+				else {
+					query.append("dlFileVersion.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.status = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("dlFileVersion.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("dlFileVersion.folderId DESC, ");
+					query.append("dlFileVersion.name DESC, ");
+					query.append("dlFileVersion.version DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(status);
+
+				list = (List<DLFileVersion>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<DLFileVersion>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_F_N_S,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public DLFileVersion findByG_F_N_S_First(long groupId, long folderId,
+		String name, int status, OrderByComparator obc)
+		throws NoSuchFileVersionException, SystemException {
+		List<DLFileVersion> list = findByG_F_N_S(groupId, folderId, name,
+				status, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileVersionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileVersion findByG_F_N_S_Last(long groupId, long folderId,
+		String name, int status, OrderByComparator obc)
+		throws NoSuchFileVersionException, SystemException {
+		int count = countByG_F_N_S(groupId, folderId, name, status);
+
+		List<DLFileVersion> list = findByG_F_N_S(groupId, folderId, name,
+				status, count - 1, count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No DLFileVersion exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(", ");
+			msg.append("status=" + status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileVersionException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public DLFileVersion[] findByG_F_N_S_PrevAndNext(long fileVersionId,
+		long groupId, long folderId, String name, int status,
+		OrderByComparator obc)
+		throws NoSuchFileVersionException, SystemException {
+		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
+
+		int count = countByG_F_N_S(groupId, folderId, name, status);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ");
+
+			query.append("dlFileVersion.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("dlFileVersion.folderId = ?");
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("dlFileVersion.name IS NULL");
+			}
+			else {
+				query.append("dlFileVersion.name = ?");
+			}
+
+			query.append(" AND ");
+
+			query.append("dlFileVersion.status = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("dlFileVersion.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("dlFileVersion.folderId DESC, ");
+				query.append("dlFileVersion.name DESC, ");
+				query.append("dlFileVersion.version DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folderId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			qPos.add(status);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					dlFileVersion);
+
+			DLFileVersion[] array = new DLFileVersionImpl[3];
+
+			array[0] = (DLFileVersion)objArray[0];
+			array[1] = (DLFileVersion)objArray[1];
+			array[2] = (DLFileVersion)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -989,18 +1438,27 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public void removeByF_N(long folderId, String name)
+	public void removeByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
-		for (DLFileVersion dlFileVersion : findByF_N(folderId, name)) {
+		for (DLFileVersion dlFileVersion : findByG_F_N(groupId, folderId, name)) {
 			remove(dlFileVersion);
 		}
 	}
 
-	public void removeByF_N_V(long folderId, String name, double version)
-		throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = findByF_N_V(folderId, name, version);
+	public void removeByG_F_N_V(long groupId, long folderId, String name,
+		double version) throws NoSuchFileVersionException, SystemException {
+		DLFileVersion dlFileVersion = findByG_F_N_V(groupId, folderId, name,
+				version);
 
 		remove(dlFileVersion);
+	}
+
+	public void removeByG_F_N_S(long groupId, long folderId, String name,
+		int status) throws SystemException {
+		for (DLFileVersion dlFileVersion : findByG_F_N_S(groupId, folderId,
+				name, status)) {
+			remove(dlFileVersion);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -1009,10 +1467,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByF_N(long folderId, String name) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(folderId), name };
+	public int countByG_F_N(long groupId, long folderId, String name)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(folderId),
+				
+				name
+			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1025,6 +1488,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append("SELECT COUNT(dlFileVersion) ");
 				query.append("FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
 
 				query.append("dlFileVersion.folderId = ?");
 
@@ -1043,6 +1510,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(folderId);
 
 				if (name != null) {
@@ -1059,8 +1528,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1069,15 +1538,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
-	public int countByF_N_V(long folderId, String name, double version)
-		throws SystemException {
+	public int countByG_F_N_V(long groupId, long folderId, String name,
+		double version) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				new Long(folderId),
+				new Long(groupId), new Long(folderId),
 				
 				name, new Double(version)
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N_V,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N_V,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1090,6 +1559,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append("SELECT COUNT(dlFileVersion) ");
 				query.append("FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
 
 				query.append("dlFileVersion.folderId = ?");
 
@@ -1112,6 +1585,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(folderId);
 
 				if (name != null) {
@@ -1130,7 +1605,84 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N_V,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N_V,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_F_N_S(long groupId, long folderId, String name,
+		int status) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(folderId),
+				
+				name, new Integer(status)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N_S,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(dlFileVersion) ");
+				query.append("FROM DLFileVersion dlFileVersion WHERE ");
+
+				query.append("dlFileVersion.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("dlFileVersion.name IS NULL");
+				}
+				else {
+					query.append("dlFileVersion.name = ?");
+				}
+
+				query.append(" AND ");
+
+				query.append("dlFileVersion.status = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N_S,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1211,5 +1763,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl
 	protected com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence;
 	@BeanReference(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected com.liferay.portal.service.persistence.UserPersistence userPersistence;
+	@BeanReference(name = "com.liferay.portlet.asset.service.persistence.AssetEntryPersistence.impl")
+	protected com.liferay.portlet.asset.service.persistence.AssetEntryPersistence assetEntryPersistence;
 	private static Log _log = LogFactoryUtil.getLog(DLFileVersionPersistenceImpl.class);
 }
