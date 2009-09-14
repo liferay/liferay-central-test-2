@@ -1608,6 +1608,31 @@ fieldset:last-child, .aui-form fieldset:last-child {
 	padding: 5px;
 }
 
+/* ---------- Taglib Input Repeat ---------- */
+
+.taglib-input-repeat .after-field-text {
+	float: left;
+	font-weight:bold;
+	position:relative;
+	top:0.5em;
+}
+
+
+.taglib-input-repeat .end-date-field {
+	clear: both;
+	padding-left: 1em;
+}
+
+.taglib-input-repeat .input-container {
+	position: relative;
+	top: 0.5em;
+}
+
+.taglib-input-repeat .weekdays {
+	clear: both;
+	padding-top: 1em;
+}
+
 /* ---------- Taglib ratings ---------- */
 
 .taglib-ratings.stars {

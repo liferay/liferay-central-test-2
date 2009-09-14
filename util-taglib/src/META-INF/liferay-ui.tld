@@ -1268,6 +1268,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>input-repeat</name>
+		<tag-class>com.liferay.taglib.ui.InputRepeatTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>event</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>input-resource</name>
 		<tag-class>com.liferay.taglib.ui.InputResourceTag</tag-class>
 		<body-content>JSP</body-content>
