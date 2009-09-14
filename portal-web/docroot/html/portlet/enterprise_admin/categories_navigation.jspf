@@ -103,7 +103,7 @@ for (int i = 0; i < categoryNames.length; i++) {
 %>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function () {
 			var <portlet:namespace />formNavigator = new Liferay.EnterpriseAdmin.FormNavigator(
 				{

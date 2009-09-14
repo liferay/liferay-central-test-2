@@ -330,7 +330,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		document.<portlet:namespace />fm['<portlet:namespace />settings(<%= PropsKeys.LDAP_GROUPS_DN %>)'].value = baseDN;
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			Liferay.Util.toggleBoxes('<portlet:namespace />ldapImportEnabledCheckbox', '<portlet:namespace />importEnabledSettings');
 			Liferay.Util.toggleBoxes('<portlet:namespace />ldapExportEnabledCheckbox', '<portlet:namespace />exportEnabledSettings');

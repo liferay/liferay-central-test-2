@@ -29,7 +29,7 @@
 		return <portlet:namespace />bbCode.getHTML();
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
 				{

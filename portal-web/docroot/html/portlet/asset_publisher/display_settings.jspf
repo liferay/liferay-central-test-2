@@ -273,7 +273,7 @@
 </table>
 
 <script type="text/javascript">
-	jQuery(
+	AUI().ready(
 		function() {
 			var selectDisplayStyle = jQuery('#<portlet:namespace />displayStyle');
 

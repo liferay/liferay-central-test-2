@@ -255,7 +255,7 @@ long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/
 		Liferay.currentURL = '<%= UnicodeFormatter.toString(currentURL) %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
-		jQuery(
+		AUI().ready(
 			function() {
 				Liferay.Util.addInputType();
 				Liferay.Util.addInputFocus();

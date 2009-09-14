@@ -144,7 +144,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		);
 	}
 
-	jQuery(
+	AUI().ready(
 		function() {
 			<portlet:namespace />updateScheduledPublishEventsDiv();
 		}
