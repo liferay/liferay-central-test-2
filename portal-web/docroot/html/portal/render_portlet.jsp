@@ -265,12 +265,6 @@ if ((portletParallelRender != null) && (portletParallelRender.booleanValue() == 
 	showRefreshIcon = false;
 }
 
-boolean useCustomTitle = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-use-custom-title", StringPool.FALSE));
-
-if (useCustomTitle) {
-	showPortletIcon = false;
-}
-
 Group group = layout.getGroup();
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
