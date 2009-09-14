@@ -30,8 +30,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -247,7 +247,7 @@ public class ShoppingCategoryLocalServiceImpl
 			parentCategories.add(tempCategory);
 
 			if (tempCategory.getParentCategoryId() ==
-					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+					ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 				break;
 			}
@@ -303,7 +303,7 @@ public class ShoppingCategoryLocalServiceImpl
 		if (mergeWithParentCategory &&
 			(categoryId != parentCategoryId) &&
 			(parentCategoryId !=
-				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
 		}
@@ -315,7 +315,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws SystemException {
 
 		if (parentCategoryId !=
-				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			ShoppingCategory parentCategory =
 				shoppingCategoryPersistence.fetchByPrimaryKey(parentCategoryId);
@@ -324,7 +324,7 @@ public class ShoppingCategoryLocalServiceImpl
 				(groupId != parentCategory.getGroupId())) {
 
 				parentCategoryId =
-					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
+					ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
@@ -336,7 +336,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws SystemException {
 
 		if (parentCategoryId ==
-				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			return parentCategoryId;
 		}

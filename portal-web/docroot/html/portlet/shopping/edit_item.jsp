@@ -31,7 +31,7 @@ ShoppingItem item = (ShoppingItem)request.getAttribute(WebKeys.SHOPPING_ITEM);
 
 long itemId = BeanParamUtil.getLong(item, request, "itemId");
 
-long categoryId = BeanParamUtil.getLong(item, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long categoryId = BeanParamUtil.getLong(item, request, "categoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 // Fields
 

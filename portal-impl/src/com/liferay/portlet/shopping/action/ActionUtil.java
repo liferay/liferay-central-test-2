@@ -27,10 +27,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
@@ -74,7 +74,8 @@ public class ActionUtil {
 		ShoppingCategory category = null;
 
 		if ((categoryId > 0) &&
-			(categoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+			(categoryId !=
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
 		}

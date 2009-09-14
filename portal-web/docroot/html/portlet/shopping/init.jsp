@@ -76,6 +76,7 @@
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingCart" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingCategory" %>
+<%@ page import="com.liferay.portlet.shopping.model.ShoppingCategoryConstants" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingCoupon" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingItem" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingItemField" %>

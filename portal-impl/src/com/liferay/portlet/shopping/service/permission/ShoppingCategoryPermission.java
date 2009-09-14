@@ -29,7 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
+import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 
 /**
@@ -74,7 +74,9 @@ public class ShoppingCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (categoryId == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+		if (categoryId ==
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
 			return ShoppingPermission.contains(
 				permissionChecker, groupId, actionId);
 		}
@@ -107,7 +109,7 @@ public class ShoppingCategoryPermission {
 
 		if (actionId.equals(ActionKeys.VIEW)) {
 			while (categoryId !=
-						ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+						ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 				category = ShoppingCategoryLocalServiceUtil.getCategory(
 					categoryId);
@@ -135,7 +137,7 @@ public class ShoppingCategoryPermission {
 		}
 		else {
 			while (categoryId !=
-						ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) {
+						ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 				if (permissionChecker.hasOwnerPermission(
 						category.getCompanyId(),

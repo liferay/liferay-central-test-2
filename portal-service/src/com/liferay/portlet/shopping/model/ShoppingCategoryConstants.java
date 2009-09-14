@@ -20,31 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.shopping.model.impl;
-
-import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
+package com.liferay.portlet.shopping.model;
 
 /**
- * <a href="ShoppingCategoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCategoryConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class ShoppingCategoryImpl
-	extends ShoppingCategoryModelImpl implements ShoppingCategory {
+public class ShoppingCategoryConstants {
 
-	public ShoppingCategoryImpl() {
-	}
-
-	public boolean isRoot() {
-		if (getParentCategoryId() ==
-				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 }

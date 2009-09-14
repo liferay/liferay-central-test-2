@@ -31,12 +31,12 @@ ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPP
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 
-long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
 
@@ -60,7 +60,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
 
-		if (parentCategoryId != <%= ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>) {
+		if (parentCategoryId != <%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>) {
 			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
 		}
 	}
@@ -79,7 +79,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= parentCategoryId != ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
+<c:if test="<%= parentCategoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
 	<div class="breadcrumbs">
 		<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
 	</div>
@@ -118,7 +118,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 				</td>
 				<td>
 					<div id="<portlet:namespace />merge-with-parent-checkbox-div"
-						<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>">
+						<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">
 							style="display: none;"
 						</c:if>
 					>
