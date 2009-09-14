@@ -143,10 +143,6 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		_helpMessage = helpMessage;
 	}
 
-	public boolean isInlineField() {
-		return _inlineField;
-	}
-
 	public void setInlineField(boolean inlineField) {
 		_inlineField = inlineField;
 	}
