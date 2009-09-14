@@ -55,6 +55,7 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -568,7 +569,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 				threadPKs, message.getThreadId(), message.getThreadId());
 
 			if ((message.getParentMessageId() ==
-					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) &&
+					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) &&
 				(discussion != null)) {
 
 				MBThread thread = MBThreadLocalServiceUtil.getThread(

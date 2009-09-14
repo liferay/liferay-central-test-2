@@ -32,6 +32,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
@@ -43,8 +44,6 @@ import com.liferay.portlet.messageboards.util.BBCodeUtil;
  * @author Brian Wing Shun Chan
  */
 public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
-
-	public static final long DEFAULT_PARENT_MESSAGE_ID = 0;
 
 	public MBMessageImpl() {
 	}
@@ -80,7 +79,9 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isRoot() {
-		if (getParentMessageId() == DEFAULT_PARENT_MESSAGE_ID) {
+		if (getParentMessageId() ==
+				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+
 			return true;
 		}
 		else {

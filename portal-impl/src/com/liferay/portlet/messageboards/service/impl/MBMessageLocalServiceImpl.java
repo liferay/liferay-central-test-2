@@ -72,10 +72,10 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
@@ -159,7 +159,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbMessagePersistence.update(message, false);
 
 		if (className.equals(BlogsEntry.class.getName()) &&
-			parentMessageId != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+			parentMessageId != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 
 			// Social
 
@@ -184,7 +184,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+		if (parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 			MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
 				classNameId, classPK);
 
@@ -295,7 +295,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId);
 
 		if (parentMessage == null) {
-			parentMessageId = MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID;
+			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
 		}
 
 		MBThread thread = null;
@@ -305,7 +305,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if ((thread == null) ||
-			(parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID)) {
+			(parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID)) {
 
 			threadId = counterLocalService.increment();
 
@@ -572,7 +572,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
+				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
 
 			deleteDiscussionSocialActivities(
 				BlogsEntry.class.getName(), messages);
@@ -705,7 +705,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					MBMessage childMessage = childrenMessages.get(0);
 
 					childMessage.setParentMessageId(
-						MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+						MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
 
 					mbMessagePersistence.update(childMessage, false);
 
@@ -866,7 +866,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (discussion != null) {
 			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
 
 			message = messages.get(0);
 		}
@@ -877,18 +877,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			try {
 				message = addDiscussionMessage(
 					userId, null, className, classPK, 0,
-					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, subject, subject,
-					new ServiceContext());
+					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
+					subject, new ServiceContext());
 			}
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Add failed, fetch {threadId=0, parentMessageId=" +
-							MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID + "}");
+							MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID + "}");
 				}
 
 				List<MBMessage> messages = mbMessagePersistence.findByT_P(
-					0, MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+					0, MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
 
 				if (messages.isEmpty()) {
 					throw se;
@@ -1665,7 +1665,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String inReplyTo = null;
 
 		if (message.getParentMessageId() !=
-				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 
 			inReplyTo = MBUtil.getMailId(
 				company.getMx(), message.getGroupId(), message.getCategoryId(),

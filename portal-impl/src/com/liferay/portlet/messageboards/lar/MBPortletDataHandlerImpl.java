@@ -51,9 +51,9 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
@@ -651,7 +651,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			long groupId = message.getGroupId();
 
-			if (parentMessageId != MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+			if (parentMessageId !=
+					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+
 				MBMessageUtil.findByPrimaryKey(parentMessageId);
 				MBThreadUtil.findByPrimaryKey(threadId);
 			}

@@ -33,7 +33,7 @@ long messageId = BeanParamUtil.getLong(message, request, "messageId");
 
 long categoryId = BeanParamUtil.getLong(message, request, "mbCategoryId");
 long threadId = BeanParamUtil.getLong(message, request, "threadId");
-long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
+long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId", MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID);
 
 String subject = BeanParamUtil.getString(message, request, "subject");
 

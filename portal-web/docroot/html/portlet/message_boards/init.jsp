@@ -55,6 +55,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBCategoryConstants" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMailingList" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBMessageConstants" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageFlag" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBStatsUser" %>
