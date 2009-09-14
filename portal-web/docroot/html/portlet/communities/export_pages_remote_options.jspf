@@ -39,6 +39,7 @@
 	(<liferay-ui:message key="organization-or-community" />)
 
 	<liferay-ui:message key="remote-pages-set" />
+
 	<aui:select label="remote-pages-set" name="remotePrivateLayout">
 		<aui:option label="public-pages" selected='<%= tabs1.equals("public-pages") %>' value="0" />
 		<aui:option label="private-pages" selected='<%= !tabs1.equals("public-pages") %>' value="1" />
