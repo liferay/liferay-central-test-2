@@ -298,7 +298,9 @@ public class PortletURLImpl
 			_portlet.getPublicRenderParameter(name);
 
 		if (publicRenderParameter == null) {
-			_log.warn("Public parameter " + name + "does not exist");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Public parameter " + name + "does not exist");
+			}
 
 			return;
 		}

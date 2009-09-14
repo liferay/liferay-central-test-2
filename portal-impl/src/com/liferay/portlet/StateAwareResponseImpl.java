@@ -110,12 +110,14 @@ public abstract class StateAwareResponseImpl
 			getPortlet().getPublicRenderParameter(name);
 
 		if (publicRenderParameter == null) {
-			_log.warn("Public parameter " + name + "does not exist");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Public parameter " + name + "does not exist");
+			}
 
 			return;
 		}
 
-		com.liferay.portal.kernel.xml.QName qName = 
+		com.liferay.portal.kernel.xml.QName qName =
 			publicRenderParameter.getQName();
 
 		String key = PortletQNameUtil.getKey(qName);
