@@ -256,7 +256,7 @@ portletURL.setParameter("name", name);
 
 		<aui:input name="file" type="file" />
 
-		<aui:input cssClass="edit-file-entry-title" name="title" /><div class="edit-file-entry-title-extension"><%= extension %></div>
+		<aui:input name="title" suffix="<%= extension %>" />
 
 		<aui:input name="description" />
 

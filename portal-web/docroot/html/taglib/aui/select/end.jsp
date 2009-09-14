@@ -28,9 +28,13 @@
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
+String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
+
 %>
 
 		</select>
+
+		<liferay-ui:message key="<%= suffix %>" />
 	</span>
 
 	<c:if test="<%= Validator.isNotNull(inlineLabel) %>">

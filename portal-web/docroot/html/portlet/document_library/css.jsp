@@ -54,15 +54,6 @@
 	margin-bottom: 1em;
 }
 
-.portlet-document-library .edit-file-entry-title-extension {
-	clear: right;
-	margin-top: 2em;
-}
-
-.portlet-document-library .edit-file-entry-title {
-	float: left;
-}
-
 .portlet-document-library .file-entry-author {
 	background: url(<%= themeImagesPath %>/portlet/edit_guest.png) no-repeat 0 50%;
 	border-right: 1px solid #999;

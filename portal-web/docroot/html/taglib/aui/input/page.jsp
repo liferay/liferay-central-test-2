@@ -42,6 +42,7 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:input:labe
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:name"));
+String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
 Object value = request.getAttribute("aui:input:value");
 
@@ -242,6 +243,10 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	</c:if>
 
 	</label>
+</c:if>
+
+<c:if test="<%= Validator.isNotNull(suffix) %>">
+	<liferay-ui:message key="<%= suffix %>" />
 </c:if>
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
