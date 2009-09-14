@@ -23,8 +23,18 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeAsset;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeAssetPublisher;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeExpando;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeGroup;
+import com.liferay.portal.upgrade.v5_3_0.UpgradePolls;
+import com.liferay.portal.upgrade.v5_3_0.UpgradePortletId;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v5_3_0.UpgradeShopping;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeSocial;
+import com.liferay.portal.upgrade.v5_3_0.UpgradeWiki;
 
 /**
  * <a href="UpgradeProcess_5_3_0.java.html"><b><i>View Source</i></b></a>
@@ -38,18 +48,18 @@ public class UpgradeProcess_5_3_0 extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-//		upgrade(UpgradeSchema.class);
-//		upgrade(UpgradeAsset.class);
-//		upgrade(UpgradeAssetPublisher.class);
-//		upgrade(UpgradeBlogs.class);
+		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeAsset.class);
+		upgrade(UpgradeAssetPublisher.class);
+		upgrade(UpgradeBlogs.class);
 		upgrade(UpgradeDocumentLibrary.class);
-//		upgrade(UpgradeExpando.class);
-//		upgrade(UpgradeGroup.class);
-//		upgrade(UpgradePolls.class);
-//		upgrade(UpgradePortletId.class);
+		upgrade(UpgradeExpando.class);
+		upgrade(UpgradeGroup.class);
+		upgrade(UpgradePolls.class);
+		upgrade(UpgradePortletId.class);
 		upgrade(UpgradeShopping.class);
-//		upgrade(UpgradeSocial.class);
-//		upgrade(UpgradeWiki.class);
+		upgrade(UpgradeSocial.class);
+		upgrade(UpgradeWiki.class);
 	}
 
 }
