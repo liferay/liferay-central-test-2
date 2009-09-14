@@ -44,33 +44,34 @@ package com.liferay.portlet.shopping.service;
  * @generated
  */
 public class ShoppingItemServiceUtil {
-	public static void addBookItems(long categoryId, java.lang.String[] isbns)
+	public static void addBookItems(long groupId, long categoryId,
+		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().addBookItems(categoryId, isbns);
+		getService().addBookItems(groupId, categoryId, isbns);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
-		long categoryId, java.lang.String sku, java.lang.String name,
-		java.lang.String description, java.lang.String properties,
-		java.lang.String fieldsQuantities, boolean requiresShipping,
-		int stockQuantity, boolean featured, java.lang.Boolean sale,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, boolean mediumImage,
-		java.lang.String mediumImageURL, java.io.File mediumFile,
-		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile,
+		long groupId, long categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addItem(categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, serviceContext);
+				   .addItem(groupId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, serviceContext);
 	}
 
 	public static void deleteItem(long itemId)
@@ -87,7 +88,7 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
-		long itemId, long categoryId, java.lang.String sku,
+		long itemId, long groupId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
 		java.lang.String properties, java.lang.String fieldsQuantities,
 		boolean requiresShipping, int stockQuantity, boolean featured,
@@ -102,11 +103,11 @@ public class ShoppingItemServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .updateItem(itemId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, serviceContext);
+				   .updateItem(itemId, groupId, categoryId, sku, name,
+			description, properties, fieldsQuantities, requiresShipping,
+			stockQuantity, featured, sale, smallImage, smallImageURL,
+			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
+			largeImageURL, largeFile, itemFields, itemPrices, serviceContext);
 	}
 
 	public static ShoppingItemService getService() {

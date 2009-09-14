@@ -50,16 +50,6 @@ public class ShoppingCategoryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long categoryId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, categoryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, ShoppingCategory category,
 			String actionId)
 		throws PortalException, SystemException {
@@ -81,19 +71,11 @@ public class ShoppingCategoryPermission {
 				permissionChecker, groupId, actionId);
 		}
 		else {
-			return contains(permissionChecker, categoryId, actionId);
+			ShoppingCategory category =
+				ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+			return contains(permissionChecker, category, actionId);
 		}
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long categoryId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		ShoppingCategory category =
-			ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
-
-		return contains(permissionChecker, category, actionId);
 	}
 
 	public static boolean contains(

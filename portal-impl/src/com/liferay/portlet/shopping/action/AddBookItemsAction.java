@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -79,12 +81,17 @@ public class AddBookItemsAction extends PortletAction {
 	}
 
 	protected void quickAddItems(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
+
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 		String[] isbns = StringUtil.split(
 			ParamUtil.getString(actionRequest, "isbns").toUpperCase(),
 			StringPool.SPACE);
 
-		ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
+		ShoppingItemServiceUtil.addBookItems(groupId, categoryId, isbns);
 	}
 
 }

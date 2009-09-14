@@ -29,6 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 
@@ -72,13 +73,26 @@ public class ShoppingItemPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		ShoppingCategory category = item.getCategory();
-
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (!ShoppingCategoryPermission.contains(
-					permissionChecker, category, ActionKeys.VIEW)) {
+			if (item.getCategoryId() ==
+					ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
-				return false;
+				long groupId = item.getGroupId();
+
+				if (!ShoppingPermission.contains(
+						permissionChecker, groupId, ActionKeys.VIEW)) {
+
+					return false;
+				}
+			}
+			else {
+				ShoppingCategory category = item.getCategory();
+
+				if (!ShoppingCategoryPermission.contains(
+						permissionChecker, category, ActionKeys.VIEW)) {
+
+					return false;
+				}
 			}
 		}
 
@@ -90,8 +104,8 @@ public class ShoppingItemPermission {
 		}
 
 		return permissionChecker.hasPermission(
-			category.getGroupId(), ShoppingItem.class.getName(),
-			item.getItemId(), actionId);
+			item.getGroupId(), ShoppingItem.class.getName(), item.getItemId(),
+			actionId);
 	}
 
 }

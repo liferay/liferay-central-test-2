@@ -78,21 +78,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 	public static final String FINDER_CLASS_NAME_ENTITY = ShoppingItemImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_CATEGORYID = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCategoryId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_OBC_CATEGORYID = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByCategoryId",
-			new String[] {
-				Long.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORYID = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
-			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByCategoryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_SMALLIMAGEID = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchBySmallImageId",
@@ -114,6 +99,23 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 	public static final FinderPath FINDER_PATH_COUNT_BY_LARGEIMAGEID = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByLargeImageId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_C = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_OBC_G_C = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
+			ShoppingItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_S = new FinderPath(ShoppingItemModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingItemModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_S",
@@ -485,265 +487,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		return shoppingItem;
 	}
 
-	public List<ShoppingItem> findByCategoryId(long categoryId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(categoryId) };
-
-		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_CATEGORYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
-
-				query.append("shoppingItem.categoryId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("shoppingItem.itemId ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(categoryId);
-
-				list = q.list();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingItem>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<ShoppingItem> findByCategoryId(long categoryId, int start,
-		int end) throws SystemException {
-		return findByCategoryId(categoryId, start, end, null);
-	}
-
-	public List<ShoppingItem> findByCategoryId(long categoryId, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(categoryId),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
-
-				query.append("shoppingItem.categoryId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-
-					String[] orderByFields = obc.getOrderByFields();
-
-					for (int i = 0; i < orderByFields.length; i++) {
-						query.append("shoppingItem.");
-						query.append(orderByFields[i]);
-
-						if (obc.isAscending()) {
-							query.append(" ASC");
-						}
-						else {
-							query.append(" DESC");
-						}
-
-						if ((i + 1) < orderByFields.length) {
-							query.append(", ");
-						}
-					}
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("shoppingItem.itemId ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(categoryId);
-
-				list = (List<ShoppingItem>)QueryUtil.list(q, getDialect(),
-						start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<ShoppingItem>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_CATEGORYID,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public ShoppingItem findByCategoryId_First(long categoryId,
-		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		List<ShoppingItem> list = findByCategoryId(categoryId, 0, 1, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No ShoppingItem exists with the key {");
-
-			msg.append("categoryId=" + categoryId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchItemException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public ShoppingItem findByCategoryId_Last(long categoryId,
-		OrderByComparator obc) throws NoSuchItemException, SystemException {
-		int count = countByCategoryId(categoryId);
-
-		List<ShoppingItem> list = findByCategoryId(categoryId, count - 1,
-				count, obc);
-
-		if (list.isEmpty()) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No ShoppingItem exists with the key {");
-
-			msg.append("categoryId=" + categoryId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchItemException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public ShoppingItem[] findByCategoryId_PrevAndNext(long itemId,
-		long categoryId, OrderByComparator obc)
-		throws NoSuchItemException, SystemException {
-		ShoppingItem shoppingItem = findByPrimaryKey(itemId);
-
-		int count = countByCategoryId(categoryId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append(
-				"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
-
-			query.append("shoppingItem.categoryId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-
-				String[] orderByFields = obc.getOrderByFields();
-
-				for (int i = 0; i < orderByFields.length; i++) {
-					query.append("shoppingItem.");
-					query.append(orderByFields[i]);
-
-					if (obc.isAscending()) {
-						query.append(" ASC");
-					}
-					else {
-						query.append(" DESC");
-					}
-
-					if ((i + 1) < orderByFields.length) {
-						query.append(", ");
-					}
-				}
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("shoppingItem.itemId ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(categoryId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					shoppingItem);
-
-			ShoppingItem[] array = new ShoppingItemImpl[3];
-
-			array[0] = (ShoppingItem)objArray[0];
-			array[1] = (ShoppingItem)objArray[1];
-			array[2] = (ShoppingItem)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public ShoppingItem findBySmallImageId(long smallImageId)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchBySmallImageId(smallImageId);
@@ -1071,6 +814,291 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<ShoppingItem> findByG_C(long groupId, long categoryId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(categoryId)
+			};
+
+		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_C,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+
+				query.append("shoppingItem.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("shoppingItem.categoryId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("shoppingItem.itemId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(categoryId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingItem>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
+					list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public List<ShoppingItem> findByG_C(long groupId, long categoryId,
+		int start, int end) throws SystemException {
+		return findByG_C(groupId, categoryId, start, end, null);
+	}
+
+	public List<ShoppingItem> findByG_C(long groupId, long categoryId,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(categoryId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		List<ShoppingItem> list = (List<ShoppingItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_OBC_G_C,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+
+				query.append("shoppingItem.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("shoppingItem.categoryId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+
+					String[] orderByFields = obc.getOrderByFields();
+
+					for (int i = 0; i < orderByFields.length; i++) {
+						query.append("shoppingItem.");
+						query.append(orderByFields[i]);
+
+						if (obc.isAscending()) {
+							query.append(" ASC");
+						}
+						else {
+							query.append(" DESC");
+						}
+
+						if ((i + 1) < orderByFields.length) {
+							query.append(", ");
+						}
+					}
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("shoppingItem.itemId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(categoryId);
+
+				list = (List<ShoppingItem>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<ShoppingItem>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_OBC_G_C,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public ShoppingItem findByG_C_First(long groupId, long categoryId,
+		OrderByComparator obc) throws NoSuchItemException, SystemException {
+		List<ShoppingItem> list = findByG_C(groupId, categoryId, 0, 1, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("categoryId=" + categoryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public ShoppingItem findByG_C_Last(long groupId, long categoryId,
+		OrderByComparator obc) throws NoSuchItemException, SystemException {
+		int count = countByG_C(groupId, categoryId);
+
+		List<ShoppingItem> list = findByG_C(groupId, categoryId, count - 1,
+				count, obc);
+
+		if (list.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No ShoppingItem exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("categoryId=" + categoryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public ShoppingItem[] findByG_C_PrevAndNext(long itemId, long groupId,
+		long categoryId, OrderByComparator obc)
+		throws NoSuchItemException, SystemException {
+		ShoppingItem shoppingItem = findByPrimaryKey(itemId);
+
+		int count = countByG_C(groupId, categoryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"SELECT shoppingItem FROM ShoppingItem shoppingItem WHERE ");
+
+			query.append("shoppingItem.groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("shoppingItem.categoryId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+
+				String[] orderByFields = obc.getOrderByFields();
+
+				for (int i = 0; i < orderByFields.length; i++) {
+					query.append("shoppingItem.");
+					query.append(orderByFields[i]);
+
+					if (obc.isAscending()) {
+						query.append(" ASC");
+					}
+					else {
+						query.append(" DESC");
+					}
+
+					if ((i + 1) < orderByFields.length) {
+						query.append(", ");
+					}
+				}
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("shoppingItem.itemId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(categoryId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					shoppingItem);
+
+			ShoppingItem[] array = new ShoppingItemImpl[3];
+
+			array[0] = (ShoppingItem)objArray[0];
+			array[1] = (ShoppingItem)objArray[1];
+			array[2] = (ShoppingItem)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public ShoppingItem findByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
@@ -1327,12 +1355,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		return list;
 	}
 
-	public void removeByCategoryId(long categoryId) throws SystemException {
-		for (ShoppingItem shoppingItem : findByCategoryId(categoryId)) {
-			remove(shoppingItem);
-		}
-	}
-
 	public void removeBySmallImageId(long smallImageId)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findBySmallImageId(smallImageId);
@@ -1354,6 +1376,13 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		remove(shoppingItem);
 	}
 
+	public void removeByG_C(long groupId, long categoryId)
+		throws SystemException {
+		for (ShoppingItem shoppingItem : findByG_C(groupId, categoryId)) {
+			remove(shoppingItem);
+		}
+	}
+
 	public void removeByC_S(long companyId, String sku)
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByC_S(companyId, sku);
@@ -1365,53 +1394,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		for (ShoppingItem shoppingItem : findAll()) {
 			remove(shoppingItem);
 		}
-	}
-
-	public int countByCategoryId(long categoryId) throws SystemException {
-		Object[] finderArgs = new Object[] { new Long(categoryId) };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(shoppingItem) ");
-				query.append("FROM ShoppingItem shoppingItem WHERE ");
-
-				query.append("shoppingItem.categoryId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(categoryId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
 	}
 
 	public int countBySmallImageId(long smallImageId) throws SystemException {
@@ -1548,6 +1530,62 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_LARGEIMAGEID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public int countByG_C(long groupId, long categoryId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(categoryId)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(shoppingItem) ");
+				query.append("FROM ShoppingItem shoppingItem WHERE ");
+
+				query.append("shoppingItem.groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("shoppingItem.categoryId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(categoryId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, finderArgs,
+					count);
 
 				closeSession(session);
 			}

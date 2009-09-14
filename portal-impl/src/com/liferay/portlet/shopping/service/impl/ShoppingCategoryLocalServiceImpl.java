@@ -178,7 +178,8 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Items
 
-		shoppingItemLocalService.deleteItems(category.getCategoryId());
+		shoppingItemLocalService.deleteItems(
+			category.getGroupId(), category.getCategoryId());
 
 		// Resources
 
@@ -380,8 +381,8 @@ public class ShoppingCategoryLocalServiceImpl
 			mergeCategories(category, toCategoryId);
 		}
 
-		List<ShoppingItem> items = shoppingItemPersistence.findByCategoryId(
-			fromCategory.getCategoryId());
+		List<ShoppingItem> items = shoppingItemPersistence.findByG_C(
+			fromCategory.getGroupId(), fromCategory.getCategoryId());
 
 		for (ShoppingItem item : items) {
 

@@ -50,14 +50,19 @@ public class ShoppingItemImpl
 	public ShoppingCategory getCategory() {
 		ShoppingCategory category = null;
 
-		try {
-			category = ShoppingCategoryLocalServiceUtil.getCategory(
-				getCategoryId());
-		}
-		catch (Exception e) {
-			category = new ShoppingCategoryImpl();
+		if (getCategoryId() > 0) {
+			try {
+				category = ShoppingCategoryLocalServiceUtil.getCategory(
+					getCategoryId());
+			}
+			catch (Exception e) {
+				category = new ShoppingCategoryImpl();
 
-			_log.error(e);
+				_log.error(e);
+			}
+		}
+		else {
+			category = new ShoppingCategoryImpl();
 		}
 
 		return category;

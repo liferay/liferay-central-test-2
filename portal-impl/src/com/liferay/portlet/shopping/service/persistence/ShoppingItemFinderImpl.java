@@ -45,10 +45,10 @@ import java.util.List;
 public class ShoppingItemFinderImpl
 	extends BasePersistenceImpl implements ShoppingItemFinder {
 
-	public static String COUNT_BY_CATEGORY_IDS =
-		ShoppingItemFinder.class.getName() + ".countByCategoryIds";
+	public static String COUNT_BY_G_C =
+		ShoppingItemFinder.class.getName() + ".countByG_C";
 
-	public int countByCategoryIds(List<Long> categoryIds)
+	public int countByG_C(long groupId, List<Long> categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -56,7 +56,7 @@ public class ShoppingItemFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
 
 			sql = StringUtil.replace(
 				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
@@ -66,6 +66,8 @@ public class ShoppingItemFinderImpl
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
 				Long categoryId = categoryIds.get(i);
@@ -104,11 +106,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
@@ -174,11 +173,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
@@ -247,11 +243,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
@@ -319,11 +312,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
@@ -381,11 +371,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
@@ -448,11 +435,8 @@ public class ShoppingItemFinderImpl
 			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
-			query.append("INNER JOIN ShoppingCategory ON ");
-			query.append("ShoppingCategory.categoryId = ");
-			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("ShoppingCategory.groupId = ? AND (");
+			query.append("ShoppingItem.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");

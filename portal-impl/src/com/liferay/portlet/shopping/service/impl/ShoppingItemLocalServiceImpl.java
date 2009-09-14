@@ -47,6 +47,7 @@ import com.liferay.portlet.shopping.ItemSKUException;
 import com.liferay.portlet.shopping.ItemSmallImageNameException;
 import com.liferay.portlet.shopping.ItemSmallImageSizeException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
@@ -73,11 +74,12 @@ import java.util.List;
 public class ShoppingItemLocalServiceImpl
 	extends ShoppingItemLocalServiceBaseImpl {
 
-	public void addBookItems(long userId, long categoryId, String[] isbns)
+	public void addBookItems(
+			long userId, long groupId, long categoryId, String[] isbns)
 		throws PortalException, SystemException {
 
 		try {
-			doAddBookItems(userId, categoryId, isbns);
+			doAddBookItems(userId, groupId, categoryId, isbns);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -85,7 +87,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem addItem(
-			long userId, long categoryId, String sku, String name,
+			long userId, long groupId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -98,8 +100,6 @@ public class ShoppingItemLocalServiceImpl
 		// Item
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		ShoppingCategory category =
-			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 		sku = sku.trim().toUpperCase();
 
 		byte[] smallBytes = null;
@@ -125,7 +125,7 @@ public class ShoppingItemLocalServiceImpl
 
 		ShoppingItem item = shoppingItemPersistence.create(itemId);
 
-		item.setGroupId(category.getGroupId());
+		item.setGroupId(groupId);
 		item.setCompanyId(user.getCompanyId());
 		item.setUserId(user.getUserId());
 		item.setUserName(user.getFullName());
@@ -218,12 +218,12 @@ public class ShoppingItemLocalServiceImpl
 			serviceContext.getAddGuestPermissions()) {
 
 			addItemResources(
-				category, item, serviceContext.getAddCommunityPermissions(),
+				groupId, item, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addItemResources(
-				category, item, serviceContext.getCommunityPermissions(),
+				groupId, item, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -236,19 +236,19 @@ public class ShoppingItemLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
-		ShoppingCategory category = item.getCategory();
 
 		addItemResources(
-			category, item, addCommunityPermissions, addGuestPermissions);
+			item.getGroupId(), item, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addItemResources(
-			ShoppingCategory category, ShoppingItem item,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			long groupId, ShoppingItem item, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			item.getCompanyId(), category.getGroupId(), item.getUserId(),
+			item.getCompanyId(), groupId, item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -259,19 +259,18 @@ public class ShoppingItemLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
-		ShoppingCategory category = item.getCategory();
 
 		addItemResources(
-			category, item, communityPermissions, guestPermissions);
+			item.getGroupId(), item, communityPermissions, guestPermissions);
 	}
 
 	public void addItemResources(
-			ShoppingCategory category, ShoppingItem item,
+			long groupId, ShoppingItem item,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			item.getCompanyId(), category.getGroupId(), item.getUserId(),
+			item.getCompanyId(), groupId, item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(),
 			communityPermissions, guestPermissions);
 	}
@@ -312,21 +311,21 @@ public class ShoppingItemLocalServiceImpl
 		shoppingItemPersistence.remove(item);
 	}
 
-	public void deleteItems(long categoryId)
+	public void deleteItems(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		List<ShoppingItem> items = shoppingItemPersistence.findByCategoryId(
-			categoryId);
+		List<ShoppingItem> items = shoppingItemPersistence.findByG_C(
+			groupId, categoryId);
 
 		for (ShoppingItem item : items) {
 			deleteItem(item);
 		}
 	}
 
-	public int getCategoriesItemsCount(List<Long> categoryIds)
+	public int getCategoriesItemsCount(long groupId, List<Long> categoryIds)
 		throws SystemException {
 
-		return shoppingItemFinder.countByCategoryIds(categoryIds);
+		return shoppingItemFinder.countByG_C(groupId, categoryIds);
 	}
 
 	public List<ShoppingItem> getFeaturedItems(
@@ -387,16 +386,19 @@ public class ShoppingItemLocalServiceImpl
 		return shoppingItemPersistence.findBySmallImageId(smallImageId);
 	}
 
-	public List<ShoppingItem> getItems(long categoryId) throws SystemException {
-		return shoppingItemPersistence.findByCategoryId(categoryId);
+	public List<ShoppingItem> getItems(long groupId, long categoryId)
+		throws SystemException {
+
+		return shoppingItemPersistence.findByG_C(groupId, categoryId);
 	}
 
 	public List<ShoppingItem> getItems(
-			long categoryId, int start, int end, OrderByComparator obc)
+			long groupId, long categoryId, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return shoppingItemPersistence.findByCategoryId(
-			categoryId, start, end, obc);
+		return shoppingItemPersistence.findByG_C(
+			groupId, categoryId, start, end, obc);
 	}
 
 	public ShoppingItem[] getItemsPrevAndNext(
@@ -405,12 +407,14 @@ public class ShoppingItemLocalServiceImpl
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		return shoppingItemPersistence.findByCategoryId_PrevAndNext(
-			item.getItemId(), item.getCategoryId(), obc);
+		return shoppingItemPersistence.findByG_C_PrevAndNext(
+			item.getItemId(), item.getGroupId(), item.getCategoryId(), obc);
 	}
 
-	public int getItemsCount(long categoryId) throws SystemException {
-		return shoppingItemPersistence.countByCategoryId(categoryId);
+	public int getItemsCount(long groupId, long categoryId)
+		throws SystemException {
+
+		return shoppingItemPersistence.countByG_C(groupId, categoryId);
 	}
 
 	public List<ShoppingItem> getSaleItems(
@@ -458,13 +462,14 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public ShoppingItem updateItem(
-			long userId, long itemId, long categoryId, String sku, String name,
-			String description, String properties, String fieldsQuantities,
-			boolean requiresShipping, int stockQuantity, boolean featured,
-			Boolean sale, boolean smallImage, String smallImageURL,
-			File smallFile, boolean mediumImage, String mediumImageURL,
-			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List<ShoppingItemField> itemFields,
+			long userId, long itemId, long groupId, long categoryId, String sku,
+			String name, String description, String properties,
+			String fieldsQuantities, boolean requiresShipping,
+			int stockQuantity, boolean featured, Boolean sale,
+			boolean smallImage, String smallImageURL, File smallFile,
+			boolean mediumImage, String mediumImageURL, File mediumFile,
+			boolean largeImage, String largeImageURL, File largeFile,
+			List<ShoppingItemField> itemFields,
 			List<ShoppingItemPrice> itemPrices, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -473,7 +478,7 @@ public class ShoppingItemLocalServiceImpl
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		ShoppingCategory category = getCategory(item, categoryId);
+		categoryId = getCategory(item, categoryId);
 		sku = sku.trim().toUpperCase();
 
 		byte[] smallBytes = null;
@@ -494,7 +499,7 @@ public class ShoppingItemLocalServiceImpl
 			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
 		item.setModifiedDate(new Date());
-		item.setCategoryId(category.getCategoryId());
+		item.setCategoryId(categoryId);
 		item.setSku(sku);
 		item.setName(name);
 		item.setDescription(description);
@@ -579,7 +584,8 @@ public class ShoppingItemLocalServiceImpl
 		return item;
 	}
 
-	protected void doAddBookItems(long userId, long categoryId, String[] isbns)
+	protected void doAddBookItems(
+			long userId, long groupId, long categoryId, String[] isbns)
 		throws IOException, PortalException, SystemException {
 
 		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
@@ -706,11 +712,12 @@ public class ShoppingItemLocalServiceImpl
 			serviceContext.setAddGuestPermissions(true);
 
 			addItem(
-				userId, categoryId, isbn, name, description, properties,
-				StringPool.BLANK, requiresShipping, stockQuantity, featured,
-				sale, smallImage, smallImageURL, smallFile, mediumImage,
-				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices, serviceContext);
+				userId, groupId, categoryId, isbn, name, description,
+				properties, StringPool.BLANK, requiresShipping, stockQuantity,
+				featured, sale, smallImage, smallImageURL, smallFile,
+				mediumImage, mediumImageURL, mediumFile, largeImage,
+				largeImageURL, largeFile, itemFields, itemPrices,
+				serviceContext);
 
 			smallFile.delete();
 			mediumFile.delete();
@@ -750,25 +757,24 @@ public class ShoppingItemLocalServiceImpl
 		return properties;
 	}
 
-	protected ShoppingCategory getCategory(ShoppingItem item, long categoryId)
+	protected long getCategory(ShoppingItem item, long categoryId)
 		throws PortalException, SystemException {
 
-		if (item.getCategoryId() != categoryId) {
-			ShoppingCategory oldCategory =
-				shoppingCategoryPersistence.findByPrimaryKey(
-					item.getCategoryId());
+		if ((item.getCategoryId() != categoryId) &&
+			(categoryId !=
+				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			ShoppingCategory newCategory =
 				shoppingCategoryPersistence.fetchByPrimaryKey(categoryId);
 
 			if ((newCategory == null) ||
-				(oldCategory.getGroupId() != newCategory.getGroupId())) {
+				(item.getGroupId() != newCategory.getGroupId())) {
 
 				categoryId = item.getCategoryId();
 			}
 		}
 
-		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
+		return categoryId;
 	}
 
 	protected void saveImages(

@@ -135,6 +135,15 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		itemQuantitiesWindow.focus();
 	}
 
+	function <portlet:namespace />removeCategory() {
+		document.<portlet:namespace />fm.<portlet:namespace />categoryId.value = "<%= ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>";
+
+		var nameEl = document.getElementById("<portlet:namespace />categoryName");
+
+		nameEl.href = "";
+		nameEl.innerHTML = "";
+	}
+
 	function <portlet:namespace />saveItem() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= item == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -188,15 +197,23 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		<td>
 
 			<%
-			ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+			String categoryName = "";
 
-			category = category.toEscapedModel();
+			if (categoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+
+				category = category.toEscapedModel();
+
+				categoryName = category.getName();
+			}
 			%>
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/view" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
-			<%= category.getName() %></a>
+			<%= categoryName %></a>
 
 			<input type="button" value="<liferay-ui:message key="select" />" onClick="var categoryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/select_category" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();" />
+
+			<input type="button" value="<liferay-ui:message key="remove" />" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' />
 		</td>
 	</tr>
 	<tr>

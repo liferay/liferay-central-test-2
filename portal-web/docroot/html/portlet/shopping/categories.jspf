@@ -44,11 +44,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 <input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 
-<c:if test="<%= category != null %>">
-	<div class="breadcrumbs">
-		<%= ShoppingUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
-	</div>
-</c:if>
+<div class="breadcrumbs">
+	<%= ShoppingUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
+</div>
 
 <%
 List<String> headerNames = new ArrayList<String>();
@@ -106,7 +104,7 @@ for (int i = 0; i < results.size(); i++) {
 	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 	int categoriesCount = subcategoryIds.size() - 1;
-	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(subcategoryIds);
+	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 	row.addText(String.valueOf(categoriesCount), rowURL);
 	row.addText(String.valueOf(itemsCount), rowURL);
@@ -169,9 +167,7 @@ boolean showSearch = (results.size() > 0);
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<c:if test="<%= category != null %>">
-	<br />
-</c:if>
+<br />
 
 </form>
 
@@ -181,192 +177,190 @@ boolean showSearch = (results.size() > 0);
 	</script>
 </c:if>
 
-<c:if test="<%= category != null %>">
-	<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
-	<liferay-portlet:renderURLParams varImpl="searchURL" />
-	<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
-	<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
-	<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= categoryId %>" />
+<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+<liferay-portlet:renderURLParams varImpl="searchURL" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(currentURL) %>" />
+<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
+<input name="<portlet:namespace />searchCategoryId" type="hidden" value="<%= categoryId %>" />
 
-	<liferay-ui:tabs names="items" />
+<liferay-ui:tabs names="items" />
 
-	<%
-	String orderByCol = ParamUtil.getString(request, "orderByCol");
-	String orderByType = ParamUtil.getString(request, "orderByType");
+<%
+String orderByCol = ParamUtil.getString(request, "orderByCol");
+String orderByType = ParamUtil.getString(request, "orderByType");
 
-	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-		portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-col", orderByCol);
-		portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-type", orderByType);
+if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+	portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-col", orderByCol);
+	portalPrefs.setValue(PortletKeys.SHOPPING, "items-order-by-type", orderByType);
+}
+else {
+	orderByCol = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
+	orderByType = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
+}
+
+OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orderByCol, orderByType);
+
+headerNames.clear();
+
+headerNames.add("sku");
+headerNames.add("description");
+headerNames.add("min-qty");
+headerNames.add("price");
+headerNames.add(StringPool.BLANK);
+
+Map orderableHeaders = new HashMap();
+
+orderableHeaders.put("sku", "sku");
+orderableHeaders.put("description", "name");
+orderableHeaders.put("min-qty", "min-qty");
+orderableHeaders.put("price", "price");
+
+searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+
+searchContainer.setOrderableHeaders(orderableHeaders);
+searchContainer.setOrderByCol(orderByCol);
+searchContainer.setOrderByType(orderByType);
+
+total = ShoppingItemLocalServiceUtil.getItemsCount(scopeGroupId, categoryId);
+
+searchContainer.setTotal(total);
+
+results = ShoppingItemLocalServiceUtil.getItems(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+
+searchContainer.setResults(results);
+
+resultRows = searchContainer.getResultRows();
+
+for (int i = 0; i < results.size(); i++) {
+	ShoppingItem item = (ShoppingItem)results.get(i);
+
+	item = item.toEscapedModel();
+
+	ResultRow row = new ResultRow(item, item.getItemId(), i);
+
+	PortletURL rowURL = renderResponse.createRenderURL();
+
+	rowURL.setWindowState(WindowState.MAXIMIZED);
+
+	rowURL.setParameter("struts_action", "/shopping/view_item");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
+
+	// SKU and small image
+
+	StringBuilder sb = new StringBuilder();
+
+	if (item.isSmallImage()) {
+		sb.append("<br />");
+		sb.append("<img alt=\"");
+		sb.append(item.getSku());
+		sb.append("\" border=\"0\" src=\"");
+
+		if (Validator.isNotNull(item.getSmallImageURL())) {
+			sb.append(item.getSmallImageURL());
+		}
+		else {
+			sb.append(themeDisplay.getPathImage());
+			sb.append("/shopping/item?img_id=");
+			sb.append(item.getSmallImageId());
+			sb.append("&t=");
+			sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
+		}
+
+		sb.append("\">");
 	}
 	else {
-		orderByCol = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
-		orderByType = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
+		sb.append(item.getSku());
 	}
 
-	OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orderByCol, orderByType);
+	row.addText(sb.toString(), rowURL);
 
-	headerNames.clear();
+	// Description
 
-	headerNames.add("sku");
-	headerNames.add("description");
-	headerNames.add("min-qty");
-	headerNames.add("price");
-	headerNames.add(StringPool.BLANK);
+	sb = new StringBuilder();
 
-	Map orderableHeaders = new HashMap();
+	sb.append(item.getName());
 
-	orderableHeaders.put("sku", "sku");
-	orderableHeaders.put("description", "name");
-	orderableHeaders.put("min-qty", "min-qty");
-	orderableHeaders.put("price", "price");
-
-	searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-	searchContainer.setOrderableHeaders(orderableHeaders);
-	searchContainer.setOrderByCol(orderByCol);
-	searchContainer.setOrderByType(orderByType);
-
-	total = ShoppingItemLocalServiceUtil.getItemsCount(categoryId);
-
-	searchContainer.setTotal(total);
-
-	results = ShoppingItemLocalServiceUtil.getItems(categoryId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-
-	searchContainer.setResults(results);
-
-	resultRows = searchContainer.getResultRows();
-
-	for (int i = 0; i < results.size(); i++) {
-		ShoppingItem item = (ShoppingItem)results.get(i);
-
-		item = item.toEscapedModel();
-
-		ResultRow row = new ResultRow(item, item.getItemId(), i);
-
-		PortletURL rowURL = renderResponse.createRenderURL();
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-
-		rowURL.setParameter("struts_action", "/shopping/view_item");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("itemId", String.valueOf(item.getItemId()));
-
-		// SKU and small image
-
-		StringBuilder sb = new StringBuilder();
-
-		if (item.isSmallImage()) {
-			sb.append("<br />");
-			sb.append("<img alt=\"");
-			sb.append(item.getSku());
-			sb.append("\" border=\"0\" src=\"");
-
-			if (Validator.isNotNull(item.getSmallImageURL())) {
-				sb.append(item.getSmallImageURL());
-			}
-			else {
-				sb.append(themeDisplay.getPathImage());
-				sb.append("/shopping/item?img_id=");
-				sb.append(item.getSmallImageId());
-				sb.append("&t=");
-				sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
-			}
-
-			sb.append("\">");
-		}
-		else {
-			sb.append(item.getSku());
-		}
-
-		row.addText(sb.toString(), rowURL);
-
-		// Description
-
-		sb = new StringBuilder();
-
-		sb.append(item.getName());
-
-		if (Validator.isNotNull(item.getDescription())) {
-			sb.append("<br />");
-			sb.append(item.getDescription());
-		}
-
-		Properties props = new OrderedProperties();
-
-		PropertiesUtil.load(props, item.getProperties());
-
-		Enumeration enu = props.propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String propsKey = (String)enu.nextElement();
-			String propsValue = props.getProperty(propsKey, StringPool.BLANK);
-
-			sb.append("<br />");
-			sb.append(propsKey);
-			sb.append(": ");
-			sb.append(propsValue);
-		}
-
-		row.addText(sb.toString(), rowURL);
-
-		// Minimum quantity
-
-		row.addText(String.valueOf(item.getMinQuantity()), rowURL);
-
-		// Price
-
-		if (item.getDiscount() <= 0) {
-			row.addText(currencyFormat.format(item.getPrice()), rowURL);
-		}
-		else {
-			row.addText(
-				"<span class=\"portlet-msg-success\">" +
-					currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) +
-						"</span>",
-				rowURL);
-		}
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/item_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	if (Validator.isNotNull(item.getDescription())) {
+		sb.append("<br />");
+		sb.append(item.getDescription());
 	}
 
-	boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_ITEM);
-	showSearch = results.size() > 0;
-	%>
+	Properties props = new OrderedProperties();
 
-	<c:if test="<%= showAddItemButton || showSearch %>">
-		<div>
-			<c:if test="<%= showSearch %>">
-				<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+	PropertiesUtil.load(props, item.getProperties());
 
-				<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+	Enumeration enu = props.propertyNames();
 
-				<input type="submit" value="<liferay-ui:message key="search-this-category" />" />
-			</c:if>
+	while (enu.hasMoreElements()) {
+		String propsKey = (String)enu.nextElement();
+		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-			<c:if test="<%= showAddItemButton %>">
-				<input type="button" value="<liferay-ui:message key="add-item" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+		sb.append("<br />");
+		sb.append(propsKey);
+		sb.append(": ");
+		sb.append(propsValue);
+	}
 
-				<input type="button" value="<liferay-ui:message key="add-books" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
-			</c:if>
-		</div>
+	row.addText(sb.toString(), rowURL);
 
-		<br />
-	</c:if>
+	// Minimum quantity
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	row.addText(String.valueOf(item.getMinQuantity()), rowURL);
 
-	</form>
+	// Price
 
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-		<script type="text/javascript">
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
-			Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-		</script>
-	</c:if>
+	if (item.getDiscount() <= 0) {
+		row.addText(currencyFormat.format(item.getPrice()), rowURL);
+	}
+	else {
+		row.addText(
+			"<span class=\"portlet-msg-success\">" +
+				currencyFormat.format(ShoppingUtil.calculateActualPrice(item)) +
+					"</span>",
+			rowURL);
+	}
+
+	// Action
+
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/shopping/item_action.jsp");
+
+	// Add result row
+
+	resultRows.add(row);
+}
+
+boolean showAddItemButton = ShoppingCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_ITEM);
+showSearch = results.size() > 0;
+%>
+
+<c:if test="<%= showAddItemButton || showSearch %>">
+	<div>
+		<c:if test="<%= showSearch %>">
+			<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
+
+			<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
+
+			<input type="submit" value="<liferay-ui:message key="search-this-category" />" />
+		</c:if>
+
+		<c:if test="<%= showAddItemButton %>">
+			<input type="button" value="<liferay-ui:message key="add-item" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+
+			<input type="button" value="<liferay-ui:message key="add-books" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/add_book_items" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+		</c:if>
+	</div>
+
+	<br />
+</c:if>
+
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+</form>
+
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<script type="text/javascript">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
+	</script>
 </c:if>

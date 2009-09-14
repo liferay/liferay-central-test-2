@@ -44,18 +44,19 @@ import java.util.List;
  */
 public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 
-	public void addBookItems(long categoryId, String[] isbns)
+	public void addBookItems(long groupId, long categoryId, String[] isbns)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
+			getPermissionChecker(), groupId, categoryId, ActionKeys.ADD_ITEM);
 
-		shoppingItemLocalService.addBookItems(getUserId(), categoryId, isbns);
+		shoppingItemLocalService.addBookItems(
+			getUserId(), groupId, categoryId, isbns);
 	}
 
 	public ShoppingItem addItem(
-			long categoryId, String sku, String name, String description,
-			String properties, String fieldsQuantities,
+			long groupId, long categoryId, String sku, String name,
+			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
@@ -65,14 +66,14 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
+			getPermissionChecker(), groupId, categoryId, ActionKeys.ADD_ITEM);
 
 		return shoppingItemLocalService.addItem(
-			getUserId(), categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, serviceContext);
+			getUserId(), groupId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, serviceContext);
 	}
 
 	public void deleteItem(long itemId)
@@ -94,7 +95,7 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 	}
 
 	public ShoppingItem updateItem(
-			long itemId, long categoryId, String sku, String name,
+			long itemId, long groupId, long categoryId, String sku, String name,
 			String description, String properties, String fieldsQuantities,
 			boolean requiresShipping, int stockQuantity, boolean featured,
 			Boolean sale, boolean smallImage, String smallImageURL,
@@ -108,11 +109,11 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			getPermissionChecker(), itemId, ActionKeys.UPDATE);
 
 		return shoppingItemLocalService.updateItem(
-			getUserId(), itemId, categoryId, sku, name, description, properties,
-			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
-			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
-			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
-			itemPrices, serviceContext);
+			getUserId(), itemId, groupId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, serviceContext);
 	}
 
 }

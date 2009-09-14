@@ -99,7 +99,7 @@ for (int i = 0; i < results.size(); i++) {
 	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 	int categoriesCount = subcategoryIds.size() - 1;
-	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(subcategoryIds);
+	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 	row.addText(String.valueOf(categoriesCount), rowURL);
 	row.addText(String.valueOf(itemsCount), rowURL);

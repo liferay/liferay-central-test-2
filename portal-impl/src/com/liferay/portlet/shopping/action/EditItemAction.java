@@ -31,7 +31,9 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -154,7 +156,12 @@ public class EditItemAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long itemId = ParamUtil.getLong(uploadRequest, "itemId");
+
+		long groupId = themeDisplay.getScopeGroupId();
 
 		long categoryId = ParamUtil.getLong(uploadRequest, "categoryId");
 		String sku = ParamUtil.getString(uploadRequest, "sku");
@@ -263,7 +270,7 @@ public class EditItemAction extends PortletAction {
 			// Add item
 
 			ShoppingItemServiceUtil.addItem(
-				categoryId, sku, name, description, properties,
+				groupId, categoryId, sku, name, description, properties,
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
@@ -274,7 +281,7 @@ public class EditItemAction extends PortletAction {
 			// Update item
 
 			ShoppingItemServiceUtil.updateItem(
-				itemId, categoryId, sku, name, description, properties,
+				itemId, groupId, categoryId, sku, name, description, properties,
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,

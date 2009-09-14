@@ -80,10 +80,10 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class ShoppingItemServiceSoap {
-	public static void addBookItems(long categoryId, java.lang.String[] isbns)
-		throws RemoteException {
+	public static void addBookItems(long groupId, long categoryId,
+		java.lang.String[] isbns) throws RemoteException {
 		try {
-			ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
+			ShoppingItemServiceUtil.addBookItems(groupId, categoryId, isbns);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

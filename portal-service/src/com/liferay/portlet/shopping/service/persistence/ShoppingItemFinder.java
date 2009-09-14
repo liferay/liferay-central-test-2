@@ -28,7 +28,7 @@ package com.liferay.portlet.shopping.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface ShoppingItemFinder {
-	public int countByCategoryIds(java.util.List<Long> categoryIds)
+	public int countByG_C(long groupId, java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
 
 	public int countByFeatured(long groupId, long[] categoryIds)

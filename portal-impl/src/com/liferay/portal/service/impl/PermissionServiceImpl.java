@@ -339,7 +339,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 		else if (name.equals(ShoppingCategory.class.getName())) {
 			ShoppingCategoryPermission.check(
-				permissionChecker, GetterUtil.getLong(primKey),
+				permissionChecker, groupId, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(ShoppingItem.class.getName())) {

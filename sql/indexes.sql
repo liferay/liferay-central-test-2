@@ -474,8 +474,8 @@ create index IX_1E6464F5 on ShoppingCategory (groupId, parentCategoryId);
 create unique index IX_DC60CFAE on ShoppingCoupon (code_);
 create index IX_3251AF16 on ShoppingCoupon (groupId);
 
-create index IX_C8EACF2E on ShoppingItem (categoryId);
 create unique index IX_1C717CA6 on ShoppingItem (companyId, sku);
+create index IX_FEFE7D76 on ShoppingItem (groupId, categoryId);
 create index IX_903DC750 on ShoppingItem (largeImageId);
 create index IX_D217AB30 on ShoppingItem (mediumImageId);
 create index IX_FF203304 on ShoppingItem (smallImageId);
