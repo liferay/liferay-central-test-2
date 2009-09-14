@@ -393,13 +393,13 @@ create table DLFileShortcut (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	folderId LONG,
+	toFolderId LONG,
+	toName VARCHAR(255) null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	folderId LONG,
-	toFolderId LONG,
-	toName VARCHAR(255) null
+	statusDate DATE null
 );
 
 create table DLFileVersion (

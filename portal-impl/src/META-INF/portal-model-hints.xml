@@ -990,15 +990,15 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="status" type="int" />
-		<field name="statusByUserId" type="long" />
-		<field name="statusByUserName" type="String" />
-		<field name="statusDate" type="Date" />
 		<field name="folderId" type="long" />
 		<field name="toFolderId" type="long" />
 		<field name="toName" type="String">
 			<hint name="max-length">255</hint>
 		</field>
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileVersion">
 		<field name="fileVersionId" type="long" />

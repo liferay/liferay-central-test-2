@@ -177,10 +177,9 @@ public class DLFileEntryLocalServiceImpl
 
 		name = getName(name);
 		title = DLFileEntryImpl.stripExtension(name, title);
+		int status = StatusConstants.APPROVED;
 
 		validate(groupId, folderId, name, title, is);
-
-		int status = StatusConstants.APPROVED;
 
 		long fileEntryId = counterLocalService.increment();
 
@@ -264,7 +263,7 @@ public class DLFileEntryLocalServiceImpl
 			userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntryId, DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 
-		// File Version
+		// File version
 
 		addFileVersion(user, fileEntry, fileEntry.getVersion(), status);
 

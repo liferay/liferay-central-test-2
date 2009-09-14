@@ -1111,13 +1111,13 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="folderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="toFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="toName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="statusDate" type="org.hibernate.type.TimestampType" />
-		<property name="folderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="toFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="toName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" table="DLFileVersion">
 		<cache usage="read-write" />

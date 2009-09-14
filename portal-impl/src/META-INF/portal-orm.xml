@@ -1296,15 +1296,15 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="folderId" />
+			<basic name="toFolderId" />
+			<basic name="toName" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="folderId" />
-			<basic name="toFolderId" />
-			<basic name="toName" />
 			<transient name="primaryKey" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />

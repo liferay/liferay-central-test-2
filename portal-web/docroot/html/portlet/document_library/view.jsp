@@ -42,6 +42,12 @@ if ((folder == null) && (defaultFolderId != DLFolderConstants.DEFAULT_PARENT_FOL
 	}
 }
 
+int status = StatusConstants.APPROVED;
+
+if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	status = StatusConstants.ANY;
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -49,12 +55,6 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
-
-int status = StatusConstants.APPROVED;
-
-if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
-	status = StatusConstants.ANY;
-}
 %>
 
 <liferay-util:include page="/html/portlet/document_library/tabs1.jsp" />

@@ -79,13 +79,13 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		newDLFileShortcut.setUserName(randomString());
 		newDLFileShortcut.setCreateDate(nextDate());
 		newDLFileShortcut.setModifiedDate(nextDate());
+		newDLFileShortcut.setFolderId(nextLong());
+		newDLFileShortcut.setToFolderId(nextLong());
+		newDLFileShortcut.setToName(randomString());
 		newDLFileShortcut.setStatus(nextInt());
 		newDLFileShortcut.setStatusByUserId(nextLong());
 		newDLFileShortcut.setStatusByUserName(randomString());
 		newDLFileShortcut.setStatusDate(nextDate());
-		newDLFileShortcut.setFolderId(nextLong());
-		newDLFileShortcut.setToFolderId(nextLong());
-		newDLFileShortcut.setToName(randomString());
 
 		_persistence.update(newDLFileShortcut, false);
 
@@ -109,6 +109,12 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDLFileShortcut.getModifiedDate()),
 			Time.getShortTimestamp(newDLFileShortcut.getModifiedDate()));
+		assertEquals(existingDLFileShortcut.getFolderId(),
+			newDLFileShortcut.getFolderId());
+		assertEquals(existingDLFileShortcut.getToFolderId(),
+			newDLFileShortcut.getToFolderId());
+		assertEquals(existingDLFileShortcut.getToName(),
+			newDLFileShortcut.getToName());
 		assertEquals(existingDLFileShortcut.getStatus(),
 			newDLFileShortcut.getStatus());
 		assertEquals(existingDLFileShortcut.getStatusByUserId(),
@@ -118,12 +124,6 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDLFileShortcut.getStatusDate()),
 			Time.getShortTimestamp(newDLFileShortcut.getStatusDate()));
-		assertEquals(existingDLFileShortcut.getFolderId(),
-			newDLFileShortcut.getFolderId());
-		assertEquals(existingDLFileShortcut.getToFolderId(),
-			newDLFileShortcut.getToFolderId());
-		assertEquals(existingDLFileShortcut.getToName(),
-			newDLFileShortcut.getToName());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -174,13 +174,13 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		dlFileShortcut.setUserName(randomString());
 		dlFileShortcut.setCreateDate(nextDate());
 		dlFileShortcut.setModifiedDate(nextDate());
+		dlFileShortcut.setFolderId(nextLong());
+		dlFileShortcut.setToFolderId(nextLong());
+		dlFileShortcut.setToName(randomString());
 		dlFileShortcut.setStatus(nextInt());
 		dlFileShortcut.setStatusByUserId(nextLong());
 		dlFileShortcut.setStatusByUserName(randomString());
 		dlFileShortcut.setStatusDate(nextDate());
-		dlFileShortcut.setFolderId(nextLong());
-		dlFileShortcut.setToFolderId(nextLong());
-		dlFileShortcut.setToName(randomString());
 
 		_persistence.update(dlFileShortcut, false);
 

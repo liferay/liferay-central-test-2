@@ -57,13 +57,13 @@ public class DLFileShortcutSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setFolderId(model.getFolderId());
+		soapModel.setToFolderId(model.getToFolderId());
+		soapModel.setToName(model.getToName());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setFolderId(model.getFolderId());
-		soapModel.setToFolderId(model.getToFolderId());
-		soapModel.setToName(model.getToName());
 
 		return soapModel;
 	}
@@ -180,6 +180,30 @@ public class DLFileShortcutSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getFolderId() {
+		return _folderId;
+	}
+
+	public void setFolderId(long folderId) {
+		_folderId = folderId;
+	}
+
+	public long getToFolderId() {
+		return _toFolderId;
+	}
+
+	public void setToFolderId(long toFolderId) {
+		_toFolderId = toFolderId;
+	}
+
+	public String getToName() {
+		return _toName;
+	}
+
+	public void setToName(String toName) {
+		_toName = toName;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -212,30 +236,6 @@ public class DLFileShortcutSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public long getFolderId() {
-		return _folderId;
-	}
-
-	public void setFolderId(long folderId) {
-		_folderId = folderId;
-	}
-
-	public long getToFolderId() {
-		return _toFolderId;
-	}
-
-	public void setToFolderId(long toFolderId) {
-		_toFolderId = toFolderId;
-	}
-
-	public String getToName() {
-		return _toName;
-	}
-
-	public void setToName(String toName) {
-		_toName = toName;
-	}
-
 	private String _uuid;
 	private long _fileShortcutId;
 	private long _groupId;
@@ -244,11 +244,11 @@ public class DLFileShortcutSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _folderId;
+	private long _toFolderId;
+	private String _toName;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private long _folderId;
-	private long _toFolderId;
-	private String _toName;
 }

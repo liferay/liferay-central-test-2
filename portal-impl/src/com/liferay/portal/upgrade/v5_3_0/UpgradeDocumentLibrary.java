@@ -61,29 +61,28 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select * from DLFileEntry");
+			ps = con.prepareStatement("select * from DLFileEntry");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long userId = rs.getLong("userId");
-				long companyId = rs.getLong("companyId");
 				long groupId = rs.getLong("groupId");
+				long userId = rs.getLong("userId");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
-				int size = rs.getInt("size_");
 				double version = rs.getDouble("version");
+				int size = rs.getInt("size_");
 
 				try {
 					addFileVersion(
-						userId, companyId, groupId, folderId, name, size,
-						version);
+						userId, groupId, folderId, name, size, version);
 				}
 				catch (Exception e) {
-					_log.warn(
-						"Version " + version + " for " + name + " was not " +
-							"created: " + e.getMessage());
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Version " + version + " for " + name +
+								" was not " + "created: " + e.getMessage());
+					}
 				}
 			}
 		}
@@ -93,8 +92,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void addFileVersion(
-			long userId, long companyId, long groupId, long folderId,
-			String fileName, int fileSize, double version)
+			long userId, long groupId, long folderId, String fileName,
+			double version, int size)
 		throws PortalException, SystemException {
 
 		User user = UserLocalServiceUtil.getUser(userId);
@@ -106,16 +105,15 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		fileVersion.setNew(true);
 		fileVersion.setPrimaryKey(fileVersionId);
-
 		fileVersion.setGroupId(groupId);
-		fileVersion.setCompanyId(companyId);
+		fileVersion.setCompanyId(user.getCompanyId());
 		fileVersion.setUserId(user.getUserId());
 		fileVersion.setUserName(user.getFullName());
 		fileVersion.setCreateDate(now);
 		fileVersion.setFolderId(folderId);
 		fileVersion.setName(fileName);
 		fileVersion.setVersion(version);
-		fileVersion.setSize(fileSize);
+		fileVersion.setSize(size);
 		fileVersion.setStatus(StatusConstants.APPROVED);
 		fileVersion.setStatusByUserId(user.getUserId());
 		fileVersion.setStatusByUserName(user.getFullName());
@@ -124,7 +122,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		DLFileVersionLocalServiceUtil.addDLFileVersion(fileVersion);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		UpgradeDocumentLibrary.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }

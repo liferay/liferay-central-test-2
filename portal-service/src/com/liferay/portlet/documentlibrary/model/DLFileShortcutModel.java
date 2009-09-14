@@ -87,6 +87,18 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public long getFolderId();
+
+	public void setFolderId(long folderId);
+
+	public long getToFolderId();
+
+	public void setToFolderId(long toFolderId);
+
+	public String getToName();
+
+	public void setToName(String toName);
+
 	public int getStatus();
 
 	public void setStatus(int status);
@@ -106,18 +118,6 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public Date getStatusDate();
 
 	public void setStatusDate(Date statusDate);
-
-	public long getFolderId();
-
-	public void setFolderId(long folderId);
-
-	public long getToFolderId();
-
-	public void setToFolderId(long toFolderId);
-
-	public String getToName();
-
-	public void setToName(String toName);
 
 	public DLFileShortcut toEscapedModel();
 }
