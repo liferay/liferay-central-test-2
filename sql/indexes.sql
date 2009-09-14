@@ -66,7 +66,6 @@ create index IX_621E19D on BlogsEntry (groupId, displayDate);
 create index IX_F0E73383 on BlogsEntry (groupId, displayDate, status);
 create index IX_1EFD8EE9 on BlogsEntry (groupId, status);
 create unique index IX_DB780A20 on BlogsEntry (groupId, urlTitle);
-create unique index IX_A09A2906 on BlogsEntry (groupId, urlTitle, status);
 create index IX_FBDE0AA3 on BlogsEntry (groupId, userId, displayDate);
 create index IX_DA04F689 on BlogsEntry (groupId, userId, displayDate, status);
 create index IX_49E15A23 on BlogsEntry (groupId, userId, status);

@@ -313,20 +313,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_UT_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_UT_S",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_UT_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_UT_S",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Integer.class.getName()
-			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_D_S = new FinderPath(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_D_S",
@@ -395,13 +381,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(blogsEntry.getGroupId()),
 				
 			blogsEntry.getUrlTitle()
-			}, blogsEntry);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
-			new Object[] {
-				new Long(blogsEntry.getGroupId()),
-				
-			blogsEntry.getUrlTitle(), new Integer(blogsEntry.getStatus())
 			}, blogsEntry);
 	}
 
@@ -524,14 +503,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				new Long(blogsEntryModelImpl.getOriginalGroupId()),
 				
 			blogsEntryModelImpl.getOriginalUrlTitle()
-			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT_S,
-			new Object[] {
-				new Long(blogsEntryModelImpl.getOriginalGroupId()),
-				
-			blogsEntryModelImpl.getOriginalUrlTitle(),
-				new Integer(blogsEntryModelImpl.getOriginalStatus())
 			});
 
 		EntityCacheUtil.removeResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -667,33 +638,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 					new Long(blogsEntry.getGroupId()),
 					
 				blogsEntry.getUrlTitle()
-				}, blogsEntry);
-		}
-
-		if (!isNew &&
-				((blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(blogsEntry.getUrlTitle(),
-					blogsEntryModelImpl.getOriginalUrlTitle()) ||
-				(blogsEntry.getStatus() != blogsEntryModelImpl.getOriginalStatus()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT_S,
-				new Object[] {
-					new Long(blogsEntryModelImpl.getOriginalGroupId()),
-					
-				blogsEntryModelImpl.getOriginalUrlTitle(),
-					new Integer(blogsEntryModelImpl.getOriginalStatus())
-				});
-		}
-
-		if (isNew ||
-				((blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(blogsEntry.getUrlTitle(),
-					blogsEntryModelImpl.getOriginalUrlTitle()) ||
-				(blogsEntry.getStatus() != blogsEntryModelImpl.getOriginalStatus()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
-				new Object[] {
-					new Long(blogsEntry.getGroupId()),
-					
-				blogsEntry.getUrlTitle(), new Integer(blogsEntry.getStatus())
 				}, blogsEntry);
 		}
 
@@ -4539,147 +4483,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public BlogsEntry findByG_UT_S(long groupId, String urlTitle, int status)
-		throws NoSuchEntryException, SystemException {
-		BlogsEntry blogsEntry = fetchByG_UT_S(groupId, urlTitle, status);
-
-		if (blogsEntry == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No BlogsEntry exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("urlTitle=" + urlTitle);
-
-			msg.append(", ");
-			msg.append("status=" + status);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return blogsEntry;
-	}
-
-	public BlogsEntry fetchByG_UT_S(long groupId, String urlTitle, int status)
-		throws SystemException {
-		return fetchByG_UT_S(groupId, urlTitle, status, true);
-	}
-
-	public BlogsEntry fetchByG_UT_S(long groupId, String urlTitle, int status,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				urlTitle, new Integer(status)
-			};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_UT_S,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT blogsEntry FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.groupId = ?");
-
-				query.append(" AND ");
-
-				if (urlTitle == null) {
-					query.append("blogsEntry.urlTitle IS NULL");
-				}
-				else {
-					query.append("blogsEntry.urlTitle = ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("blogsEntry.displayDate DESC");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (urlTitle != null) {
-					qPos.add(urlTitle);
-				}
-
-				qPos.add(status);
-
-				List<BlogsEntry> list = q.list();
-
-				result = list;
-
-				BlogsEntry blogsEntry = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
-						finderArgs, list);
-				}
-				else {
-					blogsEntry = list.get(0);
-
-					cacheResult(blogsEntry);
-
-					if ((blogsEntry.getGroupId() != groupId) ||
-							(blogsEntry.getUrlTitle() == null) ||
-							!blogsEntry.getUrlTitle().equals(urlTitle) ||
-							(blogsEntry.getStatus() != status)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
-							finderArgs, blogsEntry);
-					}
-				}
-
-				return blogsEntry;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT_S,
-						finderArgs, new ArrayList<BlogsEntry>());
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (BlogsEntry)result;
-			}
-		}
-	}
-
 	public List<BlogsEntry> findByG_D_S(long groupId, Date displayDate,
 		int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5602,13 +5405,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByG_UT_S(long groupId, String urlTitle, int status)
-		throws NoSuchEntryException, SystemException {
-		BlogsEntry blogsEntry = findByG_UT_S(groupId, urlTitle, status);
-
-		remove(blogsEntry);
-	}
-
 	public void removeByG_D_S(long groupId, Date displayDate, int status)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_D_S(groupId, displayDate, status)) {
@@ -6443,77 +6239,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_S,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByG_UT_S(long groupId, String urlTitle, int status)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId),
-				
-				urlTitle, new Integer(status)
-			};
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_UT_S,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(blogsEntry) ");
-				query.append("FROM BlogsEntry blogsEntry WHERE ");
-
-				query.append("blogsEntry.groupId = ?");
-
-				query.append(" AND ");
-
-				if (urlTitle == null) {
-					query.append("blogsEntry.urlTitle IS NULL");
-				}
-				else {
-					query.append("blogsEntry.urlTitle = ?");
-				}
-
-				query.append(" AND ");
-
-				query.append("blogsEntry.status = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (urlTitle != null) {
-					qPos.add(urlTitle);
-				}
-
-				qPos.add(status);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_UT_S,
 					finderArgs, count);
 
 				closeSession(session);

@@ -479,19 +479,6 @@ public interface BlogsEntryPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry findByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_S(
 		long groupId, java.util.Date displayDate, int status)
 		throws com.liferay.portal.SystemException;
@@ -616,11 +603,6 @@ public interface BlogsEntryPersistence extends BasePersistence {
 	public void removeByG_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_UT_S(long groupId, java.lang.String urlTitle,
-		int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException;
-
 	public void removeByG_D_S(long groupId, java.util.Date displayDate,
 		int status) throws com.liferay.portal.SystemException;
 
@@ -670,9 +652,6 @@ public interface BlogsEntryPersistence extends BasePersistence {
 		java.util.Date displayDate) throws com.liferay.portal.SystemException;
 
 	public int countByG_U_S(long groupId, long userId, int status)
-		throws com.liferay.portal.SystemException;
-
-	public int countByG_UT_S(long groupId, java.lang.String urlTitle, int status)
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_D_S(long groupId, java.util.Date displayDate, int status)

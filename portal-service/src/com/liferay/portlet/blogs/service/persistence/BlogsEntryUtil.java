@@ -684,26 +684,6 @@ public class BlogsEntryUtil {
 			obc);
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException {
-		return getPersistence().findByG_UT_S(groupId, urlTitle, status);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_UT_S(groupId, urlTitle, status);
-	}
-
-	public static com.liferay.portlet.blogs.model.BlogsEntry fetchByG_UT_S(
-		long groupId, java.lang.String urlTitle, int status,
-		boolean retrieveFromCache) throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByG_UT_S(groupId, urlTitle, status, retrieveFromCache);
-	}
-
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D_S(
 		long groupId, java.util.Date displayDate, int status)
 		throws com.liferay.portal.SystemException {
@@ -907,13 +887,6 @@ public class BlogsEntryUtil {
 		getPersistence().removeByG_U_S(groupId, userId, status);
 	}
 
-	public static void removeByG_UT_S(long groupId, java.lang.String urlTitle,
-		int status)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.blogs.NoSuchEntryException {
-		getPersistence().removeByG_UT_S(groupId, urlTitle, status);
-	}
-
 	public static void removeByG_D_S(long groupId, java.util.Date displayDate,
 		int status) throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_D_S(groupId, displayDate, status);
@@ -997,11 +970,6 @@ public class BlogsEntryUtil {
 	public static int countByG_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_U_S(groupId, userId, status);
-	}
-
-	public static int countByG_UT_S(long groupId, java.lang.String urlTitle,
-		int status) throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_UT_S(groupId, urlTitle, status);
 	}
 
 	public static int countByG_D_S(long groupId, java.util.Date displayDate,

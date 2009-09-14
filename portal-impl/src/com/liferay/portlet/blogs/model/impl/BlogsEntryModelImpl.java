@@ -308,16 +308,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 
 	public void setStatus(int status) {
 		_status = status;
-
-		if (!_setOriginalStatus) {
-			_setOriginalStatus = true;
-
-			_originalStatus = status;
-		}
-	}
-
-	public int getOriginalStatus() {
-		return _originalStatus;
 	}
 
 	public long getStatusByUserId() {
@@ -619,8 +609,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry> {
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
 	private int _status;
-	private int _originalStatus;
-	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;
