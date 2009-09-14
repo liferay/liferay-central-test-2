@@ -37,55 +37,29 @@ Liferay.Util = {
 	},
 
 	addInputFocus: function() {
-		var inputs = jQuery('input:text, input:text, textarea');
+		AUI().use('node',
+			function(A) {
+				var handleFocus = function(event) {
+					var target = event.target;
+					var tagName = target.get('tagName').toLowerCase();
+					var nodeType = target.get('type');
 
-		var focusEvent = function(event) {
-			jQuery(this).addClass('focus');
+					if (
+						(tagName == 'input' && /text|password/.test(nodeType)) ||
+						tagName == 'textarea'
+					) {
+						var action = 'addClass';
 
-			var value = this.value;
-			var caretPos = value.length;
+						if (/blur|focusout/.test(event.type)) {
+							action = 'removeClass';
+						}
 
-			if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
-				var textRange = this.createTextRange();
+						target[action]('focus');
+					}
+				};
 
-				textRange.moveStart('character', caretPos);
-			}
-			else if (this.selectionStart) {
-				this.selectionStart = caretPos;
-				this.selectionEnd = caretPos;
-			}
-
-			if (Liferay.Browser.isIe() && (this != document.activeElement)) {
-				try {
-					this.focus();
-				}
-				catch (e) {
-				}
-			}
-		};
-
-		var blurEvent = function(event) {
-			jQuery(this).removeClass('focus');
-		};
-
-		inputs.focus(focusEvent);
-		inputs.blur(blurEvent);
-
-		inputs.livequery(
-			'focus',
-			focusEvent
-		);
-
-		inputs.livequery(
-			'blur',
-			blurEvent
-		);
-
-		jQuery('input.lfr-auto-focus').livequery(
-			function() {
-				jQuery('input').trigger('blur');
-
-				jQuery(this).trigger('focus');
+				A.on('focus', handleFocus, document.body);
+				A.on('blur', handleFocus, document.body);
 			}
 		);
 	},

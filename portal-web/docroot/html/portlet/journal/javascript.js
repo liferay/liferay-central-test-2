@@ -566,186 +566,195 @@
 				var instance = this;
 
 				var journalArticleContainerId = instance._generateId(instance._fieldsContainerClass)
-				var journalAddSubfieldListBtn = jQuery(journalArticleContainerId + ' .journal-list-subfield span.journal-add-field');
-				var journalDeleteSubfieldListBtn = jQuery(journalArticleContainerId + ' .journal-list-subfield span.journal-delete-field');
-				var repeatableFieldImage = jQuery(journalArticleContainerId + ' .repeatable-field-image');
-				var journalInputListKey = jQuery('input.journal-list-key');
-				var journalInputListValue = jQuery('input.journal-list-value');
-				var journalImageShowHideLink = jQuery('.journal-image-show-hide a.journal-image-link');
-				var journalImageDeleteBtn = jQuery('.journal-image-preview .journal-image-delete-btn');
 
-				repeatableFieldImage.livequery(
-					'click',
-					function() {
-						var source = jQuery(this).parents('li:first');
+				AUI().use(
+					'aui-base',
+					function(A) {
+						var addListItem = function(event) {
+							var icon = jQuery(event.currentTarget.getDOM());
+							var iconParent = icon.parent();
 
-						instance._repeatField(source, false);
-					}
-				);
+							var select = iconParent.siblings('select:first');
 
-				repeatableFieldImage.livequery(
-					'mouseenter',
-					function() {
-						var source = jQuery(this).parents('li:first');
+							var keyInput = icon.siblings('input.journal-list-key');
+							var key = instance._formatOptionsKey(keyInput.val());
 
-						source.addClass('repeatable-border');
-					}
-				);
+							var valueInput = icon.siblings('input.journal-list-value');
+							var value = valueInput.val();
 
-				repeatableFieldImage.livequery(
-					'mouseleave',
-					function() {
-						var source = jQuery(this).parents('li:first');
+							if (key && value) {
+								var options = select.find('option');
 
-						source.removeClass('repeatable-border');
-					}
-				);
+								jQuery.grep(
+									options,
+									function(option) {
+										option = jQuery(option);
 
-				var addListItem = function(event) {
-					var icon = jQuery(this);
-					var iconParent = icon.parent();
+										if (option.text().toLowerCase() == key.toLowerCase()) {
+											option.remove();
+										}
+									}
+								);
 
-					var select = iconParent.siblings('select:first');
+								var option = jQuery('<option></option>').val(value).text(key);
 
-					var keyInput = icon.siblings('input.journal-list-key');
-					var key = instance._formatOptionsKey(keyInput.val());
+								select.append(option);
+								option.select();
+								keyInput.val('').focus();
 
-					var valueInput = icon.siblings('input.journal-list-value');
-					var value = valueInput.val();
-
-					if (key && value) {
-						var options = select.find('option');
-
-						jQuery.grep(
-							options,
-							function(option) {
-								option = jQuery(option);
-
-								if (option.text().toLowerCase() == key.toLowerCase()) {
-									option.remove();
-								}
+								valueInput.val('value');
 							}
+							else {
+								keyInput.focus();
+							}
+						};
+
+						var keyPressAddItem = function(event) {
+							var btnScope = jQuery(event.currentTarget.getDOM()).siblings('span.journal-add-field');
+							var scope = btnScope[0];
+
+							if (event.keyCode == 13) {
+								event.currentTarget = A.get(scope);
+
+								addListItem.apply(event.currentTarget, arguments);
+							}
+						};
+
+						var removeListItem = function(event) {
+							var icon = jQuery(event.currentTarget.getDOM());
+							var select = icon.siblings('select:first').focus();
+
+							jQuery('option:selected', select).remove();
+						};
+
+						var container = A.get(journalArticleContainerId);
+
+						container.delegate(
+							'click',
+							function(event) {
+								var currentTarget = event.currentTarget;
+
+								var source = jQuery(currentTarget.getDOM()).parents('li:first');
+
+								instance._repeatField(source, false);
+							},
+							'.repeatable-field-image'
 						);
 
-						var option = jQuery('<option></option>').val(value).text(key);
+						container.delegate(
+							'mouseenter',
+							function(event) {
+								var source = event.currentTarget.ancestor('li');
 
-						select.append(option);
-						option.select();
-						keyInput.val('').focus();
+								source.addClass('repeatable-border');
+							},
+							'.repeatable-field-image'
+						);
 
-						valueInput.val('value');
-					}
-					else {
-						keyInput.focus();
-					}
-				};
+						container.delegate(
+							'mouseleave',
+							function(event) {
+								var source = event.currentTarget.ancestor('li');
 
-				var keyPressAddItem = function(event) {
-					var btnScope = jQuery(this).siblings('span.journal-add-field');
-					var scope = btnScope[0];
+								source.removeClass('repeatable-border');
+							},
+							'.repeatable-field-image'
+						);
 
-					if (event.keyCode == 13) {
-						addListItem.apply(scope);
-					}
-				};
+						container.delegate('keypress', keyPressAddItem, '.journal-list-key');
+						container.delegate('keypress', keyPressAddItem, '.journal-list-value');
 
-				journalInputListKey.livequery('keypress', keyPressAddItem);
-				journalInputListValue.livequery('keypress', keyPressAddItem);
+						container.delegate('click', addListItem, '.journal-add-field');
+						container.delegate('click', removeListItem, '.journal-delete-field');
 
-				var removeListItem = function(event) {
-					var icon = jQuery(this);
-					var select = icon.siblings('select:first').focus();
+						container.delegate(
+							'click',
+							function(event) {
+								var button = jQuery(event.currentTarget.getDOM());
 
-					jQuery('option:selected', select).remove();
-				};
+								var imageWrapper = button.siblings('.journal-image-wrapper');
+								var imageDelete = button.siblings('.journal-image-delete');
 
-				journalAddSubfieldListBtn.livequery('click', addListItem);
-				journalDeleteSubfieldListBtn.livequery('click', removeListItem);
+								if (imageDelete.val() == '') {
+									imageDelete.val('delete');
+									imageWrapper.hide();
 
-				journalImageDeleteBtn.livequery(
-					'click',
-					function() {
-						var button = jQuery(this);
+									var buttonValue = Liferay.Language.get('cancel');
 
-						var imageWrapper = button.siblings('.journal-image-wrapper');
-						var imageDelete = button.siblings('.journal-image-delete');
+									button.val(buttonValue);
+								}
+								else {
+									imageDelete.val('');
+									imageWrapper.show();
 
-						if (imageDelete.val() == '') {
-							imageDelete.val('delete');
-							imageWrapper.hide();
+									var buttonValue = Liferay.Language.get('delete');
 
-							var buttonValue = Liferay.Language.get('cancel');
+									button.val(buttonValue);
+								}
+							},
+							'.journal-image-delete-btn'
+						);
 
-							button.val(buttonValue);
-						}
-						else {
-							imageDelete.val('');
-							imageWrapper.show();
+						container.delegate(
+							'click',
+							function(event) {
+								var link = jQuery(event.currentTarget.getDOM());
+								var imagePreviewDiv = link.parent().siblings('.journal-image-preview');
 
-							var buttonValue = Liferay.Language.get('delete');
+								imagePreviewDiv.toggle();
 
-							button.val(buttonValue);
-						}
-					}
-				);
+								var visible = imagePreviewDiv.is(':visible');
+								var labelSelector = '.show-label';
 
-				journalImageShowHideLink.livequery(
-					'click',
-					function(event) {
-						var link = jQuery(this);
-						var imagePreviewDiv = link.parent().siblings('.journal-image-preview');
+								if (visible) {
+									labelSelector = '.hide-label'
+								}
 
-						imagePreviewDiv.toggle();
+								link.find('span').hide();
+								link.find(labelSelector).show();
+							},
+							'.journal-image-link'
+						);
 
-						var visible = imagePreviewDiv.is(':visible');
-						var labelSelector = '.show-label';
+						var _attachButtonInputSelector = function(id, title, handlerName) {
+							var buttonId = 'input.journal-' + id + '-button';
+							var textId = 'input.journal-' + id + '-text';
 
-						if (visible) {
-							labelSelector = '.hide-label'
-						}
+							container.delegate(
+								'click',
+								function(event) {
+									var button = jQuery(event.currentTarget.getDOM());
+									var input = button.siblings(textId);
+									var imageGalleryUrl = button.attr('data-' + id + '-url');
 
-						link.find('span').hide();
-						link.find(labelSelector).show();
-					}
-				);
+									window[instance.portletNamespace + handlerName] = function(url) {
+										input.val(url);
+									};
 
-				var _attachButtonInputSelector = function(id, title, handlerName) {
-					var buttonId = 'input.journal-' + id + '-button';
-					var textId = 'input.journal-' + id + '-text';
+									instance._openPopupWindow(imageGalleryUrl, title);
+								},
+								buttonId
+							);
+						};
 
-					jQuery(buttonId).livequery(
-						'click',
-						function() {
-							var button = jQuery(this);
-							var input = button.siblings(textId);
-							var imageGalleryUrl = button.attr('data-' + id + '-url');
+						_attachButtonInputSelector('documentlibrary', 'DocumentLibrary', 'selectDocumentLibrary');
+						_attachButtonInputSelector('imagegallery', 'ImageGallery', 'selectImageGallery');
 
-							window[instance.portletNamespace + handlerName] = function(url) {
-								input.val(url);
-							};
+						container.delegate(
+							'mouseover',
+							function(event) {
+								var image = jQuery(event.currentTarget.getDOM());
+								var source = image.parents('li:first');
+								var fieldInstance = source.data('fieldInstance');
 
-							instance._openPopupWindow(imageGalleryUrl, title);
-						}
-					);
-				};
+								if (fieldInstance) {
+									var instructions = fieldInstance.get('instructions');
 
-				_attachButtonInputSelector('documentlibrary', 'DocumentLibrary', 'selectDocumentLibrary');
-				_attachButtonInputSelector('imagegallery', 'ImageGallery', 'selectImageGallery');
-
-				var instructionsTooltipImages = jQuery('img.journal-article-instructions-container');
-
-				instructionsTooltipImages.livequery(
-					'mouseover',
-					function(event) {
-						var image = jQuery(this);
-						var source = image.parents('li:first');
-						var fieldInstance = source.data('fieldInstance');
-
-						if (fieldInstance) {
-							var instructions = fieldInstance.get('instructions');
-
-							Liferay.Portal.ToolTip.show(this, instructions);
-						}
+									Liferay.Portal.ToolTip.show(this, instructions);
+								}
+							},
+							'img.journal-article-instructions-container'
+						);
 					}
 				);
 			},
