@@ -83,7 +83,6 @@
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingItemPrice" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingOrder" %>
 <%@ page import="com.liferay.portlet.shopping.model.ShoppingOrderItem" %>
-<%@ page import="com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl" %>
 <%@ page import="com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl" %>
 <%@ page import="com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl" %>
 <%@ page import="com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl" %>
