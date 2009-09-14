@@ -143,11 +143,10 @@ public class BlogsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntrySoap getEntry(
-		long groupId, java.lang.String urlTitle, int status)
-		throws RemoteException {
+		long groupId, java.lang.String urlTitle) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(groupId,
-					urlTitle, status);
+					urlTitle);
 
 			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}

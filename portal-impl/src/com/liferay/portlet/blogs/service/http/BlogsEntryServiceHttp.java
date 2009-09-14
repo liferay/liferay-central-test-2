@@ -344,8 +344,7 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String urlTitle,
-		int status)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -357,10 +356,8 @@ public class BlogsEntryServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new IntegerWrapper(status);
-
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
-					"getEntry", new Object[] { paramObj0, paramObj1, paramObj2 });
+					"getEntry", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

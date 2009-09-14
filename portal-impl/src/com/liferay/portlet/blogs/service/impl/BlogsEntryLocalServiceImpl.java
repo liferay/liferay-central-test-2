@@ -376,10 +376,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
-	public BlogsEntry getEntry(long groupId, String urlTitle, int status)
+	public BlogsEntry getEntry(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
-		return blogsEntryPersistence.findByG_UT_S(groupId, urlTitle, status);
+		return blogsEntryPersistence.findByG_UT(groupId, urlTitle);
 	}
 
 	public List<BlogsEntry> getGroupEntries(

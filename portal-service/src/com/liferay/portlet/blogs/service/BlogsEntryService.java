@@ -90,7 +90,7 @@ public interface BlogsEntryService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long groupId,
-		java.lang.String urlTitle, int status)
+		java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

@@ -151,11 +151,10 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.getEntry(entryId);
 	}
 
-	public BlogsEntry getEntry(long groupId, String urlTitle, int status)
+	public BlogsEntry getEntry(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
-		BlogsEntry entry = blogsEntryLocalService.getEntry(
-			groupId, urlTitle, status);
+		BlogsEntry entry = blogsEntryLocalService.getEntry(groupId, urlTitle);
 
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entry.getEntryId(), ActionKeys.VIEW);

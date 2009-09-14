@@ -76,8 +76,7 @@ public class ActionUtil {
 		else if (Validator.isNotNull(urlTitle)) {
 			try {
 				entry = BlogsEntryServiceUtil.getEntry(
-					themeDisplay.getScopeGroupId(), urlTitle,
-					StatusConstants.APPROVED);
+					themeDisplay.getScopeGroupId(), urlTitle);
 			}
 			catch (NoSuchEntryException nsee) {
 				if (urlTitle.indexOf(StringPool.UNDERLINE) != -1) {
@@ -89,8 +88,7 @@ public class ActionUtil {
 						urlTitle, StringPool.UNDERLINE, StringPool.DASH);
 
 					entry = BlogsEntryServiceUtil.getEntry(
-						themeDisplay.getScopeGroupId(), urlTitle,
-						StatusConstants.APPROVED);
+						themeDisplay.getScopeGroupId(), urlTitle);
 				}
 				else {
 					throw nsee;

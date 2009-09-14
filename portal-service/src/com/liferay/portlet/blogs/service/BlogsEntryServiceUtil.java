@@ -91,10 +91,10 @@ public class BlogsEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
-		long groupId, java.lang.String urlTitle, int status)
+		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getEntry(groupId, urlTitle, status);
+		return getService().getEntry(groupId, urlTitle);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
