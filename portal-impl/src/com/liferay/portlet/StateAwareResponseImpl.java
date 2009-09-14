@@ -22,8 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -106,17 +104,8 @@ public abstract class StateAwareResponseImpl
 			throw new IllegalArgumentException();
 		}
 
-		PublicRenderParameter publicRenderParameter =
-			getPortlet().getPublicRenderParameter(name);
-
-		if (publicRenderParameter == null) {
-			_log.warn("Public parameter " + name + "does not exist");
-
-			return;
-		}
-
-		com.liferay.portal.kernel.xml.QName qName =
-			publicRenderParameter.getQName();
+		com.liferay.portal.kernel.xml.QName qName = PortletQNameUtil.getQName(
+			name);
 
 		String key = PortletQNameUtil.getKey(qName);
 
@@ -315,9 +304,6 @@ public abstract class StateAwareResponseImpl
 
 		return true;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		StateAwareResponseImpl.class);
 
 	private boolean _calledSetRenderParameter;
 	private List<Event> _events = new ArrayList<Event>();
