@@ -180,17 +180,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public void addFolderResources(
-			long folderId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
 			DLFolder folder, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -199,16 +188,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			DLFolder.class.getName(), folder.getFolderId(), false,
 			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
 	public void addFolderResources(
@@ -222,12 +201,25 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteFolder(long folderId)
+	public void addFolderResources(
+			long folderId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		deleteFolder(folder);
+		addFolderResources(
+			folder, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFolderResources(
+			long folderId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(DLFolder folder)
@@ -268,6 +260,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		dlFolderPersistence.remove(folder);
 	}
 
+	public void deleteFolder(long folderId)
+		throws PortalException, SystemException {
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		deleteFolder(folder);
+	}
+
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
@@ -277,6 +277,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		for (DLFolder folder : folders) {
 			deleteFolder(folder);
 		}
+	}
+
+	public List<Object> getFileEntriesAndFileShortcuts(
+			long groupId, List<Long> folderIds, int status, int start, int end)
+		throws SystemException {
+
+		return dlFolderFinder.findFE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
@@ -291,12 +299,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			groupId, folderIds, status, start, end);
 	}
 
-	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+	public int getFileEntriesAndFileShortcutsCount(
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return dlFolderFinder.findFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
+		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
@@ -306,13 +313,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
-
-		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
-	}
-
-	public int getFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds, int status)
-		throws SystemException {
 
 		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
 	}
@@ -327,45 +327,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
-	}
-
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderIds, status, start, end);
-	}
-
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int status, int start, int end)
-		throws SystemException {
-
-		return dlFolderFinder.findF_FE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, long folderId, int status)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcutsCount(
-			groupId, folderIds, status);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds, int status)
-		throws SystemException {
-
-		return dlFolderFinder.countF_FE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {
@@ -384,6 +345,45 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		return dlFolderPersistence.findByG_P(
 			groupId, parentFolderId, start, end);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long groupId, List<Long> folderIds, int status, int start, int end)
+		throws SystemException {
+
+		return dlFolderFinder.findF_FE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long groupId, long folderId, int status, int start, int end)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			groupId, folderIds, status, start, end);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long groupId, List<Long> folderIds, int status)
+		throws SystemException {
+
+		return dlFolderFinder.countF_FE_FS_ByG_F_S(groupId, folderIds, status);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long groupId, long folderId, int status)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcutsCount(
+			groupId, folderIds, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
@@ -499,23 +499,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return folder;
 	}
 
-	protected long getParentFolderId(long groupId, long parentFolderId)
-		throws SystemException {
-
-		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
-				parentFolderId);
-
-			if ((parentFolder == null) ||
-				(groupId != parentFolder.getGroupId())) {
-
-				parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-			}
-		}
-
-		return parentFolderId;
-	}
-
 	protected long getParentFolderId(DLFolder folder, long parentFolderId)
 		throws SystemException {
 
@@ -549,12 +532,21 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
+	protected long getParentFolderId(long groupId, long parentFolderId)
+		throws SystemException {
 
-		long folderId = 0;
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
+				parentFolderId);
 
-		validate(folderId, groupId, parentFolderId, name);
+			if ((parentFolder == null) ||
+				(groupId != parentFolder.getGroupId())) {
+
+				parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+			}
+		}
+
+		return parentFolderId;
 	}
 
 	protected void validate(
@@ -580,6 +572,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		if ((folder != null) && (folder.getFolderId() != folderId)) {
 			throw new DuplicateFolderNameException();
 		}
+	}
+
+	protected void validate(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		long folderId = 0;
+
+		validate(folderId, groupId, parentFolderId, name);
 	}
 
 }

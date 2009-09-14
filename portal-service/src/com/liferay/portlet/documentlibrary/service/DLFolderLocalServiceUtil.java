@@ -130,15 +130,6 @@ public class DLFolderLocalServiceUtil {
 			description, serviceContext);
 	}
 
-	public static void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addFolderResources(folderId, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public static void addFolderResources(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -147,15 +138,6 @@ public class DLFolderLocalServiceUtil {
 		getService()
 			.addFolderResources(folder, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public static void addFolderResources(long folderId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addFolderResources(folderId, communityPermissions, guestPermissions);
 	}
 
 	public static void addFolderResources(
@@ -168,10 +150,22 @@ public class DLFolderLocalServiceUtil {
 			.addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
-	public static void deleteFolder(long folderId)
+	public static void addFolderResources(long folderId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteFolder(folderId);
+		getService()
+			.addFolderResources(folderId, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static void addFolderResources(long folderId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addFolderResources(folderId, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFolder(
@@ -181,18 +175,16 @@ public class DLFolderLocalServiceUtil {
 		getService().deleteFolder(folder);
 	}
 
+	public static void deleteFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteFolder(folderId);
+	}
+
 	public static void deleteFolders(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().deleteFolders(groupId);
-	}
-
-	public static java.util.List<Object> getFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getFileEntriesAndFileShortcuts(groupId, folderId, status,
-			start, end);
 	}
 
 	public static java.util.List<Object> getFileEntriesAndFileShortcuts(
@@ -203,11 +195,12 @@ public class DLFolderLocalServiceUtil {
 			start, end);
 	}
 
-	public static int getFileEntriesAndFileShortcutsCount(long groupId,
-		long folderId, int status) throws com.liferay.portal.SystemException {
+	public static java.util.List<Object> getFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
 		return getService()
-				   .getFileEntriesAndFileShortcutsCount(groupId, folderId,
-			status);
+				   .getFileEntriesAndFileShortcuts(groupId, folderId, status,
+			start, end);
 	}
 
 	public static int getFileEntriesAndFileShortcutsCount(long groupId,
@@ -215,6 +208,13 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getFileEntriesAndFileShortcutsCount(groupId, folderIds,
+			status);
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status) throws com.liferay.portal.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcutsCount(groupId, folderId,
 			status);
 	}
 
@@ -232,38 +232,6 @@ public class DLFolderLocalServiceUtil {
 		return getService().getFolder(groupId, parentFolderId, name);
 	}
 
-	public static java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,
-			status, start, end);
-	}
-
-	public static java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<Long> folderIds, int status, int start,
-		int end) throws com.liferay.portal.SystemException {
-		return getService()
-				   .getFoldersAndFileEntriesAndFileShortcuts(groupId,
-			folderIds, status, start, end);
-	}
-
-	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long groupId, long folderId, int status)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
-			folderId, status);
-	}
-
-	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long groupId, java.util.List<Long> folderIds, int status)
-		throws com.liferay.portal.SystemException {
-		return getService()
-				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
-			folderIds, status);
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long companyId) throws com.liferay.portal.SystemException {
 		return getService().getFolders(companyId);
@@ -279,6 +247,38 @@ public class DLFolderLocalServiceUtil {
 		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getService().getFolders(groupId, parentFolderId, start, end);
+	}
+
+	public static java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<Long> folderIds, int status, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId,
+			folderIds, status, start, end);
+	}
+
+	public static java.util.List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,
+			status, start, end);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, java.util.List<Long> folderIds, int status)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderIds, status);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, long folderId, int status)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderId, status);
 	}
 
 	public static int getFoldersCount(long groupId, long parentFolderId)

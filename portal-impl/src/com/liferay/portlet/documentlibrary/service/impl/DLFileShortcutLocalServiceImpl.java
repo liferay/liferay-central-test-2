@@ -133,18 +133,6 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void addFileShortcutResources(
-			long fileShortcutId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		DLFileShortcut fileShortcut =
-			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
-
-		addFileShortcutResources(
-			fileShortcut, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFileShortcutResources(
 			DLFileShortcut fileShortcut, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -154,18 +142,6 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addFileShortcutResources(
-			long fileShortcutId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFileShortcut fileShortcut =
-			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
-
-		addFileShortcutResources(
-			fileShortcut, communityPermissions, guestPermissions);
 	}
 
 	public void addFileShortcutResources(
@@ -180,13 +156,28 @@ public class DLFileShortcutLocalServiceImpl
 			guestPermissions);
 	}
 
-	public void deleteFileShortcut(long fileShortcutId)
+	public void addFileShortcutResources(
+			long fileShortcutId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFileShortcut fileShortcut =
-			dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 
-		deleteFileShortcut(fileShortcut);
+		addFileShortcutResources(
+			fileShortcut, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFileShortcutResources(
+			long fileShortcutId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFileShortcut fileShortcut =
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
+
+		addFileShortcutResources(
+			fileShortcut, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)
@@ -207,6 +198,15 @@ public class DLFileShortcutLocalServiceImpl
 		// File shortcut
 
 		dlFileShortcutPersistence.remove(fileShortcut);
+	}
+
+	public void deleteFileShortcut(long fileShortcutId)
+		throws PortalException, SystemException {
+
+		DLFileShortcut fileShortcut =
+			dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
+
+		deleteFileShortcut(fileShortcut);
 	}
 
 	public void deleteFileShortcuts(

@@ -54,20 +54,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long groupId, long folderId, String name, String title,
-			String description, String extraSettings, File file,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
-
-		return dlFileEntryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, name, title, description,
-			extraSettings, file, serviceContext);
-	}
-
-	public DLFileEntry addFileEntry(
-			long groupId, long folderId, String name, String title,
 			String description, String extraSettings, byte[] bytes,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -78,6 +64,20 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return dlFileEntryLocalService.addFileEntry(
 			getUserId(), groupId, folderId, name, title, description,
 			extraSettings, bytes, serviceContext);
+	}
+
+	public DLFileEntry addFileEntry(
+			long groupId, long folderId, String name, String title,
+			String description, String extraSettings, File file,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
+
+		return dlFileEntryLocalService.addFileEntry(
+			getUserId(), groupId, folderId, name, title, description,
+			extraSettings, file, serviceContext);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId, String name)

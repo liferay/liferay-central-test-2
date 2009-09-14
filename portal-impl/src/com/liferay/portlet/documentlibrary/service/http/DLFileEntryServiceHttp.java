@@ -75,8 +75,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
-		java.io.File file,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -108,10 +107,10 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = file;
+			Object paramObj6 = bytes;
 
-			if (file == null) {
-				paramObj6 = new NullWrapper("java.io.File");
+			if (bytes == null) {
+				paramObj6 = new NullWrapper("[B");
 			}
 
 			Object paramObj7 = serviceContext;
@@ -158,7 +157,8 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -190,10 +190,10 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = bytes;
+			Object paramObj6 = file;
 
-			if (bytes == null) {
-				paramObj6 = new NullWrapper("[B");
+			if (file == null) {
+				paramObj6 = new NullWrapper("java.io.File");
 			}
 
 			Object paramObj7 = serviceContext;
