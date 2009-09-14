@@ -280,38 +280,41 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.findFE_FS_ByG_F(groupId, folderIds, start, end);
+		return dlFolderFinder.findFE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int start, int end)
+			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderFinder.findFE_FS_ByG_F(groupId, folderIds, start, end);
+		return dlFolderFinder.findFE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId)
+	public int getFileEntriesAndFileShortcutsCount(
+			long groupId, long folderId, int status)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.countFE_FS_ByG_F(groupId, folderIds);
+		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds)
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return dlFolderFinder.countFE_FS_ByG_F(groupId, folderIds);
+		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -327,7 +330,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
@@ -335,18 +338,19 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folderIds.add(folderId);
 
 		return getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderIds, start, end);
+			groupId, folderIds, status, start, end);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int start, int end)
+			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderFinder.findF_FE_FS_ByG_F(groupId, folderIds, start, end);
+		return dlFolderFinder.findF_FE_FS_ByG_F_S(
+			groupId, folderIds, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, long folderId)
+			long groupId, long folderId, int status)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
@@ -354,14 +358,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folderIds.add(folderId);
 
 		return getFoldersAndFileEntriesAndFileShortcutsCount(
-			groupId, folderIds);
+			groupId, folderIds, status);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds)
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return dlFolderFinder.countF_FE_FS_ByG_F(groupId, folderIds);
+		return dlFolderFinder.countF_FE_FS_ByG_F_S(groupId, folderIds, status);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {

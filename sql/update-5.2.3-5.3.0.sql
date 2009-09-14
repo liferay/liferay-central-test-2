@@ -113,6 +113,18 @@ COMMIT_TRANSACTION;
 update BlogsEntry set status = 0 where draft = FALSE;
 update BlogsEntry set status = 2 where draft = TRUE;
 
+alter table DLFileEntry add pendingVersion DOUBLE;
+
+alter table DLFileShortcut add status INTEGER;
+alter table DLFileShortcut add statusByUserId LONG;
+alter table DLFileShortcut add statusByUserName VARCHAR(75);
+alter table DLFileShortcut add statusDate DATE;
+
+alter table DLFileVersion add status INTEGER;
+alter table DLFileVersion add statusByUserId LONG;
+alter table DLFileVersion add statusByUserName VARCHAR(75);
+alter table DLFileVersion add statusDate DATE;
+
 alter table JournalArticle add status INTEGER;
 alter table JournalArticle add statusByUserId LONG;
 alter table JournalArticle add statusByUserName VARCHAR(75);

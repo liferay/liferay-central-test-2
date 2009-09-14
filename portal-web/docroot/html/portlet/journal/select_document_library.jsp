@@ -98,7 +98,7 @@ for (int i = 0; i < results.size(); i++) {
 	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
-	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds);
+	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(groupId, subfolderIds, StatusConstants.APPROVED);
 
 	row.addText(String.valueOf(foldersCount), rowURL);
 	row.addText(String.valueOf(fileEntriesCount), rowURL);

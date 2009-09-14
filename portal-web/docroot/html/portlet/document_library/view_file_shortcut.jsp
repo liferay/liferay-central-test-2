@@ -111,7 +111,16 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
 <aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
-	<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + toFileEntry.getVersion() + ")") %></h3>
+
+	<%
+	String versionText = LanguageUtil.format(pageContext, "version-x", toFileEntry.getVersion());
+
+	if (toFileEntry.getVersion() == 0) {
+		versionText = LanguageUtil.get(pageContext, "not-approved");
+	}
+	%>
+
+	<h3><%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle() + " (" + versionText + ")") %></h3>
 
 	<div class="file-entry-categories">
 		<liferay-ui:asset-categories-summary
@@ -244,6 +253,12 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 		<c:when test='<%= tabs2.equals("version-history") %>'>
 
 			<%
+			boolean shotNonApprovedDocuments = false;
+
+			if ((user.getUserId() == fileShortcut.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+				shotNonApprovedDocuments = true;
+			}
+
 			SearchContainer searchContainer = new SearchContainer();
 
 			List<String> headerNames = new ArrayList<String>();
@@ -251,11 +266,22 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 			headerNames.add("version");
 			headerNames.add("date");
 			headerNames.add("size");
+
+			if (shotNonApprovedDocuments) {
+				headerNames.add("status");
+			}
+
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer.setHeaderNames(headerNames);
 
-			List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
+			int status = StatusConstants.APPROVED;
+
+			if (shotNonApprovedDocuments) {
+				status = StatusConstants.ANY;
+			}
+
+			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, toFileEntry.getFolderId(), toFileEntry.getName(), status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
@@ -280,6 +306,12 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileShortcutPermission.con
 				row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
 				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
 				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+				// Status
+
+				if (shotNonApprovedDocuments) {
+					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
+				}
 
 				// Action
 

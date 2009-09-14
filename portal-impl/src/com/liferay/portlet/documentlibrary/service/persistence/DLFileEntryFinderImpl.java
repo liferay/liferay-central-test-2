@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -44,13 +45,13 @@ import java.util.List;
 public class DLFileEntryFinderImpl
 	extends BasePersistenceImpl implements DLFileEntryFinder {
 
-	public static String COUNT_BY_G_F =
-		DLFileEntryFinder.class.getName() + ".countByG_F";
+	public static String COUNT_BY_G_F_S =
+		DLFileEntryFinder.class.getName() + ".countByG_F_S";
 
 	public static String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
 
-	public int countByG_F(long groupId, List<Long> folderIds)
+	public int countByG_F_S(long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		Session session = null;
@@ -58,10 +59,15 @@ public class DLFileEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_F);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_F_S);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_ID$]", getFolderIds(folderIds));
+
+			if (status != StatusConstants.APPROVED) {
+				sql = StringUtil.replace(
+					sql, "(DLFileEntry.version > 0) AND", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 

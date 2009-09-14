@@ -49,6 +49,12 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", String.valueOf(folderId));
+
+int status = StatusConstants.APPROVED;
+
+if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	status = StatusConstants.ANY;
+}
 %>
 
 <liferay-util:include page="/html/portlet/document_library/tabs1.jsp" />
@@ -182,17 +188,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					<%
 					if (mergedView) {
-						results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+						results = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 					}
 					else {
-						results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+						results = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcuts(scopeGroupId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 					}
 
 					if (mergedView) {
-						total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId);
+						total = DLFolderLocalServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 					}
 					else {
-						total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId);
+						total = DLFolderLocalServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
 					}
 
 					pageContext.setAttribute("results", results);

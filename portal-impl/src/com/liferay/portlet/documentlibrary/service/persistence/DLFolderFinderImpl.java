@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -44,19 +45,20 @@ import java.util.List;
 public class DLFolderFinderImpl
 	extends BasePersistenceImpl implements DLFolderFinder {
 
-	public static String COUNT_FE_FS_BY_G_F =
-		DLFolderFinder.class.getName() + ".countFE_FS_ByG_F";
+	public static String COUNT_FE_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".countFE_FS_ByG_F_S";
 
-	public static String COUNT_F_FE_FS_BY_G_F =
-		DLFolderFinder.class.getName() + ".countF_FE_FS_ByG_F";
+	public static String COUNT_F_FE_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".countF_FE_FS_ByG_F_S";
 
-	public static String FIND_FE_FS_BY_G_F =
-		DLFolderFinder.class.getName() + ".findFE_FS_ByG_F";
+	public static String FIND_FE_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".findFE_FS_ByG_F_S";
 
-	public static String FIND_F_FE_FS_BY_G_F =
-		DLFolderFinder.class.getName() + ".findF_FE_FS_ByG_F";
+	public static String FIND_F_FE_FS_BY_G_F_S =
+		DLFolderFinder.class.getName() + ".findF_FE_FS_ByG_F_S";
 
-	public int countFE_FS_ByG_F(long groupId, List<Long> folderIds)
+	public int countFE_FS_ByG_F_S(
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		Session session = null;
@@ -64,7 +66,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_FE_FS_BY_G_F);
+			String sql = CustomSQLUtil.get(COUNT_FE_FS_BY_G_F_S);
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -72,6 +74,13 @@ public class DLFolderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
+
+			if (status != StatusConstants.APPROVED) {
+				sql = StringUtil.replace(
+					sql, "(DLFileEntry.version > 0) AND", "");
+				sql = StringUtil.replace(
+					sql, "(DLFileShortcut.status = 0) AND", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -113,7 +122,8 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public int countF_FE_FS_ByG_F(long groupId, List<Long> folderIds)
+	public int countF_FE_FS_ByG_F_S(
+			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		Session session = null;
@@ -121,7 +131,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_F_FE_FS_BY_G_F);
+			String sql = CustomSQLUtil.get(COUNT_F_FE_FS_BY_G_F_S);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -133,6 +143,13 @@ public class DLFolderFinderImpl
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
 
+			if (status != StatusConstants.APPROVED) {
+				sql = StringUtil.replace(
+					sql, "(DLFileEntry.version > 0) AND", "");
+				sql = StringUtil.replace(
+					sql, "(DLFileShortcut.status = 0) AND", "");
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
@@ -179,8 +196,8 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public List<Object> findFE_FS_ByG_F(
-			long groupId, List<Long> folderIds, int start, int end)
+	public List<Object> findFE_FS_ByG_F_S(
+			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -188,7 +205,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_FE_FS_BY_G_F);
+			String sql = CustomSQLUtil.get(FIND_FE_FS_BY_G_F_S);
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
@@ -196,6 +213,13 @@ public class DLFolderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
+
+			if (status != StatusConstants.APPROVED) {
+				sql = StringUtil.replace(
+					sql, "(DLFileEntry.version > 0) AND", "");
+				sql = StringUtil.replace(
+					sql, "(DLFileShortcut.status = 0) AND", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -253,8 +277,8 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	public List<Object> findF_FE_FS_ByG_F(
-			long groupId, List<Long> folderIds, int start, int end)
+	public List<Object> findF_FE_FS_ByG_F_S(
+			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -262,7 +286,7 @@ public class DLFolderFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_F_FE_FS_BY_G_F);
+			String sql = CustomSQLUtil.get(FIND_F_FE_FS_BY_G_F_S);
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
@@ -273,6 +297,13 @@ public class DLFolderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderIds(folderIds, "DLFileShortcut"));
+
+			if (status != StatusConstants.APPROVED) {
+				sql = StringUtil.replace(
+					sql, "(DLFileEntry.version > 0) AND", "");
+				sql = StringUtil.replace(
+					sql, "(DLFileShortcut.status = 0) AND", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 

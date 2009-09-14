@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -85,6 +86,10 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
+		fileShortcut.setStatus(StatusConstants.APPROVED);
+		fileShortcut.setStatusByUserId(userId);
+		fileShortcut.setStatusByUserName(user.getFullName());
+		fileShortcut.setStatusDate(now);
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
@@ -301,6 +306,21 @@ public class DLFileShortcutLocalServiceImpl
 
 			dlFileShortcutPersistence.update(fileShortcut, false);
 		}
+	}
+
+	public DLFileShortcut updateStatus(
+			long userId, long fileShortcutId, int status,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileShortcut fileShortcut =
+			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
+
+		fileShortcut.setStatus(status);
+
+		dlFileShortcutPersistence.update(fileShortcut, false);
+
+		return fileShortcut;
 	}
 
 	protected void copyAssetTags(

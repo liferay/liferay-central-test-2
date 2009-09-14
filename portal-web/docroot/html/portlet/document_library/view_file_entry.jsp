@@ -167,7 +167,16 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 </c:if>
 
 <aui:column columnWidth="<%= 75 %>" cssClass="file-entry-column file-entry-column-first" first="<%= true %>">
-	<h3><%= fileEntry.getTitle() + " (" + fileEntry.getVersion() + ")" %></h3>
+
+	<%
+	String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
+
+	if (fileEntry.getVersion() == 0) {
+		versionText = LanguageUtil.get(pageContext, "not-approved");
+	}
+	%>
+
+	<h3><%= fileEntry.getTitle() + " (" + versionText + ")" %></h3>
 
 	<div class="file-entry-categories">
 		<liferay-ui:asset-categories-summary
@@ -328,6 +337,7 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 
 			<%
 			boolean comparableFileEntry = false;
+			boolean shotNonApprovedDocuments = false;
 
 			String[] comparableFileExtensions = PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
 
@@ -341,6 +351,10 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				}
 			}
 
+			if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+				shotNonApprovedDocuments = true;
+			}
+
 			SearchContainer searchContainer = new SearchContainer();
 
 			List<String> headerNames = new ArrayList<String>();
@@ -348,6 +362,11 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 			headerNames.add("version");
 			headerNames.add("date");
 			headerNames.add("size");
+
+			if (shotNonApprovedDocuments) {
+				headerNames.add("status");
+			}
+
 			headerNames.add("download");
 
 			if (conversions.length > 0) {
@@ -364,7 +383,13 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
 			}
 
-			List results = DLFileVersionLocalServiceUtil.getFileVersions(folderId, name);
+			int status = StatusConstants.APPROVED;
+
+			if (shotNonApprovedDocuments) {
+				status = StatusConstants.ANY;
+			}
+
+			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
@@ -391,6 +416,12 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
 				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
 				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+				// Status
+
+				if (shotNonApprovedDocuments) {
+					row.addText(LanguageUtil.get(pageContext, (fileVersion.getStatus() == StatusConstants.APPROVED)? "approved" : "not-approved"));
+				}
 
 				// Download
 

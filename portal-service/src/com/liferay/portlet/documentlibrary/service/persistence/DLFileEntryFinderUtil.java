@@ -28,9 +28,10 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryFinderUtil {
-	public static int countByG_F(long groupId, java.util.List<Long> folderIds)
+	public static int countByG_F_S(long groupId,
+		java.util.List<Long> folderIds, int status)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_F(groupId, folderIds);
+		return getFinder().countByG_F_S(groupId, folderIds, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()

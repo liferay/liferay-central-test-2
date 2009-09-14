@@ -30,6 +30,7 @@
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="version" type="double" />
+		<column name="pendingVersion" type="double" />
 		<column name="size" type="int" />
 		<column name="readCount" type="int" />
 		<column name="extraSettings" type="String" />
@@ -156,6 +157,10 @@
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Other fields -->
 
@@ -173,6 +178,17 @@
 			<finder-column name="groupId" />
 			<finder-column name="toFolderId" />
 			<finder-column name="toName" />
+		</finder>
+		<finder name="G_F_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="folderId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_TF_TN_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="toFolderId" />
+			<finder-column name="toName" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->
@@ -204,6 +220,10 @@
 		<column name="name" type="String" />
 		<column name="version" type="double" />
 		<column name="size" type="int" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 
@@ -215,15 +235,28 @@
 
 		<!-- Finders -->
 
-		<finder name="F_N" return-type="Collection">
+		<finder name="G_F_N" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="F_N_V" return-type="DLFileVersion" unique="true">
+		<finder name="G_F_N_V" return-type="DLFileVersion" unique="true">
+			<finder-column name="groupId" />
 			<finder-column name="folderId" />
 			<finder-column name="name" />
 			<finder-column name="version" />
 		</finder>
+		<finder name="G_F_N_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+			<finder-column name="status" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
 	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">
 

@@ -131,12 +131,15 @@ create index IX_BAFB116E on DLFileRank (groupId, userId);
 create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_B0051937 on DLFileShortcut (groupId, folderId);
+create index IX_ECCE311D on DLFileShortcut (groupId, folderId, status);
 create index IX_55C736AC on DLFileShortcut (groupId, toFolderId, toName);
+create index IX_346A0992 on DLFileShortcut (groupId, toFolderId, toName, status);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
 create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);
 
-create index IX_9CD91DB6 on DLFileVersion (folderId, name);
-create unique index IX_6C5E6512 on DLFileVersion (folderId, name, version);
+create index IX_B413F1EC on DLFileVersion (groupId, folderId, name);
+create index IX_94E784D2 on DLFileVersion (groupId, folderId, name, status);
+create unique index IX_2F8FED9C on DLFileVersion (groupId, folderId, name, version);
 
 create index IX_A74DB14C on DLFolder (companyId);
 create index IX_F2EA1ACE on DLFolder (groupId);

@@ -33,6 +33,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -135,6 +136,9 @@ public class GetFileAction extends PortletAction {
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
+		catch (NoSuchFileEntryException nsfee) {
+			PortalUtil.sendError(404, nsfee, actionRequest, actionResponse);
+		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, actionRequest, actionResponse);
 		}
@@ -187,7 +191,12 @@ public class GetFileAction extends PortletAction {
 			}
 
 			if (version == 0) {
-				version = fileEntry.getVersion();
+				if (fileEntry.getVersion() > 0) {
+					version = fileEntry.getVersion();
+				}
+				else {
+					throw new NoSuchFileEntryException();
+				}
 			}
 
 			is = DLFileEntryLocalServiceUtil.getFileAsStream(
@@ -230,7 +239,7 @@ public class GetFileAction extends PortletAction {
 				else {
 					DLFileVersion fileVersion =
 						DLFileVersionLocalServiceUtil.getFileVersion(
-							folderId, name, version);
+							groupId, folderId, name, version);
 
 					contentLength = fileVersion.getSize();
 				}
