@@ -39,6 +39,7 @@
 				</a>
 			</td>
 			<td>
+
 				<%
 				String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "year=' + this.value;";
 				%>

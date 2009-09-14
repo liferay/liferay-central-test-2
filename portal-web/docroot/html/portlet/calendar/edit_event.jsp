@@ -161,11 +161,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				<aui:select label="hours" name="durationHour">
 
 					<%
-						for (int i = 0; i <= 24 ; i++) {
+					for (int i = 0; i <= 24 ; i++) {
 					%>
-							<aui:option label="<%= i %>" selected="<%= durationHour == i %>" />
+
+						<aui:option label="<%= i %>" selected="<%= durationHour == i %>" />
+
 					<%
-						}
+					}
 					%>
 
 				</aui:select>
@@ -174,11 +176,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				<aui:select label="minutes" name="durationMinute">
 
 					<%
-						for (int i=0; i < 60 ; i = i + 5) {
+					for (int i=0; i < 60 ; i = i + 5) {
 					%>
-							<aui:option label='<%= ":" + (i < 10 ? "0" : StringPool.BLANK) + i %>' selected="<%= durationMinute == i %>" value="<%= i %>" />
+
+						<aui:option label='<%= ":" + (i < 10 ? "0" : StringPool.BLANK) + i %>' selected="<%= durationMinute == i %>" value="<%= i %>" />
+
 					<%
-						}
+					}
 					%>
 
 				</aui:select>
@@ -236,6 +240,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<aui:fieldset>
 				<aui:field-wrapper cssClass="end-date-field" label="end-date" name="endDateType">
 					<aui:input checked="<%= endDateType == 0 %>" cssClass="input-container" label="no-end-date" name="endDateType" type="radio" value="0" />
+
 					<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" /> occurrence(s)<br />--%>
 
 					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="2" />

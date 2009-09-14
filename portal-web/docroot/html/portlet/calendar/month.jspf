@@ -39,6 +39,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 
 <div>
 	<div class="event-selector">
+
 		<%
 		String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
 		%>
