@@ -121,16 +121,16 @@ public class MBStatsUserLocalServiceImpl
 		return mbStatsUserPersistence.findByG_M(groupId, 0, start, end);
 	}
 
-	public List<MBStatsUser> getStatsUsersByUserId(long userId)
-		throws SystemException {
-
-		return mbStatsUserPersistence.findByUserId(userId);
-	}
-
 	public int getStatsUsersByGroupIdCount(long groupId)
 		throws SystemException {
 
 		return mbStatsUserPersistence.countByG_M(groupId, 0);
+	}
+
+	public List<MBStatsUser> getStatsUsersByUserId(long userId)
+		throws SystemException {
+
+		return mbStatsUserPersistence.findByUserId(userId);
 	}
 
 	public MBStatsUser updateStatsUser(long groupId, long userId)

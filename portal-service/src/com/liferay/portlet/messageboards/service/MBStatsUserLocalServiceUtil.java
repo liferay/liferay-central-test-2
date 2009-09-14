@@ -139,14 +139,14 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().getStatsUsersByGroupId(groupId, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
-		long userId) throws com.liferay.portal.SystemException {
-		return getService().getStatsUsersByUserId(userId);
-	}
-
 	public static int getStatsUsersByGroupIdCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getService().getStatsUsersByGroupIdCount(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
+		long userId) throws com.liferay.portal.SystemException {
+		return getService().getStatsUsersByUserId(userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(

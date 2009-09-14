@@ -74,17 +74,6 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		mbCategoryLocalService.deleteCategory(categoryId);
 	}
 
-	public MBCategory getCategory(long categoryId)
-		throws PortalException, SystemException {
-
-		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
-
-		MBCategoryPermission.check(
-			getPermissionChecker(), category, ActionKeys.VIEW);
-
-		return category;
-	}
-
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws PortalException, SystemException {
@@ -114,6 +103,17 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 		return mbCategoryLocalService.getCategoriesCount(
 			groupId, parentCategoryId);
+	}
+
+	public MBCategory getCategory(long categoryId)
+		throws PortalException, SystemException {
+
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), category, ActionKeys.VIEW);
+
+		return category;
 	}
 
 	public void subscribeCategory(long groupId, long categoryId)

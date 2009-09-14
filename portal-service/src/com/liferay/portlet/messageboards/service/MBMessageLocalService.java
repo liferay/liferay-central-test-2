@@ -115,7 +115,8 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long userId, java.lang.String userName, long groupId, long categoryId,
-		java.lang.String subject, java.lang.String body,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -124,8 +125,7 @@ public interface MBMessageLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long userId, java.lang.String userName, long groupId, long categoryId,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
+		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -147,15 +147,15 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addMessageResources(
-		com.liferay.portlet.messageboards.model.MBMessage message,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void addMessageResources(long messageId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addMessageResources(
+		com.liferay.portlet.messageboards.model.MBMessage message,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -272,11 +272,6 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
@@ -288,6 +283,11 @@ public interface MBMessageLocalService {
 		java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
@@ -347,16 +347,16 @@ public interface MBMessageLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
+		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long userId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		java.util.List<String> existingFiles, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
-		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

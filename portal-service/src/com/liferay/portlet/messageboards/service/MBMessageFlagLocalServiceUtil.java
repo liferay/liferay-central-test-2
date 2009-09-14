@@ -108,17 +108,17 @@ public class MBMessageFlagLocalServiceUtil {
 		return getService().updateMBMessageFlag(mbMessageFlag, merge);
 	}
 
+	public static void addQuestionFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().addQuestionFlag(messageId);
+	}
+
 	public static void addReadFlags(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		getService().addReadFlags(userId, thread);
-	}
-
-	public static void addQuestionFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().addQuestionFlag(messageId);
 	}
 
 	public static void deleteFlags(long userId)

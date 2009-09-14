@@ -100,12 +100,12 @@ public interface MBMessageFlagLocalService {
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws com.liferay.portal.SystemException;
 
-	public void addReadFlags(long userId,
-		com.liferay.portlet.messageboards.model.MBThread thread)
+	public void addQuestionFlag(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addQuestionFlag(long messageId)
+	public void addReadFlags(long userId,
+		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

@@ -199,13 +199,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
-			String subject, String body,
+			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		long threadId = 0;
-		long parentMessageId = 0;
 
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
@@ -215,10 +212,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
-			long threadId, long parentMessageId, String subject, String body,
+			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		long threadId = 0;
+		long parentMessageId = 0;
 
 		return addMessage(
 			null, userId, userName, groupId, categoryId, threadId,
@@ -516,6 +516,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public void addMessageResources(
+			long messageId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		addMessageResources(message, communityPermissions, guestPermissions);
+	}
+
+	public void addMessageResources(
 			MBMessage message, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -524,16 +534,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.getCompanyId(), message.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getMessageId(),
 			false, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addMessageResources(
-			long messageId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		addMessageResources(message, communityPermissions, guestPermissions);
 	}
 
 	public void addMessageResources(
@@ -974,14 +974,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
-	public List<MBMessage> getMessages(String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return mbMessagePersistence.findByC_C(classNameId, classPK);
-	}
-
 	public MBMessageDisplay getMessageDisplay(long messageId, String threadView)
 		throws PortalException, SystemException {
 
@@ -1023,6 +1015,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread,
 			previousThread, nextThread, threadView);
+	}
+
+	public List<MBMessage> getMessages(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mbMessagePersistence.findByC_C(classNameId, classPK);
 	}
 
 	public List<MBMessage> getNoAssetMessages() throws SystemException {
@@ -1173,6 +1173,58 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage updateMessage(
+			long messageId, Date createDate, Date modifiedDate)
+		throws PortalException, SystemException {
+
+		// Message
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		message.setCreateDate(createDate);
+		message.setModifiedDate(modifiedDate);
+
+		mbMessagePersistence.update(message, false);
+
+		// Thread
+
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			message.getThreadId());
+
+		if (message.isAnonymous()) {
+			thread.setLastPostByUserId(0);
+		}
+		else {
+			thread.setLastPostByUserId(message.getUserId());
+		}
+
+		thread.setLastPostDate(modifiedDate);
+
+		mbThreadPersistence.update(thread, false);
+
+		// Category
+
+		if (message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+				message.getCategoryId());
+
+			category.setLastPostDate(modifiedDate);
+
+			mbCategoryPersistence.update(category, false);
+
+			// Statistics
+
+			if (!category.isDiscussion()) {
+				mbStatsUserLocalService.updateStatsUser(
+					message.getGroupId(), message.getUserId(), modifiedDate);
+			}
+		}
+
+		return message;
+	}
+
+	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority,
@@ -1300,58 +1352,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Indexer
 
 		reIndex(message);
-
-		return message;
-	}
-
-	public MBMessage updateMessage(
-			long messageId, Date createDate, Date modifiedDate)
-		throws PortalException, SystemException {
-
-		// Message
-
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		message.setCreateDate(createDate);
-		message.setModifiedDate(modifiedDate);
-
-		mbMessagePersistence.update(message, false);
-
-		// Thread
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			message.getThreadId());
-
-		if (message.isAnonymous()) {
-			thread.setLastPostByUserId(0);
-		}
-		else {
-			thread.setLastPostByUserId(message.getUserId());
-		}
-
-		thread.setLastPostDate(modifiedDate);
-
-		mbThreadPersistence.update(thread, false);
-
-		// Category
-
-		if (message.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
-			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-				message.getCategoryId());
-
-			category.setLastPostDate(modifiedDate);
-
-			mbCategoryPersistence.update(category, false);
-
-			// Statistics
-
-			if (!category.isDiscussion()) {
-				mbStatsUserLocalService.updateStatsUser(
-					message.getGroupId(), message.getUserId(), modifiedDate);
-			}
-		}
 
 		return message;
 	}

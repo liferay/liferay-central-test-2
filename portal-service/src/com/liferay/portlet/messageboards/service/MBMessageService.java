@@ -63,8 +63,8 @@ public interface MBMessageService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long groupId, long categoryId, java.lang.String subject,
-		java.lang.String body,
+		long groupId, long categoryId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -72,8 +72,8 @@ public interface MBMessageService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long groupId, long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
+		long groupId, long categoryId, java.lang.String subject,
+		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)

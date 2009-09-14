@@ -56,19 +56,6 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long groupId, long categoryId, java.lang.String subject,
-		java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .addMessage(groupId, categoryId, subject, body, files,
-			anonymous, priority, serviceContext);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
@@ -79,6 +66,19 @@ public class MBMessageServiceUtil {
 		return getService()
 				   .addMessage(groupId, categoryId, threadId, parentMessageId,
 			subject, body, files, anonymous, priority, serviceContext);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long groupId, long categoryId, java.lang.String subject,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addMessage(groupId, categoryId, subject, body, files,
+			anonymous, priority, serviceContext);
 	}
 
 	public static void deleteDiscussionMessage(long groupId,

@@ -165,6 +165,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void addCategoryResources(
+			long categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
 			MBCategory category, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -174,17 +185,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			category.getUserId(), MBCategory.class.getName(),
 			category.getCategoryId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addCategoryResources(
-			long categoryId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			categoryId);
-
-		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -434,6 +434,28 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 	}
 
+	public void subscribeCategory(long userId, long groupId, long categoryId)
+		throws PortalException, SystemException {
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
+		}
+
+		subscriptionLocalService.addSubscription(
+			userId, MBCategory.class.getName(), groupId);
+	}
+
+	public void unsubscribeCategory(long userId, long groupId, long categoryId)
+		throws PortalException, SystemException {
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
+		}
+
+		subscriptionLocalService.deleteSubscription(
+			userId, MBCategory.class.getName(), categoryId);
+	}
+
 	public MBCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
 			String description, String emailAddress, String inProtocol,
@@ -595,28 +617,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 
 		deleteCategory(fromCategory);
-	}
-
-	public void subscribeCategory(long userId, long groupId, long categoryId)
-		throws PortalException, SystemException {
-
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			categoryId = groupId;
-		}
-
-		subscriptionLocalService.addSubscription(
-			userId, MBCategory.class.getName(), groupId);
-	}
-
-	public void unsubscribeCategory(long userId, long groupId, long categoryId)
-		throws PortalException, SystemException {
-
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			categoryId = groupId;
-		}
-
-		subscriptionLocalService.deleteSubscription(
-			userId, MBCategory.class.getName(), categoryId);
 	}
 
 	protected void reIndexCategories(long companyId) throws SystemException {
