@@ -5,7 +5,6 @@
 	AUI().use(
 		'context-overlay',
 		'io-stdmod',
-		'liferay-layout-configuration',
 		'overlay-manager',
 		'tool-item',
 		function(A) {
@@ -138,13 +137,18 @@
 													},
 													on: {
 														success: function(id, response) {
-															var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
+															AUI().use(
+																'liferay-layout-configuration',
+																function(A) {
+																	var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
 
-															Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
+																	Liferay.Dockbar.addApplication.set('bodyContent', response.responseText);
 
-															Liferay.LayoutConfiguration._dialogBody = jQuery(contentBox.getDOM());
+																	Liferay.LayoutConfiguration._dialogBody = jQuery(contentBox.getDOM());
 
-															Liferay.LayoutConfiguration._loadContent();
+																	Liferay.LayoutConfiguration._loadContent();
+																}
+															);
 														}
 													}
 												}

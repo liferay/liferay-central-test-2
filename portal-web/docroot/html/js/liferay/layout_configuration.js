@@ -552,7 +552,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['liferay-layout'],
+		requires: ['dd', 'liferay-layout'],
 		use: []
 	}
 );
