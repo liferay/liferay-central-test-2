@@ -412,11 +412,36 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<aui:fieldset>
 				<aui:column columnWidth="20">
 					<aui:field-wrapper label="repeat" name="recurrenceType">
-						<aui:input checked="<%= recurrenceType == Recurrence.NO_RECURRENCE %>" label="never" name="recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "neverTable');" %>' />
-						<aui:input checked="<%= recurrenceType == Recurrence.DAILY %>" label="daily" name="recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "dailyTable');" %>' />
-						<aui:input checked="<%= recurrenceType == Recurrence.WEEKLY %>" label="weekly" name="recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "weeklyTable');" %>' />
-						<aui:input checked="<%= recurrenceType == Recurrence.MONTHLY %>" label="monthly" name="recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "monthlyTable');" %>' />
-						<aui:input checked="<%= recurrenceType == Recurrence.YEARLY %>" label="yearly" name="recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "yearlyTable');" %>' />
+
+						<%
+						String taglibOnClick = renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "neverTable');";
+						%>
+
+						<aui:input checked="<%= recurrenceType == Recurrence.NO_RECURRENCE %>" label="never" name="recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<%= taglibOnClick %>" />
+
+						<%
+						taglibOnClick = renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "dailyTable');";
+						%>
+
+						<aui:input checked="<%= recurrenceType == Recurrence.DAILY %>" label="daily" name="recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick="<%= taglibOnClick %>" />
+
+						<%
+						taglibOnClick = renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "weeklyTable');";
+						%>
+
+						<aui:input checked="<%= recurrenceType == Recurrence.WEEKLY %>" label="weekly" name="recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick="<%= taglibOnClick %>" />
+
+						<%
+						taglibOnClick = renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "monthlyTable');";
+						%>
+
+						<aui:input checked="<%= recurrenceType == Recurrence.MONTHLY %>" label="monthly" name="recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<%= taglibOnClick %>" />
+
+						<%
+						taglibOnClick = renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "yearlyTable');";
+						%>
+
+						<aui:input checked="<%= recurrenceType == Recurrence.YEARLY %>" label="yearly" name="recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<%= taglibOnClick %>" />
 					</aui:field-wrapper>
 				</aui:column>
 
