@@ -105,7 +105,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
 		</portlet:renderURL>
 
-		<aui:button value="add-event" onClick="<%= editEventURL %>" />
+		<aui:button onClick="<%= editEventURL %>" value="add-event" />
 	</c:if>
 
 	<c:if test="<%= showPermissionsButton %>">
@@ -116,7 +116,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 			var="permissionsURL"
 		/>
 
-		<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+		<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 	</c:if>
 
 	<br /><br />
