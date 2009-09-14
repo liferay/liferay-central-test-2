@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,64 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
+package com.liferay.portlet.asset.model;
 
-<%
-AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+import javax.portlet.PortletURL;
+import javax.portlet.PortletRequest;
 
-String title = (String)request.getAttribute("view.jsp-title");
+/**
+ * <a href="BaseAssetRenderer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public abstract class BaseAssetRenderer implements AssetRenderer {
 
-if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	public String[] getAvailableLocales() {
+		return _EMPTY_ARRAY;
+	}
+
+
+	public String getDiscussionPath() {
+		return null;
+	}
+
+	public String getUrlTitle() {
+		return null;
+	}
+
+	public PortletURL getURLExport(PortletRequest portletRequest)
+		throws Exception {
+
+		return null;
+	}
+
+	public PortletURL getURLEdit(PortletRequest portletRequest)
+		throws Exception {
+
+		return null;
+	}
+
+	public String getURLViewInContext(
+			PortletRequest portletRequest, String noSuchEntryRedirect) {
+		return null;
+	}
+
+	public String getViewInContextMessage() {
+		return "view-in-context";
+	}
+
+	public boolean isConvertible() {
+		return false;
+	}
+
+	public boolean isLocalizable() {
+		return false;
+	}
+
+	public boolean isPrintable() {
+		return false;
+	}
+
+	private static final String[] _EMPTY_ARRAY = new String[0];
 }
-
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
-
-PortalUtil.setPageSubtitle(title, request);
-PortalUtil.setPageDescription(summary, request);
-PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(assetEntry.getClassName(), assetEntry.getClassPK()), request);
-%>

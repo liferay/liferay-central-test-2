@@ -103,8 +103,10 @@ else if (!groupByClass) {
 <%
 }
 else {
-	for (int groupAssetEntryIndex = 0; groupAssetEntryIndex < _ASSET_ENTRY_TYPES.length; groupAssetEntryIndex++) {
-		long[] groupClassNameIds = {PortalUtil.getClassNameId(_ASSET_ENTRY_TYPES[groupAssetEntryIndex])};
+	List<AssetRendererFactory> rendererFactories = AssetUtil.getAssetRendererFactories();
+
+	for (AssetRendererFactory rendererFactory : rendererFactories) {
+		long[] groupClassNameIds = {rendererFactory.getClassNameId()};
 
 		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
@@ -123,7 +125,7 @@ else {
 		if (!results.isEmpty()) {
 %>
 
-			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= _ASSET_ENTRY_TITLES[groupAssetEntryIndex] %>" /></h3>
+			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= rendererFactory.getType() %>" /></h3>
 
 			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
@@ -142,10 +144,4 @@ if (total == 0) {
 
 <%
 }
-%>
-
-<%!
-private static final String[] _ASSET_ENTRY_TYPES = {BlogsEntry.class.getName(), BookmarksEntry.class.getName(), IGImage.class.getName(), DLFileEntry.class.getName(), MBMessage.class.getName(), WikiPage.class.getName()};
-
-private static final String[] _ASSET_ENTRY_TITLES = {"blogs", "bookmarks", "images", "documents", "threads", "wiki-pages"};
 %>

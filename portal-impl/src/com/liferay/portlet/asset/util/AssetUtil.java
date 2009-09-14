@@ -31,30 +31,26 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagProperty;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagPropertyLocalServiceUtil;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
@@ -68,19 +64,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Jorge Ferrer
  */
 public class AssetUtil {
-
-	public static final String[] ASSET_ENTRY_TYPE_CLASS_NAMES = {
-		BlogsEntry.class.getName(), BookmarksEntry.class.getName(),
-		DLFileEntry.class.getName(), IGImage.class.getName(),
-		JournalArticle.class.getName(), MBMessage.class.getName(),
-		WikiPage.class.getName()
-	};
-
-	public static final String[] ASSET_ENTRY_TYPE_PORTLET_IDS = {
-		PortletKeys.BLOGS, PortletKeys.BOOKMARKS, PortletKeys.DOCUMENT_LIBRARY,
-		PortletKeys.IMAGE_GALLERY, PortletKeys.JOURNAL,
-		PortletKeys.MESSAGE_BOARDS, PortletKeys.WIKI
-	};
 
 	public static char[] INVALID_CHARACTERS = new char[] {
 		CharPool.AMPERSAND, CharPool.APOSTROPHE, CharPool.AT,
@@ -150,6 +133,30 @@ public class AssetUtil {
 		sb.append(ListUtil.toString(categories, "name"));
 
 		return sb.toString();
+	}
+
+	public static AssetRendererFactory getAssetRendererFactoryByClassName(
+		String className) {
+
+		if (_rendererFactoriesMapByClassName == null) {
+			_initAssetRendererFactoryMaps();
+		}
+
+		return _rendererFactoriesMapByClassName.get(className);
+	}
+
+	public static AssetRendererFactory getAssetRendererFactoryByType(
+		String type) {
+
+		if (_rendererFactoriesMapByType == null) {
+			_initAssetRendererFactoryMaps();
+		}
+
+		return _rendererFactoriesMapByType.get(type);
+	}
+
+	public static List<AssetRendererFactory> getAssetRendererFactories() {
+		return PortletLocalServiceUtil.getAssetRendererFactories();
 	}
 
 	public static Set<String> getLayoutTagNames(HttpServletRequest request) {
@@ -276,6 +283,29 @@ public class AssetUtil {
 		}
 	}
 
+	private static void _initAssetRendererFactoryMaps() {
+		_rendererFactoriesMapByClassName =
+			new HashMap<String, AssetRendererFactory>();
+		_rendererFactoriesMapByType =
+			new HashMap<String, AssetRendererFactory>();
+
+		List<AssetRendererFactory> assetRendererFactories =
+			getAssetRendererFactories();
+
+		for (AssetRendererFactory assetRendererFactory :
+			 assetRendererFactories) {
+
+			_rendererFactoriesMapByClassName.put(
+				assetRendererFactory.getClassName(), assetRendererFactory);
+			_rendererFactoriesMapByType.put(
+				assetRendererFactory.getType(), assetRendererFactory);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AssetUtil.class);
+	private static Map<String, AssetRendererFactory>
+		_rendererFactoriesMapByClassName;
+	private static Map<String, AssetRendererFactory>
+		_rendererFactoriesMapByType;
 
 }

@@ -31,126 +31,28 @@ int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 
-String title = (String)request.getAttribute("view.jsp-title");
-String viewURL = (String)request.getAttribute("view.jsp-viewURL");
-
-String className = (String)request.getAttribute("view.jsp-className");
-long classPK = ((Long)request.getAttribute("view.jsp-classPK")).longValue();
+AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
+AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+
+String title = (String)request.getAttribute("view.jsp-title");
+
+if (Validator.isNull(title)) {
+	title = assetRenderer.getTitle();
+}
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
 viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
-if (className.equals(BlogsEntry.class.getName())) {
-	BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
-
-	if (Validator.isNull(title)) {
-		title = entry.getTitle();
-	}
-
-	viewFullContentURL.setParameter("urlTitle", entry.getUrlTitle());
-	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BLOG);
-
-	viewURL = viewInContext ? themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/blogs/find_entry?noSuchEntryRedirect=" + HttpUtil.encodeURL(viewFullContentURL.toString()) + "&entryId=" + entry.getEntryId() : viewFullContentURL.toString();
+if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
+	viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 }
-else if (className.equals(BookmarksEntry.class.getName())) {
-	BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
-	if (Validator.isNull(title)) {
-		title = entry.getName();
-	}
-
-	String entryURL = themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId();
-
-	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_BOOKMARK);
-
-	viewURL = viewInContext? entryURL : viewFullContentURL.toString();
-}
-else if (className.equals(DLFileEntry.class.getName())) {
-	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
-
-	if (Validator.isNull(title)) {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/document_library/");
-		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sb.append(".png\" />");
-		sb.append(fileEntry.getTitle());
-
-		title = sb.toString();
-	}
-
-	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_DOCUMENT);
-
-	viewURL = viewInContext? themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) : viewFullContentURL.toString();
-}
-else if (className.equals(IGImage.class.getName())) {
-	IGImage image = IGImageLocalServiceUtil.getImage(classPK);
-
-	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
-
-	imageURL.setWindowState(WindowState.MAXIMIZED);
-
-	imageURL.setParameter("struts_action", "/image_gallery/view");
-	imageURL.setParameter("folderId", String.valueOf(image.getFolderId()));
-
-	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_IMAGE);
-
-	viewURL = viewInContext? imageURL.toString() : viewFullContentURL.toString();
-}
-else if (className.equals(JournalArticle.class.getName())) {
-	JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
-
-	String languageId = LanguageUtil.getLanguageId(request);
-
-	JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
-
-	if (articleDisplay != null) {
-		if (Validator.isNull(title)) {
-			title = articleDisplay.getTitle();
-		}
-
-		PortletURL articleURL = renderResponse.createRenderURL();
-
-		articleURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articleURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
-		articleURL.setParameter("type", AssetPublisherUtil.TYPE_CONTENT);
-
-		viewURL = articleURL.toString();
-	}
-	else {
-		show = false;
-	}
-}
-else if (className.equals(MBMessage.class.getName())) {
-	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
-
-	viewFullContentURL.setParameter("type", "thread");
-
-	viewURL = viewInContext ? themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/find_message?messageId=" + message.getMessageId() : viewFullContentURL.toString();
-}
-else if (className.equals(WikiPage.class.getName())) {
-	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
-
-	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
-
-	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
-
-	pageURL.setWindowState(WindowState.MAXIMIZED);
-	pageURL.setPortletMode(PortletMode.VIEW);
-
-	pageURL.setParameter("struts_action", "/wiki/view");
-	pageURL.setParameter("title", wikiPage.getTitle());
-
-	viewFullContentURL.setParameter("type", AssetPublisherUtil.TYPE_WIKI);
-
-	viewURL = viewInContext? pageURL.toString() : viewFullContentURL.toString();
-}
+String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, viewFullContentURL.toString()) : viewFullContentURL.toString();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>

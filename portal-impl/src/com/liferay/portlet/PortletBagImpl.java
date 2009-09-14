@@ -35,9 +35,11 @@ import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.webdav.WebDAVStorage;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -51,6 +53,7 @@ import javax.servlet.ServletContext;
  * <a href="PortletBagImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  */
 public class PortletBagImpl implements PortletBag {
 
@@ -70,6 +73,7 @@ public class PortletBagImpl implements PortletBag {
 		SocialRequestInterpreter socialRequestInterpreterInstance,
 		WebDAVStorage webDAVStorageInstance,
 		ControlPanelEntry controlPanelEntryInstance,
+		List<AssetRendererFactory> AssetRendererFactoryInstanceList,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -90,6 +94,7 @@ public class PortletBagImpl implements PortletBag {
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
 		_webDAVStorageInstance = webDAVStorageInstance;
 		_controlPanelEntryInstance = controlPanelEntryInstance;
+		_assetRendererFactoryInstanceList = AssetRendererFactoryInstanceList;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -104,8 +109,13 @@ public class PortletBagImpl implements PortletBag {
 			getPollerProcessorInstance(), getPopMessageListenerInstance(),
 			getSocialActivityInterpreterInstance(),
 			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
-			getControlPanelEntryInstance(), getPreferencesValidatorInstance(),
-			getResourceBundles());
+			getControlPanelEntryInstance(),
+			getAssetRendererFactoryInstanceList(),
+			getPreferencesValidatorInstance(), getResourceBundles());
+	}
+
+	public List<AssetRendererFactory> getAssetRendererFactoryInstanceList() {
+		return _assetRendererFactoryInstanceList;
 	}
 
 	public ConfigurationAction getConfigurationActionInstance() {
@@ -208,6 +218,7 @@ public class PortletBagImpl implements PortletBag {
 		_portletName = portletName;
 	}
 
+	private List<AssetRendererFactory> _assetRendererFactoryInstanceList;
 	private ConfigurationAction _configurationActionInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private FriendlyURLMapper _friendlyURLMapperInstance;

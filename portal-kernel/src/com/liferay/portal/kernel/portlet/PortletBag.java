@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -46,6 +48,8 @@ import javax.servlet.ServletContext;
 public interface PortletBag extends Cloneable {
 
 	public Object clone();
+
+	public List<AssetRendererFactory> getAssetRendererFactoryInstanceList();
 
 	public ConfigurationAction getConfigurationActionInstance();
 

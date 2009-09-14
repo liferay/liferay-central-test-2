@@ -85,6 +85,7 @@ import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
@@ -94,6 +95,7 @@ import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUt
 
 import java.lang.reflect.Proxy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -616,6 +618,23 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					portlet.getControlPanelEntryClass()).newInstance();
 		}
 
+		List<AssetRendererFactory> assetRendererFactoryInstanceList =
+			new ArrayList<AssetRendererFactory>();
+
+		for (String AssetRendererFactoryClass :
+				portlet.getAssetRendererFactoryClass()) {
+			AssetRendererFactory assetRendererFactoryInstance =
+				(AssetRendererFactory)portletClassLoader.loadClass(
+					AssetRendererFactoryClass).newInstance();
+
+			assetRendererFactoryInstance.setClassNameId(
+				PortalUtil.getClassNameId(
+					assetRendererFactoryInstance.getClassName()));
+			assetRendererFactoryInstance.setPortletId(portlet.getPortletId());
+
+			assetRendererFactoryInstanceList.add(assetRendererFactoryInstance);
+		}
+
 		PreferencesValidator preferencesValidatorInstance = null;
 
 		if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -667,7 +686,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			pollerProcessorInstance, popMessageListenerInstance,
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
 			webDAVStorageInstance, controlPanelEntryInstance,
-			preferencesValidatorInstance, resourceBundles);
+			assetRendererFactoryInstanceList, preferencesValidatorInstance,
+			resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 

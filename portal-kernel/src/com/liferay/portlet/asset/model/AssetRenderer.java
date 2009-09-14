@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
+package com.liferay.portlet.asset.model;
 
-<%
-AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.PortletURL;
+import javax.portlet.PortletRequest;
 
-String title = (String)request.getAttribute("view.jsp-title");
+/**
+ * <a href="AssetRenderer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public interface AssetRenderer {
 
-if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	public String[] getAvailableLocales() throws Exception;
+
+	public long getClassPK();
+
+	public String getDiscussionPath();
+
+	public long getGroupId();
+
+	public String getSummary();
+
+	public String getTitle();
+
+	public String getUrlTitle();
+
+	public long getUserId();
+
+	public PortletURL getURLExport(PortletRequest portletRequest)
+		throws Exception;
+
+	public PortletURL getURLEdit(PortletRequest portletRequest)
+		throws Exception;
+
+	public String getURLViewInContext(
+		PortletRequest portletRequest, String noSuchEntryRedirect);
+
+	public String getViewInContextMessage();
+
+	public boolean isConvertible();
+
+	public boolean isLocalizable();
+
+	public boolean isPrintable();
+
+	public String render(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String template)
+		throws Exception;
+
 }
-
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
-
-PortalUtil.setPageSubtitle(title, request);
-PortalUtil.setPageDescription(summary, request);
-PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(assetEntry.getClassName(), assetEntry.getClassPK()), request);
-%>

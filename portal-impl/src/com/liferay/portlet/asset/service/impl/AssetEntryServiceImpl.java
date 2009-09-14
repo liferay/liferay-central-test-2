@@ -33,7 +33,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
-import com.liferay.portlet.asset.model.AssetEntryType;
 import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
@@ -149,10 +148,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return assetEntryLocalService.getEntry(entryId);
-	}
-
-	public AssetEntryType[] getEntryTypes(String languageId) {
-		return assetEntryLocalService.getEntryTypes(languageId);
 	}
 
 	public AssetEntry incrementViewCounter(String className, long classPK)

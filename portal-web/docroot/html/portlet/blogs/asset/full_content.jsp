@@ -21,22 +21,12 @@
  * SOFTWARE.
  */
 %>
+<%@ include file="/html/portlet/blogs/init.jsp" %>
 
-<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 
 <%
-AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
-
-String title = (String)request.getAttribute("view.jsp-title");
-
-if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
-}
-
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
-
-PortalUtil.setPageSubtitle(title, request);
-PortalUtil.setPageDescription(summary, request);
-PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(assetEntry.getClassName(), assetEntry.getClassPK()), request);
+BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 %>
+
+<%= entry.getContent() %>

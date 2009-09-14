@@ -62,58 +62,12 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, allAss
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, String[] allAssetTagNames, String assetEntryType) throws Exception {
-	RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
-
+public PortletURL getAddPortletURL(RenderRequest renderRequest, String[] allAssetTagNames, String className) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(className);
 
-	PortletURL addPortletURL = null;
-
-	if (assetEntryType.equals(BlogsEntry.class.getName())) {
-		if (BlogsPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
-			addPortletURL = new PortletURLImpl(renderRequestImpl, PortletKeys.BLOGS, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-			addPortletURL.setParameter("struts_action", "/blogs/edit_entry");
-		}
-	}
-	else if (assetEntryType.equals(BookmarksEntry.class.getName())) {
-		if (BookmarksPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
-			addPortletURL = new PortletURLImpl(renderRequestImpl, PortletKeys.BOOKMARKS, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-			addPortletURL.setParameter("struts_action", "/bookmarks/edit_entry");
-			addPortletURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(renderRequest, BookmarksEntry.class.getName())));
-		}
-	}
-	else if (assetEntryType.equals(DLFileEntry.class.getName())) {
-		if (DLPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
-			addPortletURL = new PortletURLImpl(renderRequestImpl, PortletKeys.DOCUMENT_LIBRARY, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-			addPortletURL.setParameter("struts_action", "/document_library/edit_file_entry");
-			addPortletURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(renderRequest, DLFileEntry.class.getName())));
-			addPortletURL.setParameter("uploader", "classic");
-		}
-	}
-	else if (assetEntryType.equals(IGImage.class.getName())) {
-		if (IGPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
-			addPortletURL = new PortletURLImpl(renderRequestImpl, PortletKeys.IMAGE_GALLERY, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-			addPortletURL.setParameter("struts_action", "/image_gallery/edit_image");
-			addPortletURL.setParameter("folderId", String.valueOf(AssetPublisherUtil.getRecentFolderId(renderRequest, IGImage.class.getName())));
-			addPortletURL.setParameter("uploader", "classic");
-		}
-	}
-	else if (assetEntryType.equals(JournalArticle.class.getName())) {
-		if (JournalPermission.contains(permissionChecker, themeDisplay.getScopeGroupId(), ActionKeys.ADD_ARTICLE)) {
-			addPortletURL = new PortletURLImpl(renderRequestImpl, PortletKeys.JOURNAL, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-			addPortletURL.setParameter("struts_action", "/journal/edit_article");
-			addPortletURL.setParameter("groupId", String.valueOf(themeDisplay.getLayout().getGroupId()));
-		}
-	}
-	else if (assetEntryType.equals(WikiPage.class.getName())) {
-	}
+	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest);
 
 	if (addPortletURL != null) {
 		addPortletURL.setWindowState(WindowState.MAXIMIZED);

@@ -68,6 +68,7 @@ import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletQNameUtil;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.File;
@@ -93,7 +94,7 @@ import javax.servlet.ServletContext;
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Eduardo Lundgren
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
@@ -163,6 +164,30 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		_clearCaches();
+	}
+
+	public List<AssetRendererFactory> getAssetRendererFactories() {
+		List<AssetRendererFactory> assetRendererFactories =
+			new ArrayList<AssetRendererFactory>(
+				_assetRendererFactoryPortlets.size());
+
+		Iterator<Map.Entry<String, Portlet>> itr =
+			_assetRendererFactoryPortlets.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Portlet> entry = itr.next();
+
+			Portlet portlet = entry.getValue();
+
+			List<AssetRendererFactory> portletAssetRendererFactories =
+				portlet.getAssetRendererFactoryInstanceList();
+
+			if (portletAssetRendererFactories != null) {
+				assetRendererFactories.addAll(portletAssetRendererFactories);
+			}
+		}
+
+		return assetRendererFactories;
 	}
 
 	public PortletCategory getEARDisplay(String xml) throws SystemException {
@@ -412,6 +437,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_portletsPool.clear();
 		_companyPortletsPool.clear();
 		_portletIdsByStrutsPath.clear();
+		_assetRendererFactoryPortlets .clear();
 		_friendlyURLMapperPortlets.clear();
 
 		Map<String, Portlet> portletsPool = _getPortletsPool();
@@ -1082,6 +1108,27 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setControlPanelEntryClass(GetterUtil.getString(
 					portlet.elementText("control-panel-entry-class"),
 					portletModel.getControlPanelEntryClass()));
+
+				List<String> assetRendererFactoryClassList =
+					portletModel.getAssetRendererFactoryClass();
+
+				Iterator<Element> itr2 = portlet.elements(
+					"asset-renderer-factory").iterator();
+
+				while (itr2.hasNext()) {
+					Element assetRendererFactoryClassEl = itr2.next();
+
+					assetRendererFactoryClassList.add(
+						assetRendererFactoryClassEl.getText());
+				}
+
+				if (portletModel.getAssetRendererFactoryClass().isEmpty()) {
+					_assetRendererFactoryPortlets.remove(portletId);
+				}
+				else {
+					_assetRendererFactoryPortlets.put(portletId, portletModel);
+				}
+
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));
@@ -1144,7 +1191,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalCssList =
 					portletModel.getHeaderPortalCss();
 
-				Iterator<Element> itr2 = portlet.elements(
+				itr2 = portlet.elements(
 					"header-portal-css").iterator();
 
 				while (itr2.hasNext()) {
@@ -1845,6 +1892,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<Long, Map<String, Portlet>>();
 	private static Map<String, String> _portletIdsByStrutsPath =
 		new ConcurrentHashMap<String, String>();
+	private static Map<String, Portlet> _assetRendererFactoryPortlets =
+		new ConcurrentHashMap<String, Portlet>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
 

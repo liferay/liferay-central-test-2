@@ -61,6 +61,7 @@ import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletQNameUtil;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -100,6 +101,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
+		_assetRendererFactoryClass = new ArrayList<String>();
 		_headerPortalCss = new ArrayList<String>();
 		_headerPortletCss = new ArrayList<String>();
 		_headerPortalJavaScript = new ArrayList<String>();
@@ -137,17 +139,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
-		String defaultPreferences, String preferencesValidator,
-		boolean preferencesCompanyWide, boolean preferencesUniquePerLayout,
-		boolean preferencesOwnedByGroup, boolean useDefaultTemplate,
-		boolean showPortletAccessDenied, boolean showPortletInactive,
-		boolean actionURLRedirect, boolean restoreCurrentView,
-		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
-		boolean layoutCacheable, boolean instanceable, boolean scopeable,
-		String userPrincipalStrategy, boolean privateRequestAttributes,
-		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
-		List<String> headerPortalCss, List<String> headerPortletCss,
-		List<String> headerPortalJavaScript,
+		List<String> assetRendererFactoryClass,String defaultPreferences,
+		String preferencesValidator,boolean preferencesCompanyWide,
+		boolean preferencesUniquePerLayout,boolean preferencesOwnedByGroup,
+		boolean useDefaultTemplate,boolean showPortletAccessDenied,
+		boolean showPortletInactive, boolean actionURLRedirect,
+		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
+		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
+		boolean scopeable, String userPrincipalStrategy,
+		boolean privateRequestAttributes, boolean privateSessionAttributes,
+		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
+		List<String> headerPortletCss, List<String> headerPortalJavaScript,
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript, String cssClassWrapper,
@@ -192,6 +194,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_controlPanelEntryCategory = controlPanelEntryCategory;
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
+		_assetRendererFactoryClass = assetRendererFactoryClass;
 		_defaultPreferences = defaultPreferences;
 		_preferencesValidator = preferencesValidator;
 		_preferencesCompanyWide = preferencesCompanyWide;
@@ -488,6 +491,43 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (ConfigurationAction)InstancePool.get(
 			getConfigurationActionClass());
+	}
+
+	/**
+	 * Gets the asset type instances of the portlet.
+	 *
+	 * @return the asset type instances of the portlet.
+	 */
+	public List<AssetRendererFactory> getAssetRendererFactoryInstanceList() {
+		if (Validator.isNull(getConfigurationActionClass())) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+			return portletBag.getAssetRendererFactoryInstanceList();
+		}
+
+		List<AssetRendererFactory> assetRendererFactoryInstanceList =
+			new ArrayList<AssetRendererFactory>();
+
+		for (String assetRendererFactoryClass :
+				getAssetRendererFactoryClass()) {
+
+			AssetRendererFactory assetRendererFactoryInstance =
+				(AssetRendererFactory)InstancePool.get(
+					assetRendererFactoryClass);
+
+			assetRendererFactoryInstance.setClassNameId(
+				PortalUtil.getClassNameId(
+					assetRendererFactoryInstance.getClassName()));
+			assetRendererFactoryInstance.setPortletId(getPortletId());
+
+			assetRendererFactoryInstanceList.add(assetRendererFactoryInstance);
+		}
+
+		return assetRendererFactoryInstanceList;
 	}
 
 	/**
@@ -1075,6 +1115,30 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setControlPanelEntryClass(String controlPanelEntryClass) {
 		_controlPanelEntryClass = controlPanelEntryClass;
+	}
+
+	/**
+	 * Gets the names of the classes that represent asset types associated to
+	 * this portlet
+	 *
+	 * @return the names of the classes that represent asset types associated to
+	 *         this portlet
+	 */
+	public List<String> getAssetRendererFactoryClass() {
+		return _assetRendererFactoryClass;
+	}
+
+	/**
+	 * Sets the name of the classes that represent asset types associated to
+	 * this portlet
+	 *
+	 * @param assetRendererFactoryClass the names of the classes that represent
+	 *        asset types associated to this portlet
+	 */
+	public void setAssetRendererFactoryClass(
+		List<String> assetRendererFactoryClass) {
+
+		_assetRendererFactoryClass = assetRendererFactoryClass;
 	}
 
 	/**
@@ -2808,13 +2872,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
-			getDefaultPreferences(), getPreferencesValidator(),
-			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
-			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
-			isShowPortletAccessDenied(), isShowPortletInactive(),
-			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
-			isInstanceable(), isScopeable(), getUserPrincipalStrategy(),
+			getAssetRendererFactoryClass(), getDefaultPreferences(),
+			getPreferencesValidator(), isPreferencesCompanyWide(),
+			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
+			isUseDefaultTemplate(), isShowPortletAccessDenied(),
+			isShowPortletInactive(), isActionURLRedirect(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
+			isScopeable(), getUserPrincipalStrategy(),
 			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
 			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
 			getHeaderPortletCss(), getHeaderPortalJavaScript(),
@@ -3027,6 +3092,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * in the Control Panel
 	 */
 	private String _controlPanelEntryClass;
+
+	/**
+	 * The names of the classes that represents asset types associated with this
+	 * portlet
+	 */
+	private List<String> _assetRendererFactoryClass;
 
 	/**
 	 * True if the portlet uses the default template.

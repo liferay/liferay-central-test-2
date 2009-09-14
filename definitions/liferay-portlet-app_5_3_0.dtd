@@ -24,7 +24,7 @@ portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class?,
 social-request-interpreter-class?, webdav-storage-token?, webdav-storage-class?,
 control-panel-entry-category?, control-panel-entry-weight?,
-control-panel-entry-class?, preferences-company-wide?,
+control-panel-entry-class?, asset-renderer-factory*, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
@@ -275,6 +275,16 @@ See:
 http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/ControlPanelEntry.html
 -->
 <!ELEMENT control-panel-entry-class (#PCDATA)>
+
+<!--
+The asset-renderer-factory value must be a class that extends
+com.liferay.portlet.asset.model.AssetRendererFactory and is called by Asset Publisher.
+
+See:
+
+http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/asset/model/AssetRendererFactory.html
+-->
+<!ELEMENT asset-renderer-factory (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

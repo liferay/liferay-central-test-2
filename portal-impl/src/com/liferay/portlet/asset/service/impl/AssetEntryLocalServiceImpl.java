@@ -45,7 +45,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -53,7 +52,7 @@ import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
-import com.liferay.portlet.asset.model.AssetEntryType;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.base.AssetEntryLocalServiceBaseImpl;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
@@ -151,20 +150,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
-	public AssetEntryType[] getEntryTypes(String languageId) {
-		AssetEntryType[] entryTypes =
-			new AssetEntryType[AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES.length];
-
-		for (int i = 0; i < AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES.length;
-				i++) {
-
-			entryTypes[i] = getEntryType(
-				AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES[i], languageId);
-		}
-
-		return entryTypes;
-	}
-
 	public List<AssetEntry> getTopViewedEntries(
 			String className, boolean asc, int start, int end)
 		throws SystemException {
@@ -229,11 +214,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			else {
 				BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
-				for (String entryTypePortletId :
-						AssetUtil.ASSET_ENTRY_TYPE_PORTLET_IDS) {
+				for (AssetRendererFactory rendererFactory :
+						AssetUtil.getAssetRendererFactories()) {
 
 					TermQuery termQuery = TermQueryFactoryUtil.create(
-						Field.PORTLET_ID, entryTypePortletId);
+						Field.PORTLET_ID, rendererFactory.getPortletId());
 
 					portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
@@ -700,25 +685,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 
 		return entryDisplays;
-	}
-
-	protected AssetEntryType getEntryType(String className, String languageId) {
-		long companyId = PortalInstances.getDefaultCompanyId();
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		String portletId = PortalUtil.getClassNamePortletId(className);
-		String portletTitle = PortalUtil.getPortletTitle(
-			portletId, companyId, languageId);
-
-		AssetEntryType entryType = new AssetEntryType();
-
-		entryType.setClassNameId(classNameId);
-		entryType.setClassName(className);
-		entryType.setPortletId(portletId);
-		entryType.setPortletTitle(portletTitle);
-
-		return entryType;
 	}
 
 	private static Log _log =

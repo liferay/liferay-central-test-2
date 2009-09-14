@@ -55,28 +55,20 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 		continue;
 	}
 
-	String className = PortalUtil.getClassName(assetEntry.getClassNameId());
-	long classPK = assetEntry.getClassPK();
+	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
+	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
 	String title = assetEntry.getTitle();
-	String summary = StringPool.BLANK;
-	String viewURL = StringPool.BLANK;
-	String viewURLMessage = StringPool.BLANK;
-	String editURL = StringPool.BLANK;
 
 	boolean show = true;
 
 	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
 	request.setAttribute("view.jsp-assetEntry", assetEntry);
+	request.setAttribute("view.jsp-assetRendererFactory", assetRendererFactory);
+	request.setAttribute("view.jsp-assetRenderer", assetRenderer);
 
 	request.setAttribute("view.jsp-title", title);
-	request.setAttribute("view.jsp-summary", summary);
-	request.setAttribute("view.jsp-viewURL", viewURL);
-	request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
-
-	request.setAttribute("view.jsp-className", className);
-	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
 

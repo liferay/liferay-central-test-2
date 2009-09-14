@@ -31,6 +31,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
+AssetRendererFactory rendererFactory = AssetUtil.getAssetRendererFactoryByClassName(typeSelection);
+
 PortletURL configurationRenderURL = renderResponse.createRenderURL();
 
 configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
@@ -168,15 +170,15 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
-						<select name="<portlet:namespace/>assetEntryType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
+						<select name="<portlet:namespace/>assetRendererFactory" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
 							<option value=""><liferay-ui:message key="select-existing" /></option>
 
 							<%
-							for (int i = 0; i < AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES.length; i++) {
-								if (!AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES[i].equals(MBMessage.class.getName()) && !AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES[i].equals(WikiPage.class.getName())) {
+							for (AssetRendererFactory curRendererFactory : AssetUtil.getAssetRendererFactories()) {
+								if (curRendererFactory.isSelectable()) {
 								%>
 
-									<option value="<%= AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES[i] %>"><liferay-ui:message key='<%= "model.resource." + AssetUtil.ASSET_ENTRY_TYPE_CLASS_NAMES[i] %>' /></option>
+									<option value="<%= curRendererFactory.getClassName() %>"><liferay-ui:message key='<%= "model.resource." + curRendererFactory.getClassName() %>' /></option>
 
 								<%
 								}
@@ -230,7 +232,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								DocUtil.add(root, "last", false);
 							}
 
-							String assetEntryType = root.element("asset-entry-type").getText();
+							String assetEntryClassName = root.element("asset-entry-type").getText();
 							long assetEntryId = GetterUtil.getLong(root.element("asset-entry-id").getText());
 
 							AssetEntry assetEntry = null;
@@ -254,17 +256,17 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							rowURL.setParameter("redirect", redirect);
 							rowURL.setParameter("backURL", redirect);
 							rowURL.setParameter("portletResource", portletResource);
-							rowURL.setParameter("typeSelection", assetEntryType);
+							rowURL.setParameter("typeSelection", assetEntryClassName);
 							rowURL.setParameter("assetEntryId", String.valueOf(assetEntryId));
 							rowURL.setParameter("assetEntryOrder", String.valueOf(assetEntryOrder));
 
 							// Type
 
-							row.addText(LanguageUtil.get(pageContext, "model.resource." + assetEntryType), rowURL);
+							row.addText(LanguageUtil.get(pageContext, "model.resource." + assetEntryClassName), rowURL);
 
 							// Title
 
-							if (assetEntryType.equals(IGImage.class.getName())) {
+							if (assetEntryClassName.equals(IGImage.class.getName())) {
 								IGImage image = IGImageLocalServiceUtil.getImage(assetEntry.getClassPK());
 
 								image = image.toEscapedModel();

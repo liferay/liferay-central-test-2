@@ -44,19 +44,14 @@ String className = StringPool.BLANK;
 long classPK = 0;
 
 try {
+	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByType(type);
+	AssetRenderer assetRenderer = null;
+
 	if (Validator.isNotNull(urlTitle)) {
-		if (type.equals (AssetPublisherUtil.TYPE_BLOG)) {
-			BlogsEntry entry = BlogsEntryServiceUtil.getEntry(scopeGroupId, urlTitle, StatusConstants.APPROVED);
+		assetRenderer = assetRendererFactory.getAssetRenderer(scopeGroupId, urlTitle);
 
-			className = BlogsEntry.class.getName();
-			classPK = entry.getPrimaryKey();
-		}
-		else if (type.equals (AssetPublisherUtil.TYPE_CONTENT)) {
-			JournalArticle article = JournalArticleServiceUtil.getArticleByUrlTitle(scopeGroupId, urlTitle);
-
-			className = JournalArticle.class.getName();
-			classPK = article.getResourcePrimKey();
-		}
+		className = assetRendererFactory.getClassName();
+		classPK = assetRenderer.getClassPK();
 
 		assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
 	}
@@ -65,6 +60,8 @@ try {
 
 		className = PortalUtil.getClassName(assetEntry.getClassNameId());
 		classPK = assetEntry.getClassPK();
+
+		assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
 	}
 
 	String title = assetEntry.getTitle();
@@ -78,14 +75,10 @@ try {
 	request.setAttribute("view.jsp-assetEntryIndex", new Integer(assetEntryIndex));
 
 	request.setAttribute("view.jsp-assetEntry", assetEntry);
+	request.setAttribute("view.jsp-assetRendererFactory", assetRendererFactory);
+	request.setAttribute("view.jsp-assetRenderer", assetRenderer);
 
 	request.setAttribute("view.jsp-title", title);
-	request.setAttribute("view.jsp-summary", summary);
-	request.setAttribute("view.jsp-viewURL", viewURL);
-	request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
-
-	request.setAttribute("view.jsp-className", className);
-	request.setAttribute("view.jsp-classPK", new Long(classPK));
 
 	request.setAttribute("view.jsp-show", new Boolean(show));
 	request.setAttribute("view.jsp-print", new Boolean(print));
@@ -107,7 +100,7 @@ try {
 	PortalUtil.addPortletBreadcrumbEntry(request, title, currentURL);
 }
 catch (Exception e) {
-	_log.error(e.getMessage());
+	_log.error(e);
 }
 %>
 

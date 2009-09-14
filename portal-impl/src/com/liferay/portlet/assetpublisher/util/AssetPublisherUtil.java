@@ -57,23 +57,9 @@ import javax.servlet.http.HttpSession;
 /**
  * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class AssetPublisherUtil {
-
-	public static final String TYPE_BLOG = "blog";
-
-	public static final String TYPE_BOOKMARK = "bookmark";
-
-	public static final String TYPE_CONTENT = "content";
-
-	public static final String TYPE_DOCUMENT = "document";
-
-	public static final String TYPE_IMAGE = "image";
-
-	public static final String TYPE_THREAD = "thread";
-
-	public static final String TYPE_WIKI = "wiki";
 
 	public static void addAndStoreSelection(
 			ActionRequest actionRequest, String className, long classPK,

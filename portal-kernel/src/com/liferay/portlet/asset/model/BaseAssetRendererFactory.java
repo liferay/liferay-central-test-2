@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/asset_publisher/init.jsp" %>
+package com.liferay.portlet.asset.model;
 
-<%
-AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
-String title = (String)request.getAttribute("view.jsp-title");
+/**
+ * <a href="AssetRendererFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
-if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public PortletURL getURLAdd(PortletRequest portletRequest)
+		throws Exception {
+
+		return null;
+	}
+
+	public boolean isSelectable() {
+		return true;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
+	private long _classNameId;
+	private String _portletId;
+
 }
-
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
-
-PortalUtil.setPageSubtitle(title, request);
-PortalUtil.setPageDescription(summary, request);
-PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(assetEntry.getClassName(), assetEntry.getClassPK()), request);
-%>

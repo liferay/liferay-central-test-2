@@ -29,12 +29,14 @@
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
+<%@ page import="com.liferay.portlet.PortletContextImpl" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagException" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetEntryType" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTagProperty" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
@@ -154,12 +156,12 @@ if (!defaultScope) {
 	}
 }
 
-AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLanguageId());
+List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFactories();
 
-long[] availableClassNameIds = new long[assetEntryTypes.length];
+long[] availableClassNameIds = new long[assetRendererFactories.size()];
 
-for (int i = 0; i < assetEntryTypes.length; i++) {
-	availableClassNameIds[i] = assetEntryTypes[i].getClassNameId();
+for (int i = 0; i < assetRendererFactories.size(); i++) {
+	availableClassNameIds[i] = assetRendererFactories.get(i).getClassNameId();
 }
 
 boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-type", Boolean.TRUE.toString()));

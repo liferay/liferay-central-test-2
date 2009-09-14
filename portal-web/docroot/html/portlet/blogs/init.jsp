@@ -29,6 +29,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetTag" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
