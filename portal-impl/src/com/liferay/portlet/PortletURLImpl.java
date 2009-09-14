@@ -298,7 +298,9 @@ public class PortletURLImpl
 			_portlet.getPublicRenderParameter(name);
 
 		if (publicRenderParameter == null) {
-			throw new IllegalArgumentException();
+			_log.warn("Public parameter " + name + "does not exist");
+
+			return;
 		}
 
 		QName qName = publicRenderParameter.getQName();
