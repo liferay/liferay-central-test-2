@@ -175,7 +175,7 @@ int yearlyType = ParamUtil.getInteger(request, "yearlyType");
 String yearlyTypeParam = ParamUtil.getString(request, "yearlyType");
 if (Validator.isNull(yearlyTypeParam) && (event != null)) {
 	if ((event.getRepeating()) && (recurrence != null)) {
-		if (recurrence.getByMonth() != null) {
+		if (recurrence.getByMonthDay() == null) {
 			yearlyType = 1;
 		}
 	}
@@ -213,10 +213,7 @@ int yearlyPos = ParamUtil.getInteger(request, "yearlyPos", 1);
 String yearlyPosParam = ParamUtil.getString(request, "yearlyPos");
 if (Validator.isNull(yearlyPosParam) && (event != null)) {
 	if ((event.getRepeating()) && (recurrence != null)) {
-		if (recurrence.getByMonth() != null) {
-			yearlyPos = recurrence.getByMonth()[0];
-		}
-		else if (recurrence.getByDay() != null) {
+		if (recurrence.getByDay() != null) {
 			yearlyPos = recurrence.getByDay()[0].getDayPosition();
 		}
 	}
@@ -226,10 +223,7 @@ int yearlyDay1 = ParamUtil.getInteger(request, "yearlyDay1", Calendar.SUNDAY);
 String yearlyDay1Param = ParamUtil.getString(request, "yearlyDay1");
 if (Validator.isNull(yearlyDay1Param) && (event != null)) {
 	if ((event.getRepeating()) && (recurrence != null)) {
-		if (recurrence.getByMonth() != null) {
-			yearlyDay1 = -1;
-		}
-		else if (recurrence.getByDay() != null) {
+		if (recurrence.getByDay() != null) {
 			yearlyDay1 = recurrence.getByDay()[0].getDayOfWeek();
 		}
 	}
