@@ -31,6 +31,7 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:selec
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
+boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineField"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineLabel"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
@@ -40,7 +41,7 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("aui
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 %>
 
-<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
+<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 	<c:if test="<%= Validator.isNotNull(label) %>">
 		<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK  %>" for="<%= name %>">
 			<liferay-ui:message key="<%= label %>" />

@@ -36,6 +36,7 @@ String field = GetterUtil.getString((String)request.getAttribute("aui:input:fiel
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
+boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineField"));
 boolean inlineLabel = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
@@ -63,7 +64,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 %>
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
-	<div class="aui-ctrl-holder <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
+	<div class="aui-ctrl-holder <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 		<c:if test="<%= Validator.isNotNull(label) %>">
 			<label class="aui-form-label <%= inlineLabel ? "inline-label" : StringPool.BLANK %>" <%= showForLabel ? "for=\"" + name + "\"" : StringPool.BLANK %>>
 
@@ -134,7 +135,7 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 		</span>
 	</c:when>
 	<c:when test='<%= type.equals("radio") %>'>
-		<span class="aui-form-field aui-form-radio <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
+		<span class="aui-form-field aui-form-radio <%= inlineField ? "inline-field" : StringPool.BLANK %> <%= cssClass %> <%= first ? "aui-first" : StringPool.BLANK %> <%= last ? "aui-last" : StringPool.BLANK %>">
 			<label class="aui-form-label">
 
 				<%

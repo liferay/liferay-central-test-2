@@ -61,6 +61,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				_endPage = null;
 				_first = false;
 				_helpMessage = null;
+				_inlineField = false;
 				_inlineLabel = false;
 				_id = null;
 				_label = null;
@@ -98,6 +99,8 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 				"aui:select:dynamicAttributes", _dynamicAttributes);
 			request.setAttribute("aui:select:first", String.valueOf(_first));
 			request.setAttribute("aui:select:helpMessage", _helpMessage);
+			request.setAttribute(
+				"aui:select:inlineField", String.valueOf(_inlineField));
 			request.setAttribute(
 				"aui:select:inlineLabel", String.valueOf(_inlineLabel));
 			request.setAttribute("aui:select:id", _id);
@@ -169,6 +172,10 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_id = id;
 	}
 
+	public void setInlineField(boolean inlineField) {
+		_inlineField = inlineField;
+	}
+
 	public void setInlineLabel(boolean inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
@@ -211,6 +218,7 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;
+	private boolean _inlineField;
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;

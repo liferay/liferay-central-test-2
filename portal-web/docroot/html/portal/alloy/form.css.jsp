@@ -35,7 +35,7 @@
 }
 
 .aui-form .aui-ctrl-holder {
-	clear: both;
+	clear: right;
 	margin: 0;
 	overflow: hidden;
 	padding: 3px;
@@ -136,6 +136,15 @@
 .aui-form .aui-block-labels .inline-label {
 	position: relative;
 	top: .15em;
+}
+
+.aui-form .inline-field {
+	float: left;
+}
+
+.aui-form .aui-form-radio {
+	display: block;
+	clear: left;
 }
 
 .aui-form .aui-block-labels .text-input, .aui-form .aui-block-labels .file-upload {

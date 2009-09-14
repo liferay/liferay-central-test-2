@@ -60,6 +60,7 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 				_endPage = null;
 				_first = false;
 				_helpMessage = null;
+				_inlineField = false;
 				_inlineLabel = false;
 				_label = null;
 				_last = false;
@@ -85,6 +86,8 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 				"aui:field-wrapper:first", String.valueOf(_first));
 			request.setAttribute(
 				"aui:field-wrapper:helpMessage", _helpMessage);
+			request.setAttribute(
+				"aui:field-wrapper:inlineField", String.valueOf(_inlineField));
 			request.setAttribute(
 				"aui:field-wrapper:inlineLabel", String.valueOf(_inlineLabel));
 			request.setAttribute("aui:field-wrapper:label", _label);
@@ -141,6 +144,14 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 		_helpMessage = helpMessage;
 	}
 
+	public boolean isInlineField() {
+		return _inlineField;
+	}
+
+	public void setInlineField(boolean inlineField) {
+		_inlineField = inlineField;
+	}
+
 	public void setInlineLabel(boolean inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
@@ -173,6 +184,7 @@ public class FieldWrapperTag extends IncludeTag implements DynamicAttributes {
 	private String _endPage;
 	private boolean _first;
 	private String _helpMessage;
+	private boolean _inlineField;
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;

@@ -61,6 +61,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 				_first = false;
 				_helpMessage = null;
 				_id = null;
+				_inlineField = false;
 				_inlineLabel = false;
 				_label = null;
 				_last = false;
@@ -105,6 +106,8 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		request.setAttribute("aui:input:first", String.valueOf(_first));
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", _id);
+		request.setAttribute(
+			"aui:input:inlineField", String.valueOf(_inlineField));
 		request.setAttribute(
 			"aui:input:inlineLabel", String.valueOf(_inlineLabel));
 		request.setAttribute("aui:input:label", _label);
@@ -157,6 +160,10 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 		_id = id;
 	}
 
+	public void setInlineField(boolean inlineField) {
+		_inlineField = inlineField;
+	}
+
 	public void setInlineLabel(boolean inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
@@ -201,6 +208,7 @@ public class InputTag extends IncludeTag implements DynamicAttributes {
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;
+	private boolean _inlineField;
 	private boolean _inlineLabel;
 	private String _label;
 	private boolean _last;
