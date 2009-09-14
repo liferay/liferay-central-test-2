@@ -101,8 +101,6 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portal.kernel.portlet.ConfigurationAction getConfigurationActionInstance();
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstanceList();
-
 	public java.lang.String getIndexerClass();
 
 	public void setIndexerClass(java.lang.String indexerClass);
@@ -205,12 +203,14 @@ public interface Portlet extends PortletModel {
 	public void setControlPanelEntryClass(
 		java.lang.String controlPanelEntryClass);
 
-	public java.util.List<String> getAssetRendererFactoryClass();
-
-	public void setAssetRendererFactoryClass(
-		java.util.List<String> assetRendererFactoryClass);
-
 	public com.liferay.portlet.ControlPanelEntry getControlPanelEntryInstance();
+
+	public java.util.List<String> getAssetRendererFactoryClasses();
+
+	public void setAssetRendererFactoryClasses(
+		java.util.List<String> assetRendererFactoryClasses);
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactoryInstances();
 
 	public java.lang.String getDefaultPreferences();
 

@@ -618,21 +618,29 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					portlet.getControlPanelEntryClass()).newInstance();
 		}
 
-		List<AssetRendererFactory> assetRendererFactoryInstanceList =
+		List<AssetRendererFactory> assetRendererFactoryInstances =
 			new ArrayList<AssetRendererFactory>();
 
-		for (String AssetRendererFactoryClass :
-				portlet.getAssetRendererFactoryClass()) {
+		for (String assetRendererFactoryClass :
+				portlet.getAssetRendererFactoryClasses()) {
+
 			AssetRendererFactory assetRendererFactoryInstance =
 				(AssetRendererFactory)portletClassLoader.loadClass(
-					AssetRendererFactoryClass).newInstance();
+					assetRendererFactoryClass).newInstance();
+
+			assetRendererFactoryInstance =
+				(AssetRendererFactory)Proxy.newProxyInstance(
+					portletClassLoader,
+				new Class[] {AssetRendererFactory.class},
+					new ContextClassLoaderBeanHandler(
+						assetRendererFactoryInstance, portletClassLoader));
 
 			assetRendererFactoryInstance.setClassNameId(
 				PortalUtil.getClassNameId(
 					assetRendererFactoryInstance.getClassName()));
 			assetRendererFactoryInstance.setPortletId(portlet.getPortletId());
 
-			assetRendererFactoryInstanceList.add(assetRendererFactoryInstance);
+			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
 		}
 
 		PreferencesValidator preferencesValidatorInstance = null;
@@ -686,7 +694,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			pollerProcessorInstance, popMessageListenerInstance,
 			socialActivityInterpreterInstance, socialRequestInterpreterInstance,
 			webDAVStorageInstance, controlPanelEntryInstance,
-			assetRendererFactoryInstanceList, preferencesValidatorInstance,
+			assetRendererFactoryInstances, preferencesValidatorInstance,
 			resourceBundles);
 
 		PortletBagPool.put(portlet.getPortletId(), portletBag);

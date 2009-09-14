@@ -21,9 +21,8 @@
  * SOFTWARE.
  */
 %>
-<%@ include file="/html/portlet/blogs/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
+<%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);

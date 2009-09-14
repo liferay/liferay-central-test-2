@@ -30,11 +30,10 @@ List results = (List)request.getAttribute("view.jsp-results");
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-
-String title = (String)request.getAttribute("view.jsp-title");
-
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+
+String title = (String)request.getAttribute("view.jsp-title");
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue();
@@ -132,11 +131,11 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
 				PortletContextImpl selPortletCtx = (PortletContextImpl)selPortletConfig.getPortletContext();
 
-				RequestDispatcher selRd = selPortletCtx.getServletContext().getRequestDispatcher(path);
+				RequestDispatcher selRequestDispatcher = selPortletCtx.getServletContext().getRequestDispatcher(path);
 
 				StringServletResponse stringResponse = new StringServletResponse(response);
 
-				selRd.include(request, stringResponse);
+				selRequestDispatcher.include(request, stringResponse);
 				%>
 
 				<%= stringResponse.getString() %>

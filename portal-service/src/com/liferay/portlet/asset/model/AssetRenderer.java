@@ -1,21 +1,16 @@
-package com.liferay.portlet.asset.model;
-
-import javax.portlet.PortletURL;
-import javax.portlet.PortletRequest;
-
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
- * <p/>
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * <p/>
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * <p/>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,29 +20,56 @@ import javax.portlet.PortletRequest;
  * SOFTWARE.
  */
 
-public interface AssetRendererFactory {
+package com.liferay.portlet.asset.model;
 
-	public AssetRenderer getAssetRenderer(long classPK)
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+/**
+ * <a href="AssetRenderer.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public interface AssetRenderer {
+
+	public String[] getAvailableLocales() throws Exception;
+
+	public long getClassPK();
+
+	public String getDiscussionPath();
+
+	public long getGroupId();
+
+	public String getSummary();
+
+	public String getTitle();
+
+	public PortletURL getURLEdit(PortletRequest portletRequest)
 		throws Exception;
 
-	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
+	public PortletURL getURLExport(PortletRequest portletRequest)
 		throws Exception;
 
-	public long getClassNameId();
+	public String getUrlTitle();
 
-	public void setClassNameId(long classNameId);
+	public String getURLViewInContext(
+		PortletRequest portletRequest, String noSuchEntryRedirect);
 
-	public String getClassName();
+	public long getUserId();
 
-	public String getPortletId();
+	public String getViewInContextMessage();
 
-	public String getType();
+	public boolean isConvertible();
 
-	public PortletURL getURLAdd(PortletRequest portletRequest)
+	public boolean isLocalizable();
+
+	public boolean isPrintable();
+
+	public String render(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String template)
 		throws Exception;
-
-	public boolean isSelectable();
-
-	public void setPortletId(String portletId);
 
 }

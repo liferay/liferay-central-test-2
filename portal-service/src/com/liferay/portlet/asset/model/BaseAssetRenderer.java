@@ -26,39 +26,57 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="AssetRendererFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseAssetRenderer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
+public abstract class BaseAssetRenderer implements AssetRenderer {
 
-	public long getClassNameId() {
-		return _classNameId;
+	public String[] getAvailableLocales() {
+		return _EMPTY_ARRAY;
 	}
 
-	public String getPortletId() {
-		return _portletId;
+	public String getDiscussionPath() {
+		return null;
 	}
 
-	public PortletURL getURLAdd(PortletRequest portletRequest)
+	public PortletURL getURLEdit(PortletRequest portletRequest)
 		throws Exception {
 
 		return null;
 	}
 
-	public boolean isSelectable() {
-		return true;
+	public PortletURL getURLExport(PortletRequest portletRequest)
+		throws Exception {
+
+		return null;
 	}
 
-	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
+	public String getUrlTitle() {
+		return null;
 	}
 
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
+	public String getURLViewInContext(
+			PortletRequest portletRequest, String noSuchEntryRedirect) {
+		return null;
 	}
 
-	private long _classNameId;
-	private String _portletId;
+	public String getViewInContextMessage() {
+		return "view-in-context";
+	}
+
+	public boolean isConvertible() {
+		return false;
+	}
+
+	public boolean isLocalizable() {
+		return false;
+	}
+
+	public boolean isPrintable() {
+		return false;
+	}
+
+	private static final String[] _EMPTY_ARRAY = new String[0];
 
 }

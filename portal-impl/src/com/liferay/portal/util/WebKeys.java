@@ -36,9 +36,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ANNOUNCEMENTS_ENTRY = "ANNOUNCEMENTS_ENTRY";
 
-	public static final String ASSET_RENDERER = "ASSET_RENDERER";
-
 	public static final String ASSET_LAYOUT_TAG_NAMES = "ASSET_LAYOUT_TAG_NAMES";
+
+	public static final String ASSET_RENDERER = "ASSET_RENDERER";
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
 

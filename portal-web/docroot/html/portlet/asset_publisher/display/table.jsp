@@ -30,17 +30,16 @@ List results = (List)request.getAttribute("view.jsp-results");
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
-
-boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle();
 }
+
+boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 

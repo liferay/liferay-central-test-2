@@ -30,19 +30,18 @@ List results = (List)request.getAttribute("view.jsp-results");
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
-
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
-
-boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
-
-request.setAttribute("view.jsp-showIconLabel", false);
 
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle();
 }
+
+boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
+
+request.setAttribute("view.jsp-showIconLabel", false);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -55,7 +54,6 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 }
 
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, viewFullContentURL.toString()) : viewFullContentURL.toString();
-String cssClassName = assetRendererFactory.getType();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
@@ -65,7 +63,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 	</c:if>
 
 	<c:if test="<%= show %>">
-		<li class="title-list <%= cssClassName %>">
+		<li class="title-list <%= assetRendererFactory.getType() %>">
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
 					<a href="<%= viewURL %>"><%= title %></a>

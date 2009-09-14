@@ -2539,7 +2539,7 @@
 			<transient name="actionURLRedirect" />
 			<transient name="addDefaultResource" />
 			<transient name="ajaxable" />
-			<transient name="assetRendererFactoryClass" />
+			<transient name="assetRendererFactoryClasses" />
 			<transient name="configurationActionClass" />
 			<transient name="controlPanelEntryCategory" />
 			<transient name="controlPanelEntryClass" />

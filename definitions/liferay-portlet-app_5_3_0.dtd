@@ -278,7 +278,8 @@ http://docs.liferay.com/portal/5.3/javadocs/portal-service/com/liferay/portlet/C
 
 <!--
 The asset-renderer-factory value must be a class that extends
-com.liferay.portlet.asset.model.AssetRendererFactory and is called by Asset Publisher.
+com.liferay.portlet.asset.model.AssetRendererFactory and is called by the Asset
+Publisher.
 
 See:
 

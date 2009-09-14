@@ -101,7 +101,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPortletId(portletId);
 		setStrutsPath(portletId);
 		setActive(true);
-		_assetRendererFactoryClass = new ArrayList<String>();
+		_assetRendererFactoryClasses = new ArrayList<String>();
 		_headerPortalCss = new ArrayList<String>();
 		_headerPortletCss = new ArrayList<String>();
 		_headerPortalJavaScript = new ArrayList<String>();
@@ -139,10 +139,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String controlPanelEntryCategory,
 		double controlPanelEntryWeight, String controlPanelClass,
-		List<String> assetRendererFactoryClass,String defaultPreferences,
-		String preferencesValidator,boolean preferencesCompanyWide,
-		boolean preferencesUniquePerLayout,boolean preferencesOwnedByGroup,
-		boolean useDefaultTemplate,boolean showPortletAccessDenied,
+		List<String> assetRendererFactoryClasses, String defaultPreferences,
+		String preferencesValidator, boolean preferencesCompanyWide,
+		boolean preferencesUniquePerLayout, boolean preferencesOwnedByGroup,
+		boolean useDefaultTemplate, boolean showPortletAccessDenied,
 		boolean showPortletInactive, boolean actionURLRedirect,
 		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
@@ -194,7 +194,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_controlPanelEntryCategory = controlPanelEntryCategory;
 		_controlPanelEntryWeight = controlPanelEntryWeight;
 		_controlPanelEntryClass = controlPanelClass;
-		_assetRendererFactoryClass = assetRendererFactoryClass;
+		_assetRendererFactoryClasses = assetRendererFactoryClasses;
 		_defaultPreferences = defaultPreferences;
 		_preferencesValidator = preferencesValidator;
 		_preferencesCompanyWide = preferencesCompanyWide;
@@ -491,43 +491,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 		return (ConfigurationAction)InstancePool.get(
 			getConfigurationActionClass());
-	}
-
-	/**
-	 * Gets the asset type instances of the portlet.
-	 *
-	 * @return the asset type instances of the portlet.
-	 */
-	public List<AssetRendererFactory> getAssetRendererFactoryInstanceList() {
-		if (Validator.isNull(getConfigurationActionClass())) {
-			return null;
-		}
-
-		if (_portletApp.isWARFile()) {
-			PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-			return portletBag.getAssetRendererFactoryInstanceList();
-		}
-
-		List<AssetRendererFactory> assetRendererFactoryInstanceList =
-			new ArrayList<AssetRendererFactory>();
-
-		for (String assetRendererFactoryClass :
-				getAssetRendererFactoryClass()) {
-
-			AssetRendererFactory assetRendererFactoryInstance =
-				(AssetRendererFactory)InstancePool.get(
-					assetRendererFactoryClass);
-
-			assetRendererFactoryInstance.setClassNameId(
-				PortalUtil.getClassNameId(
-					assetRendererFactoryInstance.getClassName()));
-			assetRendererFactoryInstance.setPortletId(getPortletId());
-
-			assetRendererFactoryInstanceList.add(assetRendererFactoryInstance);
-		}
-
-		return assetRendererFactoryInstanceList;
 	}
 
 	/**
@@ -1118,32 +1081,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the names of the classes that represent asset types associated to
-	 * this portlet
-	 *
-	 * @return the names of the classes that represent asset types associated to
-	 *         this portlet
-	 */
-	public List<String> getAssetRendererFactoryClass() {
-		return _assetRendererFactoryClass;
-	}
-
-	/**
-	 * Sets the name of the classes that represent asset types associated to
-	 * this portlet
-	 *
-	 * @param assetRendererFactoryClass the names of the classes that represent
-	 *        asset types associated to this portlet
-	 */
-	public void setAssetRendererFactoryClass(
-		List<String> assetRendererFactoryClass) {
-
-		_assetRendererFactoryClass = assetRendererFactoryClass;
-	}
-
-	/**
 	 * Gets an instance of the class that will control when the portlet will be
-	 * shown in the Control Panel
+	 * shown in the Control Panel.
 	 *
 	 * @return the instance of the class that will control when the portlet will
 	 *		   be shown in the Control Panel
@@ -1161,6 +1100,68 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		return (ControlPanelEntry)InstancePool.get(getControlPanelEntryClass());
+	}
+
+	/**
+	 * Gets the names of the classes that represent asset types associated to
+	 * the portlet.
+	 *
+	 * @return the names of the classes that represent asset types associated to
+	 *		   the portlet
+	 */
+	public List<String> getAssetRendererFactoryClasses() {
+		return _assetRendererFactoryClasses;
+	}
+
+	/**
+	 * Sets the name of the classes that represent asset types associated to
+	 * the portlet.
+	 *
+	 * @param assetRendererFactoryClasses the names of the classes that
+	 *		  represent asset types associated to the portlet
+	 */
+	public void setAssetRendererFactoryClasses(
+		List<String> assetRendererFactoryClasses) {
+
+		_assetRendererFactoryClasses = assetRendererFactoryClasses;
+	}
+
+	/**
+	 * Gets the asset type instances of the portlet.
+	 *
+	 * @return the asset type instances of the portlet.
+	 */
+	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
+		if (getAssetRendererFactoryClasses().isEmpty()) {
+			return null;
+		}
+
+		if (_portletApp.isWARFile()) {
+			PortletBagImpl portletBagImpl = (PortletBagImpl)PortletBagPool.get(
+				getRootPortletId());
+
+			return portletBagImpl.getAssetRendererFactoryInstances();
+		}
+
+		List<AssetRendererFactory> assetRendererFactoryInstances =
+			new ArrayList<AssetRendererFactory>();
+
+		for (String assetRendererFactoryClass :
+				getAssetRendererFactoryClasses()) {
+
+			AssetRendererFactory assetRendererFactoryInstance =
+				(AssetRendererFactory)InstancePool.get(
+					assetRendererFactoryClass);
+
+			assetRendererFactoryInstance.setClassNameId(
+				PortalUtil.getClassNameId(
+					assetRendererFactoryInstance.getClassName()));
+			assetRendererFactoryInstance.setPortletId(getPortletId());
+
+			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
+		}
+
+		return assetRendererFactoryInstances;
 	}
 
 	/**
@@ -2872,7 +2873,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getControlPanelEntryCategory(),
 			getControlPanelEntryWeight(), getControlPanelEntryClass(),
-			getAssetRendererFactoryClass(), getDefaultPreferences(),
+			getAssetRendererFactoryClasses(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
@@ -3077,27 +3078,27 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 
 	/**
 	 * The name of the category of the Control Panel where this portlet will be
-	 * shown
+	 * shown.
 	 */
 	private String _controlPanelEntryCategory;
 
 	/**
 	 * The relative weight of this portlet with respect to the other portlets in
-	 * the same category of the Control Panel
+	 * the same category of the Control Panel.
 	 */
 	private double _controlPanelEntryWeight = 100;
 
 	/**
 	 * The name of the class that will control when this portlet will be shown
-	 * in the Control Panel
+	 * in the Control Panel.
 	 */
 	private String _controlPanelEntryClass;
 
 	/**
-	 * The names of the classes that represents asset types associated with this
-	 * portlet
+	 * The names of the classes that represents asset types associated with the
+	 * portlet.
 	 */
-	private List<String> _assetRendererFactoryClass;
+	private List<String> _assetRendererFactoryClasses;
 
 	/**
 	 * True if the portlet uses the default template.

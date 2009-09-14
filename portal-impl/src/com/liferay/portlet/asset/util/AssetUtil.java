@@ -138,21 +138,13 @@ public class AssetUtil {
 	public static AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
-		if (_rendererFactoriesMapByClassName == null) {
-			_initAssetRendererFactoryMaps();
-		}
-
-		return _rendererFactoriesMapByClassName.get(className);
+		return _instance._assetRendererFactoriesMapByClassName.get(className);
 	}
 
 	public static AssetRendererFactory getAssetRendererFactoryByType(
 		String type) {
 
-		if (_rendererFactoriesMapByType == null) {
-			_initAssetRendererFactoryMaps();
-		}
-
-		return _rendererFactoriesMapByType.get(type);
+		return _instance._assetRendererFactoriesMapByType.get(type);
 	}
 
 	public static List<AssetRendererFactory> getAssetRendererFactories() {
@@ -283,29 +275,32 @@ public class AssetUtil {
 		}
 	}
 
-	private static void _initAssetRendererFactoryMaps() {
-		_rendererFactoriesMapByClassName =
+	private AssetUtil() {
+		_assetRendererFactoriesMapByClassName =
 			new HashMap<String, AssetRendererFactory>();
-		_rendererFactoriesMapByType =
+		_assetRendererFactoriesMapByType =
 			new HashMap<String, AssetRendererFactory>();
 
 		List<AssetRendererFactory> assetRendererFactories =
 			getAssetRendererFactories();
 
 		for (AssetRendererFactory assetRendererFactory :
-			 assetRendererFactories) {
+				assetRendererFactories) {
 
-			_rendererFactoriesMapByClassName.put(
+			_assetRendererFactoriesMapByClassName.put(
 				assetRendererFactory.getClassName(), assetRendererFactory);
-			_rendererFactoriesMapByType.put(
+			_assetRendererFactoriesMapByType.put(
 				assetRendererFactory.getType(), assetRendererFactory);
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetUtil.class);
-	private static Map<String, AssetRendererFactory>
-		_rendererFactoriesMapByClassName;
-	private static Map<String, AssetRendererFactory>
-		_rendererFactoriesMapByType;
+
+	private static AssetUtil _instance = new AssetUtil();
+
+	private Map<String, AssetRendererFactory>
+		_assetRendererFactoriesMapByClassName;
+	private Map<String, AssetRendererFactory>
+		_assetRendererFactoriesMapByType;
 
 }

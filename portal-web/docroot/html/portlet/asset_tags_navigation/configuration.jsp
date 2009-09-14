@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/asset_tags_navigation/init.jsp" %>
 
 <%
-AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisplay.getLocale().toString());
+List<AssetRendererFactory> assetRendererFactories = AssetUtil.getAssetRendererFactories();
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
@@ -50,10 +50,10 @@ AssetEntryType[] assetEntryTypes = AssetEntryServiceUtil.getEntryTypes(themeDisp
 			<option <%= classNameId == 0 %> value="0"><liferay-ui:message key="any" /></option>
 
 			<%
-			for (AssetEntryType assetEntryType : assetEntryTypes) {
+			for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
 			%>
 
-				<option <%= (classNameId == assetEntryType.getClassNameId()) ? "selected" : "" %> value="<%= assetEntryType.getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetEntryType.getClassName() %>' /></option>
+				<option <%= (classNameId == assetRendererFactory.getClassNameId()) ? "selected" : "" %> value="<%= assetRendererFactory.getClassNameId() %>"><liferay-ui:message key='<%= "model.resource." + assetRendererFactory.getClassName() %>' /></option>
 
 			<%
 			}

@@ -73,7 +73,7 @@ public class PortletBagImpl implements PortletBag {
 		SocialRequestInterpreter socialRequestInterpreterInstance,
 		WebDAVStorage webDAVStorageInstance,
 		ControlPanelEntry controlPanelEntryInstance,
-		List<AssetRendererFactory> AssetRendererFactoryInstanceList,
+		List<AssetRendererFactory> assetRendererFactoryInstances,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -94,7 +94,7 @@ public class PortletBagImpl implements PortletBag {
 		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
 		_webDAVStorageInstance = webDAVStorageInstance;
 		_controlPanelEntryInstance = controlPanelEntryInstance;
-		_assetRendererFactoryInstanceList = AssetRendererFactoryInstanceList;
+		_assetRendererFactoryInstances = assetRendererFactoryInstances;
 		_preferencesValidatorInstance = preferencesValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -109,13 +109,12 @@ public class PortletBagImpl implements PortletBag {
 			getPollerProcessorInstance(), getPopMessageListenerInstance(),
 			getSocialActivityInterpreterInstance(),
 			getSocialRequestInterpreterInstance(), getWebDAVStorageInstance(),
-			getControlPanelEntryInstance(),
-			getAssetRendererFactoryInstanceList(),
+			getControlPanelEntryInstance(), getAssetRendererFactoryInstances(),
 			getPreferencesValidatorInstance(), getResourceBundles());
 	}
 
-	public List<AssetRendererFactory> getAssetRendererFactoryInstanceList() {
-		return _assetRendererFactoryInstanceList;
+	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
+		return _assetRendererFactoryInstances;
 	}
 
 	public ConfigurationAction getConfigurationActionInstance() {
@@ -218,7 +217,7 @@ public class PortletBagImpl implements PortletBag {
 		_portletName = portletName;
 	}
 
-	private List<AssetRendererFactory> _assetRendererFactoryInstanceList;
+	private List<AssetRendererFactory> _assetRendererFactoryInstances;
 	private ConfigurationAction _configurationActionInstance;
 	private ControlPanelEntry _controlPanelEntryInstance;
 	private FriendlyURLMapper _friendlyURLMapperInstance;

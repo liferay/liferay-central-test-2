@@ -24,8 +24,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.model.AssetEntryType" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
+<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

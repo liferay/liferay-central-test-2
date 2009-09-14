@@ -20,20 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs;
+package com.liferay.portlet.blogs.asset;
 
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -48,6 +48,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String CLASS_NAME =
 		"com.liferay.portlet.blogs.model.BlogsEntry";
+
 	public static final String TYPE = "blog";
 
 	public AssetRenderer getAssetRenderer(long classPK) throws Exception {

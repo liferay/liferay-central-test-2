@@ -20,25 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs;
+package com.liferay.portlet.blogs.asset;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
-import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
 
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.PortletURL;
-import javax.portlet.PortletRequest;
 
 /**
  * <a href="BlogsEntryAssetRenderer.java.html"><b><i>View Source</i></b></a>
@@ -76,10 +76,6 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getTitle();
 	}
 
-	public String getUrlTitle() {
-		return _entry.getUrlTitle();
-	}
-
 	public PortletURL getURLEdit(PortletRequest portletRequest) {
 		PortletRequestImpl portletRequestImpl =
 			(PortletRequestImpl)portletRequest;
@@ -106,16 +102,20 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return editPortletURL;
 	}
 
+	public String getUrlTitle() {
+		return _entry.getUrlTitle();
+	}
+
 	public String getURLViewInContext(
-			PortletRequest portletRequest, String noSuchEntryRedirect) {
+		PortletRequest portletRequest, String noSuchEntryRedirect) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 			"/blogs/find_entry?noSuchEntryRedirect=" +
-			HttpUtil.encodeURL(noSuchEntryRedirect) + "&entryId=" +
-			_entry.getEntryId();
+				HttpUtil.encodeURL(noSuchEntryRedirect) + "&entryId=" +
+					_entry.getEntryId();
 	}
 
 	public long getUserId() {

@@ -180,9 +180,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portlet = entry.getValue();
 
 			List<AssetRendererFactory> portletAssetRendererFactories =
-				portlet.getAssetRendererFactoryInstanceList();
+				portlet.getAssetRendererFactoryInstances();
 
-			if (portletAssetRendererFactories != null) {
+			if ((portletAssetRendererFactories != null) &&
+				(!portletAssetRendererFactories.isEmpty())) {
+
 				assetRendererFactories.addAll(portletAssetRendererFactories);
 			}
 		}
@@ -1109,8 +1111,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portlet.elementText("control-panel-entry-class"),
 					portletModel.getControlPanelEntryClass()));
 
-				List<String> assetRendererFactoryClassList =
-					portletModel.getAssetRendererFactoryClass();
+				List<String> assetRendererFactoryClasses =
+					portletModel.getAssetRendererFactoryClasses();
 
 				Iterator<Element> itr2 = portlet.elements(
 					"asset-renderer-factory").iterator();
@@ -1118,11 +1120,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				while (itr2.hasNext()) {
 					Element assetRendererFactoryClassEl = itr2.next();
 
-					assetRendererFactoryClassList.add(
+					assetRendererFactoryClasses.add(
 						assetRendererFactoryClassEl.getText());
 				}
 
-				if (portletModel.getAssetRendererFactoryClass().isEmpty()) {
+				if (portletModel.getAssetRendererFactoryClasses().isEmpty()) {
 					_assetRendererFactoryPortlets.remove(portletId);
 				}
 				else {
@@ -1191,8 +1193,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				List<String> headerPortalCssList =
 					portletModel.getHeaderPortalCss();
 
-				itr2 = portlet.elements(
-					"header-portal-css").iterator();
+				itr2 = portlet.elements("header-portal-css").iterator();
 
 				while (itr2.hasNext()) {
 					Element headerPortalCssEl = itr2.next();

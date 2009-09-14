@@ -22,54 +22,37 @@
 
 package com.liferay.portlet.asset.model;
 
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.PortletURL;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
 /**
- * <a href="AssetRenderer.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssetRendererFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
-public interface AssetRenderer {
+public interface AssetRendererFactory {
 
-	public String[] getAvailableLocales() throws Exception;
-
-	public long getClassPK();
-
-	public String getDiscussionPath();
-
-	public long getGroupId();
-
-	public String getSummary();
-
-	public String getTitle();
-
-	public String getUrlTitle();
-
-	public long getUserId();
-
-	public PortletURL getURLExport(PortletRequest portletRequest)
+	public AssetRenderer getAssetRenderer(long classPK)
 		throws Exception;
 
-	public PortletURL getURLEdit(PortletRequest portletRequest)
+	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws Exception;
 
-	public String getURLViewInContext(
-		PortletRequest portletRequest, String noSuchEntryRedirect);
+	public String getClassName();
 
-	public String getViewInContextMessage();
+	public long getClassNameId();
 
-	public boolean isConvertible();
+	public String getPortletId();
 
-	public boolean isLocalizable();
+	public String getType();
 
-	public boolean isPrintable();
-
-	public String render(
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			String template)
+	public PortletURL getURLAdd(PortletRequest portletRequest)
 		throws Exception;
+
+	public boolean isSelectable();
+
+	public void setClassNameId(long classNameId);
+
+	public void setPortletId(String portletId);
 
 }

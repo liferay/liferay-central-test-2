@@ -103,10 +103,10 @@ else if (!groupByClass) {
 <%
 }
 else {
-	List<AssetRendererFactory> rendererFactories = AssetUtil.getAssetRendererFactories();
+	List<AssetRendererFactory> groupAssetRendererFactories = AssetUtil.getAssetRendererFactories();
 
-	for (AssetRendererFactory rendererFactory : rendererFactories) {
-		long[] groupClassNameIds = {rendererFactory.getClassNameId()};
+	for (AssetRendererFactory groupAssetRendererFactory : groupAssetRendererFactories) {
+		long[] groupClassNameIds = {groupAssetRendererFactory.getClassNameId()};
 
 		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
@@ -125,7 +125,7 @@ else {
 		if (!results.isEmpty()) {
 %>
 
-			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= rendererFactory.getType() %>" /></h3>
+			<h3 class="asset-entries-group-label"><liferay-ui:message key="<%= groupAssetRendererFactory.getType() %>" /></h3>
 
 			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 

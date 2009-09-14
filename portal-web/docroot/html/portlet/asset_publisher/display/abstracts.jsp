@@ -56,14 +56,13 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, viewFullContentURL.toString()) : viewFullContentURL.toString();
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more";
-String cssClassName = assetRendererFactory.getType();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>
 
 <c:if test="<%= show %>">
 	<div class="asset-abstract">
-		<h3 class="asset-title <%= cssClassName %>">
+		<h3 class="asset-title <%= assetRendererFactory.getType() %>">
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
 
 			<c:choose>
