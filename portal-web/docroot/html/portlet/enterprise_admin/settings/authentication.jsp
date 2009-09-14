@@ -74,15 +74,15 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 				<aui:option label="by-user-id" selected="<%= companySecurityAuthType.equals(CompanyConstants.AUTH_TYPE_ID) %>" value="<%= CompanyConstants.AUTH_TYPE_ID %>" />
 			</aui:select>
 
-			<aui:input inlineLabel="<%= true %>" label="allow-users-to-automatically-login" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' type="checkbox" value="<%= companySecurityAutoLogin %>" />
+			<aui:input inlineLabel="left" label="allow-users-to-automatically-login" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + ")" %>' type="checkbox" value="<%= companySecurityAutoLogin %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
+			<aui:input inlineLabel="left" label="allow-users-to-request-forgotten-passwords" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + ")" %>' type="checkbox" value="<%= companySecuritySendPassword %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
+			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="allow-strangers-to-create-accounts-with-a-company-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
+			<aui:input inlineLabel="left" label="allow-strangers-to-create-accounts-with-a-company-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + ")" %>' type="checkbox" value="<%= companySecurityStrangers %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="require-strangers-to-verify-their-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' type="checkbox" value="<%= companySecurityStrangersVerify %>" />
+			<aui:input inlineLabel="left" label="require-strangers-to-verify-their-email-address" name='<%= "settings(" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + ")" %>' type="checkbox" value="<%= companySecurityStrangersVerify %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 
@@ -92,9 +92,9 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= casAuthEnabled %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.CAS_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= casAuthEnabled %>" />
 
-			<aui:input inlineLabel="<%= true %>" helpMessage="import-cas-users-from-ldap-help" label="import-cas-users-from-ldap" name='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= casImportFromLdap %>" />
+			<aui:input inlineLabel="left" helpMessage="import-cas-users-from-ldap-help" label="import-cas-users-from-ldap" name='<%= "settings(" + PropsKeys.CAS_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= casImportFromLdap %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="login-url" name='<%= "settings(" + PropsKeys.CAS_LOGIN_URL + ")" %>' type="text" value="<%= casLoginUrl %>" />
 
@@ -110,7 +110,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ntlmAuthEnabled %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.NTLM_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ntlmAuthEnabled %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="domain-controller" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN_CONTROLLER + ")" %>' type="text" value="<%= ntlmDomainController %>" />
 
@@ -120,13 +120,13 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openIdAuthEnabled %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_ID_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openIdAuthEnabled %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openSsoAuthEnabled %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.OPEN_SSO_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= openSsoAuthEnabled %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="login-url" name='<%= "settings(" + PropsKeys.OPEN_SSO_LOGIN_URL + ")" %>' type="text" value="<%= openSsoLoginUrl %>" />
 
@@ -146,9 +146,9 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= siteminderAuthEnabled %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.SITEMINDER_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= siteminderAuthEnabled %>" />
 
-			<aui:input inlineLabel="<%= true %>" helpMessage="import-siteminder-users-from-ldap-help" label="import-siteminder-users-from-ldap" name='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= siteminderImportFromLdap %>" />
+			<aui:input inlineLabel="left" helpMessage="import-siteminder-users-from-ldap-help" label="import-siteminder-users-from-ldap" name='<%= "settings(" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + ")" %>' type="checkbox" value="<%= siteminderImportFromLdap %>" />
 
 			<aui:input cssClass="lfr-input-text-container" label="user-header" name='<%= "settings(" + PropsKeys.SITEMINDER_USER_HEADER + ")" %>' type="text" value="<%= siteminderUserHeader %>" />
 		</aui:fieldset>

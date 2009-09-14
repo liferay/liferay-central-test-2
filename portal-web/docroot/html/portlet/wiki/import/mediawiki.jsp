@@ -35,5 +35,5 @@
 
 	<aui:input label='<%= WikiPageImpl.FRONT_PAGE + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="<%= WikiImporterKeys.OPTIONS_FRONT_PAGE %>" type="text" size="40" value="Main Page" />
 
-	<aui:input checked="<%= true %>" inlineLabel="<%= true %>" label="import-only-the-latest-version-and-not-the-full-history" name="<%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
+	<aui:input checked="<%= true %>" inlineLabel="left" label="import-only-the-latest-version-and-not-the-full-history" name="<%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
 </aui:fieldset>

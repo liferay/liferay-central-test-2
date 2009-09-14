@@ -281,7 +281,6 @@
 }
 
 .portlet-enterprise-admin .aui-form .aui-block-labels .aui-ctrl-holder.mailing-ctrl span {
-	float: left;
 	margin-right: 0.5em;
 }
 

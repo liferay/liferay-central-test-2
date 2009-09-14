@@ -99,7 +99,7 @@ else {
 				<aui:select label="type" name='<%= "phoneTypeId" + phonesIndex %>' listType="<%= className + ListTypeImpl.PHONE %>" />
 
 				<aui:field-wrapper cssClass="primary-ctrl">
-					<aui:input checked="<%= phone.isPrimary() %>" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="<%= true %>" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />
+					<aui:input checked="<%= phone.isPrimary() %>" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="left" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />
 				</aui:field-wrapper>
 			</div>
 		</div>

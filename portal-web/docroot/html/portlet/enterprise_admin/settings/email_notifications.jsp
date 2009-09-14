@@ -78,7 +78,7 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailUserAddedEnable %>" />
 
 			<liferay-ui:error key="emailUserAddedSubject" message="please-enter-a-valid-subject" />
 
@@ -100,7 +100,7 @@ String adminEmailPasswordSentBody = ParamUtil.getString(request, "emailPasswordS
 
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailPasswordSentEnable %>" />
+			<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED + ")" %>' type="checkbox" value="<%= adminEmailPasswordSentEnable %>" />
 
 			<liferay-ui:error key="emailPasswordSentSubject" message="please-enter-a-valid-subject" />
 

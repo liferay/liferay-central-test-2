@@ -114,10 +114,10 @@ else {
 					<aui:input name="city" fieldParam='<%= "addressCity" + addressesIndex %>' />
 
 					<aui:field-wrapper cssClass="primary-ctrl">
-						<aui:input checked="<%= address.isPrimary() %>" id='<%= "addressPrimary" + addressesIndex %>' inlineLabel="<%= true %>" label="primary" name="addressPrimary" type="radio" value="<%= addressesIndex %>" />
+						<aui:input checked="<%= address.isPrimary() %>" id='<%= "addressPrimary" + addressesIndex %>' inlineLabel="left" label="primary" name="addressPrimary" type="radio" value="<%= addressesIndex %>" />
 					</aui:field-wrapper>
 
-					<aui:input cssClass="mailing-ctrl" fieldParam='<%= "addressMailing" + addressesIndex %>' inlineLabel="<%= true %>" name="mailing" />
+					<aui:input cssClass="mailing-ctrl" fieldParam='<%= "addressMailing" + addressesIndex %>' inlineLabel="left" name="mailing" />
 				</aui:column>
 			</div>
 		</div>

@@ -89,7 +89,7 @@
 			 <aui:button onClick='<%= renderResponse.getNamespace() + "showNext();" %>' value="next" />
 		 </aui:column>
 		<aui:column>
-			<aui:select inlineLabel="<%= true %>" name="speed" onChange='<%= renderResponse.getNamespace() + "pause();" + renderResponse.getNamespace() + "speed = this[this.selectedIndex].value * 1000;" + renderResponse.getNamespace() + "play();" %>'>
+			<aui:select inlineLabel="left" name="speed" onChange='<%= renderResponse.getNamespace() + "pause();" + renderResponse.getNamespace() + "speed = this[this.selectedIndex].value * 1000;" + renderResponse.getNamespace() + "play();" %>'>
 
 				<%
 				for (int i = 1; i <= 10; i++) {

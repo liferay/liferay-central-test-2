@@ -83,7 +83,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	<aui:input label="enter-again" name="password2" size="30" type="password" />
 
 	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
-		<aui:input inlineLabel="<%= true %>" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
+		<aui:input inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
 	</c:if>
 </aui:fieldset>
 

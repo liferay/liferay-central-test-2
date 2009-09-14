@@ -341,9 +341,9 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 <liferay-ui:error key="ldapAuthentication" message="failed-to-bind-to-the-ldap-server-with-given-values" />
 
 <aui:fieldset>
-	<aui:input inlineLabel="<%= true %>" label="enabled" name='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ldapAuthEnabled %>" />
+	<aui:input inlineLabel="left" label="enabled" name='<%= "settings(" + PropsKeys.LDAP_AUTH_ENABLED + ")" %>' type="checkbox" value="<%= ldapAuthEnabled %>" />
 
-	<aui:input inlineLabel="<%= true %>" label="required" name='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' type="checkbox" value="<%= ldapAuthRequired %>" />
+	<aui:input inlineLabel="left" label="required" name='<%= "settings(" + PropsKeys.LDAP_AUTH_REQUIRED + ")" %>' type="checkbox" value="<%= ldapAuthRequired %>" />
 </aui:fieldset>
 
 <h3><liferay-ui:message key="default-values" /></h3>
@@ -446,12 +446,12 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 <h3><liferay-ui:message key="import-export" /></h3>
 
 <aui:fieldset>
-	<aui:input id="ldapImportEnabled" inlineLabel="<%= true %>" label="import-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapImportEnabled %>" />
+	<aui:input id="ldapImportEnabled" inlineLabel="left" label="import-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapImportEnabled %>" />
 
 	<div id="<portlet:namespace />importEnabledSettings">
-		<aui:input inlineLabel="<%= true %>" label="import-on-startup-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' type="checkbox" value="<%= ldapImportOnStartup %>" />
+		<aui:input inlineLabel="left" label="import-on-startup-enabled" name='<%= "settings(" + PropsKeys.LDAP_IMPORT_ON_STARTUP + ")" %>' type="checkbox" value="<%= ldapImportOnStartup %>" />
 
-		<aui:select inlineLabel="<%= true %>" label="import-interval" name="settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
+		<aui:select inlineLabel="left" label="import-interval" name="settings(<%= PropsKeys.LDAP_IMPORT_INTERVAL %>)">
 			<aui:option value="0" selected="<%= (ldapImportInterval == 0) %>"><liferay-ui:message key="disabled" /></aui:option>
 			<aui:option value="5" selected="<%= (ldapImportInterval == 5) %>">5 <liferay-ui:message key="minutes" /></aui:option>
 			<aui:option value="10" selected="<%= (ldapImportInterval == 10) %>">10 <liferay-ui:message key="minutes" /></aui:option>
@@ -462,7 +462,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		</aui:select>
 	</div>
 
-	<aui:input id="ldapExportEnabled" inlineLabel="<%= true %>" label="export-enabled" name='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapExportEnabled %>" />
+	<aui:input id="ldapExportEnabled" inlineLabel="left" label="export-enabled" name='<%= "settings(" + PropsKeys.LDAP_EXPORT_ENABLED + ")" %>' type="checkbox" value="<%= ldapExportEnabled %>" />
 
 	<div id="<portlet:namespace />exportEnabledSettings">
 		<aui:input cssClass="lfr-input-text-container" label="users-dn" name='<%= "settings(" + PropsKeys.LDAP_USERS_DN + ")" %>' type="text" value="<%= ldapUsersDN %>" />
@@ -476,7 +476,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 <h3><liferay-ui:message key="password-policy" /></h3>
 
 <aui:fieldset>
-	<aui:input inlineLabel="<%= true %>" label="use-ldap-password-policy" name='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' type="checkbox" value="<%= ldapPasswordPolicyEnabled %>" />
+	<aui:input inlineLabel="left" label="use-ldap-password-policy" name='<%= "settings(" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + ")" %>' type="checkbox" value="<%= ldapPasswordPolicyEnabled %>" />
 </aui:fieldset>
 
 <script type="text/javascript">

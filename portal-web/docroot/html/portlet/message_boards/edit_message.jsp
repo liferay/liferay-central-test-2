@@ -261,11 +261,11 @@ if ((message != null) && message.isAttachments()) {
 			}
 			%>
 
-			<aui:input helpMessage="message-boards-message-question-help" inlineLabel="<%= true %>" label="mark-as-a-question" name="question" type="checkbox" value="<%= question %>" />
+			<aui:input helpMessage="message-boards-message-question-help" inlineLabel="left" label="mark-as-a-question" name="question" type="checkbox" value="<%= question %>" />
 		</c:if>
 
 		<c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
-			<aui:input helpMessage="message-boards-message-anonymous-help" inlineLabel="<%= true %>" name="anonymous" type="checkbox" />
+			<aui:input helpMessage="message-boards-message-anonymous-help" inlineLabel="left" name="anonymous" type="checkbox" />
 		</c:if>
 
 		<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">

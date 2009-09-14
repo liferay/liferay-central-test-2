@@ -46,13 +46,13 @@ String adminDefaultUserGroupNames = ParamUtil.getString(request, "settings(" + P
 >
 	<liferay-ui:section>
 		<aui:fieldset>
-			<aui:input inlineLabel="<%= true %>" label="terms-of-use-required" name='<%= "settings(" + PropsKeys.TERMS_OF_USE_REQUIRED + ")" %>' type="checkbox" value="<%= termsOfUseRequired %>" />
+			<aui:input inlineLabel="left" label="terms-of-use-required" name='<%= "settings(" + PropsKeys.TERMS_OF_USE_REQUIRED + ")" %>' type="checkbox" value="<%= termsOfUseRequired %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="autogenerate-user-screen-names" name='<%= "settings(" + PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE + ")" %>' type="checkbox" value="<%= usersScreenNameAlwaysAutogenerate %>" />
+			<aui:input inlineLabel="left" label="autogenerate-user-screen-names" name='<%= "settings(" + PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE + ")" %>' type="checkbox" value="<%= usersScreenNameAlwaysAutogenerate %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="enable-birthday" name='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY + ")" %>' type="checkbox" value="<%= fieldEnableBirthday %>" />
+			<aui:input inlineLabel="left" label="enable-birthday" name='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY + ")" %>' type="checkbox" value="<%= fieldEnableBirthday %>" />
 
-			<aui:input inlineLabel="<%= true %>" label="enable-gender" name='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE + ")" %>' type="checkbox" value="<%= fieldEnableMale %>" />
+			<aui:input inlineLabel="left" label="enable-gender" name='<%= "settings(" + PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE + ")" %>' type="checkbox" value="<%= fieldEnableMale %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>

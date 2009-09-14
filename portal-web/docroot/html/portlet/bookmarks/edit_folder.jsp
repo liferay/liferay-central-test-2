@@ -114,7 +114,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 
-				<aui:input inlineLabel="<%= true %>" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
+				<aui:input inlineLabel="left" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
 			</aui:field-wrapper>
 		</c:if>
 

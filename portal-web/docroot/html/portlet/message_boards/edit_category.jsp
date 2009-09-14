@@ -136,7 +136,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 
 				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
-					<aui:input inlineLabel="<%= true %>" label="merge-with-parent-category" name="mergeWithParentCategory" type="checkbox" />
+					<aui:input inlineLabel="left" label="merge-with-parent-category" name="mergeWithParentCategory" type="checkbox" />
 				</div>
 			</aui:field-wrapper>
 		</c:if>
@@ -169,7 +169,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 				<aui:model-context bean="<%= mailingList %>" model="<%= MBMailingList.class %>" />
 
-				<aui:input inlineLabel="<%= true %>" label="active" name="mailingListActive" type="checkbox" value="<%= mailingListActive %>" />
+				<aui:input inlineLabel="left" label="active" name="mailingListActive" type="checkbox" value="<%= mailingListActive %>" />
 
 				<div id="<portlet:namespace />mailingListSettings">
 					<aui:input name="emailAddress" />
@@ -184,15 +184,15 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 						%>
 
 						<aui:field-wrapper label="protocol">
-							<aui:input checked='<%= protocol.startsWith("pop3") %>' inlineLabel="<%= true %>" label="pop" name="inProtocol" type="radio" value="pop3" />
-							<aui:input checked='<%= protocol.startsWith("imap") %>' inlineLabel="<%= true %>" label="imap" name="inProtocol" type="radio" value="imap" />
+							<aui:input checked='<%= protocol.startsWith("pop3") %>' inlineLabel="left" label="pop" name="inProtocol" type="radio" value="pop3" />
+							<aui:input checked='<%= protocol.startsWith("imap") %>' inlineLabel="left" label="imap" name="inProtocol" type="radio" value="imap" />
 						</aui:field-wrapper>
 
 						<aui:input label="server-name" name="inServerName" />
 
 						<aui:input label="server-port" name="inServerPort" value="110" />
 
-						<aui:input inlineLabel="<%= true %>" label="use-a-secure-network-connection" name="inUseSSL" />
+						<aui:input inlineLabel="left" label="use-a-secure-network-connection" name="inUseSSL" />
 
 						<aui:input label="user-name" name="inUserName" />
 
@@ -206,14 +206,14 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 						<aui:input label="email-address" name="outEmailAddress" />
 
-						<aui:input inlineLabel="<%= true %>" label="use-custom-outgoing-server" name="outCustom" />
+						<aui:input inlineLabel="left" label="use-custom-outgoing-server" name="outCustom" />
 
 						<div id="<portlet:namespace />outCustomSettings">
 							<aui:input label="server-name" name="outServerName" />
 
 							<aui:input label="server-port" name="outServerPort" value="25" />
 
-							<aui:input inlineLabel="<%= true %>" label="use-a-secure-network-connection" name="outUseSSL" />
+							<aui:input inlineLabel="left" label="use-a-secure-network-connection" name="outUseSSL" />
 
 							<aui:input label="user-name" name="outUserName" />
 

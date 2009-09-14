@@ -83,7 +83,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 						choice = choice.toEscapedModel();
 					%>
 
-						<aui:input inlineLabel="<%= true %>" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>' name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
+						<aui:input inlineLabel="left" label='<%= "<strong>" + choice.getName() + ".</strong> " + choice.getDescription(locale) %>' name="choiceId" type="radio" value="<%= choice.getChoiceId() %>" />
 
 					<%
 					}

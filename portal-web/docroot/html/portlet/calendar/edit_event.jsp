@@ -363,9 +363,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			</aui:column>
 		</aui:field-wrapper>
 
-		<aui:input inlineLabel="<%= true %>" label="all-day-event" name="allDay" type="checkbox" value="<%= event == null ? false : event.isAllDay() %>" />
+		<aui:input inlineLabel="left" label="all-day-event" name="allDay" type="checkbox" value="<%= event == null ? false : event.isAllDay() %>" />
 
-		<aui:input inlineLabel="<%= true %>" name="timeZoneSensitive" type="checkbox" value="<%=  event == null ? true : event.isTimeZoneSensitive() %>" />
+		<aui:input inlineLabel="left" name="timeZoneSensitive" type="checkbox" value="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
 
 		<aui:input name="title" value='<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>' />
 
@@ -432,27 +432,27 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 					</div>
 
 					<div id="<portlet:namespace />weeklyTable" style="display: none;">
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="recur-every" maxlength="2" name="weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="recur-every" maxlength="2" name="weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" />
 						<span class="after-field-text"><liferay-ui:message key="weeks-on" /></span>
 
 						<aui:layout cssClass="weekdays">
 							<aui:column>
-								<aui:input checked="<%= weeklyPosSu %>" inlineLabel="<%= true %>" label="<%= days[0] %>" name="weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox" />
-								<aui:input checked="<%= weeklyPosTh %>" inlineLabel="<%= true %>" label="<%= days[4] %>" name="weeklyDayPos<%= Calendar.THURSDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosSu %>" inlineLabel="right" label="<%= days[0] %>" name="weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosTh %>" inlineLabel="right" label="<%= days[4] %>" name="weeklyDayPos<%= Calendar.THURSDAY %>" type="checkbox" />
 							</aui:column>
 
 							<aui:column>
-								<aui:input checked="<%= weeklyPosMo %>" inlineLabel="<%= true %>" label="<%= days[1] %>" name="weeklyDayPos<%= Calendar.MONDAY %>" type="checkbox" />
-								<aui:input checked="<%= weeklyPosFr %>" inlineLabel="<%= true %>" label="<%= days[5] %>" name="weeklyDayPos<%= Calendar.FRIDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosMo %>" inlineLabel="right" label="<%= days[1] %>" name="weeklyDayPos<%= Calendar.MONDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosFr %>" inlineLabel="right" label="<%= days[5] %>" name="weeklyDayPos<%= Calendar.FRIDAY %>" type="checkbox" />
 							</aui:column>
 
 							<aui:column>
-								<aui:input checked="<%= weeklyPosTu %>"inlineLabel="<%= true %>" label="<%= days[2] %>"  name="weeklyDayPos<%= Calendar.TUESDAY %>" type="checkbox" />
-								<aui:input checked="<%= weeklyPosSa %>" inlineLabel="<%= true %>" label="<%= days[6] %>" name="weeklyDayPos<%= Calendar.SATURDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosTu %>"inlineLabel="right" label="<%= days[2] %>" name="weeklyDayPos<%= Calendar.TUESDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosSa %>" inlineLabel="right" label="<%= days[6] %>" name="weeklyDayPos<%= Calendar.SATURDAY %>" type="checkbox" />
 							</aui:column>
 
 							<aui:column>
-								<aui:input checked="<%= weeklyPosWe %>" inlineLabel="<%= true %>" label="<%= days[3] %>" name="weeklyDayPos<%= Calendar.WEDNESDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosWe %>" inlineLabel="right" label="<%= days[3] %>" name="weeklyDayPos<%= Calendar.WEDNESDAY %>" type="checkbox" />
 							</aui:column>
 						</aui:layout>
 					</div>
@@ -460,15 +460,15 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 					<div id="<portlet:namespace />monthlyTable" style="display: none;">
 						<aui:input checked="<%= (monthlyType == 0) %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
 
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
 
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
 
 						<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
 
 						<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
 
-						<aui:select cssClass="input-container"  inlineField="<%= true %>" inlineLabel="<%= true %>" label="" name="monthlyPos">
+						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="monthlyPos">
 							<aui:option label="first" selected="<%= monthlyPos == 1 %>" value="1" />
 							<aui:option label="second" selected="<%= monthlyPos == 2 %>" value="2" />
 							<aui:option label="third" selected="<%= monthlyPos == 3 %>" value="3" />
@@ -486,7 +486,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 							<aui:option label="<%= days[6] %>" selected="<%= monthlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
 						</aui:select>
 
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" />
 
 						<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
 					</div>
@@ -494,7 +494,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 					<div id="<portlet:namespace />yearlyTable" style="display: none;">
 						<aui:input checked="<%= yearlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="every" name="yearlyType" type="radio" value="0" />
 
-						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="<%= true %>" label="" name="yearlyMonth0">
+						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="" name="yearlyMonth0">
 
 						<%
 						for (int i = 0; i < 12; i++) {
@@ -510,7 +510,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 						<aui:input inlineField="<%= true %>" label="" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
 
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
 
 						<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
 
@@ -536,7 +536,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 							<aui:option label="<%= days[6] %>" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
 						</aui:select>
 
-						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="<%= true %>" label="of" name="yearlyMonth1">
+						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="of" name="yearlyMonth1">
 
 							<%
 							for (int i = 0; i < 12; i++) {
@@ -550,7 +550,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 						</aui:select>
 
-						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
+						<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
 
 						<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
 					</div>
@@ -569,7 +569,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 		<liferay-ui:panel id="reminders" title='<%= LanguageUtil.get(pageContext, "reminders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
 			<aui:fieldset>
-				<aui:select inlineField="<%= true %>" inlineLabel="<%= true %>" label="remind-me" name="firstReminder">
+				<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
 
 					<%
 					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
@@ -583,7 +583,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 				</aui:select>
 
-				<aui:select inlineField="<%= true %>" inlineLabel="<%= true %>" label="before-and-again" name="secondReminder">
+				<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder">
 
 					<%
 					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {

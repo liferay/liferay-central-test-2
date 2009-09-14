@@ -126,7 +126,7 @@ boolean quote = false;
 	<br />
 
 	<aui:fieldset>
-		<aui:input inlineLabel="<%= true %>" label="add-explanation-post-to-the-source-thread" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
+		<aui:input inlineLabel="left" label="add-explanation-post-to-the-source-thread" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
 		<div id="<portlet:namespace/>explanationPost" style="display: none;">
 

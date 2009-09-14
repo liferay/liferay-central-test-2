@@ -115,7 +115,7 @@ boolean quote = false;
 			<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 		</aui:field-wrapper>
 
-		<aui:input inlineLabel="<%= true %>" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
+		<aui:input inlineLabel="left" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
 		<div id="<portlet:namespace/>explanationPost" style="display: none;">
 			<aui:input model="<%= MBMessage.class %>" name="subject" value="" />
