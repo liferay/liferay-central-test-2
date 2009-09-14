@@ -90,16 +90,16 @@ public class MBCategoryServiceUtil {
 		return getService().getCategoriesCount(groupId, parentCategoryId);
 	}
 
-	public static void subscribeCategory(long categoryId)
+	public static void subscribeCategory(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().subscribeCategory(categoryId);
+		getService().subscribeCategory(groupId, categoryId);
 	}
 
-	public static void unsubscribeCategory(long categoryId)
+	public static void unsubscribeCategory(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().unsubscribeCategory(categoryId);
+		getService().unsubscribeCategory(groupId, categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(

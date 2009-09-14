@@ -130,7 +130,7 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, java.lang.String userName, long categoryId,
+		long userId, java.lang.String userName, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
@@ -138,27 +138,28 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addMessage(userId, userName, categoryId, subject, body,
-			files, anonymous, priority, serviceContext);
+				   .addMessage(userId, userName, groupId, categoryId, subject,
+			body, files, anonymous, priority, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, java.lang.String userName, long categoryId, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
+		long userId, java.lang.String userName, long groupId, long categoryId,
+		long threadId, long parentMessageId, java.lang.String subject,
+		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addMessage(userId, userName, categoryId, threadId,
+				   .addMessage(userId, userName, groupId, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String uuid, long userId, java.lang.String userName,
-		long categoryId, long threadId, long parentMessageId,
+		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority,
@@ -166,9 +167,9 @@ public class MBMessageLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addMessage(uuid, userId, userName, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority,
-			serviceContext);
+				   .addMessage(uuid, userId, userName, groupId, categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, serviceContext);
 	}
 
 	public static void addMessageResources(long messageId,
@@ -237,21 +238,22 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int start, int end)
+		long groupId, long categoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoryMessages(categoryId, start, end);
+		return getService().getCategoryMessages(groupId, categoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int start, int end,
+		long groupId, long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoryMessages(categoryId, start, end, obc);
+		return getService()
+				   .getCategoryMessages(groupId, categoryId, start, end, obc);
 	}
 
-	public static int getCategoryMessagesCount(long categoryId)
+	public static int getCategoryMessagesCount(long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoryMessagesCount(categoryId);
+		return getService().getCategoryMessagesCount(groupId, categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(

@@ -49,6 +49,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -362,12 +363,21 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(String mx, long categoryId, long messageId) {
+	public static String getMailId(
+		String mx, long groupId, long categoryId, long messageId) {
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(StringPool.LESS_THAN);
 		sb.append(POP_PORTLET_PREFIX);
-		sb.append(categoryId);
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			sb.append(groupId);
+		}
+		else {
+			sb.append(categoryId);
+		}
+
 		sb.append(StringPool.PERIOD);
 		sb.append(messageId);
 		sb.append(StringPool.AT);

@@ -121,15 +121,15 @@ public class MBThreadLocalServiceUtil {
 		getService().deleteThread(thread);
 	}
 
-	public static void deleteThreads(long categoryId)
+	public static void deleteThreads(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteThreads(categoryId);
+		getService().deleteThreads(groupId, categoryId);
 	}
 
-	public static int getCategoryThreadsCount(long categoryId)
+	public static int getCategoryThreadsCount(long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoryThreadsCount(categoryId);
+		return getService().getCategoryThreadsCount(groupId, categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
@@ -194,21 +194,21 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
-		long categoryId, int start, int end)
+		long groupId, long categoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreads(categoryId, start, end);
+		return getService().getThreads(groupId, categoryId, start, end);
 	}
 
-	public static int getThreadsCount(long categoryId)
+	public static int getThreadsCount(long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreadsCount(categoryId);
+		return getService().getThreadsCount(groupId, categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(
-		long categoryId, long threadId)
+		long groupId, long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().moveThread(categoryId, threadId);
+		return getService().moveThread(groupId, categoryId, threadId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(

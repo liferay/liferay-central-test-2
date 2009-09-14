@@ -162,6 +162,7 @@ public class MailingListMessageListener implements MessageListener {
 		Company company = CompanyLocalServiceUtil.getCompany(
 			mailingListRequest.getCompanyId());
 
+		long groupId = mailingListRequest.getGroupId();
 		long categoryId = mailingListRequest.getCategoryId();
 
 		if (_log.isDebugEnabled()) {
@@ -219,12 +220,12 @@ public class MailingListMessageListener implements MessageListener {
 
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
-				categoryId, subject, collector.getBody(), collector.getFiles(),
-				anonymous, 0.0, serviceContext);
+				groupId, categoryId, subject, collector.getBody(),
+				collector.getFiles(), anonymous, 0.0, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
-				categoryId, parentMessage.getThreadId(),
+				groupId, categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
 				collector.getFiles(), anonymous, 0.0, serviceContext);
 		}

@@ -165,11 +165,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CategoryId" return-type="MBMailingList" unique="true">
-			<finder-column name="categoryId" />
-		</finder>
 		<finder name="Active" return-type="Collection">
 			<finder-column name="active" />
+		</finder>
+		<finder name="G_C" return-type="MBMailingList" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="categoryId" />
 		</finder>
 
 		<!-- References -->
@@ -222,24 +223,26 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="CategoryId" return-type="Collection">
-			<finder-column name="categoryId" />
-		</finder>
 		<finder name="ThreadId" return-type="Collection">
 			<finder-column name="threadId" />
 		</finder>
 		<finder name="ThreadReplies" return-type="Collection" where="parentMessageId != 0" db-index="false">
 			<finder-column name="threadId" />
 		</finder>
-		<finder name="G_U" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_T" return-type="Collection">
+		<finder name="G_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="categoryId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+		</finder>
+		<finder name="G_C_T" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="categoryId" />
 			<finder-column name="threadId" />
 		</finder>
@@ -389,10 +392,12 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="CategoryId" return-type="Collection">
+		<finder name="G_C" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="categoryId" />
 		</finder>
-		<finder name="C_L" return-type="Collection">
+		<finder name="G_C_L" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="categoryId" />
 			<finder-column name="lastPostDate" />
 		</finder>

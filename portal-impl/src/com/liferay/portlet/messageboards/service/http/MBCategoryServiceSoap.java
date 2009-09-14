@@ -167,10 +167,10 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void subscribeCategory(long categoryId)
+	public static void subscribeCategory(long groupId, long categoryId)
 		throws RemoteException {
 		try {
-			MBCategoryServiceUtil.subscribeCategory(categoryId);
+			MBCategoryServiceUtil.subscribeCategory(groupId, categoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -179,10 +179,10 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void unsubscribeCategory(long categoryId)
+	public static void unsubscribeCategory(long groupId, long categoryId)
 		throws RemoteException {
 		try {
-			MBCategoryServiceUtil.unsubscribeCategory(categoryId);
+			MBCategoryServiceUtil.unsubscribeCategory(groupId, categoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

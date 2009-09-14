@@ -301,16 +301,18 @@ public class MBCategoryLocalServiceUtil {
 			serviceContext);
 	}
 
-	public static void subscribeCategory(long userId, long categoryId)
+	public static void subscribeCategory(long userId, long groupId,
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().subscribeCategory(userId, categoryId);
+		getService().subscribeCategory(userId, groupId, categoryId);
 	}
 
-	public static void unsubscribeCategory(long userId, long categoryId)
+	public static void unsubscribeCategory(long userId, long groupId,
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().unsubscribeCategory(userId, categoryId);
+		getService().unsubscribeCategory(userId, groupId, categoryId);
 	}
 
 	public static MBCategoryLocalService getService() {

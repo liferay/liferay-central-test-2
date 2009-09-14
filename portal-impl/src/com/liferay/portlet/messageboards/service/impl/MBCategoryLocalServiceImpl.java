@@ -137,10 +137,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Mailing list
 
 		mbMailingListLocalService.addMailingList(
-			null, userId, category.getCategoryId(), emailAddress, inProtocol,
-			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
-			inReadInterval, outEmailAddress, outCustom, outServerName,
-			outServerPort, outUseSSL, outUserName, outPassword,
+			null, userId, category.getGroupId(), category.getCategoryId(),
+			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
+			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive);
 
 		// Expando
@@ -242,13 +242,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Threads
 
-		mbThreadLocalService.deleteThreads(category.getCategoryId());
+		mbThreadLocalService.deleteThreads(
+			category.getGroupId(), category.getCategoryId());
 
 		// Mailing list
 
 		try {
 			mbMailingListLocalService.deleteCategoryMailingList(
-				category.getCategoryId());
+				category.getGroupId(), category.getCategoryId());
 		}
 		catch (NoSuchMailingListException nsmle) {
 		}
@@ -462,18 +463,14 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Merge categories
 
-		if (mergeWithParentCategory &&
-			(categoryId != parentCategoryId) &&
-			(parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
-
+		if (mergeWithParentCategory && (categoryId != parentCategoryId)) {
 			mergeCategories(category, parentCategoryId);
 		}
 
 		// Mailing list
 
-		MBMailingList mailingList = mbMailingListPersistence.fetchByCategoryId(
-			category.getCategoryId());
+		MBMailingList mailingList = mbMailingListPersistence.fetchByG_C(
+			category.getGroupId(), category.getCategoryId());
 
 		if (mailingList != null) {
 			mbMailingListLocalService.updateMailingList(
@@ -485,11 +482,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 		else {
 			mbMailingListLocalService.addMailingList(
-				null, category.getUserId(), category.getCategoryId(),
-				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-				inUserName, inPassword, inReadInterval, outEmailAddress,
-				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive);
+				null, category.getUserId(), category.getGroupId(),
+				category.getCategoryId(), emailAddress, inProtocol,
+				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+				inReadInterval, outEmailAddress, outCustom, outServerName,
+				outServerPort, outUseSSL, outUserName, outPassword,
+				mailingListActive);
 		}
 
 		// Expando
@@ -568,8 +566,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			mergeCategories(category, toCategoryId);
 		}
 
-		List<MBThread> threads = mbThreadPersistence.findByCategoryId(
-			fromCategory.getCategoryId());
+		List<MBThread> threads = mbThreadPersistence.findByG_C(
+			fromCategory.getGroupId(), fromCategory.getCategoryId());
 
 		for (MBThread thread : threads) {
 
@@ -599,15 +597,23 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		deleteCategory(fromCategory);
 	}
 
-	public void subscribeCategory(long userId, long categoryId)
+	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws PortalException, SystemException {
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
+		}
 
 		subscriptionLocalService.addSubscription(
-			userId, MBCategory.class.getName(), categoryId);
+			userId, MBCategory.class.getName(), groupId);
 	}
 
-	public void unsubscribeCategory(long userId, long categoryId)
+	public void unsubscribeCategory(long userId, long groupId, long categoryId)
 		throws PortalException, SystemException {
+
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			categoryId = groupId;
+		}
 
 		subscriptionLocalService.deleteSubscription(
 			userId, MBCategory.class.getName(), categoryId);
@@ -635,9 +641,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		for (MBCategory category : categories) {
 			long categoryId = category.getCategoryId();
+			long groupId = category.getGroupId();
 
-			int messageCount = mbMessagePersistence.countByCategoryId(
-				categoryId);
+			int messageCount = mbMessagePersistence.countByG_C(
+				groupId, categoryId);
 
 			int messagePages = messageCount / Indexer.DEFAULT_INTERVAL;
 
@@ -645,17 +652,17 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				int messageStart = (i * Indexer.DEFAULT_INTERVAL);
 				int messageEnd = messageStart + Indexer.DEFAULT_INTERVAL;
 
-				reIndexMessages(categoryId, messageStart, messageEnd);
+				reIndexMessages(groupId, categoryId, messageStart, messageEnd);
 			}
 		}
 	}
 
 	protected void reIndexMessages(
-			long categoryId, int messageStart, int messageEnd)
+			long groupId, long categoryId, int messageStart, int messageEnd)
 		throws SystemException {
 
-		List<MBMessage> messages = mbMessagePersistence.findByCategoryId(
-			categoryId, messageStart, messageEnd);
+		List<MBMessage> messages = mbMessagePersistence.findByG_C(
+			groupId, categoryId, messageStart, messageEnd);
 
 		for (MBMessage message : messages) {
 			mbMessageLocalService.reIndex(message);

@@ -29,6 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -119,6 +121,10 @@ public class MoveThreadAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
@@ -137,9 +143,9 @@ public class MoveThreadAction extends PortletAction {
 				MBMessage.class.getName(), actionRequest);
 
 			MBMessageServiceUtil.addMessage(
-				categoryId, threadId, thread.getRootMessageId(), subject, body,
-				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, serviceContext);
+				groupId, categoryId, threadId, thread.getRootMessageId(),
+				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
+				false, MBThreadImpl.PRIORITY_NOT_GIVEN, serviceContext);
 		}
 
 		PortletURL portletURL =

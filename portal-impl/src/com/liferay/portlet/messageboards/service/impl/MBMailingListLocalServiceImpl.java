@@ -41,7 +41,6 @@ import com.liferay.portlet.messageboards.MailingListOutEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListOutServerNameException;
 import com.liferay.portlet.messageboards.MailingListOutUserNameException;
 import com.liferay.portlet.messageboards.messaging.MailingListRequest;
-import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.service.base.MBMailingListLocalServiceBaseImpl;
 
@@ -59,19 +58,18 @@ public class MBMailingListLocalServiceImpl
 	extends MBMailingListLocalServiceBaseImpl {
 
 	public MBMailingList addMailingList(
-			String uuid, long userId, long categoryId, String emailAddress,
-			String inProtocol, String inServerName, int inServerPort,
-			boolean inUseSSL, String inUserName, String inPassword,
-			int inReadInterval, String outEmailAddress, boolean outCustom,
-			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName, String outPassword, boolean active)
+			String uuid, long userId, long groupId, long categoryId,
+			String emailAddress, String inProtocol, String inServerName,
+			int inServerPort, boolean inUseSSL, String inUserName,
+			String inPassword, int inReadInterval, String outEmailAddress,
+			boolean outCustom, String outServerName, int outServerPort,
+			boolean outUseSSL, String outUserName, String outPassword,
+			boolean active)
 		throws PortalException, SystemException {
 
 		// Mailing list
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
-			categoryId);
 		Date now = new Date();
 
 		validate(
@@ -84,7 +82,7 @@ public class MBMailingListLocalServiceImpl
 			mailingListId);
 
 		mailingList.setUuid(uuid);
-		mailingList.setGroupId(category.getGroupId());
+		mailingList.setGroupId(groupId);
 		mailingList.setCompanyId(user.getCompanyId());
 		mailingList.setUserId(user.getUserId());
 		mailingList.setUserName(user.getFullName());
@@ -119,11 +117,11 @@ public class MBMailingListLocalServiceImpl
 		return mailingList;
 	}
 
-	public void deleteCategoryMailingList(long categoryId)
+	public void deleteCategoryMailingList(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		MBMailingList mailingList = mbMailingListPersistence.findByCategoryId(
-			categoryId);
+		MBMailingList mailingList = mbMailingListPersistence.findByG_C(
+			groupId, categoryId);
 
 		deleteMailingList(mailingList);
 	}
@@ -145,10 +143,10 @@ public class MBMailingListLocalServiceImpl
 		mbMailingListPersistence.remove(mailingList);
 	}
 
-	public MBMailingList getCategoryMailingList(long categoryId)
+	public MBMailingList getCategoryMailingList(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		return mbMailingListPersistence.findByCategoryId(categoryId);
+		return mbMailingListPersistence.findByG_C(groupId, categoryId);
 	}
 
 	public MBMailingList updateMailingList(
@@ -235,6 +233,7 @@ public class MBMailingListLocalServiceImpl
 
 		mailingListRequest.setCompanyId(mailingList.getCompanyId());
 		mailingListRequest.setUserId(mailingList.getUserId());
+		mailingListRequest.setGroupId(mailingList.getGroupId());
 		mailingListRequest.setCategoryId(mailingList.getCategoryId());
 		mailingListRequest.setInProtocol(mailingList.getInProtocol());
 		mailingListRequest.setInServerName(mailingList.getInServerName());

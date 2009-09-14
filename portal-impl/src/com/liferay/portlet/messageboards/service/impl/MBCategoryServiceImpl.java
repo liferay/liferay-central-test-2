@@ -66,8 +66,10 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
+
 		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.DELETE);
+			getPermissionChecker(), category, ActionKeys.DELETE);
 
 		mbCategoryLocalService.deleteCategory(categoryId);
 	}
@@ -75,10 +77,12 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 	public MBCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.VIEW);
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
 
-		return mbCategoryLocalService.getCategory(categoryId);
+		MBCategoryPermission.check(
+			getPermissionChecker(), category, ActionKeys.VIEW);
+
+		return category;
 	}
 
 	public List<MBCategory> getCategories(
@@ -112,22 +116,24 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			groupId, parentCategoryId);
 	}
 
-	public void subscribeCategory(long categoryId)
+	public void subscribeCategory(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
+			getPermissionChecker(), groupId, categoryId, ActionKeys.SUBSCRIBE);
 
-		mbCategoryLocalService.subscribeCategory(getUserId(), categoryId);
+		mbCategoryLocalService.subscribeCategory(
+			getUserId(), groupId, categoryId);
 	}
 
-	public void unsubscribeCategory(long categoryId)
+	public void unsubscribeCategory(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
+			getPermissionChecker(), groupId, categoryId, ActionKeys.SUBSCRIBE);
 
-		mbCategoryLocalService.unsubscribeCategory(getUserId(), categoryId);
+		mbCategoryLocalService.unsubscribeCategory(
+			getUserId(), groupId, categoryId);
 	}
 
 	public MBCategory updateCategory(
@@ -141,8 +147,10 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
+
 		MBCategoryPermission.check(
-			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
+			getPermissionChecker(), category, ActionKeys.UPDATE);
 
 		return mbCategoryLocalService.updateCategory(
 			categoryId, parentCategoryId, name, description, emailAddress,

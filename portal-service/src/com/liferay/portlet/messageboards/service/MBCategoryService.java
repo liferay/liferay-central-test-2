@@ -89,11 +89,11 @@ public interface MBCategoryService {
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
-	public void subscribeCategory(long categoryId)
+	public void subscribeCategory(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unsubscribeCategory(long categoryId)
+	public void unsubscribeCategory(long groupId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
