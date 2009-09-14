@@ -93,53 +93,52 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 	}
 </script>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs2) %>" />
-<input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="assignmentsRedirect" type="hidden" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 
-<c:choose>
-	<c:when test="<%= selUser == null %>">
-		<div>
-			<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
-		</div>
+	<c:choose>
+		<c:when test="<%= selUser == null %>">
+			<div>
+				<liferay-ui:message key="edit-assignments-for-community" />: <%= group.getName() %>
+			</div>
 
-		<br />
+			<br />
 
-		<liferay-ui:tabs
-			names="users,organizations,user-groups"
-			param="tabs1"
-			url="<%= portletURL.toString() %>"
-			backURL="<%= redirect %>"
-		/>
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="roles"
-			backURL="<%= redirect %>"
-		/>
-	</c:otherwise>
-</c:choose>
+			<liferay-ui:tabs
+				names="users,organizations,user-groups"
+				param="tabs1"
+				url="<%= portletURL.toString() %>"
+				backURL="<%= redirect %>"
+			/>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:tabs
+				names="roles"
+				backURL="<%= redirect %>"
+			/>
+		</c:otherwise>
+	</c:choose>
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("users") %>'>
-		<c:choose>
-			<c:when test="<%= selUser == null %>">
-				<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users.jsp" />
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users_roles.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test='<%= tabs1.equals("organizations") %>'>
-		<liferay-util:include page="/html/portlet/communities/edit_community_assignments_organizations.jsp" />
-	</c:when>
-	<c:when test='<%= tabs1.equals("user-groups") %>'>
-		<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups.jsp" />
-	</c:when>
-</c:choose>
-
-</form>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("users") %>'>
+			<c:choose>
+				<c:when test="<%= selUser == null %>">
+					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users.jsp" />
+				</c:when>
+				<c:otherwise>
+					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users_roles.jsp" />
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test='<%= tabs1.equals("organizations") %>'>
+			<liferay-util:include page="/html/portlet/communities/edit_community_assignments_organizations.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups.jsp" />
+		</c:when>
+	</c:choose>
+</aui:form>

@@ -103,24 +103,23 @@ request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 	}
 </script>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+	<aui:input name="roleId" type="hidden" value="<%= roleId %>" />
 
-<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
+	<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
-<br /><br />
+	<br /><br />
 
-<c:choose>
-	<c:when test="<%= role == null %>">
-		<liferay-util:include page="/html/portlet/communities/edit_user_roles_role.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portlet/communities/edit_user_roles_users.jsp" />
-	</c:otherwise>
-</c:choose>
-
-</form>
+	<c:choose>
+		<c:when test="<%= role == null %>">
+			<liferay-util:include page="/html/portlet/communities/edit_user_roles_role.jsp" />
+		</c:when>
+		<c:otherwise>
+			<liferay-util:include page="/html/portlet/communities/edit_user_roles_users.jsp" />
+		</c:otherwise>
+	</c:choose>
+</aui:form>

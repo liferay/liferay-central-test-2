@@ -38,9 +38,9 @@ User selUser = (User)request.getAttribute("edit_community_assignments.jsp-selUse
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignments.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
-<input name="<portlet:namespace />addRoleIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeRoleIds" type="hidden" value="" />
+<aui:input name="p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
+<aui:input name="addRoleIds" type="hidden" />
+<aui:input name="removeRoleIds" type="hidden" />
 
 <liferay-ui:message key="edit-community-roles-for-user" />: <%= selUser.getFullName() %>
 
@@ -84,7 +84,11 @@ searchContainer.setRowChecker(new UserGroupRoleRoleChecker(renderResponse, selUs
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupRole('" + updateRoleAssignmentsURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
 	<br /><br />
 

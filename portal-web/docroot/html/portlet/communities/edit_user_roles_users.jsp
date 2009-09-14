@@ -38,8 +38,8 @@ Organization organization = (Organization)request.getAttribute("edit_user_roles.
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
+<aui:input name="addUserIds" type="hidden" />
+<aui:input name="removeUserIds" type="hidden" />
 
 <div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 	<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
@@ -109,7 +109,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateUserGroupRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupRoleUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
 	<br /><br />
 

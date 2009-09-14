@@ -36,61 +36,44 @@ long groupId = BeanParamUtil.getLong(group, request, "groupId");
 MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(WebKeys.MEMBERSHIP_REQUEST);
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/post_membership_request" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
+<portlet:actionURL var="postMembershipRequestURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/communities/post_membership_request" />
+</portlet:actionURL>
 
-<liferay-ui:tabs
-	names="community"
-	backURL="<%= redirect %>"
-/>
+<aui:form action="<%= postMembershipRequestURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
-<liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
+	<liferay-ui:tabs
+		names="community"
+		backURL="<%= redirect %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="community" />
-	</td>
-	<td>
-		<%= group.getName() %>
-	</td>
-</tr>
+	<liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
 
-<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
-	<tr>
-		<td>
-			<liferay-ui:message key="description" />
-		</td>
-		<td>
-			<%= group.getDescription() %>
-		</td>
-	</tr>
-</c:if>
+	<aui:model-context bean="<%= membershipRequest %>" model="<%= MembershipRequest.class %>" />
 
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="comments" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= MembershipRequest.class %>" bean="<%= membershipRequest %>" field="comments" />
-	</td>
-</tr>
-</table>
+	<aui:fieldset>
+		<aui:field-wrapper label="community">
+			<%= group.getName() %>
+		</aui:field-wrapper>
 
-<br />
+		<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
+			<aui:field-wrapper label="description">
+				<%= group.getDescription() %>
+			</aui:field-wrapper>
+		</c:if>
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+		<aui:input name="comments" />
+	</aui:fieldset>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">

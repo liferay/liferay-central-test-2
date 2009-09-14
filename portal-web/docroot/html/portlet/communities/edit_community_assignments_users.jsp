@@ -34,8 +34,8 @@ Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group"
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignments.jsp-portletURL");
 %>
 
-<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
-<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
+<aui:input name="addUserIds" type="hidden" />
+<aui:input name="removeUserIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
@@ -122,7 +122,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 
 	<div class="separator"><!-- --></div>
 
-	<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateGroupUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
+
+	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
 	<br /><br />
 

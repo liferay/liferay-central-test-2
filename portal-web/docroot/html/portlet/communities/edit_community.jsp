@@ -42,189 +42,137 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveGroup(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= HtmlUtil.escapeAttribute(friendlyURL) %>" />
+<portlet:actionURL var="editCommunityURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/communities/edit_community" />
+</portlet:actionURL>
 
-<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
-	<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
-		<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
-	</liferay-util:include>
-</c:if>
+<aui:form action="<%= editCommunityURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveGroup(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="friendlyURL" type="hidden" value="<%= friendlyURL %>" />
 
-<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
-<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
+	<c:if test="<%= !portletName.equals(PortletKeys.ADMIN_SERVER) %>">
+		<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
+		</liferay-util:include>
+	</c:if>
 
-<table class="lfr-table">
+	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
+	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
 
-<c:if test="<%= group != null %>">
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="group-id" />
-		</td>
-		<td>
-			<%= groupId %>
-		</td>
-	</tr>
-</c:if>
+	<aui:model-context bean="<%= group %>" model="<%= Group.class %>" />
 
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="name" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />type">
-			<option <%= (type == GroupConstants.TYPE_COMMUNITY_OPEN) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>"><liferay-ui:message key="open" /></option>
-			<option <%= (type == GroupConstants.TYPE_COMMUNITY_RESTRICTED) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>"><liferay-ui:message key="restricted" /></option>
-			<option <%= (type == GroupConstants.TYPE_COMMUNITY_PRIVATE) ? "selected" : "" %> value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>"><liferay-ui:message key="private" /></option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="active" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="categories" />
-	</td>
-	<td>
-		<liferay-ui:asset-categories-selector
-			className="<%= Group.class.getName() %>"
-			classPK="<%= groupId %>"
-		/>
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="tags" />
-	</td>
-	<td>
-		<liferay-ui:asset-tags-selector
-			className="<%= Group.class.getName() %>"
-			classPK="<%= groupId %>"
-		/>
-	</td>
-</tr>
+	<aui:fieldset>
+		<c:if test="<%= group != null %>">
+			<aui:field-wrapper label="group-id">
+				<%= groupId %>
+			</aui:field-wrapper>
+		</c:if>
 
-<%
-List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
-%>
+		<aui:input name="name" />
+		<aui:input name="description" />
 
-<c:if test="<%= (group != null) || !layoutSetPrototypes.isEmpty() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="public-pages" />
-		</td>
-		<td colspan="2">
+		<aui:select name="type">
+			<aui:option label="open" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_OPEN) %>" value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>" />
+			<aui:option label="restricted" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>" value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>" />
+			<aui:option label="private" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_PRIVATE) %>" value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>" />
+		</aui:select>
+
+		<aui:input inlineLabel="left" name="active" value="<%= true %>" />
+
+		<aui:input name="categories" type="assetCategories" />
+
+		<aui:input name="tags" type="assetTags" />
+
+		<%
+		List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+		%>
+
+		<c:if test="<%= (group != null) || !layoutSetPrototypes.isEmpty() %>">
 			<c:choose>
 				<c:when test="<%= ((group == null) || (group.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-					<select id="<portlet:namespace />publicLayoutPrototypeId" name="<portlet:namespace />publicLayoutSetPrototypeId">
-						<option selected value="">(<liferay-ui:message key="none" />)</option>
+					<aui:select label="public-pages" name="publicLayoutSetPrototypeId">
+						<aui:option label="none" selected="<%= true %>" value="" />
 
 						<%
 						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
 						%>
 
-							<option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></option>
+							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 						<%
 						}
 						%>
 
-					</select>
-				</c:when>
-				<c:when test="<%= (group != null) && (group.getPublicLayoutsPageCount() > 0) %>">
-					<liferay-portlet:actionURL var="publicPagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
-						<portlet:param name="struts_action" value="/my_places/view" />
-						<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-						<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
-					</liferay-portlet:actionURL>
-
-					<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+					</aui:select>
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="this-community-does-not-have-any-public-pages" />
+					<aui:field-wrapper label="public-pages">
+						<c:choose>
+							<c:when test="<%= (group != null) && (group.getPublicLayoutsPageCount() > 0) %>">
+								<liferay-portlet:actionURL var="publicPagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+									<portlet:param name="struts_action" value="/my_places/view" />
+									<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+									<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
+								</liferay-portlet:actionURL>
+
+								<liferay-ui:icon image="view" message="open-public-pages" url="<%= publicPagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:message key="this-community-does-not-have-any-public-pages" />
+							</c:otherwise>
+						</c:choose>
+					</aui:field-wrapper>
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="private-pages" />
-		</td>
-		<td colspan="2">
+
 			<c:choose>
 				<c:when test="<%= ((group == null) || (group.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-					<select id="<portlet:namespace />privateLayoutPrototypeId" name="<portlet:namespace />privateLayoutSetPrototypeId">
-						<option selected value="">(<liferay-ui:message key="none" />)</option>
+					<aui:select label="private-pages" name="privateLayoutSetPrototypeId">
+						<aui:option label="none" selected="<%= true %>" value="" />
 
 						<%
 						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
 						%>
 
-							<option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></option>
+							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 						<%
 						}
 						%>
 
-					</select>
-				</c:when>
-				<c:when test="<%= (group != null) && (group.getPrivateLayoutsPageCount() > 0) %>">
-					<liferay-portlet:actionURL var="privatePagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
-						<portlet:param name="struts_action" value="/my_places/view" />
-						<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-						<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
-					</liferay-portlet:actionURL>
-
-					<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+					</aui:select>
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="this-community-does-not-have-any-private-pages" />
+					<aui:field-wrapper label="private-pages">
+						<c:choose>
+							<c:when test="<%= (group != null) && (group.getPrivateLayoutsPageCount() > 0) %>">
+								<liferay-portlet:actionURL var="privatePagesURL"  portletName="<%= PortletKeys.MY_PLACES %>">
+									<portlet:param name="struts_action" value="/my_places/view" />
+									<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+									<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
+								</liferay-portlet:actionURL>
+
+								<liferay-ui:icon image="view" message="open-private-pages" url="<%= privatePagesURL.toString() %>" method="get" target="_blank" label="<%= true %>" /> (<liferay-ui:message key="new-window" />)
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:message key="this-community-does-not-have-any-private-pages" />
+							</c:otherwise>
+						</c:choose>
+					</aui:field-wrapper>
 				</c:otherwise>
 			</c:choose>
-		</td>
-	</tr>
-</c:if>
+		</c:if>
+	</aui:fieldset>
 
-</table>
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
 
-<br />
-
-<input type="submit" value="<liferay-ui:message key="save" />" />
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+		<aui:button onClick="<%= redirect %>" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
