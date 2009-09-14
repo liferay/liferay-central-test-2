@@ -125,6 +125,7 @@ public class ShoppingItemLocalServiceImpl
 
 		ShoppingItem item = shoppingItemPersistence.create(itemId);
 
+		item.setGroupId(category.getGroupId());
 		item.setCompanyId(user.getCompanyId());
 		item.setUserId(user.getUserId());
 		item.setUserName(user.getFullName());
