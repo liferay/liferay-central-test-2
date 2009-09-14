@@ -23,15 +23,23 @@
 %>
 
 <c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPORT_ALL_EVENTS) %>">
-	<liferay-ui:tabs
-		names="export"
-	/>
+	<aui:fieldset>
+		<aui:legend label="export" />
 
-	<input class="lfr-input-text" name="exportFileName" type="text" value="liferay.ics">
+		<aui:input cssClass="lfr-input-text-container" label="" name="exportFileName" type="text" value="liferay.ics" />
+	</aui:fieldset>
 
-	<br /><br />
+	<portlet:actionURL var="exportEventsURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+		<portlet:param name="struts_action" value="/calendar/export_events" />
+	</portlet:actionURL>
 
-	<input type="button" value="<liferay-ui:message key="export" />" onClick="document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/calendar/export_events" /></portlet:actionURL>'; document.<portlet:namespace />fm.submit();" />
+	<%
+	String taglibOnClick = "document." + renderResponse.getNamespace() + "fm.action = '" + exportEventsURL + "'; document." + renderResponse.getNamespace() + "fm.submit();";
+	%>
+
+	<aui:button-row>
+		<aui:button onClick="<%= taglibOnClick %>" value="export" />
+	</aui:button-row>
 </c:if>
 
 <c:if test="<%= CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_EVENT) %>">
@@ -39,22 +47,21 @@
 		<br /><br />
 	</c:if>
 
-	<liferay-ui:tabs
-		names="import"
-	/>
+	<aui:fieldset>
+		<aui:legend label="import" />
+		<aui:input cssClass="lfr-input-text-container" name="file" type="file" />
+	</aui:fieldset>
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="file" />
-		</td>
-		<td>
-			<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
-		</td>
-	</tr>
-	</table>
+	<portlet:actionURL var="importEventsURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+		<portlet:param name="struts_action" value="/calendar/import_events" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+	</portlet:actionURL>
 
-	<br />
+	<%
+	String taglibOnClick = "document." + renderResponse.getNamespace() + "fm.encoding = 'multipart/form-data'; document." + renderResponse.getNamespace() + "fm.action = '" + importEventsURL + "'; document." + renderResponse.getNamespace() + "fm.submit();";
+	%>
 
-	<input type="button" value="<liferay-ui:message key="import" />" onClick="document.<portlet:namespace />fm.encoding = 'multipart/form-data'; document.<portlet:namespace />fm.action = '<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/import_events" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>'; document.<portlet:namespace />fm.submit();" />
+	<aui:button-row>
+		<aui:button onClick="<%= taglibOnClick %>" value="import" />
+	</aui:button-row>
 </c:if>

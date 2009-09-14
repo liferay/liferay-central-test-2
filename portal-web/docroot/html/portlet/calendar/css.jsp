@@ -210,3 +210,32 @@
 	border-top: 1px solid #AEB8BC;
 	padding-top: .5em;
 }
+
+.portlet-calendar .after-field-text {
+	float: left;
+	font-weight:bold;
+	position:relative;
+	top:0.6em;
+}
+
+.portlet-calendar .aui-form .input-container {
+	position: relative;
+	top: 0.5em;
+}
+
+
+.portlet-calendar .end-date-field {
+	clear: both;
+	padding-left: 1em;
+}
+
+
+.portlet-calendar .weekdays {
+	clear: both;
+	padding-top: 1em;
+}
+
+.portlet-calendar .reminders {
+	clear: both;
+	padding-left: 1em;
+}

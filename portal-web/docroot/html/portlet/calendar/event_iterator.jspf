@@ -97,7 +97,15 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 
 <c:if test="<%= showAddEventButtonButton || showPermissionsButton %>">
 	<c:if test="<%= showAddEventButtonButton %>">
-		<input type="button" value="<liferay-ui:message key="add-event" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="month" value="<%= String.valueOf(selMonth) %>" /><portlet:param name="day" value="<%= String.valueOf(selDay) %>" /><portlet:param name="year" value="<%= String.valueOf(selYear) %>" /></portlet:renderURL>';" />
+		<portlet:renderURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+			<portlet:param name="struts_action" value="/calendar/edit_event" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
+			<portlet:param name="day" value="<%= String.valueOf(selDay) %>" />
+			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
+		</portlet:renderURL>
+
+		<aui:button value="add-event" onClick="<%= editEventURL %>" />
 	</c:if>
 
 	<c:if test="<%= showPermissionsButton %>">
@@ -108,7 +116,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 			var="permissionsURL"
 		/>
 
-		<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+		<aui:button value="permissions" onClick="<%= permissionsURL %>" />
 	</c:if>
 
 	<br /><br />

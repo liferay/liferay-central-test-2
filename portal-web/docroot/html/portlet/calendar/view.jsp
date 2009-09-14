@@ -37,35 +37,33 @@ portletURL.setParameter("struts_action", "/calendar/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<form method="post" name="<portlet:namespace />fm">
+<aui:form method="post" name="fm">
+	<liferay-util:include page="/html/portlet/calendar/tabs1.jsp" />
 
-<liferay-util:include page="/html/portlet/calendar/tabs1.jsp" />
-
-<c:choose>
-	<c:when test='<%= tabs1.equals("summary") %>'>
-		<%@ include file="/html/portlet/calendar/summary.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("day") %>'>
-		<%@ include file="/html/portlet/calendar/day.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("week") %>'>
-		<%@ include file="/html/portlet/calendar/week.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("month") %>'>
-		<%@ include file="/html/portlet/calendar/month.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("year") %>'>
-		<%@ include file="/html/portlet/calendar/year.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("events") %>'>
-		<%@ include file="/html/portlet/calendar/events.jspf" %>
-	</c:when>
-	<c:when test='<%= tabs1.equals("export-import") %>'>
-		<%@ include file="/html/portlet/calendar/export_import.jspf" %>
-	</c:when>
-</c:choose>
-
-</form>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("summary") %>'>
+			<%@ include file="/html/portlet/calendar/summary.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("day") %>'>
+			<%@ include file="/html/portlet/calendar/day.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("week") %>'>
+			<%@ include file="/html/portlet/calendar/week.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("month") %>'>
+			<%@ include file="/html/portlet/calendar/month.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("year") %>'>
+			<%@ include file="/html/portlet/calendar/year.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("events") %>'>
+			<%@ include file="/html/portlet/calendar/events.jspf" %>
+		</c:when>
+		<c:when test='<%= tabs1.equals("export-import") %>'>
+			<%@ include file="/html/portlet/calendar/export_import.jspf" %>
+		</c:when>
+	</c:choose>
+</aui:form>
 
 <%
 if (!tabs1.equals("summary")) {

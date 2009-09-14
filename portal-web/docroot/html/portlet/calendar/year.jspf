@@ -39,19 +39,23 @@
 				</a>
 			</td>
 			<td>
-				<select onChange="location.href = '<%= portletURL.toString() %>&<portlet:namespace />year=' + this.value;">
+				<%
+				String taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "year=' + this.value;";
+				%>
+
+				<aui:select label="" name="yearSelector" onChange="<%= taglibOnChange %>">
 
 					<%
 					for (int i = -10; i <= 10; i++) {
 					%>
 
-						<option <%= ((curYear - selYear + i) == 0) ? "selected" : "" %> value="<%= String.valueOf(curYear + i) %>"><%= curYear + i %></option>
+						<aui:option selected="<%= (curYear - selYear + i) == 0 %>" label="<%= curYear + i %>" />
 
 					<%
 					}
 					%>
 
-				</select>
+				</aui:select>
 			</td>
 			<td>
 				<a href="<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear + 1 %>&<portlet:namespace />eventType=<%= HtmlUtil.escape(eventType) %>">
@@ -62,20 +66,25 @@
 		</table>
 	</td>
 	<td align="right">
-		<select onChange="location.href = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
-			<option value=""><liferay-ui:message key="all-events" /></option>
+
+		<%
+		taglibOnChange = "location.href = '" +  portletURL + "&" + renderResponse.getNamespace() + "month=" + selMonth + "&" + renderResponse.getNamespace() + "day=" + selDay + "&" + renderResponse.getNamespace() + "year=" + selYear + "&" + renderResponse.getNamespace() + "eventType=' + this.value;";
+		%>
+
+		<aui:select label="" name="eventType" onChange="<%= taglibOnChange %>">
+			<aui:option label="all-events" value="" />
 
 			<%
 			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= eventType.equals(CalEventImpl.TYPES[i]) ? "selected" : "" %> value="<%= CalEventImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEventImpl.TYPES[i]) %></option>
+				<aui:option label="<%= CalEventImpl.TYPES[i] %>" selected="<%= eventType.equals(CalEventImpl.TYPES[i]) %>" />
 
 			<%
 			}
 			%>
 
-		</select>
+		</aui:select>
 	</td>
 </tr>
 <tr>

@@ -59,8 +59,8 @@ endDate.set(Calendar.HOUR_OF_DAY, 23);
 endDate.set(Calendar.MINUTE, 59);
 endDate.set(Calendar.SECOND, 59);
 
-String durationHour = String.valueOf(BeanParamUtil.getInteger(event, request, "durationHour", 1));
-String durationMinute = String.valueOf(BeanParamUtil.getInteger(event, request, "durationMinute"));
+int durationHour = BeanParamUtil.getInteger(event, request, "durationHour", 1);
+int durationMinute = BeanParamUtil.getInteger(event, request, "durationMinute");
 String type = BeanParamUtil.getString(event, request, "type");
 boolean repeating = BeanParamUtil.getBoolean(event, request, "repeating");
 
@@ -316,425 +316,308 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/calendar/edit_event" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEvent(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />eventId" type="hidden" value="<%= eventId %>" />
+<portlet:actionURL var="editEventURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/calendar/edit_event" />
+</portlet:actionURL>
 
-<liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />
-<liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
-<liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
+<aui:form action="<%= editEventURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "saveEvent(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
 
-<table class="lfr-table">
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="start-date" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="startDate" defaultValue="<%= startDate %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="duration" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />durationHour">
-			<option <%= (durationHour.equals("0")) ? "selected" : "" %> value="0">0</option>
-			<option <%= (durationHour.equals("1")) ? "selected" : "" %> value="1">1</option>
-			<option <%= (durationHour.equals("2")) ? "selected" : "" %> value="2">2</option>
-			<option <%= (durationHour.equals("3")) ? "selected" : "" %> value="3">3</option>
-			<option <%= (durationHour.equals("4")) ? "selected" : "" %> value="4">4</option>
-			<option <%= (durationHour.equals("5")) ? "selected" : "" %> value="5">5</option>
-			<option <%= (durationHour.equals("6")) ? "selected" : "" %> value="6">6</option>
-			<option <%= (durationHour.equals("7")) ? "selected" : "" %> value="7">7</option>
-			<option <%= (durationHour.equals("8")) ? "selected" : "" %> value="8">8</option>
-			<option <%= (durationHour.equals("9")) ? "selected" : "" %> value="9">9</option>
-			<option <%= (durationHour.equals("10")) ? "selected" : "" %> value="10">10</option>
-			<option <%= (durationHour.equals("11")) ? "selected" : "" %> value="11">11</option>
-			<option <%= (durationHour.equals("12")) ? "selected" : "" %> value="12">12</option>
-			<option <%= (durationHour.equals("13")) ? "selected" : "" %> value="13">13</option>
-			<option <%= (durationHour.equals("14")) ? "selected" : "" %> value="14">14</option>
-			<option <%= (durationHour.equals("15")) ? "selected" : "" %> value="15">15</option>
-			<option <%= (durationHour.equals("16")) ? "selected" : "" %> value="16">16</option>
-			<option <%= (durationHour.equals("17")) ? "selected" : "" %> value="17">17</option>
-			<option <%= (durationHour.equals("18")) ? "selected" : "" %> value="18">18</option>
-			<option <%= (durationHour.equals("19")) ? "selected" : "" %> value="19">19</option>
-			<option <%= (durationHour.equals("20")) ? "selected" : "" %> value="20">20</option>
-			<option <%= (durationHour.equals("21")) ? "selected" : "" %> value="21">21</option>
-			<option <%= (durationHour.equals("22")) ? "selected" : "" %> value="22">22</option>
-			<option <%= (durationHour.equals("23")) ? "selected" : "" %> value="23">23</option>
-			<option <%= (durationHour.equals("24")) ? "selected" : "" %> value="24">24</option>
-		</select>
+	<liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />
+	<liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
+	<liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
-		<liferay-ui:message key="hours" />
+	<aui:model-context bean="<%= event %>" model="<%= CalEvent.class %>" />
 
-		<select name="<portlet:namespace />durationMinute">
-			<option <%= (durationMinute.equals("00")) ? "selected" : "" %> value="00">:00</option>
-			<option <%= (durationMinute.equals("05")) ? "selected" : "" %> value="05">:05</option>
-			<option <%= (durationMinute.equals("10")) ? "selected" : "" %> value="10">:10</option>
-			<option <%= (durationMinute.equals("15")) ? "selected" : "" %> value="15">:15</option>
-			<option <%= (durationMinute.equals("20")) ? "selected" : "" %> value="20">:20</option>
-			<option <%= (durationMinute.equals("30")) ? "selected" : "" %> value="30">:30</option>
-			<option <%= (durationMinute.equals("45")) ? "selected" : "" %> value="45">:45</option>
-		</select>
+	<aui:fieldset>
+		<aui:input name="startDate" value="<%= startDate %>" />
 
-		<liferay-ui:message key="minutes" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="all-day-event" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="allDay" defaultValue="<%= event == null ? false : event.isAllDay() %>" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="time-zone-sensitive" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="timeZoneSensitive" defaultValue="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="title" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue='<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>' />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />type">
+		<aui:field-wrapper label="duration">
+			<aui:column>
+				<aui:select label="hours" name="durationHour">
+
+					<%
+						for (int i = 0; i <= 24 ; i++) {
+					%>
+							<aui:option label="<%= i %>" selected="<%= durationHour == i %>" />
+					<%
+						}
+					%>
+
+				</aui:select>
+			</aui:column>
+			<aui:column>
+				<aui:select label="minutes" name="durationMinute">
+
+					<%
+						for (int i=0; i <  60 ; i = i + 5) {
+					%>
+							<aui:option label='<%= ":" + (i < 10 ? "0" : StringPool.BLANK) + i %>' selected="<%= durationMinute == i %>" value="<%= i %>" />
+					<%
+						}
+					%>
+
+				</aui:select>
+			</aui:column>
+		</aui:field-wrapper>
+
+		<aui:input inlineLabel="<%= true %>" label="all-day-event" name="allDay" type="checkbox" value="<%= event == null ? false : event.isAllDay() %>" />
+
+		<aui:input inlineLabel="<%= true %>" name="timeZoneSensitive" type="checkbox" value="<%=  event == null ? true : event.isTimeZoneSensitive() %>" />
+
+		<aui:input name="title" value='<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>' />
+
+		<aui:input name="description" />
+
+		<aui:select name="type">
 
 			<%
 			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(CalEventImpl.TYPES[i]) ? "selected" : "" %> value="<%= CalEventImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEventImpl.TYPES[i]) %></option>
+				<aui:option label="<%= CalEventImpl.TYPES[i] %>" selected="<%= type.equals(CalEventImpl.TYPES[i]) %>" />
 
 			<%
 			}
 			%>
 
-		</select>
-	</td>
-</tr>
+		</aui:select>
 
-<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
+		<liferay-ui:custom-attributes-available className="<%= CalEvent.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= CalEvent.class.getName() %>"
 				classPK="<%= (event != null) ? event.getEventId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
 			/>
-		</td>
-	</tr>
-</liferay-ui:custom-attributes-available>
+		</liferay-ui:custom-attributes-available>
 
-<c:if test="<%= event == null %>">
-	<tr>
-		<td colspan="2">
-			<br />
-		</td>
-	</tr>
-	<tr>
-		<td class="lfr-label">
-			<liferay-ui:message key="permissions" />
-		</td>
-		<td>
-			<liferay-ui:input-permissions
-				modelName="<%= CalEvent.class.getName() %>"
-			/>
-		</td>
-	</tr>
-</c:if>
+		<c:if test="<%= event == null %>">
+			<aui:field-wrapper label="permissions">
+				<liferay-ui:input-permissions
+					modelName="<%= CalEvent.class.getName() %>"
+				/>
+			</aui:field-wrapper>
+		</c:if>
+	</aui:fieldset>
 
-</table>
+	<br />
 
-<br />
+	<liferay-ui:panel-container id="editEvent" extended="<%= Boolean.TRUE %>" persistState="<%= true %>">
+		<liferay-ui:panel id="repeat" title='<%= LanguageUtil.get(pageContext, "repeat") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+			<aui:fieldset>
+				<aui:column columnWidth="20">
+					<aui:field-wrapper label="repeat" name="recurrenceType">
+						<aui:input checked="<%= recurrenceType == Recurrence.NO_RECURRENCE %>" label="never" name="recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "neverTable');" %>' />
+						<aui:input checked="<%= recurrenceType == Recurrence.DAILY %>" label="daily" name="recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "dailyTable');" %>' />
+						<aui:input checked="<%= recurrenceType == Recurrence.WEEKLY %>" label="weekly" name="recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "weeklyTable');" %>' />
+						<aui:input checked="<%= recurrenceType == Recurrence.MONTHLY %>" label="monthly" name="recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "monthlyTable');" %>' />
+						<aui:input checked="<%= recurrenceType == Recurrence.YEARLY %>" label="yearly" name="recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick='<%= renderResponse.getNamespace() + "showTable('" + renderResponse.getNamespace() + "yearlyTable');" %>' />
+					</aui:field-wrapper>
+				</aui:column>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+				<aui:column columnWidth="80">
+					<div id="<portlet:namespace />neverTable" style="display: none;">
+						<liferay-ui:message key="do-not-repeat-this-event" />
+					</div>
 
-<br /><br />
+					<div id="<portlet:namespace />dailyTable" style="display: none;">
+						<aui:input checked="<%= dailyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="recur-every" name="dailyType" type="radio" value="0" />
+						<aui:input inlineField="<%= true %>" label="" maxlength="3" name="dailyInterval" size="3" type="text" value="<%= dailyInterval %>" /> <span class="after-field-text"><liferay-ui:message key="day-s" /></span><br />
+						<aui:input checked="<%= (dailyType == 1) %>" label="every-weekday" name="dailyType" type="radio" value="1" />
+					</div>
 
-<liferay-ui:tabs names="repeat" />
+					<div id="<portlet:namespace />weeklyTable" style="display: none;">
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="recur-every" maxlength="2" name="weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" />
+						<span class="after-field-text"><liferay-ui:message key="weeks-on" /></span>
 
-<liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
+						<aui:layout cssClass="weekdays">
+							<aui:column>
+								<aui:input checked="<%= weeklyPosSu %>" inlineLabel="<%= true %>" label="<%= days[0] %>" name="weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosTh %>" inlineLabel="<%= true %>" label="<%= days[4] %>" name="weeklyDayPos<%= Calendar.THURSDAY %>" type="checkbox" />
+							</aui:column>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<input <%= (recurrenceType == Recurrence.NO_RECURRENCE) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<portlet:namespace />showTable('<portlet:namespace />neverTable');"> <liferay-ui:message key="never" /><br />
-		<input <%= (recurrenceType == Recurrence.DAILY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />dailyTable');"> <liferay-ui:message key="daily" /><br />
-		<input <%= (recurrenceType == Recurrence.WEEKLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />weeklyTable');"> <liferay-ui:message key="weekly" /><br />
-		<input <%= (recurrenceType == Recurrence.MONTHLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />monthlyTable');"> <liferay-ui:message key="monthly" /><br />
-		<input <%= (recurrenceType == Recurrence.YEARLY) ? "checked" : "" %> name="<portlet:namespace />recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<portlet:namespace />showTable('<portlet:namespace />yearlyTable');"> <liferay-ui:message key="yearly" />
-	</td>
-	<td valign="top">
-		<div id="<portlet:namespace />neverTable" style="display: none;">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
-					<liferay-ui:message key="do-not-repeat-this-event" />
-				</td>
-			</tr>
-			</table>
-		</div>
+							<aui:column>
+								<aui:input checked="<%= weeklyPosMo %>" inlineLabel="<%= true %>" label="<%= days[1] %>" name="weeklyDayPos<%= Calendar.MONDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosFr %>" inlineLabel="<%= true %>" label="<%= days[5] %>" name="weeklyDayPos<%= Calendar.FRIDAY %>" type="checkbox" />
+							</aui:column>
 
-		<div id="<portlet:namespace />dailyTable" style="display: none;">
-			<table border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td>
-					<input <%= (dailyType == 0) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="0"> <input maxlength="3" name="<portlet:namespace />dailyInterval" size="3" type="text" value="<%= dailyInterval %>" /> <liferay-ui:message key="day-s" /><br />
-					<input <%= (dailyType == 1) ? "checked" : "" %> name="<portlet:namespace />dailyType" type="radio" value="1"> <liferay-ui:message key="every-weekday" />
-				</td>
-			</tr>
-			</table>
-		</div>
+							<aui:column>
+								<aui:input checked="<%= weeklyPosTu %>"inlineLabel="<%= true %>" label="<%= days[2] %>"  name="weeklyDayPos<%= Calendar.TUESDAY %>" type="checkbox" />
+								<aui:input checked="<%= weeklyPosSa %>" inlineLabel="<%= true %>" label="<%= days[6] %>" name="weeklyDayPos<%= Calendar.SATURDAY %>" type="checkbox" />
+							</aui:column>
 
-		<div id="<portlet:namespace />weeklyTable" style="display: none;">
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" /> <liferay-ui:message key="weeks-on" />
+							<aui:column>
+								<aui:input checked="<%= weeklyPosWe %>" inlineLabel="<%= true %>" label="<%= days[3] %>" name="weeklyDayPos<%= Calendar.WEDNESDAY %>" type="checkbox" />
+							</aui:column>
+						</aui:layout>
+					</div>
 
-					<table class="lfr-table">
-					<tr>
-						<td nowrap>
-							<input <%= weeklyPosSu ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.SUNDAY %>" type="checkbox"> <%= days[0] %>
-						</td>
-						<td nowrap>
-							<input <%= weeklyPosMo ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.MONDAY %>" type="checkbox"> <%= days[1] %>
-						</td>
-						<td nowrap>
-							<input <%= weeklyPosTu ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.TUESDAY %>" type="checkbox"> <%= days[2] %>
-						</td>
-						<td nowrap>
-							<input <%= weeklyPosWe ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.WEDNESDAY %>" type="checkbox"> <%= days[3] %>
-						</td>
-					</tr>
-					<tr>
-						<td nowrap>
-							<input <%= weeklyPosTh ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.THURSDAY %>" type="checkbox"> <%= days[4] %>
-						</td>
-						<td nowrap>
-							<input <%= weeklyPosFr ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.FRIDAY %>" type="checkbox"> <%= days[5] %>
-						</td>
-						<td colspan="2" nowrap>
-							<input <%= weeklyPosSa ? "checked" : "" %> name="<portlet:namespace />weeklyDayPos<%= Calendar.SATURDAY %>" type="checkbox"> <%= days[6] %>
-						</td>
-					</tr>
-					</table>
-				</td>
-			</tr>
-			</table>
-		</div>
+					<div id="<portlet:namespace />monthlyTable" style="display: none;">
+						<aui:input checked="<%= (monthlyType == 0) %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
 
-		<div id="<portlet:namespace />monthlyTable" style="display: none;">
-			<table class="lfr-table">
-			<tr>
-				<td nowrap>
-					<input <%= (monthlyType == 0) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="0"> <liferay-ui:message key="day" /> <input maxlength="2" name="<portlet:namespace />monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" /> <liferay-ui:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" /> <liferay-ui:message key="month-s" /><br />
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
 
-					<input <%= (monthlyType == 1) ? "checked" : "" %> name="<portlet:namespace />monthlyType" type="radio" value="1">
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
 
-					<liferay-ui:message key="the" />
+						<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
 
-					<select name="<portlet:namespace />monthlyPos">
-						<option <%= (monthlyPos == 1) ? "selected" : "" %> value="1"><liferay-ui:message key="first" /></option>
-						<option <%= (monthlyPos == 2) ? "selected" : "" %> value="2"><liferay-ui:message key="second" /></option>
-						<option <%= (monthlyPos == 3) ? "selected" : "" %> value="3"><liferay-ui:message key="third" /></option>
-						<option <%= (monthlyPos == 4) ? "selected" : "" %> value="4"><liferay-ui:message key="fourth" /></option>
-						<option <%= (monthlyPos == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="last" /></option>
-					</select>
+						<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
 
-					<select name="<portlet:namespace />monthlyDay1">
-						<option <%= (monthlyDay1 == Calendar.SUNDAY) ? "selected" : "" %> value="<%= Calendar.SUNDAY %>"><%= days[0] %></option>
-						<option <%= (monthlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= days[1] %></option>
-						<option <%= (monthlyDay1 == Calendar.TUESDAY) ? "selected" : "" %> value="<%= Calendar.TUESDAY %>"><%= days[2] %></option>
-						<option <%= (monthlyDay1 == Calendar.WEDNESDAY) ? "selected" : "" %> value="<%= Calendar.WEDNESDAY %>"><%= days[3] %></option>
-						<option <%= (monthlyDay1 == Calendar.THURSDAY) ? "selected" : "" %> value="<%= Calendar.THURSDAY %>"><%= days[4] %></option>
-						<option <%= (monthlyDay1 == Calendar.FRIDAY) ? "selected" : "" %> value="<%= Calendar.FRIDAY %>"><%= days[5] %></option>
-						<option <%= (monthlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
-					</select>
+						<aui:select cssClass="input-container"  inlineField="<%= true %>" inlineLabel="<%= true %>" label="" name="monthlyPos">
+							<aui:option label="first" selected="<%= monthlyPos == 1 %>" value="1" />
+							<aui:option label="second" selected="<%= monthlyPos == 2 %>" value="2" />
+							<aui:option label="third" selected="<%= monthlyPos == 3 %>" value="3" />
+							<aui:option label="fourth" selected="<%= monthlyPos == 4 %>" value="4" />
+							<aui:option label="last" selected="<%= monthlyPos == -1 %>" value="-1" />
+						</aui:select>
 
-					<liferay-ui:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" /> <liferay-ui:message key="month-s" />
-				</td>
-			</tr>
-			</table>
-		</div>
+						<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="monthlyDay1">
+							<aui:option label="<%= days[0] %>" selected="<%= monthlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
+							<aui:option label="<%= days[1] %>" selected="<%= monthlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+							<aui:option label="<%= days[2] %>" selected="<%= monthlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
+							<aui:option label="<%= days[3] %>" selected="<%= monthlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
+							<aui:option label="<%= days[4] %>" selected="<%= monthlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
+							<aui:option label="<%= days[5] %>" selected="<%= monthlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
+							<aui:option label="<%= days[6] %>" selected="<%= monthlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+						</aui:select>
 
-		<div id="<portlet:namespace />yearlyTable" style="display: none;">
-			<table class="lfr-table">
-			<tr>
-				<td nowrap>
-					<input <%= (yearlyType == 0) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="0"> <liferay-ui:message key="every" />
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" />
 
-					<select name="<portlet:namespace />yearlyMonth0">
+						<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
+					</div>
 
-					<%
-					for (int i = 0; i < 12; i++) {
-					%>
+					<div id="<portlet:namespace />yearlyTable" style="display: none;">
+						<aui:input checked="<%= yearlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="every" name="yearlyType" type="radio" value="0" />
 
-							<option <%= (monthIds[i] == yearlyMonth0) ? "selected" : "" %> value="<%= monthIds[i] %>"><%= months[i] %></option>
-
-					<%
-					}
-					%>
-
-					</select>
-
-					<input maxlength="2" name="<portlet:namespace />yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" /> <liferay-ui:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" /> <liferay-ui:message key="year-s" /><br />
-
-					<input <%= (yearlyType == 1) ? "checked" : "" %> name="<portlet:namespace />yearlyType" type="radio" value="1"> <liferay-ui:message key="the" />
-
-					<select name="<portlet:namespace />yearlyPos">
-						<option <%= (yearlyPos == 1) ? "selected" : "" %> value="1"><liferay-ui:message key="first" /></option>
-						<option <%= (yearlyPos == 2) ? "selected" : "" %> value="2"><liferay-ui:message key="second" /></option>
-						<option <%= (yearlyPos == 3) ? "selected" : "" %> value="3"><liferay-ui:message key="third" /></option>
-						<option <%= (yearlyPos == 4) ? "selected" : "" %> value="4"><liferay-ui:message key="fourth" /></option>
-						<option <%= (yearlyPos == -1) ? "selected" : "" %> value="-1"><liferay-ui:message key="last" /></option>
-					</select>
-
-					<select name="<portlet:namespace />yearlyDay1">
-						<option <%= (yearlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><liferay-ui:message key="weekday" /></option>
-						<option <%= (yearlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><liferay-ui:message key="weekend-day" /></option>
-						<option <%= (yearlyDay1 == Calendar.SUNDAY) ? "selected" : "" %> value="<%= Calendar.SUNDAY %>"><%= days[0] %></option>
-						<option <%= (yearlyDay1 == Calendar.MONDAY) ? "selected" : "" %> value="<%= Calendar.MONDAY %>"><%= days[1] %></option>
-						<option <%= (yearlyDay1 == Calendar.TUESDAY) ? "selected" : "" %> value="<%= Calendar.TUESDAY %>"><%= days[2] %></option>
-						<option <%= (yearlyDay1 == Calendar.WEDNESDAY) ? "selected" : "" %> value="<%= Calendar.WEDNESDAY %>"><%= days[3] %></option>
-						<option <%= (yearlyDay1 == Calendar.THURSDAY) ? "selected" : "" %> value="<%= Calendar.THURSDAY %>"><%= days[4] %></option>
-						<option <%= (yearlyDay1 == Calendar.FRIDAY) ? "selected" : "" %> value="<%= Calendar.FRIDAY %>"><%= days[5] %></option>
-						<option <%= (yearlyDay1 == Calendar.SATURDAY) ? "selected" : "" %> value="<%= Calendar.SATURDAY %>"><%= days[6] %></option>
-					</select>
-
-					<liferay-ui:message key="of" />
-
-					<select name="<portlet:namespace />yearlyMonth1">
+						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="<%= true %>" label="" name="yearlyMonth0">
 
 						<%
 						for (int i = 0; i < 12; i++) {
 						%>
 
-								<option <%= (monthIds[i] == yearlyMonth1) ? "selected" : "" %> value="<%= monthIds[i] %>"><%= months[i] %></option>
+								<aui:option label="<%= months[i] %>" selected="<%= monthIds[i] == yearlyMonth0 %>" value="<%= monthIds[i] %>" />
 
 						<%
 						}
 						%>
 
-					</select>
+						</aui:select>
 
-					<liferay-ui:message key="of-every" /> <input maxlength="2" name="<portlet:namespace />yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" /> <liferay-ui:message key="year-s" />
-				</td>
-			</tr>
-			</table>
-		</div>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td class="lfr-label">
-		<liferay-ui:message key="end-date" />
-	</td>
-	<td valign="top">
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<input <%= (endDateType == 0) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="0"> <liferay-ui:message key="no-end-date" /><br />
-				<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" /> occurrence(s)<br />--%>
+						<aui:input inlineField="<%= true %>" label="" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
 
-				<input <%= (endDateType == 2) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="2"> <liferay-ui:message key="end-by" />
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
 
-				<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="endDate" defaultValue="<%= endDate %>" />
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+						<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
 
-<br />
+						<aui:input checked="<%= (yearlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="yearlyType" type="radio" value="1" />
 
-<liferay-ui:tabs names="reminders" />
+						<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyPos">
+							<aui:option label="first" selected="<%= yearlyPos == 1 %>" value="1" />
+							<aui:option label="second" selected="<%= yearlyPos == 2 %>" value="2" />
+							<aui:option label="third" selected="<%= yearlyPos == 3 %>" value="3" />
+							<aui:option label="fourth" selected="<%= yearlyPos == 4 %>" value="4" />
+							<aui:option label="last" selected="<%= yearlyPos == -1 %>" value="-1" />
+						</aui:select>
 
-		<label><liferay-ui:message key="remind-me" /></label>
+						<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyDay1">
+							<aui:option label="weekday" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+							<aui:option label="weekend-day" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+							<aui:option label="<%= days[0] %>" selected="<%= yearlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
+							<aui:option label="<%= days[1] %>" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
+							<aui:option label="<%= days[2] %>" selected="<%= yearlyDay1 == Calendar.TUESDAY %>" value="<%= Calendar.TUESDAY %>" />
+							<aui:option label="<%= days[3] %>" selected="<%= yearlyDay1 == Calendar.WEDNESDAY %>" value="<%= Calendar.WEDNESDAY %>" />
+							<aui:option label="<%= days[4] %>" selected="<%= yearlyDay1 == Calendar.THURSDAY %>" value="<%= Calendar.THURSDAY %>" />
+							<aui:option label="<%= days[5] %>" selected="<%= yearlyDay1 == Calendar.FRIDAY %>" value="<%= Calendar.FRIDAY %>" />
+							<aui:option label="<%= days[6] %>" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
+						</aui:select>
 
-<select name="<portlet:namespace />firstReminder">
+						<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="<%= true %>" label="of" name="yearlyMonth1">
 
-	<%
-	for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
-	%>
+							<%
+							for (int i = 0; i < 12; i++) {
+							%>
 
-		<option <%= (firstReminder == CalEventImpl.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></option>
+								<aui:option label="<%= months[i] %>" selected="<%= (monthIds[i] == yearlyMonth1) %>" value="<%= monthIds[i] %>" />
 
-	<%
-	}
-	%>
+							<%
+							}
+							%>
 
-</select>
+						</aui:select>
 
-<liferay-ui:message key="before-and-again" />
+						<aui:input inlineField="<%= true %>" inlineLabel="<%= true %>" label="of-every" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
 
-<select name="<portlet:namespace />secondReminder">
+						<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
+					</div>
+				</aui:column>
 
-	<%
-	for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
-	%>
+				<aui:field-wrapper cssClass="end-date-field" label="end-date" name="endDateType">
+					<aui:input checked="<%= endDateType == 0 %>" cssClass="input-container" label="no-end-date" name="endDateType" type="radio" value="0" />
+					<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" /> occurrence(s)<br />--%>
 
-		<option <%= (secondReminder == CalEventImpl.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></option>
+					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="2" />
 
-	<%
-	}
-	%>
+					<aui:input label="" name="endDate" value="<%= endDate %>" />
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
 
-</select>
+		<liferay-ui:panel id="reminders" title='<%= LanguageUtil.get(pageContext, "reminders") %>' collapsible="<%= true %>" persistState="<%= true %>" extended="<%= true %>">
+			<aui:fieldset>
+				<aui:select inlineField="<%= true %>" inlineLabel="<%= true %>" label="remind-me" name="firstReminder">
 
-<liferay-ui:message key="before-the-event-by" />
+					<%
+					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
+					%>
 
-<br /><br />
+						<aui:option selected="<%= (firstReminder == CalEventImpl.REMINDERS[i])  %>" value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></aui:option>
 
-<input <%= (remindBy == CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <liferay-ui:message key="do-not-send-a-reminder" /><br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <liferay-ui:message key="email-address" /> (<%= user.getEmailAddress() %>)<br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <liferay-ui:message key="sms" /> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <liferay-ui:message key="aim" /> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <liferay-ui:message key="icq" /> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <liferay-ui:message key="msn" /> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br />
-<input <%= (remindBy == CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <liferay-ui:message key="ym" /> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
+					<%
+					}
+					%>
 
-</form>
+				</aui:select>
+
+				<aui:select inlineField="<%= true %>" inlineLabel="<%= true %>" label="before-and-again" name="secondReminder">
+
+					<%
+					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
+					%>
+
+						<aui:option selected="<%= (secondReminder == CalEventImpl.REMINDERS[i]) %>" value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></aui:option>
+
+					<%
+					}
+					%>
+
+				</aui:select>
+
+				<span class="after-field-text"><liferay-ui:message key="before-the-event-by" /></span>
+
+				<aui:field-wrapper cssClass="reminders" label="">
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_NONE %>" label="do-not-send-a-reminder" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_EMAIL %>" label="<%= LanguageUtil.get(pageContext, "email-address") + " (" + user.getEmailAddress() + ")" %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_SMS %>" label="<%= LanguageUtil.get(pageContext, "sms") + (Validator.isNotNull(contact.getSmsSn()) ? " (" + contact.getSmsSn() + ")" : "") %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_AIM %>" label="<%=  LanguageUtil.get(pageContext, "aim") + (Validator.isNotNull(contact.getAimSn()) ? " (" + contact.getAimSn() + ")" : "") %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_ICQ %>" label="<%=  LanguageUtil.get(pageContext, "icq") + (Validator.isNotNull(contact.getIcqSn()) ? " (" + contact.getIcqSn() + ")" : "") %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_MSN %>" label="<%=  LanguageUtil.get(pageContext, "msn") + (Validator.isNotNull(contact.getMsnSn()) ? " (" + contact.getMsnSn() + ")" : "") %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>" />
+					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_YM %>" label="<%=  LanguageUtil.get(pageContext, "ym") + (Validator.isNotNull(contact.getYmSn()) ? " (" + contact.getYmSn() + ")" : "") %>" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>" />
+				</aui:field-wrapper>
+			</aui:fieldset>
+		</liferay-ui:panel>
+	</liferay-ui:panel-container>
+
+	<aui:button-row>
+		<aui:button type="submit" value="save" />
+
+		<aui:button value="cancel" onClick="<%= redirect %>" />
+	</aui:button-row>
+</aui:form>
 
 <script type="text/javascript">
 	<portlet:namespace />init();
