@@ -22,16 +22,7 @@
 
 package com.liferay.portal.upgrade.v5_3_0;
 
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.v5_3_0.util.ShoppingCategoryView;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 /**
  * <a href="UpgradeShopping.java.html"><b><i>View Source</i></b></a>
@@ -41,46 +32,13 @@ import java.io.FileReader;
 public class UpgradeShopping extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		BufferedReader categoryReader = null;
+		StringBuilder sb = new StringBuilder();
 
-		ShoppingCategoryView categoryView =
-			new ShoppingCategoryView(ShoppingCategoryImpl.TABLE_NAME);
+		sb.append("update ShoppingItem set groupId = (select groupId from ");
+		sb.append("ShoppingCategory where ShoppingCategory.categoryId = ");
+		sb.append("ShoppingItem.categoryId)");
 
-		String categoryViewFile = categoryView.generateTempFile();
-
-		try {
-			categoryReader =
-				new BufferedReader(new FileReader(categoryViewFile));
-
-			String line = null;
-
-			while (Validator.isNotNull(line = categoryReader.readLine())) {
-				String[] values = StringUtil.split(line);
-
-				long categoryId = ShoppingCategoryView.getCategoryId(values);
-				long groupId = ShoppingCategoryView.getGroupId(values);
-
-				String sql = StringUtil.replace(
-					_UPDATE_SQL,
-					new String [] {"_GROUP_ID_", "_CATEGORY_ID_"},
-					new String [] {
-						Long.toString(groupId),
-						Long.toString(categoryId)});
-
-				DBUtil.getInstance().runSQL(sql);
-			}
-		}
-		finally {
-			if (categoryReader != null) {
-				categoryReader.close();
-			}
-
-			FileUtil.delete(categoryViewFile);
-		}
+		runSQL(sb.toString());
 	}
-
-	private static final String _UPDATE_SQL =
-		"UPDATE ShoppingItem SET groupId = _GROUP_ID_ where categoryId = " +
-		"_CATEGORY_ID_";
 
 }
