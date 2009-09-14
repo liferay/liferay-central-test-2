@@ -205,8 +205,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBCategory category = null;
-		String name = "";
-		String description = "";
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
 
 		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 			category = mbCategoryLocalService.getCategory(categoryId);

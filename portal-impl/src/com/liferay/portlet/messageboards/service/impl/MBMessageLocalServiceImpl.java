@@ -360,7 +360,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
 			String portletId = CompanyConstants.SYSTEM_STRING;
-			long groupId2 = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+			long dlGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
@@ -384,7 +384,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				try {
 					dlService.addFile(
-						companyId, portletId, groupId2, repositoryId,
+						companyId, portletId, dlGroupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
 						message.getModifiedDate(), new ServiceContext(), bytes);
 				}
@@ -407,7 +407,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Resources
 
-		if (category != null && !category.isDiscussion()) {
+		if ((category != null) && !category.isDiscussion()) {
 			if (user.isDefaultUser()) {
 				addMessageResources(message, true, true);
 			}
@@ -429,7 +429,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (category != null && !category.isDiscussion()) {
+		if ((category != null) && !category.isDiscussion()) {
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
 		}
@@ -1437,7 +1437,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String layoutFullURL = serviceContext.getLayoutFullURL();
 
 		if (Validator.isNull(layoutFullURL) ||
-			(category != null && category.isDiscussion())) {
+			((category != null) && category.isDiscussion())) {
 
 			return;
 		}

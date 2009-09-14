@@ -121,12 +121,12 @@ public class MessageListenerImpl implements MessageListener {
 				_log.debug("Message id " + messageId);
 			}
 
-			long categoryId = getCategoryId(messageId);
 			long groupId = 0;
+			long categoryId = getCategoryId(messageId);
 
 			try {
-				MBCategory category =
-					MBCategoryLocalServiceUtil.getCategory(categoryId);
+				MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+					categoryId);
 
 				groupId = category.getGroupId();
 			}

@@ -295,11 +295,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		long oldCategoryId = thread.getCategoryId();
 
 		MBCategory oldCategory = null;
-		MBCategory category = null;
 
 		if (oldCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 			oldCategory = mbCategoryPersistence.findByPrimaryKey(oldCategoryId);
 		}
+
+		MBCategory category = null;
 
 		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 			category = mbCategoryPersistence.findByPrimaryKey(categoryId);
@@ -318,7 +319,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Indexer
 
 			try {
-				if (category != null && !category.isDiscussion()) {
+				if ((category != null) && !category.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
@@ -399,7 +400,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			if (category != null && !category.isDiscussion()) {
+			if ((category != null) && !category.isDiscussion()) {
 				Indexer.updateMessage(
 					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
@@ -554,7 +555,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			moveAttachmentsFromOldThread(message, oldAttachmentsDir);
 
 			try {
-				if (category != null && !category.isDiscussion()) {
+				if ((category != null) && !category.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),

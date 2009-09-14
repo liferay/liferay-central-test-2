@@ -640,8 +640,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			companyId, categoryStart, categoryEnd);
 
 		for (MBCategory category : categories) {
-			long categoryId = category.getCategoryId();
 			long groupId = category.getGroupId();
+			long categoryId = category.getCategoryId();
 
 			int messageCount = mbMessagePersistence.countByG_C(
 				groupId, categoryId);

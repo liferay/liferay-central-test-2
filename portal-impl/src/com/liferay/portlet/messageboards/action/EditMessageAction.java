@@ -180,7 +180,7 @@ public class EditMessageAction extends PortletAction {
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 

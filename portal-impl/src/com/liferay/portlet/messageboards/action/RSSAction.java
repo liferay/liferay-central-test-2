@@ -125,8 +125,8 @@ public class RSSAction extends Action {
 						"&mbCategoryId=" + categoryId;
 
 			try {
-				MBCategory category =
-					MBCategoryLocalServiceUtil.getCategory(categoryId);
+				MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+					categoryId);
 
 				groupId = category.getGroupId();
 			}

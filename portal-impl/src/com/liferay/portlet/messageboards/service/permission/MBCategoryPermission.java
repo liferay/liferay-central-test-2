@@ -69,8 +69,8 @@ public class MBCategoryPermission {
 			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
-			MBCategory category =
-				MBCategoryLocalServiceUtil.getCategory(categoryId);
+			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+				categoryId);
 
 			return contains(permissionChecker, category, actionId);
 		}

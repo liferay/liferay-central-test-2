@@ -103,6 +103,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 						</c:choose>
 					</c:if>
 				</div>
+
 				<div style="clear: both;"></div>
 			</div>
 		</c:if>
@@ -289,8 +290,6 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			</c:if>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-
 		</aui:form>
 
 		<script type="text/javascript">
@@ -499,6 +498,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
 		}
 		%>
+
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>
 
