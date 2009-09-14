@@ -53,12 +53,21 @@ else {
 	view = true;
 }
 
+long folderId = 0;
+
+if (fileEntry != null) {
+	folderId = fileEntry.getFolderId();
+}
+else if (fileShortcut != null) {
+	folderId = fileShortcut.getFolderId();
+}
+
 PortletURL viewFolderURL = renderResponse.createRenderURL();
 
 viewFolderURL.setWindowState(WindowState.MAXIMIZED);
 
 viewFolderURL.setParameter("struts_action", "/document_library/view");
-viewFolderURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= view %>">
