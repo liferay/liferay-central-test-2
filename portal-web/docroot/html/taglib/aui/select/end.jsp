@@ -29,7 +29,6 @@ String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:sele
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:suffix"));
-
 %>
 
 		</select>

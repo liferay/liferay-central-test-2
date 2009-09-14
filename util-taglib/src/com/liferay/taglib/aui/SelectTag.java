@@ -189,16 +189,16 @@ public class SelectTag extends IncludeTag implements DynamicAttributes {
 		_last = last;
 	}
 
+	public void setListType(String listType) {
+		_listType = listType;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
 
 	public void setShowEmptyOption(boolean showEmptyOption) {
 		_showEmptyOption = showEmptyOption;
-	}
-
-	public void setListType(String listType) {
-		_listType = listType;
 	}
 
 	public void setStartPage(String startPage) {
