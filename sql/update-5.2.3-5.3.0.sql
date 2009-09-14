@@ -107,6 +107,9 @@ create table AssetVocabulary (
 );
 
 alter table BlogsEntry add status INTEGER;
+alter table BlogsEntry add statusByUserId LONG;
+alter table BlogsEntry add statusByUserName VARCHAR(75);
+alter table BlogsEntry add statusDate DATE;
 
 COMMIT_TRANSACTION;
 
@@ -137,7 +140,7 @@ update JournalArticle set status = 1 where approved = FALSE;
 update JournalArticle set statusByUserId = approvedByUserId;
 update JournalArticle set statusByUserName = approvedByUserName;
 update JournalArticle set statusDate = approvedDate where expired = FALSE;
-update JournalArticle set statusDate = expiredDate where expired = TRUE;
+update JournalArticle set statusDate = expirationDate where expired = TRUE;
 
 alter table Layout add layoutPrototypeId LONG;
 
