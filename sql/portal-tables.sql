@@ -1307,6 +1307,7 @@ create table ShoppingCoupon (
 
 create table ShoppingItem (
 	itemId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

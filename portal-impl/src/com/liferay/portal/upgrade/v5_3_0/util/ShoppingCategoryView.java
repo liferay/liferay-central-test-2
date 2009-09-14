@@ -20,36 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_3_0.util;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v5_3_0.UpgradeShopping;
+import com.liferay.portal.upgrade.util.Table;
+
+import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="UpgradeProcess_5_3_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCategoryView.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Alexander Chow
  */
-public class UpgradeProcess_5_3_0 extends UpgradeProcess {
+public class ShoppingCategoryView extends Table {
 
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_3_0_BUILD_NUMBER;
+	public static long getCategoryId(String[] values) {
+		return Long.parseLong(values[0]);
 	}
 
-	protected void doUpgrade() throws Exception {
-//		upgrade(UpgradeSchema.class);
-//		upgrade(UpgradeAsset.class);
-//		upgrade(UpgradeAssetPublisher.class);
-//		upgrade(UpgradeBlogs.class);
-		upgrade(UpgradeDocumentLibrary.class);
-//		upgrade(UpgradeExpando.class);
-//		upgrade(UpgradeGroup.class);
-//		upgrade(UpgradePolls.class);
-//		upgrade(UpgradePortletId.class);
-		upgrade(UpgradeShopping.class);
-//		upgrade(UpgradeSocial.class);
-//		upgrade(UpgradeWiki.class);
+	public static long getGroupId(String[] values) {
+		return Long.parseLong(values[1]);
 	}
+
+	public ShoppingCategoryView(String tableName) {
+		super(tableName);
+
+		List<Object[]> columns = new ArrayList<Object[]>();
+
+		columns.add(new Object[] {"categoryId", Types.BIGINT});
+		columns.add(new Object[] {"groupId", Types.BIGINT});
+
+		setColumns(columns.toArray(new Object[0][]));
+	}
+
+	public String getSelectSQL() throws Exception {
+		return _SELECT_SQL;
+	}
+
+	private static final String _SELECT_SQL =
+		"SELECT ShoppingCategory.categoryId, ShoppingCategory.groupId " +
+		"FROM ShoppingCategory";
 
 }

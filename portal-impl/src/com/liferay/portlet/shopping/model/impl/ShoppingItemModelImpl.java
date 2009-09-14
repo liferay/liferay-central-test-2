@@ -68,6 +68,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	public static final String TABLE_NAME = "ShoppingItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "itemId", new Integer(Types.BIGINT) },
+			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
@@ -101,7 +102,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 			{ "largeImageId", new Integer(Types.BIGINT) },
 			{ "largeImageURL", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ShoppingItem (itemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,fields_ BOOLEAN,fieldsQuantities STRING null,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,requiresShipping BOOLEAN,stockQuantity INTEGER,featured_ BOOLEAN,sale_ BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,mediumImage BOOLEAN,mediumImageId LONG,mediumImageURL VARCHAR(75) null,largeImage BOOLEAN,largeImageId LONG,largeImageURL VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table ShoppingItem (itemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,sku VARCHAR(75) null,name VARCHAR(200) null,description STRING null,properties STRING null,fields_ BOOLEAN,fieldsQuantities STRING null,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,requiresShipping BOOLEAN,stockQuantity INTEGER,featured_ BOOLEAN,sale_ BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,mediumImage BOOLEAN,mediumImageId LONG,mediumImageURL VARCHAR(75) null,largeImage BOOLEAN,largeImageId LONG,largeImageURL VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ShoppingItem";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -117,6 +118,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 		ShoppingItem model = new ShoppingItemImpl();
 
 		model.setItemId(soapModel.getItemId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
@@ -187,6 +189,14 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 
 	public void setItemId(long itemId) {
 		_itemId = itemId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -548,6 +558,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 			model.setEscapedModel(true);
 
 			model.setItemId(getItemId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
@@ -606,6 +617,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 		ShoppingItemImpl clone = new ShoppingItemImpl();
 
 		clone.setItemId(getItemId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
@@ -695,6 +707,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 
 		sb.append("{itemId=");
 		sb.append(getItemId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -774,6 +788,10 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 		sb.append(
 			"<column><column-name>itemId</column-name><column-value><![CDATA[");
 		sb.append(getItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -910,6 +928,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem> {
 	}
 
 	private long _itemId;
+	private long _groupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

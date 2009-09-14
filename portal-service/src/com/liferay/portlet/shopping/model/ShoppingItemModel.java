@@ -55,6 +55,10 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 
 	public void setItemId(long itemId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);

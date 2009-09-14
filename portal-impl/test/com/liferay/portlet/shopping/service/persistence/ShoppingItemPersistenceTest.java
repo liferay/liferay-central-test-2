@@ -71,6 +71,7 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 
 		ShoppingItem newShoppingItem = _persistence.create(pk);
 
+		newShoppingItem.setGroupId(nextLong());
 		newShoppingItem.setCompanyId(nextLong());
 		newShoppingItem.setUserId(nextLong());
 		newShoppingItem.setUserName(randomString());
@@ -110,6 +111,8 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingShoppingItem.getItemId(),
 			newShoppingItem.getItemId());
+		assertEquals(existingShoppingItem.getGroupId(),
+			newShoppingItem.getGroupId());
 		assertEquals(existingShoppingItem.getCompanyId(),
 			newShoppingItem.getCompanyId());
 		assertEquals(existingShoppingItem.getUserId(),
@@ -215,6 +218,7 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 
 		ShoppingItem shoppingItem = _persistence.create(pk);
 
+		shoppingItem.setGroupId(nextLong());
 		shoppingItem.setCompanyId(nextLong());
 		shoppingItem.setUserId(nextLong());
 		shoppingItem.setUserName(randomString());

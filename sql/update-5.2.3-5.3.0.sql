@@ -175,6 +175,8 @@ create table Lock_ (
 	expirationDate DATE null
 );
 
+alter table ShoppingItem add groupId LONG;
+
 create table UserGroupGroupRole (
 	userGroupId LONG not null,
 	groupId LONG not null,
