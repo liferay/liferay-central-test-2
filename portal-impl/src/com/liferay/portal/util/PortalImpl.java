@@ -1899,14 +1899,8 @@ public class PortalImpl implements Portal {
 
 				friendlyURL = url.substring(0, pos);
 
-				Map<String, String[]> actualParams = null;
-
-				if (params != null) {
-					actualParams = new HashMap<String, String[]>(params);
-				}
-				else {
-					actualParams = new HashMap<String, String[]>();
-				}
+				Map<String, String[]> actualParams =
+					new HashMap<String, String[]>();
 
 				/*Object lifecycle = actualParams.get("p_p_lifecycle");
 
