@@ -75,7 +75,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				try {
 					addFileVersion(
-						userId, groupId, folderId, name, size, version);
+						userId, groupId, folderId, name, version, size);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
