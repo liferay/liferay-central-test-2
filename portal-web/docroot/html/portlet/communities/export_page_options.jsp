@@ -35,19 +35,18 @@ Layout curLayout = (Layout)row.getObject();
 </div>
 
 <div class="layout">
-	<a href="javascript:Liferay.LayoutExporter.details({toggle: '#_detail_<%= curLayout.getPlid() %>_toggle', detail: '#_detail_<%= curLayout.getPlid() %>'});" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></a>
+
+	<%
+	String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#_detail_" + curLayout.getPlid() + "_toggle', detail: '#_detail_" + curLayout.getPlid() + "'});";
+	%>
+
+	<aui:a href="<%= taglibHref %>" style="text-decoration: none;" target="_self"><img align="absmiddle" border="0" id="_detail_<%= curLayout.getPlid() %>_toggle" src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_plus.png" onmouseover="Liferay.Portal.ToolTip.show(this, '<%= UnicodeLanguageUtil.get(pageContext, "details") %>')" /> <%= curLayout.getName(locale) %></aui:a>
 </div>
 
 <div class="export-layout-detail" id="_detail_<%= curLayout.getPlid() %>" style="border-top: 1px solid #CCC; display: none; margin-top: 4px; padding-top: 4px; width: 95%;">
-	<input checked disabled name="<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>" type="checkbox" value="1" />
-
-	<label for="<portlet:namespace />includeAncestors_<%= curLayout.getPlid() %>"><liferay-ui:message key="include-ancestor-pages-if-necessary" /></label>
+	<aui:input checked="<%= true %>" disabled="<%= true%>" inlineLabel="left" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 
 	<c:if test="<%= curLayout.getChildren().size() > 0 %>">
-		<br />
-
-		<input name="<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>" type="checkbox" value="1" />
-
-		<label for="<portlet:namespace />includeChildren_<%= curLayout.getPlid() %>"><liferay-ui:message key="include-all-descendent-pages" /></label>
+		<aui:input label="include-all-descendent-pages" name='<%= "includeChildren_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 	</c:if>
 </div>

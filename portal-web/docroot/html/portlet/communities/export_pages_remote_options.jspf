@@ -26,72 +26,29 @@
 
 <br /><br />
 
-<fieldset>
-	<legend><liferay-ui:message key="remote-options" /></legend>
+<aui:fieldset>
+	<aui:legend label="remote-options" />
 
 	<table class="lfr-table">
-	<tr>
-		<td>
-			<liferay-ui:message key="remote-host-ip" />
-		</td>
-		<td>
-			<input id="<portlet:namespace />remoteAddress" name="<portlet:namespace />remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="remote-port" />
-		</td>
-		<td>
-			<input id="<portlet:namespace />remotePort" name="<portlet:namespace />remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="remote-group-id" />
-		</td>
-		<td>
-			<input id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
+	<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
 
-			(<liferay-ui:message key="organization-or-community" />)
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="remote-pages-set" />
-		</td>
-		<td>
-			<select name="<portlet:namespace />remotePrivateLayout">
-				<option <%= tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="0"><bean:message key="public-pages" /></option>
-				<option <%= !tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="1"><bean:message key="private-pages" /></option>
-			</select>
-		</td>
-	</tr>
-	</table>
+	<aui:input label="remote-port" name="remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
 
-	<br />
+	<aui:input label="remote-group-id" name="remoteGroupId" size="10" type="text" />
 
-	<table class="lfr-table">
-	<tr>
-		<td>
-			<input id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
+	(<liferay-ui:message key="organization-or-community" />)
 
-			<label for="<portlet:namespace />secureConnection"><liferay-ui:message key="use-a-secure-network-connection" /></label>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" />
+	<liferay-ui:message key="remote-pages-set" />
+	<aui:select label="remote-pages-set" name="remotePrivateLayout">
+		<aui:option label="public-pages" selected='<%= tabs1.equals("public-pages") %>' value="0" />
+		<aui:option label="private-pages" selected='<%= !tabs1.equals("public-pages") %>' value="1" />
+	</aui:select>
+</aui:fieldset>
 
-			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+<aui:fieldset>
+	<aui:input inlineLabel="left" label="use-a-secure-network-connection" name="secureConnection" type="checkbox" />
 
-			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
-		</td>
-	</tr>
-	</table>
-</fieldset>
+	<aui:input helpMessage="delete-missing-layouts-help" inlineLabel="left" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
+
+	<aui:input helpMessage="delete-portlet-data-help" inlineLabel="left" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+</aui:fieldset>

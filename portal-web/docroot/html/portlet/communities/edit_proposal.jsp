@@ -103,293 +103,255 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_proposal" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveProposal(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(redirect) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
-<input name="<portlet:namespace />proposalId" type="hidden" value="<%= proposalId %>" />
+<portlet:actionURL var="editProposalURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/communities/edit_proposal" />
+</portlet:actionURL>
 
-<%
-for (int i = 2; i <= workflowStages; i++) {
-	String workflowRoleName = workflowRoleNames[i - 1];
-%>
+<aui:form action="<%= editProposalURL %>" method="post" name="fm1" onSubmit='<%= renderResponse.getNamespace() + "saveProposal(); return false;" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="proposalId" type="hidden" value="<%= proposalId %>" />
 
-	<input name="<portlet:namespace />reviewUserIds_<%= i %>" type="hidden" value="" />
+	<%
+	for (int i = 2; i <= workflowStages; i++) {
+		String workflowRoleName = workflowRoleNames[i - 1];
+	%>
 
-<%
-}
-%>
+		<aui:input name="reviewUserIds_<%= i %>" type="hidden" />
 
-<liferay-ui:tabs
-	names="proposal"
-	url="<%= portletURL.toString() %>"
-	backURL="<%= redirect %>"
-/>
+	<%
+	}
+	%>
 
-<liferay-ui:error exception="<%= DuplicateReviewUserIdException.class %>" message="users-cannot-be-assigned-to-more-than-one-stage" />
+	<liferay-ui:tabs
+		names="proposal"
+		url="<%= portletURL.toString() %>"
+		backURL="<%= redirect %>"
+	/>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="user" />
-	</td>
-	<td>
-		<%= PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName()) %>
- 	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="name" />
-	</td>
-	<td>
-		<%= proposal.getName() %>
- 	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
-		<%= LanguageUtil.get(pageContext, "model.resource." + className) %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="id" />
-	</td>
-	<td>
-		<%= classPK %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="status" />
-	</td>
-	<td>
-		<%= proposal.getStatus(locale) %>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
+	<liferay-ui:error exception="<%= DuplicateReviewUserIdException.class %>" message="users-cannot-be-assigned-to-more-than-one-stage" />
+
+	<aui:model-context bean="<%= proposal %>" model="<%= TasksProposal.class %>" />
+
+	<aui:fieldset>
+		<aui:field-wrapper label="user">
+			<%= PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName()) %>
+		</aui:field-wrapper>
+
+		<aui:field-wrapper label="name">
+			<%= proposal.getName() %>
+		</aui:field-wrapper>
+
+		<aui:field-wrapper label="type">
+			<%= LanguageUtil.get(pageContext, "model.resource." + className) %>
+		</aui:field-wrapper>
+
+		<aui:field-wrapper label="id">
+			<%= classPK %>
+		</aui:field-wrapper>
+
+		<aui:field-wrapper label="status">
+			<%= proposal.getStatus(locale) %>
+		</aui:field-wrapper>
+
+		<aui:input name="description" />
+
+		<aui:input formName="fm1" name="dueDate" value="<%= dueDate %>" />
+	</aui:fieldset>
+
+	<c:if test="<%= (review != null) && (review.getStage() == 1) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) %>">
 		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<liferay-ui:input-field model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="description" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="due-date" />
-	</td>
-	<td>
-		<liferay-ui:input-field formName="fm1" model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="dueDate" defaultValue="<%= dueDate %>" />
-	</td>
-</tr>
-</table>
 
-<c:if test="<%= (review != null) && (review.getStage() == 1) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) %>">
+		<liferay-ui:toggle-area
+			id="toggle_id_communities_edit_proposal_reviewers"
+			showMessage='<%= LanguageUtil.get(pageContext, "show-assign-reviewers") + " &raquo;" %>'
+			hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-assign-reviewers") %>'
+		>
+			<table class="lfr-table">
+
+			<%
+			for (int i = 2; i <= workflowStages; i++) {
+				String workflowRoleName = workflowRoleNames[i - 1];
+			%>
+
+				<tr>
+					<td colspan="3">
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="stage" /> <%= i + 1 %>:
+
+						<%= workflowRoleName %>
+					</td>
+					<td>
+
+						<%
+
+						// Left list
+
+						List leftList = new ArrayList();
+
+						String reviewUserIdsParam = request.getParameter("reviewUserIds_" + i);
+
+						if (reviewUserIdsParam == null) {
+							List<TasksReview> reviews = TasksReviewLocalServiceUtil.getReviews(proposal.getProposalId(), i);
+
+							for (TasksReview curReview : reviews) {
+								leftList.add(new KeyValuePair(String.valueOf(curReview.getUserId()), PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName())));
+							}
+						}
+						else {
+							long[] reviewUserIds = StringUtil.split(reviewUserIdsParam, 0L);
+
+							for (long reviewUserId : reviewUserIds) {
+								User reviewUser = UserLocalServiceUtil.getUserById(reviewUserId);
+
+								leftList.add(new KeyValuePair(String.valueOf(reviewUser.getUserId()), PortalUtil.getUserName(reviewUser.getUserId(), reviewUser.getFullName())));
+							}
+						}
+
+						leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
+
+						// Right list
+
+						List rightList = new ArrayList();
+
+						Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleName);
+
+						LinkedHashMap userParams = new LinkedHashMap();
+
+						if (group.isOrganization()) {
+							userParams.put("usersOrgs", new Long(group.getClassPK()));
+						}
+						else {
+							userParams.put("usersGroups", new Long(groupId));
+						}
+
+						userParams.put("userGroupRole", new Long[] {new Long(groupId), new Long(role.getRoleId())});
+
+						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+
+						for (User reviewer : reviewers) {
+							KeyValuePair kvp = new KeyValuePair(String.valueOf(reviewer.getUserId()), reviewer.getFullName());
+
+							if (!leftList.contains(kvp)) {
+								rightList.add(kvp);
+							}
+						}
+
+						rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
+						%>
+
+						<liferay-ui:input-move-boxes
+							formName="fm1"
+							leftTitle="current"
+							rightTitle="available"
+							leftBoxName='<%= "current_reviewers_" + i %>'
+							rightBoxName='<%= "available_reviewers_" + i %>'
+							leftList="<%= leftList %>"
+							rightList="<%= rightList %>"
+						/>
+					</td>
+				</tr>
+
+			<%
+			}
+			%>
+
+			</table>
+		</liferay-ui:toggle-area>
+	</c:if>
+
 	<br />
 
 	<liferay-ui:toggle-area
-		id="toggle_id_communities_edit_proposal_reviewers"
-		showMessage='<%= LanguageUtil.get(pageContext, "show-assign-reviewers") + " &raquo;" %>'
-		hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-assign-reviewers") %>'
+		id="toggle_id_communities_edit_proposal_activities"
+		showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
+		hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
+		defaultShowContent="<%= false %>"
 	>
-		<table class="lfr-table">
+		<br />
 
-		<%
-		for (int i = 2; i <= workflowStages; i++) {
-			String workflowRoleName = workflowRoleNames[i - 1];
-		%>
-
-			<tr>
-				<td colspan="3">
-					<br />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="stage" /> <%= i + 1 %>:
-
-					<%= workflowRoleName %>
-				</td>
-				<td>
-
-					<%
-
-					// Left list
-
-					List leftList = new ArrayList();
-
-					String reviewUserIdsParam = request.getParameter("reviewUserIds_" + i);
-
-					if (reviewUserIdsParam == null) {
-						List<TasksReview> reviews = TasksReviewLocalServiceUtil.getReviews(proposal.getProposalId(), i);
-
-						for (TasksReview curReview : reviews) {
-							leftList.add(new KeyValuePair(String.valueOf(curReview.getUserId()), PortalUtil.getUserName(curReview.getUserId(), curReview.getUserName())));
-						}
-					}
-					else {
-						long[] reviewUserIds = StringUtil.split(reviewUserIdsParam, 0L);
-
-						for (long reviewUserId : reviewUserIds) {
-							User reviewUser = UserLocalServiceUtil.getUserById(reviewUserId);
-
-							leftList.add(new KeyValuePair(String.valueOf(reviewUser.getUserId()), PortalUtil.getUserName(reviewUser.getUserId(), reviewUser.getFullName())));
-						}
-					}
-
-					leftList = ListUtil.sort(leftList, new KeyValuePairComparator(false, true));
-
-					// Right list
-
-					List rightList = new ArrayList();
-
-					Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleName);
-
-					LinkedHashMap userParams = new LinkedHashMap();
-
-					if (group.isOrganization()) {
-						userParams.put("usersOrgs", new Long(group.getClassPK()));
-					}
-					else {
-						userParams.put("usersGroups", new Long(groupId));
-					}
-
-					userParams.put("userGroupRole", new Long[] {new Long(groupId), new Long(role.getRoleId())});
-
-					List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-
-					for (User reviewer : reviewers) {
-						KeyValuePair kvp = new KeyValuePair(String.valueOf(reviewer.getUserId()), reviewer.getFullName());
-
-						if (!leftList.contains(kvp)) {
-							rightList.add(kvp);
-						}
-					}
-
-					rightList = ListUtil.sort(rightList, new KeyValuePairComparator(false, true));
-					%>
-
-					<liferay-ui:input-move-boxes
-						formName="fm1"
-						leftTitle="current"
-						rightTitle="available"
-						leftBoxName='<%= "current_reviewers_" + i %>'
-						rightBoxName='<%= "available_reviewers_" + i %>'
-						leftList="<%= leftList %>"
-						rightList="<%= rightList %>"
-					/>
-				</td>
-			</tr>
-
-		<%
-		}
-		%>
-
-		</table>
+		<liferay-ui:social-activities
+			className="<%= TasksProposal.class.getName() %>"
+			classPK="<%= proposalId %>"
+		/>
 	</liferay-ui:toggle-area>
-</c:if>
 
-<br />
-
-<liferay-ui:toggle-area
-	id="toggle_id_communities_edit_proposal_activities"
-	showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
-	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
-	defaultShowContent="<%= false %>"
->
 	<br />
 
-	<liferay-ui:social-activities
-		className="<%= TasksProposal.class.getName() %>"
-		classPK="<%= proposalId %>"
-	/>
-</liferay-ui:toggle-area>
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
+		<aui:button type="submit" value="save" />
+	</c:if>
 
-<br />
+	<%
+	PortletURL publishToLiveURL = renderResponse.createRenderURL();
 
-<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
-</c:if>
+	publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+	publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
-<%
-PortletURL publishToLiveURL = renderResponse.createRenderURL();
+	publishToLiveURL.setParameter("pagesRedirect", redirect);
+	publishToLiveURL.setParameter("groupId", String.valueOf(stagingGroupId));
+	publishToLiveURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));
 
-publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-publishToLiveURL.setPortletMode(PortletMode.VIEW);
+	long proposedLayoutPlid = LayoutConstants.DEFAULT_PLID;
 
-publishToLiveURL.setParameter("pagesRedirect", redirect);
-publishToLiveURL.setParameter("groupId", String.valueOf(stagingGroupId));
-publishToLiveURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));
+	Layout proposedLayout = null;
 
-long proposedLayoutPlid = LayoutConstants.DEFAULT_PLID;
+	if (className.equals(Layout.class.getName())) {
+		publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
 
-Layout proposedLayout = null;
+		proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());
 
-if (className.equals(Layout.class.getName())) {
-	publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+		proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
 
-	proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());
+		publishToLiveURL.setParameter("tabs2", proposedLayout.isPrivateLayout() ? "private-pages" : "public-pages");
+		publishToLiveURL.setParameter("selPlid", String.valueOf(proposedLayoutPlid));
+	}
+	else if (className.equals(Portlet.class.getName())) {
+		publishToLiveURL.setParameter("struts_action", "/communities/publish_portlet");
 
-	proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
+		proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
 
-	publishToLiveURL.setParameter("tabs2", proposedLayout.isPrivateLayout() ? "private-pages" : "public-pages");
-	publishToLiveURL.setParameter("selPlid", String.valueOf(proposedLayoutPlid));
-}
-else if (className.equals(Portlet.class.getName())) {
-	publishToLiveURL.setParameter("struts_action", "/communities/publish_portlet");
+		proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
+	}
+	%>
 
-	proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
+	<aui:button onClick="window.open('<%= PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay) %>');" value="preview" />
 
-	proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
-}
-%>
+	<c:choose>
+		<c:when test="<%= review != null %>">
+			<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+				<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" value="publish-to-live" />
+			</c:if>
 
-<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay) %>');" />
+			<c:choose>
+				<c:when test="<%= review.isCompleted() %>">
+					<c:if test="<%= review.isRejected() %>">
+						<aui:button onClick='<%= renderResponse.getNamespace() + "approveProposal();" %>' value="approve" />
+					</c:if>
 
-<c:choose>
-	<c:when test="<%= review != null %>">
-		<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
-			<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" />
-		</c:if>
+					<c:if test="<%= !review.isRejected() %>">
+						<aui:button onClick='<%= renderResponse.getNamespace() + "rejectProposal();" %>' value="reject" />
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<aui:button onClick='<%= renderResponse.getNamespace() + "approveProposal();" %>' value="approve" />
 
-		<c:choose>
-			<c:when test="<%= review.isCompleted() %>">
-				<c:if test="<%= review.isRejected() %>">
-					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveProposal();" />
-				</c:if>
+					<aui:button onClick='<%= renderResponse.getNamespace() + "rejectProposal();" %>' value="reject" />
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+			<aui:button onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" value="publish-to-live" />
+		</c:when>
+	</c:choose>
 
-				<c:if test="<%= !review.isRejected() %>">
-					<input type="button" value="<liferay-ui:message key="reject" />" onClick="<portlet:namespace />rejectProposal();" />
-				</c:if>
-			</c:when>
-			<c:otherwise>
-				<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveProposal();" />
-
-				<input type="button" value="<liferay-ui:message key="reject" />" onClick="<portlet:namespace />rejectProposal();" />
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
-		<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL.toString() %>', messageId: 'publish-to-live'});" />
-	</c:when>
-</c:choose>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-
-</form>
+	<aui:button onClick="<%= redirect %>" value="cancel" />
+</aui:form>
 
 <br />
 

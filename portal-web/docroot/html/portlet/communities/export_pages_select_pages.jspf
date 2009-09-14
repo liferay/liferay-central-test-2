@@ -42,34 +42,43 @@
 	}
 </script>
 
-<fieldset <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
-	<legend><liferay-ui:message key="scope" /></legend>
+<aui:fieldset style='<%= (proposalId > 0) ? "display: none;" : "" %>'>
+	<aui:legend label="scope" />
 
 	<c:choose>
 		<c:when test="<%= !publish %>">
-			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="<portlet:namespace />showTabs(); Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label><br />
+			<%
+			String taglibOnClick = renderResponse.getNamespace() + "showTabs(); Liferay.LayoutExporter.all({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
+			%>
 
-			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="<portlet:namespace />hideTabs(); Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+			<aui:input checked="<%= results.size() == 0 %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
 
-			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+			<%
+			taglibOnClick = renderResponse.getNamespace() + "hideTabs(); Liferay.LayoutExporter.selected({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
+			%>
+
+			<aui:input checked="<%= results.size() > 0 %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 		</c:when>
 		<c:otherwise>
-			<input <%= (results.size() == 0) ? "checked":"" %> <%= (selLayout != null) ? "disabled" : "" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
-			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label>
+			<%
+			String taglibOnClick = "Liferay.LayoutExporter.all({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
+			%>
+
+			<aui:input checked="<%= results.size() == 0 %>" disabled="<%= selLayout != null %>" id="scope_all_pages" label="all-pages" name="scope" type="radio" value="all-pages" onClick="<%= taglibOnClick %>" />
 
 			<c:if test="<%= results.size() > 0 %>">
-				<br />
 
-				<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+				<%
+				taglibOnClick = "Liferay.LayoutExporter.selected({pane: '#" + renderResponse.getNamespace() + "pane', obj: this, publish: " + publish + "});";
+				%>
 
-				<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+				<aui:input checked="<%= results.size() > 0 %>" id="scope_selected_pages" label="selected-pages" name="scope" type="radio" value="selected-pages" onClick="<%= taglibOnClick %>" />
 			</c:if>
 		</c:otherwise>
 	</c:choose>
-</fieldset>
+</aui:fieldset>
 
 <div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto; padding: 5px;">
 	<c:choose>

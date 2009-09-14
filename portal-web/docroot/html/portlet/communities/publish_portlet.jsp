@@ -67,18 +67,22 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(pagesRedirect) %>">
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
+	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
-<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
+	<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
 
-<br />
+	<aui:button-row>
 
-<input id="publishBtn" type="button" value='<liferay-ui:message key="publish" />' onClick='if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") %>')) { submitForm(document.<portlet:namespace />fm); }' />
+		<%
+		String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-portlet") + "')) { submitForm(document." + renderResponse.getNamespace() + "fm); }'";
+		%>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="AUI().DialogManager.closeByChild(this);" />
+		<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" value="publish" />
 
-</form>
+		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
+	</aui:button-row>
+</aui:form>
 
 <%@ include file="/html/portlet/communities/render_controls.jspf" %>

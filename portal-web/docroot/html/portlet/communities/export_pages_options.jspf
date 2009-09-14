@@ -96,38 +96,30 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 <div style="border: 1px solid #CCC; height: 445px; overflow: auto;">
 	<ul class="lfr-tree lfr-component">
 		<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
-			<input checked disabled="disabled" type="checkbox" />
-
-			<label><liferay-ui:message key="pages" /></label>
+			<aui:input checked="<%= true %>" disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" />
 		</li>
 
 		<li class="tree-item">
-			<input checked disabled="disabled" type="checkbox" />
-
-			<label><liferay-ui:message key="portlets" /></label>
+			<aui:input checked="<%= true %>" disabled="<%= true %>" inlineLabel="right" name="portlets" type="checkbox" />
 
 			<ul>
 				<li class="tree-item">
-					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_SETUP %>" defaultValue="<%= true %>" />
-
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>Checkbox"><liferay-ui:message key="setup" /></label>
+					<aui:input inlineLabel="right" label="setup" name="<%= PortletDataHandlerKeys.PORTLET_SETUP %>" type="checkbox" value="<%= true %>" />
 				</li>
 				<li class="tree-item">
-					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
-
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox"><liferay-ui:message key="user-preferences" /></label>
+					<aui:input inlineLabel="right" label="user-preferences" name="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" type="checkbox" value="<%= false %>" />
 				</li>
 				<li id="<portlet:namespace />deleteDataOption" class="tree-item" style="display: none;">
-					<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
-
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+					<aui:input helpMessage="delete-portlet-data-help" inlineLabel="right" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
 				</li>
 				<li class="tree-item">
-					<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="false" />
+					<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="false" />
 
-					<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataList');" type="checkbox" />
+					<%
+					String taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataList');" ;
+					%>
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
+					<aui:input  checked="<%= true %>" inlineLabel="right" label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="checkbox" onchange="<%= taglibOnChange %>" />
 
 					<div id="<portlet:namespace />portletDataList">
 						<ul>
@@ -136,14 +128,10 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 								<ul>
 									<li>
-										<input checked id="<portlet:namespace />rangeAll" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
-
-										<label for="<portlet:namespace />rangeAll"><liferay-ui:message key="all" /></label>
+										<aui:input checked="<%= true %>" id="rangeAll" label="all" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
 									</li>
 									<li>
-										<input id="<portlet:namespace />rangeDateRange" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />
-
-										<label for="<portlet:namespace />rangeDateRange"><liferay-ui:message key="date-range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
+										<aui:input helpMessage="export-date-range-help" id="rangeDateRange" label="date-range" name="range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />
 
 										<%
 										Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -152,8 +140,6 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 										yesterday.add(Calendar.DATE, -1);
 										%>
-
-										<br />
 
 										<ul id="<portlet:namespace />startEndDate" style="display: none;">
 											<li>
@@ -227,16 +213,14 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 										</ul>
 									</li>
 									<li>
-										<input id="<portlet:namespace />rangeLast" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="last" />
+										<aui:input cssClass="input-container" id="rangeLast" inlineField="<%= true %>" label="last" name="range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="last" />
 
-										<label for="<portlet:namespace />rangeLast"><liferay-ui:message key="last" /></label>
-
-										<select name="<portlet:namespace />last">
-											<option value="12"><%= LanguageUtil.format(pageContext, "x-hours", "12") %></option>
-											<option value="24"><%= LanguageUtil.format(pageContext, "x-hours", "24") %></option>
-											<option value="48"><%= LanguageUtil.format(pageContext, "x-hours", "48") %></option>
-											<option value="2487"><%= LanguageUtil.format(pageContext, "x-days", "7") %></option>
-										</select>
+										<aui:select label="" name="last">
+											<aui:option value="12"><%= LanguageUtil.format(pageContext, "x-hours", "12") %></aui:option>
+											<aui:option value="24"><%= LanguageUtil.format(pageContext, "x-hours", "24") %></aui:option>
+											<aui:option value="48"><%= LanguageUtil.format(pageContext, "x-hours", "48") %></aui:option>
+											<aui:option value="2487"><%= LanguageUtil.format(pageContext, "x-days", "7") %></aui:option>
+										</aui:select>
 									</li>
 								</ul>
 							</li>
@@ -261,23 +245,20 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 									if (controls != null) {
 										String rootPortletId = curPortlet.getRootPortletId();
 
-										String checked = StringPool.BLANK;
-
-										if (portletDataHandler.isPublishToLiveByDefault()) {
-											checked = "checked";
-										}
+										boolean checked = portletDataHandler.isPublishToLiveByDefault();
 							%>
 
 										<li class="tree-item">
-											<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls');" type="checkbox" />
 
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
+											<%
+											taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId + "Controls');";
+											%>
+
+											<aui:input checked="<%= checked %>" inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name="<%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + rootPortletId %>" onchange="<%= taglibOnChange %>" type="checkbox" />
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
 												<li class="<%= renderResponse.getNamespace() %>handler-control">
-													<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>" type="checkbox" />
-
-													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>_<%= rootPortletId %>"><liferay-ui:message key="setup" /></label>
+													<aui:input checked="<%= checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" />
 												</li>
 
 												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
@@ -306,29 +287,27 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 		</li>
 
 		<li class="tree-item">
-			<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />permissionsUl');" type="checkbox" />
 
-			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label> <liferay-ui:icon-help message="export-import-permissions-help" />
+			<%
+			taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "permissionsUl');";
+			%>
+
+			<aui:input helpMessage="export-import-permissions-help" inlineLabel="right" label="permissions" name="<%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<%= taglibOnChange %>" type="checkbox" />
+
 
 			<ul id="<portlet:namespace />permissionsUl">
 				<c:choose>
 					<c:when test="<%= PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5 %>">
 						<li class="tree-item">
-							<input checked class="disabled" disabled="disabled" type="checkbox" />
-
-							<label><liferay-ui:message key="permissions-assigned-to-roles" /></label>
+							<aui:input checked="<%= true %>" cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToRoles" type="checkbox" />
 						</li>
 					</c:when>
 					<c:otherwise>
 						<li class="tree-item">
-							<input checked class="disabled" disabled="disabled" type="checkbox" />
-
-							<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
+							<aui:input checked="<%= true %>" cssClass="disabled" disabled="<%= true %>" inlineLabel="right" name="permissionsAssignedToOrganizationsUserGroupsRolesAndCommunities" type="checkbox" />
 						</li>
 						<li class="tree-item">
-							<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
-
-							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>"><liferay-ui:message key="permissions-assigned-to-users" /></label> <liferay-ui:icon-help message="export-import-permissions-assigned-to-users-help" />
+							<aui:input cssClass="disabled" disabled="<%= true %>" helpMessage="export-import-permissions-assigned-to-users-help" inlineLabel="right" label="permissions-assigned-to-users" name="<%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -336,9 +315,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 		</li>
 
 		<li class="tree-item">
-			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.CATEGORIES %>" defaultValue="<%= false %>" />
-
-			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.CATEGORIES %>Checkbox"><liferay-ui:message key="categories" /></label> <liferay-ui:icon-help message="export-import-categories-help" />
+			<aui:input helpMessage="export-import-categories-help" inlineLabel="right" label="categories" name="<%= PortletDataHandlerKeys.CATEGORIES %>" type="checkbox" value="<%= false %>" />
 		</li>
 	</ul>
 </div>

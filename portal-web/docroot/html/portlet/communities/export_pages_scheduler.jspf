@@ -151,18 +151,18 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 	);
 </script>
 
-<input name="<portlet:namespace />jobName" type="hidden" />
+<aui:input name="jobName" type="hidden" />
 
 <liferay-ui:input-scheduler />
 
 <br />
 
-<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add-event" />" onClick="<portlet:namespace />schedulePublishEvent();" />
+<aui:button name="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
 
 <br /><br />
 
-<fieldset>
-	<legend><liferay-ui:message key="scheduled-events" /></legend>
+<aui:fieldset>
+	<aui:legend label="scheduled-events" />
 
 	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
-</fieldset>
+</aui:fieldset>

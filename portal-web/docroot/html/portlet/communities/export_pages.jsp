@@ -211,85 +211,102 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
-<input name="<portlet:namespace /><%=  Constants.CMD %>" type="hidden" value="<%= cmd %>">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escapeAttribute(tabs1) %>">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escapeAttribute(pagesRedirect) %>">
-<input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
+<aui:form action="<%= portletURL.toString() %>" method="post" name="exportPagesFm">
+	<aui:input name="<%=  Constants.CMD %>" type="hidden" value="<%= cmd %>" />
+	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="pagesRedirect" type="hidden" value="<%= pagesRedirect %>" />
+	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
-<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
-	<div class="portlet-msg-alert">
-		<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-the-live-environment" />
-	</div>
-</c:if>
-
-<%
-String exportPagesTabsNames = "pages,options";
-
-if (!localPublishing) {
-	exportPagesTabsNames += ",remote-options";
-}
-
-if (proposalId <= 0) {
-	exportPagesTabsNames += ",scheduler";
-}
-
-String actionKey = "copy";
-
-if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
-	actionKey = "publish";
-}
-%>
-
-<liferay-ui:tabs
-	names="<%= exportPagesTabsNames %>"
-	param="exportPagesTabs"
-	refresh="<%= false %>"
->
-	<liferay-ui:section>
-		<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
-
-		<br />
-
-		<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
-			<portlet:param name="struts_action" value="/communities/export_pages" />
-			<portlet:param name="tabs1" value="<%= tabs1 %>" />
-			<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
-			<portlet:param name="localPublishing" value="<%= String.valueOf(localPublishing) %>" />
-		</portlet:renderURL>
-
-		<c:choose>
-			<c:when test="<%= !publish %>">
-				<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="AUI().DialogManager.refreshByChild('#<%= popupId %>', { url: '<%= selectURL %>&<portlet:namespace />publish=true' });" />
-
-				<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
-			</c:when>
-			<c:otherwise>
-				<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
-					<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="AUI().DialogManager.refreshByChild('#<%= popupId %>', { url: '<%= selectURL %>&<portlet:namespace />publish=false' });" />
-				</c:if>
-
-				<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
-			</c:otherwise>
-		</c:choose>
-
-	</liferay-ui:section>
-	<liferay-ui:section>
-		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
-	</liferay-ui:section>
-
-	<c:if test="<%= !localPublishing %>">
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
-		</liferay-ui:section>
+	<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
+		<div class="portlet-msg-alert">
+			<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-the-live-environment" />
+		</div>
 	</c:if>
 
-	<c:if test="<%= proposalId <= 0 %>">
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
-		</liferay-ui:section>
-	</c:if>
-</liferay-ui:tabs>
+	<%
+	String exportPagesTabsNames = "pages,options";
 
-</form>
+	if (!localPublishing) {
+		exportPagesTabsNames += ",remote-options";
+	}
+
+	if (proposalId <= 0) {
+		exportPagesTabsNames += ",scheduler";
+	}
+
+	String actionKey = "copy";
+
+	if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
+		actionKey = "publish";
+	}
+	%>
+
+	<liferay-ui:tabs
+		names="<%= exportPagesTabsNames %>"
+		param="exportPagesTabs"
+		refresh="<%= false %>"
+	>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+
+			<br />
+
+			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
+				<portlet:param name="struts_action" value="/communities/export_pages" />
+				<portlet:param name="tabs1" value="<%= tabs1 %>" />
+				<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
+				<portlet:param name="localPublishing" value="<%= String.valueOf(localPublishing) %>" />
+			</portlet:renderURL>
+
+			<c:choose>
+				<c:when test="<%= !publish %>">
+
+					<%
+					String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "', { url: '" + selectURL + StringPool.AMPERSAND + renderResponse.getNamespace() + "publish=true' });";
+					%>
+
+					<aui:button name="selectBtn" onClick="<%= taglibOnClick %>" value="select" />
+
+					<%
+					taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }'";
+					%>
+
+					<aui:button name="publishBtn" onClick="<%= taglibOnClick %>" value="<%= actionKey %>" style='<%= (results.size() > 0) ? "display: none;" :"" %>' />
+				</c:when>
+				<c:otherwise>
+					<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
+
+						<%
+						String taglibOnClick = "AUI().DialogManager.refreshByChild('#" + popupId + "', { url: '" + selectURL + StringPool.AMPERSAND + renderResponse.getNamespace() + "publish=false' });";
+						%>
+
+						<aui:button name="changeBtn" onClick="<%= taglibOnClick %>" value="change-selection" />
+					</c:if>
+
+					<%
+					String taglibOnClick = "if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-" + actionKey + "-these-pages") + "')) { submitForm(document." + renderResponse.getNamespace() + "exportPagesFm); }'";
+					%>
+
+					<aui:button name="publishBtn" value="<%= actionKey %>" onClick="<%= taglibOnClick %>" />
+				</c:otherwise>
+			</c:choose>
+
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
+		</liferay-ui:section>
+
+		<c:if test="<%= !localPublishing %>">
+			<liferay-ui:section>
+				<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
+			</liferay-ui:section>
+		</c:if>
+
+		<c:if test="<%= proposalId <= 0 %>">
+			<liferay-ui:section>
+				<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+			</liferay-ui:section>
+		</c:if>
+	</liferay-ui:tabs>
+</aui:form>
