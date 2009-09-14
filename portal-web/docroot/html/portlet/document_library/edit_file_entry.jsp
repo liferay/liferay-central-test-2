@@ -182,7 +182,7 @@ portletURL.setParameter("name", name);
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-	<aui:input name="newFolderId" type="hidden" />
+	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
