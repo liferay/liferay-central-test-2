@@ -43,29 +43,29 @@ boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflo
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
-String tabs2Names = "";
-
-if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
-	tabs2Names += "staging";
-}
+List<String> tabs2NamesList = new ArrayList<String>();
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
-	if (Validator.isNotNull(tabs2Names)) {
-		tabs2Names += StringPool.COMMA;
-	}
-
-	tabs2Names += "virtual-host,sitemap,monitoring";
-
 	if (company.isCommunityLogo()) {
-		tabs2Names += ",logo";
+		tabs2NamesList.add("logo");
 	}
+
+	tabs2NamesList.add("virtual-host");
+	tabs2NamesList.add("sitemap");
+	tabs2NamesList.add("monitoring");
 
 	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
 
 	if (liveGroup.getGroupId() != guestGroup.getGroupId()) {
-		tabs2Names += ",merge-pages";
+		tabs2NamesList.add("merge-pages");
 	}
 }
+
+if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
+	tabs2NamesList.add("staging");
+}
+
+String tabs2Names = StringUtil.merge(tabs2NamesList);
 
 if (!StringUtil.contains(tabs2Names, tabs2)) {
 	int pos = tabs2Names.indexOf(StringPool.COMMA);

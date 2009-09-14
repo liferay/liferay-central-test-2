@@ -220,6 +220,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<c:when test="<%= userCommunity %>">
 										<liferay-ui:message key="my-public-pages" />
 									</c:when>
+									<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
+										<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
+									</c:when>
 									<c:otherwise>
 										<%= myPlace.getName() %>
 									</c:otherwise>
@@ -263,6 +266,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									</c:when>
 									<c:when test="<%= userCommunity %>">
 										<liferay-ui:message key="my-private-pages" />
+									</c:when>
+									<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
+										<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
 									</c:when>
 									<c:otherwise>
 										<%= myPlace.getName() %>

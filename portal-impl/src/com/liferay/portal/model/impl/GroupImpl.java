@@ -38,6 +38,7 @@ import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeLocalServiceUtil;
@@ -212,6 +213,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 					userGroupId);
 
 				name = userGroup.getName();
+			}
+			else if (name.equals(GroupConstants.GUEST)) {
+				Company company = CompanyLocalServiceUtil.getCompany(
+					getCompanyId());
+
+				company.getAccount().getName();
 			}
 		}
 		catch (Exception e) {

@@ -57,13 +57,8 @@ if (layout != null) {
 						</c:if>
 
 						<c:if test="<%= !themeDisplay.isStateMaximized() %>">
-							<li class="add-application">
-								<a href="javascript:;" id="<portlet:namespace />addApplication">
-									<liferay-ui:message key="application" />
-								</a>
-							</li>
 							<li class="last common-items">
-								<h4><liferay-ui:message key="common-items" /></h4>
+								<h4><liferay-ui:message key="applications" /></h4>
 
 								<ul>
 									<li class="first">
@@ -72,8 +67,13 @@ if (layout != null) {
 										</a>
 									</li>
 									<li>
-										<a href="javascript:;" class="app-shortcut" rel="73">
-											<%= PortalUtil.getPortletTitle("73", themeDisplay.getCompanyId(), locale) %>
+										<a href="javascript:;" class="app-shortcut" rel="101">
+											<%= PortalUtil.getPortletTitle("101", themeDisplay.getCompanyId(), locale) %>
+										</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="app-shortcut" rel="3">
+											<%= PortalUtil.getPortletTitle("3", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
 									<li>
@@ -81,9 +81,9 @@ if (layout != null) {
 											<%= PortalUtil.getPortletTitle("71", themeDisplay.getCompanyId(), locale) %>
 										</a>
 									</li>
-									<li class="last">
-										<a href="javascript:;" class="app-shortcut" rel="85">
-											<%= PortalUtil.getPortletTitle("85", themeDisplay.getCompanyId(), locale) %>
+									<li class="add-application last">
+										<a href="javascript:;" id="<portlet:namespace />addApplication">
+											<liferay-ui:message key="more" />...
 										</a>
 									</li>
 								</ul>
@@ -98,32 +98,48 @@ if (layout != null) {
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
-						<liferay-ui:message key="settings" />
+						<liferay-ui:message key="manage" />
 					</span>
 				</a>
 
 				<div class="manage-content-container menu-container aui-contextoverlay-hidden" id="<portlet:namespace />manageContentContainer">
 					<ul>
-						<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
-							<li id="<portlet:namespace />controlPanel">
-								<a href="<%= themeDisplay.getURLControlPanel() %>">
-									<liferay-ui:message key="control-panel" />
-								</a>
-							</li>
-						</c:if>
-
 						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 							<li class="first">
 								<a href="<%= HtmlUtil.escape(themeDisplay.getURLPageSettings().toString()) %>">
-									<liferay-ui:message key='<%= group.isLayoutPrototype()? "manage-page" : "manage-pages" %>' />
+									<liferay-ui:message key="page" />
 								</a>
 							</li>
 						</c:if>
 
 						<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
-							<li class="last">
+							<li>
 								<a href="javascript:;" id="pageTemplate">
-									<liferay-ui:message key="layout" />
+									<liferay-ui:message key="page-layout" />
+								</a>
+							</li>
+						</c:if>
+
+						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+							<li>
+								<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1")) %>">
+									<liferay-ui:message key="sitemap" />
+								</a>
+							</li>
+						</c:if>
+
+						<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+							<li>
+								<a href="<%= HtmlUtil.escape(HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "tabs1", "settings")) %>">
+									<liferay-ui:message key="settings" />
+								</a>
+							</li>
+						</c:if>
+
+						<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
+							<li class="last control-panel-link" id="<portlet:namespace />controlPanel">
+								<a href="<%= themeDisplay.getURLControlPanel() %>">
+									<liferay-ui:message key="control-panel" />
 								</a>
 							</li>
 						</c:if>
