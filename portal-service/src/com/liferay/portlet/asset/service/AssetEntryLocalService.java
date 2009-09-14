@@ -145,10 +145,6 @@ public interface AssetEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		java.lang.String languageId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getTopViewedEntries(
 		java.lang.String className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException;

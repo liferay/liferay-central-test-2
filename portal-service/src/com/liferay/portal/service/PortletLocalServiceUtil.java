@@ -120,6 +120,10 @@ public class PortletLocalServiceUtil {
 		getService().destroyPortlet(portlet);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactories() {
+		return getService().getAssetRendererFactories();
+	}
+
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		return getService().getEARDisplay(xml);

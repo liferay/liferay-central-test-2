@@ -111,11 +111,6 @@ public class AssetEntryServiceUtil {
 		return getService().getEntry(entryId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		java.lang.String languageId) {
-		return getService().getEntryTypes(languageId);
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {

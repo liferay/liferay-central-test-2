@@ -105,6 +105,9 @@ public interface PortletLocalService {
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.asset.model.AssetRendererFactory> getAssetRendererFactories();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException;
 

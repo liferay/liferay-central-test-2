@@ -216,20 +216,6 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		java.lang.String languageId) throws RemoteException {
-		try {
-			com.liferay.portlet.asset.model.AssetEntryType[] returnValue = AssetEntryServiceUtil.getEntryTypes(languageId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntrySoap incrementViewCounter(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {

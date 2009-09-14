@@ -474,37 +474,6 @@ public class AssetEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		HttpPrincipal httpPrincipal, java.lang.String languageId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = languageId;
-
-			if (languageId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
-					"getEntryTypes", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.asset.model.AssetEntryType[])returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {

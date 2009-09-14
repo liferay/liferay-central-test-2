@@ -169,11 +169,6 @@ public class AssetEntryLocalServiceUtil {
 		return getService().getEntry(className, classPK);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		java.lang.String languageId) {
-		return getService().getEntryTypes(languageId);
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getTopViewedEntries(
 		java.lang.String className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException {

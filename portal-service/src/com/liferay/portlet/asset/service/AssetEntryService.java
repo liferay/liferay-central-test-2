@@ -105,10 +105,6 @@ public interface AssetEntryService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.asset.model.AssetEntryType[] getEntryTypes(
-		java.lang.String languageId);
-
 	public com.liferay.portlet.asset.model.AssetEntry incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
