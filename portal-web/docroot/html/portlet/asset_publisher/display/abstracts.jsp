@@ -85,7 +85,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 				String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
 
 				request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
-				request.setAttribute("abstracts.jsp_abstract_length", abstractLength);
+				request.setAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH, abstractLength);
 				%>
 
 				<c:choose>

@@ -46,8 +46,7 @@ import javax.portlet.PortletURL;
  */
 public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 
-	public static final String CLASS_NAME =
-		"com.liferay.portlet.imagegallery.model.IGImage";
+	public static final String CLASS_NAME = IGImage.class.getName();
 
 	public static final String TYPE = "image";
 
@@ -85,9 +84,11 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 
 			addAssetURL.setParameter(
 				"struts_action", "/image_gallery/edit_image");
-			addAssetURL.setParameter("folderId", String.valueOf(
-				AssetPublisherUtil.getRecentFolderId(
-					portletRequest, IGImage.class.getName())));
+			addAssetURL.setParameter(
+				"folderId",
+				String.valueOf(
+					AssetPublisherUtil.getRecentFolderId(
+						portletRequest, IGImage.class.getName())));
 			addAssetURL.setParameter("uploader", "classic");
 		}
 

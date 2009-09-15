@@ -97,7 +97,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 
 	public String getURLViewInContext(
 			PortletRequest portletRequest, String noSuchEntryRedirect)
-		throws Exception{
+		throws Exception {
 
 		PortletRequestImpl portletRequestImpl =
 			(PortletRequestImpl)portletRequest;
@@ -106,13 +106,14 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			WebKeys.THEME_DISPLAY);
 
 		PortletURL viewPortletURL = new PortletURLImpl(
-				portletRequestImpl, PortletKeys.IMAGE_GALLERY,
-				themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+			portletRequestImpl, PortletKeys.IMAGE_GALLERY,
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		viewPortletURL.setWindowState(WindowState.MAXIMIZED);
-	 	viewPortletURL.setParameter("struts_action", "/image_gallery/view");
+
+		viewPortletURL.setParameter("struts_action", "/image_gallery/view");
  		viewPortletURL.setParameter(
-			 "folderId", String.valueOf(_image.getFolderId()));
+			"folderId", String.valueOf(_image.getFolderId()));
 
 		return viewPortletURL.toString();
 	}
@@ -126,9 +127,8 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String render(
-			RenderRequest renderRequest, RenderResponse renderResponse,
-			String template)
-		throws Exception {
+		RenderRequest renderRequest, RenderResponse renderResponse,
+		String template) {
 
 		if (template.equals(TEMPLATE_FULL_CONTENT) ||
 			template.equals(TEMPLATE_ABSTRACT)) {

@@ -24,12 +24,11 @@
 
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
-
 <%
-IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
-int abstractLength = (Integer)request.getAttribute("abstracts.jsp_abstract_length");
+int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
+
+IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 %>
