@@ -1083,8 +1083,6 @@ public interface PropsKeys {
 
 	public static final String PORTLET_EVENT_DISTRIBUTION = "portlet.event.distribution";
 
-	public static final String PORTLET_EVENT_MAX_GENERATION = "portlet.event.max.generation";
-
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION = "portlet.public.render.parameter.distribution";
 
 	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";

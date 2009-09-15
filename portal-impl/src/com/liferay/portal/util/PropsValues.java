@@ -1235,10 +1235,6 @@ public class PropsValues {
 	public static final boolean PORTLET_EVENT_DISTRIBUTION_LAYOUT_SET =
 		!PORTLET_EVENT_DISTRIBUTION_LAYOUT;
 
-	public static final int PORTLET_EVENT_MAX_GENERATION =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.PORTLET_EVENT_MAX_GENERATION));
-
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION);
 
