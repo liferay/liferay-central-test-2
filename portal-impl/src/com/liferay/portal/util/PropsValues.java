@@ -1229,12 +1229,27 @@ public class PropsValues {
 	public static final String PORTLET_EVENT_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_EVENT_DISTRIBUTION);
 
+	public static final boolean PORTLET_EVENT_DISTRIBUTION_LAYOUT =
+		PORTLET_EVENT_DISTRIBUTION.equalsIgnoreCase("layout");
+
+	public static final boolean PORTLET_EVENT_DISTRIBUTION_LAYOUT_SET =
+		!PORTLET_EVENT_DISTRIBUTION_LAYOUT;
+
 	public static final int PORTLET_EVENT_MAX_GENERATION =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.PORTLET_EVENT_MAX_GENERATION));
 
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION);
+
+	public static final boolean
+		PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION_LAYOUT =
+			PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION.equalsIgnoreCase(
+				"layout");
+
+	public static final boolean
+		PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION_LAYOUT_SET =
+			!PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION_LAYOUT;
 
 	public static final boolean PORTLET_URL_ANCHOR_ENABLE =
 		GetterUtil.getBoolean(

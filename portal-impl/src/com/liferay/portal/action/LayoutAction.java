@@ -251,24 +251,24 @@ public class LayoutAction extends Action {
 		request.setAttribute(WebKeys.FORWARD_URL, forwardURL);
 	}
 
-	protected List<Portlet> getLayoutSetPortlets(Layout layout)
-		throws Exception{
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			layout.getGroupId(), layout.isPrivateLayout(),
-			LayoutConstants.TYPE_PORTLET);
+	protected List<Portlet> getLayoutSetPortlets(
+			long groupId, boolean privateLayout)
+		throws Exception {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
 
-		for (Layout currentLayout : layouts) {
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet) currentLayout.getLayoutType();
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
 
-			List<Portlet> layoutPortlets =  layoutTypePortlet.getPortlets();
-
-			if (portlets != null) {
-				portlets.addAll(layoutPortlets);
+		for (Layout layout : layouts) {
+			if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+				continue;
 			}
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			portlets.addAll(layoutTypePortlet.getPortlets());
 		}
 
 		return portlets;
@@ -661,14 +661,13 @@ public class LayoutAction extends Action {
 				if (actionResponseImpl.getEvents().size() > 0) {
 					List<Portlet> portlets = null;
 
-					if (PropsValues.PORTLET_EVENT_DISTRIBUTION.equals(
-						"LAYOUT_SET")) {
-
-						portlets = getLayoutSetPortlets(layout);
+					if (PropsValues.PORTLET_EVENT_DISTRIBUTION_LAYOUT_SET) {
+						portlets = getLayoutSetPortlets(
+							layout.getGroupId(), layout.isPrivateLayout());
 					}
 					else {
 						if (layout.getType().equals(
-							LayoutConstants.TYPE_PORTLET)) {
+								LayoutConstants.TYPE_PORTLET)) {
 
 							LayoutTypePortlet layoutTypePortlet =
 								(LayoutTypePortlet)layout.getLayoutType();

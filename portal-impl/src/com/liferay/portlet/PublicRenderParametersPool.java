@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -47,61 +48,56 @@ public class PublicRenderParametersPool {
 	public static Map<String, String[]> get(
 		HttpServletRequest request, long plid) {
 
-		Map <String, String[]> publicRenderParameters = null;
+		if (PropsValues.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION_LAYOUT) {
+			return RenderParametersPool.get(
+				request, plid, _PUBLIC_RENDER_PARAMETERS);
+		}
 
-		if (PropsValues.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION.equals(
-			"LAYOUT_SET")) {
+		HttpSession session = request.getSession();
 
-			HttpSession session = request.getSession();
+		Map<Long, Map<String, String[]>> publicRenderParametersPool =
+			(Map<Long, Map<String, String[]>>)session.getAttribute(
+				WebKeys.PUBLIC_RENDER_PARAMETERS_POOL);
 
-			Map<Long, Map<String, String[]>> publicRenderParametersPool =
-				(Map<Long, Map<String, String[]>>)session.getAttribute(
-					WebKeys.PUBLIC_RENDER_PARAMETERS_POOL);
+		if (publicRenderParametersPool == null) {
+			publicRenderParametersPool =
+				new ConcurrentHashMap<Long, Map<String, String[]>>();
 
-			if (publicRenderParametersPool == null) {
-				publicRenderParametersPool = new ConcurrentHashMap
-					<Long, Map<String, String[]>>();
+			session.setAttribute(
+				WebKeys.PUBLIC_RENDER_PARAMETERS_POOL,
+				publicRenderParametersPool);
+		}
 
-				session.setAttribute(
-					WebKeys.PUBLIC_RENDER_PARAMETERS_POOL,
-					publicRenderParametersPool);
-			}
+		try {
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			Layout layout = null;
-			Long layoutSetId = 0L;
+			LayoutSet layoutSet = layout.getLayoutSet();
 
-			try {
-				layout = LayoutLocalServiceUtil.getLayout(plid);
-				layoutSetId = layout.getLayoutSet().getLayoutSetId();
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Unable to get layout for plid + " + plid);
-				}
-			}
-
-			publicRenderParameters = publicRenderParametersPool.get(
-				layoutSetId);
+			Map<String, String[]> publicRenderParameters =
+				publicRenderParametersPool.get(layoutSet.getLayoutSetId());
 
 			if (publicRenderParameters == null) {
 				publicRenderParameters = new HashMap<String, String[]>();
 
 				publicRenderParametersPool.put(
-					layoutSetId, publicRenderParameters);
+					layoutSet.getLayoutSetId(), publicRenderParameters);
 			}
-		}
-		else {
-			publicRenderParameters = RenderParametersPool.get(
-				request, plid, PUBLIC_RENDER_PARAMETERS);
-		}
 
-		return publicRenderParameters;
+			return publicRenderParameters;
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+
+			return new HashMap<String, String[]>();
+		}
 	}
+
+	private static final String _PUBLIC_RENDER_PARAMETERS =
+		"PUBLIC_RENDER_PARAMETERS";
 
 	private static Log _log =
 		LogFactoryUtil.getLog(PublicRenderParametersPool.class);
-
-	private static final String PUBLIC_RENDER_PARAMETERS =
-		"PUBLIC_RENDER_PARAMETERS";
 
 }
