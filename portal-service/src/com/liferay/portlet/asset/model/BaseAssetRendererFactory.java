@@ -32,6 +32,12 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
+	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
+		throws Exception {
+
+		return null;
+	}
+
 	public long getClassNameId() {
 		return _classNameId;
 	}
