@@ -270,15 +270,13 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		<div id="<portlet:namespace />dailyTable" style="display: none;">
 			<aui:input checked="<%= dailyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="recur-every" name="dailyType" type="radio" value="0" />
 
-			<aui:input inlineField="<%= true %>" label="" maxlength="3" name="dailyInterval" size="3" type="text" value="<%= dailyInterval %>" /> <span class="after-field-text"><liferay-ui:message key="day-s" /></span><br />
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="day-s" maxlength="3" name="dailyInterval" size="3" type="text" value="<%= dailyInterval %>" />
 
 			<aui:input checked="<%= (dailyType == 1) %>" label="every-weekday" name="dailyType" type="radio" value="1" />
 		</div>
 
 		<div id="<portlet:namespace />weeklyTable" style="display: none;">
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="recur-every" maxlength="2" name="weeklyInterval" size="2" type="text" value="<%= weeklyInterval %>" />
-
-			<span class="after-field-text"><liferay-ui:message key="weeks-on" /></span>
+			<aui:input inlineField="<%= true %>" inlineLabel="left" label="recur-every" maxlength="2" name="weeklyInterval" size="2" suffix="weeks-on" type="text" value="<%= weeklyInterval %>" />
 
 			<%
 			String[] days = CalendarUtil.getDays(locale);
@@ -312,11 +310,9 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 		<div id="<portlet:namespace />monthlyTable" style="display: none;">
 			<aui:input checked="<%= monthlyType == 0 %>" cssClass="input-container" inlineField="<%= true %>" label="day" name="monthlyType" type="radio" value="0" />
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="monthlyDay0" size="2" type="text" value="<%= monthlyDay0 %>" />
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
-
-			<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="month-s" maxlength="2" name="monthlyInterval0" size="2" type="text" value="<%= monthlyInterval0 %>" />
 
 			<aui:input checked="<%= (monthlyType == 1) %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="monthlyType" type="radio" value="1" />
 
@@ -338,9 +334,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 				<aui:option label="<%= days[6] %>" selected="<%= monthlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
 			</aui:select>
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval1" size="2" type="text" value="<%= monthlyInterval1 %>" />
-
-			<span class="after-field-text"><liferay-ui:message key="month-s" /></span>
+			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="monthlyInterval1" size="2" suffix="month-s" type="text" value="<%= monthlyInterval1 %>" />
 		</div>
 
 		<%
@@ -365,11 +359,9 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 
 			</aui:select>
 
-			<aui:input inlineField="<%= true %>" label="" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="of-every" maxlength="2" name="yearlyDay0" size="2" type="text" value="<%= yearlyDay0 %>" />
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
-
-			<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval0" size="2" type="text" value="<%= yearlyInterval0 %>" />
 
 			<aui:input checked="<%= yearlyType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="the" name="yearlyType" type="radio" value="1" />
 
@@ -381,7 +373,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 				<aui:option label="last" selected="<%= yearlyPos == -1 %>" value="-1" />
 			</aui:select>
 
-			<aui:select cssClass="input-container" inlineField="<%= true %>" label="" name="yearlyDay1">
+			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of" name="yearlyDay1">
 				<aui:option label="weekday" selected="<%= yearlyDay1 == Calendar.MONDAY %>" value="<%= Calendar.MONDAY %>" />
 				<aui:option label="weekend-day" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
 				<aui:option label="<%= days[0] %>" selected="<%= yearlyDay1 == Calendar.SUNDAY %>" value="<%= Calendar.SUNDAY %>" />
@@ -393,7 +385,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 				<aui:option label="<%= days[6] %>" selected="<%= yearlyDay1 == Calendar.SATURDAY %>" value="<%= Calendar.SATURDAY %>" />
 			</aui:select>
 
-			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="left" label="of" name="yearlyMonth1">
+			<aui:select cssClass="input-container" inlineField="<%= true %>" inlineLabel="right" label="of-every" name="yearlyMonth1">
 
 				<%
 				for (int i = 0; i < 12; i++) {
@@ -407,9 +399,7 @@ boolean weeklyPosSa = _getWeeklyDayPos(request, Calendar.SATURDAY, event, recurr
 
 			</aui:select>
 
-			<aui:input inlineField="<%= true %>" inlineLabel="left" label="of-every" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
-
-			<span class="after-field-text"><liferay-ui:message key="year-s" /></span>
+			<aui:input inlineField="<%= true %>" inlineLabel="right" label="year-s" maxlength="2" name="yearlyInterval1" size="2" type="text" value="<%= yearlyInterval1 %>" />
 		</div>
 	</aui:column>
 </aui:fieldset>

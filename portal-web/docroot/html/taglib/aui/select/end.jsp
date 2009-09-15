@@ -33,7 +33,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 
 		</select>
 
-		<liferay-ui:message key="<%= suffix %>" />
+		<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 	</span>
 
 	<c:if test="<%= Validator.isNotNull(inlineLabel) %>">

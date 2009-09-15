@@ -64,6 +64,15 @@
 .aui-form .inline-label input {
 }
 
+.aui-form .inline-field label.inline-label {
+	margin-right: 0;
+}
+
+.aui-form .input-container {
+	position: relative;
+	top: 0.5em;
+}
+
 .aui-form .focused {
 	background: #FFFCDF;
 }

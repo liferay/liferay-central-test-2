@@ -241,7 +241,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 				<aui:field-wrapper cssClass="end-date-field" label="end-date" name="endDateType">
 					<aui:input checked="<%= endDateType == 0 %>" cssClass="input-container" label="no-end-date" name="endDateType" type="radio" value="0" />
 
-					<%--<input <%= (endDateType == 1) ? "checked" : "" %> name="<portlet:namespace />endDateType" type="radio" value="1"> End after <input maxlength="3" name="<portlet:namespace />endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" /> occurrence(s)<br />--%>
+					<%--<aui:input checked="<%= endDateType == 1 %>" cssClass="input-container" inlineField="<%= true %>" label="end-after" name="endDateType" type="radio" value="1" />--%>
+
+					<%--<aui:input inlineLabel="right" label="occurrence-s" maxlength="3" name="endDateOccurrence" size="3" type="text" value="<%= endDateOccurrence %>" />--%>
 
 					<aui:input checked="<%= endDateType == 2 %>" cssClass="input-container" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="2" />
 
@@ -266,7 +268,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 				</aui:select>
 
-				<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder">
+				<aui:select inlineField="<%= true %>" inlineLabel="left" label="before-and-again" name="secondReminder" suffix="before-the-event-by">
 
 					<%
 					for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
@@ -279,8 +281,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 					%>
 
 				</aui:select>
-
-				<span class="after-field-text"><liferay-ui:message key="before-the-event-by" /></span>
 
 				<aui:field-wrapper cssClass="reminders" label="">
 					<aui:input checked="<%= remindBy == CalEventImpl.REMIND_BY_NONE %>" label="do-not-send-a-reminder" name="remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>" />

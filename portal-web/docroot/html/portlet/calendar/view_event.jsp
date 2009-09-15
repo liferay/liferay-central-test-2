@@ -417,11 +417,22 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<tr>
 		<td class="lfr-label">
-			<liferay-ui:message key="end-date" />:
+			<c:choose>
+				<c:when test="<%= (endDateType == 0) || (endDateType == 2) %>">
+					<liferay-ui:message key="end-date" />:
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="ocurrence-s" />:
+				</c:otherwise>
+			</c:choose>
 		</td>
 		<td>
 			<c:if test="<%= (endDateType == 0) %>">
 				<liferay-ui:message key="none" />
+			</c:if>
+
+			<c:if test="<%= (endDateType == 1) %>">
+				<%= recurrence.getOccurrence() %>
 			</c:if>
 
 			<c:if test="<%= (endDateType == 2) %>">

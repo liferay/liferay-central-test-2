@@ -233,6 +233,10 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	</c:otherwise>
 </c:choose>
 
+<c:if test="<%= Validator.isNotNull(suffix) %>">
+	<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
+</c:if>
+
 <c:if test='<%= Validator.isNotNull(label) && !type.equals("radio") && Validator.isNotNull(inlineLabel) %>'>
 	<c:if test='<%= inlineLabel.equals("right") %>'>
 		<liferay-ui:message key="<%= label %>" />
@@ -243,10 +247,6 @@ if ((model != null) && Validator.isNull(type) && (dynamicAttributes.get("fieldPa
 	</c:if>
 
 	</label>
-</c:if>
-
-<c:if test="<%= Validator.isNotNull(suffix) %>">
-	<liferay-ui:message key="<%= suffix %>" />
 </c:if>
 
 <c:if test='<%= !type.equals("hidden") && !type.equals("radio") %>'>
