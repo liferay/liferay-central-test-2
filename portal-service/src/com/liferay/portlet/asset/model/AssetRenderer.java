@@ -55,7 +55,8 @@ public interface AssetRenderer {
 	public String getUrlTitle();
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest, String noSuchEntryRedirect);
+			PortletRequest portletRequest, String noSuchEntryRedirect)
+		throws Exception;
 
 	public long getUserId();
 

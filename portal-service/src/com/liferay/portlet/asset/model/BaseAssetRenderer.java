@@ -57,7 +57,9 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 	}
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest, String noSuchEntryRedirect) {
+			PortletRequest portletRequest, String noSuchEntryRedirect)
+		throws Exception {
+
 		return null;
 	}
 
