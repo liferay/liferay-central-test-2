@@ -80,7 +80,7 @@ public class Time {
 	}
 
 	public static String getDescription(long milliseconds) {
-		String s = "";
+		String s = StringPool.BLANK;
 
 		int x = 0;
 
