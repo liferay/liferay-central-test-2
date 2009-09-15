@@ -51,9 +51,9 @@ try {
 		String name = column.elementText("column-name");
 		String value = column.elementText("column-value");
 
-		sb.append("<tr><td align=\"right\" valign=\"top\"><b>");
+		sb.append("<tr><td align=\"right\" valign=\"top\"><strong>");
 		sb.append(name);
-		sb.append("</b></td><td>");
+		sb.append("</strong></td><td>");
 		sb.append(value);
 		sb.append("</td></tr>");
 	}

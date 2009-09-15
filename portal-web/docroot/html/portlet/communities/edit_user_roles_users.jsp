@@ -46,7 +46,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 
 	<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>
 
-	<i>Current</i> signifies current users associated with the <i><%= HtmlUtil.escape(role.getTitle(locale)) %></i> role. <i>Available</i> signifies all users associated with the <i><%= HtmlUtil.escape(groupName) %></i> <%= (group.isOrganization()) ? "organization" : "community" %>.
+	<em>Current</em> signifies current users associated with the <em><%= HtmlUtil.escape(role.getTitle(locale)) %></em> role. <em>Available</em> signifies all users associated with the <em><%= HtmlUtil.escape(groupName) %></em> <%= (group.isOrganization()) ? "organization" : "community" %>.
 </div>
 
 <br />

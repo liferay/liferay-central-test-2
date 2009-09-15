@@ -83,7 +83,7 @@ order = order.toEscapedModel();
 <table class="lfr-table">
 <tr>
 	<td>
-		<b><liferay-ui:message key="billing-address" /></b>
+		<strong><liferay-ui:message key="billing-address" /></strong>
 
 		<br /><br />
 
@@ -171,7 +171,7 @@ order = order.toEscapedModel();
 		</table>
 	</td>
 	<td valign="top">
-		<b><liferay-ui:message key="shipping-address" /></b>
+		<strong><liferay-ui:message key="shipping-address" /></strong>
 
 		<br /><br />
 
@@ -264,7 +264,7 @@ order = order.toEscapedModel();
 <c:if test="<%= !shoppingPrefs.usePayPal() %>">
 	<br />
 
-	<b><liferay-ui:message key="credit-card" /></b>
+	<strong><liferay-ui:message key="credit-card" /></strong>
 
 	<br /><br />
 
@@ -319,7 +319,7 @@ order = order.toEscapedModel();
 <br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
-	<b><liferay-ui:message key="comments" /></b>
+	<strong><liferay-ui:message key="comments" /></strong>
 
 	<br /><br />
 

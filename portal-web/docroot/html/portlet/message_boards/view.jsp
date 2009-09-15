@@ -164,9 +164,9 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 					sb.append("\">");
 				}
 
-				sb.append("<b>");
+				sb.append("<strong>");
 				sb.append(curCategory.getName());
-				sb.append("</b>");
+				sb.append("</strong>");
 
 				if (Validator.isNotNull(curCategory.getDescription())) {
 					sb.append("<br />");
@@ -575,9 +575,9 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 					sb.append("\">");
 				}
 
-				sb.append("<b>");
+				sb.append("<strong>");
 				sb.append(curCategory.getName());
-				sb.append("</b>");
+				sb.append("</strong>");
 
 				if (Validator.isNotNull(curCategory.getDescription())) {
 					sb.append("<br />");

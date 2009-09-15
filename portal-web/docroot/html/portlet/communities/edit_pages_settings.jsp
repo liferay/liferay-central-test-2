@@ -211,7 +211,7 @@ if (!tabs2.equals("pages")) {
 		<c:if test="<%= liveGroup.hasStagingGroup() %>">
 			<br />
 
-			<b><liferay-ui:message key="staging" /></b>
+			<strong><liferay-ui:message key="staging" /></strong>
 
 			<table class="lfr-table">
 			<tr>

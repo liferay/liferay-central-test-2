@@ -69,7 +69,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 			cal.add(Calendar.DATE, 1);
 			%>
 
-			<b><%= dateFormatDate.format(Time.getDate(cal)) %></b>
+			<strong><%= dateFormatDate.format(Time.getDate(cal)) %></strong>
 		</td>
 		<td>
 

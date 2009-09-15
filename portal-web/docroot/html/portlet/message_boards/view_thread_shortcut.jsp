@@ -88,20 +88,20 @@ if (treeWalker.isOdd()) {
 
 		<a href="<%= rowHREF %>">
 			<c:if test="<%= !readFlag %>">
-				<b>
+				<strong>
 			</c:if>
 
 			<%= HtmlUtil.escape(message.getSubject()) %>
 
 			<c:if test="<%= !readFlag %>">
-				</b>
+				</strong>
 			</c:if>
 		</a>
 	</td>
 	<td nowrap>
 		<a href="<%= rowHREF %>">
 			<c:if test="<%= !readFlag %>">
-				<b>
+				<strong>
 			</c:if>
 
 			<c:choose>
@@ -114,7 +114,7 @@ if (treeWalker.isOdd()) {
 			</c:choose>
 
 			<c:if test="<%= !readFlag %>">
-				</b>
+				</strong>
 			</c:if>
 		</a>
 	</td>

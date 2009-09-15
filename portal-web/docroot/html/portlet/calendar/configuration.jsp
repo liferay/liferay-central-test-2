@@ -140,14 +140,14 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$EVENT_START_DATE$]</b>
+				<strong>[$EVENT_START_DATE$]</strong>
 			</td>
 			<td>
 				The event start date
@@ -155,7 +155,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$EVENT_TITLE$]</b>
+				<strong>[$EVENT_TITLE$]</strong>
 			</td>
 			<td>
 				The event title
@@ -163,7 +163,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_ADDRESS$]</b>
+				<strong>[$FROM_ADDRESS$]</strong>
 			</td>
 			<td>
 				<%= HtmlUtil.escape(emailFromAddress) %>
@@ -171,7 +171,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_NAME$]</b>
+				<strong>[$FROM_NAME$]</strong>
 			</td>
 			<td>
 				<%= HtmlUtil.escape(emailFromName) %>
@@ -179,7 +179,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTAL_URL$]</b>
+				<strong>[$PORTAL_URL$]</strong>
 			</td>
 			<td>
 				<%= company.getVirtualHost() %>
@@ -187,7 +187,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -195,7 +195,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_ADDRESS$]</b>
+				<strong>[$TO_ADDRESS$]</strong>
 			</td>
 			<td>
 				The address of the email recipient
@@ -203,7 +203,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_NAME$]</b>
+				<strong>[$TO_NAME$]</strong>
 			</td>
 			<td>
 				The name of the email recipient

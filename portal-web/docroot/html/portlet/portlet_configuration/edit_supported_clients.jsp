@@ -64,7 +64,7 @@ while (itr.hasNext()) {
 			<liferay-ui:message key="portlet-mode" />
 		</td>
 		<td>
-			<b><liferay-ui:message key="<%= curPortletMode %>" /></b>
+			<strong><liferay-ui:message key="<%= curPortletMode %>" /></strong>
 		</td>
 	</tr>
 	<tr>

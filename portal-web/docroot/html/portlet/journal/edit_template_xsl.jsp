@@ -106,7 +106,7 @@ else {
 <table class="lfr-table">
 <tr>
 	<td>
-		<b><liferay-ui:message key="editor-type" /></b>
+		<strong><liferay-ui:message key="editor-type" /></strong>
 	</td>
 	<td>
 		<select name="<portlet:namespace />editorType" onChange="<portlet:namespace />updateEditorType();">

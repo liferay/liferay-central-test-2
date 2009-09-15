@@ -72,9 +72,9 @@ List<String> modelResources = ListUtil.fromArray(_CUSTOM_ATTRIBUTES_RESOURCES);
 			buffer.append(themeDisplay.getPathThemeImages());
 			buffer.append(_getIconPath(modelResource));
 			buffer.append("\" style=\"margin-right: 5px\">");
-			buffer.append("<b>");
+			buffer.append("<strong>");
 			buffer.append(LanguageUtil.get(pageContext, "model.resource." + modelResource));
-			buffer.append("</b>");
+			buffer.append("</strong>");
 			%>
 
 		</liferay-ui:search-container-column-text>

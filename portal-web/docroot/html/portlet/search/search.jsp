@@ -149,7 +149,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	//headerNames.add("tags");
 	//headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, 5, portletURL, null, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, 5, portletURL, null, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 	if (Validator.isNotNull(primarySearch) && portlet.getOpenSearchClass().equals(primarySearch)) {
 		searchContainer.setDelta(SearchContainer.DEFAULT_DELTA);
@@ -331,7 +331,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 <c:if test="<%= totalResults == 0 %>">
 	<div class="no-results">
-		<%= LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>") %>
+		<%= LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>") %>
 	</div>
 </c:if>
 

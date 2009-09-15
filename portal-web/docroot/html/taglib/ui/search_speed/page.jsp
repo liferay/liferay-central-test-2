@@ -37,6 +37,6 @@ NumberFormat integerFormat = NumberFormat.getInstance(locale);
 integerFormat.setMaximumFractionDigits(0);
 %>
 
-<%= LanguageUtil.format(pageContext, "results-of", new Object[] {"<b>" + ((searchContainer.getResultEnd() > 0) ? searchContainer.getStart() + 1 : 0)+ "</b> - <b>" + searchContainer.getResultEnd() + "</b>", "<b>" + integerFormat.format(searchContainer.getTotal()) + "</b>"}, false) %>
+<%= LanguageUtil.format(pageContext, "results-of", new Object[] {"<strong>" + ((searchContainer.getResultEnd() > 0) ? searchContainer.getStart() + 1 : 0)+ "</strong> - <strong>" + searchContainer.getResultEnd() + "</strong>", "<strong>" + integerFormat.format(searchContainer.getTotal()) + "</strong>"}, false) %>
 
-<%= LanguageUtil.format(pageContext, "search-took-x-seconds", new LanguageWrapper("<b>", doubleFormat.format(hits.getSearchTime()), "</b>"), false) %>
+<%= LanguageUtil.format(pageContext, "search-took-x-seconds", new LanguageWrapper("<strong>", doubleFormat.format(hits.getSearchTime()), "</strong>"), false) %>

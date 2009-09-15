@@ -62,7 +62,7 @@
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b><%= DateFormat.getDateInstance(DateFormat.LONG, locale).format(dateFormat.parse(date)) %></b>
+				<strong><%= DateFormat.getDateInstance(DateFormat.LONG, locale).format(dateFormat.parse(date)) %></strong>
 			</td>
 			<td align="right">
 				<c:if test="<%= previousDate != null %>">

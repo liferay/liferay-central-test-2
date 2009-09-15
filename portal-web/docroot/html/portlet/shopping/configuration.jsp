@@ -93,7 +93,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("payment-settings") %>'>
-		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<b>" + themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</b>", false) %>
+		<liferay-ui:message key="enter-a-paypal-email-address-to-send-all-payments-to-paypal" /> <%= LanguageUtil.format(pageContext, "go-to-paypal-and-set-up-ipn-to-post-to-x", "<strong>" + themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/shopping/notify</strong>", false) %>
 
 		<br /><br />
 
@@ -425,14 +425,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<br />
 
-				<b><liferay-ui:message key="definition-of-terms" /></b>
+				<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 				<br /><br />
 
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<b>[$FROM_ADDRESS$]</b>
+						<strong>[$FROM_ADDRESS$]</strong>
 					</td>
 					<td>
 						<%= emailFromAddress %>
@@ -440,7 +440,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$FROM_NAME$]</b>
+						<strong>[$FROM_NAME$]</strong>
 					</td>
 					<td>
 						<%= emailFromName %>
@@ -448,7 +448,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$ORDER_BILLING_ADDRESS$]</b>
+						<strong>[$ORDER_BILLING_ADDRESS$]</strong>
 					</td>
 					<td>
 						The order billing address
@@ -456,7 +456,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$ORDER_CURRENCY$]</b>
+						<strong>[$ORDER_CURRENCY$]</strong>
 					</td>
 					<td>
 						The order currency
@@ -464,7 +464,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$ORDER_NUMBER$]</b>
+						<strong>[$ORDER_NUMBER$]</strong>
 					</td>
 					<td>
 						The order ID
@@ -472,7 +472,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$ORDER_SHIPPING_ADDRESS$]</b>
+						<strong>[$ORDER_SHIPPING_ADDRESS$]</strong>
 					</td>
 					<td>
 						The order shipping address
@@ -480,7 +480,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$ORDER_TOTAL$]</b>
+						<strong>[$ORDER_TOTAL$]</strong>
 					</td>
 					<td>
 						The order total
@@ -488,7 +488,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$PORTAL_URL$]</b>
+						<strong>[$PORTAL_URL$]</strong>
 					</td>
 					<td>
 						<%= company.getVirtualHost() %>
@@ -496,7 +496,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$PORTLET_NAME$]</b>
+						<strong>[$PORTLET_NAME$]</strong>
 					</td>
 					<td>
 						<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -504,7 +504,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$TO_ADDRESS$]</b>
+						<strong>[$TO_ADDRESS$]</strong>
 					</td>
 					<td>
 						The address of the email recipient
@@ -512,7 +512,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$TO_NAME$]</b>
+						<strong>[$TO_NAME$]</strong>
 					</td>
 					<td>
 						The name of the email recipient

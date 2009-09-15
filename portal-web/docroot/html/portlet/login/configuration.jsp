@@ -172,14 +172,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<br />
 
-				<b><liferay-ui:message key="definition-of-terms" /></b>
+				<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 				<br /><br />
 
 				<table class="lfr-table">
 				<tr>
 					<td>
-						<b>[$FROM_ADDRESS$]</b>
+						<strong>[$FROM_ADDRESS$]</strong>
 					</td>
 					<td>
 						<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
@@ -187,7 +187,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$FROM_NAME$]</b>
+						<strong>[$FROM_NAME$]</strong>
 					</td>
 					<td>
 						<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
@@ -195,7 +195,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$PORTAL_URL$]</b>
+						<strong>[$PORTAL_URL$]</strong>
 					</td>
 					<td>
 						<%= company.getVirtualHost() %>
@@ -203,7 +203,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$REMOTE_ADDRESS$]</b>
+						<strong>[$REMOTE_ADDRESS$]</strong>
 					</td>
 					<td>
 						The browser's remote address
@@ -211,7 +211,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$REMOTE_HOST$]</b>
+						<strong>[$REMOTE_HOST$]</strong>
 					</td>
 					<td>
 						The browser's remote host
@@ -220,7 +220,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<tr>
 					<td>
-						<b>[$TO_ADDRESS$]</b>
+						<strong>[$TO_ADDRESS$]</strong>
 					</td>
 					<td>
 						The address of the email recipient
@@ -228,7 +228,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$TO_NAME$]</b>
+						<strong>[$TO_NAME$]</strong>
 					</td>
 					<td>
 						The name of the email recipient
@@ -237,7 +237,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<tr>
 					<td>
-						<b>[$USER_AGENT$]</b>
+						<strong>[$USER_AGENT$]</strong>
 					</td>
 					<td>
 						The browser's user agent
@@ -246,7 +246,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 				<tr>
 					<td>
-						<b>[$USER_ID$]</b>
+						<strong>[$USER_ID$]</strong>
 					</td>
 					<td>
 						The user ID
@@ -254,7 +254,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$USER_PASSWORD$]</b>
+						<strong>[$USER_PASSWORD$]</strong>
 					</td>
 					<td>
 						The user password
@@ -262,7 +262,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</tr>
 				<tr>
 					<td>
-						<b>[$USER_SCREENNAME$]</b>
+						<strong>[$USER_SCREENNAME$]</strong>
 					</td>
 					<td>
 						The user screen name

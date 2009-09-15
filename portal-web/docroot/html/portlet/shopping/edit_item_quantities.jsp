@@ -81,7 +81,7 @@ for (int i = 0; i < values.size(); i++) {
 	%>
 
 		<td>
-			<b><%= names.get(i) %></b>
+			<strong><%= names.get(i) %></strong>
 		</td>
 
 	<%
@@ -89,7 +89,7 @@ for (int i = 0; i < values.size(); i++) {
 	%>
 
 	<td>
-		<b><liferay-ui:message key="quantity" /></b>
+		<strong><liferay-ui:message key="quantity" /></strong>
 	</td>
 </tr>
 

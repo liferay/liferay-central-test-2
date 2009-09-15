@@ -382,7 +382,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 
 			spellCheckWindow = window.open("", "spell_check", "height=480px,status=yes,width=640px");
 
-			//spellCheckWindow.document.write("<font face=\"MS Sans Serif\" size=\"2\"><b>Loading spell checker...</b></font>");
+			//spellCheckWindow.document.write("<font face=\"MS Sans Serif\" size=\"2\"><strong>Loading spell checker...</strong></font>");
 
 			document.spell_check_fm.text.value = getHTML();
 			document.spell_check_fm.submit();

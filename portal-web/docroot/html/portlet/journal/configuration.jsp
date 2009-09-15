@@ -202,14 +202,14 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$ARTICLE_ID$]</b>
+				<strong>[$ARTICLE_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-web-content-id" />
@@ -217,7 +217,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$ARTICLE_TITLE$]</b>
+				<strong>[$ARTICLE_TITLE$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-web-content-title" />
@@ -227,7 +227,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		<c:if test='<%= tabs2.startsWith("web-content-approval-") %>'>
 			<tr>
 				<td>
-					<b>[$ARTICLE_URL$]</b>
+					<strong>[$ARTICLE_URL$]</strong>
 				</td>
 				<td>
 					<liferay-ui:message key="the-web-content-url" />
@@ -237,7 +237,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 
 		<tr>
 			<td>
-				<b>[$ARTICLE_VERSION$]</b>
+				<strong>[$ARTICLE_VERSION$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-web-content-version" />
@@ -245,7 +245,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_ADDRESS$]</b>
+				<strong>[$FROM_ADDRESS$]</strong>
 			</td>
 			<td>
 				<%= emailFromAddress %>
@@ -253,7 +253,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_NAME$]</b>
+				<strong>[$FROM_NAME$]</strong>
 			</td>
 			<td>
 				<%= emailFromName %>
@@ -261,7 +261,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTAL_URL$]</b>
+				<strong>[$PORTAL_URL$]</strong>
 			</td>
 			<td>
 				<%= company.getVirtualHost() %>
@@ -269,7 +269,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -277,7 +277,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_ADDRESS$]</b>
+				<strong>[$TO_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-address-of-the-email-recipient" />
@@ -285,7 +285,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_NAME$]</b>
+				<strong>[$TO_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-name-of-the-email-recipient" />

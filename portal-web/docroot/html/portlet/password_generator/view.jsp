@@ -141,7 +141,7 @@ catch (Exception e) {
 
 <br />
 
-<b><%= newPassword %></b>
+<strong><%= newPassword %></strong>
 
 <br /><br />
 

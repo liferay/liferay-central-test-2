@@ -1,9 +1,9 @@
-<b><liferay-ui:message key="definition-of-terms" /></b>
+<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 <table class="lfr-table">
 <tr>
 	<td>
-		<b>[$FROM_ADDRESS$]</b>
+		<strong>[$FROM_ADDRESS$]</strong>
 	</td>
 	<td>
 		<%= adminEmailFromAddress %>
@@ -11,7 +11,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$FROM_NAME$]</b>
+		<strong>[$FROM_NAME$]</strong>
 	</td>
 	<td>
 		<%= adminEmailFromName %>
@@ -19,7 +19,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$PORTAL_URL$]</b>
+		<strong>[$PORTAL_URL$]</strong>
 	</td>
 	<td>
 		<%= company.getVirtualHost() %>
@@ -27,7 +27,7 @@
 </tr>
 <tr class="password-changed-notification">
 	<td>
-		<b>[$REMOTE_ADDRESS$]</b>
+		<strong>[$REMOTE_ADDRESS$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-browser's-remote-address" />
@@ -35,7 +35,7 @@
 </tr>
 <tr class="password-changed-notification">
 	<td>
-		<b>[$REMOTE_HOST$]</b>
+		<strong>[$REMOTE_HOST$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-browser's-remote-host" />
@@ -43,7 +43,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$TO_ADDRESS$]</b>
+		<strong>[$TO_ADDRESS$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-address-of-the-email-recipient" />
@@ -51,7 +51,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$TO_NAME$]</b>
+		<strong>[$TO_NAME$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-name-of-the-email-recipient" />
@@ -59,7 +59,7 @@
 </tr>
 <tr class="password-changed-notification">
 	<td>
-		<b>[$USER_AGENT$]</b>
+		<strong>[$USER_AGENT$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-browser's-user-agent" />
@@ -67,7 +67,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$USER_ID$]</b>
+		<strong>[$USER_ID$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-user-id" />
@@ -75,7 +75,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$USER_PASSWORD$]</b>
+		<strong>[$USER_PASSWORD$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-user-password" />
@@ -83,7 +83,7 @@
 </tr>
 <tr>
 	<td>
-		<b>[$USER_SCREENNAME$]</b>
+		<strong>[$USER_SCREENNAME$]</strong>
 	</td>
 	<td>
 		<liferay-ui:message key="the-user-screen-name" />

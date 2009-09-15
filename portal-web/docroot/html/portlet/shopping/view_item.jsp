@@ -88,7 +88,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td valign="top">
-		<b><%= item.getSku() %></b>
+		<strong><%= item.getSku() %></strong>
 
 		<br /><br />
 
@@ -107,7 +107,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 	<td style="padding-left: 30px;"></td>
 	<td valign="top">
 		<span style="font-size: small;">
-		<b><%= item.getName() %></b><br />
+		<strong><%= item.getName() %></strong><br />
 		</span>
 
 		<c:if test="<%= Validator.isNotNull(item.getDescription()) %>">
@@ -153,10 +153,10 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 					<liferay-ui:message key="price" />:
 				</c:when>
 				<c:when test="<%= itemPrice.getMaxQuantity() != 0 %>">
-					<%= LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", "<b>" + new Integer(itemPrice.getMaxQuantity()) + "</b>"}, false) %>
+					<%= LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", "<strong>" + new Integer(itemPrice.getMaxQuantity()) + "</strong>"}, false) %>
 				</c:when>
 				<c:when test="<%= itemPrice.getMaxQuantity() == 0 %>">
-					<%= LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", false) %>
+					<%= LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", false) %>
 				</c:when>
 			</c:choose>
 

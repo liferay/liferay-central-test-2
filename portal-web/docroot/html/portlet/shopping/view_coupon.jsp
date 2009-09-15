@@ -30,7 +30,7 @@ ShoppingCoupon coupon = (ShoppingCoupon)request.getAttribute(WebKeys.SHOPPING_CO
 coupon = coupon.toEscapedModel();
 %>
 
-<b><%= coupon.getCouponId() %></b>
+<strong><%= coupon.getCouponId() %></strong>
 
 <br /><br />
 

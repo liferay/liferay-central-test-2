@@ -29,7 +29,7 @@
 
 <liferay-ui:message key="specify-a-url-for-a-remote-layout-template,-portlet,-or-theme" />
 
-<%= LanguageUtil.format(pageContext, "for-example-x", "<i>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</i>") %>
+<%= LanguageUtil.format(pageContext, "for-example-x", "<em>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</em>") %>
 
 <br /><br />
 
@@ -39,7 +39,7 @@
 
 <liferay-ui:message key="specify-an-optional-context-for-deployment" />
 
-<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
+<%= LanguageUtil.format(pageContext, "for-example-x", "<em>sample-jsp-portlet</em>") %>
 
 <br /><br />
 

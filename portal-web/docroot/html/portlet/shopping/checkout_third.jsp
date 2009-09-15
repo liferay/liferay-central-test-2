@@ -44,4 +44,4 @@ catch (Exception e) {
 <liferay-ui:message key="thank-you-for-your-purchase" />
 </span>
 
-<liferay-ui:message key="your-order-number-is" /> <b><%= orderId %></b>. <liferay-ui:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />
+<liferay-ui:message key="your-order-number-is" /> <strong><%= orderId %></strong>. <liferay-ui:message key="you-will-receive-an-email-shortly-with-your-order-summary-and-further-details" />

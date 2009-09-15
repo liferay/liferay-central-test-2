@@ -156,14 +156,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$COMPANY_ID$]</b>
+				<strong>[$COMPANY_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
@@ -171,7 +171,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_MX$]</b>
+				<strong>[$COMPANY_MX$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
@@ -179,7 +179,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_NAME$]</b>
+				<strong>[$COMPANY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
@@ -187,7 +187,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMMUNITY_NAME$]</b>
+				<strong>[$COMMUNITY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
@@ -195,7 +195,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MAILING_LIST_ADDRESS$]</b>
+				<strong>[$MAILING_LIST_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
@@ -203,7 +203,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_USER_ADDRESS$]</b>
+				<strong>[$MESSAGE_USER_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
@@ -211,7 +211,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_USER_NAME$]</b>
+				<strong>[$MESSAGE_USER_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-user-who-added-the-message" />
@@ -219,7 +219,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -294,14 +294,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$CATEGORY_NAME$]</b>
+				<strong>[$CATEGORY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-category-in-which-the-message-has-been-posted" />
@@ -309,7 +309,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_ID$]</b>
+				<strong>[$COMPANY_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-id-associated-with-the-message-board" />
@@ -317,7 +317,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_MX$]</b>
+				<strong>[$COMPANY_MX$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-mx-associated-with-the-message-board" />
@@ -325,7 +325,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_NAME$]</b>
+				<strong>[$COMPANY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-name-associated-with-the-message-board" />
@@ -333,7 +333,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMMUNITY_NAME$]</b>
+				<strong>[$COMMUNITY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-community-name-associated-with-the-message-board" />
@@ -341,7 +341,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_ADDRESS$]</b>
+				<strong>[$FROM_ADDRESS$]</strong>
 			</td>
 			<td>
 				<%= emailFromAddress %>
@@ -349,7 +349,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_NAME$]</b>
+				<strong>[$FROM_NAME$]</strong>
 			</td>
 			<td>
 				<%= emailFromName %>
@@ -357,7 +357,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MAILING_LIST_ADDRESS$]</b>
+				<strong>[$MAILING_LIST_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-mailing-list" />
@@ -365,7 +365,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_BODY$]</b>
+				<strong>[$MESSAGE_BODY$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-message-body" />
@@ -373,7 +373,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_ID$]</b>
+				<strong>[$MESSAGE_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-message-id" />
@@ -381,7 +381,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_SUBJECT$]</b>
+				<strong>[$MESSAGE_SUBJECT$]</strong>
 			</td>
 			<td>
 				The message subject
@@ -389,7 +389,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_USER_ADDRESS$]</b>
+				<strong>[$MESSAGE_USER_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-message" />
@@ -397,7 +397,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$MESSAGE_USER_NAME$]</b>
+				<strong>[$MESSAGE_USER_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-user-who-added-the-message" />
@@ -405,7 +405,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTAL_URL$]</b>
+				<strong>[$PORTAL_URL$]</strong>
 			</td>
 			<td>
 				<%= company.getVirtualHost() %>
@@ -413,7 +413,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -421,7 +421,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_ADDRESS$]</b>
+				<strong>[$TO_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-address-of-the-email-recipient" />
@@ -429,7 +429,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_NAME$]</b>
+				<strong>[$TO_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-name-of-the-email-recipient" />

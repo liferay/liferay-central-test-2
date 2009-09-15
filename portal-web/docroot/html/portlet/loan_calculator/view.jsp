@@ -114,7 +114,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<liferay-ui:message key="monthly-payment" />
 	</td>
 	<td>
-		<b><%= integerFormat.format(amountPerPayment) %></b>
+		<strong><%= integerFormat.format(amountPerPayment) %></strong>
 	</td>
 </tr>
 <tr>
@@ -122,7 +122,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<liferay-ui:message key="interest-paid" />
 	</td>
 	<td>
-		<b><%= integerFormat.format(interestPaid) %></b>
+		<strong><%= integerFormat.format(interestPaid) %></strong>
 	</td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		<liferay-ui:message key="total-paid" />
 	</td>
 	<td>
-		<b><%= integerFormat.format(totalPaid) %></b>
+		<strong><%= integerFormat.format(totalPaid) %></strong>
 	</td>
 </tr>
 </table>

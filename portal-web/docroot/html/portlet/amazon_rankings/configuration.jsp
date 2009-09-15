@@ -50,7 +50,7 @@ isbnsString = StringUtil.merge(isbns, StringPool.SPACE);
 		String isbn = (String)enu.nextElement();
 	%>
 
-		<b><%= isbn %></b><%= (enu.hasMoreElements()) ? ", " : "." %>
+		<strong><%= isbn %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
 
 	<%
 	}

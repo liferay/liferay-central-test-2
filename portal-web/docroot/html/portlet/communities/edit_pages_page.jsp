@@ -251,7 +251,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						<br />
 					</td>
 					<td colspan="3">
-						<%= LanguageUtil.format(pageContext, "for-example-x", "<i>/news</i>") %>
+						<%= LanguageUtil.format(pageContext, "for-example-x", "<em>/news</em>") %>
 					</td>
 				</tr>
 				<tr>

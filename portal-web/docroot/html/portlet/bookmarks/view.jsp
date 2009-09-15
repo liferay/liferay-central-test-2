@@ -103,9 +103,9 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						buffer.append("\" class=\"label-icon\" src=\"");
 						buffer.append(themeDisplay.getPathThemeImages());
 						buffer.append("/common/folder.png\">");
-						buffer.append("<b>");
+						buffer.append("<strong>");
 						buffer.append(curFolder.getName());
-						buffer.append("</b>");
+						buffer.append("</strong>");
 
 						if (Validator.isNotNull(curFolder.getDescription())) {
 							buffer.append("<br />");

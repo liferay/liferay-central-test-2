@@ -101,7 +101,7 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 		headerNames.add("document");
 		headerNames.add("score");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
 			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
@@ -211,9 +211,9 @@ portletURL.setParameter("typeSelection", DLFileEntry.class.getName());
 			sb.append("<img align=\"left\" border=\"0\" src=\"");
 			sb.append(themeDisplay.getPathThemeImages());
 			sb.append("/common/folder.png\">");
-			sb.append("<b>");
+			sb.append("<strong>");
 			sb.append(curFolder.getName());
-			sb.append("</b>");
+			sb.append("</strong>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
 				sb.append("<br />");

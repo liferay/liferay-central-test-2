@@ -84,14 +84,14 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 
 <br />
 
-<b><liferay-ui:message key="definition-of-terms" /></b>
+<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 <br /><br />
 
 <table class="lfr-table">
 <tr>
 	<td>
-		<b>[$FROM_ADDRESS$]</b>
+		<strong>[$FROM_ADDRESS$]</strong>
 	</td>
 	<td>
 		The address of the email sender
@@ -99,7 +99,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 <tr>
 	<td>
-		<b>[$FROM_NAME$]</b>
+		<strong>[$FROM_NAME$]</strong>
 	</td>
 	<td>
 		The name of the email sender
@@ -107,7 +107,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 <tr>
 	<td>
-		<b>[$PAGE_URL$]</b>
+		<strong>[$PAGE_URL$]</strong>
 	</td>
 	<td>
 		<%= PortalUtil.getLayoutFullURL(layout, themeDisplay) %>
@@ -115,7 +115,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 </tr>
 <tr>
 	<td>
-		<b>[$PORTAL_URL$]</b>
+		<strong>[$PORTAL_URL$]</strong>
 	</td>
 	<td>
 		<%= company.getVirtualHost() %>

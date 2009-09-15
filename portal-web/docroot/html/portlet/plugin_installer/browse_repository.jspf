@@ -247,9 +247,9 @@ try {
 			}
 		}
 
-		sb.append("<b>");
+		sb.append("<strong>");
 		sb.append(pluginPackageName);
-		sb.append("</b> ");
+		sb.append("</strong> ");
 		sb.append(pluginPackageAvailableVersion);
 
 		if (pluginPackage != null) {

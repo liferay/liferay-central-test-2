@@ -138,9 +138,9 @@ List updatablePackageIds = new ArrayList();
 
 						StringBuilder sb = new StringBuilder();
 
-						sb.append("<b>");
+						sb.append("<strong>");
 						sb.append(pluginPackageName);
-						sb.append("</b>");
+						sb.append("</strong>");
 						sb.append("<br />/");
 						sb.append(pluginPackageContext);
 

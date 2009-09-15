@@ -122,14 +122,14 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$COMPANY_ID$]</b>
+				<strong>[$COMPANY_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
@@ -137,7 +137,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_MX$]</b>
+				<strong>[$COMPANY_MX$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
@@ -145,7 +145,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_NAME$]</b>
+				<strong>[$COMPANY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
@@ -153,7 +153,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMMUNITY_NAME$]</b>
+				<strong>[$COMMUNITY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
@@ -161,7 +161,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_USER_ADDRESS$]</b>
+				<strong>[$PAGE_USER_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
@@ -169,7 +169,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_USER_NAME$]</b>
+				<strong>[$PAGE_USER_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-user-who-added-the-page" />
@@ -177,7 +177,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -252,14 +252,14 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 		<br />
 
-		<b><liferay-ui:message key="definition-of-terms" /></b>
+		<strong><liferay-ui:message key="definition-of-terms" /></strong>
 
 		<br /><br />
 
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<b>[$COMPANY_ID$]</b>
+				<strong>[$COMPANY_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-id-associated-with-the-wiki" />
@@ -267,7 +267,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_MX$]</b>
+				<strong>[$COMPANY_MX$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-mx-associated-with-the-wiki" />
@@ -275,7 +275,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMPANY_NAME$]</b>
+				<strong>[$COMPANY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
@@ -283,7 +283,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$COMMUNITY_NAME$]</b>
+				<strong>[$COMMUNITY_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
@@ -291,7 +291,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$DIFFS_URL$]</b>
+				<strong>[$DIFFS_URL$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-url-of-the-page-comparing-this-page-content-with-the-previous-version" />
@@ -299,7 +299,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_ADDRESS$]</b>
+				<strong>[$FROM_ADDRESS$]</strong>
 			</td>
 			<td>
 				<%= emailFromAddress %>
@@ -307,7 +307,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$FROM_NAME$]</b>
+				<strong>[$FROM_NAME$]</strong>
 			</td>
 			<td>
 				<%= emailFromName %>
@@ -315,7 +315,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$NODE_NAME$]</b>
+				<strong>[$NODE_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-node-in-which-the-page-was-added" />
@@ -323,7 +323,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_CONTENT$]</b>
+				<strong>[$PAGE_CONTENT$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-content" />
@@ -331,7 +331,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_DATE_UPDATE$]</b>
+				<strong>[$PAGE_DATE_UPDATE$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-date-of-the-modifications" />
@@ -339,7 +339,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_DIFFS$]</b>
+				<strong>[$PAGE_DIFFS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-content-compared-with-the-previous-version-page-content" />
@@ -347,7 +347,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_ID$]</b>
+				<strong>[$PAGE_ID$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-id" />
@@ -355,7 +355,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_SUMMARY$]</b>
+				<strong>[$PAGE_SUMMARY$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-summary-of-the-page-or-the-modifications" />
@@ -363,7 +363,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_TITLE$]</b>
+				<strong>[$PAGE_TITLE$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-title" />
@@ -371,7 +371,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_URL$]</b>
+				<strong>[$PAGE_URL$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-page-url" />
@@ -379,7 +379,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_USER_ADDRESS$]</b>
+				<strong>[$PAGE_USER_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-email-address-of-the-user-who-added-the-page" />
@@ -387,7 +387,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PAGE_USER_NAME$]</b>
+				<strong>[$PAGE_USER_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-user-who-added-the-page" />
@@ -395,7 +395,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTAL_URL$]</b>
+				<strong>[$PORTAL_URL$]</strong>
 			</td>
 			<td>
 				<%= company.getVirtualHost() %>
@@ -403,7 +403,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$PORTLET_NAME$]</b>
+				<strong>[$PORTLET_NAME$]</strong>
 			</td>
 			<td>
 				<%= ((RenderResponseImpl)renderResponse).getTitle() %>
@@ -411,7 +411,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_ADDRESS$]</b>
+				<strong>[$TO_ADDRESS$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-address-of-the-email-recipient" />
@@ -419,7 +419,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<b>[$TO_NAME$]</b>
+				<strong>[$TO_NAME$]</strong>
 			</td>
 			<td>
 				<liferay-ui:message key="the-name-of-the-email-recipient" />

@@ -122,9 +122,9 @@ tabs1Names += ",recent-images";
 				sb.append("<img align=\"left\" border=\"0\" src=\"");
 				sb.append(themeDisplay.getPathThemeImages());
 				sb.append("/common/folder.png\">");
-				sb.append("<b>");
+				sb.append("<strong>");
 				sb.append(curFolder.getName());
-				sb.append("</b>");
+				sb.append("</strong>");
 
 				if (Validator.isNotNull(curFolder.getDescription())) {
 					sb.append("<br />");

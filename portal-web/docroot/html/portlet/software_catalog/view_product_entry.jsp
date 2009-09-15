@@ -306,9 +306,9 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("<b>");
+			sb.append("<strong>");
 			sb.append(curProductVersion.getVersion());
-			sb.append("</b>");
+			sb.append("</strong>");
 
 			if (Validator.isNotNull(curProductVersion.getChangeLog())) {
 				sb.append("<br />");

@@ -179,9 +179,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("<b>");
+			sb.append("<strong>");
 			sb.append(productEntry.getName());
-			sb.append("</b>");
+			sb.append("</strong>");
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
 				sb.append("<br />");
@@ -376,9 +376,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("<b>");
+			sb.append("<strong>");
 			sb.append(productEntry.getName());
-			sb.append("</b>");
+			sb.append("</strong>");
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
 				sb.append("<br />");

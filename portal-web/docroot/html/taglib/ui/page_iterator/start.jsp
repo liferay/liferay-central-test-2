@@ -143,7 +143,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			sb.append(i);
 
 			if (i == cur) {
-				sb.append("</b>");
+				sb.append("</strong>");
 			}
 			else {
 				sb.append("</a>");

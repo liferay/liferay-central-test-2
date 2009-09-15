@@ -104,9 +104,9 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("\">");
 	}
 
-	sb.append("<b>");
+	sb.append("<strong>");
 	sb.append(title);
-	sb.append("</b>");
+	sb.append("</strong>");
 
 	if (showEditPluginHREF) {
 		sb.append("</a>");

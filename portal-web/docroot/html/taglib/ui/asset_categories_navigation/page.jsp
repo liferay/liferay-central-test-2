@@ -101,9 +101,9 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cur
 		sb.append("<li><span>");
 
 		if (categoryId == curCategoryId) {
-			sb.append("<b>");
+			sb.append("<strong>");
 			sb.append(name);
-			sb.append("</b>");
+			sb.append("</strong>");
 		}
 		else {
 			portletURL.setParameter("categoryId", String.valueOf(categoryId));

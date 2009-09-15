@@ -36,7 +36,7 @@
 
 <liferay-ui:message key="specify-an-optional-context-for-deployment" />
 
-<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet</i>") %>
+<%= LanguageUtil.format(pageContext, "for-example-x", "<em>sample-jsp-portlet</em>") %>
 
 <br /><br />
 

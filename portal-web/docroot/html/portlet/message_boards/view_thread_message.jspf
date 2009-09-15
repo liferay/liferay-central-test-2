@@ -116,7 +116,7 @@
 		<td valign="top">
 			<div class="thread-top float-container">
 				<div class="subject">
-					<a href="#<portlet:namespace />message_<%= message.getMessageId() %>" title="<liferay-ui:message key="permanent-link-to-this-item" />"><b><%= HtmlUtil.escape(message.getSubject()) %></b></a><br />
+					<a href="#<portlet:namespace />message_<%= message.getMessageId() %>" title="<liferay-ui:message key="permanent-link-to-this-item" />"><strong><%= HtmlUtil.escape(message.getSubject()) %></strong></a><br />
 
 					<div class="tags">
 						<liferay-ui:asset-tags-summary
@@ -404,7 +404,7 @@
 					<table class="lfr-table">
 					<tr>
 						<td valign="top">
-							<b><liferay-ui:message key="attachments" />:</b>
+							<strong><liferay-ui:message key="attachments" />:</strong>
 						</td>
 						<td>
 

@@ -68,7 +68,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		<br /><br />
 
 		<span style="font-size: small;">
-		<b><liferay-ui:message key="invoice" /></b>
+		<strong><liferay-ui:message key="invoice" /></strong>
 		</span>
 
 		<br /><br />
@@ -87,7 +87,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		<liferay-ui:message key="order" /> #:
 	</td>
 	<td>
-		<b><%= order.getNumber() %></b>
+		<strong><%= order.getNumber() %></strong>
 	</td>
 </tr>
 <tr>
@@ -113,7 +113,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 <table class="lfr-table">
 <tr>
 	<td>
-		<b><liferay-ui:message key="billing-address" /></b>
+		<strong><liferay-ui:message key="billing-address" /></strong>
 
 		<br /><br />
 
@@ -201,7 +201,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		</table>
 	</td>
 	<td valign="top">
-		<b><liferay-ui:message key="shipping-address" /></b>
+		<strong><liferay-ui:message key="shipping-address" /></strong>
 
 		<br /><br />
 
@@ -295,7 +295,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <c:choose>
 	<c:when test="<%= shoppingPrefs.usePayPal() %>">
-		<b>PayPal</b>
+		<strong>PayPal</strong>
 
 		<br /><br />
 
@@ -360,8 +360,8 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<td>
 
 					<%
-					String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay)) + "\"><b><u>";
-					String payPalLinkClose = "</u></b></a>";
+					String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay)) + "\"><strong><u>";
+					String payPalLinkClose = "</u></strong></a>";
 					%>
 
 					<%= LanguageUtil.format(pageContext, "please-complete-your-order", new Object[] {payPalLinkOpen, payPalLinkClose}, false) %>
@@ -371,7 +371,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		</table>
 	</c:when>
 	<c:otherwise>
-		<b><liferay-ui:message key="credit-card" /></b>
+		<strong><liferay-ui:message key="credit-card" /></strong>
 
 		<br /><br />
 
@@ -427,7 +427,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 <br />
 
 <c:if test="<%= Validator.isNotNull(order.getComments()) %>">
-	<b><liferay-ui:message key="comments" /></b>
+	<strong><liferay-ui:message key="comments" /></strong>
 
 	<br /><br />
 

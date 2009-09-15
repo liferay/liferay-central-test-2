@@ -66,7 +66,7 @@ decimalFormat.setMinimumFractionDigits(2);
 
 </select>
 
-<b><liferay-ui:message key="to" /></b>
+<strong><liferay-ui:message key="to" /></strong>
 
 <select name="<portlet:namespace />to">
 
@@ -95,7 +95,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		<table border="1" cellpadding="3" cellspacing="0" width="100%">
 		<tr class="portlet-section-header results-header">
 			<td>
-				<b><liferay-ui:message key="currency" /></b>
+				<strong><liferay-ui:message key="currency" /></strong>
 			</td>
 
 			<%
@@ -159,11 +159,11 @@ decimalFormat.setMinimumFractionDigits(2);
 		<tr>
 			<td align="center" width="33%">
 				<%= currency.getFromSymbol() %><br />
-				<b><%= number %></b>
+				<strong><%= number %></strong>
 			</td>
 			<td align="center" width="33%">
 				<%= currency.getToSymbol() %><br />
-				<b><%= decimalFormat.format(number * currency.getRate()) %></b>
+				<strong><%= decimalFormat.format(number * currency.getRate()) %></strong>
 			</td>
 			<td align="center" width="34%">
 				<liferay-ui:message key="historical-charts" /><br />

@@ -125,7 +125,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 				String url = (String)enu.nextElement();
 			%>
 
-				<b><%= url %></b><%= (enu.hasMoreElements()) ? ", " : "." %>
+				<strong><%= url %></strong><%= (enu.hasMoreElements()) ? ", " : "." %>
 
 			<%
 			}

@@ -74,7 +74,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		headerNames.add("modified-date");
 		headerNames.add("score");
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		try {
 			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), groupId, themeDisplay.getUserId(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());

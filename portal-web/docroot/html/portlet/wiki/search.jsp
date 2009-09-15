@@ -63,7 +63,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	addPageURL.setParameter("editTitle", "1");
 	%>
 
-	<b><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></b>
+	<strong><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></strong>
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
@@ -80,7 +80,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	headerNames.add("page");
 	headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 	try {
 		Hits results = WikiNodeLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), nodeIds, keywords, searchContainer.getStart(), searchContainer.getEnd());

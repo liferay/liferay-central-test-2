@@ -132,7 +132,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		ShoppingItem item = ShoppingItemLocalServiceUtil.getItem(badItemIds[i]);
 	%>
 
-		<b><%= item.getSku() %></b><c:if test="<%= i + 1 < badItemIds.length %>">,</c:if>
+		<strong><%= item.getSku() %></strong><c:if test="<%= i + 1 < badItemIds.length %>">,</c:if>
 
 	<%
 	}
@@ -309,10 +309,10 @@ for (int i = 0; itr.hasNext(); i++) {
 			sb.append(": ");
 		}
 		else if (itemPrice.getMaxQuantity() != 0) {
-			sb.append(LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", "<b>" + new Integer(itemPrice.getMaxQuantity()) + "</b>"}, false));
+			sb.append(LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", "<strong>" + new Integer(itemPrice.getMaxQuantity()) + "</strong>"}, false));
 		}
 		else if (itemPrice.getMaxQuantity() == 0) {
-			sb.append(LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", false));
+			sb.append(LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<strong>" + new Integer(itemPrice.getMinQuantity()) + "</strong>", false));
 		}
 
 		if (itemPrice.getDiscount() <= 0) {

@@ -255,7 +255,7 @@ String scheduleTitle = LanguageUtil.get(pageContext, "schedule");
 			}
 			%>
 
-			<b class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></b>
+			<b class="journal-article-status journal-article-status-<%= status %>"><liferay-ui:message key="<%= status %>" /></strong>
 
 			<c:if test="<%= article != null %>">
 				<br /><br />
