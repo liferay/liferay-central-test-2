@@ -280,12 +280,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<liferay-ui:icon
 			image='<%= "../document_library/" + DLUtil.getGenericName(extension) %>'
 			message='download'
-			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+			url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
 			cssClass="file-entry-avatar"
 		/>
 
 		<div class="file-entry-name">
-			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
+			<a href="<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>">
 				<%= titleWithExtension %>
 			</a>
 		</div>
@@ -302,7 +302,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<liferay-ui:icon
 						image='<%= "../document_library/" + conversion %>'
 						message="<%= conversion.toUpperCase() %>"
-						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
+						url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) + "&targetExtension=" + conversion %>'
 						label="<%= true %>"
 					/>
 
@@ -402,6 +402,8 @@ if (!PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED || !DLFileEntryPermission.contai
 				sb.append(themeDisplay.getPathMain());
 				sb.append("/document_library/get_file?p_l_id=");
 				sb.append(themeDisplay.getPlid());
+				sb.append("&groupId=");
+				sb.append(themeDisplay.getScopeGroupId());
 				sb.append("&folderId=");
 				sb.append(folderId);
 				sb.append("&name=");
