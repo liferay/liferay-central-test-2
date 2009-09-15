@@ -131,9 +131,14 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		renderRequest.setAttribute(WebKeys.BLOGS_ENTRY, _entry);
+		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+			renderRequest.setAttribute(WebKeys.BLOGS_ENTRY, _entry);
 
-		return "/html/portlet/blogs/asset/" + template + ".jsp";
+			return "/html/portlet/blogs/asset/" + template + ".jsp";
+		}
+		else {
+			return null;
+		}
 	}
 
 	private BlogsEntry _entry;

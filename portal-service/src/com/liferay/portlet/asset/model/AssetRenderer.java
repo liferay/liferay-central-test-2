@@ -34,6 +34,10 @@ import javax.portlet.RenderResponse;
  */
 public interface AssetRenderer {
 
+	public static final String TEMPLATE_ABSTRACT = "abstract";
+
+	public static final String TEMPLATE_FULL_CONTENT = "full_content";
+
 	public String[] getAvailableLocales() throws Exception;
 
 	public long getClassPK();

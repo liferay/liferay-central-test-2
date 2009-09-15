@@ -77,7 +77,40 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 		<div class="asset-content">
 			<div class="asset-summary">
-				<%= summary %>
+
+				<%
+				Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), assetRendererFactory.getPortletId());
+				PortletApp selPortletApp = selPortlet.getPortletApp();
+
+				String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_ABSTRACT);
+
+				request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
+				request.setAttribute("abstracts.jsp_abstract_length", abstractLength);
+				%>
+
+				<c:choose>
+					<c:when test="<%= path == null %>">
+						<%= summary %>
+					</c:when>
+					<c:when test="<%= selPortletApp.isWARFile() %>">
+
+						<%
+						PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);
+						PortletContextImpl selPortletCtx = (PortletContextImpl)selPortletConfig.getPortletContext();
+
+						RequestDispatcher selRequestDispatcher = selPortletCtx.getServletContext().getRequestDispatcher(path);
+
+						StringServletResponse stringResponse = new StringServletResponse(response);
+
+						selRequestDispatcher.include(request, stringResponse);
+						%>
+
+						<%= stringResponse.getString() %>
+					</c:when>
+					<c:otherwise>
+						<liferay-util:include page="<%= path %>" />
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">

@@ -115,11 +115,12 @@ request.setAttribute("view.jsp-showIconLabel", true);
 	</c:if>
 
 	<div class="asset-content">
+
 		<%
 		Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), assetRendererFactory.getPortletId());
 		PortletApp selPortletApp = selPortlet.getPortletApp();
 
-		String path = assetRenderer.render(renderRequest, renderResponse, "full_content");
+		String path = assetRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_FULL_CONTENT);
 
 		request.setAttribute(WebKeys.ASSET_RENDERER, assetRenderer);
 		%>
