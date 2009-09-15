@@ -30,11 +30,13 @@
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
 int abstractLength = (Integer)request.getAttribute("abstracts.jsp_abstract_length");
+
+Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 %>
 
 <c:if test="<%= smallImage != null %>">
 	<a href="<%= assetRenderer.getURLViewInContext(renderRequest, StringPool.BLANK) %>">
-		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="asset-small-image" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getSmallImageId() %>">
+		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="asset-small-image" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>">
 	</a>
 
 	<%= StringUtil.shorten(image.getDescription(), abstractLength) %>
