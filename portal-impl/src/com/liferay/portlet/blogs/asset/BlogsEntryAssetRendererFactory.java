@@ -46,8 +46,7 @@ import javax.portlet.PortletURL;
  */
 public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
-	public static final String CLASS_NAME =
-		"com.liferay.portlet.blogs.model.BlogsEntry";
+	public static final String CLASS_NAME = BlogsEntry.class.getName();
 
 	public static final String TYPE = "blog";
 
