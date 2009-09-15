@@ -279,7 +279,7 @@ if (entry != null) {
 	portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
 	PortalUtil.addPortletBreadcrumbEntry(request, entry.getTitle(), portletURL.toString());
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "update-entry"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
