@@ -302,6 +302,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PUBLIC_RENDER_PARAMETERS = "PUBLIC_RENDER_PARAMETERS";
 
+	public static final String PUBLIC_RENDER_PARAMETERS_POOL = "PUBLIC_RENDER_PARAMETERS_POOL";
+
 	public static final String REFERER = "referer";
 
 	public static final String RENDER_PORTLET = "RENDER_PORTLET";

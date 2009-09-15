@@ -45,6 +45,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -86,6 +87,7 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -247,6 +249,29 @@ public class LayoutAction extends Action {
 		}
 
 		request.setAttribute(WebKeys.FORWARD_URL, forwardURL);
+	}
+
+	protected List<Portlet> getLayoutSetPortlets(Layout layout)
+		throws Exception{
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			LayoutConstants.TYPE_PORTLET);
+
+		List<Portlet> portlets = new ArrayList<Portlet>();
+
+		for (Layout currentLayout : layouts) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet) currentLayout.getLayoutType();
+
+			List<Portlet> layoutPortlets =  layoutTypePortlet.getPortlets();
+
+			if (portlets != null) {
+				portlets.addAll(layoutPortlets);
+			}
+		}
+
+		return portlets;
 	}
 
 	protected void includeLayoutContent(
@@ -634,19 +659,30 @@ public class LayoutAction extends Action {
 					actionResponseImpl.getRenderParameterMap());
 
 				if (actionResponseImpl.getEvents().size() > 0) {
-					if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
-						LayoutTypePortlet layoutTypePortlet =
-							(LayoutTypePortlet)layout.getLayoutType();
+					List<Portlet> portlets = null;
 
-						List<Portlet> portlets =
-							layoutTypePortlet.getPortlets();
+					if (PropsValues.PORTLET_EVENT_DISTRIBUTION.equals(
+						"LAYOUT_SET")) {
 
-						processEvents(
-							actionRequestImpl, actionResponseImpl, portlets);
-
-						actionRequestImpl.defineObjects(
-							portletConfig, actionResponseImpl);
+						portlets = getLayoutSetPortlets(layout);
 					}
+					else {
+						if (layout.getType().equals(
+							LayoutConstants.TYPE_PORTLET)) {
+
+							LayoutTypePortlet layoutTypePortlet =
+								(LayoutTypePortlet)layout.getLayoutType();
+
+							portlets =
+								layoutTypePortlet.getPortlets();
+						}
+					}
+
+					processEvents(
+						actionRequestImpl, actionResponseImpl, portlets);
+
+					actionRequestImpl.defineObjects(
+						portletConfig, actionResponseImpl);
 				}
 			}
 			finally {

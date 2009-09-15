@@ -504,8 +504,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 		_portlet = portlet;
 		_portletName = portlet.getPortletId();
-		_publicRenderParameters = RenderParametersPool.get(
-			request, plid, RenderParametersPool.PUBLIC_RENDER_PARAMETERS);
+		_publicRenderParameters = PublicRenderParametersPool.get(request, plid);
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
 

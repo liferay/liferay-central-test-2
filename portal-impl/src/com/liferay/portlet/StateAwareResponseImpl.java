@@ -281,9 +281,8 @@ public abstract class StateAwareResponseImpl
 		_portletName = portletName;
 		_user = user;
 		_layout = layout;
-		_publicRenderParameters = RenderParametersPool.get(
-			getHttpServletRequest(), layout.getPlid(),
-			RenderParametersPool.PUBLIC_RENDER_PARAMETERS);
+		_publicRenderParameters = PublicRenderParametersPool.get(
+			getHttpServletRequest(), layout.getPlid());
 
 		setWindowState(windowState);
 		setPortletMode(portletMode);
