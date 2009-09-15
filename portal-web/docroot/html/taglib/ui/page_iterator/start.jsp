@@ -132,7 +132,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 		for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 			if (i == cur) {
-				sb.append("<b class='journal-article-page-number'>");
+				sb.append("<strong class='journal-article-page-number'>");
 			}
 			else {
 				sb.append("<a class='journal-article-page-number' href='");

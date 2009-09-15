@@ -47,7 +47,7 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 	<table class="lfr-table">
 	<tr>
 		<td>
-			<b class="category-header"><%= leftTitle %></strong>
+			<strong class="category-header"><%= leftTitle %></strong>
 
 			<table>
 			<tr>
@@ -87,7 +87,7 @@ List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightLi
 			<a href="javascript:Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
 		</td>
 		<td>
-			<b class="category-header"><%= rightTitle %></strong>
+			<strong class="category-header"><%= rightTitle %></strong>
 
 			<table>
 			<tr>
