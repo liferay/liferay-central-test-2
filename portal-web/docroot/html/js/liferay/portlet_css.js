@@ -1039,16 +1039,24 @@ Liferay.PortletCSS = {
 				if (!portletData.useCustomTitle || instance._portletLanguage.find('option:selected').val() != instance._currentLanguage) {
 					return;
 				}
-				var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
-				var portletTitleHtml = instance._curPortlet.find('.portlet-title').eq(0).html();
-				var portletTitleRegExMatch = portletTitleHtml.match(re);
-				var portletTitleWithoutText = portletTitleRegExMatch || [];
 
-				portletTitleWithoutText = portletTitleWithoutText.join('');
-				instance._curPortlet.find('.portlet-title').eq(0).html(portletTitleWithoutText + this.value);
+				var portletTitle = instance._curPortlet.find('.portlet-title');
 
-				portletData.title = this.value;
-				instance._portletTitles(false, this.value);
+				var cruft = portletTitle.html().match(/<\/?[^>]+>|\n|\r|\t/gim);
+
+				if (cruft) {
+					cruft = cruft.join('');
+				}
+				else {
+					cruft = '';
+				}
+
+				var value = this.value;
+
+				portletTitle.html(cruft + value);
+
+				portletData.title = value;
+				instance._portletTitles(false, value);
 			}
 		);
 
