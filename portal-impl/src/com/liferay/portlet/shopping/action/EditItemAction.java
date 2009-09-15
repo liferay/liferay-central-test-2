@@ -162,7 +162,6 @@ public class EditItemAction extends PortletAction {
 		long itemId = ParamUtil.getLong(uploadRequest, "itemId");
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(uploadRequest, "categoryId");
 		String sku = ParamUtil.getString(uploadRequest, "sku");
 		String name = ParamUtil.getString(uploadRequest, "name");

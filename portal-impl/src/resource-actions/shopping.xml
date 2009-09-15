@@ -23,8 +23,8 @@
 			<portlet-name>34</portlet-name>
 		</portlet-ref>
 		<supports>
-			<action-key>ADD_ITEM</action-key>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>ADD_ITEM</action-key>
 			<action-key>MANAGE_COUPONS</action-key>
 			<action-key>MANAGE_ORDERS</action-key>
 			<action-key>VIEW</action-key>
@@ -32,8 +32,8 @@
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
-			<action-key>ADD_ITEM</action-key>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>ADD_ITEM</action-key>
 			<action-key>MANAGE_COUPONS</action-key>
 			<action-key>MANAGE_ORDERS</action-key>
 		</guest-unsupported>

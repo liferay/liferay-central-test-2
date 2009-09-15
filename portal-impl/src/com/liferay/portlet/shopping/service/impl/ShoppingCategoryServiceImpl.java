@@ -54,8 +54,8 @@ public class ShoppingCategoryServiceImpl
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		ShoppingCategory category =
-			shoppingCategoryLocalService.getCategory(categoryId);
+		ShoppingCategory category = shoppingCategoryLocalService.getCategory(
+			categoryId);
 
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), category, ActionKeys.DELETE);
@@ -66,8 +66,8 @@ public class ShoppingCategoryServiceImpl
 	public ShoppingCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
-		ShoppingCategory category =
-			shoppingCategoryLocalService.getCategory(categoryId);
+		ShoppingCategory category = shoppingCategoryLocalService.getCategory(
+			categoryId);
 
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), category, ActionKeys.VIEW);
@@ -81,8 +81,8 @@ public class ShoppingCategoryServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		ShoppingCategory category =
-			shoppingCategoryLocalService.getCategory(categoryId);
+		ShoppingCategory category = shoppingCategoryLocalService.getCategory(
+			categoryId);
 
 		ShoppingCategoryPermission.check(
 			getPermissionChecker(), category, ActionKeys.UPDATE);

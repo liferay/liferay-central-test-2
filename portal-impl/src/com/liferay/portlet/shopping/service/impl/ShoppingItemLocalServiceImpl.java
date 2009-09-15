@@ -218,12 +218,12 @@ public class ShoppingItemLocalServiceImpl
 			serviceContext.getAddGuestPermissions()) {
 
 			addItemResources(
-				groupId, item, serviceContext.getAddCommunityPermissions(),
+				item, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addItemResources(
-				groupId, item, serviceContext.getCommunityPermissions(),
+				item, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -238,17 +238,16 @@ public class ShoppingItemLocalServiceImpl
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
 		addItemResources(
-			item.getGroupId(), item, addCommunityPermissions,
-			addGuestPermissions);
+			item, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(
-			long groupId, ShoppingItem item, boolean addCommunityPermissions,
+			ShoppingItem item, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			item.getCompanyId(), groupId, item.getUserId(),
+			item.getCompanyId(), item.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -260,17 +259,16 @@ public class ShoppingItemLocalServiceImpl
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		addItemResources(
-			item.getGroupId(), item, communityPermissions, guestPermissions);
+		addItemResources(item, communityPermissions, guestPermissions);
 	}
 
 	public void addItemResources(
-			long groupId, ShoppingItem item,
-			String[] communityPermissions, String[] guestPermissions)
+			ShoppingItem item, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			item.getCompanyId(), groupId, item.getUserId(),
+			item.getCompanyId(), item.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(),
 			communityPermissions, guestPermissions);
 	}

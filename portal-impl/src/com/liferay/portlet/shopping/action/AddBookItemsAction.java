@@ -85,7 +85,6 @@ public class AddBookItemsAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 		String[] isbns = StringUtil.split(
 			ParamUtil.getString(actionRequest, "isbns").toUpperCase(),

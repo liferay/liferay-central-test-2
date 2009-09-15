@@ -126,7 +126,7 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addItemResources(long groupId,
+	public void addItemResources(
 		com.liferay.portlet.shopping.model.ShoppingItem item,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -138,7 +138,7 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addItemResources(long groupId,
+	public void addItemResources(
 		com.liferay.portlet.shopping.model.ShoppingItem item,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
