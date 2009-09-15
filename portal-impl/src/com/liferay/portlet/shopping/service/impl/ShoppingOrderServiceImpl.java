@@ -88,6 +88,19 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 	}
 
 	public ShoppingOrder updateOrder(
+			long groupId, long orderId, String ppTxnId, String ppPaymentStatus,
+			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
+		throws PortalException, SystemException {
+
+		ShoppingOrderPermission.check(
+			getPermissionChecker(), groupId, orderId, ActionKeys.UPDATE);
+
+		return shoppingOrderLocalService.updateOrder(
+			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail);
+	}
+
+	public ShoppingOrder updateOrder(
 			long groupId, long orderId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
@@ -112,19 +125,6 @@ public class ShoppingOrderServiceImpl extends ShoppingOrderServiceBaseImpl {
 			shippingCompany, shippingStreet, shippingCity, shippingState,
 			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
 			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
-	}
-
-	public ShoppingOrder updateOrder(
-			long groupId, long orderId, String ppTxnId, String ppPaymentStatus,
-			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
-		throws PortalException, SystemException {
-
-		ShoppingOrderPermission.check(
-			getPermissionChecker(), groupId, orderId, ActionKeys.UPDATE);
-
-		return shoppingOrderLocalService.updateOrder(
-			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
-			ppPayerEmail);
 	}
 
 }

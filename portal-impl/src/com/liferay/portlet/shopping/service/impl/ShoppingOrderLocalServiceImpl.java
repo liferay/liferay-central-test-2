@@ -486,6 +486,26 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
+			long orderId, String ppTxnId, String ppPaymentStatus,
+			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
+		throws PortalException, SystemException {
+
+		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
+			orderId);
+
+		order.setModifiedDate(new Date());
+		order.setPpTxnId(ppTxnId);
+		order.setPpPaymentStatus(ppPaymentStatus);
+		order.setPpPaymentGross(ppPaymentGross);
+		order.setPpReceiverEmail(ppReceiverEmail);
+		order.setPpPayerEmail(ppPayerEmail);
+
+		shoppingOrderPersistence.update(order, false);
+
+		return order;
+	}
+
+	public ShoppingOrder updateOrder(
 			long orderId, String billingFirstName, String billingLastName,
 			String billingEmailAddress, String billingCompany,
 			String billingStreet, String billingCity, String billingState,
@@ -558,26 +578,6 @@ public class ShoppingOrderLocalServiceImpl
 		order.setCcExpYear(ccExpYear);
 		order.setCcVerNumber(ccVerNumber);
 		order.setComments(comments);
-
-		shoppingOrderPersistence.update(order, false);
-
-		return order;
-	}
-
-	public ShoppingOrder updateOrder(
-			long orderId, String ppTxnId, String ppPaymentStatus,
-			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
-		throws PortalException, SystemException {
-
-		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
-			orderId);
-
-		order.setModifiedDate(new Date());
-		order.setPpTxnId(ppTxnId);
-		order.setPpPaymentStatus(ppPaymentStatus);
-		order.setPpPaymentGross(ppPaymentGross);
-		order.setPpReceiverEmail(ppReceiverEmail);
-		order.setPpPayerEmail(ppPayerEmail);
 
 		shoppingOrderPersistence.update(order, false);
 

@@ -242,6 +242,16 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public void addItemResources(
+			long itemId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
+
+		addItemResources(item, communityPermissions, guestPermissions);
+	}
+
+	public void addItemResources(
 			ShoppingItem item, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -250,16 +260,6 @@ public class ShoppingItemLocalServiceImpl
 			item.getCompanyId(), item.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getItemId(), false,
 			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addItemResources(
-			long itemId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
-
-		addItemResources(item, communityPermissions, guestPermissions);
 	}
 
 	public void addItemResources(
@@ -399,6 +399,12 @@ public class ShoppingItemLocalServiceImpl
 			groupId, categoryId, start, end, obc);
 	}
 
+	public int getItemsCount(long groupId, long categoryId)
+		throws SystemException {
+
+		return shoppingItemPersistence.countByG_C(groupId, categoryId);
+	}
+
 	public ShoppingItem[] getItemsPrevAndNext(
 			long itemId, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -407,12 +413,6 @@ public class ShoppingItemLocalServiceImpl
 
 		return shoppingItemPersistence.findByG_C_PrevAndNext(
 			item.getItemId(), item.getGroupId(), item.getCategoryId(), obc);
-	}
-
-	public int getItemsCount(long groupId, long categoryId)
-		throws SystemException {
-
-		return shoppingItemPersistence.countByG_C(groupId, categoryId);
 	}
 
 	public List<ShoppingItem> getSaleItems(
@@ -582,6 +582,23 @@ public class ShoppingItemLocalServiceImpl
 		return item;
 	}
 
+	protected String checkItemField(String value) {
+		return StringUtil.replace(
+			value,
+			new String[] {
+				"\"", "&", "'", ".", "=", "|"
+			},
+			new String[] {
+				StringPool.BLANK,
+				StringPool.BLANK,
+				StringPool.BLANK,
+				StringPool.BLANK,
+				StringPool.BLANK,
+				StringPool.BLANK
+			}
+		);
+	}
+
 	protected void doAddBookItems(
 			long userId, long groupId, long categoryId, String[] isbns)
 		throws IOException, PortalException, SystemException {
@@ -723,23 +740,6 @@ public class ShoppingItemLocalServiceImpl
 		}
 	}
 
-	protected String checkItemField(String value) {
-		return StringUtil.replace(
-			value,
-			new String[] {
-				"\"", "&", "'", ".", "=", "|"
-			},
-			new String[] {
-				StringPool.BLANK,
-				StringPool.BLANK,
-				StringPool.BLANK,
-				StringPool.BLANK,
-				StringPool.BLANK,
-				StringPool.BLANK
-			}
-		);
-	}
-
 	protected String getBookProperties(AmazonRankings amazonRankings) {
 		String isbn = amazonRankings.getISBN();
 
@@ -756,7 +756,7 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	protected long getCategory(ShoppingItem item, long categoryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if ((item.getCategoryId() != categoryId) &&
 			(categoryId !=

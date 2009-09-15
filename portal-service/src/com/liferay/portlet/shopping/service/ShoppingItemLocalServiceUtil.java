@@ -147,15 +147,6 @@ public class ShoppingItemLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void addItemResources(
-		com.liferay.portlet.shopping.model.ShoppingItem item,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addItemResources(item, addCommunityPermissions, addGuestPermissions);
-	}
-
 	public static void addItemResources(long itemId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -163,6 +154,15 @@ public class ShoppingItemLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		getService()
 			.addItemResources(itemId, communityPermissions, guestPermissions);
+	}
+
+	public static void addItemResources(
+		com.liferay.portlet.shopping.model.ShoppingItem item,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addItemResources(item, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addItemResources(
@@ -254,16 +254,16 @@ public class ShoppingItemLocalServiceUtil {
 		return getService().getItems(groupId, categoryId, start, end, obc);
 	}
 
+	public static int getItemsCount(long groupId, long categoryId)
+		throws com.liferay.portal.SystemException {
+		return getService().getItemsCount(groupId, categoryId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
 		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getItemsPrevAndNext(itemId, obc);
-	}
-
-	public static int getItemsCount(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getService().getItemsCount(groupId, categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getSaleItems(

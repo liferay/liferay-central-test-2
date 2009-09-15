@@ -128,16 +128,6 @@ public class ShoppingCategoryLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void addCategoryResources(
-		com.liferay.portlet.shopping.model.ShoppingCategory category,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addCategoryResources(category, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
 	public static void addCategoryResources(long categoryId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -146,6 +136,16 @@ public class ShoppingCategoryLocalServiceUtil {
 		getService()
 			.addCategoryResources(categoryId, communityPermissions,
 			guestPermissions);
+	}
+
+	public static void addCategoryResources(
+		com.liferay.portlet.shopping.model.ShoppingCategory category,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addCategoryResources(category, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addCategoryResources(
@@ -201,13 +201,6 @@ public class ShoppingCategoryLocalServiceUtil {
 		return getService().getCategory(categoryId);
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory category)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().getParentCategory(category);
-	}
-
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getParentCategories(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
@@ -220,6 +213,13 @@ public class ShoppingCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getParentCategories(category);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategory getParentCategory(
+		com.liferay.portlet.shopping.model.ShoppingCategory category)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getParentCategory(category);
 	}
 
 	public static void getSubcategoryIds(java.util.List<Long> categoryIds,

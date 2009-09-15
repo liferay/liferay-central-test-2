@@ -252,6 +252,17 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
+		long orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .updateOrder(orderId, ppTxnId, ppPaymentStatus,
+			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
 		long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
@@ -277,17 +288,6 @@ public class ShoppingOrderLocalServiceUtil {
 			shippingCity, shippingState, shippingZip, shippingCountry,
 			shippingPhone, ccName, ccType, ccNumber, ccExpMonth, ccExpYear,
 			ccVerNumber, comments);
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long orderId, java.lang.String ppTxnId,
-		java.lang.String ppPaymentStatus, double ppPaymentGross,
-		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .updateOrder(orderId, ppTxnId, ppPaymentStatus,
-			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
 	public static ShoppingOrderLocalService getService() {

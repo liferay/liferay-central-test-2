@@ -110,6 +110,17 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void addCategoryResources(
+			long categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingCategory category =
+			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
 			ShoppingCategory category, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -119,17 +130,6 @@ public class ShoppingCategoryLocalServiceImpl
 			category.getUserId(), ShoppingCategory.class.getName(),
 			category.getCategoryId(), false, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public void addCategoryResources(
-			long categoryId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		ShoppingCategory category =
-			shoppingCategoryPersistence.findByPrimaryKey(categoryId);
-
-		addCategoryResources(category, communityPermissions, guestPermissions);
 	}
 
 	public void addCategoryResources(
@@ -219,16 +219,6 @@ public class ShoppingCategoryLocalServiceImpl
 		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
-	public ShoppingCategory getParentCategory(ShoppingCategory category)
-		throws PortalException, SystemException {
-
-		ShoppingCategory parentCategory =
-			shoppingCategoryPersistence.findByPrimaryKey(
-				category.getParentCategoryId());
-
-		return parentCategory;
-	}
-
 	public List<ShoppingCategory> getParentCategories(long categoryId)
 		throws PortalException, SystemException {
 
@@ -260,6 +250,16 @@ public class ShoppingCategoryLocalServiceImpl
 		Collections.reverse(parentCategories);
 
 		return parentCategories;
+	}
+
+	public ShoppingCategory getParentCategory(ShoppingCategory category)
+		throws PortalException, SystemException {
+
+		ShoppingCategory parentCategory =
+			shoppingCategoryPersistence.findByPrimaryKey(
+				category.getParentCategoryId());
+
+		return parentCategory;
 	}
 
 	public void getSubcategoryIds(

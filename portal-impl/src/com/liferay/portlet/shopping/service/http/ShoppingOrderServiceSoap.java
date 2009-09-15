@@ -135,6 +135,25 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
+		long groupId, long orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(groupId,
+					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
+					ppReceiverEmail, ppPayerEmail);
+
+			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
 		long groupId, long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
@@ -160,25 +179,6 @@ public class ShoppingOrderServiceSoap {
 					shippingStreet, shippingCity, shippingState, shippingZip,
 					shippingCountry, shippingPhone, ccName, ccType, ccNumber,
 					ccExpMonth, ccExpYear, ccVerNumber, comments);
-
-			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
-		long groupId, long orderId, java.lang.String ppTxnId,
-		java.lang.String ppPaymentStatus, double ppPaymentGross,
-		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(groupId,
-					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
-					ppReceiverEmail, ppPayerEmail);
 
 			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
 		}

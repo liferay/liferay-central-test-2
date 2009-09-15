@@ -77,6 +77,13 @@ public interface ShoppingOrderService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
+		long groupId, long orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
 		long groupId, long orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
@@ -91,13 +98,6 @@ public interface ShoppingOrderService {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		long groupId, long orderId, java.lang.String ppTxnId,
-		java.lang.String ppPaymentStatus, double ppPaymentGross,
-		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }
