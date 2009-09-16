@@ -56,8 +56,8 @@
 		<priority value="WARN" />
 	</category>
 
-	<category name="com.liferay.portal.comm.CommLink">
-		<priority value="DEBUG" />
+	<category name="com.liferay.portal.cluster">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.convert">

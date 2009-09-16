@@ -58,7 +58,7 @@ import org.jgroups.View;
 public class ClusterLinkImpl implements ClusterLink {
 
 	public void afterPropertiesSet() {
-		if (PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
 		}
 
@@ -82,7 +82,7 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	public void destory() {
-		if (PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
 		}
 
@@ -92,7 +92,7 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	public List<Address> getAddresses() {
-		if (PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return Collections.EMPTY_LIST;
 		}
 
@@ -118,7 +118,7 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	public void sendMulticastMessage(Message message, Priority priority) {
-		if (PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
 		}
 
@@ -135,7 +135,7 @@ public class ClusterLinkImpl implements ClusterLink {
 	public void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
 
-		if (PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!PropsValues.CLUSTER_LINK_ENABLED) {
 			return;
 		}
 
