@@ -282,9 +282,6 @@ public class PropsValues {
 	public static final String CMIS_SYSTEM_ROOT_DIR =
 		PropsUtil.get(PropsKeys.CMIS_SYSTEM_ROOT_DIR);
 
-	public static final String COMM_LINK_PROPERTIES =
-		PropsUtil.get(PropsKeys.COMM_LINK_PROPERTIES);
-
 	public static final String COMPANY_DEFAULT_HOME_URL =
 		PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 
