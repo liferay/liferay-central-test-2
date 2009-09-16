@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.messaging.DestinationEventListener;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -139,6 +141,32 @@ public abstract class AbstractMessagingConfigurator
 		Map<String, List<MessageListener>> messageListeners) {
 
 		_messageListeners = messageListeners;
+		for(List<MessageListener> messageListenerList :
+				_messageListeners.values()) {
+			for(MessageListener messageListener : messageListenerList) {
+				Class clazz = messageListener.getClass();
+				try {
+					Method setter =
+						clazz.getMethod("setMessageBus", MessageBus.class);
+					setter.setAccessible(true);
+					setter.invoke(messageListener, getMessageBus());
+					continue;
+				}
+				catch (Exception ex) {
+					//ignore
+				}
+				try{
+					Method setter =
+						clazz.getDeclaredMethod(
+							"setMessageBus", MessageBus.class);
+					setter.setAccessible(true);
+					setter.invoke(messageListener, getMessageBus());
+				}
+				catch (Exception ex) {
+					//ignore
+				}
+			}
+		}
 	}
 
 	public void setReplacementDestinations(

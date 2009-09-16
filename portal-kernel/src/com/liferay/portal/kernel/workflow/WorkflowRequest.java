@@ -20,19 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
-
-import com.liferay.portal.kernel.workflow.CallingUserId;
-import com.liferay.portal.kernel.workflow.UserCredential;
-import com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil;
-import com.liferay.portal.kernel.workflow.WorkflowException;
+package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
-import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="WorkflowRequest.java.html"><b><i>View Source</i></b></a>
@@ -41,12 +34,12 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class WorkflowRequest implements Serializable {
 
-	public WorkflowRequest(MethodInvocation methodInvocation)
+	public WorkflowRequest(Method method, Object[] arguments)
 		throws WorkflowException {
 
-		_method = methodInvocation.getMethod();
-		_arguments = methodInvocation.getArguments();
-		_userCredential = inspectForCallingUserCredential(methodInvocation);
+		_method = method;
+		_arguments = arguments;
+		_userCredential = inspectForCallingUserCredential(method);
 	}
 
 	public Object execute(Object object) throws WorkflowException {
@@ -76,11 +69,8 @@ public class WorkflowRequest implements Serializable {
 		}
 	}
 
-	protected UserCredential inspectForCallingUserCredential(
-			MethodInvocation methodInvocation)
+	protected UserCredential inspectForCallingUserCredential(Method method)
 		throws WorkflowException {
-
-		Method method = methodInvocation.getMethod();
 
 		Annotation[][] annotationsArray = method.getParameterAnnotations();
 
@@ -100,7 +90,7 @@ public class WorkflowRequest implements Serializable {
 						annotation.annotationType())) {
 
 					return UserCredentialFactoryUtil.createCredential(
-						(Long)methodInvocation.getArguments()[i]);
+						(Long)_arguments[i]);
 				}
 			}
 		}

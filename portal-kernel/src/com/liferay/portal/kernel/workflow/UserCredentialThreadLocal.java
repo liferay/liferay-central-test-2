@@ -20,43 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
-
-import com.liferay.portal.kernel.workflow.WorkflowException;
+package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserCredentialThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
- * @author Micha Kiener
+ * @author Brian Wing Shun Chan
  */
-public class WorkflowResultContainer {
+public class UserCredentialThreadLocal {
 
-	public Object getResult() {
-		return _result;
+	public static UserCredential getUserCredential() {
+		return _threadLocal.get();
 	}
 
-	public WorkflowException getWorkflowException() {
-		return _workflowException;
+	public static void setUserCredential(UserCredential userCredential) {
+		_threadLocal.set(userCredential);
 	}
 
-	public boolean hasError() {
-		if (_workflowException != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void setResult(Object result) {
-		_result = result;
-	}
-
-	public void setWorkflowException(WorkflowException workflowException) {
-		_workflowException = workflowException;
-	}
-
-	private Object _result;
-	private WorkflowException _workflowException;
+	private static ThreadLocal<UserCredential> _threadLocal =
+		new ThreadLocal<UserCredential>();
 
 }
