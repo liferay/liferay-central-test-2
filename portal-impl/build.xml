@@ -1030,14 +1030,4 @@ ${exception.message}
 			<jvmarg value="-Xmx128m" />
 		</java>
 	</target>
-
-    <target name="process-rules-grammer">
-        <java classname="antlr.Tool"
-              classpath="${project.dir}/lib/portal/antlr.jar"
-              dir="src/com/liferay/portal/bi/rules/basicrulesengine/impl"
-              fork="true"
-        >
-            <arg file="src/com/liferay/portal/bi/rules/basicrulesengine/impl/BasicRules.g"/>
-        </java>
-    </target>
 </project>
