@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.service.ServiceContext;
@@ -96,7 +95,7 @@ import java.util.Set;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  * @author Bruno Farache
  * @author Alex Chow
  */
@@ -221,7 +220,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		throws SystemException {
 
 		List<MBMessage> messages = MBMessageLocalServiceUtil.getMessages(
-			classObj.getName(), classPK, StatusConstants.ANY);
+			classObj.getName(), classPK);
 
 		if (messages.size() == 0) {
 			return;
@@ -591,7 +590,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 						userId, message.getUserName(), classObj.getName(),
 						newClassPK, threadId, parentMessageId,
 						message.getSubject(), message.getBody(),
-						message.getStatus(), serviceContext);
+						serviceContext);
 
 				messagePKs.put(
 					message.getMessageId(), newMessage.getMessageId());

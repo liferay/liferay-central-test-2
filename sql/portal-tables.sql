@@ -847,11 +847,7 @@ create table MBMessage (
 	body TEXT null,
 	attachments BOOLEAN,
 	anonymous BOOLEAN,
-	priority DOUBLE,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	priority DOUBLE
 );
 
 create table MBMessageFlag (
@@ -880,11 +876,7 @@ create table MBThread (
 	viewCount INTEGER,
 	lastPostByUserId LONG,
 	lastPostDate DATE null,
-	priority DOUBLE,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	priority DOUBLE
 );
 
 create table MembershipRequest (

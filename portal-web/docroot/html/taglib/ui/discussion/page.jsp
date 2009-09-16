@@ -49,7 +49,7 @@ boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("lif
 
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
-MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, StatusConstants.APPROVED, threadView);
+MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK, threadView);
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
@@ -65,7 +65,7 @@ if (treeWalker != null) {
 }
 else {
 	rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId(), StatusConstants.APPROVED);
+	messagesCount = MBMessageLocalServiceUtil.getThreadMessagesCount(rootMessage.getThreadId());
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
@@ -254,7 +254,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 				searchContainer.setTotal(messagesCount - 1);
 
-				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+				messages = MBMessageLocalServiceUtil.getThreadRepliesMessages(message.getThreadId(), searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(messages);
 			}

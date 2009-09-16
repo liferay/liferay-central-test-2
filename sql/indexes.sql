@@ -309,19 +309,13 @@ create index IX_4115EC7A on MBMailingList (uuid_);
 create unique index IX_E858F170 on MBMailingList (uuid_, groupId);
 
 create index IX_51A8D44D on MBMessage (classNameId, classPK);
-create index IX_F6687633 on MBMessage (classNameId, classPK, status);
 create index IX_B1432D30 on MBMessage (companyId);
-create index IX_1AD93C16 on MBMessage (companyId, status);
 create index IX_5B153FB2 on MBMessage (groupId);
 create index IX_1073AB9F on MBMessage (groupId, categoryId);
-create index IX_4257DB85 on MBMessage (groupId, categoryId, status);
 create index IX_B674AB58 on MBMessage (groupId, categoryId, threadId);
-create index IX_ED39AC98 on MBMessage (groupId, status);
 create index IX_8EB8C5EC on MBMessage (groupId, userId);
-create index IX_377858D2 on MBMessage (groupId, userId, status);
 create index IX_75B95071 on MBMessage (threadId);
 create index IX_A7038CD7 on MBMessage (threadId, parentMessageId);
-create index IX_9DC8E57 on MBMessage (threadId, status);
 create index IX_C57B16BC on MBMessage (uuid_);
 create unique index IX_8D12316E on MBMessage (uuid_, groupId);
 
@@ -341,8 +335,6 @@ create index IX_847F92B5 on MBStatsUser (userId);
 create index IX_95C0EA45 on MBThread (groupId);
 create index IX_9A2D11B2 on MBThread (groupId, categoryId);
 create index IX_50F1904A on MBThread (groupId, categoryId, lastPostDate);
-create index IX_485F7E98 on MBThread (groupId, categoryId, status);
-create index IX_E1E7142B on MBThread (groupId, status);
 
 create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);

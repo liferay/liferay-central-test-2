@@ -24,7 +24,6 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
@@ -61,8 +60,7 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 					entryId);
 
 				List<MBMessage> messages =
-					MBMessageLocalServiceUtil.getThreadMessages(
-							threadId, StatusConstants.ANY);
+					MBMessageLocalServiceUtil.getThreadMessages(threadId);
 
 				for (MBMessage message : messages) {
 					TrackbackVerifierUtil.verifyPost(entry, message);

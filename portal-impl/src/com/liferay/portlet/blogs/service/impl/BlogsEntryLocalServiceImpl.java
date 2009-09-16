@@ -179,7 +179,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, entry.getUserName(), BlogsEntry.class.getName(),
-				entryId, StatusConstants.APPROVED);
+				entryId);
 		}
 
 		// Social

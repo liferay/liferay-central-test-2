@@ -86,13 +86,9 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "body", new Integer(Types.CLOB) },
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) },
-			{ "priority", new Integer(Types.DOUBLE) },
-			{ "status", new Integer(Types.INTEGER) },
-			{ "statusByUserId", new Integer(Types.BIGINT) },
-			{ "statusByUserName", new Integer(Types.VARCHAR) },
-			{ "statusDate", new Integer(Types.TIMESTAMP) }
+			{ "priority", new Integer(Types.DOUBLE) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -125,10 +121,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setAttachments(soapModel.getAttachments());
 		model.setAnonymous(soapModel.getAnonymous());
 		model.setPriority(soapModel.getPriority());
-		model.setStatus(soapModel.getStatus());
-		model.setStatusByUserId(soapModel.getStatusByUserId());
-		model.setStatusByUserName(soapModel.getStatusByUserName());
-		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -347,47 +339,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		_priority = priority;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	public long getStatusByUserId() {
-		return _statusByUserId;
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_statusByUserId = statusByUserId;
-	}
-
-	public String getStatusByUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
-			_statusByUserUuid);
-	}
-
-	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
-	}
-
-	public String getStatusByUserName() {
-		return GetterUtil.getString(_statusByUserName);
-	}
-
-	public void setStatusByUserName(String statusByUserName) {
-		_statusByUserName = statusByUserName;
-	}
-
-	public Date getStatusDate() {
-		return _statusDate;
-	}
-
-	public void setStatusDate(Date statusDate) {
-		_statusDate = statusDate;
-	}
-
 	public MBMessage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMessage)this;
@@ -416,10 +367,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			model.setAttachments(getAttachments());
 			model.setAnonymous(getAnonymous());
 			model.setPriority(getPriority());
-			model.setStatus(getStatus());
-			model.setStatusByUserId(getStatusByUserId());
-			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
-			model.setStatusDate(getStatusDate());
 
 			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
 					new Class[] { MBMessage.class },
@@ -463,10 +410,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setAttachments(getAttachments());
 		clone.setAnonymous(getAnonymous());
 		clone.setPriority(getPriority());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -564,14 +507,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(getAnonymous());
 		sb.append(", priority=");
 		sb.append(getPriority());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", statusByUserId=");
-		sb.append(getStatusByUserId());
-		sb.append(", statusByUserName=");
-		sb.append(getStatusByUserName());
-		sb.append(", statusDate=");
-		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -656,22 +591,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
 		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
-		sb.append(getStatusDate());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -700,10 +619,5 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private boolean _attachments;
 	private boolean _anonymous;
 	private double _priority;
-	private int _status;
-	private long _statusByUserId;
-	private String _statusByUserUuid;
-	private String _statusByUserName;
-	private Date _statusDate;
 	private transient ExpandoBridge _expandoBridge;
 }

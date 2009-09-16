@@ -27,7 +27,6 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -145,15 +144,14 @@ public class EditDiscussionAction extends PortletAction {
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
 				className, classPK, threadId, parentMessageId, subject, body,
-				StatusConstants.APPROVED, serviceContext);
+				serviceContext);
 		}
 		else {
 
 			// Update message
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
-				className, classPK, messageId, subject, body,
-				StatusConstants.APPROVED, serviceContext);
+				className, classPK, messageId, subject, body, serviceContext);
 		}
 
 		return message;

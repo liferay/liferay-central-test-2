@@ -70,19 +70,6 @@ public class MBThreadJSONSerializer {
 
 		jsonObj.put("lastPostDate", lastPostDateJSON);
 		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
-
-		Date statusDate = model.getStatusDate();
-
-		String statusDateJSON = StringPool.BLANK;
-
-		if (statusDate != null) {
-			statusDateJSON = String.valueOf(statusDate.getTime());
-		}
-
-		jsonObj.put("statusDate", statusDateJSON);
 
 		return jsonObj;
 	}

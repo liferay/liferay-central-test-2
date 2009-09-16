@@ -254,7 +254,7 @@ public class DLFileEntryLocalServiceImpl
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, fileEntry.getUserName(), DLFileEntry.class.getName(),
-				fileEntryId, StatusConstants.APPROVED);
+				fileEntryId);
 		}
 
 		// Social

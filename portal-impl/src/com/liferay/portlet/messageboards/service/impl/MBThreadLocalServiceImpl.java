@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
@@ -163,55 +162,40 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
-	public int getCategoryThreadsCount(long groupId, long categoryId, int status)
+	public int getCategoryThreadsCount(long groupId, long categoryId)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.countByG_C(groupId, categoryId);
-		}
-		else {
-			return mbThreadPersistence.countByG_C_S(groupId, categoryId, status);
-		}
+		return mbThreadPersistence.countByG_C(groupId, categoryId);
 	}
 
-	public List<MBThread> getGroupThreads(long groupId, int status, int start, int end)
+	public List<MBThread> getGroupThreads(long groupId, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.findByGroupId(groupId, start, end);
-		}
-		else {
-			return mbThreadPersistence.findByG_S(groupId, status, start, end);
-		}
+		return mbThreadPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<MBThread> getGroupThreads(
-			long groupId, long userId, int status, boolean subscribed,
+			long groupId, long userId, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
 		throws PortalException, SystemException {
 
 		if (userId <= 0) {
-			if (status == StatusConstants.ANY) {
-				return mbThreadPersistence.findByGroupId(groupId, start, end);
-			}
-			else {
-				return mbThreadPersistence.findByG_S(groupId, status, start, end);
-			}
+			return mbThreadPersistence.findByGroupId(groupId, start, end);
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.findByS_G_U_S(groupId, userId, status, start, end);
+				return mbThreadFinder.findByS_G_U(groupId, userId, start, end);
 			}
 			else {
 				List<Long> threadIds = null;
 
 				if (includeAnonymous) {
-					threadIds = mbMessageFinder.findByG_U_S(
-						groupId, userId, status, start, end);
+					threadIds = mbMessageFinder.findByG_U(
+						groupId, userId, start, end);
 				}
 				else {
-					threadIds = mbMessageFinder.findByG_U_S_A(
-						groupId, userId, status, false, start, end);
+					threadIds = mbMessageFinder.findByG_U_A(
+						groupId, userId, false, start, end);
 				}
 
 				List<MBThread> threads = new ArrayList<MBThread>(
@@ -230,47 +214,38 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public List<MBThread> getGroupThreads(
-			long groupId, long userId, int status, 
-			boolean subscribed, int start, int end)
+			long groupId, long userId, boolean subscribed, int start, int end)
 		throws PortalException, SystemException {
 
-		return getGroupThreads(
-				groupId, userId, status, subscribed, true, start, end);
+		return getGroupThreads(groupId, userId, subscribed, true, start, end);
 	}
 
 	public List<MBThread> getGroupThreads(
-			long groupId, long userId, int status, int start, int end)
+			long groupId, long userId, int start, int end)
 		throws PortalException, SystemException {
 
-		return getGroupThreads(groupId, userId, status, false, start, end);
+		return getGroupThreads(groupId, userId, false, start, end);
 	}
 
-	public int getGroupThreadsCount(long groupId, int status) 
-		throws SystemException {
-
-		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.countByGroupId(groupId);
-		}
-		else {
-			return mbThreadPersistence.countByG_S(groupId, status);
-		}
+	public int getGroupThreadsCount(long groupId) throws SystemException {
+		return mbThreadPersistence.countByGroupId(groupId);
 	}
 
-	public int getGroupThreadsCount(long groupId, long userId, int status)
+	public int getGroupThreadsCount(long groupId, long userId)
 		throws SystemException {
 
-		return getGroupThreadsCount(groupId, userId, status, false);
+		return getGroupThreadsCount(groupId, userId, false);
 	}
 
 	public int getGroupThreadsCount(
-			long groupId, long userId, int status, boolean subscribed)
+			long groupId, long userId, boolean subscribed)
 		throws SystemException {
 
-		return getGroupThreadsCount(groupId, userId, status, subscribed, true);
+		return getGroupThreadsCount(groupId, userId, subscribed, true);
 	}
 
 	public int getGroupThreadsCount(
-			long groupId, long userId, int status, boolean subscribed,
+			long groupId, long userId, boolean subscribed,
 			boolean includeAnonymous)
 		throws SystemException {
 
@@ -279,16 +254,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 		else {
 			if (subscribed) {
-				return mbThreadFinder.countByS_G_U_S(groupId, userId, status);
+				return mbThreadFinder.countByS_G_U(groupId, userId);
 			}
 			else {
 				if (includeAnonymous) {
-					return mbMessageFinder.countByG_U_S(
-							groupId, userId, status);
+					return mbMessageFinder.countByG_U(groupId, userId);
 				}
 				else {
-					return mbMessageFinder.countByG_U_S_A(
-							groupId, userId, status, false);
+					return mbMessageFinder.countByG_U_A(groupId, userId, false);
 				}
 			}
 		}
@@ -301,29 +274,16 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	public List<MBThread> getThreads(
-			long groupId, long categoryId, int status, int start, int end)
+			long groupId, long categoryId, int start, int end)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.findByG_C(
-					groupId, categoryId, start, end);
-		}
-		else {
-			return mbThreadPersistence.findByG_C_S(
-					groupId, categoryId, status, start, end);
-		}
-
+		return mbThreadPersistence.findByG_C(groupId, categoryId, start, end);
 	}
 
-	public int getThreadsCount(long groupId, long categoryId, int status)
+	public int getThreadsCount(long groupId, long categoryId)
 		throws SystemException {
 
-		if (status == StatusConstants.ANY) {
-			return mbThreadPersistence.countByG_C(groupId, categoryId);
-		}
-		else {
-			return mbThreadPersistence.countByG_C_S(groupId, categoryId, status);
-		}
+		return mbThreadPersistence.countByG_C(groupId, categoryId);
 	}
 
 	public MBThread moveThread(long groupId, long categoryId, long threadId)

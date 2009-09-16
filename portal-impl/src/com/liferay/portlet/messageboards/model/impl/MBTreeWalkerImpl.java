@@ -40,12 +40,12 @@ import java.util.Map;
  */
 public class MBTreeWalkerImpl implements MBTreeWalker {
 
-	public MBTreeWalkerImpl(MBMessage message, int status) {
+	public MBTreeWalkerImpl(MBMessage message) {
 		_messageIdsMap = new HashMap<Long, Integer>();
 
 		try {
 			_messages = MBMessageLocalServiceUtil.getThreadMessages(
-				message.getThreadId(), status);
+				message.getThreadId());
 
 			for (int i = 0; i < _messages.size(); i++) {
 				MBMessage curMessage = _messages.get(i);

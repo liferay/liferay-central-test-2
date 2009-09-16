@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.permission.DoAsUserThread;
@@ -156,8 +155,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 			MBMessageServiceUtil.addMessage(
 				_category.getGroupId(), _category.getCategoryId(), _subject,
-				body, files, anonymous, priority, StatusConstants.APPROVED,
-				serviceContext);
+				body, files, anonymous, priority, serviceContext);
 		}
 
 		private String _subject;

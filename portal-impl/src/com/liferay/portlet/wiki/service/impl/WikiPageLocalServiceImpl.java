@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
@@ -208,7 +207,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		if (PropsValues.WIKI_PAGE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, page.getUserName(), WikiPage.class.getName(),
-				resourcePrimKey, StatusConstants.APPROVED);
+				resourcePrimKey);
 		}
 
 		// Social

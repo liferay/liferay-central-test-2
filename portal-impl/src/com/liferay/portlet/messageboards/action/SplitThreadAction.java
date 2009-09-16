@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -169,8 +168,7 @@ public class SplitThreadAction extends PortletAction {
 				message.getGroupId(), message.getCategoryId(), oldThreadId,
 				oldParentMessageId, subject, body,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, StatusConstants.APPROVED, 
-				serviceContext);
+				MBThreadImpl.PRIORITY_NOT_GIVEN, serviceContext);
 		}
 
 		PortletURL portletURL =
