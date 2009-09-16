@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,8 +23,8 @@
 package com.liferay.portal.kernel.workflow;
 
 import java.io.Serializable;
-
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -47,6 +47,9 @@ public class WorkflowRequest implements Serializable {
 			UserCredentialThreadLocal.setUserCredential(_userCredential);
 
 			return _method.invoke(object, _arguments);
+		}
+		catch (InvocationTargetException e) {
+			throw new WorkflowException(e.getTargetException());
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
