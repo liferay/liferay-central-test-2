@@ -22,11 +22,7 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.cache.CacheRegistry;
-import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Log;
@@ -39,16 +35,11 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.model.Release;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.LockLocalServiceUtil;
-import com.liferay.portal.service.ReleaseLocalServiceUtil;
-import com.liferay.portal.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -75,7 +66,7 @@ public class StartupAction extends SimpleAction {
 		}
 	}
 
-	protected void doRun(String[] ids) throws PortalException, SystemException {
+	protected void doRun(String[] ids) throws Exception {
 
 		// Print release information
 
@@ -109,47 +100,9 @@ public class StartupAction extends SimpleAction {
 
 		VelocityEngineUtil.init();
 
-		// Disable database caching before upgrade
-
-		CacheRegistry.setActive(false);
-
 		// Upgrade
 
-		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
-
-		if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
-			String msg = "You must first upgrade to Liferay Portal 4.2.1";
-
-			_log.fatal(msg);
-
-			throw new RuntimeException(msg);
-		}
-
-		StartupHelperUtil.upgradeProcess(buildNumber);
-
-		// Class names
-
-		ClassNameLocalServiceUtil.checkClassNames();
-
-		// Resource actions
-
-		ResourceActionsUtil.init();
-
-		ResourceActionLocalServiceUtil.checkResourceActions();
-
-		// Resource codes
-
-		ResourceCodeLocalServiceUtil.checkResourceCodes();
-
-		// Delete temporary images
-
-		StartupHelperUtil.deleteTempImages();
-
-		// Clear the caches only if the upgrade process was run
-
-		if (StartupHelperUtil.isUpgraded()) {
-			MultiVMPoolUtil.clear();
-		}
+		DBUpgrader.upgrade();
 
 		// Messaging
 
@@ -173,29 +126,7 @@ public class StartupAction extends SimpleAction {
 
 		// Verify
 
-		Release release = ReleaseLocalServiceUtil.getRelease();
-
-		StartupHelperUtil.verifyProcess(release.isVerified());
-
-		// Update indexes
-
-		if (StartupHelperUtil.isUpgraded()) {
-			StartupHelperUtil.updateIndexes();
-		}
-
-		// Update release
-
-		boolean verified = StartupHelperUtil.isVerified();
-
-		if (release.isVerified()) {
-			verified = true;
-		}
-
-		ReleaseLocalServiceUtil.updateRelease(verified);
-
-		// Enable database caching after verify
-
-		CacheRegistry.setActive(true);
+		DBUpgrader.verify();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

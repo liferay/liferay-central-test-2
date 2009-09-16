@@ -673,6 +673,57 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-5.5-$${downloads.version}.zip</
 		</zip>
 	</target>
 
+	<target name="zip-db-upgrade">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}/lib" />
+
+		<copy todir="${tstamp.value}">
+			<fileset
+				dir="tools/db-upgrade"
+			/>
+		</copy>
+
+		<copy todir="${tstamp.value}/lib">
+			<fileset
+				dir="portal-impl"
+				includes="portal-impl.jar"
+			/>
+			<fileset
+				dir="portal-kernel"
+				includes="portal-kernel.jar"
+			/>
+			<fileset
+				dir="portal-service"
+				includes="portal-service.jar"
+			/>
+			<fileset
+				dir="lib/development"
+			/>
+			<fileset
+				dir="lib/global"
+			/>
+			<fileset
+				dir="lib/portal"
+			/>
+			<fileset
+				dir="util-java"
+				includes="util-java.jar"
+			/>
+		</copy>
+
+		<zip destfile="dist/liferay-portal-db-upgrade-${lp.version}.zip">
+			<zipfileset
+				dir="${tstamp.value}"
+				prefix="liferay-portal-db-upgrade-${lp.version}"
+			/>
+		</zip>
+
+		<delete dir="${tstamp.value}" />
+	</target>
+
 	<target name="zip-executable">
 		<antelope:stringutil string="${zip.executable.dir}" property="zip.executable.dir.beginindex">
 			<lastindexof string="/" />

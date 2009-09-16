@@ -1030,4 +1030,20 @@ ${exception.message}
 			<jvmarg value="-Xmx128m" />
 		</java>
 	</target>
+
+	<target name="upgrade-db">
+		<java
+			classname="com.liferay.portal.tools.DBUpgrader"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="1024m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-upgrade.properties" />
+			<jvmarg value="-Dfile.encoding=UTF-8" />
+			<jvmarg value="-Duser.country=US" />
+			<jvmarg value="-Duser.language=en" />
+			<jvmarg value="-Duser.timezone=GMT" />
+		</java>
+	</target>
 </project>
