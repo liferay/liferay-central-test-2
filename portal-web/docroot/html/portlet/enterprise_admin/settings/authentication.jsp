@@ -114,7 +114,7 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings(" + PropsKe
 
 			<aui:input cssClass="lfr-input-text-container" label="domain-controller" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN_CONTROLLER + ")" %>' type="text" value="<%= ntlmDomainController %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="domain" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN + ")" %>' type="text" value="<%= casLoginUrl %>" />
+			<aui:input cssClass="lfr-input-text-container" label="domain" name='<%= "settings(" + PropsKeys.NTLM_DOMAIN + ")" %>' type="text" value="<%= ntlmDomain %>" />
 		</aui:fieldset>
 	</liferay-ui:section>
 

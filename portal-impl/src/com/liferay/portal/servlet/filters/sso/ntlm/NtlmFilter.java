@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
@@ -42,7 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jcifs.Config;
 import jcifs.UniAddress;
 
 import jcifs.http.NtlmHttpFilter;
@@ -62,6 +62,7 @@ import jcifs.util.Base64;
  * @author Bruno Farache
  * @author Marcus Schmidke
  * @author Brian Wing Shun Chan
+ * @author Wesley Gong
  */
 public class NtlmFilter extends BasePortalFilter {
 
@@ -95,12 +96,17 @@ public class NtlmFilter extends BasePortalFilter {
 			String domain = _filterConfig.getInitParameter(
 				"jcifs.smb.client.domain");
 
-			if ((domainController == null) && (domain == null)) {
-				domainController = PrefsPropsUtil.getString(
-					companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
-					PropsValues.NTLM_DOMAIN_CONTROLLER);
-				domain = PrefsPropsUtil.getString(
-					companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
+			String newDomainController = PrefsPropsUtil.getString(
+				companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
+				PropsValues.NTLM_DOMAIN_CONTROLLER);
+			String newDomain = PrefsPropsUtil.getString(
+				companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
+
+			if (!Validator.equals(domainController, newDomainController) ||
+				!Validator.equals(domain, newDomain)) {
+
+				domainController = newDomainController;
+				domain = newDomain;
 
 				_filterConfig.addInitParameter(
 					"jcifs.http.domainController", domainController);
@@ -108,11 +114,11 @@ public class NtlmFilter extends BasePortalFilter {
 					"jcifs.smb.client.domain", domain);
 
 				super.init(_filterConfig);
+			}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Host " + domainController);
-					_log.debug("Domain " + domain);
-				}
+			if (_log.isDebugEnabled()) {
+				_log.debug("Host " + domainController);
+				_log.debug("Domain " + domain);
 			}
 
 			// Type 1 NTLM requests from browser can (and should) always
@@ -128,8 +134,7 @@ public class NtlmFilter extends BasePortalFilter {
 
 				if (src[8] == 1) {
 					UniAddress dc = UniAddress.getByName(
-						Config.getProperty("jcifs.http.domainController"),
-						true);
+						domainController, true);
 
 					byte[] challenge = SmbSession.getChallenge(dc);
 
@@ -199,7 +204,7 @@ public class NtlmFilter extends BasePortalFilter {
 		}
 
 		if (authorization.startsWith("NTLM ")) {
-			String domainController = Config.getProperty(
+			String domainController = _filterConfig.getInitParameter(
 				"jcifs.http.domainController");
 
 			UniAddress uniAddress = UniAddress.getByName(
