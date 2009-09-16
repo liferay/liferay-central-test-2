@@ -174,13 +174,16 @@ if (type.equals("history") || type.equals("recent_changes")) {
 	headerNames.add("summary");
 }
 
-if (type.equals("all_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("history") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 	headerNames.add(StringPool.BLANK);
 }
 
 String emptyResultsMessage = null;
 
-if (type.equals("incoming_links")) {
+if (type.equals("categorized_pages")) {
+	emptyResultsMessage = "there-are-no-pages-with-this-category";
+}
+else if (type.equals("incoming_links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
 }
 else if (type.equals("outgoing_links")) {
