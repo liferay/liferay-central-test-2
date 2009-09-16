@@ -20,12 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.proxy;
+package com.liferay.portal.reflect;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
-import com.liferay.portal.kernel.messaging.annotation.MessagingProxy;
-import com.liferay.portal.kernel.messaging.annotation.MessagingMode;
 import com.liferay.portal.kernel.proxy.BaseServiceProxy;
 import com.liferay.portal.kernel.proxy.ServiceRequest;
 import com.liferay.portal.kernel.proxy.ServiceResponseContainer;
@@ -60,50 +57,9 @@ public class ServiceProxyAdvice implements MethodInterceptor {
 		BaseServiceProxy baseServiceProxy =
 				(BaseServiceProxy) methodInvocation.getThis();
 
-		//for safety, always assume async unless noted otherwise
-		MessagingProxy messagingProxy =
-				methodInvocation.getMethod().getAnnotation(
-						MessagingProxy.class);
-
-		if ((messagingProxy == null) ||
-				(messagingProxy.mode().equals(MessagingMode.ASYNC))) {
-			doInvokeAsynchronous(serviceRequest, baseServiceProxy);
-			return null;
-		}
-		else {
-			return doInvokeSynchronous(serviceRequest, baseServiceProxy);
-		}
-	}
-
-	protected void doInvokeAsynchronous(
-			ServiceRequest serviceRequest, BaseServiceProxy baseServiceProxy) {
-
-		SingleDestinationMessageSender messageSender =
-				baseServiceProxy
-						.getSingleDestinationMessageSender();
-
-		if (messageSender == null) {
-			throw new IllegalStateException(
-					"Asynchronous message sender was not configured " +
-							"properly in: " +
-							baseServiceProxy.getClass().getName());
-		}
-		messageSender.send(serviceRequest);
-	}
-
-	protected Object doInvokeSynchronous(
-			ServiceRequest serviceRequest, BaseServiceProxy baseServiceProxy)
-			throws Exception {
 		SingleDestinationSynchronousMessageSender messageSender =
 				baseServiceProxy
 						.getSingleDestinationSynchronousMessageSender();
-
-		if (messageSender == null) {
-			throw new IllegalStateException(
-					"Synchronous message sender was not configured " +
-							"properly in: " +
-							baseServiceProxy.getClass().getName());
-		}
 
 		ServiceResponseContainer serviceResponseContainer =
 				(ServiceResponseContainer) messageSender.send(serviceRequest);

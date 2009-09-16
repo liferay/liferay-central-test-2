@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.proxy;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 
 /**
  * <a href="BaseWorkflowProxy.java.html"><b><i>View Source</i></b></a>
@@ -46,22 +45,7 @@ public abstract class BaseServiceProxy {
 			singleDestinationSynchronousMessageSender;
 	}
 
-	public final SingleDestinationMessageSender
-		getSingleDestinationMessageSender() {
-
-		return _singleDestinationMessageSender;
-	}
-
-	public void setSingleDestinationMessageSender(
-		SingleDestinationMessageSender singleDestinationMessageSender) {
-
-		_singleDestinationMessageSender =
-			singleDestinationMessageSender;
-	}
-
 	private SingleDestinationSynchronousMessageSender
 		_singleDestinationSynchronousMessageSender;
 
-	private SingleDestinationMessageSender
-		_singleDestinationMessageSender;
 }

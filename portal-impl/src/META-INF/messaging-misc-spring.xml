@@ -32,6 +32,15 @@
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg index="0" type="java.lang.String" value="liferay/wiki" />
 	</bean>
+	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_definition" />
+	</bean>
+	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_instance" />
+	</bean>
+	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_task" />
+	</bean>
 
 	<!-- Listeners -->
 
@@ -62,6 +71,9 @@
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
 				<ref bean="destination.wiki" />
+				<ref bean="destination.workflow_definition" />
+				<ref bean="destination.workflow_instance" />
+				<ref bean="destination.workflow_task" />
 			</list>
 		</property>
 		<property name="messageBus">

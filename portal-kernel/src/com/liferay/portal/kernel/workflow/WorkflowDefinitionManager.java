@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.messaging.annotation.MessagingProxy;
-import com.liferay.portal.kernel.messaging.annotation.MessagingMode;
-
 import java.util.List;
 
 /**
@@ -75,7 +72,6 @@ public interface WorkflowDefinitionManager {
 	 * @throws WorkflowException is thrown, if deployment of the definition
 	 *		   failed
 	 */
-	@MessagingProxy(mode = MessagingMode.SYNC)
 	public void deployWorkflowDefinition(
 			WorkflowDefinition workflowDefinition,
 			@CallingUserId long callingUserId)
@@ -94,7 +90,6 @@ public interface WorkflowDefinitionManager {
 	 * @return the list of available workflow definitions, never
 	 *		   <code>null</code>
 	 */
-	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowDefinition> getWorkflowDefinitions();
 
 	/**
@@ -109,7 +104,6 @@ public interface WorkflowDefinitionManager {
 	 *		   or a list containing just one element, must never be
 	 *		   <code>null</code>
 	 */
-	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowDefinition> getWorkflowDefinitions(
 		String workflowDefinitionName);
 
@@ -121,7 +115,6 @@ public interface WorkflowDefinitionManager {
 	 *
 	 * @return <code>true</code>, if the workflow engine supports versioning
 	 */
-	@MessagingProxy(mode = MessagingMode.SYNC)
 	public boolean isSupportsVersioning();
 
 }
