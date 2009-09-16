@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,19 +41,19 @@ public class ClusterLinkUtil {
 	}
 
 	public static List<Address> getAddresses() {
-		if (_clusterLink == null) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return new ArrayList<Address>();
+			return Collections.EMPTY_LIST;
 		}
 
 		return _clusterLink.getAddresses();
 	}
 
 	public static ClusterLink getClusterLink() {
-		if (_clusterLink == null) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
@@ -71,7 +71,7 @@ public class ClusterLinkUtil {
 	public static void sendMulticastMessage(
 		Message message, Priority priority) {
 
-		if (_clusterLink == null) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
@@ -95,7 +95,7 @@ public class ClusterLinkUtil {
 	public static void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
 
-		if (_clusterLink == null) {
+		if ((_clusterLink == null) || !_clusterLink.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}

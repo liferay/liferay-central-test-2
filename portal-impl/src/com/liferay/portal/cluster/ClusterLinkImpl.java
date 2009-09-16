@@ -58,6 +58,10 @@ import org.jgroups.View;
 public class ClusterLinkImpl implements ClusterLink {
 
 	public void afterPropertiesSet() {
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			return;
+		}
+
 		initSystemProperties();
 
 		try {
@@ -78,12 +82,20 @@ public class ClusterLinkImpl implements ClusterLink {
 	}
 
 	public void destory() {
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			return;
+		}
+
 		for (JChannel channel : _channels) {
 			channel.close();
 		}
 	}
 
 	public List<Address> getAddresses() {
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			return Collections.EMPTY_LIST;
+		}
+
 		Vector<org.jgroups.Address> jGroupsAddresses =
 			_channels.get(0).getView().getMembers();
 
@@ -101,7 +113,15 @@ public class ClusterLinkImpl implements ClusterLink {
 		return addresses;
 	}
 
+	public boolean isEnabled() {
+		return PropsValues.CLUSTER_LINK_ENABLED;
+	}
+
 	public void sendMulticastMessage(Message message, Priority priority) {
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			return;
+		}
+
 		JChannel channel = getChannel(priority);
 
 		try {
@@ -114,6 +134,10 @@ public class ClusterLinkImpl implements ClusterLink {
 
 	public void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
+
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			return;
+		}
 
 		org.jgroups.Address jGroupsAddress =
 			(org.jgroups.Address)address.getRealAddress();

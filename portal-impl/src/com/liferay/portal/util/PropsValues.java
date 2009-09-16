@@ -264,6 +264,9 @@ public class PropsValues {
 	public static final String[] CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES =
 		PropsUtil.getArray(PropsKeys.CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES);
 
+	public static final boolean CLUSTER_LINK_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.CLUSTER_LINK_ENABLED));
+
 	public static final String CMIS_CREDENTIALS_PASSWORD =
 		PropsUtil.get(PropsKeys.CMIS_CREDENTIALS_PASSWORD);
 

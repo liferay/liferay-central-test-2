@@ -35,6 +35,8 @@ public interface ClusterLink {
 
 	public List<Address> getAddresses();
 
+	public boolean isEnabled();
+
 	public void sendMulticastMessage(Message message, Priority priority);
 
 	public void sendUnicastMessage(

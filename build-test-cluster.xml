@@ -149,6 +149,8 @@ net.sf.ehcache.configurationResourceName=/ehcache/hibernate-clustered.xml
 
 ehcache.multi.vm.config.location=/ehcache/liferay-multi-vm-clustered.xml
 
+cluster.link.enabled=true
+
 web.server.display.node=true</echo>
 
 		<exec executable="${pscp.executable}">
