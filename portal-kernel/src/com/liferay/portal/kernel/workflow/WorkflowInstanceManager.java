@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.annotation.MessagingProxy;
+import com.liferay.portal.kernel.messaging.annotation.MessagingMode;
+
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +88,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if adding the context information
 	 *		   failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo addContextInformation(
 			long workflowInstanceId, Map<String, Object> context)
 		throws WorkflowException;
@@ -108,6 +112,7 @@ public interface WorkflowInstanceManager {
 	 * @return the list of activity names possible to be signaled
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<String> getPossibleNextActivityNames(
 			long workflowInstanceId, @CallingUserId long userId)
 		throws WorkflowException;
@@ -133,6 +138,7 @@ public interface WorkflowInstanceManager {
 	 *		   its children
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowInstanceHistory> getWorkflowInstanceHistory(
 			long workflowInstanceId, boolean includeChildren)
 		throws WorkflowException;
@@ -151,6 +157,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the instance was not found or any
 	 *		   other error occurred
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
 			long workflowInstanceId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
@@ -198,6 +205,7 @@ public interface WorkflowInstanceManager {
 	 *		   instance, if found, <code>null</code> otherwise
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo getWorkflowInstanceInfo(
 			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
@@ -222,6 +230,7 @@ public interface WorkflowInstanceManager {
 	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean retrieveChildrenInfo)
@@ -249,6 +258,7 @@ public interface WorkflowInstanceManager {
 	 *		   instances found
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			boolean finished, boolean retrieveChildrenInfo)
@@ -286,6 +296,7 @@ public interface WorkflowInstanceManager {
 	 *		   found, never <code>null</code>
 	 * @throws WorkflowException is thrown, if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String relationType, long relationId, boolean retrieveChildrenInfo)
 		throws WorkflowException;
@@ -303,6 +314,7 @@ public interface WorkflowInstanceManager {
 	 *		   removed
 	 * @throws WorkflowException is thrown, if removing failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public void removeWorkflowInstance(long workflowInstanceId)
 		throws WorkflowException;
 
@@ -337,6 +349,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if triggering the next activity
 	 *		   failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, Map<String, Object> attributes,
 			@CallingUserId long callingUserId)
@@ -379,6 +392,7 @@ public interface WorkflowInstanceManager {
 	 *		   the activity was not found or is not executable due to the
 	 *		   current state of the instance
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo signalWorkflowInstance(
 			long workflowInstanceId, String activityName,
 			Map<String, Object> attributes, @CallingUserId long callingUserId)
@@ -405,6 +419,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId)
@@ -435,6 +450,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			Map<String, Object> context, @CallingUserId long callingUserId,
@@ -476,6 +492,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			String relationType, long relationId, Map<String, Object> context,
@@ -518,6 +535,7 @@ public interface WorkflowInstanceManager {
 	 * @throws WorkflowException is thrown, if the new instance could not be
 	 *		   created or the workflow could not be started
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public WorkflowInstanceInfo startWorkflowInstance(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
 			String relationType, long relationId, Map<String, Object> context,

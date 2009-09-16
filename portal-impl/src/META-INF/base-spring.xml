@@ -37,4 +37,5 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
+	<bean id="serviceProxyAdvice" class="com.liferay.portal.proxy.ServiceProxyAdvice"/>
 </beans>

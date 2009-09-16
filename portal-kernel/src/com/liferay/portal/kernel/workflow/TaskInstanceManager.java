@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.annotation.MessagingProxy;
+import com.liferay.portal.kernel.messaging.annotation.MessagingMode;
+
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +76,7 @@ public interface TaskInstanceManager {
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, @CallingUserId long callingUserId)
@@ -98,6 +102,7 @@ public interface TaskInstanceManager {
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public TaskInstanceInfo assignTaskInstanceToUser(
 			long taskInstanceId, UserCredential userCredential, String comment,
 			Map<String, Object> attributes, @CallingUserId long callingUserId)
@@ -145,6 +150,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if completing the task failed or the
 	 *		   workflow could not be continued
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, @CallingUserId long userId, String comment,
 			Map<String, Object> attributes)
@@ -193,6 +199,7 @@ public interface TaskInstanceManager {
 	 * @throws WorkflowException is thrown, if completing the task failed or the
 	 *		   workflow could not be continued
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public TaskInstanceInfo completeTaskInstance(
 			long taskInstanceId, @CallingUserId long userId,
 			String activityName, String comment, Map<String, Object> attributes)
@@ -222,6 +229,7 @@ public interface TaskInstanceManager {
 	 *		   the given task
 	 * @throws WorkflowException is thrown, if requesting the list failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<String> getPossibleNextActivityNames(
 			long taskInstanceId, @CallingUserId long userId)
 		throws WorkflowException;
@@ -238,6 +246,7 @@ public interface TaskInstanceManager {
 	 *		   credential
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public int getTaskInstanceCountForCredential(UserCredential userCredential)
 		throws WorkflowException;
 
@@ -249,6 +258,7 @@ public interface TaskInstanceManager {
 	 * @return the total count of open tasks of the specified role
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public int getTaskInstanceCountForRole(long roleId)
 		throws WorkflowException;
 
@@ -264,6 +274,7 @@ public interface TaskInstanceManager {
 	 *		   user
 	 * @throws WorkflowException is thrown if the querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public int getTaskInstanceCountForUser(long userId)
 		throws WorkflowException;
 
@@ -281,6 +292,7 @@ public interface TaskInstanceManager {
 	 *		   assigned to one of its roles
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential)
 		throws WorkflowException;
@@ -299,6 +311,7 @@ public interface TaskInstanceManager {
 	 *		   assigned to one of its roles
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByCredential(
 			UserCredential userCredential, boolean completed)
 		throws WorkflowException;
@@ -312,6 +325,7 @@ public interface TaskInstanceManager {
 	 * @return all tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(long roleId)
 		throws WorkflowException;
 
@@ -324,6 +338,7 @@ public interface TaskInstanceManager {
 	 * @return all open or completed tasks assigned to the given role
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByRole(
 			long roleId, boolean completed)
 		throws WorkflowException;
@@ -337,6 +352,7 @@ public interface TaskInstanceManager {
 	 * @return all tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(long userId)
 		throws WorkflowException;
 
@@ -349,6 +365,7 @@ public interface TaskInstanceManager {
 	 * @return all open or completed tasks assigned to the given user
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByUser(
 			long userId, boolean completed)
 		throws WorkflowException;
@@ -363,6 +380,7 @@ public interface TaskInstanceManager {
 	 * @return all tasks related to the specified workflow instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId)
 		throws WorkflowException;
@@ -378,6 +396,7 @@ public interface TaskInstanceManager {
 	 *		   instance
 	 * @throws WorkflowException is thrown if querying failed
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public List<TaskInstanceInfo> getTaskInstanceInfosByWorkflowInstance(
 			long workflowInstanceId, boolean completed)
 		throws WorkflowException;

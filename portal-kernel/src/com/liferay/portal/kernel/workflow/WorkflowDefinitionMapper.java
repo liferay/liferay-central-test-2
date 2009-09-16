@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.annotation.MessagingProxy;
+import com.liferay.portal.kernel.messaging.annotation.MessagingMode;
+
 /**
  * <a href="WorkflowDefinitionMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -53,6 +56,7 @@ public interface WorkflowDefinitionMapper {
 	 * @return the name of the workflow definition mapped to the given domain
 	 *		   class or <code>null</code> if no such mapping available
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public String getWorkflowDefinitionName(Class<?> domainClass);
 
 	/**
@@ -64,6 +68,7 @@ public interface WorkflowDefinitionMapper {
 	 * @return <code>true</code>, if there is a mapping between the given domain
 	 *		   class and a workflow definition
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public boolean hasWorkflowDefinitionMapping(Class<?> domainClass);
 
 	/**
@@ -76,6 +81,7 @@ public interface WorkflowDefinitionMapper {
 	 * @return the old workflow definition name, if any previously set,
 	 *		   <code>null</code> otherwise
 	 */
+	@MessagingProxy(mode = MessagingMode.SYNC)
 	public String setWorkflowDefinitionMapping(
 		Class<?> domainClass, String workflowDefinitionName);
 

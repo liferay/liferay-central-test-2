@@ -25,7 +25,7 @@ package com.liferay.portal.workflow;
 import com.liferay.portal.kernel.proxy.ServiceRequest;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowRequest;
-import com.liferay.portal.reflect.ServiceProxyAdvice;
+import com.liferay.portal.proxy.ServiceProxyAdvice;
 
 import org.aopalliance.intercept.MethodInvocation;
 

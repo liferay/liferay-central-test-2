@@ -10,6 +10,30 @@
 
 	<bean id="com.liferay.portal.workflow.WorkflowAdvice" class="com.liferay.portal.workflow.WorkflowAdvice" />
 
+	<!-- Workflow Messaging -->
+	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_definition" />
+	</bean>
+	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_instance" />
+	</bean>
+	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_task" />
+	</bean>
+
+	<bean id="messagingConfigurator.workflow" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.workflow_definition" />
+				<ref bean="destination.workflow_instance" />
+				<ref bean="destination.workflow_task" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+	</bean>
+
 	<!-- Workflow base managers -->
 
 	<bean id="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" class="com.liferay.portal.workflow.BaseWorkflowDefinitionManager">
