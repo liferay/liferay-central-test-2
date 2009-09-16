@@ -22,6 +22,7 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceHistory;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
@@ -34,8 +35,8 @@ import java.util.Map;
  *
  * @author Micha Kiener
  */
-public class BaseWorkflowInstanceManager extends BaseWorkflowProxy
-	implements WorkflowInstanceManager {
+public class BaseWorkflowInstanceManager
+	extends BaseProxyBean implements WorkflowInstanceManager {
 
 	public WorkflowInstanceInfo addContextInformation(
 		long workflowInstanceId, Map<String, Object> context) {

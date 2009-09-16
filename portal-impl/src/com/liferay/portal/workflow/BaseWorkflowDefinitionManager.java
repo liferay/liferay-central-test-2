@@ -22,6 +22,7 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 
@@ -33,8 +34,8 @@ import java.util.List;
  *
  * @author Micha Kiener
  */
-public class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
-	implements WorkflowDefinitionManager {
+public class BaseWorkflowDefinitionManager
+	extends BaseProxyBean implements WorkflowDefinitionManager {
 
 	public void deployWorkflowDefinition(
 		WorkflowDefinition workflowDefinition, long callingUserId) {

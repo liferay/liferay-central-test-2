@@ -20,40 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.workflow.CallingUserId;
-import com.liferay.portal.kernel.workflow.UserCredential;
-import com.liferay.portal.kernel.workflow.UserCredentialFactoryUtil;
-import com.liferay.portal.kernel.workflow.WorkflowException;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
-import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="WorkflowRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class WorkflowRequest implements Serializable {
+public class WorkflowRequest extends ProxyRequest {
 
-	public WorkflowRequest(MethodInvocation methodInvocation)
-		throws WorkflowException {
+	public WorkflowRequest(Method method, Object[] arguments) throws Exception {
+		super(method, arguments);
 
-		_method = methodInvocation.getMethod();
-		_arguments = methodInvocation.getArguments();
-		_userCredential = inspectForCallingUserCredential(methodInvocation);
+		_userCredential = inspectForCallingUserCredential();
 	}
 
 	public Object execute(Object object) throws WorkflowException {
 		try {
 			UserCredentialThreadLocal.setUserCredential(_userCredential);
 
-			return _method.invoke(object, _arguments);
+			return super.execute(object);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
@@ -68,7 +59,7 @@ public class WorkflowRequest implements Serializable {
 	}
 
 	public boolean hasReturnValue() {
-		if (_method.getReturnType() != Void.TYPE) {
+		if (getMethod().getReturnType() != Void.TYPE) {
 			return true;
 		}
 		else {
@@ -76,13 +67,10 @@ public class WorkflowRequest implements Serializable {
 		}
 	}
 
-	protected UserCredential inspectForCallingUserCredential(
-			MethodInvocation methodInvocation)
+	protected UserCredential inspectForCallingUserCredential()
 		throws WorkflowException {
 
-		Method method = methodInvocation.getMethod();
-
-		Annotation[][] annotationsArray = method.getParameterAnnotations();
+		Annotation[][] annotationsArray = getMethod().getParameterAnnotations();
 
 		if ((annotationsArray == null) || (annotationsArray.length == 0)) {
 			return null;
@@ -100,7 +88,7 @@ public class WorkflowRequest implements Serializable {
 						annotation.annotationType())) {
 
 					return UserCredentialFactoryUtil.createCredential(
-						(Long)methodInvocation.getArguments()[i]);
+						(Long)getArguments()[i]);
 				}
 			}
 		}
@@ -108,8 +96,6 @@ public class WorkflowRequest implements Serializable {
 		return null;
 	}
 
-	private Object[] _arguments;
-	private Method _method;
 	private UserCredential _userCredential;
 
 }

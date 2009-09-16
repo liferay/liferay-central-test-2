@@ -22,24 +22,34 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.workflow.UserCredential;
+import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
+import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.kernel.workflow.WorkflowRequest;
+import com.liferay.portal.messaging.proxy.BaseProxyAdvice;
+
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="UserCredentialThreadLocal.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowProxyAdvice.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Micha Kiener
  */
-public class UserCredentialThreadLocal {
+public class WorkflowProxyAdvice extends BaseProxyAdvice {
 
-	public static UserCredential getUserCredential() {
-		return _threadLocal.get();
+	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+		try {
+			return super.invoke(methodInvocation);
+		}
+		catch (Exception e) {
+			throw new WorkflowException(e);
+		}
 	}
 
-	public static void setUserCredential(UserCredential userCredential) {
-		_threadLocal.set(userCredential);
-	}
+	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
+		throws Exception {
 
-	private static ThreadLocal<UserCredential> _threadLocal =
-		new ThreadLocal<UserCredential>();
+		return new WorkflowRequest(
+			methodInvocation.getMethod(), methodInvocation.getArguments());
+	}
 
 }

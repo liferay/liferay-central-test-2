@@ -22,8 +22,11 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.AsynchronousProxy;
+
 import java.util.List;
 
+@AsynchronousProxy
 /**
  * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *

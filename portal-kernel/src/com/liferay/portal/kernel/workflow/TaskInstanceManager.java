@@ -22,9 +22,12 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.AsynchronousProxy;
+
 import java.util.List;
 import java.util.Map;
 
+@AsynchronousProxy
 /**
  * <a href="TaskInstanceManager.java.html"><b><i>View Source</i></b></a>
  *

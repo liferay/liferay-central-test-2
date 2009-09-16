@@ -22,6 +22,7 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.workflow.TaskInstanceInfo;
 import com.liferay.portal.kernel.workflow.TaskInstanceManager;
 import com.liferay.portal.kernel.workflow.UserCredential;
@@ -35,7 +36,7 @@ import java.util.Map;
  * @author Micha Kiener
  */
 public class BaseTaskInstanceManager
-	extends BaseWorkflowProxy implements TaskInstanceManager {
+	extends BaseProxyBean implements TaskInstanceManager {
 
 	public TaskInstanceInfo assignTaskInstanceToRole(
 		long taskInstanceId, long roleId, String comment,
