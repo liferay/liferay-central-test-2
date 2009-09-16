@@ -109,7 +109,7 @@ public class MBMailingListLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
-		java.lang.String uuid, long userId, long groupId, long categoryId,
+		java.lang.String uuid, long userId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,
 		java.lang.String inServerName, int inServerPort, boolean inUseSSL,
 		java.lang.String inUserName, java.lang.String inPassword,
@@ -120,17 +120,17 @@ public class MBMailingListLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addMailingList(uuid, userId, groupId, categoryId,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+				   .addMailingList(uuid, userId, categoryId, emailAddress,
+			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
+			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			active);
 	}
 
-	public static void deleteCategoryMailingList(long groupId, long categoryId)
+	public static void deleteCategoryMailingList(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().deleteCategoryMailingList(groupId, categoryId);
+		getService().deleteCategoryMailingList(categoryId);
 	}
 
 	public static void deleteMailingList(long mailingListId)
@@ -147,10 +147,10 @@ public class MBMailingListLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList getCategoryMailingList(
-		long groupId, long categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getCategoryMailingList(groupId, categoryId);
+		return getService().getCategoryMailingList(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMailingList updateMailingList(

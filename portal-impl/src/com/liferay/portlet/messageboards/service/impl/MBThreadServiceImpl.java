@@ -62,17 +62,14 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 
 		MBThread thread = mbThreadLocalService.getThread(threadId);
 
-		long groupId = thread.getGroupId();
-
 		MBCategoryPermission.check(
-			getPermissionChecker(), groupId, categoryId,
+			getPermissionChecker(), thread.getCategoryId(),
 			ActionKeys.MOVE_THREAD);
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), groupId, categoryId,
-			ActionKeys.MOVE_THREAD);
+			getPermissionChecker(), categoryId, ActionKeys.MOVE_THREAD);
 
-		return mbThreadLocalService.moveThread(groupId, categoryId, threadId);
+		return mbThreadLocalService.moveThread(categoryId, threadId);
 	}
 
 	public MBThread splitThread(long messageId, ServiceContext serviceContext)
@@ -81,8 +78,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), message.getGroupId(),
-			message.getCategoryId(), ActionKeys.MOVE_THREAD);
+			getPermissionChecker(), message.getCategoryId(),
+			ActionKeys.MOVE_THREAD);
 
 		return mbThreadLocalService.splitThread(messageId, serviceContext);
 	}

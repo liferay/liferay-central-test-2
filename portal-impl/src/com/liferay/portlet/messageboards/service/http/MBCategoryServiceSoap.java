@@ -121,6 +121,20 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap getCategory(
+		long categoryId) throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
+
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap[] getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws RemoteException {
@@ -153,12 +167,10 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategorySoap getCategory(
-		long categoryId) throws RemoteException {
+	public static void subscribeCategory(long categoryId)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
-
-			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
+			MBCategoryServiceUtil.subscribeCategory(categoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -167,22 +179,10 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static void subscribeCategory(long groupId, long categoryId)
+	public static void unsubscribeCategory(long categoryId)
 		throws RemoteException {
 		try {
-			MBCategoryServiceUtil.subscribeCategory(groupId, categoryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unsubscribeCategory(long groupId, long categoryId)
-		throws RemoteException {
-		try {
-			MBCategoryServiceUtil.unsubscribeCategory(groupId, categoryId);
+			MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -159,16 +159,6 @@ public class MBCategoryLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void addCategoryResources(long categoryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService()
-			.addCategoryResources(categoryId, communityPermissions,
-			guestPermissions);
-	}
-
 	public static void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -177,6 +167,16 @@ public class MBCategoryLocalServiceUtil {
 		getService()
 			.addCategoryResources(category, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public static void addCategoryResources(long categoryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService()
+			.addCategoryResources(categoryId, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addCategoryResources(
@@ -279,20 +279,6 @@ public class MBCategoryLocalServiceUtil {
 			keywords, start, end);
 	}
 
-	public static void subscribeCategory(long userId, long groupId,
-		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().subscribeCategory(userId, groupId, categoryId);
-	}
-
-	public static void unsubscribeCategory(long userId, long groupId,
-		long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().unsubscribeCategory(userId, groupId, categoryId);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,
@@ -313,6 +299,18 @@ public class MBCategoryLocalServiceUtil {
 			outCustom, outServerName, outServerPort, outUseSSL, outUserName,
 			outPassword, mailingListActive, mergeWithParentCategory,
 			serviceContext);
+	}
+
+	public static void subscribeCategory(long userId, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().subscribeCategory(userId, categoryId);
+	}
+
+	public static void unsubscribeCategory(long userId, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().unsubscribeCategory(userId, categoryId);
 	}
 
 	public static MBCategoryLocalService getService() {

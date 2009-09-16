@@ -268,7 +268,7 @@ if ((message != null) && message.isAttachments()) {
 			<aui:input helpMessage="message-boards-message-anonymous-help" inlineLabel="left" name="anonymous" type="checkbox" />
 		</c:if>
 
-		<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
+		<c:if test="<%= (priorities.length > 0) && MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.UPDATE_THREAD_PRIORITY) %>">
 
 			<%
 			double threadPriority = BeanParamUtil.getDouble(message, request, "priority");
@@ -326,7 +326,7 @@ if ((message != null) && message.isAttachments()) {
 	<aui:button-row>
 		<aui:button type="submit" value="save" />
 
-		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
+		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, categoryId, ActionKeys.ADD_FILE) %>">
 
 			<%
 			String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "attachments.value = '" + !attachments + "'; submitForm(document." + renderResponse.getNamespace() + "fm);";

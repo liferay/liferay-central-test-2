@@ -71,6 +71,13 @@ public class MBCategoryServiceUtil {
 		getService().deleteCategory(categoryId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getCategory(categoryId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
@@ -83,23 +90,16 @@ public class MBCategoryServiceUtil {
 		return getService().getCategoriesCount(groupId, parentCategoryId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		long categoryId)
+	public static void subscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getCategory(categoryId);
+		getService().subscribeCategory(categoryId);
 	}
 
-	public static void subscribeCategory(long groupId, long categoryId)
+	public static void unsubscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		getService().subscribeCategory(groupId, categoryId);
-	}
-
-	public static void unsubscribeCategory(long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		getService().unsubscribeCategory(groupId, categoryId);
+		getService().unsubscribeCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(

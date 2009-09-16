@@ -29,7 +29,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -85,25 +84,14 @@ public class MBMessagePermission {
 			return false;
 		}
 
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			message.getCategoryId());
+
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (message.getCategoryId() ==
-					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			if (!MBCategoryPermission.contains(
+					permissionChecker, category, ActionKeys.VIEW)) {
 
-				if (!MBPermission.contains(
-						permissionChecker, groupId, ActionKeys.VIEW)) {
-
-					return false;
-				}
-			}
-			else {
-				MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-					message.getCategoryId());
-
-				if (!MBCategoryPermission.contains(
-						permissionChecker, category, ActionKeys.VIEW)) {
-
-					return false;
-				}
+				return false;
 			}
 		}
 

@@ -46,41 +46,6 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
-	public void addQuestionFlag(long messageId)
-		throws PortalException, SystemException {
-
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		if (!message.isRoot()) {
-			return;
-		}
-
-		MBMessageFlag questionMessageFlag =
-			mbMessageFlagPersistence.fetchByU_M_F(
-				message.getUserId(), message.getMessageId(),
-				MBMessageFlagImpl.QUESTION_FLAG);
-
-		MBMessageFlag answerMessageFlag =
-			mbMessageFlagPersistence.fetchByU_M_F(
-				message.getUserId(), message.getMessageId(),
-				MBMessageFlagImpl.ANSWER_FLAG);
-
-		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
-			long messageFlagId = counterLocalService.increment();
-
-			questionMessageFlag = mbMessageFlagPersistence.create(
-				messageFlagId);
-
-			questionMessageFlag.setUserId(message.getUserId());
-			questionMessageFlag.setModifiedDate(new Date());
-			questionMessageFlag.setThreadId(message.getThreadId());
-			questionMessageFlag.setMessageId(message.getMessageId());
-			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
-
-			mbMessageFlagPersistence.update(questionMessageFlag, false);
-		}
-	}
-
 	public void addReadFlags(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
@@ -136,6 +101,41 @@ public class MBMessageFlagLocalServiceImpl
 			messageFlag.setModifiedDate(thread.getLastPostDate());
 
 			mbMessageFlagPersistence.update(messageFlag, false);
+		}
+	}
+
+	public void addQuestionFlag(long messageId)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		if (!message.isRoot()) {
+			return;
+		}
+
+		MBMessageFlag questionMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagImpl.QUESTION_FLAG);
+
+		MBMessageFlag answerMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagImpl.ANSWER_FLAG);
+
+		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
+			long messageFlagId = counterLocalService.increment();
+
+			questionMessageFlag = mbMessageFlagPersistence.create(
+				messageFlagId);
+
+			questionMessageFlag.setUserId(message.getUserId());
+			questionMessageFlag.setModifiedDate(new Date());
+			questionMessageFlag.setThreadId(message.getThreadId());
+			questionMessageFlag.setMessageId(message.getMessageId());
+			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+
+			mbMessageFlagPersistence.update(questionMessageFlag, false);
 		}
 	}
 

@@ -132,15 +132,15 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addCategoryResources(long categoryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void addCategoryResources(
 		com.liferay.portlet.messageboards.model.MBCategory category,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addCategoryResources(long categoryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -220,14 +220,6 @@ public interface MBCategoryLocalService {
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException;
 
-	public void subscribeCategory(long userId, long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void unsubscribeCategory(long userId, long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,
@@ -239,6 +231,14 @@ public interface MBCategoryLocalService {
 		java.lang.String outUserName, java.lang.String outPassword,
 		boolean mailingListActive, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void subscribeCategory(long userId, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void unsubscribeCategory(long userId, long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

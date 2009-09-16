@@ -175,6 +175,24 @@ public class MBMailingListUtil {
 		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMailingList findByCategoryId(
+		long categoryId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMailingListException {
+		return getPersistence().findByCategoryId(categoryId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCategoryId(categoryId);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
+		long categoryId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByCategoryId(categoryId, retrieveFromCache);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findByActive(
 		boolean active) throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active);
@@ -216,26 +234,6 @@ public class MBMailingListUtil {
 				   .findByActive_PrevAndNext(mailingListId, active, obc);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMailingList findByG_C(
-		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMailingListException {
-		return getPersistence().findByG_C(groupId, categoryId);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByG_C(
-		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByG_C(groupId, categoryId);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMailingList fetchByG_C(
-		long groupId, long categoryId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .fetchByG_C(groupId, categoryId, retrieveFromCache);
-	}
-
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -275,15 +273,15 @@ public class MBMailingListUtil {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
+	public static void removeByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMailingListException {
+		getPersistence().removeByCategoryId(categoryId);
+	}
+
 	public static void removeByActive(boolean active)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByActive(active);
-	}
-
-	public static void removeByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMailingListException {
-		getPersistence().removeByG_C(groupId, categoryId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -300,14 +298,14 @@ public class MBMailingListUtil {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	public static int countByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCategoryId(categoryId);
+	}
+
 	public static int countByActive(boolean active)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByActive(active);
-	}
-
-	public static int countByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByG_C(groupId, categoryId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

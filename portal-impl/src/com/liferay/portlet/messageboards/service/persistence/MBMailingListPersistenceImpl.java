@@ -97,6 +97,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByUUID_G",
 			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_CATEGORYID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByCategoryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_CATEGORYID = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByCategoryId",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_ACTIVE = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByActive",
@@ -114,14 +122,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByActive",
 			new String[] { Boolean.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
-			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -139,11 +139,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				mbMailingList.getUuid(), new Long(mbMailingList.getGroupId())
 			}, mbMailingList);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-			new Object[] {
-				new Long(mbMailingList.getGroupId()),
-				new Long(mbMailingList.getCategoryId())
-			}, mbMailingList);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+			new Object[] { new Long(mbMailingList.getCategoryId()) },
+			mbMailingList);
 	}
 
 	public void cacheResult(List<MBMailingList> mbMailingLists) {
@@ -263,9 +261,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 				new Long(mbMailingListModelImpl.getOriginalGroupId())
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CATEGORYID,
 			new Object[] {
-				new Long(mbMailingListModelImpl.getOriginalGroupId()),
 				new Long(mbMailingListModelImpl.getOriginalCategoryId())
 			});
 
@@ -385,23 +382,18 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (!isNew &&
-				((mbMailingList.getGroupId() != mbMailingListModelImpl.getOriginalGroupId()) ||
-				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CATEGORYID,
 				new Object[] {
-					new Long(mbMailingListModelImpl.getOriginalGroupId()),
 					new Long(mbMailingListModelImpl.getOriginalCategoryId())
 				});
 		}
 
 		if (isNew ||
-				((mbMailingList.getGroupId() != mbMailingListModelImpl.getOriginalGroupId()) ||
-				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-				new Object[] {
-					new Long(mbMailingList.getGroupId()),
-					new Long(mbMailingList.getCategoryId())
-				}, mbMailingList);
+				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+				new Object[] { new Long(mbMailingList.getCategoryId()) },
+				mbMailingList);
 		}
 
 		return mbMailingList;
@@ -840,6 +832,111 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public MBMailingList findByCategoryId(long categoryId)
+		throws NoSuchMailingListException, SystemException {
+		MBMailingList mbMailingList = fetchByCategoryId(categoryId);
+
+		if (mbMailingList == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No MBMailingList exists with the key {");
+
+			msg.append("categoryId=" + categoryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchMailingListException(msg.toString());
+		}
+
+		return mbMailingList;
+	}
+
+	public MBMailingList fetchByCategoryId(long categoryId)
+		throws SystemException {
+		return fetchByCategoryId(categoryId, true);
+	}
+
+	public MBMailingList fetchByCategoryId(long categoryId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
+
+				query.append("mbMailingList.categoryId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(categoryId);
+
+				List<MBMailingList> list = q.list();
+
+				result = list;
+
+				MBMailingList mbMailingList = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+						finderArgs, list);
+				}
+				else {
+					mbMailingList = list.get(0);
+
+					cacheResult(mbMailingList);
+
+					if ((mbMailingList.getCategoryId() != categoryId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+							finderArgs, mbMailingList);
+					}
+				}
+
+				return mbMailingList;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CATEGORYID,
+						finderArgs, new ArrayList<MBMailingList>());
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (MBMailingList)result;
+			}
+		}
+	}
+
 	public List<MBMailingList> findByActive(boolean active)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
@@ -1083,123 +1180,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public MBMailingList findByG_C(long groupId, long categoryId)
-		throws NoSuchMailingListException, SystemException {
-		MBMailingList mbMailingList = fetchByG_C(groupId, categoryId);
-
-		if (mbMailingList == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No MBMailingList exists with the key {");
-
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("categoryId=" + categoryId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchMailingListException(msg.toString());
-		}
-
-		return mbMailingList;
-	}
-
-	public MBMailingList fetchByG_C(long groupId, long categoryId)
-		throws SystemException {
-		return fetchByG_C(groupId, categoryId, true);
-	}
-
-	public MBMailingList fetchByG_C(long groupId, long categoryId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId)
-			};
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"SELECT mbMailingList FROM MBMailingList mbMailingList WHERE ");
-
-				query.append("mbMailingList.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMailingList.categoryId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(categoryId);
-
-				List<MBMailingList> list = q.list();
-
-				result = list;
-
-				MBMailingList mbMailingList = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-						finderArgs, list);
-				}
-				else {
-					mbMailingList = list.get(0);
-
-					cacheResult(mbMailingList);
-
-					if ((mbMailingList.getGroupId() != groupId) ||
-							(mbMailingList.getCategoryId() != categoryId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-							finderArgs, mbMailingList);
-					}
-				}
-
-				return mbMailingList;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-						finderArgs, new ArrayList<MBMailingList>());
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (MBMailingList)result;
-			}
-		}
-	}
-
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -1336,17 +1316,17 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		remove(mbMailingList);
 	}
 
+	public void removeByCategoryId(long categoryId)
+		throws NoSuchMailingListException, SystemException {
+		MBMailingList mbMailingList = findByCategoryId(categoryId);
+
+		remove(mbMailingList);
+	}
+
 	public void removeByActive(boolean active) throws SystemException {
 		for (MBMailingList mbMailingList : findByActive(active)) {
 			remove(mbMailingList);
 		}
-	}
-
-	public void removeByG_C(long groupId, long categoryId)
-		throws NoSuchMailingListException, SystemException {
-		MBMailingList mbMailingList = findByG_C(groupId, categoryId);
-
-		remove(mbMailingList);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1470,6 +1450,53 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 		return count.intValue();
 	}
 
+	public int countByCategoryId(long categoryId) throws SystemException {
+		Object[] finderArgs = new Object[] { new Long(categoryId) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(mbMailingList) ");
+				query.append("FROM MBMailingList mbMailingList WHERE ");
+
+				query.append("mbMailingList.categoryId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(categoryId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CATEGORYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { Boolean.valueOf(active) };
 
@@ -1509,62 +1536,6 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ACTIVE,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public int countByG_C(long groupId, long categoryId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(categoryId)
-			};
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(mbMailingList) ");
-				query.append("FROM MBMailingList mbMailingList WHERE ");
-
-				query.append("mbMailingList.groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("mbMailingList.categoryId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(categoryId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, finderArgs,
-					count);
 
 				closeSession(session);
 			}

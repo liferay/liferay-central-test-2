@@ -154,8 +154,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(
-				_category.getGroupId(), _category.getCategoryId(), _subject,
-				body, files, anonymous, priority, serviceContext);
+				_category.getCategoryId(), _subject, body, files, anonymous,
+				priority, serviceContext);
 		}
 
 		private String _subject;

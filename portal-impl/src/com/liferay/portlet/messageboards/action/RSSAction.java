@@ -29,10 +29,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.messageboards.NoSuchCategoryException;
-import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBCategoryConstants;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -124,20 +120,9 @@ public class RSSAction extends Action {
 					"/message_boards/find_category?p_l_id=" + plid +
 						"&mbCategoryId=" + categoryId;
 
-			try {
-				MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-					categoryId);
-
-				groupId = category.getGroupId();
-			}
-			catch (NoSuchCategoryException nsce) {
-				groupId = categoryId;
-				categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
-			}
-
 			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-				groupId, categoryId, max, type, version, displayStyle, feedURL,
-				entryURL, themeDisplay);
+				categoryId, max, type, version, displayStyle, feedURL, entryURL,
+				themeDisplay);
 		}
 		else if (threadId > 0) {
 			String feedURL =

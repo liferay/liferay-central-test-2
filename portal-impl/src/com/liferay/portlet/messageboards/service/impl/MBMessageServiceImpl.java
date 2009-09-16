@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -40,7 +39,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -90,61 +88,57 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long groupId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		checkReplyToPermission(groupId, categoryId, parentMessageId);
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_FILE)) {
-
-			files.clear();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, groupId, categoryId, threadId,
-			parentMessageId, subject, body, files, anonymous, priority,
-			serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long groupId, long categoryId, String subject, String body,
+			long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
-			getPermissionChecker(), groupId, categoryId,
-			ActionKeys.ADD_MESSAGE);
+			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_FILE)) {
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
 
 			files.clear();
 		}
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
+				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
 			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, groupId, categoryId, subject, body, files,
+			getGuestOrUserId(), null, categoryId, subject, body, files,
 			anonymous, priority, serviceContext);
+	}
+
+	public MBMessage addMessage(
+			long categoryId, long threadId, long parentMessageId,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		checkReplyToPermission(categoryId, parentMessageId);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId,
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(
@@ -170,13 +164,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public List<MBMessage> getCategoryMessages(
-			long groupId, long categoryId, int start, int end)
+			long categoryId, int start, int end)
 		throws PortalException, SystemException {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
-			groupId, categoryId, start, end).iterator();
+			categoryId, start, end).iterator();
 
 		while (itr.hasNext()) {
 			MBMessage message = itr.next();
@@ -191,36 +185,23 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return messages;
 	}
 
-	public int getCategoryMessagesCount(long groupId, long categoryId)
+	public int getCategoryMessagesCount(long categoryId)
 		throws SystemException {
 
-		return mbMessageLocalService.getCategoryMessagesCount(
-			groupId, categoryId);
+		return mbMessageLocalService.getCategoryMessagesCount(categoryId);
 	}
 
 	public String getCategoryMessagesRSS(
-			long groupId, long categoryId, int max, String type, double version,
+			long categoryId, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		MBCategory category = null;
+		MBCategory category = mbCategoryLocalService.getCategory(
+			categoryId);
 
-		String name = StringPool.BLANK;
-		String description = StringPool.BLANK;
-
-		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-			category = mbCategoryLocalService.getCategory(categoryId);
-
-			name = category.getName();
-			description = category.getDescription();
-		}
-		else {
-			Group group = groupLocalService.getGroup(groupId);
-
-			name = group.getName();
-			description = group.getDescription();
-		}
+		String name = category.getName();
+		String description = category.getDescription();
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
@@ -232,8 +213,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while ((messages.size() < max) && listNotExhausted) {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getCategoryMessages(
-					groupId, categoryId, lastIntervalStart,
-					lastIntervalStart + max, comparator);
+					categoryId, lastIntervalStart, lastIntervalStart + max,
+					comparator);
 
 			Iterator<MBMessage> itr = messageList.iterator();
 
@@ -505,15 +486,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), message.getGroupId(),
-				message.getCategoryId(), ActionKeys.ADD_FILE)) {
+				getPermissionChecker(), message.getCategoryId(),
+				ActionKeys.ADD_FILE)) {
 
 			files.clear();
 		}
 
 		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), message.getGroupId(),
-				message.getCategoryId(), ActionKeys.UPDATE_THREAD_PRIORITY)) {
+				getPermissionChecker(), message.getCategoryId(),
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
 			MBThread thread = mbThreadLocalService.getThread(
 				message.getThreadId());
@@ -526,13 +507,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			priority, serviceContext);
 	}
 
-	protected void checkReplyToPermission(
-			long groupId, long categoryId, long parentMessageId)
+	protected void checkReplyToPermission(long categoryId, long parentMessageId)
 		throws PortalException, SystemException {
 
 		if (parentMessageId > 0) {
 			if (MBCategoryPermission.contains(
-					getPermissionChecker(), groupId, categoryId,
+					getPermissionChecker(), categoryId,
 					ActionKeys.ADD_MESSAGE)) {
 
 				return;
@@ -543,7 +523,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			if ((parentMessage == null) ||
 				!MBCategoryPermission.contains(
-					getPermissionChecker(), groupId, categoryId,
+					getPermissionChecker(), categoryId,
 					ActionKeys.REPLY_TO_MESSAGE)) {
 
 				throw new PrincipalException();
@@ -551,8 +531,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 		else {
 			MBCategoryPermission.check(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_MESSAGE);
+				getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 		}
 	}
 

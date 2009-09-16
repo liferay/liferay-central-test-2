@@ -165,7 +165,7 @@
 					</c:if>
 				</div>
 
-				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, scopeGroupId, category.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE)) %>">
+				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE)) %>">
 					<ul class="edit-controls lfr-component">
 
 						<%

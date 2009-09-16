@@ -54,10 +54,10 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 		for (MBCategory category : categories) {
 			int threadCount = MBThreadLocalServiceUtil.getCategoryThreadsCount(
-				category.getGroupId(), category.getCategoryId());
+				category.getCategoryId());
 			int messageCount =
 				MBMessageLocalServiceUtil.getCategoryMessagesCount(
-					category.getGroupId(), category.getCategoryId());
+					category.getCategoryId());
 
 			if ((category.getThreadCount() != threadCount) ||
 				(category.getMessageCount() != messageCount)) {

@@ -51,6 +51,16 @@ public class MBCategoryPermission {
 	}
 
 	public static void check(
+			PermissionChecker permissionChecker, long categoryId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, categoryId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, MBCategory category,
 			String actionId)
 		throws PortalException, SystemException {
@@ -69,11 +79,19 @@ public class MBCategoryPermission {
 			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-				categoryId);
-
-			return contains(permissionChecker, category, actionId);
+			return contains(permissionChecker, categoryId, actionId);
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long categoryId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		MBCategory category =
+			MBCategoryLocalServiceUtil.getCategory(categoryId);
+
+		return contains(permissionChecker, category, actionId);
 	}
 
 	public static boolean contains(

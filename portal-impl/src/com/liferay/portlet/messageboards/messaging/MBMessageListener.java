@@ -73,7 +73,6 @@ public class MBMessageListener implements MessageListener {
 
 		long companyId = message.getLong("companyId");
 		long userId = message.getLong("userId");
-		long groupId = message.getLong("groupId");
 		String categoryIds = message.getString("categoryIds");
 		String threadId = message.getString("threadId");
 		String fromName = message.getString("fromName");
@@ -129,7 +128,7 @@ public class MBMessageListener implements MessageListener {
 				try {
 					notifyMailingList(
 						subject, body, replyToAddress, mailId, inReplyTo,
-						htmlFormat, groupId, categoryId);
+						htmlFormat, categoryId);
 				}
 				catch (NoSuchMailingListException nsmle) {
 				}
@@ -147,12 +146,11 @@ public class MBMessageListener implements MessageListener {
 
 	protected void notifyMailingList(
 			String subject, String body, String replyToAddress, String mailId,
-			String inReplyTo, boolean htmlFormat, long groupId, long categoryId)
+			String inReplyTo, boolean htmlFormat, long categoryId)
 		throws Exception {
 
 		MBMailingList mailingList =
-			MBMailingListLocalServiceUtil.getCategoryMailingList(
-				groupId, categoryId);
+			MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
 
 		if (!mailingList.isActive()) {
 			return;

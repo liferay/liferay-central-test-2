@@ -37,7 +37,7 @@ MBMailingList mailingList = null;
 
 try {
 	if (categoryId > 0) {
-		mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(scopeGroupId, categoryId);
+		mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
 	}
 }
 catch (NoSuchMailingListException nsmle) {
@@ -54,6 +54,9 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 		nameEl.href = "";
 		nameEl.innerHTML = "";
+
+		jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").hide();
+		jQuery("#<portlet:namespace />mergeWithParentCategoryCheckbox").attr("checked", false);
 	}
 
 	function <portlet:namespace />saveCategory() {
@@ -68,6 +71,10 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />mbCategoryId=" + parentCategoryId;
 		nameEl.innerHTML = parentCategoryName + "&nbsp;";
+
+		if (parentCategoryId != <%= MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>) {
+			jQuery("#<portlet:namespace />merge-with-parent-checkbox-div").show();
+		}
 	}
 </script>
 
@@ -93,42 +100,46 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 	<aui:model-context bean="<%= category %>" model="<%= MBCategory.class %>" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="parent-category">
+		<c:if test="<%= category != null %>">
+			<aui:field-wrapper label="parent-category">
 
-			<%
-			String parentCategoryName = StringPool.BLANK;
+				<%
+				String parentCategoryName = StringPool.BLANK;
 
-			try {
-				MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+				try {
+					MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
 
-				parentCategoryName = parentCategory.getName();
-			}
-			catch (NoSuchCategoryException nscce) {
-			}
-			%>
+					parentCategoryName = parentCategory.getName();
+				}
+				catch (NoSuchCategoryException nscce) {
+				}
+				%>
 
-			<portlet:renderURL var="viewCategoryURL">
-				<portlet:param name="struts_action" value="/message_boards/view" />
-				<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
-			</portlet:renderURL>
+				<portlet:renderURL var="viewCategoryURL">
+					<portlet:param name="struts_action" value="/message_boards/view" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
+				</portlet:renderURL>
 
-			<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName"><%= parentCategoryName %></aui:a>
+				<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName"><%= parentCategoryName %></aui:a>
 
-			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
-				<portlet:param name="struts_action" value="/message_boards/select_category" />
-				<portlet:param name="mbCategoryId" value="<%= String.valueOf((category == null) ? MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID : category.getParentCategoryId()) %>" />
-			</portlet:renderURL>
+				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectCategoryURL">
+					<portlet:param name="struts_action" value="/message_boards/select_category" />
+					<portlet:param name="mbCategoryId" value="<%= String.valueOf(category.getParentCategoryId()) %>" />
+				</portlet:renderURL>
 
-			<%
-			String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
-			%>
+				<%
+				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "','category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
+				%>
 
-			<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 
-			<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
+				<aui:button id="removeCategoryButton" onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 
-			<aui:input inlineLabel="left" label="merge-with-parent-category" name="mergeWithParentCategory" type="checkbox" />
-		</aui:field-wrapper>
+				<div id="<portlet:namespace />merge-with-parent-checkbox-div" <%= category.getParentCategoryId() == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID ? "style=\"display: none;\"" : StringPool.BLANK %>>
+					<aui:input inlineLabel="left" label="merge-with-parent-category" name="mergeWithParentCategory" type="checkbox" />
+				</div>
+			</aui:field-wrapper>
+		</c:if>
 
 		<aui:input name="name" />
 

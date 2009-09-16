@@ -136,6 +136,18 @@ public interface MBMailingListPersistence extends BasePersistence {
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMailingList findByCategoryId(
+		long categoryId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMailingListException;
+
+	public com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMailingList fetchByCategoryId(
+		long categoryId, boolean retrieveFromCache)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> findByActive(
 		boolean active) throws com.liferay.portal.SystemException;
 
@@ -164,19 +176,6 @@ public interface MBMailingListPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMailingListException;
 
-	public com.liferay.portlet.messageboards.model.MBMailingList findByG_C(
-		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMailingListException;
-
-	public com.liferay.portlet.messageboards.model.MBMailingList fetchByG_C(
-		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMailingList fetchByG_C(
-		long groupId, long categoryId, boolean retrieveFromCache)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -202,12 +201,12 @@ public interface MBMailingListPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMailingListException;
 
-	public void removeByActive(boolean active)
-		throws com.liferay.portal.SystemException;
-
-	public void removeByG_C(long groupId, long categoryId)
+	public void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMailingListException;
+
+	public void removeByActive(boolean active)
+		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
@@ -217,10 +216,10 @@ public interface MBMailingListPersistence extends BasePersistence {
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByActive(boolean active)
+	public int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_C(long groupId, long categoryId)
+	public int countByActive(boolean active)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

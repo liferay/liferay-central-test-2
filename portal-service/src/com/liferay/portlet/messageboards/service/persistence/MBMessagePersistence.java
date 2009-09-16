@@ -192,6 +192,34 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCategoryId(
+		long categoryId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByCategoryId(
+		long categoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByCategoryId_First(
+		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByCategoryId_Last(
+		long categoryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage[] findByCategoryId_PrevAndNext(
+		long messageId, long categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByThreadId(
 		long threadId) throws com.liferay.portal.SystemException;
 
@@ -278,37 +306,6 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C(
-		long groupId, long categoryId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C(
-		long groupId, long categoryId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C(
-		long groupId, long categoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage findByG_C_First(
-		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage findByG_C_Last(
-		long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_PrevAndNext(
-		long messageId, long groupId, long categoryId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
@@ -336,6 +333,37 @@ public interface MBMessagePersistence extends BasePersistence {
 
 	public com.liferay.portlet.messageboards.model.MBMessage[] findByC_C_PrevAndNext(
 		long messageId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_T(
+		long categoryId, long threadId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_T(
+		long categoryId, long threadId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_T(
+		long categoryId, long threadId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByC_T_First(
+		long categoryId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage findByC_T_Last(
+		long categoryId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage[] findByC_T_PrevAndNext(
+		long messageId, long categoryId, long threadId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -371,37 +399,6 @@ public interface MBMessagePersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T(
-		long groupId, long categoryId, long threadId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T(
-		long groupId, long categoryId, long threadId, int start, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_C_T(
-		long groupId, long categoryId, long threadId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_First(
-		long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage findByG_C_T_Last(
-		long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage[] findByG_C_T_PrevAndNext(
-		long messageId, long groupId, long categoryId, long threadId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchMessageException;
-
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -433,6 +430,9 @@ public interface MBMessagePersistence extends BasePersistence {
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByThreadId(long threadId)
 		throws com.liferay.portal.SystemException;
 
@@ -442,16 +442,13 @@ public interface MBMessagePersistence extends BasePersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByT_P(long threadId, long parentMessageId)
+	public void removeByC_T(long categoryId, long threadId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByG_C_T(long groupId, long categoryId, long threadId)
+	public void removeByT_P(long threadId, long parentMessageId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -468,6 +465,9 @@ public interface MBMessagePersistence extends BasePersistence {
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByCategoryId(long categoryId)
+		throws com.liferay.portal.SystemException;
+
 	public int countByThreadId(long threadId)
 		throws com.liferay.portal.SystemException;
 
@@ -477,16 +477,13 @@ public interface MBMessagePersistence extends BasePersistence {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_C(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException;
-
 	public int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public int countByT_P(long threadId, long parentMessageId)
+	public int countByC_T(long categoryId, long threadId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_C_T(long groupId, long categoryId, long threadId)
+	public int countByT_P(long threadId, long parentMessageId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -39,10 +39,6 @@ public class MailingListRequest implements Serializable {
 		return _companyId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
 	public String getInPassword() {
 		return _inPassword;
 	}
@@ -79,10 +75,6 @@ public class MailingListRequest implements Serializable {
 		_companyId = id;
 	}
 
-	public void setGroupId(long id) {
-		_groupId = id;
-	}
-
 	public void setInPassword(String inPassword) {
 		_inPassword = inPassword;
 	}
@@ -113,7 +105,6 @@ public class MailingListRequest implements Serializable {
 
 	private long _categoryId;
 	private long _companyId;
-	private long _groupId;
 	private String _inPassword;
 	private String _inProtocol;
 	private String _inServerName;

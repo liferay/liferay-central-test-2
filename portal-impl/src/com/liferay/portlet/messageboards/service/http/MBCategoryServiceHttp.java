@@ -243,6 +243,42 @@ public class MBCategoryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
+		HttpPrincipal httpPrincipal, long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
+					"getCategory", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBCategory)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		HttpPrincipal httpPrincipal, long groupId, long parentCategoryId,
 		int start, int end)
@@ -320,53 +356,15 @@ public class MBCategoryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
-		HttpPrincipal httpPrincipal, long categoryId)
+	public static void subscribeCategory(HttpPrincipal httpPrincipal,
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategory", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.messageboards.model.MBCategory)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void subscribeCategory(HttpPrincipal httpPrincipal,
-		long groupId, long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"subscribeCategory", new Object[] { paramObj0, paramObj1 });
+					"subscribeCategory", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -391,16 +389,14 @@ public class MBCategoryServiceHttp {
 	}
 
 	public static void unsubscribeCategory(HttpPrincipal httpPrincipal,
-		long groupId, long categoryId)
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
+			Object paramObj0 = new LongWrapper(categoryId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"unsubscribeCategory", new Object[] { paramObj0, paramObj1 });
+					"unsubscribeCategory", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
