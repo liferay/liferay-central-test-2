@@ -112,7 +112,9 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		viewPortletURL.setWindowState(WindowState.MAXIMIZED);
 
 		viewPortletURL.setParameter("struts_action", "/image_gallery/view");
- 		viewPortletURL.setParameter(
+		viewPortletURL.setParameter(
+			"groupId", String.valueOf(_image.getGroupId()));
+		viewPortletURL.setParameter(
 			"folderId", String.valueOf(_image.getFolderId()));
 
 		return viewPortletURL.toString();
@@ -120,6 +122,10 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _image.getUserId();
+	}
+
+	public String getViewInContextMessage() {
+		return "view-album";
 	}
 
 	public boolean isPrintable() {
