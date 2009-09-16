@@ -5,9 +5,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-
-	<!-- Monitoring service -->
-
 	<bean id="portalStatistics" class="com.liferay.portal.monitoring.statistics.portal.ServerStatistics">
 		<constructor-arg index="0" ref="com.liferay.portal.service.CompanyLocalService.impl" type="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
