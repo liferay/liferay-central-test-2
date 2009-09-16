@@ -54,7 +54,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Berentey Zsolt
  * @author Jorge Ferrer
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jesper Weissglas
  */
 public class ViewAction extends PortletAction {
@@ -101,7 +101,7 @@ public class ViewAction extends PortletAction {
 				if (Validator.isNotNull(columnId)) {
 					columnIds.put(
 						columnId,
-						portlet.getPortletId() + StringPool.UNDERLINE +
+						renderResponse.getNamespace() + StringPool.UNDERLINE +
 							columnId);
 				}
 			}
@@ -117,7 +117,7 @@ public class ViewAction extends PortletAction {
 			Matcher columnIdMatcher = _columnIdPattern.matcher(content);
 
 			velocityTemplateContent = columnIdMatcher.replaceAll(
-				"$1" + portlet.getPortletId() + "$2$3");
+				"$1" + renderResponse.getNamespace() + "$2$3");
 		}
 
 		renderRequest.setAttribute(
