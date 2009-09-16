@@ -163,12 +163,13 @@ public class AssetPublisherFriendlyURLMapper extends BaseFriendlyURLMapper {
 				namespace + "struts_action",
 				new String[] {"/asset_publisher/view_content"});
 
+			params.put(namespace + "type", new String[] {type});
+
 			if (Validator.isNotNull(assetEntryId)) {
 				params.put(
 					namespace + "assetEntryId", new String[] {assetEntryId});
 			}
 			else {
-				params.put(namespace + "type", new String[] {type});
 				params.put(namespace + "urlTitle", new String[] {urlTitle});
 			}
 		}
