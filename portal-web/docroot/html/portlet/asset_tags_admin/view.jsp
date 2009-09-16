@@ -51,7 +51,7 @@
 
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
-				
+
 				<div class="add-tag-layer-wrapper">
 					<div class="add-tag-layer">
 						<div class="aui-ctrl-holder">

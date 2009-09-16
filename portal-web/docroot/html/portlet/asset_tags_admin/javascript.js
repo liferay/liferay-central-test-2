@@ -42,11 +42,13 @@
 				AUI().use(
 					'context-panel',
 					function(A) {
-						instance._addTagOverlay = new A.ContextPanel({
-							bodyContent: A.get('.add-tag-layer'),
-							trigger: '.add-tag-button',
-							align: { points: [ 'tr', 'br' ] }
-						})
+						instance._addTagOverlay = new A.ContextPanel(
+							{
+								bodyContent: A.get('.add-tag-layer'),
+								trigger: '.add-tag-button',
+								align: { points: [ 'tr', 'br' ] }
+							}
+						)
 						.render();
 					}
 				);

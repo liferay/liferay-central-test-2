@@ -47,21 +47,23 @@
 				AUI().use(
 					'context-panel',
 					function(A) {
-
-						instance._toolbarCategoryPanel = new A.ContextPanel({
-							bodyContent: A.get('.add-category-layer'),
-							trigger: '.add-category-button',
-							align: { points: [ 'tr', 'br' ] }
-						})
+						instance._toolbarCategoryPanel = new A.ContextPanel(
+							{
+								bodyContent: A.get('.add-category-layer'),
+								trigger: '.add-category-button',
+								align: { points: [ 'tr', 'br' ] }
+							}
+						)
 						.render();
 
-						instance._vocabularyCategoryPanel = new A.ContextPanel({
-							bodyContent: A.get('.add-vocabulary-layer'),
-							trigger: '.add-vocabulary-button',
-							align: { points: [ 'tr', 'br' ] }
-						})
+						instance._vocabularyCategoryPanel = new A.ContextPanel(
+							{
+								bodyContent: A.get('.add-vocabulary-layer'),
+								trigger: '.add-vocabulary-button',
+								align: { points: [ 'tr', 'br' ] }
+							}
+						)
 						.render();
-
 					}
 				);
 

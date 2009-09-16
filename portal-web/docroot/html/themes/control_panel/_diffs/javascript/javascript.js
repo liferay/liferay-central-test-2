@@ -4,7 +4,6 @@ Liferay.Util.portletTitleEdit = function() {
 AUI().use(
 	'context-panel',
 	function(A) {
-
 		var portletInformationEl = A.get('#cpContextPanelTemplate');
 		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
 
@@ -18,22 +17,24 @@ AUI().use(
 
 			portletInformationEl.removeClass('aui-contextpanel-hidden');
 
-			var contextPanel = new A.ContextPanel({
-				trigger: portletInformationIcon,
-				bodyContent: portletInformationEl,
-				align: { points: [ 'tl', 'br' ] },
-				visible: false,
-				on: {
-					hide: function() {
-						jQuery.ajax(
-							{
-								url: themeDisplay.getPathMain() + '/portal/session_click',
-								data: sessionData
-							}
-						);
+			var contextPanel = new A.ContextPanel(
+				{
+					trigger: portletInformationIcon,
+					bodyContent: portletInformationEl,
+					align: { points: [ 'tl', 'br' ] },
+					visible: false,
+					on: {
+						hide: function() {
+							jQuery.ajax(
+								{
+									url: themeDisplay.getPathMain() + '/portal/session_click',
+									data: sessionData
+								}
+							);
+						}
 					}
 				}
-			})
+			)
 			.render();
 
 			if (visible) {
