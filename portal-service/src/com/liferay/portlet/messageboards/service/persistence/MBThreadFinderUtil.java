@@ -28,15 +28,15 @@ package com.liferay.portlet.messageboards.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public class MBThreadFinderUtil {
-	public static int countByS_G_U(long groupId, long userId)
+	public static int countByS_G_U_S(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByS_G_U(groupId, userId);
+		return getFinder().countByS_G_U_S(groupId, userId, status);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U(
-		long groupId, long userId, int start, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U_S(
+		long groupId, long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByS_G_U(groupId, userId, start, end);
+		return getFinder().findByS_G_U_S(groupId, userId, status, start, end);
 	}
 
 	public static MBThreadFinder getFinder() {

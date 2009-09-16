@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -99,8 +100,8 @@ public class RSSAction extends Action {
 			String feedURL = StringPool.BLANK;
 
 			rss = MBMessageServiceUtil.getCompanyMessagesRSS(
-				companyId, max, type, version, displayStyle, feedURL, entryURL,
-				themeDisplay);
+				companyId, StatusConstants.APPROVED, max, type, version,
+				displayStyle, feedURL, entryURL, themeDisplay);
 		}
 		else if (groupId > 0) {
 			String feedURL =
@@ -109,13 +110,13 @@ public class RSSAction extends Action {
 
 			if (userId > 0) {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
-					groupId, userId, max, type, version, displayStyle, feedURL,
-					entryURL, themeDisplay);
+					groupId, userId, StatusConstants.APPROVED, max, type, 
+					version, displayStyle, feedURL, entryURL, themeDisplay);
 			}
 			else {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
-					groupId, max, type, version, displayStyle, feedURL,
-					entryURL, themeDisplay);
+					groupId, StatusConstants.APPROVED, max, type, version,
+					displayStyle, feedURL, entryURL, themeDisplay);
 			}
 		}
 		else if (categoryId > 0) {
@@ -136,8 +137,8 @@ public class RSSAction extends Action {
 			}
 
 			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-				groupId, categoryId, max, type, version, displayStyle, feedURL,
-				entryURL, themeDisplay);
+				groupId, categoryId, StatusConstants.APPROVED, max, type, 
+				version, displayStyle, feedURL, entryURL, themeDisplay);
 		}
 		else if (threadId > 0) {
 			String feedURL =
@@ -146,8 +147,8 @@ public class RSSAction extends Action {
 						"&threadId=" + threadId;
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
-				threadId, max, type, version, displayStyle, feedURL, entryURL,
-				themeDisplay);
+				threadId, StatusConstants.APPROVED, max, type, version,
+				displayStyle, feedURL, entryURL, themeDisplay);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

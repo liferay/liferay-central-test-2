@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -47,17 +48,28 @@ public class MBThreadFinderImpl
 
 	public static String COUNT_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".countByS_G_U";
+	public static String COUNT_BY_S_G_U_S =
+		MBThreadFinder.class.getName() + ".countByS_G_U_S";
 
 	public static String FIND_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".findByS_G_U";
+	public static String FIND_BY_S_G_U_S =
+		MBThreadFinder.class.getName() + ".findByS_G_U_S";
 
-	public int countByS_G_U(long groupId, long userId) throws SystemException {
+	public int countByS_G_U_S(long groupId, long userId, int status) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+			String sql = null;
+
+			if (status == StatusConstants.ANY) {
+				sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+			}
+			else {
+				sql = CustomSQLUtil.get(COUNT_BY_S_G_U_S);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -68,6 +80,10 @@ public class MBThreadFinderImpl
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 			qPos.add(userId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -89,8 +105,8 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	public List<MBThread> findByS_G_U(
-			long groupId, long userId, int start, int end)
+	public List<MBThread> findByS_G_U_S(
+			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -98,7 +114,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_S);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -109,6 +125,7 @@ public class MBThreadFinderImpl
 			qPos.add(PortalUtil.getClassNameId(MBThread.class.getName()));
 			qPos.add(groupId);
 			qPos.add(userId);
+			qPos.add(status);
 
 			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
 		}

@@ -14,6 +14,6 @@
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteAnswerFlag" qname="operNS:deleteAnswerFlag" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addAnswerFlag deleteAnswerFlag"/>
+		<parameter name="allowedMethods" value="deleteAnswerFlag addAnswerFlag"/>
 	</service>
 </deployment>

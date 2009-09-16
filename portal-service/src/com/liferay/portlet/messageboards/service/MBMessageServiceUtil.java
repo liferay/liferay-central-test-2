@@ -47,38 +47,38 @@ public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addDiscussionMessage(className, classPK, threadId,
-			parentMessageId, subject, body, serviceContext);
+			parentMessageId, subject, body, status, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addMessage(groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, serviceContext);
+			subject, body, files, anonymous, priority, status, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .addMessage(groupId, categoryId, subject, body, files,
-			anonymous, priority, serviceContext);
+			anonymous, priority, status, serviceContext);
 	}
 
 	public static void deleteDiscussionMessage(long groupId,
@@ -96,62 +96,64 @@ public class MBMessageServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long groupId, long categoryId, int start, int end)
+		long groupId, long categoryId, int status, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getCategoryMessages(groupId, categoryId, start, end);
+		return getService()
+				   .getCategoryMessages(groupId, categoryId, status, start, end);
 	}
 
-	public static int getCategoryMessagesCount(long groupId, long categoryId)
-		throws com.liferay.portal.SystemException {
-		return getService().getCategoryMessagesCount(groupId, categoryId);
+	public static int getCategoryMessagesCount(long groupId, long categoryId,
+		int status) throws com.liferay.portal.SystemException {
+		return getService().getCategoryMessagesCount(groupId, categoryId, status);
 	}
 
 	public static java.lang.String getCategoryMessagesRSS(long groupId,
-		long categoryId, int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .getCategoryMessagesRSS(groupId, categoryId, max, type,
-			version, displayStyle, feedURL, entryURL, themeDisplay);
-	}
-
-	public static java.lang.String getCompanyMessagesRSS(long companyId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService()
-				   .getCompanyMessagesRSS(companyId, max, type, version,
-			displayStyle, feedURL, entryURL, themeDisplay);
-	}
-
-	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
+		long categoryId, int status, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getGroupMessagesRSS(groupId, max, type, version,
-			displayStyle, feedURL, entryURL, themeDisplay);
+				   .getCategoryMessagesRSS(groupId, categoryId, status, max,
+			type, version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
-	public static java.lang.String getGroupMessagesRSS(long groupId,
-		long userId, int max, java.lang.String type, double version,
+	public static java.lang.String getCompanyMessagesRSS(long companyId,
+		int status, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getGroupMessagesRSS(groupId, userId, max, type, version,
+				   .getCompanyMessagesRSS(companyId, status, max, type,
+			version, displayStyle, feedURL, entryURL, themeDisplay);
+	}
+
+	public static java.lang.String getGroupMessagesRSS(long groupId,
+		int status, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getGroupMessagesRSS(groupId, status, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
+	}
+
+	public static java.lang.String getGroupMessagesRSS(long groupId,
+		long userId, int status, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .getGroupMessagesRSS(groupId, userId, status, max, type,
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
@@ -162,20 +164,21 @@ public class MBMessageServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId, java.lang.String threadView)
+		long messageId, java.lang.String threadView, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getMessageDisplay(messageId, threadView);
+		return getService().getMessageDisplay(messageId, threadView, status);
 	}
 
-	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+	public static java.lang.String getThreadMessagesRSS(long threadId,
+		int status, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getThreadMessagesRSS(threadId, max, type, version,
+				   .getThreadMessagesRSS(threadId, status, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
@@ -193,25 +196,25 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body,
+		java.lang.String subject, java.lang.String body, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateDiscussionMessage(className, classPK, messageId,
-			subject, body, serviceContext);
+			subject, body, status, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority,
+		java.util.List<String> existingFiles, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
 				   .updateMessage(messageId, subject, body, files,
-			existingFiles, priority, serviceContext);
+			existingFiles, priority, status, serviceContext);
 	}
 
 	public static MBMessageService getService() {

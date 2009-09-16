@@ -167,7 +167,7 @@
 						<%
 						long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
 
-						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+						int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId(), StatusConstants.APPROVED);
 						%>
 
 						<c:choose>

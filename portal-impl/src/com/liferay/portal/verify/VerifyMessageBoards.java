@@ -25,6 +25,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -54,10 +55,12 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 		for (MBCategory category : categories) {
 			int threadCount = MBThreadLocalServiceUtil.getCategoryThreadsCount(
-				category.getGroupId(), category.getCategoryId());
+				category.getGroupId(), category.getCategoryId(),
+				StatusConstants.APPROVED);
 			int messageCount =
 				MBMessageLocalServiceUtil.getCategoryMessagesCount(
-					category.getGroupId(), category.getCategoryId());
+					category.getGroupId(), category.getCategoryId(),
+					StatusConstants.APPROVED);
 
 			if ((category.getThreadCount() != threadCount) ||
 				(category.getMessageCount() != messageCount)) {
@@ -84,7 +87,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 
 		for (MBThread thread : threads) {
 			int messageCount = MBMessageLocalServiceUtil.getThreadMessagesCount(
-				thread.getThreadId());
+				thread.getThreadId(), StatusConstants.APPROVED);
 
 			if (thread.getMessageCount() != messageCount) {
 				thread.setMessageCount(messageCount);

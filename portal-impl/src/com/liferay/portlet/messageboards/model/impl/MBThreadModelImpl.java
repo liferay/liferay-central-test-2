@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -75,9 +76,13 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			{ "viewCount", new Integer(Types.INTEGER) },
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
-			{ "priority", new Integer(Types.DOUBLE) }
+			{ "priority", new Integer(Types.DOUBLE) },
+			{ "status", new Integer(Types.INTEGER) },
+			{ "statusByUserId", new Integer(Types.BIGINT) },
+			{ "statusByUserName", new Integer(Types.VARCHAR) },
+			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBThread";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -101,6 +106,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		model.setLastPostByUserId(soapModel.getLastPostByUserId());
 		model.setLastPostDate(soapModel.getLastPostDate());
 		model.setPriority(soapModel.getPriority());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -214,6 +223,47 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		_priority = priority;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	public String getStatusByUserName() {
+		return GetterUtil.getString(_statusByUserName);
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public MBThread toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBThread)this;
@@ -233,6 +283,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			model.setLastPostByUserId(getLastPostByUserId());
 			model.setLastPostDate(getLastPostDate());
 			model.setPriority(getPriority());
+			model.setStatus(getStatus());
+			model.setStatusByUserId(getStatusByUserId());
+			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
+			model.setStatusDate(getStatusDate());
 
 			model = (MBThread)Proxy.newProxyInstance(MBThread.class.getClassLoader(),
 					new Class[] { MBThread.class },
@@ -267,6 +321,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		clone.setLastPostByUserId(getLastPostByUserId());
 		clone.setLastPostDate(getLastPostDate());
 		clone.setPriority(getPriority());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -350,6 +408,14 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 		sb.append(getLastPostDate());
 		sb.append(", priority=");
 		sb.append(getPriority());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -398,6 +464,22 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 			"<column><column-name>priority</column-name><column-value><![CDATA[");
 		sb.append(getPriority());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -414,5 +496,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread> {
 	private String _lastPostByUserUuid;
 	private Date _lastPostDate;
 	private double _priority;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private transient ExpandoBridge _expandoBridge;
 }

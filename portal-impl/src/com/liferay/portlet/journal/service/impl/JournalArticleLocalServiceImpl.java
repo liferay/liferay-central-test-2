@@ -330,7 +330,8 @@ public class JournalArticleLocalServiceImpl
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, article.getUserName(),
-				JournalArticle.class.getName(), resourcePrimKey);
+				JournalArticle.class.getName(), resourcePrimKey,
+				StatusConstants.APPROVED);
 		}
 
 		// Email

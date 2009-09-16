@@ -76,7 +76,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
+		java.lang.String body, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -105,10 +105,12 @@ public class MBMessageServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = serviceContext;
+			Object paramObj6 = new IntegerWrapper(status);
+
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -116,7 +118,7 @@ public class MBMessageServiceHttp {
 					"addDiscussionMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -150,7 +152,7 @@ public class MBMessageServiceHttp {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -185,10 +187,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj8 = new DoubleWrapper(priority);
 
-			Object paramObj9 = serviceContext;
+			Object paramObj9 = new IntegerWrapper(status);
+
+			Object paramObj10 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
+				paramObj10 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -196,7 +200,8 @@ public class MBMessageServiceHttp {
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 
 			Object returnObj = null;
@@ -229,7 +234,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long categoryId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -260,10 +265,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj6 = new DoubleWrapper(priority);
 
-			Object paramObj7 = serviceContext;
+			Object paramObj7 = new IntegerWrapper(status);
+
+			Object paramObj8 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -271,7 +278,7 @@ public class MBMessageServiceHttp {
 					"addMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -375,8 +382,8 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		HttpPrincipal httpPrincipal, long groupId, long categoryId, int start,
-		int end)
+		HttpPrincipal httpPrincipal, long groupId, long categoryId, int status,
+		int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -384,13 +391,17 @@ public class MBMessageServiceHttp {
 
 			Object paramObj1 = new LongWrapper(categoryId);
 
-			Object paramObj2 = new IntegerWrapper(start);
+			Object paramObj2 = new IntegerWrapper(status);
 
-			Object paramObj3 = new IntegerWrapper(end);
+			Object paramObj3 = new IntegerWrapper(start);
+
+			Object paramObj4 = new IntegerWrapper(end);
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessages",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -419,16 +430,18 @@ public class MBMessageServiceHttp {
 	}
 
 	public static int getCategoryMessagesCount(HttpPrincipal httpPrincipal,
-		long groupId, long categoryId)
+		long groupId, long categoryId, int status)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(categoryId);
 
+			Object paramObj2 = new IntegerWrapper(status);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessagesCount",
-					new Object[] { paramObj0, paramObj1 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -453,9 +466,10 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getCategoryMessagesRSS(
-		HttpPrincipal httpPrincipal, long groupId, long categoryId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+		HttpPrincipal httpPrincipal, long groupId, long categoryId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -464,38 +478,40 @@ public class MBMessageServiceHttp {
 
 			Object paramObj1 = new LongWrapper(categoryId);
 
-			Object paramObj2 = new IntegerWrapper(max);
+			Object paramObj2 = new IntegerWrapper(status);
 
-			Object paramObj3 = type;
+			Object paramObj3 = new IntegerWrapper(max);
+
+			Object paramObj4 = type;
 
 			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new DoubleWrapper(version);
+			Object paramObj5 = new DoubleWrapper(version);
 
-			Object paramObj5 = displayStyle;
+			Object paramObj6 = displayStyle;
 
 			if (displayStyle == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = feedURL;
-
-			if (feedURL == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = entryURL;
+			Object paramObj7 = feedURL;
 
-			if (entryURL == null) {
+			if (feedURL == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = themeDisplay;
+			Object paramObj8 = entryURL;
+
+			if (entryURL == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj8 = new NullWrapper(
+				paramObj9 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -503,7 +519,7 @@ public class MBMessageServiceHttp {
 					"getCategoryMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -533,7 +549,7 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getCompanyMessagesRSS(
-		HttpPrincipal httpPrincipal, long companyId, int max,
+		HttpPrincipal httpPrincipal, long companyId, int status, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -542,38 +558,40 @@ public class MBMessageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			Object paramObj1 = new IntegerWrapper(max);
+			Object paramObj1 = new IntegerWrapper(status);
 
-			Object paramObj2 = type;
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
 
 			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new DoubleWrapper(version);
+			Object paramObj4 = new DoubleWrapper(version);
 
-			Object paramObj4 = displayStyle;
+			Object paramObj5 = displayStyle;
 
 			if (displayStyle == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = feedURL;
-
-			if (feedURL == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = entryURL;
+			Object paramObj6 = feedURL;
 
-			if (entryURL == null) {
+			if (feedURL == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = themeDisplay;
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj7 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -581,7 +599,7 @@ public class MBMessageServiceHttp {
 					"getCompanyMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -611,7 +629,7 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getGroupMessagesRSS(
-		HttpPrincipal httpPrincipal, long groupId, int max,
+		HttpPrincipal httpPrincipal, long groupId, int status, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -620,85 +638,7 @@ public class MBMessageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new IntegerWrapper(max);
-
-			Object paramObj2 = type;
-
-			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new DoubleWrapper(version);
-
-			Object paramObj4 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = feedURL;
-
-			if (feedURL == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = entryURL;
-
-			if (entryURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj7 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getGroupMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.lang.String)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.lang.String getGroupMessagesRSS(
-		HttpPrincipal httpPrincipal, long groupId, long userId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
+			Object paramObj1 = new IntegerWrapper(status);
 
 			Object paramObj2 = new IntegerWrapper(max);
 
@@ -740,6 +680,89 @@ public class MBMessageServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getGroupMessagesRSS(
+		HttpPrincipal httpPrincipal, long groupId, long userId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(userId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(max);
+
+			Object paramObj4 = type;
+
+			if (type == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new DoubleWrapper(version);
+
+			Object paramObj6 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = feedURL;
+
+			if (feedURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = entryURL;
+
+			if (entryURL == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj9 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -805,7 +828,8 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		HttpPrincipal httpPrincipal, long messageId, java.lang.String threadView)
+		HttpPrincipal httpPrincipal, long messageId,
+		java.lang.String threadView, int status)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -817,8 +841,11 @@ public class MBMessageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = new IntegerWrapper(status);
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessageDisplay", new Object[] { paramObj0, paramObj1 });
+					"getMessageDisplay",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -847,7 +874,7 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getThreadMessagesRSS(
-		HttpPrincipal httpPrincipal, long threadId, int max,
+		HttpPrincipal httpPrincipal, long threadId, int status, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -856,38 +883,40 @@ public class MBMessageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(threadId);
 
-			Object paramObj1 = new IntegerWrapper(max);
+			Object paramObj1 = new IntegerWrapper(status);
 
-			Object paramObj2 = type;
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
 
 			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new DoubleWrapper(version);
+			Object paramObj4 = new DoubleWrapper(version);
 
-			Object paramObj4 = displayStyle;
+			Object paramObj5 = displayStyle;
 
 			if (displayStyle == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = feedURL;
-
-			if (feedURL == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = entryURL;
+			Object paramObj6 = feedURL;
 
-			if (entryURL == null) {
+			if (feedURL == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = themeDisplay;
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj7 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -895,7 +924,7 @@ public class MBMessageServiceHttp {
 					"getThreadMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -991,7 +1020,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		long messageId, java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -1017,10 +1046,12 @@ public class MBMessageServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = serviceContext;
+			Object paramObj5 = new IntegerWrapper(status);
+
+			Object paramObj6 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
+				paramObj6 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -1028,7 +1059,7 @@ public class MBMessageServiceHttp {
 					"updateDiscussionMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -1061,7 +1092,7 @@ public class MBMessageServiceHttp {
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
 		java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority,
+		java.util.List<String> existingFiles, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -1094,10 +1125,12 @@ public class MBMessageServiceHttp {
 
 			Object paramObj5 = new DoubleWrapper(priority);
 
-			Object paramObj6 = serviceContext;
+			Object paramObj6 = new IntegerWrapper(status);
+
+			Object paramObj7 = serviceContext;
 
 			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
+				paramObj7 = new NullWrapper(
 						"com.liferay.portal.service.ServiceContext");
 			}
 
@@ -1105,7 +1138,7 @@ public class MBMessageServiceHttp {
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
