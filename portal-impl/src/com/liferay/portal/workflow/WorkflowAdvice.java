@@ -22,11 +22,12 @@
 
 package com.liferay.portal.workflow;
 
-import com.liferay.portal.kernel.proxy.ServiceRequest;
+import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowRequest;
-import com.liferay.portal.reflect.ServiceProxyAdvice;
+import com.liferay.portal.kernel.workflow.WorkflowResultContainer;
 
+import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
@@ -34,23 +35,38 @@ import org.aopalliance.intercept.MethodInvocation;
  *
  * @author Micha Kiener
  */
-public class WorkflowAdvice extends ServiceProxyAdvice {
+public class WorkflowAdvice implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
-			return super.invoke(methodInvocation);
+			return doInvoke(methodInvocation);
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
 		}
 	}
 
-	protected ServiceRequest createServiceRequest(
-			MethodInvocation methodInvocation)
-			throws Exception {
+	protected Object doInvoke(MethodInvocation methodInvocation)
+		throws Exception {
 
-		return new WorkflowRequest(
-				methodInvocation.getMethod(), methodInvocation.getArguments());
+		WorkflowRequest workflowRequest = new WorkflowRequest(
+			methodInvocation.getMethod(), methodInvocation.getArguments());
+
+		BaseWorkflowProxy baseWorkflowProxy =
+			(BaseWorkflowProxy)methodInvocation.getThis();
+
+		SingleDestinationSynchronousMessageSender messageSender =
+			baseWorkflowProxy.getSingleDestinationSynchronousMessageSender();
+
+		WorkflowResultContainer workflowResultContainer =
+			(WorkflowResultContainer)messageSender.send(workflowRequest);
+
+		if (workflowResultContainer.hasError()) {
+			throw workflowResultContainer.getWorkflowException();
+		}
+		else {
+			return workflowResultContainer.getResult();
+		}
 	}
 
 }

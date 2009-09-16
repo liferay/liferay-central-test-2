@@ -20,40 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
-
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-
-import java.util.List;
+package com.liferay.portal.kernel.workflow;
 
 /**
- * <a href="BaseWorkflowDefinitionManager.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="WorkflowResultContainer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class BaseWorkflowDefinitionManager extends BaseWorkflowProxy
-	implements WorkflowDefinitionManager {
+public class WorkflowResultContainer {
 
-	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId) {
-
-		throw new UnsupportedOperationException();
+	public Object getResult() {
+		return _result;
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions() {
-		throw new UnsupportedOperationException();
+	public WorkflowException getWorkflowException() {
+		return _workflowException;
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName) {
-
-		throw new UnsupportedOperationException();
+	public boolean hasError() {
+		if (_workflowException != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	public boolean isSupportsVersioning() {
-		throw new UnsupportedOperationException();
+	public void setResult(Object result) {
+		_result = result;
 	}
+
+	public void setWorkflowException(WorkflowException workflowException) {
+		_workflowException = workflowException;
+	}
+
+	private Object _result;
+	private WorkflowException _workflowException;
 
 }

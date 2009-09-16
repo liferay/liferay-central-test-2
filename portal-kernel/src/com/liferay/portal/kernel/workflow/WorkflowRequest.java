@@ -22,10 +22,9 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.proxy.ServiceRequest;
-
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -33,20 +32,24 @@ import java.lang.reflect.Method;
  *
  * @author Micha Kiener
  */
-public class WorkflowRequest
-		extends ServiceRequest implements Serializable {
+public class WorkflowRequest implements Serializable {
 
 	public WorkflowRequest(Method method, Object[] arguments)
-		throws Exception {
+		throws WorkflowException {
 
-		super(method, arguments);
+		_method = method;
+		_arguments = arguments;
 		_userCredential = inspectForCallingUserCredential(method);
 	}
 
 	public Object execute(Object object) throws WorkflowException {
 		try {
 			UserCredentialThreadLocal.setUserCredential(_userCredential);
-			return super.execute(object);
+
+			return _method.invoke(object, _arguments);
+		}
+		catch (InvocationTargetException e) {
+			throw new WorkflowException(e.getTargetException());
 		}
 		catch (Exception e) {
 			throw new WorkflowException(e);
@@ -60,8 +63,17 @@ public class WorkflowRequest
 		return _userCredential;
 	}
 
+	public boolean hasReturnValue() {
+		if (_method.getReturnType() != Void.TYPE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected UserCredential inspectForCallingUserCredential(Method method)
-		throws Exception {
+		throws WorkflowException {
 
 		Annotation[][] annotationsArray = method.getParameterAnnotations();
 
@@ -89,6 +101,8 @@ public class WorkflowRequest
 		return null;
 	}
 
+	private Object[] _arguments;
+	private Method _method;
 	private UserCredential _userCredential;
 
 }
