@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portal.kernel.proxy;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,9 +35,9 @@ import com.liferay.portal.kernel.util.Validator;
  *
  * @author Micha Kiener
  */
-public class WorkflowMessageListener implements MessageListener {
+public class ServiceProxyMessageListener implements MessageListener {
 
-	public WorkflowMessageListener(Object manager) {
+	public ServiceProxyMessageListener(Object manager) {
 		_manager = manager;
 	}
 
@@ -46,34 +46,34 @@ public class WorkflowMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		WorkflowResultContainer workflowResultContainer =
-			new WorkflowResultContainer();
+		ServiceResponseContainer serviceResponseContainer =
+			new ServiceResponseContainer();
 
 		try {
 			Object payload = message.getPayload();
 
 			if (payload == null) {
-				throw new WorkflowException("Payload is null");
+				throw new Exception("Payload is null");
 			}
-			else if (!WorkflowRequest.class.isAssignableFrom(
+			else if (!ServiceRequest.class.isAssignableFrom(
 						payload.getClass())) {
 
-				throw new WorkflowException(
+				throw new Exception(
 					"Payload " + payload.getClass() + " is not of type " +
-						WorkflowRequest.class.getName());
+						ServiceRequest.class.getName());
 			}
 			else {
-				WorkflowRequest workflowRequest = (WorkflowRequest)payload;
+				ServiceRequest serviceRequest = (ServiceRequest)payload;
 
-				Object result = workflowRequest.execute(_manager);
+				Object result = serviceRequest.execute(_manager);
 
-				workflowResultContainer.setResult(result);
+				serviceResponseContainer.setResult(result);
 			}
 		}
-		catch (WorkflowException we) {
+		catch (Exception we) {
 			_log.error(we, we);
 
-			workflowResultContainer.setWorkflowException(we);
+			serviceResponseContainer.setException(we);
 		}
 		finally {
 			String responseDestination = message.getResponseDestinationName();
@@ -82,7 +82,7 @@ public class WorkflowMessageListener implements MessageListener {
 				Message responseMessage = MessageBusUtil.createResponseMessage(
 					message);
 
-				responseMessage.setPayload(workflowResultContainer);
+				responseMessage.setPayload(serviceResponseContainer);
 
 				_messageBus.sendMessage(responseDestination, responseMessage);
 			}
@@ -90,7 +90,7 @@ public class WorkflowMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactoryUtil.getLog(WorkflowMessageListener.class);
+		LogFactoryUtil.getLog(ServiceProxyMessageListener.class);
 
 	private Object _manager;
 	private MessageBus _messageBus;

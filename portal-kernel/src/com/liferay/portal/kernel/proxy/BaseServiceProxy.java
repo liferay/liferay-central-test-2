@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.proxy;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMe
  *
  * @author Micha Kiener
  */
-public abstract class BaseWorkflowProxy {
+public abstract class BaseServiceProxy {
 
 	public final SingleDestinationSynchronousMessageSender
 		getSingleDestinationSynchronousMessageSender() {
