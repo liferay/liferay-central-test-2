@@ -30,7 +30,7 @@
 	</div>
 
 	#if ($valid_portlet_description)
-		<div id="cpContextPanelTemplate" class="aui-context-pane" data-portlet-id="$portlet_id" data-visible-panel="$show_portlet_description">
+		<div id="cpContextPanelTemplate" class="aui-contextpanel-hidden" data-portlet-id="$portlet_id" data-visible-panel="$show_portlet_description">
 			$portlet_description
 		</div>
 	#end

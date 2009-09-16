@@ -61,12 +61,8 @@
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
 
-				<div class="aui-overlay add-category-layer">
-					<div class="aui-header">
-						<span class="knob"></span>
-					</div>
-
-					<div class="panel-content">
+				<div class="asset-category-layer-wrapper">
+					<div class="add-category-layer asset-category-layer">
 						<div class="aui-ctrl-holder">
 							<label class="vocabulary-label" for="vocabulary-category-name">
 								<liferay-ui:message key="name" />
@@ -97,12 +93,8 @@
 					</div>
 				</div>
 
-				<div class="aui-overlay add-vocabulary-layer">
-					<div class="aui-header">
-						<span class="knob"></span>
-					</div>
-
-					<div class="panel-content">
+				<div class="asset-category-layer-wrapper">
+					<div class="add-vocabulary-layer asset-category-layer">
 						<div class="aui-ctrl-holder">
 							<label for="vocabulary-name">
 								<liferay-ui:message key="add-vocabulary" />

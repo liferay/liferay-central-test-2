@@ -220,56 +220,39 @@
 	padding: 10px 0 0;
 }
 
-.portlet-asset-category-admin .panel-content {
-	background: #FFFFFF none repeat scroll 0 0;
-	border: 2px solid #727C81;
+.asset-category-layer-wrapper {
+	display: none;
+}
+
+.aui-widget-bd .asset-category-layer {
 	padding: 10px;
 	text-align: left;
 }
 
-.portlet-asset-category-admin .panel-content .aui-ctrl-holder {
+.aui-widget-bd .asset-category-layer .aui-ctrl-holder {
 	margin-bottom: 10px;
 }
 
-.portlet-asset-category-admin .panel-content label {
+.aui-widget-bd .asset-category-layer label {
 	display: block;
 	font-weight: bold;
 }
 
-.portlet-asset-category-admin .panel-content .aui-ctrl-holder input, .portlet-asset-category-admin .panel-content .aui-ctrl-holder select {
-	min-width: 200px;
-}
-
-.ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder, .ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder {
+.aui-widget-bd .asset-category-layer .aui-ctrl-holder input, .aui-widget-bd .asset-category-layer .aui-ctrl-holder select {
 	width: 200px;
 }
 
-.ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder input, .ie6 .portlet-asset-category-admin .panel-content .aui-ctrl-holder select {
+.ie6 .aui-widget-bd .asset-category-layer .aui-ctrl-holder, .ie6 .aui-widget-bd .asset-category-layer .aui-ctrl-holder {
 	width: 200px;
 }
 
-.portlet-asset-category-admin .panel-content .button-holder {
-	margin-top: 5px;
+.aui-widget-bd .asset-category-layer .button-holder {
+	margin-top: 10px;
 }
 
-.portlet-asset-category-admin .aui-overlay {
+.asset-category-layer .aui-overlay {
 	overflow: visible;
 	width: 230px;
-}
-
-.portlet-asset-category-admin .aui-overlay .aui-header {
-	margin-top: 18px;
-	position: relative;
-}
-
-.portlet-asset-category-admin .aui-overlay .aui-header .knob {
-	background: url(<%= themeImagesPath %>/application/panel_direction_indicator.png) no-repeat scroll;
-	height: 18px;
-	right: 10px;
-	position: absolute;
-	top: -16px;
-	width: 36px;
-	z-index: 430;
 }
 
 .portlet-asset-category-admin #vocabulary-category-messages {

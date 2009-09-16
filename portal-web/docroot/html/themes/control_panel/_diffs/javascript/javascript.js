@@ -1,25 +1,28 @@
 Liferay.Util.portletTitleEdit = function() {
 };
 
-AUI().ready(
-	function() {
-		var portletInformationEl = jQuery('#cpContextPanelTemplate');
-		var portletInformationIcon = jQuery('#cpPortletTitleHelpIcon');
+AUI().use(
+	'context-panel',
+	function(A) {
 
-		var portletId = portletInformationEl.attr('data-portlet-id');
-		var visible = (portletInformationEl.attr('data-visible-panel') == "true");
+		var portletInformationEl = A.get('#cpContextPanelTemplate');
+		var portletInformationIcon = A.get('#cpPortletTitleHelpIcon');
 
-		var sessionData = {};
-		var sessionKey = 'show-portlet-description-' + portletId;
+		if (portletInformationEl && portletInformationIcon) {
+			var portletId = portletInformationEl.attr('data-portlet-id');
+			var visible = (portletInformationEl.attr('data-visible-panel') == "true");
+			var sessionData = {};
+			var sessionKey = 'show-portlet-description-' + portletId;
 
-		sessionData[sessionKey] = false;
+			sessionData[sessionKey] = false;
 
-		var cpContextPanel = new Alloy.ContextPanel(
-			{
-				el: portletInformationEl[0],
-				context: [ portletInformationIcon[0], 'tl', 'bl', ['render', 'beforeShow', 'windowResize']],
-				visible: visible,
-				draggable: false,
+			portletInformationEl.removeClass('aui-contextpanel-hidden');
+
+			var contextPanel = new A.ContextPanel({
+				trigger: portletInformationIcon,
+				bodyContent: portletInformationEl,
+				align: { points: [ 'tl', 'br' ] },
+				visible: false,
 				on: {
 					hide: function() {
 						jQuery.ajax(
@@ -30,15 +33,12 @@ AUI().ready(
 						);
 					}
 				}
-			}
-		);
+			})
+			.render();
 
-		cpContextPanel.render(document.body);
-
-		portletInformationIcon.click(
-			function() {
-				cpContextPanel.toggle();
+			if (visible) {
+				contextPanel.show();
 			}
-		);
+		}
 	}
 );

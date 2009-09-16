@@ -44,21 +44,24 @@
 				var addCategoryButton = jQuery('.add-category-button');
 				var addVocabularyButton = jQuery('.add-vocabulary-button');
 
-				instance._toolbarCategoryPanel = new Alloy.Overlay(
-					addCategoryLayer[0],
-					{
-						context: [addCategoryButton[0], 'tr', 'br'],
-						preventcontextoverlap: true,
-						visible: false
-					}
-				);
+				AUI().use(
+					'context-panel',
+					function(A) {
 
-				instance._vocabularyCategoryPanel = new Alloy.Overlay(
-					addVocabularyLayer[0],
-					{
-						context: [addVocabularyButton[0], 'tr', 'br'],
-						preventcontextoverlap: true,
-						visible: false
+						instance._toolbarCategoryPanel = new A.ContextPanel({
+							bodyContent: A.get('.add-category-layer'),
+							trigger: '.add-category-button',
+							align: { points: [ 'tr', 'br' ] }
+						})
+						.render();
+
+						instance._vocabularyCategoryPanel = new A.ContextPanel({
+							bodyContent: A.get('.add-vocabulary-layer'),
+							trigger: '.add-vocabulary-button',
+							align: { points: [ 'tr', 'br' ] }
+						})
+						.render();
+
 					}
 				);
 
@@ -125,17 +128,17 @@
 				);
 
 				var addCategory = function() {
-					var actionScope = jQuery('.vocabulary-actions');
-					var categoryName = actionScope.find('.vocabulary-category-name').val();
-					var vocabularyId = actionScope.find('.vocabulary-select-list option:selected').attr('value');
+					var categoryLayer = jQuery('.add-category-layer');
+					var categoryName = categoryLayer.find('.vocabulary-category-name').val();
+					var vocabularyId = categoryLayer.find('.vocabulary-select-list option:selected').attr('value');
 
 					instance._hideAllMessages();
 					instance._addCategory(categoryName, vocabularyId);
 				};
 
 				var addVocabulary = function() {
-					var actionScope = jQuery('.vocabulary-actions');
-					var inputVocabularyName = actionScope.find('.vocabulary-name');
+					var vocabularyLayer = jQuery('.add-vocabulary-layer');
+					var inputVocabularyName = vocabularyLayer.find('.vocabulary-name');
 					var newVocabularyName = inputVocabularyName.val();
 
 					instance._hideAllMessages();
@@ -1099,8 +1102,8 @@
 						function() {
 							output.fadeOut('slow',
 								function(event) {
-									instance._toolbarCategoryPanel.align();
-									instance._vocabularyCategoryPanel.align();
+									instance._toolbarCategoryPanel.refreshAlign();
+									instance._vocabularyCategoryPanel.refreshAlign();
 								}
 							);
 						}, 7000);
@@ -1144,10 +1147,7 @@
 					return;
 				}
 
-				categoryPanel.show();
-				categoryPanel.align();
-
-				jQuery('.vocabulary-category-name', categoryPanel.body).focus();
+				categoryPanel.refreshAlign();
 
 				instance._vocabularyCategoryPanel.hide();
 			},
@@ -1157,10 +1157,7 @@
 
 				var vocabularyCategoryPanel = instance._vocabularyCategoryPanel;
 
-				vocabularyCategoryPanel.show();
-				vocabularyCategoryPanel.align();
-
-				jQuery('.vocabulary-name', vocabularyCategoryPanel.body).focus();
+				vocabularyCategoryPanel.refreshAlign();
 
 				instance._toolbarCategoryPanel.hide();
 			},

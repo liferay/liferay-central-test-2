@@ -37,22 +37,17 @@
 
 				var toolbar = jQuery('.tags-admin-toolbar');
 
-				var addTagLayer = jQuery('.add-tag-layer');
-
 				var addTagButton = jQuery('.add-tag-button');
 
-				instance._addTagOverlay = new Alloy.Overlay(
-					addTagLayer[0],
-					{
-						context: [addTagButton[0], 'tr', 'br'],
-						preventcontextoverlap: true,
-						visible: false
-					}
-				);
-
-				toolbar.find('.add-tag-button').click(
-					function (event) {
-						instance._showAddTagOverlay();
+				AUI().use(
+					'context-panel',
+					function(A) {
+						instance._addTagOverlay = new A.ContextPanel({
+							bodyContent: A.get('.add-tag-layer'),
+							trigger: '.add-tag-button',
+							align: { points: [ 'tr', 'br' ] }
+						})
+						.render();
 					}
 				);
 
@@ -82,8 +77,8 @@
 				);
 
 				var addTag = function() {
-					var tagsAdminActionsContainer = jQuery('.tags-admin-actions');
-					var tagName = tagsAdminActionsContainer.find('.new-tag-name').val();
+					var addTagLayer = jQuery('.add-tag-layer');
+					var tagName = addTagLayer.find('.new-tag-name').val();
 
 					instance._hideAllMessages();
 					instance._addTag(tagName);
@@ -658,22 +653,11 @@
 						function() {
 							output.fadeOut('slow',
 								function(event) {
-									instance._addTagOverlay.align();
+									instance._addTagOverlay.refreshAlign();
 								}
 							);
 						}, 7000);
 				}
-			},
-
-			_showAddTagOverlay: function() {
-				var instance = this;
-
-				var tagPanel = instance._addTagOverlay;
-
-				tagPanel.show();
-				tagPanel.align();
-
-				jQuery('.new-tag-name', tagPanel.body).focus();
 			},
 
 			_showLoading: function(container) {

@@ -213,19 +213,23 @@
 
 				var editContainerWrapper = instance._getById(instance._editFieldWrapperClass);
 
-				instance.editContainerContextPanel = new Alloy.ContextPanel(
-					{
-						el: editContainerWrapper.get(0),
-						arrowPosition: 'rt',
-						context: [ null, 'tr', 'tl', [ 'render', 'beforeShow', 'windowResize' ]],
-						draggable: false,
-						visible: false,
-						width: 'auto',
-						zIndex: 10000
+				AUI().use(
+					'context-panel',
+					function(A) {
+						var wrapper = A.get(editContainerWrapper[0]);
+
+						wrapper.setStyle('display', 'block');
+
+						instance.editContainerContextPanel = new A.ContextPanel(
+							{
+								bodyContent: wrapper,
+								align: { points: [ 'rc', 'lc' ] },
+								trigger: 'input.edit-button'
+							}
+						)
+						.render();
 					}
 				);
-
-				instance.editContainerContextPanel.render(document.body);
 
 				instance._initializePageLoadFieldInstances();
 				instance._attachEvents();
@@ -1893,7 +1897,7 @@
 				var instance = this;
 
 				var editButtons = instance._getEditButtons();
-				var editButton = instance._getEditButton(source);
+				var editButton = instance._getEditButton(source)[0];
 				var structureTree = instance._getById(instance._structureTreeClass)
 
 				if (structureTree.height() < 550) {
@@ -1920,17 +1924,17 @@
 				fields.removeClass('selected');
 				row.addClass('selected');
 
-				instance.editContainerContextPanel.show();
+				if (instance._lastEditContainerTrigger != editButton) {
+					instance.editContainerContextPanel.set('trigger', editButton);
+					instance.editContainerContextPanel.show();
 
-				var context = instance.editContainerContextPanel.cfg.getProperty('context');
-
-				context[0] = editButton[0];
-
-				instance.editContainerContextPanel.cfg.setProperty('context', context);
-				instance.editContainerContextPanel.align();
+					instance._lastEditContainerTrigger = editButton;
+				}
 
 				instance._hideEditContainerMessage();
 				instance._loadEditFieldOptions(source);
+
+				instance.editContainerContextPanel.refreshAlign();
 			},
 
 			_repeatField: function(source, editMode) {
@@ -2224,6 +2228,8 @@
 				journalMessage.removeClass().addClass(className);
 				journalMessage.show();
 
+				instance.editContainerContextPanel.refreshAlign();
+
 				if (message) {
 					var messageLang = Liferay.Language.get(message);
 					journalMessage.html(messageLang);
@@ -2238,6 +2244,7 @@
 						journalMessage.fadeOut(
 							function () {
 								jQuery(this).hide();
+								instance.editContainerContextPanel.refreshAlign();
 							}
 						);
 					},

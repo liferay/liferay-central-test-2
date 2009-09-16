@@ -180,56 +180,34 @@
 	padding: 10px 0 0;
 }
 
-.portlet-asset-tags-admin .panel-content {
-	background: #FFFFFF none repeat scroll 0 0;
-	border: 2px solid #727C81;
+.add-tag-layer-wrapper {
+	display: none;
+}
+
+.aui-widget-bd .add-tag-layer {
 	padding: 10px;
 	text-align: left;
 }
 
-.portlet-asset-tags-admin .panel-content .aui-ctrl-holder {
+.aui-widget-bd .add-tag-layer .aui-ctrl-holder {
 	margin-bottom: 10px;
 }
 
-.portlet-asset-tags-admin .panel-content label {
+.aui-widget-bd .add-tag-layer label {
 	display: block;
 	font-weight: bold;
 }
 
-.portlet-asset-tags-admin .panel-content .aui-ctrl-holder input, .portlet-asset-tags-admin .panel-content .aui-ctrl-holder select {
-	min-width: 200px;
-}
-
-.ie6 .portlet-asset-tags-admin .panel-content .aui-ctrl-holder, .ie6 .portlet-asset-tags-admin .panel-content .aui-ctrl-holder {
+.aui-widget-bd .add-tag-layer .aui-ctrl-holder input, .aui-widget-bd .add-tag-layer .aui-ctrl-holder select {
 	width: 200px;
 }
 
-.ie6 .portlet-asset-tags-admin .panel-content .aui-ctrl-holder input, .ie6 .portlet-asset-tags-admin .panel-content .aui-ctrl-holder select {
+.ie6 .add-tag-layer .aui-widget-bd .aui-ctrl-holder, .ie6 .add-tag-layer .aui-widget-bd .aui-ctrl-holder {
 	width: 200px;
 }
 
-.portlet-asset-tags-admin .panel-content .aui-button-holder {
-	margin-top: 5px;
-}
-
-.portlet-asset-tags-admin .aui-overlay {
-	overflow: visible;
-	width: 230px;
-}
-
-.portlet-asset-tags-admin .aui-overlay .aui-header {
-	margin-top: 18px;
-	position: relative;
-}
-
-.portlet-asset-tags-admin .aui-overlay .aui-header .knob {
-	background: url(<%= themeImagesPath %>/application/panel_direction_indicator.png) no-repeat scroll;
-	height: 18px;
-	right: 10px;
-	position: absolute;
-	top: -16px;
-	width: 36px;
-	z-index: 430;
+.aui-widget-bd .add-tag-layer .aui-button-holder {
+	margin-top: 10px;
 }
 
 .portlet-asset-tags-admin #tag-messages {

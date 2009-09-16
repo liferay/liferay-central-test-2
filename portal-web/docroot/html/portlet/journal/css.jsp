@@ -447,7 +447,7 @@
 }
 
 .journal-article-edit-field-wrapper {
-	position: absolute;
+	display: none;
 }
 
 .ie .journal-article-edit-field-wrapper form {
@@ -476,7 +476,7 @@
 }
 
 .journal-article-edit-field {
-	padding: 10px 15px 10px 20px;
+	padding: 5px;
 	position: relative;
 	width: 180px;
 	z-index: 420;
