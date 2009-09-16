@@ -96,17 +96,18 @@ public class NtlmFilter extends BasePortalFilter {
 			String domain = _filterConfig.getInitParameter(
 				"jcifs.smb.client.domain");
 
-			String newDomainController = PrefsPropsUtil.getString(
+			String preferencesDomainController = PrefsPropsUtil.getString(
 				companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER,
 				PropsValues.NTLM_DOMAIN_CONTROLLER);
-			String newDomain = PrefsPropsUtil.getString(
+			String preferencesDomain = PrefsPropsUtil.getString(
 				companyId, PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
 
-			if (!Validator.equals(domainController, newDomainController) ||
-				!Validator.equals(domain, newDomain)) {
+			if (!Validator.equals(
+					domainController, preferencesDomainController) ||
+				!Validator.equals(domain, preferencesDomain)) {
 
-				domainController = newDomainController;
-				domain = newDomain;
+				domainController = preferencesDomainController;
+				domain = preferencesDomain;
 
 				_filterConfig.addInitParameter(
 					"jcifs.http.domainController", domainController);
