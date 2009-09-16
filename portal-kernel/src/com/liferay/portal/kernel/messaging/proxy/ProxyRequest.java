@@ -48,7 +48,7 @@ public class ProxyRequest implements Serializable {
 	public Method getMethod() {
 		return _method;
 	}
-	
+
 	public Object execute(Object object) throws Exception {
 		try {
 			return _method.invoke(object, _arguments);
