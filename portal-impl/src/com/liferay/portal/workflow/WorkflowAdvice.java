@@ -24,8 +24,6 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.kernel.workflow.WorkflowRequest;
-import com.liferay.portal.kernel.workflow.WorkflowResultContainer;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -50,7 +48,7 @@ public class WorkflowAdvice implements MethodInterceptor {
 		throws Exception {
 
 		WorkflowRequest workflowRequest = new WorkflowRequest(
-			methodInvocation.getMethod(), methodInvocation.getArguments());
+			methodInvocation);
 
 		BaseWorkflowProxy baseWorkflowProxy =
 			(BaseWorkflowProxy)methodInvocation.getThis();

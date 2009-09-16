@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.workflow;
+package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 
 /**
  * <a href="WorkflowMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -37,11 +38,8 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class WorkflowMessageListener implements MessageListener {
 
-	public WorkflowMessageListener(Object manager) {
+	public WorkflowMessageListener(Object manager, MessageBus messageBus) {
 		_manager = manager;
-	}
-
-	public void setMessageBus(MessageBus messageBus) {
 		_messageBus = messageBus;
 	}
 
