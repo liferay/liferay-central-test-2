@@ -2483,6 +2483,7 @@ validator-expected-type-string,-but-instead-received-type-x=Validator expected t
 values=قيم
 verification-number=رقم التأكيد
 version-history=تارخ النسخ
+version-x=Version {0} (Automatic Copy)
 version=النسخة
 vertical-banner=لوحة رأسية
 vertical-bar=الشريط الرأسي

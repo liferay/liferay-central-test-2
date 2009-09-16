@@ -1580,6 +1580,7 @@ validator-expected-type-string,-but-instead-received-type-x=Validator expected t
 values=Giá trị
 verification-number=Số kiểm tra
 version-history=Lịch sử phiên bản
+version-x=Version {0} (Automatic Copy)
 version=Phiên bản
 vertical-bar=Vertical Bar
 view-all=Xem tất cả 

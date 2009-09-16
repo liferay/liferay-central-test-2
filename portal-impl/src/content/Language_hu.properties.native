@@ -270,6 +270,7 @@ use-your-preferred-language-(x)=Use your preferred language ({0}). (Automatic Co
 users-of-x=Users of {0}
 users-with-role-x=Users with Role {0}
 validator-expected-type-string,-but-instead-received-type-x=Validator expected type java.lang.String, but instead received type {0}.
+version-x=Version {0} (Automatic Copy)
 voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minute(s) on {1} {2}. Would you like to extend your session another {3} minute(s)?
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the <em>Extend</em> button.

@@ -2106,6 +2106,7 @@ validator-expected-type-string,-but-instead-received-type-x=Validator expected t
 values=مقادير
 verification-number=شماره بررسی
 version-history=تاريخچه نسخه ها
+version-x=Version {0} (Automatic Copy)
 version=نسخه
 vertical-bar=ميله عمودی
 view-all=مشاهده تمام

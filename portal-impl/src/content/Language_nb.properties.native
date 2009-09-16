@@ -2985,6 +2985,7 @@ values=Verdier
 verification-number=CVV-kode
 version-history=Versjon historikk
 version-name=Versjon navn
+version-x=Version {0} (Automatic Copy)
 version=Versjon
 vertical-banner=Vertikal webannonse
 vertical-bar=Stående "bar"
