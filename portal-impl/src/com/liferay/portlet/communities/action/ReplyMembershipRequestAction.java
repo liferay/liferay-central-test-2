@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.MembershipRequest;
-import com.liferay.portal.model.impl.MembershipRequestImpl;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -77,7 +77,7 @@ public class ReplyMembershipRequestAction extends PortletAction {
 			MembershipRequestServiceUtil.updateStatus(
 				membershipRequestId, replyComments, statusId);
 
-			if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
+			if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
 				LiveUsers.joinGroup(
 					themeDisplay.getCompanyId(),
 					membershipRequest.getGroupId(),

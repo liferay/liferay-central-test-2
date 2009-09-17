@@ -82,8 +82,8 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 		</aui:field-wrapper>
 
 		<aui:select label="status" name="statusId">
-			<aui:option label="approve" value="<%= MembershipRequestImpl.STATUS_APPROVED %>" />
-			<aui:option label="deny" value="<%= MembershipRequestImpl.STATUS_DENIED %>" />
+			<aui:option label="approve" value="<%= MembershipRequestConstants.STATUS_APPROVED %>" />
+			<aui:option label="deny" value="<%= MembershipRequestConstants.STATUS_DENIED %>" />
 		</aui:select>
 
 		<aui:input name="replyComments" />

@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.model.MembershipRequest;
+package com.liferay.portal.model;
 
 /**
- * <a href="MembershipRequestImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MembershipRequestConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Alexander Chow
  */
-public class MembershipRequestImpl
-	extends MembershipRequestModelImpl implements MembershipRequest {
+public class MembershipRequestConstants {
 
-	public MembershipRequestImpl() {
-	}
+	public static final int STATUS_PENDING = 0;
+
+	public static final int STATUS_APPROVED = 1;
+
+	public static final int STATUS_DENIED = 2;
 
 }

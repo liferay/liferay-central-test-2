@@ -32,11 +32,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -77,7 +77,8 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequest.setCreateDate(now);
 		membershipRequest.setGroupId(groupId);
 		membershipRequest.setComments(comments);
-		membershipRequest.setStatusId(MembershipRequestImpl.STATUS_PENDING);
+		membershipRequest.setStatusId(
+			MembershipRequestConstants.STATUS_PENDING);
 
 		membershipRequestPersistence.update(membershipRequest, false);
 
@@ -138,7 +139,7 @@ public class MembershipRequestLocalServiceImpl
 
 		membershipRequestPersistence.update(membershipRequest, false);
 
-		if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
+		if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 
 			userLocalService.addGroupUsers(
@@ -191,12 +192,12 @@ public class MembershipRequestLocalServiceImpl
 		String statusKey = null;
 
 		if (membershipRequest.getStatusId() ==
-				MembershipRequestImpl.STATUS_APPROVED) {
+				MembershipRequestConstants.STATUS_APPROVED) {
 
 			statusKey = "approved";
 		}
 		else if (membershipRequest.getStatusId() ==
-					MembershipRequestImpl.STATUS_DENIED) {
+					MembershipRequestConstants.STATUS_DENIED) {
 
 			statusKey = "denied";
 		}

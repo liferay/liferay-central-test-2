@@ -321,7 +321,7 @@ pageContext.setAttribute("portletURL", portletURL);
 			// Restricted number of petitions
 
 			if (tabs1.equals("communities-owned")) {
-				int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
+				int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
 
 				if (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) {
 					row.addText(String.valueOf(pendingRequests));

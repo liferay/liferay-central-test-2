@@ -32,13 +32,13 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
 int statusId = -1;
 
 if (tabs1.equals("approved")) {
-	statusId = MembershipRequestImpl.STATUS_APPROVED;
+	statusId = MembershipRequestConstants.STATUS_APPROVED;
 }
 else if (tabs1.equals("denied")) {
-	statusId = MembershipRequestImpl.STATUS_DENIED;
+	statusId = MembershipRequestConstants.STATUS_DENIED;
 }
 else {
-	statusId = MembershipRequestImpl.STATUS_PENDING;
+	statusId = MembershipRequestConstants.STATUS_PENDING;
 }
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
