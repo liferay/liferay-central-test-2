@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,5 +28,7 @@ package com.liferay.portal.kernel.messaging.proxy;
  * @author Michael C. Han
  */
 public enum ProxyMode {
+
 	ASYNC, SYNC
+
 }

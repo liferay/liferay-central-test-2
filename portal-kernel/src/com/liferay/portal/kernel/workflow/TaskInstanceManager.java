@@ -76,7 +76,7 @@ public interface TaskInstanceManager {
 	 *		   information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
-	 */	
+	 */
 	public TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, @CallingUserId long callingUserId)

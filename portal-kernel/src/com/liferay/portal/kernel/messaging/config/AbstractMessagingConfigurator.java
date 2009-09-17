@@ -27,11 +27,12 @@ import com.liferay.portal.kernel.messaging.DestinationEventListener;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
 
+import java.lang.reflect.Method;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.lang.reflect.Method;
 
 /**
  * <a href="AbstractMessagingConfigurator.java.html"><b><i>View Source</i></b>
@@ -141,32 +142,38 @@ public abstract class AbstractMessagingConfigurator
 
 		_messageListeners = messageListeners;
 
-		for(List<MessageListener> messageListenerList :
+		for (List<MessageListener> messageListenersList :
 				_messageListeners.values()) {
 
-			for(MessageListener messageListener : messageListenerList) {
-				Class clazz = messageListener.getClass();
+			for (MessageListener messageListener : messageListenersList) {
+				Class<?> messageListenerClass = messageListener.getClass();
 
 				try {
-					Method setter =
-						clazz.getMethod("setMessageBus", MessageBus.class);
-					setter.setAccessible(true);
-					setter.invoke(messageListener, getMessageBus());
+					Method setMessageBusMethod =
+						messageListenerClass.getMethod(
+							"setMessageBus", MessageBus.class);
+
+					setMessageBusMethod.setAccessible(true);
+
+					setMessageBusMethod.invoke(
+						messageListener, getMessageBus());
+
 					continue;
 				}
-				catch (Exception ex) {
-					//ignore
+				catch (Exception e) {
 				}
 
 				try{
-					Method setter =
-						clazz.getDeclaredMethod(
+					Method setMessageBusMethod =
+						messageListenerClass.getDeclaredMethod(
 							"setMessageBus", MessageBus.class);
-					setter.setAccessible(true);
-					setter.invoke(messageListener, getMessageBus());
+
+					setMessageBusMethod.setAccessible(true);
+
+					setMessageBusMethod.invoke(
+						messageListener, getMessageBus());
 				}
-				catch (Exception ex) {
-					//ignore
+				catch (Exception e) {
 				}
 			}
 		}

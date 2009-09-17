@@ -57,13 +57,13 @@ public class BaseProxyAdvice implements MethodInterceptor {
 
 		BaseProxyBean baseProxyBean = (BaseProxyBean)methodInvocation.getThis();
 
-		if (!proxyRequest.isSynchronous()) {
+		if (proxyRequest.isSynchronous()) {
+			return doInvokeSynchronous(proxyRequest, baseProxyBean);
+		}
+		else {
 			doInvokeAsynchronous(proxyRequest, baseProxyBean);
 
 			return null;
-		}
-		else {
-			return doInvokeSynchronous(proxyRequest, baseProxyBean);
 		}
 	}
 

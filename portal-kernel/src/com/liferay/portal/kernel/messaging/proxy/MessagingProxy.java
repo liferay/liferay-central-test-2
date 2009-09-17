@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,19 +22,21 @@
 
 package com.liferay.portal.kernel.messaging.proxy;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Documented;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
 @Documented
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
 /**
  * <a href="MessagingProxy.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
 public @interface MessagingProxy {
+
 	ProxyMode mode();
+
 }

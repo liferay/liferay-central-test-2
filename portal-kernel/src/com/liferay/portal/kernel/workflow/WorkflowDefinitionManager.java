@@ -71,8 +71,9 @@ public interface WorkflowDefinitionManager {
 	 *
 	 * @param  workflowDefinition the workflow definition to be deployed
 	 * @param  callingUserId the id of the user deploying the workflow
-	 *		   definition (see {@link UserCredentialFactoryUtil#createCredential(long)}
-	 *		   for more information)
+	 *		   definition (see {@link
+	 *		   UserCredentialFactoryUtil#createCredential(long)} for more
+	 *		   information)
 	 * @throws WorkflowException is thrown, if deployment of the definition
 	 *		   failed
 	 */
