@@ -25,7 +25,7 @@ package com.liferay.portal.scripting.python;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.scripting.ScriptingExecutor;
+import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.HashMap;
 import java.util.Map;

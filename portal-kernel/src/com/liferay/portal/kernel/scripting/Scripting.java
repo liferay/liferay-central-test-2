@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.scripting;
 
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -30,6 +33,7 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="Scripting.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +41,9 @@ import javax.portlet.PortletResponse;
  * @author Brian Wing Shun Chan
  */
 public interface Scripting {
+
+	public void addScriptionExecutor(
+		String language, ScriptingExecutor scriptingExecutor);
 
 	public void clearCache(String language) throws ScriptingException;
 
@@ -55,5 +62,8 @@ public interface Scripting {
 		PortletRequest portletRequest, PortletResponse portletResponse);
 
 	public Set<String> getSupportedLanguages();
+
+	public void setScriptingExecutors(
+		Map<String, ScriptingExecutor> scriptingExecutors);
 
 }

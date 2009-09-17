@@ -37,4 +37,5 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
+	<bean id="baseProxyAdvice" class="com.liferay.portal.messaging.proxy.BaseProxyAdvice" />
 </beans>

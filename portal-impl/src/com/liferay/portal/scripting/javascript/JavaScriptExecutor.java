@@ -28,7 +28,7 @@ import com.liferay.mozilla.javascript.Scriptable;
 import com.liferay.mozilla.javascript.ScriptableObject;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.scripting.ScriptingExecutor;
+import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.HashMap;
 import java.util.Map;

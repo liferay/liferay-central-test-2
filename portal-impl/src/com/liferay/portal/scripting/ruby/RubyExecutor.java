@@ -24,9 +24,9 @@ package com.liferay.portal.scripting.ruby;
 
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
+import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.scripting.ScriptingExecutor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

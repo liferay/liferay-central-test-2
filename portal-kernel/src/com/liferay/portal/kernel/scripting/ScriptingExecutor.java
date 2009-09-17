@@ -20,43 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.scripting;
+package com.liferay.portal.kernel.scripting;
 
-import com.liferay.portal.kernel.scripting.ScriptingException;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * <a href="ScriptingResultContainer.java.html"><b><i>View Source</i></b></a>
+ * <a href="ScriptingExecutor.java.html"><b><i>View Source</i></b></a>
  *
- * @author Shuyang Zhou
+ * @author Alberto Montero
+ * @author Brian Wing Shun Chan
  */
-public class ScriptingResultContainer {
+public interface ScriptingExecutor {
 
-	public Object getResult() {
-		return _result;
-	}
+	public void clearCache();
 
-	public ScriptingException getScriptingException() {
-		return _scriptingException;
-	}
+	public String getLanguage();
 
-	public boolean hasError() {
-		if (_scriptingException != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void setResult(Object result) {
-		_result = result;
-	}
-
-	public void setScriptingException(ScriptingException scriptingException) {
-		_scriptingException = scriptingException;
-	}
-
-	private Object _result;
-	private ScriptingException _scriptingException;
+	public Map<String, Object> eval(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			Set<String> outputNames, String script)
+		throws ScriptingException;
 
 }

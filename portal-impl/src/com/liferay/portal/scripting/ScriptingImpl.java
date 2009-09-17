@@ -24,13 +24,10 @@ package com.liferay.portal.scripting;
 
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
+import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
 import com.liferay.portal.kernel.servlet.StringServletOutputStream;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.scripting.groovy.GroovyExecutor;
-import com.liferay.portal.scripting.javascript.JavaScriptExecutor;
-import com.liferay.portal.scripting.python.PythonExecutor;
-import com.liferay.portal.scripting.ruby.RubyExecutor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -41,6 +38,7 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -65,12 +63,10 @@ import org.python.core.PySyntaxError;
  */
 public class ScriptingImpl implements Scripting {
 
-	public void afterPropertiesSet() {
-		_scriptingExecutors.put(GroovyExecutor.LANGUAGE, new GroovyExecutor());
-		_scriptingExecutors.put(
-			JavaScriptExecutor.LANGUAGE, new JavaScriptExecutor());
-		_scriptingExecutors.put(PythonExecutor.LANGUAGE, new PythonExecutor());
-		_scriptingExecutors.put(RubyExecutor.LANGUAGE, new RubyExecutor());
+	public void addScriptionExecutor(
+		String language, ScriptingExecutor scriptingExecutor) {
+
+		_scriptingExecutors.put(language, scriptingExecutor);
 	}
 
 	public void clearCache(String language) throws ScriptingException {
@@ -157,6 +153,16 @@ public class ScriptingImpl implements Scripting {
 		return _scriptingExecutors.keySet();
 	}
 
+	public void setScriptingExecutors(
+		Map<String, ScriptingExecutor> scriptingExecutors) {
+
+		for (Map.Entry<String, ScriptingExecutor> mapEntry :
+			scriptingExecutors.entrySet()) {
+
+			_scriptingExecutors.put(mapEntry.getKey(), mapEntry.getValue());
+		}
+	}
+
 	protected String getErrorMessage(Exception e) {
 		String message = e.getMessage();
 
@@ -214,6 +220,6 @@ public class ScriptingImpl implements Scripting {
 	}
 
 	private Map<String, ScriptingExecutor> _scriptingExecutors =
-		new HashMap<String, ScriptingExecutor>();
+		new ConcurrentHashMap<String, ScriptingExecutor>();
 
 }
