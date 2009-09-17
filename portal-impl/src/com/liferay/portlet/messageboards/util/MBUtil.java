@@ -390,7 +390,7 @@ public class MBUtil {
 		String defaultMailingListAddress) {
 
 		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
-			String mailingListAddress;
+			String mailingListAddress = defaultMailingListAddress
 
 			try {
 				MBMailingList mailingList =
@@ -400,7 +400,6 @@ public class MBUtil {
 				mailingListAddress = mailingList.getEmailAddress();
 			}
 			catch (Exception e) {
-				mailingListAddress = defaultMailingListAddress;
 			}
 
 			return mailingListAddress;
