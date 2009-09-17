@@ -72,20 +72,9 @@ public class IGImagePermission {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (image.getFolderId() ==
+			if (image.getFolderId() !=
 					IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				long groupId = image.getGroupId();
-
-				if (!IGPermission.contains(
-						permissionChecker, groupId, ActionKeys.ACCESS) &&
-					!IGPermission.contains(
-						permissionChecker, groupId, ActionKeys.VIEW)) {
-
-					return false;
-				}
-			}
-			else {
 				IGFolder folder = image.getFolder();
 
 				if (!IGFolderPermission.contains(
