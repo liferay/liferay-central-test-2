@@ -27,15 +27,15 @@ import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
 /**
  * <a href="CheckEntryJob.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class CheckEntryJob implements IntervalJob {
 

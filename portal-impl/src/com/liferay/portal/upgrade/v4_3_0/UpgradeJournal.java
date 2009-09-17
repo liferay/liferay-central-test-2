@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -43,7 +44,6 @@ import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplatePKUpgradeColumnImpl
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateSmallImageIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateTable;
 import com.liferay.portal.upgrade.v4_3_0.util.JournalTemplateXSLUpgradeColumnImpl;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Types;

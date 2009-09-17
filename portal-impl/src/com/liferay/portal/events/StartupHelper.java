@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
@@ -36,7 +37,6 @@ import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.tools.sql.Index;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
@@ -62,7 +62,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class StartupHelper {
 

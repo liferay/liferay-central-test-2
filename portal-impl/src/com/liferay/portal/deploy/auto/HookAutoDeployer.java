@@ -26,11 +26,11 @@ import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.tools.deploy.HookDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;

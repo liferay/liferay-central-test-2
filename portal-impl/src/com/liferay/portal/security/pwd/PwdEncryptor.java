@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.UnsupportedEncodingException;

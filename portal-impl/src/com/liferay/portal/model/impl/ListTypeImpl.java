@@ -23,11 +23,11 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**

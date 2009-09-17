@@ -24,9 +24,9 @@ package com.liferay.portlet.calendar.model.impl;
 
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 

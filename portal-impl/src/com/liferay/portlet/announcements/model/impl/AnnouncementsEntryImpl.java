@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
-import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 

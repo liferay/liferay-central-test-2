@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.velocity.VelocityContext;
@@ -41,7 +42,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -74,7 +74,7 @@ import java.util.Locale;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 

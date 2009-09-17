@@ -22,7 +22,7 @@
 
 package com.liferay.portal.jcr;
 
-import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import javax.jcr.RepositoryException;

@@ -25,11 +25,11 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.FilterChain;
@@ -41,7 +41,7 @@ import javax.servlet.http.HttpSession;
  * <a href="OpenSSOFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Prashant Dighe
  */
 public class OpenSSOFilter extends BasePortalFilter {

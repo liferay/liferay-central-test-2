@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsKeys;
 
 import java.io.FileNotFoundException;
 

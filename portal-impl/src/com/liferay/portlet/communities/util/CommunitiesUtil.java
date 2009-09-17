@@ -26,6 +26,7 @@ import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.io.FileCacheOutputStream;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lar.PortletDataHandlerKeys;
 import com.liferay.portal.lar.UserIdStrategy;
@@ -43,7 +44,6 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -61,7 +61,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="CommunitiesUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class CommunitiesUtil {
 

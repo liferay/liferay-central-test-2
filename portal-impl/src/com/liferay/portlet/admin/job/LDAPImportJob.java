@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 /**

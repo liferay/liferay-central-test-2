@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -62,7 +63,6 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.BufferedReader;

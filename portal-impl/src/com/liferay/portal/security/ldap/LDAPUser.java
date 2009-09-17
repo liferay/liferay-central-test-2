@@ -22,9 +22,9 @@
 
 package com.liferay.portal.security.ldap;
 
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ldap.DummyDirContext;
 

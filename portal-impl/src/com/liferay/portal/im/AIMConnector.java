@@ -24,7 +24,7 @@ package com.liferay.portal.im;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import org.walluck.oscar.AIMConnection;

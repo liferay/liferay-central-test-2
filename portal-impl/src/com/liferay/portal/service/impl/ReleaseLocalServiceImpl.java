@@ -29,12 +29,12 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.sql.Connection;

@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.search.lucene.CleanUpJob;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 

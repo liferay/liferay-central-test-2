@@ -38,12 +38,12 @@ import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
@@ -66,7 +66,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
