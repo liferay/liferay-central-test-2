@@ -33,7 +33,7 @@
 
 	<aui:input label="remote-port" name="remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
 
-	<aui:input label="<%= LanguageUtil.get(pageContext, "remote-group-id" ) + " (" + LanguageUtil.get(pageContext, "organization-or-community") + ")" %>" name="remoteGroupId" size="10" type="text" />
+	<aui:input label='<%= LanguageUtil.get(pageContext, "remote-group-id" ) + " (" + LanguageUtil.get(pageContext, "organization-or-community") + ")" %>' name="remoteGroupId" size="10" type="text" />
 
 	<aui:select label="remote-pages-set" name="remotePrivateLayout">
 		<aui:option label="public-pages" selected='<%= tabs1.equals("public-pages") %>' value="0" />
