@@ -38,7 +38,7 @@ import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
@@ -140,7 +140,7 @@ public class MoveThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				categoryId, threadId, thread.getRootMessageId(), subject, body,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, StatusConstants.APPROVED,
+				MBThreadConstants.PRIORITY_NOT_GIVEN, StatusConstants.APPROVED,
 				serviceContext);
 		}
 

@@ -42,7 +42,7 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBMessageServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
@@ -107,7 +107,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
 		}
 
 		return mbMessageLocalService.addMessage(
@@ -134,7 +134,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
+			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
 		}
 
 		return mbMessageLocalService.addMessage(

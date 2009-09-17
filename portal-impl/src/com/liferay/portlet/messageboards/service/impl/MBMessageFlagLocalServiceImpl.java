@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -56,7 +56,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		long messageId = thread.getRootMessageId();
-		int flag = MBMessageFlagImpl.READ_FLAG;
+		int flag = MBMessageFlagConstants.READ_FLAG;
 
 		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
 			userId, messageId, flag);
@@ -116,12 +116,12 @@ public class MBMessageFlagLocalServiceImpl
 		MBMessageFlag questionMessageFlag =
 			mbMessageFlagPersistence.fetchByU_M_F(
 				message.getUserId(), message.getMessageId(),
-				MBMessageFlagImpl.QUESTION_FLAG);
+				MBMessageFlagConstants.QUESTION_FLAG);
 
 		MBMessageFlag answerMessageFlag =
 			mbMessageFlagPersistence.fetchByU_M_F(
 				message.getUserId(), message.getMessageId(),
-				MBMessageFlagImpl.ANSWER_FLAG);
+				MBMessageFlagConstants.ANSWER_FLAG);
 
 		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
 			long messageFlagId = counterLocalService.increment();
@@ -133,7 +133,7 @@ public class MBMessageFlagLocalServiceImpl
 			questionMessageFlag.setModifiedDate(new Date());
 			questionMessageFlag.setThreadId(message.getThreadId());
 			questionMessageFlag.setMessageId(message.getMessageId());
-			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+			questionMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
 
 			mbMessageFlagPersistence.update(questionMessageFlag, false);
 		}
@@ -156,11 +156,12 @@ public class MBMessageFlagLocalServiceImpl
 		for (MBMessage message : messages) {
 			if (message.isRoot()) {
 				mbMessageFlagPersistence.removeByM_F(
-					message.getMessageId(), MBMessageFlagImpl.QUESTION_FLAG);
+					message.getMessageId(),
+					MBMessageFlagConstants.QUESTION_FLAG);
 			}
 
 			mbMessageFlagPersistence.removeByM_F(
-				message.getMessageId(), MBMessageFlagImpl.ANSWER_FLAG);
+				message.getMessageId(), MBMessageFlagConstants.ANSWER_FLAG);
 		}
 	}
 
@@ -178,12 +179,13 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		return mbMessageFlagPersistence.fetchByU_M_F(
-			userId, thread.getRootMessageId(), MBMessageFlagImpl.READ_FLAG);
+			userId, thread.getRootMessageId(),
+			MBMessageFlagConstants.READ_FLAG);
 	}
 
 	public boolean hasAnswerFlag(long messageId) throws SystemException {
 		int count = mbMessageFlagPersistence.countByM_F(
-			messageId, MBMessageFlagImpl.ANSWER_FLAG);
+			messageId, MBMessageFlagConstants.ANSWER_FLAG);
 
 		if (count > 0) {
 			return true;
@@ -195,7 +197,7 @@ public class MBMessageFlagLocalServiceImpl
 
 	public boolean hasQuestionFlag(long messageId) throws SystemException {
 		int count = mbMessageFlagPersistence.countByM_F(
-			messageId, MBMessageFlagImpl.QUESTION_FLAG);
+			messageId, MBMessageFlagConstants.QUESTION_FLAG);
 
 		if (count > 0) {
 			return true;
@@ -215,7 +217,8 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-			userId, thread.getRootMessageId(), MBMessageFlagImpl.READ_FLAG);
+			userId, thread.getRootMessageId(),
+			MBMessageFlagConstants.READ_FLAG);
 
 		if ((messageFlag != null) &&
 			(DateUtil.equals(

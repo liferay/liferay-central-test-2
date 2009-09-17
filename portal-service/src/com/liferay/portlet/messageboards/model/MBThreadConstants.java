@@ -20,19 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model.impl;
-
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
+package com.liferay.portlet.messageboards.model;
 
 /**
- * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class MBMessageFlagImpl
-	extends MBMessageFlagModelImpl implements MBMessageFlag {
+public class MBThreadConstants {
 
-	public MBMessageFlagImpl() {
-	}
+	public static final double PRIORITY_NOT_GIVEN = -1.0;
+
+	public static final String THREAD_VIEW_COMBINATION = "combination";
+
+	public static final String THREAD_VIEW_FLAT = "flat";
+
+	public static final String THREAD_VIEW_TREE = "tree";
 
 }

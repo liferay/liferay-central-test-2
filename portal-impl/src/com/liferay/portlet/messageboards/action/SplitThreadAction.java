@@ -42,7 +42,7 @@ import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
@@ -168,7 +168,7 @@ public class SplitThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				message.getCategoryId(), oldThreadId, oldParentMessageId,
 				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadImpl.PRIORITY_NOT_GIVEN,
+				false, MBThreadConstants.PRIORITY_NOT_GIVEN,
 				StatusConstants.APPROVED, serviceContext);
 		}
 

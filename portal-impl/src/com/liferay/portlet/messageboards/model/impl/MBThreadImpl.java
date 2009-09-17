@@ -31,14 +31,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
  */
 public class MBThreadImpl extends MBThreadModelImpl implements MBThread {
 
-	public static final double PRIORITY_NOT_GIVEN = -1.0;
-
-	public static final String THREAD_VIEW_COMBINATION = "combination";
-
-	public static final String THREAD_VIEW_FLAT = "flat";
-
-	public static final String THREAD_VIEW_TREE = "tree";
-
 	public MBThreadImpl() {
 	}
 

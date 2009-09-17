@@ -26,6 +26,7 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 
 /**
@@ -46,7 +47,7 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		_category = category;
 		_thread = thread;
 
-		if (!threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT)) {
+		if (!threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
 			_treeWalker = new MBTreeWalkerImpl(message, status);
 		}
 

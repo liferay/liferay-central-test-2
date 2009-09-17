@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model.impl;
-
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
+package com.liferay.portlet.messageboards.model;
 
 /**
- * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFlagConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class MBMessageFlagImpl
-	extends MBMessageFlagModelImpl implements MBMessageFlag {
+public class MBMessageFlagConstants {
 
-	public MBMessageFlagImpl() {
-	}
+	public static final int ANSWER_FLAG = 3;
+
+	public static final int READ_FLAG = 1;
+
+	public static final int QUESTION_FLAG = 2;
 
 }

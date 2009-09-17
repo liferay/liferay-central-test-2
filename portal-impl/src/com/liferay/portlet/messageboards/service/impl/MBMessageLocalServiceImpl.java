@@ -75,8 +75,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.messageboards.util.Indexer;
@@ -334,7 +334,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setLastPostDate(now);
 		}
 
-		if ((priority != MBThreadImpl.PRIORITY_NOT_GIVEN) &&
+		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
 			(thread.getPriority() != priority)) {
 
 			thread.setPriority(priority);
@@ -354,7 +354,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setAttachments(!files.isEmpty());
 		message.setAnonymous(anonymous);
 
-		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);
 		}
 
@@ -882,7 +882,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return getDiscussionMessageDisplay(
 			userId, className, classPK, status,
-			MBThreadImpl.THREAD_VIEW_COMBINATION);
+			MBThreadConstants.THREAD_VIEW_COMBINATION);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
@@ -1320,7 +1320,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 
-		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
+		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);
 		}
 
@@ -1388,7 +1388,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
 			message.getThreadId());
 
-		if ((priority != MBThreadImpl.PRIORITY_NOT_GIVEN) &&
+		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
 			(thread.getPriority() != priority)) {
 
 			thread.setPriority(priority);

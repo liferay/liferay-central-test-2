@@ -28,8 +28,8 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
@@ -62,22 +62,22 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 		MBMessageFlag questionMessageFlag =
 			mbMessageFlagPersistence.fetchByU_M_F(
 				rootMessage.getUserId(), rootMessage.getMessageId(),
-				MBMessageFlagImpl.QUESTION_FLAG);
+				MBMessageFlagConstants.QUESTION_FLAG);
 
 		MBMessageFlag answerMessageFlag =
 			mbMessageFlagPersistence.fetchByU_M_F(
 				rootMessage.getUserId(), rootMessage.getMessageId(),
-				MBMessageFlagImpl.ANSWER_FLAG);
+				MBMessageFlagConstants.ANSWER_FLAG);
 
 		if ((questionMessageFlag != null) && (answerMessageFlag == null)) {
-			questionMessageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
+			questionMessageFlag.setFlag(MBMessageFlagConstants.ANSWER_FLAG);
 
 			mbMessageFlagPersistence.update(questionMessageFlag, false);
 		}
 
 		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
 			message.getUserId(), message.getMessageId(),
-			MBMessageFlagImpl.ANSWER_FLAG);
+			MBMessageFlagConstants.ANSWER_FLAG);
 
 		if (messageFlag == null) {
 			long messageFlagId = counterLocalService.increment();
@@ -86,7 +86,7 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 
 			messageFlag.setUserId(message.getUserId());
 			messageFlag.setMessageId(message.getMessageId());
-			messageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
+			messageFlag.setFlag(MBMessageFlagConstants.ANSWER_FLAG);
 
 			mbMessageFlagPersistence.update(messageFlag, false);
 		}
@@ -114,7 +114,7 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 		try {
 			mbMessageFlagPersistence.removeByU_M_F(
 				message.getUserId(), message.getMessageId(),
-				MBMessageFlagImpl.ANSWER_FLAG);
+				MBMessageFlagConstants.ANSWER_FLAG);
 		}
 		catch (NoSuchMessageFlagException nsmfe) {
 		}
@@ -122,17 +122,17 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 		MBMessageFlag answerMessageFlag =
 			mbMessageFlagPersistence.fetchByU_M_F(
 				rootMessage.getUserId(), rootMessage.getMessageId(),
-				MBMessageFlagImpl.ANSWER_FLAG);
+				MBMessageFlagConstants.ANSWER_FLAG);
 
 		if (answerMessageFlag == null) {
 			return;
 		}
 
 		int answerFlagsCount = mbMessageFlagPersistence.countByT_F(
-			message.getThreadId(), MBMessageFlagImpl.ANSWER_FLAG);
+			message.getThreadId(), MBMessageFlagConstants.ANSWER_FLAG);
 
 		if (answerFlagsCount == 0) {
-			answerMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+			answerMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
 
 			mbMessageFlagPersistence.update(answerMessageFlag, false);
 		}

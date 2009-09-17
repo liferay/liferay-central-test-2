@@ -30,7 +30,7 @@ portletURL.setParameter("messageId", String.valueOf(message.getMessageId()));
 
 SearchContainer searchContainer = null;
 
-if (threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT)) {
+if (threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT)) {
 	int delta = 10;
 
 	searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, delta, portletURL, null, null);
@@ -45,7 +45,7 @@ if (threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT)) {
 }
 %>
 
-<c:if test="<%= threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
+<c:if test="<%= threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
 	<div class="taglib-search-iterator-page-iterator-top">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
@@ -74,7 +74,7 @@ for (int i = 0; i < messages.size(); i++) {
 }
 %>
 
-<c:if test="<%= threadView.equals(MBThreadImpl.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
+<c:if test="<%= threadView.equals(MBThreadConstants.THREAD_VIEW_FLAT) && (searchContainer.getTotal() > searchContainer.getDelta()) %>">
 	<div class="taglib-search-iterator-page-iterator-bottom">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>

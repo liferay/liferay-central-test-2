@@ -29,11 +29,11 @@
 	<td class="stretch"></td>
 
 	<c:if test="<%= PropsValues.MESSAGE_BOARDS_THREAD_VIEWS.length > 1 %>">
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_COMBINATION) %>">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadConstants.THREAD_VIEW_COMBINATION) %>">
 			<td class="thread-icon">
 
 				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_COMBINATION);
+				currentURLObj.setParameter("threadView", MBThreadConstants.THREAD_VIEW_COMBINATION);
 				%>
 
 				<liferay-ui:icon
@@ -45,11 +45,11 @@
 			</td>
 		</c:if>
 
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_FLAT) %>">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadConstants.THREAD_VIEW_FLAT) %>">
 			<td class="thread-icon">
 
 				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_FLAT);
+				currentURLObj.setParameter("threadView", MBThreadConstants.THREAD_VIEW_FLAT);
 				%>
 
 				<liferay-ui:icon
@@ -61,11 +61,11 @@
 			</td>
 		</c:if>
 
-		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadImpl.THREAD_VIEW_TREE) %>">
+		<c:if test="<%= ArrayUtil.contains(PropsValues.MESSAGE_BOARDS_THREAD_VIEWS, MBThreadConstants.THREAD_VIEW_TREE) %>">
 			<td class="thread-icon">
 
 				<%
-				currentURLObj.setParameter("threadView", MBThreadImpl.THREAD_VIEW_TREE);
+				currentURLObj.setParameter("threadView", MBThreadConstants.THREAD_VIEW_TREE);
 				%>
 
 				<liferay-ui:icon
@@ -204,7 +204,7 @@
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
 
-	<c:if test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_COMBINATION) && (messages.size() > 1) %>'>
+	<c:if test='<%= threadView.equals(MBThreadConstants.THREAD_VIEW_COMBINATION) && (messages.size() > 1) %>'>
 		<liferay-ui:toggle-area id="toggle_id_message_boards_view_message_thread">
 			<table class="toggle_id_message_boards_view_message_thread">
 
@@ -226,7 +226,7 @@
 	</c:if>
 
 	<c:choose>
-		<c:when test='<%= threadView.equals(MBThreadImpl.THREAD_VIEW_TREE) %>'>
+		<c:when test='<%= threadView.equals(MBThreadConstants.THREAD_VIEW_TREE) %>'>
 
 			<%
 			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
