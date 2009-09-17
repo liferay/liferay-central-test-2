@@ -22,12 +22,14 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -67,24 +69,7 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 					theme);
 			}
 			else {
-				if (_portletId != null) {
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)request.getAttribute(
-							WebKeys.THEME_DISPLAY);
-
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						themeDisplay.getCompanyId(), _portletId);
-
-					if (isWAR(portlet)) {
-						PortletConfig portletConfig =
-							PortletConfigFactory.create(
-								portlet, servletContext);
-						PortletContextImpl portletContext = (PortletContextImpl)
-							portletConfig.getPortletContext();
-
-						servletContext = portletContext.getServletContext();
-					}
-				}
+				servletContext = getServletContext(servletContext, request);
 
 				RequestDispatcher requestDispatcher =
 					servletContext.getRequestDispatcher(page);
@@ -158,11 +143,36 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		return null;
 	}
 
-	protected boolean isWAR(Portlet portlet) {
-		if (portlet == null || !portlet.getPortletApp().isWARFile()) {
-			return false;
+	protected ServletContext getServletContext(
+			ServletContext servletContext, HttpServletRequest request)
+		throws SystemException {
+
+		if (Validator.isNull(_portletId)) {
+			return servletContext;
 		}
-		return true;
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			themeDisplay.getCompanyId(), _portletId);
+
+		if (portlet == null) {
+			return servletContext;
+		}
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (!portletApp.isWARFile()) {
+			return servletContext;
+		}
+
+		PortletConfig portletConfig = PortletConfigFactory.create(
+				portlet, servletContext);
+		PortletContextImpl portletContextImpl =
+			(PortletContextImpl)portletConfig.getPortletContext();
+
+		return portletContextImpl.getServletContext();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
