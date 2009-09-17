@@ -127,62 +127,66 @@ public class MBThreadLocalServiceUtil {
 		getService().deleteThreads(categoryId);
 	}
 
-	public static int getCategoryThreadsCount(long categoryId)
+	public static int getCategoryThreadsCount(long categoryId, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoryThreadsCount(categoryId);
+		return getService().getCategoryThreadsCount(categoryId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, int start, int end)
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getGroupThreads(groupId, start, end);
+		return getService().getGroupThreads(groupId, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, int start, int end)
+		long groupId, long userId, int status, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return getService().getGroupThreads(groupId, userId, start, end);
+		return getService().getGroupThreads(groupId, userId, status, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, boolean subscribed, int start, int end)
+		long groupId, long userId, int status, boolean subscribed, int start,
+		int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getGroupThreads(groupId, userId, subscribed, start, end);
+				   .getGroupThreads(groupId, userId, status, subscribed, start,
+			end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, boolean subscribed,
+		long groupId, long userId, int status, boolean subscribed,
 		boolean includeAnonymous, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .getGroupThreads(groupId, userId, subscribed,
+				   .getGroupThreads(groupId, userId, status, subscribed,
 			includeAnonymous, start, end);
 	}
 
-	public static int getGroupThreadsCount(long groupId)
+	public static int getGroupThreadsCount(long groupId, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getGroupThreadsCount(groupId);
+		return getService().getGroupThreadsCount(groupId, status);
 	}
 
-	public static int getGroupThreadsCount(long groupId, long userId)
+	public static int getGroupThreadsCount(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getGroupThreadsCount(groupId, userId);
+		return getService().getGroupThreadsCount(groupId, userId, status);
 	}
 
 	public static int getGroupThreadsCount(long groupId, long userId,
-		boolean subscribed) throws com.liferay.portal.SystemException {
-		return getService().getGroupThreadsCount(groupId, userId, subscribed);
-	}
-
-	public static int getGroupThreadsCount(long groupId, long userId,
-		boolean subscribed, boolean includeAnonymous)
+		int status, boolean subscribed)
 		throws com.liferay.portal.SystemException {
 		return getService()
-				   .getGroupThreadsCount(groupId, userId, subscribed,
+				   .getGroupThreadsCount(groupId, userId, status, subscribed);
+	}
+
+	public static int getGroupThreadsCount(long groupId, long userId,
+		int status, boolean subscribed, boolean includeAnonymous)
+		throws com.liferay.portal.SystemException {
+		return getService()
+				   .getGroupThreadsCount(groupId, userId, status, subscribed,
 			includeAnonymous);
 	}
 
@@ -194,14 +198,14 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
-		long categoryId, int start, int end)
+		long categoryId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreads(categoryId, start, end);
+		return getService().getThreads(categoryId, status, start, end);
 	}
 
-	public static int getThreadsCount(long categoryId)
+	public static int getThreadsCount(long categoryId, int status)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreadsCount(categoryId);
+		return getService().getThreadsCount(categoryId, status);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread moveThread(

@@ -195,6 +195,49 @@ public class MBThreadUtil {
 				   .findByCategoryId_PrevAndNext(threadId, categoryId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status) throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_S(groupId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_S(groupId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_S(groupId, status, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_S_First(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByG_S_First(groupId, status, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByG_S_Last(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByG_S_Last(groupId, status, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByG_S_PrevAndNext(
+		long threadId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByG_S_PrevAndNext(threadId, groupId, status, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_L(
 		long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException {
@@ -241,6 +284,49 @@ public class MBThreadUtil {
 			obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(categoryId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(categoryId, status, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(categoryId, status, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByC_S_First(
+		long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByC_S_First(categoryId, status, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread findByC_S_Last(
+		long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence().findByC_S_Last(categoryId, status, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBThread[] findByC_S_PrevAndNext(
+		long threadId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException {
+		return getPersistence()
+				   .findByC_S_PrevAndNext(threadId, categoryId, status, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -279,9 +365,19 @@ public class MBThreadUtil {
 		getPersistence().removeByCategoryId(categoryId);
 	}
 
+	public static void removeByG_S(long groupId, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_S(groupId, status);
+	}
+
 	public static void removeByC_L(long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_L(categoryId, lastPostDate);
+	}
+
+	public static void removeByC_S(long categoryId, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_S(categoryId, status);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -298,9 +394,19 @@ public class MBThreadUtil {
 		return getPersistence().countByCategoryId(categoryId);
 	}
 
+	public static int countByG_S(long groupId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_S(groupId, status);
+	}
+
 	public static int countByC_L(long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_L(categoryId, lastPostDate);
+	}
+
+	public static int countByC_S(long categoryId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_S(categoryId, status);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

@@ -1350,6 +1350,10 @@
 		<field name="attachments" type="boolean" />
 		<field name="anonymous" type="boolean" />
 		<field name="priority" type="double" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
 		<field name="messageFlagId" type="long" />
@@ -1376,6 +1380,10 @@
 		<field name="lastPostByUserId" type="long" />
 		<field name="lastPostDate" type="Date" />
 		<field name="priority" type="double" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsChoice">
 		<field name="uuid" type="String" />

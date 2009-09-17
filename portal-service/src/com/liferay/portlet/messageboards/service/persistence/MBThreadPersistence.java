@@ -149,6 +149,36 @@ public interface MBThreadPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByG_S_First(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByG_S_Last(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread[] findByG_S_PrevAndNext(
+		long threadId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_L(
 		long categoryId, java.util.Date lastPostDate)
 		throws com.liferay.portal.SystemException;
@@ -180,6 +210,36 @@ public interface MBThreadPersistence extends BasePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchThreadException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByC_S(
+		long categoryId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_S_First(
+		long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread findByC_S_Last(
+		long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
+	public com.liferay.portlet.messageboards.model.MBThread[] findByC_S_PrevAndNext(
+		long threadId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchThreadException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -204,7 +264,13 @@ public interface MBThreadPersistence extends BasePersistence {
 	public void removeByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_S(long groupId, int status)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_L(long categoryId, java.util.Date lastPostDate)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByC_S(long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -215,7 +281,13 @@ public interface MBThreadPersistence extends BasePersistence {
 	public int countByCategoryId(long categoryId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByG_S(long groupId, int status)
+		throws com.liferay.portal.SystemException;
+
 	public int countByC_L(long categoryId, java.util.Date lastPostDate)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_S(long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

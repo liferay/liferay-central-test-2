@@ -113,47 +113,48 @@ public interface MBThreadLocalService {
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCategoryThreadsCount(long categoryId)
+	public int getCategoryThreadsCount(long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, int start, int end)
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, int start, int end)
+		long groupId, long userId, int status, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, boolean subscribed, int start, int end)
+		long groupId, long userId, int status, boolean subscribed, int start,
+		int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, boolean subscribed,
+		long groupId, long userId, int status, boolean subscribed,
 		boolean includeAnonymous, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupThreadsCount(long groupId)
+	public int getGroupThreadsCount(long groupId, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupThreadsCount(long groupId, long userId)
+	public int getGroupThreadsCount(long groupId, long userId, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupThreadsCount(long groupId, long userId,
+	public int getGroupThreadsCount(long groupId, long userId, int status,
 		boolean subscribed) throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupThreadsCount(long groupId, long userId,
+	public int getGroupThreadsCount(long groupId, long userId, int status,
 		boolean subscribed, boolean includeAnonymous)
 		throws com.liferay.portal.SystemException;
 
@@ -165,11 +166,11 @@ public interface MBThreadLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
-		long categoryId, int start, int end)
+		long categoryId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getThreadsCount(long categoryId)
+	public int getThreadsCount(long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(

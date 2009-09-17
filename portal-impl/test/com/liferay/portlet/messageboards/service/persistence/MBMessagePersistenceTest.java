@@ -88,6 +88,10 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setAttachments(randomBoolean());
 		newMBMessage.setAnonymous(randomBoolean());
 		newMBMessage.setPriority(nextDouble());
+		newMBMessage.setStatus(nextInt());
+		newMBMessage.setStatusByUserId(nextLong());
+		newMBMessage.setStatusByUserName(randomString());
+		newMBMessage.setStatusDate(nextDate());
 
 		_persistence.update(newMBMessage, false);
 
@@ -120,6 +124,13 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBMessage.getAnonymous(),
 			newMBMessage.getAnonymous());
 		assertEquals(existingMBMessage.getPriority(), newMBMessage.getPriority());
+		assertEquals(existingMBMessage.getStatus(), newMBMessage.getStatus());
+		assertEquals(existingMBMessage.getStatusByUserId(),
+			newMBMessage.getStatusByUserId());
+		assertEquals(existingMBMessage.getStatusByUserName(),
+			newMBMessage.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(existingMBMessage.getStatusDate()),
+			Time.getShortTimestamp(newMBMessage.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -180,6 +191,10 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setAttachments(randomBoolean());
 		mbMessage.setAnonymous(randomBoolean());
 		mbMessage.setPriority(nextDouble());
+		mbMessage.setStatus(nextInt());
+		mbMessage.setStatusByUserId(nextLong());
+		mbMessage.setStatusByUserName(randomString());
+		mbMessage.setStatusDate(nextDate());
 
 		_persistence.update(mbMessage, false);
 

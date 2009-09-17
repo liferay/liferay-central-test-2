@@ -58,14 +58,14 @@ public interface MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		int status, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -74,7 +74,7 @@ public interface MBMessageService {
 		long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority,
+		boolean anonymous, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -90,41 +90,44 @@ public interface MBMessageService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int start, int end)
+		long categoryId, int status, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCategoryMessagesCount(long categoryId)
+	public int getCategoryMessagesCount(long categoryId, int status)
 		throws com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getCategoryMessagesRSS(long categoryId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+	public java.lang.String getCategoryMessagesRSS(long categoryId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getCompanyMessagesRSS(long companyId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+	public java.lang.String getCompanyMessagesRSS(long companyId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getGroupMessagesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+	public java.lang.String getGroupMessagesRSS(long groupId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getGroupMessagesRSS(long groupId, long userId,
-		int max, java.lang.String type, double version,
+		int status, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -139,14 +142,15 @@ public interface MBMessageService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
-		long messageId, java.lang.String threadView)
+		long messageId, int status, java.lang.String threadView)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+	public java.lang.String getThreadMessagesRSS(long threadId, int status,
+		int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -161,7 +165,7 @@ public interface MBMessageService {
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK, long messageId,
-		java.lang.String subject, java.lang.String body,
+		java.lang.String subject, java.lang.String body, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -169,7 +173,7 @@ public interface MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		java.util.List<String> existingFiles, double priority,
+		java.util.List<String> existingFiles, double priority, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
