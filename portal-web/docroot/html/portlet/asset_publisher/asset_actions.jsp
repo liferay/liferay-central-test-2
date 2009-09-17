@@ -29,7 +29,7 @@ boolean showIconLabel = ((Boolean)request.getAttribute("view.jsp-showIconLabel")
 
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 
-PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, (LiferayPortletResponse)renderResponse);
+PortletURL editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse);
 
 if (editPortletURL != null) {
 	editPortletURL.setWindowState(WindowState.MAXIMIZED);

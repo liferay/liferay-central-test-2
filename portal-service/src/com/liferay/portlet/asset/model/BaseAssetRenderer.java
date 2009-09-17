@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.asset.model;
 
-import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -43,16 +42,14 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-			PortletRequest portletRequest,
-			LiferayPortletResponse portletResponse)
+			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
 		return null;
 	}
 
 	public PortletURL getURLExport(
-			PortletRequest portletRequest,
-			LiferayPortletResponse portletResponse)
+			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
 		return null;
@@ -63,8 +60,8 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 	}
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest,
-			LiferayPortletResponse portletResponse, String noSuchEntryRedirect)
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			String noSuchEntryRedirect)
 		throws Exception {
 
 		return null;

@@ -23,7 +23,7 @@
 %>
 
 <%
-Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, (LiferayPortletResponse)renderResponse, allAssetTagNames, classNameIds);
+Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, renderResponse, allAssetTagNames, classNameIds);
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">

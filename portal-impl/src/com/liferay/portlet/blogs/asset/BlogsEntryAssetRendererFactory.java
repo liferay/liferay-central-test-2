@@ -27,7 +27,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -36,6 +35,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -73,15 +73,13 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-			PortletRequest portletRequest,
-			LiferayPortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletURL addAssetURL = null;
 
@@ -89,7 +87,8 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			addAssetURL = portletResponse.createRenderURL(PortletKeys.BLOGS);
+			addAssetURL = liferayPortletResponse.createRenderURL(
+				PortletKeys.BLOGS);
 
 			addAssetURL.setParameter("struts_action", "/blogs/edit_entry");
 		}

@@ -53,7 +53,7 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 	viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 }
 
-String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
+String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 %>

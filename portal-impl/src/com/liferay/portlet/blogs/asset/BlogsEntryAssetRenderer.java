@@ -30,12 +30,12 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -77,14 +77,13 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -92,7 +91,8 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			editPortletURL = portletResponse.createRenderURL(PortletKeys.BLOGS);
+			editPortletURL = liferayPortletResponse.createRenderURL(
+				PortletKeys.BLOGS);
 
 			editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
 			editPortletURL.setParameter(
@@ -107,7 +107,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest, LiferayPortletResponse portletResponse,
+		PortletRequest portletRequest, PortletResponse portletResponse,
 		String noSuchEntryRedirect) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(

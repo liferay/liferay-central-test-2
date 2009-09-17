@@ -54,7 +54,7 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 }
 
 String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
-String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
+String viewURL = viewInContext ? assetRenderer.getURLViewInContext(renderRequest, renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more";
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);

@@ -28,12 +28,12 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.permission.IGPermission;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -67,14 +67,13 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -82,7 +81,7 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
 
-			editPortletURL = portletResponse.createRenderURL(
+			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.IMAGE_GALLERY);
 
 			editPortletURL.setParameter(
@@ -97,18 +96,15 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest,
-			LiferayPortletResponse portletResponse, String noSuchEntryRedirect)
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			String noSuchEntryRedirect)
 		throws Exception {
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletURL viewPortletURL = portletResponse.createRenderURL(
-				PortletKeys.IMAGE_GALLERY);
+		PortletURL viewPortletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.IMAGE_GALLERY);
 
 		viewPortletURL.setWindowState(WindowState.MAXIMIZED);
 
