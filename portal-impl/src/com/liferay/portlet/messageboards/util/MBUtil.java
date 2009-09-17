@@ -388,7 +388,16 @@ public class MBUtil {
 		String defaultMailingListAddress) {
 
 		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
-			return defaultMailingListAddress;
+			String mailingListAddress;
+
+		    try {
+			MBMailingList mbMailingList =
+				MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
+			mailingListAddress = mbMailingList.getEmailAddress();
+		    } catch (Exception e) {
+			mailingListAddress = defaultMailingListAddress;
+		    }
+		    return mailingListAddress;
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -457,9 +466,15 @@ public class MBUtil {
 		String[] references = message.getHeader("References");
 
 		if ((references != null) && (references.length > 0)) {
-			parentHeader = references[0].substring(
-				references[0].lastIndexOf("<"));
-		}
+                    int beginIndex = references[0].indexOf("<mb.");
+                    int endIndex;
+                    if (beginIndex > -1) {
+                        endIndex = references[0].indexOf(">", beginIndex);
+                        parentHeader = references[0].substring(
+                            beginIndex,
+                            endIndex);
+                    }
+                }
 
 		if (parentHeader == null) {
 			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
@@ -627,10 +642,12 @@ public class MBUtil {
 		}
 
 		for (String messageId : messageIds) {
-			if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
-				return true;
-			}
-		}
+                    if (Validator.isNotNull(PropsValues.POP_SERVER_SUBDOMAIN)) {
+                        if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
+                            return true;
+                        }
+                    }
+                }
 
 		return false;
 	}
