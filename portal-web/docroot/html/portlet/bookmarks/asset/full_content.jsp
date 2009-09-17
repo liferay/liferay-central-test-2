@@ -22,13 +22,11 @@
  */
 %>
 
-
 <%@ include file="/html/portlet/bookmarks/init.jsp" %>
 
 <%
 BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_ENTRY);
 %>
-
 
 <a href="<%= entry.getUrl() %>" target="_blank"><%= entry.getName() %></a>
 

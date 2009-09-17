@@ -28,12 +28,12 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksPermission;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -66,14 +66,13 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -81,7 +80,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			editPortletURL = portletResponse.createRenderURL(
+			editPortletURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.BOOKMARKS);
 
 			editPortletURL.setParameter(
@@ -89,15 +88,15 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 			editPortletURL.setParameter(
 				"folderId", String.valueOf(_entry.getFolderId()));
  			editPortletURL.setParameter(
-				 "entryId", String.valueOf(_entry.getEntryId()));
+				"entryId", String.valueOf(_entry.getEntryId()));
 		}
 
 		return editPortletURL;
 	}
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest,
-		LiferayPortletResponse portletResponse, String noSuchEntryRedirect) {
+		PortletRequest portletRequest, PortletResponse portletResponse,
+		String noSuchEntryRedirect) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
