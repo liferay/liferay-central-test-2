@@ -178,6 +178,24 @@ create table Lock_ (
 	expirationDate DATE null
 );
 
+alter table MBMessage add status INTEGER;
+alter table MBMessage add statusByUserId LONG;
+alter table MBMessage add statusByUserName VARCHAR(75);
+alter table MBMessage add statusDate DATE;
+
+COMMIT_TRANSACTION;
+
+update MBMessage set status = 1;
+
+alter table MBThread add status INTEGER;
+alter table MBThread add statusByUserId LONG;
+alter table MBThread add statusByUserName VARCHAR(75);
+alter table MBThread add statusDate DATE;
+
+COMMIT_TRANSACTION;
+
+update MBThread set status = 1;
+
 alter table ShoppingItem add groupId LONG;
 
 create table UserGroupGroupRole (
