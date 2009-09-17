@@ -24,7 +24,6 @@ package com.liferay.portal.bi.rules;
 
 import com.liferay.portal.kernel.bi.rules.Query;
 import com.liferay.portal.kernel.bi.rules.RulesEngine;
-import com.liferay.portal.kernel.bi.rules.RulesEngineException;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
@@ -37,50 +36,42 @@ import java.util.List;
  */
 public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 
-	public void add(String domainName, ResourceRetriever resourceRetriever)
-		throws RulesEngineException {
-
+	public void add(String domainName, ResourceRetriever resourceRetriever) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void execute(
-			ResourceRetriever resourceRetriever, List<?> facts,
-			ClassLoader... clientClassLoaders)
-		throws RulesEngineException {
+		ResourceRetriever resourceRetriever, List<?> facts,
+		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query,
-			ClassLoader... clientClassLoaders)
-		throws RulesEngineException {
+		ResourceRetriever resourceRetriever, List<?> facts, Query query,
+		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void execute(
-			String domainName, List<?> facts, ClassLoader... clientClassLoaders)
-		throws RulesEngineException {
+		String domainName, List<?> facts, ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<?> execute(
-			String domainName, List<?> facts, Query query,
-			ClassLoader... clientClassLoaders)
-		throws RulesEngineException {
+		String domainName, List<?> facts, Query query,
+		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void remove(String domainName) throws RulesEngineException {
+	public void remove(String domainName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void update(String domainName, ResourceRetriever resourceRetriever)
-		throws RulesEngineException {
-
+	public void update(String domainName, ResourceRetriever resourceRetriever) {
 		throw new UnsupportedOperationException();
 	}
 
