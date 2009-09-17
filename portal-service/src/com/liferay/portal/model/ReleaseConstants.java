@@ -20,18 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.model.Release;
+package com.liferay.portal.model;
 
 /**
- * <a href="ReleaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReleaseConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class ReleaseImpl extends ReleaseModelImpl implements Release {
+public class ReleaseConstants {
 
-	public ReleaseImpl() {
-	}
+	public static final long DEFAULT_ID = 1;
+
+	public static final String TEST_STRING =
+		"You take the blue pill, the story ends, you wake up in your bed and " +
+		"believe whatever you want to believe. You take the red pill, you " +
+		"stay in Wonderland, and I show you how deep the rabbit hole goes.";
 
 }

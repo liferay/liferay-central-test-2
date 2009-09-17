@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.model.impl.ReleaseImpl;
+import com.liferay.portal.model.ReleaseConstants;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -51,13 +51,14 @@ import java.util.Date;
 public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public Release addRelease() throws SystemException {
-		Release release = releasePersistence.create(ReleaseImpl.DEFAULT_ID);
+		Release release = releasePersistence.create(
+			ReleaseConstants.DEFAULT_ID);
 
 		Date now = new Date();
 
 		release.setCreateDate(now);
 		release.setModifiedDate(now);
-		release.setTestString(ReleaseImpl.TEST_STRING);
+		release.setTestString(ReleaseConstants.TEST_STRING);
 
 		releasePersistence.update(release, false);
 
@@ -149,7 +150,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public Release getRelease() throws SystemException {
 		Release release = releasePersistence.fetchByPrimaryKey(
-			ReleaseImpl.DEFAULT_ID);
+			ReleaseConstants.DEFAULT_ID);
 
 		if (release == null) {
 			release = releaseLocalService.addRelease();
@@ -177,7 +178,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		DBUtil dbUtil = DBUtil.getInstance();
 
 		int count = testSupportsStringCaseSensitiveQuery(
-			ReleaseImpl.TEST_STRING);
+			ReleaseConstants.TEST_STRING);
 
 		if (count == 0) {
 			try {
@@ -193,7 +194,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			try {
 				dbUtil.runSQL(
 					"update Release_ set testString = '" +
-						ReleaseImpl.TEST_STRING + "'");
+						ReleaseConstants.TEST_STRING + "'");
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
@@ -202,7 +203,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			}
 
 			count = testSupportsStringCaseSensitiveQuery(
-				ReleaseImpl.TEST_STRING);
+				ReleaseConstants.TEST_STRING);
 		}
 
 		if (count == 0) {
@@ -211,7 +212,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		}
 
 		count = testSupportsStringCaseSensitiveQuery(
-			ReleaseImpl.TEST_STRING.toUpperCase());
+			ReleaseConstants.TEST_STRING.toUpperCase());
 
 		if (count == 0) {
 			dbUtil.setSupportsStringCaseSensitiveQuery(true);
