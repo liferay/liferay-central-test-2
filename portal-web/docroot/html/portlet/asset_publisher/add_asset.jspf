@@ -23,7 +23,7 @@
 %>
 
 <%
-Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, allAssetTagNames, classNameIds);
+Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, (LiferayPortletResponse)renderResponse, allAssetTagNames, classNameIds);
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
@@ -62,12 +62,12 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, allAss
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, String[] allAssetTagNames, String className) throws Exception {
+public PortletURL getAddPortletURL(RenderRequest renderRequest, LiferayPortletResponse liferayPortletResponse, String[] allAssetTagNames, String className) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(className);
 
-	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest);
+	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest, liferayPortletResponse);
 
 	if (addPortletURL != null) {
 		addPortletURL.setWindowState(WindowState.MAXIMIZED);
@@ -89,13 +89,13 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, String[] allAsse
 	return addPortletURL;
 }
 
-public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, String[] allAssetTagNames, long[] classNameIds) throws Exception {
+public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, LiferayPortletResponse liferayPortletResponse, String[] allAssetTagNames, long[] classNameIds) throws Exception {
 	Map<String, PortletURL> addPortletURLs = new HashMap<String, PortletURL>();
 
 	for (long classNameId : classNameIds) {
 		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, allAssetTagNames, className.getValue());
+		PortletURL addPortletURL = getAddPortletURL(renderRequest, liferayPortletResponse, allAssetTagNames, className.getValue());
 
 		if (addPortletURL != null) {
 			addPortletURLs.put(className.getValue(), addPortletURL);

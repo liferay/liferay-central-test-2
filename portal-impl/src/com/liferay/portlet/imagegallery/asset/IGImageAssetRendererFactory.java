@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
@@ -64,7 +65,8 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
-	public PortletURL getURLAdd(PortletRequest portletRequest) {
+	public PortletURL getURLAdd(
+		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
 		PortletRequestImpl portletRequestImpl =
 			(PortletRequestImpl)portletRequest;
 

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
@@ -46,7 +48,9 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return _portletId;
 	}
 
-	public PortletURL getURLAdd(PortletRequest portletRequest)
+	public PortletURL getURLAdd(
+			PortletRequest portletRequest,
+			LiferayPortletResponse portletResponse)
 		throws Exception {
 
 		return null;

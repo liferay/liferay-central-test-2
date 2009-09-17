@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -66,7 +67,9 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return _image.getName();
 	}
 
-	public PortletURL getURLEdit(PortletRequest portletRequest) {
+	public PortletURL getURLEdit(
+		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
+
 		PortletRequestImpl portletRequestImpl =
 			(PortletRequestImpl)portletRequest;
 
@@ -80,9 +83,8 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
 
-			editPortletURL = new PortletURLImpl(
-				portletRequestImpl, PortletKeys.IMAGE_GALLERY,
-				themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+			editPortletURL = portletResponse.createRenderURL(
+				PortletKeys.IMAGE_GALLERY);
 
 			editPortletURL.setParameter(
 				"struts_action", "/image_gallery/edit_image");
@@ -96,7 +98,8 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest, String noSuchEntryRedirect)
+			PortletRequest portletRequest,
+			LiferayPortletResponse portletResponse, String noSuchEntryRedirect)
 		throws Exception {
 
 		PortletRequestImpl portletRequestImpl =

@@ -110,6 +110,7 @@
 }
 
 .portlet-asset-publisher .asset-title {
+	background-image: url(<%= themeImagesPath %>/common/page.png);
 	background-position: 0 50%;
 	background-repeat: no-repeat;
 	border-bottom: 1px solid #DDD;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -30,7 +31,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
@@ -76,7 +76,9 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getTitle();
 	}
 
-	public PortletURL getURLEdit(PortletRequest portletRequest) {
+	public PortletURL getURLEdit(
+		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
+
 		PortletRequestImpl portletRequestImpl =
 			(PortletRequestImpl)portletRequest;
 
@@ -90,9 +92,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			editPortletURL = new PortletURLImpl(
-				portletRequestImpl, PortletKeys.BLOGS, themeDisplay.getPlid(),
-				PortletRequest.RENDER_PHASE);
+			editPortletURL = portletResponse.createRenderURL(PortletKeys.BLOGS);
 
 			editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
 			editPortletURL.setParameter(
@@ -107,7 +107,8 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest, String noSuchEntryRedirect) {
+		PortletRequest portletRequest, LiferayPortletResponse portletResponse,
+		String noSuchEntryRedirect) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);

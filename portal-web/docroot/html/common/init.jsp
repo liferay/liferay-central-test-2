@@ -80,6 +80,7 @@
 <%@ page import="com.liferay.portal.kernel.messaging.DestinationNames" %>
 <%@ page import="com.liferay.portal.kernel.portlet.DynamicRenderRequest" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletMode" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
