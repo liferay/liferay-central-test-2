@@ -156,10 +156,10 @@ public class ScriptingImpl implements Scripting {
 	public void setScriptingExecutors(
 		Map<String, ScriptingExecutor> scriptingExecutors) {
 
-		for (Map.Entry<String, ScriptingExecutor> mapEntry :
-			scriptingExecutors.entrySet()) {
+		for (Map.Entry<String, ScriptingExecutor> entry :
+				scriptingExecutors.entrySet()) {
 
-			_scriptingExecutors.put(mapEntry.getKey(), mapEntry.getValue());
+			_scriptingExecutors.put(entry.getKey(), entry.getValue());
 		}
 	}
 
