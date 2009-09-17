@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="LiferayPortletResponse.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public interface LiferayPortletResponse extends PortletResponse {
 
@@ -45,7 +45,11 @@ public interface LiferayPortletResponse extends PortletResponse {
 
 	public PortletURL createActionURL();
 
+	public LiferayPortletURL createActionURL(String portletName);
+
 	public PortletURL createRenderURL();
+
+	public LiferayPortletURL createRenderURL(String portletName);
 
 	public ResourceURL createResourceURL();
 
