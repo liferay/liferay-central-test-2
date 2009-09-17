@@ -44,7 +44,7 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 
 		ClassLoader[] classLoaders = inspectForClassLoaders(method);
 
-		if (classLoaders != null) {
+		if ((classLoaders != null) && (classLoaders.length > 0)) {
 			_clientClassLoaders = classLoaders[0];
 
 			if (classLoaders.length > 1) {
