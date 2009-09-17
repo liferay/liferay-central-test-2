@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
@@ -47,8 +48,14 @@ public class MBMessageFinderImpl
 	public static String COUNT_BY_G_U =
 		MBMessageFinder.class.getName() + ".countByG_U";
 
+	public static String COUNT_BY_G_U_S =
+		MBMessageFinder.class.getName() + ".countByG_U_S";
+
 	public static String COUNT_BY_G_U_A =
 		MBMessageFinder.class.getName() + ".countByG_U_A";
+
+	public static String COUNT_BY_G_U_A_S =
+		MBMessageFinder.class.getName() + ".countByG_U_A_S";
 
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
@@ -56,16 +63,31 @@ public class MBMessageFinderImpl
 	public static String FIND_BY_G_U =
 		MBMessageFinder.class.getName() + ".findByG_U";
 
+	public static String FIND_BY_G_U_S =
+		MBMessageFinder.class.getName() + ".findByG_U_S";
+
 	public static String FIND_BY_G_U_A =
 		MBMessageFinder.class.getName() + ".findByG_U_A";
 
-	public int countByG_U(long groupId, long userId) throws SystemException {
+	public static String FIND_BY_G_U_A_S =
+		MBMessageFinder.class.getName() + ".findByG_U_A_S";
+
+	public int countByG_U_S(long groupId, long userId, int status)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
+			String sql = null;
+
+			if (status == StatusConstants.ANY) {
+				sql = CustomSQLUtil.get(COUNT_BY_G_U);
+			}
+			else {
+				sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -75,6 +97,10 @@ public class MBMessageFinderImpl
 
 			qPos.add(groupId);
 			qPos.add(userId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -96,8 +122,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public int countByG_U_A(
-			long groupId, long userId, boolean anonymous)
+	public int countByG_U_A_S(
+			long groupId, long userId, boolean anonymous, int status)
 		throws SystemException {
 
 		Session session = null;
@@ -105,7 +131,14 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A);
+			String sql = null;
+
+			if (status == StatusConstants.ANY) {
+				sql = CustomSQLUtil.get(COUNT_BY_G_U_A);
+			}
+			else {
+				sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -116,6 +149,10 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 			qPos.add(anonymous);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -159,8 +196,8 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public List<Long> findByG_U(
-			long groupId, long userId, int start, int end)
+	public List<Long> findByG_U_S(
+			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -168,7 +205,14 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_U);
+			String sql = null;
+
+			if (status == StatusConstants.ANY) {
+				sql = CustomSQLUtil.get(FIND_BY_G_U);
+			}
+			else {
+				sql = CustomSQLUtil.get(FIND_BY_G_U_S);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -178,6 +222,10 @@ public class MBMessageFinderImpl
 
 			qPos.add(groupId);
 			qPos.add(userId);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -189,8 +237,9 @@ public class MBMessageFinderImpl
 		}
 	}
 
-	public List<Long> findByG_U_A(
-			long groupId, long userId, boolean anonymous, int start, int end)
+	public List<Long> findByG_U_A_S(
+			long groupId, long userId, boolean anonymous, int status,
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -198,7 +247,14 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_U_A);
+			String sql = null;
+
+			if (status == StatusConstants.ANY) {
+				sql = CustomSQLUtil.get(FIND_BY_G_U_A);
+			}
+			else {
+				sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -209,6 +265,10 @@ public class MBMessageFinderImpl
 			qPos.add(groupId);
 			qPos.add(userId);
 			qPos.add(anonymous);
+
+			if (status != StatusConstants.ANY) {
+				qPos.add(status);
+			}
 
 			return (List<Long>)QueryUtil.list(q, getDialect(), start, end);
 		}

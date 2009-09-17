@@ -72,7 +72,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			String className, long classPK, long threadId, long parentMessageId,
-			String subject, String body, ServiceContext serviceContext)
+			String subject, String body, int status,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -84,13 +85,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addDiscussionMessage(
 			getUserId(), null, className, classPK, threadId, parentMessageId,
-			subject, body, serviceContext);
+			subject, body, status, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long categoryId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -111,14 +112,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, subject, body, files,
-			anonymous, priority, serviceContext);
+			anonymous, priority, status, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, ServiceContext serviceContext)
+			double priority, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		checkReplyToPermission(categoryId, parentMessageId);
@@ -138,7 +139,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, serviceContext);
+			subject, body, files, anonymous, priority, status, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(
@@ -164,13 +165,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public List<MBMessage> getCategoryMessages(
-			long categoryId, int start, int end)
+			long categoryId, int status, int start, int end)
 		throws PortalException, SystemException {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
-			categoryId, start, end).iterator();
+			categoryId, status, start, end).iterator();
 
 		while (itr.hasNext()) {
 			MBMessage message = itr.next();
@@ -185,14 +186,15 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return messages;
 	}
 
-	public int getCategoryMessagesCount(long categoryId)
+	public int getCategoryMessagesCount(long categoryId, int status)
 		throws SystemException {
 
-		return mbMessageLocalService.getCategoryMessagesCount(categoryId);
+		return mbMessageLocalService.getCategoryMessagesCount(
+			categoryId, status);
 	}
 
 	public String getCategoryMessagesRSS(
-			long categoryId, int max, String type, double version,
+			long categoryId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -213,8 +215,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while ((messages.size() < max) && listNotExhausted) {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getCategoryMessages(
-					categoryId, lastIntervalStart, lastIntervalStart + max,
-					comparator);
+					categoryId, status, lastIntervalStart,
+					lastIntervalStart + max, comparator);
 
 			Iterator<MBMessage> itr = messageList.iterator();
 
@@ -238,7 +240,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public String getCompanyMessagesRSS(
-			long companyId, int max, String type, double version,
+			long companyId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -258,8 +260,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while ((messages.size() < max) && listNotExhausted) {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getCompanyMessages(
-					companyId, lastIntervalStart, lastIntervalStart + max,
-					comparator);
+					companyId, status, lastIntervalStart,
+					lastIntervalStart + max, comparator);
 
 			Iterator<MBMessage> itr = messageList.iterator();
 
@@ -283,7 +285,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public String getGroupMessagesRSS(
-			long groupId, int max, String type, double version,
+			long groupId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -301,7 +303,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while ((messages.size() < max) && listNotExhausted) {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getGroupMessages(
-					groupId, lastIntervalStart, lastIntervalStart + max,
+					groupId, status, lastIntervalStart, lastIntervalStart + max,
 					comparator);
 
 			Iterator<MBMessage> itr = messageList.iterator();
@@ -333,9 +335,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public String getGroupMessagesRSS(
-			long groupId, long userId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL,
-			ThemeDisplay themeDisplay)
+			long groupId, long userId, int status, int max, String type,
+			double version, String displayStyle, String feedURL,
+			String entryURL, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		String name = StringPool.BLANK;
@@ -351,8 +353,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		while ((messages.size() < max) && listNotExhausted) {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getGroupMessages(
-					groupId, userId, lastIntervalStart, lastIntervalStart + max,
-					comparator);
+					groupId, userId, status, lastIntervalStart,
+					lastIntervalStart + max, comparator);
 
 			Iterator<MBMessage> itr = messageList.iterator();
 
@@ -391,17 +393,19 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.getMessage(messageId);
 	}
 
-	public MBMessageDisplay getMessageDisplay(long messageId, String threadView)
+	public MBMessageDisplay getMessageDisplay(
+			long messageId, int status, String threadView)
 		throws PortalException, SystemException {
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
-		return mbMessageLocalService.getMessageDisplay(messageId, threadView);
+		return mbMessageLocalService.getMessageDisplay(
+			messageId, status, threadView);
 	}
 
 	public String getThreadMessagesRSS(
-			long threadId, int max, String type, double version,
+			long threadId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -415,7 +419,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			new MessageCreateDateComparator(false);
 
 		Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
-			threadId, comparator).iterator();
+			threadId, status, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = itr.next();
@@ -459,7 +463,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, long messageId, String subject,
-			String body, ServiceContext serviceContext)
+			String body, int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -470,14 +474,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			user.getUserId(), ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
-			getUserId(), messageId, subject, body);
+			getUserId(), messageId, subject, body, status);
 	}
 
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files,
 			List<String> existingFiles, double priority,
-			ServiceContext serviceContext)
+			int status, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -504,7 +508,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateMessage(
 			getUserId(), messageId, subject, body, files, existingFiles,
-			priority, serviceContext);
+			priority, status, serviceContext);
 	}
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)

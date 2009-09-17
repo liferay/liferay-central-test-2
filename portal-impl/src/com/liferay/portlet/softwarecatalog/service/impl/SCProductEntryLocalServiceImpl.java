@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -82,7 +83,7 @@ import java.util.Properties;
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class SCProductEntryLocalServiceImpl
 	extends SCProductEntryLocalServiceBaseImpl {
@@ -159,7 +160,8 @@ public class SCProductEntryLocalServiceImpl
 		if (PropsValues.SC_PRODUCT_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, productEntry.getUserName(),
-				SCProductEntry.class.getName(), productEntryId);
+				SCProductEntry.class.getName(), productEntryId,
+				StatusConstants.APPROVED);
 		}
 
 		// Indexer

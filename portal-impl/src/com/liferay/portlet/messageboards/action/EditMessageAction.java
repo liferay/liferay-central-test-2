@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -229,7 +230,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					serviceContext);
+					StatusConstants.APPROVED, serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -242,7 +243,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
-					anonymous, priority, serviceContext);
+					anonymous, priority, StatusConstants.APPROVED,
+					serviceContext);
 			}
 		}
 		else {
@@ -261,7 +263,7 @@ public class EditMessageAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
-				serviceContext);
+				StatusConstants.APPROVED, serviceContext);
 
 			if (message.isRoot()) {
 				if (question) {

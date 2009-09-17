@@ -206,6 +206,10 @@
 		<column name="attachments" type="boolean" />
 		<column name="anonymous" type="boolean" />
 		<column name="priority" type="double" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 
@@ -231,6 +235,22 @@
 		<finder name="ThreadReplies" return-type="Collection" where="parentMessageId != 0" db-index="false">
 			<finder-column name="threadId" />
 		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="C_T" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="threadId" />
+		</finder>
+		<finder name="CA_S" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
@@ -239,13 +259,32 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_T" return-type="Collection">
-			<finder-column name="categoryId" />
-			<finder-column name="threadId" />
-		</finder>
 		<finder name="T_P" return-type="Collection">
 			<finder-column name="threadId" />
 			<finder-column name="parentMessageId" />
+		</finder>
+		<finder name="T_S" return-type="Collection">
+			<finder-column name="threadId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="T_R_S" return-type="Collection" where="parentMessageId != 0" db-index="false">
+			<finder-column name="threadId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_U_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="C_C_S" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="C_T_S" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="threadId" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->
@@ -376,6 +415,10 @@
 		<column name="lastPostByUserId" type="long" />
 		<column name="lastPostDate" type="Date" />
 		<column name="priority" type="double" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 
@@ -392,9 +435,17 @@
 		<finder name="CategoryId" return-type="Collection">
 			<finder-column name="categoryId" />
 		</finder>
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="C_L" return-type="Collection">
 			<finder-column name="categoryId" />
 			<finder-column name="lastPostDate" />
+		</finder>
+		<finder name="C_S" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->

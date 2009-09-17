@@ -273,7 +273,7 @@ if (articleDisplay != null) {
 			<c:if test="<%= enableComments %>">
 
 				<%
-				int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey());
+				int discussionMessagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(PortalUtil.getClassNameId(JournalArticle.class.getName()), articleDisplay.getResourcePrimKey(), StatusConstants.APPROVED);
 				%>
 
 				<c:if test="<%= discussionMessagesCount > 0 %>">

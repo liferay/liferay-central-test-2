@@ -96,7 +96,7 @@ boolean quote = false;
 	</div>
 
 	<%
-	MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId, MBThreadImpl.THREAD_VIEW_TREE);
+	MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getMessageDisplay(messageId, StatusConstants.APPROVED, MBThreadImpl.THREAD_VIEW_TREE);
 
 	MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 

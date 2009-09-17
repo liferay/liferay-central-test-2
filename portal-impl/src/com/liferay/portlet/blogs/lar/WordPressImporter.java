@@ -211,7 +211,8 @@ public class WordPressImporter {
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			defaultUser.getUserId(), commentAuthor, BlogsEntry.class.getName(),
 			entry.getEntryId(), messageDisplay.getThread().getThreadId(),
-			commentParentId, null, commentContent, serviceContext);
+			commentParentId, null, commentContent, StatusConstants.APPROVED,
+			serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}
@@ -315,7 +316,8 @@ public class WordPressImporter {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, BlogsEntry.class.getName(), entry.getEntryId());
+				userId, BlogsEntry.class.getName(), entry.getEntryId(),
+				StatusConstants.APPROVED);
 
 		Map<Long, Long> messageIdMap = new HashMap<Long, Long>();
 

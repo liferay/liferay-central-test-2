@@ -296,11 +296,11 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-				int total = MBThreadLocalServiceUtil.getThreadsCount(categoryId);
+				int total = MBThreadLocalServiceUtil.getThreadsCount(categoryId, StatusConstants.APPROVED);
 
 				searchContainer.setTotal(total);
 
-				List results = MBThreadLocalServiceUtil.getThreads(categoryId, searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBThreadLocalServiceUtil.getThreads(categoryId, StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 
@@ -605,29 +605,29 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		List results = null;
 
 		if (tabs1.equals("my_posts")) {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
 		else if (tabs1.equals("my_subscriptions")) {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, true);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, true);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, true, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, true, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
 		else if (tabs1.equals("recent_posts")) {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, false, false);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, false, false);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, false, false, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, StatusConstants.APPROVED, false, false, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
@@ -775,7 +775,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
 				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(categoryDisplay.getAllCategoriesCount()) %><br />
-				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId)) %><br />
+				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId, StatusConstants.APPROVED)) %><br />
 				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersByGroupIdCount(scopeGroupId)) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>

@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.lar.LayoutImporter;
 import com.liferay.portal.lar.PortletExporter;
@@ -92,7 +93,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jorge Ferrer
  * @author Bruno Farache
  */
@@ -221,7 +222,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (PropsValues.LAYOUT_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
-				userId, user.getFullName(), Layout.class.getName(), plid);
+				userId, user.getFullName(), Layout.class.getName(), plid,
+				StatusConstants.APPROVED);
 		}
 
 		return layout;

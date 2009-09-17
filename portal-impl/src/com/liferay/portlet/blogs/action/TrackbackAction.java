@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -163,7 +164,7 @@ public class TrackbackAction extends PortletAction {
 
 		MBMessageDisplay messageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
-				userId, className, classPK);
+				userId, className, classPK, StatusConstants.APPROVED);
 
 		MBThread thread = messageDisplay.getThread();
 
@@ -175,7 +176,7 @@ public class TrackbackAction extends PortletAction {
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, blogName, className, classPK, threadId, parentMessageId,
-			title, body, serviceContext);
+			title, body, StatusConstants.APPROVED, serviceContext);
 
 		String entryURL =
 			PortalUtil.getLayoutFullURL(themeDisplay) +

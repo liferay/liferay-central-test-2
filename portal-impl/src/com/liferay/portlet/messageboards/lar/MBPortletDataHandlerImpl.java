@@ -666,14 +666,16 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
-						existingFiles, message.getPriority(), serviceContext);
+						existingFiles, message.getPriority(),
+						message.getStatus(), serviceContext);
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
 						message.getUuid(), userId, userName, categoryId,
 						threadId, parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
-						message.getPriority(), serviceContext);
+						message.getPriority(), message.getStatus(),
+						serviceContext);
 				}
 			}
 			else {
@@ -681,7 +683,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					userId, userName, categoryId, threadId, parentMessageId,
 					message.getSubject(), message.getBody(), files,
 					message.getAnonymous(), message.getPriority(),
-					serviceContext);
+					message.getStatus(), serviceContext);
 			}
 
 			threadPKs.put(message.getThreadId(), existingMessage.getThreadId());
