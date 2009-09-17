@@ -5,28 +5,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
-	<!-- Rules advice - uses the base serviceProxyAdvice  -->
+
+	<!-- Advice -->
+
 	<bean id="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" class="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" />
 
-	<!-- Rules Messaging -->
-	<bean id="destination.rules_engine"
-		  class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String"
-						 value="liferay/rules_engine"/>
-	</bean>
-
-	<bean id="messagingConfigurator.rules" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
-		<property name="destinations">
-			<list>
-				<ref bean="destination.rules_engine"/>
-			</list>
-		</property>
-		<property name="messageBus">
-			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
-		</property>
-	</bean>
-
-	<!-- Rules Engine Base Proxies-->
+	<!-- Proxy -->
 
 	<bean id="com.liferay.portal.bi.rules.BaseRulesEngineProxy" class="com.liferay.portal.bi.rules.BaseRulesEngineProxy">
 		<property name="singleDestinationSynchronousMessageSender">
@@ -43,7 +27,7 @@
 		</property>
 	</bean>
 
-	<!-- Rules Engine utils -->
+	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.bi.rules.RulesEngineUtil">
 		<property name="rulesEngine">
@@ -58,6 +42,22 @@
 				</property>
 				<property name="target" ref="com.liferay.portal.bi.rules.BaseRulesEngineProxy" />
 			</bean>
+		</property>
+	</bean>
+
+	<!-- Messaging -->
+
+	<bean id="destination.rules_engine" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String" value="liferay/rules_engine" />
+	</bean>
+	<bean id="messagingConfigurator.rules" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.rules_engine" />
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
 		</property>
 	</bean>
 </beans>

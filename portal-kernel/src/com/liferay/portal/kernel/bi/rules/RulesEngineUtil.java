@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,10 +32,11 @@ import java.util.List;
  * @author Michael C. Han
  */
 public class RulesEngineUtil {
-	
+
 	public static void add(
 			String domainName, ResourceRetriever resourceRetriever)
-			throws RulesEngineException {
+		throws RulesEngineException {
+
 		_rulesEngine.add(domainName, resourceRetriever);
 	}
 
@@ -50,19 +51,8 @@ public class RulesEngineUtil {
 			ResourceRetriever resourceRetriever, List<?> facts,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
+
 		_rulesEngine.execute(resourceRetriever, facts, classloaders);
-	}
-
-	public static void execute(String domainName, List<?> facts)
-			throws RulesEngineException {
-		_rulesEngine.execute(domainName, facts);
-	}
-
-	public static void execute(
-			String domainName, List<?> facts, ClassLoader... classloaders)
-		throws RulesEngineException {
-
-		_rulesEngine.execute(domainName, facts, classloaders);
 	}
 
 	public static List<?> execute(
@@ -78,7 +68,20 @@ public class RulesEngineUtil {
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(
-				resourceRetriever, facts, query, classloaders);
+			resourceRetriever, facts, query, classloaders);
+	}
+
+	public static void execute(String domainName, List<?> facts)
+		throws RulesEngineException {
+
+		_rulesEngine.execute(domainName, facts);
+	}
+
+	public static void execute(
+			String domainName, List<?> facts, ClassLoader... classloaders)
+		throws RulesEngineException {
+
+		_rulesEngine.execute(domainName, facts, classloaders);
 	}
 
 	public static List<?> execute(String domainName, List<?> facts, Query query)
@@ -91,7 +94,7 @@ public class RulesEngineUtil {
 			String domainName, List<?> facts, Query query,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
-		
+
 		return _rulesEngine.execute(domainName, facts, query, classloaders);
 	}
 
@@ -101,7 +104,8 @@ public class RulesEngineUtil {
 
 	public static void update(
 			String domainName, ResourceRetriever resourceRetriever)
-			throws RulesEngineException {
+		throws RulesEngineException {
+
 		_rulesEngine.update(domainName, resourceRetriever);
 	}
 
@@ -109,6 +113,6 @@ public class RulesEngineUtil {
 		_rulesEngine = rulesEngine;
 	}
 
-
 	private static RulesEngine _rulesEngine;
+
 }

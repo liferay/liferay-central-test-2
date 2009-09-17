@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,7 @@ import com.liferay.portal.messaging.proxy.BaseProxyAdvice;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="RulesEngineAdvice.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngineProxyAdvice.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
@@ -45,12 +45,11 @@ public class RulesEngineProxyAdvice extends BaseProxyAdvice {
 		}
 	}
 
-	protected ProxyRequest createServiceRequest(
-			MethodInvocation methodInvocation)
+	protected ProxyRequest createProxyRequest(MethodInvocation methodInvocation)
 		throws Exception {
 
 		return new MultiClassLoaderProxyRequest(
-				methodInvocation.getMethod(), methodInvocation.getArguments());
+			methodInvocation.getMethod(), methodInvocation.getArguments());
 	}
 
 }

@@ -20,56 +20,68 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bi.rules;
+package com.liferay.portal.bi.rules;
 
-import com.liferay.portal.kernel.messaging.proxy.ExecutingClassLoaders;
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.bi.rules.Query;
+import com.liferay.portal.kernel.bi.rules.RulesEngine;
+import com.liferay.portal.kernel.bi.rules.RulesEngineException;
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
 
 /**
- * <a href="RulesEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- * @author Vihang Pathak
  */
-public interface RulesEngine {
+public class RulesEngineImpl extends BaseProxyBean implements RulesEngine {
 
-	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void add(String domainName, ResourceRetriever resourceRetriever)
-		throws RulesEngineException;
+		throws RulesEngineException {
 
-	@MessagingProxy(mode = ProxyMode.ASYNC)
+		throw new UnsupportedOperationException();
+	}
+
 	public void execute(
 			ResourceRetriever resourceRetriever, List<?> facts,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
-		throws RulesEngineException;
+			ClassLoader... clientClassLoaders)
+		throws RulesEngineException {
 
-	@MessagingProxy(mode = ProxyMode.SYNC)
+		throw new UnsupportedOperationException();
+	}
+
 	public List<?> execute(
 			ResourceRetriever resourceRetriever, List<?> facts, Query query,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
-		throws RulesEngineException;
+			ClassLoader... clientClassLoaders)
+		throws RulesEngineException {
 
-	@MessagingProxy(mode = ProxyMode.ASYNC)
+		throw new UnsupportedOperationException();
+	}
+
 	public void execute(
-			String domainName, List<?> facts,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
-		throws RulesEngineException;
+			String domainName, List<?> facts, ClassLoader... clientClassLoaders)
+		throws RulesEngineException {
 
-	@MessagingProxy(mode = ProxyMode.SYNC)
+		throw new UnsupportedOperationException();
+	}
+
 	public List<?> execute(
 			String domainName, List<?> facts, Query query,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
-		throws RulesEngineException;
+			ClassLoader... clientClassLoaders)
+		throws RulesEngineException {
 
-	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void remove(String domainName) throws RulesEngineException;
+		throw new UnsupportedOperationException();
+	}
 
-	@MessagingProxy(mode = ProxyMode.SYNC)
+	public void remove(String domainName) throws RulesEngineException {
+		throw new UnsupportedOperationException();
+	}
+
 	public void update(String domainName, ResourceRetriever resourceRetriever)
-		throws RulesEngineException;
+		throws RulesEngineException {
+
+		throw new UnsupportedOperationException();
+	}
 
 }
