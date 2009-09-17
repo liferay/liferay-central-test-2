@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.scheduler.Scheduler;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -56,6 +58,7 @@ import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.scheduler.SchedulerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
@@ -1053,6 +1056,39 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setSchedulerClass(GetterUtil.getString(
 					portlet.elementText("scheduler-class"),
 					portletModel.getSchedulerClass()));
+				Iterator<Element> schedulerElementIterator =
+					portlet.elementIterator("scheduler");
+				while (schedulerElementIterator.hasNext()){
+					Element schedulerElement=schedulerElementIterator.next();
+					Scheduler scheduler = new SchedulerImpl();
+					//Description
+					scheduler.setDescription(GetterUtil.getString(
+						schedulerElement.elementText("scheduler-description"),
+						StringPool.BLANK));
+					//Messaging
+					scheduler.setListenerClass(GetterUtil.getString(
+						schedulerElement.elementText(
+							"scheduler-listener-class"),
+						scheduler.getListenerClass()));
+					//Trigger
+					Element triggerElement =
+						schedulerElement.element("trigger");
+					//DTD ensures there is one and only one child
+					Element realTriggerElement =
+						triggerElement.elementIterator().next();
+					scheduler.setTriggerType(
+						TriggerType.valueOf(
+							realTriggerElement.getName().toUpperCase()));
+					//DTD ensures there is one and only one child
+					Element triggerValueElement =
+						realTriggerElement.elementIterator().next();
+					scheduler.setReadProperty(
+						triggerValueElement.getName().equals("property-key"));
+					scheduler.setTriggerValue(
+						triggerValueElement.getTextTrim());
+
+					portletModel.addScheduler(scheduler);
+				}
 				portletModel.setPortletURLClass(GetterUtil.getString(
 					portlet.elementText("portlet-url-class"),
 					portletModel.getPortletURLClass()));

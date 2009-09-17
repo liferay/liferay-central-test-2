@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
@@ -31,9 +32,12 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -312,6 +316,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
+			//TODO: remove this piece of code when we finish the migration
 			if (PropsValues.SCHEDULER_ENABLED) {
 				for (String className : PropsValues.SCHEDULER_CLASSES) {
 					Scheduler scheduler = (Scheduler)InstancePool.get(
@@ -335,6 +340,55 @@ public class MainServlet extends ActionServlet {
 						className);
 
 					scheduler.schedule();
+				}
+			}
+
+			if (PropsValues.SCHEDULER_ENABLED) {
+
+				Iterator<Portlet> itr = portlets.iterator();
+
+				while (itr.hasNext()) {
+					Portlet portlet = itr.next();
+
+					if (!portlet.isActive()) {
+						continue;
+					}
+
+					List<com.liferay.portal.kernel.scheduler.Scheduler> schedulerList =
+						portlet.getSchedulers();
+
+					if (schedulerList != null && schedulerList.size() > 0){
+						for(com.liferay.portal.kernel.scheduler.Scheduler schedulerNew : schedulerList){
+							try{
+								com.liferay.portal.kernel.messaging.MessageListener
+									schedulerListener =
+										schedulerNew.getListener();
+								if (schedulerListener==null){
+									throw new SystemException(
+										"Unable to create scheduler listener " +
+										"from class:" +
+										schedulerNew.getListenerClass());
+								}
+
+								MessageBusUtil.registerMessageListener(
+									DestinationNames.SCHEDULER_DISPATCH,
+									schedulerListener);
+								SchedulerEngineUtil.schedule(
+									schedulerNew.getTrigger(),
+									schedulerNew.getDescription(),
+									DestinationNames.SCHEDULER_DISPATCH, null);
+
+							}catch(Exception ex){
+								if (_log.isErrorEnabled()){
+									_log.error(
+										"Failed to create scheduler for " +
+										"portlet:" + portlet.getPortletName(),
+										ex);
+								}
+								continue;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -880,6 +934,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
+			//TODO: remove this piece of code when we finish the migration
 			if (PropsValues.SCHEDULER_ENABLED) {
 				for (String className : PropsValues.SCHEDULER_CLASSES) {
 					Scheduler scheduler = (Scheduler)InstancePool.get(
@@ -906,6 +961,52 @@ public class MainServlet extends ActionServlet {
 
 					if (scheduler != null) {
 						scheduler.unschedule();
+					}
+				}
+			}
+			if (PropsValues.SCHEDULER_ENABLED) {
+
+				Iterator<Portlet> itr = portlets.iterator();
+
+				while (itr.hasNext()) {
+					Portlet portlet = itr.next();
+
+					if (!portlet.isActive()) {
+						continue;
+					}
+
+					List<com.liferay.portal.kernel.scheduler.Scheduler> schedulerList =
+						portlet.getSchedulers();
+
+					if (schedulerList != null && schedulerList.size() > 0){
+						for(com.liferay.portal.kernel.scheduler.Scheduler schedulerNew : schedulerList){
+							try{
+								com.liferay.portal.kernel.messaging.MessageListener
+									schedulerListener =
+										schedulerNew.getListener();
+								if (schedulerListener==null){
+									throw new SystemException(
+										"Unable to create scheduler listener " +
+										"from class:" +
+										schedulerNew.getListenerClass());
+								}
+
+								MessageBusUtil.unregisterMessageListener(
+									DestinationNames.SCHEDULER_DISPATCH,
+									schedulerListener);
+								SchedulerEngineUtil.unschedule(
+									schedulerNew.getTrigger());
+
+							}catch(Exception ex){
+								if (_log.isErrorEnabled()){
+									_log.error(
+										"Failed to remove scheduler for " +
+										"portlet:" + portlet.getPortletName(),
+										ex);
+								}
+								continue;
+							}
+						}
 					}
 				}
 			}
