@@ -60,7 +60,7 @@ String jPassword = (String)session.getAttribute("j_password");
 				</form>
 
 				<font face="Verdana, Tahoma, Arial" size="3">
-				<strong><liferay-ui:message key="processing-login" />
+				<strong><liferay-ui:message key="processing-login" /></strong>
 				</font><br /><br />
 
 				<script type="text/javascript">
