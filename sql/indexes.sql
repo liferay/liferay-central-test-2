@@ -173,6 +173,7 @@ create index IX_CA9AFB7C on ExpandoValue (tableId, columnId);
 create unique index IX_D27B03E7 on ExpandoValue (tableId, columnId, classPK);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
+create index IX_ABA5CEC2 on Group_ (companyId);
 create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create unique index IX_5DE0BE11 on Group_ (companyId, classNameId, liveGroupId, name);
 create unique index IX_5BDDB872 on Group_ (companyId, friendlyURL);

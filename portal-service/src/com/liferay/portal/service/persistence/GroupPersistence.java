@@ -88,6 +88,34 @@ public interface GroupPersistence extends BasePersistence {
 	public com.liferay.portal.model.Group fetchByPrimaryKey(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Group> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Group> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group findByCompanyId_Last(long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group[] findByCompanyId_PrevAndNext(
+		long groupId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.SystemException;
@@ -207,6 +235,9 @@ public interface GroupPersistence extends BasePersistence {
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.SystemException;
@@ -237,6 +268,9 @@ public interface GroupPersistence extends BasePersistence {
 			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.SystemException;
