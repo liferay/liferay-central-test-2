@@ -74,18 +74,9 @@ public class ShoppingItemPermission {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (item.getCategoryId() ==
+			if (item.getCategoryId() !=
 					ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
-				long groupId = item.getGroupId();
-
-				if (!ShoppingPermission.contains(
-						permissionChecker, groupId, ActionKeys.VIEW)) {
-
-					return false;
-				}
-			}
-			else {
 				ShoppingCategory category = item.getCategory();
 
 				if (!ShoppingCategoryPermission.contains(
