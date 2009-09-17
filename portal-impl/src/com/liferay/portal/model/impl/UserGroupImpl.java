@@ -36,8 +36,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
  */
 public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 
-	public static final long DEFAULT_PARENT_USER_GROUP_ID = 0;
-
 	public UserGroupImpl() {
 	}
 
