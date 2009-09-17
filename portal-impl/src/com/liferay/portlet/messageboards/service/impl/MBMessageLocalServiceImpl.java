@@ -936,7 +936,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public int getDiscussionMessagesCount(
-		long classNameId, long classPK, int status)
+			long classNameId, long classPK, int status)
 		throws SystemException {
 
 		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
@@ -974,7 +974,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List<MBMessage> getGroupMessages(
-		long groupId, int status, int start, int end)
+			long groupId, int status, int start, int end)
 		throws SystemException {
 
 		if (status == StatusConstants.ANY) {
@@ -1172,7 +1172,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				threadId, start, end);
 		}
 		else {
-			return mbMessagePersistence.findByT_R_S(
+			return mbMessagePersistence.findByTR_S(
 				threadId, status, start, end);
 		}
 	}
@@ -1595,7 +1595,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		if ((status != StatusConstants.APPROVED) &&
-			oldStatus == StatusConstants.APPROVED) {
+			(oldStatus == StatusConstants.APPROVED)) {
 
 			assetEntryLocalService.updateVisible(
 				MBMessage.class.getName(), message.getMessageId(), false);

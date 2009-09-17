@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -46,17 +48,11 @@ import java.util.List;
 public class MBThreadFinderImpl
 	extends BasePersistenceImpl implements MBThreadFinder {
 
-	public static String COUNT_BY_S_G_U =
-		MBThreadFinder.class.getName() + ".countByS_G_U";
+	public static String COUNT_BY_S_G_U_S =
+		MBThreadFinder.class.getName() + ".countByS_G_U_S";
 
-	public static String COUNT_BY_S_G_S_U =
-		MBThreadFinder.class.getName() + ".countByS_G_S_U";
-
-	public static String FIND_BY_S_G_U =
-		MBThreadFinder.class.getName() + ".findByS_G_U";
-
-	public static String FIND_BY_S_G_S_U =
-		MBThreadFinder.class.getName() + ".findByS_G_S_U";
+	public static String FIND_BY_S_G_U_S =
+		MBThreadFinder.class.getName() + ".findByS_G_U_S";
 
 	public int countByS_G_U_S(long groupId, long userId, int status)
 		throws SystemException {
@@ -66,13 +62,14 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(COUNT_BY_S_G_U_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(COUNT_BY_S_G_U);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_BY_S_G_S_U);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -119,13 +116,14 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(FIND_BY_S_G_U_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(FIND_BY_S_G_U);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(
+					sql, "[$STATUS$]", "AND (MBThread.status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_BY_S_G_S_U);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

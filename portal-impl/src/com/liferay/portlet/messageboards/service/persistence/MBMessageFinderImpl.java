@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -45,14 +47,8 @@ import java.util.List;
 public class MBMessageFinderImpl
 	extends BasePersistenceImpl implements MBMessageFinder {
 
-	public static String COUNT_BY_G_U =
-		MBMessageFinder.class.getName() + ".countByG_U";
-
 	public static String COUNT_BY_G_U_S =
 		MBMessageFinder.class.getName() + ".countByG_U_S";
-
-	public static String COUNT_BY_G_U_A =
-		MBMessageFinder.class.getName() + ".countByG_U_A";
 
 	public static String COUNT_BY_G_U_A_S =
 		MBMessageFinder.class.getName() + ".countByG_U_A_S";
@@ -60,14 +56,8 @@ public class MBMessageFinderImpl
 	public static String FIND_BY_NO_ASSETS =
 		MBMessageFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_G_U =
-		MBMessageFinder.class.getName() + ".findByG_U";
-
 	public static String FIND_BY_G_U_S =
 		MBMessageFinder.class.getName() + ".findByG_U_S";
-
-	public static String FIND_BY_G_U_A =
-		MBMessageFinder.class.getName() + ".findByG_U_A";
 
 	public static String FIND_BY_G_U_A_S =
 		MBMessageFinder.class.getName() + ".findByG_U_A_S";
@@ -80,13 +70,13 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(COUNT_BY_G_U);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_BY_G_U_S);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -131,13 +121,13 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(COUNT_BY_G_U_A);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -205,13 +195,13 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(FIND_BY_G_U);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_BY_G_U_S);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -247,13 +237,13 @@ public class MBMessageFinderImpl
 		try {
 			session = openSession();
 
-			String sql = null;
+			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
 
-			if (status == StatusConstants.ANY) {
-				sql = CustomSQLUtil.get(FIND_BY_G_U_A);
+			if (status != StatusConstants.ANY) {
+				sql = StringUtil.replace(sql, "[$STATUS$]", "AND (status = ?)");
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
+				sql = StringUtil.replace(sql, "[$STATUS$]", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
