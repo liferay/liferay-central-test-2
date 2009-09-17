@@ -62,12 +62,12 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, LiferayPortletResponse liferayPortletResponse, String[] allAssetTagNames, String className) throws Exception {
+public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, String className) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(className);
 
-	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest, liferayPortletResponse);
+	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest, portletResponse);
 
 	if (addPortletURL != null) {
 		addPortletURL.setWindowState(WindowState.MAXIMIZED);
@@ -89,13 +89,13 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, LiferayPortletRe
 	return addPortletURL;
 }
 
-public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, LiferayPortletResponse liferayPortletResponse, String[] allAssetTagNames, long[] classNameIds) throws Exception {
+public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, long[] classNameIds) throws Exception {
 	Map<String, PortletURL> addPortletURLs = new HashMap<String, PortletURL>();
 
 	for (long classNameId : classNameIds) {
 		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, liferayPortletResponse, allAssetTagNames, className.getValue());
+		PortletURL addPortletURL = getAddPortletURL(renderRequest, portletResponse, allAssetTagNames, className.getValue());
 
 		if (addPortletURL != null) {
 			addPortletURLs.put(className.getValue(), addPortletURL);
