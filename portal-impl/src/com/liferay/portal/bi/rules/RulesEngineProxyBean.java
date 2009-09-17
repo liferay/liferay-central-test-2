@@ -31,11 +31,11 @@ import com.liferay.portal.kernel.resource.ResourceRetriever;
 import java.util.List;
 
 /**
- * <a href="RulesEngineImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="RulesEngineProxyBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  */
-public class RulesEngineImpl extends BaseProxyBean implements RulesEngine {
+public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 
 	public void add(String domainName, ResourceRetriever resourceRetriever)
 		throws RulesEngineException {
