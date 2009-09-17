@@ -170,13 +170,13 @@ public class RatingsEntryLocalServiceImpl
 			BlogsEntry blogsEntry = blogsEntryPersistence.findByPrimaryKey(
 				classPK);
 
-			BlogsStatsUser blogsStasUser =
+			BlogsStatsUser blogsStatsUser =
 				blogsStatsUserLocalService.getStatsUser(
 					blogsEntry.getGroupId(), blogsEntry.getUserId());
 
-			int ratingsTotalEntries = blogsStasUser.getRatingsTotalEntries();
-			double ratingsTotalScore = blogsStasUser.getRatingsTotalScore();
-			double ratingsAverageScore = blogsStasUser.getRatingsAverageScore();
+			int ratingsTotalEntries = blogsStatsUser.getRatingsTotalEntries();
+			double ratingsTotalScore = blogsStatsUser.getRatingsTotalScore();
+			double ratingsAverageScore = blogsStatsUser.getRatingsAverageScore();
 
 			if (newEntry) {
 				ratingsTotalEntries++;
@@ -188,11 +188,11 @@ public class RatingsEntryLocalServiceImpl
 
 			ratingsAverageScore = ratingsTotalScore / ratingsTotalEntries;
 
-			blogsStasUser.setRatingsTotalEntries(ratingsTotalEntries);
-			blogsStasUser.setRatingsTotalScore(ratingsTotalScore);
-			blogsStasUser.setRatingsAverageScore(ratingsAverageScore);
+			blogsStatsUser.setRatingsTotalEntries(ratingsTotalEntries);
+			blogsStatsUser.setRatingsTotalScore(ratingsTotalScore);
+			blogsStatsUser.setRatingsAverageScore(ratingsAverageScore);
 
-			blogsStatsUserPersistence.update(blogsStasUser, false);
+			blogsStatsUserPersistence.update(blogsStatsUser, false);
 		}
 
 		return entry;
