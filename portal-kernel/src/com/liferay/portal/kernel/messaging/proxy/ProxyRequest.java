@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.messaging.proxy;
 
 import java.io.Serializable;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -39,6 +38,16 @@ public class ProxyRequest implements Serializable {
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
 		_method = method;
 		_arguments = arguments;
+
+		MessagingProxy messagingProxy = _method.getAnnotation(
+				MessagingProxy.class);
+		if (messagingProxy == null) {
+			messagingProxy =
+				_method.getDeclaringClass().getAnnotation(MessagingProxy.class);
+		}
+		
+		_synchronous = ((messagingProxy != null) &&
+				(messagingProxy.mode().equals(ProxyMode.SYNC)));
 	}
 
 	public Object[] getArguments() {
@@ -67,7 +76,12 @@ public class ProxyRequest implements Serializable {
 		}
 	}
 
+	public boolean isSynchronous() {
+		return _synchronous;
+	}
+
 	private Object[] _arguments;
 	private Method _method;
-
+	private boolean _synchronous;
+	
 }

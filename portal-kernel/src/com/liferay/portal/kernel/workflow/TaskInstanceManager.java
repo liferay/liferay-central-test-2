@@ -22,12 +22,13 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.messaging.proxy.AsynchronousProxy;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
 import java.util.List;
 import java.util.Map;
 
-@AsynchronousProxy
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="TaskInstanceManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -75,7 +76,7 @@ public interface TaskInstanceManager {
 	 *		   information)
 	 * @return the task information reflecting the changes made to it
 	 * @throws WorkflowException is thrown, if the user could not be assigned
-	 */
+	 */	
 	public TaskInstanceInfo assignTaskInstanceToRole(
 			long taskInstanceId, long roleId, String comment,
 			Map<String, Object> attributes, @CallingUserId long callingUserId)

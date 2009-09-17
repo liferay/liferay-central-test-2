@@ -22,14 +22,11 @@
 
 package com.liferay.portal.messaging.proxy;
 
-import com.liferay.portal.kernel.messaging.proxy.AsynchronousProxy;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 import com.liferay.portal.kernel.messaging.proxy.ProxyResponse;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
-
-import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -60,17 +57,7 @@ public class BaseProxyAdvice implements MethodInterceptor {
 
 		BaseProxyBean baseProxyBean = (BaseProxyBean)methodInvocation.getThis();
 
-		Method method = methodInvocation.getMethod();
-
-		AsynchronousProxy asynchronousProxy = method.getAnnotation(
-			AsynchronousProxy.class);
-
-		if (asynchronousProxy == null) {
-			asynchronousProxy = method.getClass().getAnnotation(
-				AsynchronousProxy.class);
-		}
-
-		if (asynchronousProxy != null) {
+		if (!proxyRequest.isSynchronous()) {
 			doInvokeAsynchronous(proxyRequest, baseProxyBean);
 
 			return null;

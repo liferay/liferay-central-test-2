@@ -22,11 +22,12 @@
 
 package com.liferay.portal.kernel.workflow;
 
-import com.liferay.portal.kernel.messaging.proxy.AsynchronousProxy;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 
 import java.util.List;
 
-@AsynchronousProxy
+@MessagingProxy(mode = ProxyMode.SYNC)
 /**
  * <a href="WorkflowDefinitionManager.java.html"><b><i>View Source</i></b></a>
  *
@@ -70,7 +71,7 @@ public interface WorkflowDefinitionManager {
 	 *
 	 * @param  workflowDefinition the workflow definition to be deployed
 	 * @param  callingUserId the id of the user deploying the workflow
-	 *		   definition (see {@link WorkflowUtil#createUserCredential(long)}
+	 *		   definition (see {@link UserCredentialFactoryUtil#createCredential(long)}
 	 *		   for more information)
 	 * @throws WorkflowException is thrown, if deployment of the definition
 	 *		   failed
