@@ -31,7 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="TaskInstanceManagerProxyBean.java.html"><b><i>View Source</i></b></a>
+ * <a href="TaskInstanceManagerProxyBean.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Micha Kiener
  */
