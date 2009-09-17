@@ -46,7 +46,9 @@
 							{
 								bodyContent: A.get('.add-tag-layer'),
 								trigger: '.add-tag-button',
-								align: { points: [ 'tr', 'br' ] }
+								align: {
+									points: ['tr', 'br']
+								}
 							}
 						)
 						.render();

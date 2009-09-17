@@ -51,7 +51,9 @@
 							{
 								bodyContent: A.get('.add-category-layer'),
 								trigger: '.add-category-button',
-								align: { points: [ 'tr', 'br' ] }
+								align: {
+									points: ['tr', 'br']
+								}
 							}
 						)
 						.render();
@@ -60,7 +62,9 @@
 							{
 								bodyContent: A.get('.add-vocabulary-layer'),
 								trigger: '.add-vocabulary-button',
-								align: { points: [ 'tr', 'br' ] }
+								align: {
+									points: ['tr', 'br']
+								}
 							}
 						)
 						.render();

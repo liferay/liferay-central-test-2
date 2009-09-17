@@ -223,7 +223,9 @@
 						instance.editContainerContextPanel = new A.ContextPanel(
 							{
 								bodyContent: wrapper,
-								align: { points: [ 'rc', 'lc' ] },
+								align: {
+									points: ['rc', 'lc']
+								},
 								trigger: 'input.edit-button'
 							}
 						)
