@@ -24,7 +24,6 @@ package com.liferay.portal.scripting;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.scripting.Scripting;
-import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.Map;
@@ -48,22 +47,20 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
-	public void clearCache(String language) throws ScriptingException {
+	public void clearCache(String language) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Map<String, Object> eval(
-			Set<String> allowedClasses, Map<String, Object> inputObjects,
-			Set<String> outputNames, String language, String script)
-		throws ScriptingException {
+		Set<String> allowedClasses, Map<String, Object> inputObjects,
+		Set<String> outputNames, String language, String script) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void exec(
-			Set<String> allowedClasses, Map<String, Object> inputObjects,
-			String language, String script)
-		throws ScriptingException {
+		Set<String> allowedClasses, Map<String, Object> inputObjects,
+		String language, String script) {
 
 		throw new UnsupportedOperationException();
 	}
