@@ -76,20 +76,9 @@ public class BookmarksEntryPermission {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (entry.getFolderId() ==
+			if (entry.getFolderId() !=
 					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				long groupId = entry.getGroupId();
-
-				if (!BookmarksPermission.contains(
-						permissionChecker, groupId, ActionKeys.ACCESS) &&
-					!BookmarksPermission.contains(
-						permissionChecker, groupId, ActionKeys.VIEW)) {
-
-					return false;
-				}
-			}
-			else {
 				BookmarksFolder folder = entry.getFolder();
 
 				if (!BookmarksFolderPermission.contains(
