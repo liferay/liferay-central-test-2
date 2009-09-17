@@ -27,8 +27,15 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletContextImpl;
+
+import javax.portlet.PortletConfig;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -60,6 +67,25 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 					theme);
 			}
 			else {
+				if (_portletId != null) {
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)request.getAttribute(
+							WebKeys.THEME_DISPLAY);
+
+					Portlet portlet = PortletLocalServiceUtil.getPortletById(
+						themeDisplay.getCompanyId(), _portletId);
+
+					if (isWAR(portlet)) {
+						PortletConfig portletConfig =
+							PortletConfigFactory.create(
+								portlet, servletContext);
+						PortletContextImpl portletContext = (PortletContextImpl)
+							portletConfig.getPortletContext();
+
+						servletContext = portletContext.getServletContext();
+					}
+				}
+
 				RequestDispatcher requestDispatcher =
 					servletContext.getRequestDispatcher(page);
 
@@ -111,6 +137,10 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		_page = page;
 	}
 
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
 	public ServletContext getServletContext() {
 		if (_servletContext != null) {
 			return _servletContext;
@@ -128,9 +158,17 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		return null;
 	}
 
+	protected boolean isWAR(Portlet portlet) {
+		if (portlet == null || !portlet.getPortletApp().isWARFile()) {
+			return false;
+		}
+		return true;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private String _page;
+	private String _portletId;
 	private ServletContext _servletContext;
 
 }
