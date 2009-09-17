@@ -28,7 +28,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -80,9 +79,8 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_IMAGE)) {
 
-			addAssetURL = new PortletURLImpl(
-				portletRequestImpl, PortletKeys.IMAGE_GALLERY,
-				themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+			addAssetURL = portletResponse.createRenderURL(
+				PortletKeys.IMAGE_GALLERY);
 
 			addAssetURL.setParameter(
 				"struts_action", "/image_gallery/edit_image");
@@ -92,7 +90,7 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 				"folderId",
 				String.valueOf(
 					AssetPublisherUtil.getRecentFolderId(
-						portletRequest, IGImage.class.getName())));
+						portletRequest, CLASS_NAME)));
 			addAssetURL.setParameter("uploader", "classic");
 		}
 

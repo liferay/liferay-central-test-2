@@ -29,7 +29,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.permission.IGPermission;
@@ -108,9 +107,8 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletURL viewPortletURL = new PortletURLImpl(
-			portletRequestImpl, PortletKeys.IMAGE_GALLERY,
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+		PortletURL viewPortletURL = portletResponse.createRenderURL(
+				PortletKeys.IMAGE_GALLERY);
 
 		viewPortletURL.setWindowState(WindowState.MAXIMIZED);
 

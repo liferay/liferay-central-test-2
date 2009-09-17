@@ -90,9 +90,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			addAssetURL = new PortletURLImpl(
-				portletRequestImpl, PortletKeys.BLOGS, themeDisplay.getPlid(),
-				PortletRequest.RENDER_PHASE);
+			addAssetURL = portletResponse.createRenderURL(PortletKeys.BLOGS);
 
 			addAssetURL.setParameter("struts_action", "/blogs/edit_entry");
 		}
