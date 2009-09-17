@@ -390,7 +390,7 @@ public class MBUtil {
 		String defaultMailingListAddress) {
 
 		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
-			String mailingListAddress = defaultMailingListAddress
+			String mailingListAddress = defaultMailingListAddress;
 
 			try {
 				MBMailingList mailingList =
