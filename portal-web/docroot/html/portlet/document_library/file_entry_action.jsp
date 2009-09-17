@@ -73,13 +73,13 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 <liferay-ui:icon-menu showExpanded="<%= view %>">
 	<c:choose>
 		<c:when test="<%= fileEntry != null %>">
-			<liferay-ui:icon
-				image='download'
-				url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
-				message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
-			/>
-
 			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+				<liferay-ui:icon
+					image='download'
+					url='<%= themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId()  + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(fileEntry.getName()) %>'
+					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
+				/>
+
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
