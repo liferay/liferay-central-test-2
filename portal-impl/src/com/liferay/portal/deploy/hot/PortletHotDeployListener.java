@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -33,8 +32,6 @@ import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
@@ -42,7 +39,6 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -176,42 +172,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		//TODO: remove the old scheduler setup, when we finish the migration
 		Scheduler scheduler = portlet.getSchedulerInstance();
 
 		if (scheduler != null) {
 			scheduler.unschedule();
-		}
-
-		List<com.liferay.portal.kernel.scheduler.Scheduler> schedulerList =
-			portlet.getSchedulers();
-
-		if (schedulerList != null && schedulerList.size() > 0) {
-			for (com.liferay.portal.kernel.scheduler.Scheduler schedulerNew : schedulerList) {
-				try {
-					com.liferay.portal.kernel.messaging.MessageListener schedulerListener =
-						schedulerNew.getListener();
-					if (schedulerListener == null) {
-						throw new SystemException(
-							"Unable to create scheduler listener " +
-							"from class:" +
-							schedulerNew.getListenerClass());
-					}
-
-					MessageBusUtil.unregisterMessageListener(
-						DestinationNames.SCHEDULER_DISPATCH, schedulerListener);
-					SchedulerEngineUtil.unschedule(schedulerNew.getTrigger());
-				}
-				catch (Exception ex) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Failed to remove scheduler for " +
-							"portlet:" + portlet.getPortletName(),
-							ex);
-					}
-					continue;
-				}
-			}
 		}
 
 		PollerProcessorUtil.deletePollerProcessor(portlet.getPortletId());
@@ -532,7 +496,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getOpenSearchClass()).newInstance();
 		}
 
-		//TODO: remove the old scheduler setup, when we finish the migration
 		Scheduler schedulerInstance = null;
 
 		if (PropsValues.SCHEDULER_ENABLED &&
@@ -542,42 +505,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portlet.getSchedulerClass()).newInstance();
 
 			schedulerInstance.schedule();
-		}
-
-		if (PropsValues.SCHEDULER_ENABLED){
-			List<com.liferay.portal.kernel.scheduler.Scheduler> schedulerList =
-				portlet.getSchedulers();
-
-			if (schedulerList != null && schedulerList.size() > 0) {
-				for (com.liferay.portal.kernel.scheduler.Scheduler scheduler : schedulerList) {
-					try {
-						com.liferay.portal.kernel.messaging.MessageListener schedulerListener =
-							scheduler.getListener();
-						if (schedulerListener == null) {
-							throw new SystemException(
-								"Unable to create scheduler listener " +
-								"from class:" + scheduler.getListenerClass());
-						}
-
-						MessageBusUtil.registerMessageListener(
-							DestinationNames.SCHEDULER_DISPATCH,
-							schedulerListener);
-						SchedulerEngineUtil.schedule(
-							scheduler.getTrigger(),
-							scheduler.getDescription(),
-							DestinationNames.SCHEDULER_DISPATCH, null);
-
-					}
-					catch (Exception ex) {
-						if (_log.isErrorEnabled()) {
-							_log.error(
-								"Failed to create scheduler for portlet:" +
-								portlet.getPortletName(), ex);
-						}
-						continue;
-					}
-				}
-			}
 		}
 
 		FriendlyURLMapper friendlyURLMapperInstance = null;

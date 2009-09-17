@@ -61,10 +61,6 @@ public class MessageSenderJob implements Job {
 
 			message.put("scheduledFireTime", scheduledFireTime);
 
-			if (jobExecutionContext.getNextFireTime() == null) {
-				message.put(SchedulerEngine.POISON_MESSAGE, true);
-			}
-
 			MessageBusUtil.sendMessage(destination, message);
 		}
 		catch (Exception e) {

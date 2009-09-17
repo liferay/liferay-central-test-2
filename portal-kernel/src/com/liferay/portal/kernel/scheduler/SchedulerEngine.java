@@ -42,8 +42,6 @@ public interface SchedulerEngine {
 
 	public static final String MESSAGE = "message";
 
-	public static final String POISON_MESSAGE = "poison_message";
-
 	public static final String RECEIVER_KEY = "receiver_key";
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
