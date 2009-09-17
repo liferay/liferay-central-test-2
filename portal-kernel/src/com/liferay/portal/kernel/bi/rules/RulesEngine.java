@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.kernel.messaging.proxy.ExecutingClassLoaders;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
@@ -34,24 +37,38 @@ import java.util.List;
  */
 public interface RulesEngine {
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void add(String domainName, ResourceRetriever resourceRetriever)
 		throws RulesEngineException;
 
-	public void execute(ResourceRetriever resourceRetriever, List<?> facts)
+	@MessagingProxy(mode = ProxyMode.ASYNC)
+	public void execute(
+			ResourceRetriever resourceRetriever, List<?> facts,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
-	public void execute(String domainName, List<?> facts)
+	@MessagingProxy(mode = ProxyMode.ASYNC)
+	public void execute(
+			String domainName, List<?> facts,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 	throws RulesEngineException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query)
+			ResourceRetriever resourceRetriever, List<?> facts, Query query,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
-	public List<?> execute(String domainName, List<?> facts, Query query)
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public List<?> execute(
+			String domainName, List<?> facts, Query query,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void remove(String domainName) throws RulesEngineException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void update(String domainName, ResourceRetriever resourceRetriever)
 		throws RulesEngineException;
 

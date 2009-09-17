@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+>
+	<!-- Rules advice - uses the base serviceProxyAdvice  -->
+	<bean id="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" class="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" />
+
+	<!-- Rules Messaging -->
+	<bean id="destination.rules_engine"
+		  class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg index="0" type="java.lang.String"
+						 value="liferay/rules_engine"/>
+	</bean>
+
+	<bean id="messagingConfigurator.rules" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
+		<property name="destinations">
+			<list>
+				<ref bean="destination.rules_engine"/>
+			</list>
+		</property>
+		<property name="messageBus">
+			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+	</bean>
+
+	<!-- Rules Engine Base Proxies-->
+
+	<bean id="com.liferay.portal.bi.rules.BaseRulesEngineProxy" class="com.liferay.portal.bi.rules.BaseRulesEngineProxy">
+		<property name="singleDestinationSynchronousMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<constructor-arg index="0" value="liferay/rules_engine" />
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+			</bean>
+		</property>
+		<property name="singleDestinationMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
+				<constructor-arg index="0" value="liferay/rules_engine" />
+				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Rules Engine utils -->
+
+	<bean class="com.liferay.portal.kernel.bi.rules.RulesEngineUtil">
+		<property name="rulesEngine">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="interceptorNames">
+					<list>
+						<value>com.liferay.portal.bi.rules.RulesEngineProxyAdvice</value>
+					</list>
+				</property>
+				<property name="proxyInterfaces">
+					<value>com.liferay.portal.kernel.bi.rules.RulesEngine</value>
+				</property>
+				<property name="target" ref="com.liferay.portal.bi.rules.BaseRulesEngineProxy" />
+			</bean>
+		</property>
+	</bean>
+</beans>
