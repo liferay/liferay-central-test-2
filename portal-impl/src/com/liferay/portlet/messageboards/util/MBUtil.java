@@ -49,9 +49,11 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.mail.JavaMailUtil;
 
@@ -390,14 +392,18 @@ public class MBUtil {
 		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
 			String mailingListAddress;
 
-		    try {
-			MBMailingList mbMailingList =
-				MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
-			mailingListAddress = mbMailingList.getEmailAddress();
-		    } catch (Exception e) {
-			mailingListAddress = defaultMailingListAddress;
-		    }
-		    return mailingListAddress;
+			try {
+				MBMailingList mailingList =
+					MBMailingListLocalServiceUtil.getCategoryMailingList(
+						categoryId);
+
+				mailingListAddress = mailingList.getEmailAddress();
+			}
+			catch (Exception e) {
+				mailingListAddress = defaultMailingListAddress;
+			}
+
+			return mailingListAddress;
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -466,15 +472,16 @@ public class MBUtil {
 		String[] references = message.getHeader("References");
 
 		if ((references != null) && (references.length > 0)) {
-                    int beginIndex = references[0].indexOf("<mb.");
-                    int endIndex;
-                    if (beginIndex > -1) {
-                        endIndex = references[0].indexOf(">", beginIndex);
-                        parentHeader = references[0].substring(
-                            beginIndex,
-                            endIndex);
-                    }
-                }
+			String reference = references[0];
+
+			int x = reference.indexOf("<mb.");
+
+			if (x > -1) {
+				int y = reference.indexOf(">", x);
+
+				parentHeader = reference.substring(x, y);
+			}
+		}
 
 		if (parentHeader == null) {
 			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
@@ -642,12 +649,12 @@ public class MBUtil {
 		}
 
 		for (String messageId : messageIds) {
-                    if (Validator.isNotNull(PropsValues.POP_SERVER_SUBDOMAIN)) {
-                        if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
-                            return true;
-                        }
-                    }
-                }
+			if (Validator.isNotNull(PropsValues.POP_SERVER_SUBDOMAIN) &&
+				messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
+
+				return true;
+			}
+		}
 
 		return false;
 	}
