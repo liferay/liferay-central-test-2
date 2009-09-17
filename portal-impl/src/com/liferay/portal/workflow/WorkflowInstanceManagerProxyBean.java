@@ -31,11 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="WorkflowInstanceManagerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceManagerProxyBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class WorkflowInstanceManagerImpl
+public class WorkflowInstanceManagerProxyBean
 	extends BaseProxyBean implements WorkflowInstanceManager {
 
 	public WorkflowInstanceInfo addContextInformation(

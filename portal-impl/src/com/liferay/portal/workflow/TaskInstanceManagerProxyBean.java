@@ -31,11 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="TaskInstanceManagerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="TaskInstanceManagerProxyBean.java.html"><b><i>View Source</i></b></a>
  *
  * @author Micha Kiener
  */
-public class TaskInstanceManagerImpl
+public class TaskInstanceManagerProxyBean
 	extends BaseProxyBean implements TaskInstanceManager {
 
 	public TaskInstanceInfo assignTaskInstanceToRole(
