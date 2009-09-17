@@ -106,6 +106,7 @@ import javax.portlet.WindowState;
  * @author Raymond Aug�
  * @author Bruno Farache
  * @author Julio Camarero
+ * @author Wesley Gong
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
@@ -762,6 +763,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		validateTitle(newTitle);
 
 		// Check if the new title already exists
+
+		if (Validator.equals(title, newTitle)) {
+			throw new DuplicatePageException(newTitle);
+		}
 
 		if (isUsedTitle(nodeId, newTitle)) {
 			WikiPage page = getPage(nodeId, newTitle);
