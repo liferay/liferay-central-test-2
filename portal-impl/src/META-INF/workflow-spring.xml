@@ -10,9 +10,9 @@
 
 	<bean id="com.liferay.portal.workflow.WorkflowProxyAdvice" class="com.liferay.portal.workflow.WorkflowProxyAdvice" />
 
-	<!-- Base managers -->
+	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" class="com.liferay.portal.workflow.BaseWorkflowDefinitionManager">
+	<bean id="com.liferay.portal.workflow.WorkflowDefinitionManagerImpl" class="com.liferay.portal.workflow.WorkflowDefinitionManagerImpl">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
 				<constructor-arg index="0" value="liferay/workflow_definition" />
@@ -20,7 +20,7 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.workflow.BaseWorkflowInstanceManager" class="com.liferay.portal.workflow.BaseWorkflowInstanceManager">
+	<bean id="com.liferay.portal.workflow.WorkflowInstanceManagerImpl" class="com.liferay.portal.workflow.WorkflowInstanceManagerImpl">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
 				<constructor-arg index="0" value="liferay/workflow_instance" />
@@ -28,7 +28,7 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.workflow.BaseTaskInstanceManager" class="com.liferay.portal.workflow.BaseTaskInstanceManager">
+	<bean id="com.liferay.portal.workflow.TaskInstanceManagerImpl" class="com.liferay.portal.workflow.TaskInstanceManagerImpl">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
 				<constructor-arg index="0" value="liferay/workflow_task" />
@@ -37,7 +37,7 @@
 		</property>
 	</bean>
 
-	<!-- Utils -->
+	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil">
 		<property name="workflowDefinitionManager">
@@ -50,7 +50,7 @@
 				<property name="proxyInterfaces">
 					<value>com.liferay.portal.kernel.workflow.WorkflowDefinitionManager</value>
 				</property>
-				<property name="target" ref="com.liferay.portal.workflow.BaseWorkflowDefinitionManager" />
+				<property name="target" ref="com.liferay.portal.workflow.WorkflowDefinitionManagerImpl" />
 			</bean>
 		</property>
 	</bean>
@@ -65,7 +65,7 @@
 				<property name="proxyInterfaces">
 					<value>com.liferay.portal.kernel.workflow.WorkflowInstanceManager</value>
 				</property>
-				<property name="target" ref="com.liferay.portal.workflow.BaseWorkflowInstanceManager" />
+				<property name="target" ref="com.liferay.portal.workflow.WorkflowInstanceManagerImpl" />
 			</bean>
 		</property>
 	</bean>
@@ -80,7 +80,7 @@
 				<property name="proxyInterfaces">
 					<value>com.liferay.portal.kernel.workflow.TaskInstanceManager</value>
 				</property>
-				<property name="target" ref="com.liferay.portal.workflow.BaseTaskInstanceManager" />
+				<property name="target" ref="com.liferay.portal.workflow.TaskInstanceManagerImpl" />
 			</bean>
 		</property>
 	</bean>

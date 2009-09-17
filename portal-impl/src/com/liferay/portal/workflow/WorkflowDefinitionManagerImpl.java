@@ -29,12 +29,12 @@ import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 import java.util.List;
 
 /**
- * <a href="BaseWorkflowDefinitionManager.java.html"><b><i>View Source</i></b>
+ * <a href="WorkflowDefinitionManagerImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Micha Kiener
  */
-public class BaseWorkflowDefinitionManager
+public class WorkflowDefinitionManagerImpl
 	extends BaseProxyBean implements WorkflowDefinitionManager {
 
 	public void deployWorkflowDefinition(
