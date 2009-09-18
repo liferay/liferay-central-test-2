@@ -53,6 +53,32 @@ public class PropsUtil {
 		}
 	}
 
+	public static String getUnchecked(String key) {
+		String value = null;
+
+		try {
+			value = get(key);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return value;
+	}
+
+	public static String[] getArrayUnchecked(String key) {
+		String[] value = null;
+
+		try {
+			value = getArray(key);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return value;
+	}
+
 	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
 
 	private static final String _METHOD_GET = "get";
