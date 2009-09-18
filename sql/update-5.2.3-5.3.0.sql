@@ -186,9 +186,9 @@ alter table MBMessage add statusDate DATE;
 
 COMMIT_TRANSACTION;
 
-update MBMessage set status = 1;
 update MBMessage set discussion = TRUE where categoryId = 0;
 update MBMessage set discussion = FALSE where categoryId != 0;
+update MBMessage set status = 1;
 
 alter table MBThread add status INTEGER;
 alter table MBThread add statusByUserId LONG;
