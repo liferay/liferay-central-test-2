@@ -29,7 +29,7 @@ package com.liferay.portal.kernel.util;
  */
 public class AggregateClassLoader extends ClassLoader {
 
-	public static ClassLoader createAggregateClassLoader(
+	public static ClassLoader getAggregateClassLoader(
 		ClassLoader[] classLoaders) {
 
 		if ((classLoaders == null) || (classLoaders.length == 0)) {
@@ -40,14 +40,14 @@ public class AggregateClassLoader extends ClassLoader {
 			return classLoaders[0];
 		}
 
-		AggregateClassLoader aggregateLoader =
-			new AggregateClassLoader(classLoaders[1], classLoaders[0]);
+		AggregateClassLoader aggregateLoader = new AggregateClassLoader(
+			classLoaders[1], classLoaders[0]);
 
 		for (int i = 2; i < classLoaders.length; i++) {
 			aggregateLoader = new AggregateClassLoader(
 				classLoaders[i], aggregateLoader);
 		}
-		
+
 		return aggregateLoader;
 	}
 

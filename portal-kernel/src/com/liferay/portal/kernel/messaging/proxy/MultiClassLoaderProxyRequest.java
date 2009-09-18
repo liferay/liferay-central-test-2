@@ -44,8 +44,8 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 
 		ClassLoader[] classLoaders = inspectForClassLoaders(method);
 
-		_clientClassLoaders =
-			AggregateClassLoader.createAggregateClassLoader(classLoaders);
+		_clientClassLoaders = AggregateClassLoader.getAggregateClassLoader(
+			classLoaders);
 	}
 
 	public Object execute(Object object) throws Exception {
