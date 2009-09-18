@@ -55,9 +55,9 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
@@ -88,7 +88,7 @@ import javax.portlet.PortletSession;
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augï¿½
+ * @author Raymond AugŽ
  */
 public class JournalUtil {
 
@@ -173,47 +173,50 @@ public class JournalUtil {
 		Element root, Map<String, String> tokens, JournalArticle article) {
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_ID,
 			article.getArticleId());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_VERSION,
 			article.getVersion());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_TITLE,
 			article.getTitle());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_DESCRIPTION,
 			article.getDescription());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TYPE,
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_TYPE,
 			article.getType());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_CREATE_DATE,
 			article.getCreateDate());
 
 		JournalUtil.addReservedEl(
 			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
+			JournalStructureConstants.RESERVED_ARTICLE_MODIFIED_DATE,
 			article.getModifiedDate());
 
 		if (article.getDisplayDate() != null) {
 			JournalUtil.addReservedEl(
 				root, tokens,
-				JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
+				JournalStructureConstants.RESERVED_ARTICLE_DISPLAY_DATE,
 				article.getDisplayDate());
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_SMALL_IMAGE_URL,
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_SMALL_IMAGE_URL,
 			article.getSmallImageURL());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
+			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
 			String.valueOf(article.getUserId()));
 
 		String userName = StringPool.BLANK;
@@ -237,22 +240,22 @@ public class JournalUtil {
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
-			userName);
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_NAME, userName);
 
 		JournalUtil.addReservedEl(
 			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
 			userEmailAddress);
 
 		JournalUtil.addReservedEl(
 			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_COMMENTS,
+			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_COMMENTS,
 			userComments);
 
 		JournalUtil.addReservedEl(
 			root, tokens,
-			JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_JOB_TITLE,
+			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_JOB_TITLE,
 			userJobTitle);
 	}
 
@@ -914,11 +917,11 @@ public class JournalUtil {
 		if (Validator.isNull(langType)) {
 			output = LocalizationUtil.getLocalization(xml, languageId);
 		}
-		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
 			output = JournalVmUtil.transform(
 				tokens, viewMode, languageId, xml, script);
 		}
-		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
+		else if (langType.equals(JournalTemplateConstants.LANG_TYPE_XSL)) {
 			output = JournalXslUtil.transform(
 				tokens, viewMode, languageId, xml, script);
 		}

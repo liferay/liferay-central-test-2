@@ -25,13 +25,11 @@ package com.liferay.portlet.journal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.StatusConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocalizationUtil;
@@ -44,15 +42,6 @@ import com.liferay.util.LocalizationUtil;
  */
 public class JournalArticleImpl
 	extends JournalArticleModelImpl implements JournalArticle {
-
-	public static final double DEFAULT_VERSION = 1.0;
-
-	public static final String PORTLET = "portlet";
-
-	public static final String STAND_ALONE = "stand-alone";
-
-	public static final String[] TYPES =
-		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
 
 	public static String getContentByLocale(
 		String content, boolean templateDriven, String languageId) {

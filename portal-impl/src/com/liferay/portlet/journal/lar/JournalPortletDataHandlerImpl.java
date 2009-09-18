@@ -62,11 +62,11 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
@@ -109,7 +109,7 @@ import javax.portlet.PortletPreferences;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augï¿½
+ * @author Raymond AugŽ
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -597,7 +597,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if ((Validator.isNumber(articleId)) ||
 			(JournalArticleUtil.fetchByG_A_V(
 				groupId, articleId,
-					JournalArticleImpl.DEFAULT_VERSION) != null)) {
+					JournalArticleConstants.DEFAULT_VERSION) != null)) {
 
 			autoArticleId = true;
 		}

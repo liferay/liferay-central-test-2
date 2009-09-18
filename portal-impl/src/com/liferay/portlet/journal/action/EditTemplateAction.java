@@ -47,7 +47,7 @@ import com.liferay.portlet.journal.TemplateSmallImageNameException;
 import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
@@ -70,7 +70,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditTemplateAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  */
 public class EditTemplateAction extends PortletAction {
 
@@ -243,7 +243,7 @@ public class EditTemplateAction extends PortletAction {
 		}
 
 		String langType = ParamUtil.getString(
-			uploadRequest, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
+			uploadRequest, "langType", JournalTemplateConstants.LANG_TYPE_XSL);
 
 		boolean cacheable = ParamUtil.getBoolean(uploadRequest, "cacheable");
 

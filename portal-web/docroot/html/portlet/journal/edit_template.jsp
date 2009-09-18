@@ -70,7 +70,7 @@ else {
 	xsl = BeanParamUtil.getString(template, request, "xsl");
 }
 
-String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_VM);
+String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateConstants.LANG_TYPE_VM);
 
 boolean cacheable = BeanParamUtil.getBoolean(template, request, "cacheable");
 
@@ -319,10 +319,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<select name="<portlet:namespace />langType">
 
 			<%
-			for (int i = 0; i < JournalTemplateImpl.LANG_TYPES.length; i++) {
+			for (int i = 0; i < JournalTemplateConstants.LANG_TYPES.length; i++) {
 			%>
 
-				<option <%= langType.equals(JournalTemplateImpl.LANG_TYPES[i]) ? "selected" : "" %> value="<%= JournalTemplateImpl.LANG_TYPES[i] %>"><%= JournalTemplateImpl.LANG_TYPES[i].toUpperCase() %></option>
+				<option <%= langType.equals(JournalTemplateConstants.LANG_TYPES[i]) ? "selected" : "" %> value="<%= JournalTemplateConstants.LANG_TYPES[i] %>"><%= JournalTemplateConstants.LANG_TYPES[i].toUpperCase() %></option>
 
 			<%
 			}

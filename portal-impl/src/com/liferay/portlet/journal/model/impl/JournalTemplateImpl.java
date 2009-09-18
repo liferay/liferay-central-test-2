@@ -36,16 +36,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 public class JournalTemplateImpl
 	extends JournalTemplateModelImpl implements JournalTemplate {
 
-	public static final String LANG_TYPE_CSS = "css";
-
-	public static final String LANG_TYPE_VM = "vm";
-
-	public static final String LANG_TYPE_XSL = "xsl";
-
-	public static final String[] LANG_TYPES = new String[] {
-		LANG_TYPE_VM, LANG_TYPE_XSL, LANG_TYPE_CSS
-	};
-
 	public JournalTemplateImpl() {
 	}
 

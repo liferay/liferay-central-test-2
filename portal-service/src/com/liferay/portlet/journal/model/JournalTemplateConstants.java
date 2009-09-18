@@ -20,19 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model.impl;
-
-import com.liferay.portlet.journal.model.JournalFeed;
+package com.liferay.portlet.journal.model;
 
 /**
- * <a href="JournalFeedImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalTemplateConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class JournalFeedImpl
-	extends JournalFeedModelImpl implements JournalFeed {
+public class JournalTemplateConstants {
 
-	public JournalFeedImpl() {
-	}
+	public static final String LANG_TYPE_CSS = "css";
+
+	public static final String LANG_TYPE_VM = "vm";
+
+	public static final String LANG_TYPE_XSL = "xsl";
+
+	public static final String[] LANG_TYPES = new String[] {
+		LANG_TYPE_VM, LANG_TYPE_XSL, LANG_TYPE_CSS
+	};
 
 }

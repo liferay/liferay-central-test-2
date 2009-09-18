@@ -41,10 +41,10 @@
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
+			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
+				<option <%= type.equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
 
 			<%
 			}

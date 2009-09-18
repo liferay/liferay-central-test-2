@@ -49,7 +49,7 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalFeed;
-import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
+import com.liferay.portlet.journal.model.JournalFeedConstants;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalRSSUtil;
@@ -85,7 +85,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="RSSAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugŽ
  */
 public class RSSAction extends PortletAction {
 
@@ -282,7 +282,7 @@ public class RSSAction extends PortletAction {
 
 		String contentField = feed.getContentField();
 
-		if (contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT)) {
+		if (contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT)) {
 			String rendererTemplateId = article.getTemplateId();
 
 			if (Validator.isNotNull(feed.getRendererTemplateId())) {
@@ -299,8 +299,8 @@ public class RSSAction extends PortletAction {
 				content = articleDisplay.getContent();
 			}
 		}
-		else if (
-			!contentField.equals(JournalFeedImpl.WEB_CONTENT_DESCRIPTION)) {
+		else if (!contentField.equals(
+				JournalFeedConstants.WEB_CONTENT_DESCRIPTION)) {
 
 			Document doc = SAXReaderUtil.read(article.getContent());
 

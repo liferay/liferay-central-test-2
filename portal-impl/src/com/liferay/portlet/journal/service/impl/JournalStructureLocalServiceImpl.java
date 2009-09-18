@@ -47,7 +47,7 @@ import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
 
@@ -61,7 +61,7 @@ import java.util.Set;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugŽ
  */
 public class JournalStructureLocalServiceImpl
 	extends JournalStructureLocalServiceBaseImpl {
@@ -528,7 +528,7 @@ public class JournalStructureLocalServiceImpl
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
 			if (Validator.isNull(elName) ||
-				elName.startsWith(JournalStructureImpl.RESERVED)) {
+				elName.startsWith(JournalStructureConstants.RESERVED)) {
 
 				throw new StructureXsdException();
 			}

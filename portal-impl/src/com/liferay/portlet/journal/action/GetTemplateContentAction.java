@@ -25,7 +25,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -55,10 +55,10 @@ public class GetTemplateContentAction extends Action {
 				ParamUtil.getString(request, "xslContent"));
 			boolean formatXsl = ParamUtil.getBoolean(request, "formatXsl");
 			String langType = ParamUtil.getString(
-				request, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
+				request, "langType", JournalTemplateConstants.LANG_TYPE_XSL);
 
 			if (formatXsl) {
-				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+				if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
 					xslContent = JournalUtil.formatVM(xslContent);
 				}
 				else {

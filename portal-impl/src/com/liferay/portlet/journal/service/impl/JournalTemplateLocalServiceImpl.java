@@ -49,7 +49,7 @@ import com.liferay.portlet.journal.TemplateSmallImageNameException;
 import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
 
@@ -64,7 +64,7 @@ import java.util.List;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augï¿½
+ * @author Raymond AugŽ
  */
 public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
@@ -99,7 +99,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+				if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
@@ -522,7 +522,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+				if (langType.equals(JournalTemplateConstants.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {

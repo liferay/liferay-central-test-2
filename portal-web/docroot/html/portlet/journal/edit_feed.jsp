@@ -81,8 +81,8 @@ String rendererTemplateId = BeanParamUtil.getString(feed, request, "rendererTemp
 
 String contentField = BeanParamUtil.getString(feed, request, "contentField");
 
-if (Validator.isNull(contentField) || ((structure == null) && !contentField.equals(JournalFeedImpl.WEB_CONTENT_DESCRIPTION) && !contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT))) {
-	contentField = JournalFeedImpl.WEB_CONTENT_DESCRIPTION;
+if (Validator.isNull(contentField) || ((structure == null) && !contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) && !contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT))) {
+	contentField = JournalFeedConstants.WEB_CONTENT_DESCRIPTION;
 }
 
 String feedType = BeanParamUtil.getString(feed, request, "feedType", RSSUtil.DEFAULT_TYPE);
@@ -122,7 +122,7 @@ if (feed != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
-		document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.WEB_CONTENT_DESCRIPTION %>";
+		document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -135,7 +135,7 @@ if (feed != null) {
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedImpl.WEB_CONTENT_DESCRIPTION %>";
+			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
 			<portlet:namespace />saveFeed();
 		}
 	}
@@ -306,7 +306,7 @@ if (feed != null) {
 			<option value=""></option>
 
 			<%
-			for (String curType : JournalArticleImpl.TYPES) {
+			for (String curType : JournalArticleConstants.TYPES) {
 			%>
 
 				<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
@@ -412,9 +412,9 @@ if (feed != null) {
 	</td>
 	<td>
 		<select name="<portlet:namespace />contentField">
-			<option <%= contentField.equals(JournalFeedImpl.WEB_CONTENT_DESCRIPTION) ? "selected" : "" %> value="<%= JournalFeedImpl.WEB_CONTENT_DESCRIPTION %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="<%= JournalFeedImpl.WEB_CONTENT_DESCRIPTION %>" /></option>
-			<optgroup label='<liferay-ui:message key="<%= JournalFeedImpl.RENDERED_WEB_CONTENT %>" />'>
-				<option <%= contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_WEB_CONTENT %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="use-default-template" /></option>
+			<option <%= contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) ? "selected" : "" %> value="<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>" /></option>
+			<optgroup label='<liferay-ui:message key="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" />'>
+				<option <%= contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT) ? "selected" : "" %> value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="use-default-template" /></option>
 
 				<c:if test="<%= (structure != null) && (templates.size() > 1) %>">
 
@@ -422,7 +422,7 @@ if (feed != null) {
 					for (JournalTemplate currTemplate : templates) {
 					%>
 
-						<option <%= rendererTemplateId.equals(currTemplate.getTemplateId()) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_WEB_CONTENT %>" onClick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getTemplateId() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
+						<option <%= rendererTemplateId.equals(currTemplate.getTemplateId()) ? "selected" : "" %> value="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>" onClick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getTemplateId() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
 
 					<%
 					}

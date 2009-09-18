@@ -37,7 +37,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -171,7 +171,7 @@ public class GetArticleAction extends Action {
 
 				if (Validator.equals(
 						template.getLangType(),
-						JournalTemplateImpl.LANG_TYPE_XSL)) {
+						JournalTemplateConstants.LANG_TYPE_XSL)) {
 
 					url =
 						themeDisplay.getPathMain() +

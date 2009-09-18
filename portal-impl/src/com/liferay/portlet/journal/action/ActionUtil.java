@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
@@ -81,7 +81,7 @@ public class ActionUtil {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String articleId = ParamUtil.getString(request, "articleId");
 		double version = ParamUtil.getDouble(
-			request, "version", JournalArticleImpl.DEFAULT_VERSION);
+			request, "version", JournalArticleConstants.DEFAULT_VERSION);
 
 		JournalArticle article = null;
 

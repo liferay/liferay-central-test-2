@@ -20,19 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model.impl;
-
-import com.liferay.portlet.journal.model.JournalFeed;
+package com.liferay.portlet.journal.model;
 
 /**
- * <a href="JournalFeedImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalFeedConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class JournalFeedImpl
-	extends JournalFeedModelImpl implements JournalFeed {
+public class JournalFeedConstants {
 
-	public JournalFeedImpl() {
-	}
+	public static final String RENDERED_WEB_CONTENT = "rendered-web-content";
+
+	public static final String WEB_CONTENT_DESCRIPTION =
+		"web-content-description";
 
 }

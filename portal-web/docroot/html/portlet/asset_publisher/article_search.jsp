@@ -103,10 +103,10 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 				<option value=""></option>
 
 				<%
-				for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
+				for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
 				%>
 
-					<option <%= displayTerms.getType().equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
+					<option <%= displayTerms.getType().equals(JournalArticleConstants.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleConstants.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleConstants.TYPES[i]) %></option>
 
 				<%
 				}

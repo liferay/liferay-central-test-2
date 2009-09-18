@@ -20,19 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.model.impl;
+package com.liferay.portlet.journal.model;
 
-import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
- * <a href="JournalFeedImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class JournalFeedImpl
-	extends JournalFeedModelImpl implements JournalFeed {
+public class JournalArticleConstants {
 
-	public JournalFeedImpl() {
-	}
+	public static final double DEFAULT_VERSION = 1.0;
+
+	public static final String PORTLET = "portlet";
+
+	public static final String STAND_ALONE = "stand-alone";
+
+	public static final String[] TYPES =
+		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
 
 }

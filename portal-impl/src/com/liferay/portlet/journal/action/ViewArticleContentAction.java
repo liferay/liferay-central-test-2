@@ -39,6 +39,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -64,7 +65,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="ViewArticleContentAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugŽ
  */
 public class ViewArticleContentAction extends Action {
 
@@ -84,7 +85,7 @@ public class ViewArticleContentAction extends Action {
 			long groupId = ParamUtil.getLong(request, "groupId");
 			String articleId = ParamUtil.getString(request, "articleId");
 			double version = ParamUtil.getDouble(
-				request, "version", JournalArticleImpl.DEFAULT_VERSION);
+				request, "version", JournalArticleConstants.DEFAULT_VERSION);
 
 			String languageId = LanguageUtil.getLanguageId(request);
 

@@ -30,7 +30,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -49,7 +49,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetTemplateAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugŽ
  */
 public class GetTemplateAction extends Action {
 
@@ -81,7 +81,7 @@ public class GetTemplateAction extends Action {
 			String script = JournalUtil.getTemplateScript(
 				template, tokens, languageId, transform);
 
-			String extension = JournalTemplateImpl.LANG_TYPE_VM;
+			String extension = JournalTemplateConstants.LANG_TYPE_VM;
 
 			if (template.getLangType() != null) {
 				extension = template.getLangType();
@@ -93,12 +93,12 @@ public class GetTemplateAction extends Action {
 			String contentType = ContentTypes.TEXT_PLAIN_UTF8;
 
 			if (Validator.equals(
-					extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
+					extension, JournalTemplateConstants.LANG_TYPE_CSS)) {
 
 				contentType = ContentTypes.TEXT_CSS_UTF8;
 			}
 			else if (Validator.equals(
-					extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
+					extension, JournalTemplateConstants.LANG_TYPE_XSL)) {
 
 				contentType = ContentTypes.TEXT_XML_UTF8;
 			}

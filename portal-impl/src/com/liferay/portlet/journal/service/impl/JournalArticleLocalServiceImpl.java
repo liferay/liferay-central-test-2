@@ -89,11 +89,11 @@ import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.job.CheckArticleJob;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -120,7 +120,7 @@ import javax.portlet.PortletPreferences;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augï¿½
+ * @author Raymond AugŽ
  * @author Bruno Farache
  */
 public class JournalArticleLocalServiceImpl
@@ -168,7 +168,7 @@ public class JournalArticleLocalServiceImpl
 			String articleURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		double version = JournalArticleImpl.DEFAULT_VERSION;
+		double version = JournalArticleConstants.DEFAULT_VERSION;
 
 		return addArticle(
 			userId, groupId, articleId, autoArticleId, version, title,
@@ -571,7 +571,7 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setCreateDate(now);
 		newArticle.setModifiedDate(now);
 		newArticle.setArticleId(newArticleId);
-		newArticle.setVersion(JournalArticleImpl.DEFAULT_VERSION);
+		newArticle.setVersion(JournalArticleConstants.DEFAULT_VERSION);
 		newArticle.setTitle(oldArticle.getTitle());
 		newArticle.setDescription(oldArticle.getDescription());
 
@@ -1884,7 +1884,7 @@ public class JournalArticleLocalServiceImpl
 		boolean visible = article.isApproved();
 
 		if (!visible &&
-			(article.getVersion() != JournalArticleImpl.DEFAULT_VERSION)) {
+			(article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
 
 			int approvedArticlesCount =
 				journalArticlePersistence.countByG_A_S(
@@ -2315,7 +2315,7 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
-			if ((version > JournalArticleImpl.DEFAULT_VERSION) &&
+			if ((version > JournalArticleConstants.DEFAULT_VERSION) &&
 				(incrementVersion)) {
 
 				Image oldImage = null;

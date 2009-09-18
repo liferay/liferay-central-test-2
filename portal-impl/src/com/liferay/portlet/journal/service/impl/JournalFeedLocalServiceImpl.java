@@ -43,8 +43,8 @@ import com.liferay.portlet.journal.FeedIdException;
 import com.liferay.portlet.journal.FeedNameException;
 import com.liferay.portlet.journal.FeedTargetLayoutFriendlyUrlException;
 import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portlet.journal.model.JournalFeedConstants;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.service.base.JournalFeedLocalServiceBaseImpl;
 import com.liferay.util.RSSUtil;
 
@@ -54,7 +54,7 @@ import java.util.List;
 /**
  * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond AugŽ
  */
 public class JournalFeedLocalServiceImpl
 	extends JournalFeedLocalServiceBaseImpl {
@@ -357,8 +357,8 @@ public class JournalFeedLocalServiceImpl
 	protected boolean isValidStructureField(
 		long groupId, String structureId, String contentField) {
 
-		if (contentField.equals(JournalFeedImpl.WEB_CONTENT_DESCRIPTION) ||
-			contentField.equals(JournalFeedImpl.RENDERED_WEB_CONTENT)) {
+		if (contentField.equals(JournalFeedConstants.WEB_CONTENT_DESCRIPTION) ||
+			contentField.equals(JournalFeedConstants.RENDERED_WEB_CONTENT)) {
 
 			return true;
 		}
