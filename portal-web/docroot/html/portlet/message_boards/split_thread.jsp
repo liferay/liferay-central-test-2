@@ -86,7 +86,7 @@ boolean quote = false;
 	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
 	<liferay-ui:error exception="<%= MessageSubjectException.class %>" message="please-enter-a-valid-subject" />
 	<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="please-enter-a-valid-category" />
-	<liferay-ui:error exception="<%= SplitThreadException.class %>" message="this-thread-can-not-be-split" />
+	<liferay-ui:error exception="<%= SplitThreadException.class %>" message="a-thread-cannot-be-split-at-its-root-message" />
 
 	<%
 	long breadcrumbsMessageId = message.getMessageId();
