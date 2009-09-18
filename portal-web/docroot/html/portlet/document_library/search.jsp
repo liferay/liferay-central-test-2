@@ -107,6 +107,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 			// Folder and document
 
 			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
+			
+			if (folderId == scopeGroupId) {
+				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;			
+			}
+
 			String fileName = doc.get("path");
 
 			DLFileEntry fileEntry = null;
@@ -124,18 +129,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			row.setObject(fileEntry);
 
-			DLFolder folder = null;
-
-			try {
-				folder = DLFolderLocalServiceUtil.getFolder(folderId);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Document library search index is stale and contains folder " + folderId);
-				}
-
-				continue;
-			}
+			DLFolder folder = fileEntry.getFolder();
 
 			PortletURL rowURL = renderResponse.createActionURL();
 

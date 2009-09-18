@@ -30,6 +30,8 @@ import com.liferay.documentlibrary.service.DLService;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.annotation.BeanReference;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.LockLocalService;
@@ -39,6 +41,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.WebDAVPropsLocalService;
 import com.liferay.portal.service.base.PrincipalBean;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LockPersistence;
@@ -235,6 +239,38 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 
 	public void setDLService(DLService dlService) {
 		this.dlService = dlService;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
 	}
 
 	public LayoutLocalService getLayoutLocalService() {
@@ -441,6 +477,14 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLLocalService dlLocalService;
 	@BeanReference(name = "com.liferay.documentlibrary.service.DLService.impl")
 	protected DLService dlService;
+	@BeanReference(name = "com.liferay.portal.service.GroupLocalService.impl")
+	protected GroupLocalService groupLocalService;
+	@BeanReference(name = "com.liferay.portal.service.GroupService.impl")
+	protected GroupService groupService;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
+	protected GroupPersistence groupPersistence;
+	@BeanReference(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
+	protected GroupFinder groupFinder;
 	@BeanReference(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
 	@BeanReference(name = "com.liferay.portal.service.LayoutService.impl")

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
@@ -47,6 +48,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.imagegallery.util.Indexer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -411,20 +413,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List<DLFolder> folders = getFolders(companyId);
+			reIndexFolders(companyId);
 
-			for (DLFolder folder : folders) {
-				String portletId = PortletKeys.DOCUMENT_LIBRARY;
-				long groupId = folder.getGroupId();
-				long folderId = folder.getFolderId();
-
-				String[] newIds = {
-					String.valueOf(companyId), portletId,
-					String.valueOf(groupId), String.valueOf(folderId)
-				};
-
-				dlService.reIndex(newIds);
-			}
+			reIndexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -547,6 +538,58 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		return parentFolderId;
+	}
+
+	protected void reIndexFolders(long companyId) throws SystemException {
+		List<DLFolder> folders = getFolders(companyId);
+
+		for (DLFolder folder : folders) {
+			String portletId = PortletKeys.DOCUMENT_LIBRARY;
+			long groupId = folder.getGroupId();
+			long folderId = folder.getFolderId();
+
+			String[] newIds = {
+				String.valueOf(companyId), portletId,
+				String.valueOf(groupId), String.valueOf(folderId)
+			};
+
+			dlService.reIndex(newIds);
+		}
+	}
+
+	protected void reIndexRoot(long companyId) throws SystemException {
+		int groupCount = groupPersistence.countByCompanyId(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reIndexRoot(
+			long companyId, int groupStart, int groupEnd)
+		throws SystemException {
+
+		List<Group> groups = groupPersistence.findByCompanyId(
+			companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			String portletId = PortletKeys.DOCUMENT_LIBRARY;
+			long groupId = group.getGroupId();
+			long folderId = groupId;
+
+			String[] newIds = {
+				String.valueOf(companyId), portletId,
+				String.valueOf(groupId), String.valueOf(folderId)
+			};
+
+			dlService.reIndex(newIds);
+
+		}
 	}
 
 	protected void validate(

@@ -45,12 +45,17 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.io.File;
 import java.io.IOException;
@@ -153,11 +158,22 @@ public class DLLocalServiceImpl implements DLLocalService {
 					try {
 						if (userId > 0) {
 							try {
-								dlFolderService.getFolder(repositoryId);
+								PermissionChecker permissionChecker =
+									PermissionThreadLocal.getPermissionChecker();
+
+								DLFolderPermission.check(
+									permissionChecker, groupId, repositoryId,
+									ActionKeys.VIEW);
 							}
 							catch (Exception e) {
 								continue;
 							}
+						}
+
+						if (repositoryId ==
+								DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+							repositoryId = groupId;
 						}
 
 						TermQuery termQuery = TermQueryFactoryUtil.create(

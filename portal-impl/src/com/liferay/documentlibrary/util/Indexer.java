@@ -41,6 +41,7 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -112,8 +113,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			DLFileEntry fileEntry = null;
 
 			try {
+				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+				if (groupId != repositoryId) {
+					folderId = repositoryId;
+				}
+
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					groupId, repositoryId, fileName);
+					groupId, folderId, fileName);
 			}
 			catch (NoSuchFileEntryException nsfe) {
 				if (_log.isWarnEnabled()) {
