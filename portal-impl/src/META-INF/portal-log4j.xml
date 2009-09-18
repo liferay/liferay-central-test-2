@@ -57,7 +57,7 @@
 	</category>
 
 	<category name="com.liferay.portal.cluster">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.convert">

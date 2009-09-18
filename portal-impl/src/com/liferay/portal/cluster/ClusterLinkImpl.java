@@ -172,15 +172,15 @@ public class ClusterLinkImpl implements ClusterLink {
 							(Message)message.getObject());
 					}
 					else {
-						if (_log.isInfoEnabled()) {
-							_log.info("Block received message " + message);
+						if (_log.isDebugEnabled()) {
+							_log.debug("Block received message " + message);
 						}
 					}
 				}
 
 				public void viewAccepted(View view) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Cluster link accepted view " + view);
+					if (_log.isDebugEnabled()) {
+						_log.debug("Cluster link accepted view " + view);
 					}
 				}
 
