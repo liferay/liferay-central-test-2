@@ -39,6 +39,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -48,6 +51,7 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
+import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 import com.liferay.portlet.imagegallery.util.Indexer;
 
 import java.util.ArrayList;
@@ -278,6 +282,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		try {
 			reIndexFolders(companyId);
+
+			reIndexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -315,7 +321,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				for (long folderId : folderIds) {
 					if (userId > 0) {
 						try {
-							igFolderService.getFolder(folderId);
+							PermissionChecker permissionChecker =
+								PermissionThreadLocal.getPermissionChecker();
+
+							IGFolderPermission.check(
+								permissionChecker, groupId, folderId, 
+								ActionKeys.VIEW);
 						}
 						catch (Exception e) {
 							continue;
@@ -512,6 +523,44 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		for (IGImage image : images) {
 			igImageLocalService.reIndex(image);
+		}
+	}
+
+	protected void reIndexRoot(long companyId) throws SystemException {
+		int groupCount = groupPersistence.countByCompanyId(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reIndexRoot(
+			long companyId, int groupStart, int groupEnd)
+		throws SystemException {
+
+		List<Group> groups = groupPersistence.findByCompanyId(
+			companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			long groupId = group.getGroupId();
+			long folderId = IGFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+			int entryCount = igImagePersistence.countByG_F(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int j = 0; j <= entryPages; j++) {
+				int entryStart = (j * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexImages(groupId, folderId, entryStart, entryEnd);
+			}
 		}
 	}
 
