@@ -307,7 +307,7 @@ Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 
 <%!
 private String _checkViewURL(String viewURL, String currentURL, ThemeDisplay themeDisplay) {
-	if (viewURL.startsWith(themeDisplay.getURLPortal())) {
+	if (viewURL!= null && viewURL.startsWith(themeDisplay.getURLPortal())) {
 		viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
 	}
 
