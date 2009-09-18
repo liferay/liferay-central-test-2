@@ -44,7 +44,8 @@ public class BookmarksEntryImpl
 
 		if (getFolderId() > 0) {
 			try {
-				folder = BookmarksFolderLocalServiceUtil.getFolder(getFolderId());
+				folder = BookmarksFolderLocalServiceUtil.getFolder(
+					getFolderId());
 			}
 			catch (Exception e) {
 				folder = new BookmarksFolderImpl();

@@ -322,9 +322,9 @@ public class BookmarksFolderLocalServiceImpl
 						try {
 							PermissionChecker permissionChecker =
 								PermissionThreadLocal.getPermissionChecker();
-							
+
 							BookmarksFolderPermission.check(
-								permissionChecker, groupId, folderId, 
+								permissionChecker, groupId, folderId,
 								ActionKeys.VIEW);
 						}
 						catch (Exception e) {
@@ -549,13 +549,11 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
-	protected void reIndexRoot(
-			long companyId, int groupStart, int groupEnd)
+	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
-		List<Group> groups =
-			groupPersistence.findByCompanyId(
-				companyId, groupStart, groupEnd);
+		List<Group> groups = groupPersistence.findByCompanyId(
+			companyId, groupStart, groupEnd);
 
 		for (Group group : groups) {
 			long groupId = group.getGroupId();
