@@ -325,7 +325,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 								PermissionThreadLocal.getPermissionChecker();
 
 							IGFolderPermission.check(
-								permissionChecker, groupId, folderId, 
+								permissionChecker, groupId, folderId,
 								ActionKeys.VIEW);
 						}
 						catch (Exception e) {
@@ -539,8 +539,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		}
 	}
 
-	protected void reIndexRoot(
-			long companyId, int groupStart, int groupEnd)
+	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
