@@ -26,15 +26,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
@@ -87,73 +84,8 @@ public class SecureFilter extends BasePortalFilter {
 		}
 	}
 
-	protected long getBasicAuthUserId(HttpServletRequest request)
-		throws Exception {
-
-		long userId = 0;
-
-		String authorizationHeader = request.getHeader(
-			HttpHeaders.AUTHORIZATION);
-
-		if (Validator.isNull(authorizationHeader)) {
-			return userId;
-		}
-
-		String[] authorizationArray = authorizationHeader.split("\\s+");
-
-		String authorization = authorizationArray[0];
-		String credentials = new String(Base64.decode(authorizationArray[1]));
-
-		if (!authorization.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
-			return userId;
-		}
-
-		long companyId = PortalInstances.getCompanyId(request);
-
-		String[] loginAndPassword = StringUtil.split(
-			credentials, StringPool.COLON);
-
-		String login = loginAndPassword[0].trim();
-
-		String password = null;
-
-		if (loginAndPassword.length > 1) {
-			password = loginAndPassword[1].trim();
-		}
-
-		// Strip @uid and @sn for backwards compatibility
-
-		if (login.endsWith("@uid")) {
-			int pos = login.indexOf("@uid");
-
-			login = login.substring(0, pos);
-		}
-		else if (login.endsWith("@sn")) {
-			int pos = login.indexOf("@sn");
-
-			login = login.substring(0, pos);
-		}
-
-		// Try every authentication type
-
-		userId = UserLocalServiceUtil.authenticateForBasic(
-			companyId, CompanyConstants.AUTH_TYPE_EA, login, password);
-
-		if (userId > 0) {
-			return userId;
-		}
-
-		userId = UserLocalServiceUtil.authenticateForBasic(
-			companyId, CompanyConstants.AUTH_TYPE_SN, login, password);
-
-		if (userId > 0) {
-			return userId;
-		}
-
-		userId = UserLocalServiceUtil.authenticateForBasic(
-			companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
-
-		return userId;
+	public static boolean isHttpsRequired() {
+		return _httpsRequired;
 	}
 
 	protected boolean isAccessAllowed(HttpServletRequest request) {
@@ -258,7 +190,10 @@ public class SecureFilter extends BasePortalFilter {
 				}
 				else {
 					try {
-						userId = getBasicAuthUserId(request);
+						long companyId = PortalInstances.getCompanyId(request);
+
+						userId = SecureUtil.getBasicAuthUserId(
+							request, companyId);
 					}
 					catch (Exception e) {
 						_log.error(e);
@@ -295,8 +230,9 @@ public class SecureFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
+	private static boolean _httpsRequired;
+
 	private boolean _basicAuthEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
-	private boolean _httpsRequired;
 
 }
