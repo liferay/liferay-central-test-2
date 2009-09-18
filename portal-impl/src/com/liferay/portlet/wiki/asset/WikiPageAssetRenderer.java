@@ -109,7 +109,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLExport(
-			PortletRequest portletRequest, PortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
