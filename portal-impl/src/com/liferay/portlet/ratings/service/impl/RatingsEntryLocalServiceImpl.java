@@ -176,7 +176,8 @@ public class RatingsEntryLocalServiceImpl
 
 			int ratingsTotalEntries = blogsStatsUser.getRatingsTotalEntries();
 			double ratingsTotalScore = blogsStatsUser.getRatingsTotalScore();
-			double ratingsAverageScore = blogsStatsUser.getRatingsAverageScore();
+			double ratingsAverageScore =
+				blogsStatsUser.getRatingsAverageScore();
 
 			if (newEntry) {
 				ratingsTotalEntries++;
