@@ -133,6 +133,12 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setPriority(double priority);
 
+	public boolean getDiscussion();
+
+	public boolean isDiscussion();
+
+	public void setDiscussion(boolean discussion);
+
 	public int getStatus();
 
 	public void setStatus(int status);
@@ -152,12 +158,6 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public Date getStatusDate();
 
 	public void setStatusDate(Date statusDate);
-
-	public boolean getDiscussion();
-
-	public boolean isDiscussion();
-
-	public void setDiscussion(boolean discussion);
 
 	public MBMessage toEscapedModel();
 }

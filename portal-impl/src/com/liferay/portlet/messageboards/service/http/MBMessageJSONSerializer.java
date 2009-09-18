@@ -88,6 +88,7 @@ public class MBMessageJSONSerializer {
 		jsonObj.put("attachments", model.getAttachments());
 		jsonObj.put("anonymous", model.getAnonymous());
 		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("discussion", model.getDiscussion());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());
 		jsonObj.put("statusByUserName", model.getStatusByUserName());
@@ -101,7 +102,6 @@ public class MBMessageJSONSerializer {
 		}
 
 		jsonObj.put("statusDate", statusDateJSON);
-		jsonObj.put("discussion", model.getDiscussion());
 
 		return jsonObj;
 	}

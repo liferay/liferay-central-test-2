@@ -848,11 +848,11 @@ create table MBMessage (
 	attachments BOOLEAN,
 	anonymous BOOLEAN,
 	priority DOUBLE,
+	discussion BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	discussion BOOLEAN
+	statusDate DATE null
 );
 
 create table MBMessageFlag (

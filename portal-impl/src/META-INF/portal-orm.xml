@@ -1768,13 +1768,13 @@
 			<basic name="attachments" />
 			<basic name="anonymous" />
 			<basic name="priority" />
+			<basic name="discussion" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="discussion" />
 			<transient name="primaryKey" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />

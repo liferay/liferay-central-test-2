@@ -152,10 +152,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, status, true, serviceContext);
+			body, files, anonymous, priority, status, serviceContext);
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
+		message.setDiscussion(true);
 
 		mbMessagePersistence.update(message, false);
 
@@ -226,38 +227,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long userId, String userName, long categoryId, long threadId,
-			long parentMessageId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, boolean discussion,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			null, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, status, discussion, 
-			serviceContext);
-	}
-
-	public MBMessage addMessage(
 			String uuid, long userId, String userName, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, int status, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addMessage(
-			uuid, userId, userName, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, status, false,
-			serviceContext);
-	}
-	
-	public MBMessage addMessage(
-			String uuid, long userId, String userName, long categoryId,
-			long threadId, long parentMessageId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, int status, boolean discussion, 
-			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -313,7 +286,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
 		message.setStatusDate(now);
-		message.setDiscussion(discussion);
 
 		// Thread
 
