@@ -316,6 +316,14 @@
 	padding-bottom: 10px;
 }
 
+.portlet-wiki .top-links .top-links-block {
+	float: left;
+}
+
+.portlet-wiki .top-links .top-links-right {
+	float: right;
+}
+
 .portlet-wiki .top-links table {
 	width: 100%;
 }

@@ -43,21 +43,19 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 	%>
 
 	<div class="top-links">
-		<table class="lfr-table">
-		<tr>
-			<c:if test="<%= themeDisplay.isSignedIn() && (WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE) || GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) %>">
-				<td valign="top" width="16">
+		<aui:layout>
+			<aui:column>
+				<c:if test="<%= themeDisplay.isSignedIn() && (WikiPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_NODE) || GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) %>">
 
 					<%
 					portletURL.setParameter("struts_action", "/wiki/view_nodes");
 					%>
 
 					<liferay-ui:icon image="manage_nodes" message="manage-wikis" url="<%= portletURL.toString() %>" />
-				</td>
-			</c:if>
+				</c:if>
+			</aui:column>
 
-			<td valign="top">
-
+			<aui:column>
 				<c:if test="<%= nodes.size() > 1 %>">
 
 					<%
@@ -84,8 +82,9 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					%>
 
 				</c:if>
-			</td>
-			<td align="right" valign="top">
+			</aui:column>
+
+			<aui:column cssClass="top-links-right">
 				<liferay-portlet:renderURL varImpl="searchURL">
 					<portlet:param name="struts_action" value="/wiki/search" />
 				</liferay-portlet:renderURL>
@@ -103,37 +102,39 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					%>
 
 					<aui:fieldset>
-						<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></aui:a>
+						<div class="top-links-block">
+							<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></aui:a>
 
-						<%
-						portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
-						%>
+							<%
+							portletURL.setParameter("struts_action", "/wiki/view_recent_changes");
+							%>
 
-						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="recent-changes" /></span></aui:a>
+							| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="recent-changes" /></span></aui:a>
 
-						<%
-						portletURL.setParameter("struts_action", "/wiki/view_all_pages");
-						%>
+							<%
+							portletURL.setParameter("struts_action", "/wiki/view_all_pages");
+							%>
 
-						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="all-pages" /></span></aui:a>
+							| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="all-pages" /></span></aui:a>
 
-						<%
-						portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
-						%>
+							<%
+							portletURL.setParameter("struts_action", "/wiki/view_orphan_pages");
+							%>
 
-						| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></aui:a>
+							| <aui:a href="<%= portletURL.toString() %>"><span class="nobr"><liferay-ui:message key="orphan-pages" /></span></aui:a>
 
-						&nbsp;
+							&nbsp;
+						</div>
 
 						<span class="nobr">
-							<aui:input cssClass="input-text-search" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
+							<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" type="text" value="<%= keywords %>" />
 
 							<aui:button type="submit" value="search" />
 						</span>
+
 					</aui:fieldset>
 				</aui:form>
-			</td>
-		</tr>
-		</table>
+			</aui:column>
+		</aui:layout>
 	</div>
 </c:if>
