@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,51 +32,37 @@ package com.liferay.portal.kernel.util;
  */
 public class PropsUtil {
 
-	public static String get(String key) throws Exception {
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET, key, false);
-
-		if (returnObj != null) {
-			return (String)returnObj;
-		}
-		else {
-			return null;
-		}
-	}
-
-	public static String[] getArray(String key) throws Exception {
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_ARRAY, key, false);
-
-		if (returnObj != null) {
-			return (String[])returnObj;
-		}
-		else {
-			return null;
-		}
-	}
-
-	public static String getUnchecked(String key) {
+	public static String get(String key) {
 		String value = null;
 
 		try {
-			value = get(key);
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GET, key, false);
+
+			if (returnObj != null) {
+				value = (String)returnObj;
+			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return value;
 	}
 
-	public static String[] getArrayUnchecked(String key) {
+	public static String[] getArray(String key) {
 		String[] value = null;
 
 		try {
-			value = getArray(key);
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GET_ARRAY, key, false);
+
+			if (returnObj != null) {
+				value = (String[])returnObj;
+			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return value;
@@ -84,5 +73,7 @@ public class PropsUtil {
 	private static final String _METHOD_GET = "get";
 
 	private static final String _METHOD_GET_ARRAY = "getArray";
+
+	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 
 }
