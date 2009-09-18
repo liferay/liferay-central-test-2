@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -90,15 +89,6 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 		if (getParentCategoryId() ==
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isDiscussion() {
-		if (getCategoryId() == CompanyConstants.SYSTEM) {
 			return true;
 		}
 		else {

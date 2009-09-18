@@ -117,7 +117,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			// Statistics
 
-			if (!category.isDiscussion()) {
+			if (!message.isDiscussion()) {
 				mbStatsUserLocalService.updateStatsUser(
 					message.getGroupId(), message.getUserId());
 			}
@@ -358,7 +358,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Indexer
 
 			try {
-				if (!category.isDiscussion()) {
+				if (!message.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),
@@ -428,7 +428,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Indexer
 
 		try {
-			if (!category.isDiscussion()) {
+			if (!message.isDiscussion()) {
 				Indexer.updateMessage(
 					message.getCompanyId(), message.getGroupId(),
 					message.getUserId(), message.getUserName(),
@@ -585,7 +585,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			moveAttachmentsFromOldThread(message, oldAttachmentsDir);
 
 			try {
-				if (!category.isDiscussion()) {
+				if (!message.isDiscussion()) {
 					Indexer.updateMessage(
 						message.getCompanyId(), message.getGroupId(),
 						message.getUserId(), message.getUserName(),

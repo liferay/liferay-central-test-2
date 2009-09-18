@@ -152,7 +152,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, status, serviceContext);
+			body, files, anonymous, priority, status, true, serviceContext);
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
@@ -226,10 +226,38 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
+			long userId, String userName, long categoryId, long threadId,
+			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, int status, boolean discussion,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			null, userId, userName, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, status, discussion, 
+			serviceContext);
+	}
+
+	public MBMessage addMessage(
 			String uuid, long userId, String userName, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, int status, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			uuid, userId, userName, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, status, false,
+			serviceContext);
+	}
+	
+	public MBMessage addMessage(
+			String uuid, long userId, String userName, long categoryId,
+			long threadId, long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, int status, boolean discussion, 
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -285,6 +313,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
 		message.setStatusDate(now);
+		message.setDiscussion(discussion);
 
 		// Thread
 
@@ -410,7 +439,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Resources
 
-		if (!category.isDiscussion()) {
+		if (!message.isDiscussion()) {
 			if (user.isDefaultUser()) {
 				addMessageResources(message, true, true);
 			}
@@ -432,7 +461,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!category.isDiscussion() && (status == StatusConstants.APPROVED)) {
+		if (!message.isDiscussion() && (status == StatusConstants.APPROVED)) {
 			mbStatsUserLocalService.updateStatsUser(
 				message.getGroupId(), userId, now);
 		}
@@ -1481,7 +1510,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!category.isDiscussion() &&
+		if (!message.isDiscussion() &&
 			(message.getStatus() == StatusConstants.APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
@@ -1603,7 +1632,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Statistics
 
-		if (!category.isDiscussion()  && (status == StatusConstants.APPROVED) &&
+		if (!message.isDiscussion()  && (status == StatusConstants.APPROVED) &&
 			(oldStatus != StatusConstants.APPROVED)) {
 
 			mbStatsUserLocalService.updateStatsUser(
@@ -1717,7 +1746,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String layoutFullURL = serviceContext.getLayoutFullURL();
 
-		if (Validator.isNull(layoutFullURL) || category.isDiscussion()) {
+		if (Validator.isNull(layoutFullURL) || message.isDiscussion()) {
 			return;
 		}
 

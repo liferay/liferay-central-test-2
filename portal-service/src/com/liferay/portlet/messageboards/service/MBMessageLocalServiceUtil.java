@@ -158,6 +158,20 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		long userId, java.lang.String userName, long categoryId, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, int status, boolean discussion,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addMessage(userId, userName, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority, status,
+			discussion, serviceContext);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String uuid, long userId, java.lang.String userName,
 		long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
@@ -170,6 +184,21 @@ public class MBMessageLocalServiceUtil {
 				   .addMessage(uuid, userId, userName, categoryId, threadId,
 			parentMessageId, subject, body, files, anonymous, priority, status,
 			serviceContext);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String uuid, long userId, java.lang.String userName,
+		long categoryId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, int status, boolean discussion,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addMessage(uuid, userId, userName, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority, status,
+			discussion, serviceContext);
 	}
 
 	public static void addMessageResources(long messageId,

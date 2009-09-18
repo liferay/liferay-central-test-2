@@ -1354,6 +1354,7 @@
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
 		<field name="statusDate" type="Date" />
+		<field name="discussion" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
 		<field name="messageFlagId" type="long" />

@@ -90,9 +90,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
-			{ "statusDate", new Integer(Types.TIMESTAMP) }
+			{ "statusDate", new Integer(Types.TIMESTAMP) },
+			{ "discussion", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,discussion BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -129,6 +130,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
 		model.setStatusDate(soapModel.getStatusDate());
+		model.setDiscussion(soapModel.getDiscussion());
 
 		return model;
 	}
@@ -388,6 +390,18 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		_statusDate = statusDate;
 	}
 
+	public boolean getDiscussion() {
+		return _discussion;
+	}
+
+	public boolean isDiscussion() {
+		return _discussion;
+	}
+
+	public void setDiscussion(boolean discussion) {
+		_discussion = discussion;
+	}
+
 	public MBMessage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMessage)this;
@@ -420,6 +434,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			model.setStatusByUserId(getStatusByUserId());
 			model.setStatusByUserName(HtmlUtil.escape(getStatusByUserName()));
 			model.setStatusDate(getStatusDate());
+			model.setDiscussion(getDiscussion());
 
 			model = (MBMessage)Proxy.newProxyInstance(MBMessage.class.getClassLoader(),
 					new Class[] { MBMessage.class },
@@ -467,6 +482,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		clone.setStatusByUserId(getStatusByUserId());
 		clone.setStatusByUserName(getStatusByUserName());
 		clone.setStatusDate(getStatusDate());
+		clone.setDiscussion(getDiscussion());
 
 		return clone;
 	}
@@ -572,6 +588,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 		sb.append(getStatusByUserName());
 		sb.append(", statusDate=");
 		sb.append(getStatusDate());
+		sb.append(", discussion=");
+		sb.append(getDiscussion());
 		sb.append("}");
 
 		return sb.toString();
@@ -672,6 +690,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
 		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>discussion</column-name><column-value><![CDATA[");
+		sb.append(getDiscussion());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -705,5 +727,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage> {
 	private String _statusByUserUuid;
 	private String _statusByUserName;
 	private Date _statusDate;
+	private boolean _discussion;
 	private transient ExpandoBridge _expandoBridge;
 }

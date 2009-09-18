@@ -57,6 +57,4 @@ public interface MBCategory extends MBCategoryModel {
 			com.liferay.portal.SystemException;
 
 	public boolean isRoot();
-
-	public boolean isDiscussion();
 }

@@ -851,7 +851,8 @@ create table MBMessage (
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null
+	statusDate DATE null,
+	discussion BOOLEAN
 );
 
 create table MBMessageFlag (

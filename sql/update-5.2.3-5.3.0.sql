@@ -182,10 +182,13 @@ alter table MBMessage add status INTEGER;
 alter table MBMessage add statusByUserId LONG;
 alter table MBMessage add statusByUserName VARCHAR(75);
 alter table MBMessage add statusDate DATE;
+alter table MBMessage add discussion BOOLEAN;
 
 COMMIT_TRANSACTION;
 
 update MBMessage set status = 1;
+update MBMessage set discussion = TRUE where categoryId = 0;
+update MBMessage set discussion = FALSE where categoryId != 0;
 
 alter table MBThread add status INTEGER;
 alter table MBThread add statusByUserId LONG;

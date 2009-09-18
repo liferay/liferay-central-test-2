@@ -101,6 +101,7 @@ public class MBMessageJSONSerializer {
 		}
 
 		jsonObj.put("statusDate", statusDateJSON);
+		jsonObj.put("discussion", model.getDiscussion());
 
 		return jsonObj;
 	}

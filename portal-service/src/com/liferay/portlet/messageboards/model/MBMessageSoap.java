@@ -71,6 +71,7 @@ public class MBMessageSoap implements Serializable {
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
+		soapModel.setDiscussion(model.getDiscussion());
 
 		return soapModel;
 	}
@@ -307,6 +308,18 @@ public class MBMessageSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
+	public boolean getDiscussion() {
+		return _discussion;
+	}
+
+	public boolean isDiscussion() {
+		return _discussion;
+	}
+
+	public void setDiscussion(boolean discussion) {
+		_discussion = discussion;
+	}
+
 	private String _uuid;
 	private long _messageId;
 	private long _groupId;
@@ -329,4 +342,5 @@ public class MBMessageSoap implements Serializable {
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
+	private boolean _discussion;
 }

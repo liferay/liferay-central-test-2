@@ -153,5 +153,11 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setStatusDate(Date statusDate);
 
+	public boolean getDiscussion();
+
+	public boolean isDiscussion();
+
+	public void setDiscussion(boolean discussion);
+
 	public MBMessage toEscapedModel();
 }
