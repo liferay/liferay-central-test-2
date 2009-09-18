@@ -87,6 +87,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,6 @@ import javax.portlet.WindowState;
  * @author Bruno Farache
  * @author Julio Camarero
  * @author Wesley Gong
- * @author John Langkusch
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
@@ -487,11 +487,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
-		List<WikiPage> parents = wikiPagePersistence.findByN_H_P(
-			nodeId, true, StringPool.BLANK);
+		Iterator<WikiPage> itr = wikiPagePersistence.findByN_H(
+			nodeId, true).iterator();
 
-		for (WikiPage curPage : parents) {
-			deletePage(curPage);
+		while (itr.hasNext()) {
+			WikiPage page = itr.next();
+
+			deletePage(page);
 		}
 	}
 
