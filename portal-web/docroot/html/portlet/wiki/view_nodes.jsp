@@ -67,7 +67,7 @@ searchContainer.setResults(results);
 		rowURL.setParameter("struts_action", "/wiki/view");
 		//rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("nodeName", String.valueOf(node.getName()));
-		rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+		rowURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 
 		// Name
 

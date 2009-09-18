@@ -45,7 +45,7 @@ import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.PageVersionException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -206,11 +206,13 @@ public class EditPageAction extends PortletAction {
 				page = WikiPageServiceUtil.getPage(nodeId, title, version);
 			}
 			catch (NoSuchPageException nspe) {
-				if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+				if (title.equals(WikiPageConstants.FRONT_PAGE) &&
+						(version == 0)) {
+
 					ServiceContext serviceContext = new ServiceContext();
 
 					page = WikiPageServiceUtil.addPage(
-						nodeId, title, null, WikiPageImpl.NEW, true,
+						nodeId, title, null, WikiPageConstants.NEW, true,
 						serviceContext);
 				}
 				else {

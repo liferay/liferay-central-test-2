@@ -26,7 +26,7 @@
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
 
-String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageConstants.DEFAULT_FORMAT);
 %>
 
 <div align="right">

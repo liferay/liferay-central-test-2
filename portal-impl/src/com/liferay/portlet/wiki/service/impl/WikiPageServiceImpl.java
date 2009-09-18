@@ -45,7 +45,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
@@ -101,7 +101,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			null, getUserId(), nodeId, title, WikiPageImpl.DEFAULT_VERSION,
+			null, getUserId(), nodeId, title, WikiPageConstants.DEFAULT_VERSION,
 			content, summary, minorEdit, format, true, parentTitle,
 			redirectTitle, serviceContext);
 	}

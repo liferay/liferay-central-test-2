@@ -319,7 +319,7 @@ int count = 0;
 					<%
 					PortletURL frontPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-					frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+					frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 
 					PortletURL deletePageURL = PortletURLUtil.clone(editPageURL, PortletRequest.ACTION_PHASE, renderResponse);
 

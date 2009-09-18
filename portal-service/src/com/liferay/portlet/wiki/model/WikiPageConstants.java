@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/wiki/init.jsp" %>
+package com.liferay.portlet.wiki.model;
 
-<aui:input name="filesCount" type="hidden" value="3" />
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
-<aui:fieldset>
-	<aui:input helpMessage="import-wiki-pages-help" label="pages-file" name="file0" type="file" />
+/**
+ * <a href="WikiPageConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
+public class WikiPageConstants {
 
-	<aui:input helpMessage="import-wiki-users-help" label='<%= LanguageUtil.get(pageContext, "users-file") + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="file1" type="file" />
+	public static final String DEFAULT_FORMAT =
+		PropsUtil.getUnchecked(PropsKeys.WIKI_FORMATS_DEFAULT);
 
-	<aui:input helpMessage="import-wiki-images-help" label='<%= LanguageUtil.get(pageContext, "images-file") + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="file2" type="file" />
+	public static final double DEFAULT_VERSION = 1.0;
 
-	<aui:input label='<%= WikiPageConstants.FRONT_PAGE + "(" + LanguageUtil.get(pageContext, "optional") + ")" %>' name="<%= WikiImporterKeys.OPTIONS_FRONT_PAGE %>" type="text" size="40" value="Main Page" />
+	public static final String[] FORMATS = 
+		PropsUtil.getArrayUnchecked(PropsKeys.WIKI_FORMATS);
 
-	<aui:input checked="<%= true %>" inlineLabel="left" label="import-only-the-latest-version-and-not-the-full-history" name="<%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
-</aui:fieldset>
+	public static final String FRONT_PAGE = 
+		PropsUtil.getUnchecked(PropsKeys.WIKI_FRONT_PAGE_NAME);
+
+	public static final String MOVED = "Moved";
+
+	public static final String NEW = "New";
+
+	public static final String REVERTED = "Reverted";
+
+}

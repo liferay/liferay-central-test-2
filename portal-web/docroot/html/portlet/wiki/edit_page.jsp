@@ -49,7 +49,7 @@ String title = BeanParamUtil.getString(wikiPage, request, "title");
 boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
-String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageConstants.DEFAULT_FORMAT);
 String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
 String[] attachments = new String[0];
@@ -272,14 +272,14 @@ if (Validator.isNull(redirect)) {
 			</c:if>
 
 			<c:choose>
-				<c:when test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
+				<c:when test="<%= (WikiPageConstants.FORMATS.length > 1) %>">
 					<aui:select name="format" onChange='<%= renderResponse.getNamespace() + "changeFormat(this);" %>'>
 
 						<%
-						for (int i = 0; i < WikiPageImpl.FORMATS.length; i++) {
+						for (int i = 0; i < WikiPageConstants.FORMATS.length; i++) {
 						%>
 
-							<aui:option label='<%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageImpl.FORMATS[i]) %>' selected="<%= format.equals(WikiPageImpl.FORMATS[i]) %>" value="<%= WikiPageImpl.FORMATS[i] %>" />
+							<aui:option label='<%= LanguageUtil.get(pageContext, "wiki.formats." + WikiPageConstants.FORMATS[i]) %>' selected="<%= format.equals(WikiPageConstants.FORMATS[i]) %>" value="<%= WikiPageConstants.FORMATS[i] %>" />
 
 						<%
 						}

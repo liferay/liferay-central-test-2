@@ -56,7 +56,7 @@ import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.importers.WikiImporterKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
 
@@ -190,8 +190,8 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (NoSuchPageException nspe) {
 				page = WikiPageLocalServiceUtil.addPage(
-					authorUserId, node.getNodeId(), title, WikiPageImpl.NEW,
-					null, true, serviceContext);
+					authorUserId, node.getNodeId(), title,
+					WikiPageConstants.NEW, null, true, serviceContext);
 			}
 
 			WikiPageLocalServiceUtil.updatePage(
@@ -262,7 +262,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 					WikiPageLocalServiceUtil.movePage(
 						userId, node.getNodeId(), frontPageTitle,
-						WikiPageImpl.FRONT_PAGE, false, serviceContext);
+						WikiPageConstants.FRONT_PAGE, false, serviceContext);
 
 				}
 			}
@@ -271,7 +271,7 @@ public class MediaWikiImporter implements WikiImporter {
 					StringBuilder sb = new StringBuilder();
 
 					sb.append("Could not move ");
-					sb.append(WikiPageImpl.FRONT_PAGE);
+					sb.append(WikiPageConstants.FRONT_PAGE);
 					sb.append(" to the title provided: ");
 					sb.append(frontPageTitle);
 

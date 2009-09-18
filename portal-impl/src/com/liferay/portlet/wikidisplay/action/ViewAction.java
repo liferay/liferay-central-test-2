@@ -33,7 +33,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
@@ -65,7 +65,7 @@ public class ViewAction extends PortletAction {
 				preferences.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
 				renderRequest, "title",
-				preferences.getValue("title", WikiPageImpl.FRONT_PAGE));
+				preferences.getValue("title", WikiPageConstants.FRONT_PAGE));
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -76,7 +76,7 @@ public class ViewAction extends PortletAction {
 			}
 			catch (NoSuchPageException nspe) {
 				wikiPage = WikiPageServiceUtil.getPage(
-					nodeId, WikiPageImpl.FRONT_PAGE);
+					nodeId, WikiPageConstants.FRONT_PAGE);
 			}
 
 			renderRequest.setAttribute(WebKeys.WIKI_NODE, node);

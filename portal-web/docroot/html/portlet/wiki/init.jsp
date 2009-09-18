@@ -63,6 +63,7 @@
 <%@ page import="com.liferay.portlet.wiki.importers.WikiImporterKeys" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageConstants" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>

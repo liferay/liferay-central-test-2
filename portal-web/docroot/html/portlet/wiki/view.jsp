@@ -304,7 +304,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 </c:if>
 
 <%
-if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE)) {
+if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) {
 	PortalUtil.setPageSubtitle(wikiPage.getTitle(), request);
 
 	String description = wikiPage.getContent();

@@ -48,23 +48,6 @@ import java.util.List;
  */
 public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
-	public static final String DEFAULT_FORMAT =
-		PropsUtil.get(PropsKeys.WIKI_FORMATS_DEFAULT);
-
-	public static final double DEFAULT_VERSION = 1.0;
-
-	public static final String[] FORMATS =
-		PropsUtil.getArray(PropsKeys.WIKI_FORMATS);
-
-	public static final String FRONT_PAGE =
-		PropsUtil.get(PropsKeys.WIKI_FRONT_PAGE_NAME);
-
-	public static final String MOVED = "Moved";
-
-	public static final String NEW = "New";
-
-	public static final String REVERTED = "Reverted";
-
 	public WikiPageImpl() {
 	}
 

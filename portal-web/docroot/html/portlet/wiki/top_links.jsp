@@ -72,7 +72,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 						<portlet:renderURL var="viewPageURL">
 							<portlet:param name="struts_action" value="/wiki/view" />
 							<portlet:param name="nodeName" value="<%= curNode.getName() %>" />
-							<portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" />
+							<portlet:param name="title" value="<%= WikiPageConstants.FRONT_PAGE %>" />
 						</portlet:renderURL>
 
 						<%= (i == 0) ? "" : "|" %> <aui:a cssClass="<%= cssClass %>" href="<%= viewPageURL %>"><span class="nobr"><%= curNode.getName() %></span></aui:a>
@@ -98,12 +98,12 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					PortletURL frontPageURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 					frontPageURL.setParameter("struts_action", "/wiki/view");
-					frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
+					frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
 					%>
 
 					<aui:fieldset>
 						<div class="top-links-block">
-							<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageImpl.FRONT_PAGE %></span></aui:a>
+							<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageConstants.FRONT_PAGE %></span></aui:a>
 
 							<%
 							portletURL.setParameter("struts_action", "/wiki/view_recent_changes");

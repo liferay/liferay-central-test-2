@@ -28,6 +28,7 @@
 <%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageConstants" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
@@ -44,5 +45,5 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 long nodeId = GetterUtil.getLong(preferences.getValue("node-id", StringPool.BLANK));
-String title = GetterUtil.getString(preferences.getValue("title", WikiPageImpl.FRONT_PAGE));
+String title = GetterUtil.getString(preferences.getValue("title", WikiPageConstants.FRONT_PAGE));
 %>

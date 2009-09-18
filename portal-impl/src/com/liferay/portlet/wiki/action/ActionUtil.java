@@ -40,7 +40,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -182,7 +182,7 @@ public class ActionUtil {
 		}
 
 		if (Validator.isNull(title)) {
-			title = WikiPageImpl.FRONT_PAGE;
+			title = WikiPageConstants.FRONT_PAGE;
 		}
 
 		WikiPage page = null;
@@ -191,7 +191,7 @@ public class ActionUtil {
 			page = WikiPageServiceUtil.getPage(nodeId, title, version);
 		}
 		catch (NoSuchPageException nspe) {
-			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+			if (title.equals(WikiPageConstants.FRONT_PAGE) && (version == 0)) {
 				long userId = PortalUtil.getUserId(request);
 
 				if (userId == 0) {
@@ -214,7 +214,7 @@ public class ActionUtil {
 				}
 
 				page = WikiPageLocalServiceUtil.addPage(
-					userId, nodeId, title, null, WikiPageImpl.NEW, true,
+					userId, nodeId, title, null, WikiPageConstants.NEW, true,
 					serviceContext);
 			}
 			else {
