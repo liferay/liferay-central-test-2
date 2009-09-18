@@ -37,11 +37,11 @@ public class WikiPageConstants {
 
 	public static final double DEFAULT_VERSION = 1.0;
 
-	public static final String[] FORMATS = 
-		PropsUtil.getArrayUnchecked(PropsKeys.WIKI_FORMATS);
+	public static final String[] FORMATS =
+		PropsUtil.getArray(PropsKeys.WIKI_FORMATS);
 
-	public static final String FRONT_PAGE = 
-		PropsUtil.getUnchecked(PropsKeys.WIKI_FRONT_PAGE_NAME);
+	public static final String FRONT_PAGE =
+		PropsUtil.get(PropsKeys.WIKI_FRONT_PAGE_NAME);
 
 	public static final String MOVED = "Moved";
 
