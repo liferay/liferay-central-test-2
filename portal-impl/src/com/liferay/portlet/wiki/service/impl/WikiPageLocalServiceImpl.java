@@ -487,8 +487,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
-		Iterator<WikiPage> itr = wikiPagePersistence.findByN_H(
-			nodeId, true).iterator();
+		Iterator<WikiPage> itr = wikiPagePersistence.findByN_H_P(
+			nodeId, true, StringPool.BLANK).iterator();
 
 		while (itr.hasNext()) {
 			WikiPage page = itr.next();
