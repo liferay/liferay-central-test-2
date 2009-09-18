@@ -764,7 +764,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Check if the new title already exists
 
-		if (Validator.equals(title, newTitle)) {
+		if (title.equalsIgnoreCase(newTitle)) {
 			throw new DuplicatePageException(newTitle);
 		}
 
