@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -32,8 +33,6 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.permission.MBPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -66,13 +65,12 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -92,11 +90,13 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return editPortletURL;
 	}
 	public String getURLViewInContext(
-		PortletRequest portletRequest, PortletResponse portletResponse,
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 			"/message_boards/find_message?messageId=" + _message.getMessageId();

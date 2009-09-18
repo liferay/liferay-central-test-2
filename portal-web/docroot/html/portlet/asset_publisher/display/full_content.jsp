@@ -59,7 +59,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				<%
 				String languageId = LanguageUtil.getLanguageId(request);
 
-				PortletURL exportAssetURL = assetRenderer.getURLExport(renderRequest, renderResponse);
+				PortletURL exportAssetURL = assetRenderer.getURLExport((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 				%>
 
 				<div class="export-actions">
@@ -126,7 +126,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:if test="<%= showContextLink && !print %>">
 			<div class="asset-more">
-				<a href="<%= assetRenderer.getURLViewInContext(renderRequest, renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
+				<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
 			</div>
 		</c:if>
 

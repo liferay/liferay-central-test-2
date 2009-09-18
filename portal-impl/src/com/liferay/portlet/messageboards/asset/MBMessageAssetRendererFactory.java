@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -33,8 +34,6 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -64,13 +63,12 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL addAssetURL = null;
 

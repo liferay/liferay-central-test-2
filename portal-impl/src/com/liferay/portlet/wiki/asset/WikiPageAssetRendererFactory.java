@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.wiki.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -58,7 +58,8 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		return null;
 	}

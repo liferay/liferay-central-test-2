@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -34,8 +35,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -73,13 +72,12 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL addAssetURL = null;
 

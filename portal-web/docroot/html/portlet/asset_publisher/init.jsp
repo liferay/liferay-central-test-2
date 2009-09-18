@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse" %>
+<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletRequest" %>
 <%@ page import="com.liferay.portal.kernel.xml.Document" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>

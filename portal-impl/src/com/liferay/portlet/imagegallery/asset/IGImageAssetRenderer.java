@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -32,8 +33,6 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.permission.IGPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -67,13 +66,12 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -96,12 +94,10 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest, PortletResponse portletResponse,
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
 			String noSuchEntryRedirect)
 		throws Exception {
-
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
 
 		PortletURL viewPortletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.IMAGE_GALLERY);

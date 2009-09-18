@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -34,8 +35,6 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -77,13 +76,12 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -106,10 +104,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLExport(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
-
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		PortletURL exportPortletURL = liferayPortletResponse.createActionURL();
 
@@ -125,11 +121,13 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest, PortletResponse portletResponse,
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPathMain() +
 			"/document_library/get_file?p_l_id=" + themeDisplay.getPlid() +

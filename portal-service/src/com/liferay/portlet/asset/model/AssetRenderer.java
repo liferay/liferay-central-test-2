@@ -22,8 +22,9 @@
 
 package com.liferay.portlet.asset.model;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -52,17 +53,20 @@ public interface AssetRenderer {
 	public String getTitle();
 
 	public PortletURL getURLEdit(
-			PortletRequest portletRequest, PortletResponse portletResponse)
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
 		throws Exception;
 
 	public PortletURL getURLExport(
-			PortletRequest portletRequest, PortletResponse portletResponse)
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
 		throws Exception;
 
 	public String getUrlTitle();
 
 	public String getURLViewInContext(
-			PortletRequest portletRequest, PortletResponse portletResponse,
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
 			String noSuchEntryRedirect)
 		throws Exception;
 

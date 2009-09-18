@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -34,8 +35,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -65,13 +64,12 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL addAssetURL = null;
 
@@ -90,7 +88,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 				"folderId",
 				String.valueOf(
 					AssetPublisherUtil.getRecentFolderId(
-						portletRequest, CLASS_NAME)));
+						liferayPortletRequest, CLASS_NAME)));
 			addAssetURL.setParameter("uploader", "classic");
 		}
 

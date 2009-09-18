@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.asset;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -33,8 +34,6 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.permission.WikiPermission;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -82,13 +81,12 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletURL editPortletURL = null;
 
@@ -109,10 +107,8 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public PortletURL getURLExport(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
-
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)portletResponse;
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		PortletURL exportPortletURL = liferayPortletResponse.createActionURL();
 
@@ -126,11 +122,13 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-		PortletRequest portletRequest, PortletResponse portletResponse,
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPathMain() +
 			"/wiki/find_page?pageResourcePrimKey=" + _page.getResourcePrimKey();
