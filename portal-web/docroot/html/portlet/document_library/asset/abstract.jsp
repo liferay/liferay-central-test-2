@@ -25,9 +25,10 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
+
+DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 %>
 
 <a href="<%= assetRenderer.getURLViewInContext(renderRequest, renderResponse, StringPool.BLANK) %>">

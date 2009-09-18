@@ -99,14 +99,14 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			editPortletURL.setParameter(
 				"folderId", String.valueOf(_entry.getFolderId()));
  			editPortletURL.setParameter(
-				 "name", String.valueOf(_entry.getName()));
+				"name", String.valueOf(_entry.getName()));
 		}
 
 		return editPortletURL;
 	}
 
 	public PortletURL getURLExport(
-			PortletRequest portletRequest, PortletResponse portletResponse) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		LiferayPortletResponse liferayPortletResponse =
 			(LiferayPortletResponse)portletResponse;
@@ -119,8 +119,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			"groupId", String.valueOf(_entry.getGroupId()));
 		exportPortletURL.setParameter(
 			"folderId", String.valueOf(_entry.getFolderId()));
-		exportPortletURL.setParameter(
-			"name", String.valueOf(_entry.getName()));
+		exportPortletURL.setParameter("name", String.valueOf(_entry.getName()));
 
 		return exportPortletURL;
 	}
