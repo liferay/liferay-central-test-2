@@ -570,8 +570,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 	}
 
-	protected void reIndexRoot(
-			long companyId, int groupStart, int groupEnd)
+	protected void reIndexRoot(long companyId, int groupStart, int groupEnd)
 		throws SystemException {
 
 		List<Group> groups = groupPersistence.findByCompanyId(
@@ -588,7 +587,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			};
 
 			dlService.reIndex(newIds);
-
 		}
 	}
 

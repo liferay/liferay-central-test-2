@@ -157,17 +157,12 @@ public class DLLocalServiceImpl implements DLLocalService {
 				for (long repositoryId : repositoryIds) {
 					try {
 						if (userId > 0) {
-							try {
-								PermissionChecker permissionChecker =
-									PermissionThreadLocal.getPermissionChecker();
+							PermissionChecker permissionChecker =
+								PermissionThreadLocal.getPermissionChecker();
 
-								DLFolderPermission.check(
-									permissionChecker, groupId, repositoryId,
-									ActionKeys.VIEW);
-							}
-							catch (Exception e) {
-								continue;
-							}
+							DLFolderPermission.check(
+								permissionChecker, groupId, repositoryId,
+								ActionKeys.VIEW);
 						}
 
 						if (repositoryId ==

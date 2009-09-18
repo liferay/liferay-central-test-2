@@ -107,9 +107,9 @@ String keywords = ParamUtil.getString(request, "keywords");
 			// Folder and document
 
 			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
-			
+
 			if (folderId == scopeGroupId) {
-				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;			
+				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 
 			String fileName = doc.get("path");
