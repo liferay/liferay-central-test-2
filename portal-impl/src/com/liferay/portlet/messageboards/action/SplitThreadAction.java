@@ -40,6 +40,7 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
@@ -85,7 +86,8 @@ public class SplitThreadAction extends PortletAction {
 			}
 			else if (e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException ||
-					 e instanceof NoSuchThreadException) {
+					 e instanceof NoSuchThreadException ||
+					 e instanceof SplitThreadException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

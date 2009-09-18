@@ -36,6 +36,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -400,6 +401,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		if (message.isRoot()) {
+			throw new SplitThreadException();
+		}
 
 		MBCategory category = message.getCategory();
 		long oldThreadId = message.getThreadId();

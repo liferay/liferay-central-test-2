@@ -470,5 +470,6 @@
 		<exception>MailingListOutUserName</exception>
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
+		<exception>SplitThread</exception>
 	</exceptions>
 </service-builder>
