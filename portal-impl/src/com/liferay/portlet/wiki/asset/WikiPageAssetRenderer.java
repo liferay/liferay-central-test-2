@@ -154,7 +154,6 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		throws Exception {
 
 		if (template.equals(TEMPLATE_FULL_CONTENT)) {
-
 			renderRequest.setAttribute(WebKeys.WIKI_PAGE, _page);
 
 			return "/html/portlet/wiki/asset/" + template + ".jsp";
