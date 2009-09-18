@@ -44,6 +44,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -638,9 +639,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				props.load(typeSettings);
 
 				String stateMax = props.getProperty(
-					LayoutTypePortletImpl.STATE_MAX);
+					LayoutTypePortletConstants.STATE_MAX);
 				String stateMin = props.getProperty(
-					LayoutTypePortletImpl.STATE_MIN);
+					LayoutTypePortletConstants.STATE_MIN);
 
 				Layout layout = (Layout)this.clone();
 

@@ -38,6 +38,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
@@ -51,7 +52,6 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -212,7 +212,7 @@ public class DataFactory {
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
 		typeSettingsProperties.setProperty(
-			LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID, "2_columns_ii");
+			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, "2_columns_ii");
 		typeSettingsProperties.setProperty("column-1", column1);
 		typeSettingsProperties.setProperty("column-2", column2);
 

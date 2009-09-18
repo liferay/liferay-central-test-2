@@ -1,0 +1,63 @@
+/**
+ * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.model;
+
+/**
+ * <a href="LayoutTypePortletConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Alexander Chow
+ */
+public class LayoutTypePortletConstants {
+
+	public static final String LAYOUT_TEMPLATE_ID = "layout-template-id";
+
+	public static final String NESTED_COLUMN_IDS = "nested-column-ids";
+
+	public static final String STATE_MAX = "state-max";
+
+	public static final String STATE_MIN = "state-min";
+
+	public static final String MODE_ABOUT = "mode-about";
+
+	public static final String MODE_CONFIG = "mode-config";
+
+	public static final String MODE_EDIT = "mode-edit";
+
+	public static final String MODE_EDIT_DEFAULTS = "mode-edit-defaults";
+
+	public static final String MODE_EDIT_GUEST = "mode-edit-guest";
+
+	public static final String MODE_HELP = "mode-help";
+
+	public static final String MODE_PREVIEW = "mode-preview";
+
+	public static final String MODE_PRINT = "mode-print";
+
+	public static final String STATIC_PORTLET_COMMUNITY_SELECTOR = "community";
+
+	public static final String STATIC_PORTLET_ORGANIZATION_SELECTOR =
+		"organization";
+
+	public static final String STATIC_PORTLET_USER_SELECTOR = "user";
+
+}

@@ -57,6 +57,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.RoleConstants;
@@ -64,7 +65,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -1279,25 +1279,25 @@ public class ServicePreAction extends Action {
 					props.load(typeSettings);
 
 					String stateMax = props.getProperty(
-						LayoutTypePortletImpl.STATE_MAX);
+						LayoutTypePortletConstants.STATE_MAX);
 					String stateMin = props.getProperty(
-						LayoutTypePortletImpl.STATE_MIN);
+						LayoutTypePortletConstants.STATE_MIN);
 					String modeAbout = props.getProperty(
-						LayoutTypePortletImpl.MODE_ABOUT);
+						LayoutTypePortletConstants.MODE_ABOUT);
 					String modeConfig = props.getProperty(
-						LayoutTypePortletImpl.MODE_CONFIG);
+						LayoutTypePortletConstants.MODE_CONFIG);
 					String modeEdit = props.getProperty(
-						LayoutTypePortletImpl.MODE_EDIT);
+						LayoutTypePortletConstants.MODE_EDIT);
 					String modeEditDefaults = props.getProperty(
-						LayoutTypePortletImpl.MODE_EDIT_DEFAULTS);
+						LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
 					String modeEditGuest = props.getProperty(
-						LayoutTypePortletImpl.MODE_EDIT_GUEST);
+						LayoutTypePortletConstants.MODE_EDIT_GUEST);
 					String modeHelp = props.getProperty(
-						LayoutTypePortletImpl.MODE_HELP);
+						LayoutTypePortletConstants.MODE_HELP);
 					String modePreview = props.getProperty(
-						LayoutTypePortletImpl.MODE_PREVIEW);
+						LayoutTypePortletConstants.MODE_PREVIEW);
 					String modePrint = props.getProperty(
-						LayoutTypePortletImpl.MODE_PRINT);
+						LayoutTypePortletConstants.MODE_PRINT);
 
 					layoutTypePortlet.setStateMax(stateMax);
 					layoutTypePortlet.setStateMin(stateMin);

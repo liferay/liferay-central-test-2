@@ -39,6 +39,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -67,37 +68,6 @@ import java.util.List;
  */
 public class LayoutTypePortletImpl
 	extends LayoutTypeImpl implements LayoutTypePortlet {
-
-	public static final String LAYOUT_TEMPLATE_ID = "layout-template-id";
-
-	public static final String NESTED_COLUMN_IDS = "nested-column-ids";
-
-	public static final String STATE_MAX = "state-max";
-
-	public static final String STATE_MIN = "state-min";
-
-	public static final String MODE_ABOUT = "mode-about";
-
-	public static final String MODE_CONFIG = "mode-config";
-
-	public static final String MODE_EDIT = "mode-edit";
-
-	public static final String MODE_EDIT_DEFAULTS = "mode-edit-defaults";
-
-	public static final String MODE_EDIT_GUEST = "mode-edit-guest";
-
-	public static final String MODE_HELP = "mode-help";
-
-	public static final String MODE_PREVIEW = "mode-preview";
-
-	public static final String MODE_PRINT = "mode-print";
-
-	public static final String STATIC_PORTLET_COMMUNITY_SELECTOR = "community";
-
-	public static final String STATIC_PORTLET_ORGANIZATION_SELECTOR =
-		"organization";
-
-	public static final String STATIC_PORTLET_USER_SELECTOR = "user";
 
 	public static String getFullInstanceSeparator() {
 		String instanceId = PwdGenerator.getPassword(
@@ -133,7 +103,8 @@ public class LayoutTypePortletImpl
 
 	public String getLayoutTemplateId() {
 		String layoutTemplateId =
-			getTypeSettingsProperties().getProperty(LAYOUT_TEMPLATE_ID);
+			getTypeSettingsProperties().getProperty(
+				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
 
 		if (Validator.isNull(layoutTemplateId)) {
 			layoutTemplateId = StringPool.BLANK;
@@ -163,7 +134,7 @@ public class LayoutTypePortletImpl
 		}
 
 		getTypeSettingsProperties().setProperty(
-			LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
+			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
 
 		String themeId = null;
 
@@ -617,11 +588,13 @@ public class LayoutTypePortletImpl
 	// Maximized state
 
 	public String getStateMax() {
-		return getTypeSettingsProperties().getProperty(STATE_MAX);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.STATE_MAX);
 	}
 
 	public void setStateMax(String stateMax) {
-		getTypeSettingsProperties().setProperty(STATE_MAX, stateMax);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.STATE_MAX, stateMax);
 	}
 
 	public boolean hasStateMax() {
@@ -668,11 +641,13 @@ public class LayoutTypePortletImpl
 	// Minimized state
 
 	public String getStateMin() {
-		return getTypeSettingsProperties().getProperty(STATE_MIN);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.STATE_MIN);
 	}
 
 	public void setStateMin(String stateMin) {
-		getTypeSettingsProperties().setProperty(STATE_MIN, stateMin);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.STATE_MIN, stateMin);
 	}
 
 	public boolean hasStateMin() {
@@ -732,11 +707,13 @@ public class LayoutTypePortletImpl
 	// About mode
 
 	public String getModeAbout() {
-		return getTypeSettingsProperties().getProperty(MODE_ABOUT);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_ABOUT);
 	}
 
 	public void setModeAbout(String modeAbout) {
-		getTypeSettingsProperties().setProperty(MODE_ABOUT, modeAbout);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_ABOUT, modeAbout);
 	}
 
 	public void addModeAboutPortletId(String portletId) {
@@ -755,11 +732,13 @@ public class LayoutTypePortletImpl
 	// Config mode
 
 	public String getModeConfig() {
-		return getTypeSettingsProperties().getProperty(MODE_CONFIG);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_CONFIG);
 	}
 
 	public void setModeConfig(String modeConfig) {
-		getTypeSettingsProperties().setProperty(MODE_CONFIG, modeConfig);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_CONFIG, modeConfig);
 	}
 
 	public void addModeConfigPortletId(String portletId) {
@@ -778,11 +757,13 @@ public class LayoutTypePortletImpl
 	// Edit mode
 
 	public String getModeEdit() {
-		return getTypeSettingsProperties().getProperty(MODE_EDIT);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT);
 	}
 
 	public void setModeEdit(String modeEdit) {
-		getTypeSettingsProperties().setProperty(MODE_EDIT, modeEdit);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_EDIT, modeEdit);
 	}
 
 	public void addModeEditPortletId(String portletId) {
@@ -801,12 +782,13 @@ public class LayoutTypePortletImpl
 	// Edit defaults mode
 
 	public String getModeEditDefaults() {
-		return getTypeSettingsProperties().getProperty(MODE_EDIT_DEFAULTS);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
 	}
 
 	public void setModeEditDefaults(String modeEditDefaults) {
 		getTypeSettingsProperties().setProperty(
-			MODE_EDIT_DEFAULTS, modeEditDefaults);
+			LayoutTypePortletConstants.MODE_EDIT_DEFAULTS, modeEditDefaults);
 	}
 
 	public void addModeEditDefaultsPortletId(String portletId) {
@@ -826,11 +808,13 @@ public class LayoutTypePortletImpl
 	// Edit guest mode
 
 	public String getModeEditGuest() {
-		return getTypeSettingsProperties().getProperty(MODE_EDIT_GUEST);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_EDIT_GUEST);
 	}
 
 	public void setModeEditGuest(String modeEditGuest) {
-		getTypeSettingsProperties().setProperty(MODE_EDIT_GUEST, modeEditGuest);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_EDIT_GUEST, modeEditGuest);
 	}
 
 	public void addModeEditGuestPortletId(String portletId) {
@@ -849,11 +833,13 @@ public class LayoutTypePortletImpl
 	// Help mode
 
 	public String getModeHelp() {
-		return getTypeSettingsProperties().getProperty(MODE_HELP);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_HELP);
 	}
 
 	public void setModeHelp(String modeHelp) {
-		getTypeSettingsProperties().setProperty(MODE_HELP, modeHelp);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_HELP, modeHelp);
 	}
 
 	public void addModeHelpPortletId(String portletId) {
@@ -872,11 +858,13 @@ public class LayoutTypePortletImpl
 	// Preview mode
 
 	public String getModePreview() {
-		return getTypeSettingsProperties().getProperty(MODE_PREVIEW);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_PREVIEW);
 	}
 
 	public void setModePreview(String modePreview) {
-		getTypeSettingsProperties().setProperty(MODE_PREVIEW, modePreview);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_PREVIEW, modePreview);
 	}
 
 	public void addModePreviewPortletId(String portletId) {
@@ -895,11 +883,13 @@ public class LayoutTypePortletImpl
 	// Print mode
 
 	public String getModePrint() {
-		return getTypeSettingsProperties().getProperty(MODE_PRINT);
+		return getTypeSettingsProperties().getProperty(
+			LayoutTypePortletConstants.MODE_PRINT);
 	}
 
 	public void setModePrint(String modePrint) {
-		getTypeSettingsProperties().setProperty(MODE_PRINT, modePrint);
+		getTypeSettingsProperties().setProperty(
+			LayoutTypePortletConstants.MODE_PRINT, modePrint);
 	}
 
 	public void addModePrintPortletId(String portletId) {
@@ -972,24 +962,26 @@ public class LayoutTypePortletImpl
 		getLayout().setTypeSettingsProperties(newProps);
 
 		String nestedColumnIds = GetterUtil.getString(
-			getTypeSettingsProperties().getProperty(NESTED_COLUMN_IDS));
+			getTypeSettingsProperties().getProperty(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS));
 
 		String[] nestedColumnIdsArray = ArrayUtil.removeByPrefix(
 			StringUtil.split(nestedColumnIds), portletId);
 
 		getTypeSettingsProperties().setProperty(
-			NESTED_COLUMN_IDS, StringUtil.merge(nestedColumnIdsArray));
+			LayoutTypePortletConstants.NESTED_COLUMN_IDS,
+			StringUtil.merge(nestedColumnIdsArray));
 	}
 
 	protected void addNestedColumn(String columnId) {
 		String nestedColumnIds = getTypeSettingsProperties().getProperty(
-			NESTED_COLUMN_IDS, StringPool.BLANK);
+			LayoutTypePortletConstants.NESTED_COLUMN_IDS, StringPool.BLANK);
 
 		if (nestedColumnIds.indexOf(columnId) == -1) {
 			nestedColumnIds = StringUtil.add(nestedColumnIds, columnId);
 
 			getTypeSettingsProperties().setProperty(
-				NESTED_COLUMN_IDS, nestedColumnIds);
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS, nestedColumnIds);
 		}
 	}
 
@@ -1006,7 +998,7 @@ public class LayoutTypePortletImpl
 
 	protected List<String> getNestedColumns() {
 		String nestedColumnIds = getTypeSettingsProperties().getProperty(
-			NESTED_COLUMN_IDS);
+			LayoutTypePortletConstants.NESTED_COLUMN_IDS);
 
 		return ListUtil.fromArray(StringUtil.split(nestedColumnIds));
 	}
@@ -1019,13 +1011,15 @@ public class LayoutTypePortletImpl
 		Group group = layout.getGroup();
 
 		if (group.isUser()) {
-			selector1 = STATIC_PORTLET_USER_SELECTOR;
+			selector1 = LayoutTypePortletConstants.STATIC_PORTLET_USER_SELECTOR;
 		}
 		else if (group.isCommunity()) {
-			selector1 = STATIC_PORTLET_COMMUNITY_SELECTOR;
+			selector1 =
+				LayoutTypePortletConstants.STATIC_PORTLET_COMMUNITY_SELECTOR;
 		}
 		else if (group.isOrganization()) {
-			selector1 = STATIC_PORTLET_ORGANIZATION_SELECTOR;
+			selector1 =
+				LayoutTypePortletConstants.STATIC_PORTLET_ORGANIZATION_SELECTOR;
 		}
 
 		String selector2 = layout.getFriendlyURL();
