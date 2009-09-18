@@ -473,7 +473,7 @@ public class MBUtil {
 		if ((references != null) && (references.length > 0)) {
 			String reference = references[0];
 
-			int x = reference.indexOf("<mb.");
+			int x = reference.lastIndexOf("<mb.");
 
 			if (x > -1) {
 				int y = reference.indexOf(">", x);
