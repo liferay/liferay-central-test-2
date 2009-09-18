@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.PropsUtil;
 public class WikiPageConstants {
 
 	public static final String DEFAULT_FORMAT =
-		PropsUtil.getUnchecked(PropsKeys.WIKI_FORMATS_DEFAULT);
+		PropsUtil.get(PropsKeys.WIKI_FORMATS_DEFAULT);
 
 	public static final double DEFAULT_VERSION = 1.0;
 
