@@ -219,6 +219,19 @@ public class NtlmFilter extends BasePortalFilter {
 
 			ntlm = NtlmSsp.authenticate(request, response, challenge);
 
+			try {
+				SmbSession.logon(uniAddress, ntlm);
+			}
+			catch (Exception e) {
+				response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "NTLM");
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.setContentLength(0);
+
+				response.flushBuffer();
+
+				return null;
+			}
+
 			session.setAttribute("NtlmHttpAuth", ntlm);
 		}
 		else {
