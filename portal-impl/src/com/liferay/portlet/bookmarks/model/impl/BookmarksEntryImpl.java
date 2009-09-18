@@ -42,13 +42,18 @@ public class BookmarksEntryImpl
 	public BookmarksFolder getFolder() {
 		BookmarksFolder folder = null;
 
-		try {
-			folder = BookmarksFolderLocalServiceUtil.getFolder(getFolderId());
-		}
-		catch (Exception e) {
-			folder = new BookmarksFolderImpl();
+		if (getFolderId() > 0) {
+			try {
+				folder = BookmarksFolderLocalServiceUtil.getFolder(getFolderId());
+			}
+			catch (Exception e) {
+				folder = new BookmarksFolderImpl();
 
-			_log.error(e);
+				_log.error(e);
+			}
+		}
+		else {
+			folder = new BookmarksFolderImpl();
 		}
 
 		return folder;

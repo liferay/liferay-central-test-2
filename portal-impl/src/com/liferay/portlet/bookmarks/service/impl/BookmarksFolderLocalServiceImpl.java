@@ -37,12 +37,16 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
+import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 import com.liferay.portlet.bookmarks.util.Indexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -277,6 +281,8 @@ public class BookmarksFolderLocalServiceImpl
 
 		try {
 			reIndexFolders(companyId);
+
+			reIndexRoot(companyId);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -314,7 +320,12 @@ public class BookmarksFolderLocalServiceImpl
 				for (long folderId : folderIds) {
 					if (userId > 0) {
 						try {
-							bookmarksFolderService.getFolder(folderId);
+							PermissionChecker permissionChecker =
+								PermissionThreadLocal.getPermissionChecker();
+							
+							BookmarksFolderPermission.check(
+								permissionChecker, groupId, folderId, 
+								ActionKeys.VIEW);
 						}
 						catch (Exception e) {
 							continue;
@@ -510,6 +521,45 @@ public class BookmarksFolderLocalServiceImpl
 		for (BookmarksFolder folder : folders) {
 			long groupId = folder.getGroupId();
 			long folderId = folder.getFolderId();
+
+			int entryCount = bookmarksEntryPersistence.countByG_F(
+				groupId, folderId);
+
+			int entryPages = entryCount / Indexer.DEFAULT_INTERVAL;
+
+			for (int i = 0; i <= entryPages; i++) {
+				int entryStart = (i * Indexer.DEFAULT_INTERVAL);
+				int entryEnd = entryStart + Indexer.DEFAULT_INTERVAL;
+
+				reIndexEntries(groupId, folderId, entryStart, entryEnd);
+			}
+		}
+	}
+
+	protected void reIndexRoot(long companyId) throws SystemException {
+		int groupCount = groupPersistence.countByCompanyId(companyId);
+
+		int groupPages = groupCount / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= groupPages; i++) {
+			int groupStart = (i * Indexer.DEFAULT_INTERVAL);
+			int groupEnd = groupStart + Indexer.DEFAULT_INTERVAL;
+
+			reIndexRoot(companyId, groupStart, groupEnd);
+		}
+	}
+
+	protected void reIndexRoot(
+			long companyId, int groupStart, int groupEnd)
+		throws SystemException {
+
+		List<Group> groups =
+			groupPersistence.findByCompanyId(
+				companyId, groupStart, groupEnd);
+
+		for (Group group : groups) {
+			long groupId = group.getGroupId();
+			long folderId = BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 			int entryCount = bookmarksEntryPersistence.countByG_F(
 				groupId, folderId);
