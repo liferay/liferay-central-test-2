@@ -120,6 +120,12 @@ public interface Portal {
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
+	public long getBasicAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException;
+
+	public long getBasicAuthUserId(HttpServletRequest request, long companyId)
+		throws PortalException, SystemException;
+
 	/**
 	 * @deprecated {@link #getCDNHost(boolean)}
 	 */

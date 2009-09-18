@@ -128,6 +128,19 @@ public class PortalUtil {
 		getPortal().copyRequestParameters(actionRequest, actionResponse);
 	}
 
+	public static long getBasicAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return getPortal().getBasicAuthUserId(request);
+	}
+
+	public static long getBasicAuthUserId(
+			HttpServletRequest request, long companyId)
+		throws PortalException, SystemException {
+
+		return getPortal().getBasicAuthUserId(request, companyId);
+	}
+
 	/**
 	 * @deprecated {@link #getCDNHost(boolean)}
 	 */

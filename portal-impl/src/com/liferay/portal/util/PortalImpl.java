@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -46,6 +47,7 @@ import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -68,6 +70,7 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
@@ -534,6 +537,81 @@ public class PortalImpl implements Portal {
 			// sendRedirect of javax.portlet.ActionResponse
 
 		}
+	}
+
+	public long getBasicAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		long companyId = PortalInstances.getCompanyId(request);
+
+		return getBasicAuthUserId(request, companyId);
+	}
+
+	public long getBasicAuthUserId(HttpServletRequest request, long companyId)
+		throws PortalException, SystemException {
+
+		long userId = 0;
+
+		String authorizationHeader = request.getHeader(
+			HttpHeaders.AUTHORIZATION);
+
+		if (Validator.isNull(authorizationHeader)) {
+			return userId;
+		}
+
+		String[] authorizationArray = authorizationHeader.split("\\s+");
+
+		String authorization = authorizationArray[0];
+		String credentials = new String(Base64.decode(authorizationArray[1]));
+
+		if (!authorization.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
+			return userId;
+		}
+
+		String[] loginAndPassword = StringUtil.split(
+			credentials, StringPool.COLON);
+
+		String login = loginAndPassword[0].trim();
+
+		String password = null;
+
+		if (loginAndPassword.length > 1) {
+			password = loginAndPassword[1].trim();
+		}
+
+		// Strip @uid and @sn for backwards compatibility
+
+		if (login.endsWith("@uid")) {
+			int pos = login.indexOf("@uid");
+
+			login = login.substring(0, pos);
+		}
+		else if (login.endsWith("@sn")) {
+			int pos = login.indexOf("@sn");
+
+			login = login.substring(0, pos);
+		}
+
+		// Try every authentication type
+
+		userId = UserLocalServiceUtil.authenticateForBasic(
+			companyId, CompanyConstants.AUTH_TYPE_EA, login, password);
+
+		if (userId > 0) {
+			return userId;
+		}
+
+		userId = UserLocalServiceUtil.authenticateForBasic(
+			companyId, CompanyConstants.AUTH_TYPE_SN, login, password);
+
+		if (userId > 0) {
+			return userId;
+		}
+
+		userId = UserLocalServiceUtil.authenticateForBasic(
+			companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
+
+		return userId;
 	}
 
 	/**
