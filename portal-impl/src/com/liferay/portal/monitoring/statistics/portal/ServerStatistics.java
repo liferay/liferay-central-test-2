@@ -41,9 +41,7 @@ import java.util.TreeMap;
 public class ServerStatistics
 	implements DataSampleProcessor<PortalRequestDataSample> {
 
-	public ServerStatistics(CompanyLocalService companyLocalService) {
-		_companyLocalService = companyLocalService;
-
+	public void afterPropertiesSet() {
 		CompanyStatistics systemCompanyStatistics = new CompanyStatistics();
 
 		_companyStatisticsByCompanyId.put(
@@ -153,6 +151,12 @@ public class ServerStatistics
 		}
 
 		companyStatistics.reset();
+	}
+
+	public void setCompanyLocalService(
+		CompanyLocalService companyLocalService) {
+
+		_companyLocalService = companyLocalService;
 	}
 
 	public synchronized void unregister(String webId) {

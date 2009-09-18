@@ -92,6 +92,9 @@ public class MonitoringPortlet implements InvokerPortlet {
 		_monitoringPortletResourceRequest = monitoringPortletResourceRequest;
 	}
 
+	public MonitoringPortlet() {
+	}
+
 	public MonitoringPortlet(
 		InvokerPortlet invokerPortlet,
 		SingleDestinationMessageSender singleDestinationMessageSender) {
@@ -337,8 +340,18 @@ public class MonitoringPortlet implements InvokerPortlet {
 		}
 	}
 
+	public void setInvokerPortlet(InvokerPortlet invokerPortlet) {
+		_invokerPortlet = invokerPortlet;
+	}
+
 	public void setPortletFilters() throws PortletException {
 		_invokerPortlet.setPortletFilters();
+	}
+
+	public void setSingleDestinationMessageSender(
+		SingleDestinationMessageSender singleDestinationMessageSender) {
+
+		_singleDestinationMessageSender = singleDestinationMessageSender;
 	}
 
 	private void _processException(

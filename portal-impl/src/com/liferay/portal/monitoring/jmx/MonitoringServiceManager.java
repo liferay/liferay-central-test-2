@@ -35,10 +35,6 @@ import java.util.Set;
  */
 public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 
-	public MonitoringServiceManager(MonitoringService monitorService) {
-		_monitoringService = monitorService;
-	}
-
 	public String getLevel(String namespace) {
 		Level level = _monitoringService.getLevel(
 			namespace);
@@ -60,6 +56,10 @@ public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 		Level level = Level.valueOf(levelName);
 
 		_monitoringService.setLevel(namespace, level);
+	}
+
+	public void setMonitoringService(MonitoringService monitoringService) {
+		_monitoringService = monitoringService;
 	}
 
 	private MonitoringService _monitoringService;

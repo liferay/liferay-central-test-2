@@ -34,6 +34,12 @@ import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender
  */
 public abstract class BaseMessageListener implements MessageListener {
 
+	public BaseMessageListener() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public BaseMessageListener(
 		SingleDestinationMessageSender statusSender,
 		MessageSender responseSender) {
@@ -61,6 +67,14 @@ public abstract class BaseMessageListener implements MessageListener {
 
 			_statusSender.send(messageStatus);
 		}
+	}
+
+	public void setResponseSender(MessageSender responseSender) {
+		_responseSender = responseSender;
+	}
+
+	public void setStatusSender(SingleDestinationMessageSender statusSender) {
+		_statusSender = statusSender;
 	}
 
 	protected abstract void doReceive(

@@ -36,6 +36,12 @@ import java.util.Set;
 public class GlobalDestinationEventListener
 	extends BaseDestinationEventListener {
 
+	public GlobalDestinationEventListener() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public GlobalDestinationEventListener(
 		MessageListener messageListener, List<String> ignoredDestinations) {
 
@@ -53,6 +59,14 @@ public class GlobalDestinationEventListener
 		if (!_ignoredDestinations.contains(destination.getName())) {
 			destination.unregister(_messageListener);
 		}
+	}
+
+	public void setIgnoredDestinations(List<String> ignoredDestinations) {
+		_ignoredDestinations = SetUtil.fromList(ignoredDestinations);
+	}
+
+	public void setMessageListener(MessageListener messageListener) {
+		_messageListener = messageListener;
 	}
 
 	private Set<String> _ignoredDestinations;

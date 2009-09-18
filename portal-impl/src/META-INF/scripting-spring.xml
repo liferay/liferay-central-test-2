@@ -13,14 +13,14 @@
 	<bean id="com.liferay.portal.scripting.ScriptingProxyBean" class="com.liferay.portal.scripting.ScriptingProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<constructor-arg index="0" value="liferay/scripting" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="destinationName" value="liferay/scripting" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 		<property name="singleDestinationMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-				<constructor-arg index="0" value="liferay/scripting" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+				<property name="destinationName" value="liferay/scripting" />
+				<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 			</bean>
 		</property>
 	</bean>
@@ -67,15 +67,15 @@
 	<!-- Messaging -->
 
 	<bean id="destination.scripting" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/scripting" />
+		<property name="name" value="liferay/scripting" />
 	</bean>
 	<bean id="messageListener.scripting" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
-		<constructor-arg index="0" ref="com.liferay.portal.scripting.ScriptingImpl" />
+		<property name="manager" ref="com.liferay.portal.scripting.ScriptingImpl" />
 	</bean>
 	<bean id="messageListener.scripting_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
-		<constructor-arg index="0">
+		<property name="priority">
 			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
-		</constructor-arg>
+		</property>
 	</bean>
 	<bean id="messagingConfigurator.scripting" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">

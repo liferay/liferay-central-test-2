@@ -34,6 +34,12 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
 public class DefaultSingleDestinationSynchronousMessageSender
 	implements SingleDestinationSynchronousMessageSender {
 
+	public DefaultSingleDestinationSynchronousMessageSender() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public DefaultSingleDestinationSynchronousMessageSender(
 		String destinationName,
 		SynchronousMessageSender synchronousMessageSender) {
@@ -69,6 +75,16 @@ public class DefaultSingleDestinationSynchronousMessageSender
 		message.setPayload(payload);
 
 		return send(message, timeout);
+	}
+
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
+	}
+
+	public void setSynchronousMessageSender(
+		SynchronousMessageSender synchronousMessageSender) {
+
+		_synchronousMessageSender = synchronousMessageSender;
 	}
 
 	private String _destinationName;

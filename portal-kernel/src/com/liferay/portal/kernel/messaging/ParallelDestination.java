@@ -37,10 +37,19 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class ParallelDestination extends BaseDestination {
 
+	public ParallelDestination() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public ParallelDestination(String name) {
 		super(name);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public ParallelDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 

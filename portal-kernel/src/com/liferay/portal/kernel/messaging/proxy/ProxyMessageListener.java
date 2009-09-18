@@ -39,10 +39,6 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class ProxyMessageListener implements MessageListener {
 
-	public ProxyMessageListener(Object manager) {
-		_manager = manager;
-	}
-
 	public void receive(Message message) {
 		ProxyResponse proxyResponse = new ProxyResponse();
 
@@ -84,6 +80,10 @@ public class ProxyMessageListener implements MessageListener {
 					responseDestinationName, responseMessage);
 			}
 		}
+	}
+
+	public void setManager(Object manager) {
+		_manager = manager;
 	}
 
 	public void setMessageBus(MessageBus messageBus) {

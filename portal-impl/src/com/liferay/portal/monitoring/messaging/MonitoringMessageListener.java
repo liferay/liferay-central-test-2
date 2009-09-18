@@ -37,12 +37,6 @@ import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
  */
 public class MonitoringMessageListener implements MessageListener {
 
-	public MonitoringMessageListener(
-		DataSampleProcessor<DataSample> dataSampleProcessor) {
-
-		_dataSampleProcessor = dataSampleProcessor;
-	}
-
 	public void receive(Message message) {
 		try {
 			doReceive(message);
@@ -52,7 +46,13 @@ public class MonitoringMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(Message message) throws Exception {
+	public void setDataSampleProcessor(
+		DataSampleProcessor<DataSample> dataSampleProcessor) {
+
+		_dataSampleProcessor = dataSampleProcessor;
+	}
+
+	protected void doReceive(Message message) throws Exception {
 		DataSample dataSample = (DataSample)message.getPayload();
 
 		if (dataSample != null) {

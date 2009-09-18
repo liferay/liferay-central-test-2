@@ -48,6 +48,12 @@ import java.util.Map;
  */
 public class LayoutsRemotePublisherMessageListener extends BaseMessageListener {
 
+	public LayoutsRemotePublisherMessageListener() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public LayoutsRemotePublisherMessageListener(
 		SingleDestinationMessageSender statusSender,
 		MessageSender responseSender) {

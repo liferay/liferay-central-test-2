@@ -33,6 +33,12 @@ import com.liferay.portal.kernel.messaging.Message;
 public class DefaultSingleDestinationMessageSender
 	implements SingleDestinationMessageSender {
 
+	public DefaultSingleDestinationMessageSender() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public DefaultSingleDestinationMessageSender(
 		String destinationName, MessageSender messageSender) {
 
@@ -50,6 +56,14 @@ public class DefaultSingleDestinationMessageSender
 		message.setPayload(payload);
 
 		send(message);
+	}
+
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
+	}
+
+	public void setMessageSender(MessageSender messageSender) {
+		_messageSender = messageSender;
 	}
 
 	private String _destinationName;

@@ -37,6 +37,12 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class SerialDestination extends BaseDestination {
 
+	public SerialDestination() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public SerialDestination(String name) {
 		super(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
 	}

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
 import java.util.Set;
@@ -40,10 +41,19 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class BaseDestination implements Destination {
 
+	public BaseDestination() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public BaseDestination(String name) {
 		this(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public BaseDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 
@@ -58,6 +68,10 @@ public abstract class BaseDestination implements Destination {
 		DestinationEventListener destinationEventListener) {
 
 		_destinationEventListeners.add(destinationEventListener);
+	}
+
+	public void afterPropertiesSet() {
+		open();
 	}
 
 	public synchronized void close() {
@@ -118,6 +132,14 @@ public abstract class BaseDestination implements Destination {
 		return _name;
 	}
 
+	public int getWorkersCoreSize() {
+		return _workersCoreSize;
+	}
+
+	public int getWorkersMaxSize() {
+		return _workersMaxSize;
+	}
+
 	public boolean isRegistered() {
 		if (getMessageListenerCount() > 0) {
 			return true;
@@ -175,6 +197,18 @@ public abstract class BaseDestination implements Destination {
 		}
 
 		dispatch(_messageListeners, message);
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setWorkersCoreSize(int workersCoreSize) {
+		_workersCoreSize = workersCoreSize;
+	}
+
+	public void setWorkersMaxSize(int workersMaxSize) {
+		_workersMaxSize = workersMaxSize;
 	}
 
 	public boolean unregister(MessageListener messageListener) {
@@ -254,14 +288,6 @@ public abstract class BaseDestination implements Destination {
 		return _threadPoolExecutor;
 	}
 
-	protected int getWorkersCoreSize() {
-		return _workersCoreSize;
-	}
-
-	protected int getWorkersMaxSize() {
-		return _workersMaxSize;
-	}
-
 	protected boolean registerMessageListener(
 		InvokerMessageListener invokerMessageListener) {
 
@@ -298,9 +324,9 @@ public abstract class BaseDestination implements Destination {
 		new ConcurrentHashSet<DestinationEventListener>();
 	private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
-	private String _name;
+	private String _name = StringPool.BLANK;
 	private ThreadPoolExecutor _threadPoolExecutor;
-	private int _workersCoreSize;
-	private int _workersMaxSize;
+	private int _workersCoreSize = _WORKERS_CORE_SIZE;
+	private int _workersMaxSize = _WORKERS_MAX_SIZE;
 
 }

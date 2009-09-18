@@ -38,10 +38,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
  */
 public class ClusterBridgeMessageListener implements MessageListener {
 
-	public ClusterBridgeMessageListener(Priority priority) {
-		_priority = priority;
-	}
-
 	public void receive(Message message) {
 
 		// Prevent circular message sending
@@ -68,6 +64,10 @@ public class ClusterBridgeMessageListener implements MessageListener {
 
 			ClusterLinkUtil.sendUnicastMessage(address, message, _priority);
 		}
+	}
+
+	public void setPriority(Priority priority) {
+		_priority = priority;
 	}
 
 	private static Log _log =

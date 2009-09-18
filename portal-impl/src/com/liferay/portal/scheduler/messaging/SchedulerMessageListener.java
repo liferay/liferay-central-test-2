@@ -42,6 +42,12 @@ import java.util.List;
  */
 public class SchedulerMessageListener implements MessageListener {
 
+	public SchedulerMessageListener() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public SchedulerMessageListener(
 		MessageSender messageSender, SchedulerEngine schedulerEngine) {
 
@@ -56,6 +62,14 @@ public class SchedulerMessageListener implements MessageListener {
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
+	}
+
+	public void setMessageSender(MessageSender messageSender) {
+		_messageSender = messageSender;
+	}
+
+	public void setSchedulerEngine(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
 	}
 
 	protected void doReceive(Message message) throws Exception {

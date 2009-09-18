@@ -40,6 +40,12 @@ import com.liferay.portal.kernel.uuid.PortalUUID;
 public class DefaultSynchronousMessageSender
 	implements SynchronousMessageSender {
 
+	public DefaultSynchronousMessageSender() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public DefaultSynchronousMessageSender(
 		MessageBus messageBus, PortalUUID portalUUID, long timeout) {
 
@@ -89,6 +95,18 @@ public class DefaultSynchronousMessageSender
 			new SynchronousMessageListener(_messageBus, message, timeout);
 
 		return synchronousMessageListener.send();
+	}
+
+	public void setMessageBus(MessageBus messageBus) {
+		_messageBus = messageBus;
+	}
+
+	public void setPortalUUID(PortalUUID portalUUID) {
+		_portalUUID = portalUUID;
+	}
+
+	public void setTimeout(long timeout) {
+		_timeout = timeout;
 	}
 
 	private static Log _log =

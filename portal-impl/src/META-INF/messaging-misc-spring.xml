@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -9,40 +10,40 @@
 	<!-- Destinations -->
 
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/convert_process" />
+		<property name="name" value="liferay/convert_process" />
 	</bean>
 	<bean id="destination.hot_deploy" class="com.liferay.portal.kernel.messaging.SerialDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/hot_deploy" />
+		<property name="name" value="liferay/hot_deploy" />
 	</bean>
 	<bean id="destination.layouts_local_publisher" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/layouts_local_publisher" />
+		<property name="name" value="liferay/layouts_local_publisher" />
 	</bean>
 	<bean id="destination.layouts_remote_publisher" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/layouts_remote_publisher" />
+		<property name="name" value="liferay/layouts_remote_publisher" />
 	</bean>
 	<bean id="destination.live_users" class="com.liferay.portal.kernel.messaging.SerialDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/live_users" />
+		<property name="name" value="liferay/live_users" />
 	</bean>
 	<bean id="destination.message_boards" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/message_boards" />
+		<property name="name" value="liferay/message_boards" />
 	</bean>
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/message_boards_mailing_list" />
+		<property name="name" value="liferay/message_boards_mailing_list" />
 	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/wiki" />
+		<property name="name" value="liferay/wiki" />
 	</bean>
 
 	<!-- Listeners -->
 
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="messageSender.service_request_status" />
-		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<property name="statusSender" ref="messageSender.service_request_status" />
 	</bean>
 	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender" ref="messageSender.service_request_status" />
-		<constructor-arg index="1" type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+		<property name="statusSender" ref="messageSender.service_request_status" />
 	</bean>
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />

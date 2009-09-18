@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -24,7 +25,7 @@
 	<!-- Messaging -->
 
 	<bean id="destination.mail" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/mail" />
+		<property name="name" value="liferay/mail" />
 	</bean>
 	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
 	<bean id="messagingConfigurator.mail" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">

@@ -37,14 +37,6 @@ import java.util.Set;
  */
 public class PortletManager implements PortletManagerMBean {
 
-	public PortletManager(
-		ServerStatistics serverStatistics,
-		PortletSummaryStatistics portletSummaryStatistics) {
-
-		_serverStatistics = serverStatistics;
-		_portletSummaryStatistics = portletSummaryStatistics;
-	}
-
 	public long getAverageTime() throws MonitoringException {
 		return _portletSummaryStatistics.getAverageTime();
 	}
@@ -316,6 +308,16 @@ public class PortletManager implements PortletManagerMBean {
 
 	public void reset(String webId) {
 		_serverStatistics.reset(webId);
+	}
+
+	public void setPortletSummaryStatistics(
+		PortletSummaryStatistics portletSummaryStatistics) {
+
+		_portletSummaryStatistics = portletSummaryStatistics;
+	}
+
+	public void setServerStatistics(ServerStatistics serverStatistics) {
+		_serverStatistics = serverStatistics;
 	}
 
 	private PortletSummaryStatistics _portletSummaryStatistics;

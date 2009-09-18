@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -15,24 +16,24 @@
 	<bean id="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean" class="com.liferay.portal.workflow.WorkflowDefinitionManagerProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<constructor-arg index="0" value="liferay/workflow_definition" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="destinationName" value="liferay/workflow_definition" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean" class="com.liferay.portal.workflow.WorkflowInstanceManagerProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<constructor-arg index="0" value="liferay/workflow_instance" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="destinationName" value="liferay/workflow_instance" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.workflow.TaskInstanceManagerProxyBean" class="com.liferay.portal.workflow.TaskInstanceManagerProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<constructor-arg index="0" value="liferay/workflow_task" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="destinationName" value="liferay/workflow_task" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 	</bean>
@@ -93,13 +94,13 @@
 	<!-- Messaging -->
 
 	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_definition" />
+		<property name="name" value="liferay/workflow_definition" />
 	</bean>
 	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_instance" />
+		<property name="name" value="liferay/workflow_instance" />
 	</bean>
 	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/workflow_task" />
+		<property name="name" value="liferay/workflow_task" />
 	</bean>
 	<bean id="messagingConfigurator.workflow" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">

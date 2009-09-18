@@ -37,10 +37,6 @@ import java.util.Set;
 public class ResourceRequestSummaryStatistics
 	implements PortletSummaryStatistics {
 
-	public ResourceRequestSummaryStatistics(ServerStatistics serverStatistics) {
-		_serverStatistics = serverStatistics;
-	}
-
 	public long getAverageTime() {
 		long averageTime = 0;
 
@@ -506,6 +502,10 @@ public class ResourceRequestSummaryStatistics
 			_serverStatistics.getCompanyStatistics(webId);
 
 		return getTimeoutCountByPortlet(portletId, companyStatistics);
+	}
+
+	public void setServerStatistics(ServerStatistics serverStatistics) {
+		_serverStatistics = serverStatistics;
 	}
 
 	protected long getAverageTimeByCompany(

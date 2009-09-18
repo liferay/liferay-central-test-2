@@ -45,6 +45,12 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineImpl;
 public class SearchEngineDestinationEventListener
 	extends BaseDestinationEventListener {
 
+	public SearchEngineDestinationEventListener() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public SearchEngineDestinationEventListener(
 		SearchReaderMessageListener searchReaderMessageListener,
 		SearchWriterMessageListener searchWriterMessageListener) {
@@ -102,6 +108,18 @@ public class SearchEngineDestinationEventListener
 			setTermQueryFactory(
 				new com.liferay.portal.search.lucene.TermQueryFactoryImpl());
 		}
+	}
+
+	public void setSearchReaderMessageListener(
+		SearchReaderMessageListener searchReaderMessageListener) {
+
+		_searchReaderMessageListener = searchReaderMessageListener;
+	}
+
+	public void setSearchWriterMessageListener(
+		SearchWriterMessageListener searchWriterMessageListener) {
+
+		_searchWriterMessageListener = searchWriterMessageListener;
 	}
 
 	protected boolean isProceed(

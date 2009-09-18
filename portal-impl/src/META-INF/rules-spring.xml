@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans
+	default-init-method="afterPropertiesSet"
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
@@ -15,14 +16,14 @@
 	<bean id="com.liferay.portal.bi.rules.RulesEngineProxyBean" class="com.liferay.portal.bi.rules.RulesEngineProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
-				<constructor-arg index="0" value="liferay/rules_engine" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="destinationName" value="liferay/rules_engine" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
 			</bean>
 		</property>
 		<property name="singleDestinationMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
-				<constructor-arg index="0" value="liferay/rules_engine" />
-				<constructor-arg index="1" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+				<property name="destinationName" value="liferay/rules_engine" />
+				<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 			</bean>
 		</property>
 	</bean>
@@ -48,7 +49,7 @@
 	<!-- Messaging -->
 
 	<bean id="destination.rules_engine" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<constructor-arg index="0" type="java.lang.String" value="liferay/rules_engine" />
+		<property name="name" value="liferay/rules_engine" />
 	</bean>
 	<bean id="messagingConfigurator.rules" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinations">
