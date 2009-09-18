@@ -84,7 +84,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 				</c:if>
 			</aui:column>
 
-			<aui:column cssClass="top-links-right">
+			<aui:column cssClass="top-links-search">
 				<liferay-portlet:renderURL varImpl="searchURL">
 					<portlet:param name="struts_action" value="/wiki/search" />
 				</liferay-portlet:renderURL>
@@ -102,7 +102,7 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 					%>
 
 					<aui:fieldset>
-						<div class="top-links-block">
+						<div class="top-links-navigation">
 							<aui:a href="<%= frontPageURL.toString() %>"><span class="nobr"><%= WikiPageConstants.FRONT_PAGE %></span></aui:a>
 
 							<%

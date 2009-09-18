@@ -316,11 +316,11 @@
 	padding-bottom: 10px;
 }
 
-.portlet-wiki .top-links .top-links-block {
+.portlet-wiki .top-links .top-links-navigation {
 	float: left;
 }
 
-.portlet-wiki .top-links .top-links-right {
+.portlet-wiki .top-links .top-links-search {
 	float: right;
 }
 
