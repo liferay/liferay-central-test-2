@@ -27,7 +27,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -36,6 +35,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksPermission;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 /**
@@ -66,13 +66,13 @@ public class BookmarksEntryAssetRendererFactory
 	}
 
 	public PortletURL getURLAdd(
-		PortletRequest portletRequest, LiferayPortletResponse portletResponse) {
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequestImpl.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)portletResponse;
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletURL addAssetURL = null;
 
@@ -80,7 +80,7 @@ public class BookmarksEntryAssetRendererFactory
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			addAssetURL = portletResponse.createRenderURL(
+			addAssetURL = liferayPortletResponse.createRenderURL(
 				PortletKeys.BOOKMARKS);
 
 			addAssetURL.setParameter(
