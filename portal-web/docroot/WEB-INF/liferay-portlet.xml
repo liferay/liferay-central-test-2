@@ -370,6 +370,7 @@
 		<social-activity-interpreter-class>com.liferay.portlet.wiki.social.WikiActivityInterpreter</social-activity-interpreter-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>8.0</control-panel-entry-weight>
+		<asset-renderer-factory>com.liferay.portlet.wiki.asset.WikiPageAssetRendererFactory</asset-renderer-factory>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<scopeable>true</scopeable>
