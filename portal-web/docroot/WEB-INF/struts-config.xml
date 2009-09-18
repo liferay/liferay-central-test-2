@@ -1800,6 +1800,14 @@
 			<forward name="portlet.words.view" path="portlet.words.view" />
 		</action>
 
+		<!-- Workflow Tasks -->
+
+		<action path="/workflow_tasks/view" forward="portlet.workflow_tasks.view" />
+
+		<action path="/workflow_tasks/edit_task" type="com.liferay.portlet.workflowtasks.action.EditTaskAction">
+			<forward name="portlet.workflow_tasks.error" path="portlet.workflow_tasks.error" />
+		</action>
+
 		<!-- XSL Content -->
 
 		<action path="/xsl_content/view" type="com.liferay.portlet.xslcontent.action.ViewAction">
