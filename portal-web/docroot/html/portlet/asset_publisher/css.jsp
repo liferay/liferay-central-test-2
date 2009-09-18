@@ -217,7 +217,7 @@
 	float: left;
 }
 
-.portlet-asset-publisher .thread {
+.portlet-asset-publisher .message {
 	background-image: url(<%= PortalUtil.getPathContext() %>/html/icons/message_boards.png);
 }
 
