@@ -29,6 +29,28 @@ package com.liferay.portal.kernel.util;
  */
 public class AggregateClassLoader extends ClassLoader {
 
+	public static ClassLoader createAggregateClassLoader(
+		ClassLoader[] classLoaders) {
+
+		if ((classLoaders == null) || (classLoaders.length == 0)) {
+			return null;
+		}
+
+		if (classLoaders.length == 1) {
+			return classLoaders[0];
+		}
+
+		AggregateClassLoader aggregateLoader =
+			new AggregateClassLoader(classLoaders[1], classLoaders[0]);
+
+		for (int i = 2; i < classLoaders.length; i++) {
+			aggregateLoader = new AggregateClassLoader(
+				classLoaders[i], aggregateLoader);
+		}
+		
+		return aggregateLoader;
+	}
+
 	public AggregateClassLoader(
 		ClassLoader defaultClassLoader, ClassLoader backupClassLoader) {
 
@@ -42,7 +64,10 @@ public class AggregateClassLoader extends ClassLoader {
 			return super.loadClass(name);
 		}
 		catch (ClassNotFoundException cnfe) {
-			return _backupClassLoader.loadClass(name);
+			if (_backupClassLoader != null) {
+				return _backupClassLoader.loadClass(name);
+			}
+			throw cnfe;
 		}
 	}
 

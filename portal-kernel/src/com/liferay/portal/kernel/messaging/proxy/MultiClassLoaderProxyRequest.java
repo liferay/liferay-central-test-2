@@ -44,16 +44,8 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 
 		ClassLoader[] classLoaders = inspectForClassLoaders(method);
 
-		if ((classLoaders != null) && (classLoaders.length > 0)) {
-			_clientClassLoaders = classLoaders[0];
-
-			if (classLoaders.length > 1) {
-				for (int i = 1; i < classLoaders.length; i++) {
-					_clientClassLoaders = new AggregateClassLoader(
-						classLoaders[i], _clientClassLoaders);
-				}
-			}
-		}
+		_clientClassLoaders =
+			AggregateClassLoader.createAggregateClassLoader(classLoaders);
 	}
 
 	public Object execute(Object object) throws Exception {
