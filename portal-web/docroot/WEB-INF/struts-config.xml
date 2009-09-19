@@ -1802,11 +1802,11 @@
 
 		<!-- Workflow Tasks -->
 
-		<action path="/workflow_tasks/view" forward="portlet.workflow_tasks.view" />
-
 		<action path="/workflow_tasks/edit_task" type="com.liferay.portlet.workflowtasks.action.EditTaskAction">
 			<forward name="portlet.workflow_tasks.error" path="portlet.workflow_tasks.error" />
 		</action>
+
+		<action path="/workflow_tasks/view" forward="portlet.workflow_tasks.view" />
 
 		<!-- XSL Content -->
 

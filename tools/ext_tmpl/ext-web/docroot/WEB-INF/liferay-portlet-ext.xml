@@ -488,6 +488,31 @@
 		<struts-path>dockbar</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>146</portlet-name>
+		<struts-path>layout_prototypes</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>147</portlet-name>
+		<struts-path>asset_category_admin</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>148</portlet-name>
+		<struts-path>asset_tags_cloud</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>149</portlet-name>
+		<struts-path>layout_set_prototypes</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>150</portlet-name>
+		<struts-path>workflow_tasks</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

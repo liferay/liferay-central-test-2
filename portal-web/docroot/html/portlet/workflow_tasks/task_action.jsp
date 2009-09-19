@@ -51,6 +51,7 @@ List<String> activityNames = TaskInstanceManagerUtil.getPossibleNextActivityName
 			<portlet:param name="struts_action" value="/workflow_tasks/edit_task" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="taskIntanceId" value="<%= StringUtil.valueOf(taskInstanceInfo.getTaskInstanceId()) %>" />
+
 			<c:if test="<%= activityName != null %>">
 				<portlet:param name="activityName" value="<%= activityName %>" />
 			</c:if>

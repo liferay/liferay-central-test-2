@@ -19,6 +19,7 @@
 		<portlet id="118" />
 		<portlet id="122" />
 		<portlet id="141" />
+		<portlet id="148" />
 	</category>
 	<category name="category.collaboration">
 		<portlet id="8" />
@@ -36,6 +37,7 @@
 		<portlet id="100" />
 		<portlet id="107" />
 		<portlet id="108" />
+		<portlet id="143" />
 	</category>
 	<category name="category.entertainment">
 		<portlet id="6" />
@@ -65,6 +67,10 @@
 		<portlet id="135" />
 		<portlet id="136" />
 		<portlet id="137" />
+		<portlet id="139" />
+		<portlet id="146" />
+		<portlet id="147" />
+		<portlet id="149" />
 	</category>
 	<category name="category.news">
 		<portlet id="39" />
