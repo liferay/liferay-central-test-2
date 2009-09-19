@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.model.impl.ImageImpl;
+import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
@@ -73,7 +73,7 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 				}
 			}
 
-			_type = ImageImpl.TYPE_NOT_AVAILABLE;
+			_type = ImageConstants.TYPE_NOT_AVAILABLE;
 			_height = null;
 			_width = null;
 			_size = new Integer(bytes.length);

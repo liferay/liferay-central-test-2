@@ -20,48 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.model;
 
-import com.liferay.portal.image.Hook;
-import com.liferay.portal.image.HookFactory;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.model.Image;
+import com.liferay.portal.kernel.image.ImageProcessor;
 
 /**
- * <a href="ImageImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class ImageImpl extends ImageModelImpl implements Image {
+public class ImageConstants {
 
-	public ImageImpl() {
-	}
+	public static final String TYPE_BMP = ImageProcessor.TYPE_BMP;
 
-	public byte[] getTextObj() {
-		if (_textObj == null) {
-			try {
-				Hook hook = HookFactory.getInstance();
+	public static final String TYPE_GIF = ImageProcessor.TYPE_GIF;
 
-				_textObj = hook.getImageAsBytes(this);
-			}
-			catch (Exception e) {
-				_log.error("Error reading image " + getImageId(), e);
-			}
-		}
+	public static final String TYPE_JPEG = ImageProcessor.TYPE_JPEG;
 
-		return _textObj;
-	}
+	public static final String TYPE_PNG = ImageProcessor.TYPE_PNG;
 
-	public void setTextObj(byte[] textObj) {
-		_textObj = textObj;
+	public static final String TYPE_TIFF = ImageProcessor.TYPE_TIFF;
 
-		super.setText(Base64.objectToString(textObj));
-	}
-
-	private byte[] _textObj;
-
-	private static Log _log = LogFactoryUtil.getLog(ImageImpl.class);
+	public static final String TYPE_NOT_AVAILABLE =
+		ImageProcessor.TYPE_NOT_AVAILABLE;
 
 }

@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ImageConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.ContentTypeUtil;
@@ -236,7 +236,7 @@ public class ImageServlet extends HttpServlet {
 			throw new NoSuchImageException("Image is null");
 		}
 		else {
-			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
+			if (!image.getType().equals(ImageConstants.TYPE_NOT_AVAILABLE)) {
 				String contentType = ContentTypeUtil.getContentType(
 					image.getType());
 
