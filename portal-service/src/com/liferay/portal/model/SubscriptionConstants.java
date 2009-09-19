@@ -20,19 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.model.Subscription;
+package com.liferay.portal.model;
 
 /**
- * <a href="SubscriptionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SubscriptionConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class SubscriptionImpl
-	extends SubscriptionModelImpl implements Subscription {
+public class SubscriptionConstants {
 
-	public SubscriptionImpl() {
-	}
+	public static final String FREQUENCY_INSTANT = "instant";
 
 }

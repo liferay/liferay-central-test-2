@@ -25,8 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.SubscriptionConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -47,7 +47,8 @@ public class SubscriptionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addSubscription(
-			userId, className, classPK, SubscriptionImpl.FREQUENCY_INSTANT);
+			userId, className, classPK,
+			SubscriptionConstants.FREQUENCY_INSTANT);
 	}
 
 	public Subscription addSubscription(
