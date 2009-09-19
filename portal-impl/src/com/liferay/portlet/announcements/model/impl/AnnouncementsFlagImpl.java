@@ -28,19 +28,11 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  * <a href="AnnouncementsFlagImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
- * @author Raymond Augé
+ * @author Raymond AugŽ
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsFlagImpl
 	extends AnnouncementsFlagModelImpl implements AnnouncementsFlag {
-
-	public static final int HIDDEN = 2;
-
-	public static final int NOT_HIDDEN = -1;
-
-	public static final int READ = 1;
-
-	public static final int UNREAD = 0;
 
 	public AnnouncementsFlagImpl() {
 	}

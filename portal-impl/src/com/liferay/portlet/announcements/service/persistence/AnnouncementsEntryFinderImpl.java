@@ -35,8 +35,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+import com.liferay.portlet.announcements.model.AnnouncementsFlagConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
@@ -88,7 +88,7 @@ public class AnnouncementsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_HIDDEN);
 
-			if (flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) {
+			if (flagValue == AnnouncementsFlagConstants.NOT_HIDDEN) {
 				sql = CustomSQLUtil.get(COUNT_BY_NOT_HIDDEN);
 			}
 
@@ -112,7 +112,7 @@ public class AnnouncementsEntryFinderImpl
 
 			qPos.add(alert);
 			qPos.add(userId);
-			qPos.add(AnnouncementsFlagImpl.HIDDEN);
+			qPos.add(AnnouncementsFlagConstants.HIDDEN);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -150,7 +150,7 @@ public class AnnouncementsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_HIDDEN);
 
-			if (flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) {
+			if (flagValue == AnnouncementsFlagConstants.NOT_HIDDEN) {
 				sql = CustomSQLUtil.get(COUNT_BY_NOT_HIDDEN);
 			}
 
@@ -173,7 +173,7 @@ public class AnnouncementsEntryFinderImpl
 
 			qPos.add(alert);
 			qPos.add(userId);
-			qPos.add(AnnouncementsFlagImpl.HIDDEN);
+			qPos.add(AnnouncementsFlagConstants.HIDDEN);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -244,7 +244,7 @@ public class AnnouncementsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_HIDDEN);
 
-			if (flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) {
+			if (flagValue == AnnouncementsFlagConstants.NOT_HIDDEN) {
 				sql = CustomSQLUtil.get(FIND_BY_NOT_HIDDEN);
 			}
 
@@ -268,7 +268,7 @@ public class AnnouncementsEntryFinderImpl
 
 			qPos.add(alert);
 			qPos.add(userId);
-			qPos.add(AnnouncementsFlagImpl.HIDDEN);
+			qPos.add(AnnouncementsFlagConstants.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
 				q, getDialect(), start, end);
@@ -297,7 +297,7 @@ public class AnnouncementsEntryFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_HIDDEN);
 
-			if (flagValue == AnnouncementsFlagImpl.NOT_HIDDEN) {
+			if (flagValue == AnnouncementsFlagConstants.NOT_HIDDEN) {
 				sql = CustomSQLUtil.get(FIND_BY_NOT_HIDDEN);
 			}
 
@@ -320,7 +320,7 @@ public class AnnouncementsEntryFinderImpl
 
 			qPos.add(alert);
 			qPos.add(userId);
-			qPos.add(AnnouncementsFlagImpl.HIDDEN);
+			qPos.add(AnnouncementsFlagConstants.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
 				q, getDialect(), start, end);

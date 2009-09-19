@@ -20,19 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.model.impl;
+package com.liferay.portlet.announcements.model;
 
-import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
- * <a href="AnnouncementsEntryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AnnouncementsEntryConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class AnnouncementsEntryImpl
-	extends AnnouncementsEntryModelImpl implements AnnouncementsEntry {
+public class AnnouncementsEntryConstants {
 
-	public AnnouncementsEntryImpl() {
-	}
+	public static final String[] TYPES =
+		PropsUtil.getArray(PropsKeys.ANNOUNCEMENTS_ENTRY_TYPES);
 
 }

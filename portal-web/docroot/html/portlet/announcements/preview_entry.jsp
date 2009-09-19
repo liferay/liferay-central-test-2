@@ -29,7 +29,7 @@ String tabs1 = "preview";
 
 AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
-int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
+int flagValue = AnnouncementsFlagConstants.NOT_HIDDEN;
 
 String className = StringPool.BLANK;
 %>

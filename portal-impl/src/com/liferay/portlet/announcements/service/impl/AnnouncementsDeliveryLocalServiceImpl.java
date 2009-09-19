@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.announcements.NoSuchDeliveryException;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
+import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.service.base.AnnouncementsDeliveryLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -113,9 +113,9 @@ public class AnnouncementsDeliveryLocalServiceImpl
 
 		List<AnnouncementsDelivery> deliveries =
 			new ArrayList<AnnouncementsDelivery>(
-				AnnouncementsEntryImpl.TYPES.length);
+				AnnouncementsEntryConstants.TYPES.length);
 
-		for (String type : AnnouncementsEntryImpl.TYPES) {
+		for (String type : AnnouncementsEntryConstants.TYPES) {
 			deliveries.add(getUserDelivery(userId, type));
 		}
 

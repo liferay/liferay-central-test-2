@@ -20,19 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.model.impl;
-
-import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+package com.liferay.portlet.announcements.model;
 
 /**
- * <a href="AnnouncementsEntryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AnnouncementsFlagConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class AnnouncementsEntryImpl
-	extends AnnouncementsEntryModelImpl implements AnnouncementsEntry {
+public class AnnouncementsFlagConstants {
 
-	public AnnouncementsEntryImpl() {
-	}
+	public static final int HIDDEN = 2;
+
+	public static final int NOT_HIDDEN = -1;
+
+	public static final int READ = 1;
+
+	public static final int UNREAD = 0;
 
 }

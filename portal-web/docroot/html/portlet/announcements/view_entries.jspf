@@ -36,7 +36,7 @@
 	}
 
 	function <portlet:namespace />markEntry(entry, entryId) {
-		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagImpl.HIDDEN %>});
+		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagConstants.HIDDEN %>});
 
 		var readContainer = jQuery('#p_p_id<portlet:namespace /> .read-entries');
 		var control = entry.find('.control-entry a');
@@ -82,7 +82,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 List<AnnouncementsEntry> results = null;
 int total = 0;
 
-int flagValue = AnnouncementsFlagImpl.NOT_HIDDEN;
+int flagValue = AnnouncementsFlagConstants.NOT_HIDDEN;
 %>
 
 <div class="unread-entries">
@@ -96,7 +96,7 @@ boolean hasResults = total > 0;
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
 
 <%
-flagValue = AnnouncementsFlagImpl.HIDDEN;
+flagValue = AnnouncementsFlagConstants.HIDDEN;
 %>
 
 <div class="read-entries">

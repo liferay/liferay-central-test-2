@@ -73,8 +73,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortletImpl;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
@@ -290,7 +290,7 @@ public class EditUserAction extends PortletAction {
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			new ArrayList<AnnouncementsDelivery>();
 
-		for (String type : AnnouncementsEntryImpl.TYPES) {
+		for (String type : AnnouncementsEntryConstants.TYPES) {
 			boolean email = ParamUtil.getBoolean(
 				actionRequest, "announcementsType" + type + "Email");
 			boolean sms = ParamUtil.getBoolean(

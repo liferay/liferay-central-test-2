@@ -173,7 +173,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 		<select name="<portlet:namespace />type">
 
 			<%
-			for (String curType : AnnouncementsEntryImpl.TYPES) {
+			for (String curType : AnnouncementsEntryConstants.TYPES) {
 			%>
 
 				<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>

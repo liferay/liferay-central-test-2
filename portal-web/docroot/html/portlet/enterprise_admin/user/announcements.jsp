@@ -33,9 +33,9 @@ if (selUser != null) {
 	deliveries = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(selUser.getUserId());
 }
 else {
-	deliveries = new ArrayList<AnnouncementsDelivery>(AnnouncementsEntryImpl.TYPES.length);
+	deliveries = new ArrayList<AnnouncementsDelivery>(AnnouncementsEntryConstants.TYPES.length);
 
-	for (String type : AnnouncementsEntryImpl.TYPES) {
+	for (String type : AnnouncementsEntryConstants.TYPES) {
 		AnnouncementsDelivery delivery = new AnnouncementsDeliveryImpl();
 
 		delivery.setType(type);
