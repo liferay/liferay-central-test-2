@@ -28,10 +28,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.format.PhoneNumberUtil;
@@ -160,7 +160,8 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
 			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
 
-			listTypeService.validate(typeId, classNameId, ListTypeImpl.PHONE);
+			listTypeService.validate(
+				typeId, classNameId, ListTypeConstants.PHONE);
 		}
 
 		validate(phoneId, companyId, classNameId, classPK, primary);

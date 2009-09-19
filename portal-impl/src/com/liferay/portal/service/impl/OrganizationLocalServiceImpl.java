@@ -39,13 +39,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -890,7 +890,8 @@ public class OrganizationLocalServiceImpl
 			countryPersistence.findByPrimaryKey(countryId);
 		}
 
-		listTypeService.validate(statusId, ListTypeImpl.ORGANIZATION_STATUS);
+		listTypeService.validate(
+			statusId, ListTypeConstants.ORGANIZATION_STATUS);
 	}
 
 }

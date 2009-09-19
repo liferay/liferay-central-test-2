@@ -74,7 +74,7 @@ else {
 
 <h3><liferay-ui:message key="phone-numbers" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.PHONE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.PHONE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= PhoneNumberException.class %>" message="please-enter-a-valid-phone-number" />
 
 <aui:fieldset>
@@ -96,7 +96,7 @@ else {
 
 				<aui:input fieldParam='<%= "phoneExtension" + phonesIndex %>' name="extension" />
 
-				<aui:select label="type" name='<%= "phoneTypeId" + phonesIndex %>' listType="<%= className + ListTypeImpl.PHONE %>" />
+				<aui:select label="type" name='<%= "phoneTypeId" + phonesIndex %>' listType="<%= className + ListTypeConstants.PHONE %>" />
 
 				<aui:field-wrapper cssClass="primary-ctrl">
 					<aui:input checked="<%= phone.isPrimary() %>" id='<%= "phonePrimary" + phonesIndex %>' inlineLabel="left" label="primary" name="phonePrimary" type="radio" value="<%= phonesIndex %>" />

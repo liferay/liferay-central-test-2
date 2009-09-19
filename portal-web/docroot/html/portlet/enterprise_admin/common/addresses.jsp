@@ -76,7 +76,7 @@ else {
 <liferay-ui:error exception="<%= AddressStreetException.class %>" message="please-enter-a-valid-street" />
 <liferay-ui:error exception="<%= AddressZipException.class %>" message="please-enter-a-valid-zip" />
 <liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.ADDRESS %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.ADDRESS %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= NoSuchRegionException.class %>" message="please-select-a-region" />
 
 <aui:fieldset>
@@ -107,7 +107,7 @@ else {
 				</aui:column>
 
 				<aui:column>
-					<aui:select label="type" name='<%= "addressTypeId" + addressesIndex %>' listType="<%= className + ListTypeImpl.ADDRESS %>" />
+					<aui:select label="type" name='<%= "addressTypeId" + addressesIndex %>' listType="<%= className + ListTypeConstants.ADDRESS %>" />
 
 					<aui:input name="zip" fieldParam='<%= "addressZip" + addressesIndex %>' />
 

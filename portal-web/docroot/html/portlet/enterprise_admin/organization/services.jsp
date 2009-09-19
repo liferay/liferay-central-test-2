@@ -109,7 +109,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 <h3><liferay-ui:message key="services" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeImpl.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + Organization.class.getName() + ListTypeConstants.ORGANIZATION_SERVICE %>" message="please-select-a-type" />
 
 <aui:fieldset>
 
@@ -142,7 +142,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 			<div class="row-fields">
 				<aui:input name='<%= "orgLaborId" + orgLaborsIndex %>' type="hidden" />
 
-				<aui:select label="type" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' listType="<%= ListTypeImpl.ORGANIZATION_SERVICE %>" />
+				<aui:select label="type" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' listType="<%= ListTypeConstants.ORGANIZATION_SERVICE %>" />
 
 				<table class="org-labor-table">
 				<tr>

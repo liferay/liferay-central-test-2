@@ -72,7 +72,7 @@ else {
 
 <h3><liferay-ui:message key="websites" /></h3>
 
-<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeImpl.WEBSITE %>" message="please-select-a-type" />
+<liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.WEBSITE %>" message="please-select-a-type" />
 <liferay-ui:error exception="<%= WebsiteURLException.class %>" message="please-enter-a-valid-url" />
 
 <aui:fieldset>
@@ -93,7 +93,7 @@ else {
 
 				<aui:input fieldParam='<%= "websiteUrl" + websitesIndex %>' name="url" />
 
-				<aui:select label="type" name='<%= "websiteTypeId" + websitesIndex %>' listType="<%= className + ListTypeImpl.WEBSITE %>" />
+				<aui:select label="type" name='<%= "websiteTypeId" + websitesIndex %>' listType="<%= className + ListTypeConstants.WEBSITE %>" />
 
 				<aui:field-wrapper cssClass="primary-ctrl">
 					<aui:input checked="<%= website.isPrimary() %>" id='<%= "websitePrimary" + websitesIndex %>' inlineLabel="left" label="primary" name="websitePrimary" type="radio" value="<%= websitesIndex %>" />

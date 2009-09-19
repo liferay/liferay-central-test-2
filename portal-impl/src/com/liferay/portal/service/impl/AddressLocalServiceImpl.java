@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -181,7 +181,8 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
 			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
 
-			listTypeService.validate(typeId, classNameId, ListTypeImpl.ADDRESS);
+			listTypeService.validate(
+				typeId, classNameId, ListTypeConstants.ADDRESS);
 		}
 
 		validate(addressId, companyId, classNameId, classPK, mailing, primary);

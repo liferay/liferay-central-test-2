@@ -26,9 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -155,7 +155,8 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 			classPK = website.getClassPK();
 		}
 
-		listTypeService.validate(typeId, classNameId, ListTypeImpl.WEBSITE);
+		listTypeService.validate(
+			typeId, classNameId, ListTypeConstants.WEBSITE);
 
 		validate(websiteId, companyId, classNameId, classPK, primary);
 	}

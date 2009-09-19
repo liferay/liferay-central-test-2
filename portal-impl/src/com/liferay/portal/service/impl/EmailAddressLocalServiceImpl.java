@@ -27,8 +27,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.EmailAddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -154,7 +154,7 @@ public class EmailAddressLocalServiceImpl
 		}
 
 		listTypeService.validate(
-			typeId, classNameId, ListTypeImpl.EMAIL_ADDRESS);
+			typeId, classNameId, ListTypeConstants.EMAIL_ADDRESS);
 
 		validate(emailAddressId, companyId, classNameId, classPK, primary);
 	}
