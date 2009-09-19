@@ -20,18 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.model;
 
-import com.liferay.portal.model.Region;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 /**
- * <a href="RegionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="RegionConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class RegionImpl extends RegionModelImpl implements Region {
+public class RegionConstants {
 
-	public RegionImpl() {
-	}
+	public static final int DEFAULT_REGION_ID =
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
+			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID));
 
 }
