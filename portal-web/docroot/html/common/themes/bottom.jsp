@@ -223,6 +223,6 @@ StringBuilder pageBottomSB = (StringBuilder)request.getAttribute(WebKeys.PAGE_BO
 <%@ include file="/html/common/themes/session_timeout.jspf" %>
 
 <c:if test="<%= PropsValues.MONITORING_PORTAL_REQUEST%>">
-	<liferay-util:include page="/html/common/themes/bottom-monitoring.jsp" />
+	<liferay-util:include page="/html/common/themes/bottom_monitoring.jsp" />
 </c:if>
 <liferay-util:include page="/html/common/themes/bottom-ext.jsp" />
