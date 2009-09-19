@@ -78,6 +78,9 @@
 <%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.log.LogUtil" %>
 <%@ page import="com.liferay.portal.kernel.messaging.DestinationNames" %>
+<%@ page import="com.liferay.portal.kernel.messaging.MessageBusUtil" %>
+<%@ page import="com.liferay.portal.monitoring.statistics.DataSampleThreadLocal" %>
+<%@ page import="com.liferay.portal.monitoring.statistics.DataSample" %>
 <%@ page import="com.liferay.portal.kernel.portlet.DynamicRenderRequest" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletMode" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
@@ -138,6 +141,8 @@
 <%@ page import="com.liferay.portal.language.LanguageImpl" %>
 <%@ page import="com.liferay.portal.model.*" %>
 <%@ page import="com.liferay.portal.model.impl.*" %>
+<%@ page import="com.liferay.portal.monitoring.RequestStatus" %>
+<%@ page import="com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample" %>
 <%@ page import="com.liferay.portal.security.auth.PrincipalException" %>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
 <%@ page import="com.liferay.portal.security.permission.PermissionChecker" %>
@@ -261,6 +266,8 @@
 
 <%@ page import="org.apache.commons.math.util.MathUtils" %>
 <%@ page import="org.apache.struts.Globals" %>
+
+<%@ page import="com.liferay.portal.kernel.util.StackTraceUtil" %>
 
 <liferay-theme:defineObjects />
 

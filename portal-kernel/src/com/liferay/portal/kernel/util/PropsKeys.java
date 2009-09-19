@@ -922,6 +922,8 @@ public interface PropsKeys {
 	public static final String MODEL_HINTS_CONFIGS = "model.hints.configs";
 
 	public static final String MONITORING_DATA_SAMPLE_THREAD_LOCAL = "monitoring.data.sample.thread.local";
+	
+	public static final String MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE = "monitoring.display.per.request.data.sample";
 
 	public static final String MONITORING_PORTAL_REQUEST = "monitoring.portal.request";
 

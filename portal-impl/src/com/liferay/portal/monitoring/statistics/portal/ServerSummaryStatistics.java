@@ -36,10 +36,6 @@ import java.util.Set;
  */
 public class ServerSummaryStatistics implements SummaryStatistics {
 
-	public ServerSummaryStatistics(ServerStatistics serverStatistics) {
-		_serverStatistics = serverStatistics;
-	}
-
 	public long getAverageTime() {
 		long averageTime = 0;
 
@@ -214,6 +210,10 @@ public class ServerSummaryStatistics implements SummaryStatistics {
 		throws MonitoringException {
 
 		return getRequestStatistics(webId).getTimeoutCount();
+	}
+
+	public void setServerStatistics(ServerStatistics serverStatistics) {
+		_serverStatistics = serverStatistics;
 	}
 
 	protected RequestStatistics getRequestStatistics(long companyId)

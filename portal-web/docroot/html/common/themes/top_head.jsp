@@ -24,6 +24,10 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<c:if test="<%= PropsValues.MONITORING_PORTAL_REQUEST%>">
+	<liferay-util:include page="/html/common/themes/top-monitoring.jsp" />
+</c:if>
+
 <%@ include file="/html/common/themes/top_meta.jspf" %>
 <%@ include file="/html/common/themes/top_meta-ext.jsp" %>
 

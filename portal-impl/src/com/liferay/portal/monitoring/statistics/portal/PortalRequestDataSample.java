@@ -67,6 +67,14 @@ public class PortalRequestDataSample extends BaseDataSample {
 		return _requestURL;
 	}
 
+	@Override
+	public String toString() {
+		return "PortalRequestDataSample{" +
+			"_requestURL='" + _requestURL + '\'' +
+			super.toString() +
+			'}';
+	}
+
 	private String _requestURL;
 
 }

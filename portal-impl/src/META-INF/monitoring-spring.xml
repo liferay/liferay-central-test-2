@@ -43,6 +43,14 @@
 	</bean>
 	<bean id="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" class="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
 	<bean id="com.liferay.portlet.MonitoringPortletManager" class="com.liferay.portlet.MonitoringPortletManager" />
+	<bean id="com.liferay.portal.monitoring.jmx.PortalRequestManager" class="com.liferay.portal.monitoring.jmx.PortalManager">
+		<property name="summaryStatistics">
+			<bean class="com.liferay.portal.monitoring.statistics.portal.ServerSummaryStatistics">
+				<property name="serverStatistics" ref="portalStatistics" />
+			</bean>
+		</property>
+		<property name="serverStatistics" ref="portalStatistics" />
+	</bean>
 	<bean id="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" class="com.liferay.portal.monitoring.jmx.PortletManager">
 		<property name="portletSummaryStatistics">
 			<bean class="com.liferay.portal.monitoring.statistics.portlet.ActionRequestSummaryStatistics">
@@ -82,6 +90,8 @@
 				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
 				<entry key="com.liferay.portal:classification=instrumentation,name=MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
 				<entry key="com.liferay.portal:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
+
+				<entry key="com.liferay.portal:classification=portal,name=PortalRequestManager" value-ref="com.liferay.portal.monitoring.jmx.PortalRequestManager" />
 
 				<entry key="com.liferay.portal:classification=portlet,name=ActionRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" />
 				<entry key="com.liferay.portal:classification=portlet,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />

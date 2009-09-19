@@ -37,14 +37,6 @@ import java.util.Set;
  */
 public class PortalManager implements PortalManagerMBean {
 
-	public PortalManager(
-		ServerStatistics serverStatistics,
-		SummaryStatistics summaryStatistics) {
-
-		_serverStatistics = serverStatistics;
-		_summaryStatistics = summaryStatistics;
-	}
-
 	public long getAverageTime() throws MonitoringException {
 		return _summaryStatistics.getAverageTime();
 	}
@@ -188,6 +180,14 @@ public class PortalManager implements PortalManagerMBean {
 
 	public void reset(String webId) {
 		_serverStatistics.reset(webId);
+	}
+
+	public void setServerStatistics(ServerStatistics serverStatistics) {
+		_serverStatistics = serverStatistics;
+	}
+
+	public void setSummaryStatistics(SummaryStatistics summaryStatistics) {
+		_summaryStatistics = summaryStatistics;
 	}
 
 	private ServerStatistics _serverStatistics;

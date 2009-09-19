@@ -1000,6 +1000,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_DATA_SAMPLE_THREAD_LOCAL));
 
+	public static final boolean MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE = 
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE));
+
 	public static boolean MONITORING_PORTAL_REQUEST =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_PORTAL_REQUEST));
