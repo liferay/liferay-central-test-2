@@ -26,6 +26,7 @@ package com.liferay.portal.kernel.util;
  * <a href="AggregateClassLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael C. Han
  */
 public class AggregateClassLoader extends ClassLoader {
 
@@ -59,16 +60,28 @@ public class AggregateClassLoader extends ClassLoader {
 		_backupClassLoader = backupClassLoader;
 	}
 
-	public Class<?> loadClass(String name) throws ClassNotFoundException {
+	protected Class<?> loadClass(String name, boolean resolve)
+		throws ClassNotFoundException {
+
+		Class<?> loadedClass = null;
+		
 		try {
-			return super.loadClass(name);
+			loadedClass = super.loadClass(name, resolve);
 		}
 		catch (ClassNotFoundException cnfe) {
 			if (_backupClassLoader != null) {
-				return _backupClassLoader.loadClass(name);
+				loadedClass = _backupClassLoader.loadClass(name);
 			}
-			throw cnfe;
+			else {
+				throw cnfe;
+			}
 		}
+
+		if (resolve) {
+			resolveClass(loadedClass);
+		}
+		
+		return loadedClass;
 	}
 
 	private ClassLoader _backupClassLoader;
