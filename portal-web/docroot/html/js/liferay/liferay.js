@@ -2,6 +2,8 @@ jQuery.noConflict();
 
 Liferay = Liferay || {};
 
+Liferay.namespace = AUI().namespace;
+
 Liferay.Editor = {};
 
 if (!Liferay._ajaxOld) {
