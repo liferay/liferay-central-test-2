@@ -31,6 +31,7 @@
 <%@ page import="com.liferay.portal.kernel.xml.XPath" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
+<%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.journal.ArticleContentException" %>
 <%@ page import="com.liferay.portlet.journal.ArticleDisplayDateException" %>
@@ -69,6 +70,9 @@
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleConstants" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
+
 <%@ page import="com.liferay.portlet.journal.model.JournalFeed" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalFeedConstants" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalStructure" %>
@@ -89,6 +93,7 @@
 <%@ page import="com.liferay.portlet.journal.search.TemplateSearch" %>
 <%@ page import="com.liferay.portlet.journal.search.TemplateSearchTerms" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
@@ -99,6 +104,7 @@
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %>
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 <%@ page import="com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl" %>
+<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 
 <%@ page import="com.liferay.util.RSSUtil" %>
 
