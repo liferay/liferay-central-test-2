@@ -36,6 +36,11 @@ public class DateUtil_IW {
 		return DateUtil.compareTo(date1, date2);
 	}
 
+	public static int compareTo(java.util.Date date1, java.util.Date date2,
+		boolean ignoreMilliseconds) {
+		return DateUtil.compareTo(date1, date2, ignoreMilliseconds);
+	}
+
 	public boolean equals(java.util.Date date1, java.util.Date date2) {
 		return DateUtil.equals(date1, date2);
 	}

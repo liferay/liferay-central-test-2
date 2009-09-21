@@ -61,7 +61,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 			return 0;
 		}
 
-		int value = DateUtil.compareTo(lastPostDate1, lastPostDate2);
+		int value = DateUtil.compareTo(lastPostDate1, lastPostDate2, true);
 
 		if (_asc) {
 			return value;
