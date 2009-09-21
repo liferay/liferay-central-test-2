@@ -2028,11 +2028,13 @@
 				var canSubmmit = instance._validadeRequiredFields();
 
 				if (canSubmmit) {
-					cmdInput.val(cmd);
-
 					if (cmd == 'approve') {
 						approveInput.val(1);
+
+						cmd =  instance.articleId ? 'update' : 'add';
 					}
+
+					cmdInput.val(cmd);
 
 					if (saveAndContinue) {
 						saveAndContinueInput.val(1);
