@@ -964,7 +964,7 @@
 			},
 
 			_formatOptionsKey: function(s) {
-			    return s.replace(/\W+/g, ' ').replace(/^\W+|\W+$/g, '').replace(/ /g, '_');
+				return s.replace(/\W+/g, ' ').replace(/^\W+|\W+$/g, '').replace(/ /g, '_');
 			},
 
 			_appendStructureFieldOptionsBuffer: function(source, buffer, generateArticleContent) {
@@ -1246,7 +1246,7 @@
 					attributeMap || {},
 					function(key, value) {
 						if (value !== undefined) {
-							attrs.push([key, '="',  value, '" '].join(''));
+							attrs.push([key, '="', value, '" '].join(''));
 						}
 					}
 				);
@@ -1568,19 +1568,19 @@
 			},
 
 			_generateId: function(id, namespace, prefix) {
-			    var instance = this;
+				var instance = this;
 
-			    if (typeof namespace != 'string') {
-			        namespace = instance.portletNamespace;
-			    }
+				if (typeof namespace != 'string') {
+					namespace = instance.portletNamespace;
+				}
 
-			    if (typeof prefix != 'string') {
-			        prefix = '#';
-			    }
+				if (typeof prefix != 'string') {
+					prefix = '#';
+				}
 
-			    id = id.replace(/^#/, '');
+				id = id.replace(/^#/, '');
 
-			    return prefix + namespace + id;
+				return prefix + namespace + id;
 			},
 
 			_getById: function(id) {
@@ -2015,7 +2015,7 @@
 				}
 
 				if (!cmd) {
-					cmd =  instance.articleId ? 'update' : 'add';
+					cmd = instance.articleId ? 'update' : 'add';
 				}
 
 				var cmdInput = instance._getInputByName(form, 'cmd');
@@ -2031,7 +2031,7 @@
 					if (cmd == 'approve') {
 						approveInput.val(1);
 
-						cmd =  instance.articleId ? 'update' : 'add';
+						cmd = instance.articleId ? 'update' : 'add';
 					}
 
 					cmdInput.val(cmd);
