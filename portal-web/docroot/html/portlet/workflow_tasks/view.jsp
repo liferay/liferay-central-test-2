@@ -25,17 +25,36 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
+
+boolean completed = false;
+String emptyResultsMessage = "there-are-no-pending-tasks-assigned-to-you";
+
+if (tabs1.equals("completed")) {
+	completed = true;
+	emptyResultsMessage = "there-are-no-completed-tasks";
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setParameter("tabs1", tabs1);
+%>
+
+<liferay-ui:tabs
+	names="pending,completed"
+	url="<%= portletURL.toString() %>"
+/>
+
+<%
 try {
 %>
 
 	<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.get(pageContext, "there-are-no-pending-tasks-assigned-to-you") %>'
+		emptyResultsMessage='<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>'
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
-			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), false) %>"
+			results="<%= TaskInstanceManagerUtil.getTaskInstanceInfosByUser(user.getUserId(), completed) %>"
 			total="<%= TaskInstanceManagerUtil.getTaskInstanceCountForUser(user.getUserId()) %>"
 		/>
 
@@ -64,10 +83,12 @@ try {
 				property="dueDate"
 			/>
 
-			<liferay-ui:search-container-column-jsp
-				align="right"
-				path="/html/portlet/workflow_tasks/task_action.jsp"
-			/>
+			<c:if test="<%= !completed %>">
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/workflow_tasks/task_action.jsp"
+				/>
+			</c:if>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator paginate="<%= false %>" />
