@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
-import com.liferay.portal.kernel.workflow.query.QueryContext;
 
 import java.util.List;
 
@@ -93,16 +92,10 @@ public interface WorkflowDefinitionManager {
 	 * #getWorkflowDefinitions(String)} instead where all versions for a
 	 * specific workflow definition are being returned.
 	 *
-	 * @param queryContext the query context contains the ordering and paging
-	 *		  parameters(see {@link QueryContext} and
-	 *		  {@link WorkflowDefinitionQueryContextBuilder} for more
-	 *		  information)
-	 *
 	 * @return the list of available workflow definitions, never
 	 *		   <code>null</code>
 	 */
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		QueryContext queryContext);
+	public List<WorkflowDefinition> getWorkflowDefinitions();
 
 	/**
 	 * Returns a list of all versions of the specified workflow definition, if
@@ -117,7 +110,7 @@ public interface WorkflowDefinitionManager {
 	 *		   <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, QueryContext queryContext);
+		String workflowDefinitionName);
 
 	/**
 	 * Returns <code>true</code>, if the underlying workflow system supports

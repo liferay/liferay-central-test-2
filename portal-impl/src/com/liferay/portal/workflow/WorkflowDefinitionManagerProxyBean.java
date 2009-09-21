@@ -25,7 +25,6 @@ package com.liferay.portal.workflow;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-import com.liferay.portal.kernel.workflow.query.QueryContext;
 
 import java.util.List;
 
@@ -44,13 +43,12 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		QueryContext queryContext) {
+	public List<WorkflowDefinition> getWorkflowDefinitions() {
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, QueryContext queryContext) {
+		String workflowDefinitionName) {
 
 		throw new UnsupportedOperationException();
 	}
