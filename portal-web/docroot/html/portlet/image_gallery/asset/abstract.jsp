@@ -37,6 +37,6 @@ Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 	<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
 		<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" class="asset-small-image" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>">
 	</a>
-
-	<%= StringUtil.shorten(image.getDescription(), abstractLength) %>
 </c:if>
+
+<p class="asset-description"><%= StringUtil.shorten(image.getDescription(), abstractLength) %></p>

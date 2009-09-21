@@ -28,6 +28,6 @@
 BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_ENTRY);
 %>
 
-<a href="<%= entry.getUrl() %>" target="_blank"><%= entry.getName() %></a>
+<a href="<%= entry.getUrl() %>" target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>)</a>
 
 <p class="asset-description"><%= entry.getComments() %></p>

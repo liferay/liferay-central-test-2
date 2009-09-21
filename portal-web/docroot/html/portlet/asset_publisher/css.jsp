@@ -28,7 +28,12 @@
 	margin-bottom: 0;
 }
 
+.portlet-asset-publisher .asset-abstract .asset-description {
+	clear: left;
+}
+
 .portlet-asset-publisher .asset-content .asset-description {
+	clear: left;
 	font-style: italic;
 }
 
@@ -85,8 +90,8 @@
 }
 
 .portlet-asset-publisher .asset-small-image {
-	float: left;
-	padding-right: 10px;
+	float: right;
+	padding-left: 0.5em;
 }
 
 .portlet-asset-publisher .asset-title .asset-actions img {
@@ -150,6 +155,7 @@
 
 .portlet-asset-publisher .dl-file-icon {
 	margin: 0 5px 0 0;
+	padding-bottom: 0.5em;
 }
 
 .portlet-asset-publisher .document {

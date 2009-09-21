@@ -31,12 +31,12 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 %>
 
-<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
-	<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png">
-
-	<%= fileEntry.getTitle() %>
-</a>
-
 <div>
-	<%= StringUtil.shorten(fileEntry.getDescription(), abstractLength) %>
+	<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
+		<img align="left" alt='<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />' class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png">
+
+		<%= fileEntry.getTitleWithExtension() %>
+	</a>
 </div>
+
+<p class="asset-description"><%= StringUtil.shorten(fileEntry.getDescription(), abstractLength) %></p>
