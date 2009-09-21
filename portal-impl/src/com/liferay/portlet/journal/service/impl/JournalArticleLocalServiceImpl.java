@@ -1224,13 +1224,15 @@ public class JournalArticleLocalServiceImpl
 
 		List<JournalArticle> articles = null;
 
+		OrderByComparator orderByComparator = new ArticleVersionComparator();
+
 		if (status == StatusConstants.ANY) {
 			articles = journalArticlePersistence.findByG_A(
-				groupId, articleId, 0, 1);
+				groupId, articleId, 0, 1, orderByComparator);
 		}
 		else {
 			articles = journalArticlePersistence.findByG_A_S(
-				groupId, articleId, status, 0, 1);
+				groupId, articleId, status, 0, 1, orderByComparator);
 		}
 
 		if (articles.size() == 0) {
@@ -1246,13 +1248,15 @@ public class JournalArticleLocalServiceImpl
 
 		List<JournalArticle> articles = null;
 
+		OrderByComparator orderByComparator = new ArticleVersionComparator();
+
 		if (status == StatusConstants.ANY) {
 			articles = journalArticlePersistence.findByG_UT(
-				groupId, urlTitle, 0, 1);
+				groupId, urlTitle, 0, 1, orderByComparator);
 		}
 		else {
 			articles = journalArticlePersistence.findByG_UT_S(
-				groupId, urlTitle, status, 0, 1);
+				groupId, urlTitle, status, 0, 1, orderByComparator);
 		}
 
 		if (articles.size() == 0) {
