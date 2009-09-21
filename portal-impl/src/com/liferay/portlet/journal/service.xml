@@ -96,6 +96,11 @@
 			<finder-column name="articleId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_UT_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="urlTitle" />
+			<finder-column name="status" />
+		</finder>
 
 		<!-- References -->
 

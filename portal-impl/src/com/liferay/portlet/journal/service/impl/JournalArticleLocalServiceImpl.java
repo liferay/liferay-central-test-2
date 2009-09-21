@@ -120,7 +120,7 @@ import javax.portlet.PortletPreferences;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugŽ
+ * @author Raymond Augï¿½
  * @author Bruno Farache
  */
 public class JournalArticleLocalServiceImpl
@@ -773,14 +773,17 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_UT(
-			groupId, urlTitle, 0, 1);
+		// Get the latest article that is approved, if none are approved, get
+		// the latest unapproved article
 
-		if (articles.size() == 0) {
-			throw new NoSuchArticleException();
+		try {
+			return getLatestArticleByUrlTitle(
+				groupId, urlTitle, StatusConstants.APPROVED);
 		}
-
-		return articles.get(0);
+		catch (NoSuchArticleException nsae) {
+			return getLatestArticleByUrlTitle(
+				groupId, urlTitle, StatusConstants.PENDING);
+		}
 	}
 
 	public String getArticleContent(
@@ -1228,6 +1231,28 @@ public class JournalArticleLocalServiceImpl
 		else {
 			articles = journalArticlePersistence.findByG_A_S(
 				groupId, articleId, status, 0, 1);
+		}
+
+		if (articles.size() == 0) {
+			throw new NoSuchArticleException();
+		}
+
+		return articles.get(0);
+	}
+
+	public JournalArticle getLatestArticleByUrlTitle(
+			long groupId, String urlTitle, int status)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> articles = null;
+
+		if (status == StatusConstants.ANY) {
+			articles = journalArticlePersistence.findByG_UT(
+				groupId, urlTitle, 0, 1);
+		}
+		else {
+			articles = journalArticlePersistence.findByG_UT_S(
+				groupId, urlTitle, status, 0, 1);
 		}
 
 		if (articles.size() == 0) {
