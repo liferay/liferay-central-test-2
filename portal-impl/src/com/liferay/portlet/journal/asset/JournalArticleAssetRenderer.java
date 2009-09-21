@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.journal.asset;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
