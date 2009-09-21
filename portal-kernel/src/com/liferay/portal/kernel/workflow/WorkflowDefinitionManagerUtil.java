@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.workflow.query.QueryContext;
+
 import java.util.List;
 
 /**
@@ -59,18 +61,19 @@ public class WorkflowDefinitionManagerUtil {
 	/**
 	 * @see WorkflowDefinitionManager#getWorkflowDefinitions()
 	 */
-	public static List<WorkflowDefinition> getWorkflowDefinitions() {
-		return _workflowDefinitionManager.getWorkflowDefinitions();
+	public static List<WorkflowDefinition> getWorkflowDefinitions(
+		QueryContext queryContext) {
+		return _workflowDefinitionManager.getWorkflowDefinitions(queryContext);
 	}
 
 	/**
 	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String)
 	 */
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName) {
+		String workflowDefinitionName, QueryContext queryContext) {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
-			workflowDefinitionName);
+			workflowDefinitionName, queryContext);
 	}
 
 	/**

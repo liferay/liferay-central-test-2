@@ -20,43 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow.query;
 
-import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-import com.liferay.portal.kernel.workflow.query.QueryContext;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="QueryContext.java.html"><b><i>View Source</i></b></a>
  *
- * @author Micha Kiener
+ * @author Shuyang Zhou
  */
-public class WorkflowDefinitionManagerProxyBean
-	extends BaseProxyBean implements WorkflowDefinitionManager {
+public class QueryContext implements Serializable {
 
-	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId) {
-
-		throw new UnsupportedOperationException();
+	public QueryContext(int start, int end, OrderBy... orderBys) {
+		_start = start;
+		_end = end;
+		_orderBys = orderBys;
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		QueryContext queryContext) {
-		throw new UnsupportedOperationException();
+	public QueryContext(OrderBy... orderBys) {
+		_orderBys = orderBys;
+		_start = QueryUtil.ALL_POS;
+		_end = QueryUtil.ALL_POS;
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, QueryContext queryContext) {
-
-		throw new UnsupportedOperationException();
+	public int getEnd() {
+		return _end;
 	}
 
-	public boolean isSupportsVersioning() {
-		throw new UnsupportedOperationException();
+	public OrderBy[] getOrderBys() {
+		return _orderBys;
 	}
+
+	public int getStart() {
+		return _start;
+	}
+
+	private int _end;
+	private OrderBy[] _orderBys;
+	private int _start;
 
 }

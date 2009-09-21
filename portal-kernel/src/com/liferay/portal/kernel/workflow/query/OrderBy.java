@@ -20,43 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.workflow;
+package com.liferay.portal.kernel.workflow.query;
 
-import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
-import com.liferay.portal.kernel.workflow.query.QueryContext;
-
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * <a href="WorkflowDefinitionManagerProxyBean.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="OrderBy.java.html"><b><i>View Source</i></b></a>
  *
- * @author Micha Kiener
+ * @author Shuyang Zhou
  */
-public class WorkflowDefinitionManagerProxyBean
-	extends BaseProxyBean implements WorkflowDefinitionManager {
+public class OrderBy implements Serializable {
 
-	public void deployWorkflowDefinition(
-		WorkflowDefinition workflowDefinition, long callingUserId) {
+	public static enum OrderByType {
 
-		throw new UnsupportedOperationException();
+		DESC, ASC
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		QueryContext queryContext) {
-		throw new UnsupportedOperationException();
+	public OrderBy(String columnName, OrderByType orderByType) {
+		_columnName = columnName;
+		_orderByType = orderByType;
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName, QueryContext queryContext) {
-
-		throw new UnsupportedOperationException();
+	public OrderBy(String columnName) {
+		_columnName = columnName;
+		_orderByType = OrderByType.DESC;
 	}
 
-	public boolean isSupportsVersioning() {
-		throw new UnsupportedOperationException();
+	public String getColumnName() {
+		return _columnName;
 	}
+
+	public OrderByType getOrderByType() {
+		return _orderByType;
+	}
+
+	private String _columnName;
+	private OrderByType _orderByType;
 
 }
