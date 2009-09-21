@@ -22,6 +22,8 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.documentlibrary.util.Hook;
+import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -241,6 +243,9 @@ public class HookHotDeployListener
 					initAutoLogins(
 						servletContextName, portletClassLoader,
 						portalProperties);
+					initDLHook(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initModelListeners(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -431,6 +436,12 @@ public class HookHotDeployListener
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(customJspBag);
+		}
+
+		Hook dlHook = _dlHooksMap.remove(servletContextName);
+
+		if (dlHook != null) {
+			HookFactory.setInstance(null);
 		}
 
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
@@ -667,6 +678,28 @@ public class HookHotDeployListener
 
 			FileUtil.write(portalJspFile, customJspContent);
 		}
+	}
+
+	protected void initDLHook(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		String dlHookClassName = portalProperties.getProperty(
+			PropsKeys.DL_HOOK_IMPL);
+
+		if (Validator.isNull(dlHookClassName)) {
+			return;
+		}
+
+		Hook dlHook = (Hook)portletClassLoader.loadClass(
+			dlHookClassName).newInstance();
+
+		dlHook = (Hook)Proxy.newProxyInstance(
+			portletClassLoader, new Class[] {Hook.class},
+			new ContextClassLoaderBeanHandler(dlHook, portletClassLoader));
+
+		_dlHooksMap.put(servletContextName, dlHook);
 	}
 
 	protected Object initEvent(
@@ -1041,6 +1074,7 @@ public class HookHotDeployListener
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
+	private Map<String, Hook> _dlHooksMap = new HashMap<String, Hook>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =

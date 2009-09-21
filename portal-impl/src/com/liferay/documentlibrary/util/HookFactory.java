@@ -24,6 +24,9 @@ package com.liferay.documentlibrary.util;
 
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 
 /**
  * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
@@ -34,11 +37,29 @@ public class HookFactory {
 
 	public static Hook getInstance() {
 		if (_hook == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Instantiate " + PropsValues.DL_HOOK_IMPL);
+			}
+
 			_hook = (Hook)InstancePool.get(PropsValues.DL_HOOK_IMPL);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Return " + _hook.getClass().getName());
 		}
 
 		return _hook;
 	}
+
+	public static void setInstance(Hook hook) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set " + hook.getClass().getName());
+		}
+
+		_hook = hook;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(HookFactory.class);
 
 	private static Hook _hook = null;
 

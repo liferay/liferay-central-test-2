@@ -24,6 +24,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.documentlibrary.util">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.documentlibrary.util.HookFactory">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.jdbc">
 		<priority value="ERROR" />
 	</category>
