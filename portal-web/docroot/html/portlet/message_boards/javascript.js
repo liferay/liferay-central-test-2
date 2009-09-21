@@ -369,16 +369,28 @@ if (!Liferay.Editor.bbCode) {
 
 				instance._fontColorInput = jQuery('<input type="hidden" val="" />');
 
-				instance._location.find('.use-colorpicker').before(instance._fontColorInput);
+				AUI().use(
+					'color-picker',
+					function(A) {
+						instance._location.find('.use-colorpicker').before(instance._fontColorInput);
 
-				var colorPicker = new Alloy.ColorPickerPanel(
-					{
-						hasImage: true,
-						on: {
-							close: function() {
-								instance._insertColor();
+						new A.ColorPicker(
+							{
+								after: {
+									colorChange: function() {
+										instance._fontColorInput[0].value = '#' + this.get('hex');
+									},
+									visibleChange: function(event) {
+										if (!event.newVal) {
+											instance._insertColor();
+										}
+									}
+								},
+								trigger: instance._location.find('.use-colorpicker')[0],
+								zIndex: 9999
 							}
-						}
+						)
+						.render();
 					}
 				);
 			},

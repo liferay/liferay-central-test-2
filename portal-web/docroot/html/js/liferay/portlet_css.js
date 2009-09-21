@@ -25,6 +25,7 @@ Liferay.PortletCSS = {
 			}
 
 			AUI().use(
+				'color-picker',
 				'dialog',
 				'tabs',
 				function(A) {
@@ -103,17 +104,33 @@ Liferay.PortletCSS = {
 			bgData.backgroundColor = color;
 		};
 
-		var colorPicker = new Alloy.ColorPickerPanel(
+		var A = AUI();
+
+		var backgroundColorEl = backgroundColor[0];
+
+		var hexValue = backgroundColorEl.value.replace('#', '');
+
+		new A.ColorPicker(
 			{
-				buttonContext: instance._newPanel[0],
-				item: backgroundColor[0],
-				on: {
-					change: function() {
-						setColor(backgroundColor[0]);
+				after: {
+					colorChange: function() {
+						backgroundColorEl.value = '#' + this.get('hex');
+
+						setColor(backgroundColorEl);
+					},
+					render: function() {
+						var instance = this;
+
+						var trigger = instance.get('trigger');
+
+						A.get(backgroundColorEl).insertAfter(trigger.item(0));
 					}
-				}
+				},
+				hex: hexValue,
+				zIndex: 9999
 			}
-		);
+		)
+		.render();
 
 		backgroundColor.unbind('blur.liferay').bind(
 			'blur.liferay',
@@ -365,43 +382,36 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		var colorPickerTop = new Alloy.ColorPickerPanel(
-			{
-				buttonContext: jQuery('#portlet-set-properties')[0],
-				item: cTopColor[0],
-				on: {
-					change: changeColor
-				}
-			}
-		);
+		var A = AUI();
 
-		var colorPickerRight = new Alloy.ColorPickerPanel(
-			{
-				buttonContext: jQuery('#portlet-set-properties')[0],
-				item: cRightColor[0],
-				on: {
-					change: changeColor
-				}
-			}
-		);
+		A.each(
+			[cTopColor, cRightColor, cBottomColor, cLeftColor],
+			function(item, index, collection) {
+				var borderColorEl = item[0];
 
-		var colorPickerBottom = new Alloy.ColorPickerPanel(
-			{
-				buttonContext: jQuery('#portlet-set-properties')[0],
-				item: cBottomColor[0],
-				on: {
-					change: changeColor
-				}
-			}
-		);
+				var hexValue = borderColorEl.value.replace('#', '');
 
-		var colorPickerLeft = new Alloy.ColorPickerPanel(
-			{
-				buttonContext: jQuery('#portlet-set-properties')[0],
-				item: cLeftColor[0],
-				on: {
-					change: changeColor
-				}
+				new A.ColorPicker(
+					{
+						after: {
+							colorChange: function() {
+								borderColorEl.value = '#' + this.get('hex');
+
+								changeColor();
+							},
+							render: function() {
+								var instance = this;
+
+								var trigger = instance.get('trigger');
+
+								A.get(borderColorEl).insertAfter(trigger.item(0));
+							}
+						},
+						hex: hexValue,
+						zIndex: 9999
+					}
+				)
+				.render();
 			}
 		);
 
@@ -1533,15 +1543,34 @@ Liferay.PortletCSS = {
 			}
 		};
 
-		var colorPicker = new Alloy.ColorPickerPanel(
-			{
-				buttonContext: jQuery('#portlet-set-properties')[0],
-				item: fontColor[0],
-				on: {
-					change: function() {
-						setColor(fontColor[0]);
+		AUI().use(
+			'color-picker',
+			function(A) {
+				var fontColorEl = fontColor[0];
+
+				var hexValue = fontColorEl.value.replace('#', '');
+
+				new A.ColorPicker(
+					{
+						after: {
+							colorChange: function() {
+								fontColorEl.value = '#' + this.get('hex');
+
+								changeColor(fontColorEl);
+							},
+							render: function() {
+								var instance = this;
+
+								var trigger = instance.get('trigger');
+
+								A.get(fontColorEl).insertAfter(trigger.item(0));
+							}
+						},
+						hex: hexValue,
+						zIndex: 9999
 					}
-				}
+				)
+				.render();
 			}
 		);
 

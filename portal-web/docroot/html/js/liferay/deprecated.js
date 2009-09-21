@@ -149,22 +149,6 @@ window.Class = Alloy.Class;
     Resize.CSS_HANDLE = 'ui-resizable-handle ' + Resize.CSS_HANDLE;
 })();
 
-// LPS-2267
-
-Liferay.ColorPicker = Alloy.ColorPickerPanel.extend({
-	initialize: function(options) {
-		var instance = this;
-
-		if (options.context) {
-			options.buttonContext = options.context;
-
-			delete options.context;
-		}
-
-		instance._super(options);
-	}
-});
-
 (function() {
 	var tabShow = Liferay.Portal.Tabs.show;
 
