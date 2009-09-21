@@ -458,7 +458,7 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
+				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathJavaScript() %&gt;/aui/';" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
@@ -472,7 +472,7 @@
 					/>
 				</replaceregexp>
 
-				<replaceregexp match="(var PATH_JAVASCRIPT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathJavaScript() %&gt;/aui/';" flags="g" byline="false">
+				<replaceregexp match="(var PATH_THEME_ROOT ?= ?)[^;]+;" replace="\1'&lt;%= themeDisplay.getPathThemeRoot() %&gt;/css/';" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/src/javascript/"
 						includes="defaults.js"
