@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.util.comparator;
 
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBThread;
 
 import java.util.Date;
@@ -36,11 +37,11 @@ import java.util.Date;
  */
 public class ThreadLastPostDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "lastPostDate ASC";
+	public static String ORDER_BY_ASC = "lastPostDate ASC, threadId ASC";
 
-	public static String ORDER_BY_DESC = "lastPostDate DESC";
+	public static String ORDER_BY_DESC = "lastPostDate DESC, threadId DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"lastPostDate"};
+	public static String[] ORDER_BY_FIELDS = {"lastPostDate, threadId"};
 
 	public ThreadLastPostDateComparator() {
 		this(false);
@@ -54,18 +55,17 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		MBThread thread1 = (MBThread)obj1;
 		MBThread thread2 = (MBThread)obj2;
 
-		if (thread1.getThreadId() == thread2.getThreadId()) {
-			return 0;
-		}
-
 		Date lastPostDate1 = thread1.getLastPostDate();
 		Date lastPostDate2 = thread2.getLastPostDate();
 
-		int value = 0;
+		boolean ignoreMilliseconds = false;
 
-		if ((lastPostDate1 != null) && (lastPostDate2 != null)) {
-			value = DateUtil.compareTo(lastPostDate1, lastPostDate2, true);
+		if (!PortalUtil.getDB().isSupportsDateMilliseconds()) {
+			ignoreMilliseconds = true;
 		}
+
+		int value = DateUtil.compareTo(
+			lastPostDate1, lastPostDate2, ignoreMilliseconds);
 
 		if (value == 0) {
 			if (thread1.getThreadId() < thread2.getThreadId()) {

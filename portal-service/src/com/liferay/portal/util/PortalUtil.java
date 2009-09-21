@@ -36,6 +36,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.tools.sql.DB;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.IOException;
@@ -285,6 +286,10 @@ public class PortalUtil {
 		throws PortalException {
 
 		return getPortal().getDate(month, day, year, timeZone, pe);
+	}
+
+	public static DB getDB() {
+		return getPortal().getDB();
 	}
 
 	public static long getDefaultCompanyId() {

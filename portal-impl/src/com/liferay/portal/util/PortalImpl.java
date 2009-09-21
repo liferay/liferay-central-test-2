@@ -106,6 +106,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.tools.sql.DB;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
 import com.liferay.portal.upload.UploadServletRequestImpl;
@@ -938,6 +939,10 @@ public class PortalImpl implements Portal {
 		throws PortalException {
 
 		return getDate(month, day, year, -1, -1, timeZone, pe);
+	}
+
+	public DB getDB() {
+		return DBUtil.getInstance();
 	}
 
 	public long getDefaultCompanyId() {

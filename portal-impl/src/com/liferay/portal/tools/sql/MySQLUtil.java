@@ -53,6 +53,10 @@ public class MySQLUtil extends DBUtil {
 		return template;
 	}
 
+	public boolean isSupportsDateMilliseconds() {
+		return _SUPPORTS_DATE_MILLISECONDS;
+	}
+
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
@@ -148,6 +152,8 @@ public class MySQLUtil extends DBUtil {
 		" longtext", " longtext", " varchar",
 		"  auto_increment", "commit"
 	};
+
+	private static boolean _SUPPORTS_DATE_MILLISECONDS = false;
 
 	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 

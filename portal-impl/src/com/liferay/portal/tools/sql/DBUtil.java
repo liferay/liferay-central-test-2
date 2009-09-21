@@ -75,7 +75,7 @@ import org.hibernate.dialect.SybaseDialect;
  * @author Alexander Chow
  * @author Ganesh Ram
  */
-public abstract class DBUtil {
+public abstract class DBUtil implements DB {
 
 	public static final int MINIMAL = 1;
 
@@ -324,6 +324,10 @@ public abstract class DBUtil {
 
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
+	}
+
+	public boolean isSupportsDateMilliseconds() {
+		return _SUPPORTS_DATE_MILLISECONDS;
 	}
 
 	public boolean isSupportsStringCaseSensitiveQuery() {
@@ -904,6 +908,8 @@ public abstract class DBUtil {
 	private static boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
 
 	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
+
+	private static boolean _SUPPORTS_DATE_MILLISECONDS = true;
 
 	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 
