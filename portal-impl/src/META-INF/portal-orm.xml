@@ -2856,7 +2856,6 @@
 		<table name="JournalArticle" />
 		<attributes>
 			<transient name="smallImageType" />
-			<transient name="statusByUserUuid" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.journal.model.impl.JournalArticleImageImpl" name="JournalArticleImage">

@@ -222,6 +222,7 @@ create unique index IX_85C52EEC on JournalArticle (groupId, articleId, version);
 create index IX_2E207659 on JournalArticle (groupId, structureId);
 create index IX_8DEAE14E on JournalArticle (groupId, templateId);
 create index IX_22882D02 on JournalArticle (groupId, urlTitle);
+create index IX_D2D249E8 on JournalArticle (groupId, urlTitle, status);
 create index IX_3E2765FC on JournalArticle (resourcePrimKey, status);
 create index IX_EF9B7028 on JournalArticle (smallImageId);
 create index IX_F029602F on JournalArticle (uuid_);

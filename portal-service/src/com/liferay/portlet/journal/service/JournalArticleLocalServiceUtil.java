@@ -536,6 +536,13 @@ public class JournalArticleLocalServiceUtil {
 		return getService().getLatestArticle(groupId, articleId, status);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticleByUrlTitle(
+		long groupId, java.lang.String urlTitle, int status)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().getLatestArticleByUrlTitle(groupId, urlTitle, status);
+	}
+
 	public static double getLatestVersion(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
