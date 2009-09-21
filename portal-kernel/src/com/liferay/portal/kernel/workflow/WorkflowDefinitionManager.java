@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.List;
 
@@ -95,7 +96,8 @@ public interface WorkflowDefinitionManager {
 	 * @return the list of available workflow definitions, never
 	 *		   <code>null</code>
 	 */
-	public List<WorkflowDefinition> getWorkflowDefinitions();
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		int start, int end, OrderByComparator orderByComparator);
 
 	/**
 	 * Returns a list of all versions of the specified workflow definition, if
@@ -110,7 +112,8 @@ public interface WorkflowDefinitionManager {
 	 *		   <code>null</code>
 	 */
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName);
+		String workflowDefinitionName, int start, int end,
+		OrderByComparator orderByComparator);
 
 	/**
 	 * Returns <code>true</code>, if the underlying workflow system supports

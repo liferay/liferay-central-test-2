@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.workflow;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+
 import java.util.List;
 
 /**
@@ -57,20 +59,26 @@ public class WorkflowDefinitionManagerUtil {
 	}
 
 	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions()
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(int, int,
+	 *		OrderByComparator)
 	 */
-	public static List<WorkflowDefinition> getWorkflowDefinitions() {
-		return _workflowDefinitionManager.getWorkflowDefinitions();
+	public static List<WorkflowDefinition> getWorkflowDefinitions(
+		int start, int end, OrderByComparator orderByComparator) {
+
+		return _workflowDefinitionManager.getWorkflowDefinitions(
+			start, end, orderByComparator);
 	}
 
 	/**
-	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String)
+	 * @see WorkflowDefinitionManager#getWorkflowDefinitions(String, int, int,
+	 *		OrderByComparator)
 	 */
 	public static List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName) {
+		String workflowDefinitionName, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		return _workflowDefinitionManager.getWorkflowDefinitions(
-			workflowDefinitionName);
+			workflowDefinitionName, start, end, orderByComparator);
 	}
 
 	/**

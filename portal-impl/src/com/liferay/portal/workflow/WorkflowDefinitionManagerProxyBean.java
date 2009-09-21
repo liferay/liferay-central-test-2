@@ -23,6 +23,7 @@
 package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 
@@ -43,12 +44,15 @@ public class WorkflowDefinitionManagerProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	public List<WorkflowDefinition> getWorkflowDefinitions() {
+	public List<WorkflowDefinition> getWorkflowDefinitions(
+		int start, int end, OrderByComparator orderByComparator) {
+
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowDefinition> getWorkflowDefinitions(
-		String workflowDefinitionName) {
+		String workflowDefinitionName, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
