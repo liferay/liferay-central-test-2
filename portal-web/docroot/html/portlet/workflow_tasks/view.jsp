@@ -28,11 +28,9 @@
 String tabs1 = ParamUtil.getString(request, "tabs1", "pending");
 
 boolean completed = false;
-String emptyResultsMessage = "there-are-no-pending-tasks-assigned-to-you";
 
 if (tabs1.equals("completed")) {
 	completed = true;
-	emptyResultsMessage = "there-are-no-completed-tasks";
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -50,7 +48,7 @@ try {
 %>
 
 	<liferay-ui:search-container
-		emptyResultsMessage='<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>'
+		emptyResultsMessage='<%= LanguageUtil.get(pageContext, completed ? "there-are-no-completed-tasks" : "there-are-no-pending-tasks-assigned-to-you") %>'
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
