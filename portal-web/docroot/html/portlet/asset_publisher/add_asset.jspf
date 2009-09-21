@@ -67,7 +67,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 
 	AssetRendererFactory assetRendererFactory = AssetUtil.getAssetRendererFactoryByClassName(className);
 
-	PortletURL addPortletURL = assetRendererFactory.getURLAdd(renderRequest, portletResponse);
+	PortletURL addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
 
 	if (addPortletURL != null) {
 		addPortletURL.setWindowState(WindowState.MAXIMIZED);

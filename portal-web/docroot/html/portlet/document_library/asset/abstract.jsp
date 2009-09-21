@@ -31,7 +31,7 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 %>
 
-<a href="<%= assetRenderer.getURLViewInContext(renderRequest, renderResponse, StringPool.BLANK) %>">
+<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, StringPool.BLANK) %>">
 	<img align="left" alt="<liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" />" src="<%= themeDisplay.getPathThemeImages() %>/document_library/<%= DLUtil.getFileExtension(fileEntry.getName()) %>.png">
 
 	<%= fileEntry.getTitle() %>
