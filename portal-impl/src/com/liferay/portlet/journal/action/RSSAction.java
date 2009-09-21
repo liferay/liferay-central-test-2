@@ -300,7 +300,7 @@ public class RSSAction extends PortletAction {
 			}
 		}
 		else if (!contentField.equals(
-				JournalFeedConstants.WEB_CONTENT_DESCRIPTION)) {
+					JournalFeedConstants.WEB_CONTENT_DESCRIPTION)) {
 
 			Document doc = SAXReaderUtil.read(article.getContent());
 
