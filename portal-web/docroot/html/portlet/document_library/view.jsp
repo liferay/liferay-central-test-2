@@ -231,12 +231,20 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						String rowHREF = null;
 
 						if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
+							PortletURL href = renderResponse.createRenderURL();
+
+							href.setParameter("redirect", currentURL);
+
 							if (fileShortcut == null) {
-								rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&groupId=" + themeDisplay.getScopeGroupId() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
+								href.setParameter("struts_action", "/document_library/view_file_entry");
+								href.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+								href.setParameter("name", HtmlUtil.unescape(fileEntry.getName()));
 							}
 							else {
-								rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcut.getFileShortcutId();
+								href.setParameter("struts_action", "/document_library/view_file_shortcut");
+								href.setParameter("fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
 							}
+							rowHREF = href.toString();
 						}
 					%>
 
