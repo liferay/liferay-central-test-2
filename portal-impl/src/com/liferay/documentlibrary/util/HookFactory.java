@@ -22,11 +22,10 @@
 
 package com.liferay.documentlibrary.util;
 
-import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>

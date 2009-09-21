@@ -24,6 +24,7 @@ package com.liferay.mail.service.impl;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
+import com.liferay.mail.util.Hook;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -66,7 +67,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "addForward",
+			Hook.class.getName(), "addForward",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId), filters,
 				emailAddresses, new BooleanWrapper(leaveCopy)
@@ -84,7 +85,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "addUser",
+			Hook.class.getName(), "addUser",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId), password,
 				firstName, middleName, lastName, emailAddress
@@ -102,7 +103,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "addVacationMessage",
+			Hook.class.getName(), "addVacationMessage",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId),
 				emailAddress, vacationMessage
@@ -121,7 +122,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "deleteEmailAddress",
+			Hook.class.getName(), "deleteEmailAddress",
 			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
@@ -133,7 +134,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
+			Hook.class.getName(), "deleteUser",
 			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
@@ -276,7 +277,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "updateBlocked",
+			Hook.class.getName(), "updateBlocked",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId), blocked
 			});
@@ -292,7 +293,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "updateEmailAddress",
+			Hook.class.getName(), "updateEmailAddress",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId),
 				emailAddress
@@ -307,7 +308,7 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			PropsValues.MAIL_HOOK_IMPL, "updatePassword",
+			Hook.class.getName(), "updatePassword",
 			new Object[] {
 				new LongWrapper(companyId), new LongWrapper(userId), password
 			});

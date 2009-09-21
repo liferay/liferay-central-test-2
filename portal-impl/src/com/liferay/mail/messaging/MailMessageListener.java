@@ -22,6 +22,7 @@
 
 package com.liferay.mail.messaging;
 
+import com.liferay.mail.util.HookFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -113,7 +114,7 @@ public class MailMessageListener implements MessageListener {
 	}
 
 	public void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
-		MethodInvoker.invoke(methodWrapper);
+		MethodInvoker.invoke(methodWrapper, HookFactory.getInstance());
 	}
 
 	public void doReceive(Message message) throws Exception {

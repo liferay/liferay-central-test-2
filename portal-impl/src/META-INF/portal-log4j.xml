@@ -48,6 +48,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.mail.util.HookFactory">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.mail.util.MailSessionFactoryBean">
 		<priority value="ERROR" />
 	</category>
@@ -162,6 +166,10 @@
 
 	<category name="com.liferay.portal.events.StartupHelper">
 		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.image.HookFactory">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.image.ImageProcessorImpl">

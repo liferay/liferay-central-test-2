@@ -25,6 +25,7 @@ dl.hook.impl
 field.enable.com.liferay.portal.model.Contact.birthday
 field.enable.com.liferay.portal.model.Contact.male
 field.enable.com.liferay.portal.model.Organization.status
+image.hook.impl=
 javascript.fast.load
 layout.static.portlets.all
 layout.template.cache.enabled
@@ -40,6 +41,7 @@ login.events.post
 login.events.pre
 logout.events.post
 logout.events.pre
+mail.hook.impl
 my.places.show.community.private.sites.with.no.layouts
 my.places.show.community.public.sites.with.no.layouts
 my.places.show.organization.private.sites.with.no.layouts

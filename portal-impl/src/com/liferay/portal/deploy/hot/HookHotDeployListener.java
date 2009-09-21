@@ -22,8 +22,6 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.documentlibrary.util.Hook;
-import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ContextClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
@@ -246,6 +244,12 @@ public class HookHotDeployListener
 					initDLHook(
 						servletContextName, portletClassLoader,
 						portalProperties);
+					initImageHook(
+						servletContextName, portletClassLoader,
+						portalProperties);
+					initMailHook(
+						servletContextName, portletClassLoader,
+						portalProperties);
 					initModelListeners(
 						servletContextName, portletClassLoader,
 						portalProperties);
@@ -438,10 +442,11 @@ public class HookHotDeployListener
 			destroyCustomJspBag(customJspBag);
 		}
 
-		Hook dlHook = _dlHooksMap.remove(servletContextName);
+		com.liferay.documentlibrary.util.Hook dlHook = _dlHooksMap.remove(
+			servletContextName);
 
 		if (dlHook != null) {
-			HookFactory.setInstance(null);
+			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
 		}
 
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
@@ -451,11 +456,25 @@ public class HookHotDeployListener
 			eventsContainer.unregisterEvents();
 		}
 
+		com.liferay.portal.image.Hook imageHook = _imageHooksMap.remove(
+			servletContextName);
+
+		if (imageHook != null) {
+			com.liferay.portal.image.HookFactory.setInstance(null);
+		}
+
 		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
 			servletContextName);
 
 		if (languagesContainer != null) {
 			languagesContainer.unregisterLanguages();
+		}
+
+		com.liferay.mail.util.Hook mailHook = _mailHooksMap.remove(
+			servletContextName);
+
+		if (mailHook != null) {
+			com.liferay.mail.util.HookFactory.setInstance(null);
 		}
 
 		ModelListenersContainer modelListenersContainer =
@@ -692,11 +711,13 @@ public class HookHotDeployListener
 			return;
 		}
 
-		Hook dlHook = (Hook)portletClassLoader.loadClass(
-			dlHookClassName).newInstance();
+		com.liferay.documentlibrary.util.Hook dlHook =
+			(com.liferay.documentlibrary.util.Hook)portletClassLoader.loadClass(
+				dlHookClassName).newInstance();
 
-		dlHook = (Hook)Proxy.newProxyInstance(
-			portletClassLoader, new Class[] {Hook.class},
+		dlHook = (com.liferay.documentlibrary.util.Hook)Proxy.newProxyInstance(
+			portletClassLoader,
+			new Class[] {com.liferay.documentlibrary.util.Hook.class},
 			new ContextClassLoaderBeanHandler(dlHook, portletClassLoader));
 
 		_dlHooksMap.put(servletContextName, dlHook);
@@ -793,6 +814,53 @@ public class HookHotDeployListener
 				eventsContainer.registerEvent(eventName, obj);
 			}
 		}
+	}
+
+	protected void initImageHook(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		String imageHookClassName = portalProperties.getProperty(
+			PropsKeys.IMAGE_HOOK_IMPL);
+
+		if (Validator.isNull(imageHookClassName)) {
+			return;
+		}
+
+		com.liferay.portal.image.Hook imageHook =
+			(com.liferay.portal.image.Hook)portletClassLoader.loadClass(
+				imageHookClassName).newInstance();
+
+		imageHook = (com.liferay.portal.image.Hook)Proxy.newProxyInstance(
+			portletClassLoader,
+			new Class[] {com.liferay.portal.image.Hook.class},
+			new ContextClassLoaderBeanHandler(imageHook, portletClassLoader));
+
+		_imageHooksMap.put(servletContextName, imageHook);
+	}
+
+	protected void initMailHook(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portalProperties)
+		throws Exception {
+
+		String mailHookClassName = portalProperties.getProperty(
+			PropsKeys.MAIL_HOOK_IMPL);
+
+		if (Validator.isNull(mailHookClassName)) {
+			return;
+		}
+
+		com.liferay.mail.util.Hook mailHook =
+			(com.liferay.mail.util.Hook)portletClassLoader.loadClass(
+				mailHookClassName).newInstance();
+
+		mailHook = (com.liferay.mail.util.Hook)Proxy.newProxyInstance(
+			portletClassLoader, new Class[] {com.liferay.mail.util.Hook.class},
+			new ContextClassLoaderBeanHandler(mailHook, portletClassLoader));
+
+		_mailHooksMap.put(servletContextName, mailHook);
 	}
 
 	protected ModelListener<BaseModel<?>> initModelListener(
@@ -1074,11 +1142,16 @@ public class HookHotDeployListener
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
-	private Map<String, Hook> _dlHooksMap = new HashMap<String, Hook>();
+	private Map<String, com.liferay.documentlibrary.util.Hook> _dlHooksMap =
+		new HashMap<String, com.liferay.documentlibrary.util.Hook>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
+	private Map<String, com.liferay.portal.image.Hook> _imageHooksMap =
+		new HashMap<String, com.liferay.portal.image.Hook>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =
 		new HashMap<String, LanguagesContainer>();
+	private Map<String, com.liferay.mail.util.Hook> _mailHooksMap =
+		new HashMap<String, com.liferay.mail.util.Hook>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
 		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =

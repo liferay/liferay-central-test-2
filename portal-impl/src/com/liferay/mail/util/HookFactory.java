@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.image;
+package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,17 +30,17 @@ import com.liferay.portal.util.PropsValues;
 /**
  * <a href="HookFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  */
 public class HookFactory {
 
 	public static Hook getInstance() {
 		if (_hook == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Instantiate " + PropsValues.IMAGE_HOOK_IMPL);
+				_log.debug("Instantiate " + PropsValues.MAIL_HOOK_IMPL);
 			}
 
-			_hook = (Hook)InstancePool.get(PropsValues.IMAGE_HOOK_IMPL);
+			_hook = (Hook)InstancePool.get(PropsValues.MAIL_HOOK_IMPL);
 		}
 
 		if (_log.isDebugEnabled()) {
