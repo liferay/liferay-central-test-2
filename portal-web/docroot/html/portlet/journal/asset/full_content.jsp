@@ -34,7 +34,6 @@ int articlePage = ParamUtil.getInteger(request, "page", 1);
 String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, null, languageId, themeDisplay, articlePage, xmlRequest);
-
 %>
 
 <div class="journal-content-article">
@@ -44,20 +43,20 @@ JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleReso
 <c:if test="<%= articleDisplay.isPaginate() %>">
 
 	<%
-		String pageRedirect = ParamUtil.getString(request, "redirect");
+	String pageRedirect = ParamUtil.getString(request, "redirect");
 
-		if (Validator.isNull(pageRedirect)) {
-			pageRedirect = currentURL;
-		}
+	if (Validator.isNull(pageRedirect)) {
+		pageRedirect = currentURL;
+	}
 
-		int cur = ParamUtil.getInteger(request, "cur");
+	int cur = ParamUtil.getInteger(request, "cur");
 
-		PortletURL articlePageURL = renderResponse.createRenderURL();
+	PortletURL articlePageURL = renderResponse.createRenderURL();
 
-		articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
-		articlePageURL.setParameter("redirect", pageRedirect);
-		articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
-		articlePageURL.setParameter("cur", String.valueOf(cur));
+	articlePageURL.setParameter("struts_action", "/asset_publisher/view_content");
+	articlePageURL.setParameter("redirect", pageRedirect);
+	articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
+	articlePageURL.setParameter("cur", String.valueOf(cur));
 	%>
 
 	<br />
@@ -70,7 +69,7 @@ JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleReso
 		total="<%= articleDisplay.getNumberOfPages() %>"
 		type="article"
 		url="<%= articlePageURL.toString() %>"
-		/>
+	/>
 
 	<br />
 </c:if>

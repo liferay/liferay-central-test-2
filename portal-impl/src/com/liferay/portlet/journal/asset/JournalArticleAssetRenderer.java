@@ -134,10 +134,10 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getURLViewInContext(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse,
-		String noSuchEntryRedirect)
-		throws PortalException, SystemException {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
+			String noSuchEntryRedirect)
+		throws Exception {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
@@ -194,8 +194,8 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT) ||
-			template.equals(TEMPLATE_ABSTRACT)) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
 
 			renderRequest.setAttribute(WebKeys.JOURNAL_ARTICLE, _article);
 

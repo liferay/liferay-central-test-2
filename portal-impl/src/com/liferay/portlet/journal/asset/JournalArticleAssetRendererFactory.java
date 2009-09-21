@@ -53,12 +53,12 @@ public class JournalArticleAssetRendererFactory
 	public static final String TYPE = "content";
 
 	public AssetRenderer getAssetRenderer(long classPK) throws Exception {
-		JournalArticleResource resource =
+		JournalArticleResource articleResource =
 			JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getArticle(
-				resource.getGroupId(), resource.getArticleId());
+				articleResource.getGroupId(), articleResource.getArticleId());
 
 		return new JournalArticleAssetRenderer(article);
 	}
@@ -66,8 +66,8 @@ public class JournalArticleAssetRendererFactory
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws Exception {
 
-		JournalArticle article =
-			JournalArticleServiceUtil.getArticleByUrlTitle(groupId, urlTitle);
+		JournalArticle article = JournalArticleServiceUtil.getArticleByUrlTitle(
+			groupId, urlTitle);
 
 		return new JournalArticleAssetRenderer(article);
 	}
