@@ -88,7 +88,7 @@ import javax.portlet.PortletSession;
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugŽ
+ * @author Raymond Augï¿½
  */
 public class JournalUtil {
 
@@ -218,6 +218,11 @@ public class JournalUtil {
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
 			String.valueOf(article.getUserId()));
+
+		JournalUtil.addReservedEl(
+			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_URL_TITLE,
+			article.getUrlTitle());
 
 		String userName = StringPool.BLANK;
 		String userEmailAddress = StringPool.BLANK;
