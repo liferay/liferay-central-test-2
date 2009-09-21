@@ -231,20 +231,21 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						String rowHREF = null;
 
 						if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
-							PortletURL href = renderResponse.createRenderURL();
-
-							href.setParameter("redirect", currentURL);
+							PortletURL rowURL = renderResponse.createRenderURL();
 
 							if (fileShortcut == null) {
-								href.setParameter("struts_action", "/document_library/view_file_entry");
-								href.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
-								href.setParameter("name", HtmlUtil.unescape(fileEntry.getName()));
+								rowURL.setParameter("struts_action", "/document_library/view_file_entry");
+								rowURL.setParameter("redirect", currentURL);
+								rowURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+								rowURL.setParameter("name", HtmlUtil.unescape(fileEntry.getName()));
 							}
 							else {
-								href.setParameter("struts_action", "/document_library/view_file_shortcut");
-								href.setParameter("fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
+								rowURL.setParameter("struts_action", "/document_library/view_file_shortcut");
+								rowURL.setParameter("redirect", currentURL);
+								rowURL.setParameter("fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
 							}
-							rowHREF = href.toString();
+
+							rowHREF = rowURL.toString();
 						}
 					%>
 
