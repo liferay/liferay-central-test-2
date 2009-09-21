@@ -57,10 +57,35 @@ public class SourceFormatter {
 		try {
 			_readExclusions();
 
-			_checkPersistenceTestSuite();
-			_checkWebXML();
-			_formatJava();
-			_formatJSP();
+			Thread thread1 = new Thread () {
+				public void run() {
+					try {
+						_checkPersistenceTestSuite();
+						_checkWebXML();
+						_formatJSP();
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			};
+
+			Thread thread2 = new Thread () {
+				public void run() {
+					try {
+						_formatJava();
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			};
+
+			thread1.start();
+			thread2.start();
+
+			thread1.join();
+			thread2.join();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
