@@ -186,6 +186,11 @@ public class JournalUtil {
 
 		JournalUtil.addReservedEl(
 			root, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_URL_TITLE,
+			article.getUrlTitle());
+
+		JournalUtil.addReservedEl(
+			root, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_DESCRIPTION,
 			article.getDescription());
 
@@ -218,11 +223,6 @@ public class JournalUtil {
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
 			String.valueOf(article.getUserId()));
-
-		JournalUtil.addReservedEl(
-			root, tokens,
-			JournalStructureConstants.RESERVED_ARTICLE_URL_TITLE,
-			article.getUrlTitle());
 
 		String userName = StringPool.BLANK;
 		String userEmailAddress = StringPool.BLANK;
