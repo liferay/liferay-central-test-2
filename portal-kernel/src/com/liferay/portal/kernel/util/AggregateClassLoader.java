@@ -64,7 +64,7 @@ public class AggregateClassLoader extends ClassLoader {
 		throws ClassNotFoundException {
 
 		Class<?> loadedClass = null;
-		
+
 		try {
 			loadedClass = super.loadClass(name, resolve);
 		}
@@ -80,7 +80,7 @@ public class AggregateClassLoader extends ClassLoader {
 		if (resolve) {
 			resolveClass(loadedClass);
 		}
-		
+
 		return loadedClass;
 	}
 
