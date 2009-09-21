@@ -41,6 +41,11 @@ public class DateUtil {
 	public static final String ISO_8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ssZ";
 
 	public static int compareTo(Date date1, Date date2) {
+		return compareTo(date1, date2, false);
+	}
+
+	public static int compareTo(
+		Date date1, Date date2, boolean ignoreMilliseconds) {
 
 		// Workaround for bug in JDK 1.5.x. This bug is fixed in JDK 1.5.07. See
 		// http://bugs.sun.com/bugdatabase/view_bug.do;:YfiG?bug_id=6207898 for
@@ -59,40 +64,10 @@ public class DateUtil {
 		long time1 = date1.getTime();
 		long time2 = date2.getTime();
 
-		if (time1 == time2) {
-			return 0;
+		if (ignoreMilliseconds) {
+			time1 = time1 / Time.SECOND;
+			time2 = time2 / Time.SECOND;
 		}
-		else if (time1 < time2) {
-			return -1;
-		}
-		else {
-			return 1;
-		}
-	}
-
-	public static int compareTo(
-		Date date1, Date date2, boolean ignoreMilliseconds) {
-
-		// Workaround for bug in JDK 1.5.x. This bug is fixed in JDK 1.5.07. See
-		// http://bugs.sun.com/bugdatabase/view_bug.do;:YfiG?bug_id=6207898 for
-		// more information.
-
-		if (!ignoreMilliseconds) {
-			return compareTo(date1, date2);
-		}
-
-		if ((date1 != null) && (date2 == null)) {
-			return -1;
-		}
-		else if ((date1 == null) && (date2 != null)) {
-			return 1;
-		}
-		else if ((date1 == null) && (date2 == null)) {
-			return 0;
-		}
-
-		long time1 = date1.getTime() / Time.SECOND;
-		long time2 = date2.getTime() / Time.SECOND;
 
 		if (time1 == time2) {
 			return 0;
