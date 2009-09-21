@@ -54,6 +54,10 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		MBThread thread1 = (MBThread)obj1;
 		MBThread thread2 = (MBThread)obj2;
 
+		if (thread1.equals(thread2)) {
+			return 0;
+		}
+
 		Date lastPostDate1 = thread1.getLastPostDate();
 		Date lastPostDate2 = thread2.getLastPostDate();
 
