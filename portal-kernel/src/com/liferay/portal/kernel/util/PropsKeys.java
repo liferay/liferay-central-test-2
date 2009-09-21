@@ -922,8 +922,6 @@ public interface PropsKeys {
 	public static final String MODEL_HINTS_CONFIGS = "model.hints.configs";
 
 	public static final String MONITORING_DATA_SAMPLE_THREAD_LOCAL = "monitoring.data.sample.thread.local";
-	
-	public static final String MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE = "monitoring.display.per.request.data.sample";
 
 	public static final String MONITORING_PORTAL_REQUEST = "monitoring.portal.request";
 
@@ -934,6 +932,8 @@ public interface PropsKeys {
 	public static final String MONITORING_PORTLET_RENDER_REQUEST = "monitoring.portlet.render.request";
 
 	public static final String MONITORING_PORTLET_RESOURCE_REQUEST = "monitoring.portlet.resource.request";
+
+	public static final String MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE = "monitoring.show.per.request.data.sample";
 
 	public static final String MSN_LOGIN = "msn.login";
 

@@ -268,6 +268,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTAL_PREFERENCES = "PORTAL_PREFERENCES";
 
+	public static final String PORTAL_REQUEST_DATA_SAMPLE = "PORTAL_REQUEST_DATA_SAMPLE";
+
 	public static final String PORTLET_BREADCRUMB_MAP = "PORTLET_BREADCRUMB_MAP";
 
 	public static final String PORTLET_CATEGORY = "PORTLET_CATEGORY";

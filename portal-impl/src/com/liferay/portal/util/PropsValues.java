@@ -1000,10 +1000,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_DATA_SAMPLE_THREAD_LOCAL));
 
-	public static final boolean MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE = 
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.MONITORING_DISPLAY_PER_REQUEST_DATA_SAMPLE));
-
 	public static boolean MONITORING_PORTAL_REQUEST =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_PORTAL_REQUEST));
@@ -1023,6 +1019,10 @@ public class PropsValues {
 	public static boolean MONITORING_PORTLET_RESOURCE_REQUEST =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MONITORING_PORTLET_RESOURCE_REQUEST));
+
+	public static final boolean MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE));
 
 	public static final int MY_PLACES_MAX_ELEMENTS =
 		GetterUtil.getInteger(PropsUtil.get(PropsKeys.MY_PLACES_MAX_ELEMENTS));

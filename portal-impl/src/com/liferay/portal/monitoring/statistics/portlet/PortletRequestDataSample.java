@@ -88,15 +88,6 @@ public class PortletRequestDataSample extends BaseDataSample {
 		return _requestType;
 	}
 
-	public String toString() {
-		return "PortletRequestDataSample{" +
-			"_displayName='" + _displayName + '\'' +
-			", _portletId='" + _portletId + '\'' +
-			", _requestType=" + _requestType +
-			super.toString() +
-			'}';
-	}
-
 	private String _displayName;
 	private String _portletId;
 	private PortletRequestType _requestType;
