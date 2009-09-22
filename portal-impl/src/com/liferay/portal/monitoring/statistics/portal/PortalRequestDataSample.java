@@ -67,6 +67,18 @@ public class PortalRequestDataSample extends BaseDataSample {
 		return _requestURL;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{requestURL=");
+		sb.append(_requestURL);
+		sb.append(", ");
+		sb.append(super.toString());
+		sb.append("}");
+
+		return sb.toString();
+	}
+
 	private String _requestURL;
 
 }
