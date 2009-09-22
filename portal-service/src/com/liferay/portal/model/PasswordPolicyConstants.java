@@ -20,20 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.model;
 
-import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PasswordPolicyNames;
 
 /**
- * <a href="PasswordPolicyImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PasswordPolicyConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Scott Lee
  */
-public class PasswordPolicyImpl
-	extends PasswordPolicyModelImpl implements PasswordPolicy {
+public class PasswordPolicyConstants {
 
-	public PasswordPolicyImpl() {
-	}
+	public static final String[] SYSTEM_PASSWORD_POLICIES =
+		PasswordPolicyNames.SYSTEM_PASSWORD_POLICIES;
 
 }
