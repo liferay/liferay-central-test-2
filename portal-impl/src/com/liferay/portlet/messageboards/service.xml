@@ -206,7 +206,6 @@
 		<column name="attachments" type="boolean" />
 		<column name="anonymous" type="boolean" />
 		<column name="priority" type="double" />
-		<column name="discussion" type="boolean" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />

@@ -848,7 +848,6 @@ create table MBMessage (
 	attachments BOOLEAN,
 	anonymous BOOLEAN,
 	priority DOUBLE,
-	discussion BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,

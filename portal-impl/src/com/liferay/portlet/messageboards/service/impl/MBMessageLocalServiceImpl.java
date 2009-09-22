@@ -156,7 +156,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		message.setClassNameId(classNameId);
 		message.setClassPK(classPK);
-		message.setDiscussion(true);
 
 		mbMessagePersistence.update(message, false);
 

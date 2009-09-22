@@ -88,7 +88,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setAttachments(randomBoolean());
 		newMBMessage.setAnonymous(randomBoolean());
 		newMBMessage.setPriority(nextDouble());
-		newMBMessage.setDiscussion(randomBoolean());
 		newMBMessage.setStatus(nextInt());
 		newMBMessage.setStatusByUserId(nextLong());
 		newMBMessage.setStatusByUserName(randomString());
@@ -125,8 +124,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBMessage.getAnonymous(),
 			newMBMessage.getAnonymous());
 		assertEquals(existingMBMessage.getPriority(), newMBMessage.getPriority());
-		assertEquals(existingMBMessage.getDiscussion(),
-			newMBMessage.getDiscussion());
 		assertEquals(existingMBMessage.getStatus(), newMBMessage.getStatus());
 		assertEquals(existingMBMessage.getStatusByUserId(),
 			newMBMessage.getStatusByUserId());
@@ -194,7 +191,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setAttachments(randomBoolean());
 		mbMessage.setAnonymous(randomBoolean());
 		mbMessage.setPriority(nextDouble());
-		mbMessage.setDiscussion(randomBoolean());
 		mbMessage.setStatus(nextInt());
 		mbMessage.setStatusByUserId(nextLong());
 		mbMessage.setStatusByUserName(randomString());

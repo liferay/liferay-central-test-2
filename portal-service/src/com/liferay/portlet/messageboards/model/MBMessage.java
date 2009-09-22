@@ -54,11 +54,11 @@ public interface MBMessage extends MBMessageModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public boolean isDiscussion();
+
 	public boolean isRoot();
 
 	public boolean isReply();
-
-	public boolean isDiscussion();
 
 	public java.lang.String getBody(boolean translate);
 

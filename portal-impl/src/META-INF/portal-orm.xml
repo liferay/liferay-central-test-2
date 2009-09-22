@@ -1768,7 +1768,6 @@
 			<basic name="attachments" />
 			<basic name="anonymous" />
 			<basic name="priority" />
-			<basic name="discussion" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />

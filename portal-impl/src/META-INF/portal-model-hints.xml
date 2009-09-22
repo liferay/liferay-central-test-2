@@ -1350,7 +1350,6 @@
 		<field name="attachments" type="boolean" />
 		<field name="anonymous" type="boolean" />
 		<field name="priority" type="double" />
-		<field name="discussion" type="boolean" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />

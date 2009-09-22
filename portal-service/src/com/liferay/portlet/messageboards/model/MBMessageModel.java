@@ -133,12 +133,6 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 
 	public void setPriority(double priority);
 
-	public boolean getDiscussion();
-
-	public boolean isDiscussion();
-
-	public void setDiscussion(boolean discussion);
-
 	public int getStatus();
 
 	public void setStatus(int status);

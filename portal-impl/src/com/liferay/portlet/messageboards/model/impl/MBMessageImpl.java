@@ -73,6 +73,15 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		return MBThreadLocalServiceUtil.getThread(getThreadId());
 	}
 
+	public boolean isDiscussion() {
+		if (getClassNameId() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isRoot() {
 		if (getParentMessageId() ==
 				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
@@ -86,15 +95,6 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
 	public boolean isReply() {
 		return !isRoot();
-	}
-
-	public boolean isDiscussion() {
-		if (getCategoryId() == CompanyConstants.SYSTEM) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	public String getBody(boolean translate) {
