@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.util.PasswordPolicyNames;
-
 /**
  * <a href="PasswordPolicyConstants.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,7 +29,11 @@ import com.liferay.portal.util.PasswordPolicyNames;
  */
 public class PasswordPolicyConstants {
 
-	public static final String[] SYSTEM_PASSWORD_POLICIES =
-		PasswordPolicyNames.SYSTEM_PASSWORD_POLICIES;
+	public static final String DEFAULT_PASSWORD_POLICY =
+		"Default Password Policy";
+
+	public static final String[] SYSTEM_PASSWORD_POLICIES = {
+		DEFAULT_PASSWORD_POLICY
+	};
 
 }

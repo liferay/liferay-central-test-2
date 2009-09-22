@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PasswordPolicy;
-import com.liferay.portal.util.PasswordPolicyNames;
 
 /**
  * <a href="PasswordPolicyImpl.java.html"><b><i>View Source</i></b></a>
