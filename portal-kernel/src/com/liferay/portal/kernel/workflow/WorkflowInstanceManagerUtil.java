@@ -100,7 +100,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
-	 *		boolean, boolean)
+	 *		boolean, boolean, int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
@@ -115,7 +115,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, Integer,
-	 *		boolean)
+	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String workflowDefinitionName, Integer workflowDefinitionVersion,
@@ -130,7 +130,7 @@ public class WorkflowInstanceManagerUtil {
 
 	/**
 	 * @see WorkflowInstanceManager#getWorkflowInstanceInfos(String, long,
-	 *		boolean)
+	 *		boolean, int, int, OrderByComparator)
 	 */
 	public static List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 			String relationType, long relationId, boolean retrieveChildrenInfo,

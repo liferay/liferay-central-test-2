@@ -93,11 +93,9 @@ public interface WorkflowDefinitionManager {
 	 * #getWorkflowDefinitions(String)} instead where all versions for a
 	 * specific workflow definition are being returned.
 	 *
-	 * @param  start start position for the result pagination(inculde element on
-	 *		   start)
-	 * @param  end end position for the result pagination(exclude element on
-	 *		   end)
-	 * @param  orderByComparator the comparator for sorting the result list.
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of available workflow definitions, never
 	 *		   <code>null</code>
 	 */
@@ -112,11 +110,9 @@ public interface WorkflowDefinitionManager {
 	 *
 	 * @param  workflowDefinitionName the name of the workflow definition to
 	 *		   retrieve all versions for
-	 * @param  start start position for the result pagination(inculde element on
-	 *		   start)
-	 * @param  end end position for the result pagination(exclude element on
-	 *		   end)
-	 * @param  orderByComparator the comparator for sorting the result list.
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of all versions, if any found, an empty list otherwise
 	 *		   or a list containing just one element, must never be
 	 *		   <code>null</code>

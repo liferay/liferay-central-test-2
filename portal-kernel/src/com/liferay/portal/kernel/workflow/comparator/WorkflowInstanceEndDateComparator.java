@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.portal.kernel.workflow.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
@@ -28,24 +28,30 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
 import java.util.Date;
 
 /**
- * <a href="WorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
+ * <a href="WorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
  * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowInstanceStartDateComparator extends OrderByComparator{
+/**
+ * <a href="WorkflowInstanceEndDateComparator.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Shuyang Zhou
+ */
+public class WorkflowInstanceEndDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "start ASC, id ASC";
+	public static String ORDER_BY_ASC = "endDate ASC, id ASC";
 
-	public static String ORDER_BY_DESC = "start DESC, id DESC";
+	public static String ORDER_BY_DESC = "endDate DESC, id DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"start", "id"};
+	public static String[] ORDER_BY_FIELDS = {"endDate", "id"};
 
-	public WorkflowInstanceStartDateComparator() {
+	public WorkflowInstanceEndDateComparator() {
 		this(false);
 	}
 
-	public WorkflowInstanceStartDateComparator(boolean asc) {
+	public WorkflowInstanceEndDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -53,26 +59,19 @@ public class WorkflowInstanceStartDateComparator extends OrderByComparator{
 		WorkflowInstanceInfo workflowInstanceInfo1 = (WorkflowInstanceInfo)obj1;
 		WorkflowInstanceInfo workflowInstanceInfo2 = (WorkflowInstanceInfo)obj2;
 
-		Date startDate1 = workflowInstanceInfo1.getStartDate();
-		Date startDate2 = workflowInstanceInfo2.getStartDate();
+		Date endDate1 = workflowInstanceInfo1.getEndDate();
+		Date endDate2 = workflowInstanceInfo2.getEndDate();
 
-		int value = startDate1.compareTo(startDate2);
+		int value = endDate1.compareTo(endDate2);
 
-		if (value != 0) {
-			if (_asc) {
-				return value;
-			}
-			else {
-				return -value;
-			}
+		if (value == 0) {
+			Long workflowInstanceId1 =
+				workflowInstanceInfo1.getWorkflowInstanceId();
+			Long workflowInstanceId2 =
+				workflowInstanceInfo2.getWorkflowInstanceId();
+
+			value = workflowInstanceId1.compareTo(workflowInstanceId2);
 		}
-
-		Long workflowInstanceId1 =
-			new Long(workflowInstanceInfo1.getWorkflowInstanceId());
-		Long workflowInstanceId2 =
-			new Long(workflowInstanceInfo1.getWorkflowInstanceId());
-
-		value = workflowInstanceId1.compareTo(workflowInstanceId2);
 
 		if (_asc) {
 			return value;

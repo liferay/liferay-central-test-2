@@ -222,11 +222,9 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
-	 * @param  start start position for the result pagination(inculde element on
-	 *		   start)
-	 * @param  end end position for the result pagination(exclude element on
-	 *		   end)
-	 * @param  orderByComparator the comparator for sorting the result list.
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
 	 *		   will return an empty list rather than <code>null</code> if no
 	 *		   instances found
@@ -255,11 +253,9 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
-	 * @param  start start position for the result pagination(inculde element on
-	 *		   start)
-	 * @param  end end position for the result pagination(exclude element on
-	 *		   end)
-	 * @param  orderByComparator the comparator for sorting the result list.
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return a list of workflow instance information for the given definition,
 	 *		   will return an empty list rather than <code>null</code> if no
 	 *		   instances found
@@ -298,11 +294,9 @@ public interface WorkflowInstanceManager {
 	 * @param  retrieveChildrenInfo flag, indicating whether the hierarchy of
 	 *		   children's information should be returned as well or if only the
 	 *		   root workflow instance should be returned, without the children
-	 * @param  start start position for the result pagination(inculde element on
-	 *		   start)
-	 * @param  end end position for the result pagination(exclude element on
-	 *		   end)
-	 * @param  orderByComparator the comparator for sorting the result list.
+	 * @param  start inclusive start position for paginating the result
+	 * @param  end exclusive end position for paginating the result
+	 * @param  orderByComparator comparator for sorting the result
 	 * @return the list of workflow instance information found in relation to
 	 *		   the specified domain object instance or an empty list, if nothing
 	 *		   found, never <code>null</code>

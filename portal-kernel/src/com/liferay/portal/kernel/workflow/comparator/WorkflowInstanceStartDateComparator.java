@@ -20,56 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.portal.kernel.workflow.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowDefinition;
+import com.liferay.portal.kernel.workflow.WorkflowInstanceInfo;
+
+import java.util.Date;
 
 /**
- * <a href="WorkflowDefinitionComparator.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="WorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Shuyang Zhou
  */
-public class WorkflowDefinitionComparator extends OrderByComparator {
+/**
+ * <a href="WorkflowInstanceStartDateComparator.java.html"><b><i>View Source</i>
+ * </b></a>
+ *
+ * @author Shuyang Zhou
+ */
+public class WorkflowInstanceStartDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "name ASC, version ASC";
+	public static String ORDER_BY_ASC = "startDate ASC, id ASC";
 
-	public static String ORDER_BY_DESC = "name DESC, version DESC";
+	public static String ORDER_BY_DESC = "startDate DESC, id DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"name", "version"};
+	public static String[] ORDER_BY_FIELDS = {"startDate", "id"};
 
-	public WorkflowDefinitionComparator() {
+	public WorkflowInstanceStartDateComparator() {
 		this(false);
 	}
 
-	public WorkflowDefinitionComparator(boolean asc) {
+	public WorkflowInstanceStartDateComparator(boolean asc) {
 		_asc = asc;
 	}
 
-	@Override
 	public int compare(Object obj1, Object obj2) {
-		WorkflowDefinition workflowDefinition1 = (WorkflowDefinition)obj1;
-		WorkflowDefinition workflowDefinition2 = (WorkflowDefinition)obj2;
+		WorkflowInstanceInfo workflowInstanceInfo1 = (WorkflowInstanceInfo)obj1;
+		WorkflowInstanceInfo workflowInstanceInfo2 = (WorkflowInstanceInfo)obj2;
 
-		String name1 = workflowDefinition1.getWorkflowDefinitionName();
-		String name2 = workflowDefinition2.getWorkflowDefinitionName();
+		Date startDate1 = workflowInstanceInfo1.getStartDate();
+		Date startDate2 = workflowInstanceInfo2.getStartDate();
 
-		int value = name1.compareTo(name2);
+		int value = startDate1.compareTo(startDate2);
 
-		if (value != 0) {
-			if (_asc) {
-				return value;
-			}
-			else {
-				return -value;
-			}
+		if (value == 0) {
+			Long workflowInstanceId1 =
+				workflowInstanceInfo1.getWorkflowInstanceId();
+			Long workflowInstanceId2 =
+				workflowInstanceInfo2.getWorkflowInstanceId();
+
+			value = workflowInstanceId1.compareTo(workflowInstanceId2);
 		}
-
-		Integer version1 = workflowDefinition1.getWorkflowDefinitionVersion();
-		Integer version2 = workflowDefinition2.getWorkflowDefinitionVersion();
-
-		value = version1.compareTo(version2);
 
 		if (_asc) {
 			return value;

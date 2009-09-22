@@ -73,7 +73,7 @@ public class WorkflowInstanceManagerProxyBean
 	public List<WorkflowInstanceInfo> getWorkflowInstanceInfos(
 		String workflowDefinitionName, Integer workflowDefinitionVersion,
 		boolean retrieveChildrenInfo, int start, int end,
-			OrderByComparator orderByComparator) {
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
