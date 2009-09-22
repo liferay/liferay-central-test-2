@@ -720,6 +720,8 @@ public class HookHotDeployListener
 			new Class[] {com.liferay.documentlibrary.util.Hook.class},
 			new ContextClassLoaderBeanHandler(dlHook, portletClassLoader));
 
+		com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
+
 		_dlHooksMap.put(servletContextName, dlHook);
 	}
 
