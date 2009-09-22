@@ -20,54 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.shopping.model.impl;
-
-import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portlet.shopping.model.ShoppingCoupon;
-
-import java.util.Date;
+package com.liferay.portlet.shopping.model;
 
 /**
- * <a href="ShoppingCouponImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingItemPriceConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ShoppingCouponImpl
-	extends ShoppingCouponModelImpl implements ShoppingCoupon {
+public class ShoppingItemPriceConstants {
 
-	public ShoppingCouponImpl() {
-	}
+	public static final int STATUS_ACTIVE_DEFAULT = 1;
 
-	public boolean hasValidStartDate() {
-		Date now = new Date();
+	public static final int STATUS_ACTIVE = 2;
 
-		if (CalendarUtil.beforeByDay(now, getStartDate())) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public boolean hasValidEndDate() {
-		if (getEndDate() != null) {
-			Date now = new Date();
-
-			if (now.after(getEndDate())) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public boolean hasValidDateRange() {
-		if (hasValidStartDate() && hasValidEndDate()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	public static final int STATUS_INACTIVE = 0;
 
 }

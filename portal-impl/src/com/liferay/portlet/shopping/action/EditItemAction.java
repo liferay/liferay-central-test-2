@@ -48,7 +48,7 @@ import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
@@ -214,13 +214,13 @@ public class EditItemAction extends PortletAction {
 			int defaultPrice = ParamUtil.getInteger(
 				uploadRequest, "defaultPrice");
 
-			int status = ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT;
+			int status = ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT;
 
 			if ((defaultPrice != i) && active) {
-				status = ShoppingItemPriceImpl.STATUS_ACTIVE;
+				status = ShoppingItemPriceConstants.STATUS_ACTIVE;
 			}
 			else if ((defaultPrice != i) && !active) {
-				status = ShoppingItemPriceImpl.STATUS_INACTIVE;
+				status = ShoppingItemPriceConstants.STATUS_INACTIVE;
 			}
 
 			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(0);

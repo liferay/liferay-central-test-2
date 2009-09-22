@@ -246,10 +246,10 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 		<select name="<portlet:namespace />discountType">
 
 			<%
-			for (int i = 0; i < ShoppingCouponImpl.DISCOUNT_TYPES.length; i++) {
+			for (int i = 0; i < ShoppingCouponConstants.DISCOUNT_TYPES.length; i++) {
 			%>
 
-				<option <%= discountType.equals(ShoppingCouponImpl.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCouponImpl.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCouponImpl.DISCOUNT_TYPES[i]) %></option>
+				<option <%= discountType.equals(ShoppingCouponConstants.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCouponConstants.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCouponConstants.DISCOUNT_TYPES[i]) %></option>
 
 			<%
 			}

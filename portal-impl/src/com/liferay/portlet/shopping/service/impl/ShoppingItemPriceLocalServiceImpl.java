@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.portlet.shopping.service.base.ShoppingItemPriceLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -63,7 +63,8 @@ public class ShoppingItemPriceLocalServiceImpl
 			itemPrice.setTaxable(item.isTaxable());
 			itemPrice.setShipping(item.getShipping());
 			itemPrice.setUseShippingFormula(item.isUseShippingFormula());
-			itemPrice.setStatus(ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT);
+			itemPrice.setStatus(
+				ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT);
 
 			itemPrices.add(itemPrice);
 		}

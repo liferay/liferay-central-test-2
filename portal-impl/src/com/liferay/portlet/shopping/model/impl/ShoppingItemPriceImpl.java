@@ -32,12 +32,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 public class ShoppingItemPriceImpl
 	extends ShoppingItemPriceModelImpl implements ShoppingItemPrice {
 
-	public static final int STATUS_ACTIVE_DEFAULT = 1;
-
-	public static final int STATUS_ACTIVE = 2;
-
-	public static final int STATUS_INACTIVE = 0;
-
 	public ShoppingItemPriceImpl() {
 	}
 

@@ -20,54 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.shopping.model.impl;
-
-import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portlet.shopping.model.ShoppingCoupon;
-
-import java.util.Date;
+package com.liferay.portlet.shopping.model;
 
 /**
- * <a href="ShoppingCouponImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingCouponConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ShoppingCouponImpl
-	extends ShoppingCouponModelImpl implements ShoppingCoupon {
+public class ShoppingCouponConstants {
 
-	public ShoppingCouponImpl() {
-	}
+	public static final String[] DISCOUNT_TYPES = {
+		"percentage", "actual", "free-shipping", "tax-free"
+	};
 
-	public boolean hasValidStartDate() {
-		Date now = new Date();
+	public static final String DISCOUNT_TYPE_PERCENTAGE = "percentage";
 
-		if (CalendarUtil.beforeByDay(now, getStartDate())) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+	public static final String DISCOUNT_TYPE_ACTUAL = "actual";
 
-	public boolean hasValidEndDate() {
-		if (getEndDate() != null) {
-			Date now = new Date();
+	public static final String DISCOUNT_TYPE_FREE_SHIPPING = "free-shipping";
 
-			if (now.after(getEndDate())) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public boolean hasValidDateRange() {
-		if (hasValidStartDate() && hasValidEndDate()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	public static final String DISCOUNT_TYPE_TAX_FREE = "tax-free";
 
 }

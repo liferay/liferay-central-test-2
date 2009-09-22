@@ -298,7 +298,7 @@ for (int i = 0; itr.hasNext(); i++) {
 	for (int j = 0; j < itemPrices.length; j++) {
 		ShoppingItemPrice itemPrice = itemPrices[j];
 
-		if (itemPrice.getStatus() == ShoppingItemPriceImpl.STATUS_INACTIVE) {
+		if (itemPrice.getStatus() == ShoppingItemPriceConstants.STATUS_INACTIVE) {
 			continue;
 		}
 

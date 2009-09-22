@@ -20,54 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.shopping.model.impl;
-
-import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portlet.shopping.model.ShoppingCoupon;
-
-import java.util.Date;
+package com.liferay.portlet.shopping.model;
 
 /**
- * <a href="ShoppingCouponImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShoppingOrderConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  */
-public class ShoppingCouponImpl
-	extends ShoppingCouponModelImpl implements ShoppingCoupon {
+public class ShoppingOrderConstants {
 
-	public ShoppingCouponImpl() {
-	}
+	public static final String[] STATUSES = {
+		"checkout", "completed", "denied", "pending", "refunded"
+	};
 
-	public boolean hasValidStartDate() {
-		Date now = new Date();
+	public static final String STATUS_LATEST = "LIFERAY_STATUS_LATEST";
 
-		if (CalendarUtil.beforeByDay(now, getStartDate())) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
+	public static final String STATUS_CHECKOUT = "LIFERAY_STATUS_CHECKOUT";
 
-	public boolean hasValidEndDate() {
-		if (getEndDate() != null) {
-			Date now = new Date();
+	public static final String STATUS_COMPLETED = "Completed";
 
-			if (now.after(getEndDate())) {
-				return false;
-			}
-		}
+	public static final String STATUS_DENIED = "Denied";
 
-		return true;
-	}
+	public static final String STATUS_PENDING = "Pending";
 
-	public boolean hasValidDateRange() {
-		if (hasValidStartDate() && hasValidEndDate()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	public static final String STATUS_REFUNDED = "Refunded";
 
 }

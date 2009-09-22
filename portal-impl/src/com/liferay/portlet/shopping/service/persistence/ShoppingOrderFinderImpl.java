@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.ShoppingOrderConstants;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -79,7 +80,7 @@ public class ShoppingOrderFinderImpl
 				sql = StringUtil.replace(
 					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
 
-				ppPaymentStatus = ShoppingOrderImpl.STATUS_LATEST;
+				ppPaymentStatus = ShoppingOrderConstants.STATUS_LATEST;
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -159,7 +160,7 @@ public class ShoppingOrderFinderImpl
 				sql = StringUtil.replace(
 					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
 
-				ppPaymentStatus = ShoppingOrderImpl.STATUS_LATEST;
+				ppPaymentStatus = ShoppingOrderConstants.STATUS_LATEST;
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);

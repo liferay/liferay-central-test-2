@@ -51,7 +51,7 @@ import com.liferay.portlet.shopping.model.ShoppingCategoryConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
@@ -141,7 +141,7 @@ public class ShoppingItemLocalServiceImpl
 
 		for (ShoppingItemPrice itemPrice : itemPrices) {
 			if (itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
+					ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) {
 
 				item.setMinQuantity(itemPrice.getMinQuantity());
 				item.setMaxQuantity(itemPrice.getMaxQuantity());
@@ -155,9 +155,9 @@ public class ShoppingItemLocalServiceImpl
 
 			if ((sale == null) && (itemPrice.getDiscount() > 0) &&
 				((itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) ||
+					ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) ||
 				(itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE))) {
+					ShoppingItemPriceConstants.STATUS_ACTIVE))) {
 
 				sale = Boolean.TRUE;
 			}
@@ -507,7 +507,7 @@ public class ShoppingItemLocalServiceImpl
 
 		for (ShoppingItemPrice itemPrice : itemPrices) {
 			if (itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
+					ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) {
 
 				item.setMinQuantity(itemPrice.getMinQuantity());
 				item.setMaxQuantity(itemPrice.getMaxQuantity());
@@ -521,9 +521,9 @@ public class ShoppingItemLocalServiceImpl
 
 			if ((sale == null) && (itemPrice.getDiscount() > 0) &&
 				((itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) ||
+					ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) ||
 				(itemPrice.getStatus() ==
-					ShoppingItemPriceImpl.STATUS_ACTIVE))) {
+					ShoppingItemPriceConstants.STATUS_ACTIVE))) {
 
 				sale = Boolean.TRUE;
 			}
@@ -637,7 +637,8 @@ public class ShoppingItemLocalServiceImpl
 			itemPrice.setTaxable(taxable);
 			itemPrice.setShipping(shipping);
 			itemPrice.setUseShippingFormula(useShippingFormula);
-			itemPrice.setStatus(ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT);
+			itemPrice.setStatus(
+				ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT);
 
 			boolean requiresShipping = true;
 			int stockQuantity = 0;

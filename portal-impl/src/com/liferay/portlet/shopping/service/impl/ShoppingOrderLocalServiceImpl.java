@@ -64,9 +64,9 @@ import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.ShoppingOrderConstants;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartItemImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
@@ -107,7 +107,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		List<ShoppingOrder> pastOrders =
 			shoppingOrderPersistence.findByG_U_PPPS(
-				groupId, userId, ShoppingOrderImpl.STATUS_CHECKOUT, 0, 1);
+				groupId, userId, ShoppingOrderConstants.STATUS_CHECKOUT, 0, 1);
 
 		if (pastOrders.size() > 0) {
 			ShoppingOrder pastOrder = pastOrders.get(0);
@@ -148,7 +148,7 @@ public class ShoppingOrderLocalServiceImpl
 		order.setShippingLastName(user.getLastName());
 		order.setShippingEmailAddress(user.getEmailAddress());
 		order.setCcName(user.getFullName());
-		order.setPpPaymentStatus(ShoppingOrderImpl.STATUS_LATEST);
+		order.setPpPaymentStatus(ShoppingOrderConstants.STATUS_LATEST);
 		order.setSendOrderEmail(true);
 		order.setSendShippingEmail(true);
 
@@ -191,7 +191,7 @@ public class ShoppingOrderLocalServiceImpl
 		// Inventory
 
 		if (updateInventory &&
-			ppPaymentStatus.equals(ShoppingOrderImpl.STATUS_COMPLETED)) {
+			ppPaymentStatus.equals(ShoppingOrderConstants.STATUS_COMPLETED)) {
 
 			List<ShoppingOrderItem> orderItems =
 				shoppingOrderItemLocalService.getOrderItems(order.getOrderId());
@@ -290,7 +290,7 @@ public class ShoppingOrderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<ShoppingOrder> orders = shoppingOrderPersistence.findByG_U_PPPS(
-			groupId, userId, ShoppingOrderImpl.STATUS_LATEST, 0, 1);
+			groupId, userId, ShoppingOrderConstants.STATUS_LATEST, 0, 1);
 
 		ShoppingOrder order = null;
 
@@ -340,7 +340,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		order.setCreateDate(now);
 		order.setModifiedDate(now);
-		order.setPpPaymentStatus(ShoppingOrderImpl.STATUS_CHECKOUT);
+		order.setPpPaymentStatus(ShoppingOrderConstants.STATUS_CHECKOUT);
 
 		shoppingOrderPersistence.update(order, false);
 

@@ -143,7 +143,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		for (int i = 0; i < itemPrices.length; i++) {
 			ShoppingItemPrice itemPrice = itemPrices[i];
 
-			if (itemPrice.getStatus() == ShoppingItemPriceImpl.STATUS_INACTIVE) {
+			if (itemPrice.getStatus() == ShoppingItemPriceConstants.STATUS_INACTIVE) {
 				continue;
 			}
 		%>

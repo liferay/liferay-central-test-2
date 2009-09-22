@@ -484,7 +484,7 @@ for (int i = 0; i < pricesCount; i++) {
 		if (itemPrices[curPriceId] != null) {
 			int status = itemPrices[curPriceId].getStatus();
 
-			if (status == ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPriceImpl.STATUS_ACTIVE) {
+			if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPriceConstants.STATUS_ACTIVE) {
 				active = true;
 			}
 			else {
@@ -507,7 +507,7 @@ for (int i = 0; i < pricesCount; i++) {
 		if (itemPrices[curPriceId] != null) {
 			int status = itemPrices[curPriceId].getStatus();
 
-			if (status == ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
+			if (status == ShoppingItemPriceConstants.STATUS_ACTIVE_DEFAULT) {
 				defaultPrice = true;
 			}
 			else {

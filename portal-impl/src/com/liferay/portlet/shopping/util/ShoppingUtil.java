@@ -40,15 +40,15 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+import com.liferay.portlet.shopping.model.ShoppingCouponConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.ShoppingOrderConstants;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
@@ -246,16 +246,18 @@ public class ShoppingUtil {
 
 		String type = coupon.getDiscountType();
 
-		if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_PERCENTAGE)) {
+		if (type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_PERCENTAGE)) {
 			discount = actualSubtotal * coupon.getDiscount();
 		}
-		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_ACTUAL)) {
+		else if (type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_ACTUAL)) {
 			discount = coupon.getDiscount();
 		}
-		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_FREE_SHIPPING)) {
+		else if (
+			type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_FREE_SHIPPING)) {
+
 			discount = calculateShipping(items);
 		}
-		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_TAX_FREE)) {
+		else if (type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_TAX_FREE)) {
 			if (stateId != null) {
 				discount = calculateTax(items, stateId);
 			}
@@ -955,7 +957,7 @@ public class ShoppingUtil {
 		if ((ppPaymentStatus == null) || (ppPaymentStatus.length() < 2) ||
 			(ppPaymentStatus.equals("checkout"))) {
 
-			return ShoppingOrderImpl.STATUS_CHECKOUT;
+			return ShoppingOrderConstants.STATUS_CHECKOUT;
 		}
 		else {
 			return Character.toUpperCase(ppPaymentStatus.charAt(0)) +
@@ -968,7 +970,7 @@ public class ShoppingUtil {
 
 		String ppPaymentStatus = order.getPpPaymentStatus();
 
-		if (ppPaymentStatus.equals(ShoppingOrderImpl.STATUS_CHECKOUT)) {
+		if (ppPaymentStatus.equals(ShoppingOrderConstants.STATUS_CHECKOUT)) {
 			ppPaymentStatus = "checkout";
 		}
 		else {
@@ -1064,7 +1066,7 @@ public class ShoppingUtil {
 			int maxQty = temp.getMaxQuantity();
 
 			if ((temp.getStatus() !=
-					ShoppingItemPriceImpl.STATUS_INACTIVE)) {
+					ShoppingItemPriceConstants.STATUS_INACTIVE)) {
 
 				if ((count >= minQty) && ((count <= maxQty) || (maxQty == 0))) {
 					return temp;

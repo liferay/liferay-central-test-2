@@ -308,10 +308,10 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<select name="<portlet:namespace />ppPaymentStatus">
 
 					<%
-					for (int i = 0; i < ShoppingOrderImpl.STATUSES.length; i++) {
+					for (int i = 0; i < ShoppingOrderConstants.STATUSES.length; i++) {
 					%>
 
-						<option <%= ShoppingUtil.getPpPaymentStatus(ShoppingOrderImpl.STATUSES[i]).equals(order.getPpPaymentStatus()) ? "selected" : "" %> value="<%= ShoppingOrderImpl.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrderImpl.STATUSES[i]) %></option>
+						<option <%= ShoppingUtil.getPpPaymentStatus(ShoppingOrderConstants.STATUSES[i]).equals(order.getPpPaymentStatus()) ? "selected" : "" %> value="<%= ShoppingOrderConstants.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrderConstants.STATUSES[i]) %></option>
 
 					<%
 					}
@@ -352,7 +352,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPayerEmail" />
 			</td>
 		</tr>
-		<c:if test="<%= order.getPpPaymentStatus().equals(ShoppingOrderImpl.STATUS_CHECKOUT) %>">
+		<c:if test="<%= order.getPpPaymentStatus().equals(ShoppingOrderConstants.STATUS_CHECKOUT) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="paypal-order" />:
