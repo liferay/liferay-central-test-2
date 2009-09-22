@@ -39,8 +39,9 @@ import org.hibernate.cache.Timestamper;
 /**
  * <a href="OSCache.java.html"><b><i>View Source</i></b></a>
  *
- * @author Mathias Bogaert
- * @author Brian Wing Shun Chan
+ * @author	   Mathias Bogaert
+ * @author	   Brian Wing Shun Chan
+ * @deprecated
  */
 public class OSCache implements Cache {
 
@@ -113,7 +114,7 @@ public class OSCache implements Cache {
 		_cache.flushEntry(_encodeKey(key));
 	}
 
-	public Map toMap() {
+	public Map<Object, Object> toMap() {
 		return null;
 	}
 

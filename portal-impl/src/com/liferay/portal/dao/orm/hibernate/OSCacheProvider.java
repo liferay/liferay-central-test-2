@@ -38,8 +38,9 @@ import org.hibernate.util.StringHelper;
 /**
  * <a href="OSCacheProvider.java.html"><b><i>View Source</i></b></a>
  *
- * @author Mathias Bogaert
- * @author Brian Wing Shun Chan
+ * @author	   Mathias Bogaert
+ * @author	   Brian Wing Shun Chan
+ * @deprecated
  */
 public class OSCacheProvider implements CacheProvider {
 
