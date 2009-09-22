@@ -69,17 +69,16 @@ public class RulesEngineUtil {
 	}
 
 	public static Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever,
-			List<Fact<?>> facts, Query query)
+			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			Query query)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(RulesResourceRetriever, facts, query);
 	}
 
 	public static Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever,
-			List<Fact<?>> facts, Query query,
-			ClassLoader... classloaders)
+			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			Query query, ClassLoader... classloaders)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(
@@ -100,7 +99,7 @@ public class RulesEngineUtil {
 	}
 
 	public static Map<String, ?> execute(
-		String domainName, List<Fact<?>> facts, Query query)
+			String domainName, List<Fact<?>> facts, Query query)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(domainName, facts, query);

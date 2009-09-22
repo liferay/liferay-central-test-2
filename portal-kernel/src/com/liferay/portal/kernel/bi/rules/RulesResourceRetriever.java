@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -54,4 +54,5 @@ public class RulesResourceRetriever implements Serializable {
 
 	private ResourceRetriever _resourceRetriever;
 	private RulesLanguage _rulesLanguage;
+
 }

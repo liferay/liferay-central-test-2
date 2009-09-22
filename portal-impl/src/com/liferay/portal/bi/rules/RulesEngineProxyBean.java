@@ -57,9 +57,8 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 	}
 
 	public Map<String, ?> execute(
-		RulesResourceRetriever RulesResourceRetriever,
-		List<Fact<?>> facts, Query query,
-		ClassLoader... clientClassLoaders) {
+		RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+		Query query, ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}

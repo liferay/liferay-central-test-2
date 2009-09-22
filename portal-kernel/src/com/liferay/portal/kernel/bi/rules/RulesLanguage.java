@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2009 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,13 +28,9 @@ package com.liferay.portal.kernel.bi.rules;
  * @author Michael C. Han
  */
 public enum RulesLanguage {
-	DROOLS_RULE_LANGUAGE,
-	DROOLS_XML_LANGUAGE,
-	DROOLS_DOMAIN_SPECIFIC,
-	DROOLS_DOMAIN_SPECIFIC_RULE,
-	DROOLS_RULE_FLOW,
-	DROOLS_DECISION_TABLE,
-	DROOLS_PKG,
-	DROOLS_BRL,
-	DROOLS_CHANGE_SET
+
+	DROOLS_BRL, DROOLS_CHANGE_SET, DROOLS_DECISION_TABLE,
+	DROOLS_DOMAIN_SPECIFIC, DROOLS_DOMAIN_SPECIFIC_RULE, DROOLS_PKG,
+	DROOLS_RULE_FLOW, DROOLS_RULE_LANGUAGE, DROOLS_XML_LANGUAGE
+
 }

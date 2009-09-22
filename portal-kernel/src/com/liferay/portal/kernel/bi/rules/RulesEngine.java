@@ -55,8 +55,8 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever,
-			List<Fact<?>> facts, Query query,
+			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			Query query,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
