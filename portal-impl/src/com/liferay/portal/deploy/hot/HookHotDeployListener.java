@@ -839,6 +839,8 @@ public class HookHotDeployListener
 			new Class[] {com.liferay.portal.image.Hook.class},
 			new ContextClassLoaderBeanHandler(imageHook, portletClassLoader));
 
+		com.liferay.portal.image.HookFactory.setInstance(imageHook);
+
 		_imageHooksMap.put(servletContextName, imageHook);
 	}
 
@@ -861,6 +863,8 @@ public class HookHotDeployListener
 		mailHook = (com.liferay.mail.util.Hook)Proxy.newProxyInstance(
 			portletClassLoader, new Class[] {com.liferay.mail.util.Hook.class},
 			new ContextClassLoaderBeanHandler(mailHook, portletClassLoader));
+
+		com.liferay.mail.util.HookFactory.setInstance(mailHook);
 
 		_mailHooksMap.put(servletContextName, mailHook);
 	}
