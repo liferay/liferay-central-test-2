@@ -22,12 +22,14 @@
 
 package com.liferay.portal.bi.rules;
 
+import com.liferay.portal.kernel.bi.rules.Fact;
 import com.liferay.portal.kernel.bi.rules.Query;
 import com.liferay.portal.kernel.bi.rules.RulesEngine;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="RulesEngineProxyBean.java.html"><b><i>View Source</i></b></a>
@@ -36,32 +38,37 @@ import java.util.List;
  */
 public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 
-	public void add(String domainName, ResourceRetriever resourceRetriever) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void execute(
-		ResourceRetriever resourceRetriever, List<?> facts,
-		ClassLoader... clientClassLoaders) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public List<?> execute(
-		ResourceRetriever resourceRetriever, List<?> facts, Query query,
+	public void add(
+		String domainName, ResourceRetriever resourceRetriever,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void execute(
-		String domainName, List<?> facts, ClassLoader... clientClassLoaders) {
+		ResourceRetriever resourceRetriever, List<Fact<?>> facts,
+		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<?> execute(
-		String domainName, List<?> facts, Query query,
+	public Map<String, ?> execute(
+		ResourceRetriever resourceRetriever, List<Fact<?>> facts, Query query,
+		ClassLoader... clientClassLoaders) {
+
+		throw new UnsupportedOperationException();
+	}
+
+
+	public void execute(
+		String domainName, List<Fact<?>> facts,
+		ClassLoader... clientClassLoaders) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public Map<String, ?> execute(
+		String domainName, List<Fact<?>> facts, Query query,
 		ClassLoader... clientClassLoaders) {
 
 		throw new UnsupportedOperationException();
@@ -71,7 +78,10 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
-	public void update(String domainName, ResourceRetriever resourceRetriever) {
+	public void update(
+		String domainName, ResourceRetriever resourceRetriever,
+		ClassLoader... clientClassLoaders) {
+
 		throw new UnsupportedOperationException();
 	}
 

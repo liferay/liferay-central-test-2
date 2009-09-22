@@ -22,9 +22,12 @@
 
 package com.liferay.portal.kernel.bi.rules;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.io.Serializable;
 
 /**
  * <a href="Query.java.html"><b><i>View Source</i></b></a>
@@ -33,14 +36,24 @@ import java.util.List;
  *
  * @author Michael C. Han
  */
-public class Query {
+public class Query implements Serializable {
 
-	public static Query createCustomQuery() {
-		return new Query(QueryType.CUSTOM);
+	public static Query createCustomQuery(
+		String identifier, String queryName) {
+
+		if (Validator.isNull(identifier)) {
+			throw new IllegalArgumentException("Query idenfier is null.");
+		}
+		
+		if (Validator.isNull(queryName)) {
+			throw new IllegalArgumentException("Query string is null.");
+		}
+
+		return new Query(identifier, QueryType.CUSTOM, queryName);
 	}
 
 	public static Query createStandardQuery() {
-		return new Query(QueryType.STANDARD);
+		return new Query(null, QueryType.STANDARD, null);
 	}
 
 	public void addArgument(Object object) {
@@ -76,29 +89,27 @@ public class Query {
 		return _arguments.toArray(new Object[_arguments.size()]);
 	}
 
-	public String getQueryString() {
-		return _queryString;
+	public String getIdentifier() {
+		return _identifier;
+	}
+
+	public String getQueryName() {
+		return _queryName;
 	}
 
 	public QueryType getQueryType() {
 		return _queryType;
 	}
 
-	public void setQueryString(String queryString) {
-		if (_queryType.equals(QueryType.STANDARD)) {
-			throw new IllegalStateException(
-				"Standard queries cannot accept query strings");
-		}
-
-		_queryString = queryString;
-	}
-
-	private Query(QueryType queryType) {
+	private Query(String identifier, QueryType queryType, String queryName) {
+		_identifier = identifier;
 		_queryType = queryType;
+		_queryName = queryName;
 	}
 
 	private List<Object> _arguments = new ArrayList<Object>();
-	private String _queryString;
+	private String _identifier;
+	private String _queryName;
 	private QueryType _queryType;
 
 }

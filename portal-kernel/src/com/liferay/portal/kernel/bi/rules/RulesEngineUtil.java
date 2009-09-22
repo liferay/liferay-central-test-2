@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.bi.rules;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="RulesEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,30 +41,40 @@ public class RulesEngineUtil {
 		_rulesEngine.add(domainName, resourceRetriever);
 	}
 
+	public static void add(
+			String domainName, ResourceRetriever resourceRetriever,
+			ClassLoader... classloaders)
+		throws RulesEngineException {
+
+		_rulesEngine.add(domainName, resourceRetriever, classloaders);
+	}
+	
 	public static void execute(
-			ResourceRetriever resourceRetriever, List<?> facts)
+			ResourceRetriever resourceRetriever, List<Fact<?>> facts)
 		throws RulesEngineException {
 
 		_rulesEngine.execute(resourceRetriever, facts);
 	}
 
 	public static void execute(
-			ResourceRetriever resourceRetriever, List<?> facts,
+			ResourceRetriever resourceRetriever, List<Fact<?>> facts,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
 		_rulesEngine.execute(resourceRetriever, facts, classloaders);
 	}
 
-	public static List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query)
+	public static Map<String, ?> execute(
+			ResourceRetriever resourceRetriever,
+			List<Fact<?>> facts, Query query)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(resourceRetriever, facts, query);
 	}
 
-	public static List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query,
+	public static Map<String, ?> execute(
+			ResourceRetriever resourceRetriever,
+			List<Fact<?>> facts, Query query,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
@@ -71,27 +82,28 @@ public class RulesEngineUtil {
 			resourceRetriever, facts, query, classloaders);
 	}
 
-	public static void execute(String domainName, List<?> facts)
+	public static void execute(String domainName, List<Fact<?>> facts)
 		throws RulesEngineException {
 
 		_rulesEngine.execute(domainName, facts);
 	}
 
 	public static void execute(
-			String domainName, List<?> facts, ClassLoader... classloaders)
+			String domainName, List<Fact<?>> facts, ClassLoader... classloaders)
 		throws RulesEngineException {
 
 		_rulesEngine.execute(domainName, facts, classloaders);
 	}
 
-	public static List<?> execute(String domainName, List<?> facts, Query query)
+	public static Map<String, ?> execute(
+		String domainName, List<Fact<?>> facts, Query query)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(domainName, facts, query);
 	}
 
-	public static List<?> execute(
-			String domainName, List<?> facts, Query query,
+	public static Map<String, ?> execute(
+			String domainName, List<Fact<?>> facts, Query query,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
@@ -107,6 +119,14 @@ public class RulesEngineUtil {
 		throws RulesEngineException {
 
 		_rulesEngine.update(domainName, resourceRetriever);
+	}
+
+	public static void update(
+			String domainName, ResourceRetriever resourceRetriever,
+			ClassLoader... classloaders)
+		throws RulesEngineException {
+
+		_rulesEngine.update(domainName, resourceRetriever, classloaders);
 	}
 
 	public void setRulesEngine(RulesEngine rulesEngine) {

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.resource.ResourceRetriever;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="RulesEngine.java.html"><b><i>View Source</i></b></a>
@@ -38,30 +39,33 @@ import java.util.List;
 public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void add(String domainName, ResourceRetriever resourceRetriever)
-		throws RulesEngineException;
-
-	@MessagingProxy(mode = ProxyMode.ASYNC)
-	public void execute(
-			ResourceRetriever resourceRetriever, List<?> facts,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
-		throws RulesEngineException;
-
-	@MessagingProxy(mode = ProxyMode.SYNC)
-	public List<?> execute(
-			ResourceRetriever resourceRetriever, List<?> facts, Query query,
+	public void add(
+			String domainName, ResourceRetriever resourceRetriever,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void execute(
-			String domainName, List<?> facts,
+			ResourceRetriever resourceRetriever, List<Fact<?>> facts,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public List<?> execute(
-			String domainName, List<?> facts, Query query,
+	public Map<String, ?> execute(
+			ResourceRetriever resourceRetriever,
+			List<Fact<?>> facts, Query query,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+		throws RulesEngineException;
+
+	@MessagingProxy(mode = ProxyMode.ASYNC)
+	public void execute(
+			String domainName, List<Fact<?>> facts,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+		throws RulesEngineException;
+
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public Map<String, ?> execute(
+			String domainName, List<Fact<?>> facts, Query query,
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
@@ -69,7 +73,9 @@ public interface RulesEngine {
 	public void remove(String domainName) throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void update(String domainName, ResourceRetriever resourceRetriever)
+	public void update(
+			String domainName, ResourceRetriever resourceRetriever,
+			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
 }

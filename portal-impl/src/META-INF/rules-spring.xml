@@ -7,10 +7,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
 >
 
-	<!-- Advice -->
-
-	<bean id="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" class="com.liferay.portal.bi.rules.RulesEngineProxyAdvice" />
-
 	<!-- Proxy -->
 
 	<bean id="com.liferay.portal.bi.rules.RulesEngineProxyBean" class="com.liferay.portal.bi.rules.RulesEngineProxyBean">
@@ -35,7 +31,7 @@
 			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
 				<property name="interceptorNames">
 					<list>
-						<value>com.liferay.portal.bi.rules.RulesEngineProxyAdvice</value>
+						<value>baseMessagingProxyAdvice</value>
 					</list>
 				</property>
 				<property name="proxyInterfaces">
