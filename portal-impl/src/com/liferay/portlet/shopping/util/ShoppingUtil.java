@@ -252,8 +252,8 @@ public class ShoppingUtil {
 		else if (type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_ACTUAL)) {
 			discount = coupon.getDiscount();
 		}
-		else if (
-			type.equals(ShoppingCouponConstants.DISCOUNT_TYPE_FREE_SHIPPING)) {
+		else if (type.equals(
+					ShoppingCouponConstants.DISCOUNT_TYPE_FREE_SHIPPING)) {
 
 			discount = calculateShipping(items);
 		}
