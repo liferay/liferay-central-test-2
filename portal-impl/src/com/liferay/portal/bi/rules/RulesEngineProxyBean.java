@@ -45,6 +45,11 @@ public class RulesEngineProxyBean extends BaseProxyBean implements RulesEngine {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean containsRuleDomain(String domainName) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public void execute(
 		ResourceRetriever resourceRetriever, List<Fact<?>> facts,
 		ClassLoader... clientClassLoaders) {

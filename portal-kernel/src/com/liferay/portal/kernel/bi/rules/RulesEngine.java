@@ -44,6 +44,10 @@ public interface RulesEngine {
 			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
 		throws RulesEngineException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public boolean containsRuleDomain(String domainName)
+		throws RulesEngineException;
+
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void execute(
 			ResourceRetriever resourceRetriever, List<Fact<?>> facts,

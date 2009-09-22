@@ -49,6 +49,12 @@ public class RulesEngineUtil {
 		_rulesEngine.add(domainName, resourceRetriever, classloaders);
 	}
 
+	public static boolean containsRuleDomain(String domainName)
+		throws RulesEngineException {
+
+		return _rulesEngine.containsRuleDomain(domainName);
+	}
+
 	public static void execute(
 			ResourceRetriever resourceRetriever, List<Fact<?>> facts)
 		throws RulesEngineException {
