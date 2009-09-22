@@ -25,7 +25,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.util.Indexer;
+import com.liferay.documentlibrary.util.DLIndexerUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -734,13 +734,14 @@ public class DLFileEntryLocalServiceImpl
 
 		try {
 			if (fileEntry.getVersion() > 0) {
-				Indexer.updateFile(
+				DLIndexerUtil.updateFile(
 					companyId, portletId, groupId, folderId, fileName,
 					fileEntryId, properties, modifiedDate, assetCategoryIds,
 					assetTagNames);
 			}
 			else {
-				Indexer.deleteFile(companyId, portletId, folderId, fileName);
+				DLIndexerUtil.deleteFile(
+					companyId, portletId, folderId, fileName);
 			}
 		}
 		catch (SearchException se) {

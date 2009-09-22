@@ -109,7 +109,7 @@ public class CMISHook extends BaseHook {
 
 		CMISUtil.delete(versioningFolderEntry);
 
-		Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
+		DLIndexerUtil.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
 	public void deleteFile(
@@ -122,7 +122,7 @@ public class CMISHook extends BaseHook {
 
 		CMISUtil.delete(fileEntry);
 
-		Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
+		DLIndexerUtil.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
 	public InputStream getFileAsStream(
@@ -237,7 +237,7 @@ public class CMISHook extends BaseHook {
 
 			for (String fileName : fileNames) {
 				try {
-					Document document = Indexer.getFileDocument(
+					Document document = DLIndexerUtil.getFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
 					SearchEngineUtil.updateDocument(
@@ -279,13 +279,13 @@ public class CMISHook extends BaseHook {
 			CMISUtil.delete(oldVersioningFolderEntry);
 
 			try {
-				Indexer.deleteFile(
+				DLIndexerUtil.deleteFile(
 					companyId, portletId, repositoryId, fileName);
 			}
 			catch (SearchException se) {
 			}
 
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, newRepositoryId, fileName);
 		}
 		catch (SearchException se) {
@@ -320,14 +320,14 @@ public class CMISHook extends BaseHook {
 		fileEntry = CMISUtil.createDocument(url, title, is);
 
 		if (sourceFileName == null) {
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
 		else {
-			Indexer.updateFile(
+			DLIndexerUtil.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),

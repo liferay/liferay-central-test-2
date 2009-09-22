@@ -152,7 +152,7 @@ public class JCRHook extends BaseHook {
 				contentNode.getVersionHistory().addVersionLabel(
 					version.getName(), String.valueOf(DEFAULT_VERSION), false);
 
-				Indexer.addFile(
+				DLIndexerUtil.addFile(
 					companyId, portletId, groupId, repositoryId, fileName,
 					fileEntryId, properties, modifiedDate,
 					serviceContext.getAssetCategoryIds(),
@@ -325,7 +325,8 @@ public class JCRHook extends BaseHook {
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 
-			Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
+			DLIndexerUtil.deleteFile(
+				companyId, portletId, repositoryId, fileName);
 
 			fileNode.remove();
 
@@ -545,7 +546,7 @@ public class JCRHook extends BaseHook {
 						JCRConstants.NT_FILE)) {
 
 					try {
-						Document doc = Indexer.getFileDocument(
+						Document doc = DLIndexerUtil.getFileDocument(
 							companyId, portletId, groupId, repositoryId,
 							node.getName());
 
@@ -640,13 +641,13 @@ public class JCRHook extends BaseHook {
 				session.save();
 
 				try {
-					Indexer.deleteFile(
+					DLIndexerUtil.deleteFile(
 						companyId, portletId, repositoryId, fileName);
 				}
 				catch (SearchException se) {
 				}
 
-				Indexer.addFile(
+				DLIndexerUtil.addFile(
 					companyId, portletId, groupId, newRepositoryId, fileName);
 			}
 		}
@@ -699,7 +700,7 @@ public class JCRHook extends BaseHook {
 			contentNode.getVersionHistory().addVersionLabel(
 				version.getName(), versionLabel, false);
 
-			Indexer.updateFile(
+			DLIndexerUtil.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),
@@ -738,12 +739,12 @@ public class JCRHook extends BaseHook {
 					deleteDirectory(companyId, portletId, repositoryId, node);
 				}
 				else if (primaryNodeTypeName.equals(JCRConstants.NT_FILE)) {
-					Indexer.deleteFile(
+					DLIndexerUtil.deleteFile(
 						companyId, portletId, repositoryId, node.getName());
 				}
 			}
 
-			Indexer.deleteFile(
+			DLIndexerUtil.deleteFile(
 				companyId, portletId, repositoryId, dirNode.getName());
 		}
 		catch (RepositoryException e) {

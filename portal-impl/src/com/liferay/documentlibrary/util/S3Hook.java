@@ -100,7 +100,7 @@ public class S3Hook extends BaseHook {
 
 			_s3Service.putObject(_s3Bucket, s3Object);
 
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),
@@ -151,7 +151,8 @@ public class S3Hook extends BaseHook {
 				_s3Service.deleteObject(_s3Bucket, s3Object.getKey());
 			}
 
-			Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
+			DLIndexerUtil.deleteFile(
+				companyId, portletId, repositoryId, fileName);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -302,7 +303,7 @@ public class S3Hook extends BaseHook {
 				String fileName = itr.next();
 
 				try {
-					Document doc = Indexer.getFileDocument(
+					Document doc = DLIndexerUtil.getFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
 					SearchEngineUtil.updateDocument(
@@ -373,10 +374,10 @@ public class S3Hook extends BaseHook {
 				FileUtil.delete(tempFile);
 			}
 
-			Indexer.deleteFile(
+			DLIndexerUtil.deleteFile(
 				companyId, portletId, repositoryId, fileName);
 
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, newRepositoryId, fileName);
 		}
 		catch (IOException ioe) {
@@ -403,7 +404,7 @@ public class S3Hook extends BaseHook {
 
 			_s3Service.putObject(_s3Bucket, s3Object);
 
-			Indexer.updateFile(
+			DLIndexerUtil.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),

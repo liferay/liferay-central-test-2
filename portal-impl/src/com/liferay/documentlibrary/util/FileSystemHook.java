@@ -93,7 +93,7 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.write(fileNameVersionFile, is);
 
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),
@@ -135,7 +135,8 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.deltree(fileNameDir);
 
-			Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
+			DLIndexerUtil.deleteFile(
+				companyId, portletId, repositoryId, fileName);
 		}
 		catch (SearchException se) {
 			throw new SystemException();
@@ -255,7 +256,7 @@ public class FileSystemHook extends BaseHook {
 			String fileName = fileNames[i];
 
 			try {
-				Document doc = Indexer.getFileDocument(
+				Document doc = DLIndexerUtil.getFileDocument(
 					companyId, portletId, groupId, repositoryId, fileName);
 
 				SearchEngineUtil.updateDocument(
@@ -283,13 +284,13 @@ public class FileSystemHook extends BaseHook {
 			FileUtil.deltree(fileNameDir);
 
 			try {
-				Indexer.deleteFile(
+				DLIndexerUtil.deleteFile(
 					companyId, portletId, repositoryId, fileName);
 			}
 			catch (SearchException se) {
 			}
 
-			Indexer.addFile(
+			DLIndexerUtil.addFile(
 				companyId, portletId, groupId, newRepositoryId, fileName);
 		}
 		catch (SearchException se) {
@@ -314,7 +315,7 @@ public class FileSystemHook extends BaseHook {
 
 			FileUtil.write(fileNameVersionFile, is);
 
-			Indexer.updateFile(
+			DLIndexerUtil.updateFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				fileEntryId, properties, modifiedDate,
 				serviceContext.getAssetCategoryIds(),
