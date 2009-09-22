@@ -41,7 +41,7 @@
 				MBMessage
 			WHERE
 				(groupId = ?) AND
-				(userId = ?) AND
+				(userId = ?)
 				[$STATUS$]
 		]]>
 	</sql>
@@ -83,7 +83,7 @@
 				MBMessage
 			WHERE
 				(groupId = ?) AND
-				(userId = ?) AND
+				(userId = ?)
 				[$STATUS$]
 			GROUP BY
 				threadId
@@ -101,7 +101,7 @@
 			WHERE
 				(groupId = ?) AND
 				(userId = ?) AND
-				(anonymous = ?) AND
+				(anonymous = ?)
 				[$STATUS$]
 			GROUP BY
 				threadId
@@ -121,8 +121,8 @@
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
-				(MBThread.groupId = ?) AND
-				[$STATUS$]
+				(MBThread.groupId = ?)
+				[$STATUS$] AND
 				(Subscription.userId = ?)
 		]]>
 	</sql>
@@ -137,8 +137,8 @@
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
-				(MBThread.groupId = ?) AND
-				[$STATUS$]
+				(MBThread.groupId = ?)
+				[$STATUS$] AND
 				(Subscription.userId = ?)
 			ORDER BY
 				MBThread.priority DESC,
