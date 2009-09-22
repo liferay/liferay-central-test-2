@@ -48,6 +48,47 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	public MBMessageImpl() {
 	}
 
+	public String[] getAssetTagNames() throws SystemException {
+		return AssetTagLocalServiceUtil.getTagNames(
+			MBMessage.class.getName(), getMessageId());
+	}
+
+	public String getAttachmentsDir() {
+		if (_attachmentDirs == null) {
+			_attachmentDirs = getThreadAttachmentsDir() + "/" + getMessageId();
+		}
+
+		return _attachmentDirs;
+	}
+
+	public String[] getAttachmentsFiles()
+		throws PortalException, SystemException {
+
+		String[] fileNames = new String[0];
+
+		try {
+			fileNames = DLServiceUtil.getFileNames(
+				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+
+		return fileNames;
+	}
+
+	public String getBody(boolean translate) {
+		String body = null;
+
+		if (translate) {
+			body = BBCodeUtil.getHTML(this);
+		}
+		else {
+			body = getBody();
+		}
+
+		return body;
+	}
+
 	public MBCategory getCategory() {
 		MBCategory category = null;
 
@@ -73,6 +114,10 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		return MBThreadLocalServiceUtil.getThread(getThreadId());
 	}
 
+	public String getThreadAttachmentsDir() {
+		return "messageboards/" + getThreadId();
+	}
+
 	public boolean isDiscussion() {
 		if (getClassNameId() > 0) {
 			return true;
@@ -80,6 +125,10 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isReply() {
+		return !isRoot();
 	}
 
 	public boolean isRoot() {
@@ -93,57 +142,8 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
-	public boolean isReply() {
-		return !isRoot();
-	}
-
-	public String getBody(boolean translate) {
-		String body = null;
-
-		if (translate) {
-			body = BBCodeUtil.getHTML(this);
-		}
-		else {
-			body = getBody();
-		}
-
-		return body;
-	}
-
-	public String getThreadAttachmentsDir() {
-		return "messageboards/" + getThreadId();
-	}
-
-	public String getAttachmentsDir() {
-		if (_attachmentDirs == null) {
-			_attachmentDirs = getThreadAttachmentsDir() + "/" + getMessageId();
-		}
-
-		return _attachmentDirs;
-	}
-
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
-	}
-
-	public String[] getAttachmentsFiles()
-		throws PortalException, SystemException {
-
-		String[] fileNames = new String[0];
-
-		try {
-			fileNames = DLServiceUtil.getFileNames(
-				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
-		}
-		catch (NoSuchDirectoryException nsde) {
-		}
-
-		return fileNames;
-	}
-
-	public String[] getAssetTagNames() throws SystemException {
-		return AssetTagLocalServiceUtil.getTagNames(
-			MBMessage.class.getName(), getMessageId());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBMessageImpl.class);

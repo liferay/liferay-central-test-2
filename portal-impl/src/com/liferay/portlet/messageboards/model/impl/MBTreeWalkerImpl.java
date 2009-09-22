@@ -64,10 +64,6 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		}
 	}
 
-	public MBMessage getRoot() {
-		return _messages.get(0);
-	}
-
 	public List<MBMessage> getChildren(MBMessage message) {
 		List<MBMessage> children = new ArrayList<MBMessage>();
 
@@ -110,10 +106,8 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		return _messages;
 	}
 
-	public boolean isOdd() {
-		_odd = !_odd;
-
-		return _odd;
+	public MBMessage getRoot() {
+		return _messages.get(0);
 	}
 
 	public boolean isLeaf(MBMessage message) {
@@ -127,10 +121,16 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		}
 	}
 
+	public boolean isOdd() {
+		_odd = !_odd;
+
+		return _odd;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MBTreeWalkerImpl.class);
 
-	private List<MBMessage> _messages;
 	private Map<Long, Integer> _messageIdsMap;
+	private List<MBMessage> _messages;
 	private boolean _odd;
 
 }

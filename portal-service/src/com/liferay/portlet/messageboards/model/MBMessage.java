@@ -48,30 +48,30 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBMessage extends MBMessageModel {
+	public java.lang.String[] getAssetTagNames()
+		throws com.liferay.portal.SystemException;
+
+	public java.lang.String getAttachmentsDir();
+
+	public java.lang.String[] getAttachmentsFiles()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.lang.String getBody(boolean translate);
+
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory();
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public boolean isDiscussion();
+	public java.lang.String getThreadAttachmentsDir();
 
-	public boolean isRoot();
+	public boolean isDiscussion();
 
 	public boolean isReply();
 
-	public java.lang.String getBody(boolean translate);
-
-	public java.lang.String getThreadAttachmentsDir();
-
-	public java.lang.String getAttachmentsDir();
+	public boolean isRoot();
 
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
-
-	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public java.lang.String[] getAssetTagNames()
-		throws com.liferay.portal.SystemException;
 }

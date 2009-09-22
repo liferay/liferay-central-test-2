@@ -56,45 +56,45 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		_threadView = threadView;
 	}
 
-	public MBMessage getMessage() {
-		return _message;
-	}
-
-	public MBMessage getParentMessage() {
-		return _parentMessage;
-	}
-
 	public MBCategory getCategory() {
 		return _category;
 	}
 
-	public MBThread getThread() {
-		return _thread;
-	}
-
-	public MBTreeWalker getTreeWalker() {
-		return _treeWalker;
-	}
-
-	public MBThread getPreviousThread() {
-		return _previousThread;
+	public MBMessage getMessage() {
+		return _message;
 	}
 
 	public MBThread getNextThread() {
 		return _nextThread;
 	}
 
+	public MBMessage getParentMessage() {
+		return _parentMessage;
+	}
+
+	public MBThread getPreviousThread() {
+		return _previousThread;
+	}
+
+	public MBThread getThread() {
+		return _thread;
+	}
+
 	public String getThreadView() {
 		return _threadView;
 	}
 
-	private MBMessage _message;
-	private MBMessage _parentMessage;
+	public MBTreeWalker getTreeWalker() {
+		return _treeWalker;
+	}
+
 	private MBCategory _category;
-	private MBThread _thread;
-	private MBTreeWalker _treeWalker;
-	private MBThread _previousThread;
+	private MBMessage _message;
 	private MBThread _nextThread;
+	private MBMessage _parentMessage;
+	private MBThread _previousThread;
+	private MBThread _thread;
 	private String _threadView;
+	private MBTreeWalker _treeWalker;
 
 }
